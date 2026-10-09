@@ -1,0 +1,59 @@
+name: V3.5 WP0 native source and evidence policy falsifiers
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP0_20261009/**'
+      - '.github/workflows/v35-wp0-native-policy-falsifiers.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-python-evidence-policy:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Source SHA and Python
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          python --version
+      - name: Execute real native V3.2-V3.5 evidence-policy controls
+        shell: bash
+        run: python relay/RECOVERY/V35_R14_WP0_20261009/test_native_policy_falsifiers_v1.py
+
+  native-node-import-closure:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Source SHA and Node
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          node --version
+      - name: Inspect real RELAY full-chain ESM closure and DELP callsites
+        shell: bash
+        run: node --test relay/RECOVERY/V35_R14_WP0_20261009/test_native_callgraph_v1.mjs
