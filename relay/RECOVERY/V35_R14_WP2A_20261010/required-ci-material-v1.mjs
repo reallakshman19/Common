@@ -10,7 +10,7 @@ const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const validBranch=x=>typeof x==='string'&&BRANCH.test(x)&&!x.includes('..')&&!x.includes('//')&&!x.endsWith('/');
 const digest=o=>'sha256:'+createHash('sha256').update('wp2a-u02-v1\0'+JSON.stringify(o)).digest('hex');
 const sort=(a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b));
-function refusal(grade,errors,selected=[],required[]){
+function refusal(grade,errors,selected=[],required=[]){
   return {
     schema:'common-v35-wp2a-u02-ci-observation-v1',
     source_grade:grade,observed:false,selected_checks_observed:false,errors,
