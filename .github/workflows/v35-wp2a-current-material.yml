@@ -53,6 +53,7 @@ jobs:
       - name: Read native current issue/PR/base/head; no writes
         shell: bash
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
           CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
@@ -78,6 +79,7 @@ jobs:
       - name: Observe selected checks and separately read protection/ruleset requirements
         shell: bash
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
           CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
@@ -102,6 +104,8 @@ jobs:
           node-version: 24
       - name: Verify prior pinned TASK_EVIDENCE source stays a claim and stale
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git rev-parse HEAD
           node relay/RECOVERY/V35_R14_WP2A_20261010/task-evidence-comment-v1.cli.mjs
