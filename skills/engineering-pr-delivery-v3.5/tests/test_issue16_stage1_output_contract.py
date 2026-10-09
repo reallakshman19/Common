@@ -85,7 +85,7 @@ class Stage1OriginalFileContractTests(unittest.TestCase):
         raw = b"# STAGE1_BASELINE\n\nThe STAGE1_PLAN label belongs to a later independent document.\n"
         self.assertEqual(validate_buddy_stage1_output(STAGE1_BASELINE, raw), [])
 
-        def test_indented_second_stage_h1_is_rejected(self):
+    def test_indented_second_stage_h1_is_rejected(self):
         # Markdown permits 0-3 spaces before an ATX H1.
         for indentation in (b" ", b"  ", b"   "):
             with self.subTest(indentation=indentation):
