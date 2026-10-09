@@ -198,17 +198,17 @@
       "origin_pr": 892,
       "branch": "feat/v32-889-relay-buddy-markdown-transaction",
       "origin_head_sha": "97d9f384ac1cfe4458b2db2302f5e7170a99e06d",
-      "destination_head_sha": "e5cdf5fb1de26992ab9fa5fd7752f4f5e7f74da5",
+      "destination_head_sha": "6255b759e20577c126c7b158e1c17ddc66bb80c7",
       "relation": "SOURCE_ADVANCED",
-      "ahead_commits": 3
+      "ahead_commits": 6
     },
     {
       "origin_pr": 893,
       "branch": "docs/relay-890-continuity-md-v1",
       "origin_head_sha": "09ff3751560bb49098e69c9c79918626078c7564",
-      "destination_head_sha": "cc4de8a87ec86ea66f02bb2f82184ad0f7a3d598",
+      "destination_head_sha": "d9f785394840840775775be81a526228edd3c00d",
       "relation": "SOURCE_ADVANCED",
-      "ahead_commits": 9
+      "ahead_commits": 21
     },
     {
       "origin_pr": 894,
