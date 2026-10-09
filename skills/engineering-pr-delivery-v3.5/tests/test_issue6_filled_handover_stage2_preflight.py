@@ -55,7 +55,7 @@ def audit_filled_report(report: str) -> list[str]:
         5: ("test_issue16_stage1_output_contract.py", "consumer", "no"),
         6: ("synthetic", "original", "browser"),
         7: ("37991111370", "37989654186", "failed", "skipped"),
-        8: ("native", "defect", "unknown"),
+        8: ("native", "defect", "risk"),
         9: ("plan_handover", "handover_context", "not_granted", "stage2"),
         10: ("first safe", "head", "stop"),
         11: ("**q1", "**q2", "**q3", "**falsifier:**"),
@@ -104,7 +104,12 @@ class Issue6FilledReportReviewTests(unittest.TestCase):
         self.assertIn("QUESTIONS_NOT_3", audit_filled_report(mutated))
 
     def test_missing_red_native_run_cannot_claim_technical_completeness(self):
-        mutated = self.source.replace("37991111370", "UNVERIFIED_RUN", 1)
+        sections, errors = sections_of(self.source)
+        self.assertEqual(errors, [])
+        tested_section = sections[7]
+        self.assertIn("37991111370", tested_section)
+        missing_native_negative = tested_section.replace("37991111370", "UNVERIFIED_RUN")
+        mutated = self.source.replace(tested_section, missing_native_negative, 1)
         self.assertNotEqual(mutated, self.source)
         self.assertTrue(any("SECTION_7_MISSING" in e for e in audit_filled_report(mutated)))
 
