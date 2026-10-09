@@ -7,6 +7,7 @@ on:
       - 'skills/engineering-pr-delivery-v3.5/tests/test_runner_dispatch_markdown_contract.py'
       - 'skills/engineering-pr-delivery-v3.5/tests/test_buddy_r14_consumer_contract.py'
       - 'skills/engineering-pr-delivery-v3.5/tests/test_repository_issue_binding_contract.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_frozen_main_lineage_guard_contract.py'
       - 'skills/engineering-pr-delivery-v3.5/runner/**'
       - 'skills/engineering-pr-delivery-v3.5/SKILL.md'
       - '.github/workflows/engineering-pr-delivery-v3.5.yml'
@@ -62,6 +63,9 @@ jobs:
       - name: Run provider issue-kind and migration-negative fixture regressions
         run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_repository_issue_binding_contract.py' -v
 
+      - name: Run canonical-main lineage guard contract regressions
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_frozen_main_lineage_guard_contract.py' -v
+
       - name: Verify base-pinned frozen V3.2 tree protection
         shell: bash
         env:
@@ -82,6 +86,24 @@ jobs:
             }
           fi
           python skills/Local_PR_Deliverty_v1.1/scripts/frozen_tree_guard.py --base "$BASE_SHA" --head HEAD
+
+      - name: Verify canonical-main frozen V3.2 authority (not just stacked PR delta)
+        shell: bash
+        run: |
+          set -euo pipefail
+          # A stacked PR may have ZERO frozen edits against its immediate PR base
+          # but inherit protected changes that the canonical main has NEVER approved.
+          git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+          MAIN_SHA="$(git rev-parse refs/remotes/origin/main^{commit})"
+          test -n "$MAIN_SHA" || {
+            echo "Canonical main SHA unavailable; frozen scope gate HOLD" >&2
+            exit 1
+          }
+          git merge-base --is-ancestor "$MAIN_SHA" HEAD || {
+            echo "Candidate is not based on current canonical main; rebase and requalify" >&2
+            exit 1
+          }
+          python skills/Local_PR_Deliverty_v1.1/scripts/frozen_tree_guard.py --base "$MAIN_SHA" --head HEAD
 
       - name: Verify V3.5 lineage metadata
         shell: bash
