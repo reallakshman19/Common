@@ -40,8 +40,13 @@ def native_stages() -> set[str]:
 def has_provider_gate(s: str) -> bool:
     return (
         "| Current issue binding receipt |" in s
-        and "provider GET/identity" in s
+        and "operator-controlled provider" in s
+        and "repository `id`" in s
+        and "issue `id`" in s
+        and "`pull_request` absent" in s
         and "HOLD_REPOSITORY_IDENTITY" in s
+        and "Separate Owner/Local responsibility authorization" in s
+        and "HOLD_OWNER_SCOPE" in s
         and "old issue refs remain historical" in s
     )
 
@@ -85,6 +90,9 @@ class BuddyR14ConsumerContractTests(unittest.TestCase):
         self.assertFalse(has_provider_gate(dispatch.replace("| Current issue binding receipt |", "| Legacy issue only |")))
         self.assertFalse(has_provider_gate(dispatch.replace("HOLD_REPOSITORY_IDENTITY", "ASSUME_MATCHED_SHA")))
         self.assertFalse(has_provider_gate(dispatch.replace("old issue refs remain historical", "old issue refs are new issues")))
+        self.assertFalse(has_provider_gate(dispatch.replace("repository `id`", "repository name only")))
+        self.assertFalse(has_provider_gate(dispatch.replace("`pull_request` absent", "any issues endpoint object")))
+        self.assertFalse(has_provider_gate(dispatch.replace("HOLD_OWNER_SCOPE", "ISSUE_FOUND_IS_APPROVED")))
 
     def test_complete_narrative_is_stage2_only_and_native_custody_remains(self):
         handover = source("TEMPLATES/TECHNICAL_HANDOVER.md")
