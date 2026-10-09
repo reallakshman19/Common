@@ -159,7 +159,7 @@ class BuddyR14ConsumerContractTests(unittest.TestCase):
         for term in ("# STAGE1_BASELINE", "# STAGE1_PLAN", "same isolated session",
                      "TWO_NATIVE_FILES_UNAVAILABLE", "HOLD native publication", "must not split"):
             self.assertIn(term, golden, term)
-        self.assertIn("historical baseline first", golden.lower() + " historical baseline first")
+        self.assertIn("Finish the factual historical baseline first", golden)
 
     def test_runner_prompts_separate_independent_baseline_from_stage2_source(self):
         stage1 = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/STAGE1_INDEPENDENT_RECONSTRUCTION.md").read_text(encoding="utf-8")
