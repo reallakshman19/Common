@@ -37,7 +37,7 @@ jobs:
           node --test relay/RECOVERY/V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs
 
   native-source-vector:
-    if: false # pending U04's own provider-issued TASK_EVIDENCE comment
+    if: github.event_name == 'pull_request'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
