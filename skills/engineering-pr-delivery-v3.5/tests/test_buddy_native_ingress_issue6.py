@@ -176,5 +176,25 @@ class NativeBuddyIngressSeamTests(unittest.TestCase):
             self.assertFalse((root / "relay/STATE.yaml").exists())
 
 
+    def test_positive_new_attempt_after_supersession_is_allowed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.preflight(root)
+            self.publish(root, 4, "STAGE1_BASELINE", "runner-b",
+                         b"# STAGE1_BASELINE\n\nOld version observations.\n")
+            self.publish(root, 20, "STAGE1_INTAKE", "operator",
+                         b"# STAGE1_INTAKE\n\nNew approved original historical cutoff.\n")
+            for seq, stage, actor, body in (
+                (21, "DISPATCH_REQUEST", "operator", b"# DISPATCH_REQUEST\n"),
+                (22, "DISPATCH_OBSERVATION", "operator",
+                 b"# RUNNER_EXECUTION_OBSERVED\n\nSession ref: new-synthetic-session\nRead-scope ref: new-scope\n"),
+                (23, "STAGE1_BASELINE", "runner-c", b"# STAGE1_BASELINE\n\nNew independent baseline.\n"),
+                (24, "STAGE1_PLAN", "runner-c", b"# STAGE1_PLAN\n\nNew independent alternatives.\n"),
+            ):
+                result = self.publish(root, seq, stage, actor, body)
+                self.assertEqual("COMMITTED", result["status"])
+            self.assertFalse((root / "relay/STATE.yaml").exists())
+
+
 if __name__ == "__main__":
     unittest.main()
