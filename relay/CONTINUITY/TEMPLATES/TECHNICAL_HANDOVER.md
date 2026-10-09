@@ -94,6 +94,8 @@ Separate **test code present**, **command actually executed**, **hosted CI run**
 | Browser or real user flow | [actual deployed URL/Chromium version/actions/input/artifact] | [SHA/time] | [positive output, negative variation, console/network/long task where measured] | [grade] |
 | Source verification only | [Git blob/commit and file/diff path] | [SHA/time] | [hash/path check; NOT test execution] | [grade] |
 
+**CI result classification:** Record the **whole-run conclusion AND individual relevant job/step conclusions**, especially steps skipped by path/relevance filters. A successful workflow with source tests skipped is **not** proof those tests passed. A failure caused by files missing on both base and candidate is **INHERITED_BASELINE_FAILURE**, but remains a genuine red required check until authorized disposition; it must never be reclassified as PASS or omitted from the report. Distinguish `ZERO_STEPS/NO_RUNNER` infrastructure failures from an executed failing test and give the exact command/log excerpt. Match every claimed test result to its own tested SHA, not the report publication SHA.
+
 State **how to reproduce** with exact working directory, invocation, setup/test fixture, expected observable result, known environmental limitations and where logs/artifacts are stored. If an original golden is unavailable, mark `GOLDEN_NOT_AVAILABLE`; do not create a convenient fake and call it authentic. Identify every exact-head gap, disabled CI, unexpected failure, skipped test and browser-not-run reason.
 
 ## 6. Known defects, failures, rejected approaches and risks

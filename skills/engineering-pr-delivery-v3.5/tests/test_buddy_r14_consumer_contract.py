@@ -96,6 +96,9 @@ class BuddyR14ConsumerContractTests(unittest.TestCase):
         self.assertIn("CODE_CANDIDATE_HEAD", handover)
         self.assertIn("tested", handover.lower())
         self.assertIn("original task", handover.lower())
+        self.assertIn("INHERITED_BASELINE_FAILURE", handover)
+        self.assertIn("ZERO_STEPS/NO_RUNNER", handover)
+        self.assertIn("individual relevant job/step", handover)
 
     def test_stage2_requires_four_views_native_handover_and_separate_writer(self):
         stage2 = source("TEMPLATES/STAGE2_RECONCILIATION.md")

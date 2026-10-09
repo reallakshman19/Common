@@ -56,6 +56,8 @@ The [actual V3.2 Buddy integration handover candidate](REVIEWER_ONLY/TECHNICAL_H
 
 The [PR #2 / PR #3 consumer convergence record](REVIEWER_ONLY/BUDDY_R14_CONSUMER_CONVERGENCE_V1.md) gives the exact source provenance and fail-closed provider-binding test matrix. The native transaction can authenticate local message bytes; it cannot independently prove the current-repository issue binding, fresh B identity, denied reads, freeze, Owner decision or writer custody.
 
+**Current V3.5 handover example:** The [source-observed V2 technical report](REVIEWER_ONLY/EXAMPLE_COMPLETE_TECHNICAL_HANDOVER_PR3_V2.md) improves the older example with concrete tested-vs-skipped CI evidence and true inherited baseline classification. Both examples remain controller-only worked reports, **never input to a clean Stage1 B**.
+
 ## Versioned Markdown envelope
 
 Each actual message contains: `Record kind/version`, `existing responsibility and episode`, `writer/role`, `origin and observation timestamp`, `immutable source SHA or UNKNOWN`, `visibility and claims vs source-backed facts`, `payload with source references`, `STOP/next permitted operation`. Prefer a short Markdown table and substantive evidence over repeating fields. Corrections create an **amended new version**; never rewrite an already-frozen B response.

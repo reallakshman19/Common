@@ -29,6 +29,8 @@
 
 The source-pinned V3.5 `SKILL.md` and all seven `runner/*.md` files from PR #3's inspected `d9f785394840840775775be81a526228edd3c00d` were imported as role-specific thinking/dispatch/manual acceptance guidance. They are **instructional consumers** of the single `relay/CONTINUITY` message record, not new Runner launch engines, state/lease files or alternative issue-scoped active paths. The PR #3 complete V3.5 technical report example also remains controller/reviewer-only and cannot be made accessible to a truly blind Stage1 B.
 
+**Latest source refinement:** PR #3 later advanced to `bf4af494505cca6b655fa9163d6731ed2b1ad160`, adding `HANDOVER_TECHNICAL_V2` classifications for per-step SKIPPED vs executed tests, inherited missing-workflow baseline RED, and ZERO_STEPS/NO_RUNNER. This candidate incorporates that exact template blob and the V2 full engineering example as further source-attested disclosure-only content, without changing the native transaction or claiming a fresh independent Runner.
+
 ## Real acceptance gates vs structural checks
 
 **This candidate's executable source-level regressions** inspect the actual PR #2 \`transactionlib.py\` stage allowlist and publication path, compare the V3.5 dispatch identity + handover + Stage2 + Owner decision contracts, and negatively mutate missing provider binding and the complete technical handover requirement. These tests prove *contract consistency only*. They do not test real browser behavior, authentic provider issue GET at dispatch time, a fresh isolated B, future Owner decision or old A credential revocation.
