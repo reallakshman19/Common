@@ -87,6 +87,13 @@ jobs:
           fi
           python skills/Local_PR_Deliverty_v1.1/scripts/frozen_tree_guard.py --base "$BASE_SHA" --head HEAD
 
+      - name: Verify V3.5 lineage metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F 'SOURCE_V3_2_TREE: 88ac97432a811f9a6b8d00bbe45cbec891e70d6a' skills/engineering-pr-delivery-v3.5/SKILL.md
+          grep -F 'ENG-PRD-017-CODER' skills/engineering-pr-delivery-v3.5/SKILL.md
+
       - name: Verify canonical-main frozen V3.2 authority (not just stacked PR delta)
         shell: bash
         run: |
@@ -104,10 +111,3 @@ jobs:
             exit 1
           }
           python skills/Local_PR_Deliverty_v1.1/scripts/frozen_tree_guard.py --base "$MAIN_SHA" --head HEAD
-
-      - name: Verify V3.5 lineage metadata
-        shell: bash
-        run: |
-          set -euo pipefail
-          grep -F 'SOURCE_V3_2_TREE: 88ac97432a811f9a6b8d00bbe45cbec891e70d6a' skills/engineering-pr-delivery-v3.5/SKILL.md
-          grep -F 'ENG-PRD-017-CODER' skills/engineering-pr-delivery-v3.5/SKILL.md

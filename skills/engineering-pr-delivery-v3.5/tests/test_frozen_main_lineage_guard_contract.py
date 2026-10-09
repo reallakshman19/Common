@@ -19,7 +19,7 @@ def both_frozen_lineage_gates_present(source: str) -> bool:
         source.count(FROZEN_GUARD) >= 2
         and 'PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}' in source
         and 'python ' + FROZEN_GUARD + ' --base "$BASE_SHA" --head HEAD' in source
-        and 'python ' + FROZEN_GUARD + ' --base "$MAIN_SHA" --head HEAD' in source
+        and '\n          python ' + FROZEN_GUARD + ' --base "$MAIN_SHA" --head HEAD\n' in source
         and 'git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main' in source
         and 'git merge-base --is-ancestor "$MAIN_SHA" HEAD' in source
         and "Verify canonical-main frozen V3.2 authority" in source
@@ -34,6 +34,7 @@ class CanonicalMainLineageGuardContractTests(unittest.TestCase):
         self.assertTrue(both_frozen_lineage_gates_present(source))
         self.assertLess(source.index(' --base "$BASE_SHA" --head HEAD'), source.index(' --base "$MAIN_SHA" --head HEAD'))
         self.assertIn("Run provider issue-kind and migration-negative fixture regressions", source)
+        self.assertLess(source.index("Verify V3.5 lineage metadata"), source.index("Verify canonical-main frozen V3.2 authority"))
 
     def test_stack_only_check_does_not_satisfy_authorization(self):
         source = WORKFLOW.read_text(encoding="utf-8")
