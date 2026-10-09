@@ -20,7 +20,7 @@ TEMPLATE = ROOT / "relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md"
 REQUIRED = {
     1: ("problem", "working", "not yet implemented"),
     2: ("owner_verified", "unknown", "input"),
-    3: ("task-start", "tested", "former repository"),
+    3: ("task-start", "tested", "former repository", "never imply a previous head tests the current head"),
     4: ("consumer", "rollback", "input"),
     5: ("function", "before", "consumer"),
     6: ("positive", "negative/adversarial", "real_original", "browser_not_run"),
@@ -122,7 +122,7 @@ class Issue16HandoverContractTests(unittest.TestCase):
                 "Assume past tests qualify newer heads",
                 1,
             ),
-            "tested",
+            "never imply a previous head tests the current head",
         )
 
 
