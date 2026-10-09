@@ -53,6 +53,19 @@ export async function observeMovingHeads(manifest,read) {
     next.repositories.destination.main_sha=observedMain.object.sha;
   }
 
+  // New default branch may legitimately advance, but may not secretly
+  // rewrite/replace the historical cutover ancestry. A matched SHA across two
+  // GETs by itself is NOT proof of retained baseline history.
+  if (observedMain && next.repositories.destination.main_sha!==next.repositories.historical.main_sha) {
+    const compareMain=await doRead(d.full_name,
+      'compare/'+next.repositories.historical.main_sha+'...'+next.repositories.destination.main_sha);
+    if(!compareMain||compareMain.status!=='ahead'||
+       !safeNumber(compareMain.ahead_by)||compareMain.ahead_by<1||
+       compareMain.behind_by!==0){
+      errors.push('DESTINATION_MAIN_ANCESTRY_INVALID');
+    }
+  }
+
   // FIRST provider read: HEAD and branch must name the same current native commit.
   for(const mapping of mapped){
     const b=branches.get(mapping.origin.number);
