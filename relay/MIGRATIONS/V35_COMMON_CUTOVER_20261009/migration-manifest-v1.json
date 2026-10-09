@@ -198,9 +198,9 @@
       "origin_pr": 892,
       "branch": "feat/v32-889-relay-buddy-markdown-transaction",
       "origin_head_sha": "97d9f384ac1cfe4458b2db2302f5e7170a99e06d",
-      "destination_head_sha": "6255b759e20577c126c7b158e1c17ddc66bb80c7",
-      "relation": "SOURCE_ADVANCED",
-      "ahead_commits": 6
+      "destination_head_sha": "97d9f384ac1cfe4458b2db2302f5e7170a99e06d",
+      "relation": "EXACT_HEAD_MATCH",
+      "ahead_commits": 0
     },
     {
       "origin_pr": 893,
