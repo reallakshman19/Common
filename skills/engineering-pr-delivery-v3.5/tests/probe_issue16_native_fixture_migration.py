@@ -19,13 +19,13 @@ TARGET = "skills/engineering-pr-delivery-v3.2/tests/test_relay_tx.py"
 
 # Source-literal byte strings, not an attempt to rewrite stdout evidence.
 POSITIVE_FIXTURE_MIGRATIONS = (
-    (r'b"# Independent original system baseline\n"', r'b"# STAGE1_BASELINE\n"'),
-    (r'b"# Two independent designs\n"', r'b"# STAGE1_PLAN\n"'),
-    (r'b"# Original source independently reconstructed\n"', r'b"# STAGE1_BASELINE\n"'),
-    (r'b"# Independent options and falsifiers\n"', r'b"# STAGE1_PLAN\n"'),
-    (r'b"# Source producer and consumer witness\n"', r'b"# STAGE1_BASELINE\n"'),
-    (r'b"# Two alternate HOWs and falsifiers\n"', r'b"# STAGE1_PLAN\n"'),
-    (r'b"# Original cutoff 1 baseline\n"', r'b"# STAGE1_BASELINE\n"'),
+    (r'b"# Independent original system baseline\n', r'b"# STAGE1_BASELINE\n'),
+    (r'b"# Two independent designs\n', r'b"# STAGE1_PLAN\n'),
+    (r'b"# Original source independently reconstructed\n', r'b"# STAGE1_BASELINE\n'),
+    (r'b"# Independent options and falsifiers\n', r'b"# STAGE1_PLAN\n'),
+    (r'b"# Source producer and consumer witness\n', r'b"# STAGE1_BASELINE\n'),
+    (r'b"# Two alternate HOWs and falsifiers\n', r'b"# STAGE1_PLAN\n'),
+    (r'b"# Original cutoff 1 baseline\n', r'b"# STAGE1_BASELINE\n'),
 )
 
 
