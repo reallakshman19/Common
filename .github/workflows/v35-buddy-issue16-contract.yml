@@ -15,8 +15,10 @@ jobs:
   issue16-contract-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact PR merge candidate
+      - name: Checkout exact source head (not synthetic merge commit)
         uses: actions/checkout@v4
+        with:
+          ref: \${{ github.event.pull_request.head.sha || github.sha }}
       - name: Python 3.12
         uses: actions/setup-python@v5
         with:
