@@ -4,7 +4,11 @@
 
 | Field | Current value, exact verified ref / UNKNOWN |
 | --- | --- |
-| Episode / same parent, Local leaf, engineering leaf | [identifiers] |
+| Episode / same parent, Local leaf, engineering leaf | [identifiers **and owning repository**; historical old-repo issue is a different object] |
+| Canonical code repository vs historical issue/PR repository | [two exact owner/repo identities; provider-observed existence for each, no implicit rename] |
+| R14 U1 source roles | [PLAN_GRAPH_REVISION path/revision_sha/digest; SESSION_SOURCE_COMMIT commit SHA or UNKNOWN; CODE_CANDIDATE_HEAD PR number/base/head or UNKNOWN; one typed role per identity] |
+| R14 U2 Owner/session claims | [exact Owner-event source URL/repo/provenance and session START/STOP/RUNNER_PREPARED claims; **not authenticated Owner or old-writer revocation**] |
+| R14 U3 evidence/reviewer claims | [same-repo current PR/facts/fixture/tested SHA/reviewer URL; structure-only or UNADJUDICATED; never inherited reviewer approval] |
 | Accepted Relay transaction/checkpoint/handed-over snapshot | [current Git SHA/transaction ID/provider receipt; separate from historical source] |
 | Original Agent A true task start | [verified SHA or UNKNOWN] |
 | Current branch/PR/head/base/dirty paths | [independent provider result, time] |
