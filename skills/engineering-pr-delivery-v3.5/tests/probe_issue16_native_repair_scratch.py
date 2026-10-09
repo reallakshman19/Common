@@ -87,12 +87,15 @@ def trial(native_root: Path) -> str:
         '        ):\n'
         '            raise TransactionError("BUDDY_STAGE1_COMBINED_ORIGINALS_FORBIDDEN")\n'
     )
-    modified = replace_exact(modified, marker, marker + extra, "STAGE1_HEADING")
+    if modified.count(marker) != 1:
+        raise ValueError("NATIVE_SOURCE_DRIFT_GENERIC_MARKDOWN_HEADING")
     call = '    _require_buddy_sequence(root, int(match.group(1)), int(match.group(3)), match.group(4), actor)\n'
     modified = replace_exact(
         modified, call,
-        '    _scratch_require_monotonic_buddy_serial(root, int(match.group(1)), int(match.group(3)))\n' + call,
-        "SERIAL_CALL",
+        call
+        + '    _scratch_require_monotonic_buddy_serial(root, int(match.group(1)), int(match.group(3)))\n'
+        + extra,
+        "SEQUENCE_THEN_SERIAL_AND_HEADING",
     )
     ast.parse(modified, filename=str(source_file))
     source_file.write_text(modified, encoding="utf-8")
