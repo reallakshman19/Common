@@ -32,10 +32,46 @@
       ],
       "properties": {
         "historical": {
-          "$ref": "#/$defs/role"
+          "allOf": [
+            {
+              "$ref": "#/$defs/role"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "repository_id": {
+                  "const": 1207996454
+                },
+                "repository": {
+                  "const": "reallaksh19/Common"
+                },
+                "root_issue": {
+                  "const": 787
+                }
+              }
+            }
+          ]
         },
         "current": {
-          "$ref": "#/$defs/role"
+          "allOf": [
+            {
+              "$ref": "#/$defs/role"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "repository_id": {
+                  "const": 1412133785
+                },
+                "repository": {
+                  "const": "reallakshman19/Common"
+                },
+                "root_issue": {
+                  "const": 5
+                }
+              }
+            }
+          ]
         },
         "relation": {
           "enum": [
