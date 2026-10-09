@@ -35,7 +35,7 @@ jobs:
           git rev-parse HEAD
           node --test relay/RECOVERY/V35_R14_WP2B_20261010/*.test.mjs
   native-readonly-pre-admission:
-    if: false # gated until new PR's own native issue comment exists
+    if: github.event_name == 'pull_request'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
