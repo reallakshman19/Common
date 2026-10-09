@@ -80,7 +80,7 @@ test('positive provider GET verifies source/current objects with NO authority gr
   const r=await auditNativeProvider(f.m,f.read);
   assert.equal(r.current,true,JSON.stringify(r));
   assert.deepEqual(r.errors,[]);
-  assert.equal(r.provider_identity,'NATIVE_GET_VERIFIED_AT_OBSERVATION');
+  assert.equal(r.provider_identity,'CALLER_SUPPLIED_PROVIDER_RESPONSES_UNATTESTED');
   assert.equal(r.owner_authenticated,false);
   assert.equal(r.evidence_accepted,false);
   assert.equal(r.writer_authorized,false);
@@ -159,4 +159,14 @@ test('native transport never follows foreign URL, redirects or wrong API respons
   await assert.rejects(nativeGithubGet('reallaksh19/Common','issues/787',{
     fetchImpl:async url=>({status:200,redirected:false,url:'https://example.com/',text:async()=>'{ }'})
   }),/GITHUB_GET_UNVERIFIED/);
+});
+
+test('caller-injected valid GET shape cannot mint native-acquisition authority',async()=>{
+  const f=makeNativeFixture();
+  const out=await auditNativeProvider(f.m,f.read);
+  assert.equal(out.current,true);
+  assert.notEqual(out.provider_identity,'NATIVE_GET_VERIFIED_AT_OBSERVATION');
+  assert.equal(out.owner_authenticated,false);
+  assert.equal(out.reviewed,false);
+  assert.equal(out.evidence_accepted,false);
 });
