@@ -1,10 +1,10 @@
 /* Manual/CI read-only public provider currentness check. No GitHub mutations. */
 import {readFileSync} from 'node:fs';
-import {auditNativeProvider,nativeGithubGet} from './audit-native-provider-v1.mjs';
+import {auditLiveNativeGithub} from './audit-native-provider-v1.mjs';
 
 const manifest = JSON.parse(readFileSync(new URL('./migration-manifest-v1.json',import.meta.url),'utf8'));
-const audit = await auditNativeProvider(manifest,
-  (slug,path)=>nativeGithubGet(slug,path,{token:process.env.GITHUB_TOKEN||''}));
+const audit = await auditLiveNativeGithub(manifest,
+  {token:process.env.GITHUB_TOKEN||''});
 console.log(JSON.stringify({
   schema:audit.schema,current:audit.current,errors:audit.errors,
   provider_identity:audit.provider_identity,owner_authenticated:audit.owner_authenticated,
