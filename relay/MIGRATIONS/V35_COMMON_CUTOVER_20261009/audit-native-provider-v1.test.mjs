@@ -31,8 +31,13 @@ function makeNativeFixture(manifest=baseline) {
       state:'open',
       ...(item.kind==='PR'?{
         draft:true,merged:false,
-        head:{sha:r===roles.historical?branch.origin_head_sha:branch.destination_head_sha,
-          ref:branch.branch,repo:{full_name:r.full_name}},
+        head:{
+          sha:r===roles.historical?branch.origin_head_sha:
+            item.relation==='RELATED_NEW_IMPLEMENTATION'?'da3680459c5b48f44cda822ccf5009be4b035eef':
+            branch.destination_head_sha,
+          ref:r===roles.destination && item.relation==='RELATED_NEW_IMPLEMENTATION'
+            ? 'integrate/v32-relay-continuity-889-890-20261009' : branch.branch,
+          repo:{full_name:r.full_name}},
         base:{repo:{full_name:r.full_name}},
       }:{})
     };
@@ -130,7 +135,7 @@ test('diverged or wrong ahead count not accepted as copied source',async()=>{
   const f=makeNativeFixture(),b=f.m.branches.find(x=>x.origin_pr===893);
   f.got.get(key(f.m.repositories.destination.full_name,'compare/'+b.origin_head_sha+'...'+b.destination_head_sha)).behind_by=1;
   errors(await auditNativeProvider(f.m,f.read),'ANCESTRY_OR_AHEAD_MISMATCH');
-  const w=makeNativeFixture(),c=w.m.branches.find(x=>x.origin_pr===892);
+  const w=makeNativeFixture(),c=w.m.branches.find(x=>x.origin_pr===893);
   w.got.get(key(w.m.repositories.destination.full_name,'compare/'+c.origin_head_sha+'...'+c.destination_head_sha)).ahead_by+=1;
   errors(await auditNativeProvider(w.m,w.read),'ANCESTRY_OR_AHEAD_MISMATCH');
 });
