@@ -7,8 +7,12 @@
 | Existing episode/leaf and B actor/session | [source; no new responsibility] |
 | Frozen Stage1 original Part A+Part B immutable record | [raw digest/commit/path] |
 | Independent Controller release decision | [external freeze ref, read logs or HOLD] |
-| Current exact repo, PR, source HEAD, tested HEAD | [separate source refs and observation time] |
-| Handover mode | `PLANNED` / `INTERRUPTED_NO_PACKET` |
+| Current exact code repository, current provider PR, source HEAD, tested HEAD | [repository owner/name, actual current-repo PR number or UNKNOWN; separately pinned base, candidate and tested HEAD plus observation time] |
+| Historical legacy repo issues/PRs | [old exact repository/URL; preserve as historical, never rewrite as current-repo issue/PR] |
+| R14 U1/U2/U3/U5 reference grades | [typed graph/session/candidate, untrusted Owner/session claims, unadjudicated evidence/reviewer claims, read-only R12→DELP diagnostic; no evidence authority] |
+| Migration lineage and provider mapping | [authorized mapping + GitHub GET of newly created issue/PR or HOLD; matching commits alone insufficient] |
+| Handover mode | `PLANNED` / `INTERRUPTED_NO_PACKET`; missing A report must never be fabricated | 
+| Complete technical handover report | [`HANDOVER_TECHNICAL_V2` immutable commit/path/content digest + independent provider freshness, or INTERRUPTED_NO_PACKET; **must describe actual code, architecture/flow, tests/CI, defects, migration and next safe action**, not just an index] |
 | Accepted Owner intent and amendments | [authenticated Owner source; separate from A claim] |
 | Publication and execution authority | `READ_ONLY_RECONCILIATION`; no new GitHub writer |
 
@@ -17,6 +21,8 @@
 | Original Owner outcome | B's **frozen** historical fact + provisional hypothesis | A technical claim/decision | Independently verified CURRENT source/consumer/test/provider truth | Disposition and falsifier |
 | --- | --- | --- | --- | --- |
 | [criterion] | [literal frozen reference, not retroactive rewrite] | [A_CLAIM or UNKNOWN] | [path:function @ current SHA + true consumer/output or UNKNOWN] | [ACCEPT_A / ACCEPT_B / REVISE_BOTH / VERIFY_FIRST / PARK_MEDIUM / OWNER_DECISION / HOLD; why and a test that could change it] |
+
+**Migration falsifier:** If Owner history is stored under an old repo but the current candidate belongs to the new repo, reject invented same-repository mirrors, old PR-number reuse, and rewriting the owner slug as proof. Source identity and original chat authenticity remain UNKNOWN until separately attested.
 
 **Explicitly answer**: Where was B wrong? Where did A have superior measured/golden-tested engineering? Did both miss the same consumer or original user requirement? Is the original historical fixture now stale? What negative and current-run test would falsify the next step? Do not overvalue independent novelty.
 

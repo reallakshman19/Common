@@ -17,6 +17,18 @@
 | Task-blind two-pass request | [standalone Two-Pass schema](../../skills/two-pass-prompt-generator/schema.md); explicitly requested generator | Unplanned/no-prepared-B routing only when selected | Ordinary handover **does not** generate Two-Pass; task-aware planned Runner is different |
 | Broader three-pass reasoning | [standalone Three-Pass generator](../../skills/three-pass-prompt-generator/SKILL.md) | Optional unplanned broadened recovery | Canonical 0.5/1/2/2.5/3 sequence; not a substitute for old-writer fencing |
 
+### R14 typed-contract reconciliation and owner migration (source inspected at draft WP2/U01 head)
+
+R14's current unmerged U1→U2→U3→U4→U5 source uses **typed, non-authoritative** identities: `PLAN_GRAPH_REVISION`, `SESSION_SOURCE_COMMIT`, `CODE_CANDIDATE_HEAD`. U2 Owner/session events are GitHub-mirror/actor **claims**, not authenticated Owner or executor fencing. U3's current PR/issue/test/review structure is **same repository** and exact HEAD, but a different reviewer label is not proof of distinct principal. U4 proves canonical bytes agree across languages; U5 calls real V3.2 DELP in a **read-only untrusted-evidence quarantine**, not a publisher. The Runner/technical handover must **reference** these values only after actual admission; no second R14 canonical data model in Markdown.
+
+**Repository split:** Historical issues and PRs #890/#893 and R14 #891/#894/#895/#896/#897 exist in `reallaksh19/Common`; code and draft branches exist in `reallakshman19/Common`. The new repository initially lacks those old issue/PR objects (and has a new integration issue [#1](https://github.com/reallakshman19/Common/issues/1)). Git commit equivalence does **not** transfer issue, PR, review, workflow or credential identities. An R14 U2 exact-repo Owner-event locator cannot be made provider-authenticated by editing its owner slug. Preserve old URLs as historical facts, bind any new objects by fresh provider readback, and hold evidence/publish/writer transitions pending an approved explicit cross-repo lineage mapping.
+
+### Native Buddy transport and migration issue-identity guard
+
+The separate [new PR #2](https://github.com/reallakshman19/Common/pull/2) proposes `PUBLISH_BUDDY_MARKDOWN` under `relay/CONTINUITY/episodes/ISSUE-<issue>/messages/TX.<issue>.<serial>-<STAGE>.md`. Source inspection at `dc8203b11a5484ea8c530efc09ed5c2d43c9e3f3` found the `relay_tx.py` publisher checks numeric `issue_number` and `TX` format but has no direct provider repository/issue GET. **Do not mistake local transaction readback for current-repository issue-binding.** Require a separate current-repo issue provider readback or an approved native fail-closed adapter before admitting any migrated old-repo issue number into the new transport.
+
+The 21 overlapping Markdown paths between new PR #2 and [new PR #3](https://github.com/reallakshman19/Common/pull/3) include four R14-specific diverging files. See the [exact Git tree comparison and merge ledger](REVIEWER_ONLY/REPOSITORY_LINEAGE_AND_PR_COLLISION_V1.md). Both PRs are DRAFT. Native source author owns transport semantics; Runner prompt/handover owner preserves typed graph/session/candidate fields. **Do not merge both independently as if overlap were absent.** `STAGE1_FREEZE_CANDIDATE` is a local digest-chain candidate, never an externally attested freeze or Stage 2 permission.
+
 ### Negative authority assertions
 
 - Neither `relay/CONTINUITY` Markdown nor a Stage 1 freeze can grant Owner approval, Local execution, PR publication, merge or GitHub push rights.
