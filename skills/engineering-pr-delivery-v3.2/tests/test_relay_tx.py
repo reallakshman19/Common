@@ -990,7 +990,7 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
             )
             self.assertEqual("COMMITTED", result["status"])
             self.assertEqual(
-                "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.1-READINESS.md",
+                "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.1-READINESS.md",
                 result["message_path"],
             )
             self.assertEqual("NOT_ATTESTED_BY_MESSAGE_TRANSPORT", result["admission"])
@@ -1011,7 +1011,7 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
             publish_buddy_markdown(root, markdown=b"# Frozen plan\n\nFirst ideas.\n", **kw)
             with self.assertRaisesRegex(TransactionError, "IMMUTABLE"):
                 publish_buddy_markdown(root, markdown=b"# Changed plan\n\nRetrofit.\n", **kw)
-            self.assertIn("First ideas", (root / "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.1-STAGE1_INTAKE.md").read_text())
+            self.assertIn("First ideas", (root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.1-STAGE1_INTAKE.md").read_text())
 
     def test_reject_wrong_issue_stage_and_non_markdown(self):
         with tempfile.TemporaryDirectory() as td:
@@ -1035,14 +1035,14 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
     def test_direct_transaction_cannot_bypass_issue_or_immutability(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
-            path = "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.2-STAGE1_INTAKE.md"
+            path = "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.2-STAGE1_INTAKE.md"
             with self.assertRaisesRegex(TransactionError, "TX_OR_STAGE_INVALID"):
                 execute(root, tx_id="TX.889.1", command="PUBLISH_BUDDY_MARKDOWN",
                         actor="rogue", replacements={path: b"# forged\n"})
             with self.assertRaisesRegex(TransactionError, "ISSUE_PATH_INVALID"):
                 execute(root, tx_id="TX.889.2", command="PUBLISH_BUDDY_MARKDOWN",
                         actor="rogue", replacements={
-                            "relay/BUDDY_RUNNER/ISSUE-438/messages/TX.889.2-STAGE1_PLAN.md":
+                            "relay/CONTINUITY/episodes/ISSUE-438/messages/TX.889.2-STAGE1_PLAN.md":
                                 b"# forged\n"})
             publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
                                    stage="STAGE1_INTAKE", actor="runner-b", markdown=b"# original\n")
@@ -1244,7 +1244,7 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
                 publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
                                        stage="STAGE1_BASELINE", actor="runner-b",
                                        markdown=b"# Must not inherit old dispatch\n")
-            self.assertFalse((root / "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.6-STAGE1_PLAN.md").exists())
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.6-STAGE1_PLAN.md").exists())
 
     def test_new_symlinked_intake_cannot_be_ignored_for_old_receipt(self):
         with tempfile.TemporaryDirectory() as td:
@@ -1252,7 +1252,7 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
             publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.1",
                                    stage="STAGE1_INTAKE", actor="operator",
                                    markdown=b"# Old original intake\n")
-            folder = root / "relay/BUDDY_RUNNER/ISSUE-889/messages"
+            folder = root / "relay/CONTINUITY/episodes/ISSUE-889/messages"
             alias = folder / "TX.889.2-STAGE1_INTAKE.md"
             alias.symlink_to(folder / "TX.889.1-STAGE1_INTAKE.md")
             with self.assertRaisesRegex(TransactionError, "MESSAGE_SYMLINK_FORBIDDEN"):
@@ -1272,7 +1272,7 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
                 publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
                                        stage="DISPATCH_REQUEST", actor="operator",
                                        markdown=b"# Refuse changed intake\n")
-            self.assertFalse((root / "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.2-DISPATCH_REQUEST.md").exists())
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.2-DISPATCH_REQUEST.md").exists())
 
     def test_blocked_dispatch_cannot_become_stage1_baseline(self):
         with tempfile.TemporaryDirectory() as td:
@@ -1290,12 +1290,12 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
                 publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
                                        stage="STAGE1_BASELINE", actor="runner-b",
                                        markdown=b"# Fake baseline\n")
-            self.assertFalse((root / "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.4-STAGE1_BASELINE.md").exists())
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.4-STAGE1_BASELINE.md").exists())
 
     def test_unreceipted_intake_does_not_satisfy_stage_sequence(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
-            loose = root / "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.1-STAGE1_INTAKE.md"
+            loose = root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.1-STAGE1_INTAKE.md"
             loose.parent.mkdir(parents=True)
             loose.write_bytes(b"# Loose file with no native transaction\n")
             with self.assertRaisesRegex(TransactionError, "PRIOR_MESSAGE_UNRECORDED"):
@@ -1333,7 +1333,7 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
                     root, issue_number=889, tx_id="TX.889.7", stage="STAGE1_BASELINE",
                     actor="runner-b", markdown=b"# No independent Runner actually ran\n",
                 )
-            self.assertFalse((root / "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.7-STAGE1_PLAN.md").exists())
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.7-STAGE1_PLAN.md").exists())
 
     def test_interrupted_transaction_is_recoverable_without_duplicate_content(self):
         with tempfile.TemporaryDirectory() as td:
@@ -1347,7 +1347,7 @@ class BuddyMarkdownRelayTests(unittest.TestCase):
             self.assertEqual("COMMITTED", recovered[0]["status"])
             self.assertEqual(
                 b"# Prepared\n\nUNKNOWN context life.\n",
-                (root / "relay/BUDDY_RUNNER/ISSUE-889/messages/TX.889.4-READINESS.md").read_bytes(),
+                (root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.4-READINESS.md").read_bytes(),
             )
             with self.assertRaisesRegex(TransactionError, "IMMUTABLE"):
                 publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",

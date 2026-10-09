@@ -1333,7 +1333,7 @@ def publish_buddy_markdown(
         raise TransactionError("BUDDY_MARKDOWN_HEADING_REQUIRED")
 
     relative = (
-        f"relay/BUDDY_RUNNER/ISSUE-{issue_number}/messages/"
+        f"relay/CONTINUITY/episodes/ISSUE-{issue_number}/messages/"
         f"{tx_id}-{stage}.md"
     )
     target = root / relative

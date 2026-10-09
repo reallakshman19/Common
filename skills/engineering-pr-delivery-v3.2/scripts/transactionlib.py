@@ -19,7 +19,7 @@ from v3lib import load_yaml, repo_path, require_identifier, validate_schema
 
 COMMAND_TARGET_PATTERNS = {
     # Issue-scoped immutable Markdown messages; not lease/scoreboard/plan authority.
-    "PUBLISH_BUDDY_MARKDOWN": ["relay/BUDDY_RUNNER/ISSUE-*/messages/*.md"],
+    "PUBLISH_BUDDY_MARKDOWN": ["relay/CONTINUITY/episodes/ISSUE-*/messages/*.md"],
     "ACTIVATE_LEASE": [
         "relay/EVENTS.jsonl",
         "relay/STATE.yaml",
@@ -99,7 +99,7 @@ BUDDY_MESSAGE_STAGES = frozenset({
 
 def _prior_buddy_message(root: Path, issue: int, current_seq: int, stage: str) -> tuple[bytes, dict[str, Any]] | None:
     """Read only earlier COMMITTED native Relay message receipts, not loose files."""
-    folder = root / f"relay/BUDDY_RUNNER/ISSUE-{issue}/messages"
+    folder = root / f"relay/CONTINUITY/episodes/ISSUE-{issue}/messages"
     candidates: list[tuple[int, bytes, dict[str, Any]]] = []
     for path in folder.glob(f"TX.{issue}.*-{stage}.md"):
         match = re.fullmatch(rf"TX\.{issue}\.([1-9][0-9]*)-{re.escape(stage)}\.md", path.name)
@@ -221,7 +221,7 @@ def _validate_buddy_markdown_transaction(
         raise TransactionError("BUDDY_SINGLE_MESSAGE_TRANSACTION_REQUIRED")
     relative, payload = next(iter(replacements.items()))
     match = re.fullmatch(
-        r"relay/BUDDY_RUNNER/ISSUE-([1-9][0-9]*)/messages/"
+        r"relay/CONTINUITY/episodes/ISSUE-([1-9][0-9]*)/messages/"
         r"TX\.([1-9][0-9]*)\.([1-9][0-9]*)-([A-Z0-9_]+)\.md",
         relative,
     )
