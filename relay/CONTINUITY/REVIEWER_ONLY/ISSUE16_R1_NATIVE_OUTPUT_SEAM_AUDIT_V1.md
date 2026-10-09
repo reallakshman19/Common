@@ -41,3 +41,28 @@ This is a local reviewer-fixture success, not a native transaction or real B res
 | Native Stage1 freeze external attestation and same B Stage2 | NOT_RUN |
 
 Next V3.5 #16 unit: finish source-only test/contract publication, run focused tests against the exact current checkout, and reconcile Stage1 semantic consumers with moving PR #14 while preserving full twelve-section technical handover in main. Any protected V3.2 source change must occur on PR #2 under its separate Owner authorization.
+
+## Follow-up execution: real protected native PR #2 code, pinned RED
+
+**This upgrades the prior SOURCE_GAP finding with physically executed negative evidence.** [GitHub Actions run #37990462121](https://github.com/reallakshman19/Common/actions/runs/37990462121), job `Native PR2 Stage1 ingress conformance (RED until native fix)`, completed **FAIL** against **two explicitly checked-out immutable commits**:
+
+- Reviewer test and workflow code: `reallakshman19/Common@622c4bc55b669f854bf361766b39653e254ea57a`.
+- Native protected PR #2 code: `reallakshman19/Common@da3680459c5b48f44cda822ccf5009be4b035eef`.
+- Test script: `skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_stage1_candidate.py`, executed with Python 3.12 and installed native import dependencies (`PyYAML`, `jsonschema`). It imports actual native `transactionlib.py` from a second **read-only candidate checkout** and calls `_validate_buddy_markdown_transaction`.
+- The code **mocks only `_require_buddy_sequence`** to prevent missing predecessor receipts from hiding the heading/payload gate; it does NOT exercise `execute()` disk commit, CLI wrapper, real session identity, external access denial or actual freeze. That limited scope is explicit in both test code and CI job.
+
+| Adversarial input at actual native ingress | Execution outcome |
+| --- | --- |
+| Canonical `# STAGE1_BASELINE` positive | PASS (native accepted proper format) |
+| Canonical `# STAGE1_PLAN` positive, evidence-based `NO_CHANGE` | PASS (native accepted proper format) |
+| Generic baseline heading | FAIL — native **incorrectly accepted** |
+| Generic plan heading | FAIL — native **incorrectly accepted** |
+| Baseline file labelled as plan | FAIL — native **incorrectly accepted** |
+| Combined baseline and plan H1 inside one file | FAIL — native **incorrectly accepted** |
+| Combined file with CRLF second heading | FAIL — native **incorrectly accepted** |
+| Combined file with padded second heading | FAIL — native **incorrectly accepted** |
+| Combined file with second heading at EOF | FAIL — native **incorrectly accepted** |
+
+**Job truth:** `Ran 9 tests ... FAILED (failures=7)`, exit code 1. This is a genuine **native payload contract RED**, not an import/setup failure and not a false `9/9 PASS`. It is safe to retain as a **blocking evidence gate** while native source remains uncorrected; once an authorized PR #2 fix exists, update the pinned native SHA and rerun these same tests plus the native publisher wrapper/direct `execute()` flows. The ordinary issue #16 reviewer contract tests remain separately green and are **not** an alternate native admission implementation.
+
+**Required native-owner fix acceptance:** same source-level exact heading and combined-output rejection must apply to actual native CLI/wrapper **and direct `execute()`**, preserve original author-supplied bytes, not fabricate missing historical B source, and still acknowledge `NOT_ATTESTED` for external identity/freeze. The existing native test suite must update its old generic-heading positives and add these negatives. Owner freeze governance #4/#7 remains separate; this reviewer PR neither requests nor implies permission to mutate those paths.
