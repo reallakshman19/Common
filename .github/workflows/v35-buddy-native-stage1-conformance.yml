@@ -1,0 +1,49 @@
+name: v35-buddy-native-stage1-conformance
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_stage1_candidate.py'
+      - '.github/workflows/v35-buddy-native-stage1-conformance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  external-native-candidate-readonly-admission:
+    name: Native PR2 Stage1 ingress conformance (RED until native fix)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout issue16 test at exact source head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Checkout protected native PR2 candidate read-only at pinned SHA
+        uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install native import dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Execute real native ingress positive and adversarial probes
+        run: |
+          set -euo pipefail
+          python skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_stage1_candidate.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Report source identities and admission limitation
+        if: always()
+        run: |
+          echo "Issue16 test HEAD:"
+          git rev-parse HEAD
+          echo "Pinned external native candidate HEAD:"
+          git -C native-candidate rev-parse HEAD
+          echo "This probes native payload admission only with prior sequence validation mocked."
+          echo "A successful job never attests fresh B identity, actual provider dispatch, Stage1 freeze, or new source writer."
+          echo "A failed job is a real native candidate conformance gap, not a failure of issue16 reviewer source tests."
