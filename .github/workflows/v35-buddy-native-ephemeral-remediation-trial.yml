@@ -5,6 +5,7 @@ on:
     paths:
       - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py'
       - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_fixture_migration.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_cross_issue_concurrency.py'
       - '.github/workflows/v35-buddy-native-ephemeral-remediation-trial.yml'
   workflow_dispatch:
 
@@ -192,6 +193,13 @@ jobs:
           python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py \
             --native-root native-candidate \
             --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Validate concurrent publication on distinct issues (positive control)
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_cross_issue_concurrency.py \
+            --native-root native-candidate
       - name: Run PR22 exact 3-case deterministic native concurrency oracle
         env:
           PYTHONDONTWRITEBYTECODE: '1'
