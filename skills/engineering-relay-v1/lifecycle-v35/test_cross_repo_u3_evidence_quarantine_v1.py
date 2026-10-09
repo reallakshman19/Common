@@ -197,7 +197,7 @@ class U3CrossRepoMigrationTests(unittest.TestCase):
         self.assertNotEqual(first["binding_sha256"], later["binding_sha256"])
         self.assertEqual("NOT_ADMITTED", later["delp_evidence_admission"])
 
-    def test_claimed_stop_does_not_grant_writer(self):
+    def test_claimed_stopped_producer_blocks_new_reconciliation(self):
         doc = sample()
         events = doc["current_evidence"]["owner_session"]["session_events"]
         events.append({
@@ -206,9 +206,9 @@ class U3CrossRepoMigrationTests(unittest.TestCase):
             "kind": "STOP_CLAIMED", "owner_event_id": "O002",
             "source_commit": "b" * 40, "predecessor_id": "S002",
         })
-        out = reconcile_u3_cutover(doc)
-        self.assertEqual("NOT_GRANTED", out["writer_authorization"])
-        self.assertEqual("NOT_PROVEN", out["successor_lease"])
+        # Native U3 already rejects a stopped producer; this pre-admission
+        # wrapper must never weaken or reinterpret that denial as a fence.
+        self.reject(doc, "PRODUCER_SESSION_CLAIMED_STOPPED")
 
     def test_current_complete_failed_facts_not_copied_as_complete(self):
         doc = sample()
