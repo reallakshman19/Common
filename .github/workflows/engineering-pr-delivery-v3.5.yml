@@ -6,6 +6,8 @@ on:
       - 'relay/CONTINUITY/**'
       - 'skills/engineering-pr-delivery-v3.5/tests/test_runner_dispatch_markdown_contract.py'
       - 'skills/engineering-pr-delivery-v3.5/tests/test_buddy_r14_consumer_contract.py'
+      - 'skills/engineering-pr-delivery-v3.5/runner/**'
+      - 'skills/engineering-pr-delivery-v3.5/SKILL.md'
       - '.github/workflows/engineering-pr-delivery-v3.5.yml'
   push:
     branches:

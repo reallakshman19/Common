@@ -25,6 +25,10 @@
 | Stage2 / Owner / writer | Same B reconciles four views **only after** external final freeze and admitted disclosure; Owner and Local writer grants separate | Native Buddy Stage1 command must reject Stage2/technical handover as native published stages; old-A write fencing not replaced by Markdown |
 | Protected V3.2 code paths | Do not edit frozen source. The #2 implementation is still against base lacking four exact-path grant | [draft governance PR #8](https://github.com/reallakshman19/Common/pull/8) entry remains \`owner_authorized: false\`; current parent #2 code may not merge |
 
+## Complete V3.5 guidance retained without a second live transport
+
+The source-pinned V3.5 `SKILL.md` and all seven `runner/*.md` files from PR #3's inspected `d9f785394840840775775be81a526228edd3c00d` were imported as role-specific thinking/dispatch/manual acceptance guidance. They are **instructional consumers** of the single `relay/CONTINUITY` message record, not new Runner launch engines, state/lease files or alternative issue-scoped active paths. The PR #3 complete V3.5 technical report example also remains controller/reviewer-only and cannot be made accessible to a truly blind Stage1 B.
+
 ## Real acceptance gates vs structural checks
 
 **This candidate's executable source-level regressions** inspect the actual PR #2 \`transactionlib.py\` stage allowlist and publication path, compare the V3.5 dispatch identity + handover + Stage2 + Owner decision contracts, and negatively mutate missing provider binding and the complete technical handover requirement. These tests prove *contract consistency only*. They do not test real browser behavior, authentic provider issue GET at dispatch time, a fresh isolated B, future Owner decision or old A credential revocation.

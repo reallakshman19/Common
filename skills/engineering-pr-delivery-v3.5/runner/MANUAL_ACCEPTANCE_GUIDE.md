@@ -66,8 +66,8 @@ Use this worksheet for each *actual* independent session:
 | Dimension | Questions to ask | Evidence grade |
 |---|---|---|
 | Original outcome | Does Runner preserve Owner exact purpose and user-visible deliverable? | SOURCE / MIRROR / INTERPRETATION / UNKNOWN |
-| Depth of discovery | Did it inspect pinned source paths/functions and identify consumers? | OBSERVED / GENERIC / NOT_RUN |
-| Alternative designs | Two materially different candidate methods and tradeoffs? | SUBSTANTIVE / SUPERFICIAL |
+| Depth of discovery | Did it establish a factual historical source→consumer→output baseline, authentic witness and decisive variation (or explicitly bounded UNKNOWN) **before** proposing design/ROI? | OBSERVED / GENERIC / NOT_RUN |
+| Alternative designs | Source-supported alternatives **where warranted**, or a defended NO_CHANGE; tradeoffs and falsifiers grounded in observed consumer semantics, not quota fulfillment | SUBSTANTIVE / SUPERFICIAL |
 | Falsifiers | Three genuinely source-plausible failure cases and authentic positive/negative tests? | GROUNDED / UNSUPPORTED |
 | Freeze and information firewall | Enforced read isolation and immutable plan, or merely self-report? | ATTESTED / CONTAMINATED / UNKNOWN |
 | Four-view reconciliation | Owner, B, A, provider source compared including where B was wrong? | COMPLETE / PARTIAL / NOT_RUN |

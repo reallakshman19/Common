@@ -6,7 +6,7 @@
 
 **Do not mount or disclose this file to Stage 1 Runner B.** The Owner/controller supplies it *after* an independent Stage 1 artifact has been technically isolated, frozen, read back and authorized for disclosure. A file hash alone proves content identity, NOT tool isolation or a fresh context.
 
-**Role:** The **same** Runner B that wrote the independent Stage 1 plan. You are a critical investigator and possible future successor, not automatically the primary coder. Your job is to reconcile WHAT SHOULD EXIST against WHAT ACTUALLY EXISTS and determine the safest valuable next action.
+**Role:** The **same** Runner B that wrote the independent Stage 1 historical baseline plus provisional original-problem hypotheses. You are a critical investigator and possible future successor, not automatically the primary coder. Your job is to reconcile WHAT SHOULD EXIST against WHAT ACTUALLY EXISTS and determine the safest valuable next action.
 
 ## 0. Mandatory read admission — before viewing predecessor material
 
@@ -18,9 +18,9 @@ A trusted operator must provide **verified evidence**, or mark `UNKNOWN` and wit
 | Stage 1 original allowed-input manifest / pinned SHA | `[OPERATOR: immutable reference, raw digest]` |
 | Stage 1 technical read allowlist attested | `[OPERATOR: enforcement and denied-read log reference]` |
 | Stage 1 contamination verdict | `[OPERATOR: CLEAN / CONTAMINATED / UNKNOWN]` |
-| Immutable Stage 1 plan publication/readback | `[OPERATOR: actual content SHA256, immutable ref, receipt]` |
+| Immutable Stage 1 baseline + provisional interpretation publication/readback | `[OPERATOR: actual content SHA256, immutable ref, receipt]` |
 | Owner/coordinator permission to reveal Stage 2 | `[OPERATOR: independently authorized source ref]` |
-| Stage 2 reality packet identity | `[OPERATOR: sealed packet digest/revision]` |
+| Complete technical handover report identity | `[OPERATOR: HANDOVER_TECHNICAL_V2 exact immutable Markdown commit/path/digest, producer and source grade; or INTERRUPTED_NO_PACKET]` |
 | Stage 2 write authorization | **NONE** — read reconciliation is not executor promotion |
 
 If the read boundary was not enforced, forbidden material was already visible, the plan changed after freeze, or Owner approval is missing: **`STAGE2_ADMISSION=HOLD`**. Produce only a gate-failure report; do not use withheld material. A later clean run requires a genuinely fresh independent Runner session.
@@ -37,9 +37,9 @@ Your task is **not** to reword Agent A's handover. Investigate:
 
 ## 2. HOW to think — source-first reconciliation procedure
 
-**Step A — Reopen Stage 1 verbatim.** Verify the immutable Stage 1 file and digest; read your actual Q1/Q2/Q3, original alternatives, assumptions and ROI register. Do not rewrite the Stage 1 text to make your ideas appear accurate.
+**Step A — Reopen Stage 1 verbatim.** Verify the immutable Stage 1 file and digest; read your actual original questions (Q1/Q2/Q3 when the handover contract requires three), original alternatives, assumptions and ROI register. Do not rewrite the Stage 1 text to make your ideas appear accurate.
 
-**Step B — Read Agent A's *reality* without promoting its claims.** Ask for: original actual task start or UNKNOWN; exact HEAD/branch/PR; changed files/functions and consumers; initial plan/revisions/Owner decisions; tests at precise tested SHA with exits/goldens; known bugs/failed designs, parked Medium work; pending GitHub calls, lease and final proposal. Treat the packet as `AGENT_CLAIM` until independently checked. In a crash/no-handover case explicitly mark `HANDOVER_MODE=INTERRUPTED_NO_PACKET`.
+**Step B — Read the predecessor's complete *technical handover report* without promoting its claims.** The admitted [HANDOVER_TECHNICAL_V2 format](../../../relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md) requires a self-contained narrative: original WHAT/WHY and task start (or UNKNOWN), actual built functionality and changed symbols/consumers, causal data/control flow through the user-visible output, error/cancellation paths, deployment, exact tests/CI/fixtures/goldens at tested SHA, original plan/Owner revisions, outstanding bugs/rejected designs, old/new repository mapping, ambiguous writes/lease and an exact first safe successor action. Treat every A statement as `AGENT_CLAIM` until independently checked. A metadata index, generic plan or list of links is **not** a complete technical report. Treat the packet as `AGENT_CLAIM` until independently checked. In a crash/no-handover case explicitly mark `HANDOVER_MODE=INTERRUPTED_NO_PACKET`; controller may assemble a **source-observed reconstruction** but must not fabricate A's explanation.
 
 **Step C — Independently inspect *current* authority and source.** Read approved Owner requirement and graph/issue changes, current candidate HEAD and source, actual downstream import/call graph, committed fixture hashes, CI job steps, source-qualified TASK_EVIDENCE, parent/child/PR publication and actual browser/download if required. Keep these separate:
 
@@ -96,16 +96,16 @@ Build this matrix for **each meaningful Owner outcome or Stage 1 hypothesis**, n
 
 These are thinking examples, **not** claims about a present application or a prescribed design choice.
 
-## 4. Answer the *original* three questions, explicitly
+## 4. Answer the actual *original frozen* questions (three when required)
 
-Copy the **exact Q1/Q2/Q3 wording from your frozen Stage 1 plan** into a comparison section, preserving the question and its prior tentative answer. Do not substitute easier questions. For each:
+Copy the **exact questions from your frozen Stage 1 reconstruction (Q1/Q2/Q3 when three were required)** into a comparison section, preserving the question and its prior tentative answer. Do not substitute easier questions. For each:
 
 - Cite current source/consumer/provider evidence at its actual SHA and observation time, or `UNKNOWN`.
 - Explain what Agent A got right or wrong; also what you got right or wrong.
 - State a falsifier capable of changing your answer and the test/next source read that would settle it.
 - Identify whether the answer affects approved scope, authenticated Owner decision or execution safety.
 
-Separately, **after answering all three original questions**, identify the minimal legitimate existing execution unit or HOLD and its missing gate. Do not retrofit a generic next-unit question into Q1/Q2/Q3 if the frozen source-specific question concerns different engineering semantics. Never infer a new task from a newly created Runner issue.
+Separately, **after answering every original frozen question**,  identify the minimal legitimate existing execution unit or HOLD and its missing gate. Do not retrofit a generic next-unit question into Q1/Q2/Q3 if the frozen source-specific question concerns different engineering semantics. Never infer a new task from a newly created Runner issue.
 
 ## 5. Verify positive *and* negative acceptance
 
@@ -128,7 +128,7 @@ Create `RUNNER_RECONCILIATION_V1.md` with:
 2. **Mode and sources:** planned vs interrupted; original baseline, true Agent A starting SHA, current head, PR/issue/graph, authorizations, observation timestamp.
 3. **Four-way matrix:** Owner, Runner, Agent A, observed source for every material lifecycle/product seam.
 4. **What each agent missed or got better:** including instances where Agent A is superior and where both were wrong.
-5. **Answers to original Q1/Q2/Q3:** source-backed responses and falsifiers.
+5. **Answers to original frozen questions:** Q1/Q2/Q3 only when the governing contract required three; source-backed responses and falsifiers.
 6. **Positive/negative tests:** current SHA/fixtures/consumer/browser evidence and unrun gaps.
 7. **ROI disposition:** accepted High work, missing High, parked Medium with cost/revisit trigger and declined Low.
 8. **New detailed continuation plan:** file/function boundaries, existing issue/unit IDs, dependencies, tests, smallest legitimate next unit.
@@ -147,4 +147,4 @@ Declare **each**, independently:
 | Exclusive successor custody | `PROVEN_BY_CONTROLLER` / `NOT_PROVEN` |
 | Next engineering execution | `AUTHORIZED_UNIT_WITH_SCOPE` / `PLAN_READY_BUT_READ_ONLY` / `HOLD` |
 
-The correct outcome can be a **complete, useful revised plan with source evidence and no execution authority**. Do not publish GitHub issues/PR comments, modify source, award P/E, merge, or announce a takeover without a separately authenticated execution grant. When authorized, reconcile the current source once more before the first write and preserve the SAME existing responsibility.
+The correct outcome can be a **complete, useful revised plan with source evidence and no execution authority**. Publish the proposed [STAGE2_RECONCILIATION](../../../relay/CONTINUITY/TEMPLATES/STAGE2_RECONCILIATION.md) only through authorized Relay Markdown exchange; keep the current technical handover unreadable before the verified Stage 1 freeze. Do not publish GitHub issues/PR comments, modify source, award P/E, merge, or announce a takeover without a separately authenticated execution grant. When authorized, reconcile the current source once more before the first write and preserve the SAME existing responsibility.

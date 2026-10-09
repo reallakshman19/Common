@@ -123,5 +123,20 @@ class BuddyR14ConsumerContractTests(unittest.TestCase):
         self.assertIn("Stage2", agreement)
 
 
+    def test_runner_prompts_separate_independent_baseline_from_stage2_source(self):
+        stage1 = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/STAGE1_INDEPENDENT_RECONSTRUCTION.md").read_text(encoding="utf-8")
+        stage2 = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/STAGE2_SOURCE_RECONCILIATION.md").read_text(encoding="utf-8")
+        static = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/STATIC_PACKET_FORMATS.md").read_text(encoding="utf-8")
+        preparation = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/PREPARE_FOR_RUNNER.md").read_text(encoding="utf-8")
+        for marker in ("NO SOLUTION YET", "historical system", "Stage 1 ONLY"):
+            self.assertIn(marker.lower(), stage1.lower(), marker)
+        for marker in ("Stage 2 ONLY", "read admission", "four-perspective", "frozen"):
+            self.assertIn(marker.lower(), stage2.lower(), marker)
+        self.assertIn("never expose before Stage 2", static)
+        self.assertIn("Prepare for runner", preparation)
+        self.assertIn("Time for Runner", preparation)
+        self.assertNotEqual(stage1, stage2)
+
+
 if __name__ == "__main__":
     unittest.main()
