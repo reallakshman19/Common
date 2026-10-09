@@ -366,3 +366,28 @@ amendments:
     allowed_paths:
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_evidence_identity_red.py
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_custody_red.py
+
+  - id: AMEND-V32-BUDDY-017
+    owner_authorized: false
+    owner_basis: >-
+      PROPOSED ONLY; no independently authenticated explicit Owner authorization
+      for these four frozen V3.2 paths. New Common #6 requested recovery/start of
+      repair and documents a prerequisite, not an approved base-resident grant.
+      The original Buddy work remains historical in reallaksh19/Common #889 /
+      PR #892 and draft candidate reallakshman19/Common #2. An explicit later
+      Owner approval and a separately reviewed governance merge are required.
+    summary: >-
+      Review-only candidate exact-path V3.2 scope grant to reconcile the native
+      Relay Buddy transaction transport with one CONTINUITY Markdown episode
+      namespace, preserve transaction immutability and ordered Stage1 receipts,
+      and run focused regression tests at a newly authorized candidate base.
+      No Stage1 access isolation, final freeze, writer transfer, new DELP math,
+      source-authenticated Owner identity, production rollout or merge approval.
+      This disabled entry grants NOTHING until Owner authorization is explicitly
+      recorded and reviewed on its own base; the implementation PR may not grant
+      itself permission by changing this record.
+    allowed_paths:
+      - skills/engineering-pr-delivery-v3.2/schemas/transaction.schema.yaml
+      - skills/engineering-pr-delivery-v3.2/scripts/relay_tx.py
+      - skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
+      - skills/engineering-pr-delivery-v3.2/tests/test_relay_tx.py
