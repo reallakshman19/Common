@@ -175,7 +175,9 @@ def observe_live_crossrepo_provider_v2(envelope: Mapping[str, Any], *, token: st
     validate_crossrepo_identity_v2(envelope)
     old = envelope["historical_origin"]["repository"]
     new = envelope["current_target"]["repository"]
-    if {old, new} != {"reallaksh19/Common", "reallakshman19/Common"}:
+    # This specific cutover has a DIRECTION. A set-equality check silently
+    # lets the old repo impersonate the current execution namespace.
+    if (old, new) != ("reallaksh19/Common", "reallakshman19/Common"):
         _deny("UNAPPROVED_REPOSITORY_PAIR")
     observed = _observed(envelope, lambda r, p: _native_get(r, p, token=token))
     return {**observed, "source_grade": "NATIVE_GITHUB_GET_AT_OBSERVATION"}
