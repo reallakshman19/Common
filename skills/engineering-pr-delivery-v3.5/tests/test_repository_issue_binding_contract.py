@@ -53,7 +53,7 @@ class ProviderIssueBindingFormatTests(unittest.TestCase):
             with self.subTest(key=key):
                 self.assertEqual(
                     format_qualifies_current_issue(row, self.repo),
-                    row["expected_dispatch_issue"],
+                    row["expected_provider_issue_kind_match"],
                 )
 
     def test_pr_number_is_not_current_issue_binding(self):
@@ -75,7 +75,8 @@ class ProviderIssueBindingFormatTests(unittest.TestCase):
 
     def test_readback_qualifier_grants_no_runtime_authority(self):
         self.assertEqual(self.document["grade"], "SOURCE_OBSERVED_GITHUB_GET_SNAPSHOT_ONLY")
-        self.assertIn("not live provider admission", self.document["warning"])
+        self.assertIn("does not constitute runtime provider admission", self.document["warning"])
+        self.assertTrue(all(r["dispatch_authorization"] == "NOT_ASSESSED" for r in self.rows.values()))
 
 
 if __name__ == "__main__":

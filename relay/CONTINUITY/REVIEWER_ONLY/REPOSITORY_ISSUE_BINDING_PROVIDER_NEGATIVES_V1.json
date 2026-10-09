@@ -2,7 +2,7 @@
   "schema": "relay-provider-issue-readback-negatives-v1",
   "observed_on": "2026-10-09",
   "grade": "SOURCE_OBSERVED_GITHUB_GET_SNAPSHOT_ONLY",
-  "warning": "Fixture/result-kind parsing is not live provider admission, independent Owner authentication, or permission to mint ISSUE-number transactions.",
+  "warning": "An observed GitHub issue object or a formatting match does not constitute runtime provider admission, Owner scope authorization, independent Runner authentication, or execution/writer permissions.",
   "expected_repository": "reallakshman19/Common",
   "observations": [
     {
@@ -12,7 +12,8 @@
       "api_status": 200,
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallakshman19/Common/issues/4",
-      "expected_dispatch_issue": true
+      "expected_provider_issue_kind_match": true,
+      "dispatch_authorization": "NOT_ASSESSED"
     },
     {
       "id": "P02",
@@ -21,7 +22,8 @@
       "api_status": 200,
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallakshman19/Common/issues/6",
-      "expected_dispatch_issue": true
+      "expected_provider_issue_kind_match": true,
+      "dispatch_authorization": "NOT_ASSESSED"
     },
     {
       "id": "N01",
@@ -30,7 +32,8 @@
       "api_status": 200,
       "returned_kind": "pull_request",
       "returned_url": "https://github.com/reallakshman19/Common/pull/2",
-      "expected_dispatch_issue": false
+      "expected_provider_issue_kind_match": false,
+      "dispatch_authorization": "NOT_ASSESSED"
     },
     {
       "id": "N02",
@@ -39,7 +42,8 @@
       "api_status": 404,
       "returned_kind": null,
       "returned_url": null,
-      "expected_dispatch_issue": false
+      "expected_provider_issue_kind_match": false,
+      "dispatch_authorization": "NOT_ASSESSED"
     },
     {
       "id": "N03",
@@ -48,7 +52,8 @@
       "api_status": 404,
       "returned_kind": null,
       "returned_url": null,
-      "expected_dispatch_issue": false
+      "expected_provider_issue_kind_match": false,
+      "dispatch_authorization": "NOT_ASSESSED"
     },
     {
       "id": "N04",
@@ -57,7 +62,8 @@
       "api_status": 200,
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallaksh19/Common/issues/889",
-      "expected_dispatch_issue": false
+      "expected_provider_issue_kind_match": false,
+      "dispatch_authorization": "NOT_ASSESSED"
     },
     {
       "id": "N05",
@@ -66,7 +72,8 @@
       "api_status": 200,
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallaksh19/Common/issues/890",
-      "expected_dispatch_issue": false
+      "expected_provider_issue_kind_match": false,
+      "dispatch_authorization": "NOT_ASSESSED"
     }
   ]
 }
