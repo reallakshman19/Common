@@ -23,6 +23,12 @@ R14's current unmerged U1→U2→U3→U4→U5 source uses **typed, non-authorita
 
 **Repository split:** Historical issues and PRs #890/#893 and R14 #891/#894/#895/#896/#897 exist in `reallaksh19/Common`; code and draft branches exist in `reallakshman19/Common`. The new repository initially lacks those old issue/PR objects (and has a new integration issue [#1](https://github.com/reallakshman19/Common/issues/1)). Git commit equivalence does **not** transfer issue, PR, review, workflow or credential identities. An R14 U2 exact-repo Owner-event locator cannot be made provider-authenticated by editing its owner slug. Preserve old URLs as historical facts, bind any new objects by fresh provider readback, and hold evidence/publish/writer transitions pending an approved explicit cross-repo lineage mapping.
 
+### Native Buddy transport and migration issue-identity guard
+
+The separate [new PR #2](https://github.com/reallakshman19/Common/pull/2) proposes `PUBLISH_BUDDY_MARKDOWN` under `relay/CONTINUITY/episodes/ISSUE-<issue>/messages/TX.<issue>.<serial>-<STAGE>.md`. Source inspection at `dc8203b11a5484ea8c530efc09ed5c2d43c9e3f3` found the `relay_tx.py` publisher checks numeric `issue_number` and `TX` format but has no direct provider repository/issue GET. **Do not mistake local transaction readback for current-repository issue-binding.** Require a separate current-repo issue provider readback or an approved native fail-closed adapter before admitting any migrated old-repo issue number into the new transport.
+
+The 21 overlapping Markdown paths between new PR #2 and [new PR #3](https://github.com/reallakshman19/Common/pull/3) include four R14-specific diverging files. See the [exact Git tree comparison and merge ledger](REVIEWER_ONLY/REPOSITORY_LINEAGE_AND_PR_COLLISION_V1.md). Both PRs are DRAFT. Native source author owns transport semantics; Runner prompt/handover owner preserves typed graph/session/candidate fields. **Do not merge both independently as if overlap were absent.** `STAGE1_FREEZE_CANDIDATE` is a local digest-chain candidate, never an externally attested freeze or Stage 2 permission.
+
 ### Negative authority assertions
 
 - Neither `relay/CONTINUITY` Markdown nor a Stage 1 freeze can grant Owner approval, Local execution, PR publication, merge or GitHub push rights.
