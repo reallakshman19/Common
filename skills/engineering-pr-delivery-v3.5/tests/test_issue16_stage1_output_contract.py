@@ -29,10 +29,11 @@ def validate_buddy_stage1_output(stage: str, original_bytes: bytes) -> list[str]
         return ["NUL_FORBIDDEN"]
     if not text.startswith(f"# {stage}\n"):
         return ["STAGE1_EXACT_HEADING_REQUIRED"]
-    # Check all subsequent H1 stage delimiters, including CRLF, trailing
-    # whitespace and a header at EOF. Never reconstruct a second B-authored
-    # original from a combined document.
-    if re.search(r"(?m)^# STAGE1_(?:BASELINE|PLAN)[ \t]*\r?$", text.split("\n", 1)[1]):
+    # Check all subsequent Markdown H1 stage delimiters, including CRLF,
+    # trailing spaces, up to three leading spaces, optional closing hashes
+    # and headers at EOF. Four-space indented code is not an H1.
+    # Never reconstruct a second B-authored original from a combined document.
+    if re.search(r"(?m)^[ ]{0,3}# STAGE1_(?:BASELINE|PLAN)(?:[ \\t]+#+)?[ \\t]*\\r?$", text.split("\\n", 1)[1]):
         return ["COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES"]
     if not text.split("\n", 1)[1].strip():
         return ["EMPTY_STAGE1_SUBSTANCE"]
@@ -82,6 +83,30 @@ class Stage1OriginalFileContractTests(unittest.TestCase):
 
     def test_prose_mention_of_stage_label_is_allowed(self):
         raw = b"# STAGE1_BASELINE\n\nThe STAGE1_PLAN label belongs to a later independent document.\n"
+        self.assertEqual(validate_buddy_stage1_output(STAGE1_BASELINE, raw), [])
+
+    def test_indented_second_stage_h1_is_rejected(self):
+        # Markdown permits 0-3 spaces before an ATX H1.
+        for indentation in (b" ", b"  ", b"   "):
+            with self.subTest(indentation=indentation):
+                raw = b"# STAGE1_BASELINE\\n\\nFacts.\\n" + indentation + b"# STAGE1_PLAN\\nPlan.\\n"
+                self.assertIn(
+                    "COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES",
+                    validate_buddy_stage1_output(STAGE1_BASELINE, raw),
+                )
+
+    def test_closing_hashes_on_second_stage_h1_are_rejected(self):
+        # Markdown closing hashes do not turn an H1 into prose.
+        for closing in (b" ###", b"   ##  ", b" ##\\r"):
+            with self.subTest(closing=closing):
+                raw = b"# STAGE1_BASELINE\\n\\nFacts.\\n# STAGE1_PLAN" + closing + b"\\nPlan.\\n"
+                self.assertIn(
+                    "COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES",
+                    validate_buddy_stage1_output(STAGE1_BASELINE, raw),
+                )
+
+    def test_four_space_indented_code_heading_is_not_rejected(self):
+        raw = b"# STAGE1_BASELINE\\n\\nFacts.\\n    # STAGE1_PLAN\\nLiteral code example.\\n"
         self.assertEqual(validate_buddy_stage1_output(STAGE1_BASELINE, raw), [])
 
     def test_empty_file_is_rejected(self):
