@@ -5,6 +5,7 @@ on:
     paths:
       - 'skills/engineering-pr-delivery-v3.5/tests/test_issue16_*.py'
       - 'relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md'
+      - 'relay/CONTINUITY/REVIEWER_ONLY/ISSUE16_*.md'
       - '.github/workflows/v35-buddy-issue16-contract.yml'
   workflow_dispatch:
 
