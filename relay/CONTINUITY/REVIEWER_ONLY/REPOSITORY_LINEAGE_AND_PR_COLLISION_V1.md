@@ -65,3 +65,11 @@ Source at `dc8203b...`: `skills/engineering-pr-delivery-v3.2/scripts/relay_tx.py
 - **L06 OWNER HOLD:** Native path selection, approved old→new issue lineage, R14 schema applicability and PR merge order not authorized by this reviewer record.
 
 **Status:** `PROVIDER_OBJECTS_VERIFIED_AS_SEPARATE` · `PR_OVERLAP_21_BLOB_DIFFERENCES_4` · `NATIVE_ISSUE_BINDING_HOLD` · `STAGE1_NOT_EXECUTED` · `NO_MERGE_AUTHORITY`. This is a durable source-review message, not an attempt to issue new task credits.
+
+## 6. Provider-negative readback and concurrent writer observation
+
+Additional real GitHub API reads against `reallakshman19/Common` returned **HTTP 404** for `issues/890`, `pulls/893`, and `pulls/897`. Their old-repository counterparts are real and fetchable; the new provider objects were **NOT_FOUND** at the same check. This is stronger evidence than inferring absence from a first page of recent issues. It demonstrates the current repository-binding problem; it does not transfer the old objects or prove Owner intent.
+
+**Concurrency:** While this review proceeded, new draft [PR #2](https://github.com/reallakshman19/Common/pull/2) advanced from `dc8203b...` to `e5cdf5fb1de26992ab9fa5fd7752f4f5e7f74da5`; its native `relay_tx.py` blob remained `3a3dae8c4e21ed4f89cef5b12df8e4e6d7739963` and the issue-number-only function was re-read unchanged at the newer head. Its new checkpoint may have modified unrelated Markdown, so **the 21-overlap/4-difference count above is an explicitly pinned earlier-head comparison**, not an unqualified moving-branch assertion. Both branches require another exact-head conflict review immediately before any merge.
+
+The same issue number can refer to different GitHub repositories. A GitHub 404 observed by this reviewer is a **diagnostic source fact**, not a native runtime denial or a credential fence. A production native executor must either enforce this binding itself or require an externally attested current-repo issue object before treating a transaction message as attached to an accepted responsibility.
