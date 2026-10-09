@@ -1,0 +1,124 @@
+name: issue6-r2-handover-v2-integration-trial
+
+on:
+  pull_request:
+    paths:
+      - 'relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md'
+      - '.github/workflows/issue6-r2-handover-v2-integration-trial.yml'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_issue6_filled_handover_stage2_preflight.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrated-v2-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact pull request source head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Verify source identity and imported handover blob
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          ORIGINAL_INTEGRATION_SHA: 40956b99c646b32ae35738af20220ca289bbcb52
+          EXPECTED_HANDOVER_BLOB: 653b843c3ac8d326747261bd2dcb68282c705cd5
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$HEAD_SHA"
+          git merge-base --is-ancestor "$ORIGINAL_INTEGRATION_SHA" HEAD
+          test "$(git hash-object relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md)" = "$EXPECTED_HANDOVER_BLOB"
+          printf 'EXACT_TESTED_HEAD=%s\nEXACT_PR18_TEMPLATE_BLOB=%s\n' "$HEAD_SHA" "$EXPECTED_HANDOVER_BLOB"
+          git diff --name-only "$ORIGINAL_INTEGRATION_SHA"...HEAD
+
+      - name: Configure Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install existing native and V3.5 test dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+
+      - name: Import immutable PR19 reviewer contract test (test-only, no repository commit)
+        shell: bash
+        env:
+          ISSUE16_TEST_HEAD: d036b93fae60079cfc0b78985c4bdd56d15f7184
+          ISSUE16_TEST_BLOB: 2cf88b496b36d42923c77a33afbc0ccd087e3327
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "$ISSUE16_TEST_HEAD"
+          test "$(git rev-parse FETCH_HEAD)" = "$ISSUE16_TEST_HEAD"
+          DEST=skills/engineering-pr-delivery-v3.5/tests/test_issue16_handover_contract.py
+          test ! -e "$DEST" || { echo 'Refusing to overwrite a newer integrated issue16 test'; exit 1; }
+          git show "$ISSUE16_TEST_HEAD:$DEST" > "$DEST"
+          test "$(git hash-object "$DEST")" = "$ISSUE16_TEST_BLOB"
+          echo 'EXTERNAL_TEST_PROVENANCE=PR19 exact immutable blob, staged in CI workspace only'
+
+      - name: Prove old same-version 10-section template fails, revised 12-section template passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import importlib.util
+          import subprocess
+          from pathlib import Path
+          test_path = Path('skills/engineering-pr-delivery-v3.5/tests/test_issue16_handover_contract.py')
+          spec = importlib.util.spec_from_file_location('issue16_checker', test_path)
+          checker = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(checker)
+          file_path = 'relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md'
+          old = subprocess.run(
+              ['git','show','40956b99c646b32ae35738af20220ca289bbcb52:' + file_path],
+              check=True, text=True, capture_output=True
+          ).stdout
+          new = Path(file_path).read_text(encoding='utf-8')
+          old_errors = checker.check_handover_contract(old)
+          new_errors = checker.check_handover_contract(new)
+          print('OLD_TEN_SECTION_SOURCE_CONTRACT_ERRORS=', len(old_errors))
+          print('NEW_TWELVE_SECTION_SOURCE_CONTRACT_ERRORS=', len(new_errors))
+          assert old_errors, 'negative control unexpectedly qualified'
+          assert not new_errors, new_errors
+          PY
+
+      - name: Execute 7 actual Issue16 handover contract tests on reconciled candidate
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_issue16_handover_contract.py' -v
+
+      - name: Execute actual PR14 native-to-R14 Buddy/Stage2 consumer tests on same candidate
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_buddy_r14_consumer_contract.py' -v
+
+      - name: Execute actual PR14 dispatch and provider issue-kind tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_runner_dispatch_markdown_contract.py' -v
+          python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_repository_issue_binding_contract.py' -v
+
+      - name: Verify existing canonical-main authority workflow remains enforced (contract only)
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_frozen_main_lineage_guard_contract.py' -v
+
+      - name: Stage immutable PR19 filled technical report for reviewer-only checks
+        shell: bash
+        env:
+          PR19_REPORT_SOURCE_HEAD: c647d7a12bf4eb221e52d709ea3c52951ccf63e8
+          PR19_REPORT_BLOB: d72f49be3be82eb4f6ec9206c6afec46bd059c27
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "$PR19_REPORT_SOURCE_HEAD"
+          test "$(git rev-parse FETCH_HEAD)" = "$PR19_REPORT_SOURCE_HEAD"
+          SOURCE=relay/CONTINUITY/REVIEWER_ONLY/ISSUE16_PR19_TECHNICAL_HANDOVER_V2.md
+          mkdir -p /tmp/issue6-stage2-controller-only
+          DEST=/tmp/issue6-stage2-controller-only/pr19-filled-handover.md
+          git show "$PR19_REPORT_SOURCE_HEAD:$SOURCE" > "$DEST"
+          test "$(git hash-object "$DEST")" = "$PR19_REPORT_BLOB"
+          echo 'PINNED_FILLED_REPORT_BLOB_VERIFIED=' "$PR19_REPORT_BLOB"
+          echo 'CONTROLLER_ONLY_REVIEW_TEST=not a Stage1 read admission or actual ACL'
+
+      - name: Evaluate actual filled PR19 report, negative mutations and Stage2 HOLD
+        env:
+          ISSUE6_EXTERNAL_REPORT_PATH: /tmp/issue6-stage2-controller-only/pr19-filled-handover.md
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_issue6_filled_handover_stage2_preflight.py' -v
+
