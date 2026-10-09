@@ -3,7 +3,8 @@ on:
   pull_request:
     paths:
       - 'skills/engineering-relay-v1/lifecycle-v35/cross_repository_identity_v2.py'
-      - 'skills/engineering-relay-v1/lifecycle-v35/test_cross_repository_identity_v2.py'
+      - 'skills/engineering-relay-v1/lifecycle-v35/test_cross_repository*_v2.py'
+      - 'skills/engineering-relay-v1/lifecycle-v35/cross_repository_provider_v2.py'
       - 'skills/engineering-relay-v1/schemas/lifecycle-v35/cross-repository-identity-v2.schema.json'
       - '.github/workflows/v35-wp1-crossrepo-v2.yml'
 permissions:
@@ -30,4 +31,4 @@ jobs:
         shell: bash
         run: |
           git rev-parse HEAD
-          python -m unittest discover -s skills/engineering-relay-v1/lifecycle-v35 -p 'test_cross_repository_identity_v2.py' -v
+          python -m unittest discover -s skills/engineering-relay-v1/lifecycle-v35 -p 'test_cross_repository*_v2.py' -v
