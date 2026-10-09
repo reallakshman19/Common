@@ -66,29 +66,45 @@ export async function observeMovingHeads(manifest,read) {
     }
   }
 
-  // FIRST provider read: HEAD and branch must name the same current native commit.
+  // A SOURCE_BRANCH_CONTINUATION keeps the original ref name and ancestry.
+  // A RELATED_NEW_IMPLEMENTATION has its OWN PR branch/ref. Never bind PR #2
+  // head to the preserved #892 source branch, or invent a compare relationship.
+  const safeRef=v=>typeof v==='string'&&
+    /^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(v)&&!v.includes('..')&&!v.includes('//');
   for(const mapping of mapped){
     const b=branches.get(mapping.origin.number);
     if(!b){errors.push('UNMAPPED_DESTINATION_BRANCH:'+mapping.origin.number);continue;}
+    const related=mapping.relation==='RELATED_NEW_IMPLEMENTATION';
     const pr=await doRead(d.full_name,'pulls/'+mapping.destination.number);
-    const ref=await doRead(d.full_name,'git/ref/heads/'+b.branch);
-    if (!pr||!ref||pr.number!==mapping.destination.number||
+    const branchName=related?pr?.head?.ref:b.branch;
+    if(!safeRef(branchName)){
+      errors.push('MOVING_PR_BRANCH_UNSAFE:'+mapping.destination.number);
+      continue;
+    }
+    const ref=await doRead(d.full_name,'git/ref/heads/'+branchName);
+    if(!pr||!ref||pr.number!==mapping.destination.number||
         pr.html_url!=='https://github.com/'+d.full_name+'/pull/'+mapping.destination.number||
-        pr.head?.ref!==b.branch || pr.head?.repo?.full_name!==d.full_name||
+        pr.head?.ref!==branchName || pr.head?.repo?.full_name!==d.full_name||
         pr.base?.repo?.full_name!==d.full_name||
         !SHA.test(String(pr.head?.sha||'')) ||
-        ref.ref!=='refs/heads/'+b.branch||ref.object?.sha!==pr.head.sha){
+        ref.ref!=='refs/heads/'+branchName||ref.object?.sha!==pr.head.sha){
       errors.push('MOVING_PR_OR_BRANCH_MISMATCH:'+mapping.destination.number);
       continue;
     }
-    // Verify current exact ancestry with a NATIVE compare, not a caller-entered
-    // ahead count. Changing source HEAD changes a SOURCE OBSERVATION only.
+    if(related){
+      early.push({old_pr:mapping.origin.number,new_pr:mapping.destination.number,
+        new_head_sha:pr.head.sha,branch:branchName,
+        relation:'RELATED_NEW_IMPLEMENTATION',ahead:null,
+        ancestry:'NOT_CLAIMED'});
+      continue;
+    }
+    // Continuation only: verify exact ancestry with GitHub compare.
     const cmp=await doRead(d.full_name,
       'compare/'+b.origin_head_sha+'...'+pr.head.sha);
-    if (!cmp || (cmp.status !== 'identical' && cmp.status !== 'ahead') ||
-        !safeNumber(cmp.ahead_by) || cmp.behind_by!==0 ||
-        (cmp.status==='identical' && (cmp.ahead_by!==0 || b.origin_head_sha!==pr.head.sha)) ||
-        (cmp.status==='ahead' && (cmp.ahead_by<1 || b.origin_head_sha===pr.head.sha))){
+    if(!cmp||(cmp.status!=='identical'&&cmp.status!=='ahead')||
+       !safeNumber(cmp.ahead_by)||cmp.behind_by!==0||
+       (cmp.status==='identical'&&(cmp.ahead_by!==0||b.origin_head_sha!==pr.head.sha))||
+       (cmp.status==='ahead'&&(cmp.ahead_by<1||b.origin_head_sha===pr.head.sha))){
       errors.push('MOVING_SOURCE_ANCESTRY_INVALID:'+mapping.origin.number);
       continue;
     }
@@ -97,7 +113,8 @@ export async function observeMovingHeads(manifest,read) {
     b.relation=cmp.status==='identical'?'EXACT_HEAD_MATCH':'SOURCE_ADVANCED';
     early.push({old_pr:mapping.origin.number,new_pr:mapping.destination.number,
       new_head_sha:pr.head.sha,branch:b.branch,
-      ahead:cmp.ahead_by});
+      relation:'SOURCE_BRANCH_CONTINUATION',ahead:cmp.ahead_by,
+      ancestry:'GITHUB_COMPARE_AT_OBSERVATION'});
   }
   if(errors.length) return refusal(errors);
   const refreshed=validateMigrationManifest(next);
@@ -108,6 +125,24 @@ export async function observeMovingHeads(manifest,read) {
   // first read's response; a concurrent push MUST be marked stale.
   const audited=await auditNativeProvider(next,read);
   if (!audited.current) return refusal(['REFRESH_REQUIRED',...audited.errors]);
+
+  // RELATED_NEW_IMPLEMENTATION: re-GET native PR and its independent branch
+  // after the full census. The historical branch is checked separately by
+  // auditNativeProvider; it MUST NOT be rewritten to the new PR HEAD.
+  for(const entry of early.filter(x=>x.relation==='RELATED_NEW_IMPLEMENTATION')){
+    const pr=await doRead(d.full_name,'pulls/'+entry.new_pr);
+    const ref=await doRead(d.full_name,'git/ref/heads/'+entry.branch);
+    if(!pr||!ref||pr.number!==entry.new_pr||
+       pr.head?.repo?.full_name!==d.full_name||
+       pr.base?.repo?.full_name!==d.full_name||
+       pr.head?.ref!==entry.branch||
+       pr.head?.sha!==entry.new_head_sha||
+       ref.ref!=='refs/heads/'+entry.branch||
+       ref.object?.sha!==entry.new_head_sha){
+      errors.push('RELATED_PR_HEAD_MOVED:'+entry.new_pr);
+    }
+  }
+  if(errors.length)return refusal(['REFRESH_REQUIRED',...errors]);
 
   const source_vector=early.map(x=>Object.freeze({...x}));
   const changed=next.repositories.destination.main_sha!==manifest.repositories.destination.main_sha ||
