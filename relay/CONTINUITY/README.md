@@ -22,7 +22,7 @@ The *operator*, not Agent A, binds a continuation to the **existing, provider-ve
 | 0 | [STAGE1_SOURCE_PACKET](TEMPLATES/STAGE1_SOURCE_PACKET.md) | A drafts; operator curates/pins | B sees historical approved source and minimal Owner constraints **only** |
 | 1 | [STAGE1_RECONSTRUCTION](TEMPLATES/STAGE1_RECONSTRUCTION.md) | **Fresh B** | **Part A factual historical system witness FIRST**; Part B original-problem hypotheses SECOND; nothing published as a current plan |
 | 2 | [STAGE1_FREEZE](TEMPLATES/STAGE1_FREEZE.md) | Independent controller | Verify original bytes, immutable readback, actual denied-read isolation; no self-attestation |
-| 3 | [TECHNICAL_HANDOVER](TEMPLATES/TECHNICAL_HANDOVER.md) | Existing A/Relay custody projector | Current source/task/evidence/unknown writes and negative knowledge; **not readable by B before Step 2** |
+| 3 | [COMPLETE TECHNICAL HANDOVER V2](TEMPLATES/TECHNICAL_HANDOVER.md) | **Agent A** (or clearly attributed source-only reconstruction after termination), using existing transaction/provider receipts | **One self-contained engineering reality report**: original problem, built architecture/code/flow, exact tests and CI, real defects, repository migration and next-engineer starting point. Controller keeps it unreadable by B before verified Stage 1 freeze; it does not create custody. |
 | 4 | [STAGE2_RECONCILIATION](TEMPLATES/STAGE2_RECONCILIATION.md) | Same B after release | Four views: Owner, frozen B, A claims, actual current repo/provider. Detailed next plan is **DRAFT** |
 | 5 | [OWNER_DECISION](TEMPLATES/OWNER_DECISION.md) | Authenticated Owner/controller | Approve/hold plan and refer to externally evidenced Local writer admission. Markdown **never mints credentials** |
 
@@ -45,6 +45,10 @@ The [operator Stage 1 release contract](OPERATOR_STAGE1_RELEASE_CONTRACT.md) and
 A committed Markdown path is not private from other users or tokens with read access to the repository. **GitHub does not provide path-level confidentiality to a reader with whole-repo rights.** The safe options are (1) external tool/ref/path enforcement plus auditable denial, or (2) do not publish the current A reality on *any* B-readable ref until its independent Stage 1 is sealed. Folder names, HEAD pins, an instruction "don't read" and content hashes are not equivalent to isolation.
 
 If either the Stage 1 context cannot be separated or a forbidden fact was available, report `STAGE1_BLINDNESS_UNVERIFIED` / `STAGE1_CONTAMINATED`, do not grant Stage 2 independence credit; restart B if a clean trial is needed. An open PR, issue comment or a GitHub branch can expose withheld material—control **tools and scopes**, not just filenames.
+
+## Standalone technical report acceptance
+
+A completed [HANDOVER_TECHNICAL_V2](TEMPLATES/TECHNICAL_HANDOVER.md) is an **engineering explanation**, not a form of process instructions. It must be readable on its own: what original problem and Owner scope existed; what changed with path/function/source evidence; how a real input travels through validation/transforms/downstream consumers to a user output; which positive/negative/browser, fixture/golden and CI runs actually passed or failed at precise SHAs; known defects/risks/rejected attempts; old/new repo-object identities; and the exact first safe source/command for the successor. A table of HEAD/PR/issues and “see code” links alone is **NOT a handover report**. Keep current A material Stage 2-only and treat A's authored explanation as a claim until independent source/provider readback. External Owner/Local/Relay remains custody authority.
 
 ## Versioned Markdown envelope
 
