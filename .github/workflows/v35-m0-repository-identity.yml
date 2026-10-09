@@ -35,7 +35,11 @@ jobs:
         run: node --test relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/*.test.mjs
 
   live-provider-object-census:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,8 +49,10 @@ jobs:
         with:
           node-version: 24
       - name: Verify exact tested source
+        shell: bash
         run: git rev-parse HEAD
       - name: Double-read live moving PR heads, immutable origin refs, provider identity and ancestry
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
         run: node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/observe-moving-heads-v1.cli.mjs
