@@ -75,7 +75,9 @@ A reason code reflects **why preparation was requested**, not proof of exact con
 
 ---
 
-## Template B — After freeze: Stage 2 Agent A reality intake (**never expose before Stage 2 read admission**)
+## Template B — After freeze: Stage 2 reality metadata **AND a complete technical report** (never expose before Stage 2 read admission)
+
+The table below is **only an operator source/readback index**. It is never a sufficient handover deliverable. Agent A must write the full self-contained [HANDOVER_TECHNICAL_V2](../../../relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md), explaining the original problem, code changes and architecture, actual producer→consumer/end-user flow, tests/CI/goldens and known failures, old/new repository identity and the exact successor starting point. If no A report exists due to crash, label `INTERRUPTED_NO_PACKET`; an external reconstruction must distinguish observed source from UNKNOWN A reasoning. This is technical engineering reality, **not a reimplementation plan**.
 
 **REALITY_PACKET_ID:** `[operator id/version]`  
 **MODE:** `PLANNED_HANDOVER / INTERRUPTED_NO_PACKET`  
