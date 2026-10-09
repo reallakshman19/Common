@@ -1,0 +1,67 @@
+name: v35-issue16-native-scratch-repair-trial
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_repair_scratch.py'
+      - '.github/workflows/v35-issue16-native-scratch-repair-trial.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scratch-two-defect-native-candidate:
+    name: Two native defects repaired ONLY in disposable CI checkout
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact reviewer PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Checkout original protected PR2 only for scratch execution
+        uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install native test dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Make scratch ONLY change and display changed blob
+        run: |
+          set -euo pipefail
+          python skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_repair_scratch.py --native-root native-candidate
+          test "$(git -C native-candidate rev-parse HEAD)" = "da3680459c5b48f44cda822ccf5009be4b035eef"
+          test -n "$(git -C native-candidate status --porcelain --untracked-files=no)"
+          git -C native-candidate diff --check
+          git -C native-candidate diff --stat
+      - name: Run physical native payload 9-case regression on scratch
+        run: |
+          set -euo pipefail
+          python skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_stage1_candidate.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Run full native wrapper-direct 16-case replay on scratch
+        run: |
+          set -euo pipefail
+          python skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_full_buddy_chain.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Run protected native transaction regression on scratch
+        run: |
+          set -euo pipefail
+          python -m unittest discover \
+            -s native-candidate/skills/engineering-pr-delivery-v3.2/tests \
+            -p 'test_relay_tx.py' -v
+      - name: Print uncommitted scratch identity and limits
+        if: always()
+        run: |
+          echo "Reviewer PR tested HEAD:"
+          git rev-parse HEAD
+          echo "Native PR2 BASELINE HEAD (NOT a patched commit):"
+          git -C native-candidate rev-parse HEAD
+          echo "Native scratch-only changed file blob:"
+          git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
+          git -C native-candidate status --short
+          echo "NO PROTECTED SOURCE COMMITTED OR PUSHED. CONCURRENCY POLICY HOLD."
