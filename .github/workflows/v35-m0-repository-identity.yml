@@ -32,4 +32,21 @@ jobs:
           git status --porcelain
       - name: Run M0 reference-only positive and adversarial tests
         shell: bash
-        run: node --test relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/validate-migration-manifest-v1.test.mjs
+        run: node --test relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/*.test.mjs
+
+  live-provider-object-census:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify exact tested source
+        run: git rev-parse HEAD
+      - name: Re-fetch both GitHub repository identities, old/new issue and PR objects, branch ancestry
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/audit-native-provider-v1.cli.mjs
