@@ -36,7 +36,7 @@ function fixture(){
    issue_url:api+'/issues/20',user:{login:'reallakshman19',id:277598171,type:'User'},
    created_at:'2026-10-09T21:00:00Z',updated_at:'2026-10-09T21:00:00Z',
    body:'## TASK_EVIDENCE — historical source\n**Tested HEAD:** '+tick+OLD+tick+
-     ' [draft PR #27]('+web+'/pull/27+').'},
+     ' [draft PR #27]('+web+'/pull/27).'},
   ['commits/'+OLD]:{sha:OLD},
  };
  src['git/ref/heads/'+BR]={ref:'refs/heads/'+BR,object:{sha:H}};
