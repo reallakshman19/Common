@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_stage1_candidate.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_full_buddy_chain.py'
       - '.github/workflows/v35-buddy-native-stage1-conformance.yml'
   workflow_dispatch:
 
@@ -47,3 +48,40 @@ jobs:
           echo "This probes native payload admission only with prior sequence validation mocked."
           echo "A successful job never attests fresh B identity, actual provider dispatch, Stage1 freeze, or new source writer."
           echo "A failed job is a real native candidate conformance gap, not a failure of issue16 reviewer source tests."
+
+  full-native-transaction-chain:
+    name: Native PR2 wrapper and execute chain (RED until fixed)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout issue16 test at exact source head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Checkout protected PR2 source at pinned commit
+        uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install protected runtime import dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Run genuine native transaction and wrapper conformance cases
+        run: |
+          set -euo pipefail
+          python skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_full_buddy_chain.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Report exact checkouts and limits
+        if: always()
+        run: |
+          echo "Issue16 test source HEAD:"
+          git rev-parse HEAD
+          echo "Native protected PR2 source HEAD:"
+          git -C native-candidate rev-parse HEAD
+          echo "Real native transactions were executed in disposable tmpdirs only."
+          echo "Input/session/authentication receipts were synthetic test fixtures."
+          echo "A valid local chain cannot independently attest real Runner tool isolation."
