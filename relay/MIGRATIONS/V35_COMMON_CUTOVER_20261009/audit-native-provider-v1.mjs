@@ -18,7 +18,7 @@ export async function auditNativeProvider(manifest, getJSON) {
     schema: 'common-v35-native-provider-audit-v1',
     current: false,
     errors: Object.freeze([...errors]),
-    provider_identity: errors.length ? 'NOT_CURRENT_OR_UNVERIFIED' : 'NATIVE_GET_VERIFIED_AT_OBSERVATION',
+    provider_identity: errors.length ? 'NOT_CURRENT_OR_UNVERIFIED' : 'CALLER_SUPPLIED_PROVIDER_RESPONSES_UNATTESTED',
     reviewed: false, owner_authenticated: false, evidence_accepted: false,
     writer_authorized: false, programme_acceptance: 'NOT_EVALUATED',
   });
@@ -114,7 +114,18 @@ export async function auditNativeProvider(manifest, getJSON) {
   const out = refusal();
   return Object.freeze({...out,current:errors.length===0,
     provider_identity:errors.length===0 ?
-      'NATIVE_GET_VERIFIED_AT_OBSERVATION' : 'NOT_CURRENT_OR_UNVERIFIED'});
+      'CALLER_SUPPLIED_PROVIDER_RESPONSES_UNATTESTED' : 'NOT_CURRENT_OR_UNVERIFIED'});
+}
+
+/* This is the ONLY public production entrypoint claiming a live GitHub GET
+ * observation. The injectable verifier above *never* issues that claim.
+ * JSON readback copies cannot recreate an in-process provider source.
+ */
+export async function auditLiveNativeGithub(manifest,{token=''}={}) {
+  const result = await auditNativeProvider(manifest,(slug,path)=>
+    nativeGithubGet(slug,path,{token}));
+  return Object.freeze({...result,provider_identity: result.current ?
+    'NATIVE_GET_VERIFIED_AT_OBSERVATION' : 'NOT_CURRENT_OR_UNVERIFIED'});
 }
 
 // Never accept caller-supplied arbitrary URLs. Only the two namespace-bounded
