@@ -43,6 +43,16 @@ export async function observeMovingHeads(manifest,read) {
     }
   };
 
+  // FIRST independent read of the new default branch. The immutable origin
+  // main SHA remains frozen in manifest; destination main is moving material.
+  const observedMain=await doRead(d.full_name,'git/ref/heads/main');
+  if (!observedMain || observedMain.ref!=='refs/heads/main' ||
+      !SHA.test(String(observedMain.object?.sha||''))) {
+    errors.push('MOVING_MAIN_REF_INVALID');
+  } else {
+    next.repositories.destination.main_sha=observedMain.object.sha;
+  }
+
   // FIRST provider read: HEAD and branch must name the same current native commit.
   for(const mapping of mapped){
     const b=branches.get(mapping.origin.number);
@@ -87,9 +97,10 @@ export async function observeMovingHeads(manifest,read) {
   if (!audited.current) return refusal(['REFRESH_REQUIRED',...audited.errors]);
 
   const source_vector=early.map(x=>Object.freeze({...x}));
-  const changed=next.branches.some((b,i)=>
-    b.destination_head_sha!==manifest.branches[i].destination_head_sha ||
-    b.ahead_commits!==manifest.branches[i].ahead_commits);
+  const changed=next.repositories.destination.main_sha!==manifest.repositories.destination.main_sha ||
+    next.branches.some((b,i)=>
+      b.destination_head_sha!==manifest.branches[i].destination_head_sha ||
+      b.ahead_commits!==manifest.branches[i].ahead_commits);
   return Object.freeze({
     schema:'common-v35-moving-head-observation-v1',
     current:true, errors:Object.freeze([]),
@@ -98,6 +109,8 @@ export async function observeMovingHeads(manifest,read) {
     evidence_accepted:false,writer_authorized:false,
     programme_acceptance:'NOT_EVALUATED',
     source_vector:Object.freeze(source_vector),
+    destination_main_sha:next.repositories.destination.main_sha,
+    historical_main_sha:next.repositories.historical.main_sha,
     manifest_advanced:changed,
   });
 }
