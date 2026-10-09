@@ -30,10 +30,11 @@ def validate_buddy_stage1_output(stage: str, original_bytes: bytes) -> list[str]
     if not text.startswith(f"# {stage}\n"):
         return ["STAGE1_EXACT_HEADING_REQUIRED"]
     # Check all subsequent Markdown H1 stage delimiters, including CRLF,
-    # trailing spaces, up to three leading spaces, optional closing hashes
-    # and headers at EOF. Four-space indented code is not an H1.
+    # trailing spaces, optional horizontal whitespace after the ATX #,
+    # up to three leading spaces, optional closing hashes and headings at EOF.
+    # Four-space indented code is not an H1; a literal prose mention is safe.
     # Never reconstruct a second B-authored original from a combined document.
-    if re.search(r"(?m)^[ ]{0,3}# STAGE1_(?:BASELINE|PLAN)(?:[ \t]+#+)?[ \t]*\r?$", text.split("\n", 1)[1]):
+    if re.search(r"(?m)^[ ]{0,3}#[ \t]+STAGE1_(?:BASELINE|PLAN)(?:[ \t]+#+)?[ \t]*\r?$", text.split("\n", 1)[1]):
         return ["COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES"]
     if not text.split("\n", 1)[1].strip():
         return ["EMPTY_STAGE1_SUBSTANCE"]
@@ -80,6 +81,30 @@ class Stage1OriginalFileContractTests(unittest.TestCase):
     def test_embedded_plan_header_at_eof_is_rejected(self):
         raw = b"# STAGE1_BASELINE\n\nFacts.\n# STAGE1_PLAN"
         self.assertIn("COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES", validate_buddy_stage1_output(STAGE1_BASELINE, raw))
+
+    def test_commonmark_atx_heading_whitespace_variants_rejected(self):
+        # CommonMark accepts one or more spaces or tabs after the ATX #.
+        # The previous single-space regex missed a combined original file.
+        variants = (
+            b"#\tSTAGE1_PLAN\nPlan.\n",
+            b"#  STAGE1_PLAN\nPlan.\n",
+            b" #\tSTAGE1_PLAN\r\nPlan.\r\n",
+            b"  # \tSTAGE1_PLAN ##  \nPlan.\n",
+            b"   #   STAGE1_PLAN",  # Valid heading at EOF.
+            b"#\tSTAGE1_PLAN ###\r\nPlan.\n",
+            b"#\tSTAGE1_BASELINE\nRepeated header.\n",
+        )
+        for second_heading in variants:
+            with self.subTest(second_heading=second_heading):
+                raw = b"# STAGE1_BASELINE\n\nHistorical facts.\n" + second_heading
+                self.assertIn(
+                    "COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES",
+                    validate_buddy_stage1_output(STAGE1_BASELINE, raw),
+                )
+
+    def test_atx_like_text_inside_prose_does_not_create_second_file(self):
+        raw = b"# STAGE1_BASELINE\n\nA string contains #\tSTAGE1_PLAN as a literal value.\n"
+        self.assertEqual(validate_buddy_stage1_output(STAGE1_BASELINE, raw), [])
 
     def test_prose_mention_of_stage_label_is_allowed(self):
         raw = b"# STAGE1_BASELINE\n\nThe STAGE1_PLAN label belongs to a later independent document.\n"
