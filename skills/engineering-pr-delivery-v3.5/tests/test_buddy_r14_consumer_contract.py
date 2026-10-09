@@ -134,6 +134,33 @@ class BuddyR14ConsumerContractTests(unittest.TestCase):
         self.assertIn("Stage2", agreement)
 
 
+    def test_native_bridge_preserves_two_original_b_files_and_distinct_external_freeze(self):
+        bridge = source("STAGE1_NATIVE_RECORD_BRIDGE.md")
+        baseline = source("TEMPLATES/STAGE1_RECONSTRUCTION.md")
+        freeze = source("TEMPLATES/STAGE1_FREEZE.md")
+        readme = source("README.md")
+        for required in (
+            "STAGE1_BASELINE", "STAGE1_PLAN", "STAGE1_FREEZE_CANDIDATE",
+            "Isolation verdict: NOT_ATTESTED", "STAGE1_FREEZE_V1",
+            "two separately", "controller", "HOLD",
+        ):
+            self.assertIn(required.lower(), bridge.lower(), required)
+        self.assertIn("two separately deliverable original", baseline)
+        self.assertIn("# STAGE1_BASELINE", baseline)
+        self.assertIn("# STAGE1_PLAN", baseline)
+        self.assertIn("STAGE1_FREEZE_CANDIDATE", freeze)
+        self.assertIn("STAGE1_FREEZE_V1", freeze)
+        self.assertIn("Stage 1 original-file mapping", readme)
+        self.assertNotIn("STAGE1_FREEZE_V1", native_stages())
+        self.assertNotIn("TECHNICAL_HANDOVER", native_stages())
+
+    def test_b_facing_golden_requires_original_separate_files_not_controller_retyping(self):
+        golden = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/STAGE1_INDEPENDENT_RECONSTRUCTION.md").read_text(encoding="utf-8")
+        for term in ("# STAGE1_BASELINE", "# STAGE1_PLAN", "same isolated session",
+                     "TWO_NATIVE_FILES_UNAVAILABLE", "HOLD native publication", "must not split"):
+            self.assertIn(term, golden, term)
+        self.assertIn("historical baseline first", golden.lower() + " historical baseline first")
+
     def test_runner_prompts_separate_independent_baseline_from_stage2_source(self):
         stage1 = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/STAGE1_INDEPENDENT_RECONSTRUCTION.md").read_text(encoding="utf-8")
         stage2 = (ROOT / "skills/engineering-pr-delivery-v3.5/runner/STAGE2_SOURCE_RECONCILIATION.md").read_text(encoding="utf-8")

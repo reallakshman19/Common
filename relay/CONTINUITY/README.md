@@ -13,6 +13,10 @@
 
 If A terminates **after** an independently frozen Stage 1, a Controller may offer Runner B emergency Stage 2 using current provider evidence and explicit `missing-A` statements. Neither route may invent an A handover.
 
+## Stage 1 original-file mapping: one B session, two original records
+
+The [native Stage 1 record bridge](STAGE1_NATIVE_RECORD_BRIDGE.md) maps one independently reasoned B submission onto exactly **two separately B-authored original UTF-8 documents**: `# STAGE1_BASELINE` (factual Part A completed first), then `# STAGE1_PLAN` (provisional Part B). If B supplied only a combined answer, preserve the actual unchanged bytes and **HOLD**; Agent A or a controller must not synthesize two B-authored files by splitting or retyping it. Native `STAGE1_FREEZE_CANDIDATE` is a five-receipt local integrity check with `Isolation verdict: NOT_ATTESTED`, **not** the external `STAGE1_FREEZE_V1` decision or a Stage 2/writer grant. The separate [Stage 1 response template](TEMPLATES/STAGE1_RECONSTRUCTION.md) is only a format for a genuinely isolated B and is never a controller-authored answer.
+
 ## Communication sequence and file roles
 
 The *operator*, not Agent A, binds a continuation to the **existing, provider-verified parent/leaf/Local responsibility and its repository identity**. The proposed native V3.2 [PR #2](https://github.com/reallakshman19/Common/pull/2) would use `relay/CONTINUITY/episodes/ISSUE-<current-repo-issue>/messages/TX.<issue>.<serial>-<STAGE>.md` through the existing `PUBLISH_BUDDY_MARKDOWN` transaction. **This is a candidate, not yet admitted production transport.** Historical `episodes/CORE1B_GOLDENS_RUNNER_20261009/` files are research fixtures and are **not** native transactional messages. Avoid a second active episode namespace, a new EP or a duplicate progress denominator.
