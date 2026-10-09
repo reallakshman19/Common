@@ -56,6 +56,12 @@ class ProviderIssueBindingFormatTests(unittest.TestCase):
                     row["expected_provider_issue_kind_match"],
                 )
 
+    def test_recovery_audit_does_not_call_pr_2_an_issue(self):
+        report = (ROOT / "relay/CONTINUITY/REVIEWER_ONLY/V32_BUDDY_RECOVERY_P0_GOVERNANCE_20261009.md").read_text(encoding="utf-8")
+        self.assertNotIn("new issue #2](https://github.com/reallakshman19/Common/issues/2)", report)
+        self.assertIn("new governance issue #4](https://github.com/reallakshman19/Common/issues/4)", report)
+        self.assertIn("new PR #2](https://github.com/reallakshman19/Common/pull/2)", report)
+
     def test_pr_number_is_not_current_issue_binding(self):
         pr = self.rows["N01"]
         self.assertFalse(format_qualifies_current_issue(pr, self.repo))
