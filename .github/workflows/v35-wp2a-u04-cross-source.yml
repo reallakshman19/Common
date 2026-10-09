@@ -1,0 +1,63 @@
+name: V3.5 WP2-A U04 source vector (read-only)
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/cross-source-vector-v1*'
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/U04_README.md'
+      - '.github/workflows/v35-wp2a-u04-cross-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+  checks: read
+  statuses: read
+
+jobs:
+  cross-source-falsifiers:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: U04 source and adversarial tests at exact HEAD
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          node --test relay/RECOVERY/V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs
+
+  native-source-vector:
+    if: github.event_name == 'pull_request'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Re-observe current PR source, CI and historical TaskEvidence without write privileges
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          git rev-parse HEAD
+          node relay/RECOVERY/V35_R14_WP2A_20261010/cross-source-vector-v1.cli.mjs
