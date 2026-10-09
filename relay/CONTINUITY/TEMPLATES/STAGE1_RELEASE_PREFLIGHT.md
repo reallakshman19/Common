@@ -4,7 +4,9 @@
 
 | Field | Actual independent evidence / UNKNOWN |
 | --- | --- |
-| Existing parent/leaf/episode (no new EP) | [exact source/Owner/Local ID] |
+| Existing parent/leaf/episode (no new EP) | [current-repository ISSUE object + separately authenticated Owner/Local approved responsibility; reject PR-number-only and historical-mirror bindings] |
+| Current-repo provider object identity receipt | [controller-issued actual GET repository `id`/`full_name` + GET issue `id`/`number`/`html_url`/`repository_url`, prove no `pull_request` key, UTC time/tool principal; `HOLD_REPOSITORY_IDENTITY` if missing] |
+| Independent responsibility/Owner scope decision | [authenticated allowed work/leaf/Owner amendment or `HOLD_OWNER_SCOPE`; existence of an ISSUE object does not approve Runner/lease/Stage 2] |
 | Dispatch request version, immutable Git commit/blob | [specific ref; read back] |
 | Intended B source packet/Stage 1 instruction/output format blobs | [three separately pinned raw content digests, source manifest] |
 | Approved source closure/fixture and true original task-start distinction | [historical commit/file blobs, authenticity grades, A true start or UNKNOWN] |
@@ -24,6 +26,8 @@
 | Dispatch/admission verdict | `STAGE1_RELEASE_ATTESTED` / `HOLD_NO_FRESH_CONTEXT` / `HOLD_NO_LAUNCHER` / `HOLD_READ_BOUNDARY` / `HOLD_INPUT` / `REHEARSAL_NOT_BLIND` |
 | Next *single* authorized action / operator | [action/ref, or UNASSIGNED / STOP] |
 | Original primary A source writer status | `UNCHANGED`; no promotion or merger rights |
+
+**Provider identity MUST be independently fetched at release; a pasted source fixture or self-reported Markdown field is not a GET. Re-check exact object kind/repository ID, separately validate approved responsibility, and refuse `STAGE1_RELEASE_ATTESTED` when either gate is HOLD.**
 
 **All negative tests must be executed and attributable to the actual B identity for a CLEAN verdict.** The existence of this Markdown receipt proves nothing about denied reads by itself. A B-authored `sha256` does not prove fresh context. An agent/editor self-supplied 'DENIED' string is not an independent access log.
 
