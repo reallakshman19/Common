@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "relay-v35-cross-repo-u3-evidence-quarantine-v1",
+  "title": "Read-only historical/current U3 evidence cutover quarantine",
+  "description": "Migrate references only; no Owner/reviewer/evidence acceptance, DELP projections, or writer lease.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "mode",
+    "migration",
+    "historical_evidence",
+    "current_evidence",
+    "policy_adoption",
+    "writer_state"
+  ],
+  "properties": {
+    "schema": {
+      "const": "relay-v35-cross-repo-u3-evidence-quarantine-v1"
+    },
+    "mode": {
+      "const": "RESEARCH_ONLY"
+    },
+    "migration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "historical",
+        "current",
+        "relation",
+        "historical_source_continuity"
+      ],
+      "properties": {
+        "historical": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/role"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "repository_id": {
+                  "const": 1207996454
+                },
+                "repository": {
+                  "const": "reallaksh19/Common"
+                },
+                "root_issue": {
+                  "const": 787
+                }
+              }
+            }
+          ]
+        },
+        "current": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/role"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "repository_id": {
+                  "const": 1412133785
+                },
+                "repository": {
+                  "const": "reallakshman19/Common"
+                },
+                "root_issue": {
+                  "const": 5
+                }
+              }
+            }
+          ]
+        },
+        "relation": {
+          "enum": [
+            "PURPOSE_CONTINUATION",
+            "SOURCE_BRANCH_CONTINUATION",
+            "RELATED_NEW_IMPLEMENTATION"
+          ]
+        },
+        "historical_source_continuity": {
+          "const": "NO_NATIVE_PR_REVIEW_CI_OR_OWNER_TRANSFER"
+        }
+      }
+    },
+    "historical_evidence": {
+      "type": "object"
+    },
+    "current_evidence": {
+      "type": "object"
+    },
+    "policy_adoption": {
+      "const": "NOT_ADOPTED"
+    },
+    "writer_state": {
+      "const": "OFF"
+    }
+  },
+  "$defs": {
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_id",
+        "repository",
+        "root_issue",
+        "leaf_issue",
+        "pr_number"
+      ],
+      "properties": {
+        "repository_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "repository": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "root_issue": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "leaf_issue": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pr_number": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}
