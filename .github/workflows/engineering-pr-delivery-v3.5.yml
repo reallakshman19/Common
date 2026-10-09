@@ -52,16 +52,26 @@ jobs:
       - name: Run V3.5 Runner Markdown identity regressions
         run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_runner_dispatch_markdown_contract.py' -v
 
-      - name: Verify frozen V3.2 tree identity
+      - name: Verify base-pinned frozen V3.2 tree protection
         shell: bash
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           set -euo pipefail
-          expected='88ac97432a811f9a6b8d00bbe45cbec891e70d6a'
-          actual="$(git rev-parse HEAD:skills/engineering-pr-delivery-v3.2)"
-          test "$actual" = "$expected" || {
-            echo "V3.2 frozen tree changed: expected $expected, got $actual" >&2
-            exit 1
-          }
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            test -n "$PR_BASE_SHA" || {
+              echo "PR base SHA unavailable; refusing to qualify V3.2 scope" >&2
+              exit 1
+            }
+            BASE_SHA="$PR_BASE_SHA"
+          else
+            BASE_SHA="$(git merge-base HEAD origin/main)"
+            test -n "$BASE_SHA" || {
+              echo "Cannot determine trusted main ancestor; refusing V3.2 scope" >&2
+              exit 1
+            }
+          fi
+          python skills/Local_PR_Deliverty_v1.1/scripts/frozen_tree_guard.py --base "$BASE_SHA" --head HEAD
 
       - name: Verify V3.5 lineage metadata
         shell: bash
