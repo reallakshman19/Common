@@ -11,7 +11,8 @@
 | Historical legacy repo issues/PRs | [old exact repository/URL; preserve as historical, never rewrite as current-repo issue/PR] |
 | R14 U1/U2/U3/U5 reference grades | [typed graph/session/candidate, untrusted Owner/session claims, unadjudicated evidence/reviewer claims, read-only R12→DELP diagnostic; no evidence authority] |
 | Migration lineage and provider mapping | [authorized mapping + GitHub GET of newly created issue/PR or HOLD; matching commits alone insufficient] |
-| Handover mode | `PLANNED` / `INTERRUPTED_NO_PACKET` |
+| Handover mode | `PLANNED` / `INTERRUPTED_NO_PACKET`; missing A report must never be fabricated | 
+| Complete technical handover report | [`HANDOVER_TECHNICAL_V2` immutable commit/path/content digest + independent provider freshness, or INTERRUPTED_NO_PACKET; **must describe actual code, architecture/flow, tests/CI, defects, migration and next safe action**, not just an index] |
 | Accepted Owner intent and amendments | [authenticated Owner source; separate from A claim] |
 | Publication and execution authority | `READ_ONLY_RECONCILIATION`; no new GitHub writer |
 
