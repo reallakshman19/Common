@@ -1,0 +1,63 @@
+name: V3.5 WP2-A U05 physical integrated regression (read-only)
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/wp2a-integration-v1.test.mjs'
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/U05_INTEGRATION_BOUNDARY.md'
+      - '.github/workflows/v35-wp2a-u05-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+  checks: read
+  statuses: read
+
+jobs:
+  real-source-integration:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Exact HEAD and full U01-U05 positive/adversarial module tests
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          node --test relay/RECOVERY/V35_R14_WP2A_20261010/*.test.mjs
+
+  native-cross-module-smoke:
+    if: false # enable only after this PR's own source-verified GitHub issue comment exists
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Read-only PR/CI/TASK_EVIDENCE native source vector, no E or writer
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          git rev-parse HEAD
+          node relay/RECOVERY/V35_R14_WP2A_20261010/wp2a-integration-native-v1.cli.mjs
