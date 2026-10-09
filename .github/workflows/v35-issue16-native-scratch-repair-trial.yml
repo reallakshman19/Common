@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_repair_scratch.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_positive_fixture_migration_scratch.py'
       - '.github/workflows/v35-issue16-native-scratch-repair-trial.yml'
   workflow_dispatch:
 permissions:
@@ -21,6 +22,12 @@ jobs:
         with:
           ref: da3680459c5b48f44cda822ccf5009be4b035eef
           path: native-candidate
+          persist-credentials: false
+      - name: Checkout independent native serial conformance source from PR22
+        uses: actions/checkout@v4
+        with:
+          ref: 22c20a6a3aa7a741e7452cf3dddf75299d08b30b
+          path: native-serial-oracles
           persist-credentials: false
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -48,6 +55,22 @@ jobs:
           python skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_full_buddy_chain.py \
             --native-root native-candidate \
             --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Run independent PR22 eleven-case native H1 and chronology oracle on scratch
+        run: |
+          set -euo pipefail
+          mkdir -p native-candidate/skills/engineering-pr-delivery-v3.5/tests
+          cp native-serial-oracles/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_ingress_issue6.py \
+            native-candidate/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_ingress_issue6.py
+          test "$(git -C native-serial-oracles rev-parse HEAD)" = "22c20a6a3aa7a741e7452cf3dddf75299d08b30b"
+          python -m unittest discover \
+            -s native-candidate/skills/engineering-pr-delivery-v3.5/tests \
+            -p 'test_buddy_native_ingress_issue6.py' -v
+      - name: Migrate ONLY stale native positive headings on disposable fixture source
+        run: |
+          set -euo pipefail
+          python skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_positive_fixture_migration_scratch.py \
+            --native-root native-candidate
+          git -C native-candidate diff --check
       - name: Run protected native transaction regression on scratch
         run: |
           set -euo pipefail
