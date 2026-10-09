@@ -109,5 +109,39 @@ class NativeBuddyConcurrencyTests(unittest.TestCase):
             self.assertFalse((root / "relay/LEASES").exists())
 
 
+    def test_positive_same_transaction_id_is_atomically_reserved(self):
+        """Different TX IDs are unprotected; the *same* TX ID has mkdir(exist_ok=False)."""
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            barrier = threading.Barrier(2)
+            real_incomplete = transactionlib.incomplete_transactions
+
+            def real_read_then_pause(path: Path):
+                current = real_incomplete(path)
+                if threading.current_thread().name.startswith("issue6-same-tx"):
+                    barrier.wait(timeout=25)
+                return current
+
+            def run_same():
+                try:
+                    return ("COMMITTED", intake(root, 50, "synthetic-controller")["status"])
+                except transactionlib.TransactionError as error:
+                    return ("REJECTED", str(error))
+
+            with patch.object(transactionlib, "incomplete_transactions", side_effect=real_read_then_pause):
+                with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=2, thread_name_prefix="issue6-same-tx"
+                ) as pool:
+                    futures = [pool.submit(run_same) for _ in range(2)]
+                    outcomes = [f.result(timeout=50) for f in futures]
+
+            self.assertEqual(sorted(item[0] for item in outcomes),
+                             ["COMMITTED", "REJECTED"])
+            manifest = root / f"relay/TRANSACTIONS/TX.{ISSUE}.50/manifest.yaml"
+            self.assertTrue(manifest.is_file())
+            self.assertFalse((root / "relay/STATE.yaml").exists())
+            self.assertFalse((root / "relay/LEASES").exists())
+
+
 if __name__ == "__main__":
     unittest.main()
