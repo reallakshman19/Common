@@ -1,4 +1,4 @@
-name: V3.5 WP2-A U01 current candidate material (read-only)
+name: V3.5 WP2-A U01-U02 current material and CI diagnostics (read-only)
 on:
   pull_request:
     paths:
@@ -10,15 +10,17 @@ permissions:
   contents: read
   issues: read
   pull-requests: read
+  checks: read
+  statuses: read
 
 jobs:
-  u01-source-falsifiers:
+  u01-u02-source-falsifiers:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        node: [22, 24]
+    matrix:
+      os: [ubuntu-latest, windows-latest]
+      node: [22, 24]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,7 +29,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - name: Exact-head source and adversarial tests
+      - name: Exact-head U01-U02 source and adversarial tests
         shell: bash
         run: |
           git rev-parse HEAD
@@ -38,8 +40,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    matrix:
+      os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,7 +50,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Read GitHub current objects (no writes)
+      - name: Read native current issue/PR/base/head; no writes
         shell: bash
         env:
           CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -57,3 +59,28 @@ jobs:
         run: |
           git rev-parse HEAD
           node relay/RECOVERY/V35_R14_WP2A_20261010/current-candidate-material-v1.cli.mjs
+
+  live-selected-required-ci:
+    if: github.event_name == 'pull_request'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+    matrix:
+      os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Observe selected checks and separately read protection/ruleset requirements
+        shell: bash
+        env:
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          git rev-parse HEAD
+          node relay/RECOVERY/V35_R14_WP2A_20261010/required-ci-material-v1.cli.mjs
