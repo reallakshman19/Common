@@ -20,8 +20,12 @@ function fixture(){
     function item(r,link,destination){
       return {number:link.number,html_url:href(r.full_name,o.kind,link.number),state:'open',
         ...(o.kind==='PR'?{
-          head:{sha:destination?b.destination_head_sha:b.origin_head_sha,
-            ref:b.branch,repo:{full_name:r.full_name}},
+          head:{sha:destination && o.relation==='RELATED_NEW_IMPLEMENTATION'
+              ? 'da3680459c5b48f44cda822ccf5009be4b035eef'
+              : destination?b.destination_head_sha:b.origin_head_sha,
+            ref:destination && o.relation==='RELATED_NEW_IMPLEMENTATION'
+              ? 'integrate/v32-relay-continuity-889-890-20261009'
+              : b.branch,repo:{full_name:r.full_name}},
           base:{repo:{full_name:r.full_name}}
         }:{})};
     }
@@ -40,6 +44,12 @@ function fixture(){
         {status:'ahead',ahead_by:b.ahead_commits,behind_by:0});
     }
   }
+  // Different PR #2 integration branch is NOT the preserved old #892
+  // source branch; it is a separate provider object with separate current ref.
+  const related=records.get(k(dest.full_name,'pulls/2')).head;
+  records.set(k(dest.full_name,'git/ref/heads/'+related.ref),{
+    ref:'refs/heads/'+related.ref,object:{sha:related.sha}
+  });
   const read=async(slug,path)=>{
     const name=k(slug,path),n=(reads.get(name)||0)+1;
     reads.set(name,n);
@@ -78,6 +88,36 @@ test('positive: unchanged source, native GET-shaped double-read remains UNATTEST
   assert.equal(f.reads.get(k(f.dest.full_name,'pulls/3')),2);
   assert.equal(f.reads.get(k(f.dest.full_name,'git/ref/heads/docs/relay-890-continuity-md-v1')),2);
 });
+test('positive: #892 copied source branch and related #2 integration PR remain distinct',async()=>{
+  const f=fixture(),r=await observeMovingHeads(f.v,f.read);
+  assert.equal(r.current,true,JSON.stringify(r));
+  const b=r.source_vector.find(x=>x.old_pr===892);
+  assert.equal(b.relation,'RELATED_NEW_IMPLEMENTATION');
+  assert.equal(b.ancestry,'NOT_CLAIMED');
+  assert.equal(b.ahead,null);
+  assert.equal(b.branch,'integrate/v32-relay-continuity-889-890-20261009');
+  assert.equal(f.v.branches.find(x=>x.origin_pr===892).destination_head_sha,
+    f.v.branches.find(x=>x.origin_pr===892).origin_head_sha);
+  assert.equal(f.reads.get(k(f.dest.full_name,'pulls/2')),3);
+});
+test('negative: related PR2 branch updates between source double reads',async()=>{
+  const f=fixture(),original=f.read;
+  f.read=async(slug,path)=>{
+    if(slug===f.dest.full_name&&path==='pulls/2'&&
+       (f.reads.get(k(slug,path))||0)===2){
+      f.records.get(k(slug,path)).head.sha='e'.repeat(40);
+      f.records.get(k(slug,'git/ref/heads/integrate/v32-relay-continuity-889-890-20261009')).object.sha='e'.repeat(40);
+    }
+    return original(slug,path);
+  };
+  reject(await observeMovingHeads(f.v,f.read),'RELATED_PR_HEAD_MOVED');
+});
+test('negative: unrelated PR cannot claim continuation through original #892 branch',async()=>{
+  const f=fixture();
+  f.records.get(k(f.dest.full_name,'pulls/2')).head.ref='feat/v32-889-relay-buddy-markdown-transaction';
+  reject(await observeMovingHeads(f.v,f.read),'MOVING_PR_OR_BRANCH_MISMATCH');
+});
+
 test('positive: later Runner PR3 moves but original manifest is never mutated',async()=>{
   const f=fixture(),before=JSON.stringify(f.v),sha='f'.repeat(40);
   move(f,893,3,sha,99);
