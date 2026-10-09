@@ -1,6 +1,8 @@
 # STAGE1_FREEZE_V1 — external Controller receipt (template)
 
-Only an authenticated independent operator/controller may author this **after** fresh Runner B submitted an unchanged factual baseline and provisional Part B.
+Only an authenticated independent operator/controller may author this **after** fresh Runner B submitted an unchanged factual baseline and provisional Part B. The [Stage 1 native-record bridge](../STAGE1_NATIVE_RECORD_BRIDGE.md) defines how the two original B-authored files map to native transaction records and why an operator must not fabricate or split B's answer after submission.
+
+**Two different freeze objects:** `STAGE1_FREEZE_CANDIDATE` is only the existing native transaction's five-phase exact-TX/digest cross-reference with mandatory `Isolation verdict: NOT_ATTESTED`. This `STAGE1_FREEZE_V1` is an **external, authenticated controller decision** about actual source read restrictions and immutable B output; it is NOT an allowed native `buddy-message --stage` value and must not be treated as locally committed stage evidence. Real Stage2 disclosure requires this external evidence and separately valid Owner/controller decision; even then, it does not grant execution or writer custody.
 
 | Field | Controller evidence |
 | --- | --- |
