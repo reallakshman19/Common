@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_ingress_issue6.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_concurrency_issue6.py'
       - '.github/workflows/issue6-buddy-native-seam-diagnostics.yml'
   workflow_dispatch:
 
@@ -40,3 +41,7 @@ jobs:
       - name: Exercise real V3.2 publisher through eleven seam controls
         run: |
           python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_buddy_native_ingress_issue6.py' -v
+
+      - name: Probe atomic same-issue native transaction admission under synchronized contenders
+        run: |
+          python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_buddy_native_concurrency_issue6.py' -v
