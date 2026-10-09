@@ -1,6 +1,6 @@
 # Relay continuity — Markdown messages for planned and unplanned agent succession
 
-**Contract:** RELAY_CONTINUITY_MD_V1 · [governing issue Common #890](https://github.com/reallaksh19/Common/issues/890) · **candidate, not admitted production protocol**. These files are the transport/communication language for a Controller, Coder A, independent Runner B and Owner. They are **not** a second event store, lease, scoreboard, agent-launch engine or GitHub authorization mechanism.
+**Contract:** RELAY_CONTINUITY_MD_V1 · [canonical-repository integration issue #1](https://github.com/reallakshman19/Common/issues/1) · [historical Owner/plan issue old #890](https://github.com/reallaksh19/Common/issues/890) · **candidate, not admitted production protocol**. These files are the transport/communication language for a Controller, Coder A, independent Runner B and Owner. They are **not** a second event store, lease, scoreboard, agent-launch engine or GitHub authorization mechanism.
 
 ## Which mode is this?
 
@@ -15,7 +15,7 @@ If A terminates **after** an independently frozen Stage 1, a Controller may offe
 
 ## Communication sequence and file roles
 
-The *operator*, not Agent A, establishes a unique episode identifier pointing to the **same existing** parent/leaf/Local responsibility. Future instance records may be committed under `relay/CONTINUITY/episodes/<episode-id>/` only after release/visibility is resolved. Do **not** create a new EP or progress denominator merely because the executor changes.
+The *operator*, not Agent A, binds a continuation to the **existing, provider-verified parent/leaf/Local responsibility and its repository identity**. The proposed native V3.2 [PR #2](https://github.com/reallakshman19/Common/pull/2) would use `relay/CONTINUITY/episodes/ISSUE-<current-repo-issue>/messages/TX.<issue>.<serial>-<STAGE>.md` through the existing `PUBLISH_BUDDY_MARKDOWN` transaction. **This is a candidate, not yet admitted production transport.** Historical `episodes/CORE1B_GOLDENS_RUNNER_20261009/` files are research fixtures and are **not** native transactional messages. Avoid a second active episode namespace, a new EP or a duplicate progress denominator.
 
 | Step | Record template | Who authors it | Visibility/decision |
 | --- | --- | --- | --- |
@@ -54,7 +54,7 @@ Commit in a governed branch/PR and read back at an exact immutable SHA. No agent
 
 ## Authoritative state is elsewhere
 
-See [authority and source map](AUTHORITY_MAP.md). Existing `relay/STATE.yaml`, `relay/EVENTS.jsonl`, `relay/ROADMAP/`, `relay/LEASES/`, `relay/CHECKPOINTS/`, `relay/TRANSACTIONS/` and `relay/GENERATED/` remain the authority for what they already record. In V3.5, accepted source-bound facts and **DELP** own derived status; Local v1.1 owns source writer, reviewer/coordinator transitions and merge gates. An agent message cannot advance a lifecycle epoch or earned progress.
+See [authority and source map](AUTHORITY_MAP.md), [R14 schema/interface review](REVIEWER_ONLY/R14_SOURCE_INTERFACE_RECONCILIATION_V1.md) and the [old/new repository lineage + PR #2/#3 collision ledger](REVIEWER_ONLY/REPOSITORY_LINEAGE_AND_PR_COLLISION_V1.md). Historical old-repo issue/PR URLs are immutable provenance, **not new-repository evidence**. Native PR #2's numeric issue-scoped path requires actual new-repo provider binding; a local transaction digest cannot certify the issue exists in the target repository. Existing `relay/STATE.yaml`, `relay/EVENTS.jsonl`, `relay/ROADMAP/`, `relay/LEASES/`, `relay/CHECKPOINTS/`, `relay/TRANSACTIONS/` and `relay/GENERATED/` remain the authority for what they already record. In V3.5, accepted source-bound facts and **DELP** own derived status; Local v1.1 owns source writer, reviewer/coordinator transitions and merge gates. An agent message cannot advance a lifecycle epoch or earned progress.
 
 ## Current release state
 
