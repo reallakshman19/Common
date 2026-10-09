@@ -140,6 +140,9 @@ test('negative: old source moves between first and second reader phase',async()=
 test('positive: destination main advances while immutable origin and source roles are preserved',async()=>{
   const f=fixture(),before=JSON.stringify(f.v),newMain='d'.repeat(40);
   f.records.get(k(f.dest.full_name,'git/ref/heads/main')).object.sha=newMain;
+  f.records.set(k(f.dest.full_name,
+    'compare/'+f.origin.main_sha+'...'+newMain),
+    {status:'ahead',ahead_by:3,behind_by:0});
   const r=await observeMovingHeads(f.v,f.read);
   assert.equal(r.current,true,JSON.stringify(r));
   assert.equal(r.destination_main_sha,newMain);
@@ -170,4 +173,26 @@ test('negative: malformed current destination main reference is rejected',async(
   const f=fixture();
   f.records.get(k(f.dest.full_name,'git/ref/heads/main')).ref='refs/heads/other';
   reject(await observeMovingHeads(f.v,f.read),'MOVING_MAIN_REF_INVALID');
+});
+
+test('negative: new default branch fork cannot be certified by double matching SHA',async()=>{
+  const f=fixture(),newMain='d'.repeat(40);
+  f.records.get(k(f.dest.full_name,'git/ref/heads/main')).object.sha=newMain;
+  f.records.set(k(f.dest.full_name,
+    'compare/'+f.origin.main_sha+'...'+newMain),
+    {status:'diverged',ahead_by:7,behind_by:2});
+  reject(await observeMovingHeads(f.v,f.read),'DESTINATION_MAIN_ANCESTRY_INVALID');
+});
+test('negative: missing main compare does not grant currentness',async()=>{
+  const f=fixture();
+  f.records.get(k(f.dest.full_name,'git/ref/heads/main')).object.sha='d'.repeat(40);
+  reject(await observeMovingHeads(f.v,f.read),'PROVIDER_READ_FAILED');
+});
+test('negative: fake ahead count with nonzero behind cannot certify baseline retention',async()=>{
+  const f=fixture(),newMain='d'.repeat(40);
+  f.records.get(k(f.dest.full_name,'git/ref/heads/main')).object.sha=newMain;
+  f.records.set(k(f.dest.full_name,
+    'compare/'+f.origin.main_sha+'...'+newMain),
+    {status:'ahead',ahead_by:2,behind_by:1});
+  reject(await observeMovingHeads(f.v,f.read),'DESTINATION_MAIN_ANCESTRY_INVALID');
 });
