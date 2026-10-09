@@ -8,7 +8,7 @@ This folder is a bounded migration **reference** ledger and deterministic valida
 
 Old repository `reallaksh19/Common` has stable GitHub repository ID `1207996454`, while proposed new source destination `reallakshman19/Common` has ID `1412133785`. At census both default branches pointed to exact `d60c36605e988dcc160647421973f170fd87e0eb`. **Equal source commits do not transfer GitHub issues, comments, PRs, independent reviews, CI, access controls or custody permissions.**
 
-Source-only R14 chain #891→#894→#895→#896→#897 exists byte-identically in the new repo's branches, but remains old-repo **draft PR objects**. Old #893's Markdown branch has advanced nine commits to **new draft PR #3**. Old Buddy #892's branch has advanced three commits to **new draft PR #2**. There is also a **new issue #1** continuing the old #890 Runner purpose. These are relationships, not imported approvals.
+Source-only R14 chain #891→#894→#895→#896→#897 exists byte-identically in the new repo's branches, but remains old-repo **draft PR objects**. At provider refresh, old #893's Markdown branch had advanced **21 commits** to **new draft PR #3** (HEAD `d9f785394840840775775be81a526228edd3c00d`). Old Buddy #892 had advanced **6 commits** to **new draft PR #2** (HEAD `6255b759e20577c126c7b158e1c17ddc66bb80c7`). **These are moving observation-time values, never a standing claim of currentness.** There is also a **new issue #1** continuing the old #890 Runner purpose. These are relationships, not imported approvals.
 
 A predecessor #1/#3 investigation already produced:
 - [R14_SOURCE_INTERFACE_RECONCILIATION_V1.md](https://github.com/reallakshman19/Common/blob/cc4de8a87ec86ea66f02bb2f82184ad0f7a3d598/relay/CONTINUITY/REVIEWER_ONLY/R14_SOURCE_INTERFACE_RECONCILIATION_V1.md)
@@ -19,7 +19,9 @@ This M0 artifact **adds a strictly structured machine-checkable snapshot** rathe
 ## Inputs and reproducible check
 
 ```sh
-node --test relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/validate-migration-manifest-v1.test.mjs
+node --test relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/*.test.mjs
+# native live provider readback, fails closed on any stale object/HEAD/ancestry
+GITHUB_TOKEN=<read-only-token> node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/audit-native-provider-v1.cli.mjs
 ```
 
 The validator may be consumed as:
@@ -29,7 +31,7 @@ import {validateMigrationManifest} from './validate-migration-manifest-v1.mjs';
 const receipt = validateMigrationManifest(manifest);
 ```
 
-`receipt.valid=true` means **only** that a caller-supplied snapshot satisfies local shape/relationship constraints. Every receipt explicitly preserves `CALLER_REFERENCED_NOT_LIVE_ATTESTED`, `NOT_AUTHENTICATED`, `NOT_QUALIFIED`, `NOT_GRANTED`, `NOT_EVALUATED`. The input JSON and runtime validator are safe to execute offline; there is no fetch, write token, shell execution, native GitHub claim, CI promotion, snapshot/evidence authority or Stage1 B admission.
+`receipt.valid=true` means **only** that a caller-supplied snapshot satisfies local shape/relationship constraints. Every structural receipt explicitly preserves `CALLER_REFERENCED_NOT_LIVE_ATTESTED`, `NOT_AUTHENTICATED`, `NOT_QUALIFIED`, `NOT_GRANTED`, `NOT_EVALUATED`. The separate `audit-native-provider-v1.mjs` reader obtains actual current GitHub GETs for old/new repository stable IDs, default branch HEADs, old/new issue/PR identities, new branch ref SHA and native compare ancestry; a successful read yields `NATIVE_GET_VERIFIED_AT_OBSERVATION` **only for these bounded provider facts**, while `reviewed:false`, `owner_authenticated:false`, `evidence_accepted:false` and `writer_authorized:false` remain invariant. The live CLI requires HTTP 200, same URL, bounded body, and fails on 404/403/rate limit, stale PR/head, changed ancestry and duplicated or forged mappings. The input JSON and runtime validator are safe to execute offline; the pure structural validation has no fetch, write token, shell execution, native GitHub claim, CI promotion, snapshot/evidence authority or Stage1 B admission. The separate read-only live audit is **not** an Owner/evidence/reviewer/provider security-policy authenticator and cannot confer permission.
 
 **Strong negative checks:** same-ID confusion, old URL rewritten as new, old-only object invented as a destination, issue/PR path/type confusion, duplicate origin/destination, false branch equality, invalid/unknown relation, fabricated reviewer grant, forged 8/8 acceptance, false live writer, unexpected fields, nonexistent originating PR.
 
@@ -56,3 +58,5 @@ const receipt = validateMigrationManifest(manifest);
 **Decisions NOT made:** selecting a new authoritative programme graph/evidence schema, reconciling old/new actual identity in production, granting Owner decision, making PR #2/#3 merge-ready, unfreezing V3.2, enabling a producer or publisher. These require later governed WP0→WP1 admissions and independent source review.
 
 **Next work:** independently refresh provider census; publish `TASK_EVIDENCE END` for this bounded reference artifact with exact commit/blob hashes and test results; then execute the real WP0 DELP source graph/policy falsifier and obtain two independent source-level verdicts. This document is not a `TASK_RESULT` for #787 AC1–AC8.
+
+**CI evidence interpretation:** the four Node 22/24 × Windows/Ubuntu unit-test cells use synthetic provider-response injection to prove rejection behavior. A separate Ubuntu/Node 24 **live read-only provider job** compares the manifest with current GitHub object responses. PASS is a time-bounded census only. FAIL can indicate a genuine concurrent branch advance or unavailable GitHub API; classify as `REFRESH_REQUIRED`/HOLD, not a production defect or a retroactive acceptance decision. Source HEAD and raw job steps are mandatory for each checkpoint. The audit makes no new object publication and copies no historic reviews/permissions.
