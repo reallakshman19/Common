@@ -1,0 +1,254 @@
+{
+  "schema": "common-v35-repository-cutover-manifest-v1",
+  "source_scope": "PUBLIC_PROVIDER_CENSUS_ONLY",
+  "observed_date": "2026-10-09",
+  "recovery_issue": 5,
+  "repositories": {
+    "historical": {
+      "provider": "github",
+      "repository_id": 1207996454,
+      "full_name": "reallaksh19/Common",
+      "main_sha": "d60c36605e988dcc160647421973f170fd87e0eb"
+    },
+    "destination": {
+      "provider": "github",
+      "repository_id": 1412133785,
+      "full_name": "reallakshman19/Common",
+      "main_sha": "d60c36605e988dcc160647421973f170fd87e0eb"
+    }
+  },
+  "objects": [
+    {
+      "kind": "ISSUE",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 787,
+        "url": "https://github.com/reallaksh19/Common/issues/787"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "ISSUE",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 864,
+        "url": "https://github.com/reallaksh19/Common/issues/864"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "ISSUE",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 866,
+        "url": "https://github.com/reallaksh19/Common/issues/866"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "ISSUE",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 869,
+        "url": "https://github.com/reallaksh19/Common/issues/869"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "ISSUE",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 878,
+        "url": "https://github.com/reallaksh19/Common/issues/878"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "ISSUE",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 889,
+        "url": "https://github.com/reallaksh19/Common/issues/889"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "ISSUE",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 890,
+        "url": "https://github.com/reallaksh19/Common/issues/890"
+      },
+      "destination": {
+        "repository_id": 1412133785,
+        "number": 1,
+        "url": "https://github.com/reallakshman19/Common/issues/1"
+      },
+      "relation": "PURPOSE_CONTINUATION",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "PR",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 891,
+        "url": "https://github.com/reallaksh19/Common/pull/891"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "PR",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 892,
+        "url": "https://github.com/reallaksh19/Common/pull/892"
+      },
+      "destination": {
+        "repository_id": 1412133785,
+        "number": 2,
+        "url": "https://github.com/reallakshman19/Common/pull/2"
+      },
+      "relation": "RELATED_NEW_IMPLEMENTATION",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "PR",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 893,
+        "url": "https://github.com/reallaksh19/Common/pull/893"
+      },
+      "destination": {
+        "repository_id": 1412133785,
+        "number": 3,
+        "url": "https://github.com/reallakshman19/Common/pull/3"
+      },
+      "relation": "SOURCE_BRANCH_CONTINUATION",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "PR",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 894,
+        "url": "https://github.com/reallaksh19/Common/pull/894"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "PR",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 895,
+        "url": "https://github.com/reallaksh19/Common/pull/895"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "PR",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 896,
+        "url": "https://github.com/reallaksh19/Common/pull/896"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    },
+    {
+      "kind": "PR",
+      "origin": {
+        "repository_id": 1207996454,
+        "number": 897,
+        "url": "https://github.com/reallaksh19/Common/pull/897"
+      },
+      "destination": null,
+      "relation": "HISTORICAL_ONLY",
+      "authority": "NOT_TRANSFERRED"
+    }
+  ],
+  "branches": [
+    {
+      "origin_pr": 891,
+      "branch": "feat/v35-r14-wp1-u1-typed-identity-provisional-20261009",
+      "origin_head_sha": "8754c2e8a2e04c8cc8fd24cd290f3f82b6ab390e",
+      "destination_head_sha": "8754c2e8a2e04c8cc8fd24cd290f3f82b6ab390e",
+      "relation": "EXACT_HEAD_MATCH",
+      "ahead_commits": 0
+    },
+    {
+      "origin_pr": 892,
+      "branch": "feat/v32-889-relay-buddy-markdown-transaction",
+      "origin_head_sha": "97d9f384ac1cfe4458b2db2302f5e7170a99e06d",
+      "destination_head_sha": "e5cdf5fb1de26992ab9fa5fd7752f4f5e7f74da5",
+      "relation": "SOURCE_ADVANCED",
+      "ahead_commits": 3
+    },
+    {
+      "origin_pr": 893,
+      "branch": "docs/relay-890-continuity-md-v1",
+      "origin_head_sha": "09ff3751560bb49098e69c9c79918626078c7564",
+      "destination_head_sha": "cc4de8a87ec86ea66f02bb2f82184ad0f7a3d598",
+      "relation": "SOURCE_ADVANCED",
+      "ahead_commits": 9
+    },
+    {
+      "origin_pr": 894,
+      "branch": "feat/v35-r14-wp1-u2-owner-session-envelope-20261009",
+      "origin_head_sha": "a8759071cb816ee2c11a726d4f6beed3ed3f5ee1",
+      "destination_head_sha": "a8759071cb816ee2c11a726d4f6beed3ed3f5ee1",
+      "relation": "EXACT_HEAD_MATCH",
+      "ahead_commits": 0
+    },
+    {
+      "origin_pr": 895,
+      "branch": "feat/v35-r14-wp1-u3-evidence-review-envelope-20261009",
+      "origin_head_sha": "9134c4dc4bcce4f58749883b41b7a27f0d9dbcac",
+      "destination_head_sha": "9134c4dc4bcce4f58749883b41b7a27f0d9dbcac",
+      "relation": "EXACT_HEAD_MATCH",
+      "ahead_commits": 0
+    },
+    {
+      "origin_pr": 896,
+      "branch": "feat/v35-r14-wp1-u4-cross-language-conformance-20261009",
+      "origin_head_sha": "a908195877188b3cc9572ec8be051b6df494620c",
+      "destination_head_sha": "a908195877188b3cc9572ec8be051b6df494620c",
+      "relation": "EXACT_HEAD_MATCH",
+      "ahead_commits": 0
+    },
+    {
+      "origin_pr": 897,
+      "branch": "feat/v35-r14-wp2-u01-native-delpreado-probe-20261009",
+      "origin_head_sha": "892cb0d1eaccfe467b7db2c5f13b9df40b1ff043",
+      "destination_head_sha": "892cb0d1eaccfe467b7db2c5f13b9df40b1ff043",
+      "relation": "EXACT_HEAD_MATCH",
+      "ahead_commits": 0
+    }
+  ],
+  "trust_gates": {
+    "owner_original_source": "UNKNOWN",
+    "reviewer_authority": "NOT_TRANSFERRED",
+    "source_reference_authority": "UNATTESTED",
+    "exclusive_writer_lease": "NOT_PROVEN",
+    "live_publisher": "OFF",
+    "accepted_programme_acs": 0
+  }
+}
