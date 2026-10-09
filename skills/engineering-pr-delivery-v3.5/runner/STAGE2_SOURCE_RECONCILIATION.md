@@ -20,7 +20,7 @@ A trusted operator must provide **verified evidence**, or mark `UNKNOWN` and wit
 | Stage 1 contamination verdict | `[OPERATOR: CLEAN / CONTAMINATED / UNKNOWN]` |
 | Immutable Stage 1 baseline + provisional interpretation publication/readback | `[OPERATOR: actual content SHA256, immutable ref, receipt]` |
 | Owner/coordinator permission to reveal Stage 2 | `[OPERATOR: independently authorized source ref]` |
-| Stage 2 reality packet identity | `[OPERATOR: sealed packet digest/revision]` |
+| Complete technical handover report identity | `[OPERATOR: HANDOVER_TECHNICAL_V2 exact immutable Markdown commit/path/digest, producer and source grade; or INTERRUPTED_NO_PACKET]` |
 | Stage 2 write authorization | **NONE** — read reconciliation is not executor promotion |
 
 If the read boundary was not enforced, forbidden material was already visible, the plan changed after freeze, or Owner approval is missing: **`STAGE2_ADMISSION=HOLD`**. Produce only a gate-failure report; do not use withheld material. A later clean run requires a genuinely fresh independent Runner session.
@@ -39,7 +39,7 @@ Your task is **not** to reword Agent A's handover. Investigate:
 
 **Step A — Reopen Stage 1 verbatim.** Verify the immutable Stage 1 file and digest; read your actual original questions (Q1/Q2/Q3 when the handover contract requires three), original alternatives, assumptions and ROI register. Do not rewrite the Stage 1 text to make your ideas appear accurate.
 
-**Step B — Read Agent A's *reality* without promoting its claims.** Ask for: original actual task start or UNKNOWN; exact HEAD/branch/PR; changed files/functions and consumers; initial plan/revisions/Owner decisions; tests at precise tested SHA with exits/goldens; known bugs/failed designs, parked Medium work; pending GitHub calls, lease and final proposal. Treat the packet as `AGENT_CLAIM` until independently checked. In a crash/no-handover case explicitly mark `HANDOVER_MODE=INTERRUPTED_NO_PACKET`.
+**Step B — Read the predecessor's complete *technical handover report* without promoting its claims.** The admitted [HANDOVER_TECHNICAL_V2 format](../../../relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md) requires a self-contained narrative: original WHAT/WHY and task start (or UNKNOWN), actual built functionality and changed symbols/consumers, causal data/control flow through the user-visible output, error/cancellation paths, deployment, exact tests/CI/fixtures/goldens at tested SHA, original plan/Owner revisions, outstanding bugs/rejected designs, old/new repository mapping, ambiguous writes/lease and an exact first safe successor action. Treat every A statement as `AGENT_CLAIM` until independently checked. A metadata index, generic plan or list of links is **not** a complete technical report. Treat the packet as `AGENT_CLAIM` until independently checked. In a crash/no-handover case explicitly mark `HANDOVER_MODE=INTERRUPTED_NO_PACKET`; controller may assemble a **source-observed reconstruction** but must not fabricate A's explanation.
 
 **Step C — Independently inspect *current* authority and source.** Read approved Owner requirement and graph/issue changes, current candidate HEAD and source, actual downstream import/call graph, committed fixture hashes, CI job steps, source-qualified TASK_EVIDENCE, parent/child/PR publication and actual browser/download if required. Keep these separate:
 
