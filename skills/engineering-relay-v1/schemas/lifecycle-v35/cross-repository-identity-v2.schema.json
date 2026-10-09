@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "relay-lifecycle-cross-repository-identity-v2",
+  "title": "Recovery-only cross repository source reference envelope (no authority)",
+  "description": "Versioned ref wrapper for existing U1 identity; historical issue/review/CI may never be imported as new repo authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "current_identity",
+    "historical_origin",
+    "current_target",
+    "source_continuity",
+    "migration_relation",
+    "owner_original_source",
+    "external_review",
+    "writer_lease"
+  ],
+  "properties": {
+    "schema": {
+      "const": "relay-lifecycle-cross-repository-identity-v2"
+    },
+    "current_identity": {
+      "type": "object",
+      "description": "Validated by actual unchanged U1 V1 validator; this schema never substitutes for U1."
+    },
+    "historical_origin": {
+      "$ref": "#/$defs/issueSource"
+    },
+    "current_target": {
+      "$ref": "#/$defs/issueSource"
+    },
+    "source_continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "historical_commit_sha",
+        "current_commit_sha",
+        "relationship"
+      ],
+      "properties": {
+        "historical_commit_sha": {
+          "$ref": "#/$defs/sha"
+        },
+        "current_commit_sha": {
+          "$ref": "#/$defs/sha"
+        },
+        "relationship": {
+          "enum": [
+            "CODE_EQUIVALENT",
+            "CODE_CHANGED",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "migration_relation": {
+      "const": "HISTORICAL_PURPOSE_CONTINUATION_ONLY"
+    },
+    "owner_original_source": {
+      "const": "UNKNOWN"
+    },
+    "external_review": {
+      "const": "NOT_TRANSFERRED"
+    },
+    "writer_lease": {
+      "const": "NOT_GRANTED"
+    }
+  },
+  "$defs": {
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "issueSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_id",
+        "repository",
+        "kind",
+        "number",
+        "url",
+        "source_grade"
+      ],
+      "properties": {
+        "repository_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "repository": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "kind": {
+          "const": "ISSUE"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://github[.]com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/issues/[1-9][0-9]*$"
+        },
+        "source_grade": {
+          "enum": [
+            "HISTORICAL_SOURCE_REFERENCE",
+            "CURRENT_EXECUTION_REFERENCE"
+          ]
+        }
+      }
+    }
+  }
+}
