@@ -123,7 +123,7 @@ def main() -> int:
     # GitHub file or authority manifest may be written by this program.
     path.write_text(source, encoding="utf-8")
     dirty = git(root, "status", "--porcelain")
-    expected_dirty = f" M {RELATIVE.as_posix()}"
+    expected_dirty = f"M {RELATIVE.as_posix()}"
     if dirty != expected_dirty:
         raise RuntimeError(f"DIRTY_WORKTREE_SCOPE_MISMATCH: {dirty!r}")
     print(f"PROTECTED_ORIGINAL_COMMIT={observed}", flush=True)
