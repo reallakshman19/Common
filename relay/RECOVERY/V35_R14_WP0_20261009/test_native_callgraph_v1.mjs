@@ -41,7 +41,8 @@ function localEsmClosure(entry) {
       }
     }
     assert.doesNotMatch(source, /\bimport\s*\(/, 'unmapped dynamic import in ' + file);
-    assert.doesNotMatch(source, /\b(?:spawn|exec|execFile|fork)\s*\(/, 'unmapped subprocess call in ' + file);
+    // Test import declarations for node:child_process separately; a general '.exec(' can be RegExp.exec.
+    assert.doesNotMatch(source, /\b(?:spawn|execFile|fork)\s*\(/, 'unmapped subprocess call in ' + file);
   }
   return {seen,allEdges,external,imports};
 }
