@@ -132,10 +132,14 @@ class _RejectRedirect(HTTPRedirectHandler):
 
 
 def _native_get(repo: str, path: str, *, token: str = "") -> dict[str, Any]:
-    if not REPO.fullmatch(repo) or not ROUTE.fullmatch(path) or ".." in path.replace("..", "", 0):
-        # Three dots are not used for any route in this module.
-        _deny("PROVIDER_PATH_NOT_ALLOWED")
-    if ".." in path:
+    # The transport itself, not just the caller, must restrict GitHub
+    # namespaces. Avoid accidental cross-repository source promotion.
+    if (
+        repo not in {"reallaksh19/Common", "reallakshman19/Common"}
+        or not REPO.fullmatch(repo)
+        or not ROUTE.fullmatch(path)
+        or ".." in path
+    ):
         _deny("PROVIDER_PATH_NOT_ALLOWED")
     url = "https://api.github.com/repos/" + repo + ("/" + path if path else "")
     headers = {
