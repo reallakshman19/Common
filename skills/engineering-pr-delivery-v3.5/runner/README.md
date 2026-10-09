@@ -11,10 +11,12 @@
 | Start of Agent A Coder session / normal checkpoint | Existing primary Coder A | [Manual command and `70% advisory](PREPARE_FOR_RUNNER.md) |
 | After Owner asks to prepare, before Runner launch | Operator and Agent A only | [Static historical intake and segregated Agent A reality packets](STATIC_PACKET_FORMATS.md) |
 | New externally isolated Runner B, *Stage 1 only* | Runner B | [Stage 1 independent WHAT/HOW investigation](STAGE1_INDEPENDENT_RECONSTRUCTION.md) **plus sanitized original packet only** |
-| **After** actual independent Stage 1 plan is frozen and disclosure authorized | Same Runner B | [Stage 2 source-based reconciliation](STAGE2_SOURCE_RECONCILIATION.md) and separately held Agent A reality |
+| **After** actual independent Stage 1 baseline/provisional interpretation is frozen and disclosure authorized | Same Runner B | [Stage 2 source-based reconciliation](STAGE2_SOURCE_RECONCILIATION.md) and the withheld, **complete** [technical handover report](../../../relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md) |
 | Reviewing prompt quality/real agent outcomes | Operator/reviewer only | [Thinking method and worked examples](THINKING_METHOD_AND_EXAMPLES.md), [manual adversarial review](MANUAL_ACCEPTANCE_GUIDE.md) |
 
 **Never give the entire `runner/` folder to a fresh Stage 1 model.** This directory includes Stage 2 instructions, operator judgments and examples that would contaminate independence. Prepare a physically restricted workspace containing **only** the Stage 1 instruction, sanitized historical data and explicitly allowlisted historical source files. Without externally enforced access restrictions, label the trial **BLINDNESS_NOT_VERIFIED**, not a clean Runner.
+
+**Technical handover quality:** The predecessor must produce **one self-contained Markdown engineering narrative**, not a process plan or bare packet. It includes original problem, exact code/modules/functions/consumers and HOW the flow works, authentic tests and CI with tested HEAD, failures, migration/identity and the next engineer's precise starting point. A crash is `INTERRUPTED_NO_PACKET`, not a fictitious A narrative. Keep it withheld until independent Stage 1 is frozen.
 
 ## Dispatch is a separate operational handoff
 
