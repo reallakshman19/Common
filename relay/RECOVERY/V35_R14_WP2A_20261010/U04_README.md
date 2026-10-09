@@ -17,7 +17,7 @@ The source vector records exact new-repository ID, root/leaf, current PR number/
 - `node --test relay/RECOVERY/V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs`
 - Synthetic positive and negative sources, explicitly downgraded `CALLER_INJECTED_UNATTESTED`.
 - Dedicated Node22/24 × Windows/Ubuntu hosted source suite.
-- Native Windows/Ubuntu smoke must be enabled **only after PR22 has its own GitHub-issued TASK_EVIDENCE comment**, with a cited commit and correct current PR URL; another PR's comment cannot be reused as current.
+- Native Windows/Ubuntu smoke must be enabled **only after PR27 has its own GitHub-issued TASK_EVIDENCE comment**, with a cited commit and correct current PR URL; another PR's comment cannot be reused as current.
 - Native U04 checksum may return a deliberate source race if CI or GitHub comment moves; report the exact failure and retry at the same immutable source, never claim invented green.
 
 ## Still blocked
