@@ -135,3 +135,39 @@ test('negative: old source moves between first and second reader phase',async()=
   };
   reject(await observeMovingHeads(f.v,f.read),'REFRESH_REQUIRED');
 });
+
+
+test('positive: destination main advances while immutable origin and source roles are preserved',async()=>{
+  const f=fixture(),before=JSON.stringify(f.v),newMain='d'.repeat(40);
+  f.records.get(k(f.dest.full_name,'git/ref/heads/main')).object.sha=newMain;
+  const r=await observeMovingHeads(f.v,f.read);
+  assert.equal(r.current,true,JSON.stringify(r));
+  assert.equal(r.destination_main_sha,newMain);
+  assert.equal(r.historical_main_sha,f.origin.main_sha);
+  assert.equal(r.manifest_advanced,true);
+  assert.equal(r.source_grade,'INJECTED_UNATTESTED');
+  assert.equal(JSON.stringify(f.v),before);
+  assert.equal(f.reads.get(k(f.dest.full_name,'git/ref/heads/main')),2);
+  assert.equal(r.writer_authorized,false);
+});
+test('negative: new default branch moves between first and second GET',async()=>{
+  const f=fixture(),base=f.read;
+  f.read=async(slug,path)=>{
+    if(slug===f.dest.full_name && path==='git/ref/heads/main' &&
+       f.reads.get(k(slug,path))===1){
+      f.records.get(k(slug,path)).object.sha='d'.repeat(40);
+    }
+    return base(slug,path);
+  };
+  reject(await observeMovingHeads(f.v,f.read),'REFRESH_REQUIRED');
+});
+test('negative: historical default branch must not be silently refreshed',async()=>{
+  const f=fixture();
+  f.records.get(k(f.origin.full_name,'git/ref/heads/main')).object.sha='d'.repeat(40);
+  reject(await observeMovingHeads(f.v,f.read),'STALE_MAIN_HEAD');
+});
+test('negative: malformed current destination main reference is rejected',async()=>{
+  const f=fixture();
+  f.records.get(k(f.dest.full_name,'git/ref/heads/main')).ref='refs/heads/other';
+  reject(await observeMovingHeads(f.v,f.read),'MOVING_MAIN_REF_INVALID');
+});
