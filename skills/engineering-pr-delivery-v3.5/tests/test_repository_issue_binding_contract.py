@@ -20,8 +20,19 @@ def format_qualifies_current_issue(row: dict, expected_repository: str) -> bool:
         return False
     if row.get("api_status") != 200 or row.get("returned_kind") != "issue":
         return False
+    if row.get("returned_pull_request_marker") is not False:
+        return False
+    if type(row.get("returned_repository_id")) is not int or row["returned_repository_id"] != 1412133785:
+        return False
+    if row.get("returned_repository_url") != "https://api.github.com/repos/" + expected_repository:
+        return False
+    issue_id = row.get("returned_issue_id")
+    if type(issue_id) is not int or issue_id < 1:
+        return False
+    if not isinstance(row.get("returned_issue_node_id"), str) or not row["returned_issue_node_id"].startswith("I_"):
+        return False
     number = row.get("lookup_number")
-    if type(number) is not int or number < 1:
+    if type(number) is not int or number < 1 or row.get("returned_issue_number") != number:
         return False
     url = row.get("returned_url")
     if not isinstance(url, str):
@@ -66,12 +77,36 @@ class ProviderIssueBindingFormatTests(unittest.TestCase):
         pr = self.rows["N01"]
         self.assertFalse(format_qualifies_current_issue(pr, self.repo))
         self.assertFalse(format_qualifies_current_issue({**pr, "returned_kind": "issue"}, self.repo))
+        self.assertFalse(format_qualifies_current_issue({**pr, "returned_kind": "issue", "returned_pull_request_marker": False}, self.repo))
+        self.assertFalse(format_qualifies_current_issue({**pr, "returned_issue_node_id": "I_forged", "returned_kind": "issue", "returned_pull_request_marker": False}, self.repo))
 
     def test_old_repo_issue_and_missing_new_issue_fail_closed(self):
         self.assertFalse(format_qualifies_current_issue(self.rows["N02"], self.repo))
         self.assertFalse(format_qualifies_current_issue(self.rows["N03"], self.repo))
         self.assertFalse(format_qualifies_current_issue(self.rows["N04"], self.repo))
         self.assertFalse(format_qualifies_current_issue(self.rows["N05"], self.repo))
+
+    def test_stable_repo_issue_ids_and_response_kind_fail_closed(self):
+        good = self.rows["P02"]
+        for mutation in (
+            {"returned_repository_id": 1207996454},
+            {"returned_issue_id": None},
+            {"returned_issue_id": True},
+            {"returned_issue_node_id": "PR_fake"},
+            {"returned_issue_number": 2},
+            {"returned_repository_url": "https://api.github.com/repos/reallaksh19/Common"},
+            {"returned_pull_request_marker": True},
+            {"returned_pull_request_marker": None},
+        ):
+            with self.subTest(mutation=mutation):
+                self.assertFalse(format_qualifies_current_issue({**good, **mutation}, self.repo))
+        self.assertTrue(format_qualifies_current_issue(good, self.repo))
+        self.assertEqual(self.document["expected_repository_id"], 1412133785)
+
+    def test_provider_object_kind_is_not_owner_scope_admission(self):
+        self.assertTrue(format_qualifies_current_issue(self.rows["P01"], self.repo))
+        self.assertTrue(format_qualifies_current_issue(self.rows["P02"], self.repo))
+        self.assertTrue(all(r["dispatch_authorization"] == "NOT_ASSESSED" for r in self.rows.values()))
 
     def test_forged_cross_repo_url_and_host_are_denied(self):
         good = self.rows["P02"]

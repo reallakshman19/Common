@@ -2,7 +2,7 @@
   "schema": "relay-provider-issue-readback-negatives-v1",
   "observed_on": "2026-10-09",
   "grade": "SOURCE_OBSERVED_GITHUB_GET_SNAPSHOT_ONLY",
-  "warning": "An observed GitHub issue object or a formatting match does not constitute runtime provider admission, Owner scope authorization, independent Runner authentication, or execution/writer permissions.",
+  "warning": "An observed GitHub issue object or a formatting match does not constitute runtime provider admission, Owner scope authorization, independent Runner authentication, or execution/writer permissions. Stable IDs in this fixture are dated observations; NOT provider readback at admission.",
   "expected_repository": "reallakshman19/Common",
   "observations": [
     {
@@ -13,7 +13,13 @@
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallakshman19/Common/issues/4",
       "expected_provider_issue_kind_match": true,
-      "dispatch_authorization": "NOT_ASSESSED"
+      "dispatch_authorization": "NOT_ASSESSED",
+      "returned_repository_id": 1412133785,
+      "returned_repository_url": "https://api.github.com/repos/reallakshman19/Common",
+      "returned_issue_id": 5782308813,
+      "returned_issue_number": 4,
+      "returned_issue_node_id": "I_kwDOVCtzmc8AAAABWKcHzQ",
+      "returned_pull_request_marker": false
     },
     {
       "id": "P02",
@@ -23,7 +29,13 @@
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallakshman19/Common/issues/6",
       "expected_provider_issue_kind_match": true,
-      "dispatch_authorization": "NOT_ASSESSED"
+      "dispatch_authorization": "NOT_ASSESSED",
+      "returned_repository_id": 1412133785,
+      "returned_repository_url": "https://api.github.com/repos/reallakshman19/Common",
+      "returned_issue_id": 5782315682,
+      "returned_issue_number": 6,
+      "returned_issue_node_id": "I_kwDOVCtzmc8AAAABWKciog",
+      "returned_pull_request_marker": false
     },
     {
       "id": "N01",
@@ -33,7 +45,13 @@
       "returned_kind": "pull_request",
       "returned_url": "https://github.com/reallakshman19/Common/pull/2",
       "expected_provider_issue_kind_match": false,
-      "dispatch_authorization": "NOT_ASSESSED"
+      "dispatch_authorization": "NOT_ASSESSED",
+      "returned_repository_id": 1412133785,
+      "returned_repository_url": "https://api.github.com/repos/reallakshman19/Common",
+      "returned_issue_id": 5782250162,
+      "returned_issue_number": 2,
+      "returned_issue_node_id": "PR_kwDOVCtzmc8AAAABHlUkHA",
+      "returned_pull_request_marker": true
     },
     {
       "id": "N02",
@@ -43,7 +61,13 @@
       "returned_kind": null,
       "returned_url": null,
       "expected_provider_issue_kind_match": false,
-      "dispatch_authorization": "NOT_ASSESSED"
+      "dispatch_authorization": "NOT_ASSESSED",
+      "returned_repository_id": null,
+      "returned_repository_url": null,
+      "returned_issue_id": null,
+      "returned_issue_number": null,
+      "returned_issue_node_id": null,
+      "returned_pull_request_marker": null
     },
     {
       "id": "N03",
@@ -53,7 +77,13 @@
       "returned_kind": null,
       "returned_url": null,
       "expected_provider_issue_kind_match": false,
-      "dispatch_authorization": "NOT_ASSESSED"
+      "dispatch_authorization": "NOT_ASSESSED",
+      "returned_repository_id": null,
+      "returned_repository_url": null,
+      "returned_issue_id": null,
+      "returned_issue_number": null,
+      "returned_issue_node_id": null,
+      "returned_pull_request_marker": null
     },
     {
       "id": "N04",
@@ -63,7 +93,13 @@
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallaksh19/Common/issues/889",
       "expected_provider_issue_kind_match": false,
-      "dispatch_authorization": "NOT_ASSESSED"
+      "dispatch_authorization": "NOT_ASSESSED",
+      "returned_repository_id": 1207996454,
+      "returned_repository_url": "https://api.github.com/repos/reallaksh19/Common",
+      "returned_issue_id": 5779855845,
+      "returned_issue_number": 889,
+      "returned_issue_node_id": "I_kwDOSACQJs8AAAABWIGZ5Q",
+      "returned_pull_request_marker": false
     },
     {
       "id": "N05",
@@ -73,7 +109,14 @@
       "returned_kind": "issue",
       "returned_url": "https://github.com/reallaksh19/Common/issues/890",
       "expected_provider_issue_kind_match": false,
-      "dispatch_authorization": "NOT_ASSESSED"
+      "dispatch_authorization": "NOT_ASSESSED",
+      "returned_repository_id": 1207996454,
+      "returned_repository_url": "https://api.github.com/repos/reallaksh19/Common",
+      "returned_issue_id": 5779863368,
+      "returned_issue_number": 890,
+      "returned_issue_node_id": "I_kwDOSACQJs8AAAABWIG3SA",
+      "returned_pull_request_marker": false
     }
-  ]
+  ],
+  "expected_repository_id": 1412133785
 }

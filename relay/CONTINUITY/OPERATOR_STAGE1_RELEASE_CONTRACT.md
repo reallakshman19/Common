@@ -8,12 +8,16 @@
 
 | Admission question | Required independent evidence | HOLD if missing |
 | --- | --- | --- |
+| Is the existing work issue an authentic **current-repository ISSUE** with matching provider repository `id`, issue `id`/`number`/URL and no `pull_request` marker? | Controller's own fresh authenticated repository+issue GET, effective access identity and timestamp; old repo / new PR / 404 never satisfy | `HOLD_REPOSITORY_IDENTITY` |
+| Is this independently fetched issue the **Owner/Local-approved existing responsibility**, not merely a real governance/recovery issue? | Authenticated scoped Owner/Local decision and same-repo leaf binding (no new EP) | `HOLD_OWNER_SCOPE` |
 | Is B a fresh model/session without A's conversation, memory or connected-source access? | Actual controller-issued session identity and context isolation | `NO_FRESH_CONTEXT` |
 | Can B read only approved immutable historical files and fixtures? | Exact source manifest, immutable blob refs, tested allowed-path reads | `SOURCE_CLOSURE_INCOMPLETE` |
 | Are every alternate GitHub/API/raw URL/browser/search/shared-file route technically restricted? | Actual operator-observed denied reads on B's effective identity | `READ_BOUNDARY_NOT_ATTESTED` |
 | Does the released input contain only original Owner WHAT/WHY, approved scope and historical source (not A diagnosis or reviewer answers)? | Verified B-facing byte/link/provenance review | `INPUT_CONTAMINATED` |
 | Does B have only Stage 1 instructions and output format, without links into broader Common/Relay or Stage 2? | Controller examines the exact dispatched bytes including expanded links | `INPUT_CONTAMINATED` |
 | Can an authenticated external launcher actually start and restrict B? | Platform/runner capability plus accountable operator and real session receipt | `DISPATCH_BLOCKED_NO_SESSION_CAPABILITY` |
+
+A self-written issue `id`, copied GitHub JSON response, fixture, old-repository issue mirror or matching commit is not fresh provider readback or Owner/Local approval. Both must be independently checked by the controller and kept separate from external B access-denial evidence.
 
 A self-written Markdown `RUNNER_STARTED` declaration, Git blob digest, agent promise not to click, or an operator claim without a tool/access receipt **does not prove isolation**.
 

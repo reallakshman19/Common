@@ -45,6 +45,7 @@ class RunnerDispatchMarkdownContractTests(unittest.TestCase):
             "Parent issue / existing leaf or Local responsibility",
             "Old-repository lineage (if any)",
             "Current issue binding receipt",
+            "Separate Owner/Local responsibility authorization",
             "Episode and idempotency key",
             "External launch-capable operator",
             "Launch/isolation mechanism",
@@ -53,10 +54,22 @@ class RunnerDispatchMarkdownContractTests(unittest.TestCase):
             self.assertIn(key, fields)
         self.assertIn("provider-fetched", fields["Parent issue / existing leaf or Local responsibility"])
         self.assertIn("old issue refs remain historical", fields["Parent issue / existing leaf or Local responsibility"])
-        self.assertIn("provider GET/identity", fields["Current issue binding receipt"])
+        self.assertIn("operator-controlled provider", fields["Current issue binding receipt"])
+        self.assertIn("repository `id`", fields["Current issue binding receipt"])
+        self.assertIn("issue `id`", fields["Current issue binding receipt"])
+        self.assertIn("`pull_request` absent", fields["Current issue binding receipt"])
+        self.assertIn("HOLD_OWNER_SCOPE", fields["Separate Owner/Local responsibility authorization"])
         self.assertIn("HOLD_REPOSITORY_IDENTITY", fields["Current issue binding receipt"])
         self.assertIn("a numeric TX ID alone is insufficient", fields["Current issue binding receipt"])
         self.assertIn("not proof of the same new-repo object", fields["Old-repository lineage (if any)"])
+
+    def test_preflight_requires_separate_provider_identity_and_owner_scope(self):
+        preflight = (ROOT / "relay/CONTINUITY/TEMPLATES/STAGE1_RELEASE_PREFLIGHT.md").read_text(encoding="utf-8")
+        release = (ROOT / "relay/CONTINUITY/OPERATOR_STAGE1_RELEASE_CONTRACT.md").read_text(encoding="utf-8")
+        for word in ("Current-repo provider object identity receipt", "Independent responsibility/Owner scope decision", "HOLD_REPOSITORY_IDENTITY", "HOLD_OWNER_SCOPE", "pull_request"):
+            self.assertIn(word, preflight, word)
+        for word in ("HOLD_REPOSITORY_IDENTITY", "HOLD_OWNER_SCOPE", "controller", "repository"):
+            self.assertIn(word, release, word)
 
     def test_merged_cells_fail_closed(self):
         good = TEMPLATE.read_text(encoding="utf-8")

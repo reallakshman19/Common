@@ -39,6 +39,10 @@ The source-pinned V3.5 `SKILL.md` and all seven `runner/*.md` files from PR #3's
 
 **Latest source refinement:** PR #3 later advanced to `bf4af494505cca6b655fa9163d6731ed2b1ad160`, adding `HANDOVER_TECHNICAL_V2` classifications for per-step SKIPPED vs executed tests, inherited missing-workflow baseline RED, and ZERO_STEPS/NO_RUNNER. This candidate incorporates that exact template blob and the V2 full engineering example as further source-attested disclosure-only content, without changing the native transaction or claiming a fresh independent Runner.
 
+## Stable GitHub provider identity versus Owner/Local scope
+
+At source review, GitHub returned repo `reallakshman19/Common` with stable repository ID `1412133785`, new ISSUE #4 object ID `5782308813`, new ISSUE #6 object ID `5782315682`, and PR #2 issue-endpoint object ID `5782250162` with `pull_request` present. A provider-issued object identity is not just `owner/repo#number`. The dispatch request, controller-only preflight and release contract now demand the controller's own fresh repository+issue GET at use time, matching stable IDs, exact URL, kind and response `repository_url`, **then a separate Owner/Local responsibility scope decision**. This is one Markdown contract and its negative regression suite, not an authenticated agent launcher. Dated [fixture](REPOSITORY_ISSUE_BINDING_PROVIDER_NEGATIVES_V1.json) is only an observed snapshot; it cannot self-attest runtime authority.
+
 ## Real acceptance gates vs structural checks
 
 **This candidate's executable source-level regressions** inspect the actual PR #2 `transactionlib.py` stage allowlist and publication path, compare the V3.5 dispatch identity + handover + Stage2 + Owner decision contracts, and negatively mutate missing provider binding and the complete technical handover requirement. These tests prove *contract consistency only*. They do not test real browser behavior, authentic provider issue GET at dispatch time, a fresh isolated B, future Owner decision or old A credential revocation.
