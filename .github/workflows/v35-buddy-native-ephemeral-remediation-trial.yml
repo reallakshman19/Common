@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_fixture_migration.py'
       - '.github/workflows/v35-buddy-native-ephemeral-remediation-trial.yml'
   workflow_dispatch:
 
@@ -112,3 +113,49 @@ jobs:
           git -C native-candidate status --short
           git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
           echo 'An unmodified native fixture may fail strict Stage1 H1; do NOT mislabel as production native qualification.'
+
+  ephemeral-native-migrated-fixtures:
+    name: Ephemeral original native suite with seven contract-correct success fixtures
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: issue16-tests
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Apply advisory source repair in temporary checkout
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py \
+            --native-root native-candidate
+      - name: Correct only seven outdated positive fixture headings in temporary checkout
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_fixture_migration.py \
+            --native-root native-candidate
+      - name: Execute original native 38-case test module with unchanged assertions
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          cd native-candidate
+          python -m unittest discover -s skills/engineering-pr-delivery-v3.2/tests -p 'test_relay_tx.py' -v
+      - name: Print exact original and ephemeral source provenance
+        if: always()
+        run: |
+          git -C native-candidate rev-parse HEAD
+          git -C native-candidate status --short
+          git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
+          git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/tests/test_relay_tx.py
+          echo 'Legacy test-only heading changes are NOT merged or approved protected source.'
+          echo 'Unmodified original native test job separately records its true failures.'
+          echo 'Concurrency policy and external B/read/freeze/custody remain unproven.'
