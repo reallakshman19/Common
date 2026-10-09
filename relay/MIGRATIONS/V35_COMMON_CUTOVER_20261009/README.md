@@ -60,3 +60,25 @@ const receipt = validateMigrationManifest(manifest);
 **Next work:** independently refresh provider census; publish `TASK_EVIDENCE END` for this bounded reference artifact with exact commit/blob hashes and test results; then execute the real WP0 DELP source graph/policy falsifier and obtain two independent source-level verdicts. This document is not a `TASK_RESULT` for #787 AC1–AC8.
 
 **CI evidence interpretation:** the four Node 22/24 × Windows/Ubuntu unit-test cells use synthetic provider-response injection to prove rejection behavior. A separate Ubuntu/Node 24 **live read-only provider job** compares the manifest with current GitHub object responses. PASS is a time-bounded census only. FAIL can indicate a genuine concurrent branch advance or unavailable GitHub API; classify as `REFRESH_REQUIRED`/HOLD, not a production defect or a retroactive acceptance decision. Source HEAD and raw job steps are mandatory for each checkpoint. The audit makes no new object publication and copies no historic reviews/permissions.
+
+
+## M0-U3 — current source frontier without repeated manifest commits
+
+A **migration mapping** is durable source history; a Runner PR HEAD is mutable source material. They must not share a version or be treated as the same type of fact.
+
+The standalone `observe-moving-heads-v1.mjs` implements an **observed current-source vector** without changing `migration-manifest-v1.json`. For each mapped new PR, it executes native GitHub PR GET, exact branch ref GET, and native compare against the immutable original old PR HEAD. A second independent set of GETs through `auditNativeProvider` revalidates the complete old/new repository/issue/PR identities, old HEAD, new HEAD, source role and ancestry. If PR #3 advances during the two phases, the result is `REFRESH_REQUIRED`, **not** a silently accepted stale snapshot. A later movement after these two reads is not prevented; every consumer must independently recheck before a write.
+
+```sh
+# Offline native adversarial unit tests, fixed input/no network
+node --test relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/*.test.mjs
+# Live native old/new GET checks; read-only and current only at observation
+GITHUB_TOKEN=<read-only-token> node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/observe-moving-heads-v1.cli.mjs
+# Optional strict source freeze (must match manifest-pinned destination HEAD)
+GITHUB_TOKEN=<read-only-token> node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/audit-native-provider-v1.cli.mjs
+```
+
+**Strict audit versus moving-read mode:** The older `audit-native-provider-v1.cli.mjs` deliberately returns stale if a destination HEAD differs from its historical manifest observation; retain it for pinned freeze verifications. The workflow's **live** job now exercises moving-head mode to avoid racing an actively updated Runner branch; it never overwrites the historical manifest, transfers CI/review or turns an observation into admission. The injected `observeMovingHeads` contract explicitly says `source_grade: INJECTED_UNATTESTED`. Only the fixed `observeLiveMovingHeads` path that calls the bounded GitHub GET transport can return `NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION`. Both preserve `writer_authorized:false`, `reviewer_qualified:false`, `evidence_accepted:false`, and `programme_acceptance:NOT_EVALUATED`.
+
+Race coverage includes a new SHA observed before/after a complete current read (positive), PR changes between first and second reads (HOLD), PR/branch mismatch (HOLD), wrong original PR currentness (HOLD), divergence from historical code commit (HOLD), mock response grade not becoming native, and incomplete GitHub responses (HOLD). Test-only source is not a reviewer or privacy grant.
+
+**Scope:** This only solves current old/new *identity/material* observation for M0. It does not wire R3/R12 to accepted DELP evidence; approve the proposed WP0 architecture; qualify independent reviewers; freeze Runner B; or authorize live scoreboards. Those remain governed by #5 and #12.
