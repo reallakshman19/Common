@@ -7,7 +7,7 @@ import hashlib
 import unittest
 
 from cross_repository_provider_v2 import (
-    _native_get, observe_crossrepo_provider_v2,
+    _native_get, observe_crossrepo_provider_v2, observe_live_crossrepo_provider_v2,
 )
 from test_cross_repository_identity_v2 import fixture
 
@@ -154,6 +154,27 @@ class NativeSourceBindingTests(unittest.TestCase):
             _native_get(NEW, "issues/../../etc")
         with self.assertRaisesRegex(ValueError, "PROVIDER_PATH_NOT_ALLOWED"):
             _native_get("attacker/Other", "issues/1/../bad")
+
+    def test_native_cutover_rejects_reversed_repo_roles_before_network(self):
+        # A generic versioned V2 reference can be syntactically well formed
+        # while pointing back to the historical provider as its "current" repo.
+        # The fixed native Common cutover must deny that ordering.
+        envelope = fixture()
+        envelope["historical_origin"].update(
+            repository_id=1412133785, repository=NEW,
+            number=5, url="https://github.com/reallakshman19/Common/issues/5",
+        )
+        envelope["current_target"].update(
+            repository_id=1207996454, repository=OLD,
+            number=787, url="https://github.com/reallaksh19/Common/issues/787",
+        )
+        envelope["current_identity"]["programme"].update(
+            repository=OLD, root_issue=787,
+        )
+        for key in ("graph_source", "session_source", "candidate_source"):
+            envelope["current_identity"][key]["repository"] = OLD
+        with self.assertRaisesRegex(ValueError, "UNAPPROVED_REPOSITORY_PAIR"):
+            observe_live_crossrepo_provider_v2(envelope)
 
     def test_unknown_candidate_is_not_positive_material(self):
         envelope, _, _, read = read_fixture()
