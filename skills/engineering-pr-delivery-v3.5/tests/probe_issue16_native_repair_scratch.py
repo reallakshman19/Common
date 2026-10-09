@@ -46,7 +46,7 @@ def _scratch_require_monotonic_buddy_serial(root: Path, issue: int, serial: int)
         ):
             raise TransactionError("BUDDY_EXISTING_RECEIPT_MISMATCH")
         if previous >= serial:
-            raise TransactionError("BUDDY_SERIAL_NOT_MONOTONIC")
+            raise TransactionError("BUDDY_STALE_STAGE_SERIAL_NOT_MONOTONIC")
 
 
 '''
