@@ -5,6 +5,7 @@ on:
     paths:
       - 'relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md'
       - '.github/workflows/issue6-r2-handover-v2-integration-trial.yml'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_issue6_filled_handover_stage2_preflight.py'
   workflow_dispatch:
 
 permissions:
@@ -98,3 +99,26 @@ jobs:
 
       - name: Verify existing canonical-main authority workflow remains enforced (contract only)
         run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_frozen_main_lineage_guard_contract.py' -v
+
+      - name: Stage immutable PR19 filled technical report for reviewer-only checks
+        shell: bash
+        env:
+          PR19_REPORT_SOURCE_HEAD: c647d7a12bf4eb221e52d709ea3c52951ccf63e8
+          PR19_REPORT_BLOB: d72f49be3be82eb4f6ec9206c6afec46bd059c27
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "$PR19_REPORT_SOURCE_HEAD"
+          test "$(git rev-parse FETCH_HEAD)" = "$PR19_REPORT_SOURCE_HEAD"
+          SOURCE=relay/CONTINUITY/REVIEWER_ONLY/ISSUE16_PR19_TECHNICAL_HANDOVER_V2.md
+          mkdir -p /tmp/issue6-stage2-controller-only
+          DEST=/tmp/issue6-stage2-controller-only/pr19-filled-handover.md
+          git show "$PR19_REPORT_SOURCE_HEAD:$SOURCE" > "$DEST"
+          test "$(git hash-object "$DEST")" = "$PR19_REPORT_BLOB"
+          echo 'PINNED_FILLED_REPORT_BLOB_VERIFIED=' "$PR19_REPORT_BLOB"
+          echo 'CONTROLLER_ONLY_REVIEW_TEST=not a Stage1 read admission or actual ACL'
+
+      - name: Evaluate actual filled PR19 report, negative mutations and Stage2 HOLD
+        env:
+          ISSUE6_EXTERNAL_REPORT_PATH: /tmp/issue6-stage2-controller-only/pr19-filled-handover.md
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_issue6_filled_handover_stage2_preflight.py' -v
+
