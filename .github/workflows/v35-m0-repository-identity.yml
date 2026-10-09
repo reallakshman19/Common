@@ -46,7 +46,7 @@ jobs:
           node-version: 24
       - name: Verify exact tested source
         run: git rev-parse HEAD
-      - name: Re-fetch both GitHub repository identities, old/new issue and PR objects, branch ancestry
+      - name: Double-read live moving PR heads, immutable origin refs, provider identity and ancestry
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/audit-native-provider-v1.cli.mjs
+        run: node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009/observe-moving-heads-v1.cli.mjs
