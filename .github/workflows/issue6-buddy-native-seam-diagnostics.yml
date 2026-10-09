@@ -42,6 +42,33 @@ jobs:
         run: |
           python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_buddy_native_ingress_issue6.py' -v
 
-      - name: Probe atomic same-issue native transaction admission under synchronized contenders
+
+  native-race:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact PR head for race probe
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Assert separately tested race HEAD
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
-          python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_buddy_native_concurrency_issue6.py' -v
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          printf 'EXACT_RACE_SOURCE_HEAD=%s\n' "$EXPECTED_SHA"
+
+      - name: Python 3.12 race environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install native transaction dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+
+      - name: Probe same-issue transactional admission with deterministic parallel threads
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_buddy_native_concurrency_issue6.py' -v
+
