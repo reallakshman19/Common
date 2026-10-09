@@ -1,0 +1,61 @@
+name: V3.5 WP2-B B01-B03 pre-admission falsifiers (read-only)
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2B_20261010/**'
+      - '.github/workflows/v35-wp2b-pre-admission.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+  checks: read
+  statuses: read
+
+jobs:
+  pre-admission-physical-source:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Exact-head source and fail-closed admissibility tests
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          node --test relay/RECOVERY/V35_R14_WP2B_20261010/*.test.mjs
+  native-readonly-pre-admission:
+    if: false # gated until new PR's own native issue comment exists
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Only native GitHub GET observation and negative readiness
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          git rev-parse HEAD
+          node relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-live-v1.cli.mjs
