@@ -1,4 +1,4 @@
-name: V3.5 WP2-A U01-U02 current material and CI diagnostics (read-only)
+name: V3.5 WP2-A U01-U03 current source and evidence observations (read-only)
 on:
   pull_request:
     paths:
@@ -14,7 +14,7 @@ permissions:
   statuses: read
 
 jobs:
-  u01-u02-source-falsifiers:
+  u01-u03-source-falsifiers:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -29,7 +29,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - name: Exact-head U01-U02 source and adversarial tests
+      - name: Exact-head U01-U03 source and adversarial tests
         shell: bash
         run: |
           git rev-parse HEAD
@@ -84,3 +84,24 @@ jobs:
         run: |
           git rev-parse HEAD
           node relay/RECOVERY/V35_R14_WP2A_20261010/required-ci-material-v1.cli.mjs
+
+  live-task-evidence-comment:
+    if: github.event_name == 'pull_request'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify prior pinned TASK_EVIDENCE source stays a claim and stale
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          node relay/RECOVERY/V35_R14_WP2A_20261010/task-evidence-comment-v1.cli.mjs
