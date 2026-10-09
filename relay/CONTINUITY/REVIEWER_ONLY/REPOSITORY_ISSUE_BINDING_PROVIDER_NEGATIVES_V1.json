@@ -1,0 +1,72 @@
+{
+  "schema": "relay-provider-issue-readback-negatives-v1",
+  "observed_on": "2026-10-09",
+  "grade": "SOURCE_OBSERVED_GITHUB_GET_SNAPSHOT_ONLY",
+  "warning": "Fixture/result-kind parsing is not live provider admission, independent Owner authentication, or permission to mint ISSUE-number transactions.",
+  "expected_repository": "reallakshman19/Common",
+  "observations": [
+    {
+      "id": "P01",
+      "lookup_repository": "reallakshman19/Common",
+      "lookup_number": 4,
+      "api_status": 200,
+      "returned_kind": "issue",
+      "returned_url": "https://github.com/reallakshman19/Common/issues/4",
+      "expected_dispatch_issue": true
+    },
+    {
+      "id": "P02",
+      "lookup_repository": "reallakshman19/Common",
+      "lookup_number": 6,
+      "api_status": 200,
+      "returned_kind": "issue",
+      "returned_url": "https://github.com/reallakshman19/Common/issues/6",
+      "expected_dispatch_issue": true
+    },
+    {
+      "id": "N01",
+      "lookup_repository": "reallakshman19/Common",
+      "lookup_number": 2,
+      "api_status": 200,
+      "returned_kind": "pull_request",
+      "returned_url": "https://github.com/reallakshman19/Common/pull/2",
+      "expected_dispatch_issue": false
+    },
+    {
+      "id": "N02",
+      "lookup_repository": "reallakshman19/Common",
+      "lookup_number": 889,
+      "api_status": 404,
+      "returned_kind": null,
+      "returned_url": null,
+      "expected_dispatch_issue": false
+    },
+    {
+      "id": "N03",
+      "lookup_repository": "reallakshman19/Common",
+      "lookup_number": 890,
+      "api_status": 404,
+      "returned_kind": null,
+      "returned_url": null,
+      "expected_dispatch_issue": false
+    },
+    {
+      "id": "N04",
+      "lookup_repository": "reallaksh19/Common",
+      "lookup_number": 889,
+      "api_status": 200,
+      "returned_kind": "issue",
+      "returned_url": "https://github.com/reallaksh19/Common/issues/889",
+      "expected_dispatch_issue": false
+    },
+    {
+      "id": "N05",
+      "lookup_repository": "reallaksh19/Common",
+      "lookup_number": 890,
+      "api_status": 200,
+      "returned_kind": "issue",
+      "returned_url": "https://github.com/reallaksh19/Common/issues/890",
+      "expected_dispatch_issue": false
+    }
+  ]
+}

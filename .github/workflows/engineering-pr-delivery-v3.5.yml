@@ -6,6 +6,7 @@ on:
       - 'relay/CONTINUITY/**'
       - 'skills/engineering-pr-delivery-v3.5/tests/test_runner_dispatch_markdown_contract.py'
       - 'skills/engineering-pr-delivery-v3.5/tests/test_buddy_r14_consumer_contract.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_repository_issue_binding_contract.py'
       - 'skills/engineering-pr-delivery-v3.5/runner/**'
       - 'skills/engineering-pr-delivery-v3.5/SKILL.md'
       - '.github/workflows/engineering-pr-delivery-v3.5.yml'
@@ -57,6 +58,9 @@ jobs:
 
       - name: Run Buddy R14 native-to-handover consumer regressions
         run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_buddy_r14_consumer_contract.py' -v
+
+      - name: Run provider issue-kind and migration-negative fixture regressions
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_repository_issue_binding_contract.py' -v
 
       - name: Verify base-pinned frozen V3.2 tree protection
         shell: bash
