@@ -50,7 +50,7 @@ def main() -> int:
             raise RuntimeError(f"POSITIVE_FIXTURE_ANCHOR_MISMATCH: {old!r}")
         source = source.replace(old, new, 1)
     path.write_text(source, encoding="utf-8")
-    actual = set(git(root, "status", "--porcelain").splitlines())
+    actual = {line.strip() for line in git(root, "status", "--porcelain").splitlines()}
     allowed = {
         "M skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py",
         "M skills/engineering-pr-delivery-v3.2/tests/test_relay_tx.py",
