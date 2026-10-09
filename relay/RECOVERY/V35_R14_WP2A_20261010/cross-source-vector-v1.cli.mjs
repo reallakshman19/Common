@@ -7,8 +7,8 @@ const result=await observeLiveCrossSource({
  root_issue:5,leaf_issue:20,pr_number:Number(process.env.CANDIDATE_PR_NUMBER),
  candidate_head_sha:process.env.CANDIDATE_HEAD_SHA,
  base_branch:process.env.CANDIDATE_BASE_REF,
- evidence_comment_id:6089024942,
- evidence_claimed_head_sha:'f5a30225aea6adde20cef67ca5ab1111a11c3800',
+ evidence_comment_id:6089537374,
+ evidence_claimed_head_sha:'4d90d0ff8a72d843c632d44ed4bc90b2a7da3ca1',
  expected_author_login:'reallakshman19',
 });
 console.log(JSON.stringify(result,null,2));
