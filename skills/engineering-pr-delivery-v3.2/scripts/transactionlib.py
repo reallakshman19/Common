@@ -147,6 +147,11 @@ def _require_buddy_sequence(root: Path, issue: int, seq: int, stage: str, actor:
     )
     if target_index <= 0:
         return
+    # Missing the immediate prerequisite is a missing-stage defect, not a stale
+    # predecessor-chain defect. Check it first even when earlier stages are absent.
+    required = stages[target_index - 1]
+    if _prior_buddy_message(root, issue, seq, required) is None:
+        raise TransactionError(f"BUDDY_STAGE_ORDER_MISSING_{required}")
     chain: dict[str, tuple[bytes, dict[str, Any]]] = {}
     last_seq = 0
     for predecessor in stages[:target_index]:
