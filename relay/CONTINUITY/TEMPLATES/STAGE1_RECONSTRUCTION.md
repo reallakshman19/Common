@@ -2,6 +2,8 @@
 
 **B-facing response format: a controller must deliver only the sanitized bytes, never a navigable Common repository link.** Never fill this from Agent A's handover or current PR. Stage 1 output MUST be the independent B session's observations, authored on the permitted historical source. If B has seen A current material or unrestricted GitHub feeds, mark `CONTAMINATED` and stop.
 
+**Output packaging for a controller who can preserve original bytes:** This is ONE independent Stage 1 reasoning submission, but prepare it as **two separately deliverable original UTF-8 Markdown documents** in the same isolated session. First document: heading `# STAGE1_BASELINE` followed by all of Part A, completed before beginning Part B. Second document: heading `# STAGE1_PLAN` followed by all of Part B; its hypotheses remain provisional. Preserve each document's exact bytes and original author/session provenance. Never ask a controller to reconstruct these files by editing, inserting a header into, or copying segments of a combined answer. If separate original documents cannot be delivered, preserve your raw response unchanged and report this output-format limitation. Do not inspect controller instructions, current Agent A code, or Stage 2 to fix packaging.
+
 | Field | Value |
 | --- | --- |
 | Episode / existing governed responsibility | [from curated intake] |
