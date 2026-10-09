@@ -7,6 +7,7 @@ the native stage name. Actual provenance requires external attestation.
 """
 from __future__ import annotations
 
+import re
 import unittest
 
 
@@ -28,10 +29,10 @@ def validate_buddy_stage1_output(stage: str, original_bytes: bytes) -> list[str]
         return ["NUL_FORBIDDEN"]
     if not text.startswith(f"# {stage}\n"):
         return ["STAGE1_EXACT_HEADING_REQUIRED"]
-    if any(
-        f"\n# {other}\n" in text
-        for other in (STAGE1_BASELINE, STAGE1_PLAN)
-    ):
+    # Check all subsequent H1 stage delimiters, including CRLF, trailing
+    # whitespace and a header at EOF. Never reconstruct a second B-authored
+    # original from a combined document.
+    if re.search(r"(?m)^# STAGE1_(?:BASELINE|PLAN)[ \t]*\r?$", text.split("\n", 1)[1]):
         return ["COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES"]
     if not text.split("\n", 1)[1].strip():
         return ["EMPTY_STAGE1_SUBSTANCE"]
@@ -66,6 +67,22 @@ class Stage1OriginalFileContractTests(unittest.TestCase):
     def test_combined_document_cannot_be_split_and_relabelled(self):
         raw = b"# STAGE1_BASELINE\n\nFacts.\n# STAGE1_PLAN\n\nPlan.\n"
         self.assertIn("COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES", validate_buddy_stage1_output(STAGE1_BASELINE, raw))
+
+    def test_embedded_plan_header_with_crlf_is_rejected(self):
+        raw = b"# STAGE1_BASELINE\n\nFacts.\n# STAGE1_PLAN\r\nProvisional plan.\n"
+        self.assertIn("COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES", validate_buddy_stage1_output(STAGE1_BASELINE, raw))
+
+    def test_embedded_plan_header_with_trailing_space_is_rejected(self):
+        raw = b"# STAGE1_BASELINE\n\nFacts.\n# STAGE1_PLAN  \nProvisional plan.\n"
+        self.assertIn("COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES", validate_buddy_stage1_output(STAGE1_BASELINE, raw))
+
+    def test_embedded_plan_header_at_eof_is_rejected(self):
+        raw = b"# STAGE1_BASELINE\n\nFacts.\n# STAGE1_PLAN"
+        self.assertIn("COMBINED_STAGE1_OUTPUT_NOT_ORIGINAL_FILES", validate_buddy_stage1_output(STAGE1_BASELINE, raw))
+
+    def test_prose_mention_of_stage_label_is_allowed(self):
+        raw = b"# STAGE1_BASELINE\n\nThe STAGE1_PLAN label belongs to a later independent document.\n"
+        self.assertEqual(validate_buddy_stage1_output(STAGE1_BASELINE, raw), [])
 
     def test_empty_file_is_rejected(self):
         self.assertIn("EMPTY_STAGE1_SUBSTANCE", validate_buddy_stage1_output(STAGE1_BASELINE, b"# STAGE1_BASELINE\n"))
