@@ -4,7 +4,9 @@
 
 | Required field | Source / permitted value |
 | --- | --- |
-| Parent issue / existing leaf or Local responsibility | [authenticated current ID; do not create new EP] |
+| Parent issue / existing leaf or Local responsibility | [authenticated **repository owner/name + current-repo issue number**; provider-fetched before using native `ISSUE-<number>` transport; old issue refs remain historical, do not create new EP] |
+| Old-repository lineage (if any) | [exact original URLs and source grades, e.g. `reallaksh19/Common#890`; not proof of the same new-repo object] |
+| Current issue binding receipt | [actual `reallakshman19/Common/issues/<number>` provider GET/identity + time or `HOLD_REPOSITORY_IDENTITY`; a numeric TX ID alone is insufficient] || Parent issue / existing leaf or Local responsibility | [authenticated current ID; do not create new EP] |
 | Episode and idempotency key | [existing responsibility + packet commit/path + source tree SHA + revision] |
 | Requested mode | `PLANNED_RUNNER_STAGE1`, not Two-Pass/Three-Pass or handover transaction |
 | Owner's instruction / trigger grade | [explicit "Prepare for runner" or measured/proxy/risk, percentage UNKNOWN if unmeasured] |
