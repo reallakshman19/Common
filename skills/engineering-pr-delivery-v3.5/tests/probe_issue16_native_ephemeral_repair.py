@@ -112,12 +112,16 @@ def main() -> int:
         SEQUENCE_HELPER + "def _validate_buddy_markdown_transaction(",
         "helper insertion",
     )
+    # Preserve existing error precedence: immutable target and missing/blocked
+    # predecessor checks run BEFORE stage-shape and freshness validation.
+    # This matters for native negative tests that distinguish missing source
+    # evidence from malformed document bytes.
     anchor = (
-        '    if not content.startswith("# ") or "\\x00" in content:\n'
-        '        raise TransactionError("BUDDY_MARKDOWN_HEADING_REQUIRED")\n'
+        '    _require_buddy_sequence(root, int(match.group(1)), '
+        'int(match.group(3)), match.group(4), actor)\n'
     )
     source = replace_once(
-        source, anchor, anchor + PAYLOAD_ADDENDUM, "shared ingress insertion"
+        source, anchor, anchor + PAYLOAD_ADDENDUM, "post-prerequisite ingress insertion"
     )
     # This is a reproducible CI-worktree-only source change. No protected
     # GitHub file or authority manifest may be written by this program.
