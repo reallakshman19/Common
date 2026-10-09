@@ -147,7 +147,7 @@ class U3CrossRepoMigrationTests(unittest.TestCase):
     def test_wrong_current_root_binding_fails(self):
         doc = sample()
         doc["migration"]["current"]["root_issue"] = 6
-        self.reject(doc, "CURRENT_SOURCE_ROLE_BINDING_MISMATCH")
+        self.reject(doc, "SCHEMA_INVALID")
 
     def test_wrong_current_leaf_issue_ref_fails(self):
         doc = sample()
@@ -162,15 +162,28 @@ class U3CrossRepoMigrationTests(unittest.TestCase):
     def test_foreign_old_root_claim_fails(self):
         doc = sample()
         doc["migration"]["historical"]["root_issue"] = 788
-        self.reject(doc, "HISTORICAL_SOURCE_ROLE_BINDING_MISMATCH")
+        self.reject(doc, "SCHEMA_INVALID")
 
     def test_same_repo_id_or_namespace_cannot_be_cutover(self):
         doc = sample()
         doc["migration"]["current"]["repository_id"] = 1207996454
-        self.reject(doc, "REPOSITORY_IDENTITY_NOT_DISTINCT")
+        self.reject(doc, "SCHEMA_INVALID")
         doc = sample()
         doc["migration"]["current"]["repository"] = OLD
-        self.reject(doc, "REPOSITORY_IDENTITY_NOT_DISTINCT")
+        self.reject(doc, "SCHEMA_INVALID")
+
+    def test_reverse_origin_current_provider_id_binding_rejected_at_schema(self):
+        doc = sample()
+        doc["migration"]["historical"]["repository_id"] = 1412133785
+        doc["migration"]["historical"]["repository"] = NEW
+        doc["migration"]["current"]["repository_id"] = 1207996454
+        doc["migration"]["current"]["repository"] = OLD
+        self.reject(doc, "SCHEMA_INVALID")
+
+    def test_historical_repo_name_cannot_be_rewritten_to_new(self):
+        doc = sample()
+        doc["migration"]["historical"]["repository"] = NEW
+        self.reject(doc, "SCHEMA_INVALID")
 
     def test_self_parent_leaf_invalid_before_progress(self):
         doc = sample()
