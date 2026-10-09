@@ -4,7 +4,10 @@
 
 | Field | Independent authority reference / unresolved |
 | --- | --- |
-| Existing responsibility, episode, current candidate HEAD | [exact checked provider state; observation time] |
+| Existing responsibility, episode, current candidate HEAD | [exact checked provider state **including repository owner/name**; observation time] |
+| Old repository / issue / PR lineage | [exact historical provider objects; immutable old URLs not rewritten to new owner] |
+| New repository / issue / PR bindings | [independently fetched new issue/PR identities, or UNKNOWN/HOLD; an identical Git commit does not imply identical GitHub objects] |
+| R14 U1/U2/U3 claim-envelope grade | [reference-only vs externally authenticated source; no acceptance from digest, STOP_CLAIMED or reviewer CLAIMED_ACCEPTED] |
 | Source of Owner identity and actual approval | [authorized provider/role mechanism; missing => UNKNOWN] |
 | Stage 1 independent frozen original | [immutable receipt / read isolation verdict] |
 | Stage 2 reconcile / tests / golden readback | [actual current exact SHA, verified or NOT_RUN] |
