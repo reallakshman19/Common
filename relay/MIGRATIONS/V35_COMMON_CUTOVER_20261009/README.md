@@ -82,3 +82,9 @@ GITHUB_TOKEN=<read-only-token> node relay/MIGRATIONS/V35_COMMON_CUTOVER_20261009
 Race coverage includes a new SHA observed before/after a complete current read (positive), PR changes between first and second reads (HOLD), PR/branch mismatch (HOLD), wrong original PR currentness (HOLD), divergence from historical code commit (HOLD), mock response grade not becoming native, and incomplete GitHub responses (HOLD). Test-only source is not a reviewer or privacy grant.
 
 **Scope:** This only solves current old/new *identity/material* observation for M0. It does not wire R3/R12 to accepted DELP evidence; approve the proposed WP0 architecture; qualify independent reviewers; freeze Runner B; or authorize live scoreboards. Those remain governed by #5 and #12.
+
+## M0/U4 — historical main vs moving destination main
+
+Old repo `reallaksh19/Common/main@d60c36605e988dcc160647421973f170fd87e0eb` is a historical source anchor, **not** proof the new repo main stays frozen. New repo `reallakshman19/Common/main` advanced to `3afd78e0635957e496cfef99f6727590001f94cd` at direct provider observation. A strict M0 manifest freeze check SHOULD reject that mismatch. The moving-source read uses a separate `observedMain` GitHub GET and re-reads it in the second provider pass, without editing the original manifest. The result carries `historical_main_sha` and `destination_main_sha` in distinct typed fields. A difference is an **observed source difference**, not `CODE_EQUIVALENT` or a permission to promote historical Owner/reviews/CI.
+
+Changes to `destination_main_sha` between reads, a moved source PR, or any unknown source return `REFRESH_REQUIRED/HOLD`. A subsequent change after the second GET is not prevented; consumer must re-observe at its own decision boundary. Provider-GET-shape fixture tests remain `INJECTED_UNATTESTED`, regardless of matching data. This is a source-currentness improvement only, not the native program evidence/reviewer bridge.
