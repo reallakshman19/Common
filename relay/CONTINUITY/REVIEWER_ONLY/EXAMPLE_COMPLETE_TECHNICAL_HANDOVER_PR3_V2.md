@@ -10,7 +10,7 @@ The unmerged [new PR #3](https://github.com/reallakshman19/Common/pull/3) adds a
 
 **Actual operation is not demonstrated:** no independent isolated B, B-authored Stage 1 output, denied-read audit, Stage 1 freeze, Stage 2 successor comparison, old-agent credential revocation or production workflow admission has been observed. The known critical failures are a missing genuine B launcher/read fence, a Core1B historical packet with broad GitHub links, and missing GitHub issue/PR identity migration between owner accounts. PR #2 is another agent's overlapping V3.2 native transport candidate and must be reconciled before merge.
 
-**First safe read:** fetch exact current head of `docs/relay-890-continuity-md-v1` in `reallakshman19/Common`, compare it with candidate `0d48c3ef...`, then open `relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md` and `skills/engineering-pr-delivery-v3.5/runner/PREPARE_FOR_RUNNER.md`. The next safe action is **read-only PR #2/PR #3 exact-head collision review plus evaluation of the inherited V3.1 CI failure**. No independent Runner launch or successor code-write admission has been established.
+**First safe read:** fetch exact current head of `docs/relay-890-continuity-md-v1` in `reallakshman19/Common`, compare it with tested-documentation candidate `d9f785394840840775775be81a526228edd3c00d`, then open `relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md` and `skills/engineering-pr-delivery-v3.5/runner/PREPARE_FOR_RUNNER.md`. The next safe action is **read-only PR #2/PR #3 exact-head collision review plus evaluation of the inherited V3.1 CI failure**. No independent Runner launch or successor code-write admission has been established.
 
 ## 1. Original problem, Owner WHAT/WHY and engineering acceptance
 
