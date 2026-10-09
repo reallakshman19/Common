@@ -26,7 +26,7 @@ REQUIRED = {
     6: ("positive", "negative/adversarial", "real_original", "browser_not_run"),
     7: ("tested", "skipped", "never infer pass"),
     8: ("failed strategies", "unknown", "blocker"),
-    9: ("native", "writer", "unknown"),
+    9: ("native", "writer", "unverified"),
     10: ("first", "head", "stop"),
     11: ("three questions", "source anchors", "falsifying"),
     12: ("provider", "not_run", "unknown"),
@@ -47,7 +47,7 @@ def check_handover_contract(document: str) -> list[str]:
         "Stage 2 after independently authenticated Stage 1 freeze only",
         "HANDOVER_CONTEXT",
         "one coherent report",
-        "not a new",
+        "not a process plan",
     ):
         if required.casefold() not in preamble.casefold():
             errors.append(f"missing pre-release or native authority boundary: {required}")
