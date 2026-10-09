@@ -88,7 +88,11 @@ export async function auditNativeProvider(manifest, getJSON) {
         dest.head.repo?.full_name === d.full_name &&
         dest.base?.repo?.full_name === d.full_name);
     if (!destOK) bad('DESTINATION_OBJECT_MISMATCH',item.kind+'#'+to.number);
+    // SOURCE_BRANCH_CONTINUATION is same-ref history. A
+    // RELATED_NEW_IMPLEMENTATION is a different native PR with its own ref:
+    // do not falsely equate it to the preserved old branch (or claim ancestry).
     if (item.kind === 'PR' && branch && destOK &&
+        item.relation === 'SOURCE_BRANCH_CONTINUATION' &&
         (dest.head.sha !== branch.destination_head_sha ||
          dest.head.ref !== branch.branch)) {
       bad(REFRESH,'destination PR#'+to.number+' head/ref changed');
