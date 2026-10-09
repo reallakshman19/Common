@@ -37,7 +37,7 @@ jobs:
           node --test relay/RECOVERY/V35_R14_WP2A_20261010/*.test.mjs
 
   native-cross-module-smoke:
-    if: false # enable only after this PR's own source-verified GitHub issue comment exists
+    if: github.event_name == 'pull_request'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
