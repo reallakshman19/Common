@@ -1,4 +1,4 @@
-/* WP2-B real provider GET negative admission; issue #30 comment is historic.
+/* WP2-B native GET negative admission; B05 #30 comment is historic H1 on PR292.
  * Must never grant E, Owner, reviewer, lease, DELP or publisher.
  */
 import {inspectLivePreAdmission} from './pre-admission-boundary-v1.mjs';
@@ -8,8 +8,8 @@ const result=await inspectLivePreAdmission({
  pr_number:Number(process.env.CANDIDATE_PR_NUMBER),
  candidate_head_sha:process.env.CANDIDATE_HEAD_SHA,
  base_branch:process.env.CANDIDATE_BASE_REF,
- evidence_comment_id:6090013793,
- evidence_claimed_head_sha:'18de77d3176d87dd347ed95ad313ae330935bf27',
+ evidence_comment_id:6093641044,
+ evidence_claimed_head_sha:'64e494f6cc4bca5764b1b94ff4fe58d16da29d30',
  expected_author_login:'reallakshman19',
  facts_schema_line:'V35',
 });
