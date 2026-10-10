@@ -19,7 +19,9 @@ class GitHubReadError(OSError):
 
 
 def _safe_repository(repo: str) -> bool:
-    return isinstance(repo, str) and fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) is not None
+    return (isinstance(repo, str) and
+            fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) is not None and
+            all(segment not in (".", "..") for segment in repo.split("/")))
 
 
 class GitHubGetOnly:
