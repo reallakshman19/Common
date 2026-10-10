@@ -15,7 +15,7 @@ const G='NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION';
 function allNoAuthority(v){
  return v&&v.evidence_admitted===false&&v.delp_invoked===false&&
  v.writer_authorized===false&&v.publisher_authorized===false&&
- v.programme_progress===null;
+ (v.programme_progress===null||v.progress===null);
 }
 function result(status,firstFailure,steps,grade,source){
  return Object.freeze({
