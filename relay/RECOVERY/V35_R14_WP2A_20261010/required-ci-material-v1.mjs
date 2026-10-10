@@ -83,17 +83,25 @@ function required(classic,rules){
     throw Error('REQUIRED_POLICY_NOT_READABLE');
   const refs=[];
   const add=(name,appId,origin)=>{
-    if(typeof name!=='string'||!name||!(appId===null||Number.isSafeInteger(appId)))throw Error('REQUIRED_CHECK_MALFORMED');
+    if(typeof name!=='string'||!name.trim()||name.length>250||/[\x00-\x1f\x7f]/.test(name)||
+      !(appId===null||(Number.isSafeInteger(appId)&&appId>=-1)))
+      throw Error('REQUIRED_CHECK_MALFORMED');
     refs.push({name,app_id:appId,origin});
   };
   for(const n of classic.contexts)add(n,null,'CLASSIC');
-  for(const c of classic.checks){if(!obj(c))throw Error('CLASSIC_CHECK_MALFORMED');add(c.context,c.app_id??null,'CLASSIC');}
+  for(const c of classic.checks){
+    if(!obj(c)||!Object.hasOwn(c,'app_id'))throw Error('CLASSIC_CHECK_MALFORMED');
+    add(c.context,c.app_id,'CLASSIC');
+  }
   for(const rule of rules){
-    if(!obj(rule)||typeof rule.type!=='string')throw Error('RULE_MALFORMED');
+    if(!obj(rule)||typeof rule.type!=='string'||!rule.type)throw Error('RULE_MALFORMED');
     if(rule.type!=='required_status_checks')continue;
     const rc=rule.parameters?.required_status_checks;
     if(!Array.isArray(rc))throw Error('RULE_REQUIRED_CHECKS_MALFORMED');
-    for(const c of rc){if(!obj(c))throw Error('RULE_REQUIRED_CHECK_MALFORMED');add(c.context,c.integration_id??null,'RULESET');}
+    for(const c of rc){
+      if(!obj(c)||!Object.hasOwn(c,'integration_id'))throw Error('RULE_REQUIRED_CHECK_MALFORMED');
+      add(c.context,c.integration_id,'RULESET');
+    }
   }
   return refs.sort(sort).filter((v,i,a)=>i===0||JSON.stringify(v)!==JSON.stringify(a[i-1]));
 }
