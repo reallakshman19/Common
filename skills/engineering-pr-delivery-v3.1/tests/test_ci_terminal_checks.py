@@ -9,17 +9,18 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[3]
 
-V3_SKILL_PATTERN = "skills/" + "engineering-pr-delivery-v3/*"
+# V3.1's normative skill contract makes V2.5 and V3 historical-only.
+# Following the repository migration, their workflow YAML files are absent.
+# Never silently install placeholder old workflows to satisfy current CI.
+# If a historical workflow is intentionally reinstated, reconcile it as an
+# active required-check surface in this test and the branch-policy evidence.
+RETIRED_PREMIGRATION_WORKFLOWS = (
+    "engineering-pr-delivery-v2.5.yml",
+    "engineering-pr-delivery-v3.yml",
+)
 
-
+# The existing live V3.1 workflow remains fully subject to terminality tests.
 WORKFLOWS = {
-    "engineering-pr-delivery-v2.5.yml": (
-        "skills/engineering-pr-delivery-v2.5/*",
-        "skills/three-pass-prompt-generator/*",
-    ),
-    "engineering-pr-delivery-v3.yml": (
-        V3_SKILL_PATTERN,
-    ),
     "engineering-pr-delivery-v3.1.yml": (
         "skills/engineering-pr-delivery-v3.1/*",
         "skills/two-pass-prompt-generator/*",
@@ -29,6 +30,16 @@ WORKFLOWS = {
 
 
 class RequiredCheckTerminalityTests(unittest.TestCase):
+    def test_retired_workflows_cannot_be_silently_reactivated(self):
+        """A re-added historical workflow needs explicit check-contract review."""
+        for filename in RETIRED_PREMIGRATION_WORKFLOWS:
+            with self.subTest(workflow=filename):
+                self.assertFalse(
+                    (ROOT / ".github/workflows" / filename).exists(),
+                    "Historical workflow reappeared: reconcile its current "
+                    "required-check terminality, source and branch-policy basis",
+                )
+
     def test_relay_workflows_remain_valid_yaml(self):
         for filename in WORKFLOWS:
             with self.subTest(workflow=filename):
