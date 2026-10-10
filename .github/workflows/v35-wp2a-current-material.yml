@@ -109,3 +109,27 @@ jobs:
         run: |
           git rev-parse HEAD
           node relay/RECOVERY/V35_R14_WP2A_20261010/task-evidence-comment-v1.cli.mjs
+
+  u02-source-page-contract:
+    name: "T31 U02 native source page integrity (${{ matrix.os }}, Node ${{ matrix.node }})"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Exact-head U02 source integrity tests, no provider writes
+        shell: bash
+        env:
+          TESTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$TESTED_HEAD"
+          node --test relay/RECOVERY/V35_R14_WP2A_20261010/required-ci-material-v1.test.mjs
