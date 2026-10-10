@@ -9,10 +9,14 @@ import json
 from pathlib import Path
 import sys
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from pr_source_binding import BindingError, PreviewPins
-from v32_integrated_shadow import CycleHold, SnapshotGET, integrated_shadow, _native_modules
+from v32_integrated_shadow import CycleHold, SnapshotGET, integrated_shadow, _native_modules, main as shadow_main
 
 REPO = "author/example-lab"
 HEAD = "a" * 40
@@ -185,6 +189,57 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
         self.assertEqual(r["c6_frontier"]["schema"], native.frontier(
             graph, native.ledger_from_github(SnapshotGET(self.source), graph),
             native.observe_github(SnapshotGET(self.source), graph), self.pin.leaf_ref)["schema"])
+
+
+    def test_17_full_repository_pr_reference_is_explicit_core_hold(self):
+        # Original lab graph uses owner/repo#PR throughout, not short repo#PR.
+        # Real native graph and DELP accept this, but native responsibility core
+        # currently holds. Never report a successful complete core or CLI OK.
+        graph = json.loads(self.binary)
+        graph["programme"]["root"] = f"{REPO}#1"
+        for node in graph["nodes"]:
+            node["ref"] = f"{REPO}#{node['ref'].rsplit('#', 1)[-1]}"
+            if node.get("parent"):
+                node["parent"] = f"{REPO}#{node['parent'].rsplit('#', 1)[-1]}"
+            if node.get("primary_pr"):
+                node["primary_pr"] = f"{REPO}#{node['primary_pr'].rsplit('#', 1)[-1]}"
+        self.binary = raw(graph)
+        self.source["graph_git_blob"] = oid(self.binary)
+        self.pin = PreviewPins(REPO, 42, oid(self.binary), f"{REPO}#2", HEAD)
+        report = self.cycle()
+        self.assertIsNone(report["native_core"])
+        self.assertEqual(report["native_core_hold"], "RESPONSIBILITY_CORE_MATERIAL_BOUNDARY")
+        self.assertEqual(report["status"], "INTEGRATED_SHADOW_NATIVE_CORE_HOLD_NOT_RELEASE_READY")
+        self.assertFalse(report["issue_or_pr_github_writes"])
+        self.assertFalse(report["production_activation"])
+        self.assertFalse(report["eligible_evidence_admitted_by_this_cycle"])
+        self.assertEqual(report["real_cold_successor"], "NOT_EXECUTED")
+        self.assertEqual(report["c6_same_source_reentry"]["status"], "CURRENT")
+
+        # The private diagnostic is still written, but the CLI exits nonzero
+        # and never prints a success marker while the native core is on HOLD.
+        with TemporaryDirectory() as directory:
+            graph_file = Path(directory) / "released-graph.json"
+            snapshot_file = Path(directory) / "source-snapshot.json"
+            output_file = Path(directory) / "report.json"
+            graph_file.write_bytes(self.binary)
+            snapshot_file.write_text(json.dumps(self.source), encoding="utf-8")
+            argv = [
+                "v32_integrated_shadow.py",
+                "--graph", str(graph_file), "--snapshot", str(snapshot_file),
+                "--repository-id", "42", "--leaf", self.pin.leaf_ref,
+                "--graph-blob", self.pin.released_graph_blob_oid,
+                "--head", HEAD, "--output", str(output_file),
+            ]
+            output = StringIO()
+            with patch.object(sys, "argv", argv), redirect_stdout(output):
+                return_code = shadow_main()
+            self.assertEqual(return_code, 2)
+            self.assertIn("NATIVE_CORE_HOLD", output.getvalue())
+            self.assertNotIn("SHADOW_OK", output.getvalue())
+            saved = json.loads(output_file.read_text(encoding="utf-8"))
+            self.assertEqual(saved["status"], report["status"])
+            self.assertEqual(saved["native_core_hold"], report["native_core_hold"])
 
 
 if __name__ == "__main__":
