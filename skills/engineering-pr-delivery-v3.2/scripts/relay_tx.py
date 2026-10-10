@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -24,7 +26,7 @@ from local_execution_projection import build as build_local_execution
 from render_local_execution_request import render as render_local_execution_request
 from relay_can import _protocol_state, evaluate as can_action
 from snapshot_projection import build as build_snapshot
-from transactionlib import TransactionError, execute, jsonl_bytes, recover_all, yaml_bytes
+from transactionlib import BUDDY_MESSAGE_STAGES, TransactionError, execute, jsonl_bytes, recover_all, yaml_bytes
 from v3lib import canonical_digest, load_events, load_yaml, require_identifier, validate_schema
 from validate_foundation import validate_authority
 
@@ -1292,6 +1294,69 @@ def reconcile_roadmap(
         fail_after=fail_after,
     )
 
+# A Buddy message is a transaction-recorded Markdown observation, NOT execution
+# admission, accepted TASK_EVIDENCE, independent-context attestation or a handover.
+
+def publish_buddy_markdown(
+    root: Path,
+    *,
+    issue_number: int,
+    tx_id: str,
+    stage: str,
+    actor: str,
+    markdown: bytes,
+    fail_after: int | None = None,
+) -> dict[str, Any]:
+    """Immutable issue-scoped Markdown inside the EXISTING Relay transaction log.
+
+    This intentionally does not read/write global relay/STATE, derive P/E/D, inspect
+    Agent A's private context, grant a new lease or assert that stage visibility
+    was externally isolated. Stage admission must be verified separately.
+    """
+    if isinstance(issue_number, bool) or not isinstance(issue_number, int) or issue_number < 1:
+        raise TransactionError("BUDDY_ISSUE_REQUIRED: use a positive governed issue number")
+    if stage not in BUDDY_MESSAGE_STAGES:
+        raise TransactionError("BUDDY_STAGE_INVALID")
+    if not isinstance(actor, str) or not actor.strip():
+        raise TransactionError("BUDDY_ACTOR_REQUIRED")
+    if not isinstance(tx_id, str) or re.fullmatch(
+        rf"TX\.{issue_number}\.[1-9][0-9]*", tx_id
+    ) is None:
+        raise TransactionError("BUDDY_TX_ID_MUST_MATCH_ISSUE")
+    if not isinstance(markdown, bytes) or len(markdown) < 4 or len(markdown) > 2_000_000:
+        raise TransactionError("BUDDY_MARKDOWN_BYTES_INVALID")
+    try:
+        decoded = markdown.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise TransactionError("BUDDY_MARKDOWN_UTF8_REQUIRED") from exc
+    if not decoded.startswith("# ") or "\x00" in decoded:
+        raise TransactionError("BUDDY_MARKDOWN_HEADING_REQUIRED")
+
+    relative = (
+        f"relay/CONTINUITY/episodes/ISSUE-{issue_number}/messages/"
+        f"{tx_id}-{stage}.md"
+    )
+    target = root / relative
+    if target.exists() or target.is_symlink():
+        raise TransactionError("BUDDY_MESSAGE_IMMUTABLE: existing target cannot be replaced")
+    # No implicit writer/lease transfer. The explicit transaction manifest provides
+    # a content digest and author claim, subject to the external provider readback.
+    result = execute(
+        root,
+        tx_id=tx_id,
+        command="PUBLISH_BUDDY_MARKDOWN",
+        actor=actor,
+        replacements={relative: markdown},
+        fail_after=fail_after,
+    )
+    if result["status"] != "COMMITTED" or target.read_bytes() != markdown:
+        raise TransactionError("BUDDY_MESSAGE_READBACK_MISMATCH")
+    result["message_path"] = relative
+    result["message_sha256"] = "sha256:" + hashlib.sha256(markdown).hexdigest()
+    result["admission"] = "NOT_ATTESTED_BY_MESSAGE_TRANSPORT"
+    return result
+
+
 def publish_handover(
     root: Path,
     *,
@@ -2256,6 +2321,13 @@ def main() -> None:
     roadmap.add_argument("--expected-custody-epoch", type=int)
     roadmap.add_argument("--change-delta")
 
+    buddy = sub.add_parser("buddy-message", help="Commit an immutable issue-scoped Relay Markdown message; no stage or writer admission")
+    buddy.add_argument("--issue-number", type=int, required=True)
+    buddy.add_argument("--tx-id", required=True, help="TX.<issue>.<serial>, never guessed from root Relay state")
+    buddy.add_argument("--stage", choices=sorted(BUDDY_MESSAGE_STAGES), required=True)
+    buddy.add_argument("--actor", required=True)
+    buddy.add_argument("--markdown", required=True, help="Existing UTF-8 Markdown payload; author/source claims still require independent verification")
+
     handover = sub.add_parser("handover")
     handover.add_argument("--tx-id")
     handover.add_argument("--event-id")
@@ -2470,6 +2542,15 @@ def main() -> None:
             expected_custody_epoch=args.expected_custody_epoch,
             change_delta_path=Path(args.change_delta) if args.change_delta else None,
         )
+    elif args.command == "buddy-message":
+        result = publish_buddy_markdown(
+            root,
+            issue_number=args.issue_number,
+            tx_id=args.tx_id,
+            stage=args.stage,
+            actor=args.actor,
+            markdown=Path(args.markdown).read_bytes(),
+        )
     elif args.command == "handover":
         result = publish_handover(
             root,
@@ -2576,6 +2657,8 @@ def main() -> None:
             expected_custody_epoch=args.expected_custody_epoch,
         )
     print(f"{result['id']}: {result['status']}")
+    if args.command == "buddy-message":
+        print(f"{result['message_path']}: {result['message_sha256']} (stage/writer admission NOT_ATTESTED)")
     if args.command == "local-execution":
         request_path = root / "relay/GENERATED/LOCAL_EXECUTION.md"
         if not request_path.exists():

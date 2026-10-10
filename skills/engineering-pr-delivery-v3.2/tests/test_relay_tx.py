@@ -24,6 +24,7 @@ from relay_tx import (
     close_task,
     export_local_execution,
     publish_handover,
+    publish_buddy_markdown,
     release_lease,
     renew_lease,
     reconcile_roadmap,
@@ -39,7 +40,7 @@ from test_handover_context import (
 )
 from test_relay_can import prepare_git
 from test_v3_foundation import base_objects, dump
-from transactionlib import TransactionError, execute, yaml_bytes
+from transactionlib import TransactionError, execute, recover_all, yaml_bytes
 from v3lib import load_events, load_yaml
 from validate_foundation import validate, validate_authority
 
@@ -970,6 +971,388 @@ class RelayTransactionalCommandTests(unittest.TestCase):
                 )
             errors = validate_authority(root)
             self.assertTrue(any("requires recovery" in item for item in errors), errors)
+
+
+class BuddyMarkdownRelayTests(unittest.TestCase):
+    """Issue-scoped Markdown must be transactional, immutable and non-authoritative."""
+
+    def test_commit_readback_and_root_state_is_untouched(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            content = b"# Original source observation\n\nUNKNOWN implementation. Historical refs EP.438.7 and EVT.438.1 are citations, not new identities.\n"
+            result = publish_buddy_markdown(
+                root,
+                issue_number=889,
+                tx_id="TX.889.1",
+                stage="READINESS",
+                actor="runner-b",
+                markdown=content,
+            )
+            self.assertEqual("COMMITTED", result["status"])
+            self.assertEqual(
+                "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.1-READINESS.md",
+                result["message_path"],
+            )
+            self.assertEqual("NOT_ATTESTED_BY_MESSAGE_TRANSPORT", result["admission"])
+            self.assertEqual(content, (root / result["message_path"]).read_bytes())
+            receipt = load_yaml(root / "relay/TRANSACTIONS/TX.889.1/manifest.yaml")
+            self.assertEqual("PUBLISH_BUDDY_MARKDOWN", receipt["command"])
+            self.assertEqual(["TX.889.1"], receipt["identity_reservations"])
+            self.assertEqual(result["message_sha256"], receipt["operations"][0]["after_digest"])
+            self.assertFalse((root / "relay/STATE.yaml").exists())
+            self.assertFalse((root / "relay/LEASES").exists())
+            self.assertFalse((root / "relay/EVENTS.jsonl").exists())
+
+    def test_same_transaction_cannot_overwrite_frozen_stage1(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            kw = dict(issue_number=889, tx_id="TX.889.1", stage="STAGE1_INTAKE",
+                      actor="runner-b")
+            publish_buddy_markdown(root, markdown=b"# Frozen plan\n\nFirst ideas.\n", **kw)
+            with self.assertRaisesRegex(TransactionError, "IMMUTABLE"):
+                publish_buddy_markdown(root, markdown=b"# Changed plan\n\nRetrofit.\n", **kw)
+            self.assertIn("First ideas", (root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.1-STAGE1_INTAKE.md").read_text())
+
+    def test_reject_wrong_issue_stage_and_non_markdown(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            with self.assertRaisesRegex(TransactionError, "MATCH_ISSUE"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.438.1",
+                                       stage="STAGE1_INTAKE", actor="a", markdown=b"# a\n")
+            with self.assertRaisesRegex(TransactionError, "STAGE_INVALID"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                       stage="WRITER_PROMOTION", actor="a", markdown=b"# a\n")
+            with self.assertRaisesRegex(TransactionError, "HEADING_REQUIRED"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                       stage="STAGE1_INTAKE", actor="a", markdown=b"not markdown")
+            for prohibited_stage in ("TECHNICAL_HANDOVER", "STAGE2_RECONCILIATION",
+                                     "CONTINUATION_EVIDENCE"):
+                with self.assertRaisesRegex(TransactionError, "STAGE_INVALID"):
+                    publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                           stage=prohibited_stage, actor="a", markdown=b"# No admission\n")
+            self.assertFalse((root / "relay/TRANSACTIONS").exists())
+
+    def test_direct_transaction_cannot_bypass_issue_or_immutability(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            path = "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.2-STAGE1_INTAKE.md"
+            with self.assertRaisesRegex(TransactionError, "TX_OR_STAGE_INVALID"):
+                execute(root, tx_id="TX.889.1", command="PUBLISH_BUDDY_MARKDOWN",
+                        actor="rogue", replacements={path: b"# forged\n"})
+            with self.assertRaisesRegex(TransactionError, "ISSUE_PATH_INVALID"):
+                execute(root, tx_id="TX.889.2", command="PUBLISH_BUDDY_MARKDOWN",
+                        actor="rogue", replacements={
+                            "relay/CONTINUITY/episodes/ISSUE-438/messages/TX.889.2-STAGE1_PLAN.md":
+                                b"# forged\n"})
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                   stage="STAGE1_INTAKE", actor="runner-b", markdown=b"# original\n")
+            with self.assertRaisesRegex(TransactionError, "IMMUTABLE"):
+                execute(root, tx_id="TX.889.2", command="PUBLISH_BUDDY_MARKDOWN",
+                        actor="rogue", replacements={path: b"# replacement\n"})
+            self.assertEqual(b"# original\n", (root / path).read_bytes())
+
+    def test_baseline_first_sequence_with_claimed_external_dispatch(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            with self.assertRaisesRegex(TransactionError, "MISSING_STAGE1_BASELINE"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.5",
+                                       stage="STAGE1_PLAN", actor="runner-b",
+                                       markdown=b"# Plan\n\nNo source baseline.\n")
+            with self.assertRaisesRegex(TransactionError, "MISSING_STAGE1_INTAKE"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                       stage="DISPATCH_REQUEST", actor="operator",
+                                       markdown=b"# Dispatch\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.1",
+                                   stage="STAGE1_INTAKE", actor="operator",
+                                   markdown=b"# Owner and original source\n\nNo A implementation.\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                   stage="DISPATCH_REQUEST", actor="operator",
+                                   markdown=b"# Launch request\n\nFresh source-only context.\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.3",
+                                   stage="DISPATCH_OBSERVATION", actor="operator",
+                                   markdown=b"# RUNNER_EXECUTION_OBSERVED\n\nSession ref: external-run-1\nRead-scope ref: original-only-view-1\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
+                                   stage="STAGE1_BASELINE", actor="runner-b",
+                                   markdown=b"# Independent original system baseline\n\nObserved source-to-consumer path.\n")
+            plan = publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.5",
+                                          stage="STAGE1_PLAN", actor="runner-b",
+                                          markdown=b"# Two independent designs\n\nDesign A and B; decisive falsifiers.\n")
+            self.assertEqual("COMMITTED", plan["status"])
+            self.assertEqual("NOT_ATTESTED_BY_MESSAGE_TRANSPORT", plan["admission"])
+            self.assertFalse((root / "relay/STATE.yaml").exists())
+
+    def test_operator_cannot_claim_runner_baseline_and_runner_identity_cannot_switch(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.1",
+                                   stage="STAGE1_INTAKE", actor="operator",
+                                   markdown=b"# Original Owner source\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                   stage="DISPATCH_REQUEST", actor="operator",
+                                   markdown=b"# Launch request\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.3",
+                                   stage="DISPATCH_OBSERVATION", actor="operator",
+                                   markdown=b"# RUNNER_EXECUTION_OBSERVED\n\nSession ref: runner-123\nRead-scope ref: original-only\n")
+            with self.assertRaisesRegex(TransactionError, "OPERATOR_AND_RUNNER_NOT_SEPARATE"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
+                                       stage="STAGE1_BASELINE", actor="operator",
+                                       markdown=b"# Attempted self-attestation\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
+                                   stage="STAGE1_BASELINE", actor="runner-b",
+                                   markdown=b"# Original source independently reconstructed\n")
+            with self.assertRaisesRegex(TransactionError, "STAGE1_AUTHOR_CHANGED"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.5",
+                                       stage="STAGE1_PLAN", actor="other-agent",
+                                       markdown=b"# Different author trying to inherit baseline\n")
+            good = publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.5",
+                                          stage="STAGE1_PLAN", actor="runner-b",
+                                          markdown=b"# Independent options and falsifiers\n")
+            self.assertEqual("COMMITTED", good["status"])
+            self.assertEqual("NOT_ATTESTED_BY_MESSAGE_TRANSPORT", good["admission"])
+
+    def _good_stage1(self, root):
+        """All source/author claims are intentionally synthetic; this is NOT isolation proof."""
+        rows = (
+            (1, "STAGE1_INTAKE", "operator", b"# Historical Owner WHAT/WHY\n"),
+            (2, "DISPATCH_REQUEST", "operator", b"# Restrict Runner B to original source\n"),
+            (3, "DISPATCH_OBSERVATION", "operator",
+             b"# RUNNER_EXECUTION_OBSERVED\n\nSession ref: claimed-b-session\nRead-scope ref: claimed-original-only\n"),
+            (4, "STAGE1_BASELINE", "runner-b", b"# Source producer and consumer witness\n"),
+            (5, "STAGE1_PLAN", "runner-b", b"# Two alternate HOWs and falsifiers\n"),
+        )
+        results = {}
+        for seq, stage, actor, content in rows:
+            results[stage] = publish_buddy_markdown(
+                root, issue_number=889, tx_id=f"TX.889.{seq}",
+                stage=stage, actor=actor, markdown=content,
+            )
+        return results
+
+    def test_freeze_candidate_binds_five_actual_receipts_but_does_not_attest(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            records = self._good_stage1(root)
+            body = (
+                "# STAGE1_FREEZE_CANDIDATE\n"
+                "Isolation verdict: NOT_ATTESTED\n"
+                + "".join(
+                    f"{name} tx: TX.889.{seq}\n"
+                    f"{name} digest: {records[stage]['message_sha256']}\n"
+                    for name, seq, stage in (
+                        ("Intake", 1, "STAGE1_INTAKE"),
+                        ("Dispatch request", 2, "DISPATCH_REQUEST"),
+                        ("Dispatch observation", 3, "DISPATCH_OBSERVATION"),
+                        ("Baseline", 4, "STAGE1_BASELINE"),
+                        ("Plan", 5, "STAGE1_PLAN"),
+                    )
+                )
+            ).encode("utf-8")
+            with self.assertRaisesRegex(TransactionError, "FREEZE_OPERATOR_NOT_SEPARATE"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
+                                       stage="STAGE1_FREEZE_CANDIDATE", actor="runner-b",
+                                       markdown=body)
+            with self.assertRaisesRegex(TransactionError, "FREEZE_STAG" ):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
+                                       stage="STAGE1_FREEZE_CANDIDATE", actor="operator",
+                                       markdown=body.replace(records["STAGE1_PLAN"]["message_sha256"].encode("utf-8"),
+                                                             b"sha256:" + b"0" * 64))
+            # Forged dispatch receipt and duplicate note cannot hide in prose.
+            with self.assertRaisesRegex(TransactionError, "FREEZE_DISPATCH_OBSERVATION_REF_MISMATCH"):
+                publish_buddy_markdown(
+                    root, issue_number=889, tx_id="TX.889.6",
+                    stage="STAGE1_FREEZE_CANDIDATE", actor="operator",
+                    markdown=body.replace(records["DISPATCH_OBSERVATION"]["message_sha256"].encode("utf-8"),
+                                          b"sha256:" + b"f" * 64))
+            with self.assertRaisesRegex(TransactionError, "FREEZE_DISPATCH_REQUEST_REF_MISMATCH"):
+                publish_buddy_markdown(
+                    root, issue_number=889, tx_id="TX.889.6",
+                    stage="STAGE1_FREEZE_CANDIDATE", actor="operator",
+                    markdown=body + b"Dispatch request tx: TX.889.99\n")
+            with self.assertRaisesRegex(TransactionError, "CANNOT_SELF_CERTIFY_ISOLATION"):
+                publish_buddy_markdown(
+                    root, issue_number=889, tx_id="TX.889.6",
+                    stage="STAGE1_FREEZE_CANDIDATE", actor="operator",
+                    markdown=body + b"Isolation verdict: VERIFIED\n")
+            receipt = publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
+                                             stage="STAGE1_FREEZE_CANDIDATE", actor="operator",
+                                             markdown=body)
+            self.assertEqual("COMMITTED", receipt["status"])
+            self.assertEqual("NOT_ATTESTED_BY_MESSAGE_TRANSPORT", receipt["admission"])
+            self.assertFalse((root / "relay/STATE.yaml").exists())
+            with self.assertRaisesRegex(TransactionError, "STAGE_INVALID"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.7",
+                                       stage="STAGE2_RECONCILIATION", actor="runner-b",
+                                       markdown=b"# Must not open Stage2\n")
+
+    def test_freeze_candidate_rejects_changed_plan_and_later_dispatch(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            records = self._good_stage1(root)
+            content = (
+                "# STAGE1_FREEZE_CANDIDATE\n"
+                "Isolation verdict: NOT_ATTESTED\n"
+                + "".join(
+                    f"{label} tx: TX.889.{seq}\n{label} digest: {records[stage]['message_sha256']}\n"
+                    for label, seq, stage in (
+                        ("Intake", 1, "STAGE1_INTAKE"),
+                        ("Dispatch request", 2, "DISPATCH_REQUEST"),
+                        ("Dispatch observation", 3, "DISPATCH_OBSERVATION"),
+                        ("Baseline", 4, "STAGE1_BASELINE"),
+                        ("Plan", 5, "STAGE1_PLAN"),
+                    )
+                )
+            ).encode("utf-8")
+            plan = root / records["STAGE1_PLAN"]["message_path"]
+            original = plan.read_bytes()
+            plan.write_bytes(b"# Altered plan after commit\n")
+            with self.assertRaisesRegex(TransactionError, "RECEIPT_MISMATCH"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
+                                       stage="STAGE1_FREEZE_CANDIDATE", actor="operator",
+                                       markdown=content)
+            plan.write_bytes(original)
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
+                                   stage="DISPATCH_REQUEST", actor="operator",
+                                   markdown=b"# A different attempted Runner launch\n")
+            with self.assertRaisesRegex(TransactionError, "STALE_STAGE_CHAIN"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.7",
+                                       stage="STAGE1_FREEZE_CANDIDATE", actor="operator",
+                                       markdown=content)
+
+    def test_new_intake_supersedes_old_dispatch_and_baseline(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.1",
+                                   stage="STAGE1_INTAKE", actor="operator",
+                                   markdown=b"# Original intent cutoff 1\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                   stage="DISPATCH_REQUEST", actor="operator",
+                                   markdown=b"# Request source-only session\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.3",
+                                   stage="DISPATCH_OBSERVATION", actor="operator",
+                                   markdown=b"# RUNNER_EXECUTION_OBSERVED\n\nSession ref: run-one\nRead-scope ref: scope-one\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
+                                   stage="STAGE1_BASELINE", actor="runner-b",
+                                   markdown=b"# Original cutoff 1 baseline\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.5",
+                                   stage="STAGE1_INTAKE", actor="operator",
+                                   markdown=b"# Revised original cutoff 2\n")
+            with self.assertRaisesRegex(TransactionError, "STALE_STAGE_CHAIN"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
+                                       stage="STAGE1_PLAN", actor="runner-b",
+                                       markdown=b"# Must not inherit old baseline\n")
+            with self.assertRaisesRegex(TransactionError, "STALE_STAGE_CHAIN"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.6",
+                                       stage="STAGE1_BASELINE", actor="runner-b",
+                                       markdown=b"# Must not inherit old dispatch\n")
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.6-STAGE1_PLAN.md").exists())
+
+    def test_new_symlinked_intake_cannot_be_ignored_for_old_receipt(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.1",
+                                   stage="STAGE1_INTAKE", actor="operator",
+                                   markdown=b"# Old original intake\n")
+            folder = root / "relay/CONTINUITY/episodes/ISSUE-889/messages"
+            alias = folder / "TX.889.2-STAGE1_INTAKE.md"
+            alias.symlink_to(folder / "TX.889.1-STAGE1_INTAKE.md")
+            with self.assertRaisesRegex(TransactionError, "MESSAGE_SYMLINK_FORBIDDEN"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.3",
+                                       stage="DISPATCH_REQUEST", actor="operator",
+                                       markdown=b"# Dispatch must not reuse old intake\n")
+            self.assertFalse((root / "relay/TRANSACTIONS/TX.889.3").exists())
+
+    def test_tampered_committed_intake_blocks_dispatch(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            intake = publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.1",
+                                             stage="STAGE1_INTAKE", actor="operator",
+                                             markdown=b"# Original Owner/WHAT/WHY\n")
+            (root / intake["message_path"]).write_bytes(b"# Changed source/candidate HEAD\n")
+            with self.assertRaisesRegex(TransactionError, "RECEIPT_MISMATCH"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                       stage="DISPATCH_REQUEST", actor="operator",
+                                       markdown=b"# Refuse changed intake\n")
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.2-DISPATCH_REQUEST.md").exists())
+
+    def test_blocked_dispatch_cannot_become_stage1_baseline(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.1",
+                                   stage="STAGE1_INTAKE", actor="operator",
+                                   markdown=b"# Historic source and Owner\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                   stage="DISPATCH_REQUEST", actor="operator",
+                                   markdown=b"# Dispatch request\n")
+            publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.3",
+                                   stage="DISPATCH_OBSERVATION", actor="operator",
+                                   markdown=b"# BLOCKED_NO_RUNNER_CAPABILITY\n")
+            with self.assertRaisesRegex(TransactionError, "DISPATCH_NOT_EXECUTED"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
+                                       stage="STAGE1_BASELINE", actor="runner-b",
+                                       markdown=b"# Fake baseline\n")
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.4-STAGE1_BASELINE.md").exists())
+
+    def test_unreceipted_intake_does_not_satisfy_stage_sequence(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            loose = root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.1-STAGE1_INTAKE.md"
+            loose.parent.mkdir(parents=True)
+            loose.write_bytes(b"# Loose file with no native transaction\n")
+            with self.assertRaisesRegex(TransactionError, "PRIOR_MESSAGE_UNRECORDED"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.2",
+                                       stage="DISPATCH_REQUEST", actor="operator",
+                                       markdown=b"# Should reject loose intake\n")
+            self.assertFalse((root / "relay/TRANSACTIONS").exists())
+
+    def test_dispatch_request_then_blocker_records_no_runner_claim_or_lease(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            publish_buddy_markdown(
+                root, issue_number=889, tx_id="TX.889.3", stage="STAGE1_INTAKE",
+                actor="operator", markdown=b"# Historical Owner and source\n",
+            )
+            request = publish_buddy_markdown(
+                root, issue_number=889, tx_id="TX.889.5",
+                stage="DISPATCH_REQUEST", actor="operator",
+                markdown=b"# Dispatch requested\n\nExact source ref; independent runtime required.\n",
+            )
+            blocker = publish_buddy_markdown(
+                root, issue_number=889, tx_id="TX.889.6",
+                stage="DISPATCH_OBSERVATION", actor="operator",
+                markdown=b"# BLOCKED_NO_RUNNER_CAPABILITY\n\nNo separate AI runner available.\n",
+            )
+            self.assertEqual("COMMITTED", request["status"])
+            self.assertEqual("COMMITTED", blocker["status"])
+            self.assertEqual("NOT_ATTESTED_BY_MESSAGE_TRANSPORT", blocker["admission"])
+            self.assertNotEqual(request["message_sha256"], blocker["message_sha256"])
+            self.assertFalse((root / "relay/STATE.yaml").exists())
+            self.assertFalse((root / "relay/EVENTS.jsonl").exists())
+            self.assertFalse((root / "relay/LEASES").exists())
+            with self.assertRaisesRegex(TransactionError, "DISPATCH_NOT_EXECUTED"):
+                publish_buddy_markdown(
+                    root, issue_number=889, tx_id="TX.889.7", stage="STAGE1_BASELINE",
+                    actor="runner-b", markdown=b"# No independent Runner actually ran\n",
+                )
+            self.assertFalse((root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.7-STAGE1_PLAN.md").exists())
+
+    def test_interrupted_transaction_is_recoverable_without_duplicate_content(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            with self.assertRaisesRegex(TransactionError, "injected transaction interruption"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
+                                       stage="READINESS", actor="agent-a",
+                                       markdown=b"# Prepared\n\nUNKNOWN context life.\n",
+                                       fail_after=1)
+            recovered = recover_all(root)
+            self.assertEqual("COMMITTED", recovered[0]["status"])
+            self.assertEqual(
+                b"# Prepared\n\nUNKNOWN context life.\n",
+                (root / "relay/CONTINUITY/episodes/ISSUE-889/messages/TX.889.4-READINESS.md").read_bytes(),
+            )
+            with self.assertRaisesRegex(TransactionError, "IMMUTABLE"):
+                publish_buddy_markdown(root, issue_number=889, tx_id="TX.889.4",
+                                       stage="READINESS", actor="agent-a",
+                                       markdown=b"# Duplicate\n")
 
 
 if __name__ == "__main__":
