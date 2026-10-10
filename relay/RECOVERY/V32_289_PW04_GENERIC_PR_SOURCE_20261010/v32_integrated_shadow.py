@@ -130,10 +130,23 @@ def integrated_shadow(
           "NATIVE_INPUT_DIGEST_MISMATCH")
     _hold(set(native_plan["expected_titles"]) == {n["ref"] for n in graph["nodes"]},
           "NATIVE_ISSUE_COVERAGE_INVALID")
-    core = delp.source_bound_responsibility_core(graph, projection, pins.leaf_ref)
-    _hold(core["digests"]["input"] == native_plan["input_digest"] and
-          core["candidate_sha"] == pins.expected_pr_head_sha,
-          "NATIVE_RESPONSIBILITY_CORE_DRIFT")
+    _hold((observations.get(pins.leaf_ref) or {}).get("candidate_sha") ==
+          pins.expected_pr_head_sha, "NATIVE_PROVIDER_HEAD_MISMATCH")
+    core = None
+    core_hold = None
+    try:
+        core = delp.source_bound_responsibility_core(graph, projection, pins.leaf_ref)
+    except delp.DelpError as exc:
+        # Native V3.2 core currently refuses full owner/repo#PR refs even
+        # when native graph, projector and C6 accept those original lab refs.
+        # Never counterfeit an equivalent core or mutate the approved graph.
+        if str(exc) != "RESPONSIBILITY_CORE_MATERIAL_BOUNDARY":
+            raise
+        core_hold = "RESPONSIBILITY_CORE_MATERIAL_BOUNDARY"
+    if core is not None:
+        _hold(core["digests"]["input"] == native_plan["input_digest"] and
+              core["candidate_sha"] == pins.expected_pr_head_sha,
+              "NATIVE_RESPONSIBILITY_CORE_DRIFT")
     c6 = delp.frontier(graph, ledger, observations, pins.leaf_ref)
     _hold(c6["observed"].get("candidate_sha") == pins.expected_pr_head_sha,
           "NATIVE_FRONTIER_CANDIDATE_DRIFT")
@@ -198,6 +211,7 @@ def integrated_shadow(
         "native_expected_issue_titles": native_plan["expected_titles"],
         "native_issue_drift": native_plan["drift"],
         "native_core": core,
+        "native_core_hold": core_hold,
         "pr_managed_block": block,
         "pr_body_preview": new_body,
         "pr_body_changed_in_preview": new_body != old_body,
