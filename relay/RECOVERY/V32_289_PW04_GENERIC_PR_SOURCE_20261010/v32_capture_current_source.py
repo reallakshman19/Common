@@ -37,6 +37,17 @@ def git_blob(raw: bytes) -> str:
     return sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
 
 
+
+def _unique_json_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject ambiguous graph bytes before ANY provider GET or projection."""
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        _ensure(key not in result, "GRAPH_DUPLICATE_JSON_KEY")
+        result[key] = value
+    return result
+
+
+
 def gh_get(path: str) -> Any:
     """Entrypoint allows ONLY a single GitHub API GET, with no shell."""
     _ensure(isinstance(path, str) and path.startswith("repos/") and
@@ -122,9 +133,15 @@ def capture(
     _ensure(isinstance(graph_path, str) and graph_path.endswith(".json") and
             len(graph_path) <= 256 and all(t not in ("", ".", "..") for t in graph_path.split("/")),
             "GRAPH_PATH_INVALID")
-    graph = json.loads(raw_graph)
-    _ensure(isinstance(graph, dict) and
-            graph.get("programme", {}).get("repository") == repository,
+    try:
+        graph = json.loads(raw_graph, object_pairs_hook=_unique_json_pairs,
+                           parse_constant=lambda _value: _ensure(False, "GRAPH_NONFINITE_JSON"))
+    except CaptureHold:
+        raise
+    except (ValueError, UnicodeError, TypeError) as exc:
+        raise CaptureHold("GRAPH_JSON_INVALID") from exc
+    _ensure(isinstance(graph, dict) and isinstance(graph.get("programme"), dict) and
+            graph["programme"].get("repository") == repository,
             "GRAPH_REPOSITORY_MISMATCH")
     nodes = graph.get("nodes")
     _ensure(isinstance(nodes, list) and 1 < len(nodes) <= _MAX_ISSUES,
