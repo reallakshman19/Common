@@ -169,3 +169,12 @@ class GitHubGetOnly:
         if not isinstance(raw, dict):
             raise GitHubReadError("REQUIRED_CHECKS_RESPONSE_INVALID")
         return raw
+
+    def get_issue(self, repository: str, number: int) -> Mapping[str, Any]:
+        """Read one actual issue by number, including title/body for C6 digest."""
+        if type(number) is not int or number < 1:
+            raise GitHubReadError("INVALID_ISSUE_NUMBER")
+        row = self._get(self._repo(repository) + "/issues/" + str(number))
+        if not isinstance(row, dict):
+            raise GitHubReadError("ISSUE_RESPONSE_INVALID")
+        return row
