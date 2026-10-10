@@ -82,6 +82,7 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
         self.assertEqual(r["binding"]["primary_pr_number"], 10)
         self.assertEqual(r["native_core"]["digests"]["input"], r["native_input_digest"])
         self.assertEqual(r["c6_frontier"]["observed"]["candidate_sha"], HEAD)
+        self.assertEqual(r["c6_same_source_reentry"]["status"], "CURRENT")
         self.assertEqual(len(r["native_expected_issue_titles"]), 2)
         self.assertIn("Original human PR body.", r["pr_body_preview"])
         self.assertIn("relay-v32:pr-read-view:start", r["pr_body_preview"])
@@ -166,6 +167,16 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
         self.source["pulls"]["10"]["body"] = None
         with self.assertRaisesRegex(CycleHold, "PR_HUMAN_BODY_NOT_OBSERVED"):
             self.cycle()
+
+    def test_16_native_c6_detects_changed_candidate_after_handover(self):
+        r = self.cycle()
+        native, _ = _native_modules()
+        moved = deepcopy(r["c6_frontier"])
+        moved["observed"]["candidate_sha"] = "f" * 40
+        verdict = native.frontier_drift(r["c6_frontier"], moved)
+        self.assertEqual(verdict["status"], "MOVED")
+        self.assertEqual(verdict["action"], "RECONCILE")
+        self.assertFalse(r["issue_or_pr_github_writes"])
 
     def test_15_unchanged_native_frontier_depends_on_live_head(self):
         r = self.cycle()
