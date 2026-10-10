@@ -119,5 +119,11 @@ class ReadOnlyGetTests(unittest.TestCase):
             GitHubGetOnly(stub).get_pr_reviews(REPO, -1)
         self.assertEqual(stub.commands, [])
 
+    def test_16_dotdot_repository_rejected_without_GET(self):
+        runner = Runner([])
+        with self.assertRaisesRegex(GitHubReadError, "INVALID_REPOSITORY_SELECTOR"):
+            GitHubGetOnly(runner).get_repository("../escape")
+        self.assertEqual(runner.commands, [])
+
 if __name__ == "__main__":
     unittest.main()
