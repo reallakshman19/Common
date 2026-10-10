@@ -21,6 +21,8 @@ class Provider:
         self.base_ref = "main"
         self.reviews = []
         self.rulesets = []
+        self.active_rules = []
+        self.active_error = None
         self.classic = OSError("403")
         self.review_error = None
         self.ruleset_error = None
@@ -50,6 +52,12 @@ class Provider:
             raise self.ruleset_error
         return list(self.rulesets)
 
+    def get_active_branch_rules(self, repository, branch):
+        self.calls.append("active_rules")
+        if self.active_error:
+            raise self.active_error
+        return list(self.active_rules)
+
     def get_branch_required_checks(self, repository, branch):
         self.calls.append("classic")
         if isinstance(self.classic, Exception):
@@ -73,6 +81,7 @@ class NativeV32PolicyVisibilityTests(unittest.TestCase):
         self.assertEqual(out["status"], "HOLD_D4_D5_AUTHORITY_UNKNOWN")
         self.assertEqual(out["required_policy_endpoints"]["rulesets"], "OBSERVED_EMPTY")
         self.assertEqual(out["required_policy_endpoints"]["classic_required_checks"], "UNKNOWN")
+        self.assertEqual(out["required_policy_endpoints"]["active_branch_rules"], "OBSERVED_EMPTY")
         self.assertEqual(out["effective_required_check_policy"], "UNKNOWN_NOT_AUTHENTICATED")
         self.assertIsNone(out["accepted_evidence_count"])
         self.assertFalse(out["writer_authorized"])
@@ -131,6 +140,9 @@ class NativeV32PolicyVisibilityTests(unittest.TestCase):
         self.assertEqual(o.required_policy_endpoints["reviews"], "UNKNOWN")
         self.assertIn("REVIEW_ENDPOINT_UNKNOWN", o.reasons)
         self.assertEqual(o.independent_review_authority, "UNKNOWN_NOT_AUTHENTICATED")
+        self.assertIsNone(o.submitted_reviews)
+        self.assertIsNone(o.distinct_latest_approved_reviewers)
+        self.assertIsNone(o.exact_head_latest_approvals)
 
     def test_11_wrong_base_repo_fails_closed(self):
         p = Provider(); p.base_name = "historic/v32-proto"
@@ -167,6 +179,43 @@ class NativeV32PolicyVisibilityTests(unittest.TestCase):
         self.assertEqual(result["status"], "HOLD_PROVIDER_READ")
         self.assertNotIn("secret", repr(result))
 
+
+    def test_17_repository_inventory_is_not_applied_policy(self):
+        p = Provider()
+        p.rulesets = [{"id": 123, "name": "unrelated tag ruleset"}]
+        p.active_rules = []
+        out = run(p).as_dict()
+        self.assertEqual(out["required_policy_endpoints"]["rulesets"], "OBSERVED_UNQUALIFIED")
+        self.assertEqual(out["required_policy_endpoints"]["active_branch_rules"], "OBSERVED_EMPTY")
+        self.assertEqual(out["effective_required_check_policy"], "UNKNOWN_NOT_AUTHENTICATED")
+        self.assertFalse(out["writer_authorized"])
+
+    def test_18_applied_branch_required_rule_is_still_not_d5(self):
+        p = Provider()
+        p.rulesets = []
+        p.active_rules = [{"type": "required_status_checks", "ruleset_id": 7}]
+        out = run(p).as_dict()
+        self.assertEqual(out["required_policy_endpoints"]["rulesets"], "OBSERVED_EMPTY")
+        self.assertEqual(out["required_policy_endpoints"]["active_branch_rules"], "OBSERVED_UNQUALIFIED")
+        self.assertEqual(out["required_policy_endpoints"]["classic_required_checks"], "UNKNOWN")
+        self.assertEqual(out["status"], "HOLD_D4_D5_AUTHORITY_UNKNOWN")
+        self.assertFalse(out["writer_authorized"])
+
+    def test_19_active_branch_rules_403_does_not_waive_anything(self):
+        p = Provider()
+        p.active_error = OSError("403 with secret raw data")
+        out = run(p).as_dict()
+        self.assertIn("ACTIVE_BRANCH_RULES_ENDPOINT_UNKNOWN", out["reasons"])
+        self.assertEqual(out["required_policy_endpoints"]["active_branch_rules"], "UNKNOWN")
+        self.assertEqual(out["effective_required_check_policy"], "UNKNOWN_NOT_AUTHENTICATED")
+        self.assertNotIn("secret", str(out))
+
+    def test_20_malformed_active_rules_fails_closed_as_unknown(self):
+        p = Provider()
+        p.active_rules = [None]
+        out = run(p).as_dict()
+        self.assertEqual(out["required_policy_endpoints"]["active_branch_rules"], "UNKNOWN")
+        self.assertFalse(out["delp_invoked"])
 
 if __name__ == "__main__":
     unittest.main()
