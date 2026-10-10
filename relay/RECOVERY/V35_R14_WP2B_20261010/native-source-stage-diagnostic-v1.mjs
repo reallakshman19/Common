@@ -11,8 +11,25 @@ const stage=(v,ok,details={})=>({
   ...details,
 });
 const marker=(value,allowed)=>allowed.includes(value)?value:'UNKNOWN';
+const DIGEST=/^sha256:[a-f0-9]{64}$/;
 
-export function summarizeSourceStageDiagnostics(candidate,ci,evidence){
+/** Two *post-failure* U02 observations: a movement indicator, NOT an U04 witness. */
+export function comparePostFailureCiWindow(first,last){
+  const valid=x=>object(x)&&x.selected_checks_observed===true&&
+    x.source_grade==='NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'&&
+    typeof x.snapshot_sha256==='string'&&DIGEST.test(x.snapshot_sha256);
+  const status=!valid(first)||!valid(last)?'UNVERIFIED':
+    first.snapshot_sha256===last.snapshot_sha256?'STABLE':'CHANGED';
+  return {
+    basis:'SEPARATE_POST_FAILURE_NON_ATOMIC_U02_SAMPLES',
+    selected_check_window:status,
+    required_policy:'UNKNOWN_UNTIL_INDEPENDENTLY_VERIFIED',
+    admission:'NOT_ADMITTED',evidence_admitted:false,
+    programme_progress:null,writer_authorized:false,
+  };
+}
+
+export function summarizeSourceStageDiagnostics(candidate,ci,evidence,ciRecheck=null){
   const candidateStage=stage(candidate,x=>x.current===true&&x.material_observation==='MATCH_AT_OBSERVATION');
   const ciStage=stage(ci,x=>x.selected_checks_observed===true,{
     required_policy:marker(ci?.required_check_policy,['UNKNOWN','OBSERVED_CLASSIC_AND_RULESET']),
@@ -30,6 +47,7 @@ export function summarizeSourceStageDiagnostics(candidate,ci,evidence){
     schema:'common-wp2b-postfailure-stages-v1',
     basis:'INDEPENDENT_POST_FAILURE_NON_ATOMIC_READS',
     stages:{candidate:candidateStage,ci:ciStage,evidence:evidenceStage},
+    ci_window:comparePostFailureCiWindow(ci,ciRecheck),
     // These are invariant: this is an untrusted diagnostic, not a U04 witness.
     admission:'NOT_ADMITTED',evidence_admitted:false,owner_authenticated:false,
     reviewer_qualified:false,delp_projector_invoked:false,
@@ -67,5 +85,8 @@ export async function diagnoseLiveNativeSourceStages(locator,opts={}){
   const a=await safe(candidate,inputs.candidate);
   const b=await safe(ci,inputs.ci);
   const c=await safe(evidence,inputs.evidence);
-  return summarizeSourceStageDiagnostics(a,b,c);
+  // Additional U02-only read detects potential movement after the failed U04;
+  // it never recovers, replaces, or authorizes the original U04 result.
+  const ciRecheck=await safe(ci,inputs.ci);
+  return summarizeSourceStageDiagnostics(a,b,c,ciRecheck);
 }

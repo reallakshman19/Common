@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {summarizeSourceStageDiagnostics} from './native-source-stage-diagnostic-v1.mjs';
+import {summarizeSourceStageDiagnostics,comparePostFailureCiWindow} from './native-source-stage-diagnostic-v1.mjs';
 const candidate=()=>({current:true,material_observation:'MATCH_AT_OBSERVATION',errors:[]});
 const ci=()=>({selected_checks_observed:true,required_check_policy:'UNKNOWN',required_checks_result:'UNKNOWN',errors:[]});
 const evidence=()=>({material_observed:true,source_currentness:'STALE_CANDIDATE_HEAD',errors:[]});
@@ -62,4 +62,38 @@ test('forged required policy labels and evidence status are not printed',()=>{
  assert.equal(out.stages.ci.required_policy,'UNKNOWN');
  assert.equal(out.stages.ci.required_result,'UNKNOWN');
  assert.equal(out.stages.evidence.comment_currentness,'UNKNOWN');
+});
+const native=(digest='a'.repeat(64))=>({...ci(),source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION',snapshot_sha256:'sha256:'+digest});
+test('postfailure U02 drift is detected from physical snapshot digest differences',()=>{
+ const o=comparePostFailureCiWindow(native('a'.repeat(64)),native('b'.repeat(64)));
+ assert.equal(o.selected_check_window,'CHANGED');assert.equal(o.admission,'NOT_ADMITTED');
+ assert.equal(o.required_policy,'UNKNOWN_UNTIL_INDEPENDENTLY_VERIFIED');
+});
+test('two native matching snapshots only establish postfailure window stability',()=>{
+ const o=comparePostFailureCiWindow(native(),native());
+ assert.equal(o.selected_check_window,'STABLE');
+ assert.equal(o.basis,'SEPARATE_POST_FAILURE_NON_ATOMIC_U02_SAMPLES');
+ assert.equal(o.evidence_admitted,false);assert.equal(o.writer_authorized,false);
+});
+test('one missing or invalid digest cannot be declared stable',()=>{
+ for(const bad of [null,{}, {...native(),snapshot_sha256:null},{...native(),snapshot_sha256:'sha256:x'},
+  {...native(),selected_checks_observed:false}]){
+  assert.equal(comparePostFailureCiWindow(native(),bad).selected_check_window,'UNVERIFIED');
+  assert.equal(comparePostFailureCiWindow(bad,native()).selected_check_window,'UNVERIFIED');
+ }
+});
+test('forged source grade is not native even with matching snapshot bytes',()=>{
+ const spoof={...native(),source_grade:'CALLER_INJECTED_UNATTESTED'};
+ assert.equal(comparePostFailureCiWindow(native(),spoof).selected_check_window,'UNVERIFIED');
+});
+test('new CI recheck is observational, never upgrades source or admission',()=>{
+ const a=native('a'.repeat(64)), b=native('b'.repeat(64));
+ const out=summarizeSourceStageDiagnostics(candidate(),a,evidence(),b);
+ held(out);assert.equal(out.ci_window.selected_check_window,'CHANGED');
+ assert.equal(out.ci_window.programme_progress,null);
+ assert.equal(out.ci_window.writer_authorized,false);
+});
+test('existing three-stage summarizer alone conservatively marks no recheck',()=>{
+ const out=observe();held(out);
+ assert.equal(out.ci_window.selected_check_window,'UNVERIFIED');
 });
