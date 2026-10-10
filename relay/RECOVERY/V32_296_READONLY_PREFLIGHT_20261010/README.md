@@ -279,39 +279,39 @@ ruleset listing, which can contain nonmatching/evaluate-only entries.
 
 The original CSV Auditor seed is **not in this repository or connected conversation's
 available attachments/Drive**. Its historical private GitHub repository
-\`reallaksh19/relay-v32-e2e-lab\` returns GitHub 404 to the connected
+`reallaksh19/relay-v32-e2e-lab` returns GitHub 404 to the connected
 identity; this is an access limitation, not proof of deletion.
 
 Migrated [Common #282](https://github.com/reallakshman19/Common/issues/282)
-reports \`relay-v32-e2e-lab-starter.zip\` at exact outer SHA-256
-\`9f1c317494168bda0ea83baf31c5a6db4d6035085c102743b22c707c3f4a5030\`,
-35 members, including \`test_r01_input.py\`, \`LOCAL_AGENT_TASKS.md\`, and
-\`TASK_EVIDENCE_TEMPLATE.md\`. The original file and internal manifest have
+reports `relay-v32-e2e-lab-starter.zip` at exact outer SHA-256
+`9f1c317494168bda0ea83baf31c5a6db4d6035085c102743b22c707c3f4a5030`,
+35 members, including `test_r01_input.py`, `LOCAL_AGENT_TASKS.md`, and
+`TASK_EVIDENCE_TEMPLATE.md`. The original file and internal manifest have
 not been retrieved or independently revalidated. The reported historical
 27 smoke / 9 RED app tests are **not** new executions in this recovery PR.
 
-\`v32_starter_intake.py\` performs **no downloads, ZIP extraction, GitHub writes,
+`v32_starter_intake.py` performs **no downloads, ZIP extraction, GitHub writes,
 test execution, original Owner authentication or authority promotion**.
 It streams the outer digest, requires the parent-reported SHA before inspecting,
 bounds ZIP member count, safe names, total/individual uncompressed lengths,
 compression ratio, duplicate names, directories, symlinks and encrypted
 entries, reads all member CRCs and checks for three reported key filenames.
-It always returns \`HOLD\` even for coherent, correctly pinned archives.
+It always returns `HOLD` even for coherent, correctly pinned archives.
 
-\`\`\`sh
+```sh
 python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_starter_intake.py \
   --archive /path/to/relay-v32-e2e-lab-starter.zip
 # Exit 2: HOLD_ARCHIVE_MISSING if not available;
 # Exit 2: HOLD_ARCHIVE_SHA_MISMATCH if bytes do not match parent #282;
 # Exit 2: HOLD_PARENT_PIN_ONLY only when reported pin/shape checks match.
-\`\`\`
+```
 
-\`tests/test_v32_starter_intake.py\` uses **synthetically constructed,
+`tests/test_v32_starter_intake.py` uses **synthetically constructed,
 explicitly untrusted ZIPs** to exercise non-admitting positive-shaped control,
 absent archive, invalid/changed hash, omitted R01 test, traversal, symlink,
 directory entry, overlarge size, invalid bytes and CLI exit. It **never**
 claims to run the original R01 starter suite. Likewise, the separate
-\`lab_r01_candidate/\` parser and its ten tests are preparatory, not a native
+`lab_r01_candidate/` parser and its ten tests are preparatory, not a native
 lab feature PR, evidence producer or replacement accepted graph.
 
 **B2 migration prerequisite:** recover the original ZIP via authenticated
