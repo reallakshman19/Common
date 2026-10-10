@@ -32,3 +32,35 @@ jobs:
         run: python -m compileall -q relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010
       - name: Execute all non-admission contract tests
         run: python -m unittest discover -s relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/tests -v
+
+  live-historical-graph-refusal:
+    name: V32 live old-repo graph refused (GET only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read actual provider graph and reject historical ownership
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set +e
+          python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_readonly_cli.py \
+            --repository "$REPOSITORY" \
+            --repository-id 1412133785 \
+            --graph-path .github/v32-evidence-spine/718-proposal-v2.json \
+            --leaf-ref Common#733 \
+            --pr-number 740 > live-refusal.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python - <<'PY'
+          import json
+          with open("live-refusal.json", encoding="utf-8") as stream:
+              row = json.load(stream)
+          assert row["status"] == "HOLD_PROVIDER_READ", row
+          assert "PROVIDER_GRAPH_REPOSITORY_MISMATCH" in row["reasons"], row
+          assert row["accepted_evidence_count"] is None
+          assert row["writer_authorized"] is False
+          assert row["delp_invoked"] is False
+          print("Expected native GET wrong-repository refusal confirmed")
+          PY
