@@ -24,6 +24,66 @@ function safe(r){
   assert.equal(r.writer_authorized,false);assert.equal(r.owner_authenticated,false);
   assert.equal(r.reviewer_qualified,false);assert.equal(r.source_grade,'CALLER_INJECTED_UNATTESTED');
 }
+test('U02 native failure-stage reason is fixed across first and second reads',async()=>{
+  const cases=[
+    ['FIRST_SELECTED','CHECK_RUNS_GET_UNVERIFIED',d=>{d[p.check]=new Error('SECRET_PRIVATE_CHECK_RUNS');}],
+    ['FIRST_SELECTED','COMMIT_STATUS_GET_UNVERIFIED',d=>{d[p.status]=new Error('SECRET_PRIVATE_STATUS');}],
+    ['FIRST_SELECTED','SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID',d=>{d[p.check].total_count=999;}],
+    ['FIRST_SELECTED','CHECK_RUN_SHAPE_OR_SHA_INVALID',d=>{d[p.check].check_runs[0].head_sha=H2;}],
+    ['FIRST_SELECTED','COMMIT_STATUS_SHAPE_INVALID',d=>{d[p.status].statuses=[{context:'bad',state:'unknown'}];}],
+  ];
+  for(const [phase,reason,mutate] of cases){
+    const d=data();mutate(d);const r=await run(d);safe(r);
+    assert.equal(r.errors[0],'CI_MATERIAL_OR_POLICY_UNVERIFIED');
+    assert.equal(r.failure_stage,phase);assert.equal(r.failure_reason,reason);
+    assert.equal(r.required_check_policy,'UNKNOWN');assert.equal(r.required_checks_result,'UNKNOWN');
+    assert.equal(r.selected_checks_observed,false);assert.equal(r.snapshot_sha256,null);
+    assert.ok(!JSON.stringify(r).includes('SECRET_PRIVATE_'));
+  }
+  for(const [path,reason] of [[p.check,'CHECK_RUNS_GET_UNVERIFIED'],[p.status,'COMMIT_STATUS_GET_UNVERIFIED']]){
+    const d=data();
+    const r=await run(d,(n,route,m)=>{
+      if(n===7)m[path]=new Error('SECRET_SECOND_ROUND_ERROR');
+    });
+    assert.equal(r.failure_stage,'SECOND_SELECTED');assert.equal(r.failure_reason,reason);
+    assert.equal(r.errors[0],'CI_MATERIAL_OR_POLICY_UNVERIFIED');safe(r);
+    assert.ok(!JSON.stringify(r).includes('SECRET_SECOND_ROUND_ERROR'));
+  }
+});
+test('U02 original round differentiates PR drift, CI drift and policy drift',async()=>{
+  const prMoved=await run(data(),(n,route,d)=>{
+    if(n===6)d[p.pr].head.sha=H2;
+  });
+  assert.equal(prMoved.failure_stage,'MIDDLE_PR');
+  assert.equal(prMoved.failure_reason,'PR_HEAD_BASE_OR_REPO_MISMATCH');safe(prMoved);
+  const checksDrift=await run(data(),(n,route,d)=>{
+    if(n===7)d[p.check].check_runs[0].conclusion='failure';
+  });
+  assert.equal(checksDrift.failure_stage,'SOURCE_READBACK');
+  assert.equal(checksDrift.failure_reason,'SELECTED_CHECKS_DRIFT');safe(checksDrift);
+  const policyDrift=await run(data(),(n,route,d)=>{
+    if(n===7)d[p.classic].checks[0].context='other';
+  });
+  assert.equal(policyDrift.failure_stage,'SOURCE_READBACK');
+  assert.equal(policyDrift.failure_reason,'REQUIRED_POLICY_DRIFT');safe(policyDrift);
+});
+test('U02 provider-authored errors never become failure reason or grant authority',async()=>{
+  let calls=0;
+  const r=await observeSelectedRequiredCi(input(),async(repo,route)=>{
+    calls++;
+    throw Error('SECRET_PROVIDER_BODY; CHECK_RUNS_GET_UNVERIFIED');
+  });
+  assert.equal(calls,1);
+  assert.equal(r.failure_stage,'INITIAL_PR');assert.equal(r.failure_reason,null);
+  assert.equal(r.required_check_policy,'UNKNOWN');
+  assert.equal(r.selected_checks_observed,false);
+  assert.ok(!JSON.stringify(r).includes('SECRET_PROVIDER_BODY'));safe(r);
+});
+test('U02 fully valid selected-source observation has no failure fields',async()=>{
+  const r=await run();
+  assert.equal(r.failure_stage,null);assert.equal(r.failure_reason,null);
+  assert.equal(r.selected_checks_observed,true);safe(r);
+});
 test('positive required check diagnostic distinguishes selected and required',async()=>{
   const r=await run();safe(r);assert.equal(r.observed,true);assert.equal(r.selected_checks_observed,true);
   assert.equal(r.required_check_policy,'OBSERVED_CLASSIC_AND_RULESET');
