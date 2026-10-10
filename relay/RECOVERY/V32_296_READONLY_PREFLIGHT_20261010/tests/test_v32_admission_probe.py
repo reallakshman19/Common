@@ -115,5 +115,10 @@ class ReadOnlyAdmissionProbeTests(unittest.TestCase):
         self.assertNotEqual(result.state, "ADMITTED")
 
 
+    def test_18_dotdot_repo_selector_fails_without_e(self):
+        report = probe_v32_fact(selected(repository="../escape"), facts(), checks())
+        self.assertIn("INVALID_TARGET_REPOSITORY", report.reasons)
+        self.assertIsNone(report.accepted_evidence_count)
+
 if __name__ == "__main__":
     unittest.main()
