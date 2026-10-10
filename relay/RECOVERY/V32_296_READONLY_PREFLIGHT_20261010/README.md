@@ -232,3 +232,43 @@ PR wrapper checks and of the auxiliary 112-case negative suite. No
 `gh api` POST, PATCH, merge, protected source write or new projector is
 introduced. In the historical live GET control, the CLI **must refuse**
 the old repository graph before native C6 can consume it.
+
+## H11: D5 branch-scoped GitHub rules visibility (non-admitting)
+
+The prior D5 witness used `GET /repos/{owner}/{repo}/rulesets` as if
+a repository-wide inventory described the PR base branch. It also read
+only GitHub's default page (30 items), making a large ruleset collection
+appear complete. That is **not** evidence of an effective D5 policy.
+
+The read-only transport now distinguishes **three separate** provider
+sources: (a) the *full paginated* repository/inherited ruleset inventory;
+(b) the *full paginated* set of active rules explicitly applying to the
+PR's actual base branch using `GET /rules/branches/{branch}`; and
+(c) the independent classic `GET /branches/{branch}/protection/required_status_checks`
+endpoint. All requests are `gh api --method GET`, bounded at 1,000
+items with fail-closed invalid pages/oversize and branch traversal
+selectors. GitHub may deny (b) or (c); that is visible as `UNKNOWN`,
+never silently inferred as no required checks.
+
+The policy witness returns only endpoint visibility
+(`OBSERVED_EMPTY`, `OBSERVED_UNQUALIFIED`, `UNKNOWN`), distinct
+from **real Owner adoption, effective required check App IDs and D5
+admission**. It does not serialize raw policy data, account identities,
+or credentials, and always says `effective_required_check_policy:
+UNKNOWN_NOT_AUTHENTICATED`. It also reports `null` rather than a
+verified numeric zero for reviewer counts if the reviews endpoint itself
+was unreadable. All statuses remain HOLD.
+
+Synthetic tests include a repository inventory with rules absent from
+the active target branch, an active required-check rule with empty
+inventory, 403/malformed active-rule GETs, 101-item pagination, the
+1,000-item bound and zero-network invalid branch selectors. The live
+PR-job additionally asserts that the branch-applied endpoint was
+attempted, but its availability does **not** waive either classic
+protection or #289 D5 Owner policy authentication.
+
+**External API behavior:** GitHub documents
+`GET /repos/{owner}/{repo}/rules/branches/{branch}` as returning
+active rules applicable to a branch (including inherited rules),
+excluding evaluate/disabled rules. This is distinct from the repository
+ruleset listing, which can contain nonmatching/evaluate-only entries.
