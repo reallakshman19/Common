@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {t17,t18,t19,t20,t21} from './t17-t21-readonly-batch.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {t17,t18,t19,t20,t21,t26U03SourceScope} from './t17-t21-readonly-batch.mjs';
 const H='a'.repeat(40),I={repository:'reallakshman19/Common',repository_id:1412133785,pr_number:315,head_sha:H,base_branch:'codex/294-t13-r4-readonly-index-candidate'};
 const r={authority:'DIAGNOSIS_ONLY_CALLER_INJECTED_UNATTESTED',tested_head_sha:H,pr_number:315,evidence_admitted:false,positive_ci_qualified:false,u02_failure_reason:'SELECTED_CHECKS_DRIFT',selected_delta:{classification:'TRANSITION_ONLY',first_count:34,second_count:34,added_count:0,removed_count:0,transition_count:1,details_truncated:false,details:[{run_id:123,change:'TRANSITION',old_state:'in_progress',new_state:'completed',name:'PRIVATE'}]}};
 const U={diagnostic_only:true,source_grade:'CALLER_INJECTED_UNATTESTED',source_material_attested:false,positive_fact_admitted:false,original_u04_failure_stage:'JOIN',original_u04_failure_reason:'JOIN_U03_SOURCE_UNVERIFIED',original_u04_failure_round:'FIRST',result_class:'U03_NESTED_REFUSAL_CAUSES_JOIN',u03_round_count:1,original_u04_subreader_calls:3,no_extra_subreader_calls:true,u03_rounds:[{material_observed:false,failure_stage:'FIRST_READ',failure_reason:'COMMENT_GET_UNVERIFIED',outer_round:'FIRST'}]};
@@ -15,7 +15,7 @@ test('T19 rules 404 is UNKNOWN and malformed 200 is UNKNOWN',()=>{assert.equal(t
 test('T20 V3.1 missing workflows remain explicit',()=>{const x=t20(['.github/workflows/other.yml']);assert.equal(x.missing.length,2);assert.equal(x.release_ready,false)});
 test('T20 restored paths alone do not grant release',()=>{const x=t20(['.github/workflows/engineering-pr-delivery-v2.5.yml','.github/workflows/engineering-pr-delivery-v3.yml']);assert.equal(x.verdict,'LEGACY_PATHS_PRESENT');assert.equal(x.release_ready,false)});
 test('T20 forged relative path refused',()=>{assert.equal(t20(['../bad']).verdict,'INVENTORY_UNVERIFIED')});
-const V=()=>({ci:{schema:'v35-294-t17',evidence_admitted:false,writer_authorized:false,verdict:'DIAGNOSTIC_ONLY',delta:{classification:'STABLE'}},u03:{schema:'v35-294-t18',evidence_admitted:false,writer_authorized:false,verdict:'NO_U03_REFUSAL_IN_SAMPLE'},policy:{schema:'v35-294-t19',evidence_admitted:false,writer_authorized:false,policy:'OBSERVED_DIAGNOSTIC_ONLY'},legacy:{schema:'v35-294-t20',evidence_admitted:false,writer_authorized:false,verdict:'LEGACY_PATHS_PRESENT'}});
+const V=()=>({ci:{schema:'v35-294-t17',evidence_admitted:false,writer_authorized:false,verdict:'DIAGNOSTIC_ONLY',delta:{classification:'STABLE'}},u03:{schema:'v35-294-t18',evidence_admitted:false,writer_authorized:false,verdict:'NO_U03_REFUSAL_IN_SAMPLE'},u03_scope:{schema:'v35-294-t26-u03-source-scope-v1',evidence_admitted:false,writer_authorized:false,relationship:'SAME_HEAD_DIAGNOSTIC_ONLY'},policy:{schema:'v35-294-t19',evidence_admitted:false,writer_authorized:false,policy:'OBSERVED_DIAGNOSTIC_ONLY'},legacy:{schema:'v35-294-t20',evidence_admitted:false,writer_authorized:false,verdict:'LEGACY_PATHS_PRESENT'}});
 test('T21 missing inputs fail closed',()=>{assert.equal(t21({}).first_failed_edge,'INPUT_UNVERIFIED')});
 test('T21 U02 refusal has first priority',()=>{const v=V();v.ci.verdict='SELECTED_CHECKS_DRIFT';assert.equal(t21(v).first_failed_edge,'U02')});
 test('T21 unknown policy stays HOLD',()=>{const v=V();v.policy.policy='UNKNOWN';assert.equal(t21(v).first_failed_edge,'REQUIRED_POLICY')});
@@ -105,4 +105,39 @@ test('T25 falsified success flag never escapes inherited negative-only contract'
  assert.equal(t21(v).first_failed_edge,'U02');
  const second=V();second.policy.policy='UNKNOWN';
  assert.equal(t21(second).first_failed_edge,'REQUIRED_POLICY');
+});
+
+const nativeHistoricalT04=()=>({diagnostic_only:true,source_grade:'CALLER_INJECTED_UNATTESTED',
+ source_material_attested:false,positive_fact_admitted:false,
+ tested_candidate_head:'4f4dfa0497169d51ab86fbc27db1598121c6f25e'});
+test('T26 same original PR306 observation under PR319 cannot be called current-source evidence',()=>{
+ const x=t26U03SourceScope(I,nativeHistoricalT04());
+ assert.equal(x.relationship,'HISTORICAL_PROXY_NOT_CURRENT');
+ assert.equal(x.observer_pr_number,306);
+ assert.equal(x.current_pr_u03_verified,false);
+ assert.equal(x.evidence_admitted,false);
+ assert.equal(x.delp_projection,'NOT_CALCULATED');
+});
+test('T26 historical PR306 same-head is still a diagnostic, not admitted evidence',()=>{
+ const x=t26U03SourceScope({...I,pr_number:306,head_sha:'4f4dfa0497169d51ab86fbc27db1598121c6f25e'},nativeHistoricalT04());
+ assert.equal(x.relationship,'SAME_HEAD_DIAGNOSTIC_ONLY');
+ assert.equal(x.current_pr_u03_verified,false);
+ assert.equal(x.writer_authorized,false);
+});
+test('T26 missing historical head and forged grades are not qualified',()=>{
+ for(const changed of [
+  {tested_candidate_head:'a'.repeat(40)},
+  {source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'},
+  {positive_fact_admitted:true},
+ ]){
+  const x=t26U03SourceScope(I,{...nativeHistoricalT04(),...changed});
+  assert.equal(x.relationship,'UNVERIFIED');
+  assert.equal(x.current_pr_u03_verified,false);
+ }
+});
+test('T26 downstream first-failure edge never treats historical probe as current',()=>{
+ const v=V();v.u03_scope=t26U03SourceScope(I,nativeHistoricalT04());
+ assert.equal(t21(v).first_failed_edge,'U03_HISTORICAL_PROXY_NOT_CURRENT');
+ const x=V();delete x.u03_scope;
+ assert.equal(t21(x).first_failed_edge,'INPUT_UNVERIFIED');
 });
