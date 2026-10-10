@@ -65,6 +65,7 @@ def audit_native_comment_claims(
         "invalid_claims": 0,
         "current_candidate_claims": 0,
         "stale_candidate_claims": 0,
+        "candidate_type_ambiguous_claims": 0,
         "complete_verified_unit_claims": 0,
     }
     for comment in comments:
@@ -104,7 +105,14 @@ def audit_native_comment_claims(
                 continue
             counts["native_structural_claims"] += 1
             material = claimed.get("material") or {}
-            if material.get("candidate_sha") == candidate_sha:
+            # PyYAML interprets an unquoted 40-digit SHA as an integer.
+            # The existing native V3.2 validator string-coerces this value,
+            # but typed GitHub candidate identity is a string.  Do not
+            # silently mislabel malformed-type material as "stale".
+            fact_sha = material.get("candidate_sha")
+            if not isinstance(fact_sha, str):
+                counts["candidate_type_ambiguous_claims"] += 1
+            elif fact_sha == candidate_sha:
                 counts["current_candidate_claims"] += 1
             else:
                 counts["stale_candidate_claims"] += 1
