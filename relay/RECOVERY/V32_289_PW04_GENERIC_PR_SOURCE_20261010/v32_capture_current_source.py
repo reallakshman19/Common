@@ -134,16 +134,20 @@ def capture(
     leaves = []
     for row in nodes:
         _ensure(isinstance(row, dict) and isinstance(row.get("ref"), str) and
-                row["ref"].startswith(repository.rsplit("/", 1)[-1] + "#"),
+                "#" in row["ref"] and
+                row["ref"].rsplit("#", 1)[0].lower() in
+                (repository.lower(), repository.rsplit("/", 1)[-1].lower()),
                 "GRAPH_ISSUE_REFERENCE_INVALID")
         refno = row["ref"].rsplit("#", 1)[-1]
         _ensure(refno.isdecimal() and int(refno) > 0, "GRAPH_ISSUE_NUMBER_INVALID")
         refs.append(int(refno))
         if row.get("kind") == "LEAF":
             ref = row.get("primary_pr")
-            _ensure(isinstance(ref, str) and
-                    ref.startswith(repository.rsplit("/", 1)[-1] + "#") and
-                    ref.rsplit("#", 1)[-1].isdecimal(),
+            _ensure(isinstance(ref, str) and "#" in ref and
+                    ref.rsplit("#", 1)[0].lower() in
+                    (repository.lower(), repository.rsplit("/", 1)[-1].lower()) and
+                    ref.rsplit("#", 1)[-1].isdecimal() and
+                    int(ref.rsplit("#", 1)[-1]) > 0,
                     "GRAPH_PRIMARY_PR_REFERENCE_INVALID")
             prs.append(int(ref.rsplit("#", 1)[-1]))
             leaves.append(int(refno))
