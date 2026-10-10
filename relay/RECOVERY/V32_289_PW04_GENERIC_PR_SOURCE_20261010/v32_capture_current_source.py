@@ -29,6 +29,7 @@ def _ensure(ok: bool, reason: str) -> None:
 _SHA = re.compile(r"[0-9a-f]{40}\Z")
 _REPO = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\Z")
 _MAX_COMMENTS = 1000
+_MAX_COMMENT_CHARS = 1_000_000
 _MAX_ISSUES = 25
 _MAX_GRAPH = 5_000_000
 
@@ -108,6 +109,7 @@ def _comments(get: Callable[[str], Any], repo: str, no: int) -> list:
                     isinstance((c.get("user") or {}).get("login"), str) and
                     isinstance(c.get("author_association"), str),
                     "COMMENT_SOURCE_INVALID")
+            _ensure(len(c["body"]) <= _MAX_COMMENT_CHARS, "COMMENT_TEXT_UNBOUNDED")
             out.append({"id": c["id"], "body": c["body"],
                         "user": {"login": c["user"]["login"]},
                         "author_association": c["author_association"]})
@@ -168,6 +170,7 @@ def capture(
                     "GRAPH_PRIMARY_PR_REFERENCE_INVALID")
             prs.append(int(ref.rsplit("#", 1)[-1]))
             leaves.append(int(refno))
+    _ensure(bool(leaves), "GRAPH_NO_LEAF_BINDING")
     _ensure(len(set(refs)) == len(refs) and len(set(prs)) == len(prs) and
             graph["programme"].get("base_ref", "main") == "main",
             "GRAPH_UNRELEASED_OR_DUPLICATE_BINDING")
@@ -186,7 +189,13 @@ def capture(
             git_file.get("encoding") == "base64" and git_file.get("sha") == expected_graph_blob,
             "RELEASED_PROVIDER_GRAPH_PIN_MISMATCH")
     try:
-        payload = b64decode(git_file["content"], validate=False)
+        encoded = git_file["content"]
+        _ensure(isinstance(encoded, str), "RELEASED_PROVIDER_GRAPH_BYTES_INVALID")
+        # GitHub contents API uses MIME-wrapped base64; permit CR/LF only,
+        # never silently discard arbitrary non-base64 characters.
+        payload = b64decode(encoded.replace("\\n", "").replace("\\r", ""), validate=True)
+    except CaptureHold:
+        raise
     except (ValueError, TypeError, KeyError) as exc:
         raise CaptureHold("RELEASED_PROVIDER_GRAPH_BYTES_INVALID") from exc
     _ensure(payload == raw_graph, "RELEASED_PROVIDER_GRAPH_BYTES_DIFFER")
@@ -213,6 +222,14 @@ def capture(
                 "COMMENTS_CHANGED_DURING_READ")
     final = get(f"repos/{repository}/commits/main").get("sha")
     _ensure(final == sha, "DEFAULT_BRANCH_MOVED_DURING_READ")
+    # The same branch hash does not guarantee that the repository identity
+    # and visibility remained stable while we collected private content.
+    final_repo = get(f"repos/{repository}")
+    _ensure(isinstance(final_repo, Mapping) and
+            type(final_repo.get("id")) is int and final_repo["id"] == repo_id and
+            str(final_repo.get("full_name") or "").lower() == repository.lower() and
+            final_repo.get("default_branch") == "main",
+            "PROVIDER_REPOSITORY_MOVED_DURING_READ")
     return {
         "source_kind": "GITHUB_GET_ONLY_UNATTESTED",
         "repository": repository, "repository_id": repo_id,
