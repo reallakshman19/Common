@@ -75,10 +75,14 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         "local_writer": "NOT_GRANTED_BY_WITNESS",
         "merge_authority": "NOT_GRANTED_BY_WITNESS",
         "github_writes": "NONE", "prototype_qualified": False,
+        "failure_stage": None,
     }
+    stage = "ROOT_GET"
     try:
         root = transport.get_issue(root_issue)
+        stage = "LEAF_GET"
         leaf = transport.get_issue(leaf_issue)
+        stage = "PR_INITIAL_GET"
         first_pr = transport.get_pull(pr_number)
         if not _identity(root, root_issue, root_url) or not _identity(leaf, leaf_issue, leaf_url):
             result["status"] = "HOLD_ISSUE_IDENTITY_UNVERIFIED"
@@ -94,6 +98,7 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         if first_pr.get("state") != "open" or root.get("state") != "open" or leaf.get("state") != "open":
             result["status"] = "HOLD_SOURCE_LIFECYCLE_CHANGED"
             return result
+        stage = "COMMIT_RESOLVE"
         if transport.get_commit_sha(first_head) != first_head:
             result["status"] = "HOLD_COMMIT_NOT_RESOLVED"
             return result
@@ -102,8 +107,11 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         # readback so a caller can distinguish a current candidate from a
         # stale one without treating the ungoverned root as approved.
         if ROOT_MARKER not in str(root.get("body") or ""):
+            stage = "ROOT_READBACK"
             last_root = transport.get_issue(root_issue)
+            stage = "LEAF_READBACK"
             last_leaf = transport.get_issue(leaf_issue)
+            stage = "PR_READBACK"
             last_pr = transport.get_pull(pr_number)
             if last_root != root or last_leaf != leaf:
                 result["status"] = "HOLD_ISSUE_MOVED_DURING_OBSERVATION"
@@ -115,6 +123,7 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
             result["graph"] = "ROOT_CONTRACT_MISSING"
             result["status"] = "HOLD_ROOT_NOT_GOVERNED"
             return result
+        stage = "APPROVAL_COMMENTS_GET"
         comments = transport.list_comments(root_issue)
         if not isinstance(comments, list) or any(not isinstance(c, Mapping) for c in comments):
             result["status"] = "HOLD_PROVIDER_COMMENTS_UNVERIFIED"
@@ -129,6 +138,7 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         else:
             # Never validate the graph from caller data: use the existing
             # immutable-graph/provider Owner gate and its DELP read model.
+            stage = "GRAPH_VALIDATION"
             from integration_cold_entry_v35 import reconstruct
             try:
                 selected = reconstruct(transport, root_url)
@@ -143,20 +153,25 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
                 # This includes incomplete approval, stale source and provider
                 # faults; do not turn them into a positive or an absent graph.
                 result["graph"] = "VALIDATION_UNVERIFIED"
+                result["failure_stage"] = "GRAPH_VALIDATION"
                 decision = "HOLD_GRAPH_VALIDATION_UNVERIFIED"
         # Independent final source readback. An approval can be edited or
         # revoked while R2-D validates its original provider source; the same
         # applies to parent/leaf prose and PR metadata. No atomic snapshot is
         # offered by GitHub, so refuse any observed inconsistency.
+        stage = "ROOT_READBACK"
         last_root = transport.get_issue(root_issue)
+        stage = "LEAF_READBACK"
         last_leaf = transport.get_issue(leaf_issue)
         if last_root != root or last_leaf != leaf:
             result["status"] = "HOLD_ISSUE_MOVED_DURING_OBSERVATION"
             return result
+        stage = "APPROVAL_COMMENTS_READBACK"
         last_comments = transport.list_comments(root_issue)
         if last_comments != comments:
             result["status"] = "HOLD_COMMENTS_MOVED_DURING_OBSERVATION"
             return result
+        stage = "PR_READBACK"
         last_pr = transport.get_pull(pr_number)
         if not _pull_identity(last_pr, pr_number, pr_url, repo):
             result["status"] = "HOLD_PR_READBACK_UNVERIFIED"
@@ -170,6 +185,7 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
     except Exception:
         # No guessed permission, effective CI policy, or successful validation.
         result["status"] = "HOLD_PROVIDER_READ_UNKNOWN"
+        result["failure_stage"] = stage
         result["provider_material"] = "UNKNOWN"
         result["graph"] = "UNKNOWN"
         return result
