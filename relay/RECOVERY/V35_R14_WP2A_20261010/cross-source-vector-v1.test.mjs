@@ -81,6 +81,38 @@ test('U04 second-round JOIN misbinding stays UNKNOWN and does not replay as E',a
   assert.equal(r.failure_stage,'JOIN');assert.equal(r.failure_round,'SECOND');
   assert.equal(r.source_consistent,false);noGrant(r);
 });
+test('U04 JOIN gives a fixed, falsifiable, non-sensitive source reason',async()=>{
+  const cases=[
+    ['JOIN_SOURCE_GRADE_MISMATCH',o=>{o.ci.source_grade='UNTRUSTED';}],
+    ['JOIN_U01_SOURCE_UNVERIFIED',o=>{o.candidate.current=false;}],
+    ['JOIN_U02_SOURCE_UNVERIFIED',o=>{o.ci.selected_checks_observed=false;}],
+    ['JOIN_U03_SOURCE_UNVERIFIED',o=>{o.evidence.material_observed=false;}],
+    ['JOIN_U01_AUTHORITY_FORGED',o=>{o.candidate.programme_progress=100;}],
+    ['JOIN_U02_AUTHORITY_FORGED',o=>{o.ci.evidence_admitted=true;}],
+    ['JOIN_U03_BINDING_MISMATCH',o=>{o.evidence.source_receipt.comment_id=1;}],
+    ['JOIN_U01_BINDING_MISMATCH',o=>{o.candidate.source_vector.candidate_sha=H1;}],
+    ['JOIN_EVIDENCE_CURRENTNESS_MISMATCH',o=>{o.evidence.source_currentness='FORGED';}],
+    ['JOIN_REQUIRED_CI_POLICY_MISMATCH',o=>{o.ci.required_checks_result='SUCCESS';}],
+  ];
+  for(const [expected,mutate] of cases){
+    const out=outputs();mutate(out);
+    const r=await observeCrossSource(input(),readers(out));
+    assert.equal(r.error,'SOURCE_MATERIAL_UNVERIFIED');
+    assert.equal(r.failure_stage,'JOIN');assert.equal(r.failure_round,'FIRST');
+    assert.equal(r.failure_reason,expected);
+    assert.equal(r.material_status,'UNKNOWN');noGrant(r);
+  }
+});
+test('U04 arbitrary upstream errors are never surfaced or upgraded into JOIN reason',async()=>{
+  const r=await observeCrossSource(input(),{
+    candidate:async()=>{throw Error('JOIN_U01_SOURCE_UNVERIFIED; SECRET_PROVIDER_RESPONSE');},
+    ci:async()=>{throw Error('unused');},evidence:async()=>{throw Error('unused');},
+  });
+  assert.equal(r.failure_stage,'U01');assert.equal(r.failure_round,'FIRST');
+  assert.equal(r.failure_reason,null);
+  assert.equal(r.error,'SOURCE_MATERIAL_UNVERIFIED');
+  assert.ok(!JSON.stringify(r).includes('SECRET_PROVIDER_RESPONSE'));noGrant(r);
+});
 test('U04 second-round material drift has its own symbolic stage',async()=>{
   const out=outputs();
   const r=await observeCrossSource(input(),readers(out,(n,k,args,o)=>{
