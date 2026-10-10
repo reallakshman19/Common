@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {ORIGINAL_FILES,inspectInjectedSourceBlobs} from './t14-source-blob-closure.mjs';
 const H='087cf43193febffc31375e71359e767489d3ae68',B='4f4dfa0497169d51ab86fbc27db1598121c6f25e';
@@ -10,7 +10,7 @@ function fixtures(){
  const a={'':{id:ID,full_name:R},
   'pulls/308':{number:308,state:'open',head:{sha:H,repo:{id:ID}},base:{sha:B,repo:{id:ID}}}};
  for(const [p,h] of ORIGINAL_FILES){
-  const data=readFileSync(new URL('../../../'+p,import.meta.url));
+  const data=execFileSync('git',['show','HEAD:'+p],{maxBuffer:1000000});
   assert.equal(sha(data),h,'Original blob path and content must be exactly pinned: '+p);
   a['contents/'+p+'?ref='+H]={type:'file',path:p,sha:h,encoding:'base64',content:data.toString('base64')};
  }
