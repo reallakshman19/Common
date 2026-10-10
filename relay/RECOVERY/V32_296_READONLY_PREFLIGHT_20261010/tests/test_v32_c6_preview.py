@@ -119,6 +119,7 @@ class RealNativeC6BridgeTests(unittest.TestCase):
         row = run(p)
         self.assertEqual(row["status"], "HOLD_C6_SOURCE_READ")
         self.assertEqual(row["reasons"], ["NATIVE_C6_SOURCE_UNAVAILABLE_OR_INVALID"])
+        self.assertTrue(row["native_c6_invoked"])
         self.assertNotIn("sensitive", str(row))
         self.assertFalse(row["writer_authorized"])
 
@@ -140,7 +141,7 @@ class RealNativeC6BridgeTests(unittest.TestCase):
     def test_08_bad_frozen_basis_is_closed_without_auth(self):
         row = run(C6PreviewProvider(), {"input": "sha256:" + "0" * 64})
         self.assertEqual(row["status"], "HOLD_C6_SOURCE_READ")
-        self.assertFalse(row["native_c6_invoked"])
+        self.assertTrue(row["native_c6_invoked"])
         self.assertFalse(row["writer_authorized"])
 
 
