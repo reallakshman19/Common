@@ -374,5 +374,32 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
                         integrated_shadow(self.binary, self.pin, source)
 
 
+    def test_31_shadow_cli_rejects_ambiguous_and_oversize_snapshots_without_output(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            snapshot = Path(directory) / "snapshot.json"
+            output = Path(directory) / "report.json"
+            graph.write_bytes(self.binary)
+            argv = ["v32_integrated_shadow.py", "--graph", str(graph),
+                    "--snapshot", str(snapshot), "--repository-id", "42",
+                    "--leaf", self.pin.leaf_ref, "--graph-blob",
+                    self.pin.released_graph_blob_oid, "--head", HEAD,
+                    "--output", str(output)]
+            original = json.dumps(self.source).encode()
+            duplicate = original.replace(
+                b'"repository":', b'"repository":"different/repo","repository":', 1)
+            snapshot.write_bytes(duplicate)
+            with patch.object(sys, "argv", argv):
+                with self.assertRaisesRegex(CycleHold, "^SNAPSHOT_DUPLICATE_JSON_KEY$"):
+                    shadow_main()
+            self.assertFalse(output.exists())
+            snapshot.write_bytes(original)
+            with patch.object(sys, "argv", argv), patch.object(
+                    shadow_module, "_MAX_SNAPSHOT_BYTES", 128):
+                with self.assertRaisesRegex(CycleHold, "^SNAPSHOT_BYTES_UNBOUNDED$"):
+                    shadow_main()
+            self.assertFalse(output.exists())
+
+
 if __name__ == "__main__":
     unittest.main()
