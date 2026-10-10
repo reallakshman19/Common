@@ -1,0 +1,76 @@
+name: V3.5 #294 T02 exact-head native U01-U04 composite (read-only)
+
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/**'
+      - '.github/workflows/v35-294-t02-native-composite.yml'
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+  checks: read
+  statuses: read
+
+jobs:
+  exact-head-source-falsifiers:
+    name: source-falsifiers (${{ matrix.os }}, Node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Pin tested Git HEAD and untouched six-source manifest
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          cd relay/RECOVERY/V35_R14_WP2A_20261010
+          test "$(git hash-object required-ci-material-v1.mjs)" = "3eac046128202fdee88a5ad47bb1df82e3304ca1"
+          test "$(git hash-object required-ci-material-v1.test.mjs)" = "e1da8e166cb7e560f76f13500e629f4a0be0f877"
+          test "$(git hash-object task-evidence-comment-v1.mjs)" = "79cffd2e3d2828ac1727afad7763267768c56ad5"
+          test "$(git hash-object task-evidence-comment-v1.test.mjs)" = "e78b852d0e28c8f7a13fe66baf60662e4b7c6789"
+          test "$(git hash-object cross-source-vector-v1.mjs)" = "e5843e4ab141a49950cd8e2b380540eca8f8f938"
+          test "$(git hash-object cross-source-vector-v1.test.mjs)" = "c0074ed41ee6a35e7fe0bbc4387b89e6ccf083fb"
+      - name: Run original U01-U05 source and adversarial matrix
+        shell: bash
+        run: |
+          node --test relay/RECOVERY/V35_R14_WP2A_20261010/*.test.mjs
+
+  native-composite:
+    name: actual-github-composite (${{ matrix.os }})
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 306
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: One frozen PR and exact source head; genuine read-only GitHub native U01-U04
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_HEAD_SHA"
+          node relay/RECOVERY/V35_R14_WP2A_20261010/t02-native-composite-v1.cli.mjs
