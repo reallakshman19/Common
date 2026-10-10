@@ -17,10 +17,13 @@ separately approved V3.2 evidence-identity repair. This source tree does not edi
 - `v32_provider_preflight.py`: two serial, non-atomic material observation passes,
   graph repository/leaf/PR binding, source/HEAD/check/comment-digest drift and explicit HOLD.
 - `v32_admission_probe.py`: classifies an optional author claim and selected CI checks,
-  always denying positive admission. Claims that say VERIFIED do not become verified evidence.
+  always denying positive admission.
+- `v32_fact_claims.py`: reuses **native V3.2** comment-block extraction and validation
+  to count structurally valid, stale, invalid or unrecognized-author claims from
+  provider issue comments; aggregate observation only, not an admitted fact. Claims that say VERIFIED do not become verified evidence.
 - `v32_readonly_cli.py`: command line wrapper, output as structured JSON; exit 1 on
   invalid material and exit 2 on HOLD. **Exit 0 is impossible by design.**
-- `tests/`: 58 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
+- `tests/`: 71 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
   NEGATIVE ORACLES for this tool, not real V3.2 positive engineering qualification.
 
 ## Regression run
@@ -84,3 +87,29 @@ A future positive production issuer must be independently authorized under
 #289 / #285 / #276, bind current exact-head evidence and effective required
 checks, and only then feed the existing native V3.2 ledger. Do not weaken
 the HOLD, or import V3.5 fact schemas as V3.2 facts.
+
+## Read-only provider comment observer — NOT an E issuer
+
+The two-pass preflight now includes a `comment_claims` summary built from
+actual leaf issue comments, using unchanged native V3.2
+`extract_facts_blocks()` and `validate_facts()`. It distinguishes:
+
+- No native blocks (`HOLD_NO_COMMENT_CLAIMS`);
+- Native-shaped claims, including `COMPLETE / VERIFIED`, which remain
+  `HOLD_UNATTESTED_COMMENT_CLAIMS`;
+- Claims attached to stale candidate commits, wrong leaf references,
+  invalid native fact structures, or comment authors outside the programme
+  allowlist/association policy.
+
+The observer never follows an evidence URL, proves a reviewer or required
+check, establishes original-cycle R3 source provenance, chooses a released
+policy, mints accepted evidence or invokes DELP. Every output keeps
+`accepted_evidence_count: null`, `writer_authorized: false`,
+`delp_invoked: false`. A parser failure is a provider HOLD, never an
+empty or green result. Outputs contain counts, not raw private comment bodies
+or author identifiers.
+
+Testing the comment observer requires `PyYAML==6.0.2` alongside Python
+3.11/3.12/3.13. The scoped CI matrix installs that dependency and executes
+71 synthetic and real-native-parser regression cases. Real GET-only
+qualification remains negative by design.
