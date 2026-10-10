@@ -30,6 +30,9 @@ _SHA = re.compile(r"[0-9a-f]{40}\Z")
 _REPO = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\Z")
 _MAX_COMMENTS = 1000
 _MAX_COMMENT_CHARS = 1_000_000
+_MAX_COMMENT_TOTAL_CHARS = 5_000_000
+_POSITIVE_DECIMAL = re.compile(r"[1-9][0-9]*\\Z")
+_GET_TIMEOUT_SECONDS = 30
 _MAX_ISSUES = 25
 _MAX_GRAPH = 5_000_000
 
@@ -54,11 +57,16 @@ def gh_get(path: str) -> Any:
     _ensure(isinstance(path, str) and path.startswith("repos/") and
             not any(c in path for c in ("\n", "\r", "\x00")),
             "GET_ENDPOINT_INVALID")
-    proc = subprocess.run(
-        ["gh", "api", "--method", "GET", path],
-        capture_output=True, text=True, encoding="utf-8", errors="replace",
-        check=False,
-    )
+    try:
+        proc = subprocess.run(
+            ["gh", "api", "--method", "GET", path],
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
+            check=False, timeout=_GET_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise CaptureHold("GITHUB_GET_TIMEOUT") from exc
+    except OSError as exc:
+        raise CaptureHold("GITHUB_CLI_UNAVAILABLE") from exc
     _ensure(proc.returncode == 0, "GITHUB_GET_UNAVAILABLE")
     try:
         return json.loads(proc.stdout)
@@ -100,9 +108,11 @@ def _pr(p: Any, repo: str, repo_id: int, number: int) -> dict:
 
 def _comments(get: Callable[[str], Any], repo: str, no: int) -> list:
     out: list[dict] = []
+    total_chars = 0
     for page in range(1, 12):
         batch = get(f"repos/{repo}/issues/{no}/comments?per_page=100&page={page}")
         _ensure(isinstance(batch, list), "COMMENTS_NOT_A_LIST")
+        _ensure(len(batch) <= 100, "COMMENTS_PAGE_OVERSIZED")
         for c in batch:
             _ensure(isinstance(c, Mapping) and type(c.get("id")) is int and
                     c["id"] > 0 and isinstance(c.get("body"), str) and
@@ -110,6 +120,8 @@ def _comments(get: Callable[[str], Any], repo: str, no: int) -> list:
                     isinstance(c.get("author_association"), str),
                     "COMMENT_SOURCE_INVALID")
             _ensure(len(c["body"]) <= _MAX_COMMENT_CHARS, "COMMENT_TEXT_UNBOUNDED")
+            total_chars += len(c["body"])
+            _ensure(total_chars <= _MAX_COMMENT_TOTAL_CHARS, "COMMENTS_TOTAL_TEXT_UNBOUNDED")
             out.append({"id": c["id"], "body": c["body"],
                         "user": {"login": c["user"]["login"]},
                         "author_association": c["author_association"]})
@@ -158,15 +170,14 @@ def capture(
                 (repository.lower(), repository.rsplit("/", 1)[-1].lower()),
                 "GRAPH_ISSUE_REFERENCE_INVALID")
         refno = row["ref"].rsplit("#", 1)[-1]
-        _ensure(refno.isdecimal() and int(refno) > 0, "GRAPH_ISSUE_NUMBER_INVALID")
+        _ensure(_POSITIVE_DECIMAL.fullmatch(refno) is not None, "GRAPH_ISSUE_NUMBER_INVALID")
         refs.append(int(refno))
         if row.get("kind") == "LEAF":
             ref = row.get("primary_pr")
             _ensure(isinstance(ref, str) and "#" in ref and
                     ref.rsplit("#", 1)[0].lower() in
                     (repository.lower(), repository.rsplit("/", 1)[-1].lower()) and
-                    ref.rsplit("#", 1)[-1].isdecimal() and
-                    int(ref.rsplit("#", 1)[-1]) > 0,
+                    _POSITIVE_DECIMAL.fullmatch(ref.rsplit("#", 1)[-1]) is not None,
                     "GRAPH_PRIMARY_PR_REFERENCE_INVALID")
             prs.append(int(ref.rsplit("#", 1)[-1]))
             leaves.append(int(refno))
@@ -181,7 +192,9 @@ def capture(
             repo.get("default_branch") == "main",
             "PROVIDER_REPOSITORY_MISMATCH")
     repo_id = repo["id"]
-    sha = get(f"repos/{repository}/commits/main").get("sha")
+    first_commit = get(f"repos/{repository}/commits/main")
+    _ensure(isinstance(first_commit, Mapping), "BASE_COMMIT_RESPONSE_INVALID")
+    sha = first_commit.get("sha")
     _ensure(isinstance(sha, str) and _SHA.fullmatch(sha), "BASE_SHA_INVALID")
     graph_endpoint = f"repos/{repository}/contents/{quote(graph_path, safe='/')}?ref={sha}"
     git_file = get(graph_endpoint)
@@ -220,7 +233,9 @@ def capture(
     for no in leaves:
         _ensure(_comments(get, repository, no) == comments[str(no)],
                 "COMMENTS_CHANGED_DURING_READ")
-    final = get(f"repos/{repository}/commits/main").get("sha")
+    final_commit = get(f"repos/{repository}/commits/main")
+    _ensure(isinstance(final_commit, Mapping), "FINAL_COMMIT_RESPONSE_INVALID")
+    final = final_commit.get("sha")
     _ensure(final == sha, "DEFAULT_BRANCH_MOVED_DURING_READ")
     # The same branch hash does not guarantee that the repository identity
     # and visibility remained stable while we collected private content.
