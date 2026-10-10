@@ -200,6 +200,48 @@ class WitnessTests(unittest.TestCase):
         with patch.dict(sys.modules, {"integration_cold_entry_v35": module}):
             self.assertEqual("HOLD_GRAPH_VALIDATION_UNVERIFIED", call(t)["status"])
 
+    def test_provider_faults_expose_only_bounded_failure_stage(self):
+        for step, method, fail_on_call in (
+            ("ROOT_GET", "get_issue", 1),
+            ("LEAF_GET", "get_issue", 2),
+            ("PR_INITIAL_GET", "get_pull", 1),
+            ("COMMIT_RESOLVE", "get_commit_sha", 1),
+            ("APPROVAL_COMMENTS_GET", "list_comments", 1),
+            ("ROOT_READBACK", "get_issue", 3),
+            ("LEAF_READBACK", "get_issue", 4),
+            ("APPROVAL_COMMENTS_READBACK", "list_comments", 2),
+            ("PR_READBACK", "get_pull", 2),
+        ):
+            with self.subTest(stage=step):
+                t = Provider()
+                orig = getattr(t, method)
+                calls = [0]
+                def failing(*args):
+                    calls[0] += 1
+                    if calls[0] == fail_on_call:
+                        raise RuntimeError("SECRET_DO_NOT_EXPOSE_TO_CONSUMER")
+                    return orig(*args)
+                setattr(t, method, failing)
+                observed = call(t)
+                self.assertEqual("HOLD_PROVIDER_READ_UNKNOWN", observed["status"])
+                self.assertEqual(step, observed["failure_stage"])
+                self.assertEqual("UNKNOWN", observed["graph"])
+                self.assertEqual("UNKNOWN", observed["provider_material"])
+                self.assertNotIn("SECRET_DO_NOT_EXPOSE_TO_CONSUMER", str(observed))
+                self.assertFalse(observed["prototype_qualified"])
+
+    def test_graph_validation_exception_has_specific_stage_not_source_success(self):
+        t = Provider()
+        t.comments = [{"id": 123, "body": W.GRAPH_MARKER}]
+        module = types.ModuleType("integration_cold_entry_v35")
+        module.reconstruct = lambda *_: (_ for _ in ()).throw(RuntimeError("SECRET"))
+        with patch.dict(sys.modules, {"integration_cold_entry_v35": module}):
+            observed = call(t)
+        self.assertEqual("HOLD_GRAPH_VALIDATION_UNVERIFIED", observed["status"])
+        self.assertEqual("GRAPH_VALIDATION", observed["failure_stage"])
+        self.assertEqual("SOURCE_HEAD_DOUBLE_READ_MATCH", observed["provider_material"])
+        self.assertNotIn("SECRET", str(observed))
+
     def test_invalid_inputs_produce_zero_provider_reads(self):
         t = Provider()
         for kwargs in ({"root_issue": 30, "leaf_issue": 30, "pr_number": 292, "expected_head": SHA},
