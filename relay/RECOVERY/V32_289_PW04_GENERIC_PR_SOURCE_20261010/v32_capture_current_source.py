@@ -193,7 +193,7 @@ def capture(
         _ensure(isinstance(encoded, str), "RELEASED_PROVIDER_GRAPH_BYTES_INVALID")
         # GitHub contents API uses MIME-wrapped base64; permit CR/LF only,
         # never silently discard arbitrary non-base64 characters.
-        payload = b64decode(encoded.replace("\\n", "").replace("\\r", ""), validate=True)
+        payload = b64decode(encoded.replace("\n", "").replace("\r", ""), validate=True)
     except CaptureHold:
         raise
     except (ValueError, TypeError, KeyError) as exc:
