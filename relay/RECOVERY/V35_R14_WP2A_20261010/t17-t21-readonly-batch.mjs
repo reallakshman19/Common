@@ -50,14 +50,45 @@ export function t18(x){
  return {...b,verdict:'SAME_INVOCATION_U03_REASON',
     inner:{stage:bad.failure_stage,reason:bad.failure_reason,outer_round:bad.outer_round}};
 }
+/* T24: count app-scoped requirements without promoting inaccessible policy
+ * to an empty requirement set. Complete page proofs are mandatory. */
 export function t19(classic,rules){
  const b={schema:'v35-294-t19',policy:'UNKNOWN',required_count:null,...NO};
- if(classic?.status!==200||rules?.status!==200)return {...b,reason:classic?.status!==200?'CLASSIC_GET_UNVERIFIED':'RULES_GET_UNVERIFIED'};
- if(!Array.isArray(classic.data?.contexts)||!Array.isArray(classic.data?.checks)||!Array.isArray(rules.data))return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
- const refs=[];
- for(const c of [...classic.data.contexts,...classic.data.checks.map(x=>x?.context)]){if(typeof c!=='string'||!c)return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};refs.push('classic:'+c)}
- for(const rule of rules.data){if(typeof rule?.type!=='string')return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};if(rule.type==='required_status_checks'){if(!Array.isArray(rule.parameters?.required_status_checks))return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};for(const c of rule.parameters.required_status_checks){if(typeof c?.context!=='string'||!c.context)return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};refs.push('rules:'+c.context)}}}
- const n=new Set(refs).size;return {...b,policy:'OBSERVED_DIAGNOSTIC_ONLY',required_count:n,reason:n?'REQUIREMENTS_PRESENT':'EMPTY_POLICY_READABLE'};
+ if(classic?.status!==200||rules?.status!==200)
+  return {...b,reason:classic?.status!==200?'CLASSIC_GET_UNVERIFIED':'RULES_GET_UNVERIFIED'};
+ if(classic.page_complete!==true||rules.page_complete!==true)
+  return {...b,reason:'POLICY_PAGINATION_UNVERIFIED'};
+ if(!Array.isArray(classic.data?.contexts)||!Array.isArray(classic.data?.checks)||!Array.isArray(rules.data))
+  return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+ const refs=new Set(),add=(origin,name,app)=>{
+  if(typeof name!=='string'||!name||name.length>250||
+    !(app===null||(Number.isSafeInteger(app)&&app>=-1)))return false;
+  refs.add(JSON.stringify([origin,name,app]));return true;
+ };
+ const app=x=>x===undefined?null:x;
+ const namedChecks=new Set();
+ for(const c of classic.data.checks){
+  if(!c||typeof c!=='object'||!add('CLASSIC',c.context,app(c.app_id)))
+   return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+  namedChecks.add(c.context);
+ }
+ for(const c of classic.data.contexts)
+  if(typeof c!=='string'||!c)return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+  else if(!namedChecks.has(c)&&!add('CLASSIC',c,null))
+    return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+ for(const rule of rules.data){
+  if(!rule||typeof rule.type!=='string')return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+  if(rule.type==='required_status_checks'){
+   if(!Array.isArray(rule.parameters?.required_status_checks))
+    return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+   for(const c of rule.parameters.required_status_checks)
+    if(!c||!add('RULESET',c.context,app(c.integration_id)))
+      return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+  }
+ }
+ const n=refs.size;
+ return {...b,policy:'OBSERVED_DIAGNOSTIC_ONLY',required_count:n,
+  reason:n?'REQUIREMENTS_PRESENT':'EMPTY_POLICY_READABLE'};
 }
 export function t20(paths){
  const b={schema:'v35-294-t20',release_ready:false,required_ci_policy:'UNKNOWN',...NO};
@@ -77,7 +108,7 @@ export function t21(v){
 async function main(){
  const sha=process.env.CANDIDATE_HEAD_SHA||'',pr=Number(process.env.CANDIDATE_PR_NUMBER),base=process.env.CANDIDATE_BASE_REF||'';
  const input={repository:REPO,repository_id:ID,pr_number:pr,head_sha:sha,base_branch:base};if(!id(input)||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==sha)throw Error('HEAD_UNVERIFIED');
- const read=async path=>{if(!/^(pulls\/[1-9]\d*|commits\/[a-f0-9]{40}\/(check-runs\?per_page=100|status\?per_page=100)|branches\/[A-Za-z0-9._%/-]+\/protection\/required_status_checks|rules\/branches\/[A-Za-z0-9._%/-]+)$/.test(path)||path.includes('..'))throw Error('ROUTE');const url='https://api.github.com/repos/'+REPO+'/'+path;const headers={'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'v35-294-batch-readonly'};if(process.env.GITHUB_TOKEN)headers.Authorization='Bearer '+process.env.GITHUB_TOKEN;let res=await fetch(url,{headers,redirect:'error',signal:AbortSignal.timeout(15000)});if(res.status!==200||res.redirected||res.url!==url||/rel=["']next["']/.test(res.headers.get('link')||''))return {status:res.status,data:null};const raw=await res.text();if(Buffer.byteLength(raw)>2000000)throw Error('SIZE');return {status:200,data:JSON.parse(raw)}};
+ const read=async path=>{if(!/^(pulls\/[1-9]\d*|commits\/[a-f0-9]{40}\/(check-runs\?per_page=100|status\?per_page=100)|branches\/[A-Za-z0-9._%/-]+\/protection\/required_status_checks|rules\/branches\/[A-Za-z0-9._%/-]+)$/.test(path)||path.includes('..'))throw Error('ROUTE');const url='https://api.github.com/repos/'+REPO+'/'+path;const headers={'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'v35-294-batch-readonly'};if(process.env.GITHUB_TOKEN)headers.Authorization='Bearer '+process.env.GITHUB_TOKEN;let res=await fetch(url,{headers,redirect:'error',signal:AbortSignal.timeout(15000)});if(res.status!==200||res.redirected||res.url!==url||/rel=["']next["']/.test(res.headers.get('link')||''))return {status:res.status,data:null,page_complete:false};const raw=await res.text();if(Buffer.byteLength(raw)>2000000)throw Error('SIZE');return {status:200,data:JSON.parse(raw),page_complete:true}};
  const {diagnoseU02SelectedDrift}=await import('./t03-selected-ci-drift.mjs');
  const ci=await t17(input,diagnoseU02SelectedDrift,async(r,p)=>{if(r!==REPO)throw Error('REPO');const res=await read(p);if(res.status!==200)throw Error('UNREADABLE');return res.data});
  const {diagnoseU03OriginalCycle,createNativeT04Input,nativeT04Readers}=await import('./t04-u03-original-cycle.mjs');
