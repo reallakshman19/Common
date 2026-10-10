@@ -1,6 +1,6 @@
 # HANDOVER_TECHNICAL_V2 — self-contained successor engineering report (template)
 
-**Visibility:** Stage 2 after independently authenticated Stage 1 freeze only. If read isolation is unverified, keep the actual Agent A implementation report on a controller-only surface; GitHub folder names do not enforce privacy. **Record type:** factual technical report / derived handover view, not a process plan, execution instruction, Writer grant or a new evidence/lease authority. Derive custody claims from the existing native `PLAN_HANDOVER`, `HANDOVER_CONTEXT` and provider readback. Where these are absent, state `NOT_PUBLISHED`, `NOT_VERIFIED` or `UNKNOWN` rather than manufacturing them.
+**Visibility:** `STAGE2_AFTER_FREEZE_ONLY` — Stage 2 after independently authenticated Stage 1 freeze only. If read isolation is unverified, keep the actual Agent A implementation report on a controller-only surface; GitHub folder names do not enforce privacy. **Record type:** factual technical report / derived handover view, not a process plan, execution instruction, Writer grant or a new evidence/lease authority. Derive custody claims from the existing native `PLAN_HANDOVER`, `HANDOVER_CONTEXT` and provider readback. Where these are absent, state `NOT_PUBLISHED`, `NOT_VERIFIED` or `UNKNOWN` rather than manufacturing them.
 
 > **Writing rule:** Fill this as ONE coherent report that an unfamiliar engineer can read from beginning to end. A list of file names or a status checklist cannot substitute for the original problem, implemented mechanisms, call flow, concrete test observations and precise resumption. Source refs are citations for verification—not prerequisites to understanding. Inapplicable sections must say why, not disappear.
 
@@ -14,6 +14,10 @@ Explain the actual user-facing/system defect or required behavior and why it mat
 
 ## 3. Repositories, migration, branches and exact starting point
 
+**R14 source-identity spine (when applicable):** Report `PLAN_GRAPH_REVISION` as the approved plan/graph identifier and digest; `SESSION_SOURCE_COMMIT` as the exact Agent A session source observation; and `CODE_CANDIDATE_HEAD` as the current proposed implementation Git commit. Each has its own provider readback time, distinct purpose and authority grade. Also record the original task-start commit and historical research cutoff **separately** from those three roles, the PR base, the latest tested head and the current `main` HEAD. When not independently available, state `UNKNOWN` rather than inventing an equivalence or copying one SHA into every slot.
+
+**Provider-object migration:** For each historical and current issue/PR, identify the exact repository, provider object kind, canonical URL and freshly fetched identity (or `UNKNOWN`). An old-repository issue number does not become a new-repository issue, and a pull-request object returned by the GitHub issues endpoint is not an ordinary implementation issue. Keep current Owner/Local scope authorization separate from a successful provider-identity GET.
+
 | Role | Repository and exact revision | Evidence and limitations |
 | --- | --- | --- |
 | Original task-start of Agent A | `<owner repository>@<SHA>` or `UNKNOWN` | Distinguish from an archival/research cutoff |
@@ -26,6 +30,8 @@ Explain the actual user-facing/system defect or required behavior and why it mat
 Describe *how* the repository move affects Git histories, issue and PR numbering, clone/remote URLs, deployment/publication, and the next engineer's checkout. Name uncommitted local changes or say `UNKNOWN`; do not claim a clean workspace from GitHub alone.
 
 ## 4. Architecture and complete execution flow — HOW it actually works
+
+Describe the **actual implementation**, including source-of-truth input, verified producer-to-downstream consumer edges and final user-visible behavior, not a speculative architecture or Agent A's claims. Cover the fault/recovery path, external read access and transaction integrity separately; absence of real consumer output must be `MISSING_CONSUMER` or `NOT_RUN`, never a hypothetical PASS.
 
 Explain the **before and after** behavior in prose. Then trace one real path end to end, for example:
 
@@ -47,6 +53,10 @@ Present at least one source-grounded positive example and a negative/adversarial
 
 ## 7. Tests, CI, performance and reproducibility
 
+**Execution-grounded CI classification:** Record the whole-run conclusion **and the individual relevant job/step results** for each named check. A workflow marked SUCCESS with its relevant test steps SKIPPED is not evidence those tests passed. Record `EXECUTED_PASS`, `EXECUTED_FAIL`, `SKIPPED_NOT_EXECUTED`, `NOT_RUN`, and `ZERO_STEPS/NO_RUNNER` separately; the latter means a hosted job never actually reached test execution. A required check failing because legacy fixtures/workflows are absent on both base and candidate is an `INHERITED_BASELINE_FAILURE`, **still RED**, and must not be silently waived or counted as a code PASS. Show exact log/command/provider run ID, all expected cases, skip reasons, tested SHA, base SHA, current candidate SHA and discrepancy. Never equate a later report commit with the tested source HEAD.
+
+**Per-source claim ledger:** Distinguish a source-level authored test, an actually executed test, a real-browser user journey, a fixture/golden parity observation and a source/peer review. Mark the result `NOT_VERIFIED` when provider logs, environment or required real output are absent.
+
 | Exact candidate SHA | Command or workflow/run + environment | Actual executed cases and outcomes | Interpretation |
 | --- | --- | --- | --- |
 | `<SHA>` | `<literal command>`; Node/Python/browser/version | N PASS, M FAIL, SKIPPED or `NOT_RUN` with log links | Tested fact, expected RED, infrastructure problem, or open defect |
@@ -55,9 +65,13 @@ Provide reproducible commands and required fixtures/environment; record error te
 
 ## 8. Known failures, unresolved decisions and technical debt
 
+Classify each failure as `INHERITED_BASELINE_FAILURE`, `NEW_CANDIDATE_REGRESSION`, `ZERO_STEPS/NO_RUNNER`, `EXPECTED_RED`, `PERMISSION_HOLD` or `UNKNOWN`, with positive and negative evidence at the exact affected SHA. Do not conceal a red required check under an 'unrelated' label; report its actual disposition and whoever may authorize a repair or exception.
+
 Discuss every material defect by symptom, reproduction, root cause if verified, impact/severity, affected branch/SHA, workaround, and proposed safe repair boundary. Separate `BLOCKER`, `RISK`, `EXPECTED_RED`, `UNRELATED_FAILURE`, `NOT_RUN`, `UNKNOWN`. Include failed strategies and why they were abandoned. Distinguish missing external permission/Runner capability from a code failure. Name what remains intentionally protected or on HOLD.
 
 ## 9. Current engineering and custody truth
+
+**Authority partition:** `HANDOVER_CONTEXT` and the existing native `PLAN_HANDOVER` transaction retain custody truth, not the technical narrative. R14 `PLAN_GRAPH_REVISION`, `SESSION_SOURCE_COMMIT` and `CODE_CANDIDATE_HEAD` are separately graded sources and cannot impersonate Owner consent, Local writer admission, a frozen independent B Stage1, or accepted DELP evidence. Explicitly distinguish read-only Stage2 disclosure from source-write or merge authority.
 
 Explain the latest actual native Relay state/checkpoint/lease/DELP/Local writer and Owner/reviewer authority **as externally verifiable**. Name current PR status, pending reviews, CI, live/deployed version, in-flight commits/API writes and recovery risk. If only a draft Markdown candidate exists, say it has **no** effect on native `PLAN_HANDOVER`, accepted TASK_EVIDENCE, P/E/D, exclusive writer custody or Stage 2 admission. Mention both confirmed and unverified facts.
 
@@ -76,5 +90,7 @@ Conclude with short linked primary sources: original Owner issue/intent, source 
 ---
 
 ### Report authoring and release boundary
+
+**Interruption attribution:** If the predecessor is no longer present, identify the report as `PROVIDER_RECONSTRUCTED` / `INTERRUPTED_NO_PACKET`; never attribute inferred choices, original motivation or private plan revisions to Agent A. Its original current implementation, source symptoms and positive/negative outcomes must be independently supported or marked `UNKNOWN`.
 
 This report is **one finished technical explanation**, not a sequence of commands to prompt a model and not a new source-of-truth YAML schema. The existing `HANDOVER_CONTEXT` remains the native custody source; this Markdown is its detailed, source-verified engineer-readable companion. Prepare it before exit but do not expose its current Agent A HOW to independent Stage 1 B. On unexpected termination, the controller may create a `PROVIDER_RECONSTRUCTED` report and label unprovable Agent A plans `UNKNOWN`. Release to Stage 2 only after independently observed B freeze and actual read admission; still require existing Owner/Local source-writer permission.
