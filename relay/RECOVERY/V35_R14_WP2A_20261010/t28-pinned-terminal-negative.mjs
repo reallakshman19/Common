@@ -12,8 +12,8 @@ const locator=Object.freeze({repository:HISTORICAL_REPO,repository_id:1412133785
  pr_number:HISTORICAL_PR,head_sha:HISTORICAL_SHA,
  base_branch:'codex/294-t22-t25-diagnostic-contract-repairs'});
 const known=Object.freeze([
- Object.freeze({name:'live-selected-required-ci (windows-latest)',check_run_id:114313556975}),
- Object.freeze({name:'validate-v3-1-foundation',check_run_id:114313557296}),
+ Object.freeze({name:'live-selected-required-ci (windows-latest)',check_run_id:114313556975,app_id:15368}),
+ Object.freeze({name:'validate-v3-1-foundation',check_run_id:114313557296,app_id:15368}),
 ]);
 const refusal=(reason)=>({schema:'v35-294-t28-pinned-terminal-negative-v1',
  inspected_pr:319,inspected_head_sha:HISTORICAL_SHA,
@@ -35,8 +35,13 @@ export function t28PinnedTerminalNegative(response){
  const ids=[];
  for(const k of known){
   const same=observed.filter(x=>x.check_run_id===k.check_run_id&&x.name===k.name);
-  if(same.length!==1||same[0].state!=='completed'||same[0].conclusion!=='failure')
-   return refusal('EXPECTED_HISTORICAL_FAILURE_NOT_VERIFIED');
+  // A check-run ID+name alone is insufficient for a trustworthy
+  // immutable witness: also bind it to the genuine GitHub Actions App.
+  const physical=response.data.check_runs.filter(x=>x?.id===k.check_run_id&&
+    x?.name===k.name&&x?.app?.id===k.app_id);
+  if(same.length!==1||physical.length!==1||
+     same[0].state!=='completed'||same[0].conclusion!=='failure')
+   return refusal('EXPECTED_HISTORICAL_FAILURE_OR_APP_NOT_VERIFIED');
   ids.push(k.check_run_id);
  }
  return {...b,witness:'TWO_PINNED_HISTORICAL_FAILURES_VERIFIED',reason:null,
