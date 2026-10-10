@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {t17,t18,t19,t20,t21} from './t17-t21-readonly-batch.mjs';
 const H='a'.repeat(40),I={repository:'reallakshman19/Common',repository_id:1412133785,pr_number:315,head_sha:H,base_branch:'codex/294-t13-r4-readonly-index-candidate'};
 const r={authority:'DIAGNOSIS_ONLY_CALLER_INJECTED_UNATTESTED',tested_head_sha:H,pr_number:315,evidence_admitted:false,positive_ci_qualified:false,u02_failure_reason:'SELECTED_CHECKS_DRIFT',selected_delta:{classification:'TRANSITION_ONLY',first_count:34,second_count:34,added_count:0,removed_count:0,transition_count:1,details_truncated:false,details:[{run_id:123,change:'TRANSITION',old_state:'in_progress',new_state:'completed',name:'PRIVATE'}]}};
-const U={diagnostic_only:true,source_grade:'CALLER_INJECTED_UNATTESTED',source_material_attested:false,positive_fact_admitted:false,original_u04_failure_stage:'JOIN',original_u04_failure_reason:'JOIN_U03_SOURCE_UNVERIFIED',u03_rounds:[{material_observed:false,failure_stage:'FIRST_READ',failure_reason:'COMMENT_GET_UNVERIFIED',outer_round:'FIRST'}]};
+const U={diagnostic_only:true,source_grade:'CALLER_INJECTED_UNATTESTED',source_material_attested:false,positive_fact_admitted:false,original_u04_failure_stage:'JOIN',original_u04_failure_reason:'JOIN_U03_SOURCE_UNVERIFIED',original_u04_failure_round:'FIRST',result_class:'U03_NESTED_REFUSAL_CAUSES_JOIN',u03_round_count:1,original_u04_subreader_calls:3,no_extra_subreader_calls:true,u03_rounds:[{material_observed:false,failure_stage:'FIRST_READ',failure_reason:'COMMENT_GET_UNVERIFIED',outer_round:'FIRST'}]};
 const c={status:200,data:{contexts:[],checks:[]}},p={status:200,data:[]};
 test('T17 real-state transition is bounded by job id, with no name',async()=>{const x=await t17(I,async()=>r,async()=>({}));assert.equal(x.delta.first_job_id,123);assert.equal(x.verdict,'SELECTED_CHECKS_DRIFT');assert.ok(!JSON.stringify(x).includes('PRIVATE'));assert.equal(x.evidence_admitted,false)});
 test('T17 forged accepted candidate and bad repo refuse',async()=>{const x=await t17({...I,repository:'reallaksh19/Common'},async()=>r,async()=>({}));assert.equal(x.delta,null)});
@@ -41,4 +41,28 @@ test('T22 reject oversized or malformed selected vectors',async()=>{
   const x=structuredClone(r);mutation(x.selected_delta);
   assert.equal((await t17(I,async()=>x,async()=>({}))).delta,null);
  }
+});
+
+test('T23 missing or invented outer U04 round cannot become first-round U03 root',()=>{
+ for(const forged of [undefined,'THIRD','SECOND']){
+  const x=structuredClone(U);
+  x.u03_rounds[0].outer_round=forged;
+  assert.equal(t18(x).verdict,'INNER_REASON_NOT_CAPTURED');
+  assert.equal(t18(x).inner,null);
+ }
+});
+test('T23 require original U04 round and exact subreader count',()=>{
+ const wrong=structuredClone(U);wrong.original_u04_failure_round='SECOND';
+ assert.equal(t18(wrong).inner,null);
+ const extra=structuredClone(U);extra.original_u04_subreader_calls=7;
+ assert.equal(t18(extra).verdict,'UNVERIFIED');
+ const badCount=structuredClone(U);badCount.u03_round_count=2;
+ assert.equal(t18(badCount).verdict,'UNVERIFIED');
+});
+test('T23 a U03 failure under another outer JOIN is not an identified U03 root',()=>{
+ const x=structuredClone(U);x.original_u04_failure_reason='JOIN_U02_SOURCE_UNVERIFIED';
+ assert.equal(t18(x).verdict,'INNER_NOT_CAUSAL');
+ assert.equal(t18(x).inner,null);
+ const spoof=structuredClone(U);spoof.result_class='DIAGNOSTIC_HISTORICAL_SOURCE_OBSERVED';
+ assert.equal(t18(spoof).verdict,'UNVERIFIED');
 });
