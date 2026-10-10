@@ -137,6 +137,13 @@ def _round(target: PreflightTarget, getter: ReadOnlyGetter) -> dict[str, Any]:
     pull = getter.get_pull(target.repository, target.pr_number)
     if pull.get("number") != target.pr_number:
         raise ValueError("PROVIDER_PR_NUMBER_MISMATCH")
+    # The provider's actual base repository is an identity check.  Do NOT
+    # fill an "observed" field by copying the target supplied by the caller.
+    base_identity = (pull.get("base") or {}).get("repo")
+    if (not isinstance(base_identity, Mapping) or
+            base_identity.get("id") != target.repository_id or
+            str(base_identity.get("full_name") or "").lower() != target.repository.lower()):
+        raise ValueError("PROVIDER_PR_BASE_REPOSITORY_MISMATCH")
     candidate_sha = (pull.get("head") or {}).get("sha")
     if not isinstance(candidate_sha, str) or not fullmatch(_SHA, candidate_sha):
         raise ValueError("PROVIDER_PR_HEAD_INVALID")
@@ -157,7 +164,13 @@ def _round(target: PreflightTarget, getter: ReadOnlyGetter) -> dict[str, Any]:
         if not isinstance(check, Mapping) or not isinstance(check.get("name"), str):
             raise ValueError("PROVIDER_SELECTED_CHECK_INVALID")
     late_pull = getter.get_pull(target.repository, target.pr_number)
-    if late_pull.get("number") != target.pr_number or (late_pull.get("head") or {}).get("sha") != candidate_sha:
+    late_base = (late_pull.get("base") or {})
+    late_base_identity = late_base.get("repo") or {}
+    if (late_pull.get("number") != target.pr_number or
+            (late_pull.get("head") or {}).get("sha") != candidate_sha or
+            late_base.get("ref") != actual_base or
+            late_base_identity.get("id") != target.repository_id or
+            str(late_base_identity.get("full_name") or "").lower() != target.repository.lower()):
         raise ValueError("PROVIDER_PR_MOVED_IN_CYCLE")
     late = getter.get_commit(target.repository, branch)
     if late.get("sha") != base_sha:
@@ -177,7 +190,9 @@ def _round(target: PreflightTarget, getter: ReadOnlyGetter) -> dict[str, Any]:
         "selected_checks_digest": _sha256(_canonical(checks)),
     }
     return {"fingerprint": _sha256(_canonical(source_identity)), "graph_digest": graph_digest,
-            "candidate_sha": candidate_sha, "selected_checks": selected_checks}
+            "candidate_sha": candidate_sha, "selected_checks": selected_checks,
+            "observed_pr_repository": str(base_identity["full_name"]),
+            "observed_pr_number": pull["number"]}
 
 
 def inspect_v32_read_only(
@@ -205,8 +220,9 @@ def inspect_v32_read_only(
                                "MISMATCH", first["graph_digest"], None, 2, None)
     selection = SourceSelection(
         repository=target.repository, leaf_ref=target.leaf_ref, pr_number=target.pr_number,
-        current_head=second["candidate_sha"], observed_pr_repository=target.repository,
-        observed_pr_number=target.pr_number,
+        current_head=second["candidate_sha"],
+        observed_pr_repository=second["observed_pr_repository"],
+        observed_pr_number=second["observed_pr_number"],
     )
     probe = probe_v32_fact(selection, facts, second["selected_checks"])
     return PreflightResult(
