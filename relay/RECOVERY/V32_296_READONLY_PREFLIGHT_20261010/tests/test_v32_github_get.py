@@ -125,5 +125,18 @@ class ReadOnlyGetTests(unittest.TestCase):
             GitHubGetOnly(runner).get_repository("../escape")
         self.assertEqual(runner.commands, [])
 
+    def test_17_read_issue_only_get(self):
+        runner = Runner([{"number": 4, "state": "open", "body": "provider text"}])
+        result = GitHubGetOnly(runner).get_issue(REPO, 4)
+        self.assertEqual(result["number"], 4)
+        self.assertIn("/issues/4", runner.commands[0][0][-1])
+        self.assertEqual(runner.commands[0][0][2:4], ["--method", "GET"])
+
+    def test_18_bad_issue_selector_refused_before_network(self):
+        runner = Runner([])
+        with self.assertRaisesRegex(GitHubReadError, "INVALID_ISSUE_NUMBER"):
+            GitHubGetOnly(runner).get_issue(REPO, 0)
+        self.assertEqual(runner.commands, [])
+
 if __name__ == "__main__":
     unittest.main()
