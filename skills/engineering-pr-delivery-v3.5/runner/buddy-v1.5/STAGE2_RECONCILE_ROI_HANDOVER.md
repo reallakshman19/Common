@@ -6,7 +6,7 @@
 
 ## A. Verify the prerequisite and keep history honest
 
-Fetch the published Stage 1 artifact, compare its bytes against the supplied digest and check the current issue publication readback. If you cannot access it, mark **STAGE1_NOT_VERIFIED** and produce an explicit bounded diagnostic; do not fabricate an independent purpose.
+Fetch the Stage 1 GitHub issue-comment body **on the owning current issue**. Compute SHA-256 over the **UTF-8 bytes of the provider-returned body text**, including its exact line breaks (not HTML/Markdown rendering, JSON wrapper, URL or metadata); compare against the supplied `sha256:<64 lowercase hex>` claim. Verify the issue-comment URL/author/provenance with the provider. A renderer-validated URL and an agent-supplied digest are never enough. If the publication is absent, inaccessible, on the wrong issue, or byte-mismatched, mark **STAGE1_NOT_VERIFIED** and stop at a bounded diagnostic. Do not fabricate an independent purpose. If Stage 1 is merely `NOT_PUBLISHED`, a provider-backed Stage 2 request cannot be generated; obtain permitted publication/readback first.
 
 Treat a digest or an evidence_grade field as a *claim* until verified. Do not rewrite Stage 1 to make it look correct. Read the actual Owner current issue, parent, roadmap and amendments. Refresh the live PR/branch/source commit and compare it with the Stage 1 pinned commit; never silently change that baseline or borrow green CI from a different head.
 
