@@ -1,8 +1,9 @@
 """Read-only, non-admitting V3.2 lab source-intake witness for Common #296.
 
-B1 starts before a product PR exists. Reads an explicitly selected GitHub
-lab, native-shaped graph and real issue objects twice. It cannot prove human
-Owner approval, CI, facts, writer lease, or cutover.
+Source-bound intake reads an explicitly selected GitHub lab, native-shaped
+graph, real issues and graph-bound primary PR identities/candidate heads twice.
+Historic original lab delivered R01/R02/R03; these reads cannot prove human
+Owner approval, CI, fact admissibility, writer lease, or cutover.
 """
 from __future__ import annotations
 import argparse
@@ -25,6 +26,7 @@ class ReadOnlyLabProvider(Protocol):
     def get_commit(self, repository: str, ref: str) -> Mapping[str, Any]: ...
     def get_file_bytes(self, repository: str, path: str, ref: str) -> bytes: ...
     def get_issue(self, repository: str, number: int) -> Mapping[str, Any]: ...
+    def get_pull(self, repository: str, number: int) -> Mapping[str, Any]: ...
 
 @dataclass(frozen=True)
 class LabTarget:
@@ -93,6 +95,72 @@ def _native_structure(graph: Mapping[str, Any], repository: str) -> None:
 def _digest(value: bytes) -> str:
     return "sha256:" + sha256(value).hexdigest()
 
+
+def _linked_primary_prs(
+    target: LabTarget, nodes: list[Any], getter: ReadOnlyLabProvider,
+) -> list[dict[str, Any]]:
+    """Observe bound PR material; a coherent snapshot never admits a fact.
+
+    Both the textual identity and stable GitHub numeric repository identity
+    must agree for each PR's head and base. HEAD, merge status and base ref
+    enter the two-read source fingerprint to expose provider drift.
+    """
+    short_repo = target.repository.rsplit("/", 1)[-1]
+    out: list[dict[str, Any]] = []
+    seen: set[int] = set()
+    for node in nodes:
+        if not isinstance(node, Mapping) or node.get("kind") != "LEAF":
+            continue
+        binding = node.get("primary_pr")
+        if binding is None:
+            continue
+        if not isinstance(binding, str) or binding.count("#") != 1:
+            raise ValueError("LAB_PRIMARY_PR_BINDING_INVALID")
+        name, number_text = binding.split("#", 1)
+        if (name.lower() not in (target.repository.lower(), short_repo.lower()) or
+                not re.fullmatch(r"[1-9][0-9]*", number_text)):
+            raise ValueError("LAB_PRIMARY_PR_BINDING_INVALID")
+        number = int(number_text)
+        if number in seen:
+            raise ValueError("LAB_PRIMARY_PR_BINDING_DUPLICATE")
+        seen.add(number)
+        pull = getter.get_pull(target.repository, number)
+        if (not isinstance(pull, Mapping) or type(pull.get("number")) is not int
+                or pull["number"] != number):
+            raise ValueError("LAB_PRIMARY_PR_IDENTITY_MISMATCH")
+        head = pull.get("head")
+        base = pull.get("base")
+        if not isinstance(head, Mapping) or not isinstance(base, Mapping):
+            raise ValueError("LAB_PRIMARY_PR_REPOSITORY_MISMATCH")
+        for side in (head, base):
+            side_repo = side.get("repo")
+            if (not isinstance(side_repo, Mapping) or
+                    str(side_repo.get("full_name") or "").lower() != target.repository.lower() or
+                    type(side_repo.get("id")) is not int or
+                    side_repo["id"] != target.repository_id):
+                raise ValueError("LAB_PRIMARY_PR_REPOSITORY_MISMATCH")
+        head_sha = head.get("sha")
+        if not isinstance(head_sha, str) or not _SHA_RE.fullmatch(head_sha):
+            raise ValueError("LAB_PRIMARY_PR_HEAD_UNPINNED")
+        merged = pull.get("merged")
+        state = pull.get("state")
+        merged_at = pull.get("merged_at")
+        base_ref = base.get("ref")
+        if (type(merged) is not bool or state not in ("open", "closed") or
+                (merged and (state != "closed" or
+                             not isinstance(merged_at, str) or not merged_at)) or
+                (not merged and merged_at is not None) or
+                not isinstance(base_ref, str) or
+                not re.fullmatch(r"[A-Za-z0-9_./-]{1,200}", base_ref) or
+                any(part in ("", ".", "..") for part in base_ref.split("/"))):
+            raise ValueError("LAB_PRIMARY_PR_STATE_INVALID")
+        out.append({
+            "leaf": node["ref"], "number": number, "head_sha": head_sha,
+            "base_ref": base_ref, "state": state, "merged": merged,
+            "merged_at": merged_at,
+        })
+    return out
+
 def _round(target: LabTarget, getter: ReadOnlyLabProvider,
            validate: Callable[[Mapping[str, Any], str], None]) -> dict[str, Any]:
     repo = getter.get_repository(target.repository)
@@ -148,17 +216,24 @@ def _round(target: LabTarget, getter: ReadOnlyLabProvider,
             raise ValueError("LAB_GRAPH_ISSUE_NOT_MATERIALIZED")
         # Human text is hashed into the source fingerprint but never emitted.
         issue_facts.append({"number": number, "title": issue["title"], "body": issue["body"]})
+    pr_facts = _linked_primary_prs(target, nodes, getter)
     late_commit = getter.get_commit(target.repository, branch)
     if not isinstance(late_commit, Mapping) or late_commit.get("sha") != sha:
         raise ValueError("LAB_DEFAULT_BRANCH_MOVED_DURING_READ")
     fingerprint = _digest(json.dumps({
         "repo_id": repo["id"], "repository": target.repository.lower(),
         "base": sha, "graph_digest": graph_hash, "issues": issue_facts,
+        "bound_prs": pr_facts,
     }, sort_keys=True, separators=(",", ":")).encode("utf-8"))
     return {"fingerprint": fingerprint, "repository": target.repository,
             "repository_id": target.repository_id, "base_ref": branch,
             "base_sha": sha, "graph_digest": graph_hash,
-            "root_ref": target.root_ref, "issues_observed": len(refs)}
+            "root_ref": target.root_ref, "issues_observed": len(refs),
+            "prs_observed": len(pr_facts),
+            "merged_prs_observed": sum(1 for item in pr_facts if item["merged"]),
+            "pr_sources_digest": _digest(json.dumps(
+                pr_facts, sort_keys=True, separators=(",", ":")).encode("utf-8")),
+            }
 
 def inspect_lab_read_only(target: LabTarget, getter: ReadOnlyLabProvider,
                           *, native_validate: Callable[[Mapping[str, Any], str], None] = _native_structure) -> LabIntake:
@@ -182,7 +257,8 @@ def inspect_lab_read_only(target: LabTarget, getter: ReadOnlyLabProvider,
         return LabIntake("HOLD_LAB_DRIFT", ("LAB_NONATOMIC_SOURCE_MOVED",))
     observed = {key: first[key] for key in (
         "repository", "repository_id", "base_ref", "base_sha",
-        "graph_digest", "root_ref", "issues_observed")}
+        "graph_digest", "root_ref", "issues_observed", "prs_observed",
+        "merged_prs_observed", "pr_sources_digest")}
     return LabIntake("HOLD_OWNER_RELEASE_UNVERIFIED", (
         "LAB_STRUCTURE_ONLY_NOT_HUMAN_OWNER_APPROVAL",
         "LAB_NONATOMIC_GETS_NOT_ORIGINAL_SOURCE_ATTESTATION"), observed)
