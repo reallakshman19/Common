@@ -16,6 +16,8 @@ import subprocess
 import sys
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
+from contextlib import redirect_stdout
+from io import StringIO
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -418,6 +420,79 @@ class CurrentCaptureTests(unittest.TestCase):
         with patch.object(capture_module.subprocess, "run", return_value=reply):
             with self.assertRaisesRegex(CaptureHold, "^GITHUB_GET_NONFINITE_JSON$"):
                 capture_module.gh_get("repos/owner/source-lab")
+
+
+    def test_36_malformed_comment_user_type_held_without_python_error(self):
+        for user in ([{"login": "attacker"}], "attacker", 1):
+            with self.subTest(user=user):
+                self.g = FakeGET()
+                self.g.comments = [{"id": 19, "body": "comment", "user": user,
+                                    "author_association": "CONTRIBUTOR"}]
+                with self.assertRaisesRegex(CaptureHold, "^COMMENT_SOURCE_INVALID$"):
+                    self.do()
+
+    def test_37_oversized_issue_body_refuses_without_truncation(self):
+        original = self.g
+        def oversized(endpoint):
+            value = original(endpoint)
+            if endpoint.endswith("/issues/1"):
+                value["body"] = "i" * 1_000_001
+            return value
+        with self.assertRaisesRegex(CaptureHold, "^ISSUE_HUMAN_TEXT_UNBOUNDED$"):
+            capture(self.raw, REPO, git_blob(self.raw), oversized)
+        self.assertEqual(self.g.pr_reads, 0)
+
+    def test_38_oversized_pr_body_refuses_without_truncation(self):
+        original = self.g
+        def oversized(endpoint):
+            value = original(endpoint)
+            if endpoint.endswith("/pulls/10"):
+                value["body"] = "p" * 1_000_001
+            return value
+        with self.assertRaisesRegex(CaptureHold, "^PR_HUMAN_TEXT_UNBOUNDED$"):
+            capture(self.raw, REPO, git_blob(self.raw), oversized)
+
+    def test_39_oversized_pr_title_refuses(self):
+        original = self.g
+        def oversized(endpoint):
+            value = original(endpoint)
+            if endpoint.endswith("/pulls/10"):
+                value["title"] = "t" * 16_385
+            return value
+        with self.assertRaisesRegex(CaptureHold, "^PR_HUMAN_TEXT_UNBOUNDED$"):
+            capture(self.raw, REPO, git_blob(self.raw), oversized)
+
+    def test_40_human_body_exact_budget_remains_accepted(self):
+        original = self.g
+        def at_boundary(endpoint):
+            value = original(endpoint)
+            if endpoint.endswith("/issues/1") or endpoint.endswith("/pulls/10"):
+                value["body"] = "b" * 1_000_000
+            return value
+        result = capture(self.raw, REPO, git_blob(self.raw), at_boundary)
+        self.assertEqual(len(result["issues"]["1"]["body"]), 1_000_000)
+        self.assertEqual(len(result["pulls"]["10"]["body"]), 1_000_000)
+
+    def test_41_failed_snapshot_serialization_removes_private_partial_file(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            output = Path(directory) / "private-snapshot.json"
+            graph.write_bytes(self.raw)
+            argv = ["v32_capture_current_source.py", "--graph", str(graph),
+                    "--repository", REPO, "--graph-blob", git_blob(self.raw),
+                    "--output", str(output)]
+            output_log = StringIO()
+            def fail_dump(value, stream, **kwargs):
+                stream.write("PARTIAL_PRIVATE_CAPTURE")
+                raise OSError("synthetic write failure")
+            with patch.object(sys, "argv", argv), patch.object(
+                    capture_module, "capture", return_value={"source_kind": "GITHUB_GET_ONLY_UNATTESTED"}
+            ), patch.object(capture_module.json, "dump", side_effect=fail_dump):
+                with redirect_stdout(output_log):
+                    with self.assertRaises(OSError):
+                        capture_module.main()
+            self.assertFalse(output.exists())
+            self.assertNotIn("SAVED_0600", output_log.getvalue())
 
 
 if __name__ == "__main__":
