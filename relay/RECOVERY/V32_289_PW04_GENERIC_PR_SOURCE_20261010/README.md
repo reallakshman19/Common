@@ -30,6 +30,37 @@ python relay/RECOVERY/V32_289_PW04_GENERIC_PR_SOURCE_20261010/v32_integrated_sha
   --output /private/lab-current-shadow.json
 ```
 
+### Snapshot handoff pin and cold-process rehearsal (non-admitting)
+
+After a successful private GET-only capture, independently record the exact
+snapshot file SHA-256 **before transfer to another session or operator**. The
+offline shadow CLI accepts optional `--snapshot-sha256 <64 lowercase hex>`.
+For example, calculate the digest with
+`sha256sum /private/lab-current-get-only.json` in the authorized private
+workspace; retain its result separately from the transferred snapshot. Pass
+that retained digest as `--snapshot-sha256` to the second command above.
+Mismatch refuses with `SNAPSHOT_SHA256_PIN_MISMATCH` **before any native V3.2
+run or output creation**; malformed pins refuse with
+`SNAPSHOT_SHA256_PIN_INVALID`. The report exposes
+`snapshot_sha256_pin_verified: true/false`. Omitting the flag preserves the
+previous read-only CLI interface and clearly leaves this optional byte
+continuity unverified. A self-calculated matching digest does **not** prove
+Owner authorization, source provenance, evidence-policy issuer trust or a
+genuine successor attestation.
+
+The native-backed regression suite also runs the CLI in **two separate Python
+subprocesses**, loading the same synthetic captured source into fresh modules,
+and compares entire deterministic reports, C6 frontier and managed PR preview.
+This demonstrates offline reproducibility only. `real_cold_successor` stays
+`NOT_EXECUTED` until an independent, genuinely authenticated successor
+performs the private-lab cold reconstruction.
+
+The GitHub GET-only transport now rejects duplicate JSON keys at **all
+nested levels** and nonfinite values instead of silently applying Python's
+last-key-wins / NaN parsing. Only safe failure codes are exposed; provider
+stderr, tokens and private issue/comment bodies are not printed by the
+transport.
+
 The capture uses only GitHub API GET. It pins the graph bytes against the real
 current default-branch file Git blob and rejects a changed issue body/title,
 bound PR head/base, issue comments, main commit or numeric repository identity
