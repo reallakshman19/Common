@@ -7,9 +7,15 @@ const issue=n=>'https://github.com/'+REPO+'/issues/'+n;
 const pr=n=>'https://github.com/'+REPO+'/pull/'+n;
 const comment=(n,id)=>issue(n)+'#issuecomment-'+id;
 const hash=x=>'sha256:'+createHash('sha256').update(x).digest('hex');
-const denied=(grade,errors)=>({
+// Only source-controlled reason codes leave this module, never provider exceptions.
+class SourceFault extends Error {
+ constructor(kind,code){super(code);this.kind=kind;this.code=code;}
+}
+const fault=code=>new SourceFault('VALIDATE',code);
+const denied=(grade,errors,failureStage=null,failureReason=null)=>({
  schema:'common-v35-wp2a-u03-comment-material-v1',source_grade:grade,
- material_observed:false,source_currentness:'UNKNOWN',errors,source_receipt:null,
+ material_observed:false,source_currentness:'UNKNOWN',errors,
+ failure_stage:failureStage,failure_reason:failureReason,source_receipt:null,
  source_receipt_sha256:null,body_claim_grade:'NOT_VERIFIED',actor_grade:'NOT_VERIFIED',
  evidence_admitted:false,reviewer_qualified:false,owner_authenticated:false,
  delp_projection:'NOT_CALCULATED',programme_progress:null,writer_authorized:false,
@@ -32,25 +38,25 @@ function contract(x){
 }
 function bodyClaim(body,x){
  if(typeof body!=='string'||body.length>50000||!body.startsWith('## TASK_EVIDENCE'))
-  throw Error('NOT_TASK_EVIDENCE');
+  throw fault('NOT_TASK_EVIDENCE');
  // Author text is a CLAIM. The \x60 character is a markdown code tick.
  const heads=[...body.matchAll(/\*\*Tested HEAD:\*\*\s*\x60([a-f0-9]{40})\x60/g)];
- if(heads.length!==1||heads[0][1]!==x.claimed_head_sha)throw Error('HEAD_CLAIM_MISMATCH');
+ if(heads.length!==1||heads[0][1]!==x.claimed_head_sha)throw fault('HEAD_CLAIM_MISMATCH');
  const links=[...body.matchAll(/\]\((https:\/\/github\.com\/[A-Za-z0-9._-]+\/[A-Za-z0-9._-]+\/pull\/[1-9]\d*)\)/g)];
- if(!links.some(m=>m[1]===pr(x.pr_number)))throw Error('CURRENT_PR_BINDING_MISSING');
+ if(!links.some(m=>m[1]===pr(x.pr_number)))throw fault('CURRENT_PR_BINDING_MISSING');
  return 'CLAIMED_TEXT_ONLY';
 }
 function validate(x,s){
- if(!obj(s.repo)||s.repo.id!==ID||s.repo.full_name!==REPO)throw Error('REPO_MISMATCH');
+ if(!obj(s.repo)||s.repo.id!==ID||s.repo.full_name!==REPO)throw fault('REPO_MISMATCH');
  for(const [kind,item,n] of [['ROOT',s.root,x.root_issue],['LEAF',s.leaf,x.leaf_issue]]){
   if(!obj(item)||item.number!==n||item.html_url!==issue(n)||
-    Object.hasOwn(item,'pull_request')||item.state!=='open')throw Error(kind+'_INVALID');
+    Object.hasOwn(item,'pull_request')||item.state!=='open')throw fault(kind+'_INVALID');
  }
  const p=s.pr;
  if(!obj(p)||p.number!==x.pr_number||p.html_url!==pr(x.pr_number)||
    p.state!=='open'||!obj(p.head)||!obj(p.head.repo)||
    p.head.repo.id!==ID||p.head.repo.full_name!==REPO||!SHA.test(p.head.sha||''))
-  throw Error('PR_ROLE_INVALID');
+  throw fault('PR_ROLE_INVALID');
  const c=s.comment;
  if(!obj(c)||c.id!==x.evidence_comment_id||
    c.html_url!==comment(x.leaf_issue,x.evidence_comment_id)||
@@ -59,8 +65,8 @@ function validate(x,s){
    (c.user.type!==undefined&&c.user.type!=='User')||
    typeof c.created_at!=='string'||typeof c.updated_at!=='string'||
    Number.isNaN(Date.parse(c.created_at))||Number.isNaN(Date.parse(c.updated_at)))
-  throw Error('COMMENT_IDENTITY_INVALID');
- if(!obj(s.commit)||s.commit.sha!==x.claimed_head_sha)throw Error('COMMIT_NOT_RESOLVED');
+  throw fault('COMMENT_IDENTITY_INVALID');
+ if(!obj(s.commit)||s.commit.sha!==x.claimed_head_sha)throw fault('COMMIT_NOT_RESOLVED');
  const grade=bodyClaim(c.body,x);
  const receipt={
   repository:REPO,repository_id:ID,root_issue:x.root_issue,leaf_issue:x.leaf_issue,
@@ -76,24 +82,44 @@ function validate(x,s){
 async function round(x,read){
  const paths=['','issues/'+x.root_issue,'issues/'+x.leaf_issue,'pulls/'+x.pr_number,
   'issues/comments/'+x.evidence_comment_id,'commits/'+x.claimed_head_sha];
- const [repo,root,leaf,prObj,commentObj,commit]=await Promise.all(paths.map(async path=>{
+ const labels=['REPOSITORY','ROOT','LEAF','PR','COMMENT','COMMIT'];
+ // All six GETs already start concurrently. Wait for all and classify in
+ // fixed route order so provider completion order cannot alter the reason.
+ const settled=await Promise.allSettled(paths.map(async path=>{
   const v=await read(REPO,path);
-  if(!obj(v))throw Error('INVALID_PROVIDER_RESPONSE');
+  if(!obj(v))throw new SourceFault('SHAPE','NON_OBJECT');
   return v;
  }));
- return validate(x,{repo,root,leaf,pr:prObj,comment:commentObj,commit});
+ for(let i=0;i<settled.length;i++){
+  if(settled[i].status==='rejected'){
+   const e=settled[i].reason;
+   throw new SourceFault('READ',labels[i]+
+     (e instanceof SourceFault&&e.kind==='SHAPE'?'_RESPONSE_SHAPE_INVALID':'_GET_UNVERIFIED'));
+  }
+ }
+ const [repo,root,leaf,prObj,commentObj,commit]=settled.map(v=>v.value);
+ try{return validate(x,{repo,root,leaf,pr:prObj,comment:commentObj,commit});}
+ catch(error){
+  if(error instanceof SourceFault)throw error;
+  throw new SourceFault('VALIDATE','RECEIPT_VALIDATION_UNKNOWN');
+ }
 }
 async function observe(x,reader,grade){
  const invalid=contract(x);
  if(invalid.length)return denied(grade,invalid);
  if(typeof reader!=='function')return denied(grade,['PROVIDER_READER_MISSING']);
+ let phase='FIRST';
  try{
-  const first=await round(x,reader),second=await round(x,reader);
+  const first=await round(x,reader);
+  phase='SECOND';
+  const second=await round(x,reader);
   if(JSON.stringify(first)!==JSON.stringify(second))
-   return denied(grade,['PROVIDER_COMMENT_OR_HEAD_CHANGED_BETWEEN_READS']);
+   return denied(grade,['PROVIDER_COMMENT_OR_HEAD_CHANGED_BETWEEN_READS'],
+    'SECOND_ROUND_DRIFT','SOURCE_RECEIPT_CHANGED');
   return {
    schema:'common-v35-wp2a-u03-comment-material-v1',source_grade:grade,
    material_observed:true,source_currentness:second.currentness,errors:[],
+   failure_stage:null,failure_reason:null,
    source_receipt:second.receipt,
    source_receipt_sha256:hash('common-v35-wp2a-task-evidence-comment-v1\0'+JSON.stringify(second.receipt)),
    body_claim_grade:'CLAIMED_TEXT_ONLY',
@@ -102,7 +128,11 @@ async function observe(x,reader,grade){
    delp_projection:'NOT_CALCULATED',programme_progress:null,writer_authorized:false,
    successor_lease:'NOT_PROVEN',
   };
- }catch{return denied(grade,['PROVIDER_SOURCE_OR_CLAIM_UNVERIFIED']);}
+ }catch(error){
+  const kind=error instanceof SourceFault?error.kind:'READ';
+  return denied(grade,['PROVIDER_SOURCE_OR_CLAIM_UNVERIFIED'],
+   phase+'_'+kind,error instanceof SourceFault?error.code:null);
+ }
 }
 export const observeEvidenceComment=(x,read)=>observe(x,read,'CALLER_INJECTED_UNATTESTED');
 async function nativeGet(repo,path,token){
