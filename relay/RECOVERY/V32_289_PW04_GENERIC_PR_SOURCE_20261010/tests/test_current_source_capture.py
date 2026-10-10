@@ -54,18 +54,26 @@ class FakeGET:
         self.comments = []
         self.pr_reads = 0
         self.pr_change = False
+        self.repo_reads = 0
+        self.final_repo_id = None
+        self.noncanonical_graph_base64 = False
 
     def __call__(self, endpoint):
         self.log.append(endpoint)
         assert endpoint.startswith("repos/") and "/"+REPO.split("/")[-1] in endpoint
         if endpoint == f"repos/{REPO}":
-            return {"id": self.repo_id, "full_name": self.source, "default_branch": "main"}
+            self.repo_reads += 1
+            identity = self.final_repo_id if self.final_repo_id is not None and self.repo_reads > 1 else self.repo_id
+            return {"id": identity, "full_name": self.source, "default_branch": "main"}
         if endpoint == f"repos/{REPO}/commits/main":
             count = sum(e.endswith("/commits/main") for e in self.log)
             return {"sha": self.final_base if count > 1 else self.base}
         if "/contents/governance/released-graph.json?" in endpoint:
+            encoded = b64encode(self.graph).decode()
+            if self.noncanonical_graph_base64:
+                encoded = encoded[:4] + "!" + encoded[4:]
             return {"type": "file", "encoding": "base64",
-                    "content": b64encode(self.graph).decode(), "sha": git_blob(self.graph)}
+                    "content": encoded, "sha": git_blob(self.graph)}
         if endpoint.endswith("/issues/1") or endpoint.endswith("/issues/2"):
             no = int(endpoint[-1])
             self.issue_calls += 1
@@ -205,6 +213,46 @@ class CurrentCaptureTests(unittest.TestCase):
         with self.assertRaisesRegex(CaptureHold, "^GRAPH_JSON_INVALID$"):
             capture(corrupted, REPO, git_blob(corrupted), self.g)
         self.assertEqual(self.g.log, [])
+
+
+    def test_15_noncanonical_git_blob_base64_refuses_ambiguous_provider_bytes(self):
+        self.g.noncanonical_graph_base64 = True
+        with self.assertRaisesRegex(CaptureHold, "^RELEASED_PROVIDER_GRAPH_BYTES_INVALID$"):
+            self.do()
+
+    def test_16_graph_without_leaf_refuses_before_any_github_read(self):
+        graph = deepcopy(GRAPH)
+        graph["nodes"][1]["kind"] = "PHASE"
+        self.raw = graph_raw(graph)
+        self.g.graph = self.raw
+        with self.assertRaisesRegex(CaptureHold, "^GRAPH_NO_LEAF_BINDING$"):
+            self.do()
+        self.assertEqual(self.g.log, [])
+
+    def test_17_comment_text_exceeds_capture_budget_refuses(self):
+        self.g.comments = [{
+            "id": 19, "body": "x" * 1_000_001,
+            "author_association": "CONTRIBUTOR", "user": {"login": "user"}
+        }]
+        with self.assertRaisesRegex(CaptureHold, "^COMMENT_TEXT_UNBOUNDED$"):
+            self.do()
+
+    def test_18_repository_numeric_identity_moves_on_final_read(self):
+        self.g.final_repo_id = 43
+        with self.assertRaisesRegex(CaptureHold, "^PROVIDER_REPOSITORY_MOVED_DURING_READ$"):
+            self.do()
+
+    def test_19_standard_wrapped_graph_base64_remains_acceptable(self):
+        original_get = self.g
+        def wrapped(endpoint):
+            value = original_get(endpoint)
+            if "/contents/governance/released-graph.json?" in endpoint:
+                value["content"] = "\\n".join(
+                    value["content"][i:i+60] for i in range(0, len(value["content"]), 60))
+            return value
+        result = capture(self.raw, REPO, git_blob(self.raw), wrapped)
+        self.assertEqual(result["graph_git_blob"], git_blob(self.raw))
+        self.assertEqual(result["repository_id"], 42)
 
 
 if __name__ == "__main__":
