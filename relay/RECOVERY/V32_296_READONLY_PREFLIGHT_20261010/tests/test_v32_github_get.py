@@ -138,5 +138,49 @@ class ReadOnlyGetTests(unittest.TestCase):
             GitHubGetOnly(runner).get_issue(REPO, 0)
         self.assertEqual(runner.commands, [])
 
+    def test_19_ruleset_inventory_fetches_all_pages_not_default_30(self):
+        runner = Runner([[{"id": i} for i in range(100)], [{"id": 100}]])
+        rows = GitHubGetOnly(runner).get_branch_rulesets(REPO, "main")
+        self.assertEqual(len(rows), 101)
+        self.assertIn("per_page=100&page=1", runner.commands[0][0][-1])
+        self.assertIn("per_page=100&page=2", runner.commands[1][0][-1])
+        self.assertTrue(all(x[0][2:4] == ["--method", "GET"] for x in runner.commands))
+
+    def test_20_active_branch_rules_scoped_get_only(self):
+        runner = Runner([[{"type": "required_status_checks", "ruleset_id": 7}]])
+        rows = GitHubGetOnly(runner).get_active_branch_rules(REPO, "release/v1")
+        self.assertEqual(rows[0]["ruleset_id"], 7)
+        self.assertIn("/rules/branches/release%2Fv1?", runner.commands[0][0][-1])
+        self.assertEqual(runner.commands[0][0][2:4], ["--method", "GET"])
+
+    def test_21_applied_branch_rules_paginate_beyond_100(self):
+        runner = Runner([[{"type": "required_status_checks", "ruleset_id": i} for i in range(100)], []])
+        rows = GitHubGetOnly(runner).get_active_branch_rules(REPO, "main")
+        self.assertEqual(len(rows), 100)
+        self.assertEqual(len(runner.commands), 2)
+
+    def test_22_full_ruleset_pages_fail_closed_at_resource_bound(self):
+        runner = Runner([[{"id": 5}] * 100 for _ in range(11)])
+        with self.assertRaisesRegex(GitHubReadError, "RULESET_INVENTORY_UNBOUNDED"):
+            GitHubGetOnly(runner).get_branch_rulesets(REPO, "main")
+        self.assertEqual(len(runner.commands), 11)
+
+    def test_23_active_rules_invalid_page_is_not_empty_result(self):
+        runner = Runner([{"error": "denied"}])
+        with self.assertRaisesRegex(GitHubReadError, "APPLIED_BRANCH_RULES_PAGE_INVALID"):
+            GitHubGetOnly(runner).get_active_branch_rules(REPO, "main")
+
+    def test_24_invalid_branch_path_never_sends_network(self):
+        runner = Runner([])
+        g = GitHubGetOnly(runner)
+        for branch in ("../escape", "refs//heads/main", "/main", "main/..", "."):
+            with self.assertRaisesRegex(GitHubReadError, "INVALID_TARGET_BRANCH"):
+                g.get_branch_rulesets(REPO, branch)
+            with self.assertRaisesRegex(GitHubReadError, "INVALID_TARGET_BRANCH"):
+                g.get_active_branch_rules(REPO, branch)
+            with self.assertRaisesRegex(GitHubReadError, "INVALID_TARGET_BRANCH"):
+                g.get_branch_required_checks(REPO, branch)
+        self.assertEqual(runner.commands, [])
+
 if __name__ == "__main__":
     unittest.main()
