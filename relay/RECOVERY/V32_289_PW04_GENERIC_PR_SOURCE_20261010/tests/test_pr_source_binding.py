@@ -175,5 +175,48 @@ class PW04BindingTests(unittest.TestCase):
         self.assertEqual(result["status"], "SOURCE_BOUND_PREVIEW_NON_ADMITTING")
 
 
+    def full_refs(self):
+        # Exercise the original laboratory's full owner/repo binding shape
+        # without rewriting or interpreting the native DELP implementation.
+        self.graph["programme"]["root"] = f"{REPO}#1"
+        for node in self.graph["nodes"]:
+            for field in ("ref", "parent", "primary_pr"):
+                if field in node:
+                    node[field] = f"{REPO}#{node[field].rsplit('#', 1)[-1]}"
+
+    @unittest.skipUnless((Path(__file__).resolve().parents[4] / "skills" /
+                          "engineering-pr-delivery-v3.2" / "scripts" /
+                          "delp_projection_v32.py").exists(), "native Common source not mounted")
+    def test_26_full_owner_repository_graph_passes_native_structure_preview(self):
+        self.full_refs()
+        data = raw(self.graph)
+        result = preview_source_binding(
+            data, PreviewPins(REPO, 42, oid(data), f"{REPO}#2", SHA),
+            self.repo, self.pr)
+        self.assertEqual(result["primary_pr_number"], 10)
+        self.assertEqual(result["status"], "SOURCE_BOUND_PREVIEW_NON_ADMITTING")
+        self.assertFalse(result["publication_authorized"])
+        self.assertFalse(result["evidence_admitted"])
+
+    def test_27_foreign_full_owner_same_repo_basename_rejected(self):
+        self.full_refs()
+        self.graph["nodes"][1]["primary_pr"] = "intruder/example-lab#10"
+        self.reject("GRAPH_FOREIGN_REFERENCE",
+                    pins=PreviewPins(REPO, 42, oid(raw(self.graph)), f"{REPO}#2", SHA))
+        self.assertEqual(len(self.calls), 1)
+
+    def test_28_valid_full_repo_wrong_pr_number_rejected_by_provider(self):
+        self.full_refs()
+        self.graph["nodes"][1]["primary_pr"] = f"{REPO}#11"
+        self.reject("PROVIDER_PR_IDENTITY_MISMATCH",
+                    pins=PreviewPins(REPO, 42, oid(raw(self.graph)), f"{REPO}#2", SHA))
+
+    def test_29_full_owner_repository_zero_pr_number_refused(self):
+        self.full_refs()
+        self.graph["nodes"][1]["primary_pr"] = f"{REPO}#0"
+        self.reject("GRAPH_REFERENCE_INVALID",
+                    pins=PreviewPins(REPO, 42, oid(raw(self.graph)), f"{REPO}#2", SHA))
+
+
 if __name__ == "__main__":
     unittest.main()
