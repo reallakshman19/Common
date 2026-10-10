@@ -133,3 +133,30 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$TESTED_HEAD"
           node --test relay/RECOVERY/V35_R14_WP2A_20261010/required-ci-material-v1.test.mjs
+
+  t35-native-u02-negative:
+    if: github.event_name == 'pull_request'
+    name: "T35 genuine U02 negative readback (${{ matrix.os }})"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Exact-head native double GET, refusals preserved, no writes
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_HEAD_SHA"
+          node relay/RECOVERY/V35_R14_WP2A_20261010/t35-native-u02-readback.mjs

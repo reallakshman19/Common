@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {observeSelectedRequiredCi} from './required-ci-material-v1.mjs';
+import {t35ReadbackVerdict} from './t35-native-u02-readback.mjs';
 const R='reallakshman19/Common', ID=1412133785,H='a'.repeat(40),H2='b'.repeat(40);
 const BASE='recovery/5-m0-reference-identity-census-20261009';
 const input=()=>({repository:R,repository_id:ID,pr_number:21,head_sha:H,base_branch:BASE});
@@ -11,7 +12,7 @@ function data(){return {
   [p.pr]:{number:21,html_url:'https://github.com/'+R+'/pull/21',
     head:{sha:H,repo:{id:ID,full_name:R}},base:{ref:BASE,repo:{id:ID,full_name:R}}},
   [p.check]:{total_count:1,check_runs:[{id:17,name:'build',status:'completed',conclusion:'success',head_sha:H,app:{id:42}}]},
-  [p.status]:{sha:H,statuses:[]},[p.classic]:{contexts:[],checks:[{context:'build',app_id:42}]},[p.rules]:[],
+  [p.status]:{sha:H,total_count:0,statuses:[]},[p.classic]:{contexts:[],checks:[{context:'build',app_id:42}]},[p.rules]:[],
 };}
 function get(d=data(),observe=()=>{}){let calls=0;return async(repo,path)=>{
   assert.equal(repo,R);observe(++calls,path,d);
@@ -30,7 +31,7 @@ test('U02 native failure-stage reason is fixed across first and second reads',as
     ['FIRST_SELECTED','COMMIT_STATUS_GET_UNVERIFIED',d=>{d[p.status]=new Error('SECRET_PRIVATE_STATUS');}],
     ['FIRST_SELECTED','SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID',d=>{d[p.check].total_count=999;}],
     ['FIRST_SELECTED','CHECK_RUN_SHAPE_OR_SHA_INVALID',d=>{d[p.check].check_runs[0].head_sha=H2;}],
-    ['FIRST_SELECTED','COMMIT_STATUS_SHAPE_INVALID',d=>{d[p.status].statuses=[{context:'bad',state:'unknown'}];}],
+    ['FIRST_SELECTED','COMMIT_STATUS_SHAPE_INVALID',d=>{d[p.status].total_count=1;d[p.status].statuses=[{context:'bad',state:'unknown'}];}],
   ];
   for(const [phase,reason,mutate] of cases){
     const d=data();mutate(d);const r=await run(d);safe(r);
@@ -122,13 +123,13 @@ test('in-progress required check remains pending',async()=>{
 });
 test('legacy status satisfies unrestricted classic context',async()=>{
   const d=data();d[p.check]={total_count:0,check_runs:[]};
-  d[p.status]={sha:H,statuses:[{context:'legacy-ci',state:'success'}]};
+  d[p.status]={sha:H,total_count:1,statuses:[{context:'legacy-ci',state:'success'}]};
   d[p.classic]={contexts:['legacy-ci'],checks:[]};
   assert.equal((await run(d)).required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
 });
 test('legacy status cannot impersonate app-pinned run',async()=>{
   const d=data();d[p.check]={total_count:0,check_runs:[]};
-  d[p.status]={sha:H,statuses:[{context:'build',state:'success'}]};
+  d[p.status]={sha:H,total_count:1,statuses:[{context:'build',state:'success'}]};
   assert.equal((await run(d)).required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
 });
 test('duplicate check identities are ambiguous',async()=>{
@@ -218,5 +219,190 @@ test('T31 zero check count and zero check rows is structurally valid but cannot 
  const x=await run(d);safe(x);
  assert.equal(x.selected_checks_observed,true);
  assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
+ assert.equal(x.evidence_admitted,false);
+});
+
+test('T32 missing or underreported combined status count refuses source, never policy success',async()=>{
+ for(const mutate of [
+  d=>{delete d[p.status].total_count},
+  d=>{d[p.status].total_count=-1},
+  d=>{d[p.status].total_count=1},
+  d=>{d[p.status].total_count=101},
+ ]){
+  const d=data();mutate(d);const x=await run(d);safe(x);
+  assert.equal(x.failure_stage,'FIRST_SELECTED');
+  assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+  assert.equal(x.selected_checks_observed,false);
+  assert.equal(x.required_checks_result,'UNKNOWN');
+ }
+});
+test('T32 a second-round incomplete status page refuses after valid first read',async()=>{
+ const d=data();const x=await run(d,(n,route,m)=>{if(n===8)m[p.status].total_count=1;});
+ safe(x);assert.equal(x.failure_stage,'SECOND_SELECTED');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.snapshot_sha256,null);
+});
+test('T32 bounded complete legacy status page can satisfy an unrestricted required context diagnostically',async()=>{
+ const d=data();d[p.check]={total_count:0,check_runs:[]};
+ d[p.status]={sha:H,total_count:1,statuses:[{context:'legacy-ci',state:'success'}]};
+ d[p.classic]={contexts:['legacy-ci'],checks:[]};
+ const x=await run(d);safe(x);
+ assert.equal(x.selected_checks_observed,true);
+ assert.equal(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+ assert.equal(x.evidence_admitted,false);
+});
+test('T32 declared 100 statuses but 101 rows is incomplete, never valid',async()=>{
+ const d=data();d[p.status]={sha:H,total_count:100,statuses:Array.from({length:101},(_,i)=>({context:'job'+i,state:'success'}))};
+ const x=await run(d);safe(x);
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.required_checks_result,'UNKNOWN');
+});
+
+test('T33 duplicates of the SAME physical GitHub check-run ID are rejected before required matching',async()=>{
+ const d=data();d[p.check].check_runs.push({...d[p.check].check_runs[0]});d[p.check].total_count=2;
+ const x=await run(d);safe(x);
+ assert.equal(x.failure_stage,'FIRST_SELECTED');
+ assert.equal(x.failure_reason,'CHECK_RUN_SHAPE_OR_SHA_INVALID');
+ assert.equal(x.required_checks_result,'UNKNOWN');
+});
+test('T33 reject nonpositive physical run or app IDs even when numeric and structurally shaped',async()=>{
+ for(const field of ['id','app']){
+  for(const n of [0,-1]){
+   const d=data();
+   if(field==='id')d[p.check].check_runs[0].id=n;
+   else d[p.check].check_runs[0].app.id=n;
+   const x=await run(d);safe(x);
+   assert.equal(x.failure_reason,'CHECK_RUN_SHAPE_OR_SHA_INVALID');
+  }
+ }
+});
+test('T33 pending lifecycle with a terminal conclusion or completed with unrecognized conclusion fails closed',async()=>{
+ for(const pair of [
+  ['in_progress','success'],['queued','failure'],['requested','cancelled'],
+  ['completed','not_a_github_conclusion'],['completed',null],
+ ]){
+  const d=data();Object.assign(d[p.check].check_runs[0],{status:pair[0],conclusion:pair[1]});
+  const x=await run(d);safe(x);
+  assert.equal(x.failure_reason,'CHECK_RUN_SHAPE_OR_SHA_INVALID');
+  assert.equal(x.snapshot_sha256,null);
+ }
+});
+test('T33 valid known GitHub terminal nonpass and nonterminal null are never E',async()=>{
+ for(const c of ['success','failure','neutral','skipped','stale','startup_failure','timed_out','cancelled','action_required']){
+  const d=data();d[p.check].check_runs[0].conclusion=c;
+  const x=await run(d);safe(x);
+  assert.equal(x.selected_checks_observed,true);
+  assert.equal(x.evidence_admitted,false);
+  if(c==='success')assert.equal(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+  else assert.notEqual(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+ }
+ for(const status of ['queued','in_progress','waiting','pending','requested']){
+  const d=data();Object.assign(d[p.check].check_runs[0],{status,conclusion:null});
+  const x=await run(d);safe(x);
+  assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
+ }
+});
+
+test('T34 omitted classic App identity means UNKNOWN, never implicit any-app',async()=>{
+ const d=data();delete d[p.classic].checks[0].app_id;
+ const x=await run(d);safe(x);
+ assert.equal(x.selected_checks_observed,true);
+ assert.equal(x.required_check_policy,'UNKNOWN');
+ assert.equal(x.required_checks_result,'UNKNOWN');
+});
+test('T34 omitted ruleset integration identity means UNKNOWN instead of any-app pass',async()=>{
+ const d=data();d[p.classic]={contexts:[],checks:[]};
+ d[p.rules]=[{type:'required_status_checks',parameters:{required_status_checks:[{context:'build'}]}}];
+ const x=await run(d);safe(x);
+ assert.equal(x.required_checks_result,'UNKNOWN');
+ assert.equal(x.required_check_policy,'UNKNOWN');
+});
+test('T34 malformed required check names and app identifiers never certify policy',async()=>{
+ const invalids=[
+  d=>{d[p.classic].checks[0].app_id=-2},
+  d=>{d[p.classic].checks[0].app_id='42'},
+  d=>{d[p.classic].checks[0].context=' '},
+  d=>{d[p.classic].checks[0].context='x'.repeat(251)},
+  d=>{d[p.classic].checks[0].context='bad\u0000job'},
+  d=>{d[p.rules]=[{type:'required_status_checks',parameters:{required_status_checks:[{context:'build',integration_id:-2}]}}]},
+ ];
+ for(const mutate of invalids){
+  const d=data();mutate(d);const x=await run(d);safe(x);
+  assert.equal(x.required_check_policy,'UNKNOWN');
+  assert.equal(x.required_checks_result,'UNKNOWN');
+ }
+});
+test('T34 explicit null or app-scoped check remains valid diagnostic, never authority',async()=>{
+ for(const app of [42,null,-1]){
+  const d=data();d[p.classic].checks[0].app_id=app;
+  const x=await run(d);safe(x);
+  assert.equal(x.required_check_policy,'OBSERVED_CLASSIC_AND_RULESET');
+  if(app===42||app===null)assert.equal(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+  else assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
+  assert.equal(x.evidence_admitted,false);
+ }
+});
+test('T34 second-round policy App identity missing causes fail-closed policy drift',async()=>{
+ const d=data();const x=await run(d,(n,route,m)=>{
+  if(n===9)delete m[p.classic].checks[0].app_id;
+ });
+ safe(x);
+ assert.equal(x.failure_stage,'SOURCE_READBACK');
+ assert.equal(x.failure_reason,'REQUIRED_POLICY_DRIFT');
+ assert.equal(x.required_check_policy,'UNKNOWN');
+});
+
+test('T35 stable current worktree double-read maps only to NONADMITTED native diagnostic',async()=>{
+ const result={...(await run()),source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'};
+ const x=t35ReadbackVerdict(input(),result,H);
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_DIAGNOSTIC_NOT_ADMITTED');
+ assert.equal(x.candidate_head_sha,H);
+ assert.equal(x.evidence_admitted,false);
+ assert.equal(x.required_ci_qualified,false);
+ assert.equal(x.delp_projection,'NOT_CALCULATED');
+ assert.equal(x.writer_authorized,false);
+});
+test('T35 real U02 second-read selected drift is a refusal, never retried or waived',async()=>{
+ const d=data();
+ const result={...(await run(d,(n,route,m)=>{
+  if(n===7)m[p.check].check_runs[0].conclusion='failure';
+ })),source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'};
+ const x=t35ReadbackVerdict(input(),result,H);
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_REFUSAL_NOT_ADMITTED');
+ assert.equal(x.failure_stage,'SOURCE_READBACK');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_DRIFT');
+ assert.equal(x.selected_checks_observed,false);
+ assert.equal(x.release_ready,false);
+});
+test('T35 mismatched source worktree, spoofed PR and forged accepted evidence refuse',async()=>{
+ const native={...(await run()),source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'};
+ const forged=[
+  [input(),native,H2],
+  [{...input(),repository:'reallaksh19/Common'},native,H],
+  [input(),{...native,evidence_admitted:true},H],
+  [input(),{...native,writer_authorized:true},H],
+  [input(),{...native,source_grade:'CALLER_INJECTED_UNATTESTED'},H],
+ ];
+ for(const [i,r,h] of forged){
+  const x=t35ReadbackVerdict(i,r,h);
+  assert.equal(x.status,'SOURCE_UNVERIFIED');
+  assert.equal(x.evidence_admitted,false);
+  assert.equal(x.required_ci_qualified,false);
+ }
+});
+test('T35 provider 404/403 initial PR GET is typed refusal, not fictitious successful source',async()=>{
+ const r=await observeSelectedRequiredCi(input(),async()=>{throw Error('PRIVATE_PROVIDER_403')});
+ const x=t35ReadbackVerdict(input(),{...r,source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'},H);
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_REFUSAL_NOT_ADMITTED');
+ assert.equal(x.failure_stage,'INITIAL_PR');
+ assert.equal(x.failure_reason,null);
+ assert.ok(!JSON.stringify(x).includes('PRIVATE_PROVIDER_403'));
+});
+test('T35 malformed second-round page remains source refusal, never a native pass',async()=>{
+ const r=await run(data(),(n,route,d)=>{if(n===8)d[p.status].total_count=12});
+ const x=t35ReadbackVerdict(input(),{...r,source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'},H);
+ assert.equal(x.failure_stage,'SECOND_SELECTED');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_REFUSAL_NOT_ADMITTED');
  assert.equal(x.evidence_admitted,false);
 });

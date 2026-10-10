@@ -53,14 +53,23 @@ async function identity(input,read){
 function selected(input,checkRuns,combined){
   if(!obj(checkRuns)||!Number.isSafeInteger(checkRuns.total_count)||!Array.isArray(checkRuns.check_runs)||
     checkRuns.total_count!==checkRuns.check_runs.length||checkRuns.check_runs.length>100||
-    !obj(combined)||combined.sha!==input.head_sha||!Array.isArray(combined.statuses)||combined.statuses.length>100)
+    !obj(combined)||combined.sha!==input.head_sha||!Array.isArray(combined.statuses)||
+    !Number.isSafeInteger(combined.total_count)||combined.total_count!==combined.statuses.length||combined.statuses.length>100)
     throw new SourceFault('SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+  const runIds=new Set();
+  const completed=new Set(['success','failure','neutral','cancelled','skipped','timed_out',
+    'action_required','startup_failure','stale']);
+  const states=new Set(['queued','in_progress','completed','waiting','pending','requested']);
   const runs=checkRuns.check_runs.map(x=>{
-    if(!obj(x)||!Number.isSafeInteger(x.id)||typeof x.name!=='string'||!x.name||
-      x.head_sha!==input.head_sha||!['queued','in_progress','completed','waiting','pending','requested'].includes(x.status)||
-      (x.status==='completed'&&typeof x.conclusion!=='string')||!Number.isSafeInteger(x.app?.id))
+    if(!obj(x)||!Number.isSafeInteger(x.id)||x.id<=0||runIds.has(x.id)||
+      typeof x.name!=='string'||!x.name||
+      x.head_sha!==input.head_sha||!states.has(x.status)||
+      (x.status==='completed'?!completed.has(x.conclusion):x.conclusion!==null&&x.conclusion!==undefined)||
+      !Number.isSafeInteger(x.app?.id)||x.app.id<=0)
       throw new SourceFault('CHECK_RUN_SHAPE_OR_SHA_INVALID');
-    return {kind:'CHECK_RUN',name:x.name,app_id:x.app.id,run_id:x.id,state:x.status,conclusion:x.conclusion||null};
+    runIds.add(x.id);
+    return {kind:'CHECK_RUN',name:x.name,app_id:x.app.id,run_id:x.id,
+      state:x.status,conclusion:x.status==='completed'?x.conclusion:null};
   });
   const statuses=combined.statuses.map(x=>{
     if(!obj(x)||typeof x.context!=='string'||!x.context||!['success','failure','error','pending'].includes(x.state))
@@ -74,17 +83,25 @@ function required(classic,rules){
     throw Error('REQUIRED_POLICY_NOT_READABLE');
   const refs=[];
   const add=(name,appId,origin)=>{
-    if(typeof name!=='string'||!name||!(appId===null||Number.isSafeInteger(appId)))throw Error('REQUIRED_CHECK_MALFORMED');
+    if(typeof name!=='string'||!name.trim()||name.length>250||/[\x00-\x1f\x7f]/.test(name)||
+      !(appId===null||(Number.isSafeInteger(appId)&&appId>=-1)))
+      throw Error('REQUIRED_CHECK_MALFORMED');
     refs.push({name,app_id:appId,origin});
   };
   for(const n of classic.contexts)add(n,null,'CLASSIC');
-  for(const c of classic.checks){if(!obj(c))throw Error('CLASSIC_CHECK_MALFORMED');add(c.context,c.app_id??null,'CLASSIC');}
+  for(const c of classic.checks){
+    if(!obj(c)||!Object.hasOwn(c,'app_id'))throw Error('CLASSIC_CHECK_MALFORMED');
+    add(c.context,c.app_id,'CLASSIC');
+  }
   for(const rule of rules){
-    if(!obj(rule)||typeof rule.type!=='string')throw Error('RULE_MALFORMED');
+    if(!obj(rule)||typeof rule.type!=='string'||!rule.type)throw Error('RULE_MALFORMED');
     if(rule.type!=='required_status_checks')continue;
     const rc=rule.parameters?.required_status_checks;
     if(!Array.isArray(rc))throw Error('RULE_REQUIRED_CHECKS_MALFORMED');
-    for(const c of rc){if(!obj(c))throw Error('RULE_REQUIRED_CHECK_MALFORMED');add(c.context,c.integration_id??null,'RULESET');}
+    for(const c of rc){
+      if(!obj(c)||!Object.hasOwn(c,'integration_id'))throw Error('RULE_REQUIRED_CHECK_MALFORMED');
+      add(c.context,c.integration_id,'RULESET');
+    }
   }
   return refs.sort(sort).filter((v,i,a)=>i===0||JSON.stringify(v)!==JSON.stringify(a[i-1]));
 }
