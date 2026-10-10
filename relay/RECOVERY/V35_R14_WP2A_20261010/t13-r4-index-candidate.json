@@ -1,0 +1,86 @@
+{
+  "schema": "common-v35-294-t13-r4-index-candidate-v1",
+  "kind": "UNADOPTED_REPOSITORY_INDEX_CANDIDATE",
+  "authority": "CODER_READ_ONLY_FIXTURE_NOT_GOVERNED",
+  "repository": "reallakshman19/Common",
+  "repository_id": 1412133785,
+  "source": {
+    "pr_number": 308,
+    "head_sha": "087cf43193febffc31375e71359e767489d3ae68",
+    "base_sha": "4f4dfa0497169d51ab86fbc27db1598121c6f25e",
+    "head_ref": "codex/294-t05-wp2a-wp2b-negative-same-head",
+    "base_ref": "codex/294-t01-wp2a-u02-u03-u04-pinned"
+  },
+  "issue_links": [
+    {
+      "role": "programme",
+      "number": 5,
+      "url": "https://github.com/reallakshman19/Common/issues/5"
+    },
+    {
+      "role": "e2e_tracker",
+      "number": 284,
+      "url": "https://github.com/reallakshman19/Common/issues/284"
+    },
+    {
+      "role": "coordination",
+      "number": 294,
+      "url": "https://github.com/reallakshman19/Common/issues/294"
+    },
+    {
+      "role": "wp2a_source",
+      "number": 20,
+      "url": "https://github.com/reallakshman19/Common/issues/20"
+    },
+    {
+      "role": "wp2b_consumer",
+      "number": 30,
+      "url": "https://github.com/reallakshman19/Common/issues/30"
+    },
+    {
+      "role": "owner_admission",
+      "number": 289,
+      "url": "https://github.com/reallakshman19/Common/issues/289"
+    },
+    {
+      "role": "cold_successor",
+      "number": 288,
+      "url": "https://github.com/reallakshman19/Common/issues/288"
+    },
+    {
+      "role": "independent_review",
+      "number": 12,
+      "url": "https://github.com/reallakshman19/Common/issues/12"
+    }
+  ],
+  "evidence_links": [
+    {
+      "role": "t05_native_source",
+      "issue_number": 294,
+      "comment_id": 6099941506,
+      "url": "https://github.com/reallakshman19/Common/issues/294#issuecomment-6099941506"
+    },
+    {
+      "role": "t11_cold_entry",
+      "issue_number": 294,
+      "comment_id": 6100475989,
+      "url": "https://github.com/reallakshman19/Common/issues/294#issuecomment-6100475989"
+    },
+    {
+      "role": "t12_stale_refusal",
+      "issue_number": 294,
+      "comment_id": 6100703214,
+      "url": "https://github.com/reallakshman19/Common/issues/294#issuecomment-6100703214"
+    }
+  ],
+  "unresolved": [
+    "OWNER_D1_D5_PENDING",
+    "NO_AUTHENTIC_POSITIVE_E",
+    "REVIEW_NOT_QUALIFIED",
+    "REQUIRED_CI_POLICY_UNKNOWN",
+    "NO_CANONICAL_INDEX",
+    "INDEPENDENT_R4_NOT_RUN",
+    "NO_LOCAL_WRITER_CUSTODY"
+  ],
+  "allowed_next_step": "READ_ONLY_RECONCILE_WITH_GOVERNED_SOURCES"
+}
