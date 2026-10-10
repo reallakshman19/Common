@@ -35,6 +35,9 @@ class FakeProvider:
         self.sha = H1
         self.base = MAIN
         self.repo_id = 112233
+        self.pr_base_repository = REPO
+        self.pr_base_repo_id = 112233
+        self.pr_base_ref = "main"
         self.checks = [{"name": "build", "head_sha": H1, "status": "completed", "conclusion": "success"}]
         self.comments = [{"id": 1, "body": "historical comment"}]
         self.call_mutator = None
@@ -61,7 +64,13 @@ class FakeProvider:
 
     def get_pull(self, repository, number):
         self._before("pull")
-        return {"number": 10, "head": {"sha": self.sha}, "base": {"ref": "main"}}
+        return {
+            "number": 10, "head": {"sha": self.sha},
+            "base": {
+                "ref": self.pr_base_ref,
+                "repo": {"id": self.pr_base_repo_id, "full_name": self.pr_base_repository},
+            },
+        }
 
     def get_issue_comments(self, repository, number):
         self._before("comments")
@@ -233,6 +242,36 @@ class V32ProviderPreflightTests(unittest.TestCase):
         self.assertIsNone(v["accepted_evidence_count"])
         self.assertFalse(v["writer_authorized"])
         self.assertFalse(v["delp_invoked"])
+
+    def test_21_foreign_provider_pr_base_repository_rejected(self):
+        p = FakeProvider()
+        p.pr_base_repository = "historic/v32-proto"
+        v = inspect_v32_read_only(target(), p)
+        self.assertIn("PROVIDER_PR_BASE_REPOSITORY_MISMATCH", v.reasons)
+        self.assertEqual(v.status, "HOLD_PROVIDER_READ")
+
+    def test_22_provider_pr_base_id_changed_rejected(self):
+        p = FakeProvider()
+        p.pr_base_repo_id = 998877
+        v = inspect_v32_read_only(target(), p)
+        self.assertIn("PROVIDER_PR_BASE_REPOSITORY_MISMATCH", v.reasons)
+
+    def test_23_provider_pr_retarget_midcycle_rejected(self):
+        p = FakeProvider()
+        def retarget(kind, count, this):
+            if kind == "pull" and count == 7:
+                this.pr_base_ref = "release"
+        p.call_mutator = retarget
+        v = inspect_v32_read_only(target(), p)
+        self.assertIn("PROVIDER_PR_MOVED_IN_CYCLE", v.reasons)
+        self.assertEqual(v.pass_count, 0)
+
+    def test_24_missing_provider_pr_base_identity_rejected(self):
+        p = FakeProvider()
+        p.pr_base_repository = None
+        v = inspect_v32_read_only(target(), p)
+        self.assertEqual(v.status, "HOLD_PROVIDER_READ")
+        self.assertIn("PROVIDER_PR_BASE_REPOSITORY_MISMATCH", v.reasons)
 
 if __name__ == "__main__":
     unittest.main()
