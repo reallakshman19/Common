@@ -280,7 +280,7 @@ class V32ProviderPreflightTests(unittest.TestCase):
             "body": (
                 "```yaml\nCHECKPOINT_FACTS_V1:\n"
                 "  responsibility: {issue: v32-proto#4}\n"
-                "  material: {candidate_sha: " + H1 + "}\n"
+                "  material: {candidate_sha: '" + H1 + "'}\n"
                 "  units:\n"
                 "    - id: U01\n"
                 "      state: COMPLETE\n"
