@@ -23,7 +23,7 @@ separately approved V3.2 evidence-identity repair. This source tree does not edi
   provider issue comments; aggregate observation only, not an admitted fact. Claims that say VERIFIED do not become verified evidence.
 - `v32_readonly_cli.py`: command line wrapper, output as structured JSON; exit 1 on
   invalid material and exit 2 on HOLD. **Exit 0 is impossible by design.**
-- `tests/`: 102 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
+- `tests/`: 112 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
   NEGATIVE ORACLES for this tool, not real V3.2 positive engineering qualification.
 
 ## Regression run
@@ -111,7 +111,7 @@ or author identifiers.
 
 Testing the comment observer requires `PyYAML==6.0.2` alongside Python
 3.11/3.12/3.13. The scoped CI matrix installs that dependency and executes
-102 synthetic and real-native-parser regression cases. Real GET-only
+112 synthetic and real-native-parser regression cases. Real GET-only
 qualification remains negative by design.
 
 ### Numeric-SHA YAML edge case
@@ -189,3 +189,46 @@ The scoped workflow also executes the existing
 **directly** in a separate read-only job with Python 3.12, PyYAML and jsonschema,
 instead of claiming the unrelated path-skipped V3.2 wrapper exercised it.
 This source-quality job is distinct from production evidence qualification.
+
+## H8: Actual native V3.2 C6 source-bound read model, no grant
+
+`v32_c6_preview.py` binds the existing two-pass read-only preflight to the
+**unchanged** `skills/engineering-pr-delivery-v3.2/scripts/handover_context.py::
+build_delp_source_bound_successor` through a GET-only provider adapter. The
+native handover source itself invokes the existing V3.2 DELP, retains the
+three shared graph/plan/input digests, reads issue titles/bodies and PR candidate
+heads twice, and reconciles against an optional frozen digest basis.
+
+```sh
+python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_c6_readonly_cli.py \
+  --repository <owner/repo> --repository-id <verified-repository-id> \
+  --graph-path <approved-repo-relative-graph.json> \
+  --leaf-ref <repo#issue> --pr-number <bound-number>
+```
+
+**No result can emit production positive E or an admitted successor**.
+`HOLD_C6_SOURCE_UNADMITTED` indicates only internally coherent, read-only
+source consumption; it does not authenticate the original Owner, graph
+release, an eligible `CHECKPOINT_FACTS_V1`, two qualified reviewers, effective
+required checks or writer custody. A moved source basis becomes
+`HOLD_C6_RECONCILE_REQUIRED`; foreign old-repo graph, provider errors and
+malformed graph fail closed before native C6 invocation. The output omits all
+provisional DELP P/E percentages and imperative continuation advice.
+
+The replay tests use the repository's shipped **historical**
+`.github/v32-evidence-spine/fixtures/718-c0-source-graph.json` only through
+a local fake GET provider, **not** as an approved new-repo graph or real
+product/source evidence. An initial hand-built toy graph passed basic native
+`validate_graph` yet failed native C6's *Proposal-V2 release-state* gate;
+the fixture was repaired rather than bypassing C6. The shipped fixture is
+necessary to exercise the existing native C6 contract without fabricating an
+Owner release. Tests cover repeat-read equality, candidate H1→H2 drift,
+parent issue title drift, wrong repo, missing native units, inaccessible
+issue and incomplete frozen basis.
+
+The dedicated CI also executes the existing frozen native V3.2
+`test_handover_context.py` directly; it is independent of path-skipping
+PR wrapper checks and of the auxiliary 112-case negative suite. No
+`gh api` POST, PATCH, merge, protected source write or new projector is
+introduced. In the historical live GET control, the CLI **must refuse**
+the old repository graph before native C6 can consume it.
