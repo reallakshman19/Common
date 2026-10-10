@@ -18,6 +18,7 @@ from typing import Any, Mapping, Protocol
 
 from v32_admission_probe import ObservedCheck, ProbeReport, SourceSelection, probe_v32_fact
 from v32_fact_claims import audit_native_comment_claims
+from v32_native_graph import inspect_native_graph_structure
 
 _SHA = r"[0-9a-f]{40}"
 
@@ -130,15 +131,13 @@ def _round(target: PreflightTarget, getter: ReadOnlyGetter) -> dict[str, Any]:
         raise ValueError("PROVIDER_GRAPH_STRUCTURE_INVALID")
     if str(graph["programme"].get("repository") or "").lower() != target.repository.lower():
         raise ValueError("PROVIDER_GRAPH_REPOSITORY_MISMATCH")
-    nodes = graph.get("nodes")
-    if not isinstance(nodes, list):
-        raise ValueError("PROVIDER_GRAPH_NODES_INVALID")
-    found = [n for n in nodes if isinstance(n, dict) and n.get("ref") == target.leaf_ref and n.get("kind") == "LEAF"]
-    if len(found) != 1:
-        raise ValueError("PROVIDER_GRAPH_LEAF_NOT_BOUND")
-    pr_ref = found[0].get("primary_pr")
-    if not isinstance(pr_ref, str) or not _ref(pr_ref, target.repository, target.pr_number):
-        raise ValueError("PROVIDER_GRAPH_PR_NOT_BOUND")
+    # The old subset check failed to enforce native parent relations, declared
+    # units, unit weights and graph topology. Invoke the actual V3.2 validator
+    # rather than reimplementing it. Structural validation is NOT release.
+    native_graph = inspect_native_graph_structure(
+        graph, expected_repository=target.repository,
+        expected_leaf=target.leaf_ref, expected_pr=target.pr_number,
+    )
     pull = getter.get_pull(target.repository, target.pr_number)
     if pull.get("number") != target.pr_number:
         raise ValueError("PROVIDER_PR_NUMBER_MISMATCH")
@@ -204,7 +203,8 @@ def _round(target: PreflightTarget, getter: ReadOnlyGetter) -> dict[str, Any]:
             "candidate_sha": candidate_sha, "selected_checks": selected_checks,
             "observed_pr_repository": str(base_identity["full_name"]),
             "observed_pr_number": pull["number"],
-            "comment_claims": comment_claims}
+            "comment_claims": comment_claims,
+            "native_graph": native_graph}
 
 
 def inspect_v32_read_only(
