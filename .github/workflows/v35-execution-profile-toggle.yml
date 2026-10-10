@@ -7,7 +7,6 @@ on:
       - 'skills/engineering-pr-delivery-v3.5/SKILL.md'
       - 'skills/engineering-pr-delivery-v3.5/tests/test_execution_profiles_v35.py'
       - '.github/workflows/v35-execution-profile-toggle.yml'
-  workflow_dispatch:
 
 permissions:
   contents: read
