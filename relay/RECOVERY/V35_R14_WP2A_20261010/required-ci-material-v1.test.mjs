@@ -256,3 +256,48 @@ test('T32 declared 100 statuses but 101 rows is incomplete, never valid',async()
  assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
  assert.equal(x.required_checks_result,'UNKNOWN');
 });
+
+test('T33 duplicates of the SAME physical GitHub check-run ID are rejected before required matching',async()=>{
+ const d=data();d[p.check].check_runs.push({...d[p.check].check_runs[0]});d[p.check].total_count=2;
+ const x=await run(d);safe(x);
+ assert.equal(x.failure_stage,'FIRST_SELECTED');
+ assert.equal(x.failure_reason,'CHECK_RUN_SHAPE_OR_SHA_INVALID');
+ assert.equal(x.required_checks_result,'UNKNOWN');
+});
+test('T33 reject nonpositive physical run or app IDs even when numeric and structurally shaped',async()=>{
+ for(const field of ['id','app']){
+  for(const n of [0,-1]){
+   const d=data();
+   if(field==='id')d[p.check].check_runs[0].id=n;
+   else d[p.check].check_runs[0].app.id=n;
+   const x=await run(d);safe(x);
+   assert.equal(x.failure_reason,'CHECK_RUN_SHAPE_OR_SHA_INVALID');
+  }
+ }
+});
+test('T33 pending lifecycle with a terminal conclusion or completed with unrecognized conclusion fails closed',async()=>{
+ for(const pair of [
+  ['in_progress','success'],['queued','failure'],['requested','cancelled'],
+  ['completed','not_a_github_conclusion'],['completed',null],
+ ]){
+  const d=data();Object.assign(d[p.check].check_runs[0],{status:pair[0],conclusion:pair[1]});
+  const x=await run(d);safe(x);
+  assert.equal(x.failure_reason,'CHECK_RUN_SHAPE_OR_SHA_INVALID');
+  assert.equal(x.snapshot_sha256,null);
+ }
+});
+test('T33 valid known GitHub terminal nonpass and nonterminal null are never E',async()=>{
+ for(const c of ['success','failure','neutral','skipped','stale','startup_failure','timed_out','cancelled','action_required']){
+  const d=data();d[p.check].check_runs[0].conclusion=c;
+  const x=await run(d);safe(x);
+  assert.equal(x.selected_checks_observed,true);
+  assert.equal(x.evidence_admitted,false);
+  if(c==='success')assert.equal(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+  else assert.notEqual(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+ }
+ for(const status of ['queued','in_progress','waiting','pending','requested']){
+  const d=data();Object.assign(d[p.check].check_runs[0],{status,conclusion:null});
+  const x=await run(d);safe(x);
+  assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
+ }
+});
