@@ -5,6 +5,8 @@ Synthetic provider material only; never accepts or publishes a production fact.
 from __future__ import annotations
 from copy import deepcopy
 from hashlib import sha1
+import os
+import stat
 import json
 from pathlib import Path
 import sys
@@ -16,6 +18,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from pr_source_binding import BindingError, PreviewPins
+import v32_integrated_shadow as shadow_module
 from v32_integrated_shadow import CycleHold, SnapshotGET, integrated_shadow, _native_modules, main as shadow_main
 
 REPO = "author/example-lab"
@@ -274,6 +277,57 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
         del self.source["main_sha"]
         with self.assertRaisesRegex(CycleHold, "^SOURCE_SNAPSHOT_MAIN_SHA_INVALID$"):
             self.cycle()
+
+
+    def test_23_managed_pr_second_replay_is_byte_identical(self):
+        report = self.cycle()
+        _, views = _native_modules()
+        preview = report["pr_body_preview"]
+        second = views.reconcile_managed_block(
+            preview, report["pr_managed_block"],
+            observed_digest=views.digest(preview), pr=True)
+        self.assertEqual(preview, second)
+        self.assertTrue(report["pr_view_second_pass_unchanged"])
+        self.assertTrue(preview.startswith("Original human PR body."))
+        self.assertIn("Human acceptance is not granted.", preview)
+
+    @unittest.skipUnless(os.name == "posix", "POSIX file mode")
+    def test_24_shadow_cli_private_output_0600(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            snapshot = Path(directory) / "snapshot.json"
+            report = Path(directory) / "report.json"
+            graph.write_bytes(self.binary)
+            snapshot.write_text(json.dumps(self.source), encoding="utf-8")
+            argv = ["v32_integrated_shadow.py", "--graph", str(graph),
+                    "--snapshot", str(snapshot), "--repository-id", "42",
+                    "--leaf", self.pin.leaf_ref, "--graph-blob",
+                    self.pin.released_graph_blob_oid, "--head", HEAD,
+                    "--output", str(report)]
+            with patch.object(sys, "argv", argv), redirect_stdout(StringIO()):
+                self.assertEqual(shadow_main(), 0)
+            self.assertEqual(stat.S_IMODE(report.stat().st_mode), 0o600)
+
+    def test_25_shadow_write_failure_removes_partial_file(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            snapshot = Path(directory) / "snapshot.json"
+            report = Path(directory) / "report.json"
+            graph.write_bytes(self.binary)
+            snapshot.write_text(json.dumps(self.source), encoding="utf-8")
+            argv = ["v32_integrated_shadow.py", "--graph", str(graph),
+                    "--snapshot", str(snapshot), "--repository-id", "42",
+                    "--leaf", self.pin.leaf_ref, "--graph-blob",
+                    self.pin.released_graph_blob_oid, "--head", HEAD,
+                    "--output", str(report)]
+            def fail_dump(value, stream, **kwargs):
+                stream.write("INCOMPLETE_RECORD")
+                raise OSError("write failed")
+            with patch.object(sys, "argv", argv), patch.object(
+                    shadow_module.json, "dump", side_effect=fail_dump):
+                with self.assertRaises(OSError):
+                    shadow_main()
+            self.assertFalse(report.exists())
 
 
 if __name__ == "__main__":
