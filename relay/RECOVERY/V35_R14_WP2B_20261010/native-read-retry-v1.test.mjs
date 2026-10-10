@@ -47,3 +47,15 @@ test('the logger cannot approve or transform the actual returned result', async 
   const result=await observeNativeWithUnknownRetry(LOCATOR,async()=>UNKNOWN,x=>received.push(x));
   assert.equal(result,UNKNOWN);assert.equal(result.admission,'NOT_ADMITTED');assert.equal(received.length,2);
 });
+
+test('caller-supplied attempt field cannot forge helper-owned retry audit sequence', async () => {
+  const first=Object.freeze({source_status:'UNKNOWN',admission:'NOT_ADMITTED',native_read_attempt:900});
+  const second=Object.freeze({source_status:'REFERENCES_COHERENT_BUT_UNADMITTED',admission:'NOT_ADMITTED',native_read_attempt:999});
+  const logged=[];
+  const inputs=[first,second];
+  const returned=await observeNativeWithUnknownRetry(LOCATOR,async()=>inputs.shift(),line=>logged.push(JSON.parse(line)));
+  assert.equal(returned,second);
+  assert.equal(returned.native_read_attempt,999); // Returned observation is never modified or laundered.
+  assert.deepEqual(logged.map(x=>x.native_read_attempt),[1,2]);
+  assert.ok(logged.every(x=>x.admission==='NOT_ADMITTED'));
+});
