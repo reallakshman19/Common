@@ -1,4 +1,4 @@
-name: V3.5 #294 T02 exact-head native U01-U04 composite (read-only)
+name: "V3.5 #294 T02 exact-head native U01-U04 composite (read-only)"
 
 on:
   pull_request:
