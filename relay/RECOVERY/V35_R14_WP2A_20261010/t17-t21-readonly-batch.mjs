@@ -96,14 +96,29 @@ export function t20(paths){
  const expected=['.github/workflows/engineering-pr-delivery-v2.5.yml','.github/workflows/engineering-pr-delivery-v3.yml'];const missing=expected.filter(p=>!paths.includes(p));
  return {...b,verdict:missing.length?'RETIRED_WORKFLOW_PATHS_ABSENT':'LEGACY_PATHS_PRESENT',missing};
 }
+/* T25: a stable diagnostic is never a qualified Owner/effective-CI gate.
+ * The fold is deliberately incapable of returning a release-ready result. */
 export function t21(v){
- const b={schema:'v35-294-t21',first_failed_edge:null,verdict:'HOLD_DIAGNOSTIC',release_ready:false,...NO};
- if(!v||v.ci?.schema!=='v35-294-t17'||v.u03?.schema!=='v35-294-t18'||v.policy?.schema!=='v35-294-t19'||v.legacy?.schema!=='v35-294-t20'||Object.values(v).some(x=>x.evidence_admitted!==false||x.writer_authorized!==false))return {...b,first_failed_edge:'INPUT_UNVERIFIED'};
- if(!v.ci.delta||v.ci.verdict==='SELECTED_CHECKS_DRIFT')return {...b,first_failed_edge:'U02'};
- if(v.u03.verdict==='SAME_INVOCATION_U03_REASON'||v.u03.verdict==='INNER_REASON_NOT_CAPTURED')return {...b,first_failed_edge:'U03'};
- if(v.policy.policy==='UNKNOWN')return {...b,first_failed_edge:'REQUIRED_POLICY'};
- if(v.legacy.verdict!=='LEGACY_PATHS_PRESENT')return {...b,first_failed_edge:'V31_WORKFLOW_PATHS'};
- return {...b,verdict:'DIAGNOSTICS_CLEAR_NO_AUTHORITY'};
+ const b={schema:'v35-294-t21',first_failed_edge:null,verdict:'HOLD_DIAGNOSTIC',
+  release_ready:false,unproven_gates:['OWNER_D1_D5','EFFECTIVE_REQUIRED_CI',
+    'V31_EXACT_HEAD','U03_HISTORICAL_CAUSE','INDEPENDENT_REVIEW','LOCAL_CUSTODY'],...NO};
+ if(!v||v.ci?.schema!=='v35-294-t17'||v.u03?.schema!=='v35-294-t18'||
+  v.policy?.schema!=='v35-294-t19'||v.legacy?.schema!=='v35-294-t20'||
+  Object.values(v).some(x=>x?.evidence_admitted!==false||x?.writer_authorized!==false))
+  return {...b,first_failed_edge:'INPUT_UNVERIFIED'};
+ if(v.ci.verdict!=='DIAGNOSTIC_ONLY'||v.ci.delta?.classification!=='STABLE')
+  return {...b,first_failed_edge:'U02'};
+ if(!['NO_U03_REFUSAL_IN_SAMPLE','SAME_INVOCATION_U03_REASON'].includes(v.u03.verdict))
+  return {...b,first_failed_edge:'U03_UNVERIFIED'};
+ if(v.u03.verdict==='SAME_INVOCATION_U03_REASON')
+  return {...b,first_failed_edge:'U03'};
+ if(v.policy.policy!=='OBSERVED_DIAGNOSTIC_ONLY')
+  return {...b,first_failed_edge:'REQUIRED_POLICY'};
+ if(v.legacy.verdict!=='LEGACY_PATHS_PRESENT')
+  return {...b,first_failed_edge:'V31_WORKFLOW_PATHS'};
+ // No native, independently verified required-status-check policy or V3.1
+ // exact-head run is supplied here. Neither can be inferred from a path list.
+ return {...b,first_failed_edge:'EFFECTIVE_CI_AND_V31_NOT_QUALIFIED'};
 }
 async function main(){
  const sha=process.env.CANDIDATE_HEAD_SHA||'',pr=Number(process.env.CANDIDATE_PR_NUMBER),base=process.env.CANDIDATE_BASE_REF||'';
