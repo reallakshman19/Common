@@ -89,10 +89,25 @@ async function readNative(r,p,token){
 async function main(){
   const head=process.env.CANDIDATE_HEAD_SHA||'',pr=Number(process.env.CANDIDATE_PR_NUMBER),base=process.env.CANDIDATE_BASE_REF||'';
   if(!HEAD.test(head)||pr!==306||!base||base.includes('..'))throw Error('INVALID_PINNED_INPUT');
-  const result=await diagnoseU02SelectedDrift({repository:REPO,repository_id:1412133785,pr_number:pr,head_sha:head,base_branch:base},
-    (r,p)=>readNative(r,p,process.env.GITHUB_TOKEN||''));
-  console.log(JSON.stringify(result,null,2));
-  console.log('T03_DIAGNOSTIC_ONLY='+result.diagnosis+'; NO_EVIDENCE_ADMISSION');
+  // Bounded independent diagnostic WINDOWS only. These are not U02 source
+  // retries and do not upgrade any failed/unknown U02 material to evidence.
+  // Stop at the first real selected-source drift; otherwise report only
+  // sampled stability, never production CI qualification.
+  const samples=[];
+  for(let i=0;i<6;i++){
+    const result=await diagnoseU02SelectedDrift({repository:REPO,repository_id:1412133785,pr_number:pr,head_sha:head,base_branch:base},
+      (r,p)=>readNative(r,p,process.env.GITHUB_TOKEN||''));
+    samples.push({sample:i+1,...result});
+    if(result.u02_failure_reason==='SELECTED_CHECKS_DRIFT'&&result.selected_delta&&result.selected_delta.classification!=='STABLE')break;
+    if(i<5)await new Promise(resolve=>setTimeout(resolve,1000));
+  }
+  const witnessed=samples.find(s=>s.u02_failure_reason==='SELECTED_CHECKS_DRIFT'&&s.selected_delta&&s.selected_delta.classification!=='STABLE');
+  console.log(JSON.stringify({schema:'common-v35-294-t03-bounded-live-samples-v1',head_sha:head,
+    sample_count:samples.length,observed_selected_drift:!!witnessed,
+    samples:samples.map(s=>({sample:s.sample,diagnosis:s.diagnosis,u02_failure_stage:s.u02_failure_stage,
+      u02_failure_reason:s.u02_failure_reason,selected_delta:s.selected_delta})),
+    authority:'DIAGNOSIS_ONLY',evidence_admitted:false,positive_ci_qualified:false},null,2));
+  console.log('T03_DIAGNOSTIC_ONLY='+(witnessed?'REAL_SELECTED_DRIFT_ISOLATED':'NO_DRIFT_IN_SAMPLED_WINDOWS')+'; NO_EVIDENCE_ADMISSION');
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   main().catch(()=>{console.error('T03_DIAGNOSTIC_UNVERIFIED; no provider body disclosed');process.exitCode=1;});
