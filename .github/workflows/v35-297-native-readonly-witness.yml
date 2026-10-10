@@ -1,0 +1,112 @@
+name: v35-297-native-readonly-witness
+
+# A bounded prototype test, not a production event writer or graph selector.
+# The existing programme #5 still lacks an adopted cold-entry graph root.
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.5/scripts/integration_prototype_witness_v35.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_integration_prototype_witness_v35.py'
+      - '.github/workflows/v35-297-native-readonly-witness.yml'
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  focused-and-native:
+    # Do not turn another PR into a synthetic #297 authority/evidence event.
+    if: github.event.pull_request.number == 298
+    name: witness-python-${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - name: Checkout the exact PR head (not the synthetic merge ref)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Verify exact candidate and run focused source tests
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          python -m py_compile \
+            skills/engineering-pr-delivery-v3.5/scripts/integration_prototype_witness_v35.py \
+            skills/engineering-pr-delivery-v3.5/tests/test_integration_prototype_witness_v35.py
+          python -m unittest discover \
+            -s skills/engineering-pr-delivery-v3.5/tests \
+            -p 'test_integration_prototype_witness_v35.py' -v
+
+      - name: Real GitHub GET source-currentness and stale-head falsifier
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$REPO" = "reallakshman19/Common"
+          command -v gh
+          source_file=skills/engineering-pr-delivery-v3.5/scripts/integration_prototype_witness_v35.py
+          set +e
+          python "$source_file" --repository "$REPO" \
+            --repository-id 1412133785 --root 5 --leaf 297 --pr 298 --expected-head "$EXPECTED_HEAD" \
+            > "$RUNNER_TEMP/witness-current.json"
+          current_rc=$?
+          python "$source_file" --repository "$REPO" \
+            --repository-id 1412133785 --root 5 --leaf 297 --pr 298 --expected-head "0000000000000000000000000000000000000000" \
+            > "$RUNNER_TEMP/witness-stale.json"
+          stale_rc=$?
+          set -e
+          test "$current_rc" -eq 3
+          test "$stale_rc" -eq 3
+          python - "$RUNNER_TEMP/witness-current.json" \
+            "$RUNNER_TEMP/witness-stale.json" "$EXPECTED_HEAD" <<'PY'
+          import json
+          import sys
+          with open(sys.argv[1], encoding="utf-8") as f:
+              current = json.load(f)
+          with open(sys.argv[2], encoding="utf-8") as f:
+              stale = json.load(f)
+          head = sys.argv[3]
+          assert current["repository"] == "reallakshman19/Common"
+          assert current["expected_repository_id"] == 1412133785
+          assert current["observed_repository_id"] == 1412133785
+          assert current["root_issue"] == 5
+          assert current["leaf_issue"] == 297
+          assert current["pr_number"] == 298
+          assert current["observed_head"] == head
+          assert current["provider_material"] == "SOURCE_HEAD_DOUBLE_READ_MATCH"
+          assert current["status"] in (
+              "HOLD_ROOT_NOT_GOVERNED",
+              "HOLD_NO_PROVIDER_APPROVED_GRAPH",
+              "HOLD_LOCAL_AND_ACCEPTANCE_NOT_PROVEN",
+          ), current["status"]
+          assert stale["status"] == "HOLD_EXPECTED_HEAD_MOVED", stale["status"]
+          assert stale["observed_head"] == head
+          assert stale["expected_repository_id"] == 1412133785
+          assert stale["observed_repository_id"] == 1412133785
+          for item in (current, stale):
+              assert item["prototype_qualified"] is False
+              assert item["positive_evidence_admission"] == "NOT_DERIVED"
+              assert item["delp_progress"] == "NOT_CALCULATED"
+              assert item["effective_required_checks"] == "UNKNOWN"
+              assert item["local_writer"] == "NOT_GRANTED_BY_WITNESS"
+              assert item["merge_authority"] == "NOT_GRANTED_BY_WITNESS"
+              assert item["github_writes"] == "NONE"
+          print("NATIVE_PROVIDER_GET=VERIFIED_HOLD; STALE_HEAD=REJECTED")
+          print("NATIVE_STATUS=" + current["status"])
+          print("EXACT_CANDIDATE=" + head)
+          PY
