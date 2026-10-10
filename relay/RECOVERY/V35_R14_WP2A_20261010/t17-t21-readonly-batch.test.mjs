@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {t17,t18,t19,t20,t21,t26U03SourceScope} from './t17-t21-readonly-batch.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {t17,t18,t19,t20,t21,t26U03SourceScope,t27ObservedExactHeadChecks} from './t17-t21-readonly-batch.mjs';
 const H='a'.repeat(40),I={repository:'reallakshman19/Common',repository_id:1412133785,pr_number:315,head_sha:H,base_branch:'codex/294-t13-r4-readonly-index-candidate'};
 const r={authority:'DIAGNOSIS_ONLY_CALLER_INJECTED_UNATTESTED',tested_head_sha:H,pr_number:315,evidence_admitted:false,positive_ci_qualified:false,u02_failure_reason:'SELECTED_CHECKS_DRIFT',selected_delta:{classification:'TRANSITION_ONLY',first_count:34,second_count:34,added_count:0,removed_count:0,transition_count:1,details_truncated:false,details:[{run_id:123,change:'TRANSITION',old_state:'in_progress',new_state:'completed',name:'PRIVATE'}]}};
 const U={diagnostic_only:true,source_grade:'CALLER_INJECTED_UNATTESTED',source_material_attested:false,positive_fact_admitted:false,original_u04_failure_stage:'JOIN',original_u04_failure_reason:'JOIN_U03_SOURCE_UNVERIFIED',original_u04_failure_round:'FIRST',result_class:'U03_NESTED_REFUSAL_CAUSES_JOIN',u03_round_count:1,original_u04_subreader_calls:3,no_extra_subreader_calls:true,u03_rounds:[{material_observed:false,failure_stage:'FIRST_READ',failure_reason:'COMMENT_GET_UNVERIFIED',outer_round:'FIRST'}]};
@@ -140,4 +140,46 @@ test('T26 downstream first-failure edge never treats historical probe as current
  assert.equal(t21(v).first_failed_edge,'U03_HISTORICAL_PROXY_NOT_CURRENT');
  const x=V();delete x.u03_scope;
  assert.equal(t21(x).first_failed_edge,'INPUT_UNVERIFIED');
+});
+
+const sourceCheck=(name='validate-v3-1-foundation',status='completed',conclusion='failure')=>({
+ id:118822,name,head_sha:H,app:{id:15368},status,conclusion});
+const page=(checks)=>({status:200,page_complete:true,data:{total_count:checks.length,check_runs:checks}});
+test('T27 exact-current-head known V3.1 failure remains a failure without required-CI claims',()=>{
+ const x=t27ObservedExactHeadChecks(I,page([sourceCheck()]));
+ assert.equal(x.observation_status,'KNOWN_FAILED_CHECK_OBSERVED');
+ assert.equal(x.observed_known_jobs[0].name,'validate-v3-1-foundation');
+ assert.equal(x.observed_known_jobs[0].check_run_id,118822);
+ assert.equal(x.required_check_policy,'UNKNOWN');
+ assert.equal(x.required_ci_qualified,false);
+ assert.equal(x.evidence_admitted,false);
+});
+test('T27 a live in-progress check is pending and not a fabricated failure',()=>{
+ const x=t27ObservedExactHeadChecks(I,page([sourceCheck('live-selected-required-ci (ubuntu-latest)','in_progress',null)]));
+ assert.equal(x.observation_status,'KNOWN_PENDING_CHECK_OBSERVED');
+ assert.equal(x.known_pending_count,1);
+ assert.equal(x.known_failure_count,0);
+});
+test('T27 previous-head job is refused before extracting any check',()=>{
+ const wrong=sourceCheck();wrong.head_sha='b'.repeat(40);
+ const x=t27ObservedExactHeadChecks(I,page([wrong]));
+ assert.equal(x.observation_status,'UNKNOWN');
+ assert.deepEqual(x.observed_known_jobs,[]);
+});
+test('T27 incomplete provider pagination, wrong total and duplicate ID fail closed',()=>{
+ const incomplete=page([sourceCheck()]);incomplete.page_complete=false;
+ assert.equal(t27ObservedExactHeadChecks(I,incomplete).observation_status,'UNKNOWN');
+ const truncated=page([sourceCheck()]);truncated.data.total_count=2;
+ assert.equal(t27ObservedExactHeadChecks(I,truncated).observation_status,'UNKNOWN');
+ const dup=page([sourceCheck(),sourceCheck()]);
+ assert.equal(t27ObservedExactHeadChecks(I,dup).observation_status,'UNKNOWN');
+});
+test('T27 unknown private check names cannot leak or be promoted to accepted CI',()=>{
+ const secret='SECRET_PRIVATE_CHECK';
+ const x=t27ObservedExactHeadChecks(I,page([sourceCheck(secret,'completed','success')]));
+ assert.equal(x.observation_status,'NO_KNOWN_FAILED_CHECK_IN_SNAPSHOT');
+ assert.equal(x.observed_known_jobs.length,0);
+ assert.ok(!JSON.stringify(x).includes(secret));
+ assert.equal(x.required_ci_qualified,false);
+ assert.equal(x.writer_authorized,false);
 });
