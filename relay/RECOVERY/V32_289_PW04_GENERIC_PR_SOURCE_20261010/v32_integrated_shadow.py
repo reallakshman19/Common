@@ -44,7 +44,7 @@ def _digest(value: Any) -> str:
                                       ensure_ascii=False, allow_nan=False).encode()).hexdigest()
 
 
-_SHA = re.compile(r"[0-9a-f]{40}\\Z")
+_SHA = re.compile(r"[0-9a-f]{40}\Z")
 _MAX_GRAPH_BYTES = 5_000_000
 
 
