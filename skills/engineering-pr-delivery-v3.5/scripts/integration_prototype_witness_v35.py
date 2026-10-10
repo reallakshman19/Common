@@ -18,6 +18,7 @@ SHA = re.compile(r"^[a-f0-9]{40}$")
 REPO = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 GRAPH_MARKER = "<!-- V35_GRAPH_SELECTION_APPROVAL_V1_BEGIN -->"
 ROOT_MARKER = "<!-- V35_PARENT_OWNER_INTENT_BEGIN -->"
+_PARENT_HINT = re.compile(r"(?im)\bParent[ \t]+programme[ \t]*:[* \t]*#([1-9][0-9]*)\b")
 SCHEMA = "V35_PROTOTYPE_SOURCE_WITNESS_V1"
 
 
@@ -42,6 +43,16 @@ def _pull_identity(value: Any, number: int, uri: str, repo: str) -> bool:
             and str(head["repo"].get("full_name") or "").casefold() == repo.casefold()
             and isinstance(head.get("sha"), str)
             and bool(SHA.fullmatch(head["sha"])))
+
+
+def _route_hints_consistent(leaf: Mapping[str, Any], pull: Mapping[str, Any],
+                            root_number: int, leaf_number: int) -> bool:
+    """Check navigation hints only; body prose CANNOT grant source authority."""
+    leaf_body = str(leaf.get("body") or "")
+    pr_body = str(pull.get("body") or "")
+    parents = {int(n) for n in _PARENT_HINT.findall(leaf_body)}
+    child_mentioned = re.search(rf"(?<![A-Za-z0-9])#{leaf_number}(?![A-Za-z0-9])", pr_body)
+    return parents == {root_number} and child_mentioned is not None
 
 
 def observe(transport: Any, *, root_issue: int, leaf_issue: int,
@@ -69,6 +80,7 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         "observed_head": None,
         "status": "HOLD_PROVIDER_UNVERIFIED",
         "provider_material": "UNKNOWN", "graph": "UNKNOWN",
+        "route_hints": "UNVERIFIED",
         "effective_required_checks": "UNKNOWN",
         "positive_evidence_admission": "NOT_DERIVED",
         "delp_progress": "NOT_CALCULATED",
@@ -102,6 +114,12 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         if transport.get_commit_sha(first_head) != first_head:
             result["status"] = "HOLD_COMMIT_NOT_RESOLVED"
             return result
+        # Explicit causal navigation is necessary but never sufficient.
+        # Typed graph/Owner scope is still validated only by R2-D.
+        if not _route_hints_consistent(leaf, first_pr, root_issue, leaf_issue):
+            result["status"] = "HOLD_SOURCE_LINKAGE_UNVERIFIED"
+            return result
+        result["route_hints"] = "CONSISTENT_UNTRUSTED_PROSE"
         # Reconstructing a graph is impossible without the existing R2-D
         # governed-root marker. Still finish the first-entry provider identity
         # readback so a caller can distinguish a current candidate from a
