@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import integration_prototype_witness_v35 as W
 
 REPO = "reallakshman19/Common"
+REPO_ID = 1412133785
 SHA = "a" * 40
 OTHER = "b" * 40
 
@@ -34,6 +35,11 @@ class Provider:
         self.after_root = None
         self.after_comments = None
         self.fail_comments = False
+
+    def get_repository(self):
+        self.calls.append(("GET_REPO", REPO))
+        return copy.deepcopy(getattr(self, "repository_object",
+                                     {"id": REPO_ID, "full_name": REPO}))
 
     def get_issue(self, n):
         self.calls.append(("GET_ISSUE", n))
@@ -62,7 +68,7 @@ class Provider:
 
 def call(t):
     return W.observe(t, root_issue=5, leaf_issue=30, pr_number=292,
-                     expected_head=SHA)
+                     expected_head=SHA, expected_repository_id=REPO_ID)
 
 
 class WitnessTests(unittest.TestCase):
@@ -71,6 +77,7 @@ class WitnessTests(unittest.TestCase):
         r = call(t)
         self.assertEqual("HOLD_NO_PROVIDER_APPROVED_GRAPH", r["status"])
         self.assertEqual("SOURCE_HEAD_DOUBLE_READ_MATCH", r["provider_material"])
+        self.assertEqual(REPO_ID, r["observed_repository_id"])
         self.assertEqual("CONSISTENT_UNTRUSTED_PROSE", r["route_hints"])
         self.assertEqual(SHA, r["observed_head"])
         self.assertEqual("UNKNOWN", r["effective_required_checks"])
@@ -154,7 +161,7 @@ class WitnessTests(unittest.TestCase):
         module = types.ModuleType("integration_scoreboard_publish_v35")
         module.ScoreboardTransport = lambda repo: (seen.append(repo) or fake)
         argv = [
-            "witness", "--repository", REPO, "--root", "5", "--leaf", "30",
+            "witness", "--repository", REPO, "--repository-id", str(REPO_ID), "--root", "5", "--leaf", "30",
             "--pr", "292", "--expected-head", SHA,
         ]
         with patch.dict(sys.modules, {"integration_scoreboard_publish_v35": module}), patch.object(sys, "argv", argv):
@@ -162,10 +169,40 @@ class WitnessTests(unittest.TestCase):
         self.assertEqual([REPO], seen)
         self.assertTrue(all(x[0].startswith("GET_") for x in fake.calls))
 
+    def test_provider_repository_id_pinning_and_missing_metadata_fail_closed(self):
+        for name, record in (
+            ("historical_repo", {"id": 1207996454, "full_name": REPO}),
+            ("spoofed_name", {"id": REPO_ID, "full_name": "reallaksh19/Common"}),
+            ("missing_id", {"full_name": REPO}),
+            ("string_id", {"id": str(REPO_ID), "full_name": REPO}),
+            ("bool_id", {"id": True, "full_name": REPO}),
+            ("invalid_record", []),
+        ):
+            with self.subTest(name=name):
+                t = Provider()
+                t.repository_object = record
+                value = call(t)
+                self.assertEqual("HOLD_REPOSITORY_IDENTITY_UNVERIFIED", value["status"])
+                self.assertFalse(any(x[0] == "GET_ISSUE" for x in t.calls))
+                self.assertFalse(value["prototype_qualified"])
+
+    def test_wrong_requested_repository_id_is_rejected_before_issue_reads(self):
+        t = Provider()
+        value = W.observe(t, root_issue=5, leaf_issue=30, pr_number=292,
+                          expected_head=SHA, expected_repository_id=1207996454)
+        self.assertEqual("HOLD_REPOSITORY_IDENTITY_UNVERIFIED", value["status"])
+        self.assertEqual(REPO_ID, value["observed_repository_id"])
+        self.assertFalse(any(x[0] == "GET_ISSUE" for x in t.calls))
+        t = Provider()
+        with self.assertRaises(W.WitnessInputError):
+            W.observe(t, root_issue=5, leaf_issue=30, pr_number=292,
+                      expected_head=SHA, expected_repository_id=True)
+        self.assertEqual([], t.calls)
+
     def test_stale_expected_head_exits_before_approval(self):
         t = Provider()
         result = W.observe(t, root_issue=5, leaf_issue=30, pr_number=292,
-                           expected_head=OTHER)
+                           expected_head=OTHER, expected_repository_id=REPO_ID)
         self.assertEqual("HOLD_EXPECTED_HEAD_MOVED", result["status"])
         self.assertFalse(any(x[0] == "GET_COMMENTS" for x in t.calls))
 
@@ -234,6 +271,7 @@ class WitnessTests(unittest.TestCase):
 
     def test_provider_faults_expose_only_bounded_failure_stage(self):
         for step, method, fail_on_call in (
+            ("REPOSITORY_GET", "get_repository", 1),
             ("ROOT_GET", "get_issue", 1),
             ("LEAF_GET", "get_issue", 2),
             ("PR_INITIAL_GET", "get_pull", 1),
@@ -280,7 +318,7 @@ class WitnessTests(unittest.TestCase):
                        {"root_issue": 5, "leaf_issue": 30, "pr_number": 292, "expected_head": "bad"},
                        {"root_issue": True, "leaf_issue": 30, "pr_number": 292, "expected_head": SHA}):
             with self.assertRaises(W.WitnessInputError):
-                W.observe(t, **kwargs)
+                W.observe(t, expected_repository_id=REPO_ID, **kwargs)
         self.assertEqual([], t.calls)
 
 
