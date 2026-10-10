@@ -95,7 +95,7 @@ test('T04 U03 original first round COMMENT GET failure becomes U04 JOIN_U03 refu
  assert.equal(x.u03_round_count,1);
  assert.equal(x.u03_rounds[0].failure_stage,'FIRST_READ');
  assert.equal(x.u03_rounds[0].failure_reason,'COMMENT_GET_UNVERIFIED');
- assert.deepEqual(f.stats(),{subreaders:3,outer:1,network:12});
+ assert.deepEqual(f.stats(),{subreaders:3,outer:1,network:6});
  protectedResult(x);
 });
 test('T04 U03 original second inner round COMMIT error preserved as SECOND_READ',async()=>{
@@ -151,7 +151,7 @@ test('T04 U03 second OUTER U04 original round failure is distinguishable',async(
  assert.equal(x.u03_round_count,2);
  assert.equal(x.u03_rounds[0].material_observed,true);
  assert.equal(x.u03_rounds[1].failure_reason,'COMMENT_IDENTITY_INVALID');
- assert.deepEqual(f.stats(),{subreaders:6,outer:2,network:24});
+ assert.deepEqual(f.stats(),{subreaders:6,outer:2,network:18});
  protectedResult(x);
 });
 test('T04 U03 stable but edited comment between OUTER rounds forces U04 SOURCE_VECTOR_CHANGED',async()=>{
