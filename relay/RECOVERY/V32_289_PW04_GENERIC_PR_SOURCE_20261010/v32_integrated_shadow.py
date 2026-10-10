@@ -205,7 +205,8 @@ def integrated_shadow(
           c6_reentry["action"] == "NONE", "NATIVE_C6_REENTRY_DRIFT")
 
     return {
-        "status": "INTEGRATED_SHADOW_ONLY_NOT_RELEASE_READY",
+        "status": ("INTEGRATED_SHADOW_NATIVE_CORE_HOLD_NOT_RELEASE_READY"
+                   if core_hold else "INTEGRATED_SHADOW_ONLY_NOT_RELEASE_READY"),
         "repository": pins.repository,
         "source_kind": source["source_kind"],
         "source_snapshot_fingerprint": first,
@@ -256,8 +257,8 @@ def main() -> int:
     with os.fdopen(fd, "w", encoding="utf-8") as stream:
         json.dump(report, stream, indent=2, sort_keys=True, ensure_ascii=False)
         stream.write("\n")
-    print("OFFLINE_INTEGRATED_SHADOW_OK; OUTPUT_PRIVATE_0600; NO_GITHUB_WRITES")
-    return 0
+    print(report["status"] + "; OUTPUT_PRIVATE_0600; NO_GITHUB_WRITES")
+    return 2 if report["native_core_hold"] else 0
 
 
 if __name__ == "__main__":
