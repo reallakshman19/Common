@@ -247,7 +247,7 @@ class CurrentCaptureTests(unittest.TestCase):
         def wrapped(endpoint):
             value = original_get(endpoint)
             if "/contents/governance/released-graph.json?" in endpoint:
-                value["content"] = "\\n".join(
+                value["content"] = "\n".join(
                     value["content"][i:i+60] for i in range(0, len(value["content"]), 60))
             return value
         result = capture(self.raw, REPO, git_blob(self.raw), wrapped)
