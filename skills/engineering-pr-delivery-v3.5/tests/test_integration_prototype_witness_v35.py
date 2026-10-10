@@ -22,10 +22,12 @@ class Provider:
     def __init__(self):
         self.root = {"number": 5, "html_url": f"https://github.com/{REPO}/issues/5", "state": "open",
                      "body": "<!-- V35_PARENT_OWNER_INTENT_BEGIN --> Original Owner mirror"}
-        self.leaf = {"number": 30, "html_url": f"https://github.com/{REPO}/issues/30", "state": "open"}
+        self.leaf = {"number": 30, "html_url": f"https://github.com/{REPO}/issues/30", "state": "open",
+                     "body": "**Parent programme:** #5"}
         self.pr = {"number": 292, "html_url": f"https://github.com/{REPO}/pull/292",
                    "state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}},
-                   "base": {"repo": {"full_name": REPO}}}
+                   "base": {"repo": {"full_name": REPO}},
+                   "body": "Implements read-only #30; parent #5"}
         self.comments = []
         self.calls = []
         self.after_pr = None
@@ -69,6 +71,7 @@ class WitnessTests(unittest.TestCase):
         r = call(t)
         self.assertEqual("HOLD_NO_PROVIDER_APPROVED_GRAPH", r["status"])
         self.assertEqual("SOURCE_HEAD_DOUBLE_READ_MATCH", r["provider_material"])
+        self.assertEqual("CONSISTENT_UNTRUSTED_PROSE", r["route_hints"])
         self.assertEqual(SHA, r["observed_head"])
         self.assertEqual("UNKNOWN", r["effective_required_checks"])
         self.assertEqual("NOT_DERIVED", r["positive_evidence_admission"])
@@ -77,6 +80,35 @@ class WitnessTests(unittest.TestCase):
         self.assertEqual("NONE", r["github_writes"])
         self.assertEqual(2, sum(x[0] == "GET_PR" for x in t.calls))
         self.assertEqual(2, sum(x[0] == "GET_COMMENTS" for x in t.calls))
+
+    def test_route_hints_reject_unrelated_or_conflicting_same_repo_sources(self):
+        cases = (
+            ("wrong_parent", lambda t: t.leaf.update(body="**Parent programme:** #9")),
+            ("ambiguous_parent", lambda t: t.leaf.update(
+                body="**Parent programme:** #5\nParent programme: #9")),
+            ("unrelated_pr", lambda t: t.pr.update(body="Implements #31 not this leaf")),
+            ("missing_child_route", lambda t: t.leaf.update(body="No explicit parent")),
+            ("missing_pr_route", lambda t: t.pr.update(body="No explicit leaf")),
+            ("wrong_number_prefix", lambda t: t.pr.update(body="Mentions #300 only")),
+        )
+        for name, mutate in cases:
+            with self.subTest(case=name):
+                t = Provider()
+                mutate(t)
+                result = call(t)
+                self.assertEqual("HOLD_SOURCE_LINKAGE_UNVERIFIED", result["status"])
+                self.assertEqual("UNVERIFIED", result["route_hints"])
+                self.assertFalse(result["prototype_qualified"])
+                self.assertFalse(any(x[0] == "GET_COMMENTS" for x in t.calls))
+
+    def test_consistent_route_prose_does_not_establish_ownership_or_evidence(self):
+        t = Provider()
+        result = call(t)
+        self.assertEqual("CONSISTENT_UNTRUSTED_PROSE", result["route_hints"])
+        self.assertEqual("HOLD_NO_PROVIDER_APPROVED_GRAPH", result["status"])
+        self.assertEqual("NOT_DERIVED", result["positive_evidence_admission"])
+        self.assertEqual("NOT_GRANTED_BY_WITNESS", result["local_writer"])
+        self.assertEqual("NOT_CALCULATED", result["delp_progress"])
 
     def test_missing_governed_root_marker_fails_before_graph_claim(self):
         t = Provider()
