@@ -26,13 +26,29 @@ export async function t17(input,diagnose,reader){
   return {...b,verdict:x.u02_failure_reason==='SELECTED_CHECKS_DRIFT'?'SELECTED_CHECKS_DRIFT':'DIAGNOSTIC_ONLY',delta:{classification:d.classification,first_count:d.first_count,second_count:d.second_count,added:d.added_count,removed:d.removed_count,transition:d.transition_count,first_job_id:first?.run_id??null,first_change:first?.change??null,old_state:first?.old_state??null,new_state:first?.new_state??null}};
  }catch{return {...b,verdict:'SOURCE_UNVERIFIED',delta:null}}
 }
+/* T23: an inner U03 fault is causal only for the SAME U04 observation
+ * and matching original outer round. Never infer a missing round as FIRST. */
 export function t18(x){
  const b={schema:'v35-294-t18',source_grade:'CALLER_INJECTED_UNATTESTED',...NO};
- if(x?.diagnostic_only!==true||x?.source_grade!=='CALLER_INJECTED_UNATTESTED'||x?.source_material_attested!==false||x?.positive_fact_admitted!==false||!Array.isArray(x?.u03_rounds))return {...b,verdict:'UNVERIFIED',inner:null};
- const bad=x.u03_rounds.find(z=>z.material_observed===false),join=x.original_u04_failure_stage==='JOIN'&&x.original_u04_failure_reason==='JOIN_U03_SOURCE_UNVERIFIED';
- if(!join||!bad)return {...b,verdict:join?'INNER_REASON_NOT_CAPTURED':'NO_U03_REFUSAL_IN_SAMPLE',inner:null};
- if(!['FIRST_READ','FIRST_VALIDATE','SECOND_READ','SECOND_VALIDATE','SECOND_ROUND_DRIFT'].includes(bad.failure_stage)||!(/^[A-Z][A-Z0-9_]{0,79}$/.test(bad.failure_reason||'')))return {...b,verdict:'INNER_REASON_NOT_CAPTURED',inner:null};
- return {...b,verdict:'SAME_INVOCATION_U03_REASON',inner:{stage:bad.failure_stage,reason:bad.failure_reason,outer_round:bad.outer_round==='SECOND'?'SECOND':'FIRST'}};
+ if(x?.diagnostic_only!==true||x?.source_grade!=='CALLER_INJECTED_UNATTESTED'||
+   x?.source_material_attested!==false||x?.positive_fact_admitted!==false||
+   !Array.isArray(x?.u03_rounds)||!Number.isSafeInteger(x?.u03_round_count)||
+   x.u03_round_count!==x.u03_rounds.length||x.u03_round_count>2||
+   !Number.isSafeInteger(x?.original_u04_subreader_calls)||
+   x.original_u04_subreader_calls<0||x.original_u04_subreader_calls>6||
+   x.no_extra_subreader_calls!==true)return {...b,verdict:'UNVERIFIED',inner:null};
+ const bad=x.u03_rounds.find(z=>z?.material_observed===false);
+ const join=x.original_u04_failure_stage==='JOIN'&&x.original_u04_failure_reason==='JOIN_U03_SOURCE_UNVERIFIED';
+ if(join&&x.result_class!=='U03_NESTED_REFUSAL_CAUSES_JOIN')return {...b,verdict:'UNVERIFIED',inner:null};
+ if(join&&!bad)return {...b,verdict:'INNER_REASON_NOT_CAPTURED',inner:null};
+ if(!join&&bad)return {...b,verdict:'INNER_NOT_CAUSAL',inner:null};
+ if(!join)return {...b,verdict:'NO_U03_REFUSAL_IN_SAMPLE',inner:null};
+ if(!['FIRST','SECOND'].includes(bad.outer_round)||bad.outer_round!==x.original_u04_failure_round||
+    !['FIRST_READ','FIRST_VALIDATE','SECOND_READ','SECOND_VALIDATE','SECOND_ROUND_DRIFT'].includes(bad.failure_stage)||
+    !(/^[A-Z][A-Z0-9_]{0,79}$/.test(bad.failure_reason||'')))
+   return {...b,verdict:'INNER_REASON_NOT_CAPTURED',inner:null};
+ return {...b,verdict:'SAME_INVOCATION_U03_REASON',
+    inner:{stage:bad.failure_stage,reason:bad.failure_reason,outer_round:bad.outer_round}};
 }
 export function t19(classic,rules){
  const b={schema:'v35-294-t19',policy:'UNKNOWN',required_count:null,...NO};
