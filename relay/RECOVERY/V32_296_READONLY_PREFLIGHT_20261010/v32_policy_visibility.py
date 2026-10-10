@@ -23,6 +23,7 @@ class VisibilityProvider(Protocol):
     def get_pull(self, repository: str, number: int) -> Mapping[str, Any]: ...
     def get_pr_reviews(self, repository: str, number: int) -> list[Mapping[str, Any]]: ...
     def get_branch_rulesets(self, repository: str, branch: str) -> list[Mapping[str, Any]]: ...
+    def get_active_branch_rules(self, repository: str, branch: str) -> list[Mapping[str, Any]]: ...
     def get_branch_required_checks(self, repository: str, branch: str) -> Mapping[str, Any]: ...
 
 
@@ -31,9 +32,9 @@ class PolicyVisibility:
     status: str
     reasons: tuple[str, ...]
     observed_candidate: str | None
-    submitted_reviews: int
-    distinct_latest_approved_reviewers: int
-    exact_head_latest_approvals: int
+    submitted_reviews: int | None
+    distinct_latest_approved_reviewers: int | None
+    exact_head_latest_approvals: int | None
     required_policy_endpoints: Mapping[str, str]
     independent_review_authority: str = "UNKNOWN_NOT_AUTHENTICATED"
     effective_required_check_policy: str = "UNKNOWN_NOT_AUTHENTICATED"
@@ -68,7 +69,8 @@ def observe_review_and_policy_visibility(
         return PolicyVisibility("FAILED_TARGET", ("TARGET_INVALID",), None, 0, 0, 0, {})
     reasons: list[str] = []
     exposure: dict[str, str] = {
-        "rulesets": "NOT_RUN", "classic_required_checks": "NOT_RUN",
+        "rulesets": "NOT_RUN", "active_branch_rules": "NOT_RUN",
+        "classic_required_checks": "NOT_RUN",
     }
     try:
         pr = provider.get_pull(repository, pr_number)
@@ -104,6 +106,20 @@ def observe_review_and_policy_visibility(
         except (OSError, ValueError, TypeError):
             exposure["rulesets"] = "UNKNOWN"
             reasons.append("RULESET_ENDPOINT_UNKNOWN")
+        # Inventory applies repository-wide and may contain disabled or
+        # non-matching rulesets. Only the separate GitHub active branch-rules
+        # endpoint attempts a target-specific, inherited policy observation.
+        # Even that cannot certify D5 when classic checks are inaccessible.
+        try:
+            active = provider.get_active_branch_rules(repository, base)
+            if not isinstance(active, list) or not all(isinstance(row, Mapping) for row in active):
+                raise ValueError("ACTIVE_BRANCH_RULES_RESPONSE_INVALID")
+            exposure["active_branch_rules"] = (
+                "OBSERVED_EMPTY" if not active else "OBSERVED_UNQUALIFIED"
+            )
+        except (OSError, ValueError, TypeError):
+            exposure["active_branch_rules"] = "UNKNOWN"
+            reasons.append("ACTIVE_BRANCH_RULES_ENDPOINT_UNKNOWN")
         try:
             classic = provider.get_branch_required_checks(repository, base)
             if not isinstance(classic, Mapping):
@@ -138,6 +154,15 @@ def observe_review_and_policy_visibility(
         current_approvals = [
             row for row in approvals if row.get("commit_id") == head
         ]
+        # A 403/malformed review collection cannot be represented as
+        # verified zero submitted reviewers, even in a HOLD-only report.
+        if exposure["reviews"] == "UNKNOWN":
+            submitted = None
+            approval_count = None
+            current_approval_count = None
+        else:
+            approval_count = len(approvals)
+            current_approval_count = len(current_approvals)
         late = provider.get_pull(repository, pr_number)
         if (not isinstance(late, Mapping) or late.get("number") != pr_number or
                 (late.get("head") or {}).get("sha") != head or
@@ -149,7 +174,7 @@ def observe_review_and_policy_visibility(
                         "EFFECTIVE_REQUIRED_CHECK_POLICY_NOT_AUTHENTICATED"])
         return PolicyVisibility(
             "HOLD_D4_D5_AUTHORITY_UNKNOWN", tuple(dict.fromkeys(reasons)), head,
-            submitted, len(approvals), len(current_approvals), exposure,
+            submitted, approval_count, current_approval_count, exposure,
         )
     except (OSError, ValueError, TypeError, AttributeError):
         return PolicyVisibility(
