@@ -1,0 +1,44 @@
+name: v35-execution-profile-toggle
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.5/EXECUTION_PROFILES.md'
+      - 'skills/engineering-pr-delivery-v3.5/SKILL.md'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_execution_profiles_v35.py'
+      - '.github/workflows/v35-execution-profile-toggle.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-v35-toggle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact triggering candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Report source identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Checked-out commit: $(git rev-parse HEAD)"
+          echo "Frozen V3.2 tree: $(git rev-parse HEAD:skills/engineering-pr-delivery-v3.2)"
+          test "$(git rev-parse HEAD:skills/engineering-pr-delivery-v3.2)" = "88ac97432a811f9a6b8d00bbe45cbec891e70d6a"
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify both profile paths and shared protections
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_execution_profiles_v35.py' -v
+
+      - name: Regression — Local/V3.5 embedded Coder authority boundaries
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_embedded_coder_v35.py' -v
+
+      - name: Regression — V3.5 continuation command parsing
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p 'test_owner_commands_continuation.py' -v
