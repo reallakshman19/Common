@@ -11,7 +11,7 @@ function data(){return {
   [p.pr]:{number:21,html_url:'https://github.com/'+R+'/pull/21',
     head:{sha:H,repo:{id:ID,full_name:R}},base:{ref:BASE,repo:{id:ID,full_name:R}}},
   [p.check]:{total_count:1,check_runs:[{id:17,name:'build',status:'completed',conclusion:'success',head_sha:H,app:{id:42}}]},
-  [p.status]:{sha:H,statuses:[]},[p.classic]:{contexts:[],checks:[{context:'build',app_id:42}]},[p.rules]:[],
+  [p.status]:{sha:H,total_count:0,statuses:[]},[p.classic]:{contexts:[],checks:[{context:'build',app_id:42}]},[p.rules]:[],
 };}
 function get(d=data(),observe=()=>{}){let calls=0;return async(repo,path)=>{
   assert.equal(repo,R);observe(++calls,path,d);
@@ -122,13 +122,13 @@ test('in-progress required check remains pending',async()=>{
 });
 test('legacy status satisfies unrestricted classic context',async()=>{
   const d=data();d[p.check]={total_count:0,check_runs:[]};
-  d[p.status]={sha:H,statuses:[{context:'legacy-ci',state:'success'}]};
+  d[p.status]={sha:H,total_count:1,statuses:[{context:'legacy-ci',state:'success'}]};
   d[p.classic]={contexts:['legacy-ci'],checks:[]};
   assert.equal((await run(d)).required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
 });
 test('legacy status cannot impersonate app-pinned run',async()=>{
   const d=data();d[p.check]={total_count:0,check_runs:[]};
-  d[p.status]={sha:H,statuses:[{context:'build',state:'success'}]};
+  d[p.status]={sha:H,total_count:1,statuses:[{context:'build',state:'success'}]};
   assert.equal((await run(d)).required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
 });
 test('duplicate check identities are ambiguous',async()=>{
@@ -219,4 +219,40 @@ test('T31 zero check count and zero check rows is structurally valid but cannot 
  assert.equal(x.selected_checks_observed,true);
  assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
  assert.equal(x.evidence_admitted,false);
+});
+
+test('T32 missing or underreported combined status count refuses source, never policy success',async()=>{
+ for(const mutate of [
+  d=>{delete d[p.status].total_count},
+  d=>{d[p.status].total_count=-1},
+  d=>{d[p.status].total_count=1},
+  d=>{d[p.status].total_count=101},
+ ]){
+  const d=data();mutate(d);const x=await run(d);safe(x);
+  assert.equal(x.failure_stage,'FIRST_SELECTED');
+  assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+  assert.equal(x.selected_checks_observed,false);
+  assert.equal(x.required_checks_result,'UNKNOWN');
+ }
+});
+test('T32 a second-round incomplete status page refuses after valid first read',async()=>{
+ const d=data();const x=await run(d,(n,route,m)=>{if(n===8)m[p.status].total_count=1;});
+ safe(x);assert.equal(x.failure_stage,'SECOND_SELECTED');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.snapshot_sha256,null);
+});
+test('T32 bounded complete legacy status page can satisfy an unrestricted required context diagnostically',async()=>{
+ const d=data();d[p.check]={total_count:0,check_runs:[]};
+ d[p.status]={sha:H,total_count:1,statuses:[{context:'legacy-ci',state:'success'}]};
+ d[p.classic]={contexts:['legacy-ci'],checks:[]};
+ const x=await run(d);safe(x);
+ assert.equal(x.selected_checks_observed,true);
+ assert.equal(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+ assert.equal(x.evidence_admitted,false);
+});
+test('T32 declared 100 statuses but 101 rows is incomplete, never valid',async()=>{
+ const d=data();d[p.status]={sha:H,total_count:100,statuses:Array.from({length:101},(_,i)=>({context:'job'+i,state:'success'}))};
+ const x=await run(d);safe(x);
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.required_checks_result,'UNKNOWN');
 });
