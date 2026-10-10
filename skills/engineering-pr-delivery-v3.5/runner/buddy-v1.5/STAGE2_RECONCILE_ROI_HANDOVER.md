@@ -29,13 +29,22 @@ Decision values: KEEP_STAGE1, KEEP_EXISTING, COMBINE_BOUNDEDLY, REVISE_BOTH, VER
 
 Explicitly explain the agent's *own mistakes*, not just the predecessor's. When two architectures overlap, give each responsibility ONE proposed owner, identify the seam, and state which useful modules to retain. Do not merge incompatible size limits, permissions, source identities or CSV rights by accident.
 
+Before proposing source edits, reconcile the **complete lifecycle**, not simply filenames: original-file selection, immutable file identity and hashing, storage/indexing, projection, XML/other domain matching, cancellation, recovery, result revision, user consent and export authorization. Specify one owner per responsibility. Treat purported defects as hypotheses until supported by code or targeted evidence. In particular:
+
+- **Atomic source selection:** establish when original JSON/File, XML, configuration, source revision and selected mode become one valid Build identity; define the fail-closed behavior during partial or rapidly changing selections.
+- **Scope contract:** establish whether evidence covers the *complete* original hierarchy, an explicitly authorized subtree, or a visible filtered/paginated view. Never let a partial rendered table or silent truncation masquerade as the complete authoritative result.
+- **Full-output consistency:** reconcile projected facts, complete generated trace/evidence, rendered counts and both downloaded outputs against the SAME source/configuration revision; note which independent golden oracles would prove that.
+- **Deployment reality:** investigate which source path actually supplies the deployed runtime early (repository root, `docs/`, generated artifact or another entrypoint), including transitive Worker/import closure. Implement mirror/deployment changes only AFTER coherent product module ownership is selected. Do not assume the existence of a `docs/` directory proves it is the deployed artifact.
+
+For the LFJ example (when the request actually names competing 3D_Converters PRs #184/#185), assess the source-backed H10 handoff and the bounded indexed Build/hash/cancel/IndexedDB lifecycle separately. Consider reusing compatible proven capabilities without assuming which PR wins, rewriting established engineering matching/CSV semantics, or silently choosing between incompatible file-size, consent and revision policies. Keep independent semantic qualification, genuine Owner large-file evidence and downstream CII release outside the Stage 2 proposal.
+
 ## C. Choose high-ROI course correction
 
 Rank no more than three source-grounded candidates by **user impact, recurrence prevented, complexity, semantic risk, dependency and rollback**. Compare a minimal local patch with a better bounded correction. Select **NOW**, **PARK** or **REJECT**; justify each. A NO_CHANGE outcome is legitimate.
 
 Do not elevate cosmetic cleanup, extra test counts, complicated frameworks or performance claims unsupported by source over a missing real product path. Preserve established domain semantics, originals and independently protected golden expectations.
 
-Provide a short **RECONCILED_PURPOSE** in plain language, a module-owner decision map and one immediate *proposed* engineering outcome. Identify what needs a separate Owner/dependency decision. **This stage is analysis and handover, not coding or merge.**
+Provide a short **RECONCILED_PURPOSE** in plain language, a module-owner decision map covering Build, file identity, hashing, storage/projection, cancellation/recovery, result revision, rendering, CSV exports and the actual deployment artifact and one immediate *proposed* engineering outcome. Identify what needs a separate Owner/dependency decision. **This stage is analysis and handover, not coding or merge.**
 
 ## D. Produce a self-contained technical handover
 
