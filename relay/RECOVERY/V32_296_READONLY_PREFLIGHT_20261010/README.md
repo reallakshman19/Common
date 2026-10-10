@@ -23,7 +23,7 @@ separately approved V3.2 evidence-identity repair. This source tree does not edi
   provider issue comments; aggregate observation only, not an admitted fact. Claims that say VERIFIED do not become verified evidence.
 - `v32_readonly_cli.py`: command line wrapper, output as structured JSON; exit 1 on
   invalid material and exit 2 on HOLD. **Exit 0 is impossible by design.**
-- `tests/`: 71 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
+- `tests/`: 72 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
   NEGATIVE ORACLES for this tool, not real V3.2 positive engineering qualification.
 
 ## Regression run
@@ -111,5 +111,18 @@ or author identifiers.
 
 Testing the comment observer requires `PyYAML==6.0.2` alongside Python
 3.11/3.12/3.13. The scoped CI matrix installs that dependency and executes
-71 synthetic and real-native-parser regression cases. Real GET-only
+72 synthetic and real-native-parser regression cases. Real GET-only
 qualification remains negative by design.
+
+### Numeric-SHA YAML edge case
+
+Native V3.2 parses YAML with `yaml.safe_load`; an **unquoted, all-digit**
+40-character candidate SHA may become an integer. The present native
+`validate_facts()` converts that value to text during format validation,
+so the parser can classify it as structurally valid even though a real
+provider HEAD is a string. The diagnostic now counts such inputs separately
+as `candidate_type_ambiguous_claims` rather than falsely marking them
+stale or current. Its regression fixture quotes the normal SHA and tests
+the unquoted malformed-type case independently. A future Owner-approved
+native policy/issuer must address typed candidate equality explicitly.
+No frozen V3.2 source was changed.
