@@ -24,6 +24,14 @@ def _safe_repository(repo: str) -> bool:
             all(segment not in (".", "..") for segment in repo.split("/")))
 
 
+def _safe_branch(branch: str) -> bool:
+    return (
+        isinstance(branch, str)
+        and fullmatch(r"[A-Za-z0-9_./-]{1,200}", branch) is not None
+        and all(piece not in ("", ".", "..") for piece in branch.split("/"))
+    )
+
+
 class GitHubGetOnly:
     """Small independent GET transport; not evidence admission itself."""
 
@@ -150,19 +158,51 @@ class GitHubGetOnly:
                 return out
         raise GitHubReadError("REVIEW_PAGINATION_EXCEEDED")
 
+    def _paged_rules(self, path: str, *, label: str) -> list[Mapping[str, Any]]:
+        """Read every page or explicitly refuse an oversized/partial collection."""
+        out: list[Mapping[str, Any]] = []
+        join = "&" if "?" in path else "?"
+        for page in range(1, 12):
+            chunk = self._get(path + join + "per_page=100&page=" + str(page))
+            if not isinstance(chunk, list) or not all(isinstance(row, dict) for row in chunk):
+                raise GitHubReadError(label + "_PAGE_INVALID")
+            out.extend(chunk)
+            if len(out) > 1000:
+                raise GitHubReadError(label + "_UNBOUNDED")
+            if len(chunk) < 100:
+                return out
+        raise GitHubReadError(label + "_PAGINATION_EXCEEDED")
+
     def get_branch_rulesets(self, repository: str, branch: str) -> list[Mapping[str, Any]]:
-        """Observe ruleset endpoints but never interpret empty as no obligations."""
-        if not isinstance(branch, str) or not fullmatch(r"[A-Za-z0-9_./-]{1,200}", branch):
+        """Repository ruleset INVENTORY, not necessarily applied to the branch.
+
+        The branch selector is deliberately validated even though this endpoint
+        lists the whole repository. Never present these rows as effective policy.
+        """
+        if not _safe_branch(branch):
             raise GitHubReadError("INVALID_TARGET_BRANCH")
-        path = self._repo(repository) + "/rulesets?includes_parents=true"
-        raw = self._get(path)
-        if not isinstance(raw, list) or len(raw) > 1000 or not all(isinstance(x, dict) for x in raw):
-            raise GitHubReadError("RULESETS_RESPONSE_INVALID")
-        return raw
+        return self._paged_rules(
+            self._repo(repository) + "/rulesets?includes_parents=true",
+            label="RULESET_INVENTORY",
+        )
+
+    def get_active_branch_rules(self, repository: str, branch: str) -> list[Mapping[str, Any]]:
+        """Get active rules GitHub reports applicable to this exact base branch.
+
+        This API omits disabled/evaluation-only rules; it does NOT report
+        classic protection, adopted evidence policy, required-check App
+        identities or the separate authority to merge/publish. D5 stays HOLD.
+        """
+        if not _safe_branch(branch):
+            raise GitHubReadError("INVALID_TARGET_BRANCH")
+        return self._paged_rules(
+            self._repo(repository) + "/rules/branches/" + quote(branch, safe=""),
+            label="APPLIED_BRANCH_RULES",
+        )
 
     def get_branch_required_checks(self, repository: str, branch: str) -> Mapping[str, Any]:
         """Classic endpoint may 403/404; the caller must report UNKNOWN."""
-        if not isinstance(branch, str) or not fullmatch(r"[A-Za-z0-9_./-]{1,200}", branch):
+        if not _safe_branch(branch):
             raise GitHubReadError("INVALID_TARGET_BRANCH")
         path = self._repo(repository) + "/branches/" + quote(branch, safe="") + "/protection/required_status_checks"
         raw = self._get(path)
