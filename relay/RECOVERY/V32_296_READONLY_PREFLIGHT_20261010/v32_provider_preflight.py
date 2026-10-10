@@ -86,7 +86,9 @@ def _ref(value: str, repository: str, number: int) -> bool:
 
 def _target_errors(target: PreflightTarget) -> list[str]:
     errors: list[str] = []
-    if not isinstance(target.repository, str) or not fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", target.repository):
+    if (not isinstance(target.repository, str) or
+            not fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", target.repository) or
+            any(segment in (".", "..") for segment in target.repository.split("/"))):
         errors.append("TARGET_REPOSITORY_INVALID")
     if type(target.repository_id) is not int or target.repository_id < 1:
         errors.append("TARGET_REPOSITORY_ID_INVALID")
