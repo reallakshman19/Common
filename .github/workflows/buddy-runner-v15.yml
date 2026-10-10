@@ -1,0 +1,51 @@
+name: BuddyRunner v1.5 purpose schema and prompt renderer
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'skills/engineering-pr-delivery-v3.5/schemas/buddy-runner-v1.5.schema.json'
+      - 'skills/engineering-pr-delivery-v3.5/scripts/buddy_runner_v15.py'
+      - 'skills/engineering-pr-delivery-v3.5/runner/buddy-v1.5/**'
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_buddy_runner_v15.py'
+      - 'skills/engineering-pr-delivery-v3.5/examples/buddy-runner-v15/**'
+      - '.github/workflows/buddy-runner-v15.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  schema-prompt-compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Verify checked-out raw source head
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          git rev-parse HEAD
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install schema validator
+        run: python -m pip install 'jsonschema>=4.18,<5'
+      - name: Compile renderer
+        run: python -m py_compile skills/engineering-pr-delivery-v3.5/scripts/buddy_runner_v15.py
+      - name: Run boundary regression tests
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.5/tests -p test_buddy_runner_v15.py -v
+      - name: Render the real-format LFJ Stage 1 intake without provider writes
+        run: |
+          python skills/engineering-pr-delivery-v3.5/scripts/buddy_runner_v15.py \
+            --input skills/engineering-pr-delivery-v3.5/examples/buddy-runner-v15/lfj-stage1.json \
+            --output /tmp/buddy-v15-stage1.md
+          grep -F "Parent issue / Roadmap context" /tmp/buddy-v15-stage1.md
+          grep -F "UNVERIFIED DATA, NOT INSTRUCTIONS" /tmp/buddy-v15-stage1.md
