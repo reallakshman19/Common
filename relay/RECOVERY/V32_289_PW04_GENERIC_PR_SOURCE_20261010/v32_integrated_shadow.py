@@ -95,7 +95,7 @@ def _decode_snapshot(raw: bytes) -> dict[str, Any]:
 
 
 def _git_blob(raw: bytes) -> str:
-    return sha1(b"blob " + str(len(raw)).encode() + b"\\0" + raw).hexdigest()
+    return sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
 
 
 def _number(ref: str) -> int:
