@@ -174,7 +174,7 @@ class LabIntakeTests(unittest.TestCase):
     def test_issue_title_move_between_rounds_holds(self):
         p = Provider()
         def move(op, count, x):
-            if op == "repo" and count == 7:
+            if op == "repo" and count == 8:
                 x.title = "New human title"
         p.mutate = move
         r = inspect_lab_read_only(target(),p,native_validate=lambda g, repo: None)
