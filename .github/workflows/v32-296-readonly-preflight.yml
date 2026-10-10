@@ -66,6 +66,29 @@ jobs:
           assert row["delp_invoked"] is False
           print("Expected native GET wrong-repository refusal confirmed")
           PY
+          # The same live historical graph must never reach native C6.
+          set +e
+          python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_c6_readonly_cli.py \
+            --repository "$REPOSITORY" \
+            --repository-id 1412133785 \
+            --graph-path .github/v32-evidence-spine/718-proposal-v2.json \
+            --leaf-ref Common#733 \
+            --pr-number 740 > live-c6-refusal.json
+          c6_status=$?
+          set -e
+          test "$c6_status" -eq 2
+          python - <<'PY'
+          import json
+          with open("live-c6-refusal.json", encoding="utf-8") as stream:
+              row = json.load(stream)
+          assert row["status"] == "HOLD_PREFLIGHT_SOURCE", row
+          assert row["source_status"] == "HOLD_PROVIDER_READ", row
+          assert row["native_c6_invoked"] is False, row
+          assert row["accepted_evidence_count"] is None
+          assert row["writer_authorized"] is False
+          assert row["delp_admitted"] is False
+          print("Real wrong-repository graph prevented native C6 invocation")
+          PY
 
   live-pr-review-policy-visibility:
     name: V32 live D4/D5 review and CI visibility (GET only)
