@@ -66,3 +66,39 @@ jobs:
           assert row["delp_invoked"] is False
           print("Expected native GET wrong-repository refusal confirmed")
           PY
+
+  live-pr-review-policy-visibility:
+    name: V32 live D4/D5 review and CI visibility (GET only)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Observe this PR without reviewer or CI policy admission
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set +e
+          python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_review_policy_cli.py \
+            --repository "$REPOSITORY" \
+            --pr-number "$PR_NUMBER" \
+            --expected-head "$EXPECTED_HEAD" > review-policy-visibility.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python - <<'PY'
+          import json
+          with open("review-policy-visibility.json", encoding="utf-8") as stream:
+              row = json.load(stream)
+          assert row["status"] == "HOLD_D4_D5_AUTHORITY_UNKNOWN", row
+          assert row["independent_review_authority"] == "UNKNOWN_NOT_AUTHENTICATED", row
+          assert row["effective_required_check_policy"] == "UNKNOWN_NOT_AUTHENTICATED", row
+          assert row["accepted_evidence_count"] is None
+          assert row["writer_authorized"] is False
+          assert row["delp_invoked"] is False
+          print("Real PR D4/D5 visibility read completed; no reviewer/required-CI authority minted")
+          print("submitted review observations:", row["submitted_reviews"])
+          print("observed endpoint visibility:", row["required_policy_endpoints"])
+          PY
