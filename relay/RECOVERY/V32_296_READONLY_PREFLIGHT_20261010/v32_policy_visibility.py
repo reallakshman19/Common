@@ -62,6 +62,7 @@ def observe_review_and_policy_visibility(
 ) -> PolicyVisibility:
     """Observe only; two PR reads bound the serial GET window, not an atomic snapshot."""
     if (not isinstance(repository, str) or not fullmatch(_REPO, repository)
+            or any(segment in (".", "..") for segment in repository.split("/"))
             or type(pr_number) is not int or pr_number < 1
             or not isinstance(expected_head, str) or not fullmatch(_SHA, expected_head)):
         return PolicyVisibility("FAILED_TARGET", ("TARGET_INVALID",), None, 0, 0, 0, {})
