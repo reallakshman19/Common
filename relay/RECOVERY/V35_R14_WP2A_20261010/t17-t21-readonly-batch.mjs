@@ -118,6 +118,7 @@ export function t27ObservedExactHeadChecks(input,response){
    observation_grade:'CALLER_INJECTED_UNATTESTED',
    observed_head_sha:input?.head_sha??null,observation_status:'UNKNOWN',
    observed_known_jobs:[],known_failure_count:0,known_pending_count:0,
+   known_nonpass_count:0,
    required_check_policy:'UNKNOWN',...NO};
  if(!id(input)||response?.status!==200||response.page_complete!==true)
    return {...b,reason:'CI_GET_UNVERIFIED'};
@@ -148,10 +149,18 @@ export function t27ObservedExactHeadChecks(input,response){
  const failed=rows.filter(x=>x.state==='completed'&&
    ['failure','timed_out','cancelled','action_required','startup_failure'].includes(x.conclusion)).length;
  const pending=rows.filter(x=>x.state!=='completed').length;
- return {...b,observation_status:failed?'KNOWN_FAILED_CHECK_OBSERVED':
-   pending?'KNOWN_PENDING_CHECK_OBSERVED':'NO_KNOWN_FAILED_CHECK_IN_SNAPSHOT',
+ // A completed neutral/skipped/stale check is neither success nor pending.
+ // It is a separate non-passing outcome; never summarize it as clear.
+ const nonpass=rows.filter(x=>x.state==='completed'&&
+   ['neutral','skipped','stale'].includes(x.conclusion)).length;
+ const grade=failed?'KNOWN_FAILED_CHECK_OBSERVED':
+   nonpass?'KNOWN_NONPASS_CHECK_OBSERVED':
+   pending?'KNOWN_PENDING_CHECK_OBSERVED':
+   rows.length?'KNOWN_CHECKS_COMPLETED_NONFAIL_DIAGNOSTIC_ONLY':
+   'NO_KNOWN_CHECK_OBSERVED';
+ return {...b,observation_status:grade,
    observed_known_jobs:rows.slice(0,12),known_failure_count:failed,
-   known_pending_count:pending};
+   known_pending_count:pending,known_nonpass_count:nonpass};
 }
 export function t20(paths){
  const b={schema:'v35-294-t20',release_ready:false,required_ci_policy:'UNKNOWN',...NO};

@@ -86,3 +86,28 @@ test('T28 duplicate check-run ID and wrong expected name both fail closed',()=>{
  const renamed=t28PinnedTerminalNegative(response([v31(),{...u02(),name:'different'}]));
  assert.equal(renamed.witness,'NOT_VERIFIED');
 });
+
+test('T30 valid numeric but unrelated GitHub App identity must not forge pinned failed CI',()=>{
+ for(const appId of [1,999999,-1,0]){
+  const forged=response([v31(),{...u02(),app:{id:appId}}]);
+  const x=t28PinnedTerminalNegative(forged);
+  assert.equal(x.witness,'NOT_VERIFIED');
+  assert.equal(x.evidence_admitted,false);
+  assert.equal(x.required_ci_qualified,false);
+  assert.equal(x.witnessed_check_ids.length,0);
+ }
+});
+test('T30 an app mismatch on the V3.1 check also invalidates both historic failures',()=>{
+ const x=t28PinnedTerminalNegative(response([{...v31(),app:{id:1}},u02()]));
+ assert.equal(x.witness,'NOT_VERIFIED');
+ assert.equal(x.relationship,'HISTORICAL_PREVIOUS_HEAD_NOT_CURRENT');
+ assert.equal(x.release_ready,false);
+});
+test('T30 genuine GitHub Actions app IDs remain a historical negative witness only',()=>{
+ const x=t28PinnedTerminalNegative(response([v31(),u02()]));
+ assert.equal(x.witness,'TWO_PINNED_HISTORICAL_FAILURES_VERIFIED');
+ assert.equal(x.required_policy,'UNKNOWN');
+ assert.equal(x.evidence_admitted,false);
+ assert.equal(x.publisher_authorized,false);
+ assert.equal(x.delp_projection,'NOT_CALCULATED');
+});
