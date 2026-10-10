@@ -118,6 +118,29 @@ test('T04 U03 original second inner round COMMIT error preserved as SECOND_READ'
  assert.equal(x.original_u04_failure_round,'FIRST');
  protectedResult(x);
 });
+test('T04 edited comment between U03 INNER rounds is fail-closed SOURCE_RECEIPT_CHANGED',async()=>{
+ const f=fixture();
+ const d=material();
+ let reads=0;
+ f.readers.evidence=async()=>observeEvidenceComment(evidenceInput(input()),async(repo,p)=>{
+  assert.equal(repo,R);
+  reads++;
+  if(reads===7){
+   d['issues/comments/'+C].body+='Verified edit in second read\n';
+   d['issues/comments/'+C].updated_at='2026-10-10T10:01:00Z';
+  }
+  return structuredClone(d[p]);
+ });
+ const x=await diagnoseU03OriginalCycle(input(),f.readers);
+ assert.equal(x.original_u04_failure_stage,'JOIN');
+ assert.equal(x.original_u04_failure_round,'FIRST');
+ assert.equal(x.original_u04_failure_reason,'JOIN_U03_SOURCE_UNVERIFIED');
+ assert.equal(x.result_class,'U03_NESTED_REFUSAL_CAUSES_JOIN');
+ assert.equal(x.u03_rounds[0].failure_stage,'SECOND_ROUND_DRIFT');
+ assert.equal(x.u03_rounds[0].failure_reason,'SOURCE_RECEIPT_CHANGED');
+ assert.equal(reads,12);
+ protectedResult(x);
+});
 test('T04 U03 wrong GitHub actor becomes COMMENT_IDENTITY_INVALID and JOIN denial',async()=>{
  const f=fixture({change:d=>{d['issues/comments/'+C].user.login='impostor';}});
  const x=await diagnoseU03OriginalCycle(input(),f.readers);
