@@ -8,7 +8,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import re
 import sys
+import tempfile
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
@@ -36,6 +39,18 @@ def validate_request(request: dict) -> None:
     if request["stage"] == "STAGE2":
         if request["stage1_evidence"]["assessed_commit"] != case["inherited_commit"]:
             raise ValueError("Stage 1 evidence must name this immutable assessed commit")
+        # The Stage 2 schema intentionally requires a provider-published Stage 1
+        # comment. Local NOT_PUBLISHED prose cannot impersonate a GitHub receipt.
+        # This verifies URL shape and issue ownership only, not comment existence,
+        # body SHA or Owner/author authority; Stage 2 must fetch and read back.
+        publication = request["stage1_evidence"]["publication_url"]
+        publication_pattern = (
+            rf"{re.escape(current_url)}#issuecomment-[1-9][0-9]*"
+        )
+        if not re.fullmatch(publication_pattern, publication):
+            raise ValueError(
+                "Stage 1 publication must be an issuecomment on the exact current issue"
+            )
 
 
 def render_request(request: dict) -> str:
@@ -66,7 +81,28 @@ def main(argv: list[str] | None = None) -> int:
         data = json.loads(args.input.read_text(encoding="utf-8"))
         rendered = render_request(data)
         if args.output:
-            args.output.write_text(rendered, encoding="utf-8")
+            source_path = args.input.resolve()
+            target_path = args.output.resolve()
+            if source_path == target_path or (
+                args.output.exists() and os.path.samefile(args.input, args.output)
+            ):
+                raise ValueError("--output must not overwrite the Stage 1/2 input JSON")
+            # Atomic replacement prevents a partially written prompt on disk.
+            # Keep the temporary file beside the destination for same-device rename.
+            temp_path = None
+            try:
+                with tempfile.NamedTemporaryFile(
+                    mode="w", encoding="utf-8", newline="\n",
+                    dir=args.output.parent, prefix=".buddy-v15-",
+                    suffix=".tmp", delete=False
+                ) as stream:
+                    temp_path = Path(stream.name)
+                    stream.write(rendered)
+                os.replace(temp_path, args.output)
+                temp_path = None
+            finally:
+                if temp_path is not None:
+                    temp_path.unlink(missing_ok=True)
             print(str(args.output))
         else:
             sys.stdout.write(rendered)
