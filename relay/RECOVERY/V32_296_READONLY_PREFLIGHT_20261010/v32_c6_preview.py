@@ -59,11 +59,11 @@ def _native_c6():
     return importlib.import_module("handover_context")
 
 
-def _halt(status: str, reason: str, *, source: Mapping[str, Any] | None = None) -> dict[str, Any]:
+def _halt(status: str, reason: str, *, source: Mapping[str, Any] | None = None, native_attempted: bool = False) -> dict[str, Any]:
     return {
         "status": status, "reasons": [reason],
         "source_status": source.get("status") if source is not None else None,
-        "native_c6_invoked": False, "current_source_basis": None,
+        "native_c6_invoked": native_attempted, "current_source_basis": None,
         "c6_reconstruction": None, "accepted_evidence_count": None,
         "writer_authorized": False, "delp_admitted": False,
         "execution_admission": "NEVER_FROM_RECONSTRUCTION",
@@ -80,6 +80,7 @@ def inspect_v32_c6_read_only(
     if first.status != "HOLD_NO_APPROVED_POSITIVE_ISSUER":
         return _halt("HOLD_PREFLIGHT_SOURCE", "SOURCE_PREFLIGHT_NOT_STRUCTURALLY_CURRENT", source=source)
 
+    native_attempted = False
     try:
         repo = getter.get_repository(target.repository)
         if not isinstance(repo, Mapping) or repo.get("id") != target.repository_id or str(repo.get("full_name") or "").lower() != target.repository.lower():
@@ -98,6 +99,7 @@ def inspect_v32_c6_read_only(
         if not isinstance(graph, dict):
             raise ValueError("C6_GRAPH_PAYLOAD_INVALID")
         c6 = _native_c6()
+        native_attempted = True
         preview = c6.build_delp_source_bound_successor(
             graph, leaf_ref=target.leaf_ref,
             provider=_C6GetAdapter(target.repository, getter),
@@ -140,4 +142,4 @@ def inspect_v32_c6_read_only(
     except (OSError, ValueError, KeyError, TypeError, AttributeError, RuntimeError, ImportError) as exc:
         # Native implementation can contain source labels/body; never emit
         # exception text or provider body, only an unqualified HOLD.
-        return _halt("HOLD_C6_SOURCE_READ", "NATIVE_C6_SOURCE_UNAVAILABLE_OR_INVALID", source=source)
+        return _halt("HOLD_C6_SOURCE_READ", "NATIVE_C6_SOURCE_UNAVAILABLE_OR_INVALID", source=source, native_attempted=native_attempted)
