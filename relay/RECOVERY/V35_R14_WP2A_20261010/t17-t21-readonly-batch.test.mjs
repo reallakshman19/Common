@@ -177,9 +177,43 @@ test('T27 incomplete provider pagination, wrong total and duplicate ID fail clos
 test('T27 unknown private check names cannot leak or be promoted to accepted CI',()=>{
  const secret='SECRET_PRIVATE_CHECK';
  const x=t27ObservedExactHeadChecks(I,page([sourceCheck(secret,'completed','success')]));
- assert.equal(x.observation_status,'NO_KNOWN_FAILED_CHECK_IN_SNAPSHOT');
+ assert.equal(x.observation_status,'NO_KNOWN_CHECK_OBSERVED');
  assert.equal(x.observed_known_jobs.length,0);
  assert.ok(!JSON.stringify(x).includes(secret));
  assert.equal(x.required_ci_qualified,false);
  assert.equal(x.writer_authorized,false);
+});
+
+test('T29 completed neutral, skipped, stale are nonpass, never pseudo-clear',()=>{
+ for(const conclusion of ['neutral','skipped','stale']){
+  const item=sourceCheck('validate-v3-1-foundation','completed',conclusion);
+  const x=t27ObservedExactHeadChecks(I,page([item]));
+  assert.equal(x.observation_status,'KNOWN_NONPASS_CHECK_OBSERVED');
+  assert.equal(x.known_nonpass_count,1);
+  assert.equal(x.known_failure_count,0);
+  assert.equal(x.known_pending_count,0);
+  assert.equal(x.required_ci_qualified,false);
+  assert.equal(x.evidence_admitted,false);
+ }
+});
+test('T29 failure outranks nonpass and pending without erasing counts',()=>{
+ const x=t27ObservedExactHeadChecks(I,page([
+  sourceCheck('validate-v3-1-foundation','completed','failure'),
+  {...sourceCheck('live-selected-required-ci (windows-latest)','completed','skipped'),id:118823},
+  {...sourceCheck('live-selected-required-ci (ubuntu-latest)','in_progress',null),id:118824},
+ ]));
+ assert.equal(x.observation_status,'KNOWN_FAILED_CHECK_OBSERVED');
+ assert.equal(x.known_failure_count,1);
+ assert.equal(x.known_nonpass_count,1);
+ assert.equal(x.known_pending_count,1);
+ assert.equal(x.writer_authorized,false);
+});
+test('T29 known completed success remains diagnostic only, no-allowlist is explicitly unknown',()=>{
+ const ok=t27ObservedExactHeadChecks(I,page([sourceCheck('validate-v3-1-foundation','completed','success')]));
+ assert.equal(ok.observation_status,'KNOWN_CHECKS_COMPLETED_NONFAIL_DIAGNOSTIC_ONLY');
+ assert.equal(ok.required_ci_qualified,false);
+ const empty=t27ObservedExactHeadChecks(I,page([sourceCheck('UNKNOWN_PRIVATE_JOB','completed','success')]));
+ assert.equal(empty.observation_status,'NO_KNOWN_CHECK_OBSERVED');
+ assert.equal(empty.known_nonpass_count,0);
+ assert.equal(empty.evidence_admitted,false);
 });
