@@ -52,7 +52,7 @@ async function identity(input,read){
 }
 function selected(input,checkRuns,combined){
   if(!obj(checkRuns)||!Number.isSafeInteger(checkRuns.total_count)||!Array.isArray(checkRuns.check_runs)||
-    checkRuns.total_count>checkRuns.check_runs.length||checkRuns.check_runs.length>100||
+    checkRuns.total_count!==checkRuns.check_runs.length||checkRuns.check_runs.length>100||
     !obj(combined)||combined.sha!==input.head_sha||!Array.isArray(combined.statuses)||combined.statuses.length>100)
     throw new SourceFault('SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
   const runs=checkRuns.check_runs.map(x=>{
