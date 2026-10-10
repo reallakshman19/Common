@@ -1,0 +1,36 @@
+{
+  "schema_version": "buddy-runner-v1.5",
+  "stage": "STAGE1",
+  "mode": "OPEN_SOURCE_PURPOSE_RECONSTRUCTION",
+  "case": {
+    "repository": "reallakshman19/3D_Converters",
+    "current_issue": "https://github.com/reallakshman19/3D_Converters/issues/132",
+    "parent_issue": "https://github.com/reallakshman19/3D_Converters/issues/1",
+    "roadmap_refs": [
+      "https://github.com/reallakshman19/3D_Converters/issues/130",
+      "https://github.com/reallakshman19/3D_Converters/issues/131",
+      "https://github.com/reallakshman19/3D_Converters/issues/141",
+      "https://github.com/reallakshman19/3D_Converters/issues/171",
+      "https://github.com/reallakshman19/3D_Converters/issues/172"
+    ],
+    "inherited_commit": "240a60f84185c78ace6edef67b485e87e8130477",
+    "candidate_pr_refs": [
+      "https://github.com/reallakshman19/3D_Converters/pull/184",
+      "https://github.com/reallakshman19/3D_Converters/pull/185"
+    ],
+    "owner_source_grade": "MIRRORED_UNVERIFIED",
+    "owner_intent_ref": "UNKNOWN",
+    "objective_hint": "Deliver one authoritative, source-preserving LFJ Resolver in the published XML-CII 2019 application; independently reconcile competing approaches before selecting changes, without presupposing a winning PR.",
+    "scope_constraints": [
+      "Protect original XML/JSON and immutable two-CSV goldens; independent semantic acceptance remains separate.",
+      "Do not redesign working matching geometry merely to combine branches.",
+      "Do not claim current source, Owner approval or production release from a draft PR."
+    ],
+    "known_competing_paths": [
+      "tabs/xml-cii-2019-standalone/ui-adapted/xml-cii-adapted-events.js",
+      "lfj/consumers/3d-converters/source-backed-resolver-build.mjs",
+      "tabs/xml-cii-2019-standalone/ui-adapted/xml-cii-adapted-lfj-indexed-preview.js",
+      "docs/tabs/xml-cii-2019-standalone/ui-adapted/xml-cii-adapted-events.js"
+    ]
+  }
+}
