@@ -1,0 +1,34 @@
+name: V3.2 #296 Read-Only Preflight Tests
+
+on:
+  pull_request:
+    paths:
+      - "relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/**"
+      - ".github/workflows/v32-296-readonly-preflight.yml"
+  push:
+    branches:
+      - "prototype/v32-296-readonly-provider-preflight"
+    paths:
+      - "relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/**"
+      - ".github/workflows/v32-296-readonly-preflight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-contract:
+    name: V32 non-admitting tests (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile code
+        run: python -m compileall -q relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010
+      - name: Execute all non-admission contract tests
+        run: python -m unittest discover -s relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/tests -v
