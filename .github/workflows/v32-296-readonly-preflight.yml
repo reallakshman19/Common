@@ -102,3 +102,19 @@ jobs:
           print("submitted review observations:", row["submitted_reviews"])
           print("observed endpoint visibility:", row["required_policy_endpoints"])
           PY
+
+  native-v32-delp-contract:
+    name: Native frozen V32 DELP structural regressions (read only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install existing native graph/schema test dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.2 jsonschema
+      - name: Execute actual existing V3.2 DELP graph and facts tests
+        run: |
+          python -m unittest discover \
+            -s skills/engineering-pr-delivery-v3.2/tests \
+            -p 'test_delp_projection_v32.py' -v
