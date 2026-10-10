@@ -273,5 +273,44 @@ class V32ProviderPreflightTests(unittest.TestCase):
         self.assertEqual(v.status, "HOLD_PROVIDER_READ")
         self.assertIn("PROVIDER_PR_BASE_REPOSITORY_MISMATCH", v.reasons)
 
+    def test_25_provider_comment_claims_are_exposed_as_unattested(self):
+        p = FakeProvider()
+        p.comments = [{
+            "id": 11, "user": {"login": "owner"}, "author_association": "OWNER",
+            "body": (
+                "```yaml\nCHECKPOINT_FACTS_V1:\n"
+                "  responsibility: {issue: v32-proto#4}\n"
+                "  material: {candidate_sha: " + H1 + "}\n"
+                "  units:\n"
+                "    - id: U01\n"
+                "      state: COMPLETE\n"
+                "      result: VERIFIED\n"
+                "      evidence_refs: [v32-proto#4#issuecomment-11]\n"
+                "```"
+            ),
+        }]
+        row = inspect_v32_read_only(target(), p).as_dict()
+        self.assertEqual(row["status"], "HOLD_NO_APPROVED_POSITIVE_ISSUER")
+        self.assertEqual(row["comment_claims"]["native_structural_claims"], 1)
+        self.assertEqual(row["comment_claims"]["complete_verified_unit_claims"], 1)
+        self.assertEqual(row["comment_claims"]["status"], "HOLD_UNATTESTED_COMMENT_CLAIMS")
+        self.assertIsNone(row["accepted_evidence_count"])
+        self.assertFalse(row["delp_invoked"])
+
+    def test_26_missing_provider_checkpoint_comments_are_not_evidence(self):
+        p = FakeProvider()
+        row = inspect_v32_read_only(target(), p).as_dict()
+        self.assertEqual(row["comment_claims"]["status"], "HOLD_NO_COMMENT_CLAIMS")
+        self.assertEqual(row["comment_claims"]["blocks_seen"], 0)
+        self.assertIsNone(row["accepted_evidence_count"])
+
+    def test_27_bad_provider_comment_yaml_never_returns_empty_success(self):
+        p = FakeProvider()
+        p.comments[0]["body"] = "```yaml\nCHECKPOINT_FACTS_V1:\n  broken: [\n```"
+        row = inspect_v32_read_only(target(), p).as_dict()
+        self.assertEqual(row["status"], "HOLD_PROVIDER_READ")
+        self.assertIn("CLAIM_AUDIT_NATIVE_BLOCK_PARSE_FAILED", row["reasons"])
+        self.assertIsNone(row["comment_claims"])
+
 if __name__ == "__main__":
     unittest.main()
