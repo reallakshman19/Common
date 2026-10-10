@@ -78,6 +78,55 @@ class WitnessTests(unittest.TestCase):
         self.assertEqual(2, sum(x[0] == "GET_PR" for x in t.calls))
         self.assertEqual(2, sum(x[0] == "GET_COMMENTS" for x in t.calls))
 
+    def test_missing_governed_root_marker_fails_before_graph_claim(self):
+        t = Provider()
+        t.root["body"] = "manually maintained owner text"
+        r = call(t)
+        self.assertEqual("HOLD_ROOT_NOT_GOVERNED", r["status"])
+        self.assertEqual("UNKNOWN", r["graph"])
+        self.assertFalse(any(x[0] == "GET_COMMENTS" for x in t.calls))
+
+    def test_root_changed_during_readback_is_not_stable(self):
+        t = Provider()
+        t.after_root = copy.deepcopy(t.root)
+        t.after_root["body"] += "\nRevised while reading"
+        self.assertEqual("HOLD_ISSUE_MOVED_DURING_OBSERVATION", call(t)["status"])
+
+    def test_graph_approval_added_or_revoked_mid_observation(self):
+        t = Provider()
+        t.after_comments = [{"id": 13, "body": W.GRAPH_MARKER}]
+        self.assertEqual("HOLD_COMMENTS_MOVED_DURING_OBSERVATION", call(t)["status"])
+        t = Provider()
+        t.comments = [{"id": 13, "body": W.GRAPH_MARKER}]
+        t.after_comments = []
+        module = types.ModuleType("integration_cold_entry_v35")
+        module.reconstruct = lambda *_: {
+            "status": "GOVERNED_GRAPH_PROVIDER_OBSERVED_READ_ONLY",
+            "selected_leaf": "Common#30", "approved_pr": 292, "exact_head": SHA,
+        }
+        with patch.dict(sys.modules, {"integration_cold_entry_v35": module}):
+            self.assertEqual("HOLD_COMMENTS_MOVED_DURING_OBSERVATION", call(t)["status"])
+
+    def test_pr_body_changed_during_readback_refused(self):
+        t = Provider()
+        t.after_pr = copy.deepcopy(t.pr)
+        t.after_pr["body"] = "New semantic claims"
+        self.assertEqual("HOLD_PR_MOVED_DURING_OBSERVATION", call(t)["status"])
+
+    def test_cli_uses_graph_capable_transport_without_writing(self):
+        fake = Provider()
+        seen = []
+        module = types.ModuleType("integration_scoreboard_publish_v35")
+        module.ScoreboardTransport = lambda repo: (seen.append(repo) or fake)
+        argv = [
+            "witness", "--repository", REPO, "--root", "5", "--leaf", "30",
+            "--pr", "292", "--expected-head", SHA,
+        ]
+        with patch.dict(sys.modules, {"integration_scoreboard_publish_v35": module}), patch.object(sys, "argv", argv):
+            self.assertEqual(3, W.main())
+        self.assertEqual([REPO], seen)
+        self.assertTrue(all(x[0].startswith("GET_") for x in fake.calls))
+
     def test_stale_expected_head_exits_before_approval(self):
         t = Provider()
         result = W.observe(t, root_issue=5, leaf_issue=30, pr_number=292,
