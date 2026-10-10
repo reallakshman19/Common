@@ -1,0 +1,68 @@
+name: "V3.5 #294 T13 R4 index candidate native link verifier"
+
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/t13-*'
+      - '.github/workflows/v35-294-t13-r4-candidate-links.yml'
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  r4-candidate-negative-controls:
+    name: "T13 negative index/link controls (${{ matrix.os }}, Node ${{ matrix.node }})"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Enforce exact tested HEAD and preserved T11/WP2-B originals
+        shell: bash
+        env:
+          TESTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$TESTED_HEAD"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2A_20261010/t13-r4-index-candidate.json)" = "c0e954710442f3fbea99553e38d81ac71dcf0bfd"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2A_20261010/t13-r4-index-candidate.mjs)" = "8b1e85d67e6597a6b033f23212e43f37958470f7"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2A_20261010/t11-pr-only-cold-entry.mjs)" = "2b304deda91a8d18fda8f8927673b0205953a061"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
+      - name: Test R4 draft links, corrupt pointers, stale source and non-admission
+        shell: bash
+        run: node --test relay/RECOVERY/V35_R14_WP2A_20261010/t13-r4-index-candidate.test.mjs
+
+  native-r4-links:
+    name: "T13 native repo-index candidate source and links (${{ matrix.os }})"
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 314
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Exact candidate blob native provider GET and 2-pass link checks; never qualify R4
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TESTED_CANDIDATE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$TESTED_CANDIDATE_HEAD"
+          node relay/RECOVERY/V35_R14_WP2A_20261010/t13-r4-index-candidate.mjs
