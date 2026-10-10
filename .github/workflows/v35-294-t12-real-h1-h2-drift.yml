@@ -1,0 +1,76 @@
+name: "V3.5 #294 T12 real PR H1-to-H2 and link-drift HOLD"
+
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/t12-*'
+      - '.github/workflows/v35-294-t12-real-h1-h2-drift.yml'
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+jobs:
+  head-and-link-falsifiers:
+    name: T12 H1 H2 and bad-link negatives (${{ matrix.os }}, Node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Pin actual workflow head and unchanged original source/consumer
+        shell: bash
+        env:
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$HEAD"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2A_20261010/t11-pr-only-cold-entry.mjs)" = "2b304deda91a8d18fda8f8927673b0205953a061"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2A_20261010/t12-pr-link-drift.mjs)" = "1e88a92ff6fd980993151ae22243db427bc28eee"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
+      - name: Executable current/stale PR/branch/issue link and no-authority falsifiers
+        shell: bash
+        run: |
+          node --test relay/RECOVERY/V35_R14_WP2A_20261010/t12-pr-link-drift.test.mjs
+
+  native-actual-h1-h2:
+    name: T12 real GitHub PR312 H1-to-H2 (${{ matrix.os }})
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 312
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Real provider current H2 accepted only as read-only, original H1 revoked
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          T12_RECORDED_H1: 5d70e46d264909a576ccbbb074752004d1e9cb81
+          T12_CURRENT_H2: ${{ github.event.pull_request.head.sha }}
+          T12_WORKFLOW_HEAD: ${{ github.event.pull_request.head.sha }}
+          T12_PR_NUMBER: ${{ github.event.pull_request.number }}
+          T12_PR_ENTRY_URL: https://github.com/reallakshman19/Common/pull/312
+          T12_HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+          T12_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          T12_BASE_HEAD: ${{ github.event.pull_request.base.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$T12_WORKFLOW_HEAD"
+          test "$T12_RECORDED_H1" != "$T12_WORKFLOW_HEAD"
+          node relay/RECOVERY/V35_R14_WP2A_20261010/t12-pr-link-drift.mjs
