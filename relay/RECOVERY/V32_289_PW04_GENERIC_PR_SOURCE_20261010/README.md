@@ -58,6 +58,17 @@ overflow, timeout and missing CLI; all authentic current provider facts and
 Owner authority still require independent verification. These synthetic/transport
 protections do not issue evidence, attest human Owner approval or make the
 inaccessible original lab current.
+The **offline shadow input** now independently rejects raw graph duplicate JSON
+keys, invalid UTF-8 and non-finite JSON before native V3.2 executes, without
+rewriting the pinned graph bytes. Its GET-only snapshot adapter refuses absent
+or incorrectly typed issues/pulls/comments maps and missing/malformed pinned
+main SHA, rather than allowing raw Python lookup errors. The unchanged native
+managed PR block renderer is exercised through a *second* reconciliation pass
+and must return a byte-identical body, including untouched original human PR
+prose. Shadow report output remains exclusive-create mode 0600 on POSIX; if
+serialization fails after opening the file, the incomplete private artifact is
+unlinked. None of these offline assertions converts a snapshot into human
+Owner attestation, an independently admitted fact, or a live publication.
 The shadow refuses drift, malformed input and moved PRs, runs **real** native
 `plan_github`, `ledger_from_github`, `observe_github`, `project`,
 `source_bound_responsibility_core` where compatible and `frontier`, reuses
