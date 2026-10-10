@@ -118,6 +118,14 @@ jobs:
           assert row["status"] == "HOLD_D4_D5_AUTHORITY_UNKNOWN", row
           assert row["independent_review_authority"] == "UNKNOWN_NOT_AUTHENTICATED", row
           assert row["effective_required_check_policy"] == "UNKNOWN_NOT_AUTHENTICATED", row
+          assert row["required_policy_endpoints"]["active_branch_rules"] in (
+              "OBSERVED_EMPTY", "OBSERVED_UNQUALIFIED", "UNKNOWN"
+          ), row
+          # The new branch-applied rules source must be attempted; it can
+          # legitimately return UNKNOWN with a read-only GitHub token.
+          assert row["required_policy_endpoints"]["rulesets"] in (
+              "OBSERVED_EMPTY", "OBSERVED_UNQUALIFIED", "UNKNOWN"
+          ), row
           assert row["accepted_evidence_count"] is None
           assert row["writer_authorized"] is False
           assert row["delp_invoked"] is False
