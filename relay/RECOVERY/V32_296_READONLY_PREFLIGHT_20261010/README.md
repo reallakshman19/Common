@@ -23,7 +23,7 @@ separately approved V3.2 evidence-identity repair. This source tree does not edi
   provider issue comments; aggregate observation only, not an admitted fact. Claims that say VERIFIED do not become verified evidence.
 - `v32_readonly_cli.py`: command line wrapper, output as structured JSON; exit 1 on
   invalid material and exit 2 on HOLD. **Exit 0 is impossible by design.**
-- `tests/`: 96 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
+- `tests/`: 102 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
   NEGATIVE ORACLES for this tool, not real V3.2 positive engineering qualification.
 
 ## Regression run
@@ -111,7 +111,7 @@ or author identifiers.
 
 Testing the comment observer requires `PyYAML==6.0.2` alongside Python
 3.11/3.12/3.13. The scoped CI matrix installs that dependency and executes
-96 synthetic and real-native-parser regression cases. Real GET-only
+102 synthetic and real-native-parser regression cases. Real GET-only
 qualification remains negative by design.
 
 ### Numeric-SHA YAML edge case
@@ -165,3 +165,27 @@ This is provider D4/D5 **visibility**, not delegated Owner D1–D5 authority.
 The separate inherited `validate-v3-1-foundation` failure from missing retired
 V2.5/V3 workflows is not fixed or bypassed. Do not merge this read-only
 prototype as a substitute for native positive E→DELP→GitHub→C6.
+
+## Source-level native V3.2 graph validation (H7)
+
+The prior preflight independently checked only `programme.repository`, matching
+`LEAF`, and `primary_pr`. That subset was insufficient: it could accept a
+graph missing the native mandatory parent, leaf weight or declared weighted
+units. `v32_native_graph.py` now imports and calls the **existing frozen**
+`delp_projection_v32.py::validate_graph()`, followed by its native repository
+match gate and exact expected leaf/PR binding. The source itself is never
+changed, the auxiliary does not independently recalculate a graph, and a
+native-valid structure is expressly **not** a released Owner-approved plan.
+
+The preflight uses this validator within **both** non-atomic source read
+passes; malformed graph topology is `HOLD_PROVIDER_READ` with bounded
+`NATIVE_V32_GRAPH_CONTRACT_INVALID`, not a positive native checkpoint.
+Six provider-level negative tests cover missing parent/units/weights, duplicate
+nodes, wrong root and foreign PR binding; the fake graph fixture now actually
+satisfies the native structural contract.
+
+The scoped workflow also executes the existing
+`skills/engineering-pr-delivery-v3.2/tests/test_delp_projection_v32.py`
+**directly** in a separate read-only job with Python 3.12, PyYAML and jsonschema,
+instead of claiming the unrelated path-skipped V3.2 wrapper exercised it.
+This source-quality job is distinct from production evidence qualification.
