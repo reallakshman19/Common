@@ -27,6 +27,16 @@ def validate_request(request: dict) -> None:
     Draft202012Validator.check_schema(schema)
     Draft202012Validator(schema, format_checker=FormatChecker()).validate(request)
 
+    case = request["case"]
+    current_url = case["current_issue"]
+    current_prefix = f'https://github.com/{case["repository"]}/issues/'
+    issue_id = current_url.removeprefix(current_prefix)
+    if not current_url.startswith(current_prefix) or not issue_id.isdecimal() or int(issue_id) < 1:
+        raise ValueError("current_issue must identify an issue in the specified repository")
+    if request["stage"] == "STAGE2":
+        if request["stage1_evidence"]["assessed_commit"] != case["inherited_commit"]:
+            raise ValueError("Stage 1 evidence must name this immutable assessed commit")
+
 
 def render_request(request: dict) -> str:
     """Produce an explicit task prompt; supplied references remain unverified data."""
