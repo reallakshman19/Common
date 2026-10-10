@@ -366,3 +366,29 @@ amendments:
     allowed_paths:
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_evidence_identity_red.py
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_custody_red.py
+
+  - id: AMEND-V32-289-PRREF-017
+    owner_authorized: false
+    owner_basis: >-
+      PROPOSED — not yet an effective frozen-source exception.
+      On 2026-10-10 the Owner accepted the XS/S high-ROI engineering work in
+      Common new-repo #289, recorded in PLAN_UPDATE Revision 6
+      (issuecomment-6101543759). That approved the engineering objective;
+      no separate, source-verified authorization to extend the frozen V3.2
+      product tree and no independent qualification or merge approval has
+      yet been established. A qualified Owner decision must explicitly approve
+      these exact paths and this amendment before changing owner_authorized
+      to true in this independent governance PR. Even then, merge/review and
+      base-residency must be satisfied separately.
+    summary: >-
+      PENDING XS-A: bounded compatibility fix in unchanged native DELP
+      source_bound_responsibility_core() for exact graph-bound short repo#PR
+      and full owner/repo#PR. Reject wrong owner, wrong repository sharing
+      basename, wrong number, malformed suffix, wrong graph or leaf.
+      Preserve old Common tests, graph bytes, V1 input_digest and DELP
+      progress arithmetic. No project-specific rewrite, new reducer, issue
+      or PR writer, Owner authentication, evidence admission, V3.5 change,
+      C6 custody privilege, branch-policy, review, merge or release grant.
+    allowed_paths:
+      - skills/engineering-pr-delivery-v3.2/scripts/delp_projection_v32.py
+      - skills/engineering-pr-delivery-v3.2/tests/test_delp_projection_v32.py
