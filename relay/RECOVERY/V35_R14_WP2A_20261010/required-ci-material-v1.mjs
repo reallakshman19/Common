@@ -56,12 +56,20 @@ function selected(input,checkRuns,combined){
     !obj(combined)||combined.sha!==input.head_sha||!Array.isArray(combined.statuses)||
     !Number.isSafeInteger(combined.total_count)||combined.total_count!==combined.statuses.length||combined.statuses.length>100)
     throw new SourceFault('SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+  const runIds=new Set();
+  const completed=new Set(['success','failure','neutral','cancelled','skipped','timed_out',
+    'action_required','startup_failure','stale']);
+  const states=new Set(['queued','in_progress','completed','waiting','pending','requested']);
   const runs=checkRuns.check_runs.map(x=>{
-    if(!obj(x)||!Number.isSafeInteger(x.id)||typeof x.name!=='string'||!x.name||
-      x.head_sha!==input.head_sha||!['queued','in_progress','completed','waiting','pending','requested'].includes(x.status)||
-      (x.status==='completed'&&typeof x.conclusion!=='string')||!Number.isSafeInteger(x.app?.id))
+    if(!obj(x)||!Number.isSafeInteger(x.id)||x.id<=0||runIds.has(x.id)||
+      typeof x.name!=='string'||!x.name||
+      x.head_sha!==input.head_sha||!states.has(x.status)||
+      (x.status==='completed'?!completed.has(x.conclusion):x.conclusion!==null&&x.conclusion!==undefined)||
+      !Number.isSafeInteger(x.app?.id)||x.app.id<=0)
       throw new SourceFault('CHECK_RUN_SHAPE_OR_SHA_INVALID');
-    return {kind:'CHECK_RUN',name:x.name,app_id:x.app.id,run_id:x.id,state:x.status,conclusion:x.conclusion||null};
+    runIds.add(x.id);
+    return {kind:'CHECK_RUN',name:x.name,app_id:x.app.id,run_id:x.id,
+      state:x.status,conclusion:x.status==='completed'?x.conclusion:null};
   });
   const statuses=combined.statuses.map(x=>{
     if(!obj(x)||typeof x.context!=='string'||!x.context||!['success','failure','error','pending'].includes(x.state))
