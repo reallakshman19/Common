@@ -4,11 +4,12 @@ Synthetic provider material only; never accepts or publishes a production fact.
 """
 from __future__ import annotations
 from copy import deepcopy
-from hashlib import sha1
+from hashlib import sha1, sha256
 import os
 import stat
 import json
 from pathlib import Path
+import subprocess
 import sys
 import unittest
 from contextlib import redirect_stdout
@@ -399,6 +400,76 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
                 with self.assertRaisesRegex(CycleHold, "^SNAPSHOT_BYTES_UNBOUNDED$"):
                     shadow_main()
             self.assertFalse(output.exists())
+
+
+    def test_32_snapshot_sha256_mismatch_refuses_before_native_or_report(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            snapshot = Path(directory) / "source.json"
+            output = Path(directory) / "report.json"
+            graph.write_bytes(self.binary)
+            snapshot.write_bytes(json.dumps(self.source).encode())
+            argv = ["v32_integrated_shadow.py", "--graph", str(graph),
+                    "--snapshot", str(snapshot), "--repository-id", "42",
+                    "--leaf", self.pin.leaf_ref, "--graph-blob",
+                    self.pin.released_graph_blob_oid, "--head", HEAD,
+                    "--snapshot-sha256", "0" * 64, "--output", str(output)]
+            with patch.object(sys, "argv", argv), patch.object(
+                    shadow_module, "_native_modules",
+                    side_effect=AssertionError("native cannot run on changed snapshot")):
+                with self.assertRaisesRegex(CycleHold, "^SNAPSHOT_SHA256_PIN_MISMATCH$"):
+                    shadow_main()
+            self.assertFalse(output.exists())
+
+    def test_33_snapshot_sha256_pin_success_still_unattested(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            snapshot = Path(directory) / "source.json"
+            output = Path(directory) / "report.json"
+            graph.write_bytes(self.binary)
+            original = json.dumps(self.source).encode()
+            snapshot.write_bytes(original)
+            argv = ["v32_integrated_shadow.py", "--graph", str(graph),
+                    "--snapshot", str(snapshot), "--repository-id", "42",
+                    "--leaf", self.pin.leaf_ref, "--graph-blob",
+                    self.pin.released_graph_blob_oid, "--head", HEAD,
+                    "--snapshot-sha256", sha256(original).hexdigest(),
+                    "--output", str(output)]
+            with patch.object(sys, "argv", argv), redirect_stdout(StringIO()):
+                self.assertEqual(shadow_main(), 0)
+            result = json.loads(output.read_text(encoding="utf-8"))
+            self.assertTrue(result["snapshot_sha256_pin_verified"])
+            self.assertFalse(result["owner_source_authenticated"])
+            self.assertFalse(result["eligible_evidence_admitted_by_this_cycle"])
+            self.assertFalse(result["production_activation"])
+
+    def test_34_separate_python_processes_replay_same_source_deterministically(self):
+        # Separate Python subprocesses exercise a genuinely fresh module import
+        # and exact same captured inputs; this is NOT a real independent C6 agent.
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            snapshot = Path(directory) / "source.json"
+            graph.write_bytes(self.binary)
+            raw_snapshot = json.dumps(self.source, sort_keys=True).encode()
+            snapshot.write_bytes(raw_snapshot)
+            results = []
+            for attempt in (1, 2):
+                report_path = Path(directory) / f"replay-{attempt}.json"
+                cmd = [sys.executable, "-B", str(Path(shadow_module.__file__)),
+                       "--graph", str(graph), "--snapshot", str(snapshot),
+                       "--repository-id", "42", "--leaf", self.pin.leaf_ref,
+                       "--graph-blob", self.pin.released_graph_blob_oid,
+                       "--head", HEAD, "--snapshot-sha256",
+                       sha256(raw_snapshot).hexdigest(), "--output", str(report_path)]
+                result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+                self.assertEqual(result.returncode, 0, result.stderr[:300])
+                self.assertTrue(report_path.exists())
+                results.append(json.loads(report_path.read_text(encoding="utf-8")))
+            self.assertEqual(results[0], results[1])
+            self.assertTrue(results[0]["snapshot_sha256_pin_verified"])
+            self.assertEqual(results[0]["c6_same_source_reentry"]["status"], "CURRENT")
+            self.assertFalse(results[0]["issue_or_pr_github_writes"])
+            self.assertEqual(results[0]["real_cold_successor"], "NOT_EXECUTED")
 
 
 if __name__ == "__main__":
