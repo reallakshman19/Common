@@ -2,7 +2,7 @@
  * Must never grant E, Owner, reviewer, lease, DELP or publisher.
  */
 import {inspectLivePreAdmission} from './pre-admission-boundary-v1.mjs';
-const result=await inspectLivePreAdmission({
+const locator={
  repository:'reallakshman19/Common',repository_id:1412133785,
  root_issue:5,leaf_issue:30,
  pr_number:Number(process.env.CANDIDATE_PR_NUMBER),
@@ -12,8 +12,16 @@ const result=await inspectLivePreAdmission({
  evidence_claimed_head_sha:'64e494f6cc4bca5764b1b94ff4fe58d16da29d30',
  expected_author_login:'reallakshman19',
  facts_schema_line:'V35',
-});
-console.log(JSON.stringify(result,null,2));
+};
+// At most one complete *new* native GET observation after an UNKNOWN result.
+// Each attempt is retained in raw CI logs. This is NOT a way to re-grade a
+// REFUTED, stale or non-admitted observation and never supplies R3 authority.
+let result;
+for(let attempt=1;attempt<=2;attempt++){
+ result=await inspectLivePreAdmission(locator);
+ console.log(JSON.stringify({native_read_attempt:attempt,...result},null,2));
+ if(result.source_status!=='UNKNOWN')break;
+}
 if(result.source_status!=='REFERENCES_COHERENT_BUT_UNADMITTED'||
  result.observation_grade!=='NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'||
  !result.admission_blockers.includes('EVIDENCE_CANDIDATE_STALE_OR_UNKNOWN')||
