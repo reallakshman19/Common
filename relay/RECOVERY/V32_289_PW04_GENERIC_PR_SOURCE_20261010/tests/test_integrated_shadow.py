@@ -242,5 +242,39 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
             self.assertEqual(saved["native_core_hold"], report["native_core_hold"])
 
 
+    def test_18_duplicate_graph_keys_are_a_safe_hold(self):
+        self.binary = self.binary.replace(
+            b'"programme":', b'"programme":{"repository":"different/repo"},"programme":', 1)
+        self.source["graph_git_blob"] = oid(self.binary)
+        self.pin = PreviewPins(REPO, 42, oid(self.binary), "example-lab#2", HEAD)
+        with self.assertRaisesRegex(CycleHold, "^GRAPH_DUPLICATE_JSON_KEY$"):
+            self.cycle()
+
+    def test_19_invalid_utf8_graph_is_a_safe_hold(self):
+        self.binary += bytes([255])
+        self.source["graph_git_blob"] = oid(self.binary)
+        self.pin = PreviewPins(REPO, 42, oid(self.binary), "example-lab#2", HEAD)
+        with self.assertRaisesRegex(CycleHold, "^GRAPH_JSON_INVALID$"):
+            self.cycle()
+
+    def test_20_absent_snapshot_collections_are_safe_holds(self):
+        for name in ("issues", "pulls", "comments"):
+            with self.subTest(collection=name):
+                data = deepcopy(self.source)
+                del data[name]
+                with self.assertRaisesRegex(CycleHold, "^SOURCE_SNAPSHOT_SHAPE_INVALID$"):
+                    integrated_shadow(self.binary, self.pin, data)
+
+    def test_21_nonmapping_issues_are_safe_holds(self):
+        self.source["issues"] = []
+        with self.assertRaisesRegex(CycleHold, "^SOURCE_SNAPSHOT_SHAPE_INVALID$"):
+            self.cycle()
+
+    def test_22_missing_main_sha_is_a_safe_hold(self):
+        del self.source["main_sha"]
+        with self.assertRaisesRegex(CycleHold, "^SOURCE_SNAPSHOT_MAIN_SHA_INVALID$"):
+            self.cycle()
+
+
 if __name__ == "__main__":
     unittest.main()
