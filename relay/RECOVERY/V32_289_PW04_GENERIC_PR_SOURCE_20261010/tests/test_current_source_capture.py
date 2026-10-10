@@ -200,7 +200,7 @@ class CurrentCaptureTests(unittest.TestCase):
         self.assertEqual(self.g.log, [])
 
     def test_14_non_utf8_graph_is_bounded_hold_before_provider_read(self):
-        corrupted = self.raw + b"\\xff"
+        corrupted = self.raw + bytes([0xff])
         self.g.graph = corrupted
         with self.assertRaisesRegex(CaptureHold, "^GRAPH_JSON_INVALID$"):
             capture(corrupted, REPO, git_blob(corrupted), self.g)
