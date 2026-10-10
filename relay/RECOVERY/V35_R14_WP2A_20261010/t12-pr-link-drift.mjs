@@ -17,7 +17,7 @@ const VALID_CODES=new Set([
   'ISSUE_LINK_IDENTITY_INVALID','SOURCE_REF_DISAGREES_WITH_PR',
   'SOURCE_CHANGED_DURING_DOUBLE_READ',
   'PR_HEAD_CHANGED_SINCE_CHECKPOINT','PR_BASE_CHANGED_SINCE_CHECKPOINT',
-  'PROVIDER_READ_UNVERIFIED',
+  'PROVIDER_READ_UNVERIFIED','SOURCE_CURRENT_OWNER_HOLD',
 ]);
 function result(grade,status,reason,snapshot=null,pass_count=0){
  const isCurrent=status==='CURRENT_SOURCE_READ_ONLY_HOLD';
@@ -97,7 +97,7 @@ async function run(t,read,grade){
    return result(grade,'HOLD_STALE_H1','PR_HEAD_CHANGED_SINCE_CHECKPOINT',b,pass);
   if(b.base_sha!==t.base_expected_sha)
    return result(grade,'HOLD_STALE_BASE','PR_BASE_CHANGED_SINCE_CHECKPOINT',b,pass);
-  return result(grade,'CURRENT_SOURCE_READ_ONLY_HOLD','PROVIDER_READ_UNVERIFIED',b,pass);
+  return result(grade,'CURRENT_SOURCE_READ_ONLY_HOLD','SOURCE_CURRENT_OWNER_HOLD',b,pass);
  }catch(err){
   const reason=VALID_CODES.has(err)?err:'PROVIDER_READ_UNVERIFIED';
   return result(grade,'HOLD_UNVERIFIED_SOURCE',reason,null,pass);
