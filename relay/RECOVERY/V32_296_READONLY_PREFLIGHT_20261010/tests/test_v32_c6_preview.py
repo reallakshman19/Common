@@ -5,15 +5,33 @@ The fake provider models GET endpoints, never production Owner release.
 from __future__ import annotations
 
 from pathlib import Path
+import json
 import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from v32_c6_preview import inspect_v32_c6_read_only
-from test_v32_provider_preflight import FakeProvider, target, H1, H2
+from v32_provider_preflight import PreflightTarget
+from test_v32_provider_preflight import FakeProvider, H1, H2
+
+# Existing official test fixture: never a released new-repo Owner source.
+# The historical source has a genuinely released-form Proposal-V2 *shape*,
+# which the native C6 code requires. No real old-repo provider is contacted.
+FIXTURE = (Path(__file__).resolve().parents[4] /
+           ".github/v32-evidence-spine/fixtures/718-c0-source-graph.json")
+HISTORICAL_REPO = "reallaksh19/Common"
 
 
 class C6PreviewProvider(FakeProvider):
+    def __init__(self):
+        super().__init__()
+        self.graph = json.loads(FIXTURE.read_text(encoding="utf-8"))
+        self.pr_base_repository = HISTORICAL_REPO
+
+    def get_repository(self, repository):
+        self._before("repo")
+        return {"full_name": HISTORICAL_REPO, "id": self.repo_id, "default_branch": "main"}
+
     def get_issue(self, repository, number):
         self._before("issue")
         return {
@@ -23,9 +41,18 @@ class C6PreviewProvider(FakeProvider):
 
     def get_pull(self, repository, number):
         row = super().get_pull(repository, number)
+        row["number"] = 722
         row["state"] = "open"
         row["merged"] = False
         return row
+
+
+def target():
+    return PreflightTarget(
+        repository=HISTORICAL_REPO, repository_id=112233,
+        graph_path=".github/v32-evidence-spine/fixtures/718-c0-source-graph.json",
+        leaf_ref="Common#720", pr_number=722,
+    )
 
 
 def run(p, frozen=None):
