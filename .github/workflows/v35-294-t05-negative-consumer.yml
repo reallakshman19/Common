@@ -1,0 +1,82 @@
+name: "V3.5 #294 T05 same-head WP2-A to WP2-B native negative consumer"
+
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/**'
+      - 'relay/RECOVERY/V35_R14_WP2B_20261010/**'
+      - '.github/workflows/v35-294-t05-negative-consumer.yml'
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+  checks: read
+  statuses: read
+
+jobs:
+  same-head-consumer-negatives:
+    name: T05 actual U04-B03 source tests (${{ matrix.os }}, Node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Verify one tested HEAD plus original U02/U03/U04 and WP2-B blobs
+        shell: bash
+        env:
+          EXACT_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXACT_HEAD"
+          cd relay/RECOVERY
+          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.mjs)" = "3eac046128202fdee88a5ad47bb1df82e3304ca1"
+          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.test.mjs)" = "e1da8e166cb7e560f76f13500e629f4a0be0f877"
+          test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.mjs)" = "79cffd2e3d2828ac1727afad7763267768c56ad5"
+          test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.test.mjs)" = "e78b852d0e28c8f7a13fe66baf60662e4b7c6789"
+          test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.mjs)" = "e5843e4ab141a49950cd8e2b380540eca8f8f938"
+          test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs)" = "c0074ed41ee6a35e7fe0bbc4387b89e6ccf083fb"
+          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
+          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "abc1779f484a87b25d1a433fba6b10ebabff4993"
+      - name: Inherited WP2-B B01–B03 adversarial tests
+        shell: bash
+        run: node --test relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs
+      - name: Same-head PR308 original U04 -> unmodified WP2-B negative vector
+        shell: bash
+        run: node --test relay/RECOVERY/V35_R14_WP2A_20261010/t05-wp2b-same-head.test.mjs
+
+  native-negative-consumer:
+    name: T05 real GitHub U04 to B03 (${{ matrix.os }})
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 308
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Exact-head genuine WP2-A native provider to WP2-B original consumer, no admission
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_HEAD_SHA"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
+          node relay/RECOVERY/V35_R14_WP2A_20261010/t05-native-wp2b-negative.cli.mjs
