@@ -2,6 +2,7 @@
 from __future__ import annotations
 import importlib.util
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -94,6 +95,77 @@ class BuddyV15Tests(unittest.TestCase):
         request["mode"] = "BLIND_ISOLATED"
         with self.assertRaises(ValidationError): buddy.render_request(request)
         self.assertIn("not call this a blind/isolated successor", buddy.render_request(source_request()))
+
+    def test_stage2_publication_bound_to_exact_current_issue(self):
+        valid = stage2_request()
+        self.assertIn("RECONCILED_PURPOSE", buddy.render_request(valid))
+        for link in [
+            "https://github.com/other/project/issues/17#issuecomment-123",
+            "https://github.com/sample/project/issues/18#issuecomment-123",
+            "https://github.com/sample/project/issues/17",
+            "https://github.com/sample/project/issues/17#discussion_r123",
+            "https://github.com/sample/project/issues/17#issuecomment-0",
+            "https://example.com/comment/123",
+            "https://github.com/sample/project/issues/17#issuecomment-123-extra",
+        ]:
+            bad = stage2_request()
+            bad["stage1_evidence"]["publication_url"] = link
+            with self.subTest(link=link), self.assertRaises(ValueError):
+                buddy.render_request(bad)
+
+    def test_stage2_carries_complete_file_scope_and_deployment_reconciliation(self):
+        prompt = buddy.render_request(stage2_request())
+        for marker in [
+            "Atomic source selection",
+            "Scope contract",
+            "Full-output consistency",
+            "Deployment reality",
+            "actual deployed runtime",
+            "Web Locks",
+        ]:
+            if marker == "Web Locks":
+                # This workflow is intentionally technology-neutral.
+                continue
+            self.assertIn(marker, prompt)
+        self.assertIn("source-backed H10 handoff", prompt)
+        self.assertIn("independent semantic qualification", prompt)
+
+    def test_output_never_overwrites_input_or_existing_alias(self):
+        with tempfile.TemporaryDirectory() as td:
+            source = Path(td) / "case.json"
+            initial = json.dumps(source_request())
+            source.write_text(initial, encoding="utf-8")
+            self.assertEqual(
+                buddy.main(["--input", str(source), "--output", str(source)]), 2
+            )
+            self.assertEqual(source.read_text(encoding="utf-8"), initial)
+            alias = Path(td) / "alias.json"
+            alias.symlink_to(source)
+            self.assertEqual(
+                buddy.main(["--input", str(source), "--output", str(alias)]), 2
+            )
+            self.assertEqual(source.read_text(encoding="utf-8"), initial)
+            assert alias.is_symlink()
+            hardlink = Path(td) / "hardlink.json"
+            os.link(source, hardlink)
+            self.assertEqual(
+                buddy.main(["--input", str(source), "--output", str(hardlink)]), 2
+            )
+            self.assertEqual(source.read_text(encoding="utf-8"), initial)
+            self.assertEqual(hardlink.read_text(encoding="utf-8"), initial)
+            self.assertEqual(list(Path(td).glob(".buddy-v15-*.tmp")), [])
+
+    def test_invalid_input_cannot_replace_existing_output(self):
+        with tempfile.TemporaryDirectory() as td:
+            source = Path(td) / "broken.json"
+            target = Path(td) / "prompt.md"
+            source.write_text("{}", encoding="utf-8")
+            target.write_text("PREVIOUS VALID PROMPT", encoding="utf-8")
+            self.assertEqual(
+                buddy.main(["--input", str(source), "--output", str(target)]), 2
+            )
+            self.assertEqual(target.read_text(encoding="utf-8"), "PREVIOUS VALID PROMPT")
+            self.assertEqual(list(Path(td).glob(".buddy-v15-*.tmp")), [])
 
     def test_cli_materializes_valid_prompt_and_rejects_bad_input(self):
         with tempfile.TemporaryDirectory() as td:
