@@ -189,5 +189,23 @@ class CurrentCaptureTests(unittest.TestCase):
         self.assertFalse(result["issue_or_pr_github_writes"])
 
 
+    def test_13_duplicate_json_graph_keys_fail_before_provider_read(self):
+        # Both interpretations are individually valid JSON. A later-key-wins
+        # parser would silently launder the first (foreign) Owner/source basis.
+        duplicate = self.raw.replace(
+            b'"programme":', b'"programme":{"repository":"attacker/source-lab"},"programme":', 1)
+        self.g.graph = duplicate
+        with self.assertRaisesRegex(CaptureHold, "^GRAPH_DUPLICATE_JSON_KEY$"):
+            capture(duplicate, REPO, git_blob(duplicate), self.g)
+        self.assertEqual(self.g.log, [])
+
+    def test_14_non_utf8_graph_is_bounded_hold_before_provider_read(self):
+        corrupted = self.raw + b"\\xff"
+        self.g.graph = corrupted
+        with self.assertRaisesRegex(CaptureHold, "^GRAPH_JSON_INVALID$"):
+            capture(corrupted, REPO, git_blob(corrupted), self.g)
+        self.assertEqual(self.g.log, [])
+
+
 if __name__ == "__main__":
     unittest.main()
