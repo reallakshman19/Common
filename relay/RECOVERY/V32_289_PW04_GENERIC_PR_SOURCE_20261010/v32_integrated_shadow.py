@@ -199,6 +199,10 @@ def integrated_shadow(
           "NATIVE_ISSUE_TITLE_READBACK_FAILED")
     _hold(first == _source_fingerprint(transport, graph),
           "SOURCE_CHANGED_AFTER_SIMULATION")
+    fresh_c6 = delp.frontier(graph, ledger_get(), observation_get(), pins.leaf_ref)
+    c6_reentry = delp.frontier_drift(c6, fresh_c6)
+    _hold(c6_reentry["status"] == "CURRENT" and
+          c6_reentry["action"] == "NONE", "NATIVE_C6_REENTRY_DRIFT")
 
     return {
         "status": "INTEGRATED_SHADOW_ONLY_NOT_RELEASE_READY",
@@ -218,6 +222,7 @@ def integrated_shadow(
         "in_memory_issue_first_pass": first_pass,
         "in_memory_issue_second_pass": second_pass,
         "c6_frontier": c6,
+        "c6_same_source_reentry": c6_reentry,
         "owner_source_authenticated": False,
         "independent_witness": "NOT_EXECUTED",
         "eligible_evidence_admitted_by_this_cycle": False,
