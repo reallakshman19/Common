@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {observeSelectedRequiredCi} from './required-ci-material-v1.mjs';
+import {t35ReadbackVerdict} from './t35-native-u02-readback.mjs';
 const R='reallakshman19/Common', ID=1412133785,H='a'.repeat(40),H2='b'.repeat(40);
 const BASE='recovery/5-m0-reference-identity-census-20261009';
 const input=()=>({repository:R,repository_id:ID,pr_number:21,head_sha:H,base_branch:BASE});
@@ -349,4 +350,59 @@ test('T34 second-round policy App identity missing causes fail-closed policy dri
  assert.equal(x.failure_stage,'SOURCE_READBACK');
  assert.equal(x.failure_reason,'REQUIRED_POLICY_DRIFT');
  assert.equal(x.required_check_policy,'UNKNOWN');
+});
+
+test('T35 stable current worktree double-read maps only to NONADMITTED native diagnostic',async()=>{
+ const result={...(await run()),source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'};
+ const x=t35ReadbackVerdict(input(),result,H);
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_DIAGNOSTIC_NOT_ADMITTED');
+ assert.equal(x.candidate_head_sha,H);
+ assert.equal(x.evidence_admitted,false);
+ assert.equal(x.required_ci_qualified,false);
+ assert.equal(x.delp_projection,'NOT_CALCULATED');
+ assert.equal(x.writer_authorized,false);
+});
+test('T35 real U02 second-read selected drift is a refusal, never retried or waived',async()=>{
+ const d=data();
+ const result={...(await run(d,(n,route,m)=>{
+  if(n===7)m[p.check].check_runs[0].conclusion='failure';
+ })),source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'};
+ const x=t35ReadbackVerdict(input(),result,H);
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_REFUSAL_NOT_ADMITTED');
+ assert.equal(x.failure_stage,'SOURCE_READBACK');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_DRIFT');
+ assert.equal(x.selected_checks_observed,false);
+ assert.equal(x.release_ready,false);
+});
+test('T35 mismatched source worktree, spoofed PR and forged accepted evidence refuse',async()=>{
+ const native={...(await run()),source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'};
+ const forged=[
+  [input(),native,H2],
+  [{...input(),repository:'reallaksh19/Common'},native,H],
+  [input(),{...native,evidence_admitted:true},H],
+  [input(),{...native,writer_authorized:true},H],
+  [input(),{...native,source_grade:'CALLER_INJECTED_UNATTESTED'},H],
+ ];
+ for(const [i,r,h] of forged){
+  const x=t35ReadbackVerdict(i,r,h);
+  assert.equal(x.status,'SOURCE_UNVERIFIED');
+  assert.equal(x.evidence_admitted,false);
+  assert.equal(x.required_ci_qualified,false);
+ }
+});
+test('T35 provider 404/403 initial PR GET is typed refusal, not fictitious successful source',async()=>{
+ const r=await observeSelectedRequiredCi(input(),async()=>{throw Error('PRIVATE_PROVIDER_403')});
+ const x=t35ReadbackVerdict(input(),{...r,source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'},H);
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_REFUSAL_NOT_ADMITTED');
+ assert.equal(x.failure_stage,'INITIAL_PR');
+ assert.equal(x.failure_reason,null);
+ assert.ok(!JSON.stringify(x).includes('PRIVATE_PROVIDER_403'));
+});
+test('T35 malformed second-round page remains source refusal, never a native pass',async()=>{
+ const r=await run(data(),(n,route,d)=>{if(n===8)d[p.status].total_count=12});
+ const x=t35ReadbackVerdict(input(),{...r,source_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'},H);
+ assert.equal(x.failure_stage,'SECOND_SELECTED');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.status,'NATIVE_DOUBLE_READ_REFUSAL_NOT_ADMITTED');
+ assert.equal(x.evidence_admitted,false);
 });
