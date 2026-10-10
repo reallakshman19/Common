@@ -78,7 +78,9 @@ def probe_v32_fact(
     failures: list[str] = []
     unknowns: list[str] = []
     not_run: list[str] = []
-    if not isinstance(selection.repository, str) or not fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", selection.repository):
+    if (not isinstance(selection.repository, str) or
+            not fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", selection.repository) or
+            any(segment in (".", "..") for segment in selection.repository.split("/"))):
         failures.append("INVALID_TARGET_REPOSITORY")
     if not isinstance(selection.leaf_ref, str) or not fullmatch(r"[A-Za-z0-9_.-]+#[1-9][0-9]*", selection.leaf_ref):
         failures.append("INVALID_LEAF_REF")
