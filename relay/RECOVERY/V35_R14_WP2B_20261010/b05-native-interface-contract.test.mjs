@@ -98,15 +98,20 @@ test('B05 fake Owner/reviewer/policy/witness fields are denied before reading pr
   assert.equal(reads,0);
 });
 
-test('B05 V3.2 and V3.5 wire names remain different without schema promotion',async()=>{
+test('B05 V3.2 and V3.5 wire types are distinct but source outage returns no candidate',async()=>{
   const errorReader=async()=>{throw Error('source unavailable');};
   const readers={candidate:errorReader,ci:errorReader,evidence:errorReader};
   const v32=await inspectPreAdmission(locator(),readers);
   const v35=await inspectPreAdmission({...locator(),facts_schema_line:'V35'},readers);
   noAuthority(v32);noAuthority(v35);
-  assert.equal(v32.candidate_facts_schema,'relay-v3.2-delp-checkpoint-facts');
-  assert.equal(v35.candidate_facts_schema,'relay-v3.5-delp-checkpoint-facts');
-  assert.notEqual(v32.candidate_facts_schema,v35.candidate_facts_schema);
+  // A failed source read returns a refusal, not a source-qualified diagnostic.
+  assert.equal(v32.candidate_facts_schema,null);
+  assert.equal(v35.candidate_facts_schema,null);
+  assert.equal(v32.source_status,'UNKNOWN');
+  assert.equal(v35.source_status,'UNKNOWN');
+  const physical=read('relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs');
+  assert.ok(physical.includes("V32:'relay-v3.2-delp-checkpoint-facts'"));
+  assert.ok(physical.includes("V35:'relay-v3.5-delp-checkpoint-facts'"));
   assert.equal(v32.target_delp_policy,'NOT_ADOPTED');
   assert.equal(v35.target_delp_policy,'NOT_ADOPTED');
 });
