@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path
 import stat
+import subprocess
 import sys
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
@@ -295,6 +296,104 @@ class CurrentCaptureTests(unittest.TestCase):
                                             "OUTPUT_ALREADY_EXISTS_REFUSING_OVERWRITE"):
                     capture_module.main()
             self.assertEqual(target.read_text(), "HUMAN_OWNED")
+
+
+    def test_22_unicode_issue_number_fails_before_get(self):
+        graph = deepcopy(GRAPH)
+        graph["nodes"][1]["ref"] = REPO + "#٢"
+        self.raw = graph_raw(graph)
+        self.g.graph = self.raw
+        with self.assertRaisesRegex(CaptureHold, "^GRAPH_ISSUE_NUMBER_INVALID$"):
+            self.do()
+        self.assertEqual(self.g.log, [])
+
+    def test_23_padded_issue_number_fails_before_get(self):
+        graph = deepcopy(GRAPH)
+        graph["nodes"][1]["ref"] = REPO + "#02"
+        self.raw = graph_raw(graph)
+        self.g.graph = self.raw
+        with self.assertRaisesRegex(CaptureHold, "^GRAPH_ISSUE_NUMBER_INVALID$"):
+            self.do()
+        self.assertEqual(self.g.log, [])
+
+    def test_24_unicode_primary_pr_number_fails_before_get(self):
+        graph = deepcopy(GRAPH)
+        graph["nodes"][1]["primary_pr"] = REPO + "#١٠"
+        self.raw = graph_raw(graph)
+        self.g.graph = self.raw
+        with self.assertRaisesRegex(CaptureHold, "^GRAPH_PRIMARY_PR_REFERENCE_INVALID$"):
+            self.do()
+        self.assertEqual(self.g.log, [])
+
+    def test_25_initial_commit_nonobject_is_bounded_hold(self):
+        def malformed(endpoint):
+            if endpoint.endswith("/commits/main"):
+                return None
+            return self.g(endpoint)
+        with self.assertRaisesRegex(CaptureHold, "^BASE_COMMIT_RESPONSE_INVALID$"):
+            capture(self.raw, REPO, git_blob(self.raw), malformed)
+
+    def test_26_final_commit_nonobject_is_bounded_hold(self):
+        calls = 0
+        def malformed(endpoint):
+            nonlocal calls
+            if endpoint.endswith("/commits/main"):
+                calls += 1
+                if calls == 2:
+                    return None
+            return self.g(endpoint)
+        with self.assertRaisesRegex(CaptureHold, "^FINAL_COMMIT_RESPONSE_INVALID$"):
+            capture(self.raw, REPO, git_blob(self.raw), malformed)
+
+    def test_27_comment_provider_page_more_than_100_is_refused_immediately(self):
+        item = {"id": 1, "body": "note", "author_association": "CONTRIBUTOR",
+                "user": {"login": "actor"}}
+        called = []
+        def oversized(endpoint):
+            called.append(endpoint)
+            return [deepcopy(item) for _ in range(101)]
+        with self.assertRaisesRegex(CaptureHold, "^COMMENTS_PAGE_OVERSIZED$"):
+            capture_module._comments(oversized, REPO, 2)
+        self.assertEqual(len(called), 1)
+
+    def test_28_full_comment_page_then_empty_is_accepted(self):
+        rows = [{"id": i, "body": "note",
+                 "author_association": "CONTRIBUTOR",
+                 "user": {"login": "actor"}} for i in range(1, 101)]
+        paths = []
+        def paginated(endpoint):
+            paths.append(endpoint)
+            return deepcopy(rows) if "page=1" in endpoint else []
+        result = capture_module._comments(paginated, REPO, 2)
+        self.assertEqual(len(result), 100)
+        self.assertEqual(len(paths), 2)
+
+    def test_29_total_comment_budget_rejects_large_aggregate(self):
+        item = {"body": "x" * 900_000, "author_association": "CONTRIBUTOR",
+                "user": {"login": "actor"}}
+        self.g.comments = [dict(item, id=i) for i in range(1, 8)]
+        with self.assertRaisesRegex(CaptureHold, "^COMMENTS_TOTAL_TEXT_UNBOUNDED$"):
+            self.do()
+
+    def test_30_gh_get_timeout_refuses_without_provider_text(self):
+        with patch.object(capture_module.subprocess, "run",
+                          side_effect=subprocess.TimeoutExpired(["gh", "api"], 30)):
+            with self.assertRaisesRegex(CaptureHold, "^GITHUB_GET_TIMEOUT$"):
+                capture_module.gh_get("repos/owner/source-lab")
+
+    def test_31_gh_get_missing_binary_has_bounded_hold(self):
+        with patch.object(capture_module.subprocess, "run", side_effect=FileNotFoundError("secret path")):
+            with self.assertRaisesRegex(CaptureHold, "^GITHUB_CLI_UNAVAILABLE$"):
+                capture_module.gh_get("repos/owner/source-lab")
+
+    def test_32_gh_get_get_only_with_fixed_timeout(self):
+        reply = capture_module.subprocess.CompletedProcess(args=["gh"], returncode=0,
+                                                            stdout='{"id":42}', stderr="")
+        with patch.object(capture_module.subprocess, "run", return_value=reply) as runner:
+            self.assertEqual(capture_module.gh_get("repos/owner/source-lab"), {"id": 42})
+        self.assertEqual(runner.call_args.args[0],
+                         ["gh", "api", "--method", "GET", "repos/owner/source-lab"])
+        self.assertEqual(runner.call_args.kwargs["timeout"], 30)
 
 
 if __name__ == "__main__":
