@@ -1,0 +1,61 @@
+name: "V3.5 #294 T03 selected-CI drift diagnosis (read-only)"
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/**'
+      - '.github/workflows/v35-294-t03-selected-drift.yml'
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+  statuses: read
+jobs:
+  diagnostic-tests:
+    name: T03 bounded source-delta tests (${{ matrix.os }}, Node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Prove exact head and run T03 regressions
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          node --test relay/RECOVERY/V35_R14_WP2A_20261010/t03-selected-ci-drift.test.mjs
+  native-window:
+    name: T03 actual GitHub selected-delta (${{ matrix.os }})
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 306
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Read two real provider windows without admitting evidence
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
+          CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_HEAD_SHA"
+          node relay/RECOVERY/V35_R14_WP2A_20261010/t03-selected-ci-drift.mjs
