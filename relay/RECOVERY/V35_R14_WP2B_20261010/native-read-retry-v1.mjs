@@ -12,7 +12,8 @@ export async function observeNativeWithUnknownRetry(locator, read, record = cons
         typeof result.source_status !== 'string')
       throw new TypeError('NATIVE_READ_RESULT_INVALID');
     // Log the complete observation, including UNKNOWN, before any retry.
-    record(JSON.stringify({native_read_attempt: attempt, ...result}, null, 2));
+    // The helper-owned audit sequence must not be overwritten by a source field.
+    record(JSON.stringify({...result, native_read_attempt: attempt}, null, 2));
     if (result.source_status !== 'UNKNOWN') break;
   }
   return result;
