@@ -91,11 +91,15 @@ def audit_native_comment_claims(
             if not structurally_trusted:
                 counts["untrusted_author_claims"] += 1
             issues = native.validate_facts(claimed)
-            responsibility = claimed.get("responsibility") if isinstance(claimed, Mapping) else None
-            bound_leaf = isinstance(responsibility, Mapping) and native.same_ref(
-                responsibility.get("issue"), leaf_ref
-            ) if isinstance(responsibility, Mapping) and responsibility.get("issue") else False
-            if issues or not bound_leaf:
+            if issues:
+                counts["invalid_claims"] += 1
+                continue
+            responsibility = claimed.get("responsibility")
+            try:
+                bound_leaf = native.same_ref(responsibility["issue"], leaf_ref)
+            except (ValueError, KeyError, TypeError):
+                bound_leaf = False
+            if not bound_leaf:
                 counts["invalid_claims"] += 1
                 continue
             counts["native_structural_claims"] += 1
