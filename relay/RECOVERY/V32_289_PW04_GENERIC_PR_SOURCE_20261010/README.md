@@ -1,3 +1,84 @@
+# PW04 consolidated V3.2 lifecycle prototype — READ-ONLY / NO RELEASE
+
+**This is the one integrated engineering work package**, not additional independent
+production progress items. It combines fresh private GitHub GET capture, source/PR
+binding, the **unchanged native** DELP reducer, native issue LIVE_STATUS/title
+in-memory publication, the **unchanged native PR managed-section renderer**,
+and native C6 frontier on **one source snapshot and one native input digest**.
+
+### Executable end-to-end workflow (Owner/private workspace only)
+
+These commands require installed GitHub CLI access to the **original private**
+\`reallaksh19/relay-v32-e2e-lab\`, the released unmodified six-node graph,
+and the real current PR HEAD. Never commit snapshots or reports: both contain
+private issue/comment text and the capture/report create mode-0600 files.
+
+\`\`\`bash
+python relay/RECOVERY/V32_289_PW04_GENERIC_PR_SOURCE_20261010/v32_capture_current_source.py \
+  --graph /private/released-graph.json \
+  --repository reallaksh19/relay-v32-e2e-lab \
+  --graph-blob fde7e1fbd0c71efb64a678206f0bc9f32e36f6c8 \
+  --output /private/lab-current-get-only.json
+
+python relay/RECOVERY/V32_289_PW04_GENERIC_PR_SOURCE_20261010/v32_integrated_shadow.py \
+  --graph /private/released-graph.json \
+  --snapshot /private/lab-current-get-only.json \
+  --repository-id REAL_NUMERIC_REPOSITORY_ID_FROM_FRESH_CAPTURE \
+  --leaf reallaksh19/relay-v32-e2e-lab#4 \
+  --graph-blob fde7e1fbd0c71efb64a678206f0bc9f32e36f6c8 \
+  --head EXACT_CURRENT_PR8_HEAD_SHA \
+  --output /private/lab-current-shadow.json
+\`\`\`
+
+The capture uses only GitHub API GET. It pins the graph bytes against the real
+current default-branch file Git blob and rejects a changed issue body/title,
+bound PR head/base, issue comments, main commit or numeric repository identity
+during its bounded two-pass capture. It refuses missing or overlong sources.
+The shadow refuses drift, malformed input and moved PRs, runs **real** native
+\`plan_github\`, \`ledger_from_github\`, \`observe_github\`, \`project\`,
+\`source_bound_responsibility_core\` where compatible and \`frontier\`, reuses
+the frozen \`render_pr_block/reconcile_managed_block\` and
+\`sync_projection\` **only with native \`InMemoryStore\`**, checking
+second-pass idempotence and identical source digests. It has no GitHub write
+capabilities and never awards Owner approval or eligible evidence by itself.
+
+### Important source-discovered blocker (not silently fixed)
+
+Original lab graph links use **full** \`owner/repo#PR\` GitHub references. The
+unchanged native \`source_bound_responsibility_core()\` currently rejects those
+with \`RESPONSIBILITY_CORE_MATERIAL_BOUNDARY\` because its check expects a
+short \`repo#PR\` reference. Other native graph, DELP, title, status and C6
+calls can still complete, but the shadow reports
+\`native_core=null, native_core_hold=RESPONSIBILITY_CORE_MATERIAL_BOUNDARY\`;
+it **never synthesizes an alternate core** or normalizes/rewrites an approved
+graph to disguise the mismatch. This must be corrected **within the existing
+native owner** under an approved frozen-source grant, then reverified against
+real exact-head source. It is a genuine production admission blocker.
+
+### Review/authorization boundary
+
+- Every included hosted Python test is **synthetic GET source**, except that
+  each integration test calls the real unchanged V3.2 source in the Common
+  checkout. The Owner's archive has been tested locally separately (original
+  app acceptance 9/9; lab unit 118/118), but current private provider 404
+  blocks running these two CLIs against real current lab material.
+- The PR is intentionally **DRAFT**. It is NOT a generic live GitHub writer,
+  fact issuer, independent reviewer, actual cold successor, Owner T05 release,
+  approved new Common root graph, or production activation.
+- After original provider access, run exact native capture/replay; fix the
+  native core full-ref mismatch only with the separately approved amendment;
+  independently admit evidence; extend guarded native issue/PR publisher under
+  field-separated ownership and approved exact-path grant; prove real lab
+  GET-back, C6 cold successor, adversarial replay, Common shadow and Owner
+  rollback/cutover. V3.1 remains production until those gates PASS.
+
+**Tests**:
+\`\`\`bash
+python -m unittest discover -s relay/RECOVERY/V32_289_PW04_GENERIC_PR_SOURCE_20261010/tests -p 'test_*.py' -v
+\`\`\`
+
+---
+
 # V3.2 PW04 — generic PR source-binding preview (non-admitting)
 
 **Owner/issue:** [Common #289, PW04](https://github.com/reallakshman19/Common/issues/289#issuecomment-6100647890) · [parent #285](https://github.com/reallakshman19/Common/issues/285).
