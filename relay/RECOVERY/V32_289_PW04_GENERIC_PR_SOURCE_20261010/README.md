@@ -34,6 +34,15 @@ The capture uses only GitHub API GET. It pins the graph bytes against the real
 current default-branch file Git blob and rejects a changed issue body/title,
 bound PR head/base, issue comments, main commit or numeric repository identity
 during its bounded two-pass capture. It refuses missing or overlong sources.
+The capture also refuses non-canonical/invalid graph blob base64 while accepting
+standard GitHub CR/LF-wrapped base64, requires at least one graph LEAF before
+any GET, caps each fetched comment body at 1,000,000 characters (oversize is
+a hard HOLD, never truncation), and re-GETs the repository identity after
+the final main SHA check to detect source transfer/replacement. Graph bytes
+remain untouched. Both CLIs refuse pre-existing output paths; the capture
+CLI's POSIX tests verify private 0600 output and reject symlinks *before*
+source access. These synthetic/transport protections do not issue evidence,
+attest human Owner approval or make the inaccessible original lab current.
 The shadow refuses drift, malformed input and moved PRs, runs **real** native
 `plan_github`, `ledger_from_github`, `observe_github`, `project`,
 `source_bound_responsibility_core` where compatible and `frontier`, reuses
