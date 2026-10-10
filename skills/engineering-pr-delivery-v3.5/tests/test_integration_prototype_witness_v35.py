@@ -83,7 +83,10 @@ class WitnessTests(unittest.TestCase):
         t.root["body"] = "manually maintained owner text"
         r = call(t)
         self.assertEqual("HOLD_ROOT_NOT_GOVERNED", r["status"])
-        self.assertEqual("UNKNOWN", r["graph"])
+        self.assertEqual("ROOT_CONTRACT_MISSING", r["graph"])
+        self.assertEqual(SHA, r["observed_head"])
+        self.assertEqual("SOURCE_HEAD_DOUBLE_READ_MATCH", r["provider_material"])
+        self.assertEqual(2, sum(x[0] == "GET_PR" for x in t.calls))
         self.assertFalse(any(x[0] == "GET_COMMENTS" for x in t.calls))
 
     def test_root_changed_during_readback_is_not_stable(self):
