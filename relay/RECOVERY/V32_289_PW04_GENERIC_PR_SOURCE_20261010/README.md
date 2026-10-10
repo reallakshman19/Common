@@ -61,6 +61,25 @@ last-key-wins / NaN parsing. Only safe failure codes are exposed; provider
 stderr, tokens and private issue/comment bodies are not printed by the
 transport.
 
+### Additional captured-human-text and partial-file safety
+
+The GET-only capture now validates the `user` object on each issue-comment
+record before looking up `login`; malformed lists, strings or numbers yield
+`COMMENT_SOURCE_INVALID` rather than a raw Python exception. Human title text
+for issues/PRs is limited to **16,384 characters**, and their bodies to
+**1,000,000 characters per record**, with `ISSUE_HUMAN_TEXT_UNBOUNDED` or
+`PR_HUMAN_TEXT_UNBOUNDED` on overflow. Content at the body boundary remains
+intact; nothing is silently truncated. These per-record bounds complement the
+existing stricter per-leaf aggregate comment limits. Any legitimate source
+exceeding a bound is a *HOLD to review*, not permission to quietly credit a
+partial record.
+
+If serializing the private captured JSON fails after exclusive-create,
+the capture CLI now removes its own incomplete output and does **not** announce
+`PRIVATE_CURRENT_PROVIDER_SNAPSHOT_SAVED_0600`. This follows the existing
+offline shadow report's failure cleanup; pre-existing output paths and symlinks
+remain refused, and private files are still written with POSIX mode `0600`.
+
 The capture uses only GitHub API GET. It pins the graph bytes against the real
 current default-branch file Git blob and rejects a changed issue body/title,
 bound PR head/base, issue comments, main commit or numeric repository identity
