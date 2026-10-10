@@ -20,7 +20,8 @@ class Provider:
     repository = REPO
 
     def __init__(self):
-        self.root = {"number": 5, "html_url": f"https://github.com/{REPO}/issues/5", "state": "open"}
+        self.root = {"number": 5, "html_url": f"https://github.com/{REPO}/issues/5", "state": "open",
+                     "body": "<!-- V35_PARENT_OWNER_INTENT_BEGIN --> Original Owner mirror"}
         self.leaf = {"number": 30, "html_url": f"https://github.com/{REPO}/issues/30", "state": "open"}
         self.pr = {"number": 292, "html_url": f"https://github.com/{REPO}/pull/292",
                    "state": "open", "head": {"sha": SHA, "repo": {"full_name": REPO}},
@@ -28,10 +29,14 @@ class Provider:
         self.comments = []
         self.calls = []
         self.after_pr = None
+        self.after_root = None
+        self.after_comments = None
         self.fail_comments = False
 
     def get_issue(self, n):
         self.calls.append(("GET_ISSUE", n))
+        if n == 5 and self.after_root is not None and sum(x == ("GET_ISSUE", 5) for x in self.calls) >= 2:
+            return copy.deepcopy(self.after_root)
         return copy.deepcopy(self.root if n == 5 else self.leaf)
 
     def get_pull(self, n):
@@ -48,6 +53,8 @@ class Provider:
         self.calls.append(("GET_COMMENTS", n))
         if self.fail_comments:
             raise RuntimeError("provider forbidden")
+        if self.after_comments is not None and sum(x[0] == "GET_COMMENTS" for x in self.calls) >= 2:
+            return copy.deepcopy(self.after_comments)
         return copy.deepcopy(self.comments)
 
 
@@ -69,6 +76,7 @@ class WitnessTests(unittest.TestCase):
         self.assertFalse(r["prototype_qualified"])
         self.assertEqual("NONE", r["github_writes"])
         self.assertEqual(2, sum(x[0] == "GET_PR" for x in t.calls))
+        self.assertEqual(2, sum(x[0] == "GET_COMMENTS" for x in t.calls))
 
     def test_stale_expected_head_exits_before_approval(self):
         t = Provider()
