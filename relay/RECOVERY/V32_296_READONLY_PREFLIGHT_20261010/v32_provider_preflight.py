@@ -17,6 +17,7 @@ from re import fullmatch
 from typing import Any, Mapping, Protocol
 
 from v32_admission_probe import ObservedCheck, ProbeReport, SourceSelection, probe_v32_fact
+from v32_fact_claims import audit_native_comment_claims
 
 _SHA = r"[0-9a-f]{40}"
 
@@ -49,6 +50,7 @@ class PreflightResult:
     candidate_sha: str | None
     pass_count: int
     probe: ProbeReport | None
+    comment_claims: Mapping[str, Any] | None = None
     accepted_evidence_count: None = None
     writer_authorized: bool = False
     delp_invoked: bool = False
@@ -62,6 +64,7 @@ class PreflightResult:
             "candidate_sha": self.candidate_sha,
             "pass_count": self.pass_count,
             "probe": self.probe.as_dict() if self.probe is not None else None,
+            "comment_claims": dict(self.comment_claims) if self.comment_claims is not None else None,
             "accepted_evidence_count": None,
             "writer_authorized": False,
             "delp_invoked": False,
@@ -182,6 +185,12 @@ def _round(target: PreflightTarget, getter: ReadOnlyGetter) -> dict[str, Any]:
             conclusion=str(c.get("conclusion") or "UNKNOWN").lower(),
             executed=c.get("status") == "completed" and c.get("conclusion") != "skipped",
         ))
+    # Reuse the genuine native V3.2 parser/validator. Claim observations
+    # remain UNATTESTED even when shape, author and candidate are coherent.
+    comment_claims = audit_native_comment_claims(
+        graph=graph, leaf_ref=target.leaf_ref,
+        candidate_sha=candidate_sha, comments=comments,
+    )
     source_identity = {
         "repository_id": target.repository_id, "default_branch": branch,
         "default_branch_sha": base_sha, "graph_digest": graph_digest,
@@ -192,7 +201,8 @@ def _round(target: PreflightTarget, getter: ReadOnlyGetter) -> dict[str, Any]:
     return {"fingerprint": _sha256(_canonical(source_identity)), "graph_digest": graph_digest,
             "candidate_sha": candidate_sha, "selected_checks": selected_checks,
             "observed_pr_repository": str(base_identity["full_name"]),
-            "observed_pr_number": pull["number"]}
+            "observed_pr_number": pull["number"],
+            "comment_claims": comment_claims}
 
 
 def inspect_v32_read_only(
@@ -230,4 +240,5 @@ def inspect_v32_read_only(
         tuple(dict.fromkeys([*probe.reasons, "NONATOMIC_READ_ONLY_PROVIDER_WITNESS"])),
         "TWO_CONSISTENT_NONATOMIC_READS_NOT_ATOMIC_PROOF", first["graph_digest"],
         second["candidate_sha"], 2, probe,
+        comment_claims=second["comment_claims"],
     )
