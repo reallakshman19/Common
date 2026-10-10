@@ -17,6 +17,7 @@ from typing import Any
 SHA = re.compile(r"^[a-f0-9]{40}$")
 REPO = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 GRAPH_MARKER = "<!-- V35_GRAPH_SELECTION_APPROVAL_V1_BEGIN -->"
+ROOT_MARKER = "<!-- V35_PARENT_OWNER_INTENT_BEGIN -->"
 SCHEMA = "V35_PROTOTYPE_SOURCE_WITNESS_V1"
 
 
@@ -45,7 +46,7 @@ def _pull_identity(value: Any, number: int, uri: str, repo: str) -> bool:
 
 def observe(transport: Any, *, root_issue: int, leaf_issue: int,
             pr_number: int, expected_head: str) -> dict[str, Any]:
-    """Read native objects twice, and delegate graph validity to existing R2-D.
+    """Double-read native provider objects and delegate graph trust to R2-D.
 
     No input claim can establish OWNER/Local authority. Provider exceptions and
     inconsistent/moving objects are always HOLD, not a fabricated zero or PASS.
@@ -81,6 +82,9 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         first_pr = transport.get_pull(pr_number)
         if not _identity(root, root_issue, root_url) or not _identity(leaf, leaf_issue, leaf_url):
             result["status"] = "HOLD_ISSUE_IDENTITY_UNVERIFIED"
+            return result
+        if ROOT_MARKER not in str(root.get("body") or ""):
+            result["status"] = "HOLD_ROOT_NOT_GOVERNED"
             return result
         if not _pull_identity(first_pr, pr_number, pr_url, repo):
             result["status"] = "HOLD_PR_IDENTITY_UNVERIFIED"
@@ -125,11 +129,24 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
                 # faults; do not turn them into a positive or an absent graph.
                 result["graph"] = "VALIDATION_UNVERIFIED"
                 decision = "HOLD_GRAPH_VALIDATION_UNVERIFIED"
+        # Independent final source readback. An approval can be edited or
+        # revoked while R2-D validates its original provider source; the same
+        # applies to parent/leaf prose and PR metadata. No atomic snapshot is
+        # offered by GitHub, so refuse any observed inconsistency.
+        last_root = transport.get_issue(root_issue)
+        last_leaf = transport.get_issue(leaf_issue)
+        if last_root != root or last_leaf != leaf:
+            result["status"] = "HOLD_ISSUE_MOVED_DURING_OBSERVATION"
+            return result
+        last_comments = transport.list_comments(root_issue)
+        if last_comments != comments:
+            result["status"] = "HOLD_COMMENTS_MOVED_DURING_OBSERVATION"
+            return result
         last_pr = transport.get_pull(pr_number)
         if not _pull_identity(last_pr, pr_number, pr_url, repo):
             result["status"] = "HOLD_PR_READBACK_UNVERIFIED"
             return result
-        if last_pr["head"]["sha"] != first_head or last_pr.get("state") != first_pr.get("state"):
+        if last_pr != first_pr:
             result["status"] = "HOLD_PR_MOVED_DURING_OBSERVATION"
             return result
         result["provider_material"] = "SOURCE_HEAD_DOUBLE_READ_MATCH"
@@ -152,8 +169,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--expected-head", required=True)
     args = parser.parse_args(argv)
     try:
-        from delp_projection_v35 import GhTransport
-        value = observe(GhTransport(args.repository), root_issue=args.root,
+        # R2-D approved graph verification needs the native immutable-file
+        # and approval-comment GET methods, not just DELP.GhTransport.
+        # ScoreboardTransport has these GETs; this witness calls no writes.
+        from integration_scoreboard_publish_v35 import ScoreboardTransport
+        value = observe(ScoreboardTransport(args.repository), root_issue=args.root,
                         leaf_issue=args.leaf, pr_number=args.pr,
                         expected_head=args.expected_head)
     except WitnessInputError as exc:
