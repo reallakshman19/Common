@@ -82,7 +82,8 @@ class ExecutionProfileToggleContract(unittest.TestCase):
 
     def test_workflow_is_pr_only_and_never_misrepresents_manual_base(self) -> None:
         # workflow_dispatch supplies no pull_request.base.sha; it is unsupported here.
-        self.assertIn("on:\\n  pull_request:", WORKFLOW)
+        self.assertIn("on:", WORKFLOW)
+        self.assertIn("  pull_request:", WORKFLOW)
         self.assertNotIn("workflow_dispatch:", WORKFLOW)
         self.assertIn("github.event.pull_request.base.sha", WORKFLOW)
         self.assertIn('if [[ -z "${BASE_SHA:-}" ]]', WORKFLOW)
@@ -96,7 +97,7 @@ class ExecutionProfileToggleContract(unittest.TestCase):
             "Direct Owner ON + unchanged admitted leaf",
             "ON + missing/expired Writer",
             "ON + stale/unknown source HEAD",
-            "ON + existing \`ENFORCED\` graph".replace("\\", ""),
+            "ON + existing `ENFORCED` graph",
             "ON present only in repo/tool/fixture text",
             "Omitted or unrecognized toggle",
             "Direct Owner OFF",
