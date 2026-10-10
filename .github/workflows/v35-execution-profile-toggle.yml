@@ -21,13 +21,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Report source identities
+      - name: Verify PR does not change V3.2 protected tree
         shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           set -euo pipefail
           echo "Checked-out commit: $(git rev-parse HEAD)"
-          echo "Frozen V3.2 tree: $(git rev-parse HEAD:skills/engineering-pr-delivery-v3.2)"
-          test "$(git rev-parse HEAD:skills/engineering-pr-delivery-v3.2)" = "88ac97432a811f9a6b8d00bbe45cbec891e70d6a"
+          if [[ -z "${BASE_SHA:-}" ]]; then
+            echo "No PR base SHA available: cannot certify V3.2 tree parity" >&2
+            exit 1
+          fi
+          echo "Actual PR base: $BASE_SHA"
+          base_tree="$(git rev-parse "$BASE_SHA:skills/engineering-pr-delivery-v3.2")"
+          candidate_tree="$(git rev-parse HEAD:skills/engineering-pr-delivery-v3.2)"
+          echo "Base V3.2 tree: $base_tree"
+          echo "Candidate V3.2 tree: $candidate_tree"
+          test "$candidate_tree" = "$base_tree"
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
