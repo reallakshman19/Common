@@ -98,17 +98,23 @@ test('B05 fake Owner/reviewer/policy/witness fields are denied before reading pr
   assert.equal(reads,0);
 });
 
-test('B05 V3.2 and V3.5 wire types are distinct but source outage returns no candidate',async()=>{
+test('B05 V3.2 and V3.5 remain distinct but source outage denies material and authority',async()=>{
   const errorReader=async()=>{throw Error('source unavailable');};
   const readers={candidate:errorReader,ci:errorReader,evidence:errorReader};
   const v32=await inspectPreAdmission(locator(),readers);
   const v35=await inspectPreAdmission({...locator(),facts_schema_line:'V35'},readers);
   noAuthority(v32);noAuthority(v35);
-  // A failed source read returns a refusal, not a source-qualified diagnostic.
-  assert.equal(v32.candidate_facts_schema,null);
-  assert.equal(v35.candidate_facts_schema,null);
+  // U04 catches the outage and returns a failed observation; the B05
+  // diagnostic keeps the declared fact *type* but never certifies material.
+  assert.equal(v32.candidate_facts_schema,'relay-v3.2-delp-checkpoint-facts');
+  assert.equal(v35.candidate_facts_schema,'relay-v3.5-delp-checkpoint-facts');
+  assert.notEqual(v32.candidate_facts_schema,v35.candidate_facts_schema);
   assert.equal(v32.source_status,'UNKNOWN');
   assert.equal(v35.source_status,'UNKNOWN');
+  assert.equal(v32.source_digest,null);
+  assert.equal(v35.source_digest,null);
+  assert.ok(v32.admission_blockers.includes('CROSS_SOURCE_NOT_VERIFIED'));
+  assert.ok(v35.admission_blockers.includes('CROSS_SOURCE_NOT_VERIFIED'));
   const physical=read('relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs');
   assert.ok(physical.includes("V32:'relay-v3.2-delp-checkpoint-facts'"));
   assert.ok(physical.includes("V35:'relay-v3.5-delp-checkpoint-facts'"));
@@ -131,7 +137,8 @@ test('B05 historical frozen graph is explicitly old-repository scoped',()=>{
   assert.equal(graph.programme.repository,'reallaksh19/Common');
   assert.equal(graph.programme.root,'Common#718');
   assert.notEqual(graph.programme.repository,REPO);
-  assert.equal(graph.decomposition_policy.mode,'ENFORCED');
+  assert.equal(graph.programme.decomposition_policy.mode,'ENFORCED');
+  assert.equal(graph.programme.decomposition_policy.claim_first.mode,'ENFORCED');
 });
 
 test('B05 physical source and C6 contract has no silent bridge or alternative DELP',()=>{
