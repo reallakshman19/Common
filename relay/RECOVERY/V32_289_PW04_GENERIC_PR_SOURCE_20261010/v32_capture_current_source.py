@@ -52,6 +52,15 @@ def _unique_json_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 
 
+def _provider_json_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Refuse provider ambiguity at any JSON object nesting depth."""
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        _ensure(key not in result, "GITHUB_GET_DUPLICATE_JSON_KEY")
+        result[key] = value
+    return result
+
+
 def gh_get(path: str) -> Any:
     """Entrypoint allows ONLY a single GitHub API GET, with no shell."""
     _ensure(isinstance(path, str) and path.startswith("repos/") and
@@ -69,8 +78,14 @@ def gh_get(path: str) -> Any:
         raise CaptureHold("GITHUB_CLI_UNAVAILABLE") from exc
     _ensure(proc.returncode == 0, "GITHUB_GET_UNAVAILABLE")
     try:
-        return json.loads(proc.stdout)
-    except ValueError as exc:
+        return json.loads(
+            proc.stdout,
+            object_pairs_hook=_provider_json_pairs,
+            parse_constant=lambda _value: _ensure(False, "GITHUB_GET_NONFINITE_JSON"),
+        )
+    except CaptureHold:
+        raise
+    except (ValueError, TypeError) as exc:
         raise CaptureHold("GITHUB_GET_INVALID_JSON") from exc
 
 
