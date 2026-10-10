@@ -42,6 +42,63 @@ const noGrant=r=>{
   assert.equal(r.delp_projection,'NOT_CALCULATED');assert.equal(r.programme_progress,null);
   assert.equal(r.writer_authorized,false);assert.equal(r.successor_lease,'NOT_PROVEN');
 };
+test('U04 original-cycle U01/U02/U03 faults identify allowlisted stage and round',async()=>{
+  for(const stage of ['U01','U02','U03']){
+    for(const round of ['FIRST','SECOND']){
+      const out=outputs();
+      let n=0,reads=0;
+      const r=await observeCrossSource(input(),{
+        candidate:async()=>{reads++;if(stage==='U01'&&++n===(round==='FIRST'?1:2))
+          throw Error('PRIVATE_PROVIDER_MESSAGE_DO_NOT_LEAK');return structuredClone(out.candidate);},
+        ci:async()=>{reads++;if(stage==='U02'&&(round==='FIRST'?reads===2:reads===5))
+          throw Error('PRIVATE_PROVIDER_MESSAGE_DO_NOT_LEAK');return structuredClone(out.ci);},
+        evidence:async()=>{reads++;if(stage==='U03'&&(round==='FIRST'?reads===3:reads===6))
+          throw Error('PRIVATE_PROVIDER_MESSAGE_DO_NOT_LEAK');return structuredClone(out.evidence);},
+      });
+      assert.equal(r.error,'SOURCE_MATERIAL_UNVERIFIED',stage+' '+round);
+      assert.equal(r.failure_stage,stage,stage+' '+round);
+      assert.equal(r.failure_round,round,stage+' '+round);
+      assert.equal(r.source_consistent,false);assert.equal(r.material_status,'UNKNOWN');
+      assert.ok(reads<=(round==='FIRST'?3:6));assert.equal(r.source_vector,null);
+      assert.ok(!JSON.stringify(r).includes('PRIVATE_PROVIDER_MESSAGE_DO_NOT_LEAK'));
+      noGrant(r);
+    }
+  }
+});
+test('U04 JOIN rejected output is classified separately from HTTP provider fault',async()=>{
+  const out=outputs();out.candidate.source_vector.candidate_sha=H1;
+  const r=await observeCrossSource(input(),readers(out));
+  assert.equal(r.error,'SOURCE_MATERIAL_UNVERIFIED');
+  assert.equal(r.failure_stage,'JOIN');assert.equal(r.failure_round,'FIRST');
+  assert.equal(r.material_status,'UNKNOWN');noGrant(r);
+});
+test('U04 second-round JOIN misbinding stays UNKNOWN and does not replay as E',async()=>{
+  const out=outputs();
+  const r=await observeCrossSource(input(),readers(out,(n,k,args,o)=>{
+    if(n===4)o.candidate.source_vector.candidate_sha=H1;
+  }));
+  assert.equal(r.error,'SOURCE_MATERIAL_UNVERIFIED');
+  assert.equal(r.failure_stage,'JOIN');assert.equal(r.failure_round,'SECOND');
+  assert.equal(r.source_consistent,false);noGrant(r);
+});
+test('U04 second-round material drift has its own symbolic stage',async()=>{
+  const out=outputs();
+  const r=await observeCrossSource(input(),readers(out,(n,k,args,o)=>{
+    if(n===4)o.ci.snapshot_sha256=SHA('d');
+  }));
+  assert.equal(r.error,'SOURCE_VECTOR_CHANGED_DURING_REOBSERVATION');
+  assert.equal(r.failure_stage,'SECOND_ROUND_DRIFT');
+  assert.equal(r.failure_round,'SECOND');
+  assert.equal(r.source_consistent,false);noGrant(r);
+});
+test('U04 success and invalid input cannot impersonate a native failure stage',async()=>{
+  const good=await observeCrossSource(input(),readers());
+  assert.equal(good.error,null);assert.equal(good.failure_stage,null);
+  assert.equal(good.failure_round,null);noGrant(good);
+  const bad=await observeCrossSource({...input(),repository:'reallaksh19/Common'},readers());
+  assert.equal(bad.error,'INPUT_CONTRACT_INVALID');
+  assert.equal(bad.failure_stage,null);assert.equal(bad.failure_round,null);noGrant(bad);
+});
 test('U04 historical author comment remains visible only as stale material',async()=>{
   let calls=0;const r=await observeCrossSource(input(),readers(outputs(),()=>calls++));
   assert.equal(calls,6);assert.equal(r.source_consistent,true);
