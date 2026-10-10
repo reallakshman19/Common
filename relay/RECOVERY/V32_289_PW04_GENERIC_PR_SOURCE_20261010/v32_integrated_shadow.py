@@ -287,6 +287,7 @@ def integrated_shadow(
         "repository": pins.repository,
         "source_kind": source["source_kind"],
         "source_snapshot_fingerprint": first,
+        "snapshot_sha256_pin_verified": False,
         "binding": binding,
         "native_input_digest": native_plan["input_digest"],
         "native_rejected_facts": native_plan["rejected_facts"],
@@ -320,18 +321,29 @@ def main() -> int:
     p.add_argument("--leaf", required=True)
     p.add_argument("--graph-blob", required=True)
     p.add_argument("--head", required=True)
+    # Optional independently retained SHA pin helps detect changed handoff
+    # bytes; it is not an authenticated Owner/issuer approval.
+    p.add_argument("--snapshot-sha256")
     p.add_argument("--output", type=Path, required=True)
     args = p.parse_args()
     if args.output.exists() or args.output.is_symlink():
         raise SystemExit("OUTPUT_ALREADY_EXISTS_REFUSING_OVERWRITE")
     graph = args.graph.read_bytes()
     with args.snapshot.open("rb") as input_stream:
-        snapshot = _decode_snapshot(input_stream.read(_MAX_SNAPSHOT_BYTES + 1))
+        raw_snapshot = input_stream.read(_MAX_SNAPSHOT_BYTES + 1)
+    snapshot = _decode_snapshot(raw_snapshot)
+    if args.snapshot_sha256 is not None:
+        _hold(re.fullmatch(r"[0-9a-f]{64}", args.snapshot_sha256) is not None,
+              "SNAPSHOT_SHA256_PIN_INVALID")
+        _hold(sha256(raw_snapshot).hexdigest() == args.snapshot_sha256,
+              "SNAPSHOT_SHA256_PIN_MISMATCH")
     _hold(isinstance(snapshot.get("repository"), str),
           "SOURCE_SNAPSHOT_SHAPE_INVALID")
     report = integrated_shadow(graph, PreviewPins(
         snapshot["repository"], args.repository_id, args.graph_blob,
         args.leaf, args.head), snapshot)
+    report["snapshot_sha256_pin_verified"] = args.snapshot_sha256 is not None
+    # This equality check is NOT independently authenticated source evidence.
     # Do not print private issue/comment bodies to stdout or commit them to Git.
     import os
     fd = os.open(args.output, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
