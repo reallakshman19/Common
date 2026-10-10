@@ -98,6 +98,7 @@ def _digest(value: bytes) -> str:
 
 def _linked_primary_prs(
     target: LabTarget, nodes: list[Any], getter: ReadOnlyLabProvider,
+    expected_base_ref: str | None,
 ) -> list[dict[str, Any]]:
     """Observe bound PR material; a coherent snapshot never admits a fact.
 
@@ -154,6 +155,8 @@ def _linked_primary_prs(
                 not re.fullmatch(r"[A-Za-z0-9_./-]{1,200}", base_ref) or
                 any(part in ("", ".", "..") for part in base_ref.split("/"))):
             raise ValueError("LAB_PRIMARY_PR_STATE_INVALID")
+        if isinstance(expected_base_ref, str) and base_ref != expected_base_ref:
+            raise ValueError("LAB_PRIMARY_PR_GRAPH_BASE_MISMATCH")
         out.append({
             "leaf": node["ref"], "number": number, "head_sha": head_sha,
             "base_ref": base_ref, "state": state, "merged": merged,
@@ -216,7 +219,7 @@ def _round(target: LabTarget, getter: ReadOnlyLabProvider,
             raise ValueError("LAB_GRAPH_ISSUE_NOT_MATERIALIZED")
         # Human text is hashed into the source fingerprint but never emitted.
         issue_facts.append({"number": number, "title": issue["title"], "body": issue["body"]})
-    pr_facts = _linked_primary_prs(target, nodes, getter)
+    pr_facts = _linked_primary_prs(target, nodes, getter, programme.get("base_ref"))
     late_commit = getter.get_commit(target.repository, branch)
     if not isinstance(late_commit, Mapping) or late_commit.get("sha") != sha:
         raise ValueError("LAB_DEFAULT_BRANCH_MOVED_DURING_READ")
