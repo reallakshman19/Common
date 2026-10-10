@@ -97,7 +97,10 @@ def probe_v32_fact(
     if not isinstance(facts, Mapping):
         unknowns.append("FACTS_ABSENT")
     else:
-        if facts.get("schema") != V32_FACTS_SCHEMA:
+        # Native DELP permits an omitted "schema" (CHECKPOINT_FACTS_V1
+        # wrapper supplies it).  This classifier must not mislabel a valid
+        # native fact as structurally invalid.
+        if facts.get("schema") not in (None, V32_FACTS_SCHEMA):
             failures.append("FACT_SCHEMA_NOT_NATIVE_V32")
         responsibility = facts.get("responsibility")
         if not isinstance(responsibility, Mapping) or responsibility.get("issue") != selection.leaf_ref:
@@ -109,7 +112,12 @@ def probe_v32_fact(
             fact_head = material["candidate_sha"]
             candidate_pr = material.get("pr")
             expected_pr = selection.repository.rsplit("/", 1)[-1] + "#" + str(selection.pr_number)
-            if candidate_pr not in (expected_pr, selection.repository + "#" + str(selection.pr_number)):
+            # material.pr is optional in native V3.2.  The separate released
+            # graph and observed provider PR must still be checked; this
+            # optional field cannot mint positive evidence either way.
+            if candidate_pr is not None and candidate_pr not in (
+                expected_pr, selection.repository + "#" + str(selection.pr_number)
+            ):
                 failures.append("FACT_PR_NOT_BOUND")
             if selection.current_head is not None and fact_head != selection.current_head:
                 failures.append("FACT_CANDIDATE_STALE")
