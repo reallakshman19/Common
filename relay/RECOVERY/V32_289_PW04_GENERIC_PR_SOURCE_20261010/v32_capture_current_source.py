@@ -31,6 +31,8 @@ _REPO = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\Z")
 _MAX_COMMENTS = 1000
 _MAX_COMMENT_CHARS = 1_000_000
 _MAX_COMMENT_TOTAL_CHARS = 5_000_000
+_MAX_HUMAN_BODY_CHARS = 1_000_000
+_MAX_HUMAN_TITLE_CHARS = 16_384
 _POSITIVE_DECIMAL = re.compile(r"[1-9][0-9]*\Z")
 _GET_TIMEOUT_SECONDS = 30
 _MAX_ISSUES = 25
@@ -105,6 +107,9 @@ def _pr(p: Any, repo: str, repo_id: int, number: int) -> dict:
                 "PR_HEAD_OR_BASE_SHA_INVALID")
     _ensure(isinstance(p.get("title"), str) and isinstance(p.get("body"), (str, type(None))),
             "PR_HUMAN_TEXT_INVALID")
+    _ensure(len(p["title"]) <= _MAX_HUMAN_TITLE_CHARS and
+            len(p.get("body") or "") <= _MAX_HUMAN_BODY_CHARS,
+            "PR_HUMAN_TEXT_UNBOUNDED")
     _ensure(p.get("state") in ("open", "closed") and type(p.get("merged")) is bool,
             "PR_MERGE_STATE_INVALID")
     merged_at = p.get("merged_at")
@@ -131,7 +136,8 @@ def _comments(get: Callable[[str], Any], repo: str, no: int) -> list:
         for c in batch:
             _ensure(isinstance(c, Mapping) and type(c.get("id")) is int and
                     c["id"] > 0 and isinstance(c.get("body"), str) and
-                    isinstance((c.get("user") or {}).get("login"), str) and
+                    isinstance(c.get("user"), Mapping) and
+                    isinstance(c["user"].get("login"), str) and
                     isinstance(c.get("author_association"), str),
                     "COMMENT_SOURCE_INVALID")
             _ensure(len(c["body"]) <= _MAX_COMMENT_CHARS, "COMMENT_TEXT_UNBOUNDED")
@@ -234,6 +240,9 @@ def capture(
                 q["number"] == no and q.get("pull_request") is None and
                 isinstance(q.get("title"), str) and isinstance(q.get("body"), (str, type(None))),
                 "PROVIDER_ISSUE_INVALID")
+        _ensure(len(q["title"]) <= _MAX_HUMAN_TITLE_CHARS and
+                len(q.get("body") or "") <= _MAX_HUMAN_BODY_CHARS,
+                "ISSUE_HUMAN_TEXT_UNBOUNDED")
         return {"title": q["title"], "body": q.get("body") or ""}
 
     issues = {str(no): issue(no) for no in refs}
@@ -283,9 +292,15 @@ def main() -> int:
         raise SystemExit("OUTPUT_ALREADY_EXISTS_REFUSING_OVERWRITE")
     result = capture(a.graph.read_bytes(), a.repository, a.graph_blob)
     fd = os.open(a.output, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-    with os.fdopen(fd, "w", encoding="utf-8") as stream:
-        json.dump(result, stream, indent=2, sort_keys=True, ensure_ascii=False)
-        stream.write("\n")
+    completed = False
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            json.dump(result, stream, indent=2, sort_keys=True, ensure_ascii=False)
+            stream.write("\n")
+        completed = True
+    finally:
+        if not completed:
+            a.output.unlink(missing_ok=True)
     print("PRIVATE_CURRENT_PROVIDER_SNAPSHOT_SAVED_0600; NO_FACTS_ADMITTED; NO_WRITES")
     return 0
 
