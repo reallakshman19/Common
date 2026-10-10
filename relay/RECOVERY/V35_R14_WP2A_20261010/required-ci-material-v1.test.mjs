@@ -181,3 +181,42 @@ test('partial status provider error refuses positive diagnosis',async()=>{
 test('injected reader cannot forge native grade by passing options',async()=>{
   const r=await observeSelectedRequiredCi(input(),get(),{native:true});safe(r);
 });
+
+test('T31 underreported first-round check count is unreadable, never selected or required pass',async()=>{
+ const d=data();d[p.check].total_count=0;
+ const x=await run(d);safe(x);
+ assert.equal(x.failure_stage,'FIRST_SELECTED');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.selected_checks_observed,false);
+ assert.equal(x.required_checks_result,'UNKNOWN');
+ assert.equal(x.snapshot_sha256,null);
+});
+test('T31 negative check count and extra undeclared rows refuse source',async()=>{
+ for(const change of [
+  d=>{d[p.check].total_count=-1},
+  d=>{d[p.check].check_runs.push({...d[p.check].check_runs[0],id:987});},
+ ]){
+  const d=data();change(d);
+  const x=await run(d);safe(x);
+  assert.equal(x.failure_stage,'FIRST_SELECTED');
+  assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+  assert.equal(x.observed,false);
+ }
+});
+test('T31 underreported second-round source refuses after first valid read',async()=>{
+ const d=data();const x=await run(d,(n,route,m)=>{
+  if(n===7)m[p.check].total_count=0;
+ });
+ safe(x);
+ assert.equal(x.failure_stage,'SECOND_SELECTED');
+ assert.equal(x.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+ assert.equal(x.selected_checks_observed,false);
+ assert.equal(x.required_checks_result,'UNKNOWN');
+});
+test('T31 zero check count and zero check rows is structurally valid but cannot satisfy required check',async()=>{
+ const d=data();d[p.check]={total_count:0,check_runs:[]};
+ const x=await run(d);safe(x);
+ assert.equal(x.selected_checks_observed,true);
+ assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
+ assert.equal(x.evidence_admitted,false);
+});
