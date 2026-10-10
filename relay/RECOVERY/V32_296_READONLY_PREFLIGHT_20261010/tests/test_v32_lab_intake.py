@@ -43,6 +43,7 @@ class Provider:
         self.pr_head_repo_id = 42
         self.pr_base_repo = REPO
         self.pr_base_repo_id = 42
+        self.pr_base_ref = "main"
         self.pr_state = "closed"
         self.pr_merged = True
         self.pr_merged_at = "2026-10-09T10:00:00Z"
@@ -79,7 +80,7 @@ class Provider:
             "head": {"sha": self.pr_head_sha,
                      "repo": {"full_name": self.pr_head_repo,
                               "id": self.pr_head_repo_id}},
-            "base": {"ref": "main",
+            "base": {"ref": self.pr_base_ref,
                      "repo": {"full_name": self.pr_base_repo,
                               "id": self.pr_base_repo_id}},
         }
@@ -223,6 +224,36 @@ class LabIntakeTests(unittest.TestCase):
         p = Provider(); p.pr_base_repo = "foreign/v32-lab"
         r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
         self.assertIn("LAB_PRIMARY_PR_REPOSITORY_MISMATCH", r.reasons)
+
+    def test_linked_pr_wrong_graph_base_branch_holds(self):
+        p = Provider(); p.pr_base_ref = "release/other"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_GRAPH_BASE_MISMATCH", r.reasons)
+        self.assertIsNone(r.observations)
+
+    def test_graph_declares_different_base_than_pr_holds(self):
+        p = Provider(); p.graph["programme"]["base_ref"] = "other-main"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_GRAPH_BASE_MISMATCH", r.reasons)
+
+    def test_matching_nondefault_declared_base_is_only_observational(self):
+        p = Provider()
+        p.graph["programme"]["base_ref"] = "release/stable"
+        p.pr_base_ref = "release/stable"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertEqual(r.status, "HOLD_OWNER_RELEASE_UNVERIFIED")
+        self.assertFalse(r.as_dict()["owner_release_authenticated"])
+
+    def test_linked_pr_base_ref_move_between_reads_holds(self):
+        p = Provider()
+        def move(op, count, x):
+            if op == "repo" and count == 8:
+                x.pr_base_ref = "another-main"
+                x.graph["programme"]["base_ref"] = "another-main"
+        p.mutate = move
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertEqual(r.status, "HOLD_LAB_DRIFT")
+        self.assertIsNone(r.observations)
 
     def test_linked_pr_bad_head_sha_holds(self):
         p = Provider(); p.pr_head_sha = "current-branch"
