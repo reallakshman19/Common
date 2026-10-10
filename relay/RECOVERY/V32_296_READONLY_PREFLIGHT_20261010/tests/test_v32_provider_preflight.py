@@ -327,5 +327,42 @@ class V32ProviderPreflightTests(unittest.TestCase):
         self.assertIn("TARGET_REPOSITORY_INVALID", result.reasons)
         self.assertEqual(p.calls, [])
 
+    def test_29_native_rejects_missing_leaf_parent(self):
+        p = FakeProvider()
+        del p.graph["nodes"][1]["parent"]
+        row = inspect_v32_read_only(target(), p)
+        self.assertEqual(row.status, "HOLD_PROVIDER_READ")
+        self.assertIn("NATIVE_V32_GRAPH_CONTRACT_INVALID", row.reasons)
+
+    def test_30_native_rejects_missing_declared_units(self):
+        p = FakeProvider()
+        del p.graph["nodes"][1]["units"]
+        row = inspect_v32_read_only(target(), p)
+        self.assertIn("NATIVE_V32_GRAPH_CONTRACT_INVALID", row.reasons)
+
+    def test_31_native_rejects_zero_unit_weight(self):
+        p = FakeProvider()
+        p.graph["nodes"][1]["units"][0]["weight"] = 0
+        row = inspect_v32_read_only(target(), p)
+        self.assertIn("NATIVE_V32_GRAPH_CONTRACT_INVALID", row.reasons)
+
+    def test_32_native_rejects_duplicate_graph_node(self):
+        p = FakeProvider()
+        p.graph["nodes"].append(deepcopy(p.graph["nodes"][1]))
+        row = inspect_v32_read_only(target(), p)
+        self.assertIn("NATIVE_V32_GRAPH_CONTRACT_INVALID", row.reasons)
+
+    def test_33_native_rejects_foreign_pr_repository_while_number_same(self):
+        p = FakeProvider()
+        p.graph["nodes"][1]["primary_pr"] = "foreign-repo#10"
+        row = inspect_v32_read_only(target(), p)
+        self.assertIn("PROVIDER_GRAPH_PR_FOREIGN_REPOSITORY", row.reasons)
+
+    def test_34_native_rejects_wrong_root(self):
+        p = FakeProvider()
+        p.graph["programme"]["root"] = "v32-proto#99"
+        row = inspect_v32_read_only(target(), p)
+        self.assertIn("NATIVE_V32_GRAPH_CONTRACT_INVALID", row.reasons)
+
 if __name__ == "__main__":
     unittest.main()
