@@ -83,9 +83,6 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         if not _identity(root, root_issue, root_url) or not _identity(leaf, leaf_issue, leaf_url):
             result["status"] = "HOLD_ISSUE_IDENTITY_UNVERIFIED"
             return result
-        if ROOT_MARKER not in str(root.get("body") or ""):
-            result["status"] = "HOLD_ROOT_NOT_GOVERNED"
-            return result
         if not _pull_identity(first_pr, pr_number, pr_url, repo):
             result["status"] = "HOLD_PR_IDENTITY_UNVERIFIED"
             return result
@@ -99,6 +96,24 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
             return result
         if transport.get_commit_sha(first_head) != first_head:
             result["status"] = "HOLD_COMMIT_NOT_RESOLVED"
+            return result
+        # Reconstructing a graph is impossible without the existing R2-D
+        # governed-root marker. Still finish the first-entry provider identity
+        # readback so a caller can distinguish a current candidate from a
+        # stale one without treating the ungoverned root as approved.
+        if ROOT_MARKER not in str(root.get("body") or ""):
+            last_root = transport.get_issue(root_issue)
+            last_leaf = transport.get_issue(leaf_issue)
+            last_pr = transport.get_pull(pr_number)
+            if last_root != root or last_leaf != leaf:
+                result["status"] = "HOLD_ISSUE_MOVED_DURING_OBSERVATION"
+                return result
+            if not _pull_identity(last_pr, pr_number, pr_url, repo) or last_pr != first_pr:
+                result["status"] = "HOLD_PR_MOVED_DURING_OBSERVATION"
+                return result
+            result["provider_material"] = "SOURCE_HEAD_DOUBLE_READ_MATCH"
+            result["graph"] = "ROOT_CONTRACT_MISSING"
+            result["status"] = "HOLD_ROOT_NOT_GOVERNED"
             return result
         comments = transport.list_comments(root_issue)
         if not isinstance(comments, list) or any(not isinstance(c, Mapping) for c in comments):
