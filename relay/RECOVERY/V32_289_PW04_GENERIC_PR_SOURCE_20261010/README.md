@@ -58,6 +58,19 @@ overflow, timeout and missing CLI; all authentic current provider facts and
 Owner authority still require independent verification. These synthetic/transport
 protections do not issue evidence, attest human Owner approval or make the
 inaccessible original lab current.
+Before invoking native V3.2, the shadow now recomputes the **exact Git
+blob OID of the supplied raw graph bytes** and refuses `GRAPH_BLOB_PIN_MISMATCH`
+if they do not equal the independently configured graph selector and captured
+source reference. A valid-looking graph with altered whitespace cannot run
+native projection against a stale source pin. This remains source consistency,
+not an authenticated Owner or independent GitHub witness. The private snapshot
+CLI loads at most **64,000,001 bytes** and refuses files above the
+64,000,000-byte cap; JSON duplicate keys, nonfinite constants, invalid UTF-8,
+and non-object snapshots fail closed before rendering or report creation.
+Individual issue, PR and comment-feed snapshot entries must have the expected
+container shape, and present issues must have a title, before native execution.
+Tests cover the decoded input and the actual CLI path for duplicate and oversize
+snapshots, with no output produced when held.
 The **offline shadow input** now independently rejects raw graph duplicate JSON
 keys, invalid UTF-8 and non-finite JSON before native V3.2 executes, without
 rewriting the pinned graph bytes. Its GET-only snapshot adapter refuses absent
