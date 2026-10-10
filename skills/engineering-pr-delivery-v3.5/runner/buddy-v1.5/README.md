@@ -30,9 +30,11 @@ From the Common checkout, run:
 
     python skills/engineering-pr-delivery-v3.5/scripts/buddy_runner_v15.py --input skills/engineering-pr-delivery-v3.5/examples/buddy-runner-v15/lfj-stage1.json --output /tmp/buddy-v15-stage1.md
 
-Stage 1: the generated prompt contains an indented JSON **untrusted case packet** and explicit instructions to verify actual GitHub issues/source independently. The renderer performs only schema validation and Markdown assembly; it does not fetch, authenticate or publish anything. All specific source findings must come from the agent's own live inspection.
+Stage 1: the generated prompt contains an indented JSON **untrusted case packet** and explicit instructions to verify actual GitHub issues/source independently. The renderer performs schema/case link checks and Markdown assembly; it does not fetch, authenticate or publish anything. It rejects `--output` aliases of `--input` and writes generated prompts using an atomic same-directory replacement. All specific source findings must come from the agent's own live inspection.
 
-Stage 2: copy the same case metadata, set the stage field to STAGE2, and add stage1_evidence with the **real** published Stage 1 issue comment URL, sha256: digest of the exact artifact content, assessed commit and observed readback grade. Generate the second prompt with the same CLI. **Do not fabricate a digest/URL** or label a local guess as verified. The Stage 2 agent must independently re-fetch and compare the publication. Missing/unreadable Stage 1 evidence yields STAGE1_NOT_VERIFIED, not a made-up reconciliation.
+Stage 2: copy the same case metadata, set the stage field to STAGE2, and add stage1_evidence with the **real** Stage 1 GitHub issue-comment URL on the **same owning current issue**, the exact assessed commit and the digest. Compute `artifact_digest` as `sha256:` followed by the SHA-256 of the **UTF-8 bytes of the published GitHub comment body's text**, exactly as returned by the provider, including original line breaks; exclude the URL, issue metadata, JSON quoting, API response wrapper and Markdown rendering. Generate the second prompt with the same CLI. The renderer checks the issue-link shape and source commit but **does not fetch the comment or verify its digest**; the Stage 2 agent must re-fetch and compare both. **Do not fabricate a digest, URL or readback grade.**
+
+If Stage 1 was `NOT_PUBLISHED`, retain the copy-ready artifact, but **do not generate Stage 2 in this provider-backed v1.5 lane**. Obtain a permitted publication and genuine readback first; otherwise report `STAGE1_NOT_VERIFIED` and stop at the diagnostic. A local file's digest alone is not an accepted substitute for the provider publication. A syntactically valid claim with unreadable/mismatched provider evidence must likewise stop without an invented reconciliation.
 
 ## Evidence and safety
 
@@ -46,6 +48,8 @@ Stage 2: copy the same case metadata, set the stage field to STAGE2, and add sta
 ## First small example: LFJ
 
 The example references the **historical assessed source** for XML→CII 2019: A3/H10 draft PR #184 against its pinned commit, with competing draft PR #185. It is deliberately an *intake*, not a pre-written answer or a recommendation to merge either branch. An agent must still re-read the current issue #132, parent #1, A1/A2/H10 and protected golden responsibilities, and independently decide how to reconcile the two approaches.
+
+The agreed **illustrative Stage 2 objective** for this example is one authoritative, source-preserving LFJ Resolver in the *actual* XML→CII 2019 application. Before editing, reconcile #184/#185 Build, original-file identity, bounded hashing, cancellation/recovery, projection, revision and consent/CSV authorization. Assign one owner per responsibility and select compatible reusable components. Verify atomic source selection, declared complete-vs-subtree hierarchy scope and parity between full source-backed output, rendered tables and both downloads. Investigate the actual deployed artifact early, but reconcile its `docs/`/root import and Worker closure only after choosing the product implementation. Independent golden correctness, genuine Owner 30/90MB sources and downstream CII release remain separate. These are **questions and preservation criteria for an agent to verify**, not preaccepted diagnoses or permission to merge either product PR.
 
 ## Integration and custody
 
