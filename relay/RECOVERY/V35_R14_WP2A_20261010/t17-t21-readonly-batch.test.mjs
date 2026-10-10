@@ -15,11 +15,11 @@ test('T19 rules 404 is UNKNOWN and malformed 200 is UNKNOWN',()=>{assert.equal(t
 test('T20 V3.1 missing workflows remain explicit',()=>{const x=t20(['.github/workflows/other.yml']);assert.equal(x.missing.length,2);assert.equal(x.release_ready,false)});
 test('T20 restored paths alone do not grant release',()=>{const x=t20(['.github/workflows/engineering-pr-delivery-v2.5.yml','.github/workflows/engineering-pr-delivery-v3.yml']);assert.equal(x.verdict,'LEGACY_PATHS_PRESENT');assert.equal(x.release_ready,false)});
 test('T20 forged relative path refused',()=>{assert.equal(t20(['../bad']).verdict,'INVENTORY_UNVERIFIED')});
-const V=()=>({ci:{schema:'v35-294-t17',evidence_admitted:false,writer_authorized:false,verdict:'DIAGNOSTIC_ONLY',delta:{}},u03:{schema:'v35-294-t18',evidence_admitted:false,writer_authorized:false,verdict:'NO_U03_REFUSAL_IN_SAMPLE'},policy:{schema:'v35-294-t19',evidence_admitted:false,writer_authorized:false,policy:'OBSERVED_DIAGNOSTIC_ONLY'},legacy:{schema:'v35-294-t20',evidence_admitted:false,writer_authorized:false,verdict:'LEGACY_PATHS_PRESENT'}});
+const V=()=>({ci:{schema:'v35-294-t17',evidence_admitted:false,writer_authorized:false,verdict:'DIAGNOSTIC_ONLY',delta:{classification:'STABLE'}},u03:{schema:'v35-294-t18',evidence_admitted:false,writer_authorized:false,verdict:'NO_U03_REFUSAL_IN_SAMPLE'},policy:{schema:'v35-294-t19',evidence_admitted:false,writer_authorized:false,policy:'OBSERVED_DIAGNOSTIC_ONLY'},legacy:{schema:'v35-294-t20',evidence_admitted:false,writer_authorized:false,verdict:'LEGACY_PATHS_PRESENT'}});
 test('T21 missing inputs fail closed',()=>{assert.equal(t21({}).first_failed_edge,'INPUT_UNVERIFIED')});
 test('T21 U02 refusal has first priority',()=>{const v=V();v.ci.verdict='SELECTED_CHECKS_DRIFT';assert.equal(t21(v).first_failed_edge,'U02')});
 test('T21 unknown policy stays HOLD',()=>{const v=V();v.policy.policy='UNKNOWN';assert.equal(t21(v).first_failed_edge,'REQUIRED_POLICY')});
-test('T21 all diagnostic probes clear still never authorize release',()=>{const x=t21(V());assert.equal(x.verdict,'DIAGNOSTICS_CLEAR_NO_AUTHORITY');assert.equal(x.release_ready,false);assert.equal(x.delp_projection,'NOT_CALCULATED')});
+test('T21 all diagnostic probes clear still never authorize release',()=>{const x=t21(V());assert.equal(x.verdict,'HOLD_DIAGNOSTIC');assert.equal(x.first_failed_edge,'EFFECTIVE_CI_AND_V31_NOT_QUALIFIED');assert.equal(x.release_ready,false);assert.equal(x.delp_projection,'NOT_CALCULATED')});
 test('T21 forged evidence cannot pass',()=>{const v=V();v.u03.evidence_admitted=true;assert.equal(t21(v).first_failed_edge,'INPUT_UNVERIFIED')});
 
 test('T22 reject contradictory U02 check count and membership arithmetic',async()=>{
@@ -84,4 +84,25 @@ test('T24 invalid integration ID and malformed source are UNKNOWN',()=>{
  assert.equal(t19(bad,p).policy,'UNKNOWN');
  const missing={status:200,page_complete:true,data:[{type:'required_status_checks',parameters:{required_status_checks:null}}]};
  assert.equal(t19(c,missing).policy,'UNKNOWN');
+});
+
+test('T25 stable diagnostic never implies qualified effective CI, V3.1, or release',()=>{
+ const x=t21(V());assert.equal(x.verdict,'HOLD_DIAGNOSTIC');
+ assert.equal(x.first_failed_edge,'EFFECTIVE_CI_AND_V31_NOT_QUALIFIED');
+ assert.equal(x.release_ready,false);assert.equal(x.evidence_admitted,false);
+ assert.ok(x.unproven_gates.includes('V31_EXACT_HEAD'));
+});
+test('T25 observed U03 original fault has priority over readable policy',()=>{
+ const v=V();v.u03.verdict='SAME_INVOCATION_U03_REASON';
+ const x=t21(v);assert.equal(x.first_failed_edge,'U03');assert.equal(x.writer_authorized,false);
+});
+test('T25 missing U03 observation is a HOLD even if CI appears stable',()=>{
+ const v=V();v.u03.verdict='UNVERIFIED';
+ assert.equal(t21(v).first_failed_edge,'U03_UNVERIFIED');
+});
+test('T25 falsified success flag never escapes inherited negative-only contract',()=>{
+ const v=V();v.ci.verdict='ALL_REQUIRED_CHECKS_SUCCESS';
+ assert.equal(t21(v).first_failed_edge,'U02');
+ const second=V();second.policy.policy='UNKNOWN';
+ assert.equal(t21(second).first_failed_edge,'REQUIRED_POLICY');
 });
