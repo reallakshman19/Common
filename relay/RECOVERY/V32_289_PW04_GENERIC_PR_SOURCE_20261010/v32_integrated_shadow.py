@@ -296,9 +296,15 @@ def main() -> int:
     # Do not print private issue/comment bodies to stdout or commit them to Git.
     import os
     fd = os.open(args.output, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-    with os.fdopen(fd, "w", encoding="utf-8") as stream:
-        json.dump(report, stream, indent=2, sort_keys=True, ensure_ascii=False)
-        stream.write("\n")
+    completed = False
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            json.dump(report, stream, indent=2, sort_keys=True, ensure_ascii=False)
+            stream.write("\n")
+        completed = True
+    finally:
+        if not completed:
+            args.output.unlink(missing_ok=True)
     print(report["status"] + "; OUTPUT_PRIVATE_0600; NO_GITHUB_WRITES")
     return 2 if report["native_core_hold"] else 0
 
