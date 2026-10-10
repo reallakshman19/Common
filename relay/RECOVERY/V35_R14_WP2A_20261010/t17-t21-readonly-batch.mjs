@@ -4,11 +4,24 @@ import {execFileSync} from 'node:child_process';
 const REPO='reallakshman19/Common',ID=1412133785,SHA=/^[a-f0-9]{40}$/;
 const NO={evidence_admitted:false,owner_authenticated:false,reviewer_qualified:false,required_ci_qualified:false,writer_authorized:false,programme_progress:null,delp_projection:'NOT_CALCULATED'};
 const id=x=>x?.repository===REPO&&x?.repository_id===ID&&Number.isSafeInteger(x.pr_number)&&x.pr_number>0&&SHA.test(x.head_sha||'')&&/^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(x.base_branch||'')&&!x.base_branch.includes('..');
+/* T22: a diagnostic diff must agree with U02's actual refusal and its own arithmetic. */
+function t22DeltaValid(d,reason){
+ if(!d||!['STABLE','TRANSITION_ONLY','MEMBERSHIP_ONLY','MEMBERSHIP_AND_TRANSITION'].includes(d.classification))return false;
+ for(const k of ['first_count','second_count','added_count','removed_count','transition_count'])
+  if(!Number.isSafeInteger(d[k])||d[k]<0||d[k]>200)return false;
+ if(d.first_count>200||d.second_count>200||d.second_count!==d.first_count+d.added_count-d.removed_count)return false;
+ if(!Array.isArray(d.details)||d.details.length>12||typeof d.details_truncated!=='boolean')return false;
+ const member=d.added_count+d.removed_count>0,changing=d.transition_count>0;
+ const grade=!member&&!changing?'STABLE':member&&changing?'MEMBERSHIP_AND_TRANSITION':member?'MEMBERSHIP_ONLY':'TRANSITION_ONLY';
+ if(d.classification!==grade)return false;
+ if(reason==='SELECTED_CHECKS_DRIFT')return grade!=='STABLE';
+ return reason===null&&grade==='STABLE';
+}
 export async function t17(input,diagnose,reader){
  const b={schema:'v35-294-t17',source_grade:'CALLER_INJECTED_UNATTESTED',head_sha:input?.head_sha??null,...NO};
  if(!id(input)||typeof diagnose!=='function'||typeof reader!=='function')return {...b,verdict:'SOURCE_UNVERIFIED',delta:null};
  try{const x=await diagnose(input,reader),d=x?.selected_delta;
-  if(x.tested_head_sha!==input.head_sha||x.pr_number!==input.pr_number||x.evidence_admitted!==false||x.positive_ci_qualified!==false||!d||!['STABLE','TRANSITION_ONLY','MEMBERSHIP_ONLY','MEMBERSHIP_AND_TRANSITION'].includes(d.classification))return {...b,verdict:'SOURCE_UNVERIFIED',delta:null};
+  if(x.authority!=='DIAGNOSIS_ONLY_CALLER_INJECTED_UNATTESTED'||x.tested_head_sha!==input.head_sha||x.pr_number!==input.pr_number||x.evidence_admitted!==false||x.positive_ci_qualified!==false||!t22DeltaValid(d,x.u02_failure_reason))return {...b,verdict:'SOURCE_UNVERIFIED',delta:null};
   const first=(d.details||[]).find(y=>Number.isSafeInteger(y.run_id)&&['ADDED','REMOVED','TRANSITION'].includes(y.change));
   return {...b,verdict:x.u02_failure_reason==='SELECTED_CHECKS_DRIFT'?'SELECTED_CHECKS_DRIFT':'DIAGNOSTIC_ONLY',delta:{classification:d.classification,first_count:d.first_count,second_count:d.second_count,added:d.added_count,removed:d.removed_count,transition:d.transition_count,first_job_id:first?.run_id??null,first_change:first?.change??null,old_state:first?.old_state??null,new_state:first?.new_state??null}};
  }catch{return {...b,verdict:'SOURCE_UNVERIFIED',delta:null}}
