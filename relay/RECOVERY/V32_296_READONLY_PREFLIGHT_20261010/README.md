@@ -23,7 +23,7 @@ separately approved V3.2 evidence-identity repair. This source tree does not edi
   provider issue comments; aggregate observation only, not an admitted fact. Claims that say VERIFIED do not become verified evidence.
 - `v32_readonly_cli.py`: command line wrapper, output as structured JSON; exit 1 on
   invalid material and exit 2 on HOLD. **Exit 0 is impossible by design.**
-- `tests/`: 72 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
+- `tests/`: 96 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
   NEGATIVE ORACLES for this tool, not real V3.2 positive engineering qualification.
 
 ## Regression run
@@ -111,7 +111,7 @@ or author identifiers.
 
 Testing the comment observer requires `PyYAML==6.0.2` alongside Python
 3.11/3.12/3.13. The scoped CI matrix installs that dependency and executes
-72 synthetic and real-native-parser regression cases. Real GET-only
+96 synthetic and real-native-parser regression cases. Real GET-only
 qualification remains negative by design.
 
 ### Numeric-SHA YAML edge case
@@ -126,3 +126,42 @@ stale or current. Its regression fixture quotes the normal SHA and tests
 the unquoted malformed-type case independently. A future Owner-approved
 native policy/issuer must address typed candidate equality explicitly.
 No frozen V3.2 source was changed.
+
+## D4/D5 provider review and required-check policy visibility (GET only)
+
+`v32_policy_visibility.py` and `v32_review_policy_cli.py` are separate,
+non-admitting read-only observers for the actual PR review and GitHub
+branch-policy endpoints. They can be run without an approved lifecycle graph
+to expose the **reason** D4/D5 are unresolved, but never pronounce the Owner
+decisions satisfied.
+
+```sh
+python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_review_policy_cli.py \
+  --repository <owner/repo> --pr-number <n> --expected-head <40-char-current-PR-SHA>
+```
+
+- Rechecks PR head and base across the provider read window; a move or stale
+  expected head is HOLD, not green.
+- Reads up to 2,000 GitHub PR reviews via `gh api --method GET`,
+  tracking only aggregate observations of the latest state per reviewer;
+  even exact-head, distinct approved review observations are **not**
+  independent-review eligibility under the missing Owner source policy.
+- Reads the repository ruleset listing and classic required-check endpoint
+  with independent failure classification. Empty rulesets, 403/404 classic
+  required-check access or observed classic contexts cannot alone establish
+  the effective policy (inherited rulesets, required status semantics, exact
+  source decisions). The result always has
+  `effective_required_check_policy: UNKNOWN_NOT_AUTHENTICATED`.
+- Outputs contain no reviewer logins or credentials, no provider response
+  bodies, and no claim of a second DELP or an accepted checkpoint fact.
+- The live test runs only on PR events under `permissions: contents: read`,
+  reads the current draft PR using the event's actual head, and verifies that
+  D4/D5 remain unqualified. The GET-only transport is unit tested with
+  403, pagination, empty-ruleset and selector adversarial fixtures.
+- Repository selectors reject `.` and `..` path components across all
+  prototype input boundaries **before** any provider API call.
+
+This is provider D4/D5 **visibility**, not delegated Owner D1–D5 authority.
+The separate inherited `validate-v3-1-foundation` failure from missing retired
+V2.5/V3 workflows is not fixed or bypassed. Do not merge this read-only
+prototype as a substitute for native positive E→DELP→GitHub→C6.
