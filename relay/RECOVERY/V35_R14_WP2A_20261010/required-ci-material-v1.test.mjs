@@ -301,3 +301,52 @@ test('T33 valid known GitHub terminal nonpass and nonterminal null are never E',
   assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
  }
 });
+
+test('T34 omitted classic App identity means UNKNOWN, never implicit any-app',async()=>{
+ const d=data();delete d[p.classic].checks[0].app_id;
+ const x=await run(d);safe(x);
+ assert.equal(x.selected_checks_observed,true);
+ assert.equal(x.required_check_policy,'UNKNOWN');
+ assert.equal(x.required_checks_result,'UNKNOWN');
+});
+test('T34 omitted ruleset integration identity means UNKNOWN instead of any-app pass',async()=>{
+ const d=data();d[p.classic]={contexts:[],checks:[]};
+ d[p.rules]=[{type:'required_status_checks',parameters:{required_status_checks:[{context:'build'}]}}];
+ const x=await run(d);safe(x);
+ assert.equal(x.required_checks_result,'UNKNOWN');
+ assert.equal(x.required_check_policy,'UNKNOWN');
+});
+test('T34 malformed required check names and app identifiers never certify policy',async()=>{
+ const invalids=[
+  d=>{d[p.classic].checks[0].app_id=-2},
+  d=>{d[p.classic].checks[0].app_id='42'},
+  d=>{d[p.classic].checks[0].context=' '},
+  d=>{d[p.classic].checks[0].context='x'.repeat(251)},
+  d=>{d[p.classic].checks[0].context='bad\u0000job'},
+  d=>{d[p.rules]=[{type:'required_status_checks',parameters:{required_status_checks:[{context:'build',integration_id:-2}]}}]},
+ ];
+ for(const mutate of invalids){
+  const d=data();mutate(d);const x=await run(d);safe(x);
+  assert.equal(x.required_check_policy,'UNKNOWN');
+  assert.equal(x.required_checks_result,'UNKNOWN');
+ }
+});
+test('T34 explicit null or app-scoped check remains valid diagnostic, never authority',async()=>{
+ for(const app of [42,null,-1]){
+  const d=data();d[p.classic].checks[0].app_id=app;
+  const x=await run(d);safe(x);
+  assert.equal(x.required_check_policy,'OBSERVED_CLASSIC_AND_RULESET');
+  if(app===42||app===null)assert.equal(x.required_checks_result,'ALL_OBSERVED_REQUIRED_CHECKS_SUCCESS');
+  else assert.equal(x.required_checks_result,'REQUIRED_CHECK_PENDING_OR_AMBIGUOUS');
+  assert.equal(x.evidence_admitted,false);
+ }
+});
+test('T34 second-round policy App identity missing causes fail-closed policy drift',async()=>{
+ const d=data();const x=await run(d,(n,route,m)=>{
+  if(n===9)delete m[p.classic].checks[0].app_id;
+ });
+ safe(x);
+ assert.equal(x.failure_stage,'SOURCE_READBACK');
+ assert.equal(x.failure_reason,'REQUIRED_POLICY_DRIFT');
+ assert.equal(x.required_check_policy,'UNKNOWN');
+});
