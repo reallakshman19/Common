@@ -85,5 +85,39 @@ class ReadOnlyGetTests(unittest.TestCase):
         g.get_repository(REPO); g.get_commit(REPO, "main"); g.get_pull(REPO, 10)
         self.assertTrue(all(x[0][2:4] == ["--method", "GET"] for x in stub.commands))
 
+    def test_11_native_pr_reviews_pagination_get_only(self):
+        stub = Runner([[{"id": n} for n in range(100)], [{"id": 101}]])
+        records = GitHubGetOnly(stub).get_pr_reviews(REPO, 10)
+        self.assertEqual(len(records), 101)
+        self.assertIn("/pulls/10/reviews?", stub.commands[0][0][-1])
+        self.assertTrue(all(args[0][2:4] == ["--method", "GET"] for args in stub.commands))
+
+    def test_12_empty_rulesets_is_observation_not_required_policy(self):
+        stub = Runner([[]])
+        raw = GitHubGetOnly(stub).get_branch_rulesets(REPO, "main")
+        self.assertEqual(raw, [])
+        self.assertIn("/rulesets?includes_parents=true", stub.commands[0][0][-1])
+
+    def test_13_classic_required_status_endpoint_is_get_only(self):
+        stub = Runner([{"contexts": ["build"]}])
+        raw = GitHubGetOnly(stub).get_branch_required_checks(REPO, "main")
+        self.assertEqual(raw["contexts"], ["build"])
+        self.assertIn("/protection/required_status_checks", stub.commands[0][0][-1])
+        self.assertEqual(stub.commands[0][0][2:4], ["--method", "GET"])
+
+    def test_14_classic_provider_403_is_sanitized(self):
+        class Forbidden:
+            def __call__(self, argv, **kw):
+                return CompletedProcess(argv, 1, "", "sensitive 403 credential data")
+        with self.assertRaisesRegex(GitHubReadError, "GITHUB_GET_FAILED") as ctx:
+            GitHubGetOnly(Forbidden()).get_branch_required_checks(REPO, "main")
+        self.assertNotIn("sensitive", str(ctx.exception))
+
+    def test_15_review_endpoint_invalid_selector_no_network(self):
+        stub = Runner([])
+        with self.assertRaisesRegex(GitHubReadError, "INVALID_PR_NUMBER"):
+            GitHubGetOnly(stub).get_pr_reviews(REPO, -1)
+        self.assertEqual(stub.commands, [])
+
 if __name__ == "__main__":
     unittest.main()
