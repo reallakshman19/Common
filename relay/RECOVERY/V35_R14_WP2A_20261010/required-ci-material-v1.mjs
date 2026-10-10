@@ -10,10 +10,15 @@ const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const validBranch=x=>typeof x==='string'&&BRANCH.test(x)&&!x.includes('..')&&!x.includes('//')&&!x.endsWith('/');
 const digest=o=>'sha256:'+createHash('sha256').update('wp2a-u02-v1\0'+JSON.stringify(o)).digest('hex');
 const sort=(a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b));
-function refusal(grade,errors,selected=[],required=[]){
+class SourceFault extends Error {
+  constructor(code){super(code);this.code=code;}
+}
+const requireSource=(ok,code)=>{if(!ok)throw new SourceFault(code);};
+function refusal(grade,errors,selected=[],required=[],failureStage=null,failureReason=null){
   return {
     schema:'common-v35-wp2a-u02-ci-observation-v1',
     source_grade:grade,observed:false,selected_checks_observed:false,errors,
+    failure_stage:failureStage,failure_reason:failureReason,
     selected_checks:selected,required_checks:required,
     required_check_policy:'UNKNOWN',required_checks_result:'UNKNOWN',
     evidence_admitted:false,programme_progress:null,writer_authorized:false,
@@ -42,24 +47,24 @@ async function identity(input,read){
   if(!obj(pr)||pr.number!==input.pr_number||pr.html_url!=='https://github.com/'+REPO+'/pull/'+input.pr_number||
     pr.head?.sha!==input.head_sha||pr.base?.ref!==input.base_branch||
     pr.head?.repo?.id!==REPO_ID||pr.base?.repo?.id!==REPO_ID||
-    pr.head.repo.full_name!==REPO||pr.base.repo.full_name!==REPO)throw Error('CANDIDATE_NO_LONGER_CURRENT');
+    pr.head.repo.full_name!==REPO||pr.base.repo.full_name!==REPO)throw new SourceFault('PR_HEAD_BASE_OR_REPO_MISMATCH');
   return {head_sha:pr.head.sha,base_branch:pr.base.ref,pr_number:pr.number};
 }
 function selected(input,checkRuns,combined){
   if(!obj(checkRuns)||!Number.isSafeInteger(checkRuns.total_count)||!Array.isArray(checkRuns.check_runs)||
     checkRuns.total_count>checkRuns.check_runs.length||checkRuns.check_runs.length>100||
     !obj(combined)||combined.sha!==input.head_sha||!Array.isArray(combined.statuses)||combined.statuses.length>100)
-    throw Error('SELECTED_CHECKS_INCOMPLETE');
+    throw new SourceFault('SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
   const runs=checkRuns.check_runs.map(x=>{
     if(!obj(x)||!Number.isSafeInteger(x.id)||typeof x.name!=='string'||!x.name||
       x.head_sha!==input.head_sha||!['queued','in_progress','completed','waiting','pending','requested'].includes(x.status)||
       (x.status==='completed'&&typeof x.conclusion!=='string')||!Number.isSafeInteger(x.app?.id))
-      throw Error('CHECK_RUN_SHAPE_OR_SHA');
+      throw new SourceFault('CHECK_RUN_SHAPE_OR_SHA_INVALID');
     return {kind:'CHECK_RUN',name:x.name,app_id:x.app.id,run_id:x.id,state:x.status,conclusion:x.conclusion||null};
   });
   const statuses=combined.statuses.map(x=>{
     if(!obj(x)||typeof x.context!=='string'||!x.context||!['success','failure','error','pending'].includes(x.state))
-      throw Error('COMMIT_STATUS_SHAPE');
+      throw new SourceFault('COMMIT_STATUS_SHAPE_INVALID');
     return {kind:'COMMIT_STATUS',name:x.context,app_id:null,run_id:null,state:x.state,conclusion:null};
   });
   return [...runs,...statuses].sort(sort);
@@ -106,34 +111,52 @@ async function observeWithGrade(input,read,grade){
   const bad=validateInput(input);
   if(bad.length)return refusal(grade,bad);
   if(typeof read!=='function')return refusal(grade,['PROVIDER_READER_MISSING']);
+  let stage='INITIAL_PR';
   try{
     const initial=await identity(input,read),paths=path(input);
+    stage='FIRST_SELECTED';
     const [checkRuns,combined,classic,rules]=(await Promise.allSettled([
       read(REPO,paths.checks),read(REPO,paths.status),read(REPO,paths.classic),read(REPO,paths.rules),
     ])).map(x=>x.status==='fulfilled'?x.value:{__provider_error:true});
-    const chosen=selected(input,mustRead(checkRuns),mustRead(combined));
+    requireSource(checkRuns!==null&&checkRuns!==undefined&&
+      !checkRuns.__provider_error,'CHECK_RUNS_GET_UNVERIFIED');
+    requireSource(combined!==null&&combined!==undefined&&
+      !combined.__provider_error,'COMMIT_STATUS_GET_UNVERIFIED');
+    const chosen=selected(input,checkRuns,combined);
     let policy=null;
     try{policy=required(mustRead(classic),mustRead(rules));}catch{/* UNKNOWN is not empty policy */}
+    stage='MIDDLE_PR';
     const final=await identity(input,read);
+    stage='SECOND_SELECTED';
     const [check2,status2,classic2,rules2]=(await Promise.allSettled([
       read(REPO,paths.checks),read(REPO,paths.status),read(REPO,paths.classic),read(REPO,paths.rules),
     ])).map(x=>x.status==='fulfilled'?x.value:{__provider_error:true});
-    const chosen2=selected(input,mustRead(check2),mustRead(status2));
+    requireSource(check2!==null&&check2!==undefined&&
+      !check2.__provider_error,'CHECK_RUNS_GET_UNVERIFIED');
+    requireSource(status2!==null&&status2!==undefined&&
+      !status2.__provider_error,'COMMIT_STATUS_GET_UNVERIFIED');
+    const chosen2=selected(input,check2,status2);
     let policy2=null;
     try{policy2=required(mustRead(classic2),mustRead(rules2));}catch{/* UNKNOWN */}
+    stage='FINAL_PR';
     const end=await identity(input,read);
-    if(JSON.stringify(final)!==JSON.stringify(end)||JSON.stringify(chosen)!==JSON.stringify(chosen2)||
-      JSON.stringify(policy)!==JSON.stringify(policy2))throw Error('CI_OR_POLICY_DRIFT');
+    stage='SOURCE_READBACK';
+    requireSource(JSON.stringify(final)===JSON.stringify(end),'PR_READBACK_CHANGED');
+    requireSource(JSON.stringify(chosen)===JSON.stringify(chosen2),'SELECTED_CHECKS_DRIFT');
+    requireSource(JSON.stringify(policy)===JSON.stringify(policy2),'REQUIRED_POLICY_DRIFT');
     const result=policy2===null?'UNKNOWN':evaluate(policy2,chosen2);
     const vector={repository:REPO,repository_id:REPO_ID,...end,selected_checks:chosen2,required_checks:policy2??[],required_checks_result:result};
     return {schema:'common-v35-wp2a-u02-ci-observation-v1',source_grade:grade,observed:policy2!==null,
-      selected_checks_observed:true,errors:[],selected_checks:chosen2,required_checks:policy2??[],
+      selected_checks_observed:true,errors:[],failure_stage:null,failure_reason:null,
+      selected_checks:chosen2,required_checks:policy2??[],
       required_check_policy:policy2===null?'UNKNOWN':'OBSERVED_CLASSIC_AND_RULESET',
       required_checks_result:result,snapshot_sha256:digest(vector),
       evidence_admitted:false,programme_progress:null,writer_authorized:false,
       owner_authenticated:false,reviewer_qualified:false};
-  }catch{
-    return refusal(grade,['CI_MATERIAL_OR_POLICY_UNVERIFIED']);
+  }catch(error){
+    // No caller-controlled provider exception messages or response values.
+    return refusal(grade,['CI_MATERIAL_OR_POLICY_UNVERIFIED'],[],[],
+      stage,error instanceof SourceFault?error.code:null);
   }
 }
 async function githubGet(repo,path,token){
