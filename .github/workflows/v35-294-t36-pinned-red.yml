@@ -1,0 +1,49 @@
+name: "V3.5 #294 T36 exact original RED source baseline (not acceptance)"
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/t36-full-suite-red-baseline*'
+      - 'relay/RECOVERY/V35_R14_WP2A_20261010/T36_EXACT_RED_CAUSAL_INVENTORY.md'
+      - '.github/workflows/v35-294-t36-pinned-red.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  t36-pinned-original-red:
+    name: "T36 historical 21-failure RED oracle (${{ matrix.os }}, Node ${{ matrix.node }})"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: report
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: b6b6daabe6defb253bac9dd00ce7ad48081a1000
+          path: pinned
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Prove diagnostic HEAD and original frozen PR323 source HEAD differ
+        shell: bash
+        env:
+          DIAGNOSTIC_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git -C report rev-parse HEAD)" = "$DIAGNOSTIC_HEAD"
+          test "$(git -C pinned rev-parse HEAD)" = "b6b6daabe6defb253bac9dd00ce7ad48081a1000"
+          test "$DIAGNOSTIC_HEAD" != "b6b6daabe6defb253bac9dd00ce7ad48081a1000"
+      - name: Regression oracle self-tests must pass; do not change original RED fixtures
+        shell: bash
+        run: node --test report/relay/RECOVERY/V35_R14_WP2A_20261010/t36-full-suite-red-baseline.test.mjs
+      - name: Run ALL actual original WP2-A tests at pinned source; expected 21 red, no waiver
+        shell: bash
+        run: node report/relay/RECOVERY/V35_R14_WP2A_20261010/t36-full-suite-red-baseline.mjs pinned
