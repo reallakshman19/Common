@@ -10,10 +10,11 @@ const G_INJECTED='CALLER_INJECTED_UNATTESTED';
 const G_NATIVE='NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION';
 const HASH=x=>'sha256:'+createHash('sha256').update('wp2a-cross-source-v1\0'+JSON.stringify(x)).digest('hex');
 const DIGEST=/^sha256:[0-9a-f]{64}$/;
-function refuse(grade,error) {
+function refuse(grade,error,failureStage=null,failureRound=null) {
   return Object.freeze({
     schema:'common-v35-wp2a-u04-cross-source-v1',source_grade:grade,
     source_consistent:false,material_status:'UNKNOWN',error,
+    failure_stage:failureStage,failure_round:failureRound,
     source_vector:null,source_vector_sha256:null,
     evidence_admitted:false,owner_authenticated:false,reviewer_qualified:false,
     required_ci_qualified:false,delp_projection:'NOT_CALCULATED',
@@ -91,30 +92,41 @@ async function observe(i,readers,grade) {
   if(!validInput(i))return refuse(grade,'INPUT_CONTRACT_INVALID');
   if(!OBJ(readers)||['candidate','ci','evidence'].some(k=>typeof readers[k]!=='function'))
     return refuse(grade,'SOURCE_READER_MISSING');
+  // The stage labels are an allowlist, not provider error/response content.
+  // Preserve original U04 refusal and the exact six-read maximum.
+  let failureStage='U01',failureRound='FIRST';
   try {
     const args=taskArgs(i);
     const acquire=async()=>{
       // Deliberately serial: all role observations see a bounded order.
+      failureStage='U01';
       const a=await readers.candidate(args.candidate);
+      failureStage='U02';
       const b=await readers.ci(args.ci);
+      failureStage='U03';
       const c=await readers.evidence(args.evidence);
+      failureStage='JOIN';
       return verifyOutput(i,{candidate:a,ci:b,evidence:c},grade);
     };
-    const first=await acquire(),last=await acquire();
+    const first=await acquire();
+    failureRound='SECOND';
+    const last=await acquire();
     if(JSON.stringify(first)!==JSON.stringify(last))
-      return refuse(grade,'SOURCE_VECTOR_CHANGED_DURING_REOBSERVATION');
+      return refuse(grade,'SOURCE_VECTOR_CHANGED_DURING_REOBSERVATION',
+                    'SECOND_ROUND_DRIFT','SECOND');
     return Object.freeze({
       schema:'common-v35-wp2a-u04-cross-source-v1',source_grade:grade,
       source_consistent:true,
       material_status:last.evidence_currentness==='STALE_CANDIDATE_HEAD'?
         'CONSISTENT_HISTORICAL_EVIDENCE_ONLY':'CONSISTENT_AUTHOR_CLAIM_ONLY',
-      error:null,source_vector:Object.freeze(last),
+      error:null,failure_stage:null,failure_round:null,
+      source_vector:Object.freeze(last),
       source_vector_sha256:HASH(last),
       evidence_admitted:false,owner_authenticated:false,reviewer_qualified:false,
       required_ci_qualified:false,delp_projection:'NOT_CALCULATED',
       programme_progress:null,writer_authorized:false,successor_lease:'NOT_PROVEN',
     });
-  } catch{return refuse(grade,'SOURCE_MATERIAL_UNVERIFIED');}
+  } catch{return refuse(grade,'SOURCE_MATERIAL_UNVERIFIED',failureStage,failureRound);}
 }
 export const observeCrossSource=(i,readers)=>observe(i,readers,G_INJECTED);
 export async function observeLiveCrossSource(i,opts={}) {
