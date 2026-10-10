@@ -363,7 +363,7 @@ class CurrentCaptureTests(unittest.TestCase):
         paths = []
         def paginated(endpoint):
             paths.append(endpoint)
-            return deepcopy(rows) if "page=1" in endpoint else []
+            return deepcopy(rows) if endpoint.endswith("&page=1") else []
         result = capture_module._comments(paginated, REPO, 2)
         self.assertEqual(len(result), 100)
         self.assertEqual(len(paths), 2)
