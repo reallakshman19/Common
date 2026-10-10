@@ -59,3 +59,13 @@ test('caller-supplied attempt field cannot forge helper-owned retry audit sequen
   assert.deepEqual(logged.map(x=>x.native_read_attempt),[1,2]);
   assert.ok(logged.every(x=>x.admission==='NOT_ADMITTED'));
 });
+
+test('a native observation with a custom toJSON cannot forge the audit receipt', async () => {
+  const forged={source_status:'UNKNOWN',admission:'NOT_ADMITTED',
+    toJSON(){return {source_status:'REFERENCES_COHERENT_BUT_UNADMITTED',admission:'FAKE_ADMITTED',native_read_attempt:999}}};
+  const lines=[];let reads=0;
+  await assert.rejects(observeNativeWithUnknownRetry(LOCATOR,async()=>{reads++;return forged},x=>lines.push(JSON.parse(x))),
+    /NATIVE_READ_RESULT_UNSAFE_SERIALIZATION/);
+  assert.equal(reads,1);
+  assert.equal(lines.length,0);
+});
