@@ -8,7 +8,7 @@ Owner authorization nor evidence acceptance.
 from __future__ import annotations
 
 from copy import deepcopy
-from hashlib import sha256
+from hashlib import sha1, sha256
 import json
 from pathlib import Path
 import re
@@ -46,6 +46,7 @@ def _digest(value: Any) -> str:
 
 _SHA = re.compile(r"[0-9a-f]{40}\Z")
 _MAX_GRAPH_BYTES = 5_000_000
+_MAX_SNAPSHOT_BYTES = 64_000_000
 
 
 def _graph_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -71,6 +72,32 @@ def _parse_graph(raw: bytes) -> dict[str, Any]:
     return graph
 
 
+def _snapshot_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for name, value in pairs:
+        _hold(name not in result, "SNAPSHOT_DUPLICATE_JSON_KEY")
+        result[name] = value
+    return result
+
+
+def _decode_snapshot(raw: bytes) -> dict[str, Any]:
+    _hold(type(raw) is bytes and len(raw) <= _MAX_SNAPSHOT_BYTES,
+          "SNAPSHOT_BYTES_UNBOUNDED")
+    try:
+        source = json.loads(raw, object_pairs_hook=_snapshot_pairs,
+                            parse_constant=lambda _v: _hold(False, "SNAPSHOT_JSON_INVALID"))
+    except CycleHold:
+        raise
+    except (ValueError, UnicodeError, TypeError) as exc:
+        raise CycleHold("SNAPSHOT_JSON_INVALID") from exc
+    _hold(isinstance(source, dict), "SOURCE_SNAPSHOT_SHAPE_INVALID")
+    return source
+
+
+def _git_blob(raw: bytes) -> str:
+    return sha1(b"blob " + str(len(raw)).encode() + b"\\0" + raw).hexdigest()
+
+
 def _number(ref: str) -> int:
     return int(ref.rsplit("#", 1)[-1])
 
@@ -88,6 +115,13 @@ class SnapshotGET:
         _hold(all(isinstance(source.get(name), Mapping)
                   for name in ("issues", "pulls", "comments")),
               "SOURCE_SNAPSHOT_SHAPE_INVALID")
+        _hold(all(isinstance(row, Mapping) and isinstance(row.get("title"), str)
+                  for row in source["issues"].values()) and
+              all(isinstance(row, Mapping) for row in source["pulls"].values()) and
+              all(isinstance(rows, list) and
+                  all(isinstance(row, Mapping) for row in rows)
+                  for rows in source["comments"].values()),
+              "SOURCE_SNAPSHOT_RECORD_INVALID")
         _hold(isinstance(source.get("main_sha"), str) and
               _SHA.fullmatch(source["main_sha"]) is not None and
               isinstance(source.get("final_main_sha"), str) and
@@ -143,8 +177,10 @@ def integrated_shadow(
           "SOURCE_NUMERIC_REPOSITORY_MISMATCH")
     _hold(source.get("graph_git_blob") == pins.released_graph_blob_oid,
           "SOURCE_GRAPH_BLOB_MISMATCH")
-    transport = SnapshotGET(source)
     graph = _parse_graph(raw_graph)
+    _hold(_git_blob(raw_graph) == pins.released_graph_blob_oid,
+          "GRAPH_BLOB_PIN_MISMATCH")
+    transport = SnapshotGET(source)
     delp, views = _native_modules()
     delp.validate_graph(graph)
     delp.require_repository_match(graph, pins.repository, live=True)
@@ -289,7 +325,10 @@ def main() -> int:
     if args.output.exists() or args.output.is_symlink():
         raise SystemExit("OUTPUT_ALREADY_EXISTS_REFUSING_OVERWRITE")
     graph = args.graph.read_bytes()
-    snapshot = json.loads(args.snapshot.read_text(encoding="utf-8"))
+    with args.snapshot.open("rb") as input_stream:
+        snapshot = _decode_snapshot(input_stream.read(_MAX_SNAPSHOT_BYTES + 1))
+    _hold(isinstance(snapshot.get("repository"), str),
+          "SOURCE_SNAPSHOT_SHAPE_INVALID")
     report = integrated_shadow(graph, PreviewPins(
         snapshot["repository"], args.repository_id, args.graph_blob,
         args.leaf, args.head), snapshot)
