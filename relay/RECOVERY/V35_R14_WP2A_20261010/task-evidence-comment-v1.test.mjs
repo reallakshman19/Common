@@ -41,6 +41,67 @@ async function bad(fn){
  const r=await observeEvidenceComment(input(),injected(s));
  assert.equal(r.material_observed,false);assert.equal(r.source_receipt,null);noAuthority(r);
 }
+test('U03 first and second native round attribute each endpoint without exposing provider errors',async()=>{
+ const routes=[
+  ['','REPOSITORY'],['issues/5','ROOT'],['issues/20','LEAF'],
+  ['pulls/21','PR'],['issues/comments/'+C,'COMMENT'],['commits/'+H1,'COMMIT'],
+ ];
+ for(const [path,label] of routes)for(const phase of ['FIRST','SECOND']){
+  const d=source();
+  if(phase==='FIRST')d[path]=new Error('SECRET_PROVIDER_RESPONSE');
+  const r=await observeEvidenceComment(input(),injected(d,(n,p,src)=>{
+   if(phase==='SECOND'&&n===7)src[path]=new Error('SECRET_PROVIDER_RESPONSE');
+  }));
+  assert.equal(r.material_observed,false,label+phase);
+  assert.deepEqual(r.errors,['PROVIDER_SOURCE_OR_CLAIM_UNVERIFIED']);
+  assert.equal(r.failure_stage,phase+'_READ');
+  assert.equal(r.failure_reason,label+'_GET_UNVERIFIED');
+  assert.equal(r.source_receipt_sha256,null);noAuthority(r);
+  assert.ok(!JSON.stringify(r).includes('SECRET_PROVIDER_RESPONSE'));
+ }
+});
+test('U03 malformed native response is distinct from GET unavailable',async()=>{
+ for(const [path,label] of [['','REPOSITORY'],['issues/comments/'+C,'COMMENT'],['commits/'+H1,'COMMIT']]){
+  const d=source();d[path]=null;
+  const r=await observeEvidenceComment(input(),injected(d));
+  assert.equal(r.failure_stage,'FIRST_READ');
+  assert.equal(r.failure_reason,label+'_RESPONSE_SHAPE_INVALID');noAuthority(r);
+ }
+});
+test('U03 original validation retains safe reason for wrong source and author claims',async()=>{
+ const cases=[
+  ['REPO_MISMATCH',s=>{s[''].id=42;}],
+  ['ROOT_INVALID',s=>{s['issues/5'].state='closed';}],
+  ['LEAF_INVALID',s=>{s['issues/20'].number=999;}],
+  ['PR_ROLE_INVALID',s=>{s['pulls/21'].head.sha='short';}],
+  ['COMMENT_IDENTITY_INVALID',s=>{s['issues/comments/'+C].user.login='imposter';}],
+  ['COMMIT_NOT_RESOLVED',s=>{s['commits/'+H1].sha=H2;}],
+  ['NOT_TASK_EVIDENCE',s=>{s['issues/comments/'+C].body='## TASK_RESULT';}],
+  ['HEAD_CLAIM_MISMATCH',s=>{s['issues/comments/'+C].body=body(H2);}],
+  ['CURRENT_PR_BINDING_MISSING',s=>{s['issues/comments/'+C].body=body(H1,'https://github.com/reallaksh19/Common/pull/21');}],
+ ];
+ for(const [reason,change] of cases){
+  const d=source();change(d);
+  const r=await observeEvidenceComment(input(),injected(d));
+  assert.equal(r.failure_stage,'FIRST_VALIDATE',reason);
+  assert.equal(r.failure_reason,reason);
+  assert.equal(r.source_currentness,'UNKNOWN');noAuthority(r);
+ }
+});
+test('U03 edited receipt triggers second-round drift, never admitted material',async()=>{
+ const r=await observeEvidenceComment(input(),injected(source(),(n,p,d)=>{
+  if(n===7)d['issues/comments/'+C].body+=' edit';
+ }));
+ assert.deepEqual(r.errors,['PROVIDER_COMMENT_OR_HEAD_CHANGED_BETWEEN_READS']);
+ assert.equal(r.failure_stage,'SECOND_ROUND_DRIFT');
+ assert.equal(r.failure_reason,'SOURCE_RECEIPT_CHANGED');
+ assert.equal(r.material_observed,false);noAuthority(r);
+});
+test('U03 source-authentic-looking successful read does not grant evidence',async()=>{
+ const r=await observeEvidenceComment(input(),injected());
+ assert.equal(r.failure_stage,null);assert.equal(r.failure_reason,null);
+ assert.equal(r.material_observed,true);noAuthority(r);
+});
 test('U03 valid-shaped source is material only, never evidence admission',async()=>{
  let reads=0;
  const r=await observeEvidenceComment(input(),injected(source(),()=>reads++));
