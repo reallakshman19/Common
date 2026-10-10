@@ -62,11 +62,11 @@ jobs:
           source_file=skills/engineering-pr-delivery-v3.5/scripts/integration_prototype_witness_v35.py
           set +e
           python "$source_file" --repository "$REPO" \
-            --root 5 --leaf 297 --pr 298 --expected-head "$EXPECTED_HEAD" \
+            --repository-id 1412133785 --root 5 --leaf 297 --pr 298 --expected-head "$EXPECTED_HEAD" \
             > "$RUNNER_TEMP/witness-current.json"
           current_rc=$?
           python "$source_file" --repository "$REPO" \
-            --root 5 --leaf 297 --pr 298 --expected-head "0000000000000000000000000000000000000000" \
+            --repository-id 1412133785 --root 5 --leaf 297 --pr 298 --expected-head "0000000000000000000000000000000000000000" \
             > "$RUNNER_TEMP/witness-stale.json"
           stale_rc=$?
           set -e
@@ -82,6 +82,8 @@ jobs:
               stale = json.load(f)
           head = sys.argv[3]
           assert current["repository"] == "reallakshman19/Common"
+          assert current["expected_repository_id"] == 1412133785
+          assert current["observed_repository_id"] == 1412133785
           assert current["root_issue"] == 5
           assert current["leaf_issue"] == 297
           assert current["pr_number"] == 298
@@ -94,6 +96,8 @@ jobs:
           ), current["status"]
           assert stale["status"] == "HOLD_EXPECTED_HEAD_MOVED", stale["status"]
           assert stale["observed_head"] == head
+          assert stale["expected_repository_id"] == 1412133785
+          assert stale["observed_repository_id"] == 1412133785
           for item in (current, stale):
               assert item["prototype_qualified"] is False
               assert item["positive_evidence_admission"] == "NOT_DERIVED"
