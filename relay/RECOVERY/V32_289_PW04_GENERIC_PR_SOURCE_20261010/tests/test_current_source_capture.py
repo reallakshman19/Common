@@ -9,12 +9,17 @@ from base64 import b64encode
 from copy import deepcopy
 from hashlib import sha1
 import json
+import os
 from pathlib import Path
+import stat
 import sys
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from pr_source_binding import PreviewPins
+import v32_capture_current_source as capture_module
 from v32_capture_current_source import capture, CaptureHold, git_blob
 from v32_integrated_shadow import integrated_shadow, SnapshotGET
 
@@ -253,6 +258,43 @@ class CurrentCaptureTests(unittest.TestCase):
         result = capture(self.raw, REPO, git_blob(self.raw), wrapped)
         self.assertEqual(result["graph_git_blob"], git_blob(self.raw))
         self.assertEqual(result["repository_id"], 42)
+
+
+    @unittest.skipUnless(os.name == "posix", "POSIX output-permission contract")
+    def test_20_capture_cli_writes_private_snapshot_mode_0600(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            output = Path(directory) / "private-snapshot.json"
+            graph.write_bytes(self.raw)
+            argv = ["v32_capture_current_source.py", "--graph", str(graph),
+                    "--repository", REPO, "--graph-blob", git_blob(self.raw),
+                    "--output", str(output)]
+            with patch.object(sys, "argv", argv), patch.object(
+                    capture_module, "capture", return_value={"source_kind": "GITHUB_GET_ONLY_UNATTESTED"}):
+                self.assertEqual(capture_module.main(), 0)
+            self.assertEqual(stat.S_IMODE(output.stat().st_mode), 0o600)
+            self.assertEqual(json.loads(output.read_text())["source_kind"],
+                             "GITHUB_GET_ONLY_UNATTESTED")
+
+    @unittest.skipUnless(os.name == "posix", "POSIX symlink contract")
+    def test_21_capture_cli_refuses_existing_output_symlink_before_source_read(self):
+        with TemporaryDirectory() as directory:
+            graph = Path(directory) / "graph.json"
+            target = Path(directory) / "owner.txt"
+            output = Path(directory) / "private-snapshot.json"
+            graph.write_bytes(self.raw)
+            target.write_text("HUMAN_OWNED", encoding="utf-8")
+            output.symlink_to(target)
+            argv = ["v32_capture_current_source.py", "--graph", str(graph),
+                    "--repository", REPO, "--graph-blob", git_blob(self.raw),
+                    "--output", str(output)]
+            with patch.object(sys, "argv", argv), patch.object(
+                    capture_module, "capture", side_effect=AssertionError("source read forbidden")
+            ):
+                with self.assertRaisesRegex(SystemExit,
+                                            "OUTPUT_ALREADY_EXISTS_REFUSING_OVERWRITE"):
+                    capture_module.main()
+            self.assertEqual(target.read_text(), "HUMAN_OWNED")
 
 
 if __name__ == "__main__":
