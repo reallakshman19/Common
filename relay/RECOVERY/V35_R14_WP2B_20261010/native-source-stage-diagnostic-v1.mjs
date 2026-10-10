@@ -88,5 +88,19 @@ export async function diagnoseLiveNativeSourceStages(locator,opts={}){
   // Additional U02-only read detects potential movement after the failed U04;
   // it never recovers, replaces, or authorizes the original U04 result.
   const ciRecheck=await safe(ci,inputs.ci);
-  return summarizeSourceStageDiagnostics(a,b,c,ciRecheck);
+  const summary=summarizeSourceStageDiagnostics(a,b,c,ciRecheck);
+  if(summary.stages.ci.status==='UNKNOWN'){
+    // Independent extra HTTP checks are troubleshooting only, never U02/U04.
+    try{
+      const {probeU02NativeEndpoints}=await import('./u02-provider-probe-v1.mjs');
+      summary.u02_endpoint_probe=await probeU02NativeEndpoints(locator,{
+        token:opts.token??process.env.GITHUB_TOKEN??'',
+      });
+    }catch{
+      summary.u02_endpoint_probe={basis:'INDEPENDENT_POST_FAILURE_NON_ATOMIC_HTTP_PROBE',
+        status:'UNAVAILABLE',admission:'NOT_ADMITTED',evidence_admitted:false,
+        programme_progress:null,writer_authorized:false};
+    }
+  }
+  return summary;
 }
