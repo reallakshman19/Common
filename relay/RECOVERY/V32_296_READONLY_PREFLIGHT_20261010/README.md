@@ -20,7 +20,7 @@ separately approved V3.2 evidence-identity repair. This source tree does not edi
   always denying positive admission. Claims that say VERIFIED do not become verified evidence.
 - `v32_readonly_cli.py`: command line wrapper, output as structured JSON; exit 1 on
   invalid material and exit 2 on HOLD. **Exit 0 is impossible by design.**
-- `tests/`: 50 synthetic/fake-provider tests. Synthetic positive-shaped claims are
+- `tests/`: 58 synthetic/fake-provider/native-source tests. Synthetic positive-shaped claims are
   NEGATIVE ORACLES for this tool, not real V3.2 positive engineering qualification.
 
 ## Regression run
@@ -63,3 +63,24 @@ provider/material/reviewer/required-CI evidence + adopted V3.2 eligibility polic
 qualified `CHECKPOINT_FACTS_V1` → the existing `delp_projection_v32.py` ledger →
 the existing GitHub/C6 consumers. It is held externally by #289 D1–D5 and existing
 source ownership. Passing these tests does NOT satisfy that connection.
+
+## Actual native V3.2 trust boundary (regression discovery)
+
+`tests/test_v32_native_fact_boundary.py` imports the **existing source**
+`skills/engineering-pr-delivery-v3.2/scripts/delp_projection_v32.py`
+unchanged. It proves that:
+
+1. Native V3.2 facts may omit the top-level `schema` and `material.pr`;
+   the read-only classifier must not call those native-valid records malformed.
+2. `partition_ledger()` structurally accepts a synthetic, native-valid
+   `COMPLETE / VERIFIED` record whose evidence reference is only a claimed
+   string; this function does **not itself** fetch and independently attest
+   the referenced CI, reviewer or product verification. This is an **external
+   producer/admission boundary**, not a newly discovered arithmetic defect.
+3. This helper still reports `HOLD_NOT_AN_EVIDENCE_ISSUER` and zero credited E.
+   No live programme source or real positive admission was demonstrated.
+
+A future positive production issuer must be independently authorized under
+#289 / #285 / #276, bind current exact-head evidence and effective required
+checks, and only then feed the existing native V3.2 ledger. Do not weaken
+the HOLD, or import V3.5 fact schemas as V3.2 facts.
