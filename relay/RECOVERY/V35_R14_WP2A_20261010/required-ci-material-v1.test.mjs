@@ -30,7 +30,7 @@ test('U02 native failure-stage reason is fixed across first and second reads',as
     ['FIRST_SELECTED','COMMIT_STATUS_GET_UNVERIFIED',d=>{d[p.status]=new Error('SECRET_PRIVATE_STATUS');}],
     ['FIRST_SELECTED','SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID',d=>{d[p.check].total_count=999;}],
     ['FIRST_SELECTED','CHECK_RUN_SHAPE_OR_SHA_INVALID',d=>{d[p.check].check_runs[0].head_sha=H2;}],
-    ['FIRST_SELECTED','COMMIT_STATUS_SHAPE_INVALID',d=>{d[p.status].statuses=[{context:'bad',state:'unknown'}];}],
+    ['FIRST_SELECTED','COMMIT_STATUS_SHAPE_INVALID',d=>{d[p.status].total_count=1;d[p.status].statuses=[{context:'bad',state:'unknown'}];}],
   ];
   for(const [phase,reason,mutate] of cases){
     const d=data();mutate(d);const r=await run(d);safe(r);
