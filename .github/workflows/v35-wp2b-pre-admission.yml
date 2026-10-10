@@ -29,11 +29,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Exact-head source and fail-closed admissibility tests
         shell: bash
         run: |
           git rev-parse HEAD
           node --test relay/RECOVERY/V35_R14_WP2B_20261010/*.test.mjs
+      - name: Existing native V3.2 DELP with synthetic B05 shadow oracles only
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          python -m unittest relay/RECOVERY/V35_R14_WP2B_20261010/test_b05_v32_shadow_oracles.py -v
   native-readonly-pre-admission:
     if: github.event_name == 'pull_request'
     runs-on: ${{ matrix.os }}

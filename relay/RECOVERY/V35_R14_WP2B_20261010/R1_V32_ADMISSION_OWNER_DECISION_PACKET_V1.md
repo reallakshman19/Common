@@ -1,0 +1,35 @@
+# R1 — V3.2 positive evidence admission: Owner decision packet V1 (NOT ADOPTED)
+
+**Created:** 10 October 2026. **Candidate only:** no `EvidencePolicyVersion` is adopted, no graph released, no Owner or reviewer verdict received, no trusted fact emitted, no publishing authority granted. A read-only record for [#289](https://github.com/reallakshman19/Common/issues/289), existing WP2-B [#30](https://github.com/reallakshman19/Common/issues/30), independent review [#12](https://github.com/reallakshman19/Common/issues/12), and evidence-identity reconciliation [#276](https://github.com/reallakshman19/Common/issues/276).
+
+## Original engineering outcome / precise release claim
+
+Prove **one** new-repo programme path: authentic Owner intent → selected released graph and governed children → actual current GitHub PR/required check/evidence-source receipt → independently admitted **native V3.2 CHECKPOINT_FACTS_V1** → **one** native `delp_projection_v32.project()` → source-identical parent/leaf/PR GitHub view and native C6 frozen-successor context. Verify H1→H2 with P retained, E invalidated, requalified only from real H2 material. The external Buddy A→B exclusive writer handoff and live publisher require *separate* authorization and proof.
+
+**Source pins at preparation:** new repo `reallakshman19/Common`, provider ID `1412133785`, `main@29dffef9ad9582fa6c24e75f13326d8eecf677dc`. Source blob `skills/engineering-pr-delivery-v3.2/scripts/delp_projection_v32.py@804cacca930e47c4528bb0d245efaf941996e4cf`: `validate_facts` validates structure; `partition_ledger` uses provided source/author trust; `project` calculates, **it does not do native Owner/reviewer/CI policy identity authentication**. The default-branch graph blob `.github/v32-evidence-spine/718-proposal-v2.json@d35019b416cb3b573280e166027d3f65ba61f59c` names old `reallaksh19/Common` and root `Common#718`. **Do not simply substitute `Common#5` or overwrite the historical graph.** WP2-B [draft PR #292](https://github.com/reallakshman19/Common/pull/292) has exact read-only H11 `9649daac4102bfe587f3f38f40203ea741a4fa8e`; [6/6 scoped CI](https://github.com/reallakshman19/Common/actions/runs/38037713627) proves coherent-but-**unadmitted** negative observation, not real E.
+
+## Five independent Owner / reviewer decisions to obtain
+
+| ID | Needed external authority and submitted proof | Unblocking oracle | Current finding |
+| --- | --- | --- | --- |
+| **D1 Owner source** | Owner provides an attributable durable pointer to original #787 intent/amendments, identifies current #5 continuation, and authorizes its use in this evidence policy without fabricating private custody | Independently verify exact cited Owner object/version, authority scope and repository mapping; public agent-authored issue recap is insufficient | **MISSING; HOLD** |
+| **D2 Released graph** | Owner chooses a *new-repo-specific* graph proposal/version for #5, its actual claim/weight/leaf bindings, and explicit change policy under V3.2, with frozen historical #718 kept intact | Validate with native V3.2 graph/decompose/graph-diff and default-branch release readback; no graph switch based on branch/file name or text in this packet | **NOT SELECTED; HOLD** |
+| **D3 EvidencePolicyVersion & identity** | Owner adopts a version-tagged policy specifying genuine provider material, R3/native witness source, allowed U3/R12 facts, reviewer identity and exact-head binding, V1/V2 source receipt interpretation and downgrade handling | Native source proof cannot be serialized into `source_acquisition_attested:true`; preserve archived V1 `input_digest` bytes, keep V3.5 schema distinct, refuse forged/self-reported reviewer or Owner flags | **NOT ADOPTED; HOLD** |
+| **D4 Independent review** | Two distinct qualified #12 principals (not author, same automation or reused old-repo review) each publish an independently checked source-level verdict, current SHA, tests and explicit accepted/rejected exceptions | Reviewers actually reproduce a positive and a negative case against agreed policy, compare exact source/CI and challenge the one-DELP bridge; source-review comments are not themselves Owner policy | **0/2 qualified; HOLD** |
+| **D5 Effective required CI** | Admin-authorized or independently trustworthy native observation of effective classic branch protection **and** rulesets on current PR base, with executed required results tied to the exact candidate and check App | Policy cannot be `UNKNOWN`; 403 ≠ empty required checks; selected 6/6 WP2-B green is diagnostic only; failed/skipped/unstarted required check is not PASS | **Classic protection GET 403; HOLD** |
+
+**Required separate decisions, after D1–D5:** scoped lab/production writer/permissions; authorized native C6 graph publication and truly isolated Buddy B custody, and actual Owner acceptance of #5 AC1–AC8. This packet cannot grant these. Do not silently reassign old ESC-5/ESC-6 claim ownership or use a shadow graph to inflate E.
+
+## Exact source-to-fact test plan once D1–D5 are externally satisfied
+
+1. Read repo/PR/head/base/leaf/comment, required-CI policy and exact check App identities through approved native source and recheck drift. Confirm U03 author text remains a **claim**, not independent review. Preserve failed Windows H9 native source as a real former RED. If any source is UNKNOWN, stop without E.
+2. Bind authentic Owner/graph/policy/reviewer receipts from **different authenticated sources**. Test one forged claim, old repo ID, two same-author reviews, missing required-check policy, and edited H1 comment against H2: all rejected before fact emission.
+3. Emit a `relay-v3.2-delp-checkpoint-facts` record *only* from qualified producer and valid versioned mapping. Preserve V3.5 and V1 source identity; do not inject `progress_percent`, `attested`, `approved` or a caller-supplied source label as authority.
+4. Run **existing** native V3.2 `validate_facts` and `project()` on **one released** new-repo graph. Distinguish pure projector-valid E calculations on synthetic fixtures from accepted real provider evidence. Verify H1→H2 P continuity/E revocation and real H2 restoration.
+5. Independently compare same accepted source identity across parent, leaf, PR and native C6 frozen handover; only then ask Owner for a separate scoped GitHub publisher grant and prove provider readback/conflict/rollback. Writer OFF until then.
+
+## Decision and coding boundary
+
+Owner can respond on [#289](https://github.com/reallakshman19/Common/issues/289) with precise D1–D5 evidence locations and a choice of graph/policy version. Independent qualified reviewers respond under [#12](https://github.com/reallakshman19/Common/issues/12), not here under the author's identity. If any remains missing, **`REVIEW_REQUIRED / NOT_ADMITTED`**, not an automatic transition to R1 positive path.
+
+This is **`PLAN_UPDATE` review material**, not an `IMPLEMENTATION_PLAN` replacement, new graph publication, normative production policy, reviewer result, `CHECKPOINT_FACTS_V1`, fifth task publication family, authority flag or admission receipt. `SIMPLIFIED=ON` is the existing issue coordination mode only.
