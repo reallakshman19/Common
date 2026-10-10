@@ -17,10 +17,18 @@ H1 = "1" * 40
 H2 = "2" * 40
 MAIN = "a" * 40
 GRAPH = {
-    "programme": {"repository": REPO, "root": "v32-proto#1", "base_ref": "main"},
+    "schema": "relay-v3.2-delp-execution-graph",
+    "programme": {
+        "id": "SYNTHETIC-NONADMITTING-V32-TEST",
+        "repository": REPO, "root": "v32-proto#1", "base_ref": "main",
+    },
     "nodes": [
         {"ref": "v32-proto#1", "kind": "ROOT"},
-        {"ref": "v32-proto#4", "kind": "LEAF", "primary_pr": "v32-proto#10"},
+        {
+            "ref": "v32-proto#4", "kind": "LEAF", "parent": "v32-proto#1",
+            "weight": 1, "primary_pr": "v32-proto#10",
+            "units": [{"id": "U01", "weight": 100}],
+        },
     ],
 }
 
