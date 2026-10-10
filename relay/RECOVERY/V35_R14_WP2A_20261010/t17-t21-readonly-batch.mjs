@@ -1,0 +1,61 @@
+/* Common #294 T17-T21: additive diagnostic-only probes. No DELP, E, CI waiver or writer. */
+import {pathToFileURL} from 'node:url';
+import {execFileSync} from 'node:child_process';
+const REPO='reallakshman19/Common',ID=1412133785,SHA=/^[a-f0-9]{40}$/;
+const NO={evidence_admitted:false,owner_authenticated:false,reviewer_qualified:false,required_ci_qualified:false,writer_authorized:false,programme_progress:null,delp_projection:'NOT_CALCULATED'};
+const id=x=>x?.repository===REPO&&x?.repository_id===ID&&Number.isSafeInteger(x.pr_number)&&x.pr_number>0&&SHA.test(x.head_sha||'')&&/^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(x.base_branch||'')&&!x.base_branch.includes('..');
+export async function t17(input,diagnose,reader){
+ const b={schema:'v35-294-t17',source_grade:'CALLER_INJECTED_UNATTESTED',head_sha:input?.head_sha??null,...NO};
+ if(!id(input)||typeof diagnose!=='function'||typeof reader!=='function')return {...b,verdict:'SOURCE_UNVERIFIED',delta:null};
+ try{const x=await diagnose(input,reader),d=x?.selected_delta;
+  if(x.tested_head_sha!==input.head_sha||x.pr_number!==input.pr_number||x.evidence_admitted!==false||x.positive_ci_qualified!==false||!d||!['STABLE','TRANSITION_ONLY','MEMBERSHIP_ONLY','MEMBERSHIP_AND_TRANSITION'].includes(d.classification))return {...b,verdict:'SOURCE_UNVERIFIED',delta:null};
+  const first=(d.details||[]).find(y=>Number.isSafeInteger(y.run_id)&&['ADDED','REMOVED','TRANSITION'].includes(y.change));
+  return {...b,verdict:x.u02_failure_reason==='SELECTED_CHECKS_DRIFT'?'SELECTED_CHECKS_DRIFT':'DIAGNOSTIC_ONLY',delta:{classification:d.classification,first_count:d.first_count,second_count:d.second_count,added:d.added_count,removed:d.removed_count,transition:d.transition_count,first_job_id:first?.run_id??null,first_change:first?.change??null,old_state:first?.old_state??null,new_state:first?.new_state??null}};
+ }catch{return {...b,verdict:'SOURCE_UNVERIFIED',delta:null}}
+}
+export function t18(x){
+ const b={schema:'v35-294-t18',source_grade:'CALLER_INJECTED_UNATTESTED',...NO};
+ if(x?.diagnostic_only!==true||x?.source_grade!=='CALLER_INJECTED_UNATTESTED'||x?.source_material_attested!==false||x?.positive_fact_admitted!==false||!Array.isArray(x?.u03_rounds))return {...b,verdict:'UNVERIFIED',inner:null};
+ const bad=x.u03_rounds.find(z=>z.material_observed===false),join=x.original_u04_failure_stage==='JOIN'&&x.original_u04_failure_reason==='JOIN_U03_SOURCE_UNVERIFIED';
+ if(!join||!bad)return {...b,verdict:join?'INNER_REASON_NOT_CAPTURED':'NO_U03_REFUSAL_IN_SAMPLE',inner:null};
+ if(!['FIRST_READ','FIRST_VALIDATE','SECOND_READ','SECOND_VALIDATE','SECOND_ROUND_DRIFT'].includes(bad.failure_stage)||!(/^[A-Z][A-Z0-9_]{0,79}$/.test(bad.failure_reason||'')))return {...b,verdict:'INNER_REASON_NOT_CAPTURED',inner:null};
+ return {...b,verdict:'SAME_INVOCATION_U03_REASON',inner:{stage:bad.failure_stage,reason:bad.failure_reason,outer_round:bad.outer_round==='SECOND'?'SECOND':'FIRST'}};
+}
+export function t19(classic,rules){
+ const b={schema:'v35-294-t19',policy:'UNKNOWN',required_count:null,...NO};
+ if(classic?.status!==200||rules?.status!==200)return {...b,reason:classic?.status!==200?'CLASSIC_GET_UNVERIFIED':'RULES_GET_UNVERIFIED'};
+ if(!Array.isArray(classic.data?.contexts)||!Array.isArray(classic.data?.checks)||!Array.isArray(rules.data))return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};
+ const refs=[];
+ for(const c of [...classic.data.contexts,...classic.data.checks.map(x=>x?.context)]){if(typeof c!=='string'||!c)return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};refs.push('classic:'+c)}
+ for(const rule of rules.data){if(typeof rule?.type!=='string')return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};if(rule.type==='required_status_checks'){if(!Array.isArray(rule.parameters?.required_status_checks))return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};for(const c of rule.parameters.required_status_checks){if(typeof c?.context!=='string'||!c.context)return {...b,reason:'POLICY_SHAPE_UNVERIFIED'};refs.push('rules:'+c.context)}}}
+ const n=new Set(refs).size;return {...b,policy:'OBSERVED_DIAGNOSTIC_ONLY',required_count:n,reason:n?'REQUIREMENTS_PRESENT':'EMPTY_POLICY_READABLE'};
+}
+export function t20(paths){
+ const b={schema:'v35-294-t20',release_ready:false,required_ci_policy:'UNKNOWN',...NO};
+ if(!Array.isArray(paths)||paths.length>10000||paths.some(p=>typeof p!=='string'||p.includes('..')))return {...b,verdict:'INVENTORY_UNVERIFIED',missing:[]};
+ const expected=['.github/workflows/engineering-pr-delivery-v2.5.yml','.github/workflows/engineering-pr-delivery-v3.yml'];const missing=expected.filter(p=>!paths.includes(p));
+ return {...b,verdict:missing.length?'RETIRED_WORKFLOW_PATHS_ABSENT':'LEGACY_PATHS_PRESENT',missing};
+}
+export function t21(v){
+ const b={schema:'v35-294-t21',first_failed_edge:null,verdict:'HOLD_DIAGNOSTIC',release_ready:false,...NO};
+ if(!v||v.ci?.schema!=='v35-294-t17'||v.u03?.schema!=='v35-294-t18'||v.policy?.schema!=='v35-294-t19'||v.legacy?.schema!=='v35-294-t20'||Object.values(v).some(x=>x.evidence_admitted!==false||x.writer_authorized!==false))return {...b,first_failed_edge:'INPUT_UNVERIFIED'};
+ if(!v.ci.delta||v.ci.verdict==='SELECTED_CHECKS_DRIFT')return {...b,first_failed_edge:'U02'};
+ if(v.u03.verdict==='SAME_INVOCATION_U03_REASON'||v.u03.verdict==='INNER_REASON_NOT_CAPTURED')return {...b,first_failed_edge:'U03'};
+ if(v.policy.policy==='UNKNOWN')return {...b,first_failed_edge:'REQUIRED_POLICY'};
+ if(v.legacy.verdict!=='LEGACY_PATHS_PRESENT')return {...b,first_failed_edge:'V31_WORKFLOW_PATHS'};
+ return {...b,verdict:'DIAGNOSTICS_CLEAR_NO_AUTHORITY'};
+}
+async function main(){
+ const sha=process.env.CANDIDATE_HEAD_SHA||'',pr=Number(process.env.CANDIDATE_PR_NUMBER),base=process.env.CANDIDATE_BASE_REF||'';
+ const input={repository:REPO,repository_id:ID,pr_number:pr,head_sha:sha,base_branch:base};if(!id(input)||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==sha)throw Error('HEAD_UNVERIFIED');
+ const read=async path=>{if(!/^(pulls\/[1-9]\d*|commits\/[a-f0-9]{40}\/(check-runs\?per_page=100|status\?per_page=100)|branches\/[A-Za-z0-9._%/-]+\/protection\/required_status_checks|rules\/branches\/[A-Za-z0-9._%/-]+)$/.test(path)||path.includes('..'))throw Error('ROUTE');const url='https://api.github.com/repos/'+REPO+'/'+path;const headers={'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'v35-294-batch-readonly'};if(process.env.GITHUB_TOKEN)headers.Authorization='Bearer '+process.env.GITHUB_TOKEN;let res=await fetch(url,{headers,redirect:'error',signal:AbortSignal.timeout(15000)});if(res.status!==200||res.redirected||res.url!==url||/rel=["']next["']/.test(res.headers.get('link')||''))return {status:res.status,data:null};const raw=await res.text();if(Buffer.byteLength(raw)>2000000)throw Error('SIZE');return {status:200,data:JSON.parse(raw)}};
+ const {diagnoseU02SelectedDrift}=await import('./t03-selected-ci-drift.mjs');
+ const ci=await t17(input,diagnoseU02SelectedDrift,async(r,p)=>{if(r!==REPO)throw Error('REPO');const res=await read(p);if(res.status!==200)throw Error('UNREADABLE');return res.data});
+ const {diagnoseU03OriginalCycle,createNativeT04Input,nativeT04Readers}=await import('./t04-u03-original-cycle.mjs');
+ const historical='4f4dfa0497169d51ab86fbc27db1598121c6f25e';
+ const u03=t18(await diagnoseU03OriginalCycle(createNativeT04Input(historical),nativeT04Readers({token:process.env.GITHUB_TOKEN||''})));
+ const policy=t19(await read('branches/'+encodeURIComponent(base)+'/protection/required_status_checks').catch(()=>({status:null})),await read('rules/branches/'+encodeURIComponent(base)).catch(()=>({status:null})));
+ const files=execFileSync('git',['ls-tree','-r','--name-only','HEAD','--','.github/workflows'],{encoding:'utf8'}).trim().split('\n').filter(Boolean),legacy=t20(files);
+ console.log(JSON.stringify({head_sha:sha,ci,u03,policy,legacy,fold:t21({ci,u03,policy,legacy})},null,2));
+}
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)main().catch(()=>{console.error('T17_T21_READ_ONLY_UNVERIFIED');process.exitCode=1});
