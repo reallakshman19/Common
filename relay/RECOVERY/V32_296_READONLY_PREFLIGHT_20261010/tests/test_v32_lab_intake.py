@@ -37,6 +37,15 @@ class Provider:
         self.mutate = None
         self.title = "Human title"
         self.unavailable = False
+        self.pr_number = 10
+        self.pr_head_sha = BASE1
+        self.pr_head_repo = REPO
+        self.pr_head_repo_id = 42
+        self.pr_base_repo = REPO
+        self.pr_base_repo_id = 42
+        self.pr_state = "closed"
+        self.pr_merged = True
+        self.pr_merged_at = "2026-10-09T10:00:00Z"
 
     def _call(self, op):
         self.calls.append(op)
@@ -62,6 +71,19 @@ class Provider:
         self._call("issue")
         return {"number": number, "title": self.title, "body": "Human body"}
 
+    def get_pull(self, repository, number):
+        self._call("pull")
+        return {
+            "number": self.pr_number, "state": self.pr_state,
+            "merged": self.pr_merged, "merged_at": self.pr_merged_at,
+            "head": {"sha": self.pr_head_sha,
+                     "repo": {"full_name": self.pr_head_repo,
+                              "id": self.pr_head_repo_id}},
+            "base": {"ref": "main",
+                     "repo": {"full_name": self.pr_base_repo,
+                              "id": self.pr_base_repo_id}},
+        }
+
 def target(**kwargs):
     return replace(LabTarget(REPO, 42, "governance/released-graph.json",
                              "v32-lab#1"), **kwargs)
@@ -72,7 +94,10 @@ class LabIntakeTests(unittest.TestCase):
         r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
         self.assertEqual(r.status, "HOLD_OWNER_RELEASE_UNVERIFIED")
         self.assertEqual(r.observations["issues_observed"], 2)
-        self.assertEqual(len(p.calls), 12)
+        self.assertEqual(len(p.calls), 14)
+        self.assertEqual(r.observations["prs_observed"], 1)
+        self.assertEqual(r.observations["merged_prs_observed"], 1)
+        self.assertRegex(r.observations["pr_sources_digest"], r"^sha256:[0-9a-f]{64}$")
         d = r.as_dict()
         self.assertFalse(d["owner_release_authenticated"])
         self.assertFalse(d["positive_fact_issuer"])
@@ -139,7 +164,7 @@ class LabIntakeTests(unittest.TestCase):
     def test_source_move_between_rounds_holds(self):
         p = Provider()
         def move(op, count, x):
-            if op == "repo" and count == 7:
+            if op == "repo" and count == 8:
                 x.base_sha = BASE2
         p.mutate = move
         r = inspect_lab_read_only(target(),p, native_validate=lambda g, repo: None)
@@ -178,6 +203,70 @@ class LabIntakeTests(unittest.TestCase):
         p = Provider()
         r = inspect_lab_read_only(target(),p)
         self.assertEqual(r.status,"HOLD_OWNER_RELEASE_UNVERIFIED")
+
+    def test_linked_pr_wrong_number_holds(self):
+        p = Provider(); p.pr_number = 11
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_IDENTITY_MISMATCH", r.reasons)
+
+    def test_linked_pr_wrong_head_repo_holds(self):
+        p = Provider(); p.pr_head_repo = "foreign/v32-lab"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_REPOSITORY_MISMATCH", r.reasons)
+
+    def test_linked_pr_wrong_head_repo_id_holds(self):
+        p = Provider(); p.pr_head_repo_id = 99
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_REPOSITORY_MISMATCH", r.reasons)
+
+    def test_linked_pr_wrong_base_repo_holds(self):
+        p = Provider(); p.pr_base_repo = "foreign/v32-lab"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_REPOSITORY_MISMATCH", r.reasons)
+
+    def test_linked_pr_bad_head_sha_holds(self):
+        p = Provider(); p.pr_head_sha = "current-branch"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_HEAD_UNPINNED", r.reasons)
+
+    def test_linked_pr_merged_claim_type_must_be_boolean(self):
+        p = Provider(); p.pr_merged = "true"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_STATE_INVALID", r.reasons)
+
+    def test_linked_pr_head_move_between_reads_holds(self):
+        p = Provider()
+        def change(op, count, x):
+            if op == "repo" and count == 8:
+                x.pr_head_sha = BASE2
+        p.mutate = change
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertEqual(r.status, "HOLD_LAB_DRIFT")
+        self.assertIsNone(r.observations)
+
+    def test_linked_pr_state_move_between_reads_holds(self):
+        p = Provider()
+        def change(op, count, x):
+            if op == "repo" and count == 8:
+                x.pr_merged = False
+                x.pr_merged_at = None
+                x.pr_state = "open"
+        p.mutate = change
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertEqual(r.status, "HOLD_LAB_DRIFT")
+
+    def test_graph_primary_pr_foreign_ref_fails_before_pr_get(self):
+        p = Provider(); p.graph["nodes"][1]["primary_pr"] = "foreign/lab#10"
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertIn("LAB_PRIMARY_PR_BINDING_INVALID", r.reasons)
+        self.assertNotIn("pull", p.calls)
+
+    def test_linked_pr_closed_without_merge_still_not_admitted(self):
+        p = Provider(); p.pr_merged = False; p.pr_merged_at = None
+        r = inspect_lab_read_only(target(), p, native_validate=lambda g, repo: None)
+        self.assertEqual(r.status, "HOLD_OWNER_RELEASE_UNVERIFIED")
+        self.assertEqual(r.observations["merged_prs_observed"], 0)
+        self.assertFalse(r.as_dict()["positive_fact_issuer"])
 
     def test_unbounded_issue_graph_rejected(self):
         p=Provider()
