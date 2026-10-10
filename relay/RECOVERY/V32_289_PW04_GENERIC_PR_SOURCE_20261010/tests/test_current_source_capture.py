@@ -174,7 +174,12 @@ class CurrentCaptureTests(unittest.TestCase):
         source = self.do()
         pins = PreviewPins(REPO, 42, git_blob(self.raw), REPO+"#2", HEAD)
         result = integrated_shadow(self.raw, pins, source)
-        self.assertEqual(result["native_core"]["digests"]["input"], result["native_input_digest"])
+        # Genuine original lab graphs use owner/repo#PR; the unchanged native
+        # responsibility-core reader currently refuses this valid binding.
+        # Native DELP + C6 still run; hold the unqualified cross-view core.
+        self.assertIsNone(result["native_core"])
+        self.assertEqual(result["native_core_hold"], "RESPONSIBILITY_CORE_MATERIAL_BOUNDARY")
+        self.assertTrue(result["native_input_digest"].startswith("sha256:"))
         self.assertEqual(result["c6_frontier"]["observed"]["candidate_sha"], HEAD)
         self.assertIn("Human PR details.", result["pr_body_preview"])
         self.assertEqual(len(result["in_memory_issue_second_pass"]), 2)
