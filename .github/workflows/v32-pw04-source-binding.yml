@@ -1,0 +1,25 @@
+name: V3.2 PW04 generic PR source binding (read only)
+on:
+  pull_request:
+    paths:
+      - 'relay/RECOVERY/V32_289_PW04_GENERIC_PR_SOURCE_20261010/**'
+      - '.github/workflows/v32-pw04-source-binding.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pw04-native-source-boundary:
+    name: PW04 read-only source/PR binding (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Confirm no mutation and run source contract tests
+        run: |
+          python -m unittest discover -s relay/RECOVERY/V32_289_PW04_GENERIC_PR_SOURCE_20261010/tests -p 'test_*.py' -v
