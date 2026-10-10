@@ -312,5 +312,12 @@ class V32ProviderPreflightTests(unittest.TestCase):
         self.assertIn("CLAIM_AUDIT_NATIVE_BLOCK_PARSE_FAILED", row["reasons"])
         self.assertIsNone(row["comment_claims"])
 
+    def test_28_dotdot_repository_rejected_without_provider(self):
+        p = FakeProvider()
+        result = inspect_v32_read_only(target(repository="../escape"), p)
+        self.assertEqual(result.status, "FAILED_TARGET")
+        self.assertIn("TARGET_REPOSITORY_INVALID", result.reasons)
+        self.assertEqual(p.calls, [])
+
 if __name__ == "__main__":
     unittest.main()
