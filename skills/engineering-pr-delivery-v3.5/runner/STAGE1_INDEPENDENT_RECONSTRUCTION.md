@@ -29,7 +29,7 @@
 
 ## 1. WHAT to think about (the engineering problem)
 
-Your responsibility is to *investigate* these questions, not restate them as headings:
+Your responsibility is to *investigate* these questions, not restate them as headings. The future successor must be able to distinguish the Owner's destination and capabilities already present at the **historical source baseline** from the historical roadmap's proposed route. An apparent historical dependency is a hypothesis to test, not automatically the only viable route; do **not** infer or preview Agent A's actual later work:
 
 1. **Real Owner outcome.** What would a user actually be able to do if the requirement were fulfilled? What concrete produced artifact, provider object or UI journey would prove it? Which Owner quotations are authoritative, which are mirrors, and which are your interpretations?
 2. **Causal source path.** From an original input or approved issue, what exact functions/objects transform it, who consumes those outputs downstream, and where does an actual user-visible result appear? Which link is unsupported by the frozen source?
@@ -61,7 +61,7 @@ Perform the following evidence-led work. Report concise findings, alternatives a
 
 **F. Build the minimal legitimate execution sequence.** Separate semantic units from checkpoints, paperwork, PR count, CI jobs and code lines. Assign allowed write surfaces, dependencies, existing issue/claim identity and the exact next work unit. Do not invent new weights, responsibility, denominator or published progress.
 
-**G. Challenge your own plan.** Ask: What am I assuming that only Agent A's current work could resolve? What important function or user journey may I have missed? Which medium-value idea should *not* distract from the current release? Freeze these uncertainties rather than hiding them.
+**G. Challenge your own plan.** Ask: What am I assuming that only Agent A's current work could resolve? What important function or user journey may I have missed? What would disprove my assumed priority order? Which medium-value idea should *not* distract from the current release? Freeze these uncertainties rather than hiding them. This is an independent baseline, **not** a Mid Lifecycle Reconciliation of Agent A's unseen progress; that comparison is only possible in Stage 2.
 
 ### Worked example: weak versus independent engineering thought
 
