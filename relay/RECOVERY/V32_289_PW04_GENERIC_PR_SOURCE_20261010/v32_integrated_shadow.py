@@ -11,6 +11,7 @@ from copy import deepcopy
 from hashlib import sha256
 import json
 from pathlib import Path
+import re
 import sys
 from typing import Any, Mapping
 
@@ -43,6 +44,33 @@ def _digest(value: Any) -> str:
                                       ensure_ascii=False, allow_nan=False).encode()).hexdigest()
 
 
+_SHA = re.compile(r"[0-9a-f]{40}\\Z")
+_MAX_GRAPH_BYTES = 5_000_000
+
+
+def _graph_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for name, value in pairs:
+        _hold(name not in result, "GRAPH_DUPLICATE_JSON_KEY")
+        result[name] = value
+    return result
+
+
+def _parse_graph(raw: bytes) -> dict[str, Any]:
+    _hold(type(raw) is bytes and 0 < len(raw) <= _MAX_GRAPH_BYTES,
+          "GRAPH_BYTES_UNAVAILABLE")
+    try:
+        graph = json.loads(raw, object_pairs_hook=_graph_pairs,
+                           parse_constant=lambda _v: _hold(False, "GRAPH_NONFINITE_JSON"))
+    except CycleHold:
+        raise
+    except (ValueError, UnicodeError, TypeError) as exc:
+        raise CycleHold("GRAPH_JSON_INVALID") from exc
+    _hold(isinstance(graph, dict) and isinstance(graph.get("programme"), dict) and
+          isinstance(graph.get("nodes"), list), "GRAPH_SHAPE_INVALID")
+    return graph
+
+
 def _number(ref: str) -> int:
     return int(ref.rsplit("#", 1)[-1])
 
@@ -54,8 +82,17 @@ class SnapshotGET:
     that importing a snapshot independently authenticates its actor/approval.
     """
     def __init__(self, source: Mapping[str, Any]):
+        _hold(isinstance(source, Mapping), "SOURCE_SNAPSHOT_SHAPE_INVALID")
         _hold(source.get("source_kind") == "GITHUB_GET_ONLY_UNATTESTED",
               "SOURCE_CAPTURE_KIND_UNTRUSTED")
+        _hold(all(isinstance(source.get(name), Mapping)
+                  for name in ("issues", "pulls", "comments")),
+              "SOURCE_SNAPSHOT_SHAPE_INVALID")
+        _hold(isinstance(source.get("main_sha"), str) and
+              _SHA.fullmatch(source["main_sha"]) is not None and
+              isinstance(source.get("final_main_sha"), str) and
+              _SHA.fullmatch(source["final_main_sha"]) is not None,
+              "SOURCE_SNAPSHOT_MAIN_SHA_INVALID")
         self.source = deepcopy(dict(source))
         self.repository = self.source.get("repository")
 
@@ -100,13 +137,14 @@ def integrated_shadow(
     LIVE_STATUS/title publication twice, and snapshots native C6 frontier.
     All mutations are exclusively in native InMemoryStore, never GitHub.
     """
+    _hold(isinstance(source, Mapping), "SOURCE_SNAPSHOT_SHAPE_INVALID")
     _hold(source.get("repository") == pins.repository, "SOURCE_REPOSITORY_MISMATCH")
     _hold(source.get("repository_id") == pins.repository_id,
           "SOURCE_NUMERIC_REPOSITORY_MISMATCH")
     _hold(source.get("graph_git_blob") == pins.released_graph_blob_oid,
           "SOURCE_GRAPH_BLOB_MISMATCH")
     transport = SnapshotGET(source)
-    graph = json.loads(raw_graph)
+    graph = _parse_graph(raw_graph)
     delp, views = _native_modules()
     delp.validate_graph(graph)
     delp.require_repository_match(graph, pins.repository, live=True)
@@ -177,6 +215,9 @@ def integrated_shadow(
         old_body, block, observed_digest=views.digest(old_body), pr=True)
     _hold(views.inspect_managed_block(new_body, block, pr=True) == "MATCH",
           "PR_MANAGED_VIEW_READBACK_FAILED")
+    second_pr_body = views.reconcile_managed_block(
+        new_body, block, observed_digest=views.digest(new_body), pr=True)
+    _hold(second_pr_body == new_body, "PR_MANAGED_VIEW_NOT_IDEMPOTENT")
 
     # Use the unchanged native issue publisher against its IN-MEMORY store,
     # including all six nodes, per-node versioned status, and idempotent retry.
@@ -220,6 +261,7 @@ def integrated_shadow(
         "pr_managed_block": block,
         "pr_body_preview": new_body,
         "pr_body_changed_in_preview": new_body != old_body,
+        "pr_view_second_pass_unchanged": True,
         "in_memory_issue_first_pass": first_pass,
         "in_memory_issue_second_pass": second_pass,
         "c6_frontier": c6,
