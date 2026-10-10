@@ -24,7 +24,7 @@ def checkpoint(*, head=SHA1, issue=LEAF, result="VERIFIED", evidence=True):
         "Historical comments can contain unrelated prose.\n"
         "```yaml\nCHECKPOINT_FACTS_V1:\n"
         "  responsibility: {issue: " + issue + "}\n"
-        "  material: {candidate_sha: " + head + "}\n"
+        "  material: {candidate_sha: '" + head + "'}\n"
         "  units:\n"
         "    - id: U01\n"
         "      state: COMPLETE\n"
@@ -110,6 +110,16 @@ class NativeV32CommentObservationTests(unittest.TestCase):
         with self.assertRaisesRegex(NativeClaimAuditError, "CLAIM_AUDIT_AUTHOR_POLICY_INVALID"):
             observe([], graph_value={"programme": {"fact_authors": "everyone"}})
 
+
+    def test_11_unquoted_numeric_SHA_is_type_ambiguous_not_stale(self):
+        quoted = checkpoint()
+        unquoted = quoted.replace("candidate_sha: '" + SHA1 + "'", "candidate_sha: " + SHA1)
+        r = observe([comment(unquoted)])
+        self.assertEqual(r["native_structural_claims"], 1)
+        self.assertEqual(r["candidate_type_ambiguous_claims"], 1)
+        self.assertEqual(r["stale_candidate_claims"], 0)
+        self.assertEqual(r["current_candidate_claims"], 0)
+        self.assertIsNone(r["accepted_evidence_count"])
 
 if __name__ == "__main__":
     unittest.main()
