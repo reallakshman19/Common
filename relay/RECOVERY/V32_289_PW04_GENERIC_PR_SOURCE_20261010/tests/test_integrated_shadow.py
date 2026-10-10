@@ -330,5 +330,49 @@ class IntegratedFullLifecycleTests(unittest.TestCase):
             self.assertFalse(report.exists())
 
 
+    def test_26_raw_graph_bytes_differ_from_pins_before_native_execution(self):
+        self.binary += b" "
+        with patch.object(shadow_module, "_native_modules",
+                          side_effect=AssertionError("native used before graph source check")):
+            with self.assertRaisesRegex(CycleHold, "^GRAPH_BLOB_PIN_MISMATCH$"):
+                self.cycle()
+
+    def test_27_snapshot_json_duplicate_repository_key_refuses(self):
+        encoded = json.dumps(self.source).encode()
+        encoded = encoded.replace(
+            b'"repository":', b'"repository":"different/repo","repository":', 1)
+        with self.assertRaisesRegex(CycleHold, "^SNAPSHOT_DUPLICATE_JSON_KEY$"):
+            shadow_module._decode_snapshot(encoded)
+
+    def test_28_snapshot_json_nonfinite_and_invalid_utf8_refuse(self):
+        encoded = json.dumps(self.source).encode()
+        for mutated in (encoded[:-1] + b',"extra":NaN}',
+                        encoded + bytes([255])):
+            with self.subTest(mutated=mutated[-20:]):
+                with self.assertRaisesRegex(CycleHold, "^SNAPSHOT_JSON_INVALID$"):
+                    shadow_module._decode_snapshot(mutated)
+
+    def test_29_snapshot_bytes_over_budget_refuse(self):
+        raw_snapshot = json.dumps(self.source).encode()
+        with patch.object(shadow_module, "_MAX_SNAPSHOT_BYTES", 128):
+            with self.assertRaisesRegex(CycleHold, "^SNAPSHOT_BYTES_UNBOUNDED$"):
+                shadow_module._decode_snapshot(raw_snapshot)
+
+    def test_30_malformed_nested_snapshot_records_refuse_before_native(self):
+        for collection, key, value in (
+            ("issues", "1", "not a record"),
+            ("pulls", "10", 1),
+            ("comments", "2", {"invalid": "not a comment list"}),
+        ):
+            with self.subTest(collection=collection):
+                source = deepcopy(self.source)
+                source[collection][key] = value
+                with patch.object(shadow_module, "_native_modules",
+                                  side_effect=AssertionError("native reached with malformed source")):
+                    with self.assertRaisesRegex(CycleHold,
+                                                "^SOURCE_SNAPSHOT_RECORD_INVALID$"):
+                        integrated_shadow(self.binary, self.pin, source)
+
+
 if __name__ == "__main__":
     unittest.main()
