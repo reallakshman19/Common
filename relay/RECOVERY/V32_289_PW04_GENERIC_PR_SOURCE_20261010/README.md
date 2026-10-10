@@ -41,8 +41,23 @@ a hard HOLD, never truncation), and re-GETs the repository identity after
 the final main SHA check to detect source transfer/replacement. Graph bytes
 remain untouched. Both CLIs refuse pre-existing output paths; the capture
 CLI's POSIX tests verify private 0600 output and reject symlinks *before*
-source access. These synthetic/transport protections do not issue evidence,
-attest human Owner approval or make the inaccessible original lab current.
+source access. Additional read-only preflight rejects non-ASCII or padded
+issue/PR numbers rather than letting Python Unicode-digit parsing alias GitHub
+identities. The first and final default-branch commit responses must be JSON
+objects; missing/malformed observations produce bounded HOLD reasons instead of
+attribute exceptions. Each GitHub issue-comment page is capped at 100 entries;
+the total captured comment text is capped at 5,000,000 characters **per leaf**,
+while each individual comment keeps its 1,000,000-character bound. Overflow
+is rejected and never truncated, including on the second read. The `gh api`
+GET-only subprocess has a 30-second **per-request timeout**, explicit CLI
+unavailability/timeout reason codes and never surfaces raw stderr, tokens or
+private issue text as a diagnostic. This bounds each read, **not** the overall
+multi-request end-to-end capture duration. Synthetic tests cover clean
+100+0 pagination, numeric ambiguity, malformed commit responses, page/aggregate
+overflow, timeout and missing CLI; all authentic current provider facts and
+Owner authority still require independent verification. These synthetic/transport
+protections do not issue evidence, attest human Owner approval or make the
+inaccessible original lab current.
 The shadow refuses drift, malformed input and moved PRs, runs **real** native
 `plan_github`, `ledger_from_github`, `observe_github`, `project`,
 `source_bound_responsibility_core` where compatible and `frontier`, reuses
