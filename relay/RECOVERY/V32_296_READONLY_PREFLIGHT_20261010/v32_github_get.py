@@ -130,3 +130,40 @@ class GitHubGetOnly:
             if len(chunk) < 100:
                 return out
         raise GitHubReadError("CHECK_PAGINATION_EXCEEDED")
+
+    def get_pr_reviews(self, repository: str, number: int) -> list[Mapping[str, Any]]:
+        """Bounded read-only submitted-review snapshots; not reviewer certification."""
+        if type(number) is not int or number < 1:
+            raise GitHubReadError("INVALID_PR_NUMBER")
+        path = self._repo(repository) + "/pulls/" + str(number) + "/reviews"
+        out: list[Mapping[str, Any]] = []
+        for page in range(1, 22):
+            chunk = self._get(path + "?per_page=100&page=" + str(page))
+            if not isinstance(chunk, list) or not all(isinstance(row, dict) for row in chunk):
+                raise GitHubReadError("REVIEW_PAGE_INVALID")
+            out.extend(chunk)
+            if len(out) > 2000:
+                raise GitHubReadError("REVIEW_COLLECTION_UNBOUNDED")
+            if len(chunk) < 100:
+                return out
+        raise GitHubReadError("REVIEW_PAGINATION_EXCEEDED")
+
+    def get_branch_rulesets(self, repository: str, branch: str) -> list[Mapping[str, Any]]:
+        """Observe ruleset endpoints but never interpret empty as no obligations."""
+        if not isinstance(branch, str) or not fullmatch(r"[A-Za-z0-9_./-]{1,200}", branch):
+            raise GitHubReadError("INVALID_TARGET_BRANCH")
+        path = self._repo(repository) + "/rulesets?includes_parents=true"
+        raw = self._get(path)
+        if not isinstance(raw, list) or len(raw) > 1000 or not all(isinstance(x, dict) for x in raw):
+            raise GitHubReadError("RULESETS_RESPONSE_INVALID")
+        return raw
+
+    def get_branch_required_checks(self, repository: str, branch: str) -> Mapping[str, Any]:
+        """Classic endpoint may 403/404; the caller must report UNKNOWN."""
+        if not isinstance(branch, str) or not fullmatch(r"[A-Za-z0-9_./-]{1,200}", branch):
+            raise GitHubReadError("INVALID_TARGET_BRANCH")
+        path = self._repo(repository) + "/branches/" + quote(branch, safe="") + "/protection/required_status_checks"
+        raw = self._get(path)
+        if not isinstance(raw, dict):
+            raise GitHubReadError("REQUIRED_CHECKS_RESPONSE_INVALID")
+        return raw
