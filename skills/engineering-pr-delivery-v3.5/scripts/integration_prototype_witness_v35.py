@@ -55,8 +55,21 @@ def _route_hints_consistent(leaf: Mapping[str, Any], pull: Mapping[str, Any],
     return parents == {root_number} and child_mentioned is not None
 
 
+def _native_repository(transport: Any, repo: str) -> Any:
+    """Read the stable provider ID, never guess it from the repo spelling."""
+    getter = getattr(transport, "get_repository", None)
+    if callable(getter):
+        return getter()
+    # Native ScoreboardTransport (the only CLI transport) exposes gh-api GET.
+    api = getattr(transport, "_gh", None)
+    if not callable(api):
+        raise ValueError("provider repository identity GET unavailable")
+    return api(f"repos/{repo}")
+
+
 def observe(transport: Any, *, root_issue: int, leaf_issue: int,
-            pr_number: int, expected_head: str) -> dict[str, Any]:
+            pr_number: int, expected_head: str,
+            expected_repository_id: int) -> dict[str, Any]:
     """Double-read native provider objects and delegate graph trust to R2-D.
 
     No input claim can establish OWNER/Local authority. Provider exceptions and
@@ -65,7 +78,7 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
     repo = getattr(transport, "repository", None)
     if not isinstance(repo, str) or not REPO.fullmatch(repo):
         raise WitnessInputError("invalid provider repository identity")
-    if (any(type(n) is not int or n <= 0 for n in (root_issue, leaf_issue, pr_number))
+    if (any(type(n) is not int or n <= 0 for n in (root_issue, leaf_issue, pr_number, expected_repository_id))
             or root_issue == leaf_issue or not isinstance(expected_head, str)
             or not SHA.fullmatch(expected_head)):
         raise WitnessInputError("invalid root/leaf/PR/exact-head binding")
@@ -75,6 +88,8 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
     pr_url = f"https://github.com/{repo}/pull/{pr_number}"
     result: dict[str, Any] = {
         "schema": SCHEMA, "repository": repo,
+        "expected_repository_id": expected_repository_id,
+        "observed_repository_id": None,
         "root_issue": root_issue, "leaf_issue": leaf_issue,
         "pr_number": pr_number, "expected_head": expected_head,
         "observed_head": None,
@@ -89,8 +104,19 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
         "github_writes": "NONE", "prototype_qualified": False,
         "failure_stage": None,
     }
-    stage = "ROOT_GET"
+    stage = "REPOSITORY_GET"
     try:
+        identity = _native_repository(transport, repo)
+        if not isinstance(identity, Mapping):
+            result["status"] = "HOLD_REPOSITORY_IDENTITY_UNVERIFIED"
+            return result
+        provider_id = identity.get("id")
+        result["observed_repository_id"] = provider_id if type(provider_id) is int else None
+        if (type(provider_id) is not int or provider_id != expected_repository_id
+                or str(identity.get("full_name") or "").casefold() != repo.casefold()):
+            result["status"] = "HOLD_REPOSITORY_IDENTITY_UNVERIFIED"
+            return result
+        stage = "ROOT_GET"
         root = transport.get_issue(root_issue)
         stage = "LEAF_GET"
         leaf = transport.get_issue(leaf_issue)
@@ -212,6 +238,7 @@ def observe(transport: Any, *, root_issue: int, leaf_issue: int,
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Read-only V3.5 prototype STEP-01 source witness")
     parser.add_argument("--repository", required=True)
+    parser.add_argument("--repository-id", required=True, type=int)
     parser.add_argument("--root", required=True, type=int)
     parser.add_argument("--leaf", required=True, type=int)
     parser.add_argument("--pr", required=True, type=int)
@@ -224,7 +251,8 @@ def main(argv: list[str] | None = None) -> int:
         from integration_scoreboard_publish_v35 import ScoreboardTransport
         value = observe(ScoreboardTransport(args.repository), root_issue=args.root,
                         leaf_issue=args.leaf, pr_number=args.pr,
-                        expected_head=args.expected_head)
+                        expected_head=args.expected_head,
+                        expected_repository_id=args.repository_id)
     except WitnessInputError as exc:
         print(f"V3.5 witness invalid request: {exc}", file=sys.stderr)
         return 2
