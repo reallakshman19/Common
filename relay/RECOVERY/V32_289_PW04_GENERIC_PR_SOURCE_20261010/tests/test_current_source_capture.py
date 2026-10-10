@@ -396,5 +396,29 @@ class CurrentCaptureTests(unittest.TestCase):
         self.assertEqual(runner.call_args.kwargs["timeout"], 30)
 
 
+    def test_33_gh_get_refuses_duplicate_provider_identity_keys(self):
+        reply = capture_module.subprocess.CompletedProcess(
+            args=["gh"], returncode=0,
+            stdout='{"id":42,"id":43}', stderr="")
+        with patch.object(capture_module.subprocess, "run", return_value=reply):
+            with self.assertRaisesRegex(CaptureHold, "^GITHUB_GET_DUPLICATE_JSON_KEY$"):
+                capture_module.gh_get("repos/owner/source-lab")
+
+    def test_34_gh_get_refuses_nested_duplicate_provider_keys(self):
+        reply = capture_module.subprocess.CompletedProcess(
+            args=["gh"], returncode=0,
+            stdout='{"head":{"sha":"a","sha":"b"}}', stderr="")
+        with patch.object(capture_module.subprocess, "run", return_value=reply):
+            with self.assertRaisesRegex(CaptureHold, "^GITHUB_GET_DUPLICATE_JSON_KEY$"):
+                capture_module.gh_get("repos/owner/source-lab/pulls/10")
+
+    def test_35_gh_get_refuses_nonfinite_provider_json(self):
+        reply = capture_module.subprocess.CompletedProcess(
+            args=["gh"], returncode=0, stdout='{"id":NaN}', stderr="")
+        with patch.object(capture_module.subprocess, "run", return_value=reply):
+            with self.assertRaisesRegex(CaptureHold, "^GITHUB_GET_NONFINITE_JSON$"):
+                capture_module.gh_get("repos/owner/source-lab")
+
+
 if __name__ == "__main__":
     unittest.main()
