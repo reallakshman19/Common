@@ -30,3 +30,9 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 2026-10-11 | CI | #38108628065 @1fd3a5a01a2e09307341213901894e7f4f0857aa | T4 15/15 Node22 and Node24 PASS, authored/docs parity PASS.
 2026-10-11 | CI | #38108628056 @1fd3a5a01a2e09307341213901894e7f4f0857aa | original Firstpass/NC golden PASS.
 2026-10-11 | CI | #38108628037 @1fd3a5a01a2e09307341213901894e7f4f0857aa | real A3 original selected browser PASS.
+
+2026-10-11 | PR | #213 DRAFT exact T5 source-only fact candidate cd09d74b718cda4c7ba6610d3708235c9524a417 | https://github.com/reallakshman19/3D_Converters/pull/213
+2026-10-11 | CI | #38108956842 | A2 source/docs closure FAILED on 0f3c04c768eac8675ca3d7ce6bf10ea551c9125c because manifest omitted new xml-source-fact-handoff.mjs + old parity SHA.
+2026-10-11 | CI | #38109051094 | exact c6a95b3bcd1120f603963b1309751471ae28177f | T3/T4/T5 author unit/original Firstpass 2/2 Node22/24 SUCCESS.
+2026-10-11 | CI | #38109096996,38109096936,38109096910,38109096980 | latest cd09d74b718cda4c7ba6610d3708235c9524a417 pending at record; no inherited PASS.
+2026-10-11 | SOURCE | docs/.lfj-indexed-runtime-overlay-manifest.json | commit cd09d74b718cda4c7ba6610d3708235c9524a417 | 18 source closure entries incl new Worker import; registered public Pages not attested.
