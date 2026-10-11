@@ -11,6 +11,9 @@ on:
 
 permissions:
   contents: read
+  issues: read
+  pull-requests: read
+  checks: read
 
 jobs:
   generic-source-preflight:
@@ -35,6 +38,47 @@ jobs:
       - name: Run real native V3.2 graph/project seam with synthetic GET-only provider
         run: |
           python -m unittest discover -s relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011 -p 'test_*.py' -v
+      - name: Execute five-HOLD synthetic benchmark and print exact expected/observed oracles
+        run: |
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/benchmark_walkthrough.py > "$RUNNER_TEMP/v32-325-synthetic-benchmark.json"
+          python -m json.tool "$RUNNER_TEMP/v32-325-synthetic-benchmark.json"
+      - name: G2 real current-HEAD checks and review GET census (never approval)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/live_evidence_census.py > "$RUNNER_TEMP/v32-325-real-evidence-census.json"
+          evidence_exit=$?
+          set -e
+          python -m json.tool "$RUNNER_TEMP/v32-325-real-evidence-census.json"
+          exit "$evidence_exit"
+      - name: Source-qualified real GitHub GET census (no Owner attestation)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/live_source_census.py > "$RUNNER_TEMP/v32-325-real-source-census.json"
+          census_exit=$?
+          set -e
+          python -m json.tool "$RUNNER_TEMP/v32-325-real-source-census.json"
+          exit "$census_exit"
+      - name: B2-N02 G1/G2 same selected-PR-head and graph checkpoint (unqualified)
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.number == 336 }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DIAGNOSTIC_PR_SOURCE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set +e
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/cross_report_checkpoint.py \
+            --g1 "$RUNNER_TEMP/v32-325-real-source-census.json" \
+            --g2 "$RUNNER_TEMP/v32-325-real-evidence-census.json" \
+            --diagnostic-code-sha "$(git rev-parse HEAD)" \
+            --expected-diagnostic-pr-head "$DIAGNOSTIC_PR_SOURCE_HEAD" \
+            > "$RUNNER_TEMP/v32-325-cross-report-checkpoint.json"
+          checkpoint_exit=$?
+          set -e
+          python -m json.tool "$RUNNER_TEMP/v32-325-cross-report-checkpoint.json"
+          exit "$checkpoint_exit"
       - name: Verify every generic integration module remains read-only
         run: |
           python - <<'PY'
