@@ -38,9 +38,34 @@ This function does not authenticate whether its caller's graph is *actually curr
 
 The pinned historical example `.github/v32-evidence-spine/718-proposal-v2.json` is bound to **old** `reallaksh19/Common`. Unit tests deep-clone/rebind that complete Proposal-V2 example to `example/Pipeline` to prove **source shape portability only**. This does not constitute Owner authorization of the synthetic project and does not rewrite the checked-in graph.
 
-## Next gates (Issue #325 T02–T05)
+## T02 implemented — native ledger and source-currentness (GET-only)
 
-T02: bind a *real* authorized provider and exact default-branch released graph (blob and double-read custody), reuse native `ledger_from_github`/observations and resolve or correctly HOLD native full-`owner/repo#PR` material-ref inconsistency. T03: pure disjoint publisher plan, no writer. T04: explicitly Owner-authorized base-resident frozen native amendment and independent review. T05: real private lab positive evidence→DELP→issue+PR readback→C6 and genuine independently authorized A→B execution. Retain the existing DELP as sole P/E/D/DE owner.
+`generic_current_source.reconcile_current_source(...)` adds **two graph-custody passes** to T01. The injected `graph_provider` must expose `repository`, `get_repository()` and `get_file_bytes(path, ref)`. Exact 40-hex `graph_revision` must resolve to a bounded original JSON file with no duplicate keys or non-finite constants. It must be **byte-identical** to the same path on the provider's current default branch; the graph must declare that branch as its `programme.base_ref`. The second pass repeats both file and metadata reads; changed source returns `SOURCE_GRAPH_MOVED_DURING_READ`. This does **not** authenticate the injected provider or the underlying Owner graph issuer.
+
+After T01's explicit repository/leaf/PR/exact-head check, T02 uses the unmodified native `delp.ledger_from_github`, `delp.observe_github`, `delp.project` and `delp.source_bound_responsibility_core` behind a facade exposing only five GET methods. Both native ledger/observation passes must match. The returned P/E/D are labeled **native calculation on caller-supplied, unauthenticated inputs**; `evidence_admitted` remains `false` regardless of whether synthetic checkpoint claims appear current. Native material refs of the form full `owner/repo#PR` are **not silently shortened**; a material-boundary error remains an explicit HOLD until a separately Owner-approved native fix.
+
+```python
+from generic_current_source import reconcile_current_source
+result = reconcile_current_source(
+    repository="authorized-owner/real-project",
+    graph_path="path/to/released-graph.json",
+    graph_revision="a" * 40,  # example syntax, NOT a genuine SHA or release grant
+    leaf_ref="real-project#123",
+    pr_number=456,
+    expected_head="b" * 40,
+    graph_provider=independently_authenticated_repo_get_reader,
+    provider=independently_authenticated_issue_pr_get_reader,
+)
+assert result["status"] == "READ_ONLY_RECONCILED_UNATTESTED"
+assert result["writes"] == 0
+assert result["source_authenticated"] is False
+```
+
+The test suite now includes wrong current branch blob, pinned-vs-current mismatch, source moving between passes, malformed revision/metadata, an untrusted native fact, a parsed comment drift, a full owner/repo PR ref mismatch and a merged-pr negative authority control. It still uses **synthetic** GET providers and never exercises real GitHub credentials, a production reviewer or positive evidence issuance.
+
+## Next gates (Issue #325 T03–T05)
+
+T02: source-currentness code COMPLETE on synthetic provider; **real independently authenticated source and native full-ref fix held** until authorized pilot / protected amendment. T03: pure disjoint publisher plan, no writer. T04: explicitly Owner-authorized base-resident frozen native amendment and independent review. T05: real private lab positive evidence→DELP→issue+PR readback→C6 and genuine independently authorized A→B execution. Retain the existing DELP as sole P/E/D/DE owner.
 
 ## Test command
 
