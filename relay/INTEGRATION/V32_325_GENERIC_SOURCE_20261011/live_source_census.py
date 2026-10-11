@@ -59,7 +59,8 @@ class ReadOnlyGitHub:
     def __init__(self, token: str = ""):
         self._token = token
 
-    def get(self, path: str) -> dict[str, Any]:
+    def get_json(self, path: str) -> Any:
+        """GET a bounded JSON object or list. The caller validates its shape."""
         _require(path.startswith("/repos/") and
                  ".." not in path and "://" not in path,
                  "API_PATH_NOT_BOUND")
@@ -73,7 +74,10 @@ class ReadOnlyGitHub:
         with urllib.request.urlopen(request, timeout=12) as response:
             raw = response.read(MAX_JSON_BYTES + 1)
         _require(len(raw) <= MAX_JSON_BYTES, "API_RESPONSE_TOO_LARGE")
-        obj = json.loads(raw.decode("utf-8"))
+        return json.loads(raw.decode("utf-8"))
+
+    def get(self, path: str) -> dict[str, Any]:
+        obj = self.get_json(path)
         _require(isinstance(obj, dict), "API_RESPONSE_NOT_OBJECT")
         return obj
 
