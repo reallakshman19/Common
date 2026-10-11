@@ -48,3 +48,19 @@ TAB2 INPUTS -- APPEND ONLY. Only names/paths and SHA references; no source files
 2026-10-11 | chat=6acae34d | ACCEPTANCE SOURCE | https://github.com/reallakshman19/Grade9v3.5/issues/174 | B-M1/B-M2 two milestones in Issue body; current source digest=NOT_RECOMPUTED; read-only governance input, no question material copied.
 
 2026-10-11 | chat=6acae34d | CHAT-ONLY NEW INTENT | 2026-10-11T02:37:13Z | name=proceed_next_after_r10_external_gate | exact user instruction recorded in DECISIONS.md; source message SHA=NOT_AVAILABLE | no uploaded files, golden fixtures, test assets or source PDFs; no intent to resume repetitive verification.
+
+2026-10-11 | chat=6acae34d | HANDOVER CHAT-ONLY SECTION6 SYNCHRONIZED | original chat ID 6acae34d, no independent chat message SHA/byte digest; no chat-uploaded source files/golden fixtures/benchmarks/test inputs or original PDF; NONE means absent, NOT zero hash. Parent issue appendix: https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104765778.
+2026-10-11 | chat=6acae34d | CHAT INTENT | timestamp UNKNOWN | Track B ONLY, no overlap Track A #173 | sha=NOT_AVAILABLE, content not copied.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 01:21:17Z | old repo PR fixture reuse/no new search | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 01:25:19Z | stop PDF/hash rechecks, missing PDF allowed for research not canonical source use | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 01:27:19Z | proceed P0 68-row source queue | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 01:33:28Z | proceed P1 7 sample | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 01:47:41Z | proceed P2 49 and P3 11 | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 01:57:24Z | append-only Common Session_Oct09 Tab2 log, this chat ID | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 02:07:09Z | batch 4-5 tasks, preparation T01-T05 | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 02:14:39Z | proceed QRT research T06-T10 | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 02:30:17Z | mandatory labelled LOG format | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 02:37:13Z | proceed T11-T15 gate without external approvals | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT INTENT | 02:48:20Z | 12-section BuddyRunner v1.5 structure ONLY, no Stage 1/2 or Runner B authority; full issue comment + Common handover, then stop | sha=NOT_AVAILABLE.
+2026-10-11 | chat=6acae34d | CHAT-ONLY SOURCE MATERIAL | no file attachments or test-case/test-input/golden fixture/benchmark files provided in this chat | SHA=NOT_APPLICABLE; all inherited source path/blob SHA entries previously enumerated in INPUTS remain reference-only, not publisher source custody.
+2026-10-11 | chat=6acae34d | PARENT APPENDIX | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104765778 | no original copyrighted question content, personal credentials or publisher byte material in issue.
