@@ -120,3 +120,6 @@ AC (before -> after): source-only CSV only -> source-only original path/occurren
 Claim: HOSTED_CI
 Blocker: PERSON - B1/B4 actual physical FactRecord and writer reconciliation; Owner genuine 30MiB and independent #141 still not staged
 Next: 212-T5B, 212-T5C; 212-T6 independent tests
+
+
+2026-10-11 | CONSOL-R4 | Owner authorized F01/F02/T6; principal plan #212 comment 6105806615; Tab3 crosslink #209 comment 6105809775; new draft PR #216 branch lfj/212-tab3-tab4-consolidated-20261011 at ad5e3b275d52c6d8a8f4958fc3d9542d4522726a based #215 d1eb5d5d. Source/docs reviewer new blob dd4838d8, two synthetic tests and workflow; 5 files only, 1 ahead/0 behind; same-head reviewer workflow 38114739534 initially queued; no tests claimed PASS on new head. #215 T3/T4/T5A/T6 untouched. B1/B4 integration and full physical Run unproven; release HOLD.
