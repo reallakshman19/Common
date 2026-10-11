@@ -88,12 +88,13 @@ class FakeGET:
             title = f"Original human issue {no}"
             if self.issue_title_changes and self.issue_calls > 2:
                 title += " moved"
-            return {"number": no, "title": title, "body": "Human issue description"}
+            return {"number": no, "state": "open",
+                    "title": title, "body": "Human issue description"}
         if endpoint.endswith("/pulls/10"):
             self.pr_reads += 1
             sha = "f"*40 if self.pr_change and self.pr_reads > 1 else self.head
             return {
-                "number": 10, "state": "closed", "merged": True,
+                "number": 10, "state": "closed", "merged": True, "draft": False,
                 "merged_at": "2026-10-09T11:00:00Z",
                 "title": "Human PR title", "body": "Human PR details.",
                 "head": {"sha": sha, "ref": "lab/issue2",
@@ -115,6 +116,68 @@ class CurrentCaptureTests(unittest.TestCase):
 
     def do(self):
         return capture(self.raw, REPO, git_blob(self.raw), self.g)
+
+    def test_r3_01_full_surface_preserved(self):
+        result = self.do()
+        self.assertEqual(result['issues']['1']['number'], 1)
+        self.assertEqual(result['issues']['1']['state'], 'open')
+        self.assertIs(result['pulls']['10']['draft'], False)
+
+    def test_r3_02_missing_issue_state_hold(self):
+        def get(path):
+            row = self.g(path)
+            if path.endswith('/issues/1'): row.pop('state')
+            return row
+        with self.assertRaisesRegex(CaptureHold, '^PROVIDER_ISSUE_STATE_INVALID$'):
+            capture(self.raw, REPO, git_blob(self.raw), get)
+
+    def test_r3_03_invalid_issue_state_hold(self):
+        def get(path):
+            row = self.g(path)
+            if path.endswith('/issues/1'): row['state'] = 'untrusted'
+            return row
+        with self.assertRaisesRegex(CaptureHold, '^PROVIDER_ISSUE_STATE_INVALID$'):
+            capture(self.raw, REPO, git_blob(self.raw), get)
+
+    def test_r3_04_missing_pr_draft_hold(self):
+        def get(path):
+            row = self.g(path)
+            if path.endswith('/pulls/10'): row.pop('draft')
+            return row
+        with self.assertRaisesRegex(CaptureHold, '^PR_DRAFT_STATE_INVALID$'):
+            capture(self.raw, REPO, git_blob(self.raw), get)
+
+    def test_r3_05_nonbool_pr_draft_hold(self):
+        def get(path):
+            row = self.g(path)
+            if path.endswith('/pulls/10'): row['draft'] = 0
+            return row
+        with self.assertRaisesRegex(CaptureHold, '^PR_DRAFT_STATE_INVALID$'):
+            capture(self.raw, REPO, git_blob(self.raw), get)
+
+    def test_r3_06_issue_state_second_read_hold(self):
+        def get(path):
+            row = self.g(path)
+            if path.endswith('/issues/1') and self.g.issue_calls > 2: row['state'] = 'closed'
+            return row
+        with self.assertRaisesRegex(CaptureHold, '^ISSUE_CHANGED_DURING_READ$'):
+            capture(self.raw, REPO, git_blob(self.raw), get)
+
+    def test_r3_07_pr_draft_second_read_hold(self):
+        def get(path):
+            row = self.g(path)
+            if path.endswith('/pulls/10') and self.g.pr_reads > 1: row['draft'] = True
+            return row
+        with self.assertRaisesRegex(CaptureHold, '^PR_CHANGED_DURING_READ$'):
+            capture(self.raw, REPO, git_blob(self.raw), get)
+
+    def test_r3_08_true_draft_preserved(self):
+        def get(path):
+            row = self.g(path)
+            if path.endswith('/pulls/10'): row['draft'] = True
+            return row
+        result = capture(self.raw, REPO, git_blob(self.raw), get)
+        self.assertIs(result['pulls']['10']['draft'], True)
 
     def test_01_two_pass_complete_capture(self):
         result = self.do()

@@ -112,13 +112,15 @@ def _pr(p: Any, repo: str, repo_id: int, number: int) -> dict:
             "PR_HUMAN_TEXT_UNBOUNDED")
     _ensure(p.get("state") in ("open", "closed") and type(p.get("merged")) is bool,
             "PR_MERGE_STATE_INVALID")
+    _ensure(type(p.get("draft")) is bool, "PR_DRAFT_STATE_INVALID")
     merged_at = p.get("merged_at")
     _ensure((not p["merged"] and merged_at is None) or
             (p["merged"] and p["state"] == "closed" and isinstance(merged_at, str) and bool(merged_at)),
             "PR_MERGE_METADATA_INVALID")
     return {
         "number": number, "title": p["title"], "body": p.get("body") or "",
-        "state": p["state"], "merged": p["merged"], "merged_at": merged_at,
+        "state": p["state"], "merged": p["merged"], "draft": p["draft"],
+        "merged_at": merged_at,
         "head": {"sha": head["sha"], "ref": head.get("ref"),
                  "repo": {"full_name": repo, "id": repo_id}},
         "base": {"sha": base["sha"], "ref": base.get("ref"),
@@ -240,10 +242,14 @@ def capture(
                 q["number"] == no and q.get("pull_request") is None and
                 isinstance(q.get("title"), str) and isinstance(q.get("body"), (str, type(None))),
                 "PROVIDER_ISSUE_INVALID")
+        _ensure(q.get("state") in ("open", "closed"), "PROVIDER_ISSUE_STATE_INVALID")
         _ensure(len(q["title"]) <= _MAX_HUMAN_TITLE_CHARS and
                 len(q.get("body") or "") <= _MAX_HUMAN_BODY_CHARS,
                 "ISSUE_HUMAN_TEXT_UNBOUNDED")
-        return {"title": q["title"], "body": q.get("body") or ""}
+        # Retain observed source number and state. Missing values must never be
+        # reconstructed later from the requested endpoint or issue title.
+        return {"number": q["number"], "state": q["state"],
+                "title": q["title"], "body": q.get("body") or ""}
 
     issues = {str(no): issue(no) for no in refs}
     pulls = {str(no): _pr(get(f"repos/{repository}/pulls/{no}"), repository, repo_id, no)
