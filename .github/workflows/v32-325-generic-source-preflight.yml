@@ -33,9 +33,33 @@ jobs:
       - name: Run real native V3.2 graph/project seam with synthetic GET-only provider
         run: |
           python -m unittest discover -s relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011 -p 'test_*.py' -v
-      - name: Verify source boundary has no external GitHub writer calls
+      - name: Verify every generic integration module remains read-only
         run: |
-          if grep -En '(gh[[:space:]]+api|subprocess|requests\.|urllib\.|patch_issue|patch_pull|post_comment|PATCH|POST)' relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/generic_source_preflight.py; then
-            echo 'GET-only preflight must not own a transport or mutation call' >&2
-            exit 1
-          fi
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          root = Path("relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011")
+          modules = sorted(root.glob("generic_*.py"))
+          assert len(modules) == 3, "Unexpected generic integration module inventory"
+          banned_imports = {"subprocess", "requests", "urllib", "httpx", "socket",
+                            "http", "aiohttp"}
+          banned_calls = {"system", "popen", "run", "check_output", "urlopen",
+                          "request", "patch", "post", "put", "delete"}
+          mutation_prefixes = ("patch_", "post_", "put_", "delete_", "create_")
+          for path in modules:
+              tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      assert not any(item.name.split(".")[0] in banned_imports
+                                     for item in node.names), (path, node.lineno, "network import")
+                  if isinstance(node, ast.ImportFrom):
+                      assert (node.module or "").split(".")[0] not in banned_imports, (
+                          path, node.lineno, "network import")
+                  if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                      assert not node.func.attr.startswith(mutation_prefixes), (
+                          path, node.lineno, "writer method")
+                      assert node.func.attr not in banned_calls, (
+                          path, node.lineno, "network process helper")
+          print("PASS: three source-owned generic modules contain no direct mutation or network calls")
+          PY
