@@ -73,3 +73,20 @@ Current product repo issue search for ISS212/Atlas index did not identify a defi
 ## 12. End state / audit constraints
 **R15 preparatory XS/S work is documented, not released.** 68 development-approved source positions, 17 separate research-only draft links, 7 separately AI-authored practice previews, authentic original Core2 admitted **0/68**, accepted QRT **0/28**, genuine Track B acceptance **B-M1/B-M2 0/2**, learner release **HOLD**. No other tab owner should be impersonated. This **is a near-handover continuity memo**, not terminal handover or delegated Stage2 execution.
 LOG | chat=6acb7221 | tab=Tab2_track-b-source-custody | artifact=NEAR_HANDOVER_READINESS | original_B_M=0/2 | core2_original=0/68 | qrt=0/28 | release=HOLD
+
+---
+
+## Appendix A — 2026-10-11 12:35:07Z R15-N09 policy clarification (subsequent to the near-handover memo)
+
+**Read this appendix together with sections 4, 5, 8 and 10 above. It supersedes any interpretation that a NEW independent HUMAN mathematics signature is mandatory before provisional SOF Q004 research continues.**
+
+Owner's already-filed directives, now verified against product source:
+- [#163 exact Owner no-repeat verification](https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6104186070): “don't verify again and again, owner override. if pdf is missing its ok. stick to your core task.” **Do not** launch another SOF PDF download, digest attempt, artifact ZIP fetch or synthetic substitute to complete the current research-stage deliverable.
+- Source policy `TEST/imo-research/governance/owner-independent-academic-review-waiver.v1.json` blob `b647f1f3998a3d88fa91d99e193aaaf372279a93`: `INDEPENDENT_HUMAN_ACADEMIC_SIGNOFF_NOT_REQUIRED_BY_OWNER` **for research candidate mathematics and provisional source/QRT triage**, NOT `QRT_ACCEPTED` or `ORIGINAL_SOURCE_CORE2_ADMITTED`. The provenance, source fidelity, component inspections, lawful display, explicit QRT and separate learner release requirements are still independent decisions. Track A #168/#169 are distinct *authored-product* human review work and are not proof of or prerequisites for this separate provisional original-source research policy.
+- Owner separately approved the 68 source IDs **for development**; no implied SOF publisher right to redistribute stems/choices/table or key.
+
+**Question-specific current disposition:** [Q004 decision packet on #163](https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6109103261) and [Track B #174 result](https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6109108109), [N09 plan](https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6109094424). Sample SOF Q004 at printed Q4/page-index 0; historical organizer key B sighting and existing agent solution `y = 2x - 1`. Q004 is **PROPOSED** in frozen `QRT-REPRESENT-D1` with **zero authorized acceptances**; census shows absent durable publisher-PDF SHA-256, all seven original component categories unverified, text/table rights NOT_REVIEWED, original Core2 NOT eligible/admitted. `HOLD_ORIGINAL_CORE2; DEVELOPMENT_RESEARCH_CONTINUES` is a recommended fail-closed item disposition, NOT an Owner A/H/B learner launch choice. No source PDF reacquisition or source-code edit was made.
+
+**Handover implication:** next engineer should first check whether named Owner A/H/B display choice, explicit rights/QRT/admission verdict, or V3.1 writer routing response has since arrived. Do **not** restart PDF verification or insist on an independent HUMAN research review already waived. No change in **0/68 authentic Core2**, **0/28 accepted QRT**, **0/2 B-M1/B-M2**, learner **HOLD**.
+
+LOG | chat=6acb7221 | tab=Tab2_track-b-source-custody | memo_appendix=R15-N09_POLICY_CORRECTION | source_pdf=NOT_REFETCHED | core2=HOLD | release=HOLD
