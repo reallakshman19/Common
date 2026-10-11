@@ -180,9 +180,10 @@ async function observeWithGrade(input,read,grade){
     }
     requireSource(JSON.stringify(policy)===JSON.stringify(policy2),'REQUIRED_POLICY_DRIFT');
     const result=policy2===null?'UNKNOWN':evaluate(policy2,chosen2);
-    const vector={repository:REPO,repository_id:REPO_ID,...end,selected_drift:null,selected_checks:chosen2,required_checks:policy2??[],required_checks_result:result};
+    const vector={repository:REPO,repository_id:REPO_ID,...end,selected_checks:chosen2,required_checks:policy2??[],required_checks_result:result};
     return {schema:'common-v35-wp2a-u02-ci-observation-v1',source_grade:grade,observed:policy2!==null,
       selected_checks_observed:true,errors:[],failure_stage:null,failure_reason:null,
+      selected_drift:null,
       selected_checks:chosen2,required_checks:policy2??[],
       required_check_policy:policy2===null?'UNKNOWN':'OBSERVED_CLASSIC_AND_RULESET',
       required_checks_result:result,snapshot_sha256:digest(vector),
