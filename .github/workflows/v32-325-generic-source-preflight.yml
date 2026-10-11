@@ -1,0 +1,65 @@
+name: v32-325-generic-source-preflight-readonly
+
+on:
+  pull_request:
+    paths:
+      - 'relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/**'
+      - '.github/workflows/v32-325-generic-source-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generic-source-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install native DELP schema runtime
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Compile the new non-frozen preflight and tests
+        run: python -m compileall -q relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011
+      - name: Run real native V3.2 graph/project seam with synthetic GET-only provider
+        run: |
+          python -m unittest discover -s relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011 -p 'test_*.py' -v
+      - name: Verify every generic integration module remains read-only
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          root = Path("relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011")
+          modules = sorted(root.glob("generic_*.py"))
+          assert len(modules) == 3, "Unexpected generic integration module inventory"
+          banned_imports = {"subprocess", "requests", "urllib", "httpx", "socket",
+                            "http", "aiohttp"}
+          banned_calls = {"system", "popen", "run", "check_output", "urlopen",
+                          "request", "patch", "post", "put", "delete"}
+          mutation_prefixes = ("patch_", "post_", "put_", "delete_", "create_")
+          for path in modules:
+              tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      assert not any(item.name.split(".")[0] in banned_imports
+                                     for item in node.names), (path, node.lineno, "network import")
+                  if isinstance(node, ast.ImportFrom):
+                      assert (node.module or "").split(".")[0] not in banned_imports, (
+                          path, node.lineno, "network import")
+                  if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                      assert not node.func.attr.startswith(mutation_prefixes), (
+                          path, node.lineno, "writer method")
+                      assert node.func.attr not in banned_calls, (
+                          path, node.lineno, "network process helper")
+          print("PASS: three source-owned generic modules contain no direct mutation or network calls")
+          PY
