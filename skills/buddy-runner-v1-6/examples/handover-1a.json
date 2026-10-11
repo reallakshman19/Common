@@ -1,0 +1,33 @@
+{
+  "schema_version": "buddy-runner-v1.6",
+  "phase": "1a",
+  "mode": "OPEN_SOURCE_PURPOSE_RECONSTRUCTION",
+  "actor_id": "G1",
+  "handover": {
+    "id": "EXAMPLE-HANDOVER-01",
+    "outgoing_id": "G1",
+    "incoming_id": "G2",
+    "coordination_ref": "coordination/example/LINEAGE.md"
+  },
+  "case": {
+    "repository": "sample/project",
+    "current_issue": "https://github.com/sample/project/issues/17",
+    "parent_issue": "https://github.com/sample/project/issues/3",
+    "roadmap_refs": [
+      "https://github.com/sample/project/issues/5"
+    ],
+    "inherited_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "candidate_pr_refs": [],
+    "owner_source_grade": "UNKNOWN",
+    "owner_intent_ref": "UNKNOWN",
+    "objective_hint": "ILLUSTRATIVE ONLY: preserve every original record through the real user export; investigate the current route without presupposing a fix.",
+    "source_refs": [
+      "src/preview.py:build_preview",
+      "src/export.py:write_csv"
+    ],
+    "scope_constraints": [
+      "ILLUSTRATIVE ONLY: all sample URLs, agent IDs, hashes and publications are fictional.",
+      "Preserve original occurrence identity and protected golden expectations."
+    ]
+  }
+}

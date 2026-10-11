@@ -1,0 +1,4 @@
+interface:
+  display_name: "BuddyRunner v1.6"
+  short_description: "One investigation, one final direction, one evidence reply"
+  default_prompt: "Use $buddy-runner-v1-6 to prepare a 1a handover prompt or return one final 2 or Y engineering direction."

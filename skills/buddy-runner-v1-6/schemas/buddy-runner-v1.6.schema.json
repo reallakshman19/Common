@@ -1,0 +1,466 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/reallakshman19/Common/blob/main/skills/buddy-runner-v1-6/schemas/buddy-runner-v1.6.schema.json",
+  "title": "BuddyRunner v1.6 reusable interaction request (not an authority credential)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "phase",
+    "mode",
+    "actor_id",
+    "case"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "buddy-runner-v1.6"
+    },
+    "phase": {
+      "enum": [
+        "1a",
+        "1b",
+        "2",
+        "Y"
+      ]
+    },
+    "mode": {
+      "const": "OPEN_SOURCE_PURPOSE_RECONSTRUCTION"
+    },
+    "actor_id": {
+      "$ref": "#/$defs/id"
+    },
+    "case": {
+      "$ref": "#/$defs/case"
+    },
+    "handover": {
+      "$ref": "#/$defs/handover"
+    },
+    "stage1_evidence": {
+      "$ref": "#/$defs/stage1_evidence"
+    },
+    "task_evidence": {
+      "$ref": "#/$defs/task_evidence"
+    },
+    "response_receipts": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/receipt"
+      },
+      "description": "Unverified completion claims from existing coordination; no renderer-side durable state."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "enum": [
+              "1a",
+              "1b",
+              "2"
+            ]
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "required": [
+          "handover"
+        ],
+        "not": {
+          "required": [
+            "task_evidence"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "const": "Y"
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "required": [
+          "task_evidence"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "handover"
+              ]
+            },
+            {
+              "required": [
+                "stage1_evidence"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "const": "2"
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "required": [
+          "stage1_evidence"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "stage1_evidence"
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "uri": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "current_issue",
+        "parent_issue",
+        "roadmap_refs",
+        "inherited_commit",
+        "owner_source_grade",
+        "objective_hint",
+        "candidate_pr_refs"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "current_issue": {
+          "$ref": "#/$defs/uri"
+        },
+        "parent_issue": {
+          "$ref": "#/$defs/uri"
+        },
+        "roadmap_refs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/uri"
+          }
+        },
+        "inherited_commit": {
+          "$ref": "#/$defs/sha"
+        },
+        "candidate_pr_refs": {
+          "type": "array",
+          "maxItems": 30,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/uri"
+          }
+        },
+        "owner_source_grade": {
+          "enum": [
+            "DIRECT_OWNER_VERIFIED",
+            "MIRRORED_UNVERIFIED",
+            "UNKNOWN"
+          ]
+        },
+        "owner_intent_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uri"
+            },
+            {
+              "const": "UNKNOWN"
+            }
+          ]
+        },
+        "objective_hint": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 3000,
+          "description": "Context hint, not an authenticated Owner quote or binding implementation plan"
+        },
+        "scope_constraints": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 700
+          }
+        },
+        "known_competing_paths": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 350
+          }
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "source_refs": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "description": "Pinned source/function/input refs to investigate, not verified findings."
+        },
+        "task_evidence_summary": {
+          "type": "string",
+          "maxLength": 3000,
+          "description": "Optional unverified hint; never a substitute for the published evidence."
+        }
+      }
+    },
+    "handover": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "outgoing_id",
+        "incoming_id"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "outgoing_id": {
+          "$ref": "#/$defs/id"
+        },
+        "incoming_id": {
+          "$ref": "#/$defs/id"
+        },
+        "coordination_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "stage1_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_digest",
+        "assessed_commit",
+        "evidence_grade"
+      ],
+      "properties": {
+        "publication_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "artifact_digest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "assessed_commit": {
+          "$ref": "#/$defs/sha"
+        },
+        "evidence_grade": {
+          "enum": [
+            "AGENT_CLAIM_ONLY",
+            "PROVIDER_READBACK_OBSERVED"
+          ]
+        },
+        "stage1_purpose_summary": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 3000
+        },
+        "body_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50000,
+          "description": "Exact supplied evidence body; untrusted claims, not a provider readback."
+        },
+        "supplied_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000,
+          "description": "Supplied conversation/file provenance reference; not provider authorization."
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "publication_url"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "body_text"
+                ]
+              },
+              {
+                "required": [
+                  "supplied_ref"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "body_text",
+            "supplied_ref"
+          ],
+          "not": {
+            "required": [
+              "publication_url"
+            ]
+          }
+        }
+      ]
+    },
+    "task_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "responder_id",
+        "artifact_digest",
+        "assessed_commit",
+        "evidence_grade"
+      ],
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/id"
+        },
+        "responder_id": {
+          "$ref": "#/$defs/id"
+        },
+        "publication_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "artifact_digest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "assessed_commit": {
+          "$ref": "#/$defs/sha"
+        },
+        "evidence_grade": {
+          "enum": [
+            "AGENT_CLAIM_ONLY",
+            "PROVIDER_READBACK_OBSERVED"
+          ]
+        },
+        "body_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50000,
+          "description": "Exact supplied evidence body; untrusted claims, not a provider readback."
+        },
+        "supplied_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000,
+          "description": "Supplied conversation/file provenance reference; not provider authorization."
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "publication_url"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "body_text"
+                ]
+              },
+              {
+                "required": [
+                  "supplied_ref"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "body_text",
+            "supplied_ref"
+          ],
+          "not": {
+            "required": [
+              "publication_url"
+            ]
+          }
+        }
+      ]
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase",
+        "target_id",
+        "response_ref"
+      ],
+      "properties": {
+        "phase": {
+          "enum": [
+            "2",
+            "Y"
+          ]
+        },
+        "target_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "response_ref": {
+          "$ref": "#/$defs/uri"
+        }
+      }
+    }
+  }
+}
