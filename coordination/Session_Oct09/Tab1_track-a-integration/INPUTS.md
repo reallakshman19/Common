@@ -60,3 +60,9 @@ INPUT REGISTER -- APPEND ONLY; names, paths and Git blob SHAs only. No file bodi
 2026-10-11 UTC | chat=6acae343 | BENCHMARK TEST CASE | standalone reconstruction-proof CI run 38105696816 | near-floor print 216px KEY footer orphan FAIL; original test untouched
 2026-10-11 UTC | chat=6acae343 | HANDOVER EVENT | no inter-chat transfer, current PR head f53f6f588f173b66f0fa79f791da3eba2c93e1af
 2026-10-11 UTC | chat=6acae343 | EXACT-HEAD CI INPUT | 38105829519 | ref=f53f6f588f173b66f0fa79f791da3eba2c93e1af | expected KEY PDF page-quality benchmark FAIL (footer separated); no PDF bytes/KEY content stored
+2026-10-11 UTC | chat=6acae343 | NEW USER INPUT / CHANGE OF INTENT | 2026-10-11T02:47:31Z | mandatory structured labelled final LOG line with 15 metadata fields and request to continue; exact wording in DECISIONS.md
+2026-10-11 UTC | chat=6acae343 | SOURCE INSPECTION | Shared/tools/render_core.py | Git blob=f4b978ad61b19db663ae73af7a50a3cb8685ebc0 | shared _core1a_equation_matrix markup, CORE1B_PRINT_CSS, generic figure and table CSS, unmodified
+2026-10-11 UTC | chat=6acae343 | SOURCE INSPECTION | tools/print/print-product.mjs | Git blob=6d98c081fa303f972becdebb5f7fbd48833729fa | shared 280mm x175mm printer/KEY mode, unmodified
+2026-10-11 UTC | chat=6acae343 | INPUT TEST CASE | tests/imo_173_core1b_browser.mjs | Git blob=20aa5f9633b3313f2518a5fdd33b86861a8438e3 | keyboard-only real Tab+ArrowRight gate, unmodified
+2026-10-11 UTC | chat=6acae343 | INPUT TEST CASE | existing Core1B reconstruction-proof workflow at 38105829519 | standalone KEY orphan FAIL, no protected KEY archived
+2026-10-11 UTC | chat=6acae343 | OUTPUT HANDOFF | TEST/imo-research/pilots/issue-173-track-a-review-handoff.md | Git blob=951f414caa176002a8f16bd8051e4f0e9323e150 | bounded owner-only CR-173-KB and CR-173-KEY, no code authorization
