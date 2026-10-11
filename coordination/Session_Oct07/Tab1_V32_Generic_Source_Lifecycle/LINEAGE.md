@@ -1,0 +1,30 @@
+# LINEAGE — Tab1 / V3.2 Generic Source Lifecycle (append only)
+
+Scope: Common #325 implementation child (owner), #289 production gate, #5 programme AC1–AC8; draft PR #326. Independent Tab2 under `coordination/Session_Oct07/Tab2_Lifecycle_Evidence_Reconciliation/` is owned by Common #294 and must remain untouched. The RECON 4/4 request found **no prior Tab1 RECON artifacts** in current main/PR #326. Files `RECON/2026-10-11/1-why.md`, `2-source.md`, `3-acceptance.md` were **retrospectively** created from direct code, issue and CI evidence and consolidated into `4-report.md`; they are not separate independent runs, frozen governance or Owner-authorized fact material.
+
+## 2026-10-11 — Source identity and provenance
+- Current new repository `reallakshman19/Common` versus historical old `reallaksh19/Common` (distinct GitHub repo identity). The old graph at `.github/v32-evidence-spine/718-proposal-v2.json` and old Common#718/#733/#740 are **test/historical** sources, not released new repo Owner graph. The synthetic T01–T03 suite cloned/rebound it to `example/Pipeline`; no actual original private Owner graph was authenticated.
+- Source implementation observed on draft PR #326 `51f5bccbdab50c000ca9eb30c872ca23acdee441`, from `main@27fd8afbe76b45546e4512b252e1ea15045567f0`. Latest separately observed main `366114205d9395fe4ba4f679059ec8fc38bb7a21` (before this doc-only RECON package). New doc commits change PR HEAD but have no implied source-test CI inheritance; always read latest exact SHA.
+- #326 34/34 focused cases in three Python versions = 102 named executions PASS on source head ([#38101237687](https://github.com/reallakshman19/Common/actions/runs/38101237687)); inherited V3.1 274 tests / 6 FileNotFoundError = workflow FAIL ([#38101237697](https://github.com/reallakshman19/Common/actions/runs/38101237697)), not an end-to-end release. Draft #327 `8b9d767a236c21257a0514b1563ea7b37263b21b` V3.1 274/274 PASS ([#38100594082](https://github.com/reallakshman19/Common/actions/runs/38100594082)) is a DIFFERENT unmerged SHA.
+- Native code owner remains `skills/engineering-pr-delivery-v3.2/scripts/delp_projection_v32.py` for DELP P/E/D/DE and issue title/LIVE_STATUS. #326 owns only non-frozen `relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/` GET/plan/readback; no native protected edits or publisher API mutations.
+
+## 2026-10-11 — Explicit superseded assumptions (do not resurrect)
+
+| ID | Superseded statement | Current source-grounded position | Witness / consequence |
+|---|---|---|---|
+| S01 | “V3.2 is only an abstract JSON index; engine absent” | Native V3.2 has graph validation, fact ledger, projection, managed title/LIVE_STATUS publisher, source-bound C6, custody primitives; generic production integration not qualified | Native script files + T01–T03 code; reuse rather than rewrite |
+| S02 | “Synthetic GET double-read proves authenticated Owner/current GitHub data” | T01/T02 accept injected readers. Bytes/head parity does not authenticate provider, Owner graph issuance or fact/CI authority | Source returns `UNATTESTED`; prod HOLD |
+| S03 | “Passing isolated tests proves general V3.2 readiness/AC progress” | 34×3 real hosted tests prove narrowed source behavior only, partly fake provider; AC0/8 | #5/#289, #326 exact head logs |
+| S04 | “Five green checks / #327 fix means #326 full CI green” | #326 is 4/5 PASS and native/V3.2 checks can be path-NOT_APPLICABLE. #327 passed V3.1 only on another unmerged head | #38101237687, #38101237697, #38100594082 |
+| S05 | “C6 handover or Buddy prompt automatically performs A→B takeover” | Source-bound reconstruction and lease transaction primitives exist separately; no isolated B launcher/old-A revocation/independent continuation qualified | `handover_context.py`, `relay_tx.py`, Buddy renderer; AC8 HOLD |
+| S06 | “Generic publisher already wired because managed-block planner exists” | T03 is PURE planner/readback with no network or mutation; native existing historical adapters remain project-bound | `generic_publication_plan.py`, `trusted_scoreboard_v32.py`, `vertical_cycle_v32.py`; AC6 HOLD |
+| S07 | “Old reallaksh19/Common #718 graph can serve current owner new repo” | Repo identity and original graph issuance not portable by relabel. Graph test clone for generic shape is SYNTHETIC | Source graph programme.repository; AC1/2 HOLD |
+| S08 | “Full `owner/repo#PR` accepted everywhere” | Native source-bound responsibility core has short-`repo#PR` guard and raises MATERIAL_BOUNDARY for full valid ref; code never normalizes by guessing | Target N2 gated native exact Owner amendment |
+| S09 | “V3.2 production is active because protocol syntax or SIMPLIFIED=ON exists” | Current `relay/STATE.yaml` V3.1, Local v1.1 nested V3.5, V3.2 publisher flag OFF. No cutover by a toggle in issue prose | No production writer action |
+| S10 | “There was a prior completed Tab1 RECON 1–3” | No Tab1 folder on main or PR #326 at entry. 1–3 synthesized from existing documented T01/T02/T03 and newly written during RECON4 package | Honest reconstructed-stage provenance; independent Tab2 #294 untouched |
+
+## Unresolved facts / preserving negatives
+Original private lab `reallaksh19/relay-v32-e2e-lab` access; actual eligible new repo Owner graph; independent evidence issuer and required checks; two distinct qualified reviewers; effective branch protection; genuinely admitted positive E; three real GitHub surface mutations/readbacks; real C6 no-chat four-context test; old-A revoked/new-B sole lease; explicit Owner production cutover — ALL **OPEN/NOT_PROVEN**. No acceptance from note creation.
+
+## Successor priority (no work started)
+N1 S: governed same-HEAD full CI integration of isolated V3.1 test fix into source candidate. N2 M: separately Owner-granted native generic adapter/full material-ref repair while retaining sole writer and no live apply by default. N3 L: private-lab physical positive and negative evidence → DELP → real managed GitHub readback → independently authorized C6/B. Exact locations and oracles: `RECON/2026-10-11/4-report.md` §8; checkpoint revision 2: `CHECKPOINTS.md`.
