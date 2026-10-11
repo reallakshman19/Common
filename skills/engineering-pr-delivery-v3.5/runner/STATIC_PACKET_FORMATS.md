@@ -95,7 +95,9 @@ A reason code reflects **why preparation was requested**, not proof of exact con
 | High ROI missing / Medium ROI parked | `[A priorities]` | `[Owner scope/source impact; evaluate, do not copy]` |
 | Open GitHub writes / dirty worktree | `[A report or unavailable]` | `[controller/provider state; UNKNOWN where absent]` |
 | Current executor, lease and protected paths | `[A report]` | `[independent authority readback]` |
-| Proposed next engineering unit | `[A preference]` | `[current existing responsibility + accepted scope]` |
+| Original outcome versus currently demonstrated result | `[A account of what existed before A, last material outcome change, and remaining gap]` | `[source/consumer/provider evidence or UNKNOWN]` |
+| Mid Lifecycle Reconciliation of A's trajectory | `[recurring blocker/supporting-work pattern, why A kept working, credible alternative, falsifier; A_CLAIM]` | `[what can be independently checked; no inherited conclusion]` |
+| Proposed next engineering unit | `[A preference + authorized/needs Owner decision/UNKNOWN]` | `[current existing responsibility + accepted scope; independently reassess priority]` |
 
 **Historical packet caution:** Agent A's snapshot may be correct *when created* but stale today. A packet is evidence about A's view, not an active current-source verdict. A missing/crashed Agent A must be marked `INTERRUPTED_NO_PACKET`; do not invent words on its behalf.
 
