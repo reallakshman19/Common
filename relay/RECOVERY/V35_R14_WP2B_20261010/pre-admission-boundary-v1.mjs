@@ -36,6 +36,43 @@ function inputValid(i){
 const normalizeInput=i=>Object.fromEntries(baseKeys.map(k=>[k,i[k]]));
 const uniq=x=>[...new Set(x)];
 const fingerprint=v=>'sha256:'+createHash('sha256').update('common-wp2b-source-v1\0'+JSON.stringify(v)).digest('hex');
+// A *diagnostic* hand-off, not a provider credential or evidence receipt.
+// U04 source owns these fixed refusal codes. A simulated/caller-injected
+// reader can never obtain native grade or positive admission through them.
+const SOURCE_FAILURE_CODES=Object.freeze({
+  JOIN_U02_SOURCE_UNVERIFIED:Object.freeze({
+    component:'U02',
+    stages:['FIRST_SELECTED','SECOND_SELECTED','SOURCE_READBACK'],
+    reasons:['SELECTED_CHECKS_DRIFT','REQUIRED_POLICY_DRIFT',
+      'CHECK_RUNS_GET_UNVERIFIED','COMMIT_STATUS_GET_UNVERIFIED',
+      'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID','CHECK_RUN_SHAPE_OR_SHA_INVALID',
+      'COMMIT_STATUS_SHAPE_INVALID','PR_READBACK_CHANGED'],
+  }),
+  JOIN_U03_SOURCE_UNVERIFIED:Object.freeze({
+    component:'U03',
+    stages:['FIRST_VALIDATE','SECOND_VALIDATE','FIRST_READ','SECOND_READ',
+      'SECOND_ROUND_DRIFT'],
+    reasons:['CURRENT_PR_BINDING_MISSING','HEAD_CLAIM_MISMATCH',
+      'COMMENT_IDENTITY_INVALID','NOT_TASK_EVIDENCE','PR_ROLE_INVALID',
+      'COMMENT_GET_UNVERIFIED','SOURCE_RECEIPT_CHANGED'],
+  }),
+});
+function safeSourceFailure(stage,grade){
+  if(!OBJ(stage)||stage.schema!=='common-v35-wp2a-u04-cross-source-v1'||
+     stage.source_grade!==grade||stage.source_consistent!==false||
+     stage.error!=='SOURCE_MATERIAL_UNVERIFIED'||
+     stage.failure_stage!=='JOIN'||!['FIRST','SECOND'].includes(stage.failure_round)||
+     stage.source_vector!==null||stage.source_vector_sha256!==null||
+     stage.evidence_admitted!==false||stage.writer_authorized!==false||
+     stage.programme_progress!==null)return null;
+  const spec=SOURCE_FAILURE_CODES[stage.failure_reason];
+  const sub=stage.source_subfailure;
+  if(!spec||!OBJ(sub)||Object.keys(sub).sort().join('|')!=='component|reason|stage'||
+     sub.component!==spec.component||!spec.stages.includes(sub.stage)||
+     !spec.reasons.includes(sub.reason))return null;
+  return Object.freeze({edge:stage.failure_reason,round:stage.failure_round,
+    component:sub.component,inner_stage:sub.stage,inner_reason:sub.reason});
+}
 function diagnostic(i,stage,grade){
   const failures=[];
   if(!OBJ(stage)||stage.schema!=='common-v35-wp2a-u04-cross-source-v1'||
@@ -87,6 +124,7 @@ function diagnostic(i,stage,grade){
       !failures.some(x=>x.startsWith('CROSS_SOURCE'))?
       fingerprint({candidate:i.candidate_head_sha,predecessor:stage.source_vector_sha256}):null,
     admission:'NOT_ADMITTED',
+    source_failure:safeSourceFailure(stage,grade),
     admission_blockers:uniq(failures),
     owner_authenticated:false,reviewer_qualified:false,
     evidence_admitted:false,programme_progress:null,
@@ -98,7 +136,7 @@ function refusal(reason,grade){
   return {
     schema:SCHEMA,candidate_facts_schema:null,target_delp_policy:'NOT_ADOPTED',
     observation_grade:grade,source_status:'UNKNOWN',source_digest:null,
-    admission:'NOT_ADMITTED',admission_blockers:[reason],
+    admission:'NOT_ADMITTED',source_failure:null,admission_blockers:[reason],
     owner_authenticated:false,reviewer_qualified:false,
     evidence_admitted:false,programme_progress:null,
     delp_projector_invoked:false,writer_authorized:false,
