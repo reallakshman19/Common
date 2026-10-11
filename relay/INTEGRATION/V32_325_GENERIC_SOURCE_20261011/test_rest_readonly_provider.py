@@ -32,10 +32,10 @@ class ObservedEnvelopeFixture:
         self.reads = []
         self.base_sha = OBSERVED_MAIN_HEAD
         self.issue = {
-            ROOT_NUM: {"number": ROOT_NUM, "state": "open",
+            ROOT_NUM: {"issue_number": ROOT_NUM, "state": "open",
                        "title": "[V3.5][RECOVERY PARENT] Common repo cutover + R14/Runner reconciliation → one DELP → live lifecycle | AC0/8",
                        "body": "[sanitized Owner text]"},
-            LEAF_NUM: {"number": LEAF_NUM, "state": "open",
+            LEAF_NUM: {"issue_number": LEAF_NUM, "state": "open",
                        "title": "[V3.2][#289 child] Generic graph-bound source integration → native DELP → governed GitHub + C6",
                        "body": "[sanitized issue text]"},
         }
@@ -114,7 +114,7 @@ class RestReadOnlyContractTests(unittest.TestCase):
             self.provider.get_pull(PR_NUM)
 
     def test_invalid_issue_number_is_refused(self):
-        self.fixture.issue[LEAF_NUM]["number"] = 9999
+        self.fixture.issue[LEAF_NUM]["issue_number"] = 9999
         with self.assertRaisesRegex(RestContractHold, "REST_ISSUE_IDENTITY_MISMATCH"):
             self.provider.get_issue(LEAF_NUM)
 
