@@ -135,3 +135,7 @@ TAB2 ARTIFACTS -- APPEND ONLY; one dated ref per line; research refs are not app
 2026-10-11 | chat=6acb7221 | R15-N07 V3.1 ISSUE212 routing/allowed writer decision request to production owner #127, no grant | https://github.com/reallakshman19/Grade9v3.5/issues/127#issuecomment-6108993880
 2026-10-11 | chat=6acb7221 | R15-N08 actual Common Git continuity memo, not terminal handover, commit fc6624483cc2862730ccffa7929f29b381e525ef | https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_track-b-source-custody/handovers/2026-10-11-chat-6acb7221-readiness.md
 2026-10-11 | chat=6acb7221 | R15-N07/N08 TASK_RESULT #174, original B-M1/B-M2 0/2, release HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6109015380
+
+2026-10-11 | chat=6acb7221 | R15-N09 scoped XS plan, reconcile Owner human-review policy vs source/QRT/admission, avoid repeated PDF verification | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6109094424
+2026-10-11 | chat=6acb7221 | R15-N09 metadata-only Q004 decision packet and actual source provenance, no source acquisition / rights approval / code | https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6109103261
+2026-10-11 | chat=6acb7221 | R15-N09 owning #174 results and corrected waiver/academic source policy, original Core2 HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6109108109
