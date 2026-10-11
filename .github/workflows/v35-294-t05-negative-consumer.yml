@@ -45,7 +45,7 @@ jobs:
           test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.mjs)" = "e5843e4ab141a49950cd8e2b380540eca8f8f938"
           test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs)" = "c0074ed41ee6a35e7fe0bbc4387b89e6ccf083fb"
           test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
-          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "abc1779f484a87b25d1a433fba6b10ebabff4993"
+          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "8ad1b1978cd75e9c45bc6d8df8cfda238c12e9f1"
       - name: Inherited WP2-B B01–B03 adversarial tests
         shell: bash
         run: node --test relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs
