@@ -13,6 +13,7 @@ permissions:
   contents: read
   issues: read
   pull-requests: read
+  checks: read
 
 jobs:
   generic-source-preflight:
@@ -51,6 +52,16 @@ jobs:
           set -e
           python -m json.tool "$RUNNER_TEMP/v32-325-real-source-census.json"
           exit "$census_exit"
+      - name: G2 real current-HEAD checks and review GET census (never approval)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/live_evidence_census.py > "$RUNNER_TEMP/v32-325-real-evidence-census.json"
+          evidence_exit=$?
+          set -e
+          python -m json.tool "$RUNNER_TEMP/v32-325-real-evidence-census.json"
+          exit "$evidence_exit"
       - name: Verify every generic integration module remains read-only
         run: |
           python - <<'PY'
