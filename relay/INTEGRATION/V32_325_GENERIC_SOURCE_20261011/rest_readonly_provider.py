@@ -73,13 +73,19 @@ class BoundReadOnlyGitHubProvider:
     def get_issue(self, number: int) -> dict[str, Any]:
         _require(type(number) is int and number > 0, "REST_ISSUE_SELECTION_INVALID")
         raw = _payload(self._read_issue(number), "issue")
-        _require(type(raw.get("number")) is int and raw["number"] == number,
+        # GitHub REST uses 'number'; the connected fetch_issue reader returns
+        # 'issue_number'. Accept either explicit source field, never guessing.
+        issue_no = raw.get("number", raw.get("issue_number"))
+        _require(type(issue_no) is int and issue_no == number and
+                 (raw.get("number") is None or raw["number"] == issue_no) and
+                 (raw.get("issue_number") is None or raw["issue_number"] == issue_no),
                  "REST_ISSUE_IDENTITY_MISMATCH")
         _require(raw.get("state") in ("open", "closed")
                  and isinstance(raw.get("title"), str) and bool(raw["title"].strip())
                  and isinstance(raw.get("body"), (str, type(None))),
                  "REST_ISSUE_SURFACE_INVALID")
-        return {k: raw.get(k) for k in ("number", "state", "title", "body")}
+        return {"number": issue_no, "state": raw["state"],
+                "title": raw["title"], "body": raw.get("body")}
 
     def get_pull(self, number: int) -> dict[str, Any]:
         _require(type(number) is int and number > 0, "REST_PR_SELECTION_INVALID")
