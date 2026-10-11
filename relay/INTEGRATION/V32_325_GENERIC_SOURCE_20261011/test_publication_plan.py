@@ -5,9 +5,10 @@ import unittest
 import delp_projection_v32 as delp
 import pr_responsibility_view_v32 as view
 
-from test_current_source_reconciliation import (
-    CurrentSourceTests, GRAPH_PATH, HEAD, LEAF, PR_NUM, REPO, ROOT_REF,
+from test_generic_source_preflight import (
+    HEAD, LEAF, PR_NUM, REPO, ROOT_REF, fixture_graph,
 )
+from test_current_source_reconciliation import FakeGraphSource, FakeNativeProvider, GRAPH_PATH, REVISION
 from generic_source_preflight import SourceHold
 from generic_current_source import reconcile_current_source
 from generic_publication_plan import build_publication_plan, reconcile_publication_readback
@@ -15,12 +16,16 @@ from generic_publication_plan import build_publication_plan, reconcile_publicati
 PR_REF = "Pipeline#740"
 
 
-class PurePublisherPlanTests(CurrentSourceTests):
-    # Inherited adversarial current-source regressions still execute on this
-    # actual native V3.2 fixture, but T03-specific tests start at test_22.
+class PurePublisherPlanTests(unittest.TestCase):
+    # Independent T03 suite: earlier T01/T02 tests run in their own modules.
     def setUp(self):
-        super().setUp()
-        self.source = self.call()
+        self.graph = fixture_graph()
+        self.graph_source = FakeGraphSource(self.graph)
+        self.provider = FakeNativeProvider()
+        self.source = reconcile_current_source(
+            repository=REPO, graph_path=GRAPH_PATH, graph_revision=REVISION,
+            leaf_ref=LEAF, pr_number=PR_NUM, expected_head=HEAD,
+            graph_provider=self.graph_source, provider=self.provider)
         ledger = delp.ledger_from_github(self.provider, self.graph)
         observations = delp.observe_github(self.provider, self.graph)
         self.projection = delp.project(self.graph, ledger, observations)
