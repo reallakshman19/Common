@@ -27,3 +27,5 @@
 2026-10-11 | chat=6acae92b | type=REVIEW_READINESS_PACKET | path=handovers/2026-10-11-review-readiness.md | blob=17109376eb91d9e3516fd0b96f4448201556d865 | source_pr=326 | provenance=self-prepared-not-independent | Owner_qualification=NO
 2026-10-11 | chat=6acae92b | type=ISSUE_PUBLICATION | issue=325 | comment=6105503964 | scope=five-tab-files-and-review-readiness | parent_ML_backlog=289:6104487421
 2026-10-11 | chat=6acae92b | type=LOG_FINALIZATION | files=EVIDENCE.log,CHECKPOINTS.md,DECISIONS.md,INPUTS.md,LINEAGE.md | material_code_change=none | latest_log_commits=skip-ci | exact_head_ci=not-inherited-from-dc41b642 | AC=0/8 | production=HOLD | agent_B=NOT_RUN
+
+2026-10-11 | chat=6acae92b | type=FINAL_HANDOVER_PUBLICATION | report=handovers/2026-10-11.md | report_main_commit=0f0aa00a5b25a23b2e295f130bc6277f57aac55c | owner_comment=325:6105639710 | parent_chat_only=289:6105641933 | log_copy=main | independent_review=NOT_DONE | AC=0/8
