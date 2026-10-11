@@ -172,3 +172,51 @@ test('B03 independently marked native stage cannot be laundered by injected func
  const x=await inspectPreAdmission(input(),spoof);closed(x);
  assert.equal(x.source_status,'UNKNOWN');
 });
+
+test('N05 coherent historical source has no manufactured refusal detail',async()=>{
+ const x=await run();closed(x);
+ assert.equal(x.source_status,'REFERENCES_COHERENT_BUT_UNADMITTED');
+ assert.equal(x.source_failure,null);
+});
+test('N05 real U03 foreign-PR comment becomes safe WP2-B failed-edge evidence',async()=>{
+ const x=await run(s=>{s[cc].body=s[cc].body.replace('/pull/28','/pull/27');});
+ closed(x);assert.equal(x.source_status,'UNKNOWN');assert.equal(x.source_digest,null);
+ assert.ok(x.admission_blockers.includes('CROSS_SOURCE_NOT_VERIFIED'));
+ assert.deepEqual(x.source_failure,{
+   edge:'JOIN_U03_SOURCE_UNVERIFIED',round:'FIRST',
+   component:'U03',inner_stage:'FIRST_VALIDATE',inner_reason:'CURRENT_PR_BINDING_MISSING',
+ });
+});
+test('N05 validated U02 readback failure is propagated without admission',async()=>{
+ const underlying=readers(db());
+ const x=await inspectPreAdmission(input(),{
+   ...underlying,
+   ci:async i=>{
+     const valid=await underlying.ci(i);
+     return {...valid,selected_checks_observed:false,snapshot_sha256:null,
+       failure_stage:'SOURCE_READBACK',failure_reason:'SELECTED_CHECKS_DRIFT',
+       errors:['PRIVATE_SELECTED_PROVIDER_DATA']};
+   },
+ });
+ closed(x);assert.equal(x.source_status,'UNKNOWN');assert.equal(x.source_digest,null);
+ assert.deepEqual(x.source_failure,{
+   edge:'JOIN_U02_SOURCE_UNVERIFIED',round:'FIRST',
+   component:'U02',inner_stage:'SOURCE_READBACK',inner_reason:'SELECTED_CHECKS_DRIFT',
+ });
+ assert.ok(!JSON.stringify(x).includes('PRIVATE_SELECTED_PROVIDER_DATA'));
+});
+test('N05 unknown nested provider reason and input failure cannot leak or impersonate authority',async()=>{
+ const underlying=readers(db());
+ const x=await inspectPreAdmission(input(),{
+   ...underlying,
+   ci:async i=>{
+     const valid=await underlying.ci(i);
+     return {...valid,selected_checks_observed:false,snapshot_sha256:null,
+       failure_stage:'SOURCE_READBACK',failure_reason:'PRIVATE_AUTHORITY_TOKEN'};
+   },
+ });
+ closed(x);assert.equal(x.source_status,'UNKNOWN');assert.equal(x.source_failure,null);
+ assert.ok(!JSON.stringify(x).includes('PRIVATE_AUTHORITY_TOKEN'));
+ const malformed=await inspectPreAdmission({...input(),repository:'reallaksh19/Common'},underlying);
+ closed(malformed);assert.equal(malformed.source_failure,null);
+});

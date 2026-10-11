@@ -44,8 +44,8 @@ jobs:
           test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.test.mjs)" = "fb06f9360f5f72d12469c84ba933c282bc0ed3d8"
           test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.mjs)" = "53b078341ef32839e8fdbf26ad7cbea0f9a3cc9a"
           test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs)" = "ec9f2d4b9e563ff2994bde0b859ab83dc46b5eeb"
-          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
-          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "8ad1b1978cd75e9c45bc6d8df8cfda238c12e9f1"
+          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5b5be81045e9fbb4f2fbd2a5ff79d44baf33a594"
+          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "6c9882753df4cc55a63b0c7071f89422f8c9bc94"
       - name: Inherited WP2-B B01–B03 adversarial tests
         shell: bash
         run: node --test relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs
@@ -80,5 +80,5 @@ jobs:
           CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
           test "$(git rev-parse HEAD)" = "$CANDIDATE_HEAD_SHA"
-          test "$(git hash-object relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
+          test "$(git hash-object relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5b5be81045e9fbb4f2fbd2a5ff79d44baf33a594"
           node relay/RECOVERY/V35_R14_WP2A_20261010/t05-native-wp2b-negative.cli.mjs
