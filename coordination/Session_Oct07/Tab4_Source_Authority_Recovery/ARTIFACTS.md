@@ -36,3 +36,9 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 2026-10-11 | CI | #38109051094 | exact c6a95b3bcd1120f603963b1309751471ae28177f | T3/T4/T5 author unit/original Firstpass 2/2 Node22/24 SUCCESS.
 2026-10-11 | CI | #38109096996,38109096936,38109096910,38109096980 | latest cd09d74b718cda4c7ba6610d3708235c9524a417 pending at record; no inherited PASS.
 2026-10-11 | SOURCE | docs/.lfj-indexed-runtime-overlay-manifest.json | commit cd09d74b718cda4c7ba6610d3708235c9524a417 | 18 source closure entries incl new Worker import; registered public Pages not attested.
+
+2026-10-11 | CI | #38109096996 | PR #213 HEAD cd09d74b718cda4c7ba6610d3708235c9524a417 | new tests Node22/24 SUCCESS.
+2026-10-11 | CI | #38109096910 | same HEAD | LFJ #208 original Firstpass & NC source ledger/2 CSV oracle SUCCESS.
+2026-10-11 | CI | #38109096980 | same HEAD | native authored-root selected File, Worker, two CSV browser SUCCESS.
+2026-10-11 | CI | #38109096936 | same HEAD | A2 closure Node22+24, disposable served docs Chromium, matrix all 5 jobs SUCCESS.
+2026-10-11 | ISSUE COMMENT | #212 T5A exact-head addendum | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105127112
