@@ -3,18 +3,19 @@
  * ref pins are asserted in CI. Read-only / no retries that upgrade E.
  */
 import {inspectLivePreAdmission} from '../V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs';
-const REPO='reallakshman19/Common', BASE='codex/294-t01-wp2a-u02-u03-u04-pinned';
+import {parseCi02NativeEnvelope} from './ci02-native-eligibility-v1.mjs';
+const REPO='reallakshman19/Common';
 const CLAIMED='0dbb64b99482e94cd3155074472f600a6d915373',COMMENT=6099896350;
-const PR=308, SHA=/^[a-f0-9]{40}$/;
-const candidate=process.env.CANDIDATE_HEAD_SHA||'',base=process.env.CANDIDATE_BASE_REF||'';
-const pr=Number(process.env.CANDIDATE_PR_NUMBER);
-if(!SHA.test(candidate)||candidate===CLAIMED||base!==BASE||pr!==PR){
+const current=parseCi02NativeEnvelope(process.env);
+if(!current||current.sha===CLAIMED){
  console.log('T05_NATIVE_INPUT=INVALID_CANDIDATE_HEAD_OR_PR');
  process.exitCode=1;
 }else{
+ const {pr,sha:candidate,base}=current;
+ console.log('CI02_T05_NATIVE_STARTED='+JSON.stringify({pr,head:candidate,base,repository:REPO}));
  const locator={
   repository:REPO,repository_id:1412133785,root_issue:5,leaf_issue:20,
-  pr_number:PR,candidate_head_sha:candidate,base_branch:BASE,
+  pr_number:pr,candidate_head_sha:candidate,base_branch:base,
   evidence_comment_id:COMMENT,evidence_claimed_head_sha:CLAIMED,
   expected_author_login:'reallakshman19',facts_schema_line:'V35',
  };
@@ -58,11 +59,12 @@ if(!SHA.test(candidate)||candidate===CLAIMED||base!==BASE||pr!==PR){
  const coherent=samples.some(x=>x.source_status==='REFERENCES_COHERENT_BUT_UNADMITTED');
  console.log(JSON.stringify({
   schema:'common-v35-294-t05-native-original-pre-admission-v1',
-  repository:REPO,pr_number:PR,tested_head:candidate,source_commit_grading:'LIVE_NATIVE_SOURCE_NON_ADMISSION',
+  repository:REPO,pr_number:pr,tested_head:candidate,source_commit_grading:'LIVE_NATIVE_SOURCE_NON_ADMISSION',
   diagnostic_samples:samples.length,coherent_original_source_observed:coherent,
   measured_status:coherent?'NATIVE_SAME_HEAD_REFERENCES_COHERENT_BUT_NOT_ADMITTED':'NATIVE_SAME_HEAD_SOURCE_UNKNOWN_HOLD',
   evidence_admitted:false,delp_projector_invoked:false,writer_authorized:false,
   samples,
  },null,2));
- console.log('T05_NATIVE_CONSUMER='+(coherent?'COHERENT_NOT_ADMITTED':'UNKNOWN_NOT_ADMITTED')+'; NO DELP OR WRITER');
+ console.log('T05_NATIVE_CONSUMER='+(coherent?'COHERENT_NOT_ADMITTED':'HOLD_SOURCE_UNVERIFIED')+'; NO DELP OR WRITER');
+ if(!coherent)process.exitCode=1;
 }
