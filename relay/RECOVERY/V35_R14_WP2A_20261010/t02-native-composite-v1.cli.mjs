@@ -4,21 +4,18 @@
  * No retries, second projector, source privilege, merge or writer authority.
  */
 import {observeLiveCrossSource} from './cross-source-vector-v1.mjs';
+import {parseCi02NativeEnvelope} from './ci02-native-eligibility-v1.mjs';
 
 const HISTORIC_HEAD='19af5077fccdd9328f51efc6e316c345b1b4ca78';
 const HISTORIC_COMMENT_ID=6098434621;
 const REPO='reallakshman19/Common';
-const expectedPr=306;
-const sha=process.env.CANDIDATE_HEAD_SHA||'';
-const branch=process.env.CANDIDATE_BASE_REF||'';
-const pr=Number(process.env.CANDIDATE_PR_NUMBER);
-
-const candidateValid=pr===expectedPr&&/^[0-9a-f]{40}$/.test(sha)&&
- sha!==HISTORIC_HEAD&&branch==='recovery/5-wp2a-u05-integrated-regression-20261010';
-if(!candidateValid){
+const candidate=parseCi02NativeEnvelope(process.env);
+if(!candidate||candidate.sha===HISTORIC_HEAD){
  console.log('T02_NATIVE_COMPOSITE=INPUT_CONTRACT_INVALID');
  process.exitCode=1;
 }else{
+ const {pr,sha,base:branch}=candidate;
+ console.log('CI02_T02_NATIVE_STARTED='+JSON.stringify({pr,head:sha,base:branch,repository:REPO}));
  const r=await observeLiveCrossSource({
   repository:REPO,repository_id:1412133785,root_issue:5,leaf_issue:20,
   pr_number:pr,candidate_head_sha:sha,base_branch:branch,
@@ -36,7 +33,7 @@ if(!candidateValid){
   r.source_vector?.repository===REPO&&
   r.source_vector?.repository_id===1412133785&&
   r.source_vector?.root_issue===5&&r.source_vector?.leaf_issue===20&&
-  r.source_vector?.pr_number===expectedPr&&
+  r.source_vector?.pr_number===pr&&
   r.source_vector?.candidate_sha===sha&&r.source_vector?.base_branch===branch&&
   r.source_vector?.evidence_comment_id===HISTORIC_COMMENT_ID&&
   r.source_vector?.evidence_claimed_head_sha===HISTORIC_HEAD&&
