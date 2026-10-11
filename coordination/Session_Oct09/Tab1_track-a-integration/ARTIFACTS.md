@@ -167,3 +167,7 @@ ARTIFACTS.md | 2026-10-11T05:42:30Z | chat=6acb03f0 | R10 USER "proceed now": ex
 
 2026-10-11 UTC | chat=6acb267e | CI_RERUN | Grade9v3.5#178 | same SHA 1c8d1472, failed-job rerun Track A SUCCESS after initial browser390 FAIL; intermittent root cause not proven | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38119994530
 2026-10-11 UTC | chat=6acb267e | ISSUE_BODY | Grade9v3.5#173 | R11-S2 status updated to test-only DRAFT implemented / coordinator merge pending | https://github.com/reallakshman19/Grade9v3.5/issues/173
+
+2026-10-11 UTC | chat=6acb267e | ISSUE_CI_ROUTE | Grade9v3.5#171 | Native Guardrails exact failure-ID zero delta #178 vs #177, no waiver | https://github.com/reallakshman19/Grade9v3.5/issues/171#issuecomment-6106568267
+2026-10-11 UTC | chat=6acb267e | ISSUE_EVIDENCE | Grade9v3.5#173 | Canonical verifier exact finding parity, native absolute reds, not-triggered generator gate | https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6106579892
+2026-10-11 UTC | chat=6acb267e | CI | Grade9v3.5#178 HEAD 1c8d1472 | Guardrails FAIL 119/34/7, Canonical verifier FAIL 20 canonical findings and 62 worse pages; comparator running at check | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38119994469
