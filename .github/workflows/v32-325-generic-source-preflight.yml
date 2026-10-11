@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/**'
+      - 'coordination/Session_Oct07/Tab1_V32_Generic_Source_Lifecycle/**'
+      - 'skills/engineering-pr-delivery-v3.1/tests/test_ci_terminal_checks.py'
       - '.github/workflows/v32-325-generic-source-preflight.yml'
   workflow_dispatch:
 
