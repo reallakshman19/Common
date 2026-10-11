@@ -36,9 +36,11 @@ jobs:
           EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
         run: |
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          # Current-source integrity; immutable PR308 byte golden remains separately
+          # locked by T14 ORIGINAL_FILES, not by this moving candidate test.
           cd relay/RECOVERY/V35_R14_WP2A_20261010
-          test "$(git hash-object required-ci-material-v1.mjs)" = "3eac046128202fdee88a5ad47bb1df82e3304ca1"
-          test "$(git hash-object required-ci-material-v1.test.mjs)" = "e1da8e166cb7e560f76f13500e629f4a0be0f877"
+          test "$(git hash-object required-ci-material-v1.mjs)" = "3033b177d645810c6cb647ca831308893fd006c0"
+          test "$(git hash-object required-ci-material-v1.test.mjs)" = "cc534c88d41ed6aea12e7a67c9ce14392b7c1765"
           test "$(git hash-object task-evidence-comment-v1.mjs)" = "79cffd2e3d2828ac1727afad7763267768c56ad5"
           test "$(git hash-object task-evidence-comment-v1.test.mjs)" = "e78b852d0e28c8f7a13fe66baf60662e4b7c6789"
           test "$(git hash-object cross-source-vector-v1.mjs)" = "e5843e4ab141a49950cd8e2b380540eca8f8f938"
@@ -50,7 +52,7 @@ jobs:
 
   native-composite:
     name: actual-github-composite (${{ matrix.os }})
-    if: github.event_name == 'pull_request' && github.event.pull_request.number == 306
+    if: github.event_name == 'pull_request' && github.repository == 'reallakshman19/Common' && github.event.pull_request.head.repo.full_name == 'reallakshman19/Common'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -68,6 +70,8 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_REPOSITORY: ${{ github.repository }}
+          CANDIDATE_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
           CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
           CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}

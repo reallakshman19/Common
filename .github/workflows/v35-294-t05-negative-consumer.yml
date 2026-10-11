@@ -38,24 +38,24 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$EXACT_HEAD"
           cd relay/RECOVERY
-          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.mjs)" = "3eac046128202fdee88a5ad47bb1df82e3304ca1"
-          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.test.mjs)" = "e1da8e166cb7e560f76f13500e629f4a0be0f877"
+          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.mjs)" = "3033b177d645810c6cb647ca831308893fd006c0"
+          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.test.mjs)" = "cc534c88d41ed6aea12e7a67c9ce14392b7c1765"
           test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.mjs)" = "79cffd2e3d2828ac1727afad7763267768c56ad5"
           test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.test.mjs)" = "e78b852d0e28c8f7a13fe66baf60662e4b7c6789"
           test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.mjs)" = "e5843e4ab141a49950cd8e2b380540eca8f8f938"
           test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs)" = "c0074ed41ee6a35e7fe0bbc4387b89e6ccf083fb"
           test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
-          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "abc1779f484a87b25d1a433fba6b10ebabff4993"
+          test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "8ad1b1978cd75e9c45bc6d8df8cfda238c12e9f1"
       - name: Inherited WP2-B B01–B03 adversarial tests
         shell: bash
         run: node --test relay/RECOVERY/V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs
-      - name: Same-head PR308 original U04 -> unmodified WP2-B negative vector
+      - name: Same-head injected historical U04 -> unchanged WP2-B refusal tests
         shell: bash
         run: node --test relay/RECOVERY/V35_R14_WP2A_20261010/t05-wp2b-same-head.test.mjs
 
   native-negative-consumer:
     name: T05 real GitHub U04 to B03 (${{ matrix.os }})
-    if: github.event_name == 'pull_request' && github.event.pull_request.number == 308
+    if: github.event_name == 'pull_request' && github.repository == 'reallakshman19/Common' && github.event.pull_request.head.repo.full_name == 'reallakshman19/Common'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -73,6 +73,8 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANDIDATE_REPOSITORY: ${{ github.repository }}
+          CANDIDATE_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
           CANDIDATE_PR_NUMBER: ${{ github.event.pull_request.number }}
           CANDIDATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           CANDIDATE_BASE_REF: ${{ github.event.pull_request.base.ref }}
