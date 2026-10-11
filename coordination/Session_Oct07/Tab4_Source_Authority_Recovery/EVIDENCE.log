@@ -105,3 +105,18 @@ AC (before -> after): only Worker CSV display rows -> extra bounded original occ
 Claim: HOSTED_CI
 Blocker: CI - latest exact-head #213 verification pending; PERSON - B1/B4 source writer reconciliation for real 4 Preview
 Next: 212-T5B physical fact attestor and full 4 Preview, 212-T5C review/run; 212-T6 adversarial original-source work independent
+
+2026-10-11 | TASK EVIDENCE ADDENDUM 212-T5A — exact-head successful proof, T5 still PARTIAL
+Task: 212-T5
+Goal (issue AC): AC-04/AC-05 actual full physical 4 Preview/Mode A/B from original LFJ facts
+Status: PARTIAL
+Met: partial
+Done: Original source-only bounded XML occurrence handoff/diagnostic audit and corrected new Worker docs manifest; exact-head original Firstpass and authentic NC author oracles passed, actual authored and generated docs Chromium passed; full physical B1 4 Preview not wired
+Code (repo branch @ commit | PR): 3D_Converters lfj/212-scope-cache-exact-source-20261011 @ cd09d74b718cda4c7ba6610d3708235c9524a417 | PR #213
+Tests (command -> pass/fail/skip): Node22/24 T3/T4/T5+authentic Firstpass -> PASS; root/docs original Firstpass + NC full ledger/two CSV -> PASS; actual physical 4 Preview & final CII -> NOT_RUN
+CI (run -> result): 38109096996 SUCCESS; 38109096910 SUCCESS; 38109096980 SUCCESS; 38109096936 all 5 jobs SUCCESS; whole head at readback 29 SUCCESS,15 historic C05 FAIL,1 B0-07 IN_PROGRESS
+Evidence (link): https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105127112
+AC (before -> after): source-only CSV only -> source-only original path/occurrence facts in audit with exact head qualification; AC-04/05 final Owner 0->0
+Claim: HOSTED_CI
+Blocker: PERSON - B1/B4 actual physical FactRecord and writer reconciliation; Owner genuine 30MiB and independent #141 still not staged
+Next: 212-T5B, 212-T5C; 212-T6 independent tests
