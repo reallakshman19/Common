@@ -1,0 +1,21 @@
+TAB2 LINEAGE -- APPEND ONLY
+2026-10-11 | CHAT 6acae34d | START exact timestamp UNKNOWN (before 01:21:17Z); source task: authentic SOF IMO Grade 9 Track B source custody, rights and admission; Track A isolated.
+2026-10-11 | CHAT 6acae34d | continuation through 01:57:24Z; chat remains ACTIVE; END=NOT_YET_REACHED; no prior or successor chat ID supplied.
+2026-10-11 | NO_CHAT_MOVE | only known chat=6acae34d; moved from Q004 operator check -> historical-PR reuse -> Owner missing-PDF waiver -> 68/68 review queue; these are scope changes within same chat, not invented chat IDs.
+2026-10-11 | INTERIM HANDOVER | old repository research and CI metadata -> current issue #163/#174/#130; links https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6104127815 ; https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104201267.
+2026-10-11 | HANDOVER | 68-position P0/P1/P2/P3 research triage -> authorized #130 rights/QRT/admission reviewers and #137 coordination; links https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104361846 ; https://github.com/reallakshman19/Grade9v3.5/issues/137#issuecomment-6104362039.
+2026-10-11 | LOG HANDOVER | coordination/Session_Oct09/Tab2_track-b-source-custody/handovers/2026-10-11-initial.md | internal Common/main Tab2 transfer summary; no product approval.
+2026-10-11 | END | ACTIVE_AS_OF_LOG_WRITE; future chat move must append successor ID, reason, time, link and close record; do not invent one.
+
+2026-10-11 | CHAT 6acae34d | CONTINUES at 2026-10-11T02:07:09Z; user ordered 4–5 tasks in one uninterrupted work batch; no chat move, no new predecessor/successor chat. End remains ACTIVE.
+2026-10-11 | HANDOVER | five R/Q/C decision-preparation dockets Tab2-T01..T05 now posted in #130/#174; source links https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104485790 ; https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104486895 ; internal handover handovers/2026-10-11-next-five.md. Prepared != authorized acceptance.
+
+2026-10-11 | CHAT 6acae34d | REGISTRY RECON | same active chat; concurrent Tab1 writer replaced TABS.md index, Tab2 line restored by append-only update; no chat handover or change of substantive workstream.
+
+2026-10-11 | CHAT 6acae34d | 2026-10-11T02:14:39Z same chat Owner "proceed now"; no predecessor/successor chat ID supplied. Scope moved from first five R/Q/C decision sheets to five additional **new provisional** original-source cognitive assessments, without converting any QRT/history or source rights. End ACTIVE.
+2026-10-11 | HANDOVER | Tab2-T06..T10 five exact question-specific proposed QRT assessments, downstream authorized #130 academic reviewer + #174 editorial Q005 case; link https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535309 ; https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104536257; internal handover handovers/2026-10-11-qrt-proposals.md.
+
+2026-10-11 | CHAT 6acae34d | CONTINUATION 2026-10-11T02:37:13Z Owner asked "proceed next"; no chat handover or ID move; T11–T15 remain real third-party/Owner authority gates after a single bounded comment readback. Prior handover remains current at handovers/2026-10-11-authorization-gate.md. END=ACTIVE.
+
+2026-10-11 | CHAT 6acae34d | HANDOVER FINAL | 2026-10-11T02:48:20Z user requests terminal twelve-section continuity document; chat START exact timestamp UNKNOWN prior to 01:21:17Z; END by user instruction AFTER this verified publication; no successor chat ID known. Reason for move: bounded Track B research and QRT proposals 68/68 triaged, but source rights/QRT/Owner product gates require new authorized engineer/person. Full issue https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104788867, parent chat-only https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104765778, durable https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_track-b-source-custody/handovers/2026-10-11.md.
+2026-10-11 | HANDOVER TO NEXT ENGINEER | successor chat ID UNKNOWN, do not invent or claim new authority | path=handovers/2026-10-11.md | criteria exact source main SHA, all nine component/rights, QRT and Owner admissions held; plan=r10, completed T01-T10, authority-dependent T11-T15 OPEN.

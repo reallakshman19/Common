@@ -1,0 +1,62 @@
+TAB4 TASK EVIDENCE — APPEND ONLY; each task adds self-contained one-field-per-line record (Goal, Status, Met, Done, Code, Tests, CI, Evidence, AC, Claim, Blocker, Next).
+2026-10-11 | INITIAL STATE | Issue #212 r1 published; no Tab4 implementation task closed until evidence/checkpoint committed. Baseline 19 successful / 15 failing workflows is hosted prior evidence, not current Tab4 execution.
+
+2026-10-11 | TASK EVIDENCE 212-T1
+Task: 212-T1
+Goal (issue AC): AC-01..AC-10 documentation custody, exact-head baseline and append-only Tab4 coordination
+Status: DONE
+Met: yes
+Done: created issue #212 with 14 numbered tasks + estimates, ACs and handover references; created 7 append-only Tab4 files + TABS.md entry on Common/main and read back TABS, LINEAGE, EVIDENCE, issue body
+Code (repo branch @ commit | PR): reallakshman19/Common main @ 911fdd184d70812fe5ff34d2a61b2b45a6fdd3bd | no product PR; integration reallakshman19/3D_Converters #211 @ e7be6e26099ebef482dd89dd12898d3661bd6405 (unchanged)
+Tests (command -> pass/fail/skip): GitHub fetch_file Common/main LINEAGE.md EVIDENCE.log TABS.md -> PASS; GitHub fetch_issue #212 212-T1..T14 -> PASS
+CI (run -> result): no new CI; documentation-only Common [skip ci] -> SKIP
+Evidence (link): https://github.com/reallakshman19/3D_Converters/issues/212 ; https://github.com/reallakshman19/Common/commit/911fdd184d70812fe5ff34d2a61b2b45a6fdd3bd
+AC (before -> after): no Tab4 source register / 0 formal Owner acceptance -> issue and coordination source register published / 0 formal Owner acceptance
+Claim: NONE
+Blocker: NONE
+Next: 212-T2, 212-T3, 212-T4
+
+2026-10-11 | TASK EVIDENCE 212-T2
+Task: 212-T2
+Goal (issue AC): AC-03 source/contract classification of all 15 failing exact-head C05 workflows, without protected golden rewrites
+Status: DONE
+Met: yes (diagnostic task only; C05 release defects and owner contract decisions remain OPEN)
+Done: independently read exact-head 15 failed workflow job outcomes/logs; published per-workflow 15-row source/CI matrix identifying #893 bounded vs legacy full-master contract, old cache-generation assumptions, intended RED predecessor tests, cold restore expected exception conflicts, #835/#884 narrow-scope gates, #841 Weight predecessor assertion, and dependent aggregate failures
+Code (repo branch @ commit | PR): reallakshman19/Common main @ cca344bc1c35c0fdae84195a4068eab82ca0803c | source report R-212-01; 3D_Converters #211 @ e7be6e26099ebef482dd89dd12898d3661bd6405 unchanged
+Tests (command -> pass/fail/skip): GitHub fetch_workflow_run_jobs and fetch_workflow_job_logs across all 15 exact-head failing workflows -> PASS diagnosis; source fetch_file #893, #875 and tab/runtime call sites -> PASS comparison; no local Node/Chromium rerun -> SKIP
+CI (run -> result): exact-head 34 total -> 19 SUCCESS / 15 FAILURE, including 38101542898 #893 FAIL, 38101542874 #894 scale-browser SUCCESS but Node FAIL, 38101542960 #835 scope FAIL
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct07/Tab4_Source_Authority_Recovery/RECON/2026-10-11/1-c05-failure-matrix.md ; https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6104345351
+AC (before -> after): AC-03 15 C05 failures undifferentiated -> 15 source/log-linked dispositions with D-212-2 D-212-7 D-212-8 OPEN; formal acceptance 0->0
+Claim: HOSTED_CI
+Blocker: OWNER - adopt per-consumer C05 contract, restore failure semantics and legacy gate applicability without altering protected goldens
+Next: 212-T3, 212-T4; independent work continues while contract decisions remain OPEN
+
+2026-10-11 | TASK EVIDENCE 212-T3
+Task: 212-T3
+Goal (issue AC): AC-01 AC-02, ensure legacy original-JSON owner/zone UI cache cannot be reused across distinct source documents with equal sampled keys
+Status: PARTIAL
+Met: partial (source correction and exact docs twins committed; hosted RED/GREEN still queued)
+Done: constructed provable same-length/first96/middle96/last96 sourceKey collision with different owner label at character 340; added two Node tests + Node22/24 workflow on stacked draft PR #213; minimal product fix adds cached.source===source exact-text condition, stores exact source reference, unchanged indexed Blob worker semantics, source/docs verified identical SHA
+Code (repo branch @ commit | PR): reallakshman19/3D_Converters lfj/212-scope-cache-exact-source-20261011 @ 77adbd1c21e47c22c80f5a9dab47eaed1e973613 | PR #213 draft stacked on #211@e7be6e26099ebef482dd89dd12898d3661bd6405
+Tests (command -> pass/fail/skip): constructed sampled-key collision in in-tool JS -> PASS reproducible; GitHub fetch_file exact tabs/docs blob SHA 79d8cec47f4ac4585dcfd539ffa3513ad91b5973 -> PASS parity; node --test tests/lfj-212-scope-cache-identity.test.mjs tests/lfj-208-unsupported-owner-scope.test.mjs -> NOT_RUN (host queued)
+CI (run -> result): pre-fix 38103222868 @59f6f02d7f11c6f81fb8d1e52263ec190047c9f0 -> QUEUED; patched 38103282171 @77adbd1c21e47c22c80f5a9dab47eaed1e973613 -> QUEUED
+Evidence (link): https://github.com/reallakshman19/3D_Converters/pull/213 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38103222868 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38103282171
+AC (before -> after): sample-key-colliding text can reuse wrong owner index -> exact-text guard coded, hosted verification pending; formal accepted AC 0->0
+Claim: NONE
+Blocker: CI - exact-head #213 pre-fix and patched Node22/24 jobs queued at runs 38103222868 and 38103282171
+Next: 212-T3 verify real RED/GREEN jobs, original CSV regressions and actual Chromium; then 212-T4
+
+2026-10-11 | TASK EVIDENCE 212-T4
+Task: 212-T4
+Goal (issue AC): AC-04 define immutable LFJ original-source to engineering FactRecord basis and fail-closed authorization contract
+Status: PARTIAL
+Met: partial (source-level design and ten falsifiable negatives published; validation code not yet implemented)
+Done: traced actual indexed event Build, SOURCE_PINNED_PREVIEW_ONLY handoff, local CSV-only receipt, separate file-reading final workflow builder and nonblocking legacy readiness; proposed LFJ.EngineeringSourceBasis.v1 with original JSON/XML SHA, selected owner/zone digest, source occurrence/path, completeness/Worker generation, master revisions, governed review epochs and required reject cases; rejected mere flip of engineeringReady flag or use of display CSV rows as complete FactRecords
+Code (repo branch @ commit | PR): reallakshman19/Common main @ 7d52dfea9f0fbaa6abb06391ab804f4a723d4bc1 | contract only, no product PR or code change
+Tests (command -> pass/fail/skip): GitHub fetch_file current #211 indexed-preview, indexed-export, events, final workflow adapter, output readiness and handoff-budget modules -> PASS source-level examination; source-basis validation tests -> NOT_RUN
+CI (run -> result): no implementation CI -> SKIP
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct07/Tab4_Source_Authority_Recovery/RECON/2026-10-11/2-lfj-engineering-authority-contract.md ; https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6104373297
+AC (before -> after): unspecific LFJ downstream bridge -> source-level versioned contract and negative matrix published; no validated downstream behavior; formal accepted AC 0->0
+Claim: NONE
+Blocker: NONE
+Next: 212-T4 build pure validation module/tests; 212-T5 downstream vertical browser integration after contract

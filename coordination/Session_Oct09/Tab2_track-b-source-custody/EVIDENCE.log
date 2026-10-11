@@ -1,0 +1,263 @@
+TAB2 TASK EVIDENCE -- APPEND ONLY. Exact GitHub-posted TASK_EVIDENCE content retained below, separate from research summaries.
+2026-10-11 | chat=6acae34d | TASK_EVIDENCE | source=https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6104127815 | verbatim begin
+## TASK_EVIDENCE — Q004 official-site sighting and actual S2 acquisition blocker (2026-10-11)
+
+**Observed from publisher-controlled public surface (not retained PDF custody):** SOF Class-9 sample landing page https://sofworld.org/imo/class-9/sample-model-test-papers/imo-sample-papers-class-9 and official hosted two-page PDF https://sofworld.org/download/file/fid/73719 were accessible to the web viewer. Visually inspected both displayed PDF pages: Grade 9 IMO sample 2026–27, printed Q004 at PDF page index 0, mathematical-reasoning table and all four labelled choices on that displayed page; official printed answer-key entry **4 (B)** on page index 1. This repeats and independently refreshes #139's **browser observation only**. No copyright source stem/option listing/images copied into this issue.
+
+**Separate computational check (independent agent arithmetic, not independent-human academic signoff):** the displayed four table rows all satisfy the linear relation `y = 2x - 1`; the other three displayed option formulas do not satisfy all rows, so choice B is unique. Printed key B agrees with this calculation. This does **not** close source-component custody or rights gates.
+
+**S2 genuine acquisition attempt:** created an isolated local directory with mode **0700**, outside repository and CI. Direct HTTPS acquisition from the pinned organizer URL failed with `URLError: [Errno -3] Temporary failure in name resolution`; the independent download mechanism also failed. **No real source PDF file, no retained PDF SHA-256, no byte-count receipt, no #145 source_pipeline acquisition receipt, no document-hash-bound private Q004 inspection bundle.** A rendered browser view is not an acquisition receipt; source authenticity/version is not hash-pinned.
+
+**Nine question-component custody statuses:** original_identifier, stem, subparts, options, conditions, figures, captions, hints and answer_or_rubric are **UNRESOLVED for canonical custody** pending examination of real retained bytes by the authorized operator. Web-screen observations are research sightings and must not be entered as `PRESERVED`/`EXTERNAL_REFERENCE_VERIFIED` in `question.extensions.source_custody` or forged as a completed #145 template.
+
+**S4 rights:** SOF's website asserts all rights reserved and prior written consent for copying/using site content; the official contact page identifies `info@sofworld.org` for general queries. There is no paper-specific permission/independent rights-owner determination, no sent inquiry, and no authorised external-reference publication decision. **`SOURCE_RIGHTS_HOLD`.** Source: https://sofworld.org/contact and https://sofworld.org/.
+
+**Draft enquiry — NOT SENT; authorized Owner/rights coordinator to approve and send:**
+
+> To: info@sofworld.org (please route to the permissions/rightsholder representative)  
+> Subject: Permission and rights-holder verification — SOF IMO Class 9 sample 2026–27, Q004  
+> We operate a Grade 9 educational mathematics learner site and are evaluating whether Q004 from your official 2026–27 IMO Class 9 sample (https://sofworld.org/download/file/fid/73719) may be included with clear SOF attribution. Please confirm who controls the rights to this exact sample item, table/graphics, answer choices and key. Please advise separately whether you authorize (a) preserving the PDF privately for authenticity checking, (b) displaying the exact question/choice wording, (c) reproducing its table/figures, (d) displaying or adapting the answer key/solutions, (e) linking learners to the original PDF with external-reference-only presentation, and (f) derivative interactive/print educational delivery. If available, specify territory, duration, conditions, attribution, revocation and whether written permission is required for each use. We will not republish the source content pending an affirmative, evidenced decision.
+
+**Checkpoint facts:** S1 metadata/source locator crosswalk supported; S2 NOT_DONE (DNS/access blocker), S3 web sighting + arithmetic only (full private inspection NOT_DONE), S4 request DRAFT_NOT_SENT, S5 final decision NOT_DONE. Retained source positions with admitted canonical Core2 proof remain **0/68**, QRT accepted **0/28**, learner release **HOLD** as in the frozen census. No repository/code/census/publication mutation and no source PDF uploaded. **NEXT:** authorized operator with functioning network or authenticated local PDF must run #145's private acquisition, verify original bytes, then hash-bound Q004 inspection; designated rights contact must send request and collect written disposition.
+VERBATIM END | https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6104127815
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | IMPLEMENTATION_PLAN rev1 | source=https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6104127564 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | TRACK_B_CHECKPOINT Q004 HOLD | source=https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104131075 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | Q004 source/rights owning handoff | source=https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104132888 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | owner override; 68-row read-only triage board | source=https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104182799 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | source operator stop-repeat override | source=https://github.com/reallakshman19/Grade9v3.5/issues/163#issuecomment-6104186070 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | Q004 Owner/QRT review packet | source=https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104186333 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | Q004 formal technical HOLD and priority queue | source=https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104201267 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | Q004 reviewer decisions | source=https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104202963 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | P1 seven-source research triage | source=https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104241254 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | Q007/Q008 QRT/rights handoff | source=https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104243688 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | P2 49-source decision register | source=https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104349425 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | P3 ten-case/eleven-position dispute matrix | source=https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104358617 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | 68/68 review handoff | source=https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104361846 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | POSTED BLOCK REFERENCE | programme coordination complete research triage | source=https://github.com/reallakshman19/Grade9v3.5/issues/137#issuecomment-6104362039 | not a separate verbatim TASK_EVIDENCE heading
+2026-10-11 | chat=6acae34d | RECON | plan r1->r2 Owner accepts absent PDF for triage; no rights/QRT/Owner admission invented; see CHECKPOINTS.md and https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104201267
+2026-10-11 | chat=6acae34d | RECON | full P0/P1/P2/P3 research 68/68, admission 0/68, QRT 0/28; see https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104358617
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T01 | exact posted body begin | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104485790
+## TASK_EVIDENCE — Tab2-T01 — Sample paper rights/use decision sheet
+Track B / 6acae34d / 2026-10-11; Owner waives repeat PDF verification for research, not rights or canonical academic admissions.
+
+**Goal:** Convert the previous unsent sample rights enquiry into an approval-ready **decision instrument**, not another request for PDF inspection.
+**Scope:** document `SOF-IMO-G09-SAMPLE-2026-27`; item-specific use instances Q004, Q007, Q008 first, but clarify coverage of all ten source questions and any diagram/table.
+
+| Proposed use scope | Recorded permission | Rightsholder decision to obtain |
+|---|---|---|
+| Private source research/custody | NOT EVIDENCED as a licence | identity and allowed retention/access |
+| Link to publisher-hosted PDF only | NOT ACCEPTED as canonical external-reference | exact linking/display authority and what the learner sees |
+| Verbatim stem, all options, key | NOT GRANTED | explicit education/public website use and attribution |
+| Original tables, figures and symbols | NOT GRANTED | original visual and exact notation licence, separate media clearance |
+| Source answer/key or independently derived explanation | NOT GRANTED for publisher material | mark allowed distinction between source key vs own mathematical analysis |
+| Interactive exercise, derivative, print/export | NOT GRANTED | scope, derivative permission, print, territory, term, revocation |
+
+**Ready-to-send publisher request text (NOT SENT):**
+“Please identify the rights holder for the SOF IMO Grade 9 organizer sample 2026–27 and confirm, separately, authorization for (a) citation/link to the source PDF, (b) verbatim text/options/key, (c) figures/tables/math notation, (d) derivative solutions/interactive delivery, and (e) learner print/export. Please identify any constraints by question, attribution, territory and duration, and the documentary evidence we should preserve. If any use is not authorized, please state that expressly. We will not assume that source availability confers reproduction rights.”
+
+**Owner/rights actor fill-in receipt:** `source_document_id`, `actual_rights_holder`, `rights_actor`, `decision_at_utc`, `use_mode`, `scope_by_component`, `scope_by_item`, `written_permission_or_denial_evidence_ref`, `conditions`, `effective_status`. Until received, `R_SAMPLE=OPEN/NOT_GRANTED`. No outbound communication occurred.
+
+**Status:** DONE (decision sheet prepared), BLOCKED (third-party legal/rights reply not authorized/received). **Met:** preparation yes; licensed use no. **Code/branch:** no write. **Tests/CI:** NOT_RUN; no requirement to fetch PDF. **AC:** rights decision pending -> specific decision receipt requested; rights granted 0 -> 0. **Claim:** RESEARCH_ONLY. **Blocker:** external rights-holder and authorized sender. **Next:** authorized owner send/record disposition; do not convert link-only into original Core2.
+EXACT POSTED BLOCK END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104485790
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T02 | exact posted body begin | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486035
+## TASK_EVIDENCE — Tab2-T02 — Q004 question-demand decision
+Track B / 6acae34d / 2026-10-11; Owner waives repeat PDF verification for research, not rights or canonical academic admissions.
+
+**Goal:** Resolve what may be prepared now for the Q004 academic authority, separate from publisher and PDF custody.
+**Exact ID:** `SOF-IMO-G09-SAMPLE-2026-27-Q004`; historic organizer key B, historic independent agent linear relation `y=2x-1`, separate evidence classes.
+
+**Stored proposed demand receipt:** primary `REPRESENT`; secondary `APPLY`; 5 factors ordered `concept_model_selection=0, representation_translation=1, reasoning_chain_length=0, algebra_computational_load=0, trap_exception_sensitivity=0`, sum 1 -> D1; `QRT-REPRESENT-D1`. Research proposal from `TEST/imo-research/verification/official-sample-2026-27-math-qrt-pilot.v1.json` SHA `555d2719d917d30758acdc3ebc8d9270421d9e62`.
+
+**Protected decision:** preserve the pairs/meaning when converting a table to a linear relationship. **Classification alternative for reviewer:** if original choices remove the learner-owned representation step, reconsider `APPLY`/D1; do not infer difficulty from answer letter or provenance. **Independent review request:** say `ACCEPT`, `RECLASSIFY(primary, five scores, band)`, or `REJECT` with rationale; record `question_id, exact_item_basis, review_authority, reviewed_at_utc, canonical_demand_cell, decision`. Stored `accepted=false` remains authoritative until that receipt.
+
+**Item use:** Owner's missing-PDF operational waiver applied; no renewed source checks requested. Rights and nine-component original item-fidelity authority remain separate. **Disposition:** `Q004_MATH_AGENT_CONSISTENT`, `Q004_QRT_PREPARED_NOT_ACCEPTED`, `Q004_CANONICAL_HOLD`.
+
+**Status:** DONE (fixed decision-grade proposed receipt) / BLOCKED (authorized QRT decision). **Met:** prepared yes, accepted no. **Code/tests/CI:** none; no calculation rerun/PDF fetch. **AC:** QRT accepted cells 0/28 -> 0/28; one item now has explicit reviewer-choice schema. **Claim:** AGENT_RESEARCH_NOT_SIGNED. **Next:** authorized named QRT accept/reclassify/reject and rights decision, then separate Owner admission.
+EXACT POSTED BLOCK END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486035
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T03 | exact posted body begin | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486322
+## TASK_EVIDENCE — Tab2-T03 — Q007/Q008 differentiated Math QRT dockets
+Track B / 6acae34d / 2026-10-11; Owner waives repeat PDF verification for research, not rights or canonical academic admissions.
+
+**Goal:** Package the next two sample mathematical source positions as separate decisions rather than a blanket sample approval. Input historical QRT pilot blob SHA `555d2719d917d30758acdc3ebc8d9270421d9e62`.
+
+| Question | Historical printed/agent answer | Primary/secondary demands | Five factors (model, translation, chain, algebra, trap) | Derived proposed band/cell | Learner-owned protected mathematical choice |
+|---|---|---|---|---|---|
+| `SOF-IMO-G09-SAMPLE-2026-27-Q007` | D / D; evaluated polynomial=60 | MODEL; SYNTHESIZE, APPLY | **2/1/2/1/1** = 7 | D3, `QRT-MODEL-D3` | identify *both* divisibility conditions as zeros and coordinate the two equations before evaluating |
+| `SOF-IMO-G09-SAMPLE-2026-27-Q008` | D / D; cone height 15 m | MODEL; APPLY | **1/1/1/0/0** = 3 | D2, `QRT-MODEL-D2` | distinguish ground *area* from total required air *volume* before applying cone relation |
+
+**Reviewer contrasts:** Q007 D3 assumes model/bridge selection among plausible rules, not just executing polynomial substitution; Q008 D2 assumes one necessary geometric model connection, not a high-transfer exception. These are historical AI research scores, not accepted independent QRT ratings. A reviewer may reclassify both after determining exact learner-owned choices.
+
+**Decision receipt per item:** `question_id, printed_key_basis, primary_demand, secondary_demands, five_factor_0_to_2, computed_score, computed_band, protected_decision, reviewer_identity, review_date, ACCEPT|RECLASSIFY|REJECT`. License and source-item fidelity **not implied** by the numeric score. For either unsupported assignment, `HOLD` rather than auto-accept.
+
+**Status:** DONE (two separate reviewer dockets with criterion checks), BLOCKED (QRT authority). **Met:** packet yes; accepted 0. **Code/tests/CI:** none; no source re-verification. **AC:** 2 QRT candidate decisions prepared; accepted 0/28 unchanged. **Claim:** PROPOSED_AI_NOT_ACADEMICALLY_ACCEPTED. **Next:** reviewer decides each, then document-level rights plus Owner admission.
+EXACT POSTED BLOCK END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486322
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T04 | exact posted body begin | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486576
+## TASK_EVIDENCE — Tab2-T04 — 2025–26 school-mirror rights decision sheet
+Track B / 6acae34d / 2026-10-11; Owner waives repeat PDF verification for research, not rights or canonical academic admissions.
+
+**Goal:** Separate the next full-paper document rights question from the organizer sample and from school hosting. Target source document `SOF-IMO-G09-L1-2025-26-A`; review-first original positions `Q037` (age equations), `Q045` (cuboid polynomial), `Q036` (perfect-square counting), all historically audited in B04 SHA `39421377f759b409bb4b87351ba55b0b8b98ce16`. No diagram was needed in those three agent solutions; **this is not** a source-asset fidelity finding.
+
+**Rights boundary:** school-hosted PDF is a historical *source mirror*, not evidence that the school grants SOF publisher copyright. Separate original-paper source owner, mirror host, compilation author and mathematical researcher. Sample-paper authorization, even if later received, does not automatically cover 2025–26 original papers.
+
+**Ready-to-send authorized enquiry (NOT SENT):**
+“Please confirm ownership and permitted educational uses for the SOF IMO Grade 9 2025–26 Level 1 original paper, including source items 36, 37 and 45 as separate works or under paper-level permission. Please decide original wording, options/key, notation, figures, separately linked external-reference access, derivative explanation, interactive display and printable content. Identify scope, attribution, dates and evidence reference. We are not treating the school mirror or a math derivation as permission to reproduce source material.”
+
+**Evidence receipt:** `paper_source_id, rights_holder_verified_by, permission_actor, written_decision_at, document_or_item_scope, use_mode, figures/tables/choices/key flags, commercial/noncommercial limitation, term/territory, revocation, permission_ref, rights_status`. Unknowns explicitly unresolved. Distinct 2023–24 and 2024–25 paper rights remain their own future decisions.
+
+**Status:** DONE (2025–26 document-level permission package) / BLOCKED (authorized permission and rights-holder response). **Met:** yes for packet, no for grants. **Code/tests/CI:** no changes, no source fetch. **AC:** full-paper publication permissions 0->0; three positions now attached to a single document-scoped licensing decision. **Claim:** RESEARCH_ONLY. **Next:** authorized rightsholder contact, per-item QRT/Owner consideration independent of any paper-wide licence.
+EXACT POSTED BLOCK END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486576
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T05 | exact posted body begin | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104486895
+## TASK_EVIDENCE — Tab2-T05 — owner source-Core2 exception/admission docket and five-task reconciliation
+Track B / 6acae34d / 2026-10-11; Owner waives repeat PDF verification for research, not rights or canonical academic admissions.
+
+**Goal:** Produce one final **fail-closed admission docket** for the six next mathematical source candidates and name exactly who must decide, incorporating the already posted evidence instead of rechecking PDFs.
+
+| Exact original source ID | Agent math/answer research | QRT status | Item-licence status | Core2 proposed admission ruling |
+|---|---|---|---|---|
+| `SOF-IMO-G09-SAMPLE-2026-27-Q004` | linear y=2x−1 / B | `REPRESENT-D1` proposed, not accepted | no source-specific grant | `HOLD_RIGHTS_QRT_FIDELITY` |
+| `SOF-IMO-G09-SAMPLE-2026-27-Q007` | zero constraints, 60 / D | `MODEL-D3` proposed, not accepted | no source-specific grant | `HOLD_RIGHTS_QRT_FIDELITY` |
+| `SOF-IMO-G09-SAMPLE-2026-27-Q008` | cone height 15m / D | `MODEL-D2` proposed, not accepted | no source-specific grant | `HOLD_RIGHTS_QRT_FIDELITY` |
+| `SOF-IMO-G09-L1-2025-26-A-Q037` | linked ages, 20 years / A | NOT_CLASSIFIED_ACCEPTED; reviewer to decide primary demand and band | no paper-level grant | `HOLD_RIGHTS_QRT_FIDELITY` |
+| `SOF-IMO-G09-L1-2025-26-A-Q045` | factor `x(x−3)(x+4)` / B | NOT_CLASSIFIED_ACCEPTED; reviewer to decide factoring vs representation and domain relevance | no paper-level grant | `HOLD_RIGHTS_QRT_FIDELITY` |
+| `SOF-IMO-G09-L1-2025-26-A-Q036` | square-count model, 105 rows / B | NOT_CLASSIFIED_ACCEPTED; reviewer to decide MODEL vs APPLY | no paper-level grant | `HOLD_RIGHTS_QRT_FIDELITY` |
+
+**Owner exception decision C:** The Owner waived repetitive download/hash verification **as an operational task**. Record this as `MISSING_PDF_RESEARCH_WAIVER`. This does **not automatically amend** the canonical source-component schema or licence terms. The authorized admission Owner must explicitly choose, *per item*: `ADMIT_WITH_DOCUMENTED_CONTRACT_EXCEPTION` (citing the actual changed contract/authority, permissible use, exact original components and accepted QRT), `EXTERNAL_REFERENCE_MODE_APPROVED` (citing independently valid contract+rights+reference conditions), or `HOLD`. At present, only `HOLD` is supported. Do not encode `PDF_RETAINED=true`, `SOURCE_COMPONENTS_VERIFIED=true`, `RIGHTS_GRANTED` or accepted QRT without receipts.
+
+**Reconciliation of next 5:** (1) sample rights use-matrix prepared, awaiting authorized reply; (2) Q004 QRT reviewer decision docket prepared, awaiting acceptance; (3) Q007/008 distinct QRT dockets prepared, awaiting acceptance; (4) 2025-26 document-rights scope prepared, awaiting reply; (5) six-item source admission/Owner exception docket prepared, awaiting authorized ruling. **5/5 preparation tasks DONE; 0 third-party permission grants; 0 reviewer acceptances; 0 canonical admissions**. 68/68 triaged research still, no learner release.
+
+**Status:** DONE (formal bounded admission decision docket) / BLOCKED (R/Q/C decisions external). **Met:** planning work complete, final admission not met. **Code/tests/CI:** no source or product repository changes, tests NOT_RUN, CI NOT_RUN. **AC:** admission unchanged 0/68; QRT accepted unchanged 0/28; five review decision requests can now be answered without another tool build or PDF attempt. **Claim:** NO_CANONICAL_ADMISSION. **Blocker:** written licensing, authorized QRT review and Owner source-fidelity/admission. **Next:** do not create more repeated readiness packets; proceed only on a new authorized R/Q/C decision or new substantive source evidence.
+EXACT POSTED BLOCK END | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104486895
+
+
+2026-10-11 | chat=6acae34d | RECON | Session_Oct09/TABS.md was concurrently replaced with only Tab1; previous own Tab2 line from log bootstrap not present at current head; one-line append repair, preserve all other-tab text; after repair expect Tab1 and Tab2 each once. No original Core2 rights/QRT/admission change.
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T06 | EXACT POSTED BODY START | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535309
+## TASK_EVIDENCE — Tab2-T06 — SOF-IMO-G09-L1-2025-26-A-Q037 candidate QRT assessment
+**Track B, chat 6acae34d, 2026-10-11.** New *agent-authored, question-specific proposed* QRT assessment from stored B03/B04 research; not an original source transcription, academic reviewer acceptance, publisher use right, canonical admission or Track A exercise. Owner explicitly stopped repeat PDF verification; none performed. Authoritative bands: D1=0–2, D2=3–5, D3=6–7, D4=8–10; factor order MODEL/REPRESENTATION/CHAIN/COMPUTATION/TRAP (each 0–2). All rights, QRT, item-fidelity and owner release holds preserved.
+
+**Task:** Tab2-T06; **Question:** `SOF-IMO-G09-L1-2025-26-A-Q037`; provisional topic `LIN_EQ-AGE-EQUATIONS`. **Source evidence:** B04 exact research blob 39421377f759b409bb4b87351ba55b0b8b98ce16, audit IMO-B04-002; historically agent-selected A, reported answer 20 years; source figure dependency absent in agent record.
+
+**New proposed QRT (NOT accepted/registered):** primary `MODEL`, secondary `SYNTHESIZE, APPLY`, factor scores `1/1/2/1/1`, total **6**, band **D3**, candidate cell `QRT-MODEL-D3`.
+
+**Protected learner decision (W):** Translate present combined ages and a past multiplicative relation into one consistent pair of linked age equations while keeping the time index of both people aligned; bridge past age to future requested age.
+
+**Factor evidence anchored to the canonical 0–2 rubric:**
+1. Identify a familiar variable-and-time-shift model from a word context, not among multiple advanced models (1).
+2. Translate age states at present/past/future to variables without changing which person/instant each refers to (1).
+3. Dependent chain: form ages, shift both, solve equality, then shift forward (2).
+4. Routine linear manipulation material but bounded (1).
+5. One local trap: shifting only one person or substituting a future age into the past ratio changes the result (1).
+
+**Source-specific alternative/adversarial review:** Primary SYNTHESIZE-D3 may fit if multiple age-conditions coordination rather than model selection is decisive in the exact source item; if equation model is explicitly provided, re-score model selection 0 and protect the dependent chain.
+
+**Decision receipt needed:** question ID, exact-item basis/conditions, selected primary/secondary demand, all five signed numeric scores, derived band, reviewer identity/date, explicit `ACCEPT | RECLASSIFY | REJECT`. Neither research maths, the Owner's operational PDF waiver nor the proposed category can make that decision automatically.
+
+**Status:** DONE (novel bounded *provisional* classification prepared), BLOCKED for external authorized source rights, item fidelity, signed QRT and Owner canonical admission. **Met:** technical research preparatory step yes; approval no. **Code/branch:** no product file changed. **Tests/CI:** NOT_RUN; no repeated PDF or mathematical verification. **AC before -> after:** candidate scholarly classification for this exact original-source position unrecorded in this Tab2 batch -> candidate proposal with anchored rubric; accepted QRT 0/28 -> 0/28; admitted Core2 0/68 -> 0/68. **Claim:** `PROVISIONAL_MODEL_D3_REVIEW_REQUESTED`; no source rights granted. **Blocker:** designated reviewer and rights/fidelity/Owner authorities. **Next:** reviewer primary-vs-secondary demand and five scores; date, sign; rights and fidelity C decision later.
+EXACT POSTED BODY END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535309
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T07 | EXACT POSTED BODY START | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535564
+## TASK_EVIDENCE — Tab2-T07 — SOF-IMO-G09-L1-2025-26-A-Q045 candidate QRT assessment
+**Track B, chat 6acae34d, 2026-10-11.** New *agent-authored, question-specific proposed* QRT assessment from stored B03/B04 research; not an original source transcription, academic reviewer acceptance, publisher use right, canonical admission or Track A exercise. Owner explicitly stopped repeat PDF verification; none performed. Authoritative bands: D1=0–2, D2=3–5, D3=6–7, D4=8–10; factor order MODEL/REPRESENTATION/CHAIN/COMPUTATION/TRAP (each 0–2). All rights, QRT, item-fidelity and owner release holds preserved.
+
+**Task:** Tab2-T07; **Question:** `SOF-IMO-G09-L1-2025-26-A-Q045`; provisional topic `POLY-FACTORISATION`. **Source evidence:** B04 exact research blob 39421377f759b409bb4b87351ba55b0b8b98ce16, audit IMO-B04-007; agent-selected B, product x(x−3)(x+4), reverse expansion check; no figure dependency reported.
+
+**New proposed QRT (NOT accepted/registered):** primary `REPRESENT`, secondary `APPLY`, factor scores `0/1/1/1/0`, total **3**, band **D2**, candidate cell `QRT-REPRESENT-D2`.
+
+**Protected learner decision (W):** Convert a polynomial volume expression into three multiplicative factors interpretable as possible dimensions, maintaining equality under expansion; do not disclose the binomial pair in pre-attempt support.
+
+**Factor evidence anchored to the canonical 0–2 rubric:**
+1. The task context supplies the governing polynomial and factorization route, no material selection among models (0).
+2. Direct structural translation from additive polynomial to three multiplicative dimensions (1).
+3. Extract common x then factor a quadratic with coordinated coefficients (1).
+4. Local symbolic manipulations materially required (1).
+5. Existing agent noted physical constraint x>3, but whether source item requires a physical domain decision is not established, so do not score a domain trap now (0).
+
+**Source-specific alternative/adversarial review:** APPLY-D2 primary if the exact assessed action is merely factorization rather than representing dimensions; if reviewer establishes that valid positive dimensions and x>3 must be decided, conditional trap score 1 -> total 4, still D2.
+
+**Decision receipt needed:** question ID, exact-item basis/conditions, selected primary/secondary demand, all five signed numeric scores, derived band, reviewer identity/date, explicit `ACCEPT | RECLASSIFY | REJECT`. Neither research maths, the Owner's operational PDF waiver nor the proposed category can make that decision automatically.
+
+**Status:** DONE (novel bounded *provisional* classification prepared), BLOCKED for external authorized source rights, item fidelity, signed QRT and Owner canonical admission. **Met:** technical research preparatory step yes; approval no. **Code/branch:** no product file changed. **Tests/CI:** NOT_RUN; no repeated PDF or mathematical verification. **AC before -> after:** candidate scholarly classification for this exact original-source position unrecorded in this Tab2 batch -> candidate proposal with anchored rubric; accepted QRT 0/28 -> 0/28; admitted Core2 0/68 -> 0/68. **Claim:** `PROVISIONAL_REPRESENT_D2_REVIEW_REQUESTED`; no source rights granted. **Blocker:** designated reviewer and rights/fidelity/Owner authorities. **Next:** reviewer choose REPRESENT versus APPLY and whether source actually tests domain positivity; rights/fidelity separate.
+EXACT POSTED BODY END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535564
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T08 | EXACT POSTED BODY START | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535797
+## TASK_EVIDENCE — Tab2-T08 — SOF-IMO-G09-L1-2025-26-A-Q036 candidate QRT assessment
+**Track B, chat 6acae34d, 2026-10-11.** New *agent-authored, question-specific proposed* QRT assessment from stored B03/B04 research; not an original source transcription, academic reviewer acceptance, publisher use right, canonical admission or Track A exercise. Owner explicitly stopped repeat PDF verification; none performed. Authoritative bands: D1=0–2, D2=3–5, D3=6–7, D4=8–10; factor order MODEL/REPRESENTATION/CHAIN/COMPUTATION/TRAP (each 0–2). All rights, QRT, item-fidelity and owner release holds preserved.
+
+**Task:** Tab2-T08; **Question:** `SOF-IMO-G09-L1-2025-26-A-Q036`; provisional topic `NS-SQUARES-AND-ROOTS`. **Source evidence:** B04 exact research blob 39421377f759b409bb4b87351ba55b0b8b98ce16, audit IMO-B04-001; historical agent-selected B, result 105 rows; no figure dependency reported.
+
+**New proposed QRT (NOT accepted/registered):** primary `MODEL`, secondary `APPLY, REPRESENT`, factor scores `1/1/1/1/0`, total **4**, band **D2**, candidate cell `QRT-MODEL-D2`.
+
+**Protected learner decision (W):** Recognize that equal row/tree counts create a square-count model before undoing the tree-loss count and taking the square root; don't reveal the square model prematurely.
+
+**Factor evidence anchored to the canonical 0–2 rubric:**
+1. Select familiar square-count relation from equal quantities per row (1).
+2. Translate rows and trees per row to a single squared quantity (1).
+3. Link original total to remaining-plus-loss and invert count into row size (1).
+4. Routine addition and square-root calculation material but local (1).
+5. No independently evidenced hidden condition or exceptional branch required (0).
+
+**Source-specific alternative/adversarial review:** APPLY-D1 or D2 may be primary if the exact learner-visible source already supplies the n² relation; only a reviewer with appropriate source decision authority can determine how much model selection remains.
+
+**Decision receipt needed:** question ID, exact-item basis/conditions, selected primary/secondary demand, all five signed numeric scores, derived band, reviewer identity/date, explicit `ACCEPT | RECLASSIFY | REJECT`. Neither research maths, the Owner's operational PDF waiver nor the proposed category can make that decision automatically.
+
+**Status:** DONE (novel bounded *provisional* classification prepared), BLOCKED for external authorized source rights, item fidelity, signed QRT and Owner canonical admission. **Met:** technical research preparatory step yes; approval no. **Code/branch:** no product file changed. **Tests/CI:** NOT_RUN; no repeated PDF or mathematical verification. **AC before -> after:** candidate scholarly classification for this exact original-source position unrecorded in this Tab2 batch -> candidate proposal with anchored rubric; accepted QRT 0/28 -> 0/28; admitted Core2 0/68 -> 0/68. **Claim:** `PROVISIONAL_MODEL_D2_REVIEW_REQUESTED`; no source rights granted. **Blocker:** designated reviewer and rights/fidelity/Owner authorities. **Next:** review primary MODEL versus APPLY, retained-score anchors, and whether the n² model is truly learner-owned.
+EXACT POSTED BODY END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535797
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T09 | EXACT POSTED BODY START | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104536024
+## TASK_EVIDENCE — Tab2-T09 — SOF-IMO-G09-L1-2023-24-A-Q038 candidate QRT assessment
+**Track B, chat 6acae34d, 2026-10-11.** New *agent-authored, question-specific proposed* QRT assessment from stored B03/B04 research; not an original source transcription, academic reviewer acceptance, publisher use right, canonical admission or Track A exercise. Owner explicitly stopped repeat PDF verification; none performed. Authoritative bands: D1=0–2, D2=3–5, D3=6–7, D4=8–10; factor order MODEL/REPRESENTATION/CHAIN/COMPUTATION/TRAP (each 0–2). All rights, QRT, item-fidelity and owner release holds preserved.
+
+**Task:** Tab2-T09; **Question:** `SOF-IMO-G09-L1-2023-24-A-Q038`; provisional topic `LIN_EQ-CONTEXT-TO-EQUATION`. **Source evidence:** B03 exact research blob e9639dc85fb0a7eb0630777d30c07563204c4ad3, audit IMO-B03-008; historical agent-selected A, affine-cost relation −25x+y=700; source audit TEXT_OR_SYMBOLS_ONLY.
+
+**New proposed QRT (NOT accepted/registered):** primary `REPRESENT`, secondary `MODEL, APPLY`, factor scores `1/1/1/0/0`, total **3**, band **D2**, candidate cell `QRT-REPRESENT-D2`.
+
+**Protected learner decision (W):** Preserve the independent fixed charge and per-unit rate while translating a context to a linear equation; do not hand the learner which term is invariant versus proportional.
+
+**Factor evidence anchored to the canonical 0–2 rubric:**
+1. Recognize one familiar fixed-plus-variable cost pattern and decide the applicable relation (1).
+2. Map semantic givens to intercept and slope/variables, preserving unit correspondence (1).
+3. Bridge from total expression to equivalent requested linear equation (1).
+4. Rearrangement is incidental/routine for learner-owned decision, not a substantial algebraic burden (0).
+5. No necessary hidden domain/converse exception is evidenced (0).
+
+**Source-specific alternative/adversarial review:** MODEL-D2 primary if choosing the fixed-plus-variable model is the assessed crux; REPRESENT-D1 if exact source wording already explicitly supplies the model/representation and the learner only transcribes/rearranges. Different source-document rights decision from Q036/37/45.
+
+**Decision receipt needed:** question ID, exact-item basis/conditions, selected primary/secondary demand, all five signed numeric scores, derived band, reviewer identity/date, explicit `ACCEPT | RECLASSIFY | REJECT`. Neither research maths, the Owner's operational PDF waiver nor the proposed category can make that decision automatically.
+
+**Status:** DONE (novel bounded *provisional* classification prepared), BLOCKED for external authorized source rights, item fidelity, signed QRT and Owner canonical admission. **Met:** technical research preparatory step yes; approval no. **Code/branch:** no product file changed. **Tests/CI:** NOT_RUN; no repeated PDF or mathematical verification. **AC before -> after:** candidate scholarly classification for this exact original-source position unrecorded in this Tab2 batch -> candidate proposal with anchored rubric; accepted QRT 0/28 -> 0/28; admitted Core2 0/68 -> 0/68. **Claim:** `PROVISIONAL_REPRESENT_D2_REVIEW_REQUESTED`; no source rights granted. **Blocker:** designated reviewer and rights/fidelity/Owner authorities. **Next:** reviewer distinguish choice of model from faithful representation and validate learner-owned intercept.
+EXACT POSTED BODY END | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104536024
+
+2026-10-11 | chat=6acae34d | TASK EVIDENCE Tab2-T10 | EXACT POSTED BODY START | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104536257
+## TASK_EVIDENCE — Tab2-T10 — SOF-IMO-G09-SAMPLE-2026-27-Q005 candidate QRT assessment
+**Track B, chat 6acae34d, 2026-10-11.** New *agent-authored, question-specific proposed* QRT assessment from stored B03/B04 research; not an original source transcription, academic reviewer acceptance, publisher use right, canonical admission or Track A exercise. Owner explicitly stopped repeat PDF verification; none performed. Authoritative bands: D1=0–2, D2=3–5, D3=6–7, D4=8–10; factor order MODEL/REPRESENTATION/CHAIN/COMPUTATION/TRAP (each 0–2). All rights, QRT, item-fidelity and owner release holds preserved.
+
+**Task:** Tab2-T10; **Question:** `SOF-IMO-G09-SAMPLE-2026-27-Q005`; provisional topic `ANGLES-ANGLE-RELATIONS`. **Source evidence:** Later existing agent-only angle proof blob 0a5ab722b3635b81ac597fbb436b25d6968febe0; historical dispute IMO-SOURCE-CONFLICT-009 in source register blob 4761aecd4e54c0c694026ab10c4aa7cbfa539e56. Existing observer key C, later agent relation y=90°−x/2. Original figure is not licensed or canonically reconciled.
+
+**New proposed QRT (NOT accepted/registered):** primary `JUSTIFY`, secondary `REPRESENT, APPLY`, factor scores `1/2/2/0/1`, total **6**, band **D3**, candidate cell `QRT-JUSTIFY-D3`.
+
+**Protected learner decision (W):** Provide a valid angle warrant tying transferred parallel-line angles, a supplementary relation and two equal adjacent sectors into a conclusion; figure geometry and sector placement must be correct for this reasoning to apply.
+
+**Factor evidence anchored to the canonical 0–2 rubric:**
+1. Identify familiar parallel/transversal and straight-angle warrants (1).
+2. Interpreting directed rays and visually equal sector labels while preserving orientation is decisive (2).
+3. Parallel transfer -> supplementary angle -> sector split -> symbolic relation forms dependent chain (2).
+4. Final symbolic manipulation small compared with geometry (0).
+5. Choosing wrong rays/assuming x adjacent to one y rather than 2y plausibly changes the conclusion (1).
+
+**Source-specific alternative/adversarial review:** CRITICAL CONDITIONAL: this is a *new suggested* source-specific QRT overlay only if independent source-diagram authority confirms the two parallel indicators, directed x sector and two adjacent y sectors. If any drawn fact is unconfirmed, DO NOT file QRT as proposed in frozen ledger; retain original P0 source/editorial HOLD. Primary REPRESENT versus JUSTIFY is reviewable after diagram authority.
+
+**Decision receipt needed:** question ID, exact-item basis/conditions, selected primary/secondary demand, all five signed numeric scores, derived band, reviewer identity/date, explicit `ACCEPT | RECLASSIFY | REJECT`. Neither research maths, the Owner's operational PDF waiver nor the proposed category can make that decision automatically.
+
+**Status:** DONE (novel bounded *provisional* classification prepared), BLOCKED for external authorized source rights, item fidelity, signed QRT and Owner canonical admission. **Met:** technical research preparatory step yes; approval no. **Code/branch:** no product file changed. **Tests/CI:** NOT_RUN; no repeated PDF or mathematical verification. **AC before -> after:** candidate scholarly classification for this exact original-source position unrecorded in this Tab2 batch -> candidate proposal with anchored rubric; accepted QRT 0/28 -> 0/28; admitted Core2 0/68 -> 0/68. **Claim:** `CONDITIONAL_JUSTIFY_D3_NOT_REGISTERED_IN_CANONICAL_QRT`; no source rights granted. **Blocker:** designated reviewer and rights/fidelity/Owner authorities. **Next:** authorized diagram/editorial authority determines if candidate geometry is valid; then QRT reviewer may accept/reclassify/reject, rights first for reproduction.
+EXACT POSTED BODY END | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104536257
+
+2026-10-11 | chat=6acae34d | RECON | five proposed source-item QRT classifications T06..T10 grounded in rubric source blob 3d88b249042c501fbcbd6d8e45a9a7c523eb907c and cognitive matrix 3779a53ae7d20efbb4644bc3f9243909e93dc145; no original PDF/source components reproduced. Historical proposal acceptance 0/28, admission 0/68.
+
+2026-10-11 | chat=6acae34d | RECON ONLY (NO TASK_EVIDENCE because approvals not performed) | read-only issue comments/readbacks #130 (77 comments), #163 (16 comments), #174 (8 comments) as of this intake; no newly evidenced signed publisher grant, independent accepted QRT or Owner admission; last entries remain Tab2's T01..T10 or earlier historical operator decisions. No item moved from HOLD, no external rights request sent, no code/CI/test/PDF operation. Blocker AUTHORITY and responsibility stays with authorized actors; no false completion or new GitHub issue comments.
+
+2026-10-11 | chat=6acae34d | RECON/HANDOVER NOT TASK_EVIDENCE | Full technical report published as one #174 PLAN_UPDATE comment https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104788867, source head @778eb35a70517a46108ad0a5dc01dfc89f61c0e3 with red Guardrails and historical PR-head specificity. Parent #130 chat-only Section6 appendix https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104765778; same full comment body preserved as dated Common Tab2 handover. No new product tests, CI, source PDFs, rights emails or learner release; all T11-T15 authority-gated; legal/QRT/Owner acceptance 0. Next engineer receives self-contained report; no new Stage2 or Runner B authority.
