@@ -150,8 +150,13 @@ def reconcile_current_source(
              leaf.get("base_sha") is not None and
              leaf.get("pr_state") == source["pr_state"],
              "NATIVE_SELECTED_MATERIAL_MISMATCH")
-    graph_after, raw_after, branch_after = _custody_pass(
-        graph_provider, repository, graph_path, graph_revision)
+    try:
+        graph_after, raw_after, branch_after = _custody_pass(
+            graph_provider, repository, graph_path, graph_revision)
+    except SourceHold as exc:
+        if str(exc) == "SOURCE_GRAPH_NOT_CURRENT_RELEASED":
+            raise SourceHold("SOURCE_GRAPH_MOVED_DURING_READ") from exc
+        raise
     _require(raw_after == raw_digest and branch_after == default_branch and
              graph_after == graph, "SOURCE_GRAPH_MOVED_DURING_READ")
 
