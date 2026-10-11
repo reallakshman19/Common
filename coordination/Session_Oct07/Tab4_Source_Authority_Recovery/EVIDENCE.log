@@ -1,0 +1,2 @@
+TAB4 TASK EVIDENCE — APPEND ONLY; each task adds self-contained one-field-per-line record (Goal, Status, Met, Done, Code, Tests, CI, Evidence, AC, Claim, Blocker, Next).
+2026-10-11 | INITIAL STATE | Issue #212 r1 published; no Tab4 implementation task closed until evidence/checkpoint committed. Baseline 19 successful / 15 failing workflows is hosted prior evidence, not current Tab4 execution.
