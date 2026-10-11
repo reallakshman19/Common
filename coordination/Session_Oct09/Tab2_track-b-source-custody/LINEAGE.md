@@ -9,3 +9,5 @@ TAB2 LINEAGE -- APPEND ONLY
 
 2026-10-11 | CHAT 6acae34d | CONTINUES at 2026-10-11T02:07:09Z; user ordered 4–5 tasks in one uninterrupted work batch; no chat move, no new predecessor/successor chat. End remains ACTIVE.
 2026-10-11 | HANDOVER | five R/Q/C decision-preparation dockets Tab2-T01..T05 now posted in #130/#174; source links https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104485790 ; https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104486895 ; internal handover handovers/2026-10-11-next-five.md. Prepared != authorized acceptance.
+
+2026-10-11 | CHAT 6acae34d | REGISTRY RECON | same active chat; concurrent Tab1 writer replaced TABS.md index, Tab2 line restored by append-only update; no chat handover or change of substantive workstream.
