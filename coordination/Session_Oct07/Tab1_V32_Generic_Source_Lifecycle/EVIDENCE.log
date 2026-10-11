@@ -1,0 +1,9 @@
+# Tab1 evidence log — append-only, source-oriented
+# Chat 6acae92b; owner Common #325; production gate #289; programme #5; PR #326.
+# Each line is an observed event, not an independent Owner qualification or release authority.
+2026-10-11 | chat=6acae92b | type=SOURCE_RECON | source=RECON/2026-10-11/4-report.md | blob=409e8f290dc72b5b8a24778bfc4298d2a210b034 | provenance=retrospective-not-independent
+2026-10-11 | chat=6acae92b | type=CODE_CHANGE | branch=feature/v32-325-graph-bound-readonly-integration | commit=82b45eb0a947ffde8931448989c6e6b002c042fb | file=skills/engineering-pr-delivery-v3.1/tests/test_ci_terminal_checks.py | scope=one-file-reuse-PR327 | no-merge=true
+2026-10-11 | chat=6acae92b | type=EXACT_HEAD_CI | sha=82b45eb0a947ffde8931448989c6e6b002c042fb | v31=38103233995:274/274:PASS | focused=38103234002:34x3:PASS | v32=38103233983:SUCCESS | delp=38103233960:SUCCESS | local=38103234029:SUCCESS | coverage_note=not-applicable-paths-possible | owner_AC=0/8
+2026-10-11 | chat=6acae92b | type=PLAN_UPDATE | issue=325 | comment=6104485981 | revision=3 | scope=XS1,S2,S3
+2026-10-11 | chat=6acae92b | type=FUTURE_BACKLOG | issue=289 | comment=6104487421 | size=M,L | release_gates=unchanged
+2026-10-11 | chat=6acae92b | type=BOUNDARY | live_v32_writer=OFF | authentic_owner_source=UNPROVEN | qualified_review=UNPROVEN | agent_b=NOT_RUN | tab2=untouched
