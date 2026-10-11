@@ -406,3 +406,68 @@ test('T35 malformed second-round page remains source refusal, never a native pas
  assert.equal(x.status,'NATIVE_DOUBLE_READ_REFUSAL_NOT_ADMITTED');
  assert.equal(x.evidence_admitted,false);
 });
+
+test('N03 changing a check conclusion emits redacted bounded first/second source delta',async()=>{
+  const d=data();d[p.check].check_runs[0].name='SECRET_PRIVATE_CHECK_NAME';
+  const x=await run(d,(n,route,src)=>{
+    if(n===7)src[p.check].check_runs[0].conclusion='failure';
+  });
+  safe(x);
+  assert.equal(x.failure_stage,'SOURCE_READBACK');
+  assert.equal(x.failure_reason,'SELECTED_CHECKS_DRIFT');
+  assert.equal(x.selected_checks_observed,false);
+  assert.equal(x.required_check_policy,'UNKNOWN');
+  assert.equal(x.snapshot_sha256,null);
+  assert.equal(x.selected_drift.first_count,1);
+  assert.equal(x.selected_drift.second_count,1);
+  assert.equal(x.selected_drift.changed_total,1);
+  assert.equal(x.selected_drift.truncated,false);
+  assert.equal(x.selected_drift.changes[0].identity,'CHECK_RUN:17');
+  assert.deepEqual(x.selected_drift.changes[0].first,{state:'completed',conclusion:'success'});
+  assert.deepEqual(x.selected_drift.changes[0].second,{state:'completed',conclusion:'failure'});
+  assert.ok(!JSON.stringify(x).includes('SECRET_PRIVATE_CHECK_NAME'));
+});
+test('N03 added check gets stable identity, and no source authority',async()=>{
+  const d=data();
+  const x=await run(d,(n,route,src)=>{
+    if(n===7){
+      src[p.check].check_runs.push({...src[p.check].check_runs[0],id:18,name:'SECRET_ADD'});
+      src[p.check].total_count=2;
+    }
+  });
+  safe(x);
+  assert.equal(x.failure_reason,'SELECTED_CHECKS_DRIFT');
+  assert.equal(x.selected_drift.changed_total,1);
+  assert.equal(x.selected_drift.changes[0].identity,'CHECK_RUN:18');
+  assert.equal(x.selected_drift.changes[0].first,null);
+  assert.ok(!JSON.stringify(x).includes('SECRET_ADD'));
+});
+test('N03 large drift truncates safely and policy failures never turn green',async()=>{
+  const d=data();
+  d[p.check].check_runs=Array.from({length:10},(_,i)=>({
+    ...d[p.check].check_runs[0],id:17+i,name:'private-'+i,
+  }));
+  d[p.check].total_count=10;
+  d[p.classic]=new Error('PRIVATE_POLICY_403');
+  const x=await run(d,(n,route,src)=>{
+    if(n===7)for(const run of src[p.check].check_runs)run.conclusion='failure';
+  });
+  safe(x);
+  assert.equal(x.failure_reason,'SELECTED_CHECKS_DRIFT');
+  assert.equal(x.selected_drift.changed_total,10);
+  assert.equal(x.selected_drift.truncated,true);
+  assert.equal(x.selected_drift.changes.length,8);
+  assert.equal(x.required_check_policy,'UNKNOWN');
+  assert.equal(x.evidence_admitted,false);
+  assert.ok(!JSON.stringify(x).includes('private-'));
+  assert.ok(!JSON.stringify(x).includes('PRIVATE_POLICY_403'));
+});
+test('N03 stable selected reads have null drift; malformed provider remains redacted',async()=>{
+  const stable=await run();
+  assert.equal(stable.selected_drift,null);
+  const d=data();d[p.check].total_count=999;
+  const bad=await run(d);
+  safe(bad);
+  assert.equal(bad.selected_drift,null);
+  assert.equal(bad.failure_reason,'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID');
+});
