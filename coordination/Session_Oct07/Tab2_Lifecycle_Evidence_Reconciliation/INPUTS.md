@@ -1,0 +1,6 @@
+# Inputs / golden source register — append only
+
+2026-10-11 | VERIFIED ISSUE INPUTS | Common#294 original specification/STEP-01..05; Common#5 parent AC1..8; Common#284 lifecycle roadmap and N01..N15 test plan; Common#289 Owner D1–D5.
+2026-10-11 | VERIFIED SOURCE INPUTS (prior live readback) | Frozen PR323 head b6b6daabe6defb253bac9dd00ce7ad48081a1000; current U02 file `relay/RECOVERY/V35_R14_WP2A_20261010/required-ci-material-v1.mjs` Git blob SHA 3033b177d645810c6cb647ca831308893fd006c0; historical PR308 head 087cf43193febffc31375e71359e767489d3ae68, same path Git blob 3eac046128202fdee88a5ad47bb1df82e3304ca1. Historic-vs-current are NOT interchangeable acceptance goldens.
+2026-10-11 | VERIFIED RED BENCHMARK | T36 `relay/RECOVERY/V35_R14_WP2A_20261010/t36-full-suite-red-baseline.mjs` on PR324 8abe45dd195e613938ee004efa325cf4c9a99562. Exact historical source command `node --test relay/RECOVERY/V35_R14_WP2A_20261010/*.test.mjs`: 283 test cases, 262 pass, 21 fail, 0 skipped; diagnostic-only. No positive benchmark verified.
+2026-10-11 | OPEN | Exact original source positive input/golden datasets, authenticated Owner chat receipt, approved graph manifest/JSON SHA, signed review golden, native live publisher/index result and real independent successor output require source-level verification.
