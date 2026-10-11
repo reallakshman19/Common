@@ -110,7 +110,9 @@ class CurrentSourceTests(unittest.TestCase):
 
     def test_14_immutable_graph_must_match_released_graph(self):
         self.graph_source.revision_blob = b'{"schema":"stale"}'
-        with self.assertRaisesRegex(SourceHold, "^SOURCE_GRAPH_REVISION_MISMATCH$"):
+        # A pinned revision is not a separate Owner authorization oracle:
+        # it must byte-match the current provider default-branch source.
+        with self.assertRaisesRegex(SourceHold, "^SOURCE_GRAPH_NOT_CURRENT_RELEASED$"):
             self.call()
         self.assertEqual(self.provider.calls, [])
 
@@ -164,7 +166,16 @@ class CurrentSourceTests(unittest.TestCase):
             counter[0] += 1
             rows = original(number)
             if counter[0] > 4 and number == 733:
-                rows.append({"id": 1, "body": "new material"})
+                rows.append({
+                    "id": 66, "user": {"login": "stranger"},
+                    "author_association": "NONE",
+                    "body": "```yaml\\nCHECKPOINT_FACTS_V1:\\n"
+                            "  responsibility: {issue: Pipeline#733, id: R-PROJECTION}\\n"
+                            f"  material: {{pr: Pipeline#740, candidate_sha: {HEAD}}}\\n"
+                            "  units:\\n"
+                            "    - {id: VIEW-PR, state: COMPLETE, result: VERIFIED, evidence_refs: [Pipeline#733#issuecomment-66]}\\n"
+                            "```",
+                })
             return rows
         self.provider.list_comments = changed
         with self.assertRaisesRegex(SourceHold, "^NATIVE_LEDGER_OR_OBSERVATION_MOVED$"):
