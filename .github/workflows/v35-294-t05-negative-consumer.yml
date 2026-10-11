@@ -38,12 +38,12 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$EXACT_HEAD"
           cd relay/RECOVERY
-          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.mjs)" = "3033b177d645810c6cb647ca831308893fd006c0"
-          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.test.mjs)" = "cc534c88d41ed6aea12e7a67c9ce14392b7c1765"
+          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.mjs)" = "9eeb0413805919720535b1180ac47f1e6e54b254"
+          test "$(git hash-object V35_R14_WP2A_20261010/required-ci-material-v1.test.mjs)" = "64d4175d6293b3e39d82ce0d5d56d20e4657a2b0"
           test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.mjs)" = "79cffd2e3d2828ac1727afad7763267768c56ad5"
-          test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.test.mjs)" = "e78b852d0e28c8f7a13fe66baf60662e4b7c6789"
-          test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.mjs)" = "e5843e4ab141a49950cd8e2b380540eca8f8f938"
-          test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs)" = "c0074ed41ee6a35e7fe0bbc4387b89e6ccf083fb"
+          test "$(git hash-object V35_R14_WP2A_20261010/task-evidence-comment-v1.test.mjs)" = "fb06f9360f5f72d12469c84ba933c282bc0ed3d8"
+          test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.mjs)" = "53b078341ef32839e8fdbf26ad7cbea0f9a3cc9a"
+          test "$(git hash-object V35_R14_WP2A_20261010/cross-source-vector-v1.test.mjs)" = "ec9f2d4b9e563ff2994bde0b859ab83dc46b5eeb"
           test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs)" = "5dc2675459bbadc9f6bba4f86b91ac0e3664a061"
           test "$(git hash-object V35_R14_WP2B_20261010/pre-admission-boundary-v1.test.mjs)" = "8ad1b1978cd75e9c45bc6d8df8cfda238c12e9f1"
       - name: Inherited WP2-B B01–B03 adversarial tests

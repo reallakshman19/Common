@@ -14,12 +14,27 @@ class SourceFault extends Error {
   constructor(code){super(code);this.code=code;}
 }
 const requireSource=(ok,code)=>{if(!ok)throw new SourceFault(code);};
-function refusal(grade,errors,selected=[],required=[],failureStage=null,failureReason=null){
+// One bounded diagnostic for *validated* selected check observations only.
+ // Never serialize check names, raw provider records, or policy read failures.
+function selectedDrift(before,after){
+  const id=x=>x.kind==='CHECK_RUN'?'CHECK_RUN:'+x.run_id:
+    'COMMIT_STATUS:'+createHash('sha256').update(x.name).digest('hex').slice(0,16);
+  const compact=x=>x?{state:x.state,conclusion:x.conclusion??null}:null;
+  const first=new Map(before.map(x=>[id(x),x]));
+  const second=new Map(after.map(x=>[id(x),x]));
+  const keys=[...new Set([...first.keys(),...second.keys()])].sort();
+  const changes=keys.filter(key=>JSON.stringify(compact(first.get(key)))!==JSON.stringify(compact(second.get(key))));
+  return {first_count:before.length,second_count:after.length,
+    changed_total:changes.length,truncated:changes.length>8,
+    changes:changes.slice(0,8).map(key=>({identity:key,
+      first:compact(first.get(key)),second:compact(second.get(key))}))};
+}
+function refusal(grade,errors,selected=[],required=[],failureStage=null,failureReason=null,drift=null){
   return {
     schema:'common-v35-wp2a-u02-ci-observation-v1',
     source_grade:grade,observed:false,selected_checks_observed:false,errors,
     failure_stage:failureStage,failure_reason:failureReason,
-    selected_checks:selected,required_checks:required,
+    selected_drift:drift,selected_checks:selected,required_checks:required,
     required_check_policy:'UNKNOWN',required_checks_result:'UNKNOWN',
     evidence_admitted:false,programme_progress:null,writer_authorized:false,
     owner_authenticated:false,reviewer_qualified:false,snapshot_sha256:null,
@@ -128,7 +143,7 @@ async function observeWithGrade(input,read,grade){
   const bad=validateInput(input);
   if(bad.length)return refusal(grade,bad);
   if(typeof read!=='function')return refusal(grade,['PROVIDER_READER_MISSING']);
-  let stage='INITIAL_PR';
+  let stage='INITIAL_PR',drift=null;
   try{
     const initial=await identity(input,read),paths=path(input);
     stage='FIRST_SELECTED';
@@ -159,12 +174,16 @@ async function observeWithGrade(input,read,grade){
     const end=await identity(input,read);
     stage='SOURCE_READBACK';
     requireSource(JSON.stringify(final)===JSON.stringify(end),'PR_READBACK_CHANGED');
-    requireSource(JSON.stringify(chosen)===JSON.stringify(chosen2),'SELECTED_CHECKS_DRIFT');
+    if(JSON.stringify(chosen)!==JSON.stringify(chosen2)){
+      drift=selectedDrift(chosen,chosen2);
+      throw new SourceFault('SELECTED_CHECKS_DRIFT');
+    }
     requireSource(JSON.stringify(policy)===JSON.stringify(policy2),'REQUIRED_POLICY_DRIFT');
     const result=policy2===null?'UNKNOWN':evaluate(policy2,chosen2);
     const vector={repository:REPO,repository_id:REPO_ID,...end,selected_checks:chosen2,required_checks:policy2??[],required_checks_result:result};
     return {schema:'common-v35-wp2a-u02-ci-observation-v1',source_grade:grade,observed:policy2!==null,
       selected_checks_observed:true,errors:[],failure_stage:null,failure_reason:null,
+      selected_drift:null,
       selected_checks:chosen2,required_checks:policy2??[],
       required_check_policy:policy2===null?'UNKNOWN':'OBSERVED_CLASSIC_AND_RULESET',
       required_checks_result:result,snapshot_sha256:digest(vector),
@@ -173,7 +192,7 @@ async function observeWithGrade(input,read,grade){
   }catch(error){
     // No caller-controlled provider exception messages or response values.
     return refusal(grade,['CI_MATERIAL_OR_POLICY_UNVERIFIED'],[],[],
-      stage,error instanceof SourceFault?error.code:null);
+      stage,error instanceof SourceFault?error.code:null,drift);
   }
 }
 async function githubGet(repo,path,token){

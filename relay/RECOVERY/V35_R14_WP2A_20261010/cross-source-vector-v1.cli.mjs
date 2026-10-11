@@ -12,7 +12,15 @@ const result=await observeLiveCrossSource({
  expected_author_login:'reallakshman19',
 });
 console.log(JSON.stringify(result,null,2));
-if(!result.source_consistent||result.source_grade!=='NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION'||
- result.material_status!=='CONSISTENT_HISTORICAL_EVIDENCE_ONLY'||
- result.evidence_admitted!==false||result.writer_authorized!==false)
- process.exitCode=1;
+// Comment 6089537374 is a real historical PR27/PR21 author claim. It is
+// deliberately *not* a PR331 author comment; never count a refusal as a
+// positive current-source join, or manufacture a new comment/pr binding.
+const knownNegative=result.source_consistent===false&&
+ result.failure_stage==='JOIN'&&result.failure_round==='FIRST'&&
+ result.failure_reason==='JOIN_U03_SOURCE_UNVERIFIED'&&
+ result.evidence_admitted===false&&result.writer_authorized===false;
+console.log('U04_HISTORICAL_FOREIGN_PR_BINDING='+
+  (knownNegative?'REJECTED_AS_REQUIRED':'UNVERIFIED_OTHER_EDGE'));
+// This smoke is a positive-join job, so even an EXPECTED negative remains red.
+// N02 source tests separately assert the exact CURRENT_PR_BINDING_MISSING reason.
+process.exitCode=1;
