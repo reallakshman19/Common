@@ -30,3 +30,33 @@ AC (before -> after): AC-03 15 C05 failures undifferentiated -> 15 source/log-li
 Claim: HOSTED_CI
 Blocker: OWNER - adopt per-consumer C05 contract, restore failure semantics and legacy gate applicability without altering protected goldens
 Next: 212-T3, 212-T4; independent work continues while contract decisions remain OPEN
+
+2026-10-11 | TASK EVIDENCE 212-T3
+Task: 212-T3
+Goal (issue AC): AC-01 AC-02, ensure legacy original-JSON owner/zone UI cache cannot be reused across distinct source documents with equal sampled keys
+Status: PARTIAL
+Met: partial (source correction and exact docs twins committed; hosted RED/GREEN still queued)
+Done: constructed provable same-length/first96/middle96/last96 sourceKey collision with different owner label at character 340; added two Node tests + Node22/24 workflow on stacked draft PR #213; minimal product fix adds cached.source===source exact-text condition, stores exact source reference, unchanged indexed Blob worker semantics, source/docs verified identical SHA
+Code (repo branch @ commit | PR): reallakshman19/3D_Converters lfj/212-scope-cache-exact-source-20261011 @ 77adbd1c21e47c22c80f5a9dab47eaed1e973613 | PR #213 draft stacked on #211@e7be6e26099ebef482dd89dd12898d3661bd6405
+Tests (command -> pass/fail/skip): constructed sampled-key collision in in-tool JS -> PASS reproducible; GitHub fetch_file exact tabs/docs blob SHA 79d8cec47f4ac4585dcfd539ffa3513ad91b5973 -> PASS parity; node --test tests/lfj-212-scope-cache-identity.test.mjs tests/lfj-208-unsupported-owner-scope.test.mjs -> NOT_RUN (host queued)
+CI (run -> result): pre-fix 38103222868 @59f6f02d7f11c6f81fb8d1e52263ec190047c9f0 -> QUEUED; patched 38103282171 @77adbd1c21e47c22c80f5a9dab47eaed1e973613 -> QUEUED
+Evidence (link): https://github.com/reallakshman19/3D_Converters/pull/213 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38103222868 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38103282171
+AC (before -> after): sample-key-colliding text can reuse wrong owner index -> exact-text guard coded, hosted verification pending; formal accepted AC 0->0
+Claim: NONE
+Blocker: CI - exact-head #213 pre-fix and patched Node22/24 jobs queued at runs 38103222868 and 38103282171
+Next: 212-T3 verify real RED/GREEN jobs, original CSV regressions and actual Chromium; then 212-T4
+
+2026-10-11 | TASK EVIDENCE 212-T4
+Task: 212-T4
+Goal (issue AC): AC-04 define immutable LFJ original-source to engineering FactRecord basis and fail-closed authorization contract
+Status: PARTIAL
+Met: partial (source-level design and ten falsifiable negatives published; validation code not yet implemented)
+Done: traced actual indexed event Build, SOURCE_PINNED_PREVIEW_ONLY handoff, local CSV-only receipt, separate file-reading final workflow builder and nonblocking legacy readiness; proposed LFJ.EngineeringSourceBasis.v1 with original JSON/XML SHA, selected owner/zone digest, source occurrence/path, completeness/Worker generation, master revisions, governed review epochs and required reject cases; rejected mere flip of engineeringReady flag or use of display CSV rows as complete FactRecords
+Code (repo branch @ commit | PR): reallakshman19/Common main @ 7d52dfea9f0fbaa6abb06391ab804f4a723d4bc1 | contract only, no product PR or code change
+Tests (command -> pass/fail/skip): GitHub fetch_file current #211 indexed-preview, indexed-export, events, final workflow adapter, output readiness and handoff-budget modules -> PASS source-level examination; source-basis validation tests -> NOT_RUN
+CI (run -> result): no implementation CI -> SKIP
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct07/Tab4_Source_Authority_Recovery/RECON/2026-10-11/2-lfj-engineering-authority-contract.md ; https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6104373297
+AC (before -> after): unspecific LFJ downstream bridge -> source-level versioned contract and negative matrix published; no validated downstream behavior; formal accepted AC 0->0
+Claim: NONE
+Blocker: NONE
+Next: 212-T4 build pure validation module/tests; 212-T5 downstream vertical browser integration after contract

@@ -15,3 +15,8 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 
 2026-10-11 | REPORT | RECON/2026-10-11/1-c05-failure-matrix.md | Common main @ cca344bc1c35c0fdae84195a4068eab82ca0803c | 15-failure source reconciliation.
 2026-10-11 | ISSUE COMMENT | #212 C05 matrix | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6104345351
+
+2026-10-11 | PR | #213 DRAFT stacked on #211 branch lfj/212-scope-cache-exact-source-20261011 | patch 77adbd1c21e47c22c80f5a9dab47eaed1e973613 | https://github.com/reallakshman19/3D_Converters/pull/213
+2026-10-11 | CI | #38103222868 @59f6f02d7f11c6f81fb8d1e52263ec190047c9f0 | pre-fix RED-seeking test QUEUED | https://github.com/reallakshman19/3D_Converters/actions/runs/38103222868
+2026-10-11 | CI | #38103282171 @77adbd1c21e47c22c80f5a9dab47eaed1e973613 | patched GREEN-seeking test QUEUED | https://github.com/reallakshman19/3D_Converters/actions/runs/38103282171
+2026-10-11 | REPORT | RECON/2026-10-11/2-lfj-engineering-authority-contract.md | Common main @7d52dfea9f0fbaa6abb06391ab804f4a723d4bc1 | T4 PARTIAL.

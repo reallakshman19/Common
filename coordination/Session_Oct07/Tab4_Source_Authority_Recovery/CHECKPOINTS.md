@@ -4,3 +4,5 @@ TAB4 CHECKPOINTS — APPEND ONLY
 TRIGGER | Add a new append-only checkpoint at every 5th DONE task, each formal RECON and plan revision; do not overwrite prior revisions.
 
 2026-10-11 | RECON R-212-01 | 2/14 tasks closed (T1 setup and T2 diagnostics), plan r1 unchanged, acceptance 0/10 | all 15 failing C05 exact-head workflows logged; decisions D-212-2,D-212-7,D-212-8 OPEN; task T3 next.
+
+2026-10-11 | RECON R-212-02 | 2/14 DONE, T3/T4 PARTIAL, 0 Owner AC accepted | LFJ Build source-only receipt and downstream separate file-reading Run path verified; proposed EngineeringSourceBasis.v1 with ten fail-closed tests. T3 source fix #213 CI QUEUED. Plan r1 unchanged.
