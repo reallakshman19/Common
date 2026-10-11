@@ -145,3 +145,7 @@ python -m unittest discover -s relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011
 ```
 
 Dedicated CI: `.github/workflows/v32-325-generic-source-preflight.yml`; Python 3.11, 3.12, 3.13; `permissions: contents: read`. Tests exercise a **synthetic** provider against **real native Common V3.2** functions.
+
+## Read-only public provider contract (2026-10-11)
+
+`rest_readonly_provider.py` accepts injected GET callables, normalizes nested REST and flattened connector PR/issue metadata, checks repository and exact head identity, and has no network/write methods. `test_rest_readonly_provider.py` uses sanitized public #5/#325/#326 observations (with placeholder bodies), so its tests remain replay-only and never establish Owner source authority or positive evidence. The adapter is not a production transport, publisher or DELP. See Tab1 CHECKPOINTS.md for exact CI.
