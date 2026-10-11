@@ -170,7 +170,7 @@ class BoundNativeReadOnlyGitHubProvider(BoundReadOnlyGitHubProvider):
                 and not value.endswith("/"))
 
     def get_commit_sha(self, ref: str) -> str:
-        _require(ref in self._allowed_commits,
+        _require(isinstance(ref, str) and ref in self._allowed_commits,
                  "REST_NATIVE_COMMIT_REF_UNBOUND")
         if ref == self.base_ref:
             return super().get_commit_sha(ref)
