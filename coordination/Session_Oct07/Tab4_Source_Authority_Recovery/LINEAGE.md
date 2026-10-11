@@ -8,3 +8,8 @@ TAB4 LINEAGE — APPEND ONLY
 
 2026-10-11 | RECON R-212-03 SUPERSEDED | Earlier shorthand 'source-only audit Preview' was not actual UI phase 4 Preview. Native 4 Preview independently calls xmlCiiBuildAndRenderPreview, uses state.stagedJsonText or other source path; never credit B1/Mode A/B from LFJ audit source-only rows.
 2026-10-11 | RECON R-212-03 | Source-only Worker provenance may enrich diagnostic audit, but downstream CII remains deliberately blocked by T4 until separately attested FactRecords, reviewed masters and B1–B4 acceptance.
+
+
+2026-10-11 | HANDOVER_ONLY CHAT INTENT | Chat 6acae6e5 requested authoritative 12-section report, Common PR #307 structure ONLY, NO BuddyRunner Stage2 run or Stage1 precondition; NO Runner B packet, new source lease, product coding, merge/deploy authority. Previous chat ID remains UNKNOWN. This chat will STOP after handover.
+2026-10-11 | RECON R-212-05 | Verified draft PR #213 at cd09d74b718cda4c7ba6610d3708235c9524a417 stacked on #211 e7be6e26099ebef482dd89dd12898d3661bd6405; product main 4f14beb37bc0b719453c52a116c1c5d7183d2fd0. All 45 same-head workflows terminal 30 SUCCESS/15 C05 FAILURE. Prior head 29/15/1 was interim, SUPERSEDED. Candidate authored root/docs green != registered public Pages parity or independent #141.
+2026-10-11 | HANDOVER PUBLISHED | Full technical report coordination/Session_Oct07/Tab4_Source_Authority_Recovery/handovers/2026-10-11.md on Common/main Git blob b9bee13985eabb14976f2326533bcf9ee3cd9a06; full copy issue #212 comment 6105499324; parent #129 chat-only comment 6105501651. End this chat with handover=ready.
