@@ -31,7 +31,7 @@ from test_generic_source_preflight import (
     GenericSourceTest, HEAD, LEAF, PR_NUM, REPO,
 )
 from test_publication_plan import PurePublisherPlanTests, PR_REF, ROOT_REF
-from test_rest_readonly_provider import ObservedEnvelopeFixture, ROOT_NUM, LEAF_NUM
+from test_rest_readonly_provider import ObservedEnvelopeFixture, LEAF_NUM, PR_NUM as PUBLIC_PR_NUM
 
 
 def _case(rows: list[dict[str, Any]], name: str, expected: str,
@@ -193,12 +193,12 @@ def run_benchmark() -> dict[str, Any]:
     # Public REST envelope is a SANITIZED REPLAY, not authenticated live source.
     replay = ObservedEnvelopeFixture()
     adapter = replay.provider()
-    result = adapter.get_pull(PR_NUM)
+    result = adapter.get_pull(PUBLIC_PR_NUM)
     result2 = adapter.get_issue(LEAF_NUM)
     observed = ("SANITIZED_REPLAY_SHAPE_VALID" if
                 result["head"]["repo"]["full_name"] == "reallakshman19/Common"
                 and result2["number"] == LEAF_NUM
-                and replay.reads == [("GET_PR", PR_NUM), ("GET_ISSUE", LEAF_NUM)]
+                and replay.reads == [("GET_PR", PUBLIC_PR_NUM), ("GET_ISSUE", LEAF_NUM)]
                 else "REST_SHAPE_INVALID")
     _case(rows, "B10_public_GET_envelope_replay", "SANITIZED_REPLAY_SHAPE_VALID",
           observed, boundary="G1_G2_PUBLIC_SHAPE_IS_NOT_AUTHENTICATION")
