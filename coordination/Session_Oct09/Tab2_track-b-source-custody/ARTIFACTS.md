@@ -116,3 +116,5 @@ TAB2 ARTIFACTS -- APPEND ONLY; one dated ref per line; research refs are not app
 
 2026-10-11 | chat=6acb2a0f | TASK_RESULT R14-T12/T13/T14 | Original programme gate still 0/2; PR #179 head d9939005b4c00f11be589684f725a8169f91ea2e and PR #176 head e9b89eec562c3eb8d4a53b8d5466c067541ad378 both DRAFT; exact-main Guardrails delta and 17-ID combined browser audit, review/governance stop conditions | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6106783420
 2026-10-11 | chat=6acb2a0f | R14-T15/T16/T17 plan+result https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6107352464 | PR #179 https://github.com/reallakshman19/Grade9v3.5/pull/179 HEAD b91096ec279294830e38c319ff5f095198ee503d: 4th focused source-paper URL integrity test, 443 SOF research tests PASS. PR description updated; DRAFT/UNMERGED; release HOLD.
+
+2026-10-11 | chat=6acb2a0f | R14-T18/T19 final exact-head CI results + PR#179 human review request | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6107590695 | https://github.com/reallakshman19/Grade9v3.5/pull/179#issuecomment-6107585319 | HEAD b91096ec, DRAFT/UNMERGED, release HOLD.
