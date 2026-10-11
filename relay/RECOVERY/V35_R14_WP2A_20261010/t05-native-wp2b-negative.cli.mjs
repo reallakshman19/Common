@@ -4,6 +4,7 @@
  */
 import {inspectLivePreAdmission} from '../V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs';
 import {parseCi02NativeEnvelope} from './ci02-native-eligibility-v1.mjs';
+import {projectNativeSourceFailure} from './t05-native-source-failure-v1.mjs';
 const REPO='reallakshman19/Common';
 const CLAIMED='0dbb64b99482e94cd3155074472f600a6d915373',COMMENT=6099896350;
 const current=parseCi02NativeEnvelope(process.env);
@@ -35,6 +36,7 @@ if(!current||current.sha===CLAIMED){
   const r=await inspectLivePreAdmission(locator);
   const safe={
    sample:n,source_status:r.source_status,observation_grade:r.observation_grade,
+   source_failure:projectNativeSourceFailure(r),
    admission:r.admission,source_digest:r.source_digest,
    blockers:r.admission_blockers,
    evidence_admitted:r.evidence_admitted,owner_authenticated:r.owner_authenticated,
@@ -61,6 +63,7 @@ if(!current||current.sha===CLAIMED){
   schema:'common-v35-294-t05-native-original-pre-admission-v1',
   repository:REPO,pr_number:pr,tested_head:candidate,source_commit_grading:'LIVE_NATIVE_SOURCE_NON_ADMISSION',
   diagnostic_samples:samples.length,coherent_original_source_observed:coherent,
+  first_safe_source_failure:samples.find(x=>x.source_failure!==null)?.source_failure??null,
   measured_status:coherent?'NATIVE_SAME_HEAD_REFERENCES_COHERENT_BUT_NOT_ADMITTED':'NATIVE_SAME_HEAD_SOURCE_UNKNOWN_HOLD',
   evidence_admitted:false,delp_projector_invoked:false,writer_authorized:false,
   samples,
