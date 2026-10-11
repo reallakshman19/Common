@@ -42,16 +42,6 @@ jobs:
         run: |
           python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/benchmark_walkthrough.py > "$RUNNER_TEMP/v32-325-synthetic-benchmark.json"
           python -m json.tool "$RUNNER_TEMP/v32-325-synthetic-benchmark.json"
-      - name: Source-qualified real GitHub GET census (no Owner attestation)
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          set +e
-          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/live_source_census.py > "$RUNNER_TEMP/v32-325-real-source-census.json"
-          census_exit=$?
-          set -e
-          python -m json.tool "$RUNNER_TEMP/v32-325-real-source-census.json"
-          exit "$census_exit"
       - name: G2 real current-HEAD checks and review GET census (never approval)
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -62,6 +52,16 @@ jobs:
           set -e
           python -m json.tool "$RUNNER_TEMP/v32-325-real-evidence-census.json"
           exit "$evidence_exit"
+      - name: Source-qualified real GitHub GET census (no Owner attestation)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/live_source_census.py > "$RUNNER_TEMP/v32-325-real-source-census.json"
+          census_exit=$?
+          set -e
+          python -m json.tool "$RUNNER_TEMP/v32-325-real-source-census.json"
+          exit "$census_exit"
       - name: Verify every generic integration module remains read-only
         run: |
           python - <<'PY'
