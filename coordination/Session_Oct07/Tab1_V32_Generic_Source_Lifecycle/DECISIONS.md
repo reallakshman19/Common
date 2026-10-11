@@ -37,3 +37,8 @@ Read in conjunction with `RECON/2026-10-11/4-report.md` (retrospective source re
 - **Decision:** Publish [`handovers/2026-10-11-review-readiness.md`](handovers/2026-10-11-review-readiness.md) as a self-prepared source/review packet and link owner [#325 TASK_EVIDENCE](https://github.com/reallakshman19/Common/issues/325#issuecomment-6105503964). No reviewer status is inferred from its existence.
 - **Reason:** The XS/S code/CI plan is done, but the Owner's required independent review, protected native modification grant, real Owner graph, lab and effective branch policy are not qualified. A same-session paper packet cannot serve as external reviewer, C6, or Agent B.
 - **Handover boundary:** preserve five tab files and historical RECON; do not merge draft PR #326 to `main`, turn on writer, issue facts or initiate B. PR branch log-only commits are not credited with prior source-head CI.
+
+
+## D08 — Explicit 12-section report on main; no Stage 2/Runner B authority
+- User requested BuddyRunner PR #307's 12-section structure **only**, not a Stage 2 run; no Stage 1 digest, independent Runner B, live publisher or release grant was created. The exact technical report was committed on `main» at `0f0aa00a5b25a23b2e295f130bc6277f57aac55c» and published in full as #325 PLAN_UPDATE `6105639710»; parent #289 comment `6105641933» records chat-only Section 6 and all 44 named test cases/fixture grades.
+- This is a documentation main-branch publication, **not** a merge of #326 or #327 into main. The report and these Tab1-only log copies cannot inherit CI from feature `dc41b642» or attest Owner AC. Stop all new work after the boarding brief.
