@@ -35,3 +35,6 @@ TAB2 INPUTS -- APPEND ONLY. Only names/paths and SHA references; no source files
 2026-10-11 | chat=6acae34d | CHAT-ONLY INTENT | time=01:33:28Z | name=proceed P1 instruction | chat-message SHA=NOT_AVAILABLE | no uploaded files/test cases from this chat
 2026-10-11 | chat=6acae34d | CHAT-ONLY INTENT | time=01:47:41Z | name=proceed P2/P3 instruction | chat-message SHA=NOT_AVAILABLE | no uploaded files/test cases from this chat
 2026-10-11 | chat=6acae34d | CHAT-ONLY INTENT | time=01:57:24Z | name=Session_Oct09 Tab2 logging mandate | chat-message SHA=NOT_AVAILABLE | no uploaded files/test cases from this chat
+
+2026-10-11 | chat=6acae34d | CHAT-ONLY NEW INTENT | 2026-10-11T02:07:09Z | "continue with the next 4 to 5 tasks of your plan in one go, without stopping between them; stop only when they are done or at a real blocker" | message SHA=NOT_AVAILABLE, source URL=THIS_CHAT_ONLY | scope bounded to rights/QRT/Owner decision packets.
+2026-10-11 | chat=6acae34d | TASK T01..T05 INPUTS | no new source PDF, golden fixture, benchmark, test file, user attachment, code change, receipt or new source-content bytes. Existing referenced research blob SHAs preserved in initial INPUTS. Decisions and task artifact URLs are in EVIDENCE.log / ARTIFACTS.md.

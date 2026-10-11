@@ -9,3 +9,10 @@ TAB2 OWNER DECISIONS -- APPEND ONLY; quotes preserve exact user text. Status dis
 2026-10-11 | OPEN-R | no rightsholder-specific licence or source display mode; blocks verbatim source Core2, text/figure/publication.
 2026-10-11 | OPEN-Q | QRT authority has not accepted proposed candidate cells; blocks canonical acceptance.
 2026-10-11 | OPEN-C | Owner original component/source-fidelity exception/admission and learner publication not granted; blocks all canonical source Core2.
+
+2026-10-11 | chat=6acae34d | D8 | raised 2026-10-11T02:07:09Z | exact: "continue with the next 4 to 5 tasks of your plan in one go, without stopping between them; stop only when they are done or at a real blocker" | ANSWERED for five decision-preparation tasks Tab2-T01..T05, posted sequentially | blocked tasks rights/QRT/Owner actual approvals retain OPEN; no outbound license request or false signoff.
+2026-10-11 | chat=6acae34d | OPEN-R-SAMPLE | rights holder/publisher use scope and authorized outbound contact pending; source availability does not equal permission; request ready https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104485790.
+2026-10-11 | chat=6acae34d | OPEN-Q-Q004 | accepted primary QRT reviewer receipt pending, 0 accepted https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486035.
+2026-10-11 | chat=6acae34d | OPEN-Q-Q007-Q008 | two separate reviewer receipts pending; agent five-factor rubric is not QRT acceptance https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486322.
+2026-10-11 | chat=6acae34d | OPEN-R-2025-26 | school-mirror host not assumed publisher rights holder; written scope pending https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104486576.
+2026-10-11 | chat=6acae34d | OPEN-C | Owner explicit, governing original-source item-fidelity exception and admission needed per item; research PDF waiver not a licence https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104486895.
