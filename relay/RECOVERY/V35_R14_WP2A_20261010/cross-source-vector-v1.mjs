@@ -14,12 +14,37 @@ class JoinError extends Error {
   constructor(code){super(code);this.code=code;}
 }
 const check=(condition,code)=>{if(!condition)throw new JoinError(code);};
-function refuse(grade,error,failureStage=null,failureRound=null,failureReason=null) {
+// A nested refusal may carry a *fixed, source-controlled* reason, never a raw
+// provider message. This field diagnoses a JOIN refusal, not qualified source/E.
+const NESTED_CODES=Object.freeze({
+  U02:new Set(['SELECTED_CHECKS_DRIFT','REQUIRED_POLICY_DRIFT',
+    'CHECK_RUNS_GET_UNVERIFIED','COMMIT_STATUS_GET_UNVERIFIED',
+    'SELECTED_CHECKS_PAGE_OR_RESPONSE_INVALID','CHECK_RUN_SHAPE_OR_SHA_INVALID',
+    'COMMIT_STATUS_SHAPE_INVALID','PR_READBACK_CHANGED']),
+  U03:new Set(['CURRENT_PR_BINDING_MISSING','HEAD_CLAIM_MISMATCH',
+    'COMMENT_IDENTITY_INVALID','NOT_TASK_EVIDENCE','PR_ROLE_INVALID',
+    'COMMENT_GET_UNVERIFIED','SOURCE_RECEIPT_CHANGED']),
+});
+function nestedRefusal(stage,value,grade){
+  const schema=stage==='U02'?'common-v35-wp2a-u02-ci-observation-v1':
+    'common-v35-wp2a-u03-comment-material-v1';
+  if(!OBJ(value)||value.schema!==schema||value.source_grade!==grade||
+     value.evidence_admitted!==false||value.writer_authorized!==false||
+     value.programme_progress!==null||!NESTED_CODES[stage]?.has(value.failure_reason))
+    return null;
+  const phase=value.failure_stage;
+  if(stage==='U02'&&!['FIRST_SELECTED','SECOND_SELECTED','SOURCE_READBACK'].includes(phase))
+    return null;
+  if(stage==='U03'&&!['FIRST_VALIDATE','SECOND_VALIDATE','FIRST_READ','SECOND_READ',
+      'SECOND_ROUND_DRIFT'].includes(phase))return null;
+  return Object.freeze({component:stage,stage:phase,reason:value.failure_reason});
+}
+function refuse(grade,error,failureStage=null,failureRound=null,failureReason=null,detail=null) {
   return Object.freeze({
     schema:'common-v35-wp2a-u04-cross-source-v1',source_grade:grade,
     source_consistent:false,material_status:'UNKNOWN',error,
     failure_stage:failureStage,failure_round:failureRound,
-    failure_reason:failureReason,
+    failure_reason:failureReason,source_subfailure:detail,
     source_vector:null,source_vector_sha256:null,
     evidence_admitted:false,owner_authenticated:false,reviewer_qualified:false,
     required_ci_qualified:false,delp_projection:'NOT_CALCULATED',
@@ -109,7 +134,7 @@ async function observe(i,readers,grade) {
     return refuse(grade,'SOURCE_READER_MISSING');
   // The stage labels are an allowlist, not provider error/response content.
   // Preserve original U04 refusal and the exact six-read maximum.
-  let failureStage='U01',failureRound='FIRST';
+  let failureStage='U01',failureRound='FIRST',joinInputs=null;
   try {
     const args=taskArgs(i);
     const acquire=async()=>{
@@ -121,6 +146,7 @@ async function observe(i,readers,grade) {
       failureStage='U03';
       const c=await readers.evidence(args.evidence);
       failureStage='JOIN';
+      joinInputs={ci:b,evidence:c};
       return verifyOutput(i,{candidate:a,ci:b,evidence:c},grade);
     };
     const first=await acquire();
@@ -134,7 +160,7 @@ async function observe(i,readers,grade) {
       source_consistent:true,
       material_status:last.evidence_currentness==='STALE_CANDIDATE_HEAD'?
         'CONSISTENT_HISTORICAL_EVIDENCE_ONLY':'CONSISTENT_AUTHOR_CLAIM_ONLY',
-      error:null,failure_stage:null,failure_round:null,failure_reason:null,
+      error:null,failure_stage:null,failure_round:null,failure_reason:null,source_subfailure:null,
       source_vector:Object.freeze(last),
       source_vector_sha256:HASH(last),
       evidence_admitted:false,owner_authenticated:false,reviewer_qualified:false,
@@ -142,8 +168,12 @@ async function observe(i,readers,grade) {
       programme_progress:null,writer_authorized:false,successor_lease:'NOT_PROVEN',
     });
   } catch(error){
-    return refuse(grade,'SOURCE_MATERIAL_UNVERIFIED',failureStage,failureRound,
-      failureStage==='JOIN'&&error instanceof JoinError?error.code:null);
+    const reason=failureStage==='JOIN'&&error instanceof JoinError?error.code:null;
+    const detail=reason==='JOIN_U02_SOURCE_UNVERIFIED'?
+      nestedRefusal('U02',joinInputs?.ci,grade):
+      reason==='JOIN_U03_SOURCE_UNVERIFIED'?
+        nestedRefusal('U03',joinInputs?.evidence,grade):null;
+    return refuse(grade,'SOURCE_MATERIAL_UNVERIFIED',failureStage,failureRound,reason,detail);
   }
 }
 export const observeCrossSource=(i,readers)=>observe(i,readers,G_INJECTED);
