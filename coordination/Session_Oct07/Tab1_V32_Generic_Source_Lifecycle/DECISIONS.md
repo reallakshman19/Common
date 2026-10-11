@@ -42,3 +42,9 @@ Read in conjunction with `RECON/2026-10-11/4-report.md` (retrospective source re
 ## D08 — Explicit 12-section report on main; no Stage 2/Runner B authority
 - User requested BuddyRunner PR #307's 12-section structure **only**, not a Stage 2 run; no Stage 1 digest, independent Runner B, live publisher or release grant was created. The exact technical report was committed on `main» at `0f0aa00a5b25a23b2e295f130bc6277f57aac55c» and published in full as #325 PLAN_UPDATE `6105639710»; parent #289 comment `6105641933» records chat-only Section 6 and all 44 named test cases/fixture grades.
 - This is a documentation main-branch publication, **not** a merge of #326 or #327 into main. The report and these Tab1-only log copies cannot inherit CI from feature `dc41b642» or attest Owner AC. Stop all new work after the boarding brief.
+
+## D09 — Rev6 XS/S continuation (chat 6acb1a25)
+- Approved small tasks: cover Tab1 + V3.1 test edits in the read-only CI workflow; preserve append-only Tab1 logs; synchronize **main into feature only**; publish a current-source issue checkpoint. Plan: #325 comment 6105888196; future M/L roadmap: #289 comment 6105888446.
+- Existing DELP remains sole P/E/D/DE and issue title/LIVE_STATUS owner; no native protected edits, new writer, accepted evidence or production cutover.
+- Five older feature logs were prefixes of main files, then copied intact to feature before reverse PR #332 merged `main@c4bcd4e3a98d6d9bfaf2520213e2a819e80d6c2a` at `2e317763cb49321b29fb6db2898a45d021016d4c`. The feature stayed draft/unmerged and was 56 ahead, 0 behind at verification.
+- New workflow runs only count at their own exact head; relevant branch policy and independent review remain unverified, programme AC0/8, V3.2 live writer OFF.
