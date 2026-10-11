@@ -11,3 +11,6 @@ TAB2 LINEAGE -- APPEND ONLY
 2026-10-11 | HANDOVER | five R/Q/C decision-preparation dockets Tab2-T01..T05 now posted in #130/#174; source links https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104485790 ; https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104486895 ; internal handover handovers/2026-10-11-next-five.md. Prepared != authorized acceptance.
 
 2026-10-11 | CHAT 6acae34d | REGISTRY RECON | same active chat; concurrent Tab1 writer replaced TABS.md index, Tab2 line restored by append-only update; no chat handover or change of substantive workstream.
+
+2026-10-11 | CHAT 6acae34d | 2026-10-11T02:14:39Z same chat Owner "proceed now"; no predecessor/successor chat ID supplied. Scope moved from first five R/Q/C decision sheets to five additional **new provisional** original-source cognitive assessments, without converting any QRT/history or source rights. End ACTIVE.
+2026-10-11 | HANDOVER | Tab2-T06..T10 five exact question-specific proposed QRT assessments, downstream authorized #130 academic reviewer + #174 editorial Q005 case; link https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535309 ; https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104536257; internal handover handovers/2026-10-11-qrt-proposals.md.

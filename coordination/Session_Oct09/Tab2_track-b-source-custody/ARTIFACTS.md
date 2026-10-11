@@ -66,3 +66,11 @@ TAB2 ARTIFACTS -- APPEND ONLY; one dated ref per line; research refs are not app
 
 2026-10-11 | chat=6acae34d | COMMIT | Common/main concurrent Tab1 parent 32f4e3b4b64c45c23d7ddc97e47928f5ff4f541e | https://github.com/reallakshman19/Common/commit/32f4e3b4b64c45c23d7ddc97e47928f5ff4f541e
 2026-10-11 | chat=6acae34d | COMMIT | Common/main five-item evidence 6ca0be6d59e7538f353ef7c31f5bcdc2eacba385 | https://github.com/reallakshman19/Common/commit/6ca0be6d59e7538f353ef7c31f5bcdc2eacba385
+
+2026-10-11 | chat=6acae34d | ISSUE COMMENT | reallakshman19/Grade9v3.5 issue#130 T06 Q037 linked-ages candidate QRT-MODEL-D3; independent agent proposed, NOT ACCEPTED | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535309
+2026-10-11 | chat=6acae34d | ISSUE COMMENT | reallakshman19/Grade9v3.5 issue#130 T07 Q045 cuboid factorization QRT-REPRESENT-D2; independent agent proposed, NOT ACCEPTED | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535564
+2026-10-11 | chat=6acae34d | ISSUE COMMENT | reallakshman19/Grade9v3.5 issue#130 T08 Q036 square-count QRT-MODEL-D2; independent agent proposed, NOT ACCEPTED | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535797
+2026-10-11 | chat=6acae34d | ISSUE COMMENT | reallakshman19/Grade9v3.5 issue#130 T09 Q038 affine-cost QRT-REPRESENT-D2; independent agent proposed, NOT ACCEPTED | https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104536024
+2026-10-11 | chat=6acae34d | ISSUE COMMENT | reallakshman19/Grade9v3.5 issue#174 T10 Q005 conditional figure QRT-JUSTIFY-D3; independent agent proposed, NOT ACCEPTED | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104536257
+2026-10-11 | chat=6acae34d | BRANCH | reallakshman19/Grade9v3.5:main READ-ONLY research; no new product branch or PR/merge
+2026-10-11 | chat=6acae34d | CI | NONE launched T06..T10, source PDF re-fetch and source hash checks NOT RUN

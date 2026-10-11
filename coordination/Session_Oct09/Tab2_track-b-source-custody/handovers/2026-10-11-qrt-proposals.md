@@ -1,0 +1,10 @@
+TAB2 HANDOVER — CONTINUATION, 2026-10-11, chat=6acae34d
+TASKS T06..T10 5/5 DONE as NEW AGENT-WORKED COGNITIVE PROPOSALS; do not treat as independent signed QRT, published question, exact original asset or source-fidelity receipt.
+T06 2025-26 source Q037 age equations, MODEL-D3, five factors 1/1/2/1/1, total 6. https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535309
+T07 2025-26 source Q045 polynomial/cuboid factors, REPRESENT-D2, factors 0/1/1/1/0, total 3. Source physical domain >3 is a conditional trap only if exact item tests it. https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535564
+T08 2025-26 source Q036 square-count of trees, MODEL-D2, factors 1/1/1/1/0, total 4. https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104535797
+T09 2023-24 source Q038 linear cost equation, REPRESENT-D2, factors 1/1/1/0/0, total 3. https://github.com/reallakshman19/Grade9v3.5/issues/130#issuecomment-6104536024
+T10 organizer sample source Q005 angle/parallel-lines, CONDITIONAL JUSTIFY-D3, factors 1/2/2/0/1, total 6. Historical dispute 009 still unresolved; later source figure agent proof must be separately validated by authorized editorial/QRT authority, no source image retrieval. https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6104536257
+The existing five T01..T05 rights/QRT/Owner decision dockets were prepared last batch; no new R/Q/C authority accepted them.
+Current: research 68/68 triaged, canonical 0/68 admitted, QRT accepted 0/28, third-party permission not evidenced, learner release 0. Do not inflate formal proposed-coverage ledger or mutate historical QRT/Owner seed.
+Next externally controlled decisions (not additional research verification): sample-paper rights/use; accepted QRT Q004/Q007/Q008; full-paper QRT signoff/reclassification for Q036/Q037/Q045/Q038; disputed Q005 original diagram interpretation; Owner original-source item-fidelity exception/admission or HOLD. No new routine PDF downloads, rehash, publisher-site search, Code PR, Track A authored pathway, or Relay writer.
