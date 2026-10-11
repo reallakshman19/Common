@@ -1,2 +1,17 @@
 TAB4 TASK EVIDENCE — APPEND ONLY; each task adds self-contained one-field-per-line record (Goal, Status, Met, Done, Code, Tests, CI, Evidence, AC, Claim, Blocker, Next).
 2026-10-11 | INITIAL STATE | Issue #212 r1 published; no Tab4 implementation task closed until evidence/checkpoint committed. Baseline 19 successful / 15 failing workflows is hosted prior evidence, not current Tab4 execution.
+
+2026-10-11 | TASK EVIDENCE 212-T1
+Task: 212-T1
+Goal (issue AC): AC-01..AC-10 documentation custody, exact-head baseline and append-only Tab4 coordination
+Status: DONE
+Met: yes
+Done: created issue #212 with 14 numbered tasks + estimates, ACs and handover references; created 7 append-only Tab4 files + TABS.md entry on Common/main and read back TABS, LINEAGE, EVIDENCE, issue body
+Code (repo branch @ commit | PR): reallakshman19/Common main @ 911fdd184d70812fe5ff34d2a61b2b45a6fdd3bd | no product PR; integration reallakshman19/3D_Converters #211 @ e7be6e26099ebef482dd89dd12898d3661bd6405 (unchanged)
+Tests (command -> pass/fail/skip): GitHub fetch_file Common/main LINEAGE.md EVIDENCE.log TABS.md -> PASS; GitHub fetch_issue #212 212-T1..T14 -> PASS
+CI (run -> result): no new CI; documentation-only Common [skip ci] -> SKIP
+Evidence (link): https://github.com/reallakshman19/3D_Converters/issues/212 ; https://github.com/reallakshman19/Common/commit/911fdd184d70812fe5ff34d2a61b2b45a6fdd3bd
+AC (before -> after): no Tab4 source register / 0 formal Owner acceptance -> issue and coordination source register published / 0 formal Owner acceptance
+Claim: NONE
+Blocker: NONE
+Next: 212-T2, 212-T3, 212-T4
