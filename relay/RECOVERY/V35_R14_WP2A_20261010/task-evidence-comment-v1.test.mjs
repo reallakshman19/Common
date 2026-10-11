@@ -173,3 +173,33 @@ test('U03 caller-injected reader cannot claim native acquisition',async()=>{
  const r=await observeEvidenceComment(input(),injected(),{native:true});
  assert.equal(r.source_grade,'CALLER_INJECTED_UNATTESTED');noAuthority(r);
 });
+
+test('N02 historical PR27 and PR21 issue comment can never attest current PR331',async()=>{
+  // Grounded negative oracle: issue #20 comment 6089537374 has Tested HEAD 4d90...
+  // and only PR27/PR21 links; these are untrusted modeled GET responses, NOT a
+  // credential or the actual native provider response.
+  const commentId=6089537374,historical='4d90d0ff8a72d843c632d44ed4bc90b2a7da3ca1';
+  const current='c'.repeat(40),pr=331;
+  const d=source();
+  delete d['pulls/21'];delete d['issues/comments/'+C];delete d['commits/'+H1];
+  d['pulls/'+pr]={number:pr,html_url:'https://github.com/'+R+'/pull/'+pr,
+    state:'open',head:{sha:current,repo:{id:ID,full_name:R}}};
+  d['issues/comments/'+commentId]={
+    id:commentId,html_url:'https://github.com/'+R+'/issues/20#issuecomment-'+commentId,
+    issue_url:'https://api.github.com/repos/'+R+'/issues/20',
+    user:{login:'reallakshman19',id:277598171,type:'User'},
+    created_at:'2026-10-10T00:00:00Z',updated_at:'2026-10-10T00:00:00Z',
+    body:'## TASK_EVIDENCE - historic only. **Tested HEAD:** '+tick+historical+tick+
+      ' [draft PR27](https://github.com/'+R+'/pull/27)'+
+      ' [draft PR21](https://github.com/'+R+'/pull/21)',
+  };
+  d['commits/'+historical]={sha:historical};
+  const args={...input(),pr_number:pr,evidence_comment_id:commentId,claimed_head_sha:historical};
+  const x=await observeEvidenceComment(args,injected(d));
+  noAuthority(x);
+  assert.equal(x.material_observed,false);
+  assert.equal(x.failure_stage,'FIRST_VALIDATE');
+  assert.equal(x.failure_reason,'CURRENT_PR_BINDING_MISSING');
+  assert.equal(x.source_receipt,null);
+  assert.equal(x.source_currentness,'UNKNOWN');
+});
