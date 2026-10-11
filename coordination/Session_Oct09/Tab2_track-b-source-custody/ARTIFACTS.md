@@ -130,3 +130,8 @@ TAB2 ARTIFACTS -- APPEND ONLY; one dated ref per line; research refs are not app
 2026-10-11 | chat=6acb7221 | R15 N04–N06 continued XS batch plan / current V3.1 issue-vehicle 404 diagnostic | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6108865713
 2026-10-11 | chat=6acb7221 | R15 PR #176 formal human reviewer REQUEST ONLY (0 submitted approvals, source links 10/68) | https://github.com/reallakshman19/Grade9v3.5/pull/176#issuecomment-6108869540
 2026-10-11 | chat=6acb7221 | R15 N04/N05/N06 final read-only task results/Track A latest CI/source-authority HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6108878605
+
+2026-10-11 | chat=6acb7221 | R15-N07/N08 near-handover continuation PLAN | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6108986519
+2026-10-11 | chat=6acb7221 | R15-N07 V3.1 ISSUE212 routing/allowed writer decision request to production owner #127, no grant | https://github.com/reallakshman19/Grade9v3.5/issues/127#issuecomment-6108993880
+2026-10-11 | chat=6acb7221 | R15-N08 actual Common Git continuity memo, not terminal handover, commit fc6624483cc2862730ccffa7929f29b381e525ef | https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_track-b-source-custody/handovers/2026-10-11-chat-6acb7221-readiness.md
+2026-10-11 | chat=6acb7221 | R15-N07/N08 TASK_RESULT #174, original B-M1/B-M2 0/2, release HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6109015380
