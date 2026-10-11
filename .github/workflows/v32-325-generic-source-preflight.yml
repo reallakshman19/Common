@@ -35,6 +35,10 @@ jobs:
       - name: Run real native V3.2 graph/project seam with synthetic GET-only provider
         run: |
           python -m unittest discover -s relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011 -p 'test_*.py' -v
+      - name: Execute five-HOLD synthetic benchmark and print exact expected/observed oracles
+        run: |
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/benchmark_walkthrough.py > "$RUNNER_TEMP/v32-325-synthetic-benchmark.json"
+          python -m json.tool "$RUNNER_TEMP/v32-325-synthetic-benchmark.json"
       - name: Verify every generic integration module remains read-only
         run: |
           python - <<'PY'
