@@ -90,3 +90,18 @@ AC (before -> after): indexed source-only preview could reach independent unsour
 Claim: HOSTED_CI
 Blocker: NONE
 Next: 212-T5 add native fact provenance/attestation and browser Build→4 Preview→Run verification without weakening the fail-closed guard
+
+2026-10-11 | TASK EVIDENCE 212-T5 PARTIAL
+Task: 212-T5
+Goal (issue AC): AC-04/AC-05 original-source identity into actual 4 Preview and eventually reviewed final CII
+Status: PARTIAL
+Met: partial
+Done: bounded native Worker source-only occurrence facts coded; original xmlIndex, repeated -1 and JSON sourcePath preserved; overflow/missing paths fail closed; SHA and row-count verified at product handoff; diagnostic Preview audit receives source-only rows; genuine Firstpass 216/164 Node author test; fixed A2 overlay manifest closure regression. Actual physical 4 Preview uses xml-cii-adapted-preview-diagnostics-audit-v7.js / xmlCiiBuildAndRenderPreview and is NOT wired.
+Code (repo branch @ commit | PR): 3D_Converters lfj/212-scope-cache-exact-source-20261011 @ cd09d74b718cda4c7ba6610d3708235c9524a417 | PR #213 DRAFT base #211@e7be6e26099ebef482dd89dd12898d3661bd6405
+Tests (command -> pass/fail/skip): node --test T3/T4 + source-fact Preview + genuine Firstpass -> Node22/24 SUCCESS at c6a95b3bcd1120f603963b1309751471ae28177f (run 38109051094); actual 4 Preview and final Mode A/B -> NOT_RUN
+CI (run -> result): 38109051094 Node22/24 PASS earlier head; 38108956813 authored Chromium PASS earlier head; 38108956842 A2 declared manifest FAIL earlier head; repaired at current HEAD cd09d74b718cda4c7ba6610d3708235c9524a417; current 38109096996,38109096936,38109096910,38109096980 pending at evidence capture
+Evidence (link): https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105111566 ; https://github.com/reallakshman19/3D_Converters/pull/213
+AC (before -> after): only Worker CSV display rows -> extra bounded original occurrence audit facts with true source paths, no final CII approval; complete engineering AC 0->0
+Claim: HOSTED_CI
+Blocker: CI - latest exact-head #213 verification pending; PERSON - B1/B4 source writer reconciliation for real 4 Preview
+Next: 212-T5B physical fact attestor and full 4 Preview, 212-T5C review/run; 212-T6 adversarial original-source work independent
