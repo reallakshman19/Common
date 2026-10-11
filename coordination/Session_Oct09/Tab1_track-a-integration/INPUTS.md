@@ -34,3 +34,11 @@ INPUT REGISTER -- APPEND ONLY; names, paths and Git blob SHAs only. No file bodi
 2026-10-11 UTC | chat=6acae343 | INTENT INPUT | 2026-10-11T01:47:34Z | proceed Track A
 2026-10-11 UTC | chat=6acae343 | INTENT INPUT | 2026-10-11T01:56:59Z | persistent append-only Common main session log; source of exact user decisions in DECISIONS.md
 2026-10-11 UTC | chat=6acae343 | SCOPE EXCLUSION | no original SOF source PDF bytes required; Track B source/admission/rights/Q004 excluded
+2026-10-11 UTC | chat=6acae343 | INTENT INPUT | 2026-10-11T02:06:27Z | three consecutive plan tasks; stop only when completed or genuine blocker
+2026-10-11 UTC | chat=6acae343 | FILE | TEST/library/figures/core1a-consecutive-divisibility-staged.svg | blob=1409509839be300106f104b4cde7891524560c16
+2026-10-11 UTC | chat=6acae343 | TEST CASE | tests/test_imo_173_four_role.py | blob=40c2591e444dc0bff89f83a919d27f539bd48e8d
+2026-10-11 UTC | chat=6acae343 | TEST CASE | tests/check_imo_173_a4.py | blob=edacafd3d1bfe401cc2a12ceffbb9b16d9c69bb5
+2026-10-11 UTC | chat=6acae343 | TEST CASE | tests/imo_173_core1b_browser.mjs | blob=20aa5f9633b3313f2518a5fdd33b86861a8438e3
+2026-10-11 UTC | chat=6acae343 | HANDOFF FILE | TEST/imo-research/pilots/issue-173-track-a-review-handoff.md | blob=31a27131894ce4d822a90a39bf2a0f0736fb0f20
+2026-10-11 UTC | chat=6acae343 | BENCHMARK | pinned main 778eb35a70517a46108ad0a5dc01dfc89f61c0e3 vs candidate a70d71b4573318c5fc34dfc45f0d2156a23c5eda | full 44-step paired native Guardrails, failing identities 155/155 and failing steps 20/20, newly introduced 0
+2026-10-11 UTC | chat=6acae343 | NEW INPUT | CI 38104243517: 680px table vs 204px viewport, 200 Tabs never focused; CI 38104243449: Core1A proof text absent from PDF; CI 38104243488: standalone learner PDF middle blank sheet
