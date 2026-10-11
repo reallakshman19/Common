@@ -13,3 +13,5 @@
 2026-10-11 | chat=6acae92b | type=S3_REAL_GET | repo=reallakshman19/Common | root=5 | child=325 | pr=326 | pr_head=1ffff7799bf50f91641399b16099371452522eda | main=b24b3aedc070c7d2601457653ee2030f80d8af4a | shape=PASS | two_reads_same=PASS | original_owner_graph=NOT_RUN | content=not_logged
 2026-10-11 | chat=6acae92b | type=S3_FOCUSED_CI | exact_head=1ffff7799bf50f91641399b16099371452522eda | run=38104486803 | result=SUCCESS | python_matrix=3.11,3.12,3.13 | scope=sanitized-replay-and-existing-synthetic
 2026-10-11 | chat=6acae92b | type=UNCHANGED_RELEASE | programme_ac=0/8 | native_production=V3.1 | v32_live_writer=OFF | B=NOT_QUALIFIED | tab2=UNTOUCHED
+2026-10-11 | chat=6acae92b | type=FULL_CODE_HEAD_CI | code_head=1ffff7799bf50f91641399b16099371452522eda | v31=38104486556:274/274:SUCCESS | focused=38104486803:44x3:SUCCESS | v32=38104486557:SUCCESS | delp=38104486571:SUCCESS | local=38104486569:SUCCESS | path-not-applicable-caveat=true | owner_ac=0/8
+2026-10-11 | chat=6acae92b | type=DOC_ONLY_LATER_HEAD | head_pre_log=d9631c5c75f56eb3070d07a1b3baa80efb7daba5 | status=doc-only-head-not-CI-qualified | note=Do-not-attribute-code-head-tests-to-doc-only-commits
