@@ -108,3 +108,6 @@ TAB2 ARTIFACTS -- APPEND ONLY; one dated ref per line; research refs are not app
 2026-10-11 | chat=6acb2a0f | ISSUE #174 IMPLEMENTATION_PLAN R14 | original goal acceptance crosswalk; IDs R14-T01..T10 and XS/S/M/L estimates | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6106398662
 2026-10-11 | chat=6acb2a0f | ISSUE #174 TASK_RESULT R14-T01/T02/T03 | 68 source/browser QID exact overlap, 14 provisional source-topic groups, 10 QIDs draft/homepage, Q004 B-M1 source/rights/QRT HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6106410376
 2026-10-11 | chat=6acb2a0f | ISSUE #174 BODY R14 pointer update | old R13 data retained as historical, PR #176 remains draft, programme AC 0/2 | https://github.com/reallakshman19/Grade9v3.5/issues/174
+
+2026-10-11 | chat=6acb2a0f | ISSUE #174 TASK_RESULT R14-T04/T05/T06 (attempted, real blocker) | Owner A/H/B first-pilot mode not selected, #163 original Q004 bytes/fidelity/disposition absent, Q004/Q007 QRT acceptance actor/receipt missing | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6106470701
+2026-10-11 | chat=6acb2a0f | ISSUE #174 BODY R14 status readback updated (OPEN) | current R14 pointer now includes T04/T05/T06 blocking disposition; no code, merge, release change | https://github.com/reallakshman19/Grade9v3.5/issues/174
