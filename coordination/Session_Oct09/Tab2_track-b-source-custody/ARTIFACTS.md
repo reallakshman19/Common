@@ -126,3 +126,7 @@ TAB2 ARTIFACTS -- APPEND ONLY; one dated ref per line; research refs are not app
 2026-10-11 | chat=6acb7221 | R15 IMPLEMENTATION_PLAN #174 XS/S bounded work + true original acceptance HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6108691928
 2026-10-11 | chat=6acb7221 | R15 TASK_RESULT static source-only cross-draft 96/96 QA, Owner A/H/B still open, original Core2/QRT/learner 0/HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6108715869
 2026-10-11 | chat=6acb7221 | R15-S3 Track A coordination for existing #180 print SVG issue, sole V3.1 writer required, no renderer code mutation | https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6108710401
+
+2026-10-11 | chat=6acb7221 | R15 N04–N06 continued XS batch plan / current V3.1 issue-vehicle 404 diagnostic | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6108865713
+2026-10-11 | chat=6acb7221 | R15 PR #176 formal human reviewer REQUEST ONLY (0 submitted approvals, source links 10/68) | https://github.com/reallakshman19/Grade9v3.5/pull/176#issuecomment-6108869540
+2026-10-11 | chat=6acb7221 | R15 N04/N05/N06 final read-only task results/Track A latest CI/source-authority HOLD | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6108878605
