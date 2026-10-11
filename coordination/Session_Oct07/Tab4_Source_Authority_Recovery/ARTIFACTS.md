@@ -12,3 +12,6 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 2026-10-11 | CI | #38101542898 | C05 #893 historical real browser + Node FAILED | https://github.com/reallakshman19/3D_Converters/actions/runs/38101542898
 2026-10-11 | CI | #38085060002 | public Pages stale JS and 404 matching Worker, release blocker | https://github.com/reallakshman19/3D_Converters/actions/runs/38085060002
 2026-10-11 | BRANCH | Common/main initial observed 366114205d9395fe4ba4f679059ec8fc38bb7a21 | coordination tab created after
+
+2026-10-11 | REPORT | RECON/2026-10-11/1-c05-failure-matrix.md | Common main @ cca344bc1c35c0fdae84195a4068eab82ca0803c | 15-failure source reconciliation.
+2026-10-11 | ISSUE COMMENT | #212 C05 matrix | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6104345351

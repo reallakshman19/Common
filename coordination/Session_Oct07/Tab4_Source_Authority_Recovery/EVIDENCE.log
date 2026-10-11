@@ -15,3 +15,18 @@ AC (before -> after): no Tab4 source register / 0 formal Owner acceptance -> iss
 Claim: NONE
 Blocker: NONE
 Next: 212-T2, 212-T3, 212-T4
+
+2026-10-11 | TASK EVIDENCE 212-T2
+Task: 212-T2
+Goal (issue AC): AC-03 source/contract classification of all 15 failing exact-head C05 workflows, without protected golden rewrites
+Status: DONE
+Met: yes (diagnostic task only; C05 release defects and owner contract decisions remain OPEN)
+Done: independently read exact-head 15 failed workflow job outcomes/logs; published per-workflow 15-row source/CI matrix identifying #893 bounded vs legacy full-master contract, old cache-generation assumptions, intended RED predecessor tests, cold restore expected exception conflicts, #835/#884 narrow-scope gates, #841 Weight predecessor assertion, and dependent aggregate failures
+Code (repo branch @ commit | PR): reallakshman19/Common main @ cca344bc1c35c0fdae84195a4068eab82ca0803c | source report R-212-01; 3D_Converters #211 @ e7be6e26099ebef482dd89dd12898d3661bd6405 unchanged
+Tests (command -> pass/fail/skip): GitHub fetch_workflow_run_jobs and fetch_workflow_job_logs across all 15 exact-head failing workflows -> PASS diagnosis; source fetch_file #893, #875 and tab/runtime call sites -> PASS comparison; no local Node/Chromium rerun -> SKIP
+CI (run -> result): exact-head 34 total -> 19 SUCCESS / 15 FAILURE, including 38101542898 #893 FAIL, 38101542874 #894 scale-browser SUCCESS but Node FAIL, 38101542960 #835 scope FAIL
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct07/Tab4_Source_Authority_Recovery/RECON/2026-10-11/1-c05-failure-matrix.md ; https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6104345351
+AC (before -> after): AC-03 15 C05 failures undifferentiated -> 15 source/log-linked dispositions with D-212-2 D-212-7 D-212-8 OPEN; formal acceptance 0->0
+Claim: HOSTED_CI
+Blocker: OWNER - adopt per-consumer C05 contract, restore failure semantics and legacy gate applicability without altering protected goldens
+Next: 212-T3, 212-T4; independent work continues while contract decisions remain OPEN

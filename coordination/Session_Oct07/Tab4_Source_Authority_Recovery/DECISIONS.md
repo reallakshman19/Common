@@ -5,3 +5,6 @@ TAB4 DECISIONS — APPEND ONLY
 2026-10-11 | D-212-4 | OPEN | Independent #141 G01-G06 source/fixture and reviewer authority to qualify final integration head; no author self-signoff.
 2026-10-11 | D-212-5 | OPEN | Explicit Owner merge/public Pages deployment authorization only after verified all required gates; none inferred here.
 2026-10-11 | D-212-6 | ANSWERED | Keep current working #211 DRAFT and exact source goldens intact, no bulk-import of historical C05 #205/#207 test rewrites; this is plan's safe baseline, review if contrary authority arises.
+
+2026-10-11 | D-212-7 | OPEN | Cold IndexedDB stale revision and corrupt-master failure: global thrown rejection versus per-master isolated failure receipt; preserve authority and healthy sibling. Needs C05 source-contract owner.
+2026-10-11 | D-212-8 | OPEN | Narrow C05 qualification-only #835/#884 workflow applicability on wide LFJ integration descendant. Do not mark gate waived without Owner reviewer decision.
