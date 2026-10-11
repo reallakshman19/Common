@@ -5,6 +5,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {inspectPreAdmission} from '../V35_R14_WP2B_20261010/pre-admission-boundary-v1.mjs';
+import {projectNativeSourceFailure} from './t05-native-source-failure-v1.mjs';
 import {observeCurrentCandidate} from './current-candidate-material-v1.mjs';
 import {observeSelectedRequiredCi} from './required-ci-material-v1.mjs';
 import {observeEvidenceComment} from './task-evidence-comment-v1.mjs';
@@ -131,4 +132,62 @@ test('T05 unauthorized grants/alternate facts schema contract refused before rea
   {candidate:async()=>{throw Error('SHOULD_NOT_READ');},ci:async()=>{},
    evidence:async()=>{}});
  closed(v);assert.equal(v.source_status,'UNKNOWN');
+});
+
+/* N06 unit inputs are synthetic shapes, never native provider evidence. */
+const nativeNegative=()=>({
+ schema:'common-v35-r12-u3-delp-pre-admission-v1',
+ observation_grade:'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION',
+ source_status:'UNKNOWN',source_digest:null,admission:'NOT_ADMITTED',
+ evidence_admitted:false,owner_authenticated:false,reviewer_qualified:false,
+ programme_progress:null,delp_projector_invoked:false,writer_authorized:false,
+ target_delp_policy:'NOT_ADOPTED',
+ source_failure:{edge:'JOIN_U03_SOURCE_UNVERIFIED',round:'FIRST',
+  component:'U03',inner_stage:'FIRST_VALIDATE',inner_reason:'CURRENT_PR_BINDING_MISSING'},
+});
+test('N06 strict native negative projection preserves only five source-owned keys',()=>{
+ const r=projectNativeSourceFailure({...nativeNegative(),privateProviderBody:'SECRET_403',
+  source_failure:{...nativeNegative().source_failure}});
+ assert.deepEqual(r,nativeNegative().source_failure);
+ assert.ok(!JSON.stringify(r).includes('SECRET_403'));
+});
+test('N06 second-round U02 failure reports deterministic source reason only',()=>{
+ const r=projectNativeSourceFailure({...nativeNegative(),
+  source_failure:{edge:'JOIN_U02_SOURCE_UNVERIFIED',round:'SECOND',component:'U02',
+   inner_stage:'SOURCE_READBACK',inner_reason:'SELECTED_CHECKS_DRIFT'}});
+ assert.deepEqual(r,{edge:'JOIN_U02_SOURCE_UNVERIFIED',round:'SECOND',
+  component:'U02',inner_stage:'SOURCE_READBACK',inner_reason:'SELECTED_CHECKS_DRIFT'});
+});
+test('N06 fabricated and provider-sensitive reasons are never printed',()=>{
+ for(const bad of [
+  {source_failure:{...nativeNegative().source_failure,inner_reason:'PRIVATE_TOKEN_SECRET'}},
+  {source_failure:{...nativeNegative().source_failure,private_response:'RAW_SECRET'}},
+  {source_failure:{...nativeNegative().source_failure,component:'U02'}},
+  {source_failure:{...nativeNegative().source_failure,round:'THIRD'}},
+  {source_failure:{...nativeNegative().source_failure,inner_stage:'SOURCE_READBACK'}},
+  {source_failure:'PRIVATE_BODY'},
+ ]){
+  const r=projectNativeSourceFailure({...nativeNegative(),...bad});
+  assert.equal(r,null);
+ }
+});
+test('N06 no invented safe cause for structurally coherent or unverified details',()=>{
+ assert.equal(projectNativeSourceFailure({...nativeNegative(),source_failure:null}),null);
+ assert.equal(projectNativeSourceFailure({...nativeNegative(),source_status:'REFERENCES_COHERENT_BUT_UNADMITTED'}),null);
+ assert.equal(projectNativeSourceFailure({...nativeNegative(),source_digest:'sha256:'+'a'.repeat(64)}),null);
+});
+test('N06 no positive E, projector or writer flags can be laundered into diagnostic',()=>{
+ for(const patch of [
+  {admission:'ADMITTED'},{evidence_admitted:true},{writer_authorized:true},
+  {delp_projector_invoked:true},{programme_progress:100},
+  {observation_grade:'CALLER_INJECTED_UNATTESTED'},{reviewer_qualified:true},
+  {target_delp_policy:'ADOPTED'},
+ ]){
+  assert.equal(projectNativeSourceFailure({...nativeNegative(),...patch}),null);
+ }
+});
+test('N06 current WP2-B injected source cannot masquerade as native output',async()=>{
+ const x=await run(d=>{d['issues/comments/'+C].body+=' [other PR](https://github.com/'+R+'/pull/27)';});
+ closed(x);
+ assert.equal(projectNativeSourceFailure(x),null);
 });
