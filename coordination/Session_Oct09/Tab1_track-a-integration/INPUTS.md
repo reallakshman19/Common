@@ -50,3 +50,12 @@ INPUT REGISTER -- APPEND ONLY; names, paths and Git blob SHAs only. No file bodi
 2026-10-11 UTC | chat=6acae343 | HANDOFF CHANGE | TEST/imo-research/pilots/issue-173-track-a-review-handoff.md | Git blob=95ce97f313011470eda18e55456f1f9bbe0193fa | review status only
 2026-10-11 UTC | chat=6acae343 | TEST CASES UNMODIFIED | tests/imo_173_core1b_browser.mjs blob=20aa5f9633b3313f2518a5fdd33b86861a8438e3 ; tests/check_imo_173_a4.py blob=edacafd3d1bfe401cc2a12ceffbb9b16d9c69bb5 | no weakened assertion
 2026-10-11 UTC | chat=6acae343 | INTENT | 2026-10-11T02:16:17Z | exact user text: go on | continue within Track A without source PDF search, stop at real blocker
+2026-10-11 UTC | chat=6acae343 | USER INTENT INPUT | timestamp=2026-10-11T02:26:28Z | user exact phrase "ok next one" | interpreted as next single contained Core1B offline print diagnostic task
+2026-10-11 UTC | chat=6acae343 | FIXTURE | TEST/products/core1b-authored-reconstruction-journey.manifest.json | blob=35b57884c605e324542201d99c62ff42174a2699 | historic 3-role TEST manuscript
+2026-10-11 UTC | chat=6acae343 | TOOL INPUT | tools/print/print-product.mjs | blob=6d98c081fa303f972becdebb5f7fbd48833729fa | unchanged shared offline print path
+2026-10-11 UTC | chat=6acae343 | CI INPUT | .github/workflows/imo-track-a-173.yml | blob=f30b6a07fae8bd2b0b61b665166fd2f26b08e4e6 | learner-only diagnostic job, NO KEY generation/upload
+2026-10-11 UTC | chat=6acae343 | AUTHORED SVG | TEST/library/figures/core1b-three-factor-attempt-safe.svg | current blob=c6c0130d527cc3ade8f258bdbd01e1b45353ec81 | print-only 280px; screen unchanged
+2026-10-11 UTC | chat=6acae343 | GOLDEN BACKING | TEST/imo-research/pilots/blueprint-first-five-transfer.v1.json | blob=3a1c862dd1c6e83c9e2530cdc540c24050c054bd | existing source-free authored package
+2026-10-11 UTC | chat=6acae343 | CI LEARNER PDF ONLY | generated public/test/products/core1b-authored-reconstruction-journey/core1b.pdf | sha256=dca407d8c71333f4b22039a359fdd170700f3a4dd74c6dd6c2b6b8ec3fd366b8 | artifact#11689696038 from 38105285336; NOT an original source PDF
+2026-10-11 UTC | chat=6acae343 | BENCHMARK TEST CASE | standalone reconstruction-proof CI run 38105696816 | near-floor print 216px KEY footer orphan FAIL; original test untouched
+2026-10-11 UTC | chat=6acae343 | HANDOVER EVENT | no inter-chat transfer, current PR head f53f6f588f173b66f0fa79f791da3eba2c93e1af

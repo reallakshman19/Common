@@ -21,3 +21,6 @@ STATUS ANSWERED: completed 3 tasks as a batch; stopped at reproduced out-of-scop
 2026-10-11T02:16:17Z | chat=6acae343 | D5 EXACT USER TEXT:
 go on
 STATUS ANSWERED: continued within isolated Track A scope and old-PR/generated CI fixtures; PDF triage and author-only print correction verified. BLOCKED: no authorization to alter shared renderer keyboard semantics, unresolved Core1B offline page quality; external QRT/AT and Owner acceptance OPEN. Source-PDF searching not resumed.
+2026-10-11T02:26:28Z | chat=6acae343 | D6 EXACT USER TEXT:
+ok next one
+STATUS ANSWERED: took one next contained engineering task, diagnosis of Core1B offline learner-PDF and independent KEY pagination from old TEST fixtures. DONE: isolated over-wide, split vector-only paper page, added exact-head learner-only diagnostic and author print-only improvement. OPEN/BLOCKED: author-only sizes 280/240/216 do not clear protected offline KEY footer orphan; require separate shared print pipeline/renderer scope authorization, no waiver, no key distribution, no Track B, source PDF, relay or publication work.
