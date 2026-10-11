@@ -8,3 +8,8 @@ TAB4 DECISIONS — APPEND ONLY
 
 2026-10-11 | D-212-7 | OPEN | Cold IndexedDB stale revision and corrupt-master failure: global thrown rejection versus per-master isolated failure receipt; preserve authority and healthy sibling. Needs C05 source-contract owner.
 2026-10-11 | D-212-8 | OPEN | Narrow C05 qualification-only #835/#884 workflow applicability on wide LFJ integration descendant. Do not mark gate waived without Owner reviewer decision.
+
+2026-10-11 | D-212-9 | OPEN | For actual physical 4 Preview (`xml-cii-adapted-preview-diagnostics-audit-v7.js` -> `xmlCiiBuildAndRenderPreview`), reconcile B1 #133 and B4 #136 source writer ownership before changing production Preview/Run; T5A source-only audit is not acceptance.
+
+
+2026-10-11 | D-212-10 | AUTHORIZED SCOPED | Owner consolidates Tab3+Tab4 and authorizes #216 isolated reviewer port and F02/T6 tests; #212 coordinating. Preserve old #210/#215 branches; D-212-9 B1/B4 lease remains OPEN, not overridden. No golden, Run flag promotion, merge/deploy.

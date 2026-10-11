@@ -20,3 +20,31 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 2026-10-11 | CI | #38103222868 @59f6f02d7f11c6f81fb8d1e52263ec190047c9f0 | pre-fix RED-seeking test QUEUED | https://github.com/reallakshman19/3D_Converters/actions/runs/38103222868
 2026-10-11 | CI | #38103282171 @77adbd1c21e47c22c80f5a9dab47eaed1e973613 | patched GREEN-seeking test QUEUED | https://github.com/reallakshman19/3D_Converters/actions/runs/38103282171
 2026-10-11 | REPORT | RECON/2026-10-11/2-lfj-engineering-authority-contract.md | Common main @7d52dfea9f0fbaa6abb06391ab804f4a723d4bc1 | T4 PARTIAL.
+
+2026-10-11 | CI | 38103222868 pre-fix 59f6f02d7f11c6f81fb8d1e52263ec190047c9f0 | RED both Node22/24 confirmed.
+2026-10-11 | CI | 38103282171 post-fix 77adbd1c21e47c22c80f5a9dab47eaed1e973613 | GREEN both Node22/24 confirmed.
+2026-10-11 | CI | 38103282320 same-head LFJ #208 original frozen ledger and two CSV PASS.
+2026-10-11 | CI | 38103282218 same-head native A3 original selected Chromium PASS.
+
+2026-10-11 | PR | #213 draft commit ecd9fdc133501ec4feb01608d68dbd7b36308601 | first T4 code; first test failed nested import path, fixed at 1fd3a5a01a2e09307341213901894e7f4f0857aa.
+2026-10-11 | CI | #38108628065 @1fd3a5a01a2e09307341213901894e7f4f0857aa | T4 15/15 Node22 and Node24 PASS, authored/docs parity PASS.
+2026-10-11 | CI | #38108628056 @1fd3a5a01a2e09307341213901894e7f4f0857aa | original Firstpass/NC golden PASS.
+2026-10-11 | CI | #38108628037 @1fd3a5a01a2e09307341213901894e7f4f0857aa | real A3 original selected browser PASS.
+
+2026-10-11 | PR | #213 DRAFT exact T5 source-only fact candidate cd09d74b718cda4c7ba6610d3708235c9524a417 | https://github.com/reallakshman19/3D_Converters/pull/213
+2026-10-11 | CI | #38108956842 | A2 source/docs closure FAILED on 0f3c04c768eac8675ca3d7ce6bf10ea551c9125c because manifest omitted new xml-source-fact-handoff.mjs + old parity SHA.
+2026-10-11 | CI | #38109051094 | exact c6a95b3bcd1120f603963b1309751471ae28177f | T3/T4/T5 author unit/original Firstpass 2/2 Node22/24 SUCCESS.
+2026-10-11 | CI | #38109096996,38109096936,38109096910,38109096980 | latest cd09d74b718cda4c7ba6610d3708235c9524a417 pending at record; no inherited PASS.
+2026-10-11 | SOURCE | docs/.lfj-indexed-runtime-overlay-manifest.json | commit cd09d74b718cda4c7ba6610d3708235c9524a417 | 18 source closure entries incl new Worker import; registered public Pages not attested.
+
+2026-10-11 | CI | #38109096996 | PR #213 HEAD cd09d74b718cda4c7ba6610d3708235c9524a417 | new tests Node22/24 SUCCESS.
+2026-10-11 | CI | #38109096910 | same HEAD | LFJ #208 original Firstpass & NC source ledger/2 CSV oracle SUCCESS.
+2026-10-11 | CI | #38109096980 | same HEAD | native authored-root selected File, Worker, two CSV browser SUCCESS.
+2026-10-11 | CI | #38109096936 | same HEAD | A2 closure Node22+24, disposable served docs Chromium, matrix all 5 jobs SUCCESS.
+2026-10-11 | ISSUE COMMENT | #212 T5A exact-head addendum | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105127112
+
+
+2026-10-11 | HANDOVER | Common/main coordination/Session_Oct07/Tab4_Source_Authority_Recovery/handovers/2026-10-11.md | file creation commit da64754b1cf1c34cac9148fca8d477d34e6e114a | Git blob b9bee13985eabb14976f2326533bcf9ee3cd9a06 | https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct07/Tab4_Source_Authority_Recovery/handovers/2026-10-11.md
+2026-10-11 | ISSUE PLAN_UPDATE | #212 full 12-section report comment 6105499324 | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105499324
+2026-10-11 | PARENT CHAT-ONLY | #129 comment 6105501651 | https://github.com/reallakshman19/3D_Converters/issues/129#issuecomment-6105501651
+2026-10-11 | CI EXACT HEAD | PR #213@cd09d74b718cda4c7ba6610d3708235c9524a417 | 45 terminal = 30 success, 15 historical C05 failure; final #38109097052 success; #38109096996 #38109096910 #38109096980 #38109096936 success.

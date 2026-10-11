@@ -60,3 +60,68 @@ AC (before -> after): unspecific LFJ downstream bridge -> source-level versioned
 Claim: NONE
 Blocker: NONE
 Next: 212-T4 build pure validation module/tests; 212-T5 downstream vertical browser integration after contract
+
+2026-10-11 | TASK EVIDENCE 212-T3 FINAL (supersedes preliminary PARTIAL)
+Task: 212-T3
+Goal (issue AC): AC-01/AC-02 prevent source-key collisions from reusing another original owner/zone catalogue, preserve explicit selection and shipping CSV semantics
+Status: DONE
+Met: yes (scoped author regression; independent Owner large-file gate remains open)
+Done: original source/sample-key collision regression RED on Node22/24 before patch, then exact-text reuse guard in source/docs twins and same test GREEN at exact patch head; old no-silent-owner tests preserved; hosted unchanged original source/CSV and actual Chromium selected Build regressions successful
+Code (repo branch @ commit | PR): reallakshman19/3D_Converters lfj/212-scope-cache-exact-source-20261011 @ 77adbd1c21e47c22c80f5a9dab47eaed1e973613 | PR #213 DRAFT stacked on #211@e7be6e26099ebef482dd89dd12898d3661bd6405
+Tests (command -> pass/fail/skip): node --test tests/lfj-212-scope-cache-identity.test.mjs tests/lfj-208-unsupported-owner-scope.test.mjs -> RED before patch on Node22/24; PASS after patch on Node22/24; cmp authored/docs scope modules -> PASS; hosted LFJ#208 original ledger and frozen two CSV oracles -> PASS; A3 actual authored-root selected Chromium -> PASS
+CI (run -> result): 38103222868 pre-fix @59f6f02d7f11c6f81fb8d1e52263ec190047c9f0 -> 2/2 FAIL expected; 38103282171 fixed @77adbd1c21e47c22c80f5a9dab47eaed1e973613 -> 2/2 SUCCESS; 38103282320 combined acceptance SUCCESS; 38103282218 native selected Chromium SUCCESS; whole exact head 20 SUCCESS/15 historical C05 FAILURE
+Evidence (link): https://github.com/reallakshman19/3D_Converters/actions/runs/38103222868 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38103282171 ; https://github.com/reallakshman19/3D_Converters/pull/213
+AC (before -> after): two source texts with same sampled key substitute old owner UI catalogue -> exact JSON source equality required, behavior protected by hosted RED/GREEN; formal Owner release acceptance remains 0->0
+Claim: HOSTED_CI
+Blocker: NONE
+Next: 212-T4 validated downstream handoff contract and fail-closed tests, then 212-T5 real UI vertical slice
+
+2026-10-11 | TASK EVIDENCE 212-T4 FINAL (supersedes preliminary PARTIAL)
+Task: 212-T4
+Goal (issue AC): AC-04 formal versioned LFJ.EngineeringSourceBasis.v1 contract and fail-closed authority boundary before actual engineering Preview/Run
+Status: DONE
+Met: yes (contract and negative gate only; complete native FactRecord attestation/integration is 212-T5 and NOT accepted)
+Done: Implemented real Run checklist veto and final-job-builder guard for indexed LFJ CSV-only preview, explicit legacy mode compatibility, separate product-attested receipt requirement that cannot be faked with UI flags, original Blob reference and selected owner/zone comparison, source/docs mirrors, and seven Node negative/positive tests; corrected initial nested test import path after hosted failure; read exact-head tests and original unchanged Firstpass/NC CSV regressions
+Code (repo branch @ commit | PR): reallakshman19/3D_Converters lfj/212-scope-cache-exact-source-20261011 @ 1fd3a5a01a2e09307341213901894e7f4f0857aa | PR #213 DRAFT stacked on #211; source adapter at tabs/xml-cii-2019-standalone/integration/xml-cii-lfj-engineering-authority.js and exact docs mirror
+Tests (command -> pass/fail/skip): node --test tests/lfj-212-scope-cache-identity.test.mjs tests/lfj-208-unsupported-owner-scope.test.mjs tests/recovery-final-cii/xml-cii-indexed-run-authority.test.mjs -> 15/15 PASS on Node22 and Node24; cmp three authored/docs module pairs -> PASS; original Firstpass positive and NC negative complete ledger + two frozen CSV byte tests -> PASS; actual A3 original root selected browser Build/two CSV -> PASS; complete LFJ-to-B1 Preview/Mode A/B -> NOT_RUN
+CI (run -> result): 38108628065 Node22/24 2/2 SUCCESS; 38108628056 combined source/CSV 2/2 SUCCESS; 38108628037 native selected Chromium SUCCESS; raw-head 35 PR workflows 20 SUCCESS/15 historical C05 FAILURE
+Evidence (link): https://github.com/reallakshman19/3D_Converters/actions/runs/38108628065 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38108628056 ; https://github.com/reallakshman19/3D_Converters/pull/213
+AC (before -> after): indexed source-only preview could reach independent unsourced final XML-CII job path -> actual UI readiness and workflow-job builder refuse until separately product-attested FactRecord; formal Owner AC-04 end-to-end 0->0
+Claim: HOSTED_CI
+Blocker: NONE
+Next: 212-T5 add native fact provenance/attestation and browser Build→4 Preview→Run verification without weakening the fail-closed guard
+
+2026-10-11 | TASK EVIDENCE 212-T5 PARTIAL
+Task: 212-T5
+Goal (issue AC): AC-04/AC-05 original-source identity into actual 4 Preview and eventually reviewed final CII
+Status: PARTIAL
+Met: partial
+Done: bounded native Worker source-only occurrence facts coded; original xmlIndex, repeated -1 and JSON sourcePath preserved; overflow/missing paths fail closed; SHA and row-count verified at product handoff; diagnostic Preview audit receives source-only rows; genuine Firstpass 216/164 Node author test; fixed A2 overlay manifest closure regression. Actual physical 4 Preview uses xml-cii-adapted-preview-diagnostics-audit-v7.js / xmlCiiBuildAndRenderPreview and is NOT wired.
+Code (repo branch @ commit | PR): 3D_Converters lfj/212-scope-cache-exact-source-20261011 @ cd09d74b718cda4c7ba6610d3708235c9524a417 | PR #213 DRAFT base #211@e7be6e26099ebef482dd89dd12898d3661bd6405
+Tests (command -> pass/fail/skip): node --test T3/T4 + source-fact Preview + genuine Firstpass -> Node22/24 SUCCESS at c6a95b3bcd1120f603963b1309751471ae28177f (run 38109051094); actual 4 Preview and final Mode A/B -> NOT_RUN
+CI (run -> result): 38109051094 Node22/24 PASS earlier head; 38108956813 authored Chromium PASS earlier head; 38108956842 A2 declared manifest FAIL earlier head; repaired at current HEAD cd09d74b718cda4c7ba6610d3708235c9524a417; current 38109096996,38109096936,38109096910,38109096980 pending at evidence capture
+Evidence (link): https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105111566 ; https://github.com/reallakshman19/3D_Converters/pull/213
+AC (before -> after): only Worker CSV display rows -> extra bounded original occurrence audit facts with true source paths, no final CII approval; complete engineering AC 0->0
+Claim: HOSTED_CI
+Blocker: CI - latest exact-head #213 verification pending; PERSON - B1/B4 source writer reconciliation for real 4 Preview
+Next: 212-T5B physical fact attestor and full 4 Preview, 212-T5C review/run; 212-T6 adversarial original-source work independent
+
+2026-10-11 | TASK EVIDENCE ADDENDUM 212-T5A — exact-head successful proof, T5 still PARTIAL
+Task: 212-T5
+Goal (issue AC): AC-04/AC-05 actual full physical 4 Preview/Mode A/B from original LFJ facts
+Status: PARTIAL
+Met: partial
+Done: Original source-only bounded XML occurrence handoff/diagnostic audit and corrected new Worker docs manifest; exact-head original Firstpass and authentic NC author oracles passed, actual authored and generated docs Chromium passed; full physical B1 4 Preview not wired
+Code (repo branch @ commit | PR): 3D_Converters lfj/212-scope-cache-exact-source-20261011 @ cd09d74b718cda4c7ba6610d3708235c9524a417 | PR #213
+Tests (command -> pass/fail/skip): Node22/24 T3/T4/T5+authentic Firstpass -> PASS; root/docs original Firstpass + NC full ledger/two CSV -> PASS; actual physical 4 Preview & final CII -> NOT_RUN
+CI (run -> result): 38109096996 SUCCESS; 38109096910 SUCCESS; 38109096980 SUCCESS; 38109096936 all 5 jobs SUCCESS; whole head at readback 29 SUCCESS,15 historic C05 FAIL,1 B0-07 IN_PROGRESS
+Evidence (link): https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105127112
+AC (before -> after): source-only CSV only -> source-only original path/occurrence facts in audit with exact head qualification; AC-04/05 final Owner 0->0
+Claim: HOSTED_CI
+Blocker: PERSON - B1/B4 actual physical FactRecord and writer reconciliation; Owner genuine 30MiB and independent #141 still not staged
+Next: 212-T5B, 212-T5C; 212-T6 independent tests
+
+
+2026-10-11 | CONSOL-R4 | Owner authorized F01/F02/T6; principal plan #212 comment 6105806615; Tab3 crosslink #209 comment 6105809775; new draft PR #216 branch lfj/212-tab3-tab4-consolidated-20261011 at ad5e3b275d52c6d8a8f4958fc3d9542d4522726a based #215 d1eb5d5d. Source/docs reviewer new blob dd4838d8, two synthetic tests and workflow; 5 files only, 1 ahead/0 behind; same-head reviewer workflow 38114739534 initially queued; no tests claimed PASS on new head. #215 T3/T4/T5A/T6 untouched. B1/B4 integration and full physical Run unproven; release HOLD.
+
+2026-10-11 | CONSOL-R4 EXACT-HEAD TASK_EVIDENCE | Product combined DRAFT #216 lfj/212-tab3-tab4-consolidated-20261011 HEAD 0a1b130695bae20ffc1817670e6e8f61ef99456a, unchanged #215 base d1eb5d5d; three commits, 9 paths: Tab3 renderer/docs, 2 reviewer synthetic tests, two native Firstpass UI browser test/workflow files, T6 extended negatives and workflow. Exact 36 PR-associated terminal CI runs 21 SUCCESS/15 C05 FAILURE, zero pending; 38115038754 Node22/24 27/27, 38115038758 real Chromium Firstpass 216 XML/241 evidence source path $[0].children[1] search1/zero0/restore241 and exact 2 unchanged CSV SHA, 38115038735 reviewer Node/Chromium, 38115038733 cancellation/IDB cleanup, 38115038768 source/docs closure, 38115038551 original Firstpass+NC all SUCCESS. Frozen node CSV 57945B SHA256 0d8bb4482ed4a9d0d116faeac5e68ce564f07b6bba2dd73dfc3676b72ec2eddc; evidence 50399B SHA256 653485ff968bf478fa0001488432bb210a9ce6e85a901e9cc19f368f53a24809. T6 PARTIAL because C05 corrupt restore/stale/cold contract still failing: #880 logs Missing expected rejection; D-212-7 escalation #203 comment 6105875297. F01/F02 done as author tests, not independently accepted #141. B1 #133 comment 6105855859 / B4 #136 comment 6105856070 unresolved writer requests; no production B1/Weight/CII edit and indexed T4 Run veto remains. Principal #212 TASK_EVIDENCE 6105869308; reviewer #209 6105870845; Owner genuine 30MiB and public Pages parity not proven. No merge/deploy; release HOLD.
