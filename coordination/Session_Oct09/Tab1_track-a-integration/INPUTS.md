@@ -59,3 +59,4 @@ INPUT REGISTER -- APPEND ONLY; names, paths and Git blob SHAs only. No file bodi
 2026-10-11 UTC | chat=6acae343 | CI LEARNER PDF ONLY | generated public/test/products/core1b-authored-reconstruction-journey/core1b.pdf | sha256=dca407d8c71333f4b22039a359fdd170700f3a4dd74c6dd6c2b6b8ec3fd366b8 | artifact#11689696038 from 38105285336; NOT an original source PDF
 2026-10-11 UTC | chat=6acae343 | BENCHMARK TEST CASE | standalone reconstruction-proof CI run 38105696816 | near-floor print 216px KEY footer orphan FAIL; original test untouched
 2026-10-11 UTC | chat=6acae343 | HANDOVER EVENT | no inter-chat transfer, current PR head f53f6f588f173b66f0fa79f791da3eba2c93e1af
+2026-10-11 UTC | chat=6acae343 | EXACT-HEAD CI INPUT | 38105829519 | ref=f53f6f588f173b66f0fa79f791da3eba2c93e1af | expected KEY PDF page-quality benchmark FAIL (footer separated); no PDF bytes/KEY content stored

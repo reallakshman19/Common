@@ -106,3 +106,6 @@ Each entry records one link or immutable identifier; status is a point-in-time o
 2026-10-11 UTC | chat=6acae343 | CI RUN | 38105829519 | restored 280px current-head reconstruction-proof queued/in progress at log read; not assumed PASS | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38105829519
 2026-10-11 UTC | chat=6acae343 | CI RUN | 38105829529 | current-head offline learner geometry and other Track A checks queued at log read | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38105829529
 2026-10-11 UTC | chat=6acae343 | MERGE | NONE | draft/HOLD, no merged or approved source/Owner/relay/public | https://github.com/reallakshman19/Grade9v3.5/pull/175
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38105829519 | current held head f53f6f588f173b66f0fa79f791da3eba2c93e1af offline KEY footer FAIL, independently verified exact head | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38105829519
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38105829529 | same-head historic pinned-fixture comparison SUCCESS but four-role keyboard browser FAIL | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38105829529
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#173 | exact restored-head TASK EVIDENCE closure, no independent acceptance | https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6104709661
