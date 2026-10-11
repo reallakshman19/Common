@@ -45,8 +45,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
+          set +e
           python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/live_source_census.py > "$RUNNER_TEMP/v32-325-real-source-census.json"
+          census_exit=$?
+          set -e
           python -m json.tool "$RUNNER_TEMP/v32-325-real-source-census.json"
+          exit "$census_exit"
       - name: Verify every generic integration module remains read-only
         run: |
           python - <<'PY'
