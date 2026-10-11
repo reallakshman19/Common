@@ -241,3 +241,57 @@ test('U04 current author account requires exact current leaf binding',async()=>{
   const r=await observeCrossSource(input(),readers(o));
   assert.equal(r.source_consistent,false);noGrant(r);
 });
+
+test('N04 qualified-shaped U02 red read exposes only allowlisted inner source reason',async()=>{
+  const o=outputs();o.ci.selected_checks_observed=false;
+  o.ci.schema='common-v35-wp2a-u02-ci-observation-v1';
+  o.ci.failure_stage='SOURCE_READBACK';o.ci.failure_reason='SELECTED_CHECKS_DRIFT';
+  o.ci.errors=['SECRET_PROVIDER_MESSAGE'];
+  const x=await observeCrossSource(input(),readers(o));
+  noGrant(x);assert.equal(x.source_consistent,false);assert.equal(x.source_vector,null);
+  assert.equal(x.failure_stage,'JOIN');assert.equal(x.failure_round,'FIRST');
+  assert.equal(x.failure_reason,'JOIN_U02_SOURCE_UNVERIFIED');
+  assert.deepEqual(x.source_subfailure,{
+    component:'U02',stage:'SOURCE_READBACK',reason:'SELECTED_CHECKS_DRIFT'});
+  assert.ok(!JSON.stringify(x).includes('SECRET_PROVIDER_MESSAGE'));
+});
+test('N04 U03 foreign-comment misbinding is visibly a first unverified edge, no promotion',async()=>{
+  const o=outputs();o.evidence.material_observed=false;
+  o.evidence.schema='common-v35-wp2a-u03-comment-material-v1';
+  o.evidence.failure_stage='FIRST_VALIDATE';
+  o.evidence.failure_reason='CURRENT_PR_BINDING_MISSING';
+  const x=await observeCrossSource(input(),readers(o));noGrant(x);
+  assert.equal(x.failure_stage,'JOIN');
+  assert.equal(x.failure_reason,'JOIN_U03_SOURCE_UNVERIFIED');
+  assert.deepEqual(x.source_subfailure,{
+    component:'U03',stage:'FIRST_VALIDATE',reason:'CURRENT_PR_BINDING_MISSING'});
+  assert.equal(x.source_vector,null);
+});
+test('N04 invalid nested source details and arbitrary provider failures cannot leak',async()=>{
+  const o=outputs();o.evidence.material_observed=false;
+  o.evidence.schema='common-v35-wp2a-u03-comment-material-v1';
+  o.evidence.failure_stage='FIRST_VALIDATE';
+  o.evidence.failure_reason='SECRET_PRIVATE_BODY';
+  const x=await observeCrossSource(input(),readers(o));noGrant(x);
+  assert.equal(x.failure_reason,'JOIN_U03_SOURCE_UNVERIFIED');
+  assert.equal(x.source_subfailure,null);
+  assert.ok(!JSON.stringify(x).includes('SECRET_PRIVATE_BODY'));
+  const y=await observeCrossSource(input(),{
+    candidate:async()=>{throw Error('SELECTED_CHECKS_DRIFT SECRET');},
+    ci:async()=>o.ci,evidence:async()=>o.evidence});
+  assert.equal(y.failure_stage,'U01');assert.equal(y.source_subfailure,null);noGrant(y);
+});
+test('N04 U02 inner refusal in second round preserves round and status',async()=>{
+  const o=outputs();
+  const x=await observeCrossSource(input(),readers(o,(n,k,args,s)=>{
+    if(n===4){s.ci.selected_checks_observed=false;
+      s.ci.schema='common-v35-wp2a-u02-ci-observation-v1';
+      s.ci.failure_stage='SECOND_SELECTED';
+      s.ci.failure_reason='CHECK_RUNS_GET_UNVERIFIED';}
+  }));
+  assert.equal(x.failure_round,'SECOND');assert.equal(x.failure_stage,'JOIN');
+  assert.equal(x.failure_reason,'JOIN_U02_SOURCE_UNVERIFIED');
+  assert.deepEqual(x.source_subfailure,{
+    component:'U02',stage:'SECOND_SELECTED',reason:'CHECK_RUNS_GET_UNVERIFIED'});
+  assert.equal(x.evidence_admitted,false);noGrant(x);
+});
