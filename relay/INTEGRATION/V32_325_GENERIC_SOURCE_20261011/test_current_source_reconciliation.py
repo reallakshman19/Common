@@ -169,11 +169,11 @@ class CurrentSourceTests(unittest.TestCase):
                 rows.append({
                     "id": 66, "user": {"login": "stranger"},
                     "author_association": "NONE",
-                    "body": "```yaml\\nCHECKPOINT_FACTS_V1:\\n"
-                            "  responsibility: {issue: Pipeline#733, id: R-PROJECTION}\\n"
-                            f"  material: {{pr: Pipeline#740, candidate_sha: {HEAD}}}\\n"
-                            "  units:\\n"
-                            "    - {id: VIEW-PR, state: COMPLETE, result: VERIFIED, evidence_refs: [Pipeline#733#issuecomment-66]}\\n"
+                    "body": "```yaml\nCHECKPOINT_FACTS_V1:\n"
+                            "  responsibility: {issue: Pipeline#733, id: R-PROJECTION}\n"
+                            f"  material: {{pr: Pipeline#740, candidate_sha: {HEAD}}}\n"
+                            "  units:\n"
+                            "    - {id: VIEW-PR, state: COMPLETE, result: VERIFIED, evidence_refs: [Pipeline#733#issuecomment-66]}\n"
                             "```",
                 })
             return rows
