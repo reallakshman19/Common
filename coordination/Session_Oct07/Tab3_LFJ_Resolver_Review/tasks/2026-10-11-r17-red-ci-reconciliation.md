@@ -38,3 +38,40 @@
 2. Decide whether older `#855`/ `#871` **historical RED** tests remain required release checks as-is, or should be replaced by separately reviewed positive/negative current-contract oracles that ensure revision custody and typed failure receipts.
 3. Reconcile `#835` and `#884` legacy **single-PR scope-only** qualification policy; they presently fail any unrelated PR changes by construction. Do not simply disable final release qualification.
 4. Resolve #841 remaining actual browser/test acceptance, independent physical C05/Weight oracle, and full C05 predecessor compatibility. Qualify all 15 at one head with source/docs byte-parity and independent review, then explicitly allocate C05 single writer/integration authority before landing into the B1 stack.
+
+## FINAL R17 RED→GREEN REPLAY — exact-head verified 2026-10-11
+
+**Current isolated draft PR #225:** [PR #225](https://github.com/reallakshman19/3D_Converters/pull/225) at immutable **`8d3f7987ef4318b9a9b18f75b599884c4d51c492`**, based on original W03 test-only PR #224 `46c01166924326d516746d24781c03013c5b7a46`. Hosted GitHub `pull_request` workflow enumeration: **24 terminal workflows, 20 SUCCESS, four FAILURE, none pending**. The composite C05 #841 [run #38163924589](https://github.com/reallakshman19/3D_Converters/actions/runs/38163924589) has **all five jobs SUCCESS**: `c05-browser`, `p0-applicable`, `c05-ledger-mirror`, `c05-current-node`, `worker-line-list`. This did not merge, integrate into #222, deploy, or qualify physical Preview.
+
+**Proven repaired on pinned #225 head (11 of 15 originally red):** named C05 workflow tests **#836, #837, #841, #856, #857, #860, #875, #880, #893, #894, #895**. Other preexisting green workflows remain green. The patches preserve product/runtime input bytes: eight exact preexisting #205 C05 owner test/runner blobs, plus three focused historical compatibility files, all in isolated draft; no `tabs/` production code or `docs/` product mirror changed.
+
+**Additional original #841 failures diagnosed and corrected in-hosted-replay:**
+1. `tests/xml-cii-issue-776-match1-acceptance-paths.test.mjs`: old static assertion demanded obsolete `withXmlCiiRigidWeightMatch1(clean,candidates,proposalMeta)` and automatic `withXmlCiiRigidWeightFinal` in Match1; current correct implementation merges explicitly chosen manual and candidate Match1 and keeps Final Match2 separate. Test changed to require that explicit Match1 and forbid automatic Final.
+2. `tests/browser/xml-cii-weight-basis-fastpath-e2e.html`: expected 25 kg proposal as already accepted `input.value=25`. Current safe behavior renders candidate chip 25 but leaves input empty/unaccepted; revised browser acceptance asserts explicit `selectedProposalAvailable`, empty input and unaccepted authority, while keeping strict responsiveness and source checks. Hosted receipt `ok:true`.
+3. `tests/browser/xml-cii-weight-rating-input-e2e.mjs`: legacy harness served `.mjs` as octet-stream, initially had premature response headers, seeded before origin, and attempted a Source upload during lazy mount. Fixed HTTP JS module MIME and load-before-headers, origin-bound config seed and explicit authored Source/Loader wait; captured console/network errors for diagnostics. Original test still assumed typed manual Weight accepted Final Match2, and stale Match1 remains accepted after Rating changed; adjusted to require manual Match1 provenance and **no automatic Final**, and to require invalidation of stale accepted UI following rating change. Composite #841 whole workflow now 5/5 jobs green.
+
+**Four named unrepaired checks, still red and must not be made green by suppressing them:**
+- **#835 Issue 835 C05.1 Master Custody Baseline**, [run #38163924482](https://github.com/reallakshman19/3D_Converters/actions/runs/38163924482): historical single-PR scope guard rejects unrelated added W03/test files since its fixed ancestor SHA; not a product test pass/fail.
+- **#855 Issue 855 C05.4.1 Valve Weight RED Baseline**, [run #38163924614](https://github.com/reallakshman19/3D_Converters/actions/runs/38163924614): archived intentionally RED test asserts dropped `datasetRevision=null/undefined` though current source preserves 5. Must not reintroduce revision loss.
+- **#871 Issue 871 C05.5.1 Persistence Failure Baselines**, [run #38163924632](https://github.com/reallakshman19/3D_Converters/actions/runs/38163924632): historical negative expects *global thrown rejection* on persistence/corrupt restore, current per-key typed-receipt/sibling-preservation contract. Owner D-212-7 decision needed on accepted behavior and corresponding protected negative oracle.
+- **#884 Issue 884 C05.5.4.5 Corrupt Restore Final Qualification**, [run #38163924579](https://github.com/reallakshman19/3D_Converters/actions/runs/38163924579): fixed-base historical qualification-only path scope rejects any unrelated PR, with hundreds of ancestor additions including backups; C05 Owner must decide how to apply it as a valid independent release check.
+
+**Boundaries and claims:** 11 historical C05 workflow failures corrected under *existing test/compatibility candidate*; **full exact-head CI remains RED** (20/24, 4 Owner-held); no independent Owner adoption of #205 tests, protected #141 semantic acceptance, production/Runtime C05 or selected physical B1 four-master Preview, merge/deploy/release. Keep W02 blocked on B1 sole producer writer+allowed paths+authenticated A3 source receipt and original approved 385. User request for `tests=` and `PR=` on LOG reflects full hosted results, not misleading isolated 2/2 success.
+
+### TASK EVIDENCE
+
+```text
+Task: TAB3-R17-CI-RED-REPAIR
+Goal (issue AC): #212/C05 #203 independently identify, repair and rerun exact-head inherited red workflows before next product work, preserving #129 PB1-4/PG1 and source authority
+Status: PARTIAL
+Met: partial (11 of 15 C05 failed workflow families repaired; 4 remain Owner-held)
+Done: replayed eight reviewed-source candidate C05 #205 test/runner fixes; corrected three obsolete #776/#781/#841 compatibility tests/harness in isolated draft; hosted rerun exact head 20/24 green; no prod changes
+Code: reallakshman19/3D_Converters lfj/212-r17-c05-inherited-tests-reconcile-20261011 @ 8d3f7987ef4318b9a9b18f75b599884c4d51c492 | PR #225 DRAFT
+Tests: GitHub Actions exact-head 24 workflow runs -> 20 pass / 4 fail; five #841 composite jobs -> 5/5 pass
+CI: https://github.com/reallakshman19/3D_Converters/actions/runs/38163924589 -> SUCCESS #841; full exact head 20 success/4 failure RED
+Evidence: PR #225, C05 owner issue #203, 15-row failure name/cause matrix and exact-head details in this report
+AC: inherited 15 failed C05 workflows -> 4 failed; parent PB1-4/PG1 0/5 -> 0/5
+Claim: HOSTED_CI (negative/current test qualification only, no independent product acceptance)
+Blocker: OWNER:C05_D-212-7 #835/#855/#871/#884 historical contract adjudication; B1_W02 writer authorization and Owner 385 separate
+Next: C05 owner reviews four original required-check contracts and candidate #205 test adoption; W02 remains blocked, no new product work
+```
