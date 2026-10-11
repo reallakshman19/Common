@@ -193,3 +193,5 @@ ARTIFACTS.md | 2026-10-11T05:42:30Z | chat=6acb03f0 | R10 USER "proceed now": ex
 2026-10-11 UTC | chat=6acb267e | ARTIFACT | GitHub artifact11697931135, parsed first-hand 16 measured browser geometry JSON samples; no clips in 8 trials | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38126705969/artifacts/11697931135
 2026-10-11 UTC | chat=6acb267e | TASK_EVIDENCE | #173 R12-P01..P03 completed bounded evidence, no release | https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6107384200
 2026-10-11 UTC | chat=6acb267e | HUMAN_REVIEW_PACKET | #169 new geometric measurements; manual true 200% zoom and physical A4 NOT_RUN | https://github.com/reallakshman19/Grade9v3.5/issues/169#issuecomment-6107388406
+2026-10-11 UTC | chat=6acb267e | R12_NATIVE_FOLLOWUP | current #180 guardrails native FAIL no new IDs; canonical absolute FAIL, delta pending | https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6107445531
+2026-10-11 UTC | chat=6acb267e | R12_CI_OWNER | #171 source verified same named absolute failures vs #178 and no waiver | https://github.com/reallakshman19/Grade9v3.5/issues/171#issuecomment-6107448024
