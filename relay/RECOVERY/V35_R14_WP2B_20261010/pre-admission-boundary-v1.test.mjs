@@ -30,7 +30,7 @@ function db(){
     base:{sha:BSHA,ref:BASE,repo:{id:ID,full_name:R}}},
   [cp]:{total_count:1,check_runs:[{id:111,name:'unit',status:'completed',
     conclusion:'success',head_sha:H,app:{id:42}}]},
-  [sp]:{sha:H,statuses:[]},
+  [sp]:{sha:H,total_count:0,statuses:[]},
   [bp]:{contexts:[],checks:[{context:'unit',app_id:42}]},
   [rp]:[],
   [cc]:{id:C,html_url:WEB+'/issues/20#issuecomment-'+C,
