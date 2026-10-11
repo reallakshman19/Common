@@ -29,3 +29,9 @@
 2026-10-11 | chat=6acae92b | type=LOG_FINALIZATION | files=EVIDENCE.log,CHECKPOINTS.md,DECISIONS.md,INPUTS.md,LINEAGE.md | material_code_change=none | latest_log_commits=skip-ci | exact_head_ci=not-inherited-from-dc41b642 | AC=0/8 | production=HOLD | agent_B=NOT_RUN
 
 2026-10-11 | chat=6acae92b | type=FINAL_HANDOVER_PUBLICATION | report=handovers/2026-10-11.md | report_main_commit=0f0aa00a5b25a23b2e295f130bc6277f57aac55c | owner_comment=325:6105639710 | parent_chat_only=289:6105641933 | log_copy=main | independent_review=NOT_DONE | AC=0/8
+2026-10-11 | chat=6acb1a25 | type=PLAN_UPDATE | issue=325 | comment=6105888196 | revision=6 | allowed=XS,S
+2026-10-11 | chat=6acb1a25 | type=FUTURE_BACKLOG | parent=289 | comment=6105888446 | sizes=M,L | not_blocking_small_tasks=true
+2026-10-11 | chat=6acb1a25 | type=CI_PATH_UPDATE | commit=73b009be9fe92210d6c1ad98d9164b9e2e6f7f72 | workflow=v32-325-generic-source-preflight.yml | tab1_and_v31_path_filter=YES
+2026-10-11 | chat=6acb1a25 | type=LOG_PRESERVATION | main_superset_of_feature=5/5 | original_lines_preserved=YES | other_tabs_touched_directly=NO
+2026-10-11 | chat=6acb1a25 | type=MAIN_TO_FEATURE | reversePR=332 | merged=YES | feature_head=2e317763cb49321b29fb6db2898a45d021016d4c | main=c4bcd4e3a98d6d9bfaf2520213e2a819e80d6c2a | feature_ahead=56 | behind=0
+2026-10-11 | chat=6acb1a25 | type=MERGE_HEAD_CI_FIRST_SEEN | head=2e317763cb49321b29fb6db2898a45d021016d4c | focused=38115455975:IN_PROGRESS | v31=38115455953:IN_PROGRESS | v32=38115455950:IN_PROGRESS | delp=38115455948:IN_PROGRESS | local=38115455959:IN_PROGRESS | NOT_YET_PASS
