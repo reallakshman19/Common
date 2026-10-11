@@ -1,16 +1,30 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {ORIGINAL_FILES,inspectInjectedSourceBlobs} from './t14-source-blob-closure.mjs';
 const H='087cf43193febffc31375e71359e767489d3ae68',B='4f4dfa0497169d51ab86fbc27db1598121c6f25e';
 const R='reallakshman19/Common',ID=1412133785;
+// The original PR308 objects are not reachable from shallow CI checkouts.
+// These historical test bytes were independently fetched at immutable H;
+// they are NEVER a current native provider read or accepted Owner evidence.
+const source=JSON.parse(readFileSync(new URL('./t14-pr308-original-blob-bytes.fixture.json',import.meta.url),'utf8'));
+assert.equal(source.source_commit,H);
+assert.equal(source.schema,'v35-t14-immutable-original-pr308-byte-fixture-v1');
+assert.equal(source.authority,'HISTORICAL_TEST_BYTES_ONLY_NOT_NATIVE_OR_OWNER_EVIDENCE');
+assert.equal(source.files.length,ORIGINAL_FILES.length);
+const byPath=new Map(source.files.map(f=>[f.path,f]));
+assert.equal(byPath.size,ORIGINAL_FILES.length,'Historical source paths must be unique');
 const sha=b=>createHash('sha1').update(Buffer.concat([Buffer.from('blob '+b.length+'\0'),b])).digest('hex');
 function fixtures(){
  const a={'':{id:ID,full_name:R},
   'pulls/308':{number:308,state:'open',head:{sha:H,repo:{id:ID}},base:{sha:B,repo:{id:ID}}}};
  for(const [p,h] of ORIGINAL_FILES){
-  const data=execFileSync('git',['show','HEAD:'+p],{maxBuffer:1000000});
+  const original=byPath.get(p);
+  assert.ok(original,'Missing immutable original PR308 fixture: '+p);
+  assert.equal(original.sha,h,'Original source metadata must retain PR308 SHA: '+p);
+  assert.match(original.bytes_base64,/^[A-Za-z0-9+/]+={0,2}$/);
+  const data=Buffer.from(original.bytes_base64,'base64');
   assert.equal(sha(data),h,'Original blob path and content must be exactly pinned: '+p);
   a['contents/'+p+'?ref='+H]={type:'file',path:p,sha:h,encoding:'base64',content:data.toString('base64')};
  }
