@@ -30,3 +30,6 @@ TAB4 INPUTS / GOLDEN MANIFEST — APPEND ONLY
 2026-10-11 | CHAT-ONLY BENCHMARK NON-STAGED | original Owner about-30MiB multiple-zone JSON+paired XML + expected two CSV goldens; PL01/PL06 19 branches 871 nodes/322 -1; masters 385/10699/383/1595; 90MiB rejection control | exact external files/SHA256 not staged UNKNOWN, never qualify via synthetic control.
 2026-10-11 | CHAT-ONLY CHANGE OF INTENT | This user message requests self-contained 12-section report using merged Common #307 organization only; NO Stage1 prerequisite, NO Runner B, NO new authority; publish ONE full PLAN_UPDATE on #212, commit handovers/2026-10-11.md Common/main, update parent #129 and INPUTS, then STOP all coding | report Git blob b9bee13985eabb14976f2326533bcf9ee3cd9a06; full issue comment #6105499324.
 2026-10-11 | CHAT-ONLY PROVENANCE PARENT COMMENT | https://github.com/reallakshman19/3D_Converters/issues/129#issuecomment-6105501651 | chat-only materials, no binary attachment.
+
+
+2026-10-11 | CONSOL-R4 | No original Owner XML/JSON newly attached; original frozen Firstpass positive and NC negative remain unchanged under PR #216's 5-file reviewer-only diff. Reviewer browser script is synthetic 1004 rows, NOT real Firstpass full UI qualification. 30MiB Owner positive/90MiB control remain NOT_STAGED; see #212 comment 6105806615.
