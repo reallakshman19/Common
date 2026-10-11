@@ -7,7 +7,7 @@ const route={pr:'pulls/306',checks:'commits/'+H+'/check-runs?per_page=100',statu
 const data=()=>({
  [route.pr]:{number:306,html_url:'https://github.com/'+R+'/pull/306',head:{sha:H,repo:{id:ID,full_name:R}},base:{ref:BASE,repo:{id:ID,full_name:R}}},
  [route.checks]:{total_count:1,check_runs:[{id:12345,name:'SECRET_PRIVATE_JOB',head_sha:H,status:'in_progress',conclusion:null,app:{id:15368}}]},
- [route.status]:{sha:H,statuses:[]},[route.classic]:{contexts:[],checks:[]},[route.rules]:[]
+ [route.status]:{sha:H,total_count:0,statuses:[]},[route.classic]:{contexts:[],checks:[]},[route.rules]:[]
 });
 const reader=(d,mutation)=>{let n=0;return async(r,p)=>{assert.equal(r,R);n++;if(n===7&&mutation)mutation(d);return structuredClone(d[p]);};};
 test('T03 transition supplies exact numeric run id without revealing check name',async()=>{

@@ -28,7 +28,7 @@ function data(){
    base:{sha:BSHA,ref:BASE,repo:{id:ID,full_name:R}}},
   [check]:{total_count:1,check_runs:[{id:9001,name:'selected',app:{id:1234},
     head_sha:H,status:'completed',conclusion:'success'}]},
-  [status]:{sha:H,statuses:[]},
+  [status]:{sha:H,total_count:0,statuses:[]},
   [classic]:{contexts:[],checks:[{context:'selected',app_id:1234}]},
   [rules]:[],
   ['issues/comments/'+C]:{id:C,html_url:WEB+'/issues/20#issuecomment-'+C,
