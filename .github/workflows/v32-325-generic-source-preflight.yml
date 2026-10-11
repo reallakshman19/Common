@@ -62,6 +62,23 @@ jobs:
           set -e
           python -m json.tool "$RUNNER_TEMP/v32-325-real-source-census.json"
           exit "$census_exit"
+      - name: B2-N02 G1/G2 same selected-PR-head and graph checkpoint (unqualified)
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.number == 336 }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DIAGNOSTIC_PR_SOURCE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set +e
+          python relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/cross_report_checkpoint.py \
+            --g1 "$RUNNER_TEMP/v32-325-real-source-census.json" \
+            --g2 "$RUNNER_TEMP/v32-325-real-evidence-census.json" \
+            --diagnostic-code-sha "$(git rev-parse HEAD)" \
+            --expected-diagnostic-pr-head "$DIAGNOSTIC_PR_SOURCE_HEAD" \
+            > "$RUNNER_TEMP/v32-325-cross-report-checkpoint.json"
+          checkpoint_exit=$?
+          set -e
+          python -m json.tool "$RUNNER_TEMP/v32-325-cross-report-checkpoint.json"
+          exit "$checkpoint_exit"
       - name: Verify every generic integration module remains read-only
         run: |
           python - <<'PY'
