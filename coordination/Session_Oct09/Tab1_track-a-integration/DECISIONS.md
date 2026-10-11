@@ -114,3 +114,12 @@ LOG | chat=6acb71eb | tab=Tab1_track-a-integration | decisions=SOURCE_STATE_ONLY
 
 **Decision:** preserve all test failures, drafts and release HOLD; proceed with current terminal route, no merge/renderer/source/KEY/public writes. Evidence [Canonical](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38136898937) · [Guardrails](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38136898928) · [Owner issue](https://github.com/reallakshman19/Grade9v3.5/issues/173).
 LOG | chat=6acb71eb | tab=Tab1_track-a-integration | decision=RELEASE_HOLD | native=GUARDRAILS_FAIL_CANONICAL_FAIL | comparator=0_NEW_VS_STACK_7_NEW_VS_HISTORIC_PIN | next=V31_WRITER,CI_171,GENERATOR_91,REVIEWS_168_169,OWNER | release=HOLD
+
+
+## R18 handover source links — owner comments committed, 2026-10-11
+- Terminal #173 handover and immutable CI evidence: https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6108981135.
+- #171 historical pinned-main seven-case/CI maintainer action request: https://github.com/reallakshman19/Grade9v3.5/issues/171#issuecomment-6108975436.
+- Owning issue top now contains R18 terminal status: https://github.com/reallakshman19/Grade9v3.5/issues/173; earlier R17 `IN_PROGRESS` is superseded by new terminal job evidence, **not retroactively false**.
+- Decision unchanged: test-only new head's focused PASS ≠ shared renderer repair, 0 new vs stacked base ≠ absolute native PASS, historical seven cases ≠ approved waiver. No academic, human, rights, merge or Owner release authority. **HOLD**.
+
+LOG | chat=6acb71eb | tab=Tab1_track-a-integration | issue=173 | done=R16,R17,R18_LOGS_REFRESH,R18_NATIVE_TERMINAL,R18_CI_OWNER_ROUTE,R18_FINAL_HANDOVER | next=EXCLUSIVE_V31_RENDERER_WRITER,#171_7_HISTORICAL_CASES,#91_GENERATOR,#168_MATH,#169_HUMAN,#174_SOURCE,OWNER_DECISION | PR180=7772166f:DRAFT | native=3PASS_2FAIL | historic=7NEW_20FIXED_146STILL | release=HOLD
