@@ -118,3 +118,5 @@ TAB2 ARTIFACTS -- APPEND ONLY; one dated ref per line; research refs are not app
 2026-10-11 | chat=6acb2a0f | R14-T15/T16/T17 plan+result https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6107352464 | PR #179 https://github.com/reallakshman19/Grade9v3.5/pull/179 HEAD b91096ec279294830e38c319ff5f095198ee503d: 4th focused source-paper URL integrity test, 443 SOF research tests PASS. PR description updated; DRAFT/UNMERGED; release HOLD.
 
 2026-10-11 | chat=6acb2a0f | R14-T18/T19 final exact-head CI results + PR#179 human review request | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6107590695 | https://github.com/reallakshman19/Grade9v3.5/pull/179#issuecomment-6107585319 | HEAD b91096ec, DRAFT/UNMERGED, release HOLD.
+
+2026-10-11 | chat=6acb2a0f | R14-T20/T21 exact-source CI and human review readback | https://github.com/reallakshman19/Grade9v3.5/issues/174#issuecomment-6107923514 | PR reviewer diagnostic https://github.com/reallakshman19/Grade9v3.5/pull/179#issuecomment-6107916487 | Product main 778eb35a, draft #179 b91096ec unchanged.
