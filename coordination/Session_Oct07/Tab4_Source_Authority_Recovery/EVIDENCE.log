@@ -60,3 +60,18 @@ AC (before -> after): unspecific LFJ downstream bridge -> source-level versioned
 Claim: NONE
 Blocker: NONE
 Next: 212-T4 build pure validation module/tests; 212-T5 downstream vertical browser integration after contract
+
+2026-10-11 | TASK EVIDENCE 212-T3 FINAL (supersedes preliminary PARTIAL)
+Task: 212-T3
+Goal (issue AC): AC-01/AC-02 prevent source-key collisions from reusing another original owner/zone catalogue, preserve explicit selection and shipping CSV semantics
+Status: DONE
+Met: yes (scoped author regression; independent Owner large-file gate remains open)
+Done: original source/sample-key collision regression RED on Node22/24 before patch, then exact-text reuse guard in source/docs twins and same test GREEN at exact patch head; old no-silent-owner tests preserved; hosted unchanged original source/CSV and actual Chromium selected Build regressions successful
+Code (repo branch @ commit | PR): reallakshman19/3D_Converters lfj/212-scope-cache-exact-source-20261011 @ 77adbd1c21e47c22c80f5a9dab47eaed1e973613 | PR #213 DRAFT stacked on #211@e7be6e26099ebef482dd89dd12898d3661bd6405
+Tests (command -> pass/fail/skip): node --test tests/lfj-212-scope-cache-identity.test.mjs tests/lfj-208-unsupported-owner-scope.test.mjs -> RED before patch on Node22/24; PASS after patch on Node22/24; cmp authored/docs scope modules -> PASS; hosted LFJ#208 original ledger and frozen two CSV oracles -> PASS; A3 actual authored-root selected Chromium -> PASS
+CI (run -> result): 38103222868 pre-fix @59f6f02d7f11c6f81fb8d1e52263ec190047c9f0 -> 2/2 FAIL expected; 38103282171 fixed @77adbd1c21e47c22c80f5a9dab47eaed1e973613 -> 2/2 SUCCESS; 38103282320 combined acceptance SUCCESS; 38103282218 native selected Chromium SUCCESS; whole exact head 20 SUCCESS/15 historical C05 FAILURE
+Evidence (link): https://github.com/reallakshman19/3D_Converters/actions/runs/38103222868 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38103282171 ; https://github.com/reallakshman19/3D_Converters/pull/213
+AC (before -> after): two source texts with same sampled key substitute old owner UI catalogue -> exact JSON source equality required, behavior protected by hosted RED/GREEN; formal Owner release acceptance remains 0->0
+Claim: HOSTED_CI
+Blocker: NONE
+Next: 212-T4 validated downstream handoff contract and fail-closed tests, then 212-T5 real UI vertical slice
