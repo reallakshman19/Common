@@ -1,0 +1,147 @@
+EVIDENCE LOG -- APPEND ONLY. TASK EVIDENCE blocks are archived exactly when accessible from the already-posted public GitHub issue comments; links remain canonical. No reproduced third-party source PDF content.
+
+Known source comments are already public. TASK EVIDENCE #1..#10 ordered by their posted event thread sequence; not a claim that every comment used the literal heading TASK_EVIDENCE.
+
+===== TASK EVIDENCE #1 | 2026-10-11 | chat=6acae343 | issue=173 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6104120910 =====
+
+## Track A #173 execution boundary (2026-10-11)
+
+Taking the user's new direct Track A assignment as authority for an isolated **draft engineering proposal** only, not a relay lease transfer, academic review, merge or publication approval. Scope: authored TEST four-role pathway and candidate-golden acceptance evidence.
+
+**Zero overlap with Track B #174 / #163:** no official SOF PDF/Q004 acquisition, source text, custody, rights, admission ledger, 68-position counters or source-QRT acceptance. No edits to main, relay/*, #166's branch, or #172's branch. Candidate work will be in a new branch stacked from #172 HEAD `835f1f717db9aebf232a8e7f2807a11f7878b63e` (itself based on #166 HEAD `48007ccf962ed03f9f6a5423fe7525eaba9cfdf1`). Neither dependency will be merged by this work.
+
+**Technical finding:** the #166 addon package already embeds the mature Core1B microtopic and its elicitation; declaring the original Core1B package as a second `package_ref` duplicates canonical IDs and triggers `PRODUCT_SELECTION_AUTHORITY_DUPLICATE_ID`. Use one existing package with new additive *Track A-only* manifests (A and B separately), with `output_roles` CORE2A→CORE1A→CORE1B→CORE2B. Preserve both #166 manifests as pristine three-role baselines and the unreviewed A/B choice.
+
+All outputs remain TEST/CANDIDATE/HOLD. V3.1 active serialized #212 writer lease is not modified or claimed; any future integration/merge requires coordinator sequencing and Owner decision. Mathematics/QRT #168 and human AT/A4 #169 remain independent human gates.
+
+===== END TASK EVIDENCE #1 =====
+
+===== TASK EVIDENCE #2 | 2026-10-11 | chat=6acae343 | issue=173 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6104158005 =====
+
+## Track A #173: isolated first engineering batch submitted — draft PR #175
+
+[Draft stacked PR #175](https://github.com/reallakshman19/Grade9v3.5/pull/175) has **exactly seven additive files** over [PR #172](https://github.com/reallakshman19/Grade9v3.5/pull/172) HEAD `835f1f717db9aebf232a8e7f2807a11f7878b63e`. Proposed commit `ee9e3f81091ef97afbed3055a0fe3f438ca1e920`. It **does not modify** #166's or #172's branches, any common renderer/canonical records, main/relay, source/Q004/admission/rights/QRT files, or public routes.
+
+**Implemented, CI pending:** two four-role TEST manifests for the existing authored A/B alternatives; one-package Core1B reuse avoids duplicate academic authority; actual shared-renderer four-role HTML/golden structural tests; SHA-bound golden-method comparison matrix; Core1B keyboard/attempt/boundary/refresh isolation Playwright checks; pre/post A4 and four-role PDFs with printed-text/MediaBox checks; dedicated CI workflow. The precommit Core2B two-state negative check is *inherited* from draft #172 and not copied or edited here.
+
+**Evidence status:** dedicated [Track A workflow #38101613392](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38101613392) was QUEUED at readback; **not claimed passed**. Benchmarks, browser screenshots and PDF receipts only become `CI VERIFIED` after exact-head execution and review. Human screen-reader/physical A4/200% zoom #169 and independent Grade 9 mathematics/QRT #168 remain NOT_RUN. The two transfer choices remain academically UNSELECTED; source Core2 0/68 and QRT accepted 0/28; Owner publication, review and merge not authorized. Broader CI is likewise not claimed clean.
+
+**Writer coordination:** this is an isolated stacked draft review branch, not V3.1 #212 lease reassignment or integration authorization. No merge or public learner routing; subsequent reviewer-driven selection and integration should be explicitly sequenced by the active coordinator/Owner.
+
+===== END TASK EVIDENCE #2 =====
+
+===== TASK EVIDENCE #3 | 2026-10-11 | chat=6acae343 | issue=168 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/168#issuecomment-6104181987 =====
+
+## Track A #173: four-role authored A/B material ready for independent mathematical review (engineering draft only)
+
+New [draft stacked PR #175](https://github.com/reallakshman19/Grade9v3.5/pull/175) retains both authored Core2B alternatives without selecting either. [Held Track A review handoff](https://github.com/reallakshman19/Grade9v3.5/blob/agent/issue-173-authored-four-role/TEST/imo-research/pilots/issue-173-track-a-review-handoff.md) supplies independent **author** proofs/falsifiers for the universal five-factor/120 and the triple/12 iff residue-one candidates, identifies the learner-owned changed decision for each, and discloses Core1A/Core1B prior teaching.
+
+For the actual #168 reviewer: inspect BOTH exact PR-head rendered four-role products, assess whether Core1B boundary material inadvertently reduces the chosen Core2B demand, and respond to the original 12 H/S/P/M QRT questions in the existing worksheet. Return a named, dated **SELECT_A / SELECT_B / REVISE_BOTH / REJECT_BOTH / HOLD** verdict with proof, counterexamples, D-band rationale and explicit independence. The Track A author calculations and CI are **not** your review and do not accept QRT. No named reviewer assigned by this comment. Other source/admission Track B work is excluded.
+
+===== END TASK EVIDENCE #3 =====
+
+===== TASK EVIDENCE #4 | 2026-10-11 | chat=6acae343 | issue=169 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/169#issuecomment-6104182253 =====
+
+## Track A #173: held four-role human UX/print review input (not acceptance)
+
+New [draft stacked PR #175](https://github.com/reallakshman19/Grade9v3.5/pull/175) proposes both TEST-only four-role `Core2A→Core1A→Core1B→Core2B` variants with no source Core2 substitution. [Author review handoff](https://github.com/reallakshman19/Grade9v3.5/blob/agent/issue-173-authored-four-role/TEST/imo-research/pilots/issue-173-track-a-review-handoff.md) identifies intended attempt/proof isolation. Dedicated [Track A CI](https://github.com/reallakshman19/Grade9v3.5/actions/workflows/imo-track-a-173.yml) captures automated 320/390/768/1280 screenshots, Core1B two-state A4, source-free A/B Core2B before/after A4, and distinct boundary gates. Use **successful exact-head** artifacts, not first-run errors or prior-head receipts.
+
+This is **candidate preview evidence** only. Named human tester must still execute keyboard, NVDA/VoiceOver, real 200% zoom and physical A4 inspection of all four roles, for BOTH variants while #168 remains unselected. Record real defects and dated verdict in #169. The 195px CSS viewport proxy is NOT a claim of 200% assistive zoom. No human check or candidate acceptance is asserted by this comment; no Track B custody/source operations are touched.
+
+===== END TASK EVIDENCE #4 =====
+
+===== TASK EVIDENCE #5 | 2026-10-11 | chat=6acae343 | issue=169 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/169#issuecomment-6104191217 =====
+
+## Track A #173 — exact-head automated evidence and zoom stress finding (NOT human acceptance)
+
+Dedicated [CI run #38101785407](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38101785407) **SUCCESS** on draft #175 head `ee2f854834fb08efdb6aebd06a3ddd26de145d02`:
+- 4 focused four-role tests passed; both actual candidate goldens built; A/B SHA-bound HTML criteria **12 PASS, 0 FAIL, 5 NOT_RUN per variant**.
+- Chromium all four roles at 320/390/768/1280 CSS px, Core1B independent boundary disclosure and Core2B fail-closed return passed; both variants' pre/post A4 PDFs passed automated MediaBox/text/locked-proof checks (see [workflow evidence artifact](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38101785407)).
+- **Zoom investigation needed:** a separate **195 CSS px stress proxy** (approximating 390px at 200% zoom, not real browser zoom) reports `horizontal_overflow: true` in Core1B for BOTH variants. The real 200% browser zoom, touch, physical A4, NVDA/VoiceOver and independent human keyboard checks remain `NOT_RUN`. Do not label this overall visual/zoom PASS.
+  
+Please include this as a specifically reproduced stress observation in #169; a named human should determine whether actual 200% zoom triggers harmful content loss/clipping and provide screenshot, measured overflowing element, device/browser details and remediation verdict. **No human signoff, product release or academic candidate selection is asserted.**
+
+===== END TASK EVIDENCE #5 =====
+
+===== TASK EVIDENCE #6 | 2026-10-11 | chat=6acae343 | issue=173 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6104194497 =====
+
+## Track A #173 first implementation evidence — exact-head qualification (2026-10-11)
+
+**Draft stacked PR:** [#175](https://github.com/reallakshman19/Grade9v3.5/pull/175), branch `agent/issue-173-authored-four-role` on #172; exact tested HEAD `ee2f854834fb08efdb6aebd06a3ddd26de145d02`. The PR has only **Track A additive** TEST manifests/tests/workflow/review handoff. No `main`, `relay/*`, #166/#172 branches, public navigation, source-admission, SOF copyright/custody, Q004 or Track B #174/#163 changes.
+
+**Successful bounded CI:** [IMO Track A run #38101785407](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38101785407) **SUCCESS** on this exact SHA: 4/4 four-role tests; BOTH `G-MATH-LINEAR-CONSTRAINT` and `G-CORE2-R2` candidate fixture HTML builds; per candidate **12 semantic criteria PASS, 0 FAIL, 5 NOT_RUN** in generated SHA-bound matrix; real Chromium at 320/390/768/1280 across both four-role authored journeys; Core1B reconstruction + boundary gates, after-attempt reveal, refresh/return isolation; genuine locked/revealed two-state Core2B A4 and two-state Core1B A4 plus Core2A/Core1A actual A4 previews for both variants; PDF MediaBox/text/protected-crux tests PASS. Artefacts uploaded to that run. Golden technique/semantic check is **not human screenshot/typographic equivalence**.
+
+**Observed negative:** automated 195 CSS px stress **proxy** for 390px/200% zoom reports horizontal overflow in Core1B for both variants; it is not actual browser 200% human testing. [Human-review defect handoff #169](https://github.com/reallakshman19/Grade9v3.5/issues/169#issuecomment-6104191217).
+
+| Scope gate | Evidence status |
+| --- | --- |
+| IMPLEMENTED | YES — isolated draft, exact SHA above, not merged |
+| CI VERIFIED (bounded Track A) | YES — exact-head successful workflow and real artifacts |
+| GOLDEN SEMANTIC CHECKED | YES — 12 PASS per variant against candidate technique criteria |
+| GOLDEN VISUAL / HUMAN ZOOM | **NOT_RUN** — pixel/geometry inspection and real 200% need review; proxy overflow recorded |
+| MATH/QRT ACCEPTED | **NO** — both variants academically unselected; #168 human review requested |
+| HUMAN ACCEPTED | **NO** — NVDA/VoiceOver/keyboard/physical A4 #169 not signed |
+| REQUIRED BROAD CI | **NOT CLEAR** — exact-head native Canonical Assurance verifier FAIL, historical exact-ID delta and Guardrails were still running at this checkpoint |
+| RELEASE AUTHORIZED | **NO / HOLD** — V3.1 #212 coordination/Owner merge and learner routing not authorized |
+
+Original source Core2 remains **0/68** and accepted source QRT remains **0/28**, and these are NOT Track A acceptance denominators. The author mathematical proof/counterexamples and review reproducibility packet are in [issue-173-track-a-review-handoff.md](https://github.com/reallakshman19/Grade9v3.5/blob/ee2f854834fb08efdb6aebd06a3ddd26de145d02/TEST/imo-research/pilots/issue-173-track-a-review-handoff.md). **Do not merge or publish** merely because the bounded workflow is green.
+
+===== END TASK EVIDENCE #6 =====
+
+===== TASK EVIDENCE #7 | 2026-10-11 | chat=6acae343 | issue=169 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/169#issuecomment-6104273666 =====
+
+## Track A #173 – historical fixture re-use found two locally clipped authored figures
+
+While upgrading #175 to test **visible SVG bounds inside the figure**, not only document `scrollWidth`, actual [run #38102329762](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102329762) caught `Core1B attempt-safe figure clips within its own wrapper at 320`; after a Core1B-only correction, [run #38102423878](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102423878) caught `core2a safe figure clipping at 320`. These are **real failed browser assertions**, not human approval or speculative findings. Both older original SVGs were 620/700-wide single rows with CSS text-readability floors; document root-overflow checks had previously missed the local crop. This reproduces the failure mechanism in [Issue #164's five-factor visual defect](https://github.com/reallakshman19/Grade9v3.5/issues/164#issuecomment-6102452635).
+
+Track A-only branch revisions now use readable neutral **430-unit two-row SVGs**, keeping original symbols `t−2, t−1, t` and `m+1, m+2, m+3`, accessible titles and descriptions, stage IDs, and pre-answer safety. Files are `TEST/library/figures/core1b-three-factor-attempt-safe.svg` and `TEST/library/figures/core2a-three-consecutive-attempt-safe.svg`; the common renderer and inherited #166/#172 branches are untouched. Dedicated screen-geometry and SVG-boundary regression assertions are added. Latest exact branch `c041d96253907c555857d7617695d3ba3e787eea` is **CI PENDING at handoff**; no fixed/verdict claim until the new run passes.
+
+Human #169 keyboard/screen-reader/real 200%-zoom/physical A4 remains `NOT_RUN`. The 195 CSS px stress proxy still needs exact-head readback; a proxy overhang does not alone establish actual human 200% zoom failure. Product and academic/QRT gates remain HOLD.
+
+===== END TASK EVIDENCE #7 =====
+
+===== TASK EVIDENCE #8 | 2026-10-11 | chat=6acae343 | issue=173 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6104303994 =====
+
+## Track A #173 R2 — historical PR fixtures reused; three-role + Core1A geometry defects pursued
+
+**Implemented on isolated draft [PR #175](https://github.com/reallakshman19/Grade9v3.5/pull/175)**, current exact HEAD `62365aed81e4215799471fa19783b599cb77151d` (still DRAFT/UNMERGED/HOLD, stacked on #172). All writes are Track A authored TEST files, tests, workflow, documentation only; no main/relay, renderer, source PDF/Q004, custody/rights/admission, original 68 census, accepted QRT or public route modifications.
+
+**Actual old-PR evidence reused:** unmodified PR #166 pinned-main scripts in a new Track A CI job ([success at c27f2d7](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102343981)) compare 7 `G-CORE2-R2` pages, 7 `G-MATH-LINEAR-CONSTRAINT` pages and 7 Physics pages: **21/21 HTML identical**, zero introduced severe/standalone Pages violations or stale generator paths; existing 20 canonical severe and 62 standalone ledger findings remain. This is not global Guardrails green.
+
+**Previously invisible clipped-content regression now detectable:** the root-viewport checks were insufficient. Real role-by-role computed geometry at 320 caught a Core1B SVG crop, then a Core2A SVG crop, then boundary-12 Core2B crop; Core1A's original staged teaching SVG was also measured overhanging its own narrow wrapper. The historical [#164 five-factor failure and two-row remediation](https://github.com/reallakshman19/Grade9v3.5/issues/164#issuecomment-6102452635) informed four branch-local readable, neutral responsive SVG corrections. Actual stage IDs, mathematical parity/residue/coprime proof content, learner-facing question and distinct preattempt transfer stages remain. Dedicated test gates now assert all visible figure-wrapper bounds at 320/390/768/1280 and staged math/source exclusion.
+
+**Verification state:** past-head failures remain genuine; new exact HEAD `62365aed...` [CI workflow #38102749327](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102749327) was **QUEUED** at this readback; do not claim the proposed layout fixes green until complete. The genuine historical 21-page parity result applies to `c27f2d7`, with exact-head rerun also scheduled. Retained Core1A mobile table scroll and 195px narrow stress-proxy need human usability evaluation. Named #168 math/QRT selection and #169 actual zoom/AT/physical A4 signoff are still `NOT_RUN`/unaccepted; source Core2 0/68 and QRT 0/28; no Owner launch.
+
+===== END TASK EVIDENCE #8 =====
+
+===== TASK EVIDENCE #9 | 2026-10-11 | chat=6acae343 | issue=169 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/169#issuecomment-6104367498 =====
+
+## Track A #173 — targeted reflow/keyboard review checks from historical rendered geometry
+
+After the responsive TEST SVG corrections, [the prior-head actual Chromium log](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102532074) measured a **680px-wide Core1A equation table** inside a 320px document, yet document `scrollWidth` stayed 320px. This is not automatically a crop: the unchanged renderer intentionally wraps the equation table in a `.g9-table-scroll { overflow-x:auto }` region. However, its markup does not explicitly declare `tabindex` on that region. Browser-native focusability and keyboard horizontal scrolling must be **hands-on checked** (Tab, arrow keys, focus ring, VoiceOver/NVDA reading order) rather than called PASS from no root overflow. **Do not disable scroll or shrink mathematical text below policy to force a viewport fit.**
+
+At **195 CSS px only**, earlier machine geometry recorded a narrow viewport/root overflow of ~6 CSS px and a figure wider than its visible card. The renderer's `.g9-diagram-scroll` *does* have `tabindex="0"`, `role="region"`, an explicit horizontal-scroll accessibility label and a minimum text size; a scrollable diagram and a truly cut-off diagram must be distinguished by testing keyboard scrolling and whether all factor labels remain reachable. This 195px artificial viewport is **not** an actual 200% browser zoom session.
+
+Named #169 human reviewer: for both variants, check 200% true zoom at 390px device width, all four roles and each Core1A stage, and specifically record **Core1A table horizontal keyboard access** plus **Core1B/Core2B neutral SVG horizontal access**, using device/OS/browser/AT/zoom/screenshots. Record actual inaccessible content as a dated defect; no inferred acceptance. [Prior-head complete automated browser/A4 pass](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38103057565) is technical-only; current more granular stage run is queued.
+
+===== END TASK EVIDENCE #9 =====
+
+===== TASK EVIDENCE #10 | 2026-10-11 | chat=6acae343 | issue=173 | posted=https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6104372668 =====
+
+## Track A #173 R3 — the precise Core1A authoring-gate failure is fixed, predecessor head fully green
+
+The four-role continuation identified a real `AUTHOR_FIGURE_TEXT` failure: in the revised Core1A staged SVG, `3 · Combine valid factors` exceeded the authoring viewBox. Its shorter heading, `3 · Combine factors`, retains all original parity, modulo-3 and coprime content and stage IDs. No common renderer, baseline golden, original source rights/custody, source PDFs, protected admission, main/relay, or Track B writes.
+
+**Exact predecessor commit `2934e8d4faa3598ae17a58161aa4adca3322b3ac` [workflow #38103057565](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38103057565) COMPLETED SUCCESS in BOTH jobs:** six regression tests, both candidate-golden builds, A/B semantic matrix, real Chromium at 320/390/768/1280, isolated Core1B answer/boundary gates, pre/post A4 PDFs on both variants, and original PR #166 pinned-main comparison of 21 identical golden/Physics HTML pages + no introduced scoped assurance identity. Native historical global failures are not waived.
+
+**Next branch head `a70d71b4573318c5fc34dfc45f0d2156a23c5eda`:** upgrades the real-browser check from initial-stage only to click every Core1A diagram stage and every available Core2B neutral stage at all four viewport widths, verify `aria-pressed`, uncropped SVG bounds and root overflow, save stage screenshots at 320 and 390. This head's [workflow #38103169711](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38103169711) is still **QUEUED** at readback and is **not** assumed to pass. Additional actual #169 human zoom/keyboard/SR/A4 checks and independent #168 academic/QRT selection remain unassigned/unaccepted; product release, source Core2 0/68 and QRT 0/28 remain HOLD.
+
+Distinct accessibility risk retained: the Core1A 680px equation table is inside the intentional horizontal-scrolling `.g9-table-scroll` wrapper, but its keyboard reachability on named assistive-tech browsers is not human-verified. The 195px proxy is not actual 200% browser zoom; see [#169 targeted reviewer notes](https://github.com/reallakshman19/Grade9v3.5/issues/169#issuecomment-6104367498).
+
+===== END TASK EVIDENCE #10 =====
+
+===== TASK EVIDENCE #11 | 2026-10-11 UTC | chat=6acae343 | verified CURRENT exact head =====
+
+Track A draft PR #175 current exact head a70d71b4573318c5fc34dfc45f0d2156a23c5eda. https://github.com/reallakshman19/Grade9v3.5/actions/runs/38103169711: authored-four-role=SUCCESS, pinned-historical-fixture-differential=SUCCESS. New stage-by-stage Chromium checks passed for both held variants; 21 legacy golden/Physics pages preserved; real before/after Core1B/Core2B A4 structural checks. Scoped automated technical only; no math/QRT, named human AT, real browser 200% zoom, physical print or Owner acceptance. Source Core2 admitted 0/68, accepted QRT 0/28, release HOLD.
+
+===== END TASK EVIDENCE #11 =====

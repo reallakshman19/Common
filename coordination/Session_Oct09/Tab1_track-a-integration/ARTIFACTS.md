@@ -1,0 +1,60 @@
+ARTIFACT REGISTER -- APPEND ONLY; date is observed/logged UTC, not necessarily creation date.
+Each entry records one link or immutable identifier; status is a point-in-time observation, not approval.
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#173 | Track A owner planning and implementation | https://github.com/reallakshman19/Grade9v3.5/issues/173
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#174 | Track B source admission (explicitly out of scope) | https://github.com/reallakshman19/Grade9v3.5/issues/174
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#168 | Independent mathematics and QRT reviewer gate | https://github.com/reallakshman19/Grade9v3.5/issues/168
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#169 | Independent human accessibility, zoom and A4 review gate | https://github.com/reallakshman19/Grade9v3.5/issues/169
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#164 | Earlier authored blueprint and historical visual regression | https://github.com/reallakshman19/Grade9v3.5/issues/164
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#163 | Original source custody (out of scope) | https://github.com/reallakshman19/Grade9v3.5/issues/163
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#212 | Serialized V3.1 active relay lease (untouched) | https://github.com/reallakshman19/Grade9v3.5/issues/212
+2026-10-11 UTC | chat=6acae343 | ISSUE | Grade9v3.5#130 | Older authored diagnostic precedent (not selected) | https://github.com/reallakshman19/Grade9v3.5/issues/130
+2026-10-11 UTC | chat=6acae343 | PR | Grade9v3.5#175 | Draft, stacked Track A; not merged; branch=agent/issue-173-authored-four-role | https://github.com/reallakshman19/Grade9v3.5/pull/175
+2026-10-11 UTC | chat=6acae343 | PR | Grade9v3.5#172 | Draft predecessor, two-state A4; branch=agent/iss169-precommit-a4-evidence | https://github.com/reallakshman19/Grade9v3.5/pull/172
+2026-10-11 UTC | chat=6acae343 | PR | Grade9v3.5#166 | Draft earlier three-role authored A/B; branch=agent1/imo-blueprint-first-transfer-164 | https://github.com/reallakshman19/Grade9v3.5/pull/166
+2026-10-11 UTC | chat=6acae343 | PR | Grade9v3.5#155 | Earlier matrix-first diagnostic reference | https://github.com/reallakshman19/Grade9v3.5/pull/155
+2026-10-11 UTC | chat=6acae343 | PR | Grade9v3.5#145 | Source gap/rights research, excluded Track B scope | https://github.com/reallakshman19/Grade9v3.5/pull/145
+2026-10-11 UTC | chat=6acae343 | BRANCH | main | observed HEAD=778eb35a70517a46108ad0a5dc01dfc89f61c0e3 | https://github.com/reallakshman19/Grade9v3.5/tree/main
+2026-10-11 UTC | chat=6acae343 | BRANCH | agent1/imo-blueprint-first-transfer-164 | observed HEAD=48007ccf962ed03f9f6a5423fe7525eaba9cfdf1 | https://github.com/reallakshman19/Grade9v3.5/tree/agent1%2Fimo-blueprint-first-transfer-164
+2026-10-11 UTC | chat=6acae343 | BRANCH | agent/iss169-precommit-a4-evidence | observed HEAD=835f1f717db9aebf232a8e7f2807a11f7878b63e | https://github.com/reallakshman19/Grade9v3.5/tree/agent%2Fiss169-precommit-a4-evidence
+2026-10-11 UTC | chat=6acae343 | BRANCH | agent/issue-173-authored-four-role | observed HEAD=a70d71b4573318c5fc34dfc45f0d2156a23c5eda | https://github.com/reallakshman19/Grade9v3.5/tree/agent%2Fissue-173-authored-four-role
+2026-10-11 UTC | chat=6acae343 | COMMIT | 778eb35a70517a46108ad0a5dc01dfc89f61c0e3 | main pinned comparison input | https://github.com/reallakshman19/Grade9v3.5/commit/778eb35a70517a46108ad0a5dc01dfc89f61c0e3
+2026-10-11 UTC | chat=6acae343 | COMMIT | 48007ccf962ed03f9f6a5423fe7525eaba9cfdf1 | earlier PR 166 head | https://github.com/reallakshman19/Grade9v3.5/commit/48007ccf962ed03f9f6a5423fe7525eaba9cfdf1
+2026-10-11 UTC | chat=6acae343 | COMMIT | 835f1f717db9aebf232a8e7f2807a11f7878b63e | earlier PR 172 head | https://github.com/reallakshman19/Grade9v3.5/commit/835f1f717db9aebf232a8e7f2807a11f7878b63e
+2026-10-11 UTC | chat=6acae343 | COMMIT | ee9e3f81091ef97afbed3055a0fe3f438ca1e920 | Track A initial candidate submission | https://github.com/reallakshman19/Grade9v3.5/commit/ee9e3f81091ef97afbed3055a0fe3f438ca1e920
+2026-10-11 UTC | chat=6acae343 | COMMIT | d3781113eef3fc15901b36e2e520dd2902fbace1 | Track A failed first standalone benchmark | https://github.com/reallakshman19/Grade9v3.5/commit/d3781113eef3fc15901b36e2e520dd2902fbace1
+2026-10-11 UTC | chat=6acae343 | COMMIT | de0cc66eef23be361903c248f5ff60ed41d6240e | Track A preceding green build | https://github.com/reallakshman19/Grade9v3.5/commit/de0cc66eef23be361903c248f5ff60ed41d6240e
+2026-10-11 UTC | chat=6acae343 | COMMIT | ee2f854834fb08efdb6aebd06a3ddd26de145d02 | Track A first full technical green | https://github.com/reallakshman19/Grade9v3.5/commit/ee2f854834fb08efdb6aebd06a3ddd26de145d02
+2026-10-11 UTC | chat=6acae343 | COMMIT | 302dca9de258ed27dc2c79184493442e029802f3 | DOM figure geometry regression | https://github.com/reallakshman19/Grade9v3.5/commit/302dca9de258ed27dc2c79184493442e029802f3
+2026-10-11 UTC | chat=6acae343 | COMMIT | c27f2d7986b75f4b85d50fd881311d79449d3c03 | historical 21-page and assurance identity comparison | https://github.com/reallakshman19/Grade9v3.5/commit/c27f2d7986b75f4b85d50fd881311d79449d3c03
+2026-10-11 UTC | chat=6acae343 | COMMIT | efe196bc529cf20ac8c207dee17c3ef05f6bb040 | Core1B two-row figure fix | https://github.com/reallakshman19/Grade9v3.5/commit/efe196bc529cf20ac8c207dee17c3ef05f6bb040
+2026-10-11 UTC | chat=6acae343 | COMMIT | 4a77e2ee17af41e5ec9a262a793b5e098d6b0f5a | add figure workflow trigger | https://github.com/reallakshman19/Grade9v3.5/commit/4a77e2ee17af41e5ec9a262a793b5e098d6b0f5a
+2026-10-11 UTC | chat=6acae343 | COMMIT | 6d76fb2833b1c3f4de9319f173ea4c7119436055 | Core2A two-row figure fix | https://github.com/reallakshman19/Grade9v3.5/commit/6d76fb2833b1c3f4de9319f173ea4c7119436055
+2026-10-11 UTC | chat=6acae343 | COMMIT | e9a98a4d7bd6ed3e81b0266955c996b2b29272a8 | Core2A workflow trigger | https://github.com/reallakshman19/Grade9v3.5/commit/e9a98a4d7bd6ed3e81b0266955c996b2b29272a8
+2026-10-11 UTC | chat=6acae343 | COMMIT | c041d96253907c555857d7617695d3ba3e787eea | figure boundary tests | https://github.com/reallakshman19/Grade9v3.5/commit/c041d96253907c555857d7617695d3ba3e787eea
+2026-10-11 UTC | chat=6acae343 | COMMIT | 044334d14e4e885be6a9ac1474d7c8427e8e9bba | boundary-12 SVG responsive fix | https://github.com/reallakshman19/Grade9v3.5/commit/044334d14e4e885be6a9ac1474d7c8427e8e9bba
+2026-10-11 UTC | chat=6acae343 | COMMIT | f51cd4edcf0e55b87f302e4b1e40b798b58738cd | boundary-12 workflow trigger | https://github.com/reallakshman19/Grade9v3.5/commit/f51cd4edcf0e55b87f302e4b1e40b798b58738cd
+2026-10-11 UTC | chat=6acae343 | COMMIT | cd9bb4d6b5cf4bba963a26b2d511e21b5d243805 | Core1A staged responsive figure | https://github.com/reallakshman19/Grade9v3.5/commit/cd9bb4d6b5cf4bba963a26b2d511e21b5d243805
+2026-10-11 UTC | chat=6acae343 | COMMIT | 3838738c5a30ccdd2de36ed792ce6276766c0c74 | all-role visible-figure geometry check | https://github.com/reallakshman19/Grade9v3.5/commit/3838738c5a30ccdd2de36ed792ce6276766c0c74
+2026-10-11 UTC | chat=6acae343 | COMMIT | dd7443e9b49a94169767458afa497464608ff9c9 | Core1A workflow trigger | https://github.com/reallakshman19/Grade9v3.5/commit/dd7443e9b49a94169767458afa497464608ff9c9
+2026-10-11 UTC | chat=6acae343 | COMMIT | 62365aed81e4215799471fa19783b599cb77151d | new teaching-stage and preattempt integrity tests | https://github.com/reallakshman19/Grade9v3.5/commit/62365aed81e4215799471fa19783b599cb77151d
+2026-10-11 UTC | chat=6acae343 | COMMIT | 2934e8d4faa3598ae17a58161aa4adca3322b3ac | authoring figure heading guard fixed; full CI success | https://github.com/reallakshman19/Grade9v3.5/commit/2934e8d4faa3598ae17a58161aa4adca3322b3ac
+2026-10-11 UTC | chat=6acae343 | COMMIT | a70d71b4573318c5fc34dfc45f0d2156a23c5eda | current Track A full stage-by-stage technical PASS | https://github.com/reallakshman19/Grade9v3.5/commit/a70d71b4573318c5fc34dfc45f0d2156a23c5eda
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38088265700 | Older PR 166 fixed two-row mobile/A4 precedent; historical | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38088265700
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38093968502 | Prior PR 172 Core2B before/after print tests; historical | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38093968502
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38101613392 | Initial Track A draft CI, no green attributed | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38101613392
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38101731796 | Track A first-run benchmark error | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38101731796
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38101785407 | Track A exact-head complete PASS | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38101785407
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102329762 | Core1B local figure clip: FAIL | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102329762
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102343981 | Historical goldens/assurance PASS; visible-geometry FAIL | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102343981
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102423878 | Core2A local figure clip: FAIL | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102423878
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102432228 | New SVG chain revealed additional clipping; FAIL | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102432228
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102496827 | Intermediate figure fix run, not used for final acceptance | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102496827
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102503589 | Intermediate figure fix run, not used for final acceptance | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102503589
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102532074 | Boundary-12 local crop: FAIL; prior staged geometry | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102532074
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102643555 | Boundary-stage figure trial; superseded | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102643555
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102650031 | Boundary-stage figure trial; superseded | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102650031
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102737473 | Intermediate Core1A figure trial; FAIL | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102737473
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38102749327 | Core1A label outside viewBox: AUTHOR_FIGURE_TEXT FAIL; historical compare PASS | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38102749327
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38103057565 | Six focused tests, A/B actual browser/A4, historical compare: both jobs SUCCESS | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38103057565
+2026-10-11 UTC | chat=6acae343 | CI RUN | 38103169711 | CURRENT HEAD: stage-by-stage real Chromium and historical pinned-main comparison: both jobs SUCCESS | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38103169711
+2026-10-11 UTC | chat=6acae343 | MERGE | NONE | No merge performed or authorized in this tab; all three stacked Track A predecessor PRs are draft/unmerged | https://github.com/reallakshman19/Grade9v3.5/pull/175
