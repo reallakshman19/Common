@@ -46,3 +46,5 @@ TAB2 INPUTS -- APPEND ONLY. Only names/paths and SHA references; no source files
 
 2026-10-11 | chat=6acae34d | CHAT-ONLY NEW INTENT | 2026-10-11T02:30:17Z | name=labelled_LOG_status_and_continue_plan | message SHA=NOT_AVAILABLE; no uploaded file, test case, golden fixture or benchmark. Format/progress contract only.
 2026-10-11 | chat=6acae34d | ACCEPTANCE SOURCE | https://github.com/reallakshman19/Grade9v3.5/issues/174 | B-M1/B-M2 two milestones in Issue body; current source digest=NOT_RECOMPUTED; read-only governance input, no question material copied.
+
+2026-10-11 | chat=6acae34d | CHAT-ONLY NEW INTENT | 2026-10-11T02:37:13Z | name=proceed_next_after_r10_external_gate | exact user instruction recorded in DECISIONS.md; source message SHA=NOT_AVAILABLE | no uploaded files, golden fixtures, test assets or source PDFs; no intent to resume repetitive verification.
