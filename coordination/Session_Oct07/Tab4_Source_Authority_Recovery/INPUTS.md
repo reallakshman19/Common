@@ -14,3 +14,8 @@ TAB4 INPUTS / GOLDEN MANIFEST — APPEND ONLY
 2026-10-11 | OWNER LARGE POSITIVE | real original ~30MiB JSON and paired XML; genuine multiple owner/zone; paths, bytes, SHA, expected ledger/CSV UNKNOWN, NOT_STAGED.
 2026-10-11 | CHAT-ONLY HISTORICAL HANDOVER | LFJ_XML_CII_2019_Verified_Technical_Handover_2026-10-10(2).md | source #208 body, file SHA/URL UNKNOWN; old claims not current proof.
 2026-10-11 | THIS CHAT OWNER REQUEST | chat ID 6acae6e5 | no uploaded source files or tests in this turn; specification and ordered intent captured by #212.
+
+2026-10-11 | T5 NEW SOURCE FACT ADAPTER | lfj/qualification/experiments/consumer-sparse-b0-xml-match/xml-source-fact-handoff.mjs | Git blob SHA a4419259ffdee1b931efdd93d2293c289dad79f9 | original xmlIndex and sourcePath, no -1 reassignment, 8MiB bound, source-only.
+2026-10-11 | T5 NEGATIVE TESTS | tests/recovery-final-cii/xml-cii-source-fact-preview.test.mjs | Git blob SHA 89d919684346b18259e5bee8ba471a71785b8ab4 | repeat -1, path, corrupt index, overflow, stale selected owner; synthetic unit not golden.
+2026-10-11 | T5 AUTHENTIC POSITIVE TEST | tests/recovery-final-cii/xml-cii-authentic-source-fact-handoff.test.mjs | Git blob SHA 896e1c843152379eefd91bce1568c67e0ffc23dc | frozen 733806B JSON + original Firstpass XML, expected 216 XML and 164 matched, author test only.
+2026-10-11 | T5 DOCS CLOSURE MANIFEST | docs/.lfj-indexed-runtime-overlay-manifest.json | Git blob SHA e8b37a95804795e5dbc61b4340e5261eb2398878 | 18 entries. Hash change claimed in CI log; post-fix exact head CI required.
