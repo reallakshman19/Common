@@ -125,8 +125,8 @@ class RestReadOnlyContractTests(unittest.TestCase):
 
     def test_unbound_endpoint_repository_cannot_be_normalized_as_expected_repo(self):
         self.provider = self.fixture.provider(repository="elsewhere/Common")
-        with self.assertRaisesRegex(SourceHold, "^PROVIDER_HEAD_REPOSITORY_MISMATCH$"):
-            self.read()
+        with self.assertRaisesRegex(RestContractHold, "REST_HEAD_REPOSITORY_MISMATCH"):
+            self.provider.get_pull(PR_NUM)
 
     def test_nested_github_rest_pr_shape_supported_with_strict_base_repo_check(self):
         source = copy.deepcopy(self.fixture.pull)
