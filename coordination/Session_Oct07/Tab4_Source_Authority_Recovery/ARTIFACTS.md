@@ -61,3 +61,9 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 2026-10-11 | CURRENT PR #216 HEAD | https://github.com/reallakshman19/3D_Converters/pull/216 | 675f432fc23bbe08bb8e2a3ef87cef3b52fa2ca6, stacked draft; 38 full workflows 23 success 15 historic C05 failed.
 2026-10-11 | TAB3-F01/F02 RE-RUNS | https://github.com/reallakshman19/3D_Converters/actions/runs/38116750844 and https://github.com/reallakshman19/3D_Converters/actions/runs/38116750943 | exact-head both SUCCESS original reviewer and genuine Firstpass source CSV.
 2026-10-11 | ISSUE TASK_EVIDENCE | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6106080673 | LFJ T6 proof and scoped read-only A0 master custody survey.
+
+
+2026-10-11 | A0 SCRIPT+CI CURRENT EXACT HEAD | https://github.com/reallakshman19/3D_Converters/commit/db6be834f106111b923ce54476e5ca4b242b875c | read-only master SHA/row source census. 
+2026-10-11 | A0 HOSTED RUN | https://github.com/reallakshman19/3D_Converters/actions/runs/38118193100 | artifact https://github.com/reallakshman19/3D_Converters/actions/runs/38118193100/artifacts/11693782470 exact raw workbook headers, 802 vs 205 physical rows, three correct source counts.
+2026-10-11 | COMMON SOURCE READBACK | coordination/Session_Oct07/Tab4_Source_Authority_Recovery/RECON/2026-10-11/a0-four-master-input-census.md | current source facts and honest physical gaps, no actual Preview AC award.
+2026-10-11 | ISSUE EVIDENCE | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6106257785 | final same-head full CI https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6106287554 | B1 #133 comment 6106260720 GC-PW #96 comment 6106261298.
