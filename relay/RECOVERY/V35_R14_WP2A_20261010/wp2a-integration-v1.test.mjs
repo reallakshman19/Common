@@ -29,7 +29,7 @@ function fixture(){
    base:{sha:B,ref:BASE,repo:{id:ID,full_name:R}}},
   [checkPath]:{total_count:1,check_runs:[{id:501,name:'unit',status:'completed',
    conclusion:'success',head_sha:H,app:{id:42}}]},
-  [statusPath]:{sha:H,statuses:[]},
+  [statusPath]:{sha:H,total_count:0,statuses:[]},
   [classicPath]:{contexts:[],checks:[{context:'unit',app_id:42}]},
   [rulesPath]:[],
   [commentPath]:{id:C,html_url:web+'/issues/20#issuecomment-'+C,
