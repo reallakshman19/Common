@@ -75,3 +75,18 @@ AC (before -> after): two source texts with same sampled key substitute old owne
 Claim: HOSTED_CI
 Blocker: NONE
 Next: 212-T4 validated downstream handoff contract and fail-closed tests, then 212-T5 real UI vertical slice
+
+2026-10-11 | TASK EVIDENCE 212-T4 FINAL (supersedes preliminary PARTIAL)
+Task: 212-T4
+Goal (issue AC): AC-04 formal versioned LFJ.EngineeringSourceBasis.v1 contract and fail-closed authority boundary before actual engineering Preview/Run
+Status: DONE
+Met: yes (contract and negative gate only; complete native FactRecord attestation/integration is 212-T5 and NOT accepted)
+Done: Implemented real Run checklist veto and final-job-builder guard for indexed LFJ CSV-only preview, explicit legacy mode compatibility, separate product-attested receipt requirement that cannot be faked with UI flags, original Blob reference and selected owner/zone comparison, source/docs mirrors, and seven Node negative/positive tests; corrected initial nested test import path after hosted failure; read exact-head tests and original unchanged Firstpass/NC CSV regressions
+Code (repo branch @ commit | PR): reallakshman19/3D_Converters lfj/212-scope-cache-exact-source-20261011 @ 1fd3a5a01a2e09307341213901894e7f4f0857aa | PR #213 DRAFT stacked on #211; source adapter at tabs/xml-cii-2019-standalone/integration/xml-cii-lfj-engineering-authority.js and exact docs mirror
+Tests (command -> pass/fail/skip): node --test tests/lfj-212-scope-cache-identity.test.mjs tests/lfj-208-unsupported-owner-scope.test.mjs tests/recovery-final-cii/xml-cii-indexed-run-authority.test.mjs -> 15/15 PASS on Node22 and Node24; cmp three authored/docs module pairs -> PASS; original Firstpass positive and NC negative complete ledger + two frozen CSV byte tests -> PASS; actual A3 original root selected browser Build/two CSV -> PASS; complete LFJ-to-B1 Preview/Mode A/B -> NOT_RUN
+CI (run -> result): 38108628065 Node22/24 2/2 SUCCESS; 38108628056 combined source/CSV 2/2 SUCCESS; 38108628037 native selected Chromium SUCCESS; raw-head 35 PR workflows 20 SUCCESS/15 historical C05 FAILURE
+Evidence (link): https://github.com/reallakshman19/3D_Converters/actions/runs/38108628065 ; https://github.com/reallakshman19/3D_Converters/actions/runs/38108628056 ; https://github.com/reallakshman19/3D_Converters/pull/213
+AC (before -> after): indexed source-only preview could reach independent unsourced final XML-CII job path -> actual UI readiness and workflow-job builder refuse until separately product-attested FactRecord; formal Owner AC-04 end-to-end 0->0
+Claim: HOSTED_CI
+Blocker: NONE
+Next: 212-T5 add native fact provenance/attestation and browser Build→4 Preview→Run verification without weakening the fail-closed guard

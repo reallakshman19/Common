@@ -25,3 +25,8 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 2026-10-11 | CI | 38103282171 post-fix 77adbd1c21e47c22c80f5a9dab47eaed1e973613 | GREEN both Node22/24 confirmed.
 2026-10-11 | CI | 38103282320 same-head LFJ #208 original frozen ledger and two CSV PASS.
 2026-10-11 | CI | 38103282218 same-head native A3 original selected Chromium PASS.
+
+2026-10-11 | PR | #213 draft commit ecd9fdc133501ec4feb01608d68dbd7b36308601 | first T4 code; first test failed nested import path, fixed at 1fd3a5a01a2e09307341213901894e7f4f0857aa.
+2026-10-11 | CI | #38108628065 @1fd3a5a01a2e09307341213901894e7f4f0857aa | T4 15/15 Node22 and Node24 PASS, authored/docs parity PASS.
+2026-10-11 | CI | #38108628056 @1fd3a5a01a2e09307341213901894e7f4f0857aa | original Firstpass/NC golden PASS.
+2026-10-11 | CI | #38108628037 @1fd3a5a01a2e09307341213901894e7f4f0857aa | real A3 original selected browser PASS.
