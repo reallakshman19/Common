@@ -63,9 +63,79 @@ assert result["source_authenticated"] is False
 
 The test suite now includes wrong current branch blob, pinned-vs-current mismatch, source moving between passes, malformed revision/metadata, an untrusted native fact, a parsed comment drift, a full owner/repo PR ref mismatch and a merged-pr negative authority control. It still uses **synthetic** GET providers and never exercises real GitHub credentials, a production reviewer or positive evidence issuance.
 
-## Next gates (Issue #325 T03–T05)
+## T03 implemented — single-owner, three-surface **pure** publisher plan
 
-T02: source-currentness code COMPLETE on synthetic provider; **real independently authenticated source and native full-ref fix held** until authorized pilot / protected amendment. T03: pure disjoint publisher plan, no writer. T04: explicitly Owner-authorized base-resident frozen native amendment and independent review. T05: real private lab positive evidence→DELP→issue+PR readback→C6 and genuine independently authorized A→B execution. Retain the existing DELP as sole P/E/D/DE owner.
+`generic_publication_plan.build_publication_plan(...)` takes only in-memory
+`graph`, the T02 **UNATTESTED** source report, the unchanged native DELP
+`projection`, a selected responsibility read-view bundle and three complete
+caller-observed provider surfaces (root issue, child issue, bound PR). It performs
+**no network or provider calls, no GitHub writes, no evidence admission**.
+
+The planner recomputes the existing native
+`delp.source_bound_responsibility_core` and requires equality with T02's core,
+with matching plan/input/graph digests, selected responsibility and exact PR
+candidate SHA. It also checks the read-view root/leaf binding, native P/E/D
+values, selected released title scope and preserved human title suffixes.
+A caller-provided read-view can **never** become an authenticated source or
+a second DELP calculator; an issuer and actual Owner authority must be checked
+outside this module before any real publication could ever be considered.
+
+**Three separate responsibilities — never conflated:**
+
+| Surface | Sole intended owner | Pure plan output |
+| --- | --- | --- |
+| Parent + child issue TITLE and versioned `LIVE_STATUS_V1` comment | Existing native `delp.sync_projection` | Intended issue titles and required native input digest, **not** a second issue title writer |
+| Parent + child issue managed BODY block | Existing native guarded issue-BODY adapter only | `expected_body`, full observed/expected digests, and only-body change intent |
+| Product PR managed BODY and title | Existing separately guarded PR metadata adapter | `expected_title`, `expected_body`, full observed/expected digests |
+
+Body proposals use the **shipped native** `pr_responsibility_view_v32.inspect_managed_block` and
+`reconcile_managed_block`. They retain the human material outside managed
+markers and refuse duplicate/broken managed delimiters, wrong repository/PR
+identity, stale native DELP input/progress and changed Owner title base. The
+plan's ordered surfaces are **child issue → parent issue → PR**, but this is
+**advisory**: it cannot issue or grant a single mutation.
+
+`reconcile_publication_readback(plan, observed_after, native_live_status)`
+is also pure. It compares **full-body digests, exact titles, provider PR number
+and SHA**, and verifies both native `LIVE_STATUS` markers have version > 0
+and the exact pinned DELP input digest. One matched issue with other unverified
+surfaces yields `INCOMPLETE_SYNC`, **never** rollback/success fiction. If all
+fields match, it returns `OBSERVED_MATCH_NOT_AUTHORIZATION`, with
+`production_authorized: false` and `writes: 0`. Even a perfect caller-
+controlled readback is not independent provider proof or a genuine GitHub CAS:
+GitHub's three separate REST updates are **not** an atomic transaction.
+
+Example call boundaries:
+
+```python
+from generic_publication_plan import build_publication_plan, reconcile_publication_readback
+
+plan = build_publication_plan(
+    graph=source_graph, source=t02_unattested_report,
+    projection=native_delp_projection,
+    views=caller_read_view_bundle,         # must be independently verified
+    observed_surfaces=original_get_three_surfaces,
+)
+assert plan["writes"] == 0
+assert plan["writers"]["issue_title_and_live_status"] == "NATIVE_DELP_SYNC_PROJECTION_ONLY"
+
+readback = reconcile_publication_readback(plan, after_get_three_surfaces,
+                                            after_native_live_status_markers)
+assert readback["production_authorized"] is False
+```
+
+The 13 new adversarial publisher-plan test cases verify (a) three disjoint
+owners and human text preservation, (b) no-change idempotence,
+(c) mutated owner titles, (d) repeated/corrupt body markers,
+(e) changed DELP input or PR HEAD, (f) changed or only partially updated
+provider surfaces, (g) missing or stale native status, and
+(h) forged authority/progress refusals. These exercise **synthetic** provider
+material plus the original native Common V3.2 routines; they are not real
+live-publication qualification.
+
+## Next gates (Issue #325 T04–T05)
+
+T02: source-currentness code COMPLETE on synthetic provider; **real independently authenticated source and native full-ref fix held** until authorized pilot / protected amendment. T03: pure three-surface disjoint publisher plan/readback COMPLETE, no writer or provenance certification. T04: explicitly Owner-authorized base-resident frozen native amendment and independent review. T05: real private lab positive evidence→DELP→issue+PR readback→C6 and genuine independently authorized A→B execution. Retain the existing DELP as sole P/E/D/DE owner.
 
 ## Test command
 
