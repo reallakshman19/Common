@@ -48,3 +48,9 @@ TAB4 ARTIFACTS — APPEND ONLY; one dated reference per line
 2026-10-11 | ISSUE PLAN_UPDATE | #212 full 12-section report comment 6105499324 | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105499324
 2026-10-11 | PARENT CHAT-ONLY | #129 comment 6105501651 | https://github.com/reallakshman19/3D_Converters/issues/129#issuecomment-6105501651
 2026-10-11 | CI EXACT HEAD | PR #213@cd09d74b718cda4c7ba6610d3708235c9524a417 | 45 terminal = 30 success, 15 historical C05 failure; final #38109097052 success; #38109096996 #38109096910 #38109096980 #38109096936 success.
+
+
+2026-10-11 | CONSOLIDATED r5 FULL PLAN | https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct07/Tab4_Source_Authority_Recovery/RECON/2026-10-11/3-consolidated-gcpw-plan-r5.md | creation commit 5b8157b868ae2d7142ea763d8031362cd81877c2 | Git blob e1b1ecdf4f94c169e4e171211a0585738d7d42fa.
+2026-10-11 | SAME PLAN ISSUE COPY | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105942722 | GC-PW #96 architecture, TAB3 F01/F02 done, B1/B4 blockers, Owner X001–X008.
+2026-10-11 | CROSS-LINKS | https://github.com/reallakshman19/3D_Converters/issues/209#issuecomment-6105945010 ; https://github.com/reallakshman19/3D_Converters/issues/96#issuecomment-6105945331 ; https://github.com/reallakshman19/3D_Converters/issues/129#issuecomment-6105945634 .
+2026-10-11 | FOCUSED SOURCE FIRST TASK | https://github.com/reallakshman19/3D_Converters/issues/212#issuecomment-6105955180 | #880 run 38115038718 failing global reject; #893 38115038741 full-resident regex; #884 38115038704 file scope, no protected change, T6 still PARTIAL.
