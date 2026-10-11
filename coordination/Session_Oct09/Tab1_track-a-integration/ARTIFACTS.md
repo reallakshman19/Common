@@ -164,3 +164,6 @@ ARTIFACTS.md | 2026-10-11T05:42:30Z | chat=6acb03f0 | R10 USER "proceed now": ex
 2026-10-11 UTC | chat=6acb267e | DRAFT_PR | Grade9v3.5#178 | test-only R11-S2, base #177, initial head 3ef12ec then corrected 1c8d1472eec1ae45d25fcf9c2770fd5ebd075bf9, exact-head workflow pending/failing | https://github.com/reallakshman19/Grade9v3.5/pull/178
 2026-10-11 UTC | chat=6acb267e | ISSUE_EVIDENCE | Grade9v3.5#173 | current S2 implementation and observed 390px browser FAIL, rerun requested | https://github.com/reallakshman19/Grade9v3.5/issues/173#issuecomment-6106495680
 2026-10-11 UTC | chat=6acb267e | CI | Grade9v3.5#178 @ 1c8d1472eec1ae45d25fcf9c2770fd5ebd075bf9 | focused Python PASS + Track A browser FAIL, failed-job rerun requested | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38119994530
+
+2026-10-11 UTC | chat=6acb267e | CI_RERUN | Grade9v3.5#178 | same SHA 1c8d1472, failed-job rerun Track A SUCCESS after initial browser390 FAIL; intermittent root cause not proven | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38119994530
+2026-10-11 UTC | chat=6acb267e | ISSUE_BODY | Grade9v3.5#173 | R11-S2 status updated to test-only DRAFT implemented / coordinator merge pending | https://github.com/reallakshman19/Grade9v3.5/issues/173
