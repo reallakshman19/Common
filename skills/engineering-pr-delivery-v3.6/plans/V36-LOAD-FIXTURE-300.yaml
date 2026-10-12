@@ -5,64 +5,102 @@
 # 2. Never include "FIXTURE:" or custom markers in comment bodies on GitHub.
 #    lifecycle_v36.py validate_evidence() strictly enforces text == expected (canonical 8 lines);
 #    any extraneous lines cause ContractError and prematurely flag tasks as INVALID_EVIDENCE.
-# 3. All fixture assignments are maintained externally in this manifest.
+# 3. All fixture assignments and wave schedules are maintained externally in this manifest.
 # 4. If a PR does not exist, GitHub API returns 404, which GithubClient.request() raises as
 #    ContractError and snapshot_v36.py records as PROVIDER_UNAVAILABLE (not UNKNOWN_PR).
+# 5. Invalid comments never overwrite previously valid evidence (tested in Wave 2 on LOAD001..LOAD150).
+# 6. Total volume: 600 comments across Two Waves (300 positive + 300 negative/adversarial).
 
 workload_id: "V36-LOAD-FIXTURE-300"
 workload_plan_path: "skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml"
 workload_parent: "reallakshman19/relay-v36-stress-lab#8"
 controlling_parent: "reallakshman19/relay-v36-stress-lab#1"
-controlling_stage: "V36-1-ST02"
-target_scale: 300
+controlling_stage: "V36-1-ST03"
+total_tasks: 300
+total_comments: 600
 
-evidence_classification_contract:
-  positive_controls:
-    task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
-    count: 150
-    expected_status: "CURRENT_EVIDENCE"
-    comment_format: "Strict canonical 8-line record with valid Proof PR URL and matching candidate SHA"
-    proof_pr_url: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/<LIVE_PR>"
-    candidate: "reallakshman19/relay-v36-stress-lab@<LIVE_PR_HEAD_SHA>"
-    tests: "84/84"
-    author_requirement: "Must match repository owner (reallakshman19)"
-    semantics: "Confirms candidate test execution; NEVER implies Owner final delivery acceptance"
+github_numbering_reservation:
+  rule: "GitHub shares a single sequence counter across issues and PRs."
+  parent_1: "reallakshman19/relay-v36-stress-lab#1 (Controlling test parent)"
+  stage_children: "reallakshman19/relay-v36-stress-lab#2 through #7 (ST-01..ST-06)"
+  workload_parent: "reallakshman19/relay-v36-stress-lab#8 (MUST be created before first PR)"
+  proof_pr_number: 9
+  proof_pr_url: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/9"
 
-  negative_controls:
-    stale_candidate_sha:
-      task_range: ["V36-8-LOAD151", "V36-8-LOAD180"]
-      count: 30
-      expected_status: "STALE_EVIDENCE"
-      description: "Valid 8-line record, but candidate SHA points to prior commit superseded by PR head"
-    commit_proof_url:
-      task_range: ["V36-8-LOAD181", "V36-8-LOAD210"]
-      count: 30
-      expected_status: "UNVERIFIED_PROOF"
-      description: "Proof URL uses /commit/<sha> instead of /pull/<pr>; proof_pr() returns None"
-    mismatched_proof_commit:
-      task_range: ["V36-8-LOAD211", "V36-8-LOAD240"]
-      count: 30
-      expected_status: "UNVERIFIED_PROOF"
-      description: "Proof URL uses /pull/<pr>/commits/<sha1> where sha1 differs from candidate sha2"
+two_wave_execution_schedule:
+  wave_1:
+    description: "Initial baseline evidence and control injection (300 comments)"
+    total_comments: 300
+    subsets:
+      positive_controls:
+        task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
+        count: 150
+        comment_nature: "Positive valid canonical 8-line record"
+        proof_pr: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/9"
+        candidate_sha: "<LIVE_PR_HEAD_SHA>"
+        tests: "84/84"
+        author: "reallakshman19 (Owner)"
+        expected_status: "CURRENT_EVIDENCE"
+      stale_candidate_sha:
+        task_range: ["V36-8-LOAD151", "V36-8-LOAD200"]
+        count: 50
+        comment_nature: "Valid 8-line record, but candidate SHA points to prior commit superseded by PR head"
+        expected_status: "STALE_EVIDENCE"
+      unverified_proof:
+        task_range: ["V36-8-LOAD201", "V36-8-LOAD240"]
+        count: 40
+        comment_nature: "20 commit Proof URLs (/commit/<sha>) + 20 mismatched PR commit URLs (/pull/9/commits/<sha1> != sha2)"
+        expected_status: "UNVERIFIED_PROOF"
+      invalid_evidence:
+        task_range: ["V36-8-LOAD241", "V36-8-LOAD280"]
+        count: 40
+        comment_nature: "20 non-owner foreign authors + 20 malformed syntax/outcome mismatches"
+        expected_status: "INVALID_EVIDENCE"
+      nonexistent_pr:
+        task_range: ["V36-8-LOAD281", "V36-8-LOAD300"]
+        count: 20
+        comment_nature: "Proof URL references non-existent PR /pull/99999 (HTTP 404)"
+        expected_status: "PROVIDER_UNAVAILABLE"
 
-  adversarial_controls:
-    foreign_comment_author:
-      task_range: ["V36-8-LOAD241", "V36-8-LOAD260"]
-      count: 20
-      expected_status: "INVALID_EVIDENCE"
-      description: "Comment authored by account other than repository owner (filtered before validate_evidence)"
-    malformed_header_format:
-      task_range: ["V36-8-LOAD261", "V36-8-LOAD275"]
-      count: 15
-      expected_status: "INVALID_EVIDENCE"
-      description: "Missing required prefix, invalid test format, or unresolved placeholder"
-    task_outcome_mismatch:
-      task_range: ["V36-8-LOAD276", "V36-8-LOAD290"]
-      count: 15
-      expected_status: "INVALID_EVIDENCE"
-      description: "Declared task ID or outcome in comment differs from task declaration in plan"
-    nonexistent_pr_reference:
-      task_range: ["V36-8-LOAD291", "V36-8-LOAD300"]
-      count: 10
-      expected_status: "PROVIDER_UNAVAILABLE"
-      description: "Proof URL references non-existent PR; GitHub 404 raises ContractError in get_pr()"
+    wave_1_snapshot_oracle:
+      CURRENT_EVIDENCE: 150
+      STALE_EVIDENCE: 50
+      UNVERIFIED_PROOF: 40
+      INVALID_EVIDENCE: 40
+      PROVIDER_UNAVAILABLE: 20
+      verified_complete: 0
+      total_tasks_evaluated: 300
+
+  wave_2:
+    description: "Invariance verification and recovery (300 comments)"
+    total_comments: 300
+    subsets:
+      adversarial_non_overwrite:
+        task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
+        count: 150
+        comment_nature: "Invalid/malformed comments posted to tasks already having valid Wave 1 evidence"
+        expected_behavior: "snapshot_v36.py discards invalid comments; eligible[-1] remains Wave 1 valid comment"
+        expected_status: "CURRENT_EVIDENCE"
+        verified_invariant: "Invalid comments MUST NOT overwrite or degrade previously valid evidence"
+      positive_recovery:
+        task_range: ["V36-8-LOAD151", "V36-8-LOAD300"]
+        count: 150
+        comment_nature: "Fresh valid canonical 8-line records pointing to live PR #9 with current head SHA"
+        expected_behavior: "New valid comments added to eligible; chronologically supersede prior negative/control states"
+        expected_status: "CURRENT_EVIDENCE"
+        verified_invariant: "Fresh valid evidence cleanly supersedes prior stale/invalid/error states"
+
+    wave_2_snapshot_oracle:
+      CURRENT_EVIDENCE: 300
+      STALE_EVIDENCE: 0
+      UNVERIFIED_PROOF: 0
+      INVALID_EVIDENCE: 0
+      PROVIDER_UNAVAILABLE: 0
+      verified_complete: 0
+      total_tasks_evaluated: 300
+
+workload_summary:
+  total_positive_comments: 300
+  total_negative_adversarial_comments: 300
+  grand_total_comments: 600
+  synthetic_evidence_notice: "Synthetic evidence fixtures are restricted to test validation; they NEVER represent Owner delivery acceptance"

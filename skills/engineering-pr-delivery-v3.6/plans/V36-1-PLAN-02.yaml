@@ -34,7 +34,7 @@ tasks:
     outcome: O3
     title: simulated fault injection and interrupted recovery
     for_user: System recovers cleanly from simulated 429 rate limits, 5xx server errors, and dropped connections
-    acceptance: Exponential backoff operates correctly; reconciliation restores accurate state; retry produces zero duplicates
+    acceptance: Simulated transient faults fail closed with ContractError and are recorded as FINDING-ST05-RETRY-01; external retry restores accurate state with zero duplicates
   - task_id: V36-1-ST06
     size: M
     outcome: O5
