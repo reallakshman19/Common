@@ -1,7 +1,7 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CoordinatorTabObservationV1",
-  "description": "Side-effect-free typed projection of the exact 10-column watch.ps1 row output",
+  "description": "Side-effect-free typed projection of the exact 10-column watch.ps1 row output with composite binding envelope",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -15,21 +15,24 @@
     "due",
     "checked",
     "next",
-    "observed_at",
-    "coordinator_liveness"
+    "tab_position",
+    "chat_id",
+    "binding_generation",
+    "observed_at_utc",
+    "probe_status"
   ],
   "properties": {
     "tab": {
       "type": "string",
-      "description": "Column 1: Tab alias string"
+      "description": "Column 1: Tab string from coordinator"
     },
     "status": {
       "type": "string",
-      "description": "Column 2: Status string from coordinator"
+      "description": "Column 2: Exact Status string from coordinator"
     },
     "aim": {
       "type": "string",
-      "description": "Column 3: Aim identifier"
+      "description": "Column 3: Aim label string"
     },
     "plan": {
       "type": "string",
@@ -45,27 +48,83 @@
     },
     "meter": {
       "type": "string",
-      "description": "Column 7: Progress meter"
+      "description": "Column 7: Progress meter string"
     },
     "due": {
       "type": "string",
-      "description": "Column 8: Due date / cycle string"
+      "description": "Column 8: Due date / milestone string"
     },
     "checked": {
       "type": "string",
-      "description": "Column 9: Verification timestamp"
+      "description": "Column 9: Checked freshness string"
     },
     "next": {
       "type": "string",
-      "description": "Column 10: Next action obligation"
+      "description": "Column 10: Next action obligation string"
+    },
+    "tab_position": {
+      "type": "string",
+      "description": "Numeric tab position (e.g. '1', '2', '3')"
+    },
+    "chat_id": {
+      "type": "string",
+      "description": "Chat identifier from cyclestate map"
+    },
+    "binding_generation": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Successive generation number for this chat binding"
+    },
+    "assignment_id": {
+      "type": ["string", "null"],
+      "description": "Resolved assignment ID if mapped, or null if unassigned"
+    },
+    "work_id": {
+      "type": ["string", "null"],
+      "description": "Resolved Work ID if mapped, or null if unassigned"
+    },
+    "observed_at_utc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp of the observation row"
     },
     "observed_at": {
       "type": "string",
       "format": "date-time",
-      "description": "Probe observation timestamp"
+      "description": "Legacy alias for observed_at_utc"
+    },
+    "last_probe_at_utc": {
+      "type": ["string", "null"],
+      "description": "Timestamp of the last live coordinator probe"
+    },
+    "probe_status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "TIMEOUT",
+        "LOADFAIL",
+        "NOBOX",
+        "UNUSUAL",
+        "ERROR",
+        "NEVER_PROBED",
+        "UNKNOWN"
+      ],
+      "description": "Verbatim status result of the last probe"
+    },
+    "liveness": {
+      "type": "string",
+      "enum": ["ALIVE", "STALE", "UNKNOWN"],
+      "description": "Calculated probe freshness against 2x Cycle threshold"
     },
     "coordinator_liveness": {
-      "enum": ["ALIVE", "STALE", "STOPPED"]
+      "type": "string",
+      "enum": ["ALIVE", "STALE", "STOPPED", "UNKNOWN"],
+      "description": "Legacy alias for liveness"
+    },
+    "conflicts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Any identity or binding conflict flags"
     }
   }
 }

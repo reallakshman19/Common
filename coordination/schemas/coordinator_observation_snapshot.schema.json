@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CoordinatorObservationSnapshot",
+  "description": "Represents a private, atomic observation snapshot published by a coordinator session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "coordinator_id",
+    "session_id",
+    "project_id",
+    "generated_at_utc",
+    "source_digest",
+    "source_watermark",
+    "observations"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["v1.0.0"]
+    },
+    "coordinator_id": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "generated_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40,64}$"
+    },
+    "source_watermark": {
+      "type": "string"
+    },
+    "cycle_seconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "coordinator_tab_observation_v1.schema.json"
+      }
+    }
+  }
+}
