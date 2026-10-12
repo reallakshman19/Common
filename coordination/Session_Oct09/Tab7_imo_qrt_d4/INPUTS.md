@@ -28,3 +28,5 @@
 2026-10-12 | chat=6accb5b3 | APPLY-D4 defect exact log | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245419910 job114797946977 | authored SVG desc false-positive, not math issue
 2026-10-12 | chat=6accb5b3 | MODEL-D4 source static | TEST/imo-research/qrt-d4/model-d4.package.json @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50 | schema0 errors, U=4n−2e safe Core1, protected c correction Core2A
 2026-10-12 | chat=6accb5b3 | MODEL-D4 math oracle | tests/test_imo182_qrt_d4_model.py @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50 | exterior flood-fill model 512x3x3 and five named layouts, hosted unittest queued
+2026-10-12 | chat=6accb5b3 | APPLY final exact head | PR#196@0d36673633e115ecaa261917ee2066a80c3accc2 run38248875649 | renderer receipt gaps=[], digest d0e79b75bbea0e1d, semantic 281d54b485bb6c97, five role SHA in handovers/QRT-APPLY-D4.md
+2026-10-12 | chat=6accb5b3 | MODEL static not admission | PR#198@cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50 run38250646298 queued | no rendered-role hashes; source AUTHORED TEST

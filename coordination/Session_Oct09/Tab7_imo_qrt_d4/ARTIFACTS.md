@@ -33,3 +33,6 @@
 2026-10-12 | chat=6accb5b3 | MODEL-D4 latest CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38250646298 | QUEUED, no final HTML credit
 2026-10-12 | chat=6accb5b3 | MODEL-D4 cell artifact | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-MODEL-D4.md | review packet only, NOT successor-chat handover
 2026-10-12 | chat=6accb5b3 | APPLY-D4 cell artifact | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-APPLY-D4.md | diagnosis and pending proof packet only
+2026-10-12 | chat=6accb5b3 | APPLY-D4 FINAL five role HTML/screenshots | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38248875649/artifacts/11747409718 | run 38248875649 SUCCESS @0d36673633e115ecaa261917ee2066a80c3accc2, receipt gaps=[], 6 screenshots
+2026-10-12 | chat=6accb5b3 | APPLY-D4 final sha and golden role benchmark | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-APPLY-D4.md | five exact-head sha, role slot MATCH to frozen golden
+2026-10-12 | chat=6accb5b3 | MODEL-D4 static source latest | https://github.com/reallakshman19/Grade9v3.5/pull/198 | @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50, 512 flood-fill grids and schema 0 errors, hosted CI queued

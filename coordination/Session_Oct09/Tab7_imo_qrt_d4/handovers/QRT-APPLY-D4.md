@@ -27,3 +27,18 @@ P1-P3: 7201-int oracle authored for main/changed/repaired; independent direct in
 M1-M3: source rights AUTHORED TEST; five golden blueprint/slot contracts authored into tests; actual accessible 1280x900 browser screenshot/A4 require hosted result and independent reviewer.
 Qualified independent reviewer verdict: BLANK. Owner QRT acceptance: BLANK. Successor golden D-182-3 OPEN.
 NOT a successor chat handover; chat handover=no.
+
+## Verified completion addendum — exact-head APPLY worker pass
+2026-10-12 | chat=6accb5b3 | exact PR#196 head 0d36673633e115ecaa261917ee2066a80c3accc2
+Hosted job https://github.com/reallakshman19/Grade9v3.5/actions/runs/38248875649 completed SUCCESS, including all steps (sole renderer; schema/arithmetic/golden five roles; Chromium five pages plus H3 after attempt; SHA receipt; artifact upload). Exact generated pages/screenshots: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38248875649/artifacts/11747409718.
+Renderer digest d0e79b75bbea0e1d semantic_digest 281d54b485bb6c97, held_to REFERENCE, gaps=[].
+Five exact head role HTML SHA256:
+core1.html ff7b13b1fcdfe26b073a61f06b9508d1e3b4e51e5ef06148ee6697fcde027335
+core1a.html c9c1eea02c6674fa76ce0ba2977b5a4cac7f41f59dd6115c32a7901c1fbd00ff
+core1b.html ef847f39b5cef72ae3f4b90f9abfb9ef15fb3558ed36865e73f4bd8f3cbb8a5a
+core2a.html 4f1274bb803af4e30043f1715c7ff23b09933eb55a49afda0f9618764df655fb
+core2b.html e658d4c96752d10ac6cee2a6d0e66a97e594d31e3d30daaab896ba9329270ecb
+index.html fce8db0f14030c6f0a67b864d9c1b97559b9cf1541dbcce4bc66f2a4688af45c.
+All five registered blueprint role ref and frozen matching slot sequences were asserted in hosted unittest PASS, corresponding to BP-CORE1-ORIENTATION@1.1.0, BP-CORE1A-CONSTRUCTION@1.8.0, BP-CORE1B-RECONSTRUCTION@1.1.0, BP-CORE2A-SUPPORTED-APPLICATION@1.1.0, BP-CORE2B-TRANSFER@1.1.0. Frozen original_digest ad02fef42f0d505a untouched; comparing technique/slots only, not new content byte equality.
+Browser screenshots in artifact: browser/core1.png, core1a.png, core1b.png, core2a.png, core2b.png, core2a-after-attempt.png. Blank Core2A attempt refused, H3 only visible after nonblank commit, and separate Core1B boundary gate present; all PASS.
+Review focus H1–M3 covered by original cell packet; independent qualified reviewer verdict BLANK, Owner acceptance BLANK. Source AUTHORED TEST. Worker implementation DONE; QRT officially accepted0/28, no merge or release.
