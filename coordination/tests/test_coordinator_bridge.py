@@ -346,6 +346,29 @@ class TestCoordinatorBridgeWP2(unittest.TestCase):
             again = get_observations_for_api("ProjectA", "Session_Two", td)
             self.assertEqual(again["observations"], [])
 
+    def test_snapshot_symlink_outside_scope_is_not_served(self):
+        with tempfile.TemporaryDirectory() as root, tempfile.TemporaryDirectory() as external:
+            secret = Path(external) / "secret.json"
+            secret.write_text(json.dumps({
+                "schema_version": "v1.0.0", "project_id": "ProjectA",
+                "session_id": "Session_One", "coordinator_id": "c1",
+                "generated_at_utc": self.now_utc, "source_digest": "a"*64,
+                "source_watermark": "external", "cycle_seconds": 900,
+                "observations": []
+            }), encoding="utf-8")
+            pointer = Path(root) / "observations_ProjectA_Session_One.json"
+            try:
+                pointer.symlink_to(secret)
+            except (OSError, NotImplementedError):
+                self.skipTest("Symlink creation unavailable on this host")
+            data = get_observations_for_api("ProjectA", "Session_One", root)
+            self.assertEqual(data["source_watermark"], "NO_OBSERVATIONS_FOUND")
+
+    def test_publish_rejects_untrusted_custom_filename(self):
+        bridge = CoordinatorBridge(snapshot_dir="unused")
+        with self.assertRaises(ValueError):
+            bridge.publish_snapshot({"schema_version":"v1.0.0"}, file_name="../escape.json")
+
     def test_adv07_internal_api_defense(self):
         """ADV-07: GET /api/v3/observations loopback defense, Host check, and snapshot query."""
         with tempfile.TemporaryDirectory() as td:
