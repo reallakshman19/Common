@@ -26,3 +26,4 @@
 2026-10-12 | chat=6accb51c | EXPLAIN source | Grade9v3.5 PR#192 agent/imo182-qrt-d1-represent @3540909404324130f29501df88d2a46ef0cc40cc | original EXPLAIN-D1 package, four SVG, manifest, independent oracle, six-test suite, dedicated workflow; no merge
 2026-10-12 | chat=6accb51c | EXPLAIN candidate hosted run | 38248301556 queued at source pin | requires actual sole-renderer receipt for D1-EXP-03 closure
 2026-10-12 | chat=6accb51c | EXPLAIN review artifact | coordination/Session_Oct09/Tab4_imo_qrt_d1/handovers/QRT-EXPLAIN-D1.md | per-cell review packet, NOT successor-chat handover
+2026-10-12 | chat=6accb51c | issue #182 evidence | comment 6124415717 (D1-EXP-03 PARTIAL) | exact same block EVIDENCE.log; Actions run 38248301556 QUEUED, not counted 3/7
