@@ -163,7 +163,7 @@ class TestSecurityHttpServer(unittest.TestCase):
         with urllib.request.urlopen(req) as resp:
             self.assertEqual(resp.status, 200)
             data = json.loads(resp.read().decode())
-            self.assertEqual(data.get("visibility"), "PUBLIC")
+            self.assertEqual(data.get("visibility"), "INTERNAL")  # PUBLIC remains blocked until WP4 privacy allowlist
             self.assertIn("projects", data)
             self.assertIn("source_watermarks", data)
 

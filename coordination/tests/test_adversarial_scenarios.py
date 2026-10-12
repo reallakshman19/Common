@@ -145,7 +145,6 @@ class TestAdversarialScenarios(unittest.TestCase):
         self.assertEqual(len(self.reg.evidence_history), baseline+1)
         self.assertEqual(self.reg.evidence[ev.evidence_id].proof_digest, "f"*64)
 
-    @unittest.skip("WP1 CI provider adapter not yet implemented; fixture values are not live CI verification")
     def test_tc10_exact_head_ci_invalidation(self):
         """TC-10: PR head move invalidates green check; current head marked CI_UNKNOWN."""
         ci_info = self.fixture["exact_head_ci"]
@@ -153,7 +152,11 @@ class TestAdversarialScenarios(unittest.TestCase):
         curr_head = ci_info["current_head"]
 
         self.assertNotEqual(prior_head["sha"], curr_head["sha"])
-        self.assertEqual(prior_head["ci_status"], "PASS")
+        from coordination.indexer import ExactHeadCIAdapter
+        result = ExactHeadCIAdapter.evaluate_check(
+            "old-run", prior_head["sha"], curr_head["sha"],
+            "completed", "success")
+        self.assertEqual(result, "TESTS_PASSED_ON_OLD_HEAD")
         self.assertEqual(curr_head["ci_status"], "CI_UNKNOWN")
 
     def test_tc11_resource_protection_error_codes(self):

@@ -25,16 +25,16 @@ class Project:
     name: str
     repo_url: str
     coordination_dir: str
-    status: str  # ACTIVE, DEGRADED, UNAVAILABLE
+    status: str  # ACTIVE, DEGRADED, UNAVAILABLE, UNKNOWN
     as_of: str
-    provider_reachability: str  # REACHABLE, UNAVAILABLE, RATE_LIMITED, FORBIDDEN
+    provider_reachability: str  # REACHABLE, UNAVAILABLE, RATE_LIMITED, FORBIDDEN, PARTIAL, UNKNOWN
 
     def validate(self):
         if not self.project_id or not self.project_id.strip():
             raise ValueError("project_id cannot be empty")
-        if self.status not in ("ACTIVE", "DEGRADED", "UNAVAILABLE"):
+        if self.status not in ("ACTIVE", "DEGRADED", "UNAVAILABLE", "UNKNOWN"):
             raise ValueError(f"Invalid project status: {self.status}")
-        if self.provider_reachability not in ("REACHABLE", "UNAVAILABLE", "RATE_LIMITED", "FORBIDDEN"):
+        if self.provider_reachability not in ("REACHABLE", "UNAVAILABLE", "RATE_LIMITED", "FORBIDDEN", "PARTIAL", "UNKNOWN"):
             raise ValueError(f"Invalid provider_reachability: {self.provider_reachability}")
 
 
