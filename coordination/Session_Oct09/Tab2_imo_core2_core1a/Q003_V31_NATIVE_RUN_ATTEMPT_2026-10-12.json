@@ -1,0 +1,31 @@
+{
+  "schema": "Q003-native-v3.1-run-attempt/1",
+  "issue": 183,
+  "chat": "6acc4eaa",
+  "plan": "r5",
+  "aim": "v3.1.0",
+  "label_sha": "64a4e9c",
+  "outcome": "O1",
+  "original_item_components_sha256": "31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2",
+  "new_local_full_input_sha256": "9c31355c73ab7b62904c4ccc85f6636ebbd90e2547e2737f44e647cab5d13012",
+  "new_input_bytes": 4015,
+  "old_full_input_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+  "proof": "New input full bytes differ; original canonical question components hash match. Original text/options/answer NOT in this Git file.",
+  "local_checks": "PASS: Q003 canonical item SHA, new raw JSON SHA, four ordered options, independent numerical oracle, authored route/crux shape",
+  "product_main": "778eb35a70517a46108ad0a5dc01dfc89f61c0e3",
+  "test_branch_head": "e50802f371c03fe94e47ad85808b9cce5632e3c7",
+  "TEST_patch": "prepare_private.py optional --custody-receipt to keep frozen default intact; only TEST path modified",
+  "clone": {
+    "command": "git clone --depth 1 --branch agent/183-q003-private-core2-test-6acc303b https://github.com/reallakshman19/Grade9v3.5.git <LOCAL_CHECKOUT>",
+    "exit": 128,
+    "error": "Could not resolve host: github.com"
+  },
+  "native_renderer": "NOT_RUN",
+  "native_core2": "NOT_CREATED",
+  "golden_comparison": "NOT_RUN",
+  "canonical_core1a": "NOT_RUN",
+  "qrt_owner_accepted": false,
+  "rights_granted": false,
+  "local_standalone_html_status": "OWNER_REJECTED_NOT_A_DELIVERABLE",
+  "next": "Complete checkout with DNS access, run existing TEST adapter with local input and alternate receipt, invoke native renderer, then actual golden."
+}
