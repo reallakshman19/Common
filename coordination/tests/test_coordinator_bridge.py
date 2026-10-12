@@ -75,6 +75,10 @@ class TestCoordinatorBridgeWP2(unittest.TestCase):
         run2 = AgentRun("run-grade9-182-1", a2.assignment_id, 1, "chat-g1", self.now_utc, 2, "IN_PROGRESS")
         reg.register_run(run1)
         reg.register_run(run2)
+        reg.register_binding(TabBinding("bind-common", run1.run_id, p1.project_id,
+                                       "Tab3", 1, "ACTIVE", session_alias="Session_Common"))
+        reg.register_binding(TabBinding("bind-grade9", run2.run_id, p2.project_id,
+                                       "Tab3", 1, "ACTIVE", session_alias="Session_Grade9"))
 
         # Both coordinator observations report 'Tab3'
         obs_common = {
@@ -109,6 +113,29 @@ class TestCoordinatorBridgeWP2(unittest.TestCase):
         self.assertNotIn("UNASSIGNED_OR_UNKNOWN_TAB", res_common["conflicts"])
         self.assertNotIn("UNASSIGNED_OR_UNKNOWN_TAB", res_grade9["conflicts"])
 
+    def test_wrong_session_or_project_never_resolves_by_chat_only(self):
+        reg = ControlTowerRegistry()
+        a = Project("A", "A", "https://github.com/test/A", "coordination", "ACTIVE", self.now_utc, "REACHABLE")
+        b = Project("B", "B", "https://github.com/test/B", "coordination", "ACTIVE", self.now_utc, "REACHABLE")
+        reg.register_project(a); reg.register_project(b)
+        work = Work("A-work", "A", "AIM", "1234567", "https://github.com/test/A/issues/1", "IN_PROGRESS")
+        reg.register_work(work)
+        lane = ExecutionLane("A-lane", work.work_id, "DEVELOPMENT"); reg.register_lane(lane)
+        assign = AgentAssignment("A-assign", lane.lane_id, "RESP", "PRIMARY_IMPLEMENTER", "ACTIVE")
+        reg.register_assignment(assign)
+        run = AgentRun("A-run", assign.assignment_id, 1, "shared-chat", self.now_utc, 0, "IN_PROGRESS")
+        reg.register_run(run)
+        reg.register_binding(TabBinding("A-binding", run.run_id, "A", "Tab3", 1, "ACTIVE", session_alias="Session_A"))
+        row = {"tab": "Tab3", "status": "working", "tab_position": "3",
+               "chat_id": "shared-chat", "binding_generation": 1}
+        for project,session in (("B","Session_A"),("A","Session_B")):
+            result = CompositeBindingResolver.resolve(row,project,self.coordinator_id,session,reg)
+            self.assertIsNone(result["assignment_id"])
+            self.assertIn("UNASSIGNED_OR_UNKNOWN_TAB",result["conflicts"])
+            self.assertEqual(result["status"],"working")
+        good = CompositeBindingResolver.resolve(row,"A",self.coordinator_id,"Session_A",reg)
+        self.assertEqual(good["assignment_id"], assign.assignment_id)
+
     def test_adv02_carry_generation_invalidation(self):
         """ADV-02: Predecessor carried to g+1 retains history; successor starts fresh run."""
         reg = ControlTowerRegistry()
@@ -133,6 +160,8 @@ class TestCoordinatorBridgeWP2(unittest.TestCase):
         run2 = AgentRun("run-002", assign.assignment_id, 2, "chat-002", self.now_utc,
                         0, "IN_PROGRESS", predecessor_run_id=run1.run_id)
         reg.register_run(run2)
+        reg.register_binding(TabBinding("bind-carry-g2", run2.run_id, p.project_id,
+                                       "Tab1", 2, "ACTIVE", session_alias="Session_Oct12"))
 
         # Both exist in history; generation 1 is not overwritten
         self.assertEqual(reg.runs["run-001"].generation, 1)
@@ -297,6 +326,26 @@ class TestCoordinatorBridgeWP2(unittest.TestCase):
             self.assertEqual(fallback["observations"], [])
             self.assertEqual(fallback["source_watermark"], "NO_OBSERVATIONS_FOUND")
 
+    def test_session_isolation_no_fallback_to_other_session(self):
+        with tempfile.TemporaryDirectory() as td:
+            first = Path(td) / "observations_ProjectA_Session_One.json"
+            AtomicSnapshotWriter.write_snapshot(first, {
+                "schema_version": "v1.0.0", "project_id": "ProjectA",
+                "coordinator_id": "c1", "session_id": "Session_One",
+                "generated_at_utc": self.now_utc, "source_digest": "a"*64,
+                "source_watermark": "cycle:1", "cycle_seconds": 900,
+                "observations": []})
+            good = get_observations_for_api("ProjectA", "Session_One", td)
+            self.assertEqual(good["session_id"], "Session_One")
+            bad = get_observations_for_api("ProjectA", "Session_Two", td)
+            self.assertEqual(bad["source_watermark"], "NO_OBSERVATIONS_FOUND")
+            self.assertEqual(bad["observations"], [])
+            # A forged payload under the expected filename must be rejected.
+            forged = Path(td) / "observations_ProjectA_Session_Two.json"
+            forged.write_text(json.dumps({**good, "session_id":"Session_One"}),encoding="utf-8")
+            again = get_observations_for_api("ProjectA", "Session_Two", td)
+            self.assertEqual(again["observations"], [])
+
     def test_adv07_internal_api_defense(self):
         """ADV-07: GET /api/v3/observations loopback defense, Host check, and snapshot query."""
         with tempfile.TemporaryDirectory() as td:
@@ -387,6 +436,10 @@ class TestCoordinatorBridgeWP2(unittest.TestCase):
         reg.register_assignment(assign2)
         run2 = AgentRun("run-002", assign2.assignment_id, 1, "chat-222", self.now_utc, 1, "IN_PROGRESS")
         reg.register_run(run2)
+        reg.register_binding(TabBinding("bind-t1", run1.run_id, p.project_id,
+                                       "Tab1", 1, "ACTIVE", session_alias="Session_Default"))
+        reg.register_binding(TabBinding("bind-t2", run2.run_id, p.project_id,
+                                       "Tab2", 1, "ACTIVE", session_alias="Session_Default"))
 
         raw_rows = [
             {"tab": "Tab1 · c1", "status": "🟢 working", "aim": "AIM-1", "plan": "-", "ac": "-", "ci": "-",
