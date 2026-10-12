@@ -224,6 +224,8 @@ class TestWP1Snapshot(unittest.TestCase):
             idx = EvidenceIndex(str(Path(d) / "db.sqlite"))
             try:
                 before = {b.binding_id:b.binding_state for b in registry.bindings.values()}
+                idx.get_active_evidence = lambda *args, **kwargs: self.fail(
+                    "Portfolio snapshot must not materialize all evidence rows")
                 snap = generate_control_tower_snapshot(registry, idx)
                 self.assertEqual(len(snap["projects"]), 2)
                 self.assertEqual(len(snap["assignments"]), 5)
