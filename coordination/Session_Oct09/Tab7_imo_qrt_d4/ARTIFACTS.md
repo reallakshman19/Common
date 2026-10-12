@@ -38,3 +38,5 @@
 2026-10-12 | chat=6accb5b3 | MODEL-D4 static source latest | https://github.com/reallakshman19/Grade9v3.5/pull/198 | @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50, 512 flood-fill grids and schema 0 errors, hosted CI queued
 2026-10-12 | chat=6accb5b3 | MODEL-D4 source-owned renderer schema correction | https://github.com/reallakshman19/Grade9v3.5/pull/198@c6cb89e25222d4b7148b381560336d966e27f7c6 | oracle verification.bindings n/e/c/A numbers -> strings
 2026-10-12 | chat=6accb5b3 | MODEL-D4 rerun after schema correction | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38251762173 | QUEUED exact head, no rendered page claims
+2026-10-12 | chat=6accb5b3 | APPLY-D4 closed and MODEL-D4 active issue evidence | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6124622053 | exact EVIDENCE.log updated two-cell block
+2026-10-12 | chat=6accb5b3 | MODEL-D4 renderer defect correction | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6124660809 | correction addendum and rerun, does not self-accept
