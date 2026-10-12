@@ -103,6 +103,38 @@ class TestWP1ProviderAndSafety(unittest.TestCase):
             project_id="project-A", repository="reallakshman19/Common", issue_number=353)
         self.assertEqual(len(self.idx.get_evidence_versions("project-A", "8899")), 2)
 
+    def test_cursor_continues_large_issue_without_falsely_marking_complete(self):
+        class PagingProvider(FakeGitHub):
+            def get_json(self, path, query=None):
+                if path.endswith("/comments"):
+                    page = query["page"]
+                    first = (page - 1) * 100
+                    rows = []
+                    for offset in range(first, min(first + 100, 202)):
+                        rows.append({
+                            "id": 10000 + offset, "body": canonical(),
+                            "created_at": "2026-10-12T10:00:00Z",
+                            "updated_at": "2026-10-12T10:00:00Z",
+                            "html_url": f"https://github.com/reallakshman19/Common/issues/353#issuecomment-{10000+offset}",
+                            "user": {"login": "fixture-user"},
+                        })
+                    return rows
+                return super().get_json(path, query)
+        p = PagingProvider()
+        partial = ingest_issue_evidence(self.idx, p, project_id="project-A",
+            repository="reallakshman19/Common", issue_number=353, max_pages=2)
+        self.assertEqual(partial["provider_status"], "PARTIAL")
+        self.assertEqual(partial["next_page"], 3)
+        self.assertEqual(len(self.idx.get_active_evidence("project-A")), 200)
+        complete = ingest_issue_evidence(self.idx, p, project_id="project-A",
+            repository="reallakshman19/Common", issue_number=353, max_pages=2)
+        self.assertEqual(complete["provider_status"], "REACHABLE")
+        self.assertEqual(complete["next_page"], 1)
+        self.assertEqual(len(self.idx.get_active_evidence("project-A")), 202)
+        cursor = self.idx.get_project_observation(
+            "project-A", "GITHUB_ISSUE_COMMENT:reallakshman19/Common:353")
+        self.assertEqual(cursor["last_cursor"], "page:1")
+
     def test_wrong_child_and_malformed_comment_are_not_admitted(self):
         self.provider.body = canonical(issue="999")
         one = ingest_issue_evidence(self.idx, self.provider,
