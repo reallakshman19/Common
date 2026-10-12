@@ -2,3 +2,93 @@
 2026-10-12 | 182-INT-02 / 03 | CI preflight #197 a846174: reviewed all six workflow-only concurrency patches, PR/push gates intact, cancel non-main only, no jobs removed; guardrails run38249723271 RED first 2385 violations across 272; prior #190 run38231707421 same first failure; canonical regression delta run38249723570 exact base main@778eb35a: NEW 0, fixed 0, still failing 153. Versus older pinned-main baseline NEW7 (baseline drift), not globally waived. #191 canonical run38278770085 delta run38278770085 NEW14 vs pinned main: separate regressions; DO NOT MERGE #191 until fixed. #197 PR comment https://github.com/reallakshman19/Grade9v3.5/pull/197#issuecomment-6129735680. Marked ready then safely merged with lease a846174 using merge commit 4dbedc6773482bbecb146ff8959614b2c32dcc6e; readback main confirmed. Main scoped Actions 38287890745 / 38287890723 / 38287890727 / 38287890758 / 38287890766 / 38287890826 QUEUED, deployment workflow 38287889853 QUEUED; no learner content changed by PR#197. Source lock and registry untouched. QRT accepted0/28.
 
 2026-10-12 | 182-INT-01/13 | INDEPENDENT exact-head hosted artifact byte audit: 25/25 ZIPs fetched, unpacked 150 actual role/index HTML, 25/25 render_core/2 receipts gaps=[], 25/25 source manifest refs; all 25 six-page SHA computed, 14/14 supplied sha256.json files match 84/84, 11/25 no supplied sha manifests; none of 25 render-receipt.json files contains per-page SHA, strict gate unmet for all. D1 six, D2 seven, D3 seven, D4 five; 3 missing. Reviewer packets all 25 generated in chat artifact archive, not published; scope summaries independently checked from 25 exact source blobs for protected W. No QRT acceptance. Main PR#197 merge@4dbedc6 only; #190 golden lock run38231707266 FAIL six tests and Core2A H3 after attempt run38231707376 PASS; #190 cannot merge. Original Owner golden bytes immutable. Main run38287890758 guardrails FAIL and 38287889853 pages workflow SUCCESS after infrastructure merge; content unchanged.
+
+2026-10-12 | Tab8 issued evidence text (verbatim issue comments, append-only)
+Issue #182 comment 6129771453 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6129771453
+TASK EVIDENCE | Tab8 | plan=r1 | chat=new | aim=v3.1.0 | outcome=O1 | user=no
+```text
+Outcome: O1 — independently pinned exact-head takeover inventory, scoped CI evidence triage, 28-cell index published; final per-page independent SHA still outstanding.
+For the user: No public learner content, source status, release or QRT acceptance changed. 25 authored TEST candidate cells (D1 6, D2 7, D3 7, D4 5), 3 not authored, 16 PRs inventoried, 0/28 accepted.
+Proof: https://github.com/reallakshman19/Common/blob/6355dbfe17fa97ea4ccbfec1f814a3be28dbf810/coordination/Session_Oct09/Tab8_imo_182_integrator/INDEX-28-CELLS.md ; https://github.com/reallakshman19/Common/blob/6355dbfe17fa97ea4ccbfec1f814a3be28dbf810/coordination/Session_Oct09/Tab8_imo_182_integrator/PLAN.md
+Task: 182-INT-01
+Goal (issue AC): Preflight source plans/workpacks, issue comments, worker logs, exact PR heads/base chain/checks/cells, publish Tab8 folder, task plan and 28-row review index.
+Status: PARTIAL
+Met: partial — inventory/plan/PR checks published; individual generated file hashes and renderer receipts still require independent verification, and per-page direct links are pending.
+Done: Re-read Common Tab1 execution plan, four workpacks, 28-row monitor and Tab4–Tab7 evidence/decisions, sticky label; GitHub current main and PRs #184–#199, each file inventory and exact-head workflow. Common folder/TABS created with one commit; reviewer checklist blank.
+Code (repo branch @ commit | PR): Common main@c24e5b109ec84e6f262b6093a7c8e6e036e886b6 | N/A; Grade9 main preflight@778eb35a | no product PR.
+Tests (command -> pass/fail/skip): GitHub exact-head PR metadata/files/status and Actions runs -> PASS inventory; renderer 6-file per-cell SHA -> NOT_RUN by integrator.
+CI (run -> result): D2 38278770743 SUCCESS; D1 38279514542 SUCCESS; D3 38281511658 SUCCESS; D4 38276710514 SUCCESS; broad guardrails/canonical RED.
+Evidence (link): https://github.com/reallakshman19/Common/blob/6355dbfe17fa97ea4ccbfec1f814a3be28dbf810/coordination/Session_Oct09/Tab8_imo_182_integrator/INDEX-28-CELLS.md
+AC (before -> after): no Tab8/inventory -> published Tab8 and preliminary 28-row candidate index; accepted 0/28 -> 0/28.
+Claim: HOSTED_CI for scoped runs; INDEPENDENT GitHub metadata.
+Blocker: CI baseline + independent per-role receipt SHA audit; no Owner blocker for engineering preflight.
+Next: 182-INT-02, 182-INT-04, 182-INT-05.
+```
+END issuecomment-6129771453
+
+Issue #182 comment 6129772065 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6129772065
+TASK EVIDENCE | Tab8 | plan=r1 | chat=new | aim=v3.1.0 | outcome=O1 | user=no
+```text
+Outcome: O1 — first exact-base CI root-cause separation; not all red is baseline.
+For the user: No learner/page changes; shared guard 2385 violations/272 files confirmed. PR #191 has distinct new pinned-main regression-delta failures and cannot merge on broad baseline excuse.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38249723271 ; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38249723570 ; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38278770085
+Task: 182-INT-02
+Goal (issue AC): Separate pre-existing shared guard/canonical failures from new failures per exact SHA; repair blockages without weakening checks.
+Status: PARTIAL
+Met: partial — #197 exact-base new 0/fixed 0/old 153; 2385 first guard violations shared with #190. #191 delta new 14 vs pinned main (not waived); full suite repair incomplete.
+Done: Read entire #197 6-file patch, live head/CI and decoded guardrails/canonical regression logs; documented precise findings in Common log.
+Code (repo branch @ commit | PR): Grade9 main@778eb35a pre-integration | #197 reviewed; no guard test changes.
+Tests (command -> pass/fail/skip): canonical regression-delta base vs head -> 0 new; baseline pin comparison -> 7 NEW #197 / 14 NEW #191; shared guardrails -> FAIL 2385/272.
+CI (run -> result): 38249723271 FAIL; 38249723570 FAIL broad with base delta 0; 38278770085 FAIL and new 14 vs pinned baseline.
+Evidence (link): https://github.com/reallakshman19/Common/blob/6355dbfe17fa97ea4ccbfec1f814a3be28dbf810/coordination/Session_Oct09/Tab8_imo_182_integrator/EVIDENCE.log
+AC (before -> after): undifferentiated red -> exact-base baseline versus newly-failing separation at inspected heads; other heads still to audit.
+Claim: HOSTED_CI + INDEPENDENT log inspection.
+Blocker: CI — broader regressions and golden rebuild need individual repairs and refreshed exact-head proof.
+Next: 182-INT-02 (continue), 182-INT-04, 182-INT-05.
+```
+END issuecomment-6129772065
+
+Issue #182 comment 6129772596 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6129772596
+TASK EVIDENCE | Tab8 | plan=r1 | chat=new | aim=v3.1.0 | outcome=O1 | user=no
+```text
+Outcome: O1 — CI concurrency PR #197 merged into main with exact-base non-worsening evidence; no quality gate removed.
+For the user: No public learner page CONTENT changed, TEST-only work remains. QRT accepted 0/28. Existing GitHub Pages workflow automatically queued after main merge; no manual public release authorized or initiated.
+Proof: https://github.com/reallakshman19/Grade9v3.5/pull/197#issuecomment-6129735680 ; https://github.com/reallakshman19/Grade9v3.5/commit/4dbedc6773482bbecb146ff8959614b2c32dcc6e
+Task: 182-INT-03
+Goal (issue AC): Reduce superseded PR push workload without disabling, weakening or bypassing any PR/CI gates; merge only on exact-head test or proven baseline red.
+Status: DONE
+Met: yes — six workflow YAML concurrency-only changes, existing triggers/jobs preserved, PR and push event groups distinct, main never cancelled, prior PR run cancelled only on supersession.
+Done: Examined all six patches, exact head a846174, canonical delta new0 vs exact main base778eb35a, shared guard red preexisting; documented gate on PR and in Common. Marked draft ready; merged using expected_head_sha lease. Verified new main 4dbedc6.
+Code (repo branch @ commit | PR): Grade9 main@4dbedc6773482bbecb146ff8959614b2c32dcc6e | PR #197 MERGED.
+Tests (command -> pass/fail/skip): read-only six-workflow patch audit -> PASS; canonical diff base vs head -> PASS no new failed IDs; no generated-role files touched -> N/A.
+CI (run -> result): PR #197 learner-platform 38249723446 SUCCESS; v31-relay 38249723304 SUCCESS; seed 38249723613 SUCCESS; question-bank 38249723301 SUCCESS; guardrails 38249723271 RED baseline; canonical 38249723570 RED baseline comparison 0 new; main run 38287890758 QUEUED as of checkpoint.
+Evidence (link): https://github.com/reallakshman19/Common/blob/6355dbfe17fa97ea4ccbfec1f814a3be28dbf810/coordination/Session_Oct09/Tab8_imo_182_integrator/EVIDENCE.log
+AC (before -> after): #197 draft unmerged -> merged on main while preserving all quality tests; 0/28 -> 0/28.
+Claim: INDEPENDENT diff/readback + HOSTED_CI; no academic review claim.
+Blocker: NONE for task 182-INT-03; CI still blocks subsequent content PR merge.
+Next: 182-INT-02, 182-INT-04, 182-INT-05.
+```
+END issuecomment-6129772596
+
+Issue #182 comment 6130005217 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6130005217
+TASK EVIDENCE — 182-INT-13
+```text
+Outcome: O1 — 28-row monitor reconciled without QRT acceptance; strict SHA/golden merge gate objectively not satisfied.
+For the user: 23 RENDERED_TEST technical candidates, 2 REVISIONS_REQUIRED (MODEL-D1, MODEL-D4), 3 UNSTARTED; 150 actual generated HTML files independently hashed. No content released, QRT accepted 0/28.
+Proof: https://github.com/reallakshman19/Common/blob/d5b951e97ec66e2e144a3954c9d68a56707fc654/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-P6-28-CELL-AGENT-MONITOR.json
+Task: 182-INT-13
+Goal (issue AC): Verify each cell's sole renderer six pages, receipt/digest/SHA, golden slots and academic review docket; update 28-cell Common monitor without changing accepted.
+Status: PARTIAL
+Met: partial — all 25 candidate ZIPs inspected, 25 render_core/2 zero gap, 150/150 HTML. 14 artifact six-file SHA manifests match 84/84, 11 have independent-only hashes; 0/25 receipts has per-page SHA fields; #190 frozen exact lock red, no academic verdict or successor Core2A golden.
+Done: Downloaded 25 exact-hosted artifact ZIPs; computed independent SHA256 of all pages; inspected 25 source scope summaries and protected learner W; reconciled 28 monitor rows. Kept 28 accepted=false, reviewer_verdict=NOT_REVIEWED, Owner decision null.
+Code (repo branch @ commit | PR): Common main@d5b951e97ec66e2e144a3954c9d68a56707fc654 monitor/Tab8 index; Grade9 #197 only merged, other 15 held.
+Tests (command -> pass/fail/skip): Python zipfile/hashlib -> 25/25 ZIP, 150/150 pages PASS; 14/14 separate SHA manifests PASS; per-page SHA in original receipt -> 0/25 FAIL gate; independent full browser suite NOT_RUN.
+CI (run -> result): 25 scoped exact-head workflows SUCCESS; #190 Owner golden 38231707266 FAILURE (six tests), H3-after-attempt 38231707376 SUCCESS, #190 canonical 38231707358 FAILURE.
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab8_imo_182_integrator/INDEX-28-CELLS.md ; downloadable generated-HTML review archive attached in chat (not public release).
+AC (before -> after): stale 1 RENDERED_TEST + 27 UNSTARTED -> 23 RENDERED_TEST + 2 REVISIONS_REQUIRED + 3 UNSTARTED; accepted 0/28 -> 0/28.
+Claim: INDEPENDENT page byte SHA/receipt audit + HOSTED_CI scoped; no academic reviewer claim.
+Blocker: CI: receipts lack page SHA and #190 frozen exact lock red; PERSON qualified independent reviewer, OWNER D-182-3 successor golden remain separately reserved.
+Next: 182-INT-02, 182-INT-05, 182-INT-09, 182-INT-10, 182-INT-11, 182-INT-12, 182-INT-13.
+```
+END issuecomment-6130005217
+
