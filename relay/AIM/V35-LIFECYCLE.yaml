@@ -1,0 +1,38 @@
+# Sticky label: the Owner's aim for this work. Master copy, written by the coordinator (skill coordinator-protocol, scripts/aim.ps1)
+# only after the Owner approves a change card. The label text is the Owner's: never paraphrase it. Guidance (watch, not_now, notes) is
+# versioned too: a change of what may be done is a change of the label. Every copy carries version and label_sha.
+work: "V35-LIFECYCLE"
+repository: "reallakshman19/Common"
+engineering_critical: "standard"
+version: "1.1.0"
+label_sha: "775f2bc"
+label:
+  problem: "You cannot see from GitHub what agents did or how far a work has got; each successor starts half-blind."
+  main_aim: "From one parent issue, GitHub alone shows the plan, evidence and live progress; any successor continues without chats."
+  outcomes:
+    O1: "A parent issue is decomposed into child issues with a visible plan"
+    O2: "Each finished task posts its evidence on its child issue"
+    O3: "Issue titles show live progress, updated automatically"
+    O4: "PR titles say what they deliver and their state, automatically"
+    O5: "A successor continues from GitHub alone, without chats"
+  owner_constraints:
+    - "A new, independent v3.6 lifecycle skill: no dependency on v3.5, v3.2 or v3.1 (Owner, 12 Oct)"
+    - "BuddyRunner v1.6 and revamped 2-pass / 3-pass prompts inside v3.6 (Owner, 12 Oct)"
+  task_outcome: "O1-O5"
+  task_aim: "Build v3.6; one real parent issue on the lab runs end to end, titles updating themselves as evidence lands."
+  done_when: "With v3.6 only, on relay-v35-e2e-lab: parent and child issues with evidence, automatic titles, and a handover a successor continues from."
+guidance:
+  not_now: []
+  watch:
+    - "Authenticating old labs or sources: say which outcome it serves"
+    - "Admission gates and authority debates"
+    - "Debates about evidence format"
+    - "Reports about the lifecycle instead of running it"
+  notes:
+    - "Lab: reallaksh19/relay-v35-e2e-lab"
+    - "Root issue: Common #234 (old #787); current issue #294"
+    - "The Owner quote in #284 also names a repo-wise OwnerIntent index; it is not in the 12 Oct aim"
+bindings:
+  - "Session_Oct07:2 coordination/Session_Oct07/Tab2_Lifecycle_Evidence_Reconciliation"
+history:
+  - "v1.1.0 · 2026-10-12 04:56 · create · created · CP-V35-LIFECYCLE-01 · approved by the Owner"
