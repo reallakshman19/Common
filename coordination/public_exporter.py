@@ -146,22 +146,63 @@ class PrivacyValidator:
 
 
 def _validate_schema(instance: dict) -> None:
-    """Validates public snapshot against control_tower_public_snapshot_v1 schema."""
+    """Validate the entire shipped public JSON contract without external deps."""
     if not SCHEMA_PATH.is_file():
-        raise FileNotFoundError(f"Schema file not found at {SCHEMA_PATH}")
+        raise FileNotFoundError("Public snapshot JSON schema is missing")
     with open(SCHEMA_PATH, encoding="utf-8") as f:
         schema = json.load(f)
 
-    # Lightweight stdlib-only validation of required root keys and types
-    required = schema.get("required", [])
-    for req in required:
-        if req not in instance:
-            raise ValueError(f"Public snapshot missing required property: {req}")
+    def validate(value, rule, location="$"):
+        typ = rule.get("type")
+        accepted = [typ] if isinstance(typ, str) else (typ or [])
+        def matches(kind):
+            return (
+                (kind == "null" and value is None) or
+                (kind == "string" and isinstance(value, str)) or
+                (kind == "boolean" and isinstance(value, bool)) or
+                (kind == "integer" and isinstance(value, int) and not isinstance(value, bool)) or
+                (kind == "number" and isinstance(value, (int, float)) and not isinstance(value, bool)) or
+                (kind == "object" and isinstance(value, dict)) or
+                (kind == "array" and isinstance(value, list))
+            )
+        if accepted and not any(matches(t) for t in accepted):
+            raise PrivacyViolationError(f"Invalid type at {location}")
+        if "const" in rule and value != rule["const"]:
+            raise PrivacyViolationError(f"Invalid constant at {location}")
+        if "enum" in rule and value not in rule["enum"]:
+            raise PrivacyViolationError(f"Invalid enumeration at {location}")
+        if isinstance(value, str):
+            if "pattern" in rule and re.fullmatch(rule["pattern"], value) is None:
+                raise PrivacyViolationError(f"Invalid text pattern at {location}")
+            if rule.get("format") == "date-time":
+                try:
+                    stamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                    if stamp.tzinfo is None:
+                        raise ValueError("Timezone missing")
+                except ValueError as exc:
+                    raise PrivacyViolationError(f"Invalid timestamp at {location}") from exc
+        if isinstance(value, list):
+            if "maxItems" in rule and len(value) > rule["maxItems"]:
+                raise PrivacyViolationError(f"Array limit exceeded at {location}")
+            for pos, item in enumerate(value):
+                validate(item, rule.get("items", {}), f"{location}[{pos}]")
+        if isinstance(value, dict):
+            properties = rule.get("properties", {})
+            required = rule.get("required", [])
+            if any(k not in value for k in required):
+                raise PrivacyViolationError(f"Missing required public field at {location}")
+            if rule.get("additionalProperties") is False and any(k not in properties for k in value):
+                raise PrivacyViolationError(f"Unapproved field at {location}")
+            for key, item in value.items():
+                nested = properties.get(key, rule.get("additionalProperties", {}))
+                if isinstance(nested, dict):
+                    validate(item, nested, f"{location}.{key}")
+        if (isinstance(value, int) and not isinstance(value, bool)
+                and "minimum" in rule and value < rule["minimum"]):
+            raise PrivacyViolationError(f"Negative public metric at {location}")
 
-    allowed_properties = set(schema.get("properties", {}).keys())
-    for key in instance.keys():
-        if key not in allowed_properties:
-            raise ValueError(f"Public snapshot contains forbidden property: {key}")
+    validate(instance, schema)
+
 
 
 def _project_entity(entity: dict, allowlist: tuple) -> dict:
@@ -188,6 +229,14 @@ def export_public_snapshot(
     - Deep leak validation failing closed on any token or local path.
     - Atomic write via temporary file replacement.
     """
+    if not isinstance(approved_projects, (list, set, tuple)) or any(
+            not isinstance(x, str) or not re.fullmatch(r"[A-Za-z0-9_.-]{1,128}", x)
+            for x in approved_projects):
+        raise PolicyViolationError("Invalid approved project identifier")
+    if not isinstance(max_evidence, int) or not 0 <= max_evidence <= 500:
+        raise PolicyViolationError("Public evidence cap must be between 0 and 500")
+    if not isinstance(policy_version, str) or not re.fullmatch(r"[A-Za-z0-9_.-]{1,80}", policy_version):
+        raise PolicyViolationError("Invalid publication policy revision")
     approved = set(approved_projects)
     if not approved:
         raise PolicyViolationError("No approved projects specified for public export")
@@ -211,6 +260,12 @@ def export_public_snapshot(
 
             # 1. Portfolio View
             portfolio_items = []
+            totals_by_view = {}
+            max_view_records = 5000
+            def bounded(view, collection):
+                if len(collection) > max_view_records:
+                    raise PolicyViolationError(f"Public {view} exceeds 5000-row limit")
+
             cur = None
             while True:
                 p_resp = query_service.page("portfolio", limit=200, cursor=cur)
@@ -219,6 +274,7 @@ def export_public_snapshot(
                 for item in p_resp["items"]:
                     if item.get("project_id") in approved:
                         portfolio_items.append(_project_entity(item, PORTFOLIO_ALLOWLIST))
+                        bounded("portfolio", portfolio_items)
                 cur = p_resp.get("next_cursor")
                 if not cur:
                     break
@@ -236,6 +292,7 @@ def export_public_snapshot(
                         proj["issue_ref"] = URLSanitizer.sanitize(proj.get("issue_ref"))
                         proj["candidate_pr_ref"] = URLSanitizer.sanitize(proj.get("candidate_pr_ref"))
                         works_items.append(proj)
+                        bounded("works", works_items)
                     cur = w_resp.get("next_cursor")
                     if not cur:
                         break
@@ -256,6 +313,7 @@ def export_public_snapshot(
                             proj.get("latest_evidence_source_ref")
                         )
                         assignments_items.append(proj)
+                        bounded("assignments", assignments_items)
                     cur = a_resp.get("next_cursor")
                     if not cur:
                         break
@@ -310,9 +368,16 @@ def export_public_snapshot(
                             "[WITHHELD_PRIVATE_COORDINATOR_NEXT]" if proj.get("coordinator_next") else None
                         )
                         recovery_items.append(proj)
+                        bounded("recovery", recovery_items)
                     cur = r_resp.get("next_cursor")
                     if not cur:
                         break
+
+            # Check the repository still exposes the exact same immutable
+            # source generation; a mixed export is never a valid publication.
+            final_check = query_service.page("portfolio", limit=1)
+            if final_check["generation"] != generation or final_check["as_of_utc"] != as_of_utc:
+                raise LookupError("Generation shifted before snapshot promotion")
 
             # Sort items deterministically
             portfolio_items.sort(key=lambda x: x["project_id"])
@@ -348,7 +413,7 @@ def export_public_snapshot(
                 "content_digest": content_digest,
                 "visibility": "PUBLIC",
                 "policy_version": policy_version,
-                "source_watermarks": {pid: as_of_utc for pid in sorted(approved)},
+                "source_watermarks": {"wp3_projection_generation": generation},
                 "portfolio": portfolio_items,
                 "works": works_items,
                 "assignments": assignments_items,
@@ -361,9 +426,12 @@ def export_public_snapshot(
             _validate_schema(public_snapshot)
             PrivacyValidator.assert_no_leaks(public_snapshot)
 
-            # Stage 4: Atomic write
+            # Stage 4: Bounded atomic write. Never commit partial/sensitive data.
+            payload = json.dumps(public_snapshot, indent=2, sort_keys=True, ensure_ascii=False)
+            if len(payload.encode("utf-8")) > 5 * 1024 * 1024:
+                raise PolicyViolationError("Public snapshot exceeds 5 MiB limit")
             with open(temp_out, "w", encoding="utf-8") as f:
-                f.write(json.dumps(public_snapshot, indent=2, sort_keys=True, ensure_ascii=False))
+                f.write(payload)
                 f.flush()
                 os.fsync(f.fileno())
 
