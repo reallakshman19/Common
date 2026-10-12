@@ -366,3 +366,33 @@ amendments:
     allowed_paths:
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_evidence_identity_red.py
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_custody_red.py
+
+  - id: AMEND-V32-289-PRREF-017
+    owner_authorized: true
+    owner_basis: >-
+      OWNER APPROVAL RECEIVED in G7 chat 6acbb049 on 2026-10-12: after being
+      shown the exact amendment AMEND-V32-289-PRREF-017, the narrowly scoped
+      V3.2 native PR-reference fix, and the separately retained independent
+      review/check conditions, the Owner explicitly replied "approved".
+      This statement is an engineer-recorded in-chat approval, not an
+      independently authenticated GitHub Owner sign-off or approved evidence
+      issuer/reviewer policy. The approved scope is ONLY the existing DELP
+      source_bound_responsibility_core() and its existing native test module,
+      for exact same-repository short repo#PR and full owner/repo#PR binding.
+      It does not waive separate qualified independent review, effective CI
+      requirements or merge, and it is NOT EFFECTIVE for a product PR until
+      this independent governance amendment is approved and merged to the
+      product PR base. It grants no live publisher, issued CHECKPOINT_FACTS_V1,
+      evidence admission, C6/B custody, programme AC or production cutover.
+    summary: >-
+      PENDING XS-A: bounded compatibility fix in unchanged native DELP
+      source_bound_responsibility_core() for exact graph-bound short repo#PR
+      and full owner/repo#PR. Reject wrong owner, wrong repository sharing
+      basename, wrong number, malformed suffix, wrong graph or leaf.
+      Preserve old Common tests, graph bytes, V1 input_digest and DELP
+      progress arithmetic. No project-specific rewrite, new reducer, issue
+      or PR writer, Owner authentication, evidence admission, V3.5 change,
+      C6 custody privilege, branch-policy, review, merge or release grant.
+    allowed_paths:
+      - skills/engineering-pr-delivery-v3.2/scripts/delp_projection_v32.py
+      - skills/engineering-pr-delivery-v3.2/tests/test_delp_projection_v32.py
