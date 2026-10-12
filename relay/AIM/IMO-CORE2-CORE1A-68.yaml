@@ -4,8 +4,8 @@
 work: "IMO-CORE2-CORE1A-68"
 repository: "reallakshman19/Grade9v3.5"
 engineering_critical: "standard"
-version: "1.1.0"
-label_sha: "11984b4"
+version: "2.1.0"
+label_sha: "ec7844d"
 label:
   problem: "The 68 available IMO questions have no Core 2 or Core 1A pages built from blueprints, aligned with golden fixtures, per QRT."
   main_aim: "Create Core 2 and Core 1A for the 68 IMO questions from blueprints, aligned with golden fixtures, per QRT."
@@ -16,6 +16,7 @@ label:
   owner_constraints:
     - "The 68 frozen question identities are the development set (Owner, 11 Oct: these 68 are ok, proceed)."
     - "Question text is never invented or relabelled: the original stays faithful and authored work is labelled authored."
+    - "Use the existing blueprints for Core 2, Core 1A and Core 1B and reuse them wherever possible; create a new one adapted to QRT only where one is missing; benchmark every page against the available golden fixtures (Owner, 12 Oct)."
   task_outcome: "O1"
   task_aim: "Plan: from the 68 register, choose the first question and propose its Core 2 page against the golden."
   done_when: "PENDING: the Owner sets display mode (embed original text or reference link), acceptance per QRT cell, rights handling and A4 print."
@@ -30,6 +31,7 @@ guidance:
     - "Pending at source (main): 68 positions registered, 0 retained PDFs, Core 2 admitted 0, Core 1A admitted units 0, QRT accepted 0 of 28. One Core1A divisibility candidate exists."
     - "Blueprint registry v1.17.0. Goldens: G-CORE2-R2 (Core2) and G-MATH-LINEAR-CONSTRAINT (Core1A)."
 bindings:
-  - "Session_Oct09:2 coordination/Session_Oct09/Tab2_core2-core1a-68"
+  - "Session_Oct09:2 coordination/Session_Oct09/Tab2_imo_core2_core1a"
 history:
   - "v1.1.0 · 2026-10-12 04:52 · create · created · CP-IMO-CORE2-CORE1A-68-01 · approved by the Owner"
+  - "v2.1.0 · 2026-10-12 05:37 · rescope · Add an Owner constraint: reuse existing Core 2, 1A and 1B blueprints, create new... · CP-IMO-CORE2-CORE1A-68-03 · approved by the Owner"
