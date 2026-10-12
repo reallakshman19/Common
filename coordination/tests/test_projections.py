@@ -38,7 +38,7 @@ def setup_registry():
         reg.register_lane(ExecutionLane(lid,wid,"DEVELOPMENT"))
         reg.register_assignment(AgentAssignment(aid,lid,f"RESP-{i}",
             "PRIMARY_IMPLEMENTER","ACTIVE"))
-        tab = "Tab3" if i in (0,3) else f"Tab{i+1}"
+        tab = "Tab3" if i in (0,3) else "Tab5" if i == 2 else f"Tab{i+1}"
         chat = "same-chat" if i in (0,3) else f"chat-{i}"
         reg.register_run(AgentRun(rid,aid,1,chat,ASOF,0,"IN_PROGRESS"))
         reg.register_binding(TabBinding(f"binding-{i}",rid,pid,tab,1,"ACTIVE",
