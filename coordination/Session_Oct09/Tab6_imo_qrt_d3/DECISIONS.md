@@ -1,3 +1,5 @@
 # Owner decisions: raised date, status and authority (append only)
 2026-10-12 | chat=new | D-182-2-H3 | ANSWERED | AFTER_ATTEMPT for Core2A H3 on a nonblank committed attempt; does not accept QRT | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6121493094
 # Other Owner-only matters remain unclaimed: successor golden, independent academic review, rights and merge/release.
+2026-10-12 | chat=new | D-182-3 | OPEN | Owner to designate or reject a successor Core2A golden for H3 AFTER_ATTEMPT; frozen G-IMO-G9-FIVE-CORE-20261012 unchanged; raised by worker as Owner-only review request, not a signed Owner decision
+2026-10-12 | chat=new | D-182-4 | OPEN | Qualified reviewer to assess MODEL-D3 mathematics/band/curriculum, then Owner to accept/reject/reclassify QRT-MODEL-D3; not a signed Owner decision; technical work may continue on RETRIEVE

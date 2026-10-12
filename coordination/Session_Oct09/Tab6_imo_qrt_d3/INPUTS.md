@@ -11,3 +11,7 @@
 2026-10-12 | chat=new | D3 pilot reuse | PR140@02ccdc75bb95bf3ce910438bf78622e24e66b226:TEST/imo-research/golden/imo-327-model-d3.v1.json | AUTHORED review fixture only; no admitted source; must independently verify
 2026-10-12 | chat=new | D3 JUSTIFY reuse | PR155@a9e68883d71afd2e8b7a0c067eedc23ee4da7ef8 and PR166@48007ccf962ed03f9f6a5423fe7525eaba9cfdf1 | distinctness and band pending
 2026-10-12 | chat=new | source-rights | official sample and 68 authentic Core2 research-only; use wholly novel AUTHORED TEST D3; no official questions/logos or exam provenance
+2026-10-12 | chat=new | QRT-MODEL-D3 source package | Grade9v3.5 PR193@815fe643fa73272ea75b5c00d23bc0c3301a68bd:TEST/imo-research/qrt-d3/model.v1.json | blob=9025855dc36c0eaa486342c72ab66a211104bbca | original AUTHOR TEST
+2026-10-12 | chat=new | MODEL D3 manifest | Grade9v3.5 PR193@815fe643:TEST/products/imo182-qrt-d3-model.manifest.json | role selection CORE1,CORE1A,CORE1B,CORE2A,CORE2B; core2=[]
+2026-10-12 | chat=new | model receipt | hosted 38238397575 artifact=11741409210 | digest=3df500047dd79b31, no gaps, exact five role SHA in handovers/model-d3.md
+2026-10-12 | chat=new | immutable frozen golden | G-IMO-G9-FIVE-CORE-20261012 | all 5 SHA preserved in hosted exact-head test; technique matched but new authored bytes deliberately differ

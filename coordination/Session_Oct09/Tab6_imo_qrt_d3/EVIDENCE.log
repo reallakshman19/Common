@@ -1,2 +1,22 @@
 # TASK EVIDENCE blocks (append only)
 # No D3 cell completed at initialization; do not mistake dependency PR#190 for D3 evidence.
+2026-10-12 | chat=new | QRT-MODEL-D3 | original hosted TEST evidence | accepted 0/28
+Outcome: O1 (five-role renderer TEST pilot); O2 review pending; O3 no proven registry gap
+For the user: Five original authored TEST learner-role pages plus index are available in the exact-head CI artifact; no public release or academic QRT acceptance.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38238397575/artifacts/11741409210 ; render-receipt.json gaps=[]; same-head six tests passed
+Task: AGENT-D3/QRT-MODEL-D3
+Goal (issue AC): A genuine D3 learner-owned shared-power MODEL question with one connected sole-renderer CORE1/CORE1A/CORE1B/CORE2A/CORE2B TEST journey, original rights-safe sources, complete role/golden comparisons, protected post-attempt H3, and independent academic handoff.
+Status: PARTIAL
+Met: partial — authored/renderer/golden-technique and hosted QA passed; independent qualified QRT reviewer and Owner's accepted decision still absent
+Done: AUTHORED TEST target 4^(2u+1)=16^u+192 has u=3/2 with 256=256; W is learner choice t=16^u=4^(2u)>0 and factor 4 (never preattempt supplied). Core1A exit 3^(2v+1)=9^v+162 has v=2 and 243=243. Core1B changed-base additive error fails at b=2,r=2 (8 not 6). Changed-demand Core2B 4^(2v+1)=16^v+c permits real v exactly if c>0; c=-12 impossible; c=48,v=1 gives 64=64. Six actual rendered HTML files, 0 REFERENCE gaps, original Owner golden unmodified. Five corresponding blueprint/slot role comparisons, browser initial/commit gates, preattempt SVG scan and frozen golden lock passed. Not a public or accepted academic product.
+Code (repo branch @ commit | PR): reallakshman19/Grade9v3.5 agent-d3/imo182-qrt-model-d3@815fe643fa73272ea75b5c00d23bc0c3301a68bd | draft PR #193 stacked on unmerged #190@67c34dababb0da0ef7d5f4a532bfcf3119754961
+Tests (command -> pass/fail/skip): python Shared/tools/render_core.py build --manifest TEST/products/imo182-qrt-d3-model.manifest.json --out build/imo182-qrt/d3/model --draft --reference -> PASS (six files, zero gaps); python -m unittest tests.test_imo182_qrt_d3_model -v -> PASS 6/6 (schema, independent maths, typed H3, role/golden digest, Chromium gate, source); local Chromium inspection -> five roles, no page JS errors
+CI (run -> result): https://github.com/reallakshman19/Grade9v3.5/actions/runs/38238397575 -> SUCCESS at exact head; artifact=11741409210
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/actions/runs/38238397575/artifacts/11741409210 ; https://github.com/reallakshman19/Grade9v3.5/pull/193 ; frozen golden G-IMO-G9-FIVE-CORE-20261012 with five unchanged SHA lock
+Golden: frozen original baseline exact lock PASS; semantic BP/slot five-role comparison PASS; changed Core2A H3 expected different bytes; successor golden not yet designated
+Role SHA256: CORE1=0ff7180da03fe6979470e7d92b3333355a178feb7caffaeed7fb73da6bbdd385; CORE1A=eacd75253599f16621ca9e0ae1bcb95110664b14afbfb44bb73f35b78bc24620; CORE1B=81369842aec51afa9c18d8e5620b145da104f6277a012d853adab7010b52f88c; CORE2A=b600278d8e049a0f6bcefd9d7275f2323d7ae77eda057dc7895d3c1072de2fba; CORE2B=29533f9102e776a652149ae7fe51cc8d8a7eedae16f39dc6f454a48dbcc74a26
+AC (before -> after): D3 MODEL UNSTARTED 0/7 rendered -> 1/7 technically rendered, golden technique PASS, INDEPENDENT_REVIEW_PENDING; Owner-accepted stays 0/28
+Claim: HOSTED_CI
+Blocker: OWNER — independent academic D3/MODEL acceptance and frozen-golden successor designation reserved to Owner/qualified reviewer, not a blocker to AGENT-D3 beginning RETRIEVE-D3; no source rights needed for wholly authored TEST
+Next: AGENT-D3/QRT-RETRIEVE-D3; qualified reviewer to judge D3 MODEL and Owner to designate successor Core2A golden and decide QRT acceptance
+
