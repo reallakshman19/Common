@@ -60,11 +60,13 @@ To prevent inflated progress reporting and maintain a verifiable denominator, th
 - **Exact Denominator:** Strictly **6**. The parent issue title reflects progress in terms of proven test stages (e.g. `[E1/6]`, `[E2/6]`, ..., `[E6/6]`).
 - A stage is marked evidenced only after its specific acceptance criteria and GO-gate evidence are proven and posted on its dedicated child issue.
 
-### 2.2 The Subject Workload: 300 Workload Fixture Tasks
-- Plan file: `skills/engineering-pr-delivery-v3.6/plans/V36-LOAD-FIXTURE-300.yaml`
-- Task IDs: `V36-LOAD-001` through `V36-LOAD-300`.
-- **Purpose:** Subject workload generated during ST-02 and exercised during ST-03/ST-04 to test pagination, REST `Link` header navigation, memory scaling, and race safety.
-- **Rule:** Successfully generating and reconciling all 300 workload issues fulfills the acceptance check for **Stage ST-02 (`progress=E2/6`)**. It does NOT change the top-level denominator or create false progress.
+### 2.2 The Subject Workload: 300 Workload Tasks under Parent #8
+- Workload Plan File: `skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml` (plan_version `V36-8-PLAN-01`)
+- Workload Parent Issue: `reallakshman19/relay-v36-stress-lab#8`
+- Workload Fixture Specification: `skills/engineering-pr-delivery-v3.6/plans/V36-LOAD-FIXTURE-300.yaml`
+- Task IDs: `V36-8-LOAD001` through `V36-8-LOAD300`.
+- **Integration with decompose_v36.py:** Unlike the top-level specification file, `V36-8-PLAN-01.yaml` is a fully compliant input to `decompose_v36.py`, providing a separate real parent (#8) and stable task IDs prefixed with `V36-8-`.
+- **Preservation of Denominator:** Parent issue #1 maintains a strictly bounded denominator of **6** (`progress=E0/6` to `E6/6`). Materializing the 300 child tasks under Parent #8 fulfills the acceptance check for **Stage ST-02 (`progress=E2/6`)** on child issue #3 (`V36-1-ST02`).
 
 ---
 
@@ -73,28 +75,38 @@ To prevent inflated progress reporting and maintain a verifiable denominator, th
 In accordance with the v3.6 contract, evidence represents factual, reproducible test execution results:
 
 ### 3.1 Positive Evidence Rules (300 Cases)
-1. **Genuinely Verified Test Facts:**
-   - Every positive `TASK_EVIDENCE` comment must report actual test results executed against candidate commits on test branches in the stress lab.
-   - Example valid record:
+1. **Genuinely Verified Test Facts & PR Proof URL:**
+   - `snapshot_v36.py` line 16 requires a GitHub Pull Request URL (`https://github.com/<owner>/<repo>/pull/<N>`) matching the repository. Commit URLs (e.g. `/commit/<sha>`) are rejected by `proof_pr()` as `UNVERIFIED_PROOF`.
+   - The candidate SHA must match the live PR's `head.sha` for the task to be recognized as `CURRENT_EVIDENCE`.
+   - Canonical valid example:
      ```text
      Outcome: O1
-     For the user: Workload child task V36-LOAD-042 materialized and verified via paginated GitHub REST readback
-     Proof: https://github.com/reallakshman19/relay-v36-stress-lab/commit/a8b9c0d1e2f3
+     For the user: Workload child task V36-8-LOAD001 materialized and verified on live test PR
+     Proof: https://github.com/reallakshman19/relay-v36-stress-lab/pull/10
      TASK_EVIDENCE v3.6
-     Task: V36-LOAD-042
-     Child issue: reallakshman19/relay-v36-stress-lab#43
+     Task: V36-8-LOAD001
+     Child issue: reallakshman19/relay-v36-stress-lab#9
      Candidate: reallakshman19/relay-v36-stress-lab@a8b9c0d1e2f3a8b9c0d1e2f3a8b9c0d1e2f3a8b9
      Tests: 84/84
      ```
-2. **Never Imply Owner Acceptance:** Evidence confirms candidate state and test execution; it does not constitute Owner signoff or delivery release.
+2. **Never Imply Owner Acceptance:** Evidence confirms candidate test state; it does not constitute Owner signoff or delivery release.
 
-### 3.2 Negative & Adversarial Fixture Rules (300 Cases)
-1. **Explicit Fixture Header:** Every simulated negative or adversarial comment must contain an explicit fixture tag in the body:
-   `FIXTURE: NEGATIVE_TEST (Simulated test fixture for ST-03; not real work)` or  
-   `FIXTURE: ADVERSARIAL_TEST (Simulated test fixture for ST-03; not real work)`.
-2. **Verification Oracle:**
-   - `snapshot_v36.py` must reliably flag stale candidate SHAs, mismatched Proof URLs, missing required headers, and foreign comment authors as `STALE` or `INVALID`.
-   - Title publisher must reflect `[STALE]` or `[PENDING]` without corrupting issue state or granting false progress.
+### 3.2 Negative & Adversarial Fixture Classifications (300 Cases)
+Negative fixtures must be evaluated against the actual parser contract of `snapshot_v36.py`, rather than assuming generic failure states:
+
+| Fixture Category | Subtype / Mutation | Expected Parser Status in `snapshot_v36.py` | Rationale in Source Code |
+| :--- | :--- | :---: | :--- |
+| **Negative Control** | Stale Candidate SHA | `STALE_EVIDENCE` | `candidate[2] != live["head"]["sha"]` |
+| **Negative Control** | Commit URL in Proof | `UNVERIFIED_PROOF` | `proof_pr()` requires `/pull/<N>`, returns `None` |
+| **Negative Control** | Mismatched Proof Commit | `UNVERIFIED_PROOF` | `proof[1] is not None and proof[1] != candidate[2]` |
+| **Adversarial Control** | Foreign Author Comment | `INVALID_EVIDENCE` | `actor.get("login") != client.repo.split("/")[0]` |
+| **Adversarial Control** | Malformed 8-line Format | `INVALID_EVIDENCE` | `validate_evidence(body)` raises `ContractError` |
+| **Adversarial Control** | Task/Outcome Mismatch | `INVALID_EVIDENCE` | `(evidence["task_id"], evidence["outcome"]) != declared` |
+| **Adversarial Control** | Non-existent PR URL | `UNKNOWN_PR` | `client.get_pr()` returns 404 or missing `head` |
+
+Every synthetic fixture comment must include an explicit header:  
+`FIXTURE: NEGATIVE_TEST (Simulated test fixture for ST-03; not real work)` or  
+`FIXTURE: ADVERSARIAL_TEST (Simulated test fixture for ST-03; not real work)`.
 
 ---
 
@@ -105,17 +117,18 @@ Execution follows a strict gate-driven sequence:
 | Stage | Focus | Primary Workload | Gate Invariant / Exit Check |
 | :--- | :--- | :--- | :--- |
 | **ST-01** | Foundation & Boundaries | Lab #1, label & plan validation | Clean lab verified; unauthorized write scopes rejected; dry-run matches target plan. |
-| **ST-02** | Progressive Scale | 20 → 100/101 → 125 → 300 child issues | 300 workload issues materialized; 0 duplicate issues; parent index intact; pagination verified. |
-| **ST-03** | Evidence & PR Attribution | 600 comments, 20 PRs | 100% positive comments verified; 100% negative/adversarial fixtures rejected; PR titles accurate. |
+| **ST-02** | Progressive Scale | Lab #8, 300 child issues | 300 workload issues materialized under parent #8 via `V36-8-PLAN-01.yaml`; 0 duplicates; parent index intact; pagination verified. |
+| **ST-03** | Evidence & PR Attribution | 600 comments, 20 PRs | 100% positive comments verified (`CURRENT_EVIDENCE`); 100% negative/adversarial fixtures mapped to expected states (`STALE_EVIDENCE`, `UNVERIFIED_PROOF`, `INVALID_EVIDENCE`); PR titles accurate. |
 | **ST-04** | Concurrency & Event Storms | 1 → 3 → 5 → 8 concurrent workers | All 8 workers settle cleanly; zero race conflicts; replay yields zero changes. |
-| **ST-05** | Faults & Recovery | API 429/5xx, timeouts, dropped ACKs | Exponential backoff verified; transaction resumed without duplicates; state reconciled. |
+| **ST-05** | Faults & Real Behavior | API 429/5xx, timeouts | Test real client behavior: `GithubClient` has no native retries and fails closed with `ContractError`; report finding `FINDING-ST05-RETRY-01`; verify external idempotent resumption creates zero duplicates. |
 | **ST-06** | Cold Successor & Endurance | Cold agent, BuddyRunner 1a/1b/2 | 100% state reconstructed from GitHub alone; prompt generators run clean; 5 cycles stable. |
 
 ---
 
-## 5. Execution Order & Current Status
+## 5. Execution Order & CI Investigation Status
 
-* **Plan Preparation:** Complete locally (updated with all 4 corrections).
-* **GitHub Publication & Approval:** In Progress (published to `proposal/v36-stress-plan-01` on `reallakshman19/Common`; Change Card `CP-V36-STRESS-01` pending Owner approval).
+* **Plan Preparation:** Complete locally (updated with all 5 corrections).
+* **GitHub Publication & Approval:** Published on branch `proposal/v36-stress-plan-01` via [PR #355](https://github.com/reallakshman19/Common/pull/355). Owner decisions D-STRESS-01 (`CP-V36-STRESS-01`) and D-STRESS-02 (repo provisioning) pending.
+* **CI Investigation (Correction 5):** The failure on PR #355 in `validate-v3-1-foundation` ([Run 38267158083](https://github.com/reallakshman19/Common/actions/runs/38267158083)) has been investigated and documented in [`CI_INVESTIGATION_RUN_38267158083.md`](file:///c:/Users/reall/Documents/antigravity/vibrant-heisenberg/skills/engineering-pr-delivery-v3.6/docs/CI_INVESTIGATION_RUN_38267158083.md). The 7 failures (6 FileNotFoundError for retired v2.5/v3 workflows, 1 AssertionError for diff string) stem from legacy v3.1 test table expectations triggered by matching `relay/*`. No tests have been suppressed or modified.
 * **ST-01 Foundation:** **HOLD** (Awaiting Owner approval of label and repository provisioning of `reallakshman19/relay-v36-stress-lab`).
 * **ST-02 through ST-06:** **Not started**.

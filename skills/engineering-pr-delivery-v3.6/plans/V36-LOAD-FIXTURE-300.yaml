@@ -1,47 +1,59 @@
-# Stress test workload fixture plan: 300 generated test items for ST-02 / ST-03 / ST-04.
-# IMPORTANT: These tasks represent subject workload generated during Stage ST-02.
-# They do NOT alter or inflate the 6-stage controlling denominator (progress=E#/6) of parent issue #1.
+# Stress test workload fixture mapping and classification contract.
+#
+# NOTE: decompose_v36.py requires a strict plan format. The actual 300 tasks are defined
+# in skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml under Parent Issue #8.
+# This specification defines the parser outcome classification contract for snapshot_v36.py.
+
 workload_id: "V36-LOAD-FIXTURE-300"
-workload_type: "SYNTHETIC_STRESS_FIXTURE"
-target_scale: 300
+workload_plan_path: "skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml"
+workload_parent: "reallakshman19/relay-v36-stress-lab#8"
+controlling_parent: "reallakshman19/relay-v36-stress-lab#1"
 controlling_stage: "V36-1-ST02"
-parent: "reallakshman19/relay-v36-stress-lab#1"
-label:
-  work: "V36-STRESS"
-  version: "1.0.0"
-  label_sha: "9f8e7d6"
-evidence_rules:
+target_scale: 300
+
+# Strict parser classification contract mapped to snapshot_v36.py states:
+evidence_classification_matrix:
   positive_controls:
     count: 300
-    requirement: "Must reference verified test executions in the stress lab repository matching current PR head"
-    implication: "Indicates passing test evidence; NEVER implies Owner final acceptance or delivery signoff"
+    expected_status: "CURRENT_EVIDENCE"
+    proof_url_pattern: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/<PR>"
+    candidate_pattern: "reallakshman19/relay-v36-stress-lab@<LIVE_PR_HEAD_SHA>"
+    tests_pattern: "84/84"
+    actor_requirement: "Must match repository owner (reallakshman19)"
+    notes: "Evidence confirms candidate test state; NEVER implies Owner final delivery acceptance."
+
   negative_controls:
-    count: 150
-    marking: "FIXTURE: NEGATIVE_TEST"
-    types: ["stale_candidate_sha", "mismatched_proof_url", "missing_required_headers"]
+    total_count: 150
+    subsets:
+      stale_pr_head:
+        count: 50
+        expected_status: "STALE_EVIDENCE"
+        description: "Valid 8 lines and proof PR, but PR head has moved past candidate SHA"
+      commit_proof_url:
+        count: 50
+        expected_status: "UNVERIFIED_PROOF"
+        description: "Proof URL uses /commit/<sha> instead of /pull/<pr>; proof_pr() returns None"
+      proof_commit_mismatch:
+        count: 50
+        expected_status: "UNVERIFIED_PROOF"
+        description: "Proof URL uses /pull/<pr>/commits/<sha1> where sha1 differs from candidate sha2"
+
   adversarial_controls:
-    count: 150
-    marking: "FIXTURE: ADVERSARIAL_TEST"
-    types: ["foreign_author_comment", "cross_repo_reference", "prompt_injection_payload", "malformed_yaml"]
-workload_batches:
-  tier_2a:
-    range: [1, 20]
-    description: "Initial baseline load: 20 issues"
-  tier_2b:
-    range: [21, 101]
-    description: "Pagination boundary test across 99, 100, and 101 issue thresholds"
-  tier_2c:
-    range: [102, 125]
-    description: "Mid-scale load: 125 issues"
-  tier_2d:
-    range: [126, 300]
-    description: "Full stress load: 300 issues"
-task_template:
-  id_prefix: "V36-LOAD-"
-  size: "S"
-  outcomes_distribution:
-    O1: 60
-    O2: 60
-    O3: 60
-    O4: 60
-    O5: 60
+    total_count: 150
+    subsets:
+      foreign_author:
+        count: 50
+        expected_status: "INVALID_EVIDENCE"
+        description: "Comment authored by actor other than repository owner"
+      malformed_format:
+        count: 40
+        expected_status: "INVALID_EVIDENCE"
+        description: "Missing required headers, unresolved placeholders, or invalid test counts"
+      task_outcome_mismatch:
+        count: 30
+        expected_status: "INVALID_EVIDENCE"
+        description: "Comment declares outcome or task ID differing from task declaration"
+      nonexistent_pr:
+        count: 30
+        expected_status: "UNKNOWN_PR"
+        description: "Proof URL references PR number that does not exist in repository"

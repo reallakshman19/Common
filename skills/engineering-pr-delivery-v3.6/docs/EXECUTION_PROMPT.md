@@ -17,11 +17,12 @@
 * **Controlling Plan (Stages):** `skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-02.yaml` (plan_version `V36-1-PLAN-02`)
   - Parent issue: `reallakshman19/relay-v36-stress-lab#1`
   - Controlling denominator: **6** (`E0/6` to `E6/6`, corresponding to stages `V36-1-ST01` through `V36-1-ST06`)
-* **Workload Fixture Plan:** `skills/engineering-pr-delivery-v3.6/plans/V36-LOAD-FIXTURE-300.yaml` (300 tasks `V36-LOAD-001` through `V36-LOAD-300`)
+* **Subject Workload Plan:** `skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml` (Parent #8, 300 tasks `V36-8-LOAD001` through `V36-8-LOAD300`)
+* **Workload Fixture Classification Map:** `skills/engineering-pr-delivery-v3.6/plans/V36-LOAD-FIXTURE-300.yaml`
 * **Authorized Target Lab:** `reallakshman19/relay-v36-stress-lab` (disposable lab)
 * **Required CLI Arguments:**
   - Read: `--label relay/AIM/V36-STRESS.yaml --plan <PLAN_PATH> --lab reallakshman19/relay-v36-stress-lab`
-  - Write: `--apply --confirm-scope reallakshman19/relay-v36-stress-lab#1`
+  - Write: `--apply --confirm-scope reallakshman19/relay-v36-stress-lab#<PARENT_NUM>`
 * **Rate-Limit Pacing Rules:**
   - $\le 1$ write per second per worker.
   - $\le 15$ issue/comment creations per minute total.
@@ -59,20 +60,24 @@
 
 ---
 
-### Phase ST-02: Progressive Scale (20 → 125 → 300 Child Issues)
-1. **Workload Fixture Decomposition:**
-   - Using `skills/engineering-pr-delivery-v3.6/plans/V36-LOAD-FIXTURE-300.yaml`, materialize subject workload tasks across tiers:
-     - Tier 2a: 20 issues
-     - Tier 2b: Boundary test across 99, 100, 101 issue thresholds
-     - Tier 2c: 125 issues
-     - Tier 2d: Full 300 issues (`V36-LOAD-001` through `V36-LOAD-300`)
-   - Paced execution: 1 write/sec with retry backoff.
-2. **Pagination & Index Verification:**
+### Phase ST-02: Progressive Scale (300 Workload Issues under Parent #8)
+1. **Workload Parent Initialization:**
+   - Create workload parent issue #8 on `reallakshman19/relay-v36-stress-lab` with title:  
+     `[V3.6][PARENT][PLANNED] Subject Workload 300-Task Decomposition Benchmark`
+2. **Workload Decomposition:**
+   - Execute decomposition using the compliant plan:  
+     `python skills/engineering-pr-delivery-v3.6/scripts/decompose_v36.py --label relay/AIM/V36-STRESS.yaml --plan skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml --lab reallakshman19/relay-v36-stress-lab --apply --confirm-scope reallakshman19/relay-v36-stress-lab#8`
+   - Materialize tasks across batches (20 → boundary 99/100/101 → 125 → 300 items).
+   - Paced execution: $\le 1$ write/sec with rate limit awareness.
+3. **Pagination & Index Verification:**
    - Execute multi-page REST GET to verify all 300 workload issues exist.
    - Run second decomposition pass. Assert: **0 duplicate issues created**.
    - Profile memory usage (RAM MB) and duration across the 300 items.
-3. **Gate ST-02 Evaluation:**
-   - [ ] Exactly 300 workload issues created and verified?
+4. **Stage Progression:**
+   - Once all 300 workload tasks are verified, post task evidence on child issue #3 (`V36-1-ST02`).
+   - Run publisher to advance controlling parent title to `[V3.6][PARENT][E2/6]`.
+5. **Gate ST-02 Evaluation:**
+   - [ ] Exactly 300 workload issues created under Parent #8 and verified?
    - [ ] REST API pagination correctly navigated via `Link` header?
    - [ ] Replay creates 0 duplicate tasks?
    - [ ] Top-level progress correctly advances to `[E2/6]` on child #3 (`V36-1-ST02`)?
@@ -86,20 +91,30 @@
    - Distribute states: 10 Draft, 5 Ready, 3 Merged, 2 Closed.
 2. **Evidence Staging (600 Comments):**
    - **300 Genuine Positive Evidence Comments:**
-     - Must link to verified test runs in the lab repository matching candidate commit SHAs.
+     - Must use canonical GitHub PR Proof URL: `https://github.com/reallakshman19/relay-v36-stress-lab/pull/<PR>` (never commit URLs).
+     - Candidate SHA must match live PR `head.sha`.
      - Tests field must report actual passing counts (e.g. `Tests: 84/84`).
+     - Expected snapshot status: `CURRENT_EVIDENCE`.
    - **150 Negative Control Comments:**
-     - Mark explicitly with `FIXTURE: NEGATIVE_TEST`.
-     - Include stale candidate SHAs, mismatched Proof URLs, missing headers.
+     - Explicit header: `FIXTURE: NEGATIVE_TEST (Simulated test fixture for ST-03; not real work)`.
+     - Stale candidate SHAs $\rightarrow$ Expected snapshot status: `STALE_EVIDENCE`.
+     - Commit Proof URLs (`/commit/<sha>`) $\rightarrow$ Expected snapshot status: `UNVERIFIED_PROOF`.
+     - Mismatched Proof commit SHA $\rightarrow$ Expected snapshot status: `UNVERIFIED_PROOF`.
    - **150 Adversarial Comments:**
-     - Mark explicitly with `FIXTURE: ADVERSARIAL_TEST`.
-     - Include foreign comment authors, malformed YAML, cross-repo commit links, prompt injection payloads.
+     - Explicit header: `FIXTURE: ADVERSARIAL_TEST (Simulated test fixture for ST-03; not real work)`.
+     - Foreign comment authors $\rightarrow$ Expected snapshot status: `INVALID_EVIDENCE`.
+     - Malformed 8-line format / missing headers $\rightarrow$ Expected snapshot status: `INVALID_EVIDENCE`.
+     - Task/outcome mismatch $\rightarrow$ Expected snapshot status: `INVALID_EVIDENCE`.
+     - Non-existent PR URL $\rightarrow$ Expected snapshot status: `UNKNOWN_PR`.
 3. **Snapshot & Publisher Verification:**
-   - Run `snapshot_v36.py`. Confirm: 100% of positive comments accepted; 100% of negative/adversarial fixtures flagged stale/invalid.
-   - Run `publisher_v36.py --apply --confirm-scope reallakshman19/relay-v36-stress-lab#1`.
+   - Run `snapshot_v36.py`. Confirm: 100% of comments classified according to the classification matrix.
+   - Run `publisher_v36.py --apply --confirm-scope reallakshman19/relay-v36-stress-lab#8`.
    - Verify issue titles reflect `[EVIDENCED]` for positive tasks and `[STALE]` for negative tasks.
    - Verify PR titles reflect accurate outcome attribution (e.g. `[O1/O2][DRAFT][E15/15]`).
-4. **Gate ST-03 Evaluation:**
+4. **Stage Progression:**
+   - Post task evidence on child issue #4 (`V36-1-ST03`).
+   - Run publisher to advance controlling parent title to `[V3.6][PARENT][E3/6]`.
+5. **Gate ST-03 Evaluation:**
    - [ ] 0 false or adversarial evidence accepted?
    - [ ] Exact PR head matching enforced?
    - [ ] Progress advances to `[E3/6]` on child #4 (`V36-1-ST03`)?
@@ -123,16 +138,18 @@
 
 ---
 
-### Phase ST-05: Fault Injection & Interrupted Recovery
-1. **Fault Simulation:**
-   - Simulate HTTP 429 rate limit with `Retry-After: 5`.
-   - Simulate HTTP 503 error on POST.
-   - Simulate process interruption mid-transaction.
-2. **Resumption & Verification:**
-   - Verify exponential backoff and jitter operate properly.
-   - Re-run reconciler from fresh process. Assert clean resumption with **0 duplicate entities**.
+### Phase ST-05: Fault Injection & Real Behavior Verification
+1. **Real Behavior Testing (Unimplemented Retries):**
+   - Inject simulated HTTP 429 rate limit and HTTP 503 error.
+   - Observe real behavior: `GithubClient` in `decompose_v36.py` has no native retry/backoff logic and immediately raises `ContractError`.
+   - Record finding in final report: `FINDING-ST05-RETRY-01: GithubClient lacks native exponential backoff/retry; fails closed with ContractError on transient 429/5xx`.
+   - Do NOT quietly add retries in the test harness to mask this behavior.
+2. **Idempotent Resumption Verification:**
+   - Trigger process interruption mid-transaction.
+   - Re-run reconciler/decomposition from fresh process state.
+   - Verify: Reconciler reads true GitHub state, safely resumes, and produces **0 duplicate entities**.
 3. **Gate ST-05 Evaluation:**
-   - [ ] Backoff logic respects rate-limit headers?
+   - [ ] Real fail-closed behavior on transient errors observed and recorded as finding?
    - [ ] Interrupted transaction resumes without data loss or duplicates?
    - [ ] Progress advances to `[E5/6]` on child #6 (`V36-1-ST05`)?
    - **Verdict:** If all YES → **GO to ST-06**. Else → **STOP**.
