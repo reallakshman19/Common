@@ -1,0 +1,21 @@
+# EXAMPLE ONLY; DRAFT, NOT OWNER APPROVED; do not copy as authority.
+# Live path is relay/AIM/V35-LIFECYCLE.yaml after documented Owner authorization.
+label_id: V35-LIFECYCLE
+label_version: draft-01
+approval: pending
+criticality: pending
+owner_aim_verbatim: |-
+  Main aim: to fix the life cycle issue of V3.5:
+  Parent issue>Task decomposition>live scoreboard on issue title>smartPRtitle>Handover
+  improve this with traceable key parameters like detailed child issue, task evidence etc
+
+  remember to re architecture v3.5 to suit these new skill (You may have to revamp entire v3.5 to v3.6 rather than patching. Plan v3.6 to be independent of any of previous version v3.5/3.1, include buddyrunnerv1.6 and other handover prompts, 2pass,3pass (only thing, you now need to revamp them also!))
+outcomes:
+  O1: Parent issue decomposes into child issues with a visible plan.
+  O2: Each finished task posts evidence on its child issue.
+  O3: Issue titles show progress updated automatically.
+  O4: PR titles state deliverable and state automatically.
+  O5: Successor continues from GitHub alone, without chats.
+task_aim: Build a fully independent lifecycle v3.6.
+done_when: On relay-v35-e2e-lab, children with evidence, automatic titles, and a cold successor continuation are shown.
+source_issue: reallakshman19/Common#341
