@@ -27,7 +27,7 @@
     },
     "source_watermarks": {
       "type": "object",
-      "additionalProperties": { "type": "string" }
+      "additionalProperties": { "type": ["string", "null"] }
     },
     "projects": {
       "type": "array",
