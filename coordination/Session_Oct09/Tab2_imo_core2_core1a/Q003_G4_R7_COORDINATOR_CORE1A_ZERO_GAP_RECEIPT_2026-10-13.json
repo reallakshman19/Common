@@ -1,0 +1,103 @@
+{
+  "schema": "tab2-q003-coordinator-reported-core1a-native-zero-gap/v1",
+  "issue": 183,
+  "plan": "r7",
+  "chat": "6acd1e6b",
+  "date_local": "2026-10-13 00:4x Dubai",
+  "task": "183-T4-G2-W1",
+  "outcome": "O2",
+  "aim": "v3.1.0",
+  "evidence_class": "COORDINATOR_REPORTED_LOCAL; private Owner machine; G4 did not run native benchmark or personally view the protected rendered page",
+  "inputs": {
+    "repo": "reallakshman19/Grade9v3.5",
+    "branch": "agent/183-q003-private-core2-test-6acc303b",
+    "exact_commit": "f030a0aca51038575778de3489f75d1d629a6b74",
+    "clean_clone": true,
+    "jsonschema_version": "4.26.0",
+    "original_private_input_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "original_digest_matched": true,
+    "authored_core1a_input": "TEST/imo-research/core2-q003/core1a-authored.v1.json"
+  },
+  "run": {
+    "prepare_command": "python -I TEST/imo-research/core2-q003/build_private_core1a.py --private-input <PRIVATE> --prepare-only",
+    "prepare_exit": 0,
+    "benchmark_command": "python -I TEST/imo-research/core2-q003/benchmark_core1a_native.py --private-input <PRIVATE>",
+    "benchmark_exit": 0,
+    "status": "STRUCTURAL_CHECK_ONLY",
+    "renderer": "render_core/2",
+    "Q003_core1a": {
+      "role": "CORE1A",
+      "blueprint": "BP-CORE1A-CONSTRUCTION@1.8.0",
+      "native_gaps": 0,
+      "prior_gaps": 6,
+      "bytes": 76401,
+      "sha256": "d1fe23c43d1eeae67c69600beef1b5054c361854c3e5cd6742545859592998c0",
+      "render_digest": "bce31f18481cb4da",
+      "published": false
+    },
+    "golden_core1a": {
+      "id": "G-MATH-LINEAR-CONSTRAINT",
+      "status": "CANDIDATE_NOT_OWNER_BLESSED",
+      "native_gaps": 0,
+      "bytes": 64626,
+      "sha256": "27547f2e31b84f53a2e506ceff137ce1ae4b403c195c79080709fa5f505063d6",
+      "render_digest": "8433c0370f6a1999"
+    },
+    "golden_slots": [
+      "CONCEPT_HEADER",
+      "CONSTRUCTION_STEPS",
+      "EQUATIONS",
+      "EXIT_RECALL",
+      "KEY_STEP",
+      "LEARNING_TRANSITIONS",
+      "MODEL_CONTRACT",
+      "PRACTICE_LINKS",
+      "QUICK_CHECK",
+      "STAGED_VISUAL",
+      "TRAP_REPAIR",
+      "UNIT_HEADER",
+      "WORKED_EXAMPLE"
+    ],
+    "source_q003_matches_golden": 12,
+    "source_golden_slot_count": 13,
+    "source_golden_slot_fraction": 0.9230769230769231,
+    "q003_only_slots": [
+      "QUESTION_BRIDGE",
+      "SECTION_ROUTE"
+    ],
+    "golden_only_slots": [
+      "LEARNING_TRANSITIONS"
+    ],
+    "equations_present": true,
+    "staged_visual_present": true
+  },
+  "independent_registered_blueprint_decision": {
+    "blueprint_source": "Grade9v3.5 Shared/web/interactive-page-blueprints.v1.json @f030a0a blob 591ba061b8771c30fdffc4506aa720ca9ba89335",
+    "component": "LEARNING_TRANSITIONS",
+    "level": "OPTIONAL",
+    "source": [
+      "concept_bundle"
+    ],
+    "renderer": "Shared/tools/render_core.py::_core1a_learning_transitions returns empty if there is no portal_root; portal_root derived from manifest home_href parent directory",
+    "private_test_manifest": "home_href=index.html, output_roles=[CORE1A], no portal root / no selected CORE2 role",
+    "decision": "EXPECTED_ABSENT_FOR_ISOLATED_TEST; NO_TEST_CODE_ADDITION",
+    "rationale": "The private TEST lesson has no destination for a public Learn/Practice/Interactive/Question Bank portal; do not fabricate links to increase slot parity. Any future published manifest should be assessed only against its actual deployment route and Owner display/rights decisions.",
+    "render_digest_reason": "render_core.py::render_digest hashes renderer/registry and exact manifest, package, bank and other authority-file bytes; different source and golden packages must not have equal digests. No hash equality expected between different input packages.",
+    "conclusion": "12/13 technique roles plus extra QUESTION_BRIDGE,SECTION_ROUTE is a contextual semantic comparison, not an acceptance threshold/Owner golden blessing"
+  },
+  "remaining": {
+    "core1a_browser_mouse_keyboard_narrow": "NOT_RUN",
+    "core1a_owner_visual_math_pedagogy": "PENDING_OWNER",
+    "core2_precommit_DOM_and_browser_report": "COORDINATOR_REPORTED_PARTIAL",
+    "core2_original_source_private_transcription_vs_print": "NOT_OWNER_VERIFIED",
+    "same_page_a4": "NOT_RUN",
+    "screen_reader": "NOT_RUN",
+    "pixel_comparison": "NOT_RUN",
+    "publisher_rights_granted": false,
+    "owner_qrt_accepted": false,
+    "admitted_core2_original_of_68": 0,
+    "admitted_core1a": 0,
+    "qrt_accepted_of_28": 0
+  },
+  "next": "183-T5-G2-W1 Owner source-safe QRT preview packet assembled; secure operator test actual Core1A exit/visual/browser 375px and Owner side-by-side look before academic cell decision."
+}
