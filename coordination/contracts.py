@@ -52,8 +52,11 @@ class Work:
     def validate(self):
         if not self.work_id:
             raise ValueError("work_id cannot be empty")
-        if not re.match(r"^[0-9a-fA-F]{40}$", self.label_sha):
-            raise ValueError(f"label_sha must be exactly 40-char hex, got {self.label_sha}")
+        # v3.28 AIM labels store a seven-hex digest (e.g. 5f9065d).
+        # Some lifecycle sources use full 40-hex commits or 64-hex digests.
+        # This is syntax validation only; provider authenticity is separate.
+        if not re.fullmatch(r"(?:[0-9a-fA-F]{7}|[0-9a-fA-F]{40}|[0-9a-fA-F]{64})", self.label_sha):
+            raise ValueError(f"Invalid AIM label_sha format: {self.label_sha}")
         if self.acceptance_status not in ("NOT_STARTED", "IN_PROGRESS", "ACCEPTED", "REJECTED", "HOLD"):
             raise ValueError(f"Invalid acceptance_status: {self.acceptance_status}")
 
