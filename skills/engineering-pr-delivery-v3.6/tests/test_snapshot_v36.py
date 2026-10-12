@@ -32,7 +32,12 @@ class Provider:
         self.comments = comments if comments is not None else [{"body": evidence()}]
         self.head = head
     def list_issues(self): return self.issues
-    def list_comments(self, n): return self.comments if n == 345 else []
+    def list_comments(self, n):
+        if n != 345: return []
+        # The provider API includes the comment author; older source fixtures
+        # omitted it because the original snapshot ignored provenance.
+        return [{**comment, "user": comment.get("user", {"login": "reallakshman19"})}
+                for comment in self.comments]
     def get_pr(self, n):
         if n != 344: raise lc.ContractError("wrong PR")
         return {"head": {"sha": self.head}, "draft": True}
@@ -90,6 +95,32 @@ class SnapshotTests(unittest.TestCase):
             {"body": evidence(OLD), "created_at": "2026-10-11T05:00:00Z", "id": 1},
             {"body": evidence(HEAD), "created_at": "2026-10-12T05:00:00Z", "id": 2}])
         self.assertEqual(ss.snapshot(PLAN, provider)["tasks"][0]["status"], "CURRENT_EVIDENCE")
+
+    def test_owner_author_exact_proof_stays_current(self):
+        r = ss.snapshot(PLAN, Provider(comments=[
+            {"body": evidence(HEAD), "user": {"login": "reallakshman19"}}]))
+        self.assertEqual(r["tasks"][0]["status"], "CURRENT_EVIDENCE")
+        self.assertEqual(r["current_evidence"], 1)
+
+    def test_foreign_author_exact_candidate_is_invalid(self):
+        r = ss.snapshot(PLAN, Provider(comments=[
+            {"body": evidence(HEAD), "user": {"login": "foreign-contributor"}}]))
+        self.assertEqual(r["tasks"][0]["status"], "INVALID_EVIDENCE")
+        self.assertEqual(r["current_evidence"], 0)
+
+    def test_mismatched_proof_commit_cannot_raise_current(self):
+        bad = evidence(HEAD).replace("/commits/" + HEAD, "/commits/" + OLD)
+        r = ss.snapshot(PLAN, Provider(comments=[
+            {"body": bad, "user": {"login": "reallakshman19"}}]))
+        self.assertEqual(r["tasks"][0]["status"], "UNVERIFIED_PROOF")
+        self.assertEqual(r["current_evidence"], 0)
+
+    def test_missing_author_fails_closed(self):
+        provider = Provider(comments=[{"body": evidence(HEAD)}])
+        provider.list_comments = lambda n: [{"body": evidence(HEAD)}]
+        r = ss.snapshot(PLAN, provider)
+        self.assertEqual(r["tasks"][0]["status"], "INVALID_EVIDENCE")
+        self.assertEqual(r["current_evidence"], 0)
 
     def test_closed_child_stale_remains_stale(self):
         r = ss.snapshot(PLAN, Provider(issues=[{**ISSUE, "state": "closed"}]))
