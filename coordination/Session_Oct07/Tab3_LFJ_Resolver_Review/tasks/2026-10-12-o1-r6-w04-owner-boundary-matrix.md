@@ -35,3 +35,13 @@ Directly re-fetched GitHub Actions job conclusions and decoded terminal job logs
 - count-in **PENDING at checkpoint**: hosted job still executing real Chromium; its status and exact 2000000 positive export results must be fetched before W04 is closed.
 
 Exact job IDs: count-out 114698356570 SUCCESS, byte-out 114698356786 FAILURE, byte-in 114698356789 SUCCESS, count-in 114698356731 IN_PROGRESS. Source app test-only at 6388f1a; accepted exact-head focused CI on *prior* ef003ad must not be carried forward. No product fixes have been made.
+
+## W04 CLOSED — all four exact-head Chromium jobs terminal (diagnostic)
+At original W04 head `6388f1ae3f26cb1f73a4bdcf32cd7826b6ee3ae9`, real [CI run 38215243840](https://github.com/reallakshman19/3D_Converters/actions/runs/38215243840) is **RED 3 PASS / 1 FAIL**, and the red byte-out is the *real Owner-policy defect*, not a bypass of the test. W04 diagnostic is DONE, **NOT** O1 product accepted. [Issue #226 W04 final TASK EVIDENCE](https://github.com/reallakshman19/3D_Converters/issues/226#issuecomment-6119490728) posted and read back. Details of other three runs are in the preceding section.
+
+- **count-in PASS:** exactly **2,000,000 original occurrences**, **4,686,297B**, SHA256 `61156f26e51748cb44c42100285ab8465a9b3b1ff92118df5b196668c6f6275d`. Native source **COMMITTED**, exact count and source SHA returned; original XML matched 241 attested paths; 64 visible rows; full original 216-row/57945B Node-wise CSV SHA `0d8bb4482ed4a9d0d116faeac5e68ce564f07b6bba2dd73dfc3676b72ec2eddc` and 241-row/50399B Evidence CSV SHA `653485ff968bf478fa0001488432bb210a9ce6e85a901e9cc19f368f53a24809`; invalid source replacement blocked old export `O1_EXPORT_SOURCE_STALE`; max measured rAF 16.8ms. Source index 65061ms and matched-domain build 70211ms. This is a generated capacity case, not an independently certified semantic golden.
+- **byte-out FAIL:** exactly 104,857,601B, 26,932 originals wrongly committed and downloaded both CSVs, not a benign expected negative. W05 engineering-correct product fix required.
+- **byte-in PASS:** exactly 104,857,600B, 26,932 originals + both CSVs.
+- **count-out PASS:** exactly 2,000,001 originals within byte cap, typed OCCURRENCE_LIMIT, no commit/exports.
+
+No app/source code was changed by W04; new W05 head CI evidence must be read separately, never carried from W04 SHA.
