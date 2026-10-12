@@ -12,3 +12,6 @@ ARTIFACTS -- APPEND ONLY | each dated line includes chat
 2026-10-12 | chat=6acc3003 | Issue #182 182-T4 evidence comment #6115980103 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6115980103
 2026-10-12 | chat=6acc3003 | Common/main packet + chat-ID lineage commit @98c2b34a5bd013540917d2228aced517b749241c | https://github.com/reallakshman19/Common/commit/98c2b34a5bd013540917d2228aced517b749241c
 2026-10-12 | chat=6acc3003 | CI: no new runs, no PR, no Grade9v3.5 source changes; connected GitHub readback only | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6115980103
+2026-10-12 | chat=6acc3003 | Issue #182 Owner-decision + route-HOLD receipt, comment #6116027729 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116027729
+2026-10-12 | chat=6acc3003 | Grade9v3.5 main@778eb35a source-only readback; relay/STATE.yaml lease ACTIVE for #212 (not #182) | https://github.com/reallakshman19/Grade9v3.5/blob/778eb35a/relay/STATE.yaml
+2026-10-12 | chat=6acc3003 | Grade9v3.5 writer lease only #212 Atlas scope; neither isolated Issue #182 branch nor PR created | https://github.com/reallakshman19/Grade9v3.5/blob/778eb35a/relay/LEASES/LEASE-ISS212-ATLAS-INDEX-V31-003.yaml
