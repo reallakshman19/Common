@@ -37,3 +37,4 @@
 2026-10-12 | chat=6accb51c | APPLY-D1 hosted CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38253294826 SUCCESS job 114824789972; 6/6 tests, 625 area roundtrips + 6 boundaries, zero reference-depth gaps, Owner frozen 5 SHA locks intact
 2026-10-12 | chat=6accb51c | APPLY-D1 rendered artifact | artifact 11749865966 "imo182-qrt-d1-apply-five-core-html"; five generated HTML SHA256 5/5 match receipt; local Chromium final 37/37 PASS, 0 JS errors
 2026-10-12 | chat=6accb51c | per-cell review packet | handovers/QRT-APPLY-D1.md; technical completion appended, NOT successor-chat handover; issue #182 comment 6125201981 matches EVIDENCE.log
+2026-10-12 | chat=6accb51c | later PR-wide CI result | Grade9v3.5#192@771f808b exact head, guardrails run 38253294957 FAILURE (job 114824790518), separate scoped APPLY 38253294826 SUCCESS | lead reproduction PR#192 comment 6125240175
