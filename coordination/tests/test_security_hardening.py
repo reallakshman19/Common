@@ -9,6 +9,7 @@ import socket
 import threading
 import urllib.request
 import urllib.error
+import urllib.parse
 import json
 import time
 from pathlib import Path
@@ -86,12 +87,12 @@ class TestSecurityHttpServer(unittest.TestCase):
             self.assertEqual(headers.get("X-Frame-Options"), "DENY")
             self.assertIn("Content-Security-Policy", headers)
 
-    def test_allowed_cors_origin_reflected(self):
+    def test_even_configured_origin_cannot_read_local_files_cross_origin(self):
         req = urllib.request.Request(f"http://127.0.0.1:{self.port}/api/status")
         req.add_header("Origin", "https://trusted.internal")
         with urllib.request.urlopen(req) as resp:
             headers = dict(resp.headers)
-            self.assertEqual(headers.get("Access-Control-Allow-Origin"), "https://trusted.internal")
+            self.assertNotIn("Access-Control-Allow-Origin", headers)
 
     def test_untrusted_cors_origin_not_reflected(self):
         req = urllib.request.Request(f"http://127.0.0.1:{self.port}/api/status")
@@ -120,6 +121,31 @@ class TestSecurityHttpServer(unittest.TestCase):
         with self.assertRaises(urllib.error.HTTPError) as ctx:
             urllib.request.urlopen(url)
         self.assertEqual(ctx.exception.code, 403)
+
+    def test_tab_path_escape_is_forbidden(self):
+        for value in ("..", "../..", "../outside", "anything/../../"):
+            url = (f"http://127.0.0.1:{self.port}/api/tab?project=common"
+                   f"&session={urllib.parse.quote(value)}&tab=Tab1")
+            with self.subTest(value=value):
+                with self.assertRaises(urllib.error.HTTPError) as ctx:
+                    urllib.request.urlopen(url)
+                self.assertEqual(ctx.exception.code, 403)
+
+    def test_decoded_null_byte_file_path_rejected(self):
+        url = f"http://127.0.0.1:{self.port}/api/file?project=common&path=%00abc"
+        with self.assertRaises(urllib.error.HTTPError) as ctx:
+            urllib.request.urlopen(url)
+        self.assertEqual(ctx.exception.code, 400)
+
+    def test_non_loopback_is_refused_even_with_override(self):
+        from coordination.coordination_ui import run_server
+        for flag in (False, True):
+            with self.subTest(flag=flag):
+                with self.assertRaises(SystemExit) as ctx:
+                    run_server(self.httpd.RequestHandlerClass.config, self.port,
+                               host="0.0.0.0", open_browser=False,
+                               allow_remote_unauthenticated=flag)
+                self.assertEqual(ctx.exception.code, 1)
 
     def test_read_quota_exceeded_returns_413(self):
         # The test server set max_file_read_bytes = 1024 (1 KB)
