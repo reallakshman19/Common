@@ -22,7 +22,7 @@ LABEL_FIELDS = frozenset({
 })
 GUIDANCE_FIELDS = frozenset({"not_now", "watch", "notes"})
 REPO_REF = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
-VERSION = re.compile(r"^[0-9]+\\.[0-9]+\\.[0-9]+$")
+VERSION = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
 LABEL_SHA = re.compile(r"^[0-9a-f]{7,40}$")
 ISSUE_REF = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+#[1-9][0-9]*$")
 TASK_REF = re.compile(r"^[A-Z0-9][A-Z0-9_.-]{2,79}$")
