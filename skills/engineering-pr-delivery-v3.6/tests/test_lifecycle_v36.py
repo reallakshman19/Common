@@ -44,6 +44,55 @@ class LabelTests(unittest.TestCase):
         item = v36.validate_label(LABEL, "V35-LIFECYCLE")
         self.assertEqual(item["version"], "1.2.1")
 
+    def test_other_lifecycle_label_without_writable_lab_is_valid_read_only(self):
+        other = {**LABEL, "work": "V32-LIFECYCLE",
+                 "version": "1.1.0", "label_sha": "6e81bd8",
+                 "guidance": {**LABEL["guidance"], "notes": [
+                     "Lab: reallaksh19/relay-v32-e2e-lab"]}}
+        self.assertEqual(v36.validate_label(other)["work"], "V32-LIFECYCLE")
+        self.assertIsNone(v36.writable_lab(other, required=False))
+        with self.assertRaisesRegex(v36.ContractError, "Writable lab"):
+            v36.writable_lab(other)
+
+    def test_3dc_label_three_outcomes_and_criticality(self):
+        other = {**LABEL, "work": "3DC-XML-CII",
+                 "repository": "reallakshman19/3D_Converters",
+                 "engineering_critical": "critical",
+                 "version": "2.2.0", "label_sha": "5f9065d",
+                 "label": {**LABEL["label"],
+                           "outcomes": {"O1": "Large JSON loads",
+                                        "O2": "Preview traces",
+                                        "O3": "Weight review flow"},
+                           "task_outcome": "O1"},
+                 "guidance": {**LABEL["guidance"], "notes": []}}
+        self.assertEqual(v36.validate_label(other)["work"], "3DC-XML-CII")
+        self.assertIsNone(v36.writable_lab(other, required=False))
+        with tempfile.TemporaryDirectory() as work:
+            import yaml
+            path = Path(work) / "relay" / "AIM" / "3DC-XML-CII.yaml"
+            path.parent.mkdir(parents=True)
+            path.write_text(yaml.safe_dump(other, sort_keys=False))
+            self.assertEqual(v36.load_label(path)["label_sha"], "5f9065d")
+
+    def test_writable_lab_is_explicit_and_unique(self):
+        master = v36.load_label(ROOT/"tests/fixtures/relay/AIM/V35-LIFECYCLE.yaml")
+        self.assertEqual(v36.writable_lab(master), "reallakshman19/relay-v36-e2e-lab")
+        bad = {**master, "guidance": {**master["guidance"],
+               "notes": master["guidance"]["notes"] + [
+                   "Writable lab: reallakshman19/different"]}}
+        with self.assertRaisesRegex(v36.ContractError, "multiple Writable lab"):
+            v36.validate_label(bad)
+        bad_repo = {**master, "guidance": {**master["guidance"],
+                    "notes": ["Writable lab: not-a-repo"]}}
+        with self.assertRaisesRegex(v36.ContractError, "invalid Writable lab"):
+            v36.validate_label(bad_repo)
+
+    def test_missing_or_gapped_outcomes_fail_closed(self):
+        changed = {**LABEL, "label": {**LABEL["label"],
+                   "outcomes": {"O1": "One", "O3": "Three"}}}
+        with self.assertRaisesRegex(v36.ContractError, "contiguous"):
+            v36.validate_label(changed)
+
     def test_bad_aim_id(self):
         with self.assertRaises(v36.ContractError):
             v36.validate_label(LABEL, "OTHER-LABEL")
