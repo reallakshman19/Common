@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CONTROL_TOWER_PROJECTIONS_V1",
+  "description": "Private read-only generation-scoped Control Tower read model, no inferred acceptance or Owner command. Data is materialized, not recomputed by GET.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generation",
+    "projection_digest",
+    "as_of_utc",
+    "view",
+    "project_id",
+    "items",
+    "next_cursor"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "control_tower_projections_v1"
+    },
+    "generation": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "projection_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "as_of_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "view": {
+      "enum": [
+        "portfolio",
+        "works",
+        "assignments",
+        "unassigned_observations",
+        "evidence",
+        "recovery"
+      ]
+    },
+    "project_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object"
+      }
+    },
+    "next_cursor": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
