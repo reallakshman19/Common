@@ -1,0 +1,181 @@
+{
+  "schema": "tab2-q003-r7-coordinator-browser-and-core1a-handoff/v1",
+  "date_utc": "2026-10-12",
+  "chat": "6acd1e6b",
+  "issue": 183,
+  "aim": "v3.1.0",
+  "plan": "r7",
+  "outcomes": [
+    "O1",
+    "O2",
+    "O3"
+  ],
+  "coordinator_browser_report": {
+    "kind": "COORDINATOR_LOCAL_BROWSER_PANE; NOT_INDEPENDENT_ENGINEERING_REVIEW",
+    "timestamp_claim": "2026-10-12 23:5x Dubai",
+    "product_commit": "98ae06741f4d90865fcd313d609aeabba46826e2",
+    "page": "Owner private native Q003 Core2",
+    "exact_original_html_sha256_from_prior_owner_report": "827a8a99128601721c3c13dfd99806b5a563624526edfd8ba137ab8d4b64b6a0",
+    "before_attempt": {
+      "wrong_route_locked": true,
+      "after_attempt_support_locked": true,
+      "answer_and_working_locked": true,
+      "only_first_guided_rung_H0_revealed": true,
+      "H0_chars": 99
+    },
+    "blank_attempt": {
+      "commit_refused": true,
+      "message": "ATTEMPT FIRST",
+      "no_disclosure_unlocked": true
+    },
+    "committed_attempt": {
+      "select_one_radio_then_commit": true,
+      "wrong_route_unlocked": true,
+      "after_attempt_support_unlocked": true,
+      "after_attempt_further_reveal_steps": 2,
+      "answer_and_working_unlocked": true,
+      "answer_and_working_chars": 1079
+    },
+    "keyboard_only": {
+      "arrow_keys_move_radio": true,
+      "tab_reaches_commit": true,
+      "enter_commits_and_unlocks": true
+    },
+    "narrow_viewport": {
+      "width_css_px": 375,
+      "height_css_px": 812,
+      "horizontal_scroll": false,
+      "radio_option_target_width": 279,
+      "radio_option_target_height": 65,
+      "commit_target_width": 189,
+      "commit_target_height": 49
+    },
+    "not_tested": [
+      "same-page A4 PDF",
+      "pixel-level comparison",
+      "screen-reader behaviour"
+    ],
+    "browser_evidence_not_shared": [
+      "screen recording",
+      "captured DOM/screenshot",
+      "protected original HTML"
+    ],
+    "evidence_boundary": "Reports actual Coordinator clicking and keyboard on Owner machine, accepted as reported but G4 has not independently reproduced."
+  },
+  "core1a_handoff": {
+    "task": "183-T4-G2-W1",
+    "product_repo": "reallakshman19/Grade9v3.5",
+    "isolated_branch": "agent/183-q003-private-core2-test-6acc303b",
+    "final_pinned_commit": "a1c46c96a4549b3f238f46ce8e3fc6438ef50bca",
+    "base_core2_tested_commit": "98ae06741f4d90865fcd313d609aeabba46826e2",
+    "added_authored_inputs": "TEST/imo-research/core2-q003/core1a-authored.v1.json",
+    "new_private_builder": "TEST/imo-research/core2-q003/build_private_core1a.py",
+    "new_private_golden_benchmark": "TEST/imo-research/core2-q003/benchmark_core1a_native.py",
+    "README": "TEST/imo-research/core2-q003/README.md",
+    "first_command": "python -I TEST/imo-research/core2-q003/build_private_core1a.py --private-input \"/PRIVATE/EXACT_Q003.json\" --prepare-only",
+    "native_command": "python -I TEST/imo-research/core2-q003/benchmark_core1a_native.py --private-input \"/PRIVATE/EXACT_Q003.json\"",
+    "original_question_id": "SOF-IMO-G09-L1-2023-24-A-Q003",
+    "required_original_SHA256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "template_status": "SOURCE_SAFE_AUTHORED_RECORDS_COMMITTED",
+    "source_math": "Learner computes same residual y-x^2 across each ordered pair; Q003 source specific maths independently reviewed previously, no source options copied",
+    "authored_transfer_case": {
+      "pairs": [
+        [
+          4,
+          23
+        ],
+        [
+          6,
+          43
+        ],
+        [
+          7,
+          58
+        ],
+        [
+          9,
+          88
+        ]
+      ],
+      "residuals": [
+        7,
+        7,
+        9,
+        7
+      ],
+      "correct_exception_index_zero_based": 2,
+      "origin": "AUTHORED_NOT_ORIGINAL"
+    },
+    "authored_exit_case": {
+      "pairs": [
+        [
+          2,
+          9
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          5,
+          30
+        ],
+        [
+          6,
+          43
+        ]
+      ],
+      "residuals": [
+        5,
+        5,
+        5,
+        7
+      ],
+      "correct_exception_index_zero_based": 3,
+      "origin": "AUTHORED_NOT_ORIGINAL"
+    },
+    "role": "CORE1A",
+    "blueprint": "BP-CORE1A-CONSTRUCTION",
+    "renderer": "Shared/tools/render_core.py",
+    "golden": "G-MATH-LINEAR-CONSTRAINT",
+    "golden_status": "CANDIDATE_NOT_OWNER_BLESSED",
+    "test_static_contracts": {
+      "passed": 17,
+      "total": 17,
+      "kind": "JS readback and arithmetic/data-contract checks",
+      "python_syntax_compilation": "NOT_RUN",
+      "full_native_renderer": "NOT_RUN",
+      "private_input_original_bytes": "NOT_PRESENT_IN_G4_ENV",
+      "execution_blocker": "COORDINATOR_SECURE_OPERATOR_CAN_RUN"
+    },
+    "privacy_and_outputs": {
+      "source_bodies_committed": false,
+      "private_bank_staging": "TEST/imo-research/core2-q003/.private/core1a/bank.json",
+      "native_core1a_html": "TEST/imo-research/core2-q003/.private/core1a/rendered/core1a.html",
+      "source_safe_receipt": "TEST/imo-research/core2-q003/.private/core1a/source-safe-core1a-receipt.json",
+      "source_safe_golden_comparison": "TEST/imo-research/core2-q003/.private/core1a/native-core1a-golden-comparison.json",
+      "return_only": [
+        "source-safe-core1a-receipt.json",
+        "native-core1a-golden-comparison.json",
+        "first error ID/component sanitized on failure"
+      ],
+      "return_not": [
+        "original private JSON",
+        "stem/options/answer content",
+        "generated HTML",
+        "source paper reproduction",
+        "unredacted screenshots or browser DOM"
+      ]
+    },
+    "authorities": {
+      "original_paper_personally_inspected_by_owner": "UNCONFIRMED",
+      "rights": "NOT_GRANTED",
+      "a4": "NOT_RUN",
+      "qrt_cells_accepted": 0,
+      "admitted_original_core2_of_68": 0,
+      "admitted_core1a": 0,
+      "owner_accepted_private_context_only": true
+    },
+    "next": "Coordinator executes exact pinned native command with unchanged secured original; G4 reads source-safe receipts, fixes only observed TEST defects, then math lesson real visual and QRT proposal; no Shared/main change."
+  }
+}
