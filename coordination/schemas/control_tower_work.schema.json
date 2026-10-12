@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerWork",
+  "description": "Unit of delivery anchored strictly to approved AIM label and milestone issue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "work_id",
+    "project_id",
+    "aim_id",
+    "label_sha",
+    "issue_ref",
+    "acceptance_status"
+  ],
+  "properties": {
+    "work_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique work identifier bound to issue & AIM label"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreign key referencing Project.project_id"
+    },
+    "aim_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Approved AIM label identifier"
+    },
+    "label_sha": {
+      "type": "string",
+      "pattern": "^([0-9a-fA-F]{7}|[0-9a-fA-F]{40}|[0-9a-fA-F]{64})$",
+      "description": "Owner-approved AIM label_sha, observed as 7-hex on v3.28, or full 40-hex/64-hex form; structural validation is not provenance verification"
+    },
+    "issue_ref": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical GitHub issue URL"
+    },
+    "acceptance_status": {
+      "enum": ["NOT_STARTED", "IN_PROGRESS", "ACCEPTED", "REJECTED", "HOLD"]
+    },
+    "candidate_pr_ref": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Optional active candidate pull request URL"
+    },
+    "candidate_head_sha": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-fA-F]{40}$",
+      "description": "Current candidate git commit SHA under test"
+    }
+  }
+}

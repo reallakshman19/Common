@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordination Cockpit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header id="topbar">
+    <div class="logo">
+      <span class="logo-badge">COORD</span>
+      <div class="logo-text">
+        <a id="repoLink" href="#" target="_blank" rel="noopener">Coordination Cockpit</a>
+        <span class="chip" id="commitChip"></span>
+      </div>
+    </div>
+
+    <div class="bar-right">
+      <select id="projSelect" class="proj-select" title="Switch project"></select>
+
+      <div class="search-wrap">
+        <span class="si">🔍</span>
+        <input id="globalSearch" type="text" placeholder="Search...">
+      </div>
+
+      <button class="btn btn-primary" id="syncBtn">⟳ Sync</button>
+      <button class="btn" id="themeBtn" title="Toggle theme">🌓</button>
+
+      <div class="status-pill">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">…</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nav tabs -->
+  <nav id="navtabs">
+    <div class="ntab active" data-view="overview">📊 Overview</div>
+    <div class="ntab" data-view="decisions">📋 Decisions <span class="cnt" id="cnt-decisions">–</span></div>
+    <div class="ntab" data-view="qrt">🧩 28-Cell QRT</div>
+    <div class="ntab" data-view="checkpoints">⏱ Checkpoints <span class="cnt" id="cnt-checkpoints">–</span></div>
+    <div class="ntab" data-view="handovers">🤝 Handovers <span class="cnt" id="cnt-handovers">–</span></div>
+    <div class="ntab" data-view="receipts">🧾 Receipts</div>
+    <div class="ntab" data-view="explorer">📂 Files</div>
+  </nav>
+
+  <!-- Main layout: sidebar + content -->
+  <div id="main">
+    <aside id="sidebar" aria-label="Session navigation"></aside>
+    <div id="content" role="main"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal-bg" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div class="modal-title" id="modal-title">Details</div>
+        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

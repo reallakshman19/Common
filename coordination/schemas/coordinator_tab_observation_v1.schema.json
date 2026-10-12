@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoordinatorTabObservationV1",
+  "description": "Side-effect-free typed projection of the exact 10-column watch.ps1 row output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tab",
+    "status",
+    "aim",
+    "plan",
+    "ac",
+    "ci",
+    "meter",
+    "due",
+    "checked",
+    "next",
+    "observed_at",
+    "coordinator_liveness"
+  ],
+  "properties": {
+    "tab": {
+      "type": "string",
+      "description": "Column 1: Tab alias string"
+    },
+    "status": {
+      "type": "string",
+      "description": "Column 2: Status string from coordinator"
+    },
+    "aim": {
+      "type": "string",
+      "description": "Column 3: Aim identifier"
+    },
+    "plan": {
+      "type": "string",
+      "description": "Column 4: Plan revision string"
+    },
+    "ac": {
+      "type": "string",
+      "description": "Column 5: Acceptance criteria status"
+    },
+    "ci": {
+      "type": "string",
+      "description": "Column 6: Exact CI check status"
+    },
+    "meter": {
+      "type": "string",
+      "description": "Column 7: Progress meter"
+    },
+    "due": {
+      "type": "string",
+      "description": "Column 8: Due date / cycle string"
+    },
+    "checked": {
+      "type": "string",
+      "description": "Column 9: Verification timestamp"
+    },
+    "next": {
+      "type": "string",
+      "description": "Column 10: Next action obligation"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Probe observation timestamp"
+    },
+    "coordinator_liveness": {
+      "enum": ["ALIVE", "STALE", "STOPPED"]
+    }
+  }
+}
