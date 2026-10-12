@@ -168,6 +168,37 @@ class TestWP3MaterializedProjections(unittest.TestCase):
             self.assertIsNone(w["tasks_total"])
             self.assertIsNone(w["accepted_ac"])
 
+    def test_adv13_source_pinned_exact_head_ci_and_skipped_never_accept_work(self):
+        binding={"project_id":"common","work_id":"common-work-0",
+                 "repo_id":"987","pr_number":500,
+                 "current_head_sha":"b"*40,"observed_at_utc":ASOF,
+                 "source_ref":"https://github.com/reallakshman19/Common/pull/500",
+                 "required_jobs":["build"]}
+        def check(check_id,sha,result,observed):
+            self.idx.store_check_observation({
+                "check_id":check_id,"project_id":"common","repo_id":"987",
+                "pr_number":500,"head_sha":sha,"workflow_name":"build",
+                "job_name":"build","applicability":"PATH_SCOPED",
+                "conclusion":result,"run_url":"https://github.com/reallakshman19/Common/actions",
+                "observed_at":observed})
+        check("old-head","a"*40,"EXACT_HEAD_PASSED","2026-10-12T11:55:00Z")
+        self.build(pr_bindings=[binding])
+        row=next(x for x in self.rows("works")["items"] if x["work_id"]=="common-work-0")
+        self.assertEqual(row["ci_status"],"OLD_HEAD")
+        check("skipped-head","b"*40,"GREEN_NOT_APPLICABLE","2026-10-12T11:56:00Z")
+        self.build(pr_bindings=[binding])
+        row=next(x for x in self.rows("works")["items"] if x["work_id"]=="common-work-0")
+        self.assertEqual(row["ci_status"],"NOT_APPLICABLE")
+        check("current-success","b"*40,"EXACT_HEAD_PASSED","2026-10-12T11:59:00Z")
+        self.build(pr_bindings=[binding])
+        row=next(x for x in self.rows("works")["items"] if x["work_id"]=="common-work-0")
+        self.assertEqual(row["ci_status"],"EXACT_HEAD_PASSED")
+        self.assertEqual(row["acceptance_status"],"IN_PROGRESS")
+        stale={**binding,"observed_at_utc":"2026-10-12T09:00:00Z"}
+        self.build(pr_bindings=[stale])
+        row=next(x for x in self.rows("works")["items"] if x["work_id"]=="common-work-0")
+        self.assertEqual(row["ci_status"],"UNKNOWN")
+
     def test_adv14_only_factual_recovery_with_original_next(self):
         self.snaps[0]["observations"][0]["probe_status"]="LOADFAIL"
         self.build()
