@@ -1,0 +1,35 @@
+# Sticky label: the Owner's aim for this work. Master copy, written by the coordinator (skill coordinator-protocol, scripts/aim.ps1)
+# only after the Owner approves a change card. The label text is the Owner's: never paraphrase it. Guidance (watch, not_now, notes) is
+# versioned too: a change of what may be done is a change of the label. Every copy carries version and label_sha.
+work: "IMO-CORE-BLUEPRINTS"
+repository: "reallakshman19/Grade9v3.5"
+engineering_critical: "standard"
+version: "1.1.0"
+label_sha: "ec55f5d"
+label:
+  problem: "Core 1B is done with a golden fixture; other Cores are not yet created or optimized from blueprints based on QRT."
+  main_aim: "Create or optimize blueprints for each Core based on QRT; Core 1B is done, golden fixture created, others remain."
+  outcomes:
+    O1: "Each remaining Core (1, 1A, 2A, 2B) has a page built from its blueprint that matches its golden fixture."
+    O2: "Each page serves a named QRT cell and that cell has an accepted decision."
+    O3: "Where a golden shows a blueprint gap, the blueprint is optimized and the change is recorded."
+  owner_constraints:
+    - "Pages come from the existing blueprint registry and are aligned with the golden fixtures."
+    - "This work grants no source rights, QRT acceptance, merge or release."
+  task_outcome: "O1"
+  task_aim: "Plan: map each Core blueprint, golden and QRT cell to what exists, then propose the first Core to build."
+  done_when: "PENDING: the Owner sets which Cores, acceptance per QRT cell, real learner inputs and A4 print."
+guidance:
+  not_now:
+    - "Authentic Core 2 from the 68 source questions: separate work in Tab 2, back when a Core page needs a real source question."
+  watch:
+    - "Print, CI, lease or route work: do it only when it blocks a Core page, and say which outcome it serves."
+    - "Task counts such as 3/3 or 5/5 are not progress toward the aim."
+  notes:
+    - "Roots: programme #137 and owning plan #130. Predecessor Track A #173 and its seven stacked draft PRs (#166 #172 #175 #177 #178 #180 #181) are unmerged."
+    - "Blueprint registry v1.17.0 (7 blueprints). Goldens: G-MATH-LINEAR-CONSTRAINT (Core1, 1A, 1B, 2A, 2B) and G-CORE2-R2 (Core2)."
+    - "Pending at source (main): one Core1A divisibility candidate, one Core1B journey manifest, QRT accepted 0 of 28."
+bindings:
+  - "Session_Oct09:1 coordination/Session_Oct09/Tab1_core-blueprints-qrt"
+history:
+  - "v1.1.0 · 2026-10-12 04:52 · create · created · CP-IMO-CORE-BLUEPRINTS-01 · approved by the Owner"
