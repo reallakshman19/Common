@@ -22,3 +22,4 @@
 2026-10-12 | chat=6accb51c | browser final | exact-hosted HTML Chrome/Playwright 35/35 PASS JS errors 0 | H3, initial/blank/commit, staged Core1A, Core1B independent boundary, Core2B attempt gates
 2026-10-12 | chat=6accb51c | cell artifact | handovers/QRT-RETRIEVE-D1.md @0906aa3c907b0202d49b1efb0548598e97f6c802 | NOT successor-chat handover
 2026-10-12 | chat=6accb51c | issue evidence | Grade9v3.5 issue#182 comment 6123725775 | identical TASK EVIDENCE block in EVIDENCE.log
+2026-10-12 | chat=6accb51c | shared CI reproduction to lead | Grade9v3.5 PR#192 comment 6123776631 | guardrails run 38244512653 FAILURE, job 114794950678, named raw intake/evidence snapshot/search-index failures; D1 focused run 38244512806 SUCCESS
