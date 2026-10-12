@@ -11,3 +11,11 @@
 2026-10-12 | chat=new | frozen golden | Grade9v3.5 draft G-IMO-G9-FIVE-CORE-20261012 | old frozen, must not edit | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219621844
 2026-10-12 | chat=new | H3 patch | Grade9v3.5 PR#190 head=67c34dababb0da0ef7d5f4a532bfcf3119754961 | CI run=38231707376 SUCCESS; no merge; not exact old golden
 2026-10-12 | chat=new | source rights | Q004/Q006 authentic sample research only; fresh D1 question must be wholly original and marked AUTHORED TEST
+2026-10-12 | chat=new | Grade9v3.5 confirmed main | QRT matrix 3779a53ae7d20efbb4644bc3f9243909e93dc145; coverage c81b32875be6f239a877e8df95252be1b7741a00; registry 591ba061b8771c30fdffc4506aa720ca9ba89335; renderer 9302174e1491138a459a80e9d3f176b83b19e6d7; schema a9cdf31d6ae46d00ac227791264231f05d453725
+2026-10-12 | chat=new | D1 cell exact source | Grade9v3.5 PR#192@630900aaeb379ee38c0f2a8760ffe83581f5ad86, AUTHORED original signed-direction task, H3 policy from upstream PR#190@67c34dababb0da0ef7d5f4a532bfcf3119754961
+2026-10-12 | chat=new | Owner frozen five golden | G-IMO-G9-FIVE-CORE-20261012 source f87d2f627e3f05476d39fb04d7f26e453661dc68; exact snapshot-lock SHA256 5/5 PASS and untouched
+2026-10-12 | chat=new | generated core1.html | Grade9v3.5 run 38237708811 artifact 11741437776 SHA256 a477bf1132ee4704bbc617c983e08cee77472ceec6dacdce71ada4577fb03931
+2026-10-12 | chat=new | generated core1a.html | Grade9v3.5 run 38237708811 artifact 11741437776 SHA256 298d277ef623b89267f602187a7775fe4482e1a1f1fc82805c965a12e99bc889
+2026-10-12 | chat=new | generated core1b.html | Grade9v3.5 run 38237708811 artifact 11741437776 SHA256 eeca2fc7ac620bf66dd620eef0b336996ebcac4f06a6cbc86b9ebc05ff8074dd
+2026-10-12 | chat=new | generated core2a.html | Grade9v3.5 run 38237708811 artifact 11741437776 SHA256 a8c0acfef176967a44777a57634076a8157b016c78d26a4a1d3207dc521de300
+2026-10-12 | chat=new | generated core2b.html | Grade9v3.5 run 38237708811 artifact 11741437776 SHA256 087b2ec74ebfc568e618e9e2b12daca42ffc56d3afc30f2de596f41abfd0c9cf

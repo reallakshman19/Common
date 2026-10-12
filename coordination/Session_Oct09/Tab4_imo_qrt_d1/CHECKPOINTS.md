@@ -9,3 +9,5 @@
 2026-10-12 | chat=new | r1 | D1-SYN-06 | QRT-SYNTHESIZE-D1 | O1 + O2 review proposal, band challenge | 120 | L
 2026-10-12 | chat=new | r1 | D1-JUS-07 | QRT-JUSTIFY-D1 | O1 + O2 review proposal | 110 | M
 2026-10-12 | chat=new | r1 checkpoint policy | record after D1-MOD-05 (5th task), after any revision/blocked cell, and at final handover; estimates not measured work.
+2026-10-12 | chat=new | r1 cell-1 checkpoint | D1-REP-01 technically complete: five sole-renderer pages, 0 gaps, 5/5 golden anatomy comparison, local Chromium 27/27, hosted 6/6, exact SHA receipt. Qualified review+Owner acceptance remains pending; proceed D1-RET-02.
+2026-10-12 | chat=new | r1 risk checkpoint | PDF publication output and successor golden intentionally not claimed; current-head broad guardrails and canonical assurance not yet green; no shared tool or release work by agent.
