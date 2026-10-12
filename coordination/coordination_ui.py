@@ -258,6 +258,8 @@ def parse_tabs_index(tabs_file: Path) -> list[dict]:
 def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
     """Scan one Tab directory. Uses per-file cache."""
     t_path = coord_dir / session_name / tab_name
+    if not is_safe_contained_path(t_path, coord_dir):
+        raise ValueError("Tab path escapes registered project")
 
     def cached(fname, parser, *extra):
         fp = t_path / fname
@@ -382,6 +384,8 @@ def scan_project(project: dict) -> dict:
         tab_summaries = []
 
         for t_dir in tab_dirs:
+            if not is_safe_contained_path(t_dir, coord_dir):
+                continue
             t_name = t_dir.name
             reg = next((r for r in tabs_index
                         if r["tab_num"] in t_name or t_name.startswith(r["tab_num"])), None)
@@ -482,7 +486,7 @@ class DataStore:
     def find_tab_data(self, project: dict, session: str, tab: str) -> dict | None:
         coord_dir = resolve_project_dir(project)
         t_path = coord_dir / session / tab
-        if not t_path.is_dir():
+        if not is_safe_contained_path(t_path, coord_dir) or not t_path.is_dir():
             return None
         return scan_tab(coord_dir, session, tab)
 
@@ -515,13 +519,8 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "DENY")
         self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;")
-        # Same-origin policy: do NOT send wildcard Access-Control-Allow-Origin: *
-        origin = self.headers.get("Origin")
-        if origin:
-            allowed_origins = self.config.get("server", {}).get("allowed_origins", [])
-            if origin in allowed_origins:
-                self.send_header("Access-Control-Allow-Origin", origin)
-                self.send_header("Vary", "Origin")
+        # Never permit browser cross-origin reads of local coordination files.
+        # Remote access requires a separately authenticated gateway.
 
     def send_json(self, obj, status: int = 200):
         body = json.dumps(obj, separators=(",", ":")).encode()
@@ -583,7 +582,7 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
         # DNS rebinding / Host header validation
         host_header = self.headers.get("Host", "").split(":")[0].strip()
         allowed_hosts = {"127.0.0.1", "localhost", "::1", getattr(self, "server_host", "127.0.0.1")}
-        if host_header and host_header not in allowed_hosts and not self.config.get("server", {}).get("allow_any_host", False):
+        if host_header not in allowed_hosts:
             self.send_text("Invalid Host header (DNS rebinding protection)", status=400)
             return
 
@@ -725,6 +724,10 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
             if not sess or not tab:
                 self.send_json({"error": "session and tab required"}, 400)
                 return
+            if any(x in (".", "..") or "/" in x or "\\" in x or "\0" in x
+                   for x in (sess, tab)):
+                self.send_json({"error": "Forbidden tab path"}, 403)
+                return
             tab_data = STORE.find_tab_data(proj, sess, tab)
             if not tab_data:
                 self.send_json({"error": "Tab not found"}, 404)
@@ -761,6 +764,9 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
                 self.send_json({"error": "Unknown project"}, 404)
                 return
             rel_path = self._str(qs, "path")
+            if "\0" in rel_path:
+                self.send_json({"error": "Invalid path"}, 400)
+                return
             coord_dir = resolve_project_dir(proj)
             target = coord_dir / rel_path
             # Security: strict canonical path containment check
@@ -809,15 +815,10 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
 
 def run_server(config: dict, port: int, host: str = "127.0.0.1", open_browser: bool = True, allow_remote_unauthenticated: bool = False):
     """Start the live HTTP server with loopback by default and security validation."""
-    if host not in ("127.0.0.1", "localhost", "::1") and not allow_remote_unauthenticated:
-        print(f"[SECURITY ERROR] Refusing to bind to non-loopback address ('{host}') without an authenticated TLS gateway.")
-        print("To override for testing only, pass --allow-remote-unauthenticated.")
+    if host not in ("127.0.0.1", "localhost", "::1") or allow_remote_unauthenticated:
+        print("[SECURITY ERROR] Unauthenticated coordination reader supports loopback only.")
+        print("Remote access requires a separate authenticated TLS gateway.")
         sys.exit(1)
-    if host not in ("127.0.0.1", "localhost", "::1") and allow_remote_unauthenticated:
-        print("\n" + "!" * 65)
-        print("  [SECURITY WARNING] Binding to non-loopback address without authentication!")
-        print("  Coordination documents are exposed unauthenticated on the network.")
-        print("!" * 65 + "\n")
 
     # Pre-warm cache
     print("[INIT] Pre-scanning projects...")
@@ -947,7 +948,7 @@ def main():
     parser.add_argument("--host", default="127.0.0.1",
                         help="HTTP host to bind (default: 127.0.0.1 loopback only)")
     parser.add_argument("--allow-remote-unauthenticated", action="store_true",
-                        help="Explicitly permit non-loopback binding without authentication")
+                        help="DEPRECATED / DISABLED: unauthenticated remote access forbidden")
     parser.add_argument("--no-browser", action="store_true",
                         help="Don't open browser automatically")
     parser.add_argument("--watch", action="store_true",
