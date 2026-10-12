@@ -1,0 +1,40 @@
+name: coordination-v328-source-parity
+on:
+  pull_request:
+    paths:
+      - 'coordination/**'
+      - '.github/workflows/coordination-v328-source-parity.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'coordination/**'
+      - '.github/workflows/coordination-v328-source-parity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-coordinator-rowsjson-parity:
+    runs-on: windows-latest
+    timeout-minutes: 12
+    env:
+      WP2_POWERSHELL_REQUIRED: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: PowerShell actual source parity (never skip)
+        shell: pwsh
+        run: |
+          python -m unittest coordination.tests.test_v328_rowsjson_windows -v
+      - name: Verify original source digest
+        shell: pwsh
+        run: |
+          $wanted = 'c8e0e06a753f5663bfa3768a9b3a61d9a62ee5f489a40916e3d4e614171b'
+          $source = 'coordination/tests/fixtures/v328_source/watch.ps1'
+          $actual = (Get-FileHash -Algorithm SHA256 $source).Hash.ToLowerInvariant()
+          if ($actual -ne $wanted) { throw "Authoritative v3.28 SHA mismatch: $actual" }
