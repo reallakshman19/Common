@@ -6,3 +6,4 @@
 2026-10-12 | Tab6 | imo-qrt-d3 | coordination/Session_Oct09/Tab6_imo_qrt_d3/ | chat=new | issue=Grade9v3.5#182 | plan=r1 | state=pilot-MODEL-D3 | log=main
 2026-10-12 | Tab5 | IMO QRT D2 worker | coordination/Session_Oct09/Tab5_imo_qrt_d2/ | chat=new | issue=Grade9v3.5#182 | plan=r1 | seven owned D2 cells; pilot JUSTIFY-D2 | accepted=0/28
 2026-10-12 | Tab7 | AGENT-D4 seven QRT cells | coordination/Session_Oct09/Tab7_imo_qrt_d4/ | chat=new | issue=Grade9v3.5#182 | plan=r1 | pilot=QRT-JUSTIFY-D4 | accepted=0/28
+2026-10-12 | Tab8 | AGENT-INTEGRATOR #182 | coordination/Session_Oct09/Tab8_imo_182_integrator/ | chat=new | plan=r1 | 25 technical candidates, 3 not authored, accepted=0/28 | TEST only
