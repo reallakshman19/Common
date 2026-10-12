@@ -1,0 +1,364 @@
+"""One V3.2 lab→native DELP→issue/PR preview→in-memory publication→C6 cycle.
+
+OFFLINE, GET-only, NO production writes. The native V3.2 module remains the
+exclusive reducer, title/status owner and C6 implementation. The existing
+source-bound PR view owns managed-section rendering. This adapter owns neither
+Owner authorization nor evidence acceptance.
+"""
+from __future__ import annotations
+
+from copy import deepcopy
+from hashlib import sha1, sha256
+import json
+from pathlib import Path
+import re
+import sys
+from typing import Any, Mapping
+
+from pr_source_binding import BindingError, PreviewPins, preview_source_binding
+
+
+class CycleHold(ValueError):
+    """Safe, non-secret-bearing failure code."""
+
+
+def _hold(condition: bool, code: str) -> None:
+    if not condition:
+        raise CycleHold(code)
+
+
+def _native_modules():
+    native_path = (Path(__file__).resolve().parents[3] / "skills" /
+                   "engineering-pr-delivery-v3.2" / "scripts")
+    _hold((native_path / "delp_projection_v32.py").is_file(),
+          "NATIVE_V32_SOURCE_NOT_IN_CHECKOUT")
+    if str(native_path) not in sys.path:
+        sys.path.insert(0, str(native_path))
+    import delp_projection_v32 as delp
+    import pr_responsibility_view_v32 as views
+    return delp, views
+
+
+def _digest(value: Any) -> str:
+    return "sha256:" + sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
+                                      ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+
+
+_SHA = re.compile(r"[0-9a-f]{40}\Z")
+_MAX_GRAPH_BYTES = 5_000_000
+_MAX_SNAPSHOT_BYTES = 64_000_000
+
+
+def _graph_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for name, value in pairs:
+        _hold(name not in result, "GRAPH_DUPLICATE_JSON_KEY")
+        result[name] = value
+    return result
+
+
+def _parse_graph(raw: bytes) -> dict[str, Any]:
+    _hold(type(raw) is bytes and 0 < len(raw) <= _MAX_GRAPH_BYTES,
+          "GRAPH_BYTES_UNAVAILABLE")
+    try:
+        graph = json.loads(raw, object_pairs_hook=_graph_pairs,
+                           parse_constant=lambda _v: _hold(False, "GRAPH_NONFINITE_JSON"))
+    except CycleHold:
+        raise
+    except (ValueError, UnicodeError, TypeError) as exc:
+        raise CycleHold("GRAPH_JSON_INVALID") from exc
+    _hold(isinstance(graph, dict) and isinstance(graph.get("programme"), dict) and
+          isinstance(graph.get("nodes"), list), "GRAPH_SHAPE_INVALID")
+    return graph
+
+
+def _snapshot_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for name, value in pairs:
+        _hold(name not in result, "SNAPSHOT_DUPLICATE_JSON_KEY")
+        result[name] = value
+    return result
+
+
+def _decode_snapshot(raw: bytes) -> dict[str, Any]:
+    _hold(type(raw) is bytes and len(raw) <= _MAX_SNAPSHOT_BYTES,
+          "SNAPSHOT_BYTES_UNBOUNDED")
+    try:
+        source = json.loads(raw, object_pairs_hook=_snapshot_pairs,
+                            parse_constant=lambda _v: _hold(False, "SNAPSHOT_JSON_INVALID"))
+    except CycleHold:
+        raise
+    except (ValueError, UnicodeError, TypeError) as exc:
+        raise CycleHold("SNAPSHOT_JSON_INVALID") from exc
+    _hold(isinstance(source, dict), "SOURCE_SNAPSHOT_SHAPE_INVALID")
+    return source
+
+
+def _git_blob(raw: bytes) -> str:
+    return sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+
+
+def _number(ref: str) -> int:
+    return int(ref.rsplit("#", 1)[-1])
+
+
+class SnapshotGET:
+    """Fully materialized private GET snapshot; exposes NO write methods.
+
+    Source must be re-captured from actual GitHub. This adapter never pretends
+    that importing a snapshot independently authenticates its actor/approval.
+    """
+    def __init__(self, source: Mapping[str, Any]):
+        _hold(isinstance(source, Mapping), "SOURCE_SNAPSHOT_SHAPE_INVALID")
+        _hold(source.get("source_kind") == "GITHUB_GET_ONLY_UNATTESTED",
+              "SOURCE_CAPTURE_KIND_UNTRUSTED")
+        _hold(all(isinstance(source.get(name), Mapping)
+                  for name in ("issues", "pulls", "comments")),
+              "SOURCE_SNAPSHOT_SHAPE_INVALID")
+        _hold(all(isinstance(row, Mapping) and isinstance(row.get("title"), str)
+                  for row in source["issues"].values()) and
+              all(isinstance(row, Mapping) for row in source["pulls"].values()) and
+              all(isinstance(rows, list) and
+                  all(isinstance(row, Mapping) for row in rows)
+                  for rows in source["comments"].values()),
+              "SOURCE_SNAPSHOT_RECORD_INVALID")
+        _hold(isinstance(source.get("main_sha"), str) and
+              _SHA.fullmatch(source["main_sha"]) is not None and
+              isinstance(source.get("final_main_sha"), str) and
+              _SHA.fullmatch(source["final_main_sha"]) is not None,
+              "SOURCE_SNAPSHOT_MAIN_SHA_INVALID")
+        self.source = deepcopy(dict(source))
+        self.repository = self.source.get("repository")
+
+    def get_commit_sha(self, ref: str) -> str:
+        _hold(ref == self.source.get("base_ref", "main"), "BASE_REF_NOT_CAPTURED")
+        return self.source["main_sha"]
+
+    def get_issue(self, number: int) -> dict:
+        _hold(str(number) in self.source["issues"], "SOURCE_ISSUE_MISSING")
+        return deepcopy(self.source["issues"][str(number)])
+
+    def get_pull(self, number: int) -> dict:
+        _hold(str(number) in self.source["pulls"], "SOURCE_PR_MISSING")
+        return deepcopy(self.source["pulls"][str(number)])
+
+    def list_comments(self, number: int) -> list:
+        _hold(str(number) in self.source["comments"], "SOURCE_COMMENTS_MISSING")
+        return deepcopy(self.source["comments"][str(number)])
+
+
+def _source_fingerprint(transport: SnapshotGET, graph: Mapping[str, Any]) -> str:
+    nodes = graph["nodes"]
+    base = graph["programme"].get("base_ref", "main")
+    selected_issues = {_number(n["ref"]): transport.get_issue(_number(n["ref"]))
+                       for n in nodes}
+    selected_pulls = {_number(n["primary_pr"]): transport.get_pull(_number(n["primary_pr"]))
+                      for n in nodes if n.get("kind") == "LEAF" and n.get("primary_pr")}
+    selected_comments = {_number(n["ref"]): transport.list_comments(_number(n["ref"]))
+                         for n in nodes if n.get("kind") == "LEAF"}
+    return _digest({"base": transport.get_commit_sha(base),
+                    "issues": selected_issues, "pulls": selected_pulls,
+                    "comments": selected_comments})
+
+
+def integrated_shadow(
+    raw_graph: bytes, pins: PreviewPins, source: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Complete non-admitting lifecycle on one immutable-shaped GET snapshot.
+
+    Verifies source→PR binding, executes original native facts/DELP, renders
+    managed PR text with the existing view module, simulates native issue
+    LIVE_STATUS/title publication twice, and snapshots native C6 frontier.
+    All mutations are exclusively in native InMemoryStore, never GitHub.
+    """
+    _hold(isinstance(source, Mapping), "SOURCE_SNAPSHOT_SHAPE_INVALID")
+    _hold(source.get("repository") == pins.repository, "SOURCE_REPOSITORY_MISMATCH")
+    _hold(source.get("repository_id") == pins.repository_id,
+          "SOURCE_NUMERIC_REPOSITORY_MISMATCH")
+    _hold(source.get("graph_git_blob") == pins.released_graph_blob_oid,
+          "SOURCE_GRAPH_BLOB_MISMATCH")
+    graph = _parse_graph(raw_graph)
+    _hold(_git_blob(raw_graph) == pins.released_graph_blob_oid,
+          "GRAPH_BLOB_PIN_MISMATCH")
+    transport = SnapshotGET(source)
+    delp, views = _native_modules()
+    delp.validate_graph(graph)
+    delp.require_repository_match(graph, pins.repository, live=True)
+    _hold(transport.get_commit_sha(graph["programme"].get("base_ref", "main")) ==
+          source.get("final_main_sha"), "SOURCE_DEFAULT_BRANCH_MOVED")
+    leaf = next((node for node in graph["nodes"] if node.get("ref") == pins.leaf_ref), None)
+    _hold(isinstance(leaf, dict) and leaf.get("kind") == "LEAF" and
+          leaf.get("primary_pr"), "SOURCE_LEAF_PR_UNBOUND")
+    pr_number = _number(leaf["primary_pr"])
+    observed_pr = transport.get_pull(pr_number)
+    repo = {"full_name": pins.repository, "id": source["repository_id"]}
+    binding = preview_source_binding(raw_graph, pins, repo, observed_pr)
+    _hold(binding["observed_pr_head_sha"] == pins.expected_pr_head_sha,
+          "SOURCE_CANDIDATE_MISMATCH")
+    first = _source_fingerprint(transport, graph)
+    native_plan = delp.plan_github(transport, graph)
+    ledger = delp.ledger_from_github(transport, graph)
+    observations = delp.observe_github(transport, graph)
+    projection = delp.project(graph, ledger, observations)
+    _hold(projection["input_digest"] == native_plan["input_digest"],
+          "NATIVE_INPUT_DIGEST_MISMATCH")
+    _hold(set(native_plan["expected_titles"]) == {n["ref"] for n in graph["nodes"]},
+          "NATIVE_ISSUE_COVERAGE_INVALID")
+    _hold((observations.get(pins.leaf_ref) or {}).get("candidate_sha") ==
+          pins.expected_pr_head_sha, "NATIVE_PROVIDER_HEAD_MISMATCH")
+    core = None
+    core_hold = None
+    try:
+        core = delp.source_bound_responsibility_core(graph, projection, pins.leaf_ref)
+    except delp.DelpError as exc:
+        # Native V3.2 core currently refuses full owner/repo#PR refs even
+        # when native graph, projector and C6 accept those original lab refs.
+        # Never counterfeit an equivalent core or mutate the approved graph.
+        if str(exc) != "RESPONSIBILITY_CORE_MATERIAL_BOUNDARY":
+            raise
+        core_hold = "RESPONSIBILITY_CORE_MATERIAL_BOUNDARY"
+    if core is not None:
+        _hold(core["digests"]["input"] == native_plan["input_digest"] and
+              core["candidate_sha"] == pins.expected_pr_head_sha,
+              "NATIVE_RESPONSIBILITY_CORE_DRIFT")
+    c6 = delp.frontier(graph, ledger, observations, pins.leaf_ref)
+    _hold(c6["observed"].get("candidate_sha") == pins.expected_pr_head_sha,
+          "NATIVE_FRONTIER_CANDIDATE_DRIFT")
+    _hold(first == _source_fingerprint(transport, graph),
+          "SOURCE_CHANGED_ACROSS_LIFECYCLE")
+
+    # Existing V3.2 managed PR block renderer; deliberately represents Owner
+    # provenance as UNVERIFIED, never manufactures a real OwnerIntent/OR record.
+    native_view = {
+        "responsibility": leaf.get("responsibility_id") or "UNRELEASED",
+        "leaf": pins.leaf_ref,
+        "owner_trace": {"owner_intents": [{"id": "UNVERIFIED_ORIGINAL_SOURCE"}]},
+        "OR_ids": [],
+        "claim_ids": list(leaf.get("owns_claims") or []),
+        "golden_fixture_ids": [],
+        "pr": {"number": pr_number, "head_sha": pins.expected_pr_head_sha,
+               "lifecycle": ("MERGED" if observed_pr.get("merged") else
+                             observed_pr.get("state", "UNKNOWN").upper()),
+               "binding": "BOUND"},
+        "qualification": {"state": "UNPROVEN", "basis": "NO_INDEPENDENT_WITNESS"},
+        "input_digest": native_plan["input_digest"],
+        "actual_next": "AUTHENTICATE_OWNER_AND_EVIDENCE_BEFORE_PUBLICATION",
+    }
+    block = views.render_pr_block(native_view)
+    old_body = observed_pr.get("body")
+    _hold(isinstance(old_body, str), "PR_HUMAN_BODY_NOT_OBSERVED")
+    new_body = views.reconcile_managed_block(
+        old_body, block, observed_digest=views.digest(old_body), pr=True)
+    _hold(views.inspect_managed_block(new_body, block, pr=True) == "MATCH",
+          "PR_MANAGED_VIEW_READBACK_FAILED")
+    second_pr_body = views.reconcile_managed_block(
+        new_body, block, observed_digest=views.digest(new_body), pr=True)
+    _hold(second_pr_body == new_body, "PR_MANAGED_VIEW_NOT_IDEMPOTENT")
+
+    # Use the unchanged native issue publisher against its IN-MEMORY store,
+    # including all six nodes, per-node versioned status, and idempotent retry.
+    base_titles = {ref: transport.get_issue(_number(ref))["title"]
+                   for ref in native_plan["expected_titles"]}
+    store = delp.InMemoryStore(base_titles)
+    def ledger_get():
+        return delp.ledger_from_github(transport, graph)
+    def observation_get():
+        return delp.observe_github(transport, graph)
+    first_pass = delp.sync_projection(
+        store, graph, ledger_get, observation_get, base_titles,
+        expected_input_digest=native_plan["input_digest"])
+    second_pass = delp.sync_projection(
+        store, graph, ledger_get, observation_get, base_titles,
+        expected_input_digest=native_plan["input_digest"])
+    _hold(all(row["status"] == "UNCHANGED" for row in second_pass.values()),
+          "NATIVE_IN_MEMORY_IDEMPOTENCE_FAILED")
+    _hold(store.titles == native_plan["expected_titles"],
+          "NATIVE_ISSUE_TITLE_READBACK_FAILED")
+    _hold(first == _source_fingerprint(transport, graph),
+          "SOURCE_CHANGED_AFTER_SIMULATION")
+    fresh_c6 = delp.frontier(graph, ledger_get(), observation_get(), pins.leaf_ref)
+    c6_reentry = delp.frontier_drift(c6, fresh_c6)
+    _hold(c6_reentry["status"] == "CURRENT" and
+          c6_reentry["action"] == "NONE", "NATIVE_C6_REENTRY_DRIFT")
+
+    return {
+        "status": ("INTEGRATED_SHADOW_NATIVE_CORE_HOLD_NOT_RELEASE_READY"
+                   if core_hold else "INTEGRATED_SHADOW_ONLY_NOT_RELEASE_READY"),
+        "repository": pins.repository,
+        "source_kind": source["source_kind"],
+        "source_snapshot_fingerprint": first,
+        "snapshot_sha256_pin_verified": False,
+        "binding": binding,
+        "native_input_digest": native_plan["input_digest"],
+        "native_rejected_facts": native_plan["rejected_facts"],
+        "native_expected_issue_titles": native_plan["expected_titles"],
+        "native_issue_drift": native_plan["drift"],
+        "native_core": core,
+        "native_core_hold": core_hold,
+        "pr_managed_block": block,
+        "pr_body_preview": new_body,
+        "pr_body_changed_in_preview": new_body != old_body,
+        "pr_view_second_pass_unchanged": True,
+        "in_memory_issue_first_pass": first_pass,
+        "in_memory_issue_second_pass": second_pass,
+        "c6_frontier": c6,
+        "c6_same_source_reentry": c6_reentry,
+        "owner_source_authenticated": False,
+        "independent_witness": "NOT_EXECUTED",
+        "eligible_evidence_admitted_by_this_cycle": False,
+        "issue_or_pr_github_writes": False,
+        "production_activation": False,
+        "real_cold_successor": "NOT_EXECUTED",
+    }
+
+
+def main() -> int:
+    import argparse
+    p = argparse.ArgumentParser(description="V3.2 full-cycle offline shadow. NO GITHUB WRITES.")
+    p.add_argument("--graph", type=Path, required=True)
+    p.add_argument("--snapshot", type=Path, required=True)
+    p.add_argument("--repository-id", type=int, required=True)
+    p.add_argument("--leaf", required=True)
+    p.add_argument("--graph-blob", required=True)
+    p.add_argument("--head", required=True)
+    # Optional independently retained SHA pin helps detect changed handoff
+    # bytes; it is not an authenticated Owner/issuer approval.
+    p.add_argument("--snapshot-sha256")
+    p.add_argument("--output", type=Path, required=True)
+    args = p.parse_args()
+    if args.output.exists() or args.output.is_symlink():
+        raise SystemExit("OUTPUT_ALREADY_EXISTS_REFUSING_OVERWRITE")
+    graph = args.graph.read_bytes()
+    with args.snapshot.open("rb") as input_stream:
+        raw_snapshot = input_stream.read(_MAX_SNAPSHOT_BYTES + 1)
+    snapshot = _decode_snapshot(raw_snapshot)
+    if args.snapshot_sha256 is not None:
+        _hold(re.fullmatch(r"[0-9a-f]{64}", args.snapshot_sha256) is not None,
+              "SNAPSHOT_SHA256_PIN_INVALID")
+        _hold(sha256(raw_snapshot).hexdigest() == args.snapshot_sha256,
+              "SNAPSHOT_SHA256_PIN_MISMATCH")
+    _hold(isinstance(snapshot.get("repository"), str),
+          "SOURCE_SNAPSHOT_SHAPE_INVALID")
+    report = integrated_shadow(graph, PreviewPins(
+        snapshot["repository"], args.repository_id, args.graph_blob,
+        args.leaf, args.head), snapshot)
+    report["snapshot_sha256_pin_verified"] = args.snapshot_sha256 is not None
+    # This equality check is NOT independently authenticated source evidence.
+    # Do not print private issue/comment bodies to stdout or commit them to Git.
+    import os
+    fd = os.open(args.output, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+    completed = False
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            json.dump(report, stream, indent=2, sort_keys=True, ensure_ascii=False)
+            stream.write("\n")
+        completed = True
+    finally:
+        if not completed:
+            args.output.unlink(missing_ok=True)
+    print(report["status"] + "; OUTPUT_PRIVATE_0600; NO_GITHUB_WRITES")
+    return 2 if report["native_core_hold"] else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
