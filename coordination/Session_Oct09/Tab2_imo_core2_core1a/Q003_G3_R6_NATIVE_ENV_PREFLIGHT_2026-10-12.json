@@ -1,0 +1,66 @@
+{
+  "schema": "q003-v31-native-env-preflight/v1",
+  "date_utc": "2026-10-12",
+  "chat": "6acc9f8c",
+  "issue": 183,
+  "plan": "r6",
+  "aim": "v3.1.0",
+  "label_sha": "64a4e9c",
+  "outcome": "O1",
+  "task": "183-T2-G2-W1 / 183-T2-G2-W2",
+  "status": "BLOCKED",
+  "basis": {
+    "handover": "coordination/Session_Oct09/Tab2_imo_core2_core1a/handovers/2026-10-12-g2-2.md",
+    "plan_comment": "https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6121419307",
+    "product_main": "778eb35a70517a46108ad0a5dc01dfc89f61c0e3",
+    "isolated_test_branch": "agent/183-q003-private-core2-test-6acc303b",
+    "isolated_test_head": "d1aa1e092fd5cb102eea3e6b85a1428ad085a42d",
+    "previous_owner_reported_native_head": "9fa6bb37e7c855a7cb72a2aedd59e32074f712b7",
+    "previous_owner_reported_gap": "AUTHOR_LEARNER_METADATA/METADATA_FAMILY_MISSING",
+    "previous_native_html_shared_with_this_executor": false
+  },
+  "expected_private_custody": {
+    "question_id": "SOF-IMO-G09-L1-2023-24-A-Q003",
+    "complete_original_json_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "source_item_sha256": "31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2",
+    "source_bytes_in_receipt": false,
+    "exact_input_available_to_this_executor": false
+  },
+  "local_preflight": {
+    "working_root": "/mnt/data/Grade9v3.5",
+    "renderer_path": "Shared/tools/render_core.py",
+    "renderer_path_present": false,
+    "private_adapter_present": false,
+    "private_input_env_var": "Q003_PRIVATE_INPUT",
+    "private_input_env_var_provided": false,
+    "jsonschema_version": "4.26.0",
+    "git_remote_probe": "git ls-remote https://github.com/reallakshman19/Grade9v3.5.git refs/heads/agent/183-q003-private-core2-test-6acc303b",
+    "git_remote_probe_exit_code": 128,
+    "git_remote_probe_error": "Could not resolve host: github.com",
+    "checkout_success": false,
+    "native_command_invoked": false,
+    "reason_not_invoked": "No local renderer tree and no source-private Q003 JSON; native invocation cannot validate the exact original and would produce a misleading result.",
+    "actual_tests_run": 0,
+    "actual_tests_passed": 0,
+    "new_learner_pages": 0,
+    "native_golden_comparator_run": false,
+    "browser_visual_check_run": false,
+    "qrt_accepted": false,
+    "a4_run": false,
+    "published": false
+  },
+  "classification": {
+    "source_verified": "GitHub branch ref/product files and predecessor workpack read separately through connected repository provider.",
+    "owner_reported": "Prior 9fa6bb3 authentic render and one family gap, not rerun or output readback in this chat.",
+    "locally_verified": "Absence of checkout/input environment and actual DNS failure on Git remote preflight.",
+    "not_inferred": "No failure of render_core.py or benchmark_native.py is proved by this environment blocker."
+  },
+  "next_precise_action": "Existing authorized secure operator with original b263...e1227f9 JSON and full checkout at d1aa1e0 runs python -I TEST/imo-research/core2-q003/benchmark_native.py --private-input <LOCAL_PRIVATE_Q003_JSON>, checks ignored .private native outputs and receipts, supplies source-safe digests/gaps plus privately inspectable real HTML/learner behavior. If no secure checkout/input, remain BLOCKED. Do not publicly upload original text or substitute standalone HTML.",
+  "decisions_reserved": [
+    "original display mode",
+    "publisher rights",
+    "per-QRT cell Owner decision",
+    "A4 acceptance"
+  ],
+  "product_main_mutated": false
+}
