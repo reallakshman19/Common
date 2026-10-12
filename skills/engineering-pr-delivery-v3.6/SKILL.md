@@ -1,6 +1,6 @@
 # Engineering PR Delivery v3.6 — independent GitHub lifecycle (DRAFT)
 
-**Status:** v1.1.0 Owner label approved; this implementation remains DRAFT. **Owning issue:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Plan:** V36-341-PLAN-01. **Owner aim card:** V35-LIFECYCLE / CP-V35-LIFECYCLE-01, approved master v1.1.0 / label_sha 775f2bc.
+**Status:** v1.1.0 Owner label approved; this implementation remains DRAFT. **Owning issue:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Plan:** V36-341-PLAN-02. **Owner aim card:** V35-LIFECYCLE / CP-V35-LIFECYCLE-01, approved master v1.1.0 / label_sha 775f2bc.
 
 ## Scope, independence and safety
 
@@ -49,4 +49,25 @@ The v3.6 module requires Python 3.10+ and PyYAML 6.x. All public CLI commands re
 
 WP2 must validate stable workpack/task IDs, sizes, outcome and acceptance before materialization; replay must not duplicate children. WP3 must validate evidence references, current candidate, negative/stale tests and provider visibility. WP4 must preserve unmanaged human title text and refuse unauthorized writes; repeated runs must be idempotent and read back exact output. WP5 must implement BuddyRunner v1.6 as **1a execution HOLD → 1b independent reconstruction → 2 single reconciliation**, with an optional **Y** response to later Xb evidence, *not* a loop. WP6 must honor the Owner's pending D-V36-2 packaging decision. WP7 requires a real lab run with a fresh cold successor; synthetic lab proof must not be promoted to authentic programme acceptance.
 
-**Current admission:** Master label v1.1.0 approved; scope of automatic lab writes and future prompt-pack choices remains subject to explicit Owner direction. WP1 draft scaffolding is not approval of these decisions. WP4/WP7 live publisher writes HOLD pending explicit scoped permission. Older #294 decisions are **not v3.6 inputs**.
+**Current state:** Master label v1.1.0 approved; scope of automatic lab writes and future prompt-pack choices remains subject to explicit Owner direction. WP1 draft scaffolding is not approval of these decisions. WP4/WP7 live publisher writes HOLD pending explicit scoped permission. Older #294 decisions are **not v3.6 inputs**.
+
+## WP2 — parent → real child issues (O1)
+
+The approved master is always loaded from `relay/AIM/V35-LIFECYCLE.yaml`, not from this skill's fixture. The plan `plans/V36-341-PLAN-02.yaml` pins `work/version/label_sha` and each task's stable ID, size, single primary outcome, acceptance and owner-visible result. The WP2 implementation and tests are in `scripts/decompose_v36.py` and `tests/test_decompose_v36.py`.
+
+```sh
+# Repo root, read-only provider snapshot and proposed child list (default)
+python skills/engineering-pr-delivery-v3.6/scripts/decompose_v36.py \
+  --label relay/AIM/V35-LIFECYCLE.yaml \
+  --plan skills/engineering-pr-delivery-v3.6/plans/V36-341-PLAN-02.yaml
+
+# Only with an explicit scoped writing instruction and usable token:
+GITHUB_TOKEN=<token> python skills/engineering-pr-delivery-v3.6/scripts/decompose_v36.py \
+  --label relay/AIM/V35-LIFECYCLE.yaml \
+  --plan skills/engineering-pr-delivery-v3.6/plans/V36-341-PLAN-02.yaml \
+  --apply --confirm-scope 'reallakshman19/Common#341'
+```
+
+WP2 is **not** a title/evidence publisher; it only makes missing child issues and a managed parent-plan index. GitHub reads precede every write; duplicate child matches or multiple parent indexes fail closed; existing manually created WP1 #345 is uniquely adopted, not recreated. Repeated `--apply` should produce zero new children and an unchanged index. The 12 Oct Common #341 child list #345–#351 was created using connected GitHub tooling and read back, *not* by executing the Python `--apply` command; do not count it as script-level integration proof or the final lab acceptance.
+
+Exact-source WP1/WP2 offline tests have not yet been executed at branch head; the earlier 14/14 run only covered the superseded draft shape. The independent v3.6 acceptance suite must be rerun before claiming the implementation green.
