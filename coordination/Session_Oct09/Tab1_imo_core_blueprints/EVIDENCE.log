@@ -92,3 +92,21 @@ Claim: HOSTED_CI
 Blocker: TECH - shared existing printer defaults to non-A4 280x175mm, so same-page PDF does not meet D-182-4 A4 acceptance, Owner visual remains NOT_RUN; no public route or source rights
 Next: 182-T10 Core1B golden inspection, then Core1 and Core2B; Core1A A4 receipt remediation scoped to blocking O1 only
 LOG | chat=6acc3003 | tab=Tab1 | issue=182 | plan=P3 | progress=2/10 | done=none | next=182-T10 | ac=0/4 | blocker=TECH:O1-A4-print-noncompliant | PR=185@752b9ba:green | tests=11/11 | handover=no | aim=v1.2.0 | outcome=O1 | user=no
+
+Outcome: O1
+For the user: no new learner workflow changed by handover; one pinned-source successor prompt exists for G2's independent review of the Core page/golden evidence.
+Proof: https://github.com/reallakshman19/Common/blob/ff0c54cfa6d80ec6518790937cc84c888e723ead/coordination/Session_Oct09/Tab1_imo_core_blueprints/handovers/2026-10-12-g1-1a.md
+TASK EVIDENCE
+Task: BUDDY_V16_1A
+Goal (issue AC): prepare one independent G2 investigation prompt against current sticky v2.1.0 without product implementation.
+Status: PREPARED
+Met: yes (handover artifact only; O1 page acceptance remains incomplete)
+Done: Pinned BuddyRunner skill/contract/1A+1B source read; latest Owner label copied verbatim at top; current #182/#130/#137/#183 and exact draft PR heads recorded; G1 findings posed as questions rather than diagnosis; G2 1b publication/readback/digest/assessed schema included.
+Code: Common/main coordination artifact 1a @ff0c54cfa6d80ec6518790937cc84c888e723ead; Grade9v3.5 unchanged, existing draft PR #184/#185 unchanged
+Tests: GitHub handover blob and Common/main commit readback -> PASS; no product tests, print or CI triggered for handover
+CI: not-run -> not-run (handover only)
+Evidence: https://github.com/reallakshman19/Common/blob/ff0c54cfa6d80ec6518790937cc84c888e723ead/coordination/Session_Oct09/Tab1_imo_core_blueprints/handovers/2026-10-12-g1-1a.md
+AC: 1a delivered; Owner QRT/blueprint/golden/learner release decisions remain unaccepted/unknown
+Claim: NONE
+Blocker: G1 execution HOLD by BuddyRunner v1.6 Stage 1A
+Next: G2 independently investigates and submits 1b
