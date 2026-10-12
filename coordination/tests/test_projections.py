@@ -1,0 +1,229 @@
+"""WP3 ADV-09..16: producer, private API, provider-independent assertions."""
+import json
+import socketserver
+import sqlite3
+import tempfile
+import threading
+import unittest
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+from coordination.contracts import (
+    Project, Work, ExecutionLane, AgentAssignment, AgentRun, TabBinding, ControlTowerRegistry,
+)
+from coordination.indexer import EvidenceIndex
+from coordination.projections import ProjectionEngine, ProjectionQueryService
+from coordination.coordination_ui import ApiHandler
+
+
+ASOF = "2026-10-12T12:00:00Z"
+CHILD = "reallakshman19/Common#353"
+
+
+def setup_registry():
+    reg = ControlTowerRegistry()
+    for pid in ("common", "grade9"):
+        reg.register_project(Project(pid,pid,"https://github.com/example/"+pid,
+            "coordination", "ACTIVE" if pid=="common" else "DEGRADED",ASOF,
+            "REACHABLE" if pid=="common" else "RATE_LIMITED"))
+    snapshots = {}
+    for i in range(5):
+        pid = "common" if i<3 else "grade9"
+        wid, lid, aid, rid = (f"{pid}-work-{i}",f"{pid}-lane-{i}",
+                               f"{pid}-assignment-{i}",f"{pid}-run-{i}")
+        reg.register_work(Work(wid,pid,f"AIM-{i}","5f9065d",
+            f"https://github.com/example/{pid}/issues/{i+1}","IN_PROGRESS"))
+        reg.register_lane(ExecutionLane(lid,wid,"DEVELOPMENT"))
+        reg.register_assignment(AgentAssignment(aid,lid,f"RESP-{i}",
+            "PRIMARY_IMPLEMENTER","ACTIVE"))
+        tab = "Tab3" if i in (0,3) else f"Tab{i+1}"
+        chat = "same-chat" if i in (0,3) else f"chat-{i}"
+        reg.register_run(AgentRun(rid,aid,1,chat,ASOF,0,"IN_PROGRESS"))
+        reg.register_binding(TabBinding(f"binding-{i}",rid,pid,tab,1,"ACTIVE",
+                                        session_alias="Session_One"))
+        snap=snapshots.setdefault(pid,{"schema_version":"v1.0.0",
+            "project_id":pid,"coordinator_id":"coord-1",
+            "session_id":"Session_One","generated_at_utc":ASOF,
+            "source_digest":"a"*64,"source_watermark":"cycle-1",
+            "cycle_seconds":900,"observations":[]})
+        snap["observations"].append({
+            "tab":tab, "status":f"status-{i}", "aim":"-","plan":"-","ac":"-",
+            "ci":"CI_UNKNOWN","meter":"-","due":"-","checked":"-",
+            "next":f"original coordinator next {i}",
+            "tab_position":tab.replace("Tab",""),"chat_id":chat,
+            "binding_generation":1,"probe_status":"SUCCESS",
+            "last_probe_at_utc":"2026-10-12T11:59:00Z",
+            "observed_at_utc":ASOF
+        })
+    return reg,list(snapshots.values())
+
+
+def canonical():
+    return ("Outcome: O1\nFor the user: Evidence projection is read only\n"
+            "Proof: https://github.com/reallakshman19/Common/issues/353\n"
+            "TASK_EVIDENCE v3.6\nTask: WP3-353-W01\n"
+            "Child issue: reallakshman19/Common#353\n"
+            "Candidate: "+"a"*40+"\nTests: 1/1\n")
+
+
+class TestWP3MaterializedProjections(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory()
+        self.root=Path(self.tmp.name)
+        self.reg,self.snaps=setup_registry()
+        self.idx=EvidenceIndex(str(self.root/"source.sqlite"))
+        self.path=str(self.root/"materialized.sqlite")
+        self.engine=ProjectionEngine(self.path)
+        self.asof=ASOF
+        self.wm={"common":"source-v1","grade9":"source-v2"}
+
+    def tearDown(self):
+        self.idx.close()
+        self.tmp.cleanup()
+
+    def build(self,**kw):
+        return self.engine.materialize(self.reg,self.idx,self.snaps,
+                   kw.pop("as_of_utc",self.asof),
+                   kw.pop("source_watermarks",self.wm),**kw)
+
+    def rows(self,view,project=None,limit=200,cursor=None):
+        return ProjectionQueryService(self.path).page(view,project,limit,cursor)
+
+    def test_adv09_five_agents_duplicate_tab3_and_chat_are_isolated(self):
+        built=self.build()
+        self.assertEqual(built["counts"]["assignments"],5)
+        rows=self.rows("assignments")["items"]
+        self.assertEqual(len(rows),5)
+        self.assertEqual(len({(x["project_id"],x["assignment_id"]) for x in rows}),5)
+        common=next(x for x in rows if x["project_id"]=="common" and x["tab"]=="Tab3")
+        grade=next(x for x in rows if x["project_id"]=="grade9" and x["tab"]=="Tab3")
+        self.assertNotEqual(common["assignment_id"],grade["assignment_id"])
+        self.assertEqual(common["status"],"status-0")
+        self.snaps[0]["observations"].append({
+            **self.snaps[0]["observations"][0],
+            "tab":"Tab8","tab_position":"8","chat_id":"unbound-chat",
+            "status":"original unbound status"})
+        self.build(source_watermarks={"common":"source-v2","grade9":"source-v2"})
+        self.assertEqual(len(self.rows("assignments")["items"]),5)
+        orphan=self.rows("unassigned_observations")["items"]
+        self.assertEqual(len(orphan),1)
+        self.assertEqual(orphan[0]["status"],"original unbound status")
+        self.assertIsNone(orphan[0]["assignment_id"])
+
+    def test_adv10_digest_is_deterministic_and_source_sensitive(self):
+        a=self.build()["projection_digest"]
+        self.assertEqual(a,self.build()["projection_digest"])
+        other=ProjectionEngine(str(self.root/"second.sqlite"))
+        self.assertEqual(a,other.materialize(self.reg,self.idx,self.snaps,self.asof,self.wm)["projection_digest"])
+        self.snaps[0]["observations"][0]["status"]="provider-observed change"
+        self.assertNotEqual(a,self.build()["projection_digest"])
+
+    def test_adv11_staleness_provider_isolation(self):
+        self.snaps[0]["observations"][0]["last_probe_at_utc"]="2026-10-12T10:00:00Z"
+        self.build()
+        cells={x["tab"]:x for x in self.rows("assignments","common")["items"]}
+        self.assertEqual(cells["Tab3"]["agent_probe_freshness"],"STALE")
+        self.assertEqual(cells["Tab2"]["agent_probe_freshness"],"ALIVE")
+        p={x["project_id"]:x for x in self.rows("portfolio")["items"]}
+        self.assertEqual(p["common"]["provider_reachability"],"REACHABLE")
+        self.assertEqual(p["grade9"]["provider_reachability"],"RATE_LIMITED")
+
+    def test_adv12_unattributed_evidence_not_inherited_by_run(self):
+        self.idx.store_evidence("common",{
+            "provider_comment_id":"9001","evidence_id":"comment-9001",
+            "task_id":"WP3-353-W01","owner_issue":CHILD,
+            "candidate_sha":"a"*40,"author":"source",
+            "created_at":"2026-10-12T11:00:00Z",
+            "raw_text":canonical(),"is_canonical_8line":True,
+            "proof_url":"https://github.com/reallakshman19/Common/issues/353"})
+        self.build()
+        evidence=self.rows("evidence")["items"]
+        self.assertEqual(evidence[0]["attribution"],"UNATTRIBUTED")
+        self.assertIsNone(evidence[0]["run_id"])
+        self.assertIsNone(self.rows("works","common")["items"][0]["evidenced_tasks"])
+        mapping={
+            "project_id":"common","task_id":"WP3-353-W01","child_issue":CHILD,
+            "work_id":"common-work-0","assignment_id":"common-assignment-0",
+            "run_id":"common-run-0",
+            "source_ref":"https://github.com/reallakshman19/Common/issues/353",
+            "source_revision":"plan-r3",
+        }
+        self.build(task_attributions=[mapping])
+        e=self.rows("evidence")["items"][0]
+        self.assertEqual(e["attribution"],"ATTRIBUTED")
+        self.assertEqual(e["run_id"],"common-run-0")
+        self.assertEqual(next(x for x in self.rows("works")["items"]
+                              if x["work_id"]=="common-work-0")["evidenced_tasks"],1)
+        self.assertEqual(e["validator_verdict"],None)
+
+    def test_adv13_green_check_does_not_infer_owner_acceptance(self):
+        self.build()
+        for w in self.rows("works")["items"]:
+            self.assertEqual(w["acceptance_status"],"IN_PROGRESS")
+            self.assertEqual(w["ci_status"],"UNKNOWN")
+            self.assertIsNone(w["tasks_total"])
+            self.assertIsNone(w["accepted_ac"])
+
+    def test_adv14_only_factual_recovery_with_original_next(self):
+        self.snaps[0]["observations"][0]["probe_status"]="LOADFAIL"
+        self.build()
+        r=self.rows("recovery")["items"]
+        bad=next(x for x in r if x["anomaly_type"]=="PROBE_FAILURE")
+        self.assertEqual(bad["coordinator_next"],"original coordinator next 0")
+        self.assertNotIn("recommended_action",bad)
+        self.assertEqual(bad["status_verbatim"],"status-0")
+
+    def test_adv15_keyset_generation_cursor_and_bounded_pages(self):
+        self.build()
+        first=self.rows("assignments",limit=2)
+        second=self.rows("assignments",limit=2,cursor=first["next_cursor"])
+        self.assertEqual(len(first["items"]),2)
+        self.assertEqual(len(second["items"]),2)
+        ids=[x["assignment_id"] for x in first["items"]+second["items"]]
+        self.assertEqual(len(set(ids)),4)
+        with self.assertRaises(ValueError):
+            self.rows("assignments",limit=201)
+        with self.assertRaises(ValueError):
+            self.rows("assignments",limit=2,cursor="wrong%%%")
+        self.snaps[0]["observations"][0]["status"]="new generation"
+        self.build(source_watermarks={"common":"cycle2","grade9":"cycle1"})
+        with self.assertRaises(LookupError):
+            self.rows("assignments",limit=2,cursor=first["next_cursor"])
+
+    def test_adv16_private_api_get_never_creates_or_writes_db(self):
+        self.build()
+        before=Path(self.path).stat().st_mtime_ns
+        class Handler(ApiHandler):
+            pass
+        Handler.config={"projects":[{"id":"common","name":"Common"},{"id":"grade9","name":"Grade9"}],
+                        "server":{"projection_db_path":self.path}}
+        Handler.server_host="127.0.0.1"
+        with socketserver.TCPServer(("127.0.0.1",0),Handler) as server:
+            thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+            try:
+                addr=f"http://127.0.0.1:{server.server_address[1]}"
+                with urllib.request.urlopen(addr+"/api/v3/projections?view=assignments&limit=2") as response:
+                    body=json.load(response)
+                self.assertEqual(len(body["items"]),2)
+                self.assertEqual(body["schema_version"],"control_tower_projections_v1")
+                for suffix,code in (("?view=invalid",400),
+                                    ("?view=portfolio&project=not-a-project",404),
+                                    ("?view=portfolio&cursor=broken%%%",400)):
+                    with self.subTest(suffix=suffix):
+                        with self.assertRaises(urllib.error.HTTPError) as ctx:
+                            urllib.request.urlopen(addr+"/api/v3/projections"+suffix)
+                        self.assertEqual(ctx.exception.code,code)
+                with self.assertRaises(urllib.error.HTTPError) as ctx:
+                    req=urllib.request.Request(addr+"/api/v3/projections")
+                    req.add_header("Host","evil.example")
+                    urllib.request.urlopen(req)
+                self.assertEqual(ctx.exception.code,400)
+            finally:
+                server.shutdown();thread.join(timeout=4)
+        self.assertEqual(before,Path(self.path).stat().st_mtime_ns)
+
+
+if __name__=="__main__":
+    unittest.main()
