@@ -38,3 +38,8 @@
 2026-10-12 | chat=6accb51c | APPLY-D1 rendered artifact | artifact 11749865966 "imo182-qrt-d1-apply-five-core-html"; five generated HTML SHA256 5/5 match receipt; local Chromium final 37/37 PASS, 0 JS errors
 2026-10-12 | chat=6accb51c | per-cell review packet | handovers/QRT-APPLY-D1.md; technical completion appended, NOT successor-chat handover; issue #182 comment 6125201981 matches EVIDENCE.log
 2026-10-12 | chat=6accb51c | later PR-wide CI result | Grade9v3.5#192@771f808b exact head, guardrails run 38253294957 FAILURE (job 114824790518), separate scoped APPLY 38253294826 SUCCESS | lead reproduction PR#192 comment 6125240175
+2026-10-12 | chat=6accb51c | original MODEL D1 source | Grade9v3.5 DRAFT PR#192 agent/imo182-qrt-d1-represent @0949e4866b06aefd8b866fc3d2565f434e19bb93 | unique authored TEST model.v1.json, four safe SVG, five-role manifest core2=[], verifier, six-test suite, workflow, academic review proposal
+2026-10-12 | chat=6accb51c | MODEL D1 hosted CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38258022860 SUCCESS job 114841032291; 6/6 dedicated unittest PASS, 625 group/inverse tests+6 boundaries, six HTML incl index, zero REFERENCE gaps, Owner frozen original 5 SHA locks PASS
+2026-10-12 | chat=6accb51c | MODEL D1 exact HTML | artifact 11751335796 imo182-qrt-d1-model-five-core-html; all five SHA256 match hosted receipt; local exact HTML Chromium 37/37 PASS, JS errors 0, golden role refs/slots PASS
+2026-10-12 | chat=6accb51c | MODEL D1 cell artifact | handovers/QRT-MODEL-D1.md @5a192c579ebac4722d76dbbd31be9b1b50f32080 | qualified verdict/Owner blank; this is NOT chat-successor handover
+2026-10-12 | chat=6accb51c | MODEL issue#182 exact TASK EVIDENCE comment 6125634577, identical in EVIDENCE.log
