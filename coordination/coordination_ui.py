@@ -187,7 +187,7 @@ def parse_handovers(ho_dir: Path, session: str, tab: str) -> list[dict]:
     if not ho_dir.is_dir():
         return results
     for f in ho_dir.iterdir():
-        if not f.is_file():
+        if not f.is_file() or not is_safe_contained_path(f, ho_dir):
             continue
         head = _read(f)[:1500]
         hid_m = re.search(r"\*\*Handover ID:\*\*\s*`?([^`\n]{3,80})`?", head, re.I)
@@ -268,8 +268,12 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
     if not is_safe_contained_path(t_path, coord_dir):
         raise ValueError("Tab path escapes registered project")
 
+    scan_warnings = []
     def cached(fname, parser, *extra):
         fp = t_path / fname
+        if not is_safe_contained_path(fp, coord_dir):
+            scan_warnings.append({"file": fname, "code": "OUTSIDE_PROJECT"})
+            return []
         if not fp.exists():
             return []
         return CACHE.get_or_parse(fp, parser, session_name, tab_name) or []
@@ -285,7 +289,7 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
     # Handovers: parse dir (no single-file caching for directories; use mtime of newest file)
     ho_dir = t_path / "handovers"
     ho_mtime = 0.0
-    if ho_dir.is_dir():
+    if is_safe_contained_path(ho_dir, coord_dir) and ho_dir.is_dir():
         for f in ho_dir.iterdir():
             try:
                 m = f.stat().st_mtime
@@ -297,7 +301,7 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
     sentinel = str(ho_dir / "__dir__")
     existing = CACHE._entries.get(sentinel, {})
     if existing.get("mtime") != ho_mtime:
-        handovers_list = parse_handovers(ho_dir, session_name, tab_name)
+        handovers_list = parse_handovers(ho_dir, session_name, tab_name) if is_safe_contained_path(ho_dir, coord_dir) else []
         with CACHE._lock:
             CACHE._entries[sentinel] = {"mtime": ho_mtime, "data": handovers_list}
     else:
@@ -306,7 +310,6 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
     # JSON receipts & special reports (flat files in tab dir)
     json_receipts = []
     special_files = []
-    scan_warnings = []
     for fname in ("DECISIONS.md", "CHECKPOINTS.md", "LINEAGE.md", "EVIDENCE.log"):
         fp = t_path / fname
         if fp.is_file() and fp.stat().st_size > MAX_SCANNED_TEXT_BYTES:
@@ -347,7 +350,7 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
                                           "schema": None, "size": size, "data": None,
                                           "parse_status": "INVALID"})
                     scan_warnings.append({"file": f.name, "code": "RECEIPT_INVALID"})
-            elif f.suffix == ".md":
+            elif f.suffix == ".md" and is_safe_contained_path(f, coord_dir):
                 special_files.append({
                     "filename": f.name,
                     "path": str(f.relative_to(coord_dir)).replace("\\", "/"),
@@ -402,7 +405,8 @@ def scan_project(project: dict) -> dict:
     # Discover sessions
     session_dirs = sorted(
         d for d in coord_dir.iterdir()
-        if d.is_dir() and d.name.startswith("Session_") and d.name not in IGNORED_DIRS
+        if d.is_dir() and is_safe_contained_path(d, coord_dir)
+        and d.name.startswith("Session_") and d.name not in IGNORED_DIRS
     )
 
     for s_dir in session_dirs:
