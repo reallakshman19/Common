@@ -198,3 +198,52 @@ AC (before -> after): true native original-Q003 page 0->0, first named structura
 Claim: INDEPENDENT source/schema/commit; HOSTED_CI generic; OWNER-REPORTED native prior error
 Blocker: PERSON - Owner promised local clean checkout rerun on @9fa6bb3 and sanitized native output receipt/HTML
 Next: Owner rerun of T2 native Q003; if true success T3 actual golden, T4 canonical lesson, T5 QRT/A4; if first new error conditional W2 fix
+2026-10-12 | CHAT 6acc4eaa | TASK EVIDENCE BATCH OWNER_NATIVE_DRAFT_GAP_METADATA_GOLDEN_HARNESS | plan=r5 | aim=v3.1.0
+Outcome: O1
+For the user: Original Q003 now has an Owner-side real blueprint-rendered draft, 59805 bytes, but with one metadata gap; no acceptance.
+Proof: https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_V31_OWNER_NATIVE_RENDER_GAP2_FIX_AND_GOLDEN_PREP_2026-10-12.json; https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120631370
+Task: 183-T2-G2-W1
+Goal (issue AC): Faithful Q003 through BP-CORE2-SOURCE-QUESTION and Shared/tools/render_core.py
+Status: PARTIAL
+Met: partial
+Done: Owner reports native render at 9fa6bb3, exact source and four options, render digest f2b3e21cdfc61a22, 2 pages, gap 1
+Code (repo branch @ commit | PR): Owner run TEST@9fa6bb3; current branch TEST@d1aa1e092fd5cb102eea3e6b85a1428ad085a42d | PR none
+Tests (command -> pass/fail/skip): Owner clean clone python -I prepare_private.py -> REPORTED_PASS_with_1_gap; post-fix runner -> NOT_RUN
+CI (run -> result): HEAD learner-platform-code-tests 38223743981 -> success; v31-relay 38223743932 -> success; guardrails 38223743895 -> in progress at check
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120631370
+AC (before -> after): 0 original native drafts -> 1 draft with 1 metadata gap; 0 accepted QRT remains
+Claim: LOCAL Owner-reported; HOSTED_CI generic
+Blocker: NONE for initial run; family gap fix needs new native receipt for full O1
+Next: 183-T2-G2-W2 verify current HEAD zero-gap or next exact failure
+Outcome: O1
+For the user: Source-level family metadata contract is fixed in TEST, but the actual post-fix native result is not yet known.
+Proof: https://github.com/reallakshman19/Grade9v3.5/commit/2dcc9f46caa7125446230574d17181dbc016fe11
+Task: 183-T2-G2-W2
+Goal (issue AC): Close exact METADATA_FAMILY_MISSING gap without altering original exam input
+Status: PARTIAL
+Met: partial
+Done: authored family record with complete schema fields, Q003 family_ref and mic family refs, existing blueprint/renderer source untouched
+Code (repo branch @ commit | PR): TEST@d1aa1e092fd5cb102eea3e6b85a1428ad085a42d; family fix at 2dcc9f4 | PR none
+Tests (command -> pass/fail/skip): static source/schema and provider readback PASS; true native post-fix rerun NOT_RUN
+CI (run -> result): same generic HEAD workflows, not private Q003
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120631370
+AC (before -> after): missing family metadata -> real authored family binding; zero-gap native acceptance unproven
+Claim: INDEPENDENT static + generic HOSTED_CI
+Blocker: MACHINE - native full checkout inaccessible here; no new Owner permissions required
+Next: rerun exact Owner original secure Q003 input on HEAD d1aa1e092fd5cb102eea3e6b85a1428ad085a42d
+Outcome: O3
+For the user: Only a reproducible native structural golden comparison command is now available, no actual rendered fixture comparison yet.
+Proof: https://github.com/reallakshman19/Grade9v3.5/blob/d1aa1e092fd5cb102eea3e6b85a1428ad085a42d/TEST/imo-research/core2-q003/benchmark_native.py
+Task: 183-T3-G2-W1
+Goal (issue AC): actual output vs rendered G-CORE2-R2 candidate and Owner QRT cell decision
+Status: BLOCKED
+Met: no
+Done: wrote native-only comparator invoking real Q003 and golden renderers, committed TEST, private sanitized receipt, compiled local identical source, failed closed without checkout
+Code (repo branch @ commit | PR): TEST@d1aa1e092fd5cb102eea3e6b85a1428ad085a42d | PR none
+Tests (command -> pass/fail/skip): local Python py_compile -> pass; native compare -> NOT_RUN, browser/visual/Owner decision -> NOT_RUN
+CI (run -> result): generic learner-platform-code-tests and relay success, unrelated to golden
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120631370
+AC (before -> after): real golden benchmark NOT_RUN -> NOT_RUN; now script exists to run in secure native checkout; QRT 0/28
+Claim: LOCAL (script preflight), NONE actual golden output
+Blocker: MACHINE - no local full product checkout or native Q003 plus G-CORE2-R2 artifacts accessible to assistant
+Next: secure native run of benchmark_native.py with original Q003 input and inspect generated report/visual
