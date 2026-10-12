@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ControlTowerIngestionEvent",
+  "description": "Represents an immutable, normalized ingestion event from GitHub, coordinator probes, or local files.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "project_id",
+    "source_kind",
+    "source_ref",
+    "source_revision",
+    "content_sha",
+    "observed_at_utc",
+    "ingested_at_utc",
+    "parse_status",
+    "scope_key"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "project_id": { "type": "string" },
+    "source_kind": {
+      "type": "string",
+      "enum": [
+        "GITHUB_ISSUE_COMMENT",
+        "GITHUB_PR_REVIEW",
+        "GITHUB_CHECK_RUN",
+        "COORDINATOR_RUNTIME_PROBE",
+        "COORDINATOR_LOG",
+        "METRICS_SIDECAR"
+      ]
+    },
+    "source_ref": { "type": "string" },
+    "source_revision": { "type": ["string", "integer", "null"] },
+    "content_sha": { "type": "string", "pattern": "^[0-9a-f]{40,64}$" },
+    "observed_at_utc": { "type": "string", "format": "date-time" },
+    "ingested_at_utc": { "type": "string", "format": "date-time" },
+    "parse_status": {
+      "type": "string",
+      "enum": ["PARSED", "CLAIMED_UNKNOWN", "NONCANONICAL_REJECTED", "CORRUPT_IGNORED"]
+    },
+    "scope_key": { "type": "string" },
+    "raw_payload": { "type": ["string", "object", "null"] }
+  },
+  "additionalProperties": false
+}

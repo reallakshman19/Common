@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ControlTowerCheckObservation",
+  "description": "Represents a CI check or workflow run observation tied to a repository and exact commit SHA.",
+  "type": "object",
+  "required": [
+    "check_id",
+    "project_id",
+    "repo_id",
+    "pr_number",
+    "head_sha",
+    "workflow_name",
+    "job_name",
+    "applicability",
+    "conclusion",
+    "observed_at"
+  ],
+  "properties": {
+    "check_id": { "type": "string" },
+    "project_id": { "type": "string" },
+    "repo_id": { "type": "string" },
+    "pr_number": { "type": "integer", "minimum": 1 },
+    "head_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "workflow_name": { "type": "string" },
+    "job_name": { "type": "string" },
+    "applicability": {
+      "type": "string",
+      "enum": ["REQUIRED", "PATH_SCOPED", "OPTIONAL", "NOT_APPLICABLE"]
+    },
+    "conclusion": {
+      "type": "string",
+      "enum": [
+        "EXACT_HEAD_PASSED",
+        "TESTS_PASSED_ON_OLD_HEAD",
+        "GREEN_NOT_APPLICABLE",
+        "FAILED",
+        "CANCELLED",
+        "TIMED_OUT",
+        "IN_PROGRESS",
+        "PENDING",
+        "UNKNOWN"
+      ]
+    },
+    "run_url": { "type": ["string", "null"] },
+    "observed_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

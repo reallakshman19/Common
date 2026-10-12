@@ -157,6 +157,15 @@ class TestSecurityHttpServer(unittest.TestCase):
         body = json.loads(ctx.exception.read().decode())
         self.assertEqual(body.get("code"), "TOO_LARGE")
 
+    def test_api_v3_snapshot_returns_valid_snapshot(self):
+        req = urllib.request.Request(f"http://127.0.0.1:{self.port}/api/v3/snapshot")
+        with urllib.request.urlopen(req) as resp:
+            self.assertEqual(resp.status, 200)
+            data = json.loads(resp.read().decode())
+            self.assertEqual(data.get("visibility"), "PUBLIC")
+            self.assertIn("projects", data)
+            self.assertIn("source_watermarks", data)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ControlTowerSnapshot",
+  "description": "Represents an immutable, point-in-time multi-project control tower projection with source watermarks and conflict logs.",
+  "type": "object",
+  "required": [
+    "snapshot_id",
+    "version",
+    "generated_at_utc",
+    "visibility",
+    "source_watermarks",
+    "projects",
+    "works",
+    "assignments",
+    "runs",
+    "tab_bindings",
+    "evidence_count",
+    "conflicts"
+  ],
+  "properties": {
+    "snapshot_id": { "type": "string" },
+    "version": { "type": "string" },
+    "generated_at_utc": { "type": "string", "format": "date-time" },
+    "visibility": {
+      "type": "string",
+      "enum": ["PUBLIC", "RESTRICTED", "INTERNAL"]
+    },
+    "source_watermarks": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "projects": {
+      "type": "array",
+      "items": { "$ref": "control_tower_project.schema.json" }
+    },
+    "works": {
+      "type": "array",
+      "items": { "$ref": "control_tower_work.schema.json" }
+    },
+    "assignments": {
+      "type": "array",
+      "items": { "$ref": "control_tower_assignment.schema.json" }
+    },
+    "runs": {
+      "type": "array",
+      "items": { "$ref": "control_tower_run.schema.json" }
+    },
+    "tab_bindings": {
+      "type": "array",
+      "items": { "$ref": "control_tower_tab_binding.schema.json" }
+    },
+    "evidence_count": { "type": "integer", "minimum": 0 },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["conflict_type", "severity", "entity_id", "details"],
+        "properties": {
+          "conflict_type": { "type": "string" },
+          "severity": { "type": "string", "enum": ["CRITICAL_HOLD", "WARNING", "INFO"] },
+          "entity_id": { "type": "string" },
+          "details": { "type": "string" },
+          "source_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
