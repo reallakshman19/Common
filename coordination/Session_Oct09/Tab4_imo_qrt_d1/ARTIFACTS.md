@@ -33,3 +33,7 @@
 2026-10-12 | chat=6accb51c | EXPLAIN-D1 issue closure evidence | Grade9v3.5 issue#182 comment 6124989042 | matched EVIDENCE.log, success run 38251957578 artifact 11748552287
 2026-10-12 | chat=6accb51c | APPLY-D1 issue partial evidence | Grade9v3.5 issue#182 comment 6124997038 | matched EVIDENCE.log, exact-head run 38253294826 QUEUED; no HTML credit
 2026-10-12 | chat=6accb51c | EXPLAIN exact browser QA | local /mnt/data/imo182-qrt-d1-explain-browser-qa.py on artifact 11748552287 | PASS 45/45 and 0 JS errors, all five slot anatomies equal immutable golden
+2026-10-12 | chat=6accb51c | APPLY-D1 exact source | Grade9v3.5 agent/imo182-qrt-d1-represent @771f808b5000ddef11d74bde45835eee0905cdc4 | DRAFT PR#192, five roles from TEST/products/imo182-qrt-d1-apply.manifest.json, no merge
+2026-10-12 | chat=6accb51c | APPLY-D1 hosted CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38253294826 SUCCESS job 114824789972; 6/6 tests, 625 area roundtrips + 6 boundaries, zero reference-depth gaps, Owner frozen 5 SHA locks intact
+2026-10-12 | chat=6accb51c | APPLY-D1 rendered artifact | artifact 11749865966 "imo182-qrt-d1-apply-five-core-html"; five generated HTML SHA256 5/5 match receipt; local Chromium final 37/37 PASS, 0 JS errors
+2026-10-12 | chat=6accb51c | per-cell review packet | handovers/QRT-APPLY-D1.md; technical completion appended, NOT successor-chat handover; issue #182 comment 6125201981 matches EVIDENCE.log
