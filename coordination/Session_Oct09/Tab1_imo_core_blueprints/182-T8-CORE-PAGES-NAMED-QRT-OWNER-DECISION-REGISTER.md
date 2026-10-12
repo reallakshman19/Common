@@ -1,6 +1,6 @@
 # 182-T8 | Owner decision register — QRT cell per Core page, no acceptance inferred
 
-2026-10-12 | tab=Tab1 | chat=6acc408a | Grade9v3.5 issue #182 | P4 + P2 T8 continuation | aim=v2.1.0/ad b005e (master label_sha `adb005e`) | outcome=O2 | REPORT=PREPARED | QRT=0/28 ACCEPTED
+2026-10-12 | tab=Tab1 | chat=6acc408a | Grade9v3.5 issue #182 | P4 + P2 T8 continuation | aim=v2.1.0 / master label_sha `adb005e` | outcome=O2 | REPORT=PREPARED | QRT=0/28 ACCEPTED
 
 Outcome: O2
 For the user: No real learner page was published or given an academic acceptance. The Owner now has a five-page source-to-QRT decision register with exact current TEST role receipts, primary cognitive demand evidence and the still-open H3 protected-warrant question.
