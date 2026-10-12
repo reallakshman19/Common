@@ -10,6 +10,7 @@ Provides:
 """
 
 import sqlite3
+import threading
 import hashlib
 import json
 import re
@@ -65,11 +66,12 @@ class EvidenceIndex:
     def __init__(self, db_path: str = ":memory:"):
         self.db_path = db_path
         self._conn: Optional[sqlite3.Connection] = None
+        self._lock = threading.RLock()
         self._init_db()
 
     def _get_connection(self) -> sqlite3.Connection:
         if self._conn is None:
-            self._conn = sqlite3.connect(self.db_path, timeout=10.0)
+            self._conn = sqlite3.connect(self.db_path, timeout=10.0, check_same_thread=False)
             self._conn.row_factory = sqlite3.Row
             if self.db_path != ":memory:":
                 self._conn.execute("PRAGMA journal_mode=WAL;")
@@ -78,9 +80,10 @@ class EvidenceIndex:
 
     def close(self):
         """Closes the underlying SQLite connection if open."""
-        if self._conn is not None:
-            self._conn.close()
-            self._conn = None
+        with self._lock:
+            if self._conn is not None:
+                self._conn.close()
+                self._conn = None
 
     def _init_db(self):
         conn = self._get_connection()
@@ -152,7 +155,7 @@ class EvidenceIndex:
 
     def record_ingestion_event(self, event: Dict[str, Any]) -> bool:
         """Idempotently records raw ingestion event."""
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             try:
                 conn.execute("""
                 INSERT INTO ingestion_events (
@@ -176,8 +179,11 @@ class EvidenceIndex:
                 conn.commit()
                 return True
             except sqlite3.IntegrityError:
-                # Already ingested identical event ID
-                return False
+                old = conn.execute("SELECT content_sha FROM ingestion_events WHERE event_id = ?",
+                                   (event["event_id"],)).fetchone()
+                if old and old["content_sha"] == event["content_sha"]:
+                    return False
+                raise ValueError("Immutable event ID collision with changed content")
 
     def store_evidence(self, project_id: str, evidence: Dict[str, Any]) -> Tuple[int, bool]:
         """
@@ -187,7 +193,7 @@ class EvidenceIndex:
         cid = str(evidence["provider_comment_id"])
         c_sha = hashlib.sha256(evidence["raw_text"].encode("utf-8")).hexdigest()
 
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             # Check existing records for this comment ID
             rows = conn.execute("""
             SELECT version, content_sha FROM task_evidence
@@ -197,9 +203,10 @@ class EvidenceIndex:
 
             if rows:
                 latest = rows[0]
-                if latest["content_sha"] == c_sha:
-                    # Identical replay: idempotent return
-                    return latest["version"], False
+                # Any already observed historical revision must replay idempotently.
+                for old in rows:
+                    if old["content_sha"] == c_sha:
+                        return old["version"], False
                 # Edited comment: deactivate previous version, bump version
                 new_version = latest["version"] + 1
                 conn.execute("""
@@ -237,9 +244,9 @@ class EvidenceIndex:
 
     def store_check_observation(self, check: Dict[str, Any]):
         """Records or updates a CI check observation."""
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             conn.execute("""
-            INSERT OR REPLACE INTO check_observations (
+            INSERT OR IGNORE INTO check_observations (
                 check_id, project_id, repo_id, pr_number, head_sha,
                 workflow_name, job_name, applicability, conclusion,
                 run_url, observed_at
@@ -261,7 +268,7 @@ class EvidenceIndex:
 
     def get_active_evidence(self, project_id: Optional[str] = None) -> List[Dict[str, Any]]:
         """Returns all active evidence records."""
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             query = "SELECT * FROM task_evidence WHERE is_active_version = 1"
             params = []
             if project_id:
@@ -272,7 +279,7 @@ class EvidenceIndex:
 
     def get_evidence_versions(self, project_id: str, provider_comment_id: str) -> List[Dict[str, Any]]:
         """Returns full version history of a specific comment ID."""
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             rows = conn.execute("""
             SELECT * FROM task_evidence
             WHERE project_id = ? AND provider_comment_id = ?
@@ -282,7 +289,7 @@ class EvidenceIndex:
 
     def get_checks_for_pr(self, project_id: str, pr_number: int) -> List[Dict[str, Any]]:
         """Returns all check observations for a given PR."""
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             rows = conn.execute("""
             SELECT * FROM check_observations
             WHERE project_id = ? AND pr_number = ?
@@ -293,7 +300,7 @@ class EvidenceIndex:
     def update_project_status(self, project_id: str, source_kind: str, status: str, cursor: Optional[str] = None):
         """Updates provider reachability cursor for a project."""
         now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             conn.execute("""
             INSERT INTO project_cursors (project_id, source_kind, last_cursor, last_fetch_at, provider_status)
             VALUES (?, ?, ?, ?, ?)
@@ -304,14 +311,22 @@ class EvidenceIndex:
             """, (project_id, source_kind, cursor, now, status))
             conn.commit()
 
+    def get_project_observation(self, project_id: str, source_kind: str = "GITHUB_ISSUE_COMMENT") -> Optional[Dict[str, Any]]:
+        """Last provider observation; absence must not imply reachability."""
+        with self._lock, self._get_connection() as conn:
+            row = conn.execute("""
+                SELECT * FROM project_cursors WHERE project_id = ? AND source_kind = ?
+                """, (project_id, source_kind)).fetchone()
+            return dict(row) if row else None
+
     def get_project_status(self, project_id: str, source_kind: str = "GITHUB_ISSUE_COMMENT") -> str:
         """Retrieves provider reachability status for a project."""
-        with self._get_connection() as conn:
+        with self._lock, self._get_connection() as conn:
             row = conn.execute("""
             SELECT provider_status FROM project_cursors
             WHERE project_id = ? AND source_kind = ?
             """, (project_id, source_kind)).fetchone()
-            return row["provider_status"] if row else "REACHABLE"
+            return row["provider_status"] if row else "UNKNOWN"
 
 
 @lru_cache(maxsize=1)
