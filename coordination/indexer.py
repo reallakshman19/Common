@@ -11,6 +11,8 @@ Provides:
 
 import sqlite3
 import threading
+import urllib.request
+import urllib.error
 import hashlib
 import json
 import re
@@ -653,7 +655,8 @@ def ingest_issue_evidence(
                 # treat a parent issue comment as accepted child task evidence.
                 if str(parsed["owner_issue"]).strip() not in (
                     str(issue_number), f"#{issue_number}",
-                    f"https://github.com/{repository}/issues/{issue_number}"
+                    f"https://github.com/{repository}/issues/{issue_number}",
+                    f"{repository}#{issue_number}"
                 ):
                     stats["rejected"] += 1
                     continue
