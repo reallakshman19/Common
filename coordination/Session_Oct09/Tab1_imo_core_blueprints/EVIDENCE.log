@@ -218,3 +218,38 @@ AC (before -> after): 182-T4 packet no real rendered page/attempt trace -> hoste
 Claim: LOCAL
 Blocker: OWNER - assign independent academic reviewer, decide D2 H3 pre-attempt protected-work risk and named QRT cell with decision ID; not a blocker to new O1 Core pages
 Next: Core1 registered-blueprint page and Core2B; W04 condition NOT_TRIGGERED
+Outcome: O1
+For the user: No public/real learner change. A Core1 TEST orientation page now exists from BP-CORE1-ORIENTATION@1.1.0 and technically matches the candidate golden prerequisite-orientation T14 technique.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38210827543
+TASK EVIDENCE | 182-T6 | P4 | chat=6acc408a | aim=v2.1.0 | outcome=O1 | user=no
+Task: 182-T6
+Goal (issue AC): Build actual Core1 TEST learner page from existing blueprint and independently benchmark against G-MATH-LINEAR-CONSTRAINT/core1.html T14, without Owner acceptance fiction.
+Status: DONE
+Met: partial, actual TEST page and technical golden move checked, no academic/Owner signoff
+Done: Author-only Core1 manifest selects original Core1A concept from untouched original package blob e8b1dcae1014f9a9a2cce7c2489b21b36c049f81, no real source Core2. Actual exact-head CI artifact 11729430238 Core1 HTML sha256 605c57fe7fff8b0f128ad41ef813f8db2717f603cfc7793545ded401330d578f; registered blueprint BP-CORE1-ORIENTATION@1.1.0 with identity/orientation slots and real hard transition, governing relation, compact anchor and exit prompt, zero authored depth gaps. Compare authored arbitrary positive integer/prerequisite guarantees to golden equation domain/substitution role, not text identity. Local Chromium visible role and two slots PASS. Existing registry and renderer unchanged.
+Code (repo branch @ commit | PR): Grade9v3.5 agent/issue-182-core1-core2b-6acc408a @c55c9d927c09a4dfdb45eba5d038983e0f562275 | PR #187 DRAFT/unmerged
+Tests (command -> pass/fail/skip): Hosted python -m unittest tests.imo_182_core1_core2b_golden -v -> joint T6/T7 7/7 PASS; local exact-head Core1 visible anatomy PASS; Owner golden human NOT_RUN
+CI (run -> result): https://github.com/reallakshman19/Grade9v3.5/actions/runs/38210827543 -> SUCCESS exact head; other PR-wide CI separately
+Evidence (link): https://github.com/reallakshman19/Common/blob/4a1c736d665ea4bd38ecb9f9fec528c802f801c2/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-T6-CORE1-ORIENTATION-GOLDEN-REVIEW.md ; https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6118769613
+AC (before -> after): Core1 role unbuilt for IMO TEST concept -> actual registered blueprint page from existing authored source, golden T14 method comparison; Owner O1/O2 acceptance unchanged
+Claim: HOSTED_CI
+Blocker: NONE for T7; Owner golden/academic/QRT decision remains reserved
+Next: 182-T7
+---
+Outcome: O1
+For the user: No public/real learner change. A new TEST Core2B page poses a distinct four-factor/48 universal claim, supplies unmarked givens, and locks the counterexample/strongest-common-divisor answer until commitment.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38210827543
+TASK EVIDENCE | 182-T7 | P4 | chat=6acc408a | aim=v2.1.0 | outcome=O1 | user=no
+Task: 182-T7
+Goal (issue AC): Build Core2B transfer page from existing BP-CORE2B-TRANSFER@1.1.0, benchmark T08/T09 against candidate golden, use a genuine changed demand and same-product prior authored lineage.
+Status: DONE
+Met: partial, true TEST page and technical golden T09 benchmark complete, separate display of T08 closure unverified and Owner approval pending
+Done: Created isolated TEST pilot snapshot with authored Q-TEST-CORE2B-FOUR-FACTOR-48-BOUNDARY, unmarked four-factor SVG and self-contained manifest, existing original Core1A pilot restored byte-identical to main (avoids earlier 3-vs-2 Core1A CI regression). Exact-head Core2B HTML sha256 d26f325e1f48dd8a4f938cfca7ccd59d8f380a8ab0aa420fc456da75e48ef231; registered BP-CORE2B-TRANSFER@1.1.0 slots identity,attempt,post_attempt match candidate golden. Renders invariant 24 and changed 48 after attempt; authored T08 closure recorded task-specifically but not shown as separate block (no false acceptance). General arithmetic: k=1 ->24 not 48, four factors always contain 8 and 3 so 24 divides; k=1 proves greatest universal 24; k=5 ->1680 divisible by48. Hosted 7/7 and local exact-head Chromium early/blank commit blocked, after typed attempt explicit disclosure reveals, safe SVG no factor mark, prior Core2A link resolves, zero reference-depth gaps. Original source Core2 is unselected. Fixed initial schema/missing crux tests and separate original source boundary before final run. No blueprint, shared renderer, print, QRT, state, source rights, merge or public route changes.
+Code (repo branch @ commit | PR): Grade9v3.5 agent/issue-182-core1-core2b-6acc408a @c55c9d927c09a4dfdb45eba5d038983e0f562275 | PR #187 DRAFT/unmerged
+Tests (command -> pass/fail/skip): Hosted unittest tests.imo_182_core1_core2b_golden -> 7/7 PASS; LOCAL Chromium lock/commit/reveal 5/5 PASS; exact artifact SHA receipt 6/6 PASS; Owner human NOT_RUN
+CI (run -> result): https://github.com/reallakshman19/Grade9v3.5/actions/runs/38210827543 -> SUCCESS; other PR-wide CI separately
+Evidence (link): https://github.com/reallakshman19/Common/blob/5ea6a44ee23021b8b0d2434a4615bc217a295781/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-T7-CORE2B-TRANSFER-GOLDEN-REVIEW.md ; https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6118776153
+AC (before -> after): no authored Core2B transfer page -> exact-head changed-demand blueprint page technically benchmarked T08 record/T09 visible, Owner approval and T08 separate display outstanding
+Claim: HOSTED_CI
+Blocker: OWNER - pending independent golden/academic and named QRT decisions (D-182-2-H3 among them), not source or technical build blocker
+Next: 182-T8 Owner QRT decisions; W04 SKIP without golden-proven blueprint gap
