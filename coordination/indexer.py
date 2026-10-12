@@ -530,3 +530,220 @@ def generate_control_tower_snapshot(
     }
 
     return snapshot
+
+
+class ProviderFailure(Exception):
+    """A provider error for one source; other projects must remain queryable."""
+
+    def __init__(self, status: int, reason: str = ""):
+        self.status = status
+        super().__init__(f"GitHub provider returned {status}: {reason}")
+
+
+class GitHubEvidenceProvider:
+    """Read-only GitHub REST adapter; use a separate trusted token/environment."""
+
+    def __init__(self, token: Optional[str] = None, timeout: int = 15):
+        self.token = token
+        self.timeout = timeout
+
+    def get_json(self, path: str, query: Optional[Dict[str, Any]] = None) -> Any:
+        from urllib.parse import urlencode, quote
+        if not path.startswith("repos/") or ".." in path.split("/"):
+            raise ValueError("Provider path must identify a repository resource")
+        url = "https://api.github.com/" + quote(path, safe="/-_.")
+        if query:
+            url += "?" + urlencode(query)
+        headers = {"Accept": "application/vnd.github+json",
+                   "User-Agent": "coordination-control-tower-wp1",
+                   "X-GitHub-Api-Version": "2022-11-28"}
+        if self.token:
+            headers["Authorization"] = "Bearer " + self.token
+        request = urllib.request.Request(url, headers=headers)
+        try:
+            with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                return json.load(response)
+        except urllib.error.HTTPError as exc:
+            raise ProviderFailure(exc.code, "permission, rate limit or source unavailable") from exc
+
+
+def _provider_status(code: int) -> str:
+    return ("RATE_LIMITED" if code == 429 else "FORBIDDEN" if code == 403 else
+            "UNAVAILABLE" if code in (404, 500, 502, 503, 504) else "UNAVAILABLE")
+
+
+def ingest_issue_evidence(
+    index: EvidenceIndex,
+    provider: GitHubEvidenceProvider,
+    *,
+    project_id: str,
+    repository: str,
+    issue_number: int,
+    max_pages: int = 5
+) -> Dict[str, Any]:
+    """Bounded, idempotent, source-verified one-issue ingestion.
+
+    The caller registers project/work bindings separately; an issue comment is
+    not automatically assigned to a work or admitted as accepted engineering fact.
+    """
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
+        raise ValueError("Expected owner/repository")
+    if issue_number < 1 or not (1 <= max_pages <= 20):
+        raise ValueError("Invalid bounded ingestion request")
+    source_kind = f"GITHUB_ISSUE_COMMENT:{repository}:{issue_number}"
+    stats = {"project_id": project_id, "ingested": 0, "replayed": 0,
+             "canonical": 0, "rejected": 0, "provider_status": "UNKNOWN"}
+    try:
+        repo = provider.get_json(f"repos/{repository}")
+        repo_id = str(repo["id"])
+        canonical_full_name = repo["full_name"]
+        # An explicit registered repository must match provider identity.
+        if canonical_full_name.lower() != repository.lower():
+            raise ValueError("Provider repository identity mismatch")
+        newest = None
+        for page in range(1, max_pages + 1):
+            rows = provider.get_json(f"repos/{repository}/issues/{issue_number}/comments",
+                                     {"per_page": 100, "page": page})
+            if not isinstance(rows, list):
+                raise ValueError("Unexpected GitHub comments response")
+            for comment in rows:
+                comment_id = str(comment["id"])
+                raw = comment["body"] or ""
+                digest = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+                parsed, result = CanonicalV36Adapter.parse(raw)
+                ref = comment["html_url"]
+                created = comment["created_at"]
+                updated = comment.get("updated_at") or created
+                if newest is None or updated > newest:
+                    newest = updated
+                event_id = f"github:{repo_id}:issue:{issue_number}:comment:{comment_id}:{digest}"
+                event = {"event_id": event_id, "project_id": project_id,
+                         "source_kind": "GITHUB_ISSUE_COMMENT",
+                         "source_ref": ref, "source_revision": updated,
+                         "content_sha": digest, "raw_payload": {"id": comment_id, "body": raw},
+                         "observed_at_utc": updated,
+                         "ingested_at_utc": datetime.now(timezone.utc).isoformat(),
+                         "parse_status": result, "scope_key": f"{repo_id}/issue/{issue_number}"}
+                if index.record_ingestion_event(event):
+                    stats["ingested"] += 1
+                else:
+                    stats["replayed"] += 1
+                if parsed is None:
+                    stats["rejected"] += 1
+                    continue
+                # Own-child attachment is checked before publication; do not
+                # treat a parent issue comment as accepted child task evidence.
+                if str(parsed["owner_issue"]).strip() not in (
+                    str(issue_number), f"#{issue_number}",
+                    f"https://github.com/{repository}/issues/{issue_number}"
+                ):
+                    stats["rejected"] += 1
+                    continue
+                index.store_evidence(project_id, {
+                    "evidence_id": event_id, "provider_comment_id": comment_id,
+                    "task_id": parsed["task_id"], "owner_issue": parsed["owner_issue"],
+                    "candidate_sha": parsed["candidate_sha"], "pr_number": None,
+                    "author": comment.get("user", {}).get("login") or "UNKNOWN",
+                    "created_at": created, "updated_at": updated,
+                    "raw_text": raw, "proof_url": ref,
+                    "is_canonical_8line": True
+                })
+                stats["canonical"] += 1
+            if len(rows) < 100:
+                break
+        index.update_project_status(project_id, source_kind, "REACHABLE", newest)
+        index.update_project_status(project_id, "GITHUB_ISSUE_COMMENT", "REACHABLE", newest)
+        stats["provider_status"] = "REACHABLE"
+    except ProviderFailure as exc:
+        state = _provider_status(exc.status)
+        index.update_project_status(project_id, source_kind, state)
+        index.update_project_status(project_id, "GITHUB_ISSUE_COMMENT", state)
+        stats["provider_status"] = state
+        stats["provider_error_code"] = exc.status
+    return stats
+
+
+def ingest_pr_checks(
+    index: EvidenceIndex, provider: GitHubEvidenceProvider, *,
+    project_id: str, repository: str, pr_number: int
+) -> Dict[str, Any]:
+    """Fetch PR HEAD from GitHub before classifying its observed check runs."""
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
+        raise ValueError("Expected owner/repository")
+    if pr_number < 1:
+        raise ValueError("Invalid PR number")
+    try:
+        repo = provider.get_json(f"repos/{repository}")
+        if repo["full_name"].lower() != repository.lower():
+            raise ValueError("Provider repository identity mismatch")
+        pr = provider.get_json(f"repos/{repository}/pulls/{pr_number}")
+        current_head = pr["head"]["sha"]
+        checks = provider.get_json(f"repos/{repository}/commits/{current_head}/check-runs",
+                                   {"per_page": 100})
+        rows = checks["check_runs"]
+        now = datetime.now(timezone.utc).isoformat()
+        counts = {"EXACT_HEAD_PASSED": 0, "GREEN_NOT_APPLICABLE": 0,
+                  "FAILED": 0, "PENDING": 0, "UNKNOWN": 0,
+                  "TESTS_PASSED_ON_OLD_HEAD": 0}
+        for row in rows:
+            result = ExactHeadCIAdapter.evaluate_check(
+                check_name=row["name"],
+                check_head_sha=row["head_sha"],
+                current_pr_head_sha=current_head,
+                check_status=row["status"],
+                check_conclusion=row.get("conclusion") or "",
+                is_path_scoped=True, skipped=row.get("conclusion") in ("skipped", "neutral")
+            )
+            counts[result] = counts.get(result, 0) + 1
+            receipt = f"{repo['id']}:{pr_number}:{current_head}:{row['id']}:{row.get('updated_at')}:{row.get('status')}:{row.get('conclusion')}"
+            index.store_check_observation({
+                "check_id": hashlib.sha256(receipt.encode("utf-8")).hexdigest(),
+                "project_id": project_id, "repo_id": str(repo["id"]),
+                "pr_number": pr_number, "head_sha": row["head_sha"],
+                "workflow_name": row.get("name", ""), "job_name": row["name"],
+                "applicability": "PATH_SCOPED", "conclusion": result,
+                "run_url": row.get("html_url"), "observed_at": now
+            })
+        index.update_project_status(project_id, "GITHUB_CHECK_RUN", "REACHABLE", current_head)
+        return {"project_id": project_id, "pr_number": pr_number,
+                "observed_head": current_head, "counts": counts,
+                "provider_status": "REACHABLE"}
+    except ProviderFailure as exc:
+        state = _provider_status(exc.status)
+        index.update_project_status(project_id, "GITHUB_CHECK_RUN", state)
+        return {"project_id": project_id, "pr_number": pr_number,
+                "observed_head": None, "counts": {},
+                "provider_status": state, "provider_error_code": exc.status}
+
+
+def main(argv=None) -> int:
+    """One-shot read-only GitHub fetch; recurring scheduling belongs to coordinator."""
+    import argparse
+    import os
+    parser = argparse.ArgumentParser(description="WP1 bounded GitHub evidence ingestion")
+    parser.add_argument("--db", required=True)
+    parser.add_argument("--project", required=True)
+    parser.add_argument("--repo", required=True)
+    parser.add_argument("--issue", type=int)
+    parser.add_argument("--pr", type=int)
+    args = parser.parse_args(argv)
+    if not args.issue and not args.pr:
+        parser.error("Provide --issue or --pr")
+    index = EvidenceIndex(args.db)
+    provider = GitHubEvidenceProvider(os.environ.get("GITHUB_TOKEN"))
+    try:
+        outputs = []
+        if args.issue:
+            outputs.append(ingest_issue_evidence(index, provider, project_id=args.project,
+                                                 repository=args.repo, issue_number=args.issue))
+        if args.pr:
+            outputs.append(ingest_pr_checks(index, provider, project_id=args.project,
+                                            repository=args.repo, pr_number=args.pr))
+        print(json.dumps(outputs, indent=2))
+        return 0 if all(x["provider_status"] == "REACHABLE" for x in outputs) else 2
+    finally:
+        index.close()
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
