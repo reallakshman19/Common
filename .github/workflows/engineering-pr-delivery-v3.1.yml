@@ -40,12 +40,18 @@ jobs:
             exit 0
           fi
 
+          # A PR base.sha can move after the feature branch forks. Diffing the
+          # two tip SHAs directly includes unrelated base changes and falsely
+          # runs legacy v3.1 tests on independent v3.6-only pull requests.
+          # Merge-base..head matches the actual PR changed-file boundary.
           changed_paths="$RUNNER_TEMP/relay-changed-paths.txt"
-          if ! git diff --name-only --no-renames "$BASE_SHA" "$HEAD_SHA" > "$changed_paths"; then
+          if ! merge_base="$(git merge-base "$BASE_SHA" "$HEAD_SHA")" \
+             || ! git diff --name-only --no-renames "$merge_base" "$HEAD_SHA" > "$changed_paths"; then
             echo "relevant=true" >> "$GITHUB_OUTPUT"
             echo "Path relevance could not be determined; running full validation." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
+          echo "PR relevance computed from merge base $merge_base (not moving base tip)." >> "$GITHUB_STEP_SUMMARY"
 
           relevant=false
           while IFS= read -r path; do
