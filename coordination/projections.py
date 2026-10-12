@@ -185,6 +185,7 @@ class ProjectionEngine:
             project_runtime = {pid: {"fresh": 0, "stale": 0, "unknown": 0,
                                      "stale_agents": 0} for pid in registry.projects}
             seen_task_by_work = {}
+            latest_evidence_by_run = {}
             def emit(view, project, key, row):
                 if view not in VIEWS or not isinstance(project, str):
                     raise ValueError("Invalid projection scope")
@@ -278,6 +279,9 @@ class ProjectionEngine:
                         "snapshot_freshness": fresh, "agent_probe_freshness": live,
                         "assignment_id": aid, "work_id": wid, "run_id": run_id,
                         "lane_id": lane_id,
+                        "latest_task_id": None, "latest_candidate_sha": None,
+                        "latest_evidence_verdict": None,
+                        "latest_evidence_source_ref": None,
                         "conflicts": sorted(set(resolved.get("conflicts", []))),
                     })
                     key = "|".join([snap["coordinator_id"],snap["session_id"],
@@ -384,6 +388,33 @@ class ProjectionEngine:
                         if match:
                             seen_task_by_work.setdefault(match["work_id"], set()).add(
                                 (row["task_id"], row["owner_issue"]))
+                            run_id = match["run_id"]
+                            stamp = (row["created_at"],row["provider_comment_id"],row["version"])
+                            current = latest_evidence_by_run.get(run_id)
+                            if current is None or stamp > current[0]:
+                                latest_evidence_by_run[run_id] = (stamp, {
+                                    "task_id": row["task_id"],
+                                    "candidate_sha": row["candidate_sha"] or None,
+                                    "source_ref": row["proof_url"],
+                                })
+
+            # Link a task to an AgentRun only from an explicit validated
+            # companion; never borrow a predecessor's evidence after handover.
+            for pid, key, body in conn.execute("""SELECT project_id,sort_key,body
+                FROM projection_rows WHERE generation='__staging__' AND view='assignments'"""):
+                result=json.loads(body)
+                found=latest_evidence_by_run.get(result.get("run_id"))
+                if not found:
+                    continue
+                _,evidence=found
+                result["latest_task_id"]=evidence["task_id"]
+                result["latest_candidate_sha"]=evidence["candidate_sha"]
+                result["latest_evidence_source_ref"]=evidence["source_ref"]
+                # Governing lifecycle qualification was not stored by WP1.
+                result["latest_evidence_verdict"]=None
+                conn.execute("""UPDATE projection_rows SET body=? WHERE
+                  generation='__staging__' AND view='assignments'
+                  AND project_id=? AND sort_key=?""",(canon(result),pid,key))
 
             # Store count of distinct evidenced tasks only where an explicit mapping exists.
             # Work data are replaced, keeping all unsupported plan/Owner fields null.
