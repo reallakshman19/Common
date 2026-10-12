@@ -74,6 +74,8 @@ class TestWP3MaterializedProjections(unittest.TestCase):
         self.root=Path(self.tmp.name)
         self.reg,self.snaps=setup_registry()
         self.idx=EvidenceIndex(str(self.root/"source.sqlite"))
+        self.idx.update_project_status("common","GITHUB_ISSUE_COMMENT","REACHABLE")
+        self.idx.update_project_status("grade9","GITHUB_ISSUE_COMMENT","RATE_LIMITED")
         self.path=str(self.root/"materialized.sqlite")
         self.engine=ProjectionEngine(self.path)
         self.asof=ASOF
