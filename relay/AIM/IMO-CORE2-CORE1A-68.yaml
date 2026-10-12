@@ -1,0 +1,35 @@
+# Sticky label: the Owner's aim for this work. Master copy, written by the coordinator (skill coordinator-protocol, scripts/aim.ps1)
+# only after the Owner approves a change card. The label text is the Owner's: never paraphrase it. Guidance (watch, not_now, notes) is
+# versioned too: a change of what may be done is a change of the label. Every copy carries version and label_sha.
+work: "IMO-CORE2-CORE1A-68"
+repository: "reallakshman19/Grade9v3.5"
+engineering_critical: "standard"
+version: "1.1.0"
+label_sha: "11984b4"
+label:
+  problem: "The 68 available IMO questions have no Core 2 or Core 1A pages built from blueprints, aligned with golden fixtures, per QRT."
+  main_aim: "Create Core 2 and Core 1A for the 68 IMO questions from blueprints, aligned with golden fixtures, per QRT."
+  outcomes:
+    O1: "Each of the 68 questions has a Core 2 page built from the Core 2 blueprint with the original question kept faithful."
+    O2: "Each question concept has a Core 1A lesson built from the Core 1A blueprint, shared where concepts repeat."
+    O3: "Every page sits in its QRT cell with an accepted decision, aligned with the golden fixtures."
+  owner_constraints:
+    - "The 68 frozen question identities are the development set (Owner, 11 Oct: these 68 are ok, proceed)."
+    - "Question text is never invented or relabelled: the original stays faithful and authored work is labelled authored."
+  task_outcome: "O1"
+  task_aim: "Plan: from the 68 register, choose the first question and propose its Core 2 page against the golden."
+  done_when: "PENDING: the Owner sets display mode (embed original text or reference link), acceptance per QRT cell, rights handling and A4 print."
+guidance:
+  not_now: []
+  watch:
+    - "Source-rights, PDF custody and publisher-contact work: do it only when it blocks a question page, and say which outcome it serves."
+    - "Task counts such as 3/3 or 5/5 are not progress toward the aim."
+    - "Reference-only links are not Core 2 pages."
+  notes:
+    - "Roots: programme #137 and owning plan #130. Predecessors: Track B #174 (draft PRs #145 #155 #176 #179 unmerged) and source operator #163."
+    - "Pending at source (main): 68 positions registered, 0 retained PDFs, Core 2 admitted 0, Core 1A admitted units 0, QRT accepted 0 of 28. One Core1A divisibility candidate exists."
+    - "Blueprint registry v1.17.0. Goldens: G-CORE2-R2 (Core2) and G-MATH-LINEAR-CONSTRAINT (Core1A)."
+bindings:
+  - "Session_Oct09:2 coordination/Session_Oct09/Tab2_core2-core1a-68"
+history:
+  - "v1.1.0 · 2026-10-12 04:52 · create · created · CP-IMO-CORE2-CORE1A-68-01 · approved by the Owner"
