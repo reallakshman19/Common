@@ -65,6 +65,19 @@ class PlanTests(unittest.TestCase):
         with self.assertRaises(lc.ContractError):
             dc.validate_plan(plan, LABEL)
 
+    def test_named_lab_target_is_valid_for_real_o1_benchmark(self):
+        parent = "reallaksh19/relay-v35-e2e-lab#20"
+        translated = [{**t, "task_id": t["task_id"].replace("V36-341-", "V36-20-")}
+                      for t in PLAN["tasks"]]
+        approved_lab = {**PLAN, "parent": parent,
+                        "plan_version": "V36-20-PLAN-01", "tasks": translated}
+        self.assertEqual(dc.validate_plan(approved_lab, LABEL)["parent"], parent)
+
+    def test_unnamed_repo_refused_even_with_correct_parent_id(self):
+        plan = {**PLAN, "parent": "unapproved/other-repo#341"}
+        with self.assertRaises(lc.ContractError):
+            dc.validate_plan(plan, LABEL)
+
     def test_reject_other_parent(self):
         with self.assertRaises(lc.ContractError):
             dc.validate_plan({**PLAN, "parent": "someother/repo#341"}, LABEL)

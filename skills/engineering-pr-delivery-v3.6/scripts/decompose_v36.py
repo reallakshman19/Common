@@ -44,8 +44,15 @@ def validate_plan(plan: object, label: dict) -> dict:
     match = PARENT_REF.fullmatch(parent)
     if not match:
         raise ContractError("parent must be owner/repo#N")
-    if match[1] != label["repository"]:
-        raise ContractError("parent repository does not match approved label")
+    allowed = {label["repository"]}
+    for note in label["guidance"]["notes"]:
+        if note.startswith("Lab: "):
+            target = note[len("Lab: "):]
+            if not REPO_REF.fullmatch(target):
+                raise ContractError("master label has invalid lab repository")
+            allowed.add(target)
+    if match[1] not in allowed:
+        raise ContractError("parent repository not in approved master or named lab")
     expected = {key: label[key] for key in LABEL_KEYS}
     if require_keys(plan["label"], LABEL_KEYS, "label binding") != expected:
         raise ContractError("plan must bind exact approved work/version/label_sha")
@@ -257,7 +264,7 @@ def main(argv=None) -> int:
         token = os.environ.get("GITHUB_TOKEN")
         if args.apply and (args.confirm_scope != plan["parent"] or not token):
             raise ContractError("write refused: --confirm-scope exact parent and GITHUB_TOKEN are required")
-        result = execute(plan, GithubClient(label["repository"], token), apply=args.apply)
+        result = execute(plan, GithubClient(PARENT_REF.fullmatch(plan["parent"])[1], token), apply=args.apply)
         print(json.dumps(result, indent=2, sort_keys=True))
     except ContractError as exc:
         print(f"v3.6 decomposition error: {exc}", file=sys.stderr)
