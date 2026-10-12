@@ -1,8 +1,13 @@
 # Stress test workload fixture mapping and classification contract.
 #
-# NOTE: decompose_v36.py requires a strict plan format. The actual 300 tasks are defined
-# in skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml under Parent Issue #8.
-# This specification defines the parser outcome classification contract for snapshot_v36.py.
+# IMPORTANT OPERATIONAL CONSTRAINTS:
+# 1. snapshot_v36.py calculates status PER TASK, not per comment.
+# 2. Never include "FIXTURE:" or custom markers in comment bodies on GitHub.
+#    lifecycle_v36.py validate_evidence() strictly enforces text == expected (canonical 8 lines);
+#    any extraneous lines cause ContractError and prematurely flag tasks as INVALID_EVIDENCE.
+# 3. All fixture assignments are maintained externally in this manifest.
+# 4. If a PR does not exist, GitHub API returns 404, which GithubClient.request() raises as
+#    ContractError and snapshot_v36.py records as PROVIDER_UNAVAILABLE (not UNKNOWN_PR).
 
 workload_id: "V36-LOAD-FIXTURE-300"
 workload_plan_path: "skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml"
@@ -11,49 +16,53 @@ controlling_parent: "reallakshman19/relay-v36-stress-lab#1"
 controlling_stage: "V36-1-ST02"
 target_scale: 300
 
-# Strict parser classification contract mapped to snapshot_v36.py states:
-evidence_classification_matrix:
+evidence_classification_contract:
   positive_controls:
-    count: 300
+    task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
+    count: 150
     expected_status: "CURRENT_EVIDENCE"
-    proof_url_pattern: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/<PR>"
-    candidate_pattern: "reallakshman19/relay-v36-stress-lab@<LIVE_PR_HEAD_SHA>"
-    tests_pattern: "84/84"
-    actor_requirement: "Must match repository owner (reallakshman19)"
-    notes: "Evidence confirms candidate test state; NEVER implies Owner final delivery acceptance."
+    comment_format: "Strict canonical 8-line record with valid Proof PR URL and matching candidate SHA"
+    proof_pr_url: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/<LIVE_PR>"
+    candidate: "reallakshman19/relay-v36-stress-lab@<LIVE_PR_HEAD_SHA>"
+    tests: "84/84"
+    author_requirement: "Must match repository owner (reallakshman19)"
+    semantics: "Confirms candidate test execution; NEVER implies Owner final delivery acceptance"
 
   negative_controls:
-    total_count: 150
-    subsets:
-      stale_pr_head:
-        count: 50
-        expected_status: "STALE_EVIDENCE"
-        description: "Valid 8 lines and proof PR, but PR head has moved past candidate SHA"
-      commit_proof_url:
-        count: 50
-        expected_status: "UNVERIFIED_PROOF"
-        description: "Proof URL uses /commit/<sha> instead of /pull/<pr>; proof_pr() returns None"
-      proof_commit_mismatch:
-        count: 50
-        expected_status: "UNVERIFIED_PROOF"
-        description: "Proof URL uses /pull/<pr>/commits/<sha1> where sha1 differs from candidate sha2"
+    stale_candidate_sha:
+      task_range: ["V36-8-LOAD151", "V36-8-LOAD180"]
+      count: 30
+      expected_status: "STALE_EVIDENCE"
+      description: "Valid 8-line record, but candidate SHA points to prior commit superseded by PR head"
+    commit_proof_url:
+      task_range: ["V36-8-LOAD181", "V36-8-LOAD210"]
+      count: 30
+      expected_status: "UNVERIFIED_PROOF"
+      description: "Proof URL uses /commit/<sha> instead of /pull/<pr>; proof_pr() returns None"
+    mismatched_proof_commit:
+      task_range: ["V36-8-LOAD211", "V36-8-LOAD240"]
+      count: 30
+      expected_status: "UNVERIFIED_PROOF"
+      description: "Proof URL uses /pull/<pr>/commits/<sha1> where sha1 differs from candidate sha2"
 
   adversarial_controls:
-    total_count: 150
-    subsets:
-      foreign_author:
-        count: 50
-        expected_status: "INVALID_EVIDENCE"
-        description: "Comment authored by actor other than repository owner"
-      malformed_format:
-        count: 40
-        expected_status: "INVALID_EVIDENCE"
-        description: "Missing required headers, unresolved placeholders, or invalid test counts"
-      task_outcome_mismatch:
-        count: 30
-        expected_status: "INVALID_EVIDENCE"
-        description: "Comment declares outcome or task ID differing from task declaration"
-      nonexistent_pr:
-        count: 30
-        expected_status: "UNKNOWN_PR"
-        description: "Proof URL references PR number that does not exist in repository"
+    foreign_comment_author:
+      task_range: ["V36-8-LOAD241", "V36-8-LOAD260"]
+      count: 20
+      expected_status: "INVALID_EVIDENCE"
+      description: "Comment authored by account other than repository owner (filtered before validate_evidence)"
+    malformed_header_format:
+      task_range: ["V36-8-LOAD261", "V36-8-LOAD275"]
+      count: 15
+      expected_status: "INVALID_EVIDENCE"
+      description: "Missing required prefix, invalid test format, or unresolved placeholder"
+    task_outcome_mismatch:
+      task_range: ["V36-8-LOAD276", "V36-8-LOAD290"]
+      count: 15
+      expected_status: "INVALID_EVIDENCE"
+      description: "Declared task ID or outcome in comment differs from task declaration in plan"
+    nonexistent_pr_reference:
+      task_range: ["V36-8-LOAD291", "V36-8-LOAD300"]
+      count: 10
+      expected_status: "PROVIDER_UNAVAILABLE"
+      description: "Proof URL references non-existent PR; GitHub 404 raises ContractError in get_pr()"
