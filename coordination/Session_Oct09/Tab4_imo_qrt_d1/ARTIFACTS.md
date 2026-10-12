@@ -27,3 +27,6 @@
 2026-10-12 | chat=6accb51c | EXPLAIN candidate hosted run | 38248301556 queued at source pin | requires actual sole-renderer receipt for D1-EXP-03 closure
 2026-10-12 | chat=6accb51c | EXPLAIN review artifact | coordination/Session_Oct09/Tab4_imo_qrt_d1/handovers/QRT-EXPLAIN-D1.md | per-cell review packet, NOT successor-chat handover
 2026-10-12 | chat=6accb51c | issue #182 evidence | comment 6124415717 (D1-EXP-03 PARTIAL) | exact same block EVIDENCE.log; Actions run 38248301556 QUEUED, not counted 3/7
+2026-10-12 | chat=6accb51c | EXPLAIN final | source SVG-font fix @f06825eab9e799384210f3886f6c8036b62fcc6d, focused CI 38251957578 SUCCESS (job 114820261094) artifact 11748552287; 5 HTML SHA receipt, 6/6 tests, local Chromium 45/45 and 0 JS errors
+2026-10-12 | chat=6accb51c | APPLY source | Grade9v3.5 PR#192 agent/imo182-qrt-d1-represent @771f808b5000ddef11d74bde45835eee0905cdc4 | original package, 4 SVG, manifest, verifier, six tests, dedicated workflow, per-cell review proposal
+2026-10-12 | chat=6accb51c | APPLY exact-head CI | run 38253294826 QUEUED at time of entry | rendered credit not yet given
