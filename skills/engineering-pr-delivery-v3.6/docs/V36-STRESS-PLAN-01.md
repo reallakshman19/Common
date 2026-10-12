@@ -1,6 +1,6 @@
 # V3.6 Full-Scale Stress Test Plan (V36-STRESS-PLAN-01)
 
-> **Document Status:** PROPOSAL — RECONCILED WITH ALL OWNER CORRECTIONS  
+> **Document Status:** PROPOSAL — HARDENED WITH EXECUTABLE PACING & CONTROLS  
 > **Execution Status:** NOT EXECUTED — PLANNING & PUBLICATION STAGE ONLY (0 Writes / 0 Mutations to GitHub Lab)  
 > **Target Release:** Engineering PR Delivery v3.6 (merged to `Common/main` via PR #344 / commit `bd8ee38`)  
 > **Proposed Disposable Lab:** `reallakshman19/relay-v36-stress-lab` (currently 404; pending Owner creation and write authorization)  
@@ -47,7 +47,7 @@ To prevent inflated progress reporting and avoid numbering collisions, the test 
 |   ├── V36-1-ST03: Truthful Evidence & PR Attribution (Size L, Outcome O2)       |
 |   │     └── Subject Load: 600 Evidence Comments (300 Positive / 300 Adversarial)|
 |   ├── V36-1-ST04: Concurrency & Event Storms (Size M, Outcome O3)               |
-|   │     └── Subject Load: 1 -> 8 Concurrent Local Workers                        |
+|   │     └── Subject Load: 1 -> 8 Concurrent Local Workers (Shared Rate Limiter)  |
 |   ├── V36-1-ST05: Fault Injection & Recovery (Size M, Outcome O3)                |
 |   └── V36-1-ST06: Cold Successor & Endurance (Size M, Outcome O5)                |
 +---------------------------------------------------------------------------------+
@@ -79,7 +79,7 @@ To prevent inflated progress reporting and avoid numbering collisions, the test 
 
 ---
 
-## 3. Truthful Evidence & Two-Wave Workload Architecture (600 Comments)
+## 3. Truthful Evidence, Rate Limiting & Two-Wave Architecture (600 Comments)
 
 Evidence represents factual, reproducible test execution results:
 
@@ -110,9 +110,10 @@ Evidence represents factual, reproducible test execution results:
 - **Negative Controls (150 tasks, `LOAD151`..`LOAD300`):**
   - Stale candidate SHA (50 tasks, `LOAD151`..`LOAD200`) $\rightarrow$ Expected status: `STALE_EVIDENCE` (50).
   - Unverified proof (40 tasks, `LOAD201`..`LOAD240`): 20 commit Proof URLs (`/commit/<sha>`) + 20 mismatched PR commit URLs (`/pull/9/commits/<sha1>` where sha1 != candidate sha2) $\rightarrow$ Expected status: `UNVERIFIED_PROOF` (40).
-  - Invalid evidence (40 tasks, `LOAD241`..`LOAD280`): 20 foreign comment authors + 20 malformed syntax/outcome mismatches $\rightarrow$ Expected status: `INVALID_EVIDENCE` (40).
+  - Foreign-Author Controls (20 tasks, `LOAD241`..`LOAD260`): Rejection of non-owner author (`actor.login != owner`). **Execution Rule:** On live GitHub, API comments always bear the login of the authenticated user. Therefore, these 20 cases require a verified secondary GitHub credential (`GITHUB_TOKEN_2`). If only a single credential is provided, these 20 cases are executed as **SIMULATED_CONTROL** fixtures in the test harness and reported truthfully as simulated controls, never claiming live multi-identity execution without a second credential $\rightarrow$ Expected status: `INVALID_EVIDENCE` (20).
+  - Malformed & Mismatched Live Evidence (20 tasks, `LOAD261`..`LOAD280`): Malformed syntax or plan outcome mismatches authored by repository owner $\rightarrow$ Expected status: `INVALID_EVIDENCE` (20).
   - Non-existent PR URL (20 tasks, `LOAD281`..`LOAD300`): Proof URL references non-existent PR `/pull/99999` (HTTP 404 raises `ContractError` in `get_pr()`) $\rightarrow$ Expected status: `PROVIDER_UNAVAILABLE` (20).
-- **Wave 1 Snapshot Oracle:** Exactly 150 `CURRENT_EVIDENCE`, 50 `STALE_EVIDENCE`, 40 `UNVERIFIED_PROOF`, 40 `INVALID_EVIDENCE`, 20 `PROVIDER_UNAVAILABLE`, 0 `verified_complete`.
+- **Wave 1 Snapshot Oracle:** Exactly 150 `CURRENT_EVIDENCE`, 50 `STALE_EVIDENCE`, 40 `UNVERIFIED_PROOF`, 40 `INVALID_EVIDENCE` (20 simulated / 20 live), 20 `PROVIDER_UNAVAILABLE`, 0 `verified_complete`.
 
 #### Wave 2: Invariance Verification & Recovery (300 comments)
 - **Verification of Non-Overwrite Invariant (150 tasks, `LOAD001`..`LOAD150`):** Post 150 invalid/malformed comments on the tasks that already have valid Wave 1 evidence.
@@ -127,16 +128,19 @@ Evidence represents factual, reproducible test execution results:
 
 ---
 
-## 4. Staged Execution Plan & Gate Criteria
+## 4. Hardened Pacing & Staged Execution Plan
 
-Execution follows a strict gate-driven sequence:
+Execution enforces strict rate-limit budgets via hard parameter validation and `SharedRateLimiter`:
+
+- **Enforced Parameters:** `batch_size <= 15`, `item_delay >= 4.0s`, `batch_delay >= 60.0s`. Values violating these bounds raise `ContractError`.
+- **Aggregate Rate Limiter (`SharedRateLimiter`):** A shared, cross-process atomic file-locked token coordinator ensures that all workers (including concurrent multi-worker executions in ST-04) share a single global rate budget ($\le 15$ writes per 60.0s window).
 
 | Stage | Focus | Primary Workload | Gate Invariant / Exit Check |
 | :--- | :--- | :--- | :--- |
 | **ST-01** | Foundation & Boundaries | Lab #1, Parent #8 reserved, Proof PR #9, trusted publisher | Clean lab verified; unauthorized write scopes rejected; create parent #1 and children #2..#7; reserve workload parent #8; create feature branch & test PR #9; run tests; install trusted stress-lab publisher; post child #2 evidence; verify `[V3.6][LAB][E1/6] Full-Scale Stress Test Lifecycle Stage Progression` via GET readback. |
-| **ST-02** | Progressive Scale & Bounded Pacing | Lab #8, 300 child issues via `pacing_harness_v36.py` | Execute bounded batch harness `pacing_harness_v36.py` ($\le 15$ issues/min, batches of 15, 4.0s item pause, 60.0s batch pause) to avoid tripping GitHub secondary rate limits; materialize 300 tasks under parent #8 via `V36-8-PLAN-01.yaml`; record interruptions and timing; assert 0 duplicates and intact parent index. |
-| **ST-03** | Evidence & PR Attribution | 600 comments, 20 PRs across Two Waves | Execute Wave 1 (300 comments) and Wave 2 (300 comments) per [`V36-LOAD-FIXTURE-300.yaml`](../plans/V36-LOAD-FIXTURE-300.yaml); verify 100% of task statuses match the classification matrix across both waves; confirm invalid comments do not overwrite valid evidence; PR titles accurate. |
-| **ST-04** | Concurrency & Event Storms | 1 → 3 → 5 → 8 concurrent workers | All 8 workers settle cleanly; zero race conflicts; replay yields zero changes. |
+| **ST-02** | Progressive Scale & Hardened Pacing | Lab #8, 300 child issues via `pacing_harness_v36.py` | Execute bounded batch harness `pacing_harness_v36.py` with hard parameter validation and `SharedRateLimiter` ($\le 15$ issues/min, batches of 15, 4.0s item pause, 60.0s batch pause) to avoid tripping GitHub secondary rate limits; materialize 300 tasks under parent #8 via `V36-8-PLAN-01.yaml`; record interruptions and timing; assert 0 duplicates and intact parent index. |
+| **ST-03** | Evidence & PR Attribution | 600 comments, 20 PRs across Two Waves | Execute Wave 1 (300 comments) and Wave 2 (300 comments) per [`V36-LOAD-FIXTURE-300.yaml`](../plans/V36-LOAD-FIXTURE-300.yaml); verify 100% of task statuses match the classification matrix across both waves; confirm invalid comments do not overwrite valid evidence; PR titles accurate; foreign-author cases executed via `GITHUB_TOKEN_2` or truthfully reported as `SIMULATED_CONTROL`. |
+| **ST-04** | Concurrency & Aggregate Pacing | 1 → 3 → 5 → 8 concurrent workers | All 8 workers bind global `SharedRateLimiter`; aggregate write rate across all 8 workers strictly bounded $\le 15$ writes/60s; all 8 workers settle cleanly; zero race conflicts; replay yields zero changes. |
 | **ST-05** | Faults & Real Behavior | API 429/5xx, timeouts | Test real client behavior: `GithubClient` has no native retries and fails closed with `ContractError`; record operational finding `FINDING-ST05-RETRY-01` (not counted as proof of recovery capability); verify external idempotent resumption creates zero duplicates. |
 | **ST-06** | Cold Successor & Endurance | Cold agent, BuddyRunner 1a/1b/2 | 100% state reconstructed from GitHub alone; prompt generators run clean; 5 cycles stable. |
 
@@ -144,8 +148,8 @@ Execution follows a strict gate-driven sequence:
 
 ## 5. Execution Order & CI Investigation Status
 
-* **Plan Preparation:** Complete locally (updated with all remaining execution-contract corrections).
+* **Plan Preparation:** Complete locally (updated with all remaining execution-contract corrections and hardened pacing tests).
 * **GitHub Publication & Approval:** Published on branch `proposal/v36-stress-plan-01` via [PR #355](https://github.com/reallakshman19/Common/pull/355). Owner decisions D-STRESS-01 (`CP-V36-STRESS-01`) and D-STRESS-02 (repo provisioning) pending.
-* **CI Investigation:** The failure on PR #355 in `validate-v3-1-foundation` ([Run 38267158083](https://github.com/reallakshman19/Common/actions/runs/38267158083)) has been investigated and documented in [`CI_INVESTIGATION_RUN_38267158083.md`](CI_INVESTIGATION_RUN_38267158083.md). The 7 failures (6 FileNotFoundError for retired v2.5/v3 workflows, 1 AssertionError for diff string) stem from legacy v3.1 test table expectations triggered by matching `relay/*`. No tests have been suppressed or modified.
+* **CI Investigation:** The failure on PR #355 in `validate-v3-1-foundation` ([Run 38273482097](https://github.com/reallakshman19/Common/actions/runs/38273482097)) is documented in [`CI_INVESTIGATION_RUN_38267158083.md`](CI_INVESTIGATION_RUN_38267158083.md). The 7 failures (6 FileNotFoundError for retired v2.5/v3 workflows, 1 AssertionError for diff string) stem from legacy v3.1 test table expectations triggered by matching `relay/*`. No tests have been suppressed or modified.
 * **ST-01 Foundation:** **HOLD** (Awaiting Owner approval of label and repository provisioning of `reallakshman19/relay-v36-stress-lab`).
 * **ST-02 through ST-06:** **Not started**.

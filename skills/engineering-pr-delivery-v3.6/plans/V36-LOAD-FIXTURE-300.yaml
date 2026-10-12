@@ -10,6 +10,8 @@
 #    ContractError and snapshot_v36.py records as PROVIDER_UNAVAILABLE (not UNKNOWN_PR).
 # 5. Invalid comments never overwrite previously valid evidence (tested in Wave 2 on LOAD001..LOAD150).
 # 6. Total volume: 600 comments across Two Waves (300 positive + 300 negative/adversarial).
+# 7. Foreign-author controls (LOAD241..LOAD260) require a genuine secondary GitHub identity (GITHUB_TOKEN_2);
+#    without a second account, they are strictly labeled as SIMULATED_CONTROL, not claimed as live verified.
 
 workload_id: "V36-LOAD-FIXTURE-300"
 workload_plan_path: "skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml"
@@ -27,6 +29,10 @@ github_numbering_reservation:
   proof_pr_number: 9
   proof_pr_url: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/9"
 
+foreign_author_control_policy:
+  live_identity_requirement: "To live-verify foreign-author filtering on GitHub, a genuine secondary GitHub account identity (GITHUB_TOKEN_2 / GITHUB_ACTOR_2) is required."
+  fallback_labeling: "When executing with only a single repository owner credential, tasks V36-8-LOAD241 through V36-8-LOAD260 MUST be labeled as SIMULATED_CONTROL. The agent/harness must NEVER claim live verification of foreign-author rejection without a verified second credential."
+
 two_wave_execution_schedule:
   wave_1:
     description: "Initial baseline evidence and control injection (300 comments)"
@@ -35,6 +41,7 @@ two_wave_execution_schedule:
       positive_controls:
         task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
         count: 150
+        verification_mode: "LIVE_VERIFIED"
         comment_nature: "Positive valid canonical 8-line record"
         proof_pr: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/9"
         candidate_sha: "<LIVE_PR_HEAD_SHA>"
@@ -44,21 +51,33 @@ two_wave_execution_schedule:
       stale_candidate_sha:
         task_range: ["V36-8-LOAD151", "V36-8-LOAD200"]
         count: 50
+        verification_mode: "LIVE_VERIFIED"
         comment_nature: "Valid 8-line record, but candidate SHA points to prior commit superseded by PR head"
         expected_status: "STALE_EVIDENCE"
       unverified_proof:
         task_range: ["V36-8-LOAD201", "V36-8-LOAD240"]
         count: 40
+        verification_mode: "LIVE_VERIFIED"
         comment_nature: "20 commit Proof URLs (/commit/<sha>) + 20 mismatched PR commit URLs (/pull/9/commits/<sha1> != sha2)"
         expected_status: "UNVERIFIED_PROOF"
-      invalid_evidence:
-        task_range: ["V36-8-LOAD241", "V36-8-LOAD280"]
-        count: 40
-        comment_nature: "20 non-owner foreign authors + 20 malformed syntax/outcome mismatches"
+      simulated_foreign_author:
+        task_range: ["V36-8-LOAD241", "V36-8-LOAD260"]
+        count: 20
+        verification_mode: "SIMULATED_CONTROL (requires GITHUB_TOKEN_2 for live test; otherwise labeled simulated)"
+        comment_nature: "Non-owner author comment; verified via test fixtures unless GITHUB_TOKEN_2 is present"
         expected_status: "INVALID_EVIDENCE"
+        author_filter_rule: "actor.get('login') != client.repo.split('/')[0]"
+      live_malformed_evidence:
+        task_range: ["V36-8-LOAD261", "V36-8-LOAD280"]
+        count: 20
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "20 malformed syntax/outcome mismatch comments posted live by repository owner"
+        expected_status: "INVALID_EVIDENCE"
+        rejection_rule: "validate_evidence(body) raises ContractError or task/outcome does not match plan"
       nonexistent_pr:
         task_range: ["V36-8-LOAD281", "V36-8-LOAD300"]
         count: 20
+        verification_mode: "LIVE_VERIFIED"
         comment_nature: "Proof URL references non-existent PR /pull/99999 (HTTP 404)"
         expected_status: "PROVIDER_UNAVAILABLE"
 
@@ -78,6 +97,7 @@ two_wave_execution_schedule:
       adversarial_non_overwrite:
         task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
         count: 150
+        verification_mode: "LIVE_VERIFIED"
         comment_nature: "Invalid/malformed comments posted to tasks already having valid Wave 1 evidence"
         expected_behavior: "snapshot_v36.py discards invalid comments; eligible[-1] remains Wave 1 valid comment"
         expected_status: "CURRENT_EVIDENCE"
@@ -85,6 +105,7 @@ two_wave_execution_schedule:
       positive_recovery:
         task_range: ["V36-8-LOAD151", "V36-8-LOAD300"]
         count: 150
+        verification_mode: "LIVE_VERIFIED"
         comment_nature: "Fresh valid canonical 8-line records pointing to live PR #9 with current head SHA"
         expected_behavior: "New valid comments added to eligible; chronologically supersede prior negative/control states"
         expected_status: "CURRENT_EVIDENCE"

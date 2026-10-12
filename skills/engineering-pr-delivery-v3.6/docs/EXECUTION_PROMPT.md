@@ -19,14 +19,14 @@
   - Controlling denominator: **6** (`E0/6` to `E6/6`, corresponding to stages `V36-1-ST01` through `V36-1-ST06`)
 * **Subject Workload Plan:** `skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml` (Parent #8, 300 tasks `V36-8-LOAD001` through `V36-8-LOAD300`)
 * **Workload Fixture Classification Map:** `skills/engineering-pr-delivery-v3.6/plans/V36-LOAD-FIXTURE-300.yaml`
-* **Bounded Pacing Harness:** `skills/engineering-pr-delivery-v3.6/scripts/pacing_harness_v36.py`
+* **Hardened Bounded Pacing Harness & Shared Rate Limiter:** `skills/engineering-pr-delivery-v3.6/scripts/pacing_harness_v36.py`
 * **Authorized Target Lab:** `reallakshman19/relay-v36-stress-lab` (disposable lab)
 * **Required CLI Arguments:**
   - Read: `--label relay/AIM/V36-STRESS.yaml --plan <PLAN_PATH> --lab reallakshman19/relay-v36-stress-lab`
   - Write: `--apply --confirm-scope reallakshman19/relay-v36-stress-lab#<PARENT_NUM>`
-* **Rate-Limit Pacing Rules:**
-  - $\le 1$ write per second per worker.
-  - $\le 15$ issue/comment creations per minute total via bounded pacing harness.
+* **Enforced Rate-Limit Pacing Rules:**
+  - Hard parameter limits: `batch-size <= 15`, `item-delay >= 4.0s`, `batch-delay >= 60.0s`.
+  - Global write budget: $\le 15$ writes per 60 seconds aggregate across all workers via `SharedRateLimiter` (`.v36_rate_limiter.json`).
   - On HTTP 429 / HTTP 403 `retry-after`: sleep requested seconds + 2s jitter.
   - Maximum concurrent Actions workflow runs: 3.
 
@@ -56,7 +56,7 @@
    - Verify via GET that Parent #8 is confirmed as issue #8.
 5. **Proof PR Establishment (#9):**
    - Create initial feature branch `test/st01-foundation-probe` and open test PR. Since issue #8 was reserved, this PR receives number **#9** (`https://github.com/reallakshman19/relay-v36-stress-lab/pull/9`).
-   - Execute candidate test suite (e.g. `Tests: 94/94`) on the PR head.
+   - Execute candidate test suite (e.g. `Tests: 99/99`) on the PR head.
    - Install trusted stress-lab publisher workflow on the default branch (`.github/workflows/publisher.yml`) using pinned v3.6 source.
    - Post genuine canonical 8-line `TASK_EVIDENCE v3.6` on child issue #2 (`V36-1-ST01`) linking to PR #9 and matching live candidate SHA.
    - Run publisher to update parent title:  
@@ -81,17 +81,19 @@
 ### Phase ST-02: Progressive Scale (300 Workload Issues under Parent #8)
 1. **Workload Parent Verification:**
    - Confirm Parent Issue #8 is present and verified on `reallakshman19/relay-v36-stress-lab#8`.
-2. **Bounded Workload Decomposition (Pacing Strategy):**
-   - *Baseline Observation:* Native `decompose_v36.py` executes an unpaced sequential loop; running 300 sequential creates directly triggers secondary limits. This is recorded as a baseline operational constraint.
-   - *Bounded Execution Strategy:* Execute decomposition using the bounded pacing harness `pacing_harness_v36.py` ($\le 15$ issues/min in batches of 15, 4.0s item pause, 60.0s batch pause):
+2. **Hardened Workload Decomposition (Pacing & Limiter Enforcement):**
+   - *Baseline Observation:* Native unpaced `decompose_v36.py` is documented as a baseline constraint.
+   - *Enforced Execution Strategy:* Execute decomposition using the hardened pacing harness `pacing_harness_v36.py`:
      ```bash
      python skills/engineering-pr-delivery-v3.6/scripts/pacing_harness_v36.py \
        --label relay/AIM/V36-STRESS.yaml \
        --plan skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml \
        --lab reallakshman19/relay-v36-stress-lab \
        --apply --confirm-scope reallakshman19/relay-v36-stress-lab#8 \
-       --batch-size 15 --item-delay 4.0 --batch-delay 60.0
+       --batch-size 15 --item-delay 4.0 --batch-delay 60.0 \
+       --rate-limit-file .v36_rate_limiter.json
      ```
+   - Parameters are validated fail-closed (`batch_size <= 15`, `item_delay >= 4.0s`, `batch_delay >= 60.0s`).
    - The harness durably synchronizes the managed index comment on Parent #8 after every batch.
    - Observe, log, and measure rate-limit responses, API latencies, and memory consumption.
 3. **Pagination & Index Verification:**
@@ -106,7 +108,7 @@
    - [ ] Exactly 300 workload issues created under Parent #8 and verified?
    - [ ] REST API pagination correctly navigated via `Link` header?
    - [ ] Replay creates 0 duplicate tasks?
-   - [ ] Bounded pacing respected without unhandled 403 secondary limit lockout?
+   - [ ] Hardened pacing respected without unhandled 403 secondary limit lockout?
    - [ ] Top-level progress correctly advances to `[V3.6][LAB][E2/6]` on child #3 (`V36-1-ST02`)?
    - **Verdict:** If all YES → **GO to ST-03**. Else → **STOP**.
 
@@ -124,17 +126,18 @@
    - Post 150 control comments on `V36-8-LOAD151`..`LOAD300`:
      - 50 tasks with stale candidate SHAs (`LOAD151`..`LOAD200`).
      - 40 tasks with unverified proofs (`LOAD201`..`LOAD240`: 20 commit URLs, 20 mismatched commit SHAs).
-     - 40 tasks with invalid evidence (`LOAD241`..`LOAD280`: 20 foreign authors, 20 malformed syntax).
+     - **Foreign Author Cases (20 tasks, `LOAD241`..`LOAD260`):** Check for `GITHUB_TOKEN_2`. If configured, post live foreign comments with token 2. If absent, execute as **SIMULATED_CONTROL** in test fixtures and report telemetry as simulated; never claim live multi-user verification without a second account.
+     - 20 tasks with live malformed syntax/outcome mismatches (`LOAD261`..`LOAD280`).
      - 20 tasks with non-existent PR URLs (`LOAD281`..`LOAD300`: `/pull/99999` returning 404).
    - Run `snapshot_v36.py`. Assert Wave 1 Oracle:
      - `CURRENT_EVIDENCE`: 150
      - `STALE_EVIDENCE`: 50
      - `UNVERIFIED_PROOF`: 40
-     - `INVALID_EVIDENCE`: 40
+     - `INVALID_EVIDENCE`: 40 (20 simulated, 20 live)
      - `PROVIDER_UNAVAILABLE`: 20
      - `verified_complete`: 0
 4. **Wave 2 Execution (300 comments):**
-   - **Test Non-Overwrite Invariant:** Post 150 invalid/adversarial comments on `V36-8-LOAD001`..`LOAD150`.
+   - **Test Non-Overwrite Invariant:** Post 150 invalid/malformed comments on `V36-8-LOAD001`..`LOAD150`.
      - *Verified Oracle Behavior:* `snapshot_v36.py` discards invalid comments before eligible sort; `eligible[-1]` remains the Wave 1 valid comment. Status for all 150 tasks **remains `CURRENT_EVIDENCE`**.
      - **Security Invariant Verified: Invalid comments MUST NOT overwrite or degrade previously valid evidence.**
    - **Test Recovery / Superseding:** Post 150 fresh positive comments on `V36-8-LOAD151`..`LOAD300` referencing PR #9 with matching candidate SHA.
@@ -158,14 +161,17 @@
    - [ ] 0 false or adversarial evidence accepted?
    - [ ] All 300 tasks match their expected external oracle state across both waves?
    - [ ] Invalid comments confirmed NOT to overwrite previously valid evidence?
+   - [ ] Foreign-author verification truthfully labeled (live if token 2 present, simulated otherwise)?
    - [ ] Progress advances to `[V3.6][LAB][E3/6]` on child #4 (`V36-1-ST03`)?
    - **Verdict:** If all YES → **GO to ST-04**. Else → **STOP**.
 
 ---
 
-### Phase ST-04: Concurrency & Event Storms (1 → 8 Workers)
+### Phase ST-04: Concurrency & Event Storms (1 → 8 Workers with Shared Rate Limiter)
 1. **Multi-Worker Execution:**
    - Spawn parallel worker processes (1 → 3 → 5 → 8 workers).
+   - All workers bind `--rate-limit-file .v36_rate_limiter.json` via `SharedRateLimiter`.
+   - Aggregate write rate across all concurrent workers is strictly capped at $\le 15$ writes per 60.0s window.
    - Workers execute concurrent reads, decomposition checks, and publisher updates.
 2. **Convergence & Idempotence:**
    - Allow worker queues to drain.
@@ -177,6 +183,7 @@
      `[V3.6][LAB][E4/6] Full-Scale Stress Test Lifecycle Stage Progression`.
 4. **Gate ST-04 Evaluation:**
    - [ ] 8 concurrent workers complete without deadlock?
+   - [ ] SharedRateLimiter bounds aggregate writes <= 15 writes/min across all 8 workers?
    - [ ] Settled replay produces exactly 0 mutations?
    - [ ] Progress advances to `[V3.6][LAB][E4/6]` on child #5 (`V36-1-ST04`)?
    - **Verdict:** If all YES → **GO to ST-05**. Else → **STOP**.
