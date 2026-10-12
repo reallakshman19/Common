@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse
 
 from decompose_v36 import GithubClient, PARENT_REF, load_plan
-from lifecycle_v36 import ContractError, load_label
+from lifecycle_v36 import ContractError, load_label, require_explicit_lab
 from successor_v36 import build_packet, render_markdown
 
 
@@ -55,12 +55,14 @@ def main(argv=None):
     parser=argparse.ArgumentParser(description="standalone v3.6 THREE-pass independent validator generator")
     parser.add_argument("--label",required=True)
     parser.add_argument("--plan",required=True)
+    parser.add_argument("--lab",help="selected label Writable lab: repo for lab parent")
     parser.add_argument("--task-id",required=True)
     parser.add_argument("--pr",type=int,action="append",required=True)
     args=parser.parse_args(argv)
     try:
         label=load_label(args.label)
         plan=load_plan(args.plan,label)
+        require_explicit_lab(label,plan["parent"],args.lab)
         client=GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
         client.get_pr=lambda n:client.request("GET",f"/pulls/{n}")
         print(generate_three_pass(build_packet(label,plan,client,args.pr),args.task_id),end="")
