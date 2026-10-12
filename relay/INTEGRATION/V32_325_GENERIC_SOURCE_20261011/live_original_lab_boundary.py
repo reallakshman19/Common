@@ -129,3 +129,143 @@ class OriginalPublicLabNativeSourceBoundary(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# G8 Batch 01. These are real original-provider GET-only tests, not
+# CHECKPOINT_FACTS, writer qualification, or an independent successor.
+from generic_source_preflight import delp
+
+
+class WholeGraphPublicGetOnly(PublicGetOnly):
+    """Extend only issue GET selection for all six graph-bound titles."""
+
+    def get_issue(self, number: int):
+        if number not in (1, 2, 3, 4, 5, 6):
+            raise AssertionError("ISSUE_NOT_IN_RELEASED_GRAPH")
+        return self._get("/issues/" + str(number))
+
+
+@unittest.skipUnless(os.getenv("V32_PUBLIC_LAB_LIVE") == "1",
+                     "G8 read-only original lab probes require explicit opt-in")
+class G8Batch01ActualLabReadOnly(unittest.TestCase):
+    """Actual V3.2 source + provider on fixed lab graph/head; zero writes."""
+
+    def _source(self, reader):
+        reader.get_repository()
+        before = reader.get_commit_sha("main")
+        self.assertEqual(before, GRAPH_HEAD, "LAB_MAIN_MOVED")
+        pinned = reader.get_file_bytes(GRAPH_PATH, GRAPH_HEAD)
+        current = reader.get_file_bytes(GRAPH_PATH, "main")
+        self.assertEqual(pinned, current, "RELEASED_GRAPH_MOVED")
+        graph = json.loads(pinned.decode("utf-8"))
+        self.assertEqual(graph["programme"]["repository"], REPOSITORY)
+        self.assertEqual(reader.get_commit_sha("main"), before,
+                         "LAB_MAIN_MOVED_AFTER_SOURCE_READ")
+        return graph
+
+    def _native(self, reader, graph):
+        ledger = delp.ledger_from_github(reader, graph)
+        observed = delp.observe_github(reader, graph)
+        projection = delp.project(graph, ledger, observed)
+        return ledger, observed, projection
+
+    def test_g8_w01_actual_evidence_to_issue_dryrun(self):
+        reader = WholeGraphPublicGetOnly()
+        graph = self._source(reader)
+        ledger, observed, projection = self._native(reader, graph)
+        self.assertEqual(ledger, [],
+                         "CHECKPOINT_FACT_APPEARED_REQUALIFY_ISSUER_HEAD")
+        self.assertEqual(projection["rejected_facts"], [])
+        root, leaf = graph["programme"]["root"], LEAF
+        self.assertEqual(projection["nodes"][root]["progress"]["E"], 0)
+        self.assertEqual(projection["nodes"][leaf]["progress"]["E"], 0)
+        dry = delp.plan_github(reader, graph)
+        actual = {ref: reader.get_issue(delp.ref_number(ref))["title"]
+                  for ref in (root, leaf)}
+        expected = {ref: dry["expected_titles"][ref] for ref in (root, leaf)}
+        markers = [delp.read_status_marker(row["body"])
+                   for row in reader.list_comments(4)]
+        markers = [row for row in markers if row is not None]
+        self.assertEqual(len(markers), 1, "NATIVE_LIVE_STATUS_MARKER_MISSING")
+        self.assertEqual(expected, actual,
+                         "ISSUE_TITLE_DRIFT_REQUIRES_EVENT_DIAGNOSIS")
+        self.assertEqual(reader.get_commit_sha("main"), GRAPH_HEAD,
+                         "LAB_MAIN_MOVED_DURING_PROBE")
+        print("G8_W01_ACTUAL_READONLY=" + json.dumps({
+            "graph_blob": GRAPH_BLOB, "source_main": GRAPH_HEAD,
+            "ledger_records": len(ledger),
+            "rejected": len(projection["rejected_facts"]),
+            "native_input_digest": projection["input_digest"],
+            "root_E": projection["nodes"][root]["progress"]["E"],
+            "leaf_E": projection["nodes"][leaf]["progress"]["E"],
+            "root_title_equal": expected[root] == actual[root],
+            "leaf_title_equal": expected[leaf] == actual[leaf],
+            "total_title_drift": dry["would_write_titles"],
+            "status_digest": markers[0]["input_digest"],
+            "native_status_digest_equal": (
+                markers[0]["input_digest"] == projection["input_digest"]),
+            "writes": 0,
+        }, sort_keys=True))
+
+    def test_g8_w02_merged_pr_actual_native_view_boundary(self):
+        reader = WholeGraphPublicGetOnly()
+        graph = self._source(reader)
+        ledger, observed, projection = self._native(reader, graph)
+        actual = reader.get_pull(PR_NUMBER)
+        self.assertTrue(actual["merged"], "EXPECTED_REAL_MERGED_PR")
+        self.assertEqual(actual["head"]["sha"], PR_HEAD,
+                         "LAB_PR_HEAD_MOVED")
+        self.assertIn("[DRAFT]", actual["title"],
+                      "HUMAN_PR_TITLE_ALREADY_UPDATED_REBASE_ORACLE")
+        self.assertEqual(ledger, [], "NEW_FACT_REQUALIFY")
+        try:
+            delp.source_bound_responsibility_core(graph, projection, LEAF)
+        except delp.DelpError as exc:
+            self.assertIn("RESPONSIBILITY_CORE_MATERIAL_BOUNDARY", str(exc),
+                          "DIFFERENT_NATIVE_CORE_FAILURE")
+            failure = "RESPONSIBILITY_CORE_MATERIAL_BOUNDARY"
+        else:
+            self.fail("NATIVE_FULL_PR_REFERENCE_BOUNDARY_NO_LONGER_PRESENT")
+        self.assertEqual(reader.get_commit_sha("main"), GRAPH_HEAD,
+                         "LAB_MAIN_MOVED_DURING_PR_PROBE")
+        print("G8_W02_ACTUAL_READONLY=" + json.dumps({
+            "pr": REPOSITORY + "#8", "merged": actual["merged"],
+            "head": actual["head"]["sha"], "live_title": actual["title"],
+            "core": failure, "derived_pr_title": "BLOCKED_BY_NATIVE_CORE",
+            "publisher": "NONE_VERIFIED_IN_LAB_WORKFLOW", "writes": 0
+        }, sort_keys=True))
+
+    def test_g8_w03_github_only_current_frontier_oracle(self):
+        reader = WholeGraphPublicGetOnly()
+        graph = self._source(reader)
+        indexed = delp.validate_graph(graph)
+        leaf = indexed["nodes"][LEAF]
+        self.assertEqual(leaf["parent"], REPOSITORY + "#2")
+        self.assertEqual(leaf["primary_pr"], REPOSITORY + "#8")
+        self.assertEqual(leaf["depends_on"], [])
+        ledger, observed, projection = self._native(reader, graph)
+        self.assertEqual(ledger, [], "NEW_FACT_REQUIRES_AUTHORITY_CHECK")
+        entry = delp.admit(projection, LEAF, "continue")
+        frontier = delp.frontier(graph, ledger, observed, LEAF)
+        actual = reader.get_issue(4)
+        native_status = [delp.read_status_marker(row["body"])
+                         for row in reader.list_comments(4)]
+        native_status = [row for row in native_status if row]
+        self.assertEqual(len(native_status), 1)
+        self.assertEqual(entry["lineage"],
+                         [REPOSITORY + "#1", REPOSITORY + "#2", LEAF])
+        self.assertEqual(frontier["observed"]["candidate_sha"], PR_HEAD)
+        self.assertEqual(frontier["inputs"]["facts"]["accepted"], 0)
+        self.assertEqual(reader.get_commit_sha("main"), GRAPH_HEAD,
+                         "LAB_MAIN_MOVED_DURING_ENTRY_ORACLE")
+        print("G8_W03_GITHUB_ONLY_ENTRY=" + json.dumps({
+            "root": graph["programme"]["root"], "selected_leaf": LEAF,
+            "issue_title": actual["title"], "pr": leaf["primary_pr"],
+            "pr_head": PR_HEAD, "fact_count": 0,
+            "live_status_digest": native_status[0]["input_digest"],
+            "frontier_digest": frontier["frontier_digest"],
+            "action": entry["action"], "next": entry["next"],
+            "authority": "ISSUER_UNSELECTED; NO_WRITER_GRANT",
+            "actual_independent_successor": "NOT_RUN",
+            "writes": 0,
+        }, sort_keys=True))
