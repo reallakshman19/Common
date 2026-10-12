@@ -15,3 +15,19 @@ AC: no named starting question/proposed rendered-page contract -> first register
 Claim: NONE (source-level audit and plan only, no independent real learner workflow test)
 Blocker: OWNER - answer D-183-1 display, D-183-2 QRT acceptance, D-183-3 rights/source-custody, D-183-4 A4 print criteria before T2/approval
 Next: 183-T2, 183-T3, 183-T4, 183-T5, 183-T6
+Outcome: O2
+For the user: Authored construction/exit lesson for the provisional number-pattern concept is reviewable; no actual learner page, Q003 binding or publication yet.
+Proof: https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/T4_CORE1A_NUMBER_PATTERN_CONSTRUCTION_DRAFT.md
+Task: 183-T4
+Goal (issue AC): Author reusable Core1A construction for Q003's actual concept, bound to its crux and rendered with the Core1A blueprint/golden
+Status: PARTIAL
+Met: partial (source-independent authoring done; actual question crux, renderer, accepted QRT and learner product absent)
+Done: Authored new square/cube invariants construction with action/warrant/output steps, staged-table design, worked example, quick check and independent changed-case exit; explicitly left Q003 source crux unbound
+Code: reallakshman19/Common main coordination-only draft | reallakshman19/Grade9v3.5 main@778eb35a70517a46108ad0a5dc01dfc89f61c0e3 READ ONLY | PR none
+Tests: JS numeric perfect-square/perfect-cube checks for three authored examples -> 3/3 pass; product renderer/schema/browser/PDF -> skip
+CI: none -> not-run
+Evidence: https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/T4_CORE1A_NUMBER_PATTERN_CONSTRUCTION_DRAFT.md
+AC: no number-pattern Core1A concept teaching draft -> source-independent lesson draft with three arithmetically checked examples; 0 admitted units -> 0 admitted units
+Claim: LOCAL (bounded arithmetic checks only; no product or learner evidence)
+Blocker: OWNER - D-183-3 source fidelity to bind actual Q003 crux, D-183-2 QRT acceptance; product TEST writer authorization and renderer still needed before completed T4
+Next: none until Owner/source/writer gates for remaining tasks; 183-T4 remains PARTIAL
