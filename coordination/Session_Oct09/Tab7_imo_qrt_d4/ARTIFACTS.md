@@ -20,3 +20,6 @@
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 actual HTML/screenshots | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242619673/artifacts/11743552219 | artifact 11743552219; index+five pages+6 screenshots+receipt
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 cell artifact | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-EXPLAIN-D4.md | qualified reviewer packet, not successor-chat handover
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 issue evidence | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6123432473 | exact EVIDENCE.log block, academic reviewer and Owner unsigned
+2026-10-12 | chat=6accb5b3 | APPLY-D4 branch | Grade9v3.5 agent/imo182-qrt-d4-apply-pilot@ed0c655fcbb7f4afdfaf19231174820a05c2d699 | based on unmerged PR#190 exact H3 head
+2026-10-12 | chat=6accb5b3 | APPLY-D4 draft PR | https://github.com/reallakshman19/Grade9v3.5/pull/196 | wholly AUTHORED TEST source, original SVGs, independent QA
+2026-10-12 | chat=6accb5b3 | APPLY-D4 first scoped CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245052128 | QUEUED at first check; no cell credit until successful exact-head

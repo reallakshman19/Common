@@ -21,3 +21,5 @@
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 final renderer | Grade9v3.5 PR#195@6c00fae5c150cd580ab04c680414fba0a0c776e8 build/imo182-qrt/d4/explain/render-receipt.json | renderer=render_core/2 digest=4288fa8c817df8fe semantic_digest=a25c7f4881d523c0 gaps=[]
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 five-role hashes | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-EXPLAIN-D4.md | original frozen owner G-IMO-G9-FIVE-CORE-20261012 vs exact head 6c00fae5c150cd580ab04c680414fba0a0c776e8
 2026-10-12 | chat=6accb5b3 | independent maths | tests/test_imo182_qrt_d4_explain.py@6c00fae5c150cd580ab04c680414fba0a0c776e8 | 2727 multiples11 original length2..6, 900 three-digit exit, 3 tests PASS hosted
+2026-10-12 | chat=6accb5b3 | APPLY-D4 authored record | Grade9v3.5 draft PR#196@ed0c655fcbb7f4afdfaf19231174820a05c2d699 TEST/imo-research/qrt-d4/apply-d4.package.json | three non-coprime phases, interval, changed incompatibility, no authentic source
+2026-10-12 | chat=6accb5b3 | APPLY-D4 five-role manifest | Grade9v3.5 draft PR#196@ed0c655fcbb7f4afdfaf19231174820a05c2d699 TEST/products/imo182-qrt-d4-apply.manifest.json | core2=[] and five registered roles
