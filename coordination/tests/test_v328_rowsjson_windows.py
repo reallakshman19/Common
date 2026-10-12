@@ -36,7 +36,7 @@ class TestAuthoritativePowerShellWP2(unittest.TestCase):
         for name in ("watch.ps1", "watch_rowsjson.ps1", *DEPS):
             text = (FIXTURES / name).read_text(encoding="utf-8")
             for dependency in DEPS:
-                installed = r"C:\Users\reall\.claude\skills\coordinator-protocol\scripts\\" + dependency
+                installed = r"C:\Users\reall\.claude\skills\coordinator-protocol\scripts" + "\\" + dependency
                 text = text.replace(installed, str(cls.root / dependency))
             (cls.root / name).write_text(text, encoding="utf-8", newline="\n")
         cls.wrapper = cls.root / "invoke.ps1"
