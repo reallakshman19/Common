@@ -266,6 +266,20 @@ class EvidenceIndex:
             ))
             conn.commit()
 
+    def evidence_summary(self) -> Dict[str, Dict[str, Any]]:
+        """Indexed SQL aggregates; no full evidence table materialization."""
+        with self._lock, self._get_connection() as conn:
+            rows = conn.execute("""
+                SELECT project_id, count(*) AS count,
+                       max(created_at) AS latest_created
+                FROM task_evidence
+                WHERE is_active_version = 1
+                GROUP BY project_id
+                """).fetchall()
+            return {row["project_id"]: {"count": row["count"],
+                                        "latest_created": row["latest_created"]}
+                    for row in rows}
+
     def get_active_evidence(self, project_id: Optional[str] = None) -> List[Dict[str, Any]]:
         """Returns all active evidence records."""
         with self._lock, self._get_connection() as conn:
@@ -439,17 +453,14 @@ def generate_control_tower_snapshot(
     if visibility != "INTERNAL":
         raise PermissionError("Public export requires WP4 allowlist and privacy approval")
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    active_ev = evidence_index.get_active_evidence()
+    summary = evidence_index.evidence_summary()
 
-    # Calculate watermarks per project
-    watermarks = {}
-    for p_id in registry.projects:
-        ev_p = [e for e in active_ev if e["project_id"] == p_id]
-        if ev_p:
-            ev_p.sort(key=lambda x: x["created_at"], reverse=True)
-            watermarks[p_id] = ev_p[0]["created_at"]
-        else:
-            watermarks[p_id] = registry.projects[p_id].as_of
+    # SQL grouped projection avoids loading every evidence body into memory.
+    watermarks = {
+        p_id: (summary[p_id]["latest_created"] if p_id in summary
+               else registry.projects[p_id].as_of)
+        for p_id in registry.projects
+    }
 
     # Convert registry entities to dicts
     projects_list = [
@@ -545,7 +556,7 @@ def generate_control_tower_snapshot(
         "assignments": assignments_list,
         "runs": runs_list,
         "tab_bindings": bindings_list,
-        "evidence_count": len(active_ev),
+        "evidence_count": sum(v["count"] for v in summary.values()),
         "conflicts": conflicts_list
     }
 
