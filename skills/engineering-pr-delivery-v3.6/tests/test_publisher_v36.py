@@ -15,9 +15,10 @@ CHILDREN = [dict(number=n,title=f"[V3.6][O{outcome}][PLANNED] V36-1-WP{i} — ex
 PR={"number":4,"head":{"sha":"8ec979746b0a7f55532c804fbb959ed1a29eb3a2"},"title":"[V3.6][LAB][O1][DRAFT] Evidence probe — candidate created","draft":True,"state":"open","merged":False}
 
 
-def report(current=0, statuses=("NO_EVIDENCE","NO_EVIDENCE")):
+def report(current=0, statuses=("NO_EVIDENCE","NO_EVIDENCE"), links=(None,None)):
     return {"parent":PLAN["parent"],"label_sha":PLAN["label"]["label_sha"],"current_evidence":current,
-            "total":2,"verified_complete":0,"tasks":[dict(task_id=t["task_id"],status=s) for t,s in zip(PLAN["tasks"],statuses)]}
+            "total":2,"verified_complete":0,"tasks":[dict(task_id=t["task_id"],status=s,pr=link)
+                for t,s,link in zip(PLAN["tasks"],statuses,links)]}
 
 
 class Fake:
@@ -40,14 +41,50 @@ class PublisherTests(unittest.TestCase):
         updates=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,report())
         self.assertIn("[E0/2]",updates[0]["after"])
         self.assertIn("[PENDING]",updates[1]["after"])
-        self.assertIn("[DRAFT][E0/2]",updates[3]["after"])
+        self.assertIn("[UNATTRIBUTED][DRAFT][E0/0]",updates[3]["after"])
 
     def test_one_evidence_updates_parent_child_and_pr(self):
-        u=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,report(1,("CURRENT_EVIDENCE","NO_EVIDENCE")))
+        u=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,report(1,("CURRENT_EVIDENCE","NO_EVIDENCE"),("https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4",None)))
         self.assertIn("[E1/2]",u[0]["after"])
         self.assertIn("[EVIDENCED]",u[1]["after"])
         self.assertIn("[PENDING]",u[2]["after"])
-        self.assertIn("[E1/2]",u[3]["after"])
+        self.assertIn("[O1][DRAFT][E1/1]",u[3]["after"])
+
+    def test_unrelated_pr_does_not_inherit_plan_outcomes(self):
+        unrelated=dict(PR,number=5,title="[V3.6][O1/O3][DRAFT] Other feature")
+        link="https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        u=pu.title_plan(PLAN,[PARENT,*CHILDREN],unrelated,
+                        report(2,("CURRENT_EVIDENCE","CURRENT_EVIDENCE"),(link,link)))
+        self.assertIn("[E2/2]",u[0]["after"])
+        self.assertIn("[UNATTRIBUTED][DRAFT][E0/0]",u[-1]["after"])
+        self.assertNotIn("[O1/O3]",u[-1]["after"])
+        self.assertIn("Other feature",u[-1]["after"])
+
+    def test_one_PR_has_one_outcome_not_whole_plan(self):
+        a="https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        other="https://github.com/reallakshman19/relay-v36-e2e-lab/pull/5"
+        u=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,
+                        report(2,("CURRENT_EVIDENCE","CURRENT_EVIDENCE"),(a,other)))
+        self.assertIn("[E2/2]",u[0]["after"])  # parent sees every task
+        self.assertIn("[O1][DRAFT][E1/1]",u[-1]["after"])  # PR sees its own task
+        self.assertNotIn("[O1/O3]",u[-1]["after"])
+
+    def test_stale_link_retains_PR_outcome_but_not_current_count(self):
+        a="https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        u=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,
+                        report(0,("STALE_EVIDENCE","STALE_EVIDENCE"),(a,a)))
+        self.assertIn("[O1/O3][DRAFT][E0/2]",u[-1]["after"])
+
+    def test_wrong_repo_proof_does_not_attribute_outcome(self):
+        wrong="https://github.com/other/repo/pull/4"
+        u=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,
+                        report(1,("CURRENT_EVIDENCE","NO_EVIDENCE"),(wrong,None)))
+        self.assertIn("[UNATTRIBUTED][DRAFT][E0/0]",u[-1]["after"])
+
+    def test_closed_PR_status_is_not_draft(self):
+        u=pu.title_plan(PLAN,[PARENT,*CHILDREN],
+                        dict(PR,draft=False,state="closed"),report())
+        self.assertIn("[UNATTRIBUTED][CLOSED][E0/0]",u[-1]["after"])
 
     def test_stale_is_not_evidence(self):
         u=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,report(0,("STALE_EVIDENCE","NO_EVIDENCE")))
