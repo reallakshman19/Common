@@ -56,10 +56,20 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict) ->
             raise ContractError("malformed PR")
         status = "MERGED" if pr.get("merged") else "DRAFT" if pr.get("draft") else (
             "OPEN" if pr.get("state") == "open" else "CLOSED")
-        outcomes = "/".join(sorted(set(t["outcome"] for t in plan["tasks"])))
+        # The parent count covers ALL children. A PR title, instead, may describe
+        # only tasks whose provider-verified proof actually refers to THIS PR.
+        # STALE evidence still identifies its PR, but never counts as current.
+        pr_ref = f"https://github.com/{parent[1]}/pull/{pr['number']}"
+        linked = [current_by_task[t["task_id"]] for t in plan["tasks"]
+                  if current_by_task[t["task_id"]].get("pr") == pr_ref]
+        linked_ids = {t["task_id"] for t in linked}
+        outcomes = "/".join(sorted({t["outcome"] for t in plan["tasks"]
+                                    if t["task_id"] in linked_ids})) or "UNATTRIBUTED"
+        pr_count = sum(t["status"] == "CURRENT_EVIDENCE" for t in linked)
+        pr_total = len(linked)
         tail = title_tail(pr.get("title"), "Lifecycle work")
         updates.append({"kind": "pr", "number": pr["number"], "before": pr["title"],
-                        "after": f"[V3.6][{outcomes}][{status}][E{count}/{total}] {tail}",
+                        "after": f"[V3.6][{outcomes}][{status}][E{pr_count}/{pr_total}] {tail}",
                         "head_sha": pr["head"].get("sha")})
     return updates
 
