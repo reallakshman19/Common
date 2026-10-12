@@ -15,3 +15,12 @@ ARTIFACTS -- APPEND ONLY | each dated line includes chat
 2026-10-12 | chat=6acc3003 | Issue #182 Owner-decision + route-HOLD receipt, comment #6116027729 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116027729
 2026-10-12 | chat=6acc3003 | Grade9v3.5 main@778eb35a source-only readback; relay/STATE.yaml lease ACTIVE for #212 (not #182) | https://github.com/reallakshman19/Grade9v3.5/blob/778eb35a/relay/STATE.yaml
 2026-10-12 | chat=6acc3003 | Grade9v3.5 writer lease only #212 Atlas scope; neither isolated Issue #182 branch nor PR created | https://github.com/reallakshman19/Grade9v3.5/blob/778eb35a/relay/LEASES/LEASE-ISS212-ATLAS-INDEX-V31-003.yaml
+2026-10-12 | chat=6acc3003 | P2 PLAN_UPDATE #182 after Owner corrections | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116093655
+2026-10-12 | chat=6acc3003 | Grade9v3.5 isolated branch agent/issue-182-core2a-test-blueprint from main@778eb35a (no relay files touched) | https://github.com/reallakshman19/Grade9v3.5/tree/agent/issue-182-core2a-test-blueprint
+2026-10-12 | chat=6acc3003 | Code commit 7b65e26a94b3c87dda626c6be0c3bd3e79567e52 CORE2A-only TEST manifest, sole-renderer comparison test and scoped workflow | https://github.com/reallakshman19/Grade9v3.5/commit/7b65e26a94b3c87dda626c6be0c3bd3e79567e52
+2026-10-12 | chat=6acc3003 | Code commit 86f17fa062607fe5e94a04f10dfed2f6fe868d4c corrected test-only DOM order to verified candidate+golden order | https://github.com/reallakshman19/Grade9v3.5/commit/86f17fa062607fe5e94a04f10dfed2f6fe868d4c
+2026-10-12 | chat=6acc3003 | PR #184 DRAFT at head 86f17fa; unmerged, no publish | https://github.com/reallakshman19/Grade9v3.5/pull/184
+2026-10-12 | chat=6acc3003 | CI #38191880133 first head 7b65e26 failed test comparator 1/9 only, real render and golden both completed | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38191880133
+2026-10-12 | chat=6acc3003 | CI #38192048244 corrected head 86f17fa passed 9/9, real CORE2A render, candidate golden, zero gaps | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38192048244
+2026-10-12 | chat=6acc3003 | CI evidence artifact #11721871419, metadata only, no HTML/KEY upload, Owner visual outstanding | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38192048244
+2026-10-12 | chat=6acc3003 | 182-T5 O1 PARTIAL issue evidence comment #6116151965 | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116151965
