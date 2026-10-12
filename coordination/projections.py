@@ -146,13 +146,18 @@ class ProjectionEngine:
             # Source provenance: explicit project registry, never fabricate provider presence.
             for pid in sorted(registry.projects):
                 p = registry.projects[pid]
+                provider_observation = evidence_index.get_project_observation(pid)
+                provider_reachability = (
+                    provider_observation["provider_status"] if provider_observation else "UNKNOWN")
+                provider_observed_at = (
+                    provider_observation["last_fetch_at"] if provider_observation else None)
                 assignments = [a for a in registry.assignments.values()
                                if registry.works[registry.lanes[a.lane_id].work_id].project_id == pid]
                 active_assignments = sum(a.status == "ACTIVE" for a in assignments)
                 emit("portfolio", pid, pid, {
                     "project_id": pid, "verified_repo_id": None,
-                    "name": p.name, "provider_reachability": p.provider_reachability,
-                    "provider_observed_at_utc": p.as_of, "registered_assignments": len(assignments),
+                    "name": p.name, "provider_reachability": provider_reachability,
+                    "provider_observed_at_utc": provider_observed_at, "registered_assignments": len(assignments),
                     "registered_active_assignments": active_assignments,
                     "work_count": sum(w.project_id == pid for w in registry.works.values()),
                     "coordinator_source_state": "UNKNOWN", "stale_observation_count": 0,
