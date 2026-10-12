@@ -498,3 +498,88 @@ class ProjectionQueryService:
                     "next_cursor":next_cursor}
         finally:
             conn.close()
+
+
+def materialize_manifest(manifest_path: str, evidence_db: str,
+                         projection_db: str, as_of_utc: str) -> dict:
+    """Explicit private, read-only-source publisher. NEVER invoked from GET.
+
+    A trusted operator provides a source-pinned registry/assignment manifest;
+    paths are relative to that manifest and constrained to its directory.
+    Nothing is inferred from a folder or browser Tab alias.
+    """
+    from coordination.contracts import (
+        ControlTowerRegistry, Project, Work, ExecutionLane, AgentAssignment,
+        AgentRun, TabBinding,
+    )
+    from coordination.indexer import EvidenceIndex
+    from coordination.coordinator_bridge import AtomicSnapshotReader
+
+    root = Path(manifest_path).resolve().parent
+    manifest_file = Path(manifest_path).resolve()
+    if manifest_file.stat().st_size > 2 * 1024 * 1024:
+        raise ValueError("Private projection manifest too large")
+    doc = json.loads(manifest_file.read_text(encoding="utf-8"))
+    if doc.get("schema_version") != "WP3_PRIVATE_MANIFEST_V1":
+        raise ValueError("Unsupported private manifest schema")
+    if not isinstance(doc.get("source_watermarks"), dict):
+        raise ValueError("Missing authoritative source watermark vector")
+    source_ref = doc.get("registry_source_ref")
+    if not isinstance(source_ref, str) or not source_ref.startswith("https://"):
+        raise ValueError("Missing source-pinned registry provenance")
+    registry = ControlTowerRegistry()
+    for name, typ, add in (
+        ("projects",Project,registry.register_project),
+        ("works",Work,registry.register_work),
+        ("execution_lanes",ExecutionLane,registry.register_lane),
+        ("assignments",AgentAssignment,registry.register_assignment),
+        ("runs",AgentRun,registry.register_run),
+        ("tab_bindings",TabBinding,registry.register_binding),
+    ):
+        if not isinstance(doc.get(name), list):
+            raise ValueError("Missing registry section: " + name)
+        for entry in doc[name]:
+            add(typ(**entry))
+    snaps = []
+    names = doc.get("observation_files",[])
+    if not isinstance(names,list) or len(names)>1000:
+        raise ValueError("Too many source snapshots")
+    for filename in names:
+        if (not isinstance(filename,str) or not filename or
+            Path(filename).is_absolute() or ".." in Path(filename).parts or
+            "\x00" in filename):
+            raise ValueError("Invalid private snapshot filename")
+        path = root / filename
+        if path.is_symlink() or not path.resolve().is_relative_to(root):
+            raise ValueError("Source snapshot path escapes manifest root")
+        snapshot = AtomicSnapshotReader.read_snapshot(path)
+        if snapshot is None:
+            raise ValueError("Invalid or missing coordinator observation source")
+        snaps.append(snapshot)
+    if not Path(evidence_db).is_file():
+        raise FileNotFoundError("Durable WP1 evidence index is required")
+    idx = EvidenceIndex(evidence_db)
+    try:
+        return ProjectionEngine(projection_db).materialize(
+            registry, idx, snaps, as_of_utc, doc["source_watermarks"],
+            task_attributions=doc.get("task_attributions",[]),
+            pr_bindings=doc.get("pr_bindings",[]))
+    finally:
+        idx.close()
+
+
+def main(argv=None) -> int:
+    import argparse
+    parser=argparse.ArgumentParser(description="Materialize private WP3 read projections")
+    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--evidence-db", required=True)
+    parser.add_argument("--projection-db", required=True)
+    parser.add_argument("--as-of-utc", required=True)
+    args=parser.parse_args(argv)
+    result=materialize_manifest(args.manifest,args.evidence_db,args.projection_db,args.as_of_utc)
+    print(canon(result))
+    return 0
+
+
+if __name__=="__main__":
+    raise SystemExit(main())
