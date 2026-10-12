@@ -666,30 +666,32 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
             return
 
         # GET /api/v3/snapshot
+        # Internal-only projection; no GitHub Pages/public export is authorized.
         if route == "v3/snapshot":
             from coordination.contracts import ControlTowerRegistry, Project
             from coordination.indexer import EvidenceIndex, generate_control_tower_snapshot
-            reg = ControlTowerRegistry()
-            for p in self.config.get("projects", []):
-                proj_obj = Project(
-                    project_id=p["id"],
-                    name=p["name"],
-                    repo_url=p.get("repo_url", f"https://github.com/reallakshman19/{p['name']}"),
-                    coordination_dir=p.get("path", ""),
-                    status="ACTIVE",
-                    as_of=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    provider_reachability="REACHABLE"
-                )
-                reg.register_project(proj_obj)
-            projects = self.config.get("projects", [])
-            if projects:
-                coord_dir = resolve_project_dir(projects[0])
-                db_path = str(coord_dir / "evidence_index.db")
-            else:
-                db_path = ":memory:"
-            idx = EvidenceIndex(db_path)
+            index_path = Path(self.config.get("server", {}).get("evidence_index_path")
+                              or (HERE / "evidence_index.db"))
+            # A read endpoint must never create a DB or simulate a provider poll.
+            idx = EvidenceIndex(str(index_path)) if index_path.is_file() else EvidenceIndex(":memory:")
             try:
-                snap = generate_control_tower_snapshot(reg, idx, visibility="PUBLIC")
+                reg = ControlTowerRegistry()
+                for p in self.config.get("projects", []):
+                    observation = idx.get_project_observation(p["id"])
+                    reachability = observation["provider_status"] if observation else "UNKNOWN"
+                    observed_at = observation["last_fetch_at"] if observation else None
+                    state = ("ACTIVE" if reachability == "REACHABLE" else
+                             "UNKNOWN" if reachability == "UNKNOWN" else "DEGRADED")
+                    reg.register_project(Project(
+                        project_id=p["id"],
+                        name=p["name"],
+                        repo_url=p.get("repo_url", ""),
+                        coordination_dir=p.get("coordination_dir", ""),
+                        status=state,
+                        as_of=observed_at,
+                        provider_reachability=reachability
+                    ))
+                snap = generate_control_tower_snapshot(reg, idx, visibility="INTERNAL")
                 self.send_json(snap)
             finally:
                 idx.close()
