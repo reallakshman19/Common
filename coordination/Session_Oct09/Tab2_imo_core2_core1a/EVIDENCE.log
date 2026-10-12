@@ -130,3 +130,20 @@ AC (before -> after): product Core2 0->0, canonical Core1A 0->0, Owner QRT 0/28-
 Claim: INDEPENDENT (source and local visual audit, not native render)
 Blocker: MACHINE - native full checkout/source fixture local execution not confirmed; OWNER - later specific QRT and A4 accept/reject reserved, not permission for TEST
 Next: 183-T2-G2-W1 native render using existing adapter/render_core; conditional W2 only first real native error; then T3/T4/T5; T6 parked
+2026-10-12 | chat=6acc4eaa | TASK EVIDENCE | NATIVE V31 BLOCKED AFTER REAL CLONE | plan=r5 | aim=v3.1.0
+Outcome: O1
+For the user: Nothing changed in the required native-learner workflow; source input for running original Q003 through the existing native renderer is prepared, but no Core2 page produced.
+Proof: https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_V31_NATIVE_RUN_ATTEMPT_2026-10-12.json (exact SHA/input preparation and git checkout failed with DNS; NOT learner HTML)
+Task: 183-T2-G2-W1
+Goal (issue AC): Registered BP-CORE2-SOURCE-QUESTION Q003 real page from sole Shared/tools/render_core.py then actual G-CORE2-R2 comparator
+Status: BLOCKED
+Met: no
+Done: replan under v3.1.0; checked immutable source component SHA; newly SHA-pinned local authored input; isolated TEST-only adapter optional --custody-receipt commit e50802f readback; verified one-file diff; attempted git clone exit128 DNS
+Code (repo branch @ commit | PR): Grade9v3.5 agent/183-q003-private-core2-test-6acc303b@e50802f; main@778eb35a unchanged | PR none
+Tests (command -> pass/fail/skip): local option/source/file SHA/math/crux checks -> 5 local PASS (NOT native); git clone -> FAIL DNS; prepare_private.py/native render/golden/browser -> NOT_RUN
+CI (run -> result): none -> not-run
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120007557; https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_V31_NATIVE_RUN_ATTEMPT_2026-10-12.json
+AC (before -> after): native Q003 Core2 0->0; golden not-run, Core1A admitted 0, QRT 0/28
+Claim: LOCAL (input and checkout), GitHub adapter readback independent
+Blocker: MACHINE - github.com DNS blocks connected checkout, existing sandbox lacks Shared/tools/render_core.py; private local source input now exists
+Next: 183-T2-G2-W1 actual native renderer with pinned new receipt; W2 only observed authentic failure; then T3/T4/T5, T6 parked
