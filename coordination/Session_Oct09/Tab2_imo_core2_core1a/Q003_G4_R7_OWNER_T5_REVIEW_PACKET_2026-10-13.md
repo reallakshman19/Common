@@ -1,0 +1,119 @@
+# T5 Owner evidence packet — Q003 original Core2 + authored-concept Core1A
+
+**Issue [#183](https://github.com/reallakshman19/Grade9v3.5/issues/183)** · chat `6acd1e6b` · plan **r7** · aim **v3.1.0** · 13 Oct 2026 Dubai · task **183-T5-G2-W1 / O3** · **SOURCE-SAFE, DEVELOPMENT-ONLY CANDIDATE — NOT ACCEPTED**
+
+**Outcome: O3**  
+**For the user:** A real native Core2/Core1A **TEST pair** now exists solely on the Owner's local secure machine as Coordinator-reported rendered pages with zero structural gaps. The Core1A has not been visually or interactively accepted. This package queues the precise Owner/independent reviewer decisions; it does NOT accept or merge a QRT cell, license original text, assert printed-source custody, or publish learner pages.  
+**Proof:** [Coordinator Core1A native receipt](Q003_G4_R7_COORDINATOR_CORE1A_ZERO_GAP_RECEIPT_2026-10-13.json), [Core1A secure browser checklist](Q003_G4_R7_SECURE_CORE1A_BROWSER_ORACLE_2026-10-13.md), [Owner-approved narrow private Core2 contextual comparison](Q003_G4_R7_OWNER_CONTEXT_COMPARISON_2026-10-12.json).
+
+## A. Exact two-page private preview to open locally
+
+| Role | Source/renderer identity | Private exact artifact/grounded state | Owner review task |
+|---|---|---|---|
+| Authentic-source `CORE2` | `BP-CORE2-SOURCE-QUESTION`, native sole `Shared/tools/render_core.py`; frozen source TEST `agent/183-q003-private-core2-test-6acc303b@98ae06741f4d90865fcd313d609aeabba46826e2` | Owner-relayed native `core2.html`: **62,277 bytes**, SHA-256 `827a8a99128601721c3c13dfd99806b5a563624526edfd8ba137ab8d4b64b6a0`, **0 reported gaps** against `G-CORE2-R2` **0**; private 10/12 golden component roles, Owner “approve. conceptually ok” for that **contextual TEST comparison only**. Separate Coordinator browser click/keyboard at 375px reported PASS on named attempt/disclosure checks, not independent review. | Inspect exact original printed question fidelity, answer/crux and faithful ordered options on the Owner's private machine; keep the already Owner-accepted TEST badge/labels/no CONDITIONS/no SOURCE_PDF/one-rung differences out of repair queue. |
+| Authored concept `CORE1A` | `BP-CORE1A-CONSTRUCTION@1.8.0`, native sole `Shared/tools/render_core.py`; isolated branch `agent/183-q003-private-core2-test-6acc303b@f030a0aca51038575778de3489f75d1d629a6b74` | Coordinator-reported new native `core1a.html`: **76,401 bytes**, SHA-256 `d1fe23c43d1eeae67c69600beef1b5054c361854c3e5cd6742545859592998c0`, **0 gaps**; candidate `G-MATH-LINEAR-CONSTRAINT` Core1A **64,626 bytes**, SHA-256 `27547f2e31b84f53a2e506ceff137ce1ae4b403c195c79080709fa5f505063d6`, **0 gaps**. Both `render_core/2` and benchmark exit **0** `STRUCTURAL_CHECK_ONLY`. Coordinator has placed both pages side by side but **has not** tested actual Core1A learner browser or judged pedagogy. | Visual comparison of authentic learner layout to candidate technique golden and concept-specific maths/pedagogy; watch both staged constructions, independent exit, evidence/representative examples; do not count a static role list as approval. |
+
+**Private-only files remain on Owner machine:** `TEST/imo-research/core2-q003/.private/rendered/core2.html` (frozen Core2 receipt), `TEST/imo-research/core2-q003/.private/core1a/rendered/core1a.html` (new), and `golden/units/G-MATH-LINEAR-CONSTRAINT/rendered/core1a.html`. Do not copy the original question, four printed options, original answer, private JSON, full HTML, screenshots or PDF into issue comments/Common. Share only source-safe hashes, role slots, qualitative defects and explicit Owner verdicts.
+
+## B. Core1A native comparison decision — no filler
+
+- **Golden roles:** 13. **Q003 Core1A overlaps 12 of 13 (~92.3%)**, plus the concept-specific `QUESTION_BRIDGE` and `SECTION_ROUTE`. `EQUATIONS` and `STAGED_VISUAL` were missing in the first draft, genuinely authored using relation and independently authored SVG stages, and now appear. No native gaps remain **as reported by Coordinator**, not independently reproduced.
+- **`LEARNING_TRANSITIONS` deliberately absent:** the blueprint marks this slot **OPTIONAL**. Native `_core1a_learning_transitions` requires a real site portal root to derive valid Learn/Practice/Question Bank navigation. Private TEST manifest `home_href=index.html` has no parent portal root and `output_roles=[CORE1A]`, so this slot should **not** be fabricated. **Decision: EXPECTED ABSENT / NO TEST CODE ADDITION**, subject to new review only for an actual permitted future deployed portal.
+- **Digest non-equality is normal:** `render_core.render_digest` fingerprints renderer plus each manifest, package, bank and other authority file; native original and candidate golden have different source records. Reported Q003 digest `bce31f18481cb4da` versus golden `8433c0370f6a1999` is **not** a demand for identical digests. Exact same input reruns can be checked for reproducibility instead.
+- **Maths basis (independently previously reviewed against school-mirror original):** Q003 tests whether one relation accounts for three numerical input-output pairs and one exception; the inferred residual method is `y - x²`, with **+4** for three *printed* source pairs. This fact is a source-safe method description, not a substitute for exact private stem/options custody or the Owner's own examination of the paper.
+- **Clearly AUTHORED transfer:** concept worked visual/new pair sequence `(4,23),(6,43),(7,58),(9,88)`: residuals `7,7,9,7`. A **different** independent exit case `(2,9),(3,14),(5,30),(6,43)`: residuals `5,5,5,7`. Neither is an original IMO option; the constructed teaching/visual must preserve that label. Source-specific reasoning must not be inferred solely from the answer key.
+- **Actual construction quality to inspect:** two construction units with two action/why-valid/output steps each; equation meaning and validity scope; real staged authored visuals; hardest original Q003 crux connected using source-private authenticated bank ref; bounded misconception/repair and meaningful quick checks; exit demands learner's own changed-case residual decision.
+
+## C. QRT hypothesis — a proposal for review, **not** an accepted classification
+
+Candidate `QRT-MODEL-D2` (**MODEL / Connected reasoning, D2**). The plausible decisive learner act is to **choose and consistently test** one square-offset model instead of re-fitting a different rule per pair. A short model-selection-plus-checking decision, not mere reading of a printed formula, could justify D2; the reported private difficulty assessment is D2, 4/10 overall, 2/4 conceptual. This is an **AUTHOR / G4 PROPOSAL ONLY**. An independent academic reviewer must adjudicate whether the real printed source task instead primarily demands `APPLY` or `REPRESENT`, and whether D2 is justified in the visible learner workflow. Do **not** count the row as proposed in canonical coverage register merely by appending this packet.
+
+No `QRT-MODEL-D2` owner decision ID exists for Q003 here; the 2026-27 sample-only canonical QRT proposal row already has a *different* sample question, and this 2023-24 Q003 does not replace it. No accepted QRT cells change.
+
+### 28-cell visibility for Owner (no canonical ledger mutation)
+
+| Base QRT cell | This packet's scoped Q003 status | Owner acceptance state |
+|---|---|---|
+| `QRT-RETRIEVE-D1` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-EXPLAIN-D1` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-APPLY-D1` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-MODEL-D1` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-REPRESENT-D1` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-SYNTHESIZE-D1` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-JUSTIFY-D1` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-RETRIEVE-D2` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-EXPLAIN-D2` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-APPLY-D2` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-MODEL-D2` | **Q003 tentative placement; not reviewed** | **NOT ACCEPTED** |
+| `QRT-REPRESENT-D2` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-SYNTHESIZE-D2` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-JUSTIFY-D2` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-RETRIEVE-D3` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-EXPLAIN-D3` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-APPLY-D3` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-MODEL-D3` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-REPRESENT-D3` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-SYNTHESIZE-D3` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-JUSTIFY-D3` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-RETRIEVE-D4` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-EXPLAIN-D4` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-APPLY-D4` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-MODEL-D4` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-REPRESENT-D4` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-SYNTHESIZE-D4` | No Q003 claim in this cell | **NOT ACCEPTED** |
+| `QRT-JUSTIFY-D4` | No Q003 claim in this cell | **NOT ACCEPTED** |
+
+Canonical 28-cell matrix authority: `Shared/quality/question-demand-matrix.v1.json` (7 demands × 4 bands); current accepted coverage **0/28**, unchanged. Q003 contributes **one candidate placement at most**, not 28 cells of evidence.
+
+## D. Review observations still required before any Owner cell decision
+
+| Review proof item | Present/source | Reviewer status / what is missing |
+|---|---|---|
+| Source custody & precise original | Private input SHA `b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9`; source item SHA `31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2`; school-mirror printed page 2/Q003 public visually inspected by G4; private stem/options exact-match Coordinator-reported. | **Owner personally confirming original printed-paper inspection is UNCONFIRMED**. Publisher authenticated PDF binary custody absent. Request source-private original-vs-transcript comparison and explicit Owner confirmation (or reject provenance string `PYQ_VERIFIED_OWNER_INSPECTED_FOR_DEVELOPMENT_ONLY` until true). |
+| Native Core2 and golden | Coordinator/Owner reports 0 gaps Core2; 10/12 context roles; Owner approved limited TEST differences. | No academic QRT decision from that approval; protected answer consistency with source must be visually adjudicated on secure machine. |
+| Native Core1A & golden | New Coordinator report 0/0 gaps and 12/13 slots, extra bridge/route; `LEARNING_TRANSITIONS` optional/absent as expected. | **Structural portion met, LOCAL claim**; Owner visual and independent pedagogical assessment PENDING. |
+| Actual Core1A browser | Not executed. | Run [exact source-safe operator checklist](Q003_G4_R7_SECURE_CORE1A_BROWSER_ORACLE_2026-10-13.md): stages, equation tile, quick checks, independently attempted exit, keyboard/focus, 375px, touch, side-by-side golden. |
+| H1/H2/H3, S1/S2/S3, P1/P2/P3, M1/M2/M3 matrix | Canonical `Shared/quality/question-demand-matrix.v1.json`, 12 semantic asks. Core2 source-specific first hint and post-attempt support are Coordinator-reported, original Core1A teaching visual and exit rendered only. | **Reviewer verdict PENDING for each ask**: PASS/FAIL/NOT_APPLICABLE+why/UNKNOWN with source-private rationale; do not force 3 source hint rungs or a Core2 source visual into an item that lacks them. Core1A teaching stages are not a substitute for Core2 protected stage evidence. See review grid below. |
+| Accessibility/real devices | Core2 keyboard+375x812 reported by Coordinator; Core1A not run. | Core1A focus/keyboard/375px/touch and screen reader (independent optional test) still open. Screen reader status NOT_RUN. |
+| Same-page native A4 | NOT_RUN. | **Separate Owner decision reserved**. No A4 pass or PDF artifact claimed. |
+| Publisher/public use | Rights `NOT_GRANTED`; development-only isolated TEST display approved for local study, no publication. | **Owner separate rights/display-mode decision reserved**; no unlicensed publishing/merge. |
+| CI and PR | No new hosted CI; product code in isolated TEST only, no PR; main/Shared writer serial #212. | Native operator local exit 0 is not a hosted CI run. No release or writer-lease bypass. |
+
+### Canonical 12-ask review grid (to be filled by an authorized academic reviewer)
+
+| Ask | Evidence required to judge on original private page / authored lesson | Qualified reviewer verdict | Owner cell disposition |
+|---|---|---|---|
+| H1 | Pre-attempt source-authored orientation clarifies rule-selection crux without revealing answer. | PENDING | PENDING |
+| H2 | Connects relevant known square relation to input-output checks only at allowed disclosure stage. | PENDING / N/A with reason | PENDING |
+| H3 | Posture opens route while preserving the D2 learner-owned relation test until actual attempt; no forced fabricated source rung. | PENDING / N/A with reason | PENDING |
+| S1 | Source-role stage safely sets up question; if no original source image/stages, written N/A justified. | PENDING / N/A | PENDING |
+| S2 | Visual supports meaning of invariant; distinguish authored Core1A teaching stages from original Core2 source image. | PENDING / N/A | PENDING |
+| S3 | Progressive stage helps without revealing original Core2 final exception before the permitted attempt. | PENDING / N/A | PENDING |
+| P1 | Protected original Core2 answer/crux not revealed before typed commitment; Core1A independent exit independently attempted. | PENDING | PENDING |
+| P2 | Core2 to concept bridge/repair links to exact corresponding constructed reasoning move. | PENDING | PENDING |
+| P3 | Post-attempt solution warrants are valid and separately verified (not merely pattern-matching four choices). | PENDING | PENDING |
+| M1 | Plausible wrong route (change rule mid-list or infer from one pair) is represented. | PENDING | PENDING |
+| M2 | Diagnostic differentiates true misconception from one arithmetic slip. | PENDING | PENDING |
+| M3 | Repair establishes one fixed residual procedure, then the changed authored exit independently tests transfer. | PENDING | PENDING |
+
+## E. Owner decision placeholders — **intentionally unanswered**
+
+1. **Original source fidelity and printed-paper inspection:** `CONFIRMED_BY_OWNER / NEEDS_CORRECTION / HOLD` — Owner name/date/secure evidence fingerprint: **PENDING**. Do not infer from code's source-status string.
+2. **Core1A academic, concept and visual review:** `ACCEPT_PRIVATE_TEST_VISUAL / REVISE / HOLD` — exact local Core1A SHA and any specific problem: **PENDING**.
+3. **QRT primary demand and difficulty:** `MODEL-D2 / ANOTHER_CELL_WITH_REASON / REJECT_CLASSIFICATION / HOLD`, with qualified independent academic review and Owner decision ID: **PENDING**.
+4. **12 cognitive review asks:** review each above in the private environment and record independent evidence; **PENDING**, no automatic PASS from structural gaps=0.
+5. **Owner QRT cell** `QRT-<DEMAND>-<D1..D4>`: `ACCEPT / REVISE / HOLD`, exact source+page digests, reviewer ID/verdict and decision date — **PENDING**; accepted count remains **0/28** until authenticated accepted event.
+6. **Same-page A4:** `ACCEPT / REVISE / HOLD`, exact native A4 artifact SHA, print/legibility review — **NOT_RUN**.
+7. **Original embedding, publisher rights, and public release:** `RIGHTS_GRANTED_WITH_EVIDENCE / LINK_ONLY_AUTHORISED / DEVELOPMENT_ONLY / HOLD` — rights **NOT_GRANTED**, publication **FORBIDDEN**; do not assume TEST embed approval permits public distribution.
+8. **Real browser Core1A and cross-page integration:** operator-reported safe receipt per [QA oracle](Q003_G4_R7_SECURE_CORE1A_BROWSER_ORACLE_2026-10-13.md) — **PENDING**.
+
+**Owner review should use the actual private native Core1A side-by-side with candidate G-MATH-LINEAR-CONSTRAINT already displayed on the Owner's machine.** No public screenshot or protected data is requested.
+
+## F. Workflow next, release boundary
+
+1. Coordinator secure operator executes the exact real browser checklist without touching code, returning only result flags, viewport/touch measurements and first redacted discrepancy. G4 records it as LOCAL, not independently run.
+2. Owner and qualified academic reviewer inspect the private authentic Core2 vs paper and actual Core1A vs golden; decide maths, teaching, layout and provisional QRT classification. If a demonstrated defect exists, authorize/fix it in isolated TEST; no cosmetic slot inflation.
+3. Owner alone gives **separate** QRT/A4/rights/display approvals. Only after the exact original Core2 + concept Core1A pair and QRT placement are accepted can `183-T6` / 68-question repetition be unparked.
+4. Product main, `Shared/tools/render_core.py` and #212 writer lease unchanged. No PR, no merge, no released learner artifact; existing Coordinator rendering remains **private TEST**.
+
+**Current count: accepted authentic Core2 0/68 · admitted Core1A 0 · Owner accepted QRT 0/28.** This packet is a deliverable, not a quality or publication verdict.
