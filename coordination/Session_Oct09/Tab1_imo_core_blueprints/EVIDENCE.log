@@ -54,3 +54,22 @@ Claim: NONE
 Blocker: PERSON - coordinator: record explicit Issue #182 TEST-only isolated-branch writer grant or authorized carve-out from active serial #212 lease, with allowed file scope and no relay/STATE.yaml edit, merge or release.
 Next: none (HOLD until writer route exists)
 LOG | chat=6acc3003 | tab=Tab1 | issue=182 | plan=P1 | progress=2/9 | done=none | next=none | ac=0/4 | blocker=PERSON:coordinator writer-route grant for #182 TEST branch | aim=v1.1.0 | outcome=O1 | user=no
+
+Outcome: O1
+For the user: a real authored Core2A TEST page was generated from the registered blueprint and compared structurally with the Core2A golden inside hosted CI, but no public or real-learner page has been delivered.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38192048244
+TASK EVIDENCE
+Task: 182-T5
+Goal (issue AC): P2 first Core2A: build in TEST using BP-CORE2A-SUPPORTED-APPLICATION@1.1.0, compare to candidate golden core2a.html, no rights, QRT acceptance, publication or merge.
+Status: PARTIAL
+Met: partial
+Done: Isolated branch from Grade9v3.5/main@778eb35a; authored CORE2A-only TEST manifest; real sole renderer --draft --reference generated the page and sole renderer generated candidate golden; corrected exact-head run PASS with 9/9 machine semantic/structural checks, identical slot order, T05 hint ladder and T07 independent check, 0 renderer gaps; no protected KEY or generated HTML artifact uploaded.
+Code: reallakshman19/Grade9v3.5 agent/issue-182-core2a-test-blueprint @86f17fa062607fe5e94a04f10dfed2f6fe868d4c | PR #184 DRAFT and unmerged
+Tests: python -m unittest tests.test_core_authored_qrt_repair_journey -v -> pass; python Shared/tools/question_review_matrix.py check -> pass; python Shared/tools/render_core.py build --draft --reference -> pass; python Shared/tools/build_golden.py --id G-MATH-LINEAR-CONSTRAINT -> pass; python tests/imo_182_core2a_golden.py -> 9/9 pass; browser, pixel, human learner, same-page A4 and Owner visual -> NOT_RUN
+CI: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38191880133 -> failure (wrong comparator expectation, not page difference); https://github.com/reallakshman19/Grade9v3.5/actions/runs/38192048244 -> success
+Evidence: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38192048244 ; https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116151965
+AC: no Core2A actual rendered page/golden evidence -> actual TEST render completed and same blueprint/golden semantics/slots/hints/check passed with zero gaps; not a final pixel/Owner/print accept (O1 incomplete)
+Claim: HOSTED_CI
+Blocker: NONE - A4 same-page renderer-generated PDF receipt and Owner visual signoff not yet obtained; no new authorization required for scoped TEST branch
+Next: 182-T5 integrated page/A4 receipt and Owner review, then 182-T2 Core1A
+LOG | chat=6acc3003 | tab=Tab1 | issue=182 | plan=P2 | progress=2/10 | done=none | next=182-T5,182-T2 | ac=0/4 | blocker=NONE | aim=v1.1.0 | outcome=O1 | user=no
