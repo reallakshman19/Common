@@ -125,7 +125,7 @@ class TestIdentityContracts(unittest.TestCase):
         self.assertEqual(run2.predecessor_run_id, run1.run_id)
         self.assertEqual(run2.evidence_cadence_count, 3)  # carried forward
         self.assertNotEqual(run2.meter_started_at, run1.meter_started_at)  # fresh meter
-        self.assertEqual(run1.run_state, "SUCCEEDED")  # predecessor marked complete
+        self.assertEqual(run1.run_state, "SUPERSEDED")  # custody transfer does not prove task completion
 
         # Check binding states: run1 binding is HISTORICAL, run2 binding is ACTIVE
         self.assertEqual(b1.binding_state, "HISTORICAL")
@@ -174,7 +174,65 @@ class TestIdentityContracts(unittest.TestCase):
         # Assert states updated
         self.assertEqual(b1.binding_state, "IDENTITY_CONFLICT")
         self.assertEqual(b2.binding_state, "IDENTITY_CONFLICT")
-        self.assertEqual(self.work.acceptance_status, "HOLD")
+        self.assertEqual(self.work.acceptance_status, "IN_PROGRESS")  # runtime conflict cannot decide Owner acceptance
+
+
+    def test_cross_project_binding_must_match_assignment(self):
+        other = Project(project_id="other", name="Other", repo_url="https://github.com/example/other",
+                        coordination_dir="other", status="ACTIVE", as_of="2026-10-12T00:00:00Z",
+                        provider_reachability="REACHABLE")
+        self.reg.register_project(other)
+        run = AgentRun(run_id="run-1", assignment_id=self.assign.assignment_id,
+                       generation=1, chat_id="chat1", meter_started_at="2026-10-12T00:00:00Z",
+                       evidence_cadence_count=0, run_state="IN_PROGRESS")
+        self.reg.register_run(run)
+        with self.assertRaises(ValueError):
+            self.reg.register_binding(TabBinding(binding_id="wrong", run_id="run-1", project_id="other",
+                                                tab_alias="Tab3", generation=1, binding_state="ACTIVE"))
+
+    def test_duplicate_evidence_replay_is_idempotent(self):
+        evidence = TaskEvidence(evidence_id="source-comment-1", work_id=self.work.work_id,
+                                task_id="task-1", candidate_sha="a"*40, proof_digest="f"*64,
+                                validator_verdict="PASS", is_canonical=True)
+        self.reg.register_evidence(evidence)
+        self.reg.register_evidence(evidence)
+        self.assertEqual(len(self.reg.evidence_history), 1)
+        updated = TaskEvidence(evidence_id=evidence.evidence_id, work_id=self.work.work_id,
+                               task_id="task-1", candidate_sha="a"*40, proof_digest="e"*64,
+                               validator_verdict="PASS", is_canonical=True)
+        self.reg.register_evidence(updated)
+        self.assertEqual(len(self.reg.evidence_history), 2)
+        self.assertEqual(self.reg.evidence[evidence.evidence_id].proof_digest, "e"*64)
+
+    def test_recovery_carry_does_not_claim_success(self):
+        run = AgentRun(run_id="run-1", assignment_id=self.assign.assignment_id,
+                       generation=1, chat_id="old-chat", meter_started_at="2026-10-12T00:00:00Z",
+                       evidence_cadence_count=2, run_state="IN_PROGRESS")
+        self.reg.register_run(run)
+        successor = self.reg.perform_handover_carry(
+            self.assign.assignment_id, "new-chat", "Tab5", self.proj.project_id, "RECOVERY")
+        self.assertEqual(run.run_state, "INTERRUPTED")
+        self.assertEqual(successor.predecessor_run_id, run.run_id)
+        self.assertEqual(successor.evidence_cadence_count, 2)
+
+    def test_duplicate_work_id_across_projects_is_rejected(self):
+        other = Project(project_id="other", name="Other", repo_url="https://github.com/example/other",
+                        coordination_dir="other", status="ACTIVE", as_of="2026-10-12T00:00:00Z",
+                        provider_reachability="REACHABLE")
+        self.reg.register_project(other)
+        duplicate = Work(work_id=self.work.work_id, project_id="other", aim_id="OTHER",
+                         label_sha="a"*40, issue_ref="https://github.com/example/other/issues/1",
+                         acceptance_status="IN_PROGRESS")
+        with self.assertRaises(ValueError):
+            self.reg.register_work(duplicate)
+
+    def test_invalid_predecessor_cannot_be_registered(self):
+        bad = AgentRun(run_id="run-2", assignment_id=self.assign.assignment_id,
+                       generation=2, chat_id="new", meter_started_at="2026-10-12T00:00:00Z",
+                       evidence_cadence_count=0, run_state="IN_PROGRESS",
+                       predecessor_run_id="missing-run")
+        with self.assertRaises(ValueError):
+            self.reg.register_run(bad)
 
 
 if __name__ == "__main__":
