@@ -181,7 +181,9 @@ class ProjectionEngine:
             digest = hashlib.sha256()
             digest.update(canon({"as_of_utc": as_of_utc,
                                  "source_watermarks": source_watermarks}).encode("utf-8"))
-            active_evidence_by_work = {}
+            source_summary = evidence_index.evidence_summary()
+            project_runtime = {pid: {"fresh": 0, "stale": 0, "unknown": 0,
+                                     "stale_agents": 0} for pid in registry.projects}
             seen_task_by_work = {}
             def emit(view, project, key, row):
                 if view not in VIEWS or not isinstance(project, str):
@@ -212,6 +214,8 @@ class ProjectionEngine:
                     "registered_active_assignments": active_assignments,
                     "work_count": sum(w.project_id == pid for w in registry.works.values()),
                     "coordinator_source_state": "UNKNOWN", "stale_observation_count": 0,
+                    "evidence_count": source_summary.get(pid,{}).get("count",0),
+                    "latest_evidence_at_utc": source_summary.get(pid,{}).get("latest_created"),
                 })
             for wid in sorted(registry.works):
                 w = registry.works[wid]
@@ -238,6 +242,7 @@ class ProjectionEngine:
                 if not isinstance(cycle, int) or cycle < 1:
                     raise ValueError("Invalid cycle")
                 fresh = age_state(snap.get("generated_at_utc"), as_of_utc, cycle)
+                project_runtime[pid][fresh.lower()] += 1
                 for n, obs in enumerate(snap.get("observations", [])):
                     if not all(isinstance(obs.get(k), str) for k in CELLS):
                         raise ValueError("Missing authoritative ten-cell observation")
@@ -249,6 +254,8 @@ class ProjectionEngine:
                         as_of_utc, cycle)
                     if fresh != "FRESH" and live == "ALIVE":
                         live = "STALE"
+                    if live == "STALE":
+                        project_runtime[pid]["stale_agents"] += 1
                     aid, wid = resolved.get("assignment_id"), resolved.get("work_id")
                     run_id = None
                     lane_id = None
@@ -312,6 +319,25 @@ class ProjectionEngine:
                         "probe_status": "UNKNOWN", "status_verbatim": None,
                         "source_watermark": None,
                     })
+
+            # Project-level runtime metrics are independent of GitHub provider
+            # reachability. A stale agent never changes provider/Owner state.
+            for pid, health in sorted(project_runtime.items()):
+                key = pid + "|" + pid
+                got = conn.execute("""SELECT body FROM projection_rows WHERE
+                       generation='__staging__' AND view='portfolio'
+                       AND project_id=? AND sort_key=?""",(pid,key)).fetchone()
+                if not got:
+                    raise ValueError("Missing project projection")
+                row=json.loads(got[0])
+                row["coordinator_source_state"] = (
+                    "FRESH" if health["fresh"] else
+                    "STALE" if health["stale"] else "UNKNOWN")
+                row["stale_observation_count"] = health["stale_agents"]
+                conn.execute("""UPDATE projection_rows SET body=? WHERE
+                       generation='__staging__' AND view='portfolio'
+                       AND project_id=? AND sort_key=?""",
+                       (canon(row),pid,key))
 
             # Source WP1 records in cursor-sized batches; no whole-table fetchall.
             with evidence_index._lock:
