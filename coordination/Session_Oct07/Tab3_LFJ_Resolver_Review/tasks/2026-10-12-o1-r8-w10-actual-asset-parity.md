@@ -1,0 +1,22 @@
+# TAB3-O1-W10 — actual default-user asset parity (R8, chat=6accb8c4)
+
+Outcome: O1, sticky AIM v2.2.0 / label_sha 5f9065d; Owner Option A inclusive 104857600 bytes AND 2000000 original JSON occurrences; above either typed zero-rights refusal. Owning issue reallakshman19/3D_Converters#226. BuddyRunner response2 final #6122960205; successor R8 plan #6123072321. O1 Owner outcome NOT_ACCEPTED; no merge/deploy.
+
+## Source identity / actual entrypoint graph (verified)
+- Direct-main OPEN/DRAFT PR #228 inherited `fb1d354ceac76e4c8c2dcdc478dd498ea6e9cdeb`, base/main `4f14beb37bc0b719453c52a116c1c5d7183d2fd0`.
+- Root `tabs/xml-cii-2019-standalone/ui-adapted/xml-cii-adapted-workflow-shell-mode-a-easy-bulk-v6.js` blob `92ef60f849638e1b1f4c10461cfbe3b637144399` calls/imports `installLfjO1SourceIntake`; `docs/tabs/.../same.js` blob `d5221b79cd6502d37f7d1e2232ff35acbd84a5d6` lacks it. Checked-in docs O1 intake/domain/Worker modules absent (404 GitHub fetch); independent prebuild asset graph is genuinely divergent.
+- `scripts/build-github-pages-docs.mjs` explicitly copies root runtime `tabs`, `lfj`, index, core etc into `docs/`; existing W07 and W06 workflows execute this generator before calling their supposed 'docs' Chromium route. Therefore those passes prove *generated docs*, NOT tracked raw docs.
+- `.github/workflows/deploy-app-on-main.yml` checks out main and uploads `path: .` with no docs-build step; root is the intended Actions upload directory, but actual Pages configuration/source/last successful deployment URL/loaded assets cannot be attested with authorized provider access. Main deploy #37963317608 FAILED at Configure Pages; older public snapshot NOT_DISPROVEN. Never conflate raw docs mismatch with demonstrated root Pages defect.
+
+## W10 discriminator built and execution plan
+Test-first added to draft #228, no product code edits:
+- `scripts/lfj-226-o1-w10-asset-parity-browser.mjs`, commit `044d7389c74a13070c861fe0306bb54d485a1090`: direct actual fresh root/docs default user, original Firstpass XML+JSON `6b2c8b01ab0ba6ec8e9e7c42eb4a719668ffd2dc4dbe4790d27cf426a1f60288`, native source/domain Worker network URLs, source SHA, independently pinned complete 216 Node CSV SHA `0d8bb4482ed4a9d0d116faeac5e68ce564f07b6bba2dd73dfc3676b72ec2eddc`, 241 Evidence SHA `653485ff968bf478fa0001488432bb210a9ce6e85a901e9cc19f368f53a24809`, 100MiB+1 original byte refusal, 2m+1 source occurrence refusal, revoked controls, request status/pageerrors, rAF gaps; all via actual file picker and Build, no frontend mock.
+- `.github/workflows/lfj-226-o1-w10-asset-parity.yml`, test-only head `34f1d4ed8b345f9f4892e51f2fa5d74aa91351e5`: three hosted Chromium jobs **root-raw / docs-raw / docs-built**. Only docs-built runs the canonical docs generator; root/docs-raw preserve checked-in bytes. All output JSON artifacts retained, including RED.
+- Run: https://github.com/reallakshman19/3D_Converters/actions/runs/38241220978 (initially queued/in_progress). Await exact-head results before any pass claim; a raw docs RED is evidence of unsupported tracked docs, *not* public deployment status.
+- Technical decision if proven: root + generated docs pass and only raw docs fails => identify explicit supported-root Actions contract, KEEP O1 product Workers, route docs mirror build ownership to deployment owner; do not transplant the entire `lfj` tree into stale tracked docs without authorization. If root/generated docs fail on real original or typed refusal => identify exact failing observable and correct solely O1-owned shell/build route under existing custody, then rerun exact head.
+- Existing W07 and W04 focused CI remain earlier-head evidence, not a substitute for new W10 checks. No O2/O3/legacy parser/master/C05 modification authorized.
+
+## Unknown / releases
+- Deployed Pages URL, actual chosen source/folder, latest successful deployment SHA and network Worker URLs: DEPLOYED_NOT_VERIFIED (GitHub connector Pages settings endpoint not available; browser connector not connected).
+- Owner exclusively authorizes merge/deploy and O1 final acceptance. All 19 preexisting red C05/adjacent release workflows remain unwaived.
+- W10 is test-only first; no deployment or product integration change yet. Later W11/W12 are distinct one-task replies.
