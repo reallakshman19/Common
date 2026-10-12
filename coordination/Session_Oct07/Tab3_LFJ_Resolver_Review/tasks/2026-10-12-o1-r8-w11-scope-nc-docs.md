@@ -35,3 +35,11 @@ After the 7-file copy, each target Git tree blob matches exact root blob. Copy i
 ## Evidence and decisions
 
 Scope adaption **VERIFY_FIRST**; NC matched-original positive blocked by missing real comparable source. Raw docs in-scope O1 entrypoint adoption corrected in draft, test pending. User benefit is not live yet. Existing main and tracked main/docs remain old until Owner authorizes release. A visible typed refusal at over either 100MiB / 2m occurrences is still required. Task status PARTIAL until exact-head browser receipts are inspected.
+
+## W11 publication receipt and exact-head qualification status
+
+- [W11 TASK EVIDENCE #6123683859](https://github.com/reallakshman19/3D_Converters/issues/226#issuecomment-6123683859) posted with required opening `Outcome: O1 / For the user / Proof`, marked **PARTIAL**, no false semantic or public-site acceptance.
+- Draft branch HEAD `227184ad09bc45ee0137b631fec950f8d0bfcc9c` (GitHub tree 7/7 O1 root-vs-tracked-docs content blob parity); original canonical root O1 source unchanged. Only seven in-scope docs O1 integration paths, W11 test and CI authored in this reply.
+- [Exact-head W10 hosted browser matrix #38244848114](https://github.com/reallakshman19/3D_Converters/actions/runs/38244848114): three jobs QUEUED at latest evidence read. [W11 original-scope/NC #38244848048](https://github.com/reallakshman19/3D_Converters/actions/runs/38244848048): two jobs QUEUED. No attempted CI waiver, no claimed post-fix browser green.
+- User-level public route **unknown**: successful new-root Actions Pages workflow would serve root artifact because its upload `path: .`, but public GitHub Pages setting could select legacy docs from main; live site cannot be queried through available tools. Neither route currently serves unmerged PR #228. Owner release authority unchanged.
+- Remaining: positive active scope requires a real supported selector/source scope oracle or explicit Owner N/A; positive NC needs compatible PSI116 XML with independent CSV golden, empty checked-in InputXML not usable. Next W11 hosted receipts if available, then W12, one task per reply.
