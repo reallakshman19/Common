@@ -4,8 +4,8 @@
 work: "3DC-XML-CII"
 repository: "reallakshman19/3D_Converters"
 engineering_critical: "critical"
-version: "2.1.0"
-label_sha: "d3ecd06"
+version: "2.2.0"
+label_sha: "5f9065d"
 label:
   problem: "The XML→CII app freezes on large JSON, 4 Preview hangs, and weight decisions are split between Weight Match and \"Rigid Weights Need Review\"; fixes so far were patches."
   main_aim: "Large-JSON trace, Preview and Weight Match stay responsive on large inputs, traceable to source, with one weight review flow."
@@ -19,7 +19,7 @@ label:
     - "Most of \"4 Preview\" and \"Weight Match\" is already coded: use and adapt it, do not rebuild (Owner, 12 Oct)"
   task_outcome: "O1"
   task_aim: "Large-JSON trace runs in its own worker; the app stays responsive across the agreed size range."
-  done_when: "PENDING: you set the operating range (critical work): largest file, representative real inputs, longest acceptable freeze, behaviour beyond the range; the agent proposes it from the real files."
+  done_when: "Files up to 100 MiB with at most 2 million occurrences trace in the worker without freezing the app; beyond that the app stops with a clear error and does not freeze (Owner, 12 Oct, D-AIM-2 option A)."
 guidance:
   not_now: []
   watch:
@@ -36,3 +36,4 @@ bindings:
 history:
   - "v1.1.0 · 2026-10-12 04:56 · create · created · CP-3DC-XML-CII-01 · approved by the Owner"
   - "v2.1.0 · 2026-10-12 06:02 · rescope · add Owner constraint: reuse the coded 4 Preview and Weight Match · CP-3DC-XML-CII-03 · approved by the Owner"
+  - "v2.2.0 Â· 2026-10-12 10:15 Â· clarify Â· done-when set from the Owner's D-AIM-2 answer (option A) Â· CP-3DC-XML-CII-05 Â· approved by the Owner"
