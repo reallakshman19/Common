@@ -49,7 +49,7 @@ The v3.6 module requires Python 3.10+ and PyYAML 6.x. All public CLI commands re
 
 WP2 must validate stable workpack/task IDs, sizes, outcome and acceptance before materialization; replay must not duplicate children. WP3 must validate evidence references, current candidate, negative/stale tests and provider visibility. WP4 must preserve unmanaged human title text and refuse unauthorized writes; repeated runs must be idempotent and read back exact output. WP5 must implement BuddyRunner v1.6 as **1a execution HOLD → 1b independent reconstruction → 2 single reconciliation**, with an optional **Y** response to later Xb evidence, *not* a loop. WP6 must implement the Owner-approved D-V36-2: two separate 2-pass and 3-pass generators with distinct purposes and independent tests, inside v3.6. WP7 requires a real lab run with a fresh cold successor; synthetic lab proof must not be promoted to authentic programme acceptance.
 
-**Current state (12 Oct 2026):** Master label v1.2.1 / label_sha 4b90240 governs. D-V36-1/2/3 approved independence, two separately invoked generators, and writes confined to the new v3.6 lab; no wider writes/merge. WP1–WP3 are draft source-tested, WP4 E01/E02 verified with installed lab Actions workflow; E03 metadata reconciliation is underway. WP5, WP6 and WP7 remain unaccepted. Owner outcome acceptance remains 0/5. Older #294 decisions are **not v3.6 inputs**.
+**Current state (12 Oct 2026):** Master label v1.2.1 / label_sha 4b90240 governs. D-V36-1/2/3 approved independence, two separately invoked generators, and writes confined to the new v3.6 lab; no wider writes/merge. WP1–WP3 are draft source-tested, WP4 E01/E02 verified with installed lab Actions workflow; E03 metadata reconciliation is underway. WP5 now has an independently testable GitHub-only packet/1a–1b–2/Y renderer but a genuinely independent cold successor action is still NOT_PROVEN; WP6 has two separately executable generators demonstrated in hosted CI (80/80 v3.6 tests). WP7 integrated cold successor acceptance remains NOT_PROVEN. Owner outcome acceptance remains 0/5. Older #294 decisions are **not v3.6 inputs**.
 
 ## WP2 — parent → real child issues (O1)
 
@@ -84,3 +84,40 @@ WP3 script `scripts/snapshot_v36.py` is a GitHub read-only provider snapshot. It
 
 ## v1.2.1 lab acceptance target
 The only approved writable benchmark target for WP4/WP7 is `reallakshman19/relay-v36-e2e-lab` identified by the approved master guidance `Writable lab:`. Common v3.6 source changes stay on draft PR #344, not main. The existing Common seven-child managed index predates v1.2.1 and is metadata to reconcile; preserve child bodies and previous evidence comments as historical, not as current Owner-label authority. Older `reallaksh19/relay-v35-e2e-lab` is reference-only, and any prior `Lab:` note is not permission. See Common #341 PLAN-04. Lab parent #1, children #2/#3, PR #4 are real. Title changes must be computed from GitHub facts, scoped, applied and read back with no hand-authored completion number.
+
+## WP5 — read-only GitHub-only successor and BuddyRunner v1.6
+
+The v3.6-only `scripts/successor_v36.py` reads the approved master, validated lab plan, live parent managed index, real child TASK_EVIDENCE and exact live PR heads. It emits a portable packet with the **Owner's exact words** and child acceptance criteria. It does not write, execute agents, certify completion or depend on old BuddyRunner skills.
+
+```sh
+# Run from the Common repository root (Python 3.10+, PyYAML 6.x installed):
+python skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py cold \
+  --label relay/AIM/V35-LIFECYCLE.yaml \
+  --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
+  --pr 4 --pr 5
+
+python skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py buddy \
+  --phase 1a --handover-id V36-341-COLD \
+  --parent reallakshman19/relay-v36-e2e-lab#1 \
+  --assessed-sha 61a71a038cca56507040bdb365edf76a9c0d2469
+```
+
+The four Buddy phases are independent, bounded **1a** (G1 prepares/holds), **1b** (G2 investigates/holds implementation), **2** (one G1 reconciliation; closes predecessor) and optional one-shot **Y** (on later evidence only). For 2 or Y, supply the exact `--evidence-url` and `--body-digest` (64 hex UTF-8 SHA-256) and verify the claim against the provider before relying on it. Rendering is not an agent run or digest verification. The live lab parent packet is [here](https://github.com/reallakshman19/relay-v36-e2e-lab/issues/1#issuecomment-6117217647). Hosted GitHub-only cold reconstruction with 71/71 tests and 1a HOLD rendering: [run 38199859956](https://github.com/reallakshman19/relay-v36-e2e-lab/actions/runs/38199859956). **Independent external cold engineer acceptance remains outstanding**.
+
+## WP6 — TWO standalone purpose-specific prompt generators
+
+Never combine these into a single mode-controlled generator. Both independently execute `--label --plan --task-id --pr` (PR may repeat), re-fetch provider facts via v3.6 only, preserve the Owner words and exact source links, and refuse missing selected child issues.
+
+```sh
+python skills/engineering-pr-delivery-v3.6/scripts/prompt_2pass_v36.py \
+  --label relay/AIM/V35-LIFECYCLE.yaml \
+  --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
+  --task-id V36-1-WP1 --pr 4 --pr 5
+
+python skills/engineering-pr-delivery-v3.6/scripts/prompt_3pass_v36.py \
+  --label relay/AIM/V35-LIFECYCLE.yaml \
+  --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
+  --task-id V36-1-WP2 --pr 4 --pr 5
+```
+
+Two-pass: **evidence-grounded task plan → bounded implementation/test/own-child proof**. Three-pass: **independent source/falsifier → bounded implementation → genuinely independent provider acceptance**, with both positive and negative oracles. They generate prompts; they do not run phases or appoint reviewers. Exact-source hosted test [run 38200093786](https://github.com/reallakshman19/relay-v36-e2e-lab/actions/runs/38200093786) passed 80/80 and logged TWO_SEPARATE_GENERATORS_OK. No O5 or WP7 release assertion without a real independent cold continuation.
