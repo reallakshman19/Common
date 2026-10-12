@@ -1,0 +1,95 @@
+{
+  "schema": "q003-v31-owner-native-render-and-golden-preparation/v1",
+  "date_utc": "2026-10-12",
+  "chat": "6acc4eaa",
+  "issue": 183,
+  "plan": "r5",
+  "aim": "v3.1.0",
+  "label_sha": "64a4e9c",
+  "purpose": "One batch W1 native Owner-run readback, W2 family gap fix, T3 reproducible native golden comparator",
+  "owner_reported_native_run": {
+    "classification": "OWNER_SIDE_COORDINATOR_RUN_OWNER_REPORTED_NOT_INDEPENDENTLY_INSPECTED",
+    "repository": "reallakshman19/Grade9v3.5",
+    "branch": "agent/183-q003-private-core2-test-6acc303b",
+    "commit": "9fa6bb37e7c855a7cb72a2aedd59e32074f712b7",
+    "python": "python -I TEST/imo-research/core2-q003/prepare_private.py --private-input <original local item>",
+    "jsonschema": "4.26.0",
+    "private_input_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "result": "PRIVATE_TEST_RENDER_DONE",
+    "output": "DRAFT_WITH_ONE_RENDER_GAP",
+    "renderer": "render_core/2",
+    "mode": "PAGES",
+    "held_to": "REFERENCE",
+    "draft": true,
+    "render_digest": "f2b3e21cdfc61a22",
+    "pages": 2,
+    "selected": {
+      "microtopics": 0,
+      "core2": 1,
+      "core2a": 0,
+      "core2b": 0
+    },
+    "native_core2_html": {
+      "created": true,
+      "bytes": 59805,
+      "blueprint_marker": "BP-CORE2-SOURCE-QUESTION",
+      "original_stem_present": true,
+      "ordered_four_options_present": true,
+      "sha256": "NOT_PROVIDED_IN_OWNER_REPORT"
+    },
+    "native_index_html": true,
+    "render_receipt": true,
+    "sanitized_render_receipt": true,
+    "gap_count": 1,
+    "gap": {
+      "duty": "AUTHOR_LEARNER_METADATA",
+      "record": "SOF-IMO-G09-L1-2023-24-A-Q003",
+      "error": "METADATA_FAMILY_MISSING: the question has no family_ref (set it to the id of a question family in the package)"
+    },
+    "qrt_accepted": false,
+    "a4": "NOT_RUN",
+    "publication": false
+  },
+  "independently_verified_static_evidence": {
+    "shared_metadata_family_resolution": "Shared/tools/learner_metadata.py::resolve_family() requires bank family_ref and a same-id package question_families record with nonblank title.",
+    "package_schema": "Shared/library/package.schema.json $defs.question_family requires capability_refs, solution_structure, demand_dimensions, transfer_boundaries, item_refs, required basic record fields.",
+    "original_item_fidelity": "Existing adapter keeps source/hash validation unchanged; Owner reports exact stem/options in native Core2.",
+    "prior_workflow": "Real native renderer was invoked; prior abstract MACHINE blocker cleared for reported baseline."
+  },
+  "tested_product_branch": {
+    "baseline": "9fa6bb37e7c855a7cb72a2aedd59e32074f712b7",
+    "family_fix_commit": "2dcc9f46caa7125446230574d17181dbc016fe11",
+    "benchmark_script_commit": "d1aa1e092fd5cb102eea3e6b85a1428ad085a42d",
+    "current_head": "d1aa1e092fd5cb102eea3e6b85a1428ad085a42d",
+    "files": [
+      "TEST/imo-research/core2-q003/prepare_private.py",
+      "TEST/imo-research/core2-q003/benchmark_native.py"
+    ],
+    "patch": "Add one authored test family FAM-IMO-NUMERIC-PAIR-RULE-CHECK (schema-required fields, same capability, item_refs Q003), bind q.family_ref and microtopic.question_family_refs. All original question text, response and hash constraints unchanged; manifest selects only CORE2.",
+    "benchmark_runner": "python -I TEST/imo-research/core2-q003/benchmark_native.py --private-input <original local Q003 JSON>",
+    "runner_process": "Invoke private Q003 adapter -> native render_core, and invoke Shared/tools/build_golden.py --id G-CORE2-R2 -> same render_core. Audit named role/required components, typed commit, renderer source/markers, gap counts, and byte SHA. Emit source-safe .private/native-golden-comparison.json.",
+    "runner_qualifiers": [
+      "Not actually run in clean native checkout by this assistant",
+      "Only structural marker comparator, not visual/pixel/browser or QRT acceptance",
+      "Owner's older native output at 9fa6bb3 has one gap and cannot close T3",
+      "No standalone HTML produced"
+    ],
+    "local_test": "Python py_compile of the same proposed benchmark runner file PASS; a local invocation failed closed with full-native-checkout unavailable; exact branch file readback verified.",
+    "generic_ci": "v31-relay SUCCESS on d1aa1e0 at readback; learner-platform tests and guardrails IN_PROGRESS at readback, not original Q003 native comparison."
+  },
+  "task_states": {
+    "183-T2-G2-W1": "PARTIAL: native O1 draft produced and original present, one gap and Owner not accepted",
+    "183-T2-G2-W2": "PARTIAL: family contract corrected in branch source; Owner native rerun on new HEAD not yet observed",
+    "183-T3-G2-W1": "BLOCKED: benchmark runner staged; actual G-CORE2-R2 render and Q003 comparison not executed, no direct HTML/receipt accessible",
+    "183-T4-G2-W1": "NOT_STARTED this batch",
+    "183-T5-G2-W1": "NOT_STARTED this batch"
+  },
+  "provenance": {
+    "golden": "G-CORE2-R2 is CANDIDATE, not Owner blessed",
+    "verified_source_digest": "31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2",
+    "product_main_mutated": false,
+    "qrt_accepted": false,
+    "publisher_rights_granted": false
+  },
+  "next": "At d1aa1e0 in original Q003 secure clean checkout rerun native adapter; invoke benchmark_native.py; inspect JSON report and rendered DOM/real viewport/attempt gating before any QRT decision. If next true native failure, narrow TEST adapter fix only."
+}
