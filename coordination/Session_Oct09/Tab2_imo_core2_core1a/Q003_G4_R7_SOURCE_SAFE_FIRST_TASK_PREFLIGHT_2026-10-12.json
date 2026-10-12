@@ -1,0 +1,68 @@
+{
+  "schema": "tab2-q003-g4-first-task-preflight/v1",
+  "date_utc": "2026-10-12",
+  "chat": "6acd1e6b",
+  "issue": 183,
+  "plan": "r7",
+  "task": "183-T2-G2-W2",
+  "outcome": "O1",
+  "source_pins": {
+    "owner_sticky": "Common/main:relay/AIM/IMO-CORE2-CORE1A-68.yaml",
+    "version": "3.1.0",
+    "label_sha": "64a4e9c",
+    "product_main": "4dbedc6773482bbecb146ff8959614b2c32dcc6e",
+    "tested_isolated_branch": "agent/183-q003-private-core2-test-6acc303b",
+    "tested_head": "98ae06741f4d90865fcd313d609aeabba46826e2",
+    "original_private_input_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "original_bytes": 3835,
+    "source_item_sha256": "31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2",
+    "source_document_sha256": null,
+    "source_rights": "DEVELOPMENT_ONLY_NO_PUBLISHER_LICENSE"
+  },
+  "owner_relayed_coordinator_report": {
+    "tested_head": "98ae06741f4d90865fcd313d609aeabba46826e2",
+    "command_template": "python -I TEST/imo-research/core2-q003/benchmark_native.py --private-input <OWNER_PROTECTED_JSON>",
+    "exit_code": 0,
+    "q003_gaps": 0,
+    "golden_G_CORE2_R2_gaps": 0,
+    "status": "STRUCTURAL_CHECK_ONLY",
+    "core2_bytes": 62277,
+    "core2_sha256": "827a8a99128601721c3c13dfd99806b5a563624526edfd8ba137ab8d4b64b6a0",
+    "provenance": "OWNER_SUPPLIED_COORDINATOR_CLAIM; ORIGINAL_RUN_LOG_HTML_NOT_AVAILABLE_TO_THIS_EXECUTOR"
+  },
+  "independent_public_source_inspection": {
+    "custody_blob": "4925e5c9b203b0c3c5bafc47a67577842fd49804",
+    "prepare_private_blob": "3c9ea4664469c7f07392dac3322dc8b65a59e2ab",
+    "benchmark_blob": "2ec44ae8ccf729d4163dabc50755d677aaea8cc4",
+    "shared_metadata_blob": "5f43526724447841e64821725081be463437ab58",
+    "adapter_private_digest_guard": true,
+    "adapter_canonical_item_digest_guard": true,
+    "adapter_provenance_class": "PYQ_VERIFIED",
+    "adapter_source_status": "PYQ_VERIFIED_OWNER_INSPECTED_FOR_DEVELOPMENT_ONLY",
+    "shared_metadata_requires_vocabulary_class": true,
+    "shared_metadata_requires_PYQ_VERIFIED_source_prefix": true,
+    "source_personally_visually_inspected_by_owner": "UNCONFIRMED",
+    "rights_granted": false
+  },
+  "local_environment": {
+    "mounted_private_original": false,
+    "mounted_native_q003_html": false,
+    "mounted_native_source_safe_report": false,
+    "git_ls_remote": "FAILED_EXIT_128_DNS",
+    "new_original_native_benchmark": "NOT_RUN: PREVIOUS_OWNER_REPORT_EXISTS_NO_DUPE"
+  },
+  "current_first_unsettled_boundary": "Factual original-source fidelity/provenance and protected learner interaction at exact native candidate hash; source-safe structure is only Owner-relayed",
+  "task_status": "BLOCKED",
+  "blocker": "PERSON:authorized_secure_owner_operator_original_and_html_receipts",
+  "ask": "Secure operator provide source-safe run-log/receipt and controlled inspection of exact private original and generated core2.html; Owner clarify whether original source page was personally inspected, without disclosing protected bytes publicly",
+  "admission": {
+    "core2_accepted": 0,
+    "denominator_questions": 68,
+    "core1a_admitted": 0,
+    "qrt_accepted": 0,
+    "qrt_cells": 28
+  },
+  "publication_rights": "NOT_GRANTED",
+  "a4": "NOT_RUN",
+  "product_mutation": "NONE"
+}
