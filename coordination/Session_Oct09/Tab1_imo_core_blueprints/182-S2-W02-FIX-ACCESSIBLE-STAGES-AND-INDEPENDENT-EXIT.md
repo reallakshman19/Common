@@ -1,0 +1,31 @@
+# 182-S2-W02-FIX | Restore staged Core1A accessibility and independently attempted exit
+
+2026-10-12 | chat=6acc408a | owning issue Grade9v3.5 #182 | PLAN=P4 | aim=v2.1.0 | outcome=O1 | TEST-only | no merge/release
+
+Outcome: O1
+For the user: No real/public learner change has shipped. The TEST Core1A page built from its existing blueprint now has a non-spoiling accessible description at stage 1, and the 24-residue-check hint no longer appears before the learner's four-factor exit attempt.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38198786141
+
+## Triage and explicit boundaries
+
+**Decision:** YES, the T03 stage-1 accessibility leak blocks Core1A golden-alignment acceptance. A blind/assistive-technology learner can encounter protected later-stage mathematical conclusions without requesting stage 2 or 3. The associated pre-exit quick-check disclosure can compromise the less-supported independent exit T11; fix this narrow authored sequencing at the same time. The W02 `13/14` was a locally counted diagnostic (13 passes plus one T03 finding), NOT a failing GitHub Actions suite; original exact-head hosted #185 CI `38193075758` was green. W01 non-A4 original learner PDF IS an O1 print-acceptance blocker but **parked by the Owner with shared-printer owner**; no shared printer edit or CI A4 claim is part of this correction. T02 unit elicitation remains an unproven pedagogy/Owner/human review, not a reproducible failing test.
+
+## Named failures, cause, minimal source changes
+
+| Named failing check (observed before) | Source cause | Scoped change and regression |
+| --- | --- | --- |
+| `T03 accessible-stage disclosure` / `test_first_stage_svg_accessibility_does_not_announce_later_proof` (new reproducible gate) | `TEST/library/figures/core1a-consecutive-divisibility-staged.svg` blob `c9a8b42b444a010a77bd820b3e8d97d114726a84` had one static `<desc>` spelling out parity + ALL three mod-3 cases + final coprime conclusion; initial browser AX image node exposed it despite correct display:none later groups. | Replace only authored `<desc>` with stage-1 parity and neutral invitation to use stage controls; keep three SVG stage groups and dynamic `data-g9-stage-desc-text` explanations, no renderer change. New blob `b8f54b89706eaba84b2e631458c87360711c32be`. |
+| `T11 premature four-factor exit-method prompt` / `test_independent_exit_method_not_displayed_in_pre_exit_quick_check` (new reproducible gate) | Second `construction_units[0].independent_checks` publicly asked a **four-factor modulo-24 check over 24 classes** before the independent exit attempt, narrowing a valid exit solution method. | Remove only this authored pre-exit independent_check from `TEST/imo-research/pilots/core1a-render-qualified-divisibility.v1.json`; preserve three-factor modulo-6 quick check and the entire four-factor `exit_task.prompt`, locked model answer, check and mathematical oracle. New blob `002fc44d1038ed5628f5121d7a5d95072b867a3a`. |
+
+**Test file:** `tests/test_core1a_renderer_maturity.py` new blob `d29c3a7527a42a8d820284891ef2305ed1b91263`, adds the two named unittest methods above and renders with the original `Shared/tools/render_core.py` to ensure stage message wiring and no emitted pre-exit four-factor check. Only those three files differ from Grade9v3.5 main. No blueprint registry change, original source or QRT acceptance, lease/state edit, printer change or public route.
+
+**Exact-head code:** [Draft PR #186](https://github.com/reallakshman19/Grade9v3.5/pull/186) `agent/issue-182-core1a-stage-disclosure-6acc408a@ef3d3e2dd7055d4d89d8aa154a861be2f37e11e1`, from pinned main `778eb35a70517a46108ad0a5dc01dfc89f61c0e3`; existing #185@752b9ba remains unchanged/unmerged.
+
+## Retest and evidence
+
+- **LOCAL browser RED → GREEN:** Same original hosted #185 HTML bytes passed to Chromium's `page.set_content`. BEFORE patch mirror, stage-1 image accessible description contained later `modulo three` and `coprime` proof; AFTER substituting the exact newly committed authored <desc> bytes, stage-1 image description no longer contained later mathematics. Cumulative stage display still `[inline,none,none]` at 1, `[inline,inline,none]` at 2 and `[inline,inline,inline]` at 3. Dynamic current-stage description still states appropriate current content, including coprime warrant only at stage 3. Mirror local test is **not** a substitute for branch-rendered CI.
+- **HOSTED exact-head real renderer CI:** [Core1A actual-render maturity 38198786141](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38198786141) at `ef3d3e2dd...` concluded SUCCESS. `python -m unittest tests.test_core1a_renderer_maturity -v` **8/8 passed**, explicitly including both newly added tests. In same workflow, QRT regression `python -m unittest tests.test_question_review_matrix -v` **28/28**, authored Core2A↔Core1A journey `python -m unittest tests.test_core_authored_qrt_repair_journey -v` **5/5**; total **41/41 hosted unit tests passing**. The hosted job also successfully executed `deploy_test.py product` with actual Core1A TEST HTML, browser QA, PDF/receipt, joined authored Core2A render and browser QRT-safe repair QA. It **does not validate ISO A4** or confer Owner acceptance.
+- **Review limits:** local screen-reader device/human audit **NOT_RUN**; exact branch CI has no independent pedagogy/golden acceptance; learner intervention effectiveness remains unknown. The authored SVG description now does not leak future stages in image AX while the HTML also presents complete construction steps; no promise all content is hidden or all assistive technologies announce identical descriptions. The separate W01 A4 printer acceptance remains outstanding and parked with the Owner; no print fix attempted.
+- **Outcome:** two actionable *authoring* failures resolved at the source boundary with no demonstrated registry/renderer gap. T03 is technically corrected for accessible figure description, T11 early method disclosure removed. The wider O1 owner-blessed match, O2 QRT approved cell (0/28) and A4 Owner visual remain pending. `182-S2-W04` (O3 blueprint change) is not activated by this correction.
+
+Next unblocked work in Owner order: `182-S2-W03` Owner-complete Core1B T06/T10/T12 preserve-first verification; printer owner tickets remain parked per Owner instruction.
