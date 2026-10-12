@@ -55,11 +55,14 @@ def build_packet(label: dict, plan: dict, client, pr_numbers: list[int]) -> dict
                     "head": head, "state": pr.get("state"), "draft": bool(pr.get("draft")),
                     "merged": bool(pr.get("merged")), "title": pr["title"]})
     task_rows = []
+    spec_by_id = {t["task_id"]: t for t in plan["tasks"]}
     for t in report["tasks"]:
+        spec = spec_by_id[t["task_id"]]
         task_rows.append({"task_id": t["task_id"], "outcome": t["outcome"],
                           "issue": t["issue"], "status": t["status"],
                           "evidence": t["evidence"], "proof_pr": t["pr"],
-                          "accepted": False})
+                          "acceptance": spec["acceptance"],
+                          "for_user": spec["for_user"], "accepted": False})
     pending = [t["task_id"] for t in task_rows if t["status"] != "CURRENT_EVIDENCE"]
     return {
         "schema": "V36_COLD_SUCCESSOR_V1", "parent": plan["parent"],
@@ -101,6 +104,8 @@ def render_markdown(packet: dict) -> str:
     for row in packet["tasks"]:
         lines.append(f"{row['task_id']} | {row['outcome']} | {row['issue'] or 'UNKNOWN'} | "
                      f"{row['evidence'] or 'NONE'} | {row['status']} | NO")
+        lines.append(f"  Acceptance for {row['task_id']}: {row['acceptance']}")
+        lines.append(f"  For the user: {row['for_user']}")
     lines += ["Current PRs:"]
     for pr in packet["prs"]:
         lines.append(f"- {pr['url']} @ {pr['head']} | state={pr['state']} "
