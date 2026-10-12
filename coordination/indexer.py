@@ -13,6 +13,8 @@ import sqlite3
 import hashlib
 import json
 import re
+import importlib.util
+from functools import lru_cache
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
@@ -312,66 +314,37 @@ class EvidenceIndex:
             return row["provider_status"] if row else "REACHABLE"
 
 
+@lru_cache(maxsize=1)
+def _v36_module():
+    """Use the source's exact canonical v3.6 validator."""
+    path = Path(__file__).resolve().parents[1] / "skills" / "engineering-pr-delivery-v3.6" / "scripts" / "lifecycle_v36.py"
+    spec = importlib.util.spec_from_file_location("_control_tower_v36", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("Governing v3.6 validator not available")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 class CanonicalV36Adapter:
-    """
-    Parses and strictly validates canonical 8-line v3.6 TASK_EVIDENCE.
-    Rejects any noncanonical modifications or trailing text.
-    """
+    """Use the exact eight-line format from lifecycle_v36.validate_evidence."""
 
-    REQUIRED_KEYS = [
-        "TASK_EVIDENCE",
-        "PARENT_EVIDENCE",
-        "CLAIMED_RESULT",
-        "CANDIDATE_SHA",
-        "PR_NUMBER",
-        "PROOF_URL",
-        "AUTHOR",
-        "TIMESTAMP"
-    ]
-
-    @classmethod
-    def parse(cls, text: str) -> Tuple[Optional[Dict[str, Any]], str]:
-        """
-        Parses text. Returns (evidence_dict, parse_status).
-        Enforces exactly the 8 canonical lines with no noncanonical trailing text.
-        """
-        lines = [line.strip() for line in text.strip().splitlines() if line.strip()]
-        if len(lines) != 8:
-            return None, "NONCANONICAL_REJECTED"
-
-        data = {}
-        for line in lines:
-            if ":" not in line:
-                return None, "NONCANONICAL_REJECTED"
-            k, v = line.split(":", 1)
-            k, v = k.strip(), v.strip()
-            data[k] = v
-
-        # Check exact key set
-        if set(data.keys()) != set(cls.REQUIRED_KEYS):
-            return None, "NONCANONICAL_REJECTED"
-
-        # Validate candidate SHA
-        if not re.match(r"^[0-9a-f]{40}$", data["CANDIDATE_SHA"]):
-            return None, "NONCANONICAL_REJECTED"
-
+    @staticmethod
+    def parse(text: str) -> Tuple[Optional[Dict[str, Any]], str]:
         try:
-            pr_num = int(data["PR_NUMBER"])
-        except ValueError:
+            fields = _v36_module().validate_evidence(text)
+        except Exception:
             return None, "NONCANONICAL_REJECTED"
-
         return {
-            "evidence_id": data["TASK_EVIDENCE"],
-            "parent_id": data["PARENT_EVIDENCE"],
-            "task_id": data["TASK_EVIDENCE"],
-            "claimed_result": data["CLAIMED_RESULT"],
-            "candidate_sha": data["CANDIDATE_SHA"],
-            "pr_number": pr_num,
-            "proof_url": data["PROOF_URL"],
-            "author": data["AUTHOR"],
-            "created_at": data["TIMESTAMP"],
+            "outcome": fields["outcome"],
+            "task_id": fields["task_id"],
+            "owner_issue": fields["issue_ref"],
+            "candidate": fields["candidate"],
+            "candidate_sha": fields["candidate"] if re.fullmatch(r"[0-9a-fA-F]{40}", fields["candidate"]) else "",
+            "for_user": text.splitlines()[1].split(": ", 1)[1],
+            "proof": text.splitlines()[2].split(": ", 1)[1],
             "is_canonical_8line": True,
-            "raw_text": text
+            "raw_text": text,
         }, "PARSED"
 
 
@@ -422,12 +395,14 @@ def generate_control_tower_snapshot(
     registry,
     evidence_index: EvidenceIndex,
     version: str = "v3.0.0",
-    visibility: str = "PUBLIC"
+    visibility: str = "INTERNAL"
 ) -> Dict[str, Any]:
     """
     Builds a coherent ControlTowerSnapshot from registry and durable evidence index.
     Applies privacy redaction for public visibility.
     """
+    if visibility != "INTERNAL":
+        raise PermissionError("Public export requires WP4 allowlist and privacy approval")
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     active_ev = evidence_index.get_active_evidence()
 
@@ -473,10 +448,9 @@ def generate_control_tower_snapshot(
         {
             "assignment_id": a.assignment_id,
             "lane_id": a.lane_id,
-            "task_id": a.task_id,
-            "owner_issue": a.owner_issue,
-            "task_title": a.task_title,
-            "state": a.state
+            "responsibility_id": a.responsibility_id,
+            "assigned_role": a.assigned_role,
+            "status": a.status
         }
         for a in registry.assignments.values()
     ]
@@ -509,15 +483,21 @@ def generate_control_tower_snapshot(
 
     conflicts_list = []
     # Check for active tab conflicts
-    tab_conflicts = registry.validate_single_active_tab_invariants()
-    for msg in tab_conflicts:
-        conflicts_list.append({
-            "conflict_type": "DUAL_ACTIVE_TAB_CONFLICT",
-            "severity": "CRITICAL_HOLD",
-            "entity_id": "active_tab_bindings",
-            "details": msg,
-            "source_refs": []
-        })
+    active_by_work = {}
+    for binding in registry.bindings.values():
+        if binding.binding_state == "ACTIVE":
+            work = registry.resolve_work_for_binding(binding.binding_id)
+            if work:
+                active_by_work.setdefault(work.work_id, []).append(binding.binding_id)
+    for work_id, ids in active_by_work.items():
+        if len(ids) > 1:
+            conflicts_list.append({
+                "conflict_type": "DUAL_ACTIVE_TAB_CONFLICT",
+                "severity": "CRITICAL_HOLD",
+                "entity_id": work_id,
+                "details": f"{len(ids)} active tab bindings",
+                "source_refs": ids
+            })
 
     snapshot = {
         "snapshot_id": f"snap-{hashlib.sha256(now.encode('utf-8')).hexdigest()[:12]}",
@@ -533,8 +513,5 @@ def generate_control_tower_snapshot(
         "evidence_count": len(active_ev),
         "conflicts": conflicts_list
     }
-
-    if visibility == "PUBLIC":
-        snapshot = PrivacyRedactor.redact_dict(snapshot)
 
     return snapshot
