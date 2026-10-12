@@ -36,7 +36,7 @@ class Provider:
                  proof=f"https://github.com/{REPO}/pull/4/commits/{sha}",
                  task_id=t["task_id"],issue_ref=f"{REPO}#{i+2}",
                  candidate=f"{REPO}@{sha}",tests_passed=2,tests_run=2)
-            self.comments[i+2]=[{"body":e,"html_url":f"https://github.com/{REPO}/issues/{i+2}#issuecomment-{i+2}"}]
+            self.comments[i+2]=[{"body":e,"user":{"login":"reallakshman19"},"html_url":f"https://github.com/{REPO}/issues/{i+2}#issuecomment-{i+2}"}]
         self.pr={"number":5 if wrong_pr else 4,"head":{"sha":HEAD},
                  "title":"[V3.6][O1/O3][DRAFT][E2/2] Evidence probe",
                  "draft":True,"merged":False,"state":"open"}
