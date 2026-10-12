@@ -607,8 +607,9 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
         return params.get(key, [default])[0]
 
     def do_GET(self):
-        # Null-byte rejection
-        if "\x00" in self.path:
+        # Null-byte rejection (both literal and URL-decoded)
+        unquoted_path = urllib.parse.unquote(self.path)
+        if "\x00" in self.path or "\x00" in unquoted_path:
             self.send_text("Invalid request path", status=400)
             return
 
@@ -695,6 +696,20 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
                 self.send_json(snap)
             finally:
                 idx.close()
+            return
+
+        # GET /api/v3/observations?project=&session=
+        # Internal-only private snapshot query; reads atomic snapshot directly from disk.
+        if route == "v3/observations":
+            proj = self._project(qs)
+            if not proj:
+                self.send_json({"error": "Unknown project"}, 404)
+                return
+            sess = self._str(qs, "session")
+            from coordination.coordinator_bridge import get_observations_for_api
+            snap_dir = self.config.get("server", {}).get("snapshot_dir")
+            snap = get_observations_for_api(proj["id"], session_id=sess if sess else None, snapshot_dir=snap_dir)
+            self.send_json(snap)
             return
 
         # GET /api/projects

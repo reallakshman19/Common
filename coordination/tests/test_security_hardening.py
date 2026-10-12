@@ -178,7 +178,12 @@ class TestScannerPathAndQuota(unittest.TestCase):
             tab.mkdir(parents=True)
             outside = Path(base) / "private.txt"
             outside.write_text("2026-01-01 | private | D-1-1 | SECRET", encoding="utf-8")
-            (tab / "DECISIONS.md").symlink_to(outside)
+            try:
+                (tab / "DECISIONS.md").symlink_to(outside)
+            except OSError as e:
+                if getattr(e, "winerror", None) == 1314:
+                    self.skipTest("Symlink creation requires elevated privileges on Windows")
+                raise
             result = scan_tab(root, "Session_One", "Tab1")
             self.assertEqual(result["decisions"], [])
             self.assertIn({"file": "DECISIONS.md", "code": "OUTSIDE_PROJECT"},
@@ -203,7 +208,12 @@ class TestScannerPathAndQuota(unittest.TestCase):
             root.mkdir()
             outside = Path(base) / "Session_Outside"
             (outside / "Tab1").mkdir(parents=True)
-            (root / "Session_Outside").symlink_to(outside, target_is_directory=True)
+            try:
+                (root / "Session_Outside").symlink_to(outside, target_is_directory=True)
+            except OSError as e:
+                if getattr(e, "winerror", None) == 1314:
+                    self.skipTest("Symlink creation requires elevated privileges on Windows")
+                raise
             result = scan_project({"id": "fixture", "name": "fixture",
                                    "coordination_dir": str(root)})
             self.assertEqual(result["sessions"], [])
@@ -216,7 +226,12 @@ class TestScannerPathAndQuota(unittest.TestCase):
             outside = Path(base) / "private_handovers"
             outside.mkdir()
             (outside / "secret.md").write_text("private evidence", encoding="utf-8")
-            (tab / "handovers").symlink_to(outside, target_is_directory=True)
+            try:
+                (tab / "handovers").symlink_to(outside, target_is_directory=True)
+            except OSError as e:
+                if getattr(e, "winerror", None) == 1314:
+                    self.skipTest("Symlink creation requires elevated privileges on Windows")
+                raise
             result = scan_tab(root, "Session_One", "Tab1")
             self.assertEqual(result["handovers"], [])
 

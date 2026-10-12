@@ -160,11 +160,36 @@ class CoordinatorObservation:
     checked: str
     next: str
     observed_at: str
-    coordinator_liveness: str  # ALIVE, STALE, STOPPED
+    coordinator_liveness: str  # ALIVE, STALE, STOPPED, UNKNOWN
+    tab_position: Optional[str] = None
+    chat_id: Optional[str] = None
+    binding_generation: int = 1
+    observed_at_utc: Optional[str] = None
+    last_probe_at_utc: Optional[str] = None
+    probe_status: str = "UNKNOWN"
+    liveness: Optional[str] = None
+    assignment_id: Optional[str] = None
+    work_id: Optional[str] = None
+    conflicts: List[str] = field(default_factory=list)
 
     def validate(self):
-        if self.coordinator_liveness not in ("ALIVE", "STALE", "STOPPED"):
+        if not self.observed_at and self.observed_at_utc:
+            self.observed_at = self.observed_at_utc
+        if not self.observed_at_utc and self.observed_at:
+            self.observed_at_utc = self.observed_at
+        if not self.liveness and self.coordinator_liveness:
+            self.liveness = self.coordinator_liveness
+        if not self.coordinator_liveness and self.liveness:
+            self.coordinator_liveness = self.liveness
+
+        valid_liveness = ("ALIVE", "STALE", "STOPPED", "UNKNOWN")
+        if self.coordinator_liveness not in valid_liveness:
             raise ValueError(f"Invalid coordinator_liveness: {self.coordinator_liveness}")
+        if self.liveness and self.liveness not in valid_liveness:
+            raise ValueError(f"Invalid liveness: {self.liveness}")
+        valid_probes = ("SUCCESS", "TIMEOUT", "LOADFAIL", "NOBOX", "UNUSUAL", "ERROR", "NEVER_PROBED", "UNKNOWN")
+        if self.probe_status not in valid_probes:
+            raise ValueError(f"Invalid probe_status: {self.probe_status}")
 
 
 class ControlTowerRegistry:
