@@ -60,3 +60,16 @@ Claim: HOSTED_CI
 Blocker: OWNER:D-AIM-2 final range policy, ENGINEERING:frame/staging/semantics validation
 Next: performance profile source paths/IDB/DOM, independent oracle, generated capacity and Owner approval
 ```
+
+---
+
+## Later exact-head performance correction — proven after original W02/W03 observation
+
+This appended correction **supersedes the previous failing Firstpass frame/wall measurements FOR THE NEW HEAD ONLY**. Historical prior-head 134,803ms/2,933.2ms remains correctly recorded above as the finding that led to the change.
+
+- App draft PR #228 now exact **`608774d61f2474748611528c6ff8b6690d7b627c`**, still based on unmerged main `4f14beb37bc0b719453c52a116c1c5d7183d2fd0`.
+- Changed one bounded page-read API `readCommittedPages` in `lfj/storage/browser/indexed-page-record-store.mjs` (committed native IDB PAGE retrieval with source-basis and committed-head re-attestation **before/after each awaited page**) and UI provenance audit `ui-adapted/xml-cii-adapted-lfj-o1-domain-ui.js` to consume bounded source pages rather than resolving 23,754 individual async OPEN events. No geometry, resolver, parser or CSV behavior rewritten.
+- [Exact-head real authored Chromium run #38200358335](https://github.com/reallakshman19/3D_Converters/actions/runs/38200358335) **FOCUSED GREEN**; full [artifact #11725770309](https://github.com/reallakshman19/3D_Converters/actions/runs/38200358335/artifacts/11725770309). Re-fetched archive and independently SHA256-verified actual CSV contents.
+- Genuine original Firstpass XML+JSON: **Build 1,489ms, max rAF 16.8ms** for 216 actual XML rows / 241 committed original evidence paths, 64 rows visible; **same complete CSV outputs byte-for-byte** (57,945B sha256 `0d8bb4482ed4a9d0d116faeac5e68ce564f07b6bba2dd73dfc3676b72ec2eddc`; 50,399B sha256 `653485ff968bf478fa0001488432bb210a9ce6e85a901e9cc19f368f53a24809`). No foreign/stale source output: after replacing JSON, export is blocked `O1_EXPORT_SOURCE_STALE`.
+- Genuine original Firstpass and NC (10.23MB) native Worker source-only committed index again **PASS** with original SHA; malformed negative FAIL-CLOSED. NC still not admitted as matched XML positive.
+- The former W03 **Firstpass** <=200ms *proposed* rAF failure is now **fixed at this exact HEAD**. But **Owner-approved O1 operating range remains pending D-AIM-2**, full matching/export under original NC compatible XML, independent exact semantic golden, 30/60/100MiB generated capacity/cancel/beyond-range, deploy/Pages parity, peak memory and cold/warm run **remain NOT_PROVEN**. Focused green is not final O1 acceptance or full PR CI. W02 and W03 remain **PARTIAL** due these acceptance gaps; product not merged/released.
