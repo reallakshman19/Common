@@ -4,8 +4,8 @@
 work: "V35-LIFECYCLE"
 repository: "reallakshman19/Common"
 engineering_critical: "standard"
-version: "1.1.0"
-label_sha: "775f2bc"
+version: "1.2.1"
+label_sha: "4b90240"
 label:
   problem: "You cannot see from GitHub what agents did or how far a work has got; each successor starts half-blind."
   main_aim: "From one parent issue, GitHub alone shows the plan, evidence and live progress; any successor continues without chats."
@@ -20,7 +20,7 @@ label:
     - "BuddyRunner v1.6 and revamped 2-pass / 3-pass prompts inside v3.6 (Owner, 12 Oct)"
   task_outcome: "O1-O5"
   task_aim: "Build v3.6; one real parent issue on the lab runs end to end, titles updating themselves as evidence lands."
-  done_when: "With v3.6 only, on relay-v35-e2e-lab: parent and child issues with evidence, automatic titles, and a handover a successor continues from."
+  done_when: "With v3.6 only, on reallakshman19/relay-v36-e2e-lab (copy of the v3.5 lab): parent and child issues, evidence, automatic titles, successor handover."
 guidance:
   not_now: []
   watch:
@@ -32,7 +32,10 @@ guidance:
     - "Lab: reallaksh19/relay-v35-e2e-lab"
     - "Root issue: Common #234 (old #787); current issue #294"
     - "The Owner quote in #284 also names a repo-wise OwnerIntent index; it is not in the 12 Oct aim"
+    - "Writable lab: reallakshman19/relay-v36-e2e-lab (code and branches copied 12 Oct; reallaksh19/relay-v35-e2e-lab is reference only)"
 bindings:
   - "Session_Oct07:2 coordination/Session_Oct07/Tab2_Lifecycle_Evidence_Reconciliation"
 history:
   - "v1.1.0 · 2026-10-12 04:56 · create · created · CP-V35-LIFECYCLE-01 · approved by the Owner"
+  - "v1.2.0 · 2026-10-12 05:25 · clarify · lab = writable copy relay-v36-e2e-lab · CP-V35-LIFECYCLE-03 · approved by the Owner"
+  - "v1.2.1 · 2026-10-12 05:25 · guidance · notes += Writable lab: reallakshman19/relay-v36-e2e-lab (code and branches copied 12 Oct... · coordinator"
