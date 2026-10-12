@@ -113,3 +113,20 @@ AC (before -> after): 0 native Core2/1A -> 0 native; local prototype 0->2; G-COR
 Claim: LOCAL
 Blocker: MACHINE - native renderer checkout/complete exact private input not present; OWNER - later QRT/rights/A4 actual approval only when native pages exist
 Next: resume 183-T2-G2-W1 native execution, T3 actual golden, T4 canonical Core1A, T5 Owner packet; W2 conditional; T6 parked
+2026-10-12 | chat=6acc4eaa | TASK EVIDENCE | OWNER REJECTION AND NATIVE PATH | aim=v2.2.0 | plan=r4
+Outcome: O1 and downstream O2/O3
+For the user: Previous pair of local HTML previews REJECTED; no accepted/core renderer generated learner page yet.
+Proof: https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_G2_OWNER_REJECTED_PREVIEW_AUDIT_2026-10-12.md; https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6119832568
+Task: 183-T2-G2-W1, 183-T3-G2-W1, 183-T4-G2-W1, 183-T5-G2-W1 (four individual blocks in issue)
+Goal (issue AC): genuine source faithful native Core2; actual G-CORE2-R2 delta; blueprint-based concept construction lesson; Owner QRT and same-renderer A4
+Status: FAILED (Owner-rejected standalone prototypes, not product-source failure)
+Met: no
+Done: source/schema audit, measured browser geometry, identified noncanonical composer, posted issue retraction and native-only corrective sequence
+Code (repo branch @ commit | PR): Grade9v3.5 main@778eb35a TEST@b720b791 unchanged | none
+Tests (command -> pass/fail/skip): local Playwright geometry -> verified header 240px and wrong Core2 layout; earlier 17/17 bespoke smoke PASS only; canonical render/golden/CI -> NOT_RUN
+CI (run -> result): none -> not-run
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_G2_OWNER_REJECTED_PREVIEW_AUDIT_2026-10-12.md; https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6119832568
+AC (before -> after): product Core2 0->0, canonical Core1A 0->0, Owner QRT 0/28->0/28, accepted print 0->0; prototype acceptance revoked
+Claim: INDEPENDENT (source and local visual audit, not native render)
+Blocker: MACHINE - native full checkout/source fixture local execution not confirmed; OWNER - later specific QRT and A4 accept/reject reserved, not permission for TEST
+Next: 183-T2-G2-W1 native render using existing adapter/render_core; conditional W2 only first real native error; then T3/T4/T5; T6 parked
