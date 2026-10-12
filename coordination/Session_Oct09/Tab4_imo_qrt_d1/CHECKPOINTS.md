@@ -1,0 +1,11 @@
+# AGENT-D1 / plan revision and checkpoints (append only)
+2026-10-12 | chat=new | PLAN r1 | strict one-cell-at-a-time, source-safe AUTHORED TEST; five sole-renderer roles per cell, golden technique comparison, reviewer+Owner acceptance separate (0/28 until authorized).
+2026-10-12 | chat=new | PLAN r1 | order (task; cell; expected outcome; working minutes; size)
+2026-10-12 | chat=new | r1 | D1-REP-01 | QRT-REPRESENT-D1 | O1 + O2 review proposal | 110 | M
+2026-10-12 | chat=new | r1 | D1-RET-02 | QRT-RETRIEVE-D1 | O1 + O2 review proposal | 85 | M
+2026-10-12 | chat=new | r1 | D1-EXP-03 | QRT-EXPLAIN-D1 | O1 + O2 review proposal | 95 | M
+2026-10-12 | chat=new | r1 | D1-APP-04 | QRT-APPLY-D1 | O1 + O2 review proposal | 100 | M
+2026-10-12 | chat=new | r1 | D1-MOD-05 | QRT-MODEL-D1 | O1 + O2 review proposal, band challenge | 115 | L
+2026-10-12 | chat=new | r1 | D1-SYN-06 | QRT-SYNTHESIZE-D1 | O1 + O2 review proposal, band challenge | 120 | L
+2026-10-12 | chat=new | r1 | D1-JUS-07 | QRT-JUSTIFY-D1 | O1 + O2 review proposal | 110 | M
+2026-10-12 | chat=new | r1 checkpoint policy | record after D1-MOD-05 (5th task), after any revision/blocked cell, and at final handover; estimates not measured work.
