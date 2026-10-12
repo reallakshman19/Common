@@ -24,7 +24,7 @@ from typing import Optional, List, Dict, Any, Union
 from coordination.contracts import CoordinatorObservation, ControlTowerRegistry
 
 SNAPSHOT_SCHEMA_VERSION = "v1.0.0"
-DEFAULT_CYCLE_SECONDS = 15
+DEFAULT_CYCLE_SECONDS = 15 * 60  # v3.28 -Cycle is minutes; default 15 minutes
 
 
 class AtomicSnapshotWriter:
@@ -62,13 +62,26 @@ class AtomicSnapshotReader:
             p = Path(target_path).resolve()
             if not p.is_file():
                 return None
+            if p.stat().st_size > 2 * 1024 * 1024:
+                return None
             with open(p, "r", encoding="utf-8") as f:
                 data = json.load(f)
             if not isinstance(data, dict):
                 return None
             if data.get("schema_version") != SNAPSHOT_SCHEMA_VERSION:
                 return None
-            if "observations" not in data or not isinstance(data["observations"], list):
+            required = ("project_id", "session_id", "coordinator_id", "generated_at_utc",
+                        "source_digest", "source_watermark", "cycle_seconds", "observations")
+            if not all(key in data for key in required):
+                return None
+            if not isinstance(data["observations"], list) or len(data["observations"]) > 1000:
+                return None
+            if not isinstance(data["cycle_seconds"], int) or data["cycle_seconds"] < 1:
+                return None
+            if not all(isinstance(row, dict) and all(
+                    isinstance(row.get(k), str) for k in
+                    ("tab","status","aim","plan","ac","ci","meter","due","checked","next"))
+                    for row in data["observations"]):
                 return None
             return data
         except (json.JSONDecodeError, OSError, ValueError):
@@ -110,7 +123,7 @@ class LivenessEvaluator:
         threshold = 2 * max(1, cycle_seconds)
         elapsed = (now_dt - probe_dt).total_seconds()
         if elapsed < 0:
-            return "ALIVE"
+            return "UNKNOWN"  # future timestamps are not proof of a live probe
         if elapsed > threshold:
             return "STALE"
         if probe_status == "SUCCESS":
@@ -144,29 +157,36 @@ class CompositeBindingResolver:
         assignment_id = None
         work_id = None
 
-        if isinstance(registry_or_map, ControlTowerRegistry):
-            # Resolve from ControlTowerRegistry
-            matched_run = None
-            for run in registry_or_map.runs.values():
-                if run.chat_id == chat_id and run.generation == gen:
-                    matched_run = run
-                    break
-
-            if matched_run:
-                assignment_id = matched_run.assignment_id
-                assign = registry_or_map.assignments.get(assignment_id)
-                if assign:
-                    lane = registry_or_map.lanes.get(assign.lane_id)
-                    if lane:
-                        work_id = lane.work_id
-            else:
+        if not project_id or not coordinator_id or not session_id or not tab_pos or not chat_id or gen < 1:
+            conflicts.append("INCOMPLETE_BINDING_IDENTITY")
+        elif isinstance(registry_or_map, ControlTowerRegistry):
+            matches = []
+            for binding in registry_or_map.bindings.values():
+                if (binding.project_id != project_id or
+                    binding.binding_state != "ACTIVE" or
+                    binding.session_alias != session_id or
+                    binding.tab_alias not in (tab_pos, "Tab" + tab_pos) or
+                    binding.generation != gen):
+                    continue
+                run = registry_or_map.runs.get(binding.run_id)
+                if run and run.chat_id == chat_id and run.generation == gen:
+                    matches.append(run)
+            if len(matches) == 1:
+                run = matches[0]
+                assignment = registry_or_map.assignments.get(run.assignment_id)
+                lane = registry_or_map.lanes.get(assignment.lane_id) if assignment else None
+                work = registry_or_map.works.get(lane.work_id) if lane else None
+                if work and work.project_id == project_id:
+                    assignment_id, work_id = run.assignment_id, work.work_id
+            elif len(matches) > 1:
+                conflicts.append("AMBIGUOUS_ACTIVE_BINDING")
+            if assignment_id is None and not conflicts:
                 conflicts.append("UNASSIGNED_OR_UNKNOWN_TAB")
         elif isinstance(registry_or_map, dict):
-            # Resolve from dictionary map (either composite_key or (chat_id, gen))
-            match = registry_or_map.get(composite_key) or registry_or_map.get(f"{chat_id}|{gen}") or registry_or_map.get(chat_id)
+            # No weak chat-only or (chat,generation) fallback across projects.
+            match = registry_or_map.get(composite_key)
             if isinstance(match, dict):
-                assignment_id = match.get("assignment_id")
-                work_id = match.get("work_id")
+                assignment_id, work_id = match.get("assignment_id"), match.get("work_id")
             elif isinstance(match, tuple) and len(match) == 2:
                 assignment_id, work_id = match
             else:
@@ -299,12 +319,12 @@ class CoordinatorBridge:
             "-Action", "rowsjson",
             "-Tabs", tabs,
             "-Session", self.session_id,
-            "-Cycle", str(self.cycle_seconds)
+            "-Cycle", str(max(1, self.cycle_seconds // 60))
         ]
         if state_file:
             cmd.extend(["-StateFile", str(state_file)])
 
-        res = subprocess.run(cmd, capture_output=True, text=True, encoding="latin1")
+        res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", timeout=120)
         if res.returncode != 0:
             raise RuntimeError(f"watch.ps1 failed (exit {res.returncode}): {res.stderr}")
 
@@ -336,17 +356,19 @@ def get_observations_for_api(
         safe_sess = session_id.replace("/", "_").replace("\\", "_")
         target = s_dir / f"observations_{safe_proj}_{safe_sess}.json"
         snap = AtomicSnapshotReader.read_snapshot(target)
-        if snap:
+        if snap and snap.get("project_id") == project_id and snap.get("session_id") == session_id:
             return snap
 
-    # Fallback to general project snapshot or search matching files
-    candidates = list(s_dir.glob(f"observations_{safe_proj}*.json"))
-    if candidates:
-        # Sort by mtime descending to get freshest snapshot
-        candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-        snap = AtomicSnapshotReader.read_snapshot(candidates[0])
-        if snap:
-            return snap
+    # Strict project/session scope: never borrow another session's observations.
+    # No glob/path-substring search; IDs are not filesystem lookup patterns.
+    if not session_id:
+        return {
+            "schema_version": SNAPSHOT_SCHEMA_VERSION, "coordinator_id": "UNKNOWN",
+            "session_id": "UNKNOWN", "project_id": project_id,
+            "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "source_digest": "0" * 40, "source_watermark": "SESSION_REQUIRED",
+            "cycle_seconds": DEFAULT_CYCLE_SECONDS, "observations": []
+        }
 
     # No snapshot found: return uninitialized structure
     return {
