@@ -1,0 +1,112 @@
+{
+  "schema": "tab2-q003-g4-owner-context-comparison/v1",
+  "date_utc": "2026-10-12",
+  "chat": "6acd1e6b",
+  "issue": 183,
+  "plan": "r7-proposed-not-yet-posted",
+  "aim_version": "3.1.0",
+  "outcomes": [
+    "O1",
+    "O3"
+  ],
+  "evidence_level": "COORDINATOR-REPORTED_LOCAL_COMPARISON + OWNER-EXPLICIT_NARROW_APPROVAL; NOT independently inspected by G4",
+  "baseline": {
+    "tested_head": "98ae06741f4d90865fcd313d609aeabba46826e2",
+    "native_core2_sha256": "827a8a99128601721c3c13dfd99806b5a563624526edfd8ba137ab8d4b64b6a0",
+    "native_core2_bytes": 62277,
+    "private_input_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "golden": "G-CORE2-R2",
+    "golden_status": "CANDIDATE_NOT_OWNER_BLESSED",
+    "native_structural_status": "STRUCTURAL_CHECK_ONLY",
+    "original_html_public": false
+  },
+  "comparison": {
+    "owner_requested_context_threshold_percent": 70,
+    "golden_role_count": 12,
+    "golden_roles": [
+      "IDENTITY",
+      "STEM",
+      "CONDITIONS",
+      "ATTEMPT",
+      "TRAP",
+      "HINT_LADDER",
+      "ANSWER",
+      "SOLUTION",
+      "SOLUTION_STEPS",
+      "CHECK",
+      "DIFFICULTY_WHY",
+      "SOURCE_PDF"
+    ],
+    "q003_roles_reported": 10,
+    "match_percent": 83.33333333333333,
+    "q003_absent": [
+      "CONDITIONS",
+      "SOURCE_PDF"
+    ],
+    "absences_explained": [
+      "Original source has no separate printed conditions block",
+      "No retained PDF binary to represent as source PDF"
+    ],
+    "source_filler_added": false,
+    "golden_hint_ladder_rungs": 2,
+    "q003_hint_ladder_rungs": 1,
+    "reported_fidelity_vs_private_transcription": {
+      "stem_verbatim": true,
+      "four_ordered_options_verbatim": true,
+      "radio_options": 4,
+      "commit_control": true,
+      "answer_and_work_after_attempt_controls": true
+    },
+    "private_visible_differences": {
+      "q003_source_badge": "Source unverified",
+      "golden_source_badge": "Verified past-exam adaptation",
+      "q003_subject": "TEST",
+      "q003_topic": "Logical reasoning",
+      "q003_concept": "Original numerical pair question / private TEST"
+    },
+    "independently_rechecked_private_html": false,
+    "independent_browser_interaction": false,
+    "independent_keyboard_a11y": false,
+    "independent_viewport": false,
+    "source_original_paper_visual_verification_by_owner": "NOT_CONFIRMED"
+  },
+  "owner_decision": {
+    "exact_words": "approve. conceptually ok",
+    "accepted_for": "Private Q003 TEST contextual golden matching including two shown learner-visible labels",
+    "do_not_fix": [
+      "Source unverified badge difference",
+      "Subject TEST/Topic Logical reasoning/concept title differences",
+      "Missing CONDITIONS and SOURCE_PDF blocks justified by source",
+      "One-versus-two ladder rungs on context match"
+    ],
+    "explicit_exclusions": [
+      "Not a QRT-cell ACCEPT",
+      "Not same-page A4 approval",
+      "Not publisher rights / public display permission",
+      "Not validation of PYQ_VERIFIED_OWNER_INSPECTED_FOR_DEVELOPMENT_ONLY string",
+      "Not original printed-source visual inspection evidence",
+      "Not a new Core1A mathematics acceptance",
+      "Not golden fixture blessing"
+    ]
+  },
+  "independent_source_inspection": {
+    "repo": "reallakshman19/Grade9v3.5",
+    "render_core": "Shared/tools/render_core.py @ 98ae067, blob 9302174e1491138a459a80e9d3f176b83b19e6d7",
+    "attempt_box": "Single-choice renders radio options and data-g9-commit",
+    "browser_js_static": "validAttempt requires a checked radio for single_choice; commit handler marks attempted and materialises gated payload; lock blocks requires-attempt disclosures before commitment",
+    "support_projection": "core2_v2.py support availability distinguishes PRE_ATTEMPT_SAFE/AFTER_ATTEMPT/POST_SOLUTION; adapter bank marks private authored support according to plan",
+    "limitations": "Static branch source inspection; cannot verify actual generated HTML, real browser keyboard or DOM safety on this page"
+  },
+  "follow_up": {
+    "t2": "Private original paper custody/provenance factual review remains blocked on secure holder, not on accepted badges",
+    "t3": "Use real browser/keyboard/viewport + before/after commit and protected support tests; don't repeat accepted context-label diff or native structural runner",
+    "t4": "Independent source-faithful mathematical concept derivation before native Core1A authoring",
+    "t5": "Owner separately accepts QRT cells, rights/display and A4 evidence",
+    "admitted_counts": {
+      "core2_of_68": 0,
+      "core1a": 0,
+      "qrt_of_28": 0
+    }
+  },
+  "source_private_question_material_in_file": false
+}
