@@ -147,3 +147,20 @@ AC (before -> after): native Q003 Core2 0->0; golden not-run, Core1A admitted 0,
 Claim: LOCAL (input and checkout), GitHub adapter readback independent
 Blocker: MACHINE - github.com DNS blocks connected checkout, existing sandbox lacks Shared/tools/render_core.py; private local source input now exists
 Next: 183-T2-G2-W1 actual native renderer with pinned new receipt; W2 only observed authentic failure; then T3/T4/T5, T6 parked
+2026-10-12 | chat=6acc4eaa | TASK EVIDENCE | HOSTED_CI CHECK v3.1.0 e50802f | plan=r5
+Outcome: O1
+For the user: No native Q003 learner page, only source-adapter generic hosted test status.
+Proof: https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120075635
+Task: 183-T2-G2-W1
+Goal (issue AC): actual original-source Q003 generated from registered Core2 through Shared/tools/render_core.py
+Status: BLOCKED
+Met: no
+Done: inspected hosted push CI results for isolated TEST adapter code; 2 workflows success and broad guardrail red; neither renders authentic Q003
+Code (repo branch @ commit | PR): agent/183-q003-private-core2-test-6acc303b@e50802f | none
+Tests (command -> pass/fail/skip): 5 local original/item SHA, math, route checks PASS; actual native Q003 render/golden SKIP
+CI (run -> result): https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219422584 -> success; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219422658 -> success; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219422637 -> failure 20 steps, cause relative to patch not established
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120075635
+AC (before -> after): admitted Q003 native 0->0, real G-CORE2-R2 NOT_RUN, QRT 0/28
+Claim: HOSTED_CI (generic), LOCAL (source/input)
+Blocker: MACHINE - full checkout unavailable in local runtime due github DNS; broad guardrails RED separate unresolved CI risk
+Next: native W1 in full checkout, then native golden comparison, canonical Core1A, Owner QRT
