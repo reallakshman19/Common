@@ -3,3 +3,4 @@
 # Other Owner-only matters remain unclaimed: successor golden, independent academic review, rights and merge/release.
 2026-10-12 | chat=new | D-182-3 | OPEN | Owner to designate or reject a successor Core2A golden for H3 AFTER_ATTEMPT; frozen G-IMO-G9-FIVE-CORE-20261012 unchanged; raised by worker as Owner-only review request, not a signed Owner decision
 2026-10-12 | chat=new | D-182-4 | OPEN | Qualified reviewer to assess MODEL-D3 mathematics/band/curriculum, then Owner to accept/reject/reclassify QRT-MODEL-D3; not a signed Owner decision; technical work may continue on RETRIEVE
+2026-10-12 | chat=6accb584 | D-182-5 | OPEN | Independent qualified academic reviewer to assess RETRIEVE-D3 as a legitimate D3 RETRIEVE rather than D2/APPLY, and Owner to accept/reject/reclassify only afterward; 2026-10-12 raised; not critical-path blocker for further TEST cells

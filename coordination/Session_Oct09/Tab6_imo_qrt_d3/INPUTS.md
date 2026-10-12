@@ -15,3 +15,7 @@
 2026-10-12 | chat=new | MODEL D3 manifest | Grade9v3.5 PR193@815fe643:TEST/products/imo182-qrt-d3-model.manifest.json | role selection CORE1,CORE1A,CORE1B,CORE2A,CORE2B; core2=[]
 2026-10-12 | chat=new | model receipt | hosted 38238397575 artifact=11741409210 | digest=3df500047dd79b31, no gaps, exact five role SHA in handovers/model-d3.md
 2026-10-12 | chat=new | immutable frozen golden | G-IMO-G9-FIVE-CORE-20261012 | all 5 SHA preserved in hosted exact-head test; technique matched but new authored bytes deliberately differ
+2026-10-12 | chat=6accb584 | RETRIEVE-D3 package | Grade9v3.5 PR#193@c3506cc14f3e1af795acf30175d2d95e22d62bd4:TEST/imo-research/qrt-d3/retrieve.v1.json | blob=dda4ee58b80d1fd6bc8feb16c8986935bc9d92e8 | wholly AUTHORED TEST, no official rights
+2026-10-12 | chat=6accb584 | RETRIEVE-D3 five-role manifest | Grade9v3.5 PR#193@c3506cc:TEST/products/imo182-qrt-d3-retrieve.manifest.json | core2=[]; exact role names and two distinct question IDs in reviewer packet
+2026-10-12 | chat=6accb584 | RETRIEVE-D3 five-role receipt | CI run 38242658290 artifact=11743277133 | render_digest=838c4e589b276fa4 semantic_digest=afb1ced74c81b6c3 | six SHA in cell artifact, no REFERENCE gaps
+2026-10-12 | chat=6accb584 | freeze golden | G-IMO-G9-FIVE-CORE-20261012 original five snapshots | all five golden SHA locks PASS in same-head CI; semantically matched five role slots, not identical new-content HTML
