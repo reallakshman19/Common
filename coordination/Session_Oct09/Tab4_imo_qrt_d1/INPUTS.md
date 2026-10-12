@@ -22,3 +22,5 @@
 
 2026-10-12 | chat=6accb51c | RETRIEVE source Grade9v3.5#192@bc4debf5 | hosted artifact 11744825810 | SHA detail handovers/QRT-RETRIEVE-D1.md
 2026-10-12 | chat=6accb51c | original EXPLAIN-D1 source | Grade9v3.5 agent/imo182-qrt-d1-represent @3540909404324130f29501df88d2a46ef0cc40cc | TEST/imo-research/qrt-d1/explain.v1.json, TEST/products/imo182-qrt-d1-explain.manifest.json, authored safe four SVG; schema-validator structural PASS; no official source or Core2
+2026-10-12 | chat=6accb51c | EXPLAIN generated HTML SHA evidence | run 38251957578 artifact 11748552287 | five per-role SHA256 in handovers/QRT-EXPLAIN-D1.md; frozen original golden intact
+2026-10-12 | chat=6accb51c | APPLY authored TEST source | Grade9v3.5 draft PR#192@771f808b5000ddef11d74bde45835eee0905cdc4 | TEST/imo-research/qrt-d1/apply.v1.json, four authored safe SVG, manifest and tests, role renderer workflow 38253294826 queued
