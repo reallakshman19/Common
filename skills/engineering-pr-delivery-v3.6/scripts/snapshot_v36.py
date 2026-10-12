@@ -10,7 +10,7 @@ from decompose_v36 import GithubClient, PARENT_REF, is_task_issue, load_plan
 from lifecycle_v36 import ContractError, load_label, validate_evidence
 
 SHA = re.compile(r"^([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@([0-9a-f]{40})$")
-PR = re.compile(r"^/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)/pull/([1-9][0-9]*)(?:/commits/[0-9a-f]{40})?/?$")
+PR = re.compile(r"^/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)/pull/([1-9][0-9]*)(?:/commits/([0-9a-f]{40}))?/?$")
 
 
 def proof_pr(body, repo):
@@ -23,7 +23,7 @@ def proof_pr(body, repo):
         return None
     if hit[1]+"/"+hit[2] != repo or url.query or url.fragment:
         return None
-    return int(hit[3])
+    return int(hit[3]), hit[4]  # optional exact proof commit, not merely the PR number
 
 
 def snapshot(plan, client):
@@ -58,6 +58,12 @@ def snapshot(plan, client):
             body = comment.get("body") or ""
             if "TASK_EVIDENCE v3.6" not in body:
                 continue
+            # This v3.6 lab only admits evidence authored by its repository owner.
+            # GitHub PR events can rescan comments that did not trigger issue_comment.
+            actor = comment.get("user")
+            if not isinstance(actor, dict) or actor.get("login") != client.repo.split("/", 1)[0]:
+                invalid += 1
+                continue
             try:
                 evidence = validate_evidence(body)
             except (ContractError, ValueError, IndexError):
@@ -82,11 +88,13 @@ def snapshot(plan, client):
         comment, evidence = eligible[-1]
         row["evidence"] = comment.get("html_url") or comment.get("url")
         candidate = SHA.fullmatch(evidence["candidate"])
-        pr_no = proof_pr(comment["body"], client.repo)
-        if not candidate or candidate[1] != client.repo or pr_no is None:
+        proof = proof_pr(comment["body"], client.repo)
+        if (not candidate or candidate[1] != client.repo or proof is None
+                or (proof[1] is not None and proof[1] != candidate[2])):
             row["status"] = "UNVERIFIED_PROOF"
             tasks.append(row)
             continue
+        pr_no = proof[0]
         try:
             if pr_no not in prs:
                 prs[pr_no] = client.get_pr(pr_no)
