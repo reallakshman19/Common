@@ -13,9 +13,17 @@ import yaml
 
 OUTCOME_IDS = frozenset({"O1", "O2", "O3", "O4", "O5"})
 REQUIRED_LABEL_FIELDS = frozenset({
-    "label_id", "label_version", "approval", "criticality",
-    "owner_aim_verbatim", "outcomes", "task_aim", "done_when", "source_issue"
+    "work", "repository", "engineering_critical", "version", "label_sha",
+    "label", "guidance", "bindings", "history"
 })
+LABEL_FIELDS = frozenset({
+    "problem", "main_aim", "outcomes", "owner_constraints", "task_outcome",
+    "task_aim", "done_when"
+})
+GUIDANCE_FIELDS = frozenset({"not_now", "watch", "notes"})
+REPO_REF = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+VERSION = re.compile(r"^[0-9]+\\.[0-9]+\\.[0-9]+$")
+LABEL_SHA = re.compile(r"^[0-9a-f]{7,40}$")
 ISSUE_REF = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+#[1-9][0-9]*$")
 TASK_REF = re.compile(r"^[A-Z0-9][A-Z0-9_.-]{2,79}$")
 LABEL_NAME = re.compile(r"^[A-Z][A-Z0-9-]{2,79}$")
@@ -52,29 +60,50 @@ def _text(value: object, field: str) -> str:
     return value
 
 
+def _keys(value: object, expected: frozenset[str], name: str) -> dict:
+    if not isinstance(value, dict) or set(value) != expected:
+        missing = sorted(expected - set(value)) if isinstance(value, dict) else sorted(expected)
+        extra = sorted(set(value) - expected) if isinstance(value, dict) else []
+        raise ContractError(f"{name} keys mismatch: missing={missing}, extra={extra}")
+    return value
+
+
+def _strings(value: object, name: str, *, minimum: int = 0) -> list[str]:
+    if not isinstance(value, list) or len(value) < minimum:
+        raise ContractError(f"{name} must be a list with at least {minimum} elements")
+    for i, item in enumerate(value):
+        _text(item, f"{name}[{i}]")
+    return value
+
+
 def validate_label(document: object, expected_id: str | None = None) -> dict:
-    if not isinstance(document, dict):
-        raise ContractError("label must be a YAML mapping")
-    if set(document) != REQUIRED_LABEL_FIELDS:
-        missing = sorted(REQUIRED_LABEL_FIELDS - set(document))
-        extra = sorted(set(document) - REQUIRED_LABEL_FIELDS)
-        raise ContractError(f"label fields mismatch: missing={missing}, extra={extra}")
-    label_id = _text(document["label_id"], "label_id")
-    if not LABEL_NAME.fullmatch(label_id) or (expected_id and label_id != expected_id):
-        raise ContractError("label_id is invalid or does not match path")
-    _text(document["label_version"], "label_version")
-    if document["approval"] not in ("pending", "approved"):
-        raise ContractError("approval must be pending or approved")
-    if document["criticality"] not in ("pending", "engineering-critical", "standard"):
-        raise ContractError("criticality must be pending, engineering-critical or standard")
-    for field in ("owner_aim_verbatim", "task_aim", "done_when"):
-        _text(document[field], field)
-    if not isinstance(document["outcomes"], dict) or set(document["outcomes"]) != OUTCOME_IDS:
-        raise ContractError("outcomes must define exactly O1..O5")
-    for outcome_id, text in document["outcomes"].items():
-        _text(text, f"outcomes.{outcome_id}")
-    if not isinstance(document["source_issue"], str) or not ISSUE_REF.fullmatch(document["source_issue"]):
-        raise ContractError("source_issue must be owner/repo#N")
+    """Read actual relay/AIM v1.1.0+ structure; do not infer issuer authenticity."""
+    document = _keys(document, REQUIRED_LABEL_FIELDS, "master label")
+    work = _text(document["work"], "work")
+    if not LABEL_NAME.fullmatch(work) or (expected_id and work != expected_id):
+        raise ContractError("work is invalid or does not match path")
+    repo = _text(document["repository"], "repository")
+    if not REPO_REF.fullmatch(repo):
+        raise ContractError("repository must be owner/repo")
+    if document["engineering_critical"] not in ("standard", "engineering-critical"):
+        raise ContractError("engineering_critical must be standard or engineering-critical")
+    version = _text(document["version"], "version")
+    label_sha = _text(document["label_sha"], "label_sha")
+    if not VERSION.fullmatch(version) or not LABEL_SHA.fullmatch(label_sha):
+        raise ContractError("version must be semver and label_sha a 7..40 hex label identifier")
+    label = _keys(document["label"], LABEL_FIELDS, "label")
+    for name in ("problem", "main_aim", "task_outcome", "task_aim", "done_when"):
+        _text(label[name], "label." + name)
+    outcomes = label["outcomes"]
+    _keys(outcomes, OUTCOME_IDS, "label.outcomes")
+    for key, value in outcomes.items():
+        _text(value, "label.outcomes." + key)
+    _strings(label["owner_constraints"], "label.owner_constraints", minimum=1)
+    guidance = _keys(document["guidance"], GUIDANCE_FIELDS, "guidance")
+    for field in GUIDANCE_FIELDS:
+        _strings(guidance[field], "guidance." + field)
+    _strings(document["bindings"], "bindings", minimum=1)
+    _strings(document["history"], "history", minimum=1)
     return dict(document)
 
 
@@ -167,10 +196,10 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "validate-label":
             label = load_label(args.path)
-            print(json.dumps({"valid": True, "label_id": label["label_id"],
-                              "version": label["label_version"],
-                              "approval": label["approval"],
-                              "criticality": label["criticality"]}, sort_keys=True))
+            print(json.dumps({"valid": True, "work": label["work"],
+                              "version": label["version"],
+                              "label_sha": label["label_sha"],
+                              "engineering_critical": label["engineering_critical"]}, sort_keys=True))
         else:
             print(render_evidence(outcome=args.outcome, for_user=args.for_user,
                                   proof=args.proof, task_id=args.task_id,

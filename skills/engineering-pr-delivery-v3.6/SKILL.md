@@ -1,6 +1,6 @@
 # Engineering PR Delivery v3.6 — independent GitHub lifecycle (DRAFT)
 
-**Status:** proposed, not Owner-approved. **Owning issue:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Plan:** V36-341-PLAN-01. **Owner aim card:** V35-LIFECYCLE / CP-V35-LIFECYCLE-01, approval pending.
+**Status:** v1.1.0 Owner label approved; this implementation remains DRAFT. **Owning issue:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Plan:** V36-341-PLAN-01. **Owner aim card:** V35-LIFECYCLE / CP-V35-LIFECYCLE-01, approved master v1.1.0 / label_sha 775f2bc.
 
 ## Scope, independence and safety
 
@@ -41,7 +41,7 @@ python -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -v
 python skills/engineering-pr-delivery-v3.6/scripts/lifecycle_v36.py validate-label relay/AIM/V35-LIFECYCLE.yaml
 ```
 
-The `validate-label` command only parses and validates an explicit `relay/AIM/<WORK>.yaml` path; no GitHub write. `render-evidence` formats a comment from supplied verified task facts and refuses an empty placeholder proof; rendering is **not publication**. See `templates/sticky-label-v36.yaml` and `templates/task-evidence-v36.md`. The example label is unapproved and must not be silently installed to a live repository.
+The `validate-label` command only parses and validates an explicit `relay/AIM/<WORK>.yaml` path; no GitHub write. `render-evidence` formats a comment from supplied verified task facts and refuses an empty placeholder proof; rendering is **not publication**. See `templates/sticky-label-v36.yaml` and `templates/task-evidence-v36.md`. The example label is a pinned read-only fixture of the approved master; only the master at relay/AIM/V35-LIFECYCLE.yaml governs. Label fields remain the Owner's exact words.
 
 The v3.6 module requires Python 3.10+ and PyYAML 6.x. All public CLI commands remain read-only in WP1. Every future write command must implement dry-run as its default, fail closed on missing approval, verify selected exact repository/issue/PR and read back results. One scripting language: Python.
 
@@ -49,4 +49,4 @@ The v3.6 module requires Python 3.10+ and PyYAML 6.x. All public CLI commands re
 
 WP2 must validate stable workpack/task IDs, sizes, outcome and acceptance before materialization; replay must not duplicate children. WP3 must validate evidence references, current candidate, negative/stale tests and provider visibility. WP4 must preserve unmanaged human title text and refuse unauthorized writes; repeated runs must be idempotent and read back exact output. WP5 must implement BuddyRunner v1.6 as **1a execution HOLD → 1b independent reconstruction → 2 single reconciliation**, with an optional **Y** response to later Xb evidence, *not* a loop. WP6 must honor the Owner's pending D-V36-2 packaging decision. WP7 requires a real lab run with a fresh cold successor; synthetic lab proof must not be promoted to authentic programme acceptance.
 
-**Current admission:** D-AIM-1, D-V36-1, D-V36-2, D-V36-3 pending. WP1 draft scaffolding is not approval of these decisions. WP4/WP7 live publisher writes HOLD pending explicit scoped permission. Older #294 decisions are **not v3.6 inputs**.
+**Current admission:** Master label v1.1.0 approved; scope of automatic lab writes and future prompt-pack choices remains subject to explicit Owner direction. WP1 draft scaffolding is not approval of these decisions. WP4/WP7 live publisher writes HOLD pending explicit scoped permission. Older #294 decisions are **not v3.6 inputs**.

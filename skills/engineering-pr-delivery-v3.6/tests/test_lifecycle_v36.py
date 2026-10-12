@@ -12,15 +12,23 @@ v36 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(v36)
 
 LABEL = {
-    "label_id": "V35-LIFECYCLE",
-    "label_version": "draft-01",
-    "approval": "pending",
-    "criticality": "pending",
-    "owner_aim_verbatim": "Parent issue>Task decomposition>live scoreboard",
-    "outcomes": {f"O{i}": f"Outcome {i}" for i in range(1, 6)},
-    "task_aim": "Build the independent lifecycle",
-    "done_when": "Lab can be continued from GitHub",
-    "source_issue": "reallakshman19/Common#341",
+    "work": "V35-LIFECYCLE",
+    "repository": "reallakshman19/Common",
+    "engineering_critical": "standard",
+    "version": "1.1.0",
+    "label_sha": "775f2bc",
+    "label": {
+        "problem": "You cannot see from GitHub what agents did or how far a work has got; each successor starts half-blind.",
+        "main_aim": "From one parent issue, GitHub alone shows the plan, evidence and live progress; any successor continues without chats.",
+        "outcomes": {f"O{i}": f"Outcome {i}" for i in range(1, 6)},
+        "owner_constraints": ["A new, independent v3.6 lifecycle skill", "BuddyRunner v1.6 and revamped 2-pass / 3-pass prompts inside v3.6"],
+        "task_outcome": "O1-O5",
+        "task_aim": "Build v3.6; one real parent issue on the lab runs end to end, titles updating themselves as evidence lands.",
+        "done_when": "With v3.6 only, on relay-v35-e2e-lab: parent and child issues with evidence, automatic titles, and a handover a successor continues from.",
+    },
+    "guidance": {"not_now": [], "watch": ["Reports about the lifecycle instead of running it"], "notes": []},
+    "bindings": ["Session_Oct07:2 coordination/Session_Oct07/Tab2_Lifecycle_Evidence_Reconciliation"],
+    "history": ["v1.1.0 · 2026-10-12 · approved by the Owner"],
 }
 EVIDENCE = dict(
     outcome="O1", for_user="A usable child task now exists",
@@ -32,16 +40,16 @@ EVIDENCE = dict(
 
 
 class LabelTests(unittest.TestCase):
-    def test_label_valid_and_draft_does_not_imply_approval(self):
+    def test_label_reads_approved_master_shape(self):
         item = v36.validate_label(LABEL, "V35-LIFECYCLE")
-        self.assertEqual(item["approval"], "pending")
+        self.assertEqual(item["version"], "1.1.0")
 
     def test_bad_aim_id(self):
         with self.assertRaises(v36.ContractError):
             v36.validate_label(LABEL, "OTHER-LABEL")
 
     def test_missing_outcome(self):
-        changed = {**LABEL, "outcomes": {"O1": "Only one"}}
+        changed = {**LABEL, "label": {**LABEL["label"], "outcomes": {"O1": "Only one"}}}
         with self.assertRaises(v36.ContractError):
             v36.validate_label(changed)
 
@@ -49,9 +57,17 @@ class LabelTests(unittest.TestCase):
         with self.assertRaises(v36.ContractError):
             v36.validate_label({**LABEL, "writer": "ON"})
 
-    def test_bad_source_ref(self):
+    def test_bad_repository_ref(self):
         with self.assertRaises(v36.ContractError):
-            v36.validate_label({**LABEL, "source_issue": "random URL"})
+            v36.validate_label({**LABEL, "repository": "random URL"})
+
+    def test_master_key_mismatch_fails(self):
+        with self.assertRaises(v36.ContractError):
+            v36.validate_label({**LABEL, "label_sha": "unknown"})
+
+    def test_owner_master_example_is_accepted(self):
+        master = ROOT / "tests" / "fixtures" / "V35-LIFECYCLE.yaml"
+        self.assertEqual(v36.load_label(master)["label_sha"], "775f2bc")
 
     def test_no_ambiguous_yaml_duplicate_keys(self):
         source = "label_id: A\nlabel_id: B\n"
@@ -73,7 +89,7 @@ class LabelTests(unittest.TestCase):
             path = Path(work) / "relay" / "AIM" / "V35-LIFECYCLE.yaml"
             path.parent.mkdir(parents=True)
             path.write_text(yaml.safe_dump(LABEL, sort_keys=False))
-            self.assertEqual(v36.load_label(path)["source_issue"], LABEL["source_issue"])
+            self.assertEqual(v36.load_label(path)["label_sha"], LABEL["label_sha"])
 
 
 class EvidenceTests(unittest.TestCase):
