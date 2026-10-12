@@ -357,3 +357,20 @@ AC (before -> after): H3 requestable preattempt -> after nonblank own attempt an
 Claim: HOSTED_CI
 Blocker: OWNER - changed Core2A visual review + successor golden designation; independent academic QRT cell acceptance still PENDING; no merge/release
 Next: Owner reviews H3-afterattempt Core2A exact learner HTML, then approve new golden ID only if accepted, follow qualified QRT review
+Outcome: O1
+For the user: No public learner workflow changed. Issue #182 now points to governing Owner master v3.1.0 and usable D1-D4 workpacks; lead directly corrected missing instructions rather than ask Owner; monitor shows one actual TEST D2 renderer pilot, 27 unbuilt, QRT accepted 0/28.
+Proof: https://github.com/reallakshman19/Common/blob/27f1599e7e395354d4721f39e8e9916328d12058/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-P6-TECHLEAD-FRESH-ISSUE-AUDIT-AND-NO-PINGPONG-CORRECTIONS.md
+TASK EVIDENCE | 182-P6-LEAD-FRESH-ISSUE-CORRECTION | 2026-10-12 | chat=6acc408a | tab=Tab1 | aim=v3.1.0 | label_sha=2ff9246 | outcome=O1 | user=no
+Task: 182-P6-LEAD-FRESH-ISSUE-CORRECTION
+Goal (issue AC): Naive-first independent read of issue/master/repo/PR/CI, fix missing four-agent execution workpacks, outdated issue operating references, and miscounted real QRT-technical output without routine Owner ping-pong.
+Status: DONE coordination; no four active worker receipts
+Met: yes source/lead corrections; twenty-eight cells NOT built or Owner accepted
+Done: Issue original v1.1 historical body preserved below current v3.1 addendum; four absent D1-D4 7-cell workpacks created/fetched; P6 plan stale H3 pending corrected to Owner-approved H3 AFTER_ATTEMPT now technically scoped #190; 28-cell board corrected 1 RENDERED_TEST QRT-JUSTIFY-D2 candidate on exact #190, 27 UNSTARTED, 0 QRT accepted. #190 targeted H3 CI 38231707376 7/7 PASS, original golden 38231707266 FAIL expected because changed H3 HTML, original frozen file untouched; broad guardrails/canonical and tablet browser publication CI not claimed green.
+Code (repo branch @ commit | PR): Common main documentation and issue addendum | Grade9v3.5 #190@67c34da TEST DRAFT unchanged
+Tests (command -> pass/fail/skip): GitHub readback 4/4 workpacks with 7/7 cells each PASS, 28 unique board entries PASS, one exact H3 TEST run 7/7 PASS, no real learner tests
+CI (run -> result): 38231707376 SUCCESS targeted; 38231707266 FAILURE frozen golden mismatch; 38231707500 FAILURE publishing checks; 38231707421 guardrails FAILURE
+Evidence (link): https://github.com/reallakshman19/Common/blob/27f1599e7e395354d4721f39e8e9916328d12058/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-P6-TECHLEAD-FRESH-ISSUE-AUDIT-AND-NO-PINGPONG-CORRECTIONS.md ; https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6121979138
+AC (before -> after): missing workpacks and incorrect current label/H3 status -> real coordinated executable workpacks and honest H3 technical state; QRT 0/28 remains unchanged
+Claim: LOCAL
+Blocker: OWNER only for successor golden, qualified QRT cell review, source rights and merge; four worker dispatch NOT_VERIFIED
+Next: Correct agent PR mistakes directly as their work appears; present changed Core2A actual HTML first for Owner successor golden comparison
