@@ -1,0 +1,53 @@
+{
+  "schema": "imo-q003-w1-access-check/v1",
+  "issue": 183,
+  "task": "183-T2-G2-W1",
+  "chat": "6acc4eaa",
+  "outcome": "O1",
+  "date_utc": "2026-10-12",
+  "state": "BLOCKED_BEFORE_AUTHENTIC_RENDER",
+  "assessed": {
+    "product_main": "778eb35a70517a46108ad0a5dc01dfc89f61c0e3",
+    "test_branch": "b720b791f87ff0b78f1d9ff3e32f169ef0851850"
+  },
+  "bounded_local_probe": {
+    "roots": [
+      "/mnt/data",
+      "/home/oai/share",
+      "/tmp"
+    ],
+    "found": {
+      "q003.source.private.json": 0,
+      "Shared/tools/render_core.py": 0,
+      "TEST/imo-research/core2-q003/prepare_private.py": 0,
+      "render-receipt.json": 0,
+      "sanitized-render-receipt.json": 0
+    },
+    "github_dns": "FAILED:gaierror",
+    "local_proof_sha256": "3fe52df9215c4d64b241c21d03db44cffe49a73715030b8f67377f0e9743ed27",
+    "scope_note": "Absence proven only in inspected local roots, not on Owner's machine."
+  },
+  "hosted_readback": {
+    "issue_183": "No authoritative Q003 renderer result in 8 comments read as of this check. Stage-2 handover comment 6117204413 confirms UNKNOWN Owner-side execution.",
+    "common_tab2_directory": "Contains local preflight and handovers, no real Q003 render receipt as of this check.",
+    "product_test_q003_directory": "Only staged adapter, README, custody and preflight receipt; no rendered output.",
+    "committed_preflight": "checks={} ; renderer=NOT_RUN ; rendered_html=NOT_CREATED",
+    "prior_private_preflight": "Eight G1-reported PASS categories in Common Q003_PREFLIGHT_RECHECK_2026-10-12.json; not rerun or adopted as G2 actual renderer proof."
+  },
+  "required_input": {
+    "private_json_expected_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "normalized_components_expected_sha256": "31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2",
+    "custody": "No original question or answer copied to this receipt."
+  },
+  "execution": {
+    "prepare_private.py --prepare-only": "NOT_RUN_NO_AUTHENTIC_INPUT_OR_CHECKOUT",
+    "prepare_private.py (render_core.py)": "NOT_RUN_NO_AUTHENTIC_INPUT_OR_CHECKOUT",
+    "HTML, browser commit/reveal": "NOT_RUN",
+    "golden, CI, A4": "NOT_RUN",
+    "learner_core2": "NOT_CREATED",
+    "owner_qrt": "NOT_ACCEPTED",
+    "publisher_rights": "NOT_GRANTED"
+  },
+  "next": "Use an authorized secure local executor with full checkout plus exact private input, or supply an already-completed authentic sanitized renderer run receipt and privately inspectable learner artifact. No new Owner decision for private TEST is required.",
+  "non_claims": "No renderer exception observed, no source-byte comparison performed in this session, no browser/print testing, no product-code edits, no QRT acceptance."
+}
