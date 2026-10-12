@@ -288,3 +288,20 @@ AC (before -> after): Incomplete golden/blueprint gap classification -> five-rol
 Claim: LOCAL
 Blocker: OWNER - D-182-2-H3/academic golden acceptance, QRT cell and cross-draft integration decisions; PERSON shared printer owner parked
 Next: none in authorized unblocked blueprint lane; reopen only on specific Owner academic/blueprint evidence
+Outcome: O1
+For the user: Owner preview approved exact earlier #187 Core1 and Core2B TEST HTML. Separate unmerged TEST draft #188 integrates five Core blueprint roles on one head, preserving Core1A staged accessible description and independent-exit hint protections; no live learner/public page changes.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38215683516
+TASK EVIDENCE | 182-S3-OWNER-PREVIEW-AND-INTEGRATED-FIVE-CORE-TEST | 2026-10-12 | chat=6acc408a | aim=v2.1.0 | label_sha=adb005e | outcome=O1 | user=no
+Task: 182-S3-OWNER-PREVIEW-AND-INTEGRATED-FIVE-CORE-TEST
+Goal (issue AC): Record Owner approval with exact page-byte scope and integrate #186 safe SVG/source repairs into sibling #187 authored TEST Core1 and Core2B journey, preserving both predecessors and checking one exact-head learner route.
+Status: DONE
+Met: partial: technical integrated TEST build plus approval of original shown #187 Core1/Core2B HTML; new altered integrated HTML Owner golden/academic approval and QRT NOT_MET.
+Done: Owner said "ok proceed, approved" at 2026-10-12T06:56:34Z after two TEST HTML and golden links shown; approval attached only #187 original Core1 SHA605c57f... and Core2B SHAd26f325..., NOT QRT/H3/merge/release. Recorded independently https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6119344478. Created separate DRAFT PR #188@f87d2f627e3f05476d39fb04d7f26e453661dc68 from #187, overlaid exact #186 Core1A authored 2-question fixes, SVG static <desc> and regressions; reconciled pre-exit four-factor method hint in Core2B 3-question snapshot. New TEST manifest selects output_roles CORE1,CORE1A,CORE1B,CORE2A,CORE2B with core2=[], sole existing registry and renderer unchanged. Exact-head hosted 38215683516 rendered 6 HTML files/0 depth gaps, digest ad02fef42f0d505a, recovered all SHA256 page hashes match receipt; 17/17 hosted targeted unit tests PASS. Local headless Chromium actual integrated Core1A/1B/2A/2B 4/4 role gate flows PASS, no runtime JS errors: precommit/empty blocked, nonempty attempt unlock then explicit disclosure; Core1A stage1 accessible desc parity only. QRT 0/28, H3 OWNER PENDING, printer A4 parked.
+Code (repo branch @ commit | PR): Grade9v3.5 agent/issue-182-approved-integrated-test-preview-6acc408a @f87d2f627e3f05476d39fb04d7f26e453661dc68 | PR #188 DRAFT/unmerged; #186/#187 unchanged | Common main@7aca396c444784133521c0ee452a3f34ec038c9e report
+Tests (command -> pass/fail/skip): Exact-hosted unittest 17/17 PASS; actual artifact receipt hashes 12/12 PASS; local Chromium four roles 4/4 PASS; integrated Owner visual review, H3 and QRT academic NOT_RUN
+CI (run -> result): https://github.com/reallakshman19/Grade9v3.5/actions/runs/38215683516 scoped SUCCESS; PR-wide guardrails/canonical assurance must be tracked separately; whole PR not declared green
+Evidence (link): https://github.com/reallakshman19/Common/blob/7aca396c444784133521c0ee452a3f34ec038c9e/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-S3-OWNER-HTML-PREVIEW-APPROVAL-AND-FIVE-ROLE-INTEGRATION.md ; https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6119462405
+AC (before -> after): Original exact Core1/Core2B preview Owner-approved, sibling repairs not integrated -> one five-role exact-head TEST artifact and gates; Owner full O1 academic and O2 accepted decisions remain open
+Claim: HOSTED_CI
+Blocker: OWNER - D-182-2-H3, named independent QRT/academic, new-byte visual approval, explicit merge/release; shared-printer A4 parked
+Next: Owner decisions / CI-owner for unrelated PR-wide guardrails, no authorized next blueprint task
