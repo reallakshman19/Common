@@ -65,14 +65,18 @@ class TestAdversarialScenarios(unittest.TestCase):
         self.assertNotEqual(w182.aim_id, w183.aim_id)
 
     def test_tc03_dual_active_tab_conflict_detection(self):
-        """TC-03: Two simultaneous active tabs for same Work flags IDENTITY_CONFLICT / HOLD."""
+        """TC-03: Feed two concurrent ACTIVE bindings through the actual registry."""
+        b1 = self.reg.bindings["bind-common-183-tabA"]
+        b2 = self.reg.bindings["bind-common-183-tabB"]
+        b1.binding_state = b2.binding_state = "ACTIVE"
+        before = self.reg.works["work-common-183"].acceptance_status
         conflicts = self.reg.validate_single_active_tab_invariants()
-        # The fixture has two bindings for work-common-183 initially marked CONFLICT
-        # Let's verify that the registry enforces the HOLD status on Work
-        w183 = self.reg.works["work-common-183"]
-        self.assertEqual(w183.acceptance_status, "HOLD")
-        conflict_bindings = [b for b in self.reg.bindings.values() if b.binding_state == "IDENTITY_CONFLICT"]
-        self.assertGreaterEqual(len(conflict_bindings), 2)
+        self.assertEqual(len(conflicts), 1)
+        self.assertIn("work-common-183", conflicts[0])
+        self.assertEqual(b1.binding_state, "IDENTITY_CONFLICT")
+        self.assertEqual(b2.binding_state, "IDENTITY_CONFLICT")
+        # Observing an identity conflict is not an Owner acceptance decision.
+        self.assertEqual(self.reg.works["work-common-183"].acceptance_status, before)
 
     def test_tc04_unresolved_work_missing_aim(self):
         """TC-04: Missing AIM label produces UNRESOLVED, never guesses ACTIVE."""
@@ -128,14 +132,20 @@ class TestAdversarialScenarios(unittest.TestCase):
         self.assertEqual(grade9_proj.status, "ACTIVE")
 
     def test_tc09_evidence_replay_and_edit_idempotency(self):
-        """TC-09: Replayed/edited evidence retains immutable history without double-counting."""
-        evidences = [e for e in self.reg.evidence_history if e.work_id == "work-common-182"]
-        self.assertGreaterEqual(len(evidences), 2)
-        # All evidence records are canonical GitHub records
-        for ev in evidences:
-            self.assertTrue(ev.is_canonical)
-            self.assertEqual(ev.validator_verdict, "PASS")
+        """TC-09: Exercise the registry replay, edit and source identity semantics."""
+        ev = next(e for e in self.reg.evidence_history if e.work_id == "work-common-182")
+        baseline = len(self.reg.evidence_history)
+        self.reg.register_evidence(ev)
+        self.assertEqual(len(self.reg.evidence_history), baseline)
+        changed = TaskEvidence(evidence_id=ev.evidence_id, work_id=ev.work_id,
+                               task_id=ev.task_id, candidate_sha=ev.candidate_sha,
+                               proof_digest="f"*64, validator_verdict="PASS",
+                               is_canonical=True, source_ref=ev.source_ref)
+        self.reg.register_evidence(changed)
+        self.assertEqual(len(self.reg.evidence_history), baseline+1)
+        self.assertEqual(self.reg.evidence[ev.evidence_id].proof_digest, "f"*64)
 
+    @unittest.skip("WP1 CI provider adapter not yet implemented; fixture values are not live CI verification")
     def test_tc10_exact_head_ci_invalidation(self):
         """TC-10: PR head move invalidates green check; current head marked CI_UNKNOWN."""
         ci_info = self.fixture["exact_head_ci"]
@@ -147,14 +157,19 @@ class TestAdversarialScenarios(unittest.TestCase):
         self.assertEqual(curr_head["ci_status"], "CI_UNKNOWN")
 
     def test_tc11_resource_protection_error_codes(self):
-        """TC-11: Quota overflow or invalid path yields explicit status, not unhandled crash."""
-        # Simulated payload exceeding quota (e.g. 10MB when limit is 5MB)
-        limit = 5 * 1024 * 1024
-        oversized_bytes = 6 * 1024 * 1024
-        self.assertTrue(oversized_bytes > limit)
-        error_response = {"error": "Payload too large", "code": "TOO_LARGE", "status": 413}
-        self.assertEqual(error_response["status"], 413)
+        """TC-11: Run actual receipt scanner under quota; HTTP 413 is tested separately."""
+        import tempfile
+        from coordination.coordination_ui import scan_tab
+        with tempfile.TemporaryDirectory() as d:
+            tab = Path(d) / "Session_X" / "Tab1"
+            tab.mkdir(parents=True)
+            (tab / "large.json").write_bytes(b"x" * (1024*1024+1))
+            result = scan_tab(Path(d), "Session_X", "Tab1")
+            entry = next(e for e in result["json_receipts"] if e["filename"] == "large.json")
+            self.assertEqual(entry["parse_status"], "TOO_LARGE")
+            self.assertIsNone(entry["data"])
 
+    @unittest.skip("WP4 public snapshot exporter not yet implemented; allowlist fixture is not a privacy gate")
     def test_tc12_snapshot_privacy_redaction(self):
         """TC-12: Public snapshot excludes tokens, private local paths, and private chat IDs."""
         private_keys = ["token", "password", "secret", "private_key"]
