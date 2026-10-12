@@ -1,0 +1,13 @@
+TAB2 INPUTS — append only; path | immutable Git blob SHA (unless explicitly noted) | intent/status
+2026-10-12 | new | reallakshman19/Common:relay/AIM/IMO-CORE2-CORE1A-68.yaml | a463895a3b0d148f0b3721d678f40c7e2b9b91ef | Owner sticky label 1.1.0; label_sha 11984b4; unchanged
+2026-10-12 | new | reallakshman19/Grade9v3.5:TEST/imo-research/intake/core2-source-custody-eligibility.v1.json | 800a2f693e1b46162a026375c5854ad4b8b05257 | frozen 68 identities; Q003 first literal register entry; no custody admission
+2026-10-12 | new | reallakshman19/Grade9v3.5:TEST/imo-research/seed/questions.jsonl | 6d0e9a1d74403a221362c0121322d885025b11fb | Owner compiled position-identity evidence only
+2026-10-12 | new | reallakshman19/Grade9v3.5:TEST/imo-research/seed/sources.json | 4057e7642402915e9dacdb4b54fc7fbe9b42867f | school mirror, not rights grant
+2026-10-12 | new | reallakshman19/Grade9v3.5:TEST/imo-research/taxonomy/seed-question-topic-map.v1.jsonl | 80816f9bb5a579f4c822a477ce53e8b98be1381b | provisional LOGIC-NUMBER-PATTERNS
+2026-10-12 | new | reallakshman19/Grade9v3.5:Shared/web/interactive-page-blueprints.v1.json | 591ba061b8771c30fdffc4506aa720ca9ba89335 | registry v1.17.0; BP-CORE2 1.11.0 and BP-CORE1A 1.8.0
+2026-10-12 | new | reallakshman19/Grade9v3.5:golden/INDEX.md | e6ad5a71ece3056f46fdb72a82fec14b75cd75f0 | candidate exemplars, no Owner blessing
+2026-10-12 | new | reallakshman19/Grade9v3.5:golden/units/G-CORE2-R2/GOLDEN.md | 13c33f13d558fbd2026a72ae3392cafcaf0c8f80 | Core2 technique benchmark
+2026-10-12 | new | reallakshman19/Grade9v3.5:golden/units/G-CORE2-R2/bank.json | f5ce6720702649375ba757ac3d6a2ad5fb0e26de | exemplar data; never copy answer to Q003
+2026-10-12 | new | reallakshman19/Grade9v3.5:golden/units/G-MATH-LINEAR-CONSTRAINT/GOLDEN.md | 0cf42ead25564a71de824b4e41a62e1502af6183 | Core1A technique benchmark
+2026-10-12 | new | chat-upload:AA3_BM4L_Technical_Handover_2026-10-10(1).md | sha256:f23eaaa056d98c3cfc40868fcdb5c86c0532f88a0b0e55cbd4091d676b40d85c | supplied in chat; unrelated technical handover, not used as IMO question evidence; no contents copied
+2026-10-12 | new | chat-only Owner task instruction (current chat) | SHA not independently established | intent: M0 first, #183 only, coordination in exact named Tab2 folder; contents not copied

@@ -1,0 +1,17 @@
+TAB2 TASK EVIDENCE — append only
+Outcome: O1
+For the user: First eligible-register entry identified and an inspectable Core2 page proposal against the golden published; no learner page changed yet.
+Proof: https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
+Task: 183-T1
+Goal (issue AC): M0 select first question from 68 register, propose faithful blueprint/golden Core2 page and ask Owner for display mode once
+Status: DONE
+Met: yes (M0 proposal only; O1 learner pages not met)
+Done: Q003 chosen by literal eligibility-register order; status and missing rights/source/QRT preserved; six-task M0-M3 plan r1 and four decision requests posted
+Code: reallakshman19/Grade9v3.5 main@778eb35a70517a46108ad0a5dc01dfc89f61c0e3 (read only) | PR none; reallakshman19/Common main coordination log
+Tests: GitHub issue/register/seed/topic/blueprint/golden source readback -> pass; render_core -> skip (plan-only)
+CI: none -> not-run
+Evidence: https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
+AC: no named starting question/proposed rendered-page contract -> first register Q003, page spec and Owner decisions proposed; 0/68 built -> 0/68 built
+Claim: NONE (source-level audit and plan only, no independent real learner workflow test)
+Blocker: OWNER - answer D-183-1 display, D-183-2 QRT acceptance, D-183-3 rights/source-custody, D-183-4 A4 print criteria before T2/approval
+Next: 183-T2, 183-T3, 183-T4, 183-T5, 183-T6

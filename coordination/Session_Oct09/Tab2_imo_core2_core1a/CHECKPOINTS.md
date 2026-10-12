@@ -1,0 +1,3 @@
+TAB2 PLAN & RECONCILIATION CHECKPOINTS — append only
+2026-10-12 | chat=new | PLAN r1 | first M0 T1, then M1 T2-T3, M2 T4-T5, M3 T6. Outcome per task: T1 O1, T2 O1, T3 O3, T4 O2, T5 O3, T6 O1. Estimates and sizes at https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779. Do not use completion counts as programme progress.
+2026-10-12 | chat=new | RECONCILE 1 | Grade9v3.5 main@778eb35a; eligibility 68 / original Core2 admitted 0 / Core1A admitted 0 / QRT accepted 0/28; 0 learner pages. First literal eligibility entry Q003; provisional LOGIC-NUMBER-PATTERNS, QRT NOT_CLASSIFIED, source/rights HOLD. Golden candidates not Owner blessed. Issue #183 OPEN. Next checkpoint after fifth task and each reconcile.

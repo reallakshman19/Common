@@ -1,0 +1,5 @@
+TAB2 OWNER DECISIONS — append only; proposed values are not accepted values
+2026-10-12 | chat=new | D-183-1 | OPEN | Core2 source display mode: embed exact original on actual attempt page (proposed, only where permitted) versus reference-link mode with explicit STEM/ATTEMPT solution; raised https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
+2026-10-12 | chat=new | D-183-2 | OPEN | Authority, granularity and evidence for accepted 7-demand x 4-band QRT cell per page; raised https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
+2026-10-12 | chat=new | D-183-3 | OPEN | Rights and exact source-component verification boundary for Q003 verbatim publication; no right inferred from Owner 68 identity approval; raised https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
+2026-10-12 | chat=new | D-183-4 | OPEN | A4 print acceptance criteria / same-page renderer-generated PDF receipt; raised https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
