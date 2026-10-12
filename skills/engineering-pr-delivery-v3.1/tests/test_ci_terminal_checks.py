@@ -9,17 +9,13 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[3]
 
-V3_SKILL_PATTERN = "skills/" + "engineering-pr-delivery-v3/*"
-
-
+# The repository's *present* required check is V3.1. The historical
+# engineering-pr-delivery-v2.5.yml and engineering-pr-delivery-v3.yml workflow
+# files are no longer present on main. Test their historical behavior through
+# compatibility fixtures; do not treat deleted workflow paths as mandatory
+# currently instantiated checks, or the test itself prevents every PR from
+# passing despite no existing V2.5/V3 workflow being callable.
 WORKFLOWS = {
-    "engineering-pr-delivery-v2.5.yml": (
-        "skills/engineering-pr-delivery-v2.5/*",
-        "skills/three-pass-prompt-generator/*",
-    ),
-    "engineering-pr-delivery-v3.yml": (
-        V3_SKILL_PATTERN,
-    ),
     "engineering-pr-delivery-v3.1.yml": (
         "skills/engineering-pr-delivery-v3.1/*",
         "skills/two-pass-prompt-generator/*",
