@@ -4,8 +4,8 @@
 work: "IMO-CORE2-CORE1A-68"
 repository: "reallakshman19/Grade9v3.5"
 engineering_critical: "standard"
-version: "2.2.0"
-label_sha: "d68e4d5"
+version: "3.1.0"
+label_sha: "64a4e9c"
 label:
   problem: "The 68 available IMO questions have no Core 2 or Core 1A pages built from blueprints, aligned with golden fixtures, per QRT."
   main_aim: "Create Core 2 and Core 1A for the 68 IMO questions from blueprints, aligned with golden fixtures, per QRT."
@@ -17,6 +17,7 @@ label:
     - "The 68 frozen question identities are the development set (Owner, 11 Oct: these 68 are ok, proceed)."
     - "Question text is never invented or relabelled: the original stays faithful and authored work is labelled authored."
     - "Use the existing blueprints for Core 2, Core 1A and Core 1B and reuse them wherever possible; create a new one adapted to QRT only where one is missing; benchmark every page against the available golden fixtures (Owner, 12 Oct)."
+    - "Parent aim: every page is generated from its registered blueprint through Shared/tools/render_core.py and benchmarked against its golden fixture. A standalone, hand-written or composer-made HTML page is never a deliverable and is never presented as one; if the renderer cannot run, report BLOCKED (Owner, 12 Oct)."
   task_outcome: "O1"
   task_aim: "Render Q003 as a Core 2 page from the Core 2 blueprint, benchmark it against G-CORE2-R2, then build its Core 1A."
   done_when: "PENDING: the Owner sets display mode (embed original text or reference link), acceptance per QRT cell, rights handling and A4 print."
@@ -36,3 +37,4 @@ history:
   - "v1.1.0 · 2026-10-12 04:52 · create · created · CP-IMO-CORE2-CORE1A-68-01 · approved by the Owner"
   - "v2.1.0 · 2026-10-12 05:37 · rescope · Add an Owner constraint: reuse existing Core 2, 1A and 1B blueprints, create new... · CP-IMO-CORE2-CORE1A-68-03 · approved by the Owner"
   - "v2.2.0 · 2026-10-12 05:38 · retarget · Task aim now: render the first question Core 2 page (Q003, staged from private i... · CP-IMO-CORE2-CORE1A-68-04 · approved by the Owner"
+  - "v3.1.0 · 2026-10-12 11:37 · rescope · Make the parent aim a hard rule: pages only through the registered blueprint and... · CP-IMO-CORE2-CORE1A-68-07 · approved by the Owner"
