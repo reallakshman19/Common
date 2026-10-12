@@ -12,7 +12,7 @@ import json
 import re
 
 from decompose_v36 import GithubClient, PARENT_REF, load_plan
-from lifecycle_v36 import ContractError, load_label
+from lifecycle_v36 import ContractError, load_label, require_explicit_lab
 from snapshot_v36 import snapshot
 
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
@@ -165,6 +165,7 @@ def main(argv=None) -> int:
     cold = sub.add_parser("cold", help="fetch GitHub-only evidence and render packet")
     cold.add_argument("--label", required=True)
     cold.add_argument("--plan", required=True)
+    cold.add_argument("--lab", help="explicit lab repo from selected label when parent is lab")
     cold.add_argument("--pr", type=int, action="append", default=[])
     buddy = sub.add_parser("buddy", help="render a read-only v1.6 stage prompt")
     buddy.add_argument("--phase", choices=sorted(PHASES), required=True)
@@ -178,6 +179,7 @@ def main(argv=None) -> int:
         if args.mode == "cold":
             label = load_label(args.label)
             plan = load_plan(args.plan, label)
+            require_explicit_lab(label, plan["parent"], args.lab)
             client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
             client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
             print(render_markdown(build_packet(label, plan, client, args.pr)), end="")
