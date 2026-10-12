@@ -1,0 +1,115 @@
+{
+  "test_plan": "V36-STRESS-PLAN-01",
+  "controlling_plan": "skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-02.yaml",
+  "workload_plan": "skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml",
+  "label": "relay/AIM/V36-STRESS.yaml",
+  "label_sha": "9f8e7d6",
+  "target_repository": "reallakshman19/relay-v36-stress-lab",
+  "repository_init_sha": "ffb2245",
+  "publisher_pinned_sha": "5017e272d125d179573ebd860cad221641851245",
+  "controlling_parent": "reallakshman19/relay-v36-stress-lab#1",
+  "workload_parent": "reallakshman19/relay-v36-stress-lab#8",
+  "proof_pr_number": 9,
+  "proof_pr_url": "https://github.com/reallakshman19/relay-v36-stress-lab/pull/9",
+  "proof_pr_sha": "cb6dd50275e8f5c05e5867d1237cc6a68ce9d8b7",
+  "pr_fleet": {
+    "total_prs": 20,
+    "proof_pr": 9,
+    "draft_prs": [310, 311, 312, 313, 314, 315, 316, 317, 318, 319],
+    "merged_prs": [9, 320, 321],
+    "closed_prs": [322, 323],
+    "open_prs": [324, 325, 326, 327, 328]
+  },
+  "stages": {
+    "ST-01": {
+      "name": "Foundation & Boundaries",
+      "verdict": "PASS",
+      "parent_title": "[V3.6][LAB][E1/6] Full-Scale Stress Test Lifecycle Stage Progression",
+      "proof_pr_title": "[V3.6][O1][MERGED][E2/2] test: add test fixture and initial scaffold",
+      "evidence_comment": "https://github.com/reallakshman19/relay-v36-stress-lab/issues/2#issuecomment-6128946983",
+      "checks": {
+        "negative_boundary_unauthorized_scope": "PASS",
+        "confirm_scope_mismatch_rejected": "PASS",
+        "disposable_lab_creation": "PASS",
+        "parent_and_six_children_materialized": "PASS",
+        "workload_parent_reserved_before_pr": "PASS",
+        "proof_pr_created_and_merged": "PASS",
+        "publisher_workflow_installed": "PASS",
+        "parent_title_readback_verified": "PASS"
+      }
+    },
+    "ST-02": {
+      "name": "Progressive Scale & Hardened Pacing",
+      "verdict": "PASS",
+      "tasks_materialized": 300,
+      "tasks_verified": 300,
+      "duplicate_issues_on_replay": 0,
+      "batches_executed": 20,
+      "pacing_parameters": {
+        "batch_size": 15,
+        "item_delay_seconds": 4.0,
+        "batch_delay_seconds": 60.0,
+        "max_writes_per_minute": 15
+      },
+      "evidence_comment": "https://github.com/reallakshman19/relay-v36-stress-lab/issues/3#issuecomment-6130085944",
+      "parent_title": "[V3.6][LAB][E2/6] Full-Scale Stress Test Lifecycle Stage Progression",
+      "checks": {
+        "300_child_issues_created": "PASS",
+        "multi_page_rest_pagination_verified": "PASS",
+        "idempotent_dry_run_zero_mutations": "PASS",
+        "parent_index_comment_synchronized": "PASS",
+        "hard_parameter_validation": "PASS"
+      }
+    },
+    "ST-03": {
+      "name": "Evidence Processing & PR Attribution",
+      "verdict": "CONDITIONAL",
+      "live_comments_posted": 168,
+      "total_comments_target": 600,
+      "prs_provisioned": 20,
+      "status": "BLOCKED_BY_SECONDARY_RATE_LIMIT",
+      "block_error": "HTTP Error 403: Forbidden (Secondary rate limit - content creation temporarily blocked)",
+      "findings": [
+        "FINDING-ST03-SECONDARY-LIMIT-01: Continuous posting of >150 comments across distinct issues triggers GitHub anti-abuse secondary content creation limit even at <= 15 writes/min",
+        "FINDING-ST03-OUTCOME-CYCLING-01: Plan V36-8-PLAN-01 cycles outcomes across O1..O5; test harness must dynamically match task['outcome'] to avoid INVALID_EVIDENCE classification"
+      ]
+    },
+    "ST-04": {
+      "name": "Concurrency & Global Write Budget",
+      "verdict": "PASS",
+      "concurrent_workers": 8,
+      "duration_seconds": 4.53,
+      "total_issues_fetched": 308,
+      "deadlocks": 0,
+      "race_conditions": 0,
+      "shared_rate_limiter_verified": "PASS"
+    },
+    "ST-05": {
+      "name": "Fault Injection & Real Client Resumption",
+      "verdict": "PASS_WITH_CRITICAL_DEFECT",
+      "fail_closed_contract_error_verified": true,
+      "zero_duplicate_creation_on_resume": true,
+      "defects": [
+        "FINDING-ST05-RETRY-01: GithubClient lacks native retries, does not inspect Retry-After or HTTP 403/429 headers, and raises ContractError immediately upon secondary rate limits",
+        "DEFECT-V36-GET-PR-01: GithubClient lacks native get_pr() method required by snapshot_v36.py"
+      ]
+    },
+    "ST-06": {
+      "name": "Cold Successor Independent Takeover & Endurance",
+      "verdict": "PASS",
+      "state_reconstruction_from_github_alone": true,
+      "endurance_cycles_passed": 5,
+      "prompt_2pass_rendered": true,
+      "prompt_3pass_rendered": true
+    }
+  },
+  "summary": {
+    "overall_verdict": "CONDITIONAL PASS",
+    "core_architecture": "VERIFIED",
+    "scale_capacity_300_tasks": "VERIFIED",
+    "fleet_capacity_20_prs": "VERIFIED",
+    "concurrency_8_workers": "VERIFIED",
+    "cold_successor_takeover": "VERIFIED",
+    "critical_operational_blocker": "FINDING-ST05-RETRY-01: GithubClient fails closed on secondary content creation limit without native retry/backoff"
+  }
+}
