@@ -7,3 +7,5 @@
 2026-10-12 | chat=new | hosted scoped CI | 38237137616 FAIL (self-fixed false-positive SVG numeric coordinate check) -> 38237242485 SUCCESS at exact head | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38237242485
 2026-10-12 | chat=new | HTML artifact | #191 run 38237242485 / artifact 11740817775 | 5 role HTML + index + SHA/receipt | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38237242485
 2026-10-12 | chat=new | issue #182 | TASK EVIDENCE posted | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6122660972
+2026-10-12 | chat=new | PR-wide guardrails | #191 run 38237242531 FAILURE 20 guardrail steps; stacked parent #190 run 38236796844 FAILURE same 20 steps; shared preexisting CI debt | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38237242531
+2026-10-12 | chat=new | issue #182 | supplemental exact-head guardrail diagnostic | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6122705196
