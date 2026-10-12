@@ -261,6 +261,34 @@ class TestWP3MaterializedProjections(unittest.TestCase):
                 break
         self.assertEqual(seen,10000)
 
+    def test_private_cli_materializer_reads_explicit_pinned_sources_only(self):
+        from dataclasses import asdict
+        from coordination.projections import materialize_manifest
+        source={
+            "schema_version":"WP3_PRIVATE_MANIFEST_V1",
+            "registry_source_ref":"https://github.com/reallakshman19/Common/issues/353",
+            "source_watermarks":self.wm,
+            "projects":[asdict(x) for x in self.reg.projects.values()],
+            "works":[asdict(x) for x in self.reg.works.values()],
+            "execution_lanes":[asdict(x) for x in self.reg.lanes.values()],
+            "assignments":[asdict(x) for x in self.reg.assignments.values()],
+            "runs":[asdict(x) for x in self.reg.runs.values()],
+            "tab_bindings":[asdict(x) for x in self.reg.bindings.values()],
+            "observation_files":["coordinator-a.json","coordinator-b.json"],
+        }
+        for name,snap in zip(source["observation_files"],self.snaps):
+            (self.root/name).write_text(json.dumps(snap),encoding="utf-8")
+        manifest=self.root/"wp3-manifest.json"
+        manifest.write_text(json.dumps(source),encoding="utf-8")
+        result=materialize_manifest(str(manifest),self.idx.db_path,self.path,ASOF)
+        self.assertEqual(result["counts"]["assignments"],5)
+        self.assertEqual(len(self.rows("assignments")["items"]),5)
+        source["observation_files"]=["../private.json"]
+        manifest.write_text(json.dumps(source),encoding="utf-8")
+        with self.assertRaises(ValueError):
+            materialize_manifest(str(manifest),self.idx.db_path,self.path,ASOF)
+        self.assertEqual(len(self.rows("assignments")["items"]),5)
+
     def test_adv16_private_api_get_never_creates_or_writes_db(self):
         self.build()
         before=Path(self.path).stat().st_mtime_ns
