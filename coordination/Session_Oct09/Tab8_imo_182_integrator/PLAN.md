@@ -49,3 +49,6 @@ Exact-head merge gate: scoped CI green OR documented baseline-only red; sole ren
 
 ## r1.1 artifact audit checkpoint
 182-INT-01 inventory/verification DONE within indexed scope (25 authored, 3 unstarted). 182-INT-13 PARTIAL: 25 downloaded hosted artifacts with zero gaps and six independently computed SHA, but no receipt per-page SHA. #190 exact frozen lock fails and needs legitimate correction without golden-byte mutation / Owner D-182-3 for changed H3. No additional PR merged. Technical content still blocked CI under strict gate.
+
+## r2 checkpoint, 2026-10-12
+182-INT-03 DONE #197 merged; 182-INT-04 DONE dispositions/fold of older #184–#189 source/Owner index; 182-INT-05 PARTIAL #190 strict frozen golden/H3/page SHA engineering subgates pass, waiting on exact canonical regression delta and tablet; 182-INT-02 PARTIAL shared baseline and two newly introduced golden-regression IDs repaired. 182-INT-01/13 PARTIAL 25 technical artifact sets and 28-row monitor, 0/28 accepted. 182-INT-06–12 remain unmerged/unfinished. [r2 handover](handovers/2026-10-12-tab8-int-r2.md) is the exact next-work contract.
