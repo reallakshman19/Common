@@ -1,0 +1,49 @@
+plan_version: V36-341-PLAN-02
+parent: reallakshman19/Common#341
+label:
+  work: V35-LIFECYCLE
+  version: 1.1.0
+  label_sha: 775f2bc
+tasks:
+  - task_id: V36-341-WP1
+    size: S
+    outcome: O1
+    title: independent approved aim reader and task evidence foundation
+    for_user: Validated aim and task evidence format can be read from GitHub; no automatic lifecycle yet
+    acceptance: The exact approved v1.1.0 master parses; tests pass; no imports from older skills
+  - task_id: V36-341-WP2
+    size: M
+    outcome: O1
+    title: validated parent to child issue decomposition
+    for_user: One parent issue reveals seven real child tasks and their acceptance criteria
+    acceptance: Dry-run predicts missing children; apply creates only missing issues and stable parent index; second apply creates zero duplicates
+  - task_id: V36-341-WP3
+    size: M
+    outcome: O2
+    title: GitHub evidence and live PR snapshot
+    for_user: Current progress can be calculated from child evidence and actual PR heads
+    acceptance: Provider fixtures include positive negative stale ambiguous and missing cases without invented completion
+  - task_id: V36-341-WP4
+    size: M
+    outcome: O3
+    title: automatic issue and PR status title publisher
+    for_user: Issue and PR titles visibly update themselves as qualifying evidence changes
+    acceptance: Test both O3 and O4; dry-run defaults; bounded approved lab writes are idempotent and read back
+  - task_id: V36-341-WP5
+    size: M
+    outcome: O5
+    title: GitHub only handover with BuddyRunner v1.6
+    for_user: A successor takes over from GitHub without previous chat
+    acceptance: Run 1a 1b 2 and optional one shot Y from current GitHub snapshot with cold successor validation
+  - task_id: V36-341-WP6
+    size: S
+    outcome: O5
+    title: revamped two pass and three pass prompts
+    for_user: Prompt workflows use the approved aim and real task evidence
+    acceptance: Both modes stay within v3.6 and preserve exact Owner label text and evidence links
+  - task_id: V36-341-WP7
+    size: M
+    outcome: O5
+    title: live lab end to end lifecycle benchmark
+    for_user: One real lab parent progresses through child evidence title changes and independent continuation
+    acceptance: Prove O1 through O5 on relay-v35-e2e-lab using v3.6 only with positive and negative records
