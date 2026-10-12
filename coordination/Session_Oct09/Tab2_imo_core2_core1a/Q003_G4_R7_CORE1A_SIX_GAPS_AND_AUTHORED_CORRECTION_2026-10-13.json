@@ -1,0 +1,164 @@
+{
+  "schema": "tab2-q003-core1a-six-gap-authored-remedy/v1",
+  "chat": "6acd1e6b",
+  "date_local": "2026-10-13 00:2x Asia/Dubai",
+  "issue": 183,
+  "plan": "r7",
+  "outcome": "O2",
+  "task": "183-T4-G2-W1",
+  "coordinator_local_report": {
+    "provenance": "COORDINATOR-REPORTED_LOCAL; not independently rerun by G4",
+    "tested_repo": "reallakshman19/Grade9v3.5",
+    "tested_commit": "99faff867c76016ee4bbc426f0811941eebe4cee",
+    "clean_clone": true,
+    "jsonschema": "4.26.0",
+    "input_sha256_prefix": "b263644c",
+    "prepare_only_exit": 0,
+    "benchmark_exit": 1,
+    "benchmark_status": "NATIVE_GAPS_OR_STRUCTURE_FINDINGS",
+    "Q003_core1a": {
+      "status": "DRAFT_NATIVE_RENDERED_NOT_ACCEPTED",
+      "pages_written": 2,
+      "gaps": 6,
+      "bytes": 65505,
+      "sha256": "93f11be103163d89c78698525ce0e5f70438eb8766a02e61bbb1ef9b23498c38",
+      "renderer_digest": "c73b92c2a2028a7c"
+    },
+    "G_MATH_LINEAR_CONSTRAINT": {
+      "golden_status": "CANDIDATE_NOT_OWNER_BLESSED",
+      "pages_written": 7,
+      "gaps": 0,
+      "bytes": 64626,
+      "sha256": "27547f2e31b84f53a2e506ceff137ce1ae4b403c195c79080709fa5f505063d6",
+      "renderer_digest": "8433c0370f6a1999"
+    },
+    "author_input_sha256": "9cb34f711030169c31f0051d589b1cb10d0e398b15cef1ae58ebef3ce9220b25",
+    "golden_core1a_slots": [
+      "CONCEPT_HEADER",
+      "CONSTRUCTION_STEPS",
+      "EQUATIONS",
+      "EXIT_RECALL",
+      "KEY_STEP",
+      "LEARNING_TRANSITIONS",
+      "MODEL_CONTRACT",
+      "PRACTICE_LINKS",
+      "QUICK_CHECK",
+      "STAGED_VISUAL",
+      "TRAP_REPAIR",
+      "UNIT_HEADER",
+      "WORKED_EXAMPLE"
+    ],
+    "q003_core1a_slots": [
+      "CONCEPT_HEADER",
+      "CONSTRUCTION_STEPS",
+      "EXIT_RECALL",
+      "KEY_STEP",
+      "MODEL_CONTRACT",
+      "PRACTICE_LINKS",
+      "QUESTION_BRIDGE",
+      "QUICK_CHECK",
+      "SECTION_ROUTE",
+      "TRAP_REPAIR",
+      "UNIT_HEADER",
+      "WORKED_EXAMPLE"
+    ],
+    "golden_only_roles": [
+      "EQUATIONS",
+      "LEARNING_TRANSITIONS",
+      "STAGED_VISUAL"
+    ],
+    "gaps": [
+      {
+        "duty": "AUTHOR_COMPONENT",
+        "unit": "CU-IMO-PAIR-RESIDUAL-1",
+        "component": "EQUATIONS",
+        "message": "EQUATIONS absent"
+      },
+      {
+        "duty": "STAGE_REPRESENTATION",
+        "unit": "CU-IMO-PAIR-RESIDUAL-1",
+        "component": "STAGED_VISUAL",
+        "message": "STAGED_VISUAL absent"
+      },
+      {
+        "duty": "AUTHOR_COMPONENT",
+        "unit": "CU-IMO-PAIR-RESIDUAL-2",
+        "component": "CONSTRUCTION_STEPS",
+        "message": "one authored step of two required"
+      },
+      {
+        "duty": "AUTHOR_COMPONENT",
+        "unit": "CU-IMO-PAIR-RESIDUAL-2",
+        "component": "EQUATIONS",
+        "message": "EQUATIONS absent"
+      },
+      {
+        "duty": "STAGE_REPRESENTATION",
+        "unit": "CU-IMO-PAIR-RESIDUAL-2",
+        "component": "STAGED_VISUAL",
+        "message": "STAGED_VISUAL absent"
+      },
+      {
+        "duty": "AUTHOR_TOUGHEST_CONCEPT",
+        "unit": "CU-IMO-PAIR-RESIDUAL-1",
+        "component": "WORKED_EXAMPLE",
+        "message": "authored example lacks binding to actual private Q003 target_crux_move_ref"
+      }
+    ],
+    "not_a_renderer_gap": "LEARNING_TRANSITIONS is OPTIONAL in native BP-CORE1A-CONSTRUCTION v1.8.0; no fake transition/link invented",
+    "a4": "NOT_RUN",
+    "owner_qrt_accepted": false
+  },
+  "registered_contract_and_single_correction_batch": {
+    "decision": "Author real equation/MathML/validity and genuine staged pair-residual visuals; 2-step second construction, plus authentic private-source crux binding; do not waive mandatory steps, falsify source, invent transitions or alter shared runtime.",
+    "isolated_branch": "agent/183-q003-private-core2-test-6acc303b",
+    "base_native_receipt_head": "99faff867c76016ee4bbc426f0811941eebe4cee",
+    "fixed_exact_head": "f030a0aca51038575778de3489f75d1d629a6b74",
+    "ahead_by": 4,
+    "behind_by": 0,
+    "three_test_scoped_files": [
+      "TEST/imo-research/core2-q003/core1a-authored.v1.json",
+      "TEST/imo-research/core2-q003/build_private_core1a.py",
+      "TEST/imo-research/core2-q003/assets/core1a-authored-residual-stages.svg"
+    ],
+    "authoring_change_by_gap": {
+      "unit1_equations": "REL-IMO-PAIR-SQUARE-OFFSET relation has x,y,k meanings, k=y-x^2 presentation MathML, derivation, conditions/limits/checks and null gate_relation_ref",
+      "unit2_equations": "Same genuinely reusable authored relation explicitly referenced from unit2",
+      "unit1_staged_visual": "REP-IMO-PAIR-AUTHORED-RESIDUALS and genuine SVG authored data stages VIS-IMO-PAIR-1/2",
+      "unit2_staged_visual": "Same SVG with consecutive relevant stages VIS-IMO-PAIR-2/3; computed residual exception not a decorative image",
+      "unit2_construction_steps": "Independent fourth step IMO-PAIR-M4 verifies a changed-offset authored list; unit2 now [IMO-PAIR-M3,IMO-PAIR-M4]",
+      "unit1_toughest_worked_anchor": "Runtime builder maps a wholly AUTHORED Q003 transfer example to registered grade9v3:lesson_anchors, target_question_ref, construction_ref and crux_move_ref derived only from SHA-validated private bank; checked with learning_repair.anchor_problems."
+    },
+    "new_visual_source": "Only separately authored transfer pairs; no original question/option/stem/answer is included in asset or authored JSON.",
+    "figure_text_reference_floor_px": 14,
+    "figure_text_predicted_px": 20.074,
+    "independent_static_checks": {
+      "passed": 22,
+      "total": 22,
+      "mode": "GitHub exact readback and JS static source/schema/ref/maths/geometry check; NOT Python or native secure rendering"
+    },
+    "renderer_modified": false,
+    "original_custody_guard_modified": false,
+    "rights_granted": false,
+    "owner_qrt_accepted": false,
+    "published_private_html": false
+  },
+  "coordinator_rerun": {
+    "checkout_exact_commit": "f030a0aca51038575778de3489f75d1d629a6b74",
+    "commands": [
+      "python -I TEST/imo-research/core2-q003/build_private_core1a.py --private-input \"/PRIVATE/EXACT_Q003.json\" --prepare-only",
+      "python -I TEST/imo-research/core2-q003/benchmark_core1a_native.py --private-input \"/PRIVATE/EXACT_Q003.json\""
+    ],
+    "return_source_safe_only": [
+      "TEST/imo-research/core2-q003/.private/core1a/source-safe-core1a-receipt.json",
+      "TEST/imo-research/core2-q003/.private/core1a/native-core1a-golden-comparison.json",
+      "if still failing: first sanitized gap(s) by duty, component, unit, no protected question/answer/HTML"
+    ],
+    "claim": "Any 0-gap result remains STRUCTURAL_CHECK_ONLY and requires Owner visual/A4/QRT.",
+    "current_admission": {
+      "core2_of_68": 0,
+      "core1a_accepted": 0,
+      "qrt_of_28": 0
+    }
+  }
+}
