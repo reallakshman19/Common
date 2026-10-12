@@ -136,6 +136,8 @@ class ProjectionEngine:
                 if view not in VIEWS or not isinstance(project, str):
                     raise ValueError("Invalid projection scope")
                 body = canon(row)
+                # Globally ordered key prevents cross-project cursor collisions.
+                key = project + "|" + key
                 conn.execute("""INSERT INTO projection_rows(generation, view, project_id, sort_key, body)
                                 VALUES ('__staging__', ?, ?, ?, ?)""", (view, project, key, body))
                 digest.update(canon([view, project, key, row]).encode("utf-8"))
@@ -148,7 +150,8 @@ class ProjectionEngine:
                                if registry.works[registry.lanes[a.lane_id].work_id].project_id == pid]
                 active_assignments = sum(a.status == "ACTIVE" for a in assignments)
                 emit("portfolio", pid, pid, {
-                    "project_id": pid, "name": p.name, "provider_reachability": p.provider_reachability,
+                    "project_id": pid, "verified_repo_id": None,
+                    "name": p.name, "provider_reachability": p.provider_reachability,
                     "provider_observed_at_utc": p.as_of, "registered_assignments": len(assignments),
                     "registered_active_assignments": active_assignments,
                     "work_count": sum(w.project_id == pid for w in registry.works.values()),
@@ -273,6 +276,9 @@ class ProjectionEngine:
                             continue
                         match, conflicts = _evidence_match(registry, task_attributions, row)
                         parsed, status = CanonicalV36Adapter.parse(row["raw_text"])
+                        if status != "PARSED" or not row["is_canonical_8line"]:
+                            match = None
+                            conflicts = sorted(set(conflicts + ["INVALID_CANONICAL_EVIDENCE"]))
                         out = {
                             "evidence_id": row["evidence_id"],
                             "project_id": pid, "task_id": row["task_id"],
@@ -294,7 +300,8 @@ class ProjectionEngine:
                         emit("evidence", pid, "|".join([row["provider_comment_id"].zfill(20),
                             str(row["version"]).zfill(8)]), out)
                         if match:
-                            seen_task_by_work.setdefault(match["work_id"], set()).add(row["task_id"])
+                            seen_task_by_work.setdefault(match["work_id"], set()).add(
+                                (row["task_id"], row["owner_issue"]))
 
             # Store count of distinct evidenced tasks only where an explicit mapping exists.
             # Work data are replaced, keeping all unsupported plan/Owner fields null.
