@@ -12,8 +12,9 @@ import urllib.error
 import urllib.parse
 import json
 import time
+import tempfile
 from pathlib import Path
-from coordination.coordination_ui import is_safe_contained_path, ApiHandler, UI_DIR, HERE
+from coordination.coordination_ui import is_safe_contained_path, ApiHandler, UI_DIR, HERE, scan_tab, scan_project
 
 
 class TestPathContainmentHelper(unittest.TestCase):
@@ -165,6 +166,59 @@ class TestSecurityHttpServer(unittest.TestCase):
             self.assertEqual(data.get("visibility"), "PUBLIC")
             self.assertIn("projects", data)
             self.assertIn("source_watermarks", data)
+
+
+
+class TestScannerPathAndQuota(unittest.TestCase):
+
+    def test_known_document_symlink_cannot_escape_project(self):
+        with tempfile.TemporaryDirectory() as base:
+            root = Path(base) / "project"
+            tab = root / "Session_One" / "Tab1"
+            tab.mkdir(parents=True)
+            outside = Path(base) / "private.txt"
+            outside.write_text("2026-01-01 | private | D-1-1 | SECRET", encoding="utf-8")
+            (tab / "DECISIONS.md").symlink_to(outside)
+            result = scan_tab(root, "Session_One", "Tab1")
+            self.assertEqual(result["decisions"], [])
+            self.assertIn({"file": "DECISIONS.md", "code": "OUTSIDE_PROJECT"},
+                          result["scan_warnings"])
+
+    def test_oversized_receipt_visible_without_reading_payload(self):
+        with tempfile.TemporaryDirectory() as base:
+            root = Path(base)
+            tab = root / "Session_One" / "Tab1"
+            tab.mkdir(parents=True)
+            (tab / "huge.json").write_bytes(b"x" * (1024 * 1024 + 8))
+            result = scan_tab(root, "Session_One", "Tab1")
+            receipt = next(r for r in result["json_receipts"] if r["filename"] == "huge.json")
+            self.assertEqual(receipt["parse_status"], "TOO_LARGE")
+            self.assertIsNone(receipt["data"])
+            self.assertIn({"file": "huge.json", "code": "RECEIPT_TOO_LARGE"},
+                          result["scan_warnings"])
+
+    def test_external_session_symlink_not_scanned(self):
+        with tempfile.TemporaryDirectory() as base:
+            root = Path(base) / "project"
+            root.mkdir()
+            outside = Path(base) / "Session_Outside"
+            (outside / "Tab1").mkdir(parents=True)
+            (root / "Session_Outside").symlink_to(outside, target_is_directory=True)
+            result = scan_project({"id": "fixture", "name": "fixture",
+                                   "coordination_dir": str(root)})
+            self.assertEqual(result["sessions"], [])
+
+    def test_external_handover_symlink_not_scanned(self):
+        with tempfile.TemporaryDirectory() as base:
+            root = Path(base) / "project"
+            tab = root / "Session_One" / "Tab1"
+            tab.mkdir(parents=True)
+            outside = Path(base) / "private_handovers"
+            outside.mkdir()
+            (outside / "secret.md").write_text("private evidence", encoding="utf-8")
+            (tab / "handovers").symlink_to(outside, target_is_directory=True)
+            result = scan_tab(root, "Session_One", "Tab1")
+            self.assertEqual(result["handovers"], [])
 
 
 if __name__ == "__main__":
