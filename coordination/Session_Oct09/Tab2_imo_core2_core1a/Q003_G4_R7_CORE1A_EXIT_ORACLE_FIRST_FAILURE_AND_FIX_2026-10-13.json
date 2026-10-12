@@ -1,0 +1,81 @@
+{
+  "schema": "tab2-q003-core1a-native-first-failure-and-fix/v1",
+  "chat": "6acd1e6b",
+  "issue": 183,
+  "plan": "r7",
+  "aim": "v3.1.0",
+  "task": "183-T4-G2-W1",
+  "outcome": "O2",
+  "date_local": "2026-10-13 00:2x Dubai",
+  "coordinator_report": {
+    "claim": "COORDINATOR-REPORTED LOCAL, not independently executed by G4",
+    "clean_clone_commit": "a1c46c96a4549b3f238f46ce8e3fc6438ef50bca",
+    "jsonschema_version": "4.26.0",
+    "private_original_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "private_original_sha_matched": true,
+    "prepare_command": "python -I TEST/imo-research/core2-q003/build_private_core1a.py --private-input <PRIVATE_FILE> --prepare-only",
+    "prepare_exit": 0,
+    "prepare_stdout": "CORE1A_PRIVATE_FIXTURE_PREPARED; original input verified and retained locally only",
+    "native_command": "python -I TEST/imo-research/core2-q003/benchmark_core1a_native.py --private-input <PRIVATE_FILE>",
+    "native_exit": 1,
+    "first_error": "ValueError PRODUCT_STRUCTURE_INVALID in .private/core1a/records.json at microtopics/0/exit_task/oracle: Additional properties are not allowed ('authored_case' was unexpected).",
+    "native_core1a_page": "NOT_CREATED",
+    "math_golden_comparison": "NOT_REACHED",
+    "native_gap_count": "NOT_AVAILABLE",
+    "protected_artifacts_public": false
+  },
+  "independent_schema_decision": {
+    "authority": "Shared/library/package.schema.json @ isolated branch; blob a9cdf31d6ae46d00ac227791264231f05d453725",
+    "schema_path": "$defs.microtopic.properties.exit_task.properties.oracle",
+    "minProperties": 1,
+    "maxProperties": 1,
+    "additionalProperties": false,
+    "permitted": [
+      "verification with validator_id and bindings",
+      "held_by with known issue id",
+      "no_numeric_claim with reason"
+    ],
+    "choice": "held_by: Grade9v3.5#183",
+    "reason": "Computed numeric exit has no registered numeric validator/data bindings; must not falsely claim no numeric result; hold under existing issue."
+  },
+  "patch": {
+    "original_commit": "a1c46c96a4549b3f238f46ce8e3fc6438ef50bca",
+    "fixed_exact_commit": "99faff867c76016ee4bbc426f0811941eebe4cee",
+    "changed_file": "TEST/imo-research/core2-q003/core1a-authored.v1.json",
+    "old_oracle": {
+      "authored_case": "Independent source-free arithmetic, not a printed answer key."
+    },
+    "new_oracle": {
+      "held_by": "Grade9v3.5#183"
+    },
+    "github_compare_ahead": 1,
+    "github_compare_behind": 0,
+    "github_changed_files": 1,
+    "github_diff_additions": 1,
+    "github_diff_deletions": 1,
+    "exact_readback": true,
+    "independent_static_checks_passed": 9,
+    "independent_static_checks_total": 9,
+    "changed_source_math": false,
+    "changed_private_input_gate": false,
+    "changed_registered_renderer": false
+  },
+  "next_operator_run": {
+    "exact_commit": "99faff867c76016ee4bbc426f0811941eebe4cee",
+    "commands": [
+      "python -I TEST/imo-research/core2-q003/build_private_core1a.py --private-input \"/PRIVATE/EXACT_Q003.json\" --prepare-only",
+      "python -I TEST/imo-research/core2-q003/benchmark_core1a_native.py --private-input \"/PRIVATE/EXACT_Q003.json\""
+    ],
+    "expected_private_receipts": [
+      ".private/core1a/source-safe-core1a-receipt.json",
+      ".private/core1a/native-core1a-golden-comparison.json"
+    ],
+    "share_only": "source-safe receipt hashes, gaps and role slots or redacted first failure; no original item, answer, HTML or private JSON.",
+    "status_until_rerun": "BLOCKED",
+    "a4": "NOT_RUN",
+    "qrt_accepted": 0,
+    "core2_admitted_of_68": 0,
+    "core1a_admitted": 0,
+    "publisher_rights": "NOT_GRANTED"
+  }
+}
