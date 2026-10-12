@@ -1,4 +1,4 @@
-"""Hardened tests for v3.6 bounded decomposition pacing harness & shared rate limiter."""
+"""Hardened tests for v3.6 bounded decomposition pacing harness, shared rate limiter & client."""
 import sys
 import tempfile
 import threading
@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import lifecycle_v36 as lc
 import decompose_v36 as dc
+import snapshot_v36 as ss
 import pacing_harness_v36 as ph
 
 LABEL = lc.load_label(ROOT / "tests" / "fixtures" / "relay" / "AIM" / "V35-LIFECYCLE.yaml")
@@ -39,12 +40,27 @@ class FakeClient:
         self.comments = []
         self.calls = []
 
+    def request(self, method: str, endpoint: str, body: dict | None = None):
+        self.calls.append(("request", method, endpoint))
+        if method == "POST" and endpoint == "/pulls":
+            pr_num = 10 + len(self.calls)
+            return {"number": pr_num, "head": {"sha": "a" * 40}}
+        return {}
+
+    def paginate(self, path: str):
+        self.calls.append(("paginate", path))
+        return []
+
     def list_issues(self):
         return list(self.issues)
 
     def list_comments(self, n):
         self.calls.append(("list_comments", n))
         return list(self.comments)
+
+    def get_pr(self, number: int):
+        self.calls.append(("get_pr", number))
+        return {"number": number, "head": {"sha": "a" * 40}}
 
     def create_issue(self, title, body):
         self.calls.append(("create_issue", title))
@@ -126,12 +142,6 @@ class HardenedPacingTests(unittest.TestCase):
         )
         self.assertEqual(res["items_created"], len(PLAN["tasks"]))
         self.assertEqual(res["batches_executed"], 3)
-
-        # In batch 1 (3 items): 2 item sleeps of 4s = 8s; + 1 batch pause of 60s
-        # In batch 2 (3 items): 2 item sleeps of 4s = 8s; + 1 batch pause of 60s
-        # In batch 3 (1 item): 0 item sleeps; 0 batch pause
-        # Total sleep duration across harness: (4*2 + 60) + (4*2 + 60) = 136s
-        # Plus rate limiter acquisitions: tokens are available (<= 15 total operations), so limiter adds 0 sleep
         self.assertGreaterEqual(sum(vclock.sleep_calls), 136.0)
 
         # Total elapsed time proves aggregate rate <= 15 items per minute
@@ -149,16 +159,13 @@ class HardenedPacingTests(unittest.TestCase):
             sleeper=vclock.sleep
         )
         acquired = []
-        # Acquire 20 tokens rapidly
-        for i in range(20):
+        for _ in range(20):
             t = limiter.acquire()
             acquired.append(t)
 
         self.assertEqual(len(acquired), 20)
-        # First 15 tokens acquired at t=500.0 without sleeping
         for i in range(15):
             self.assertEqual(acquired[i], 500.0)
-        # 16th token required waiting until oldest (at 500.0) expired at 560.0
         self.assertGreaterEqual(acquired[15], 560.0)
         self.assertGreater(len(vclock.sleep_calls), 0)
 
@@ -196,16 +203,89 @@ class HardenedPacingTests(unittest.TestCase):
         self.assertEqual(len(errors), 0, f"Worker errors: {errors}")
         self.assertEqual(len(results), 8, "All 8 concurrent workers must acquire slots")
 
-        # 8 requests with 4 per 0.25s requires spanning at least 2 full windows (>= 0.25s)
         total_duration = time.time() - t_start
         self.assertGreaterEqual(total_duration, 0.20)
 
-        # Invariant: within any 0.25s window, no more than 4 workers acquired slots
         timestamps = sorted([r[1] for r in results])
         for i in range(len(timestamps)):
             window_end = timestamps[i] + 0.25
             count = sum(1 for ts in timestamps if timestamps[i] <= ts <= window_end)
             self.assertLessEqual(count, 4, f"Aggregate pacing exceeded: {count} writes in 0.25s")
+
+    # --- RateLimitedGithubClient Integration (Issues, Comments, PRs) ---
+
+    def test_rate_limited_client_covers_issues_comments_and_prs(self):
+        vclock = VirtualClock(start_time=100.0)
+        limiter = ph.SharedRateLimiter(
+            state_path=self.state_file,
+            max_requests=3,
+            window_seconds=60.0,
+            clock=vclock.time,
+            sleeper=vclock.sleep
+        )
+        raw_client = FakeClient()
+        client = ph.RateLimitedGithubClient(raw_client, limiter)
+
+        # Perform 1 issue creation, 1 comment creation, 1 PR creation (total 3 writes)
+        client.create_issue("Title 1", "Body 1")
+        client.create_comment(500, "Comment 1")
+        client.create_pr("PR 1", "feature/branch")
+
+        self.assertEqual(len(limiter.get_history()), 3)
+        self.assertEqual(len(vclock.sleep_calls), 0)
+
+        # 4th write (e.g. comment update) must trigger rate limit sleep
+        client.update_comment(1000, "Updated Comment")
+        self.assertEqual(len(vclock.sleep_calls), 1)
+        self.assertEqual(vclock.sleep_calls[0], 60.0)
+
+        # Reads do NOT consume tokens
+        hist_before = len(limiter.get_history())
+        client.list_issues()
+        client.list_comments(500)
+        client.get_pr(10)
+        self.assertEqual(len(limiter.get_history()), hist_before)
+
+    # --- Foreign Author Isolated Simulation Test ---
+
+    def test_foreign_author_simulation_isolated(self):
+        """Proves that foreign-author evidence is rejected as INVALID_EVIDENCE in simulation."""
+        head_sha = "c" * 40
+        valid_body = (
+            "Outcome: O1\n"
+            "For the user: Clean foreign author test\n"
+            "Proof: https://github.com/reallakshman19/Common/pull/1\n"
+            "TASK_EVIDENCE v3.6\n"
+            "Task: V36-341-WP1\n"
+            "Child issue: reallakshman19/Common#400\n"
+            f"Candidate: reallakshman19/Common@{head_sha}\n"
+            "Tests: 84/84\n"
+        )
+        foreign_comment = {
+            "body": valid_body,
+            "created_at": "2026-10-12T12:00:00Z",
+            "user": {"login": "foreign-contributor-identity"}
+        }
+
+        class MockProvider:
+            repo = "reallakshman19/Common"
+            def list_issues(self):
+                return [{
+                    "number": 400,
+                    "title": "[V3.6][O1/O2][DRAFT] V36-341-WP1",
+                    "body": "<!-- v36-task:V36-341-WP1 parent:reallakshman19/Common#341 -->",
+                    "html_url": "https://github.com/reallakshman19/Common/issues/400"
+                }]
+            def list_comments(self, n):
+                return [foreign_comment]
+            def get_pr(self, n):
+                return {"number": n, "head": {"sha": head_sha}}
+
+        result = ss.snapshot(PLAN, MockProvider())
+        task_row = result["tasks"][0]
+        # In isolated simulation, foreign author MUST evaluate to INVALID_EVIDENCE
+        self.assertEqual(task_row["status"], "INVALID_EVIDENCE")
+        self.assertEqual(result["current_evidence"], 0)
 
     # --- Base Harness Functionality ---
 

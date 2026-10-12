@@ -19,14 +19,14 @@
   - Controlling denominator: **6** (`E0/6` to `E6/6`, corresponding to stages `V36-1-ST01` through `V36-1-ST06`)
 * **Subject Workload Plan:** `skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml` (Parent #8, 300 tasks `V36-8-LOAD001` through `V36-8-LOAD300`)
 * **Workload Fixture Classification Map:** `skills/engineering-pr-delivery-v3.6/plans/V36-LOAD-FIXTURE-300.yaml`
-* **Hardened Bounded Pacing Harness & Shared Rate Limiter:** `skills/engineering-pr-delivery-v3.6/scripts/pacing_harness_v36.py`
+* **Hardened Pacing Harness & Rate-Limited Client:** `skills/engineering-pr-delivery-v3.6/scripts/pacing_harness_v36.py` (`RateLimitedGithubClient` & `SharedRateLimiter`)
 * **Authorized Target Lab:** `reallakshman19/relay-v36-stress-lab` (disposable lab)
 * **Required CLI Arguments:**
   - Read: `--label relay/AIM/V36-STRESS.yaml --plan <PLAN_PATH> --lab reallakshman19/relay-v36-stress-lab`
   - Write: `--apply --confirm-scope reallakshman19/relay-v36-stress-lab#<PARENT_NUM>`
 * **Enforced Rate-Limit Pacing Rules:**
   - Hard parameter limits: `batch-size <= 15`, `item-delay >= 4.0s`, `batch-delay >= 60.0s`.
-  - Global write budget: $\le 15$ writes per 60 seconds aggregate across all workers via `SharedRateLimiter` (`.v36_rate_limiter.json`).
+  - Global aggregate write budget: $\le 15$ writes per 60 seconds across all operations (issues, comments, PRs) and all workers via `RateLimitedGithubClient` and `SharedRateLimiter` (`.v36_rate_limiter.json`).
   - On HTTP 429 / HTTP 403 `retry-after`: sleep requested seconds + 2s jitter.
   - Maximum concurrent Actions workflow runs: 3.
 
@@ -54,8 +54,8 @@
    - **CRITICAL NUMBERING RESERVATION:** GitHub shares a single counter across issues and PRs. Immediately create workload Parent Issue #8 *before* opening any PR:  
      `gh issue create --repo reallakshman19/relay-v36-stress-lab --title "[V3.6][PLAN] Subject Workload 300-Task Decomposition Benchmark" --body "Parent issue #8 for V36-8-PLAN-01.yaml 300-task decomposition benchmark"`
    - Verify via GET that Parent #8 is confirmed as issue #8.
-5. **Proof PR Establishment (#9):**
-   - Create initial feature branch `test/st01-foundation-probe` and open test PR. Since issue #8 was reserved, this PR receives number **#9** (`https://github.com/reallakshman19/relay-v36-stress-lab/pull/9`).
+5. **Proof PR Establishment (#9 — PR 1 of 20):**
+   - Create initial feature branch `test/st01-foundation-probe` and open test PR. Since issue #8 was reserved, this PR receives number **#9** (`https://github.com/reallakshman19/relay-v36-stress-lab/pull/9`). Proof PR #9 counts as the **first of the 20 target PRs**.
    - Execute candidate test suite (e.g. `Tests: 99/99`) on the PR head.
    - Install trusted stress-lab publisher workflow on the default branch (`.github/workflows/publisher.yml`) using pinned v3.6 source.
    - Post genuine canonical 8-line `TASK_EVIDENCE v3.6` on child issue #2 (`V36-1-ST01`) linking to PR #9 and matching live candidate SHA.
@@ -82,8 +82,7 @@
 1. **Workload Parent Verification:**
    - Confirm Parent Issue #8 is present and verified on `reallakshman19/relay-v36-stress-lab#8`.
 2. **Hardened Workload Decomposition (Pacing & Limiter Enforcement):**
-   - *Baseline Observation:* Native unpaced `decompose_v36.py` is documented as a baseline constraint.
-   - *Enforced Execution Strategy:* Execute decomposition using the hardened pacing harness `pacing_harness_v36.py`:
+   - Execute decomposition using `pacing_harness_v36.py`:
      ```bash
      python skills/engineering-pr-delivery-v3.6/scripts/pacing_harness_v36.py \
        --label relay/AIM/V36-STRESS.yaml \
@@ -114,33 +113,36 @@
 
 ---
 
-### Phase ST-03: Evidence Processing & PR Attribution (600 Comments across Two Waves)
-1. **PR Lifecycle Initialization:**
-   - Create 20 branches and open 20 PRs on the stress lab (IDs #10 through #29).
-   - Distribute states: 10 Draft, 5 Ready, 3 Merged, 2 Closed.
+### Phase ST-03: Evidence Processing & PR Attribution (600 LIVE Comments across 20 Discovered PRs)
+1. **Dynamic PR Discovery (20 PRs Total):**
+   - Proof PR #9 was established in ST-01 (PR 1 of 20).
+   - Create 19 additional PRs on the lab under rate limiter.
+   - **Dynamic Discovery Rule:** Do NOT hardcode PR numbers. Discover all 20 PR numbers dynamically from the GitHub API (`gh pr list --json number` or API create response).
+   - Distribute states across the 20 discovered PRs: 10 Draft, 5 Ready/Open (including PR #9), 3 Merged, 2 Closed.
 2. **Evidence Staging via External Fixture Manifest ([`V36-LOAD-FIXTURE-300.yaml`](../plans/V36-LOAD-FIXTURE-300.yaml)):**
    - *Oracle Architecture:* `snapshot_v36.py` evaluates status **per task, not per comment**, selecting `eligible[-1]`.
    - *Rule on Comment Bodies:* Do **NOT** append `FIXTURE:` or extra text to comments on GitHub. `validate_evidence()` strictly checks `text == expected` (canonical 8 lines); any extra lines cause `ContractError` and prematurely mark the task as `INVALID_EVIDENCE`.
-3. **Wave 1 Execution (300 comments):**
-   - Post 150 positive canonical 8-line comments on `V36-8-LOAD001`..`LOAD150` referencing PR #9 with matching candidate SHA.
-   - Post 150 control comments on `V36-8-LOAD151`..`LOAD300`:
+3. **Wave 1 Execution (300 LIVE comments):**
+   - Post 150 positive canonical 8-line comments on `V36-8-LOAD001`..`LOAD150` referencing live Proof PR #9 with matching candidate SHA.
+   - Post 150 live negative control comments on `V36-8-LOAD151`..`LOAD300`:
      - 50 tasks with stale candidate SHAs (`LOAD151`..`LOAD200`).
      - 40 tasks with unverified proofs (`LOAD201`..`LOAD240`: 20 commit URLs, 20 mismatched commit SHAs).
-     - **Foreign Author Cases (20 tasks, `LOAD241`..`LOAD260`):** Check for `GITHUB_TOKEN_2`. If configured, post live foreign comments with token 2. If absent, execute as **SIMULATED_CONTROL** in test fixtures and report telemetry as simulated; never claim live multi-user verification without a second account.
-     - 20 tasks with live malformed syntax/outcome mismatches (`LOAD261`..`LOAD280`).
-     - 20 tasks with non-existent PR URLs (`LOAD281`..`LOAD300`: `/pull/99999` returning 404).
+     - **20 Live Malformed Syntax Comments (`LOAD241`..`LOAD260`):** Posted live by owner with malformed 8-line syntax (truncated fields, corrupt header, extra lines) causing `validate_evidence()` to fail closed $\rightarrow$ Expected status: `INVALID_EVIDENCE` (20). This ensures 100% of comments in Wave 1 are LIVE on GitHub!
+     - 20 tasks with live task outcome / ID mismatches (`LOAD261`..`LOAD280`) $\rightarrow$ Expected status: `INVALID_EVIDENCE` (20).
+     - 20 tasks with non-existent PR URLs (`LOAD281`..`LOAD300`: `/pull/99999` returning 404) $\rightarrow$ Expected status: `PROVIDER_UNAVAILABLE` (20).
+   - **Foreign-Author Isolated Simulation:** Execute separate simulation test suite (`test_foreign_author_simulation_isolated`), verifying rejection of non-owner author (`actor.login != owner`); report telemetry truthfully as `SIMULATED_CONTROL`.
    - Run `snapshot_v36.py`. Assert Wave 1 Oracle:
      - `CURRENT_EVIDENCE`: 150
      - `STALE_EVIDENCE`: 50
      - `UNVERIFIED_PROOF`: 40
-     - `INVALID_EVIDENCE`: 40 (20 simulated, 20 live)
+     - `INVALID_EVIDENCE`: 40 (all live on GitHub!)
      - `PROVIDER_UNAVAILABLE`: 20
      - `verified_complete`: 0
-4. **Wave 2 Execution (300 comments):**
-   - **Test Non-Overwrite Invariant:** Post 150 invalid/malformed comments on `V36-8-LOAD001`..`LOAD150`.
+4. **Wave 2 Execution (300 LIVE comments):**
+   - **Test Non-Overwrite Invariant:** Post 150 live invalid/malformed comments on `V36-8-LOAD001`..`LOAD150`.
      - *Verified Oracle Behavior:* `snapshot_v36.py` discards invalid comments before eligible sort; `eligible[-1]` remains the Wave 1 valid comment. Status for all 150 tasks **remains `CURRENT_EVIDENCE`**.
      - **Security Invariant Verified: Invalid comments MUST NOT overwrite or degrade previously valid evidence.**
-   - **Test Recovery / Superseding:** Post 150 fresh positive comments on `V36-8-LOAD151`..`LOAD300` referencing PR #9 with matching candidate SHA.
+   - **Test Recovery / Superseding:** Post 150 fresh positive live comments on `V36-8-LOAD151`..`LOAD300` referencing live discovered PRs with matching candidate SHAs.
      - *Verified Oracle Behavior:* New valid comments are added to eligible and chronologically supersede prior negative states. Status for all 150 tasks **transitions to `CURRENT_EVIDENCE`**.
    - Run `snapshot_v36.py`. Assert Wave 2 Oracle:
      - `CURRENT_EVIDENCE`: 300
@@ -149,7 +151,7 @@
      - `INVALID_EVIDENCE`: 0
      - `PROVIDER_UNAVAILABLE`: 0
      - `verified_complete`: 0
-   - Volume Verified: 300 positive + 300 negative/adversarial = **600 comments**.
+   - Volume Verified: 300 live positive + 300 live negative = **600 LIVE comments on GitHub**.
 5. **Publisher Verification & Stage Progression:**
    - Run `publisher_v36.py --apply --confirm-scope reallakshman19/relay-v36-stress-lab#8`.
    - Verify issue titles reflect `[EVIDENCED]` for all 300 tasks.
@@ -160,18 +162,19 @@
 6. **Gate ST-03 Evaluation:**
    - [ ] 0 false or adversarial evidence accepted?
    - [ ] All 300 tasks match their expected external oracle state across both waves?
+   - [ ] Exactly 600 LIVE comments verified on GitHub?
    - [ ] Invalid comments confirmed NOT to overwrite previously valid evidence?
-   - [ ] Foreign-author verification truthfully labeled (live if token 2 present, simulated otherwise)?
+   - [ ] 20 PRs dynamically discovered and correctly attributed?
    - [ ] Progress advances to `[V3.6][LAB][E3/6]` on child #4 (`V36-1-ST03`)?
    - **Verdict:** If all YES → **GO to ST-04**. Else → **STOP**.
 
 ---
 
-### Phase ST-04: Concurrency & Event Storms (1 → 8 Workers with Shared Rate Limiter)
+### Phase ST-04: Concurrency & Global Write Budget (1 → 8 Workers)
 1. **Multi-Worker Execution:**
    - Spawn parallel worker processes (1 → 3 → 5 → 8 workers).
-   - All workers bind `--rate-limit-file .v36_rate_limiter.json` via `SharedRateLimiter`.
-   - Aggregate write rate across all concurrent workers is strictly capped at $\le 15$ writes per 60.0s window.
+   - All workers route ALL write calls (issues, comments, PRs) through `RateLimitedGithubClient` binding `--rate-limit-file .v36_rate_limiter.json`.
+   - Global write rate across all 8 concurrent workers is strictly capped at $\le 15$ writes per 60.0s window.
    - Workers execute concurrent reads, decomposition checks, and publisher updates.
 2. **Convergence & Idempotence:**
    - Allow worker queues to drain.
@@ -183,7 +186,7 @@
      `[V3.6][LAB][E4/6] Full-Scale Stress Test Lifecycle Stage Progression`.
 4. **Gate ST-04 Evaluation:**
    - [ ] 8 concurrent workers complete without deadlock?
-   - [ ] SharedRateLimiter bounds aggregate writes <= 15 writes/min across all 8 workers?
+   - [ ] RateLimitedGithubClient strictly bounds aggregate writes <= 15 writes/min across issues, comments and PRs?
    - [ ] Settled replay produces exactly 0 mutations?
    - [ ] Progress advances to `[V3.6][LAB][E4/6]` on child #5 (`V36-1-ST04`)?
    - **Verdict:** If all YES → **GO to ST-05**. Else → **STOP**.

@@ -2,8 +2,9 @@
 """V3.6 Hardened Bounded Decomposition Pacing Harness & Shared Rate Limiter.
 
 Executes progressive decomposition in rate-controlled batches enforcing strict GitHub
-secondary content-creation limits (<= 15 issue/comment creates per minute aggregate).
-Coordinates aggregate pacing across concurrent workers via SharedRateLimiter.
+secondary content-creation limits (<= 15 issue/comment/PR creates per minute aggregate).
+Coordinates aggregate pacing across concurrent workers via SharedRateLimiter and
+RateLimitedGithubClient.
 """
 from __future__ import annotations
 
@@ -184,7 +185,56 @@ class SharedRateLimiter:
                     self.state_path.unlink()
 
 
-def update_index(plan: dict, client: GithubClient, parent_no: int, child_links: dict[str, str]) -> str:
+class RateLimitedGithubClient:
+    """Decorator for GithubClient ensuring all write operations (issues, comments, PRs)
+    acquire tokens from the SharedRateLimiter to guarantee global aggregate compliance.
+    """
+
+    def __init__(self, client: GithubClient, limiter: SharedRateLimiter):
+        self._client = client
+        self.limiter = limiter
+        self.repo = client.repo
+
+    @property
+    def token(self):
+        return getattr(self._client, "token", None)
+
+    def request(self, method: str, endpoint: str, body: dict | None = None):
+        if method.upper() in ("POST", "PATCH", "PUT", "DELETE"):
+            self.limiter.acquire()
+        return self._client.request(method, endpoint, body)
+
+    def paginate(self, path: str):
+        return self._client.paginate(path)
+
+    def list_issues(self):
+        return self._client.list_issues()
+
+    def list_comments(self, number: int):
+        return self._client.list_comments(number)
+
+    def get_pr(self, number: int):
+        if hasattr(self._client, "get_pr"):
+            return self._client.get_pr(number)
+        return self.request("GET", f"/pulls/{number}")
+
+    def create_issue(self, title: str, body: str):
+        self.limiter.acquire()
+        return self._client.create_issue(title, body)
+
+    def create_comment(self, number: int, body: str):
+        self.limiter.acquire()
+        return self._client.create_comment(number, body)
+
+    def update_comment(self, comment_id: int, body: str):
+        self.limiter.acquire()
+        return self._client.update_comment(comment_id, body)
+
+    def create_pr(self, title: str, head: str, base: str = "main", body: str = ""):
+        return self.request("POST", "/pulls", {"title": title, "head": head, "base": base, "body": body})
+
+
+def update_index(plan: dict, client: GithubClient | RateLimitedGithubClient, parent_no: int, child_links: dict[str, str]) -> str:
     """Durably synchronize the managed index comment on the parent issue."""
     existing_index = [c for c in client.list_comments(parent_no)
                       if index_marker(plan) in (c.get("body") or "")]
@@ -202,7 +252,7 @@ def update_index(plan: dict, client: GithubClient, parent_no: int, child_links: 
 
 def run_bounded_decomposition(
     plan: dict,
-    client: GithubClient,
+    client: GithubClient | RateLimitedGithubClient,
     *,
     apply: bool = False,
     batch_size: int = 15,
@@ -224,8 +274,10 @@ def run_bounded_decomposition(
         raise ContractError("parent repository mismatch")
     parent_no = int(match[2])
 
-    if apply and limiter is None:
-        limiter = SharedRateLimiter()
+    if apply and not isinstance(client, RateLimitedGithubClient):
+        if limiter is None:
+            limiter = SharedRateLimiter()
+        client = RateLimitedGithubClient(client, limiter)
 
     issues = client.list_issues()
     child_links: dict[str, str] = {}
@@ -254,8 +306,6 @@ def run_bounded_decomposition(
 
     if not missing or not apply:
         if apply:
-            if limiter is not None:
-                limiter.acquire()
             action = update_index(plan, client, parent_no, child_links)
             telemetry["index_actions"].append(action)
         return telemetry
@@ -271,9 +321,6 @@ def run_bounded_decomposition(
             title = child_title(task)
             body = child_body(task, plan)
 
-            if limiter is not None:
-                limiter.acquire()
-
             t0 = time.time()
             issue = client.create_issue(title, body)
             duration = time.time() - t0
@@ -288,8 +335,6 @@ def run_bounded_decomposition(
         telemetry["batches_executed"] += 1
 
         # Intermediate index update after each batch to preserve index durability
-        if limiter is not None:
-            limiter.acquire()
         action = update_index(plan, client, parent_no, child_links)
         telemetry["index_actions"].append(action)
 
@@ -322,8 +367,10 @@ def main(argv=None) -> int:
         if args.apply and (args.confirm_scope != plan["parent"] or not token):
             raise ContractError("write refused: --confirm-scope exact parent and GITHUB_TOKEN are required")
 
+        base_client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1], token=token)
         limiter = SharedRateLimiter(state_path=args.rate_limit_file) if args.apply else None
-        client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1], token=token)
+        client = RateLimitedGithubClient(base_client, limiter) if args.apply else base_client
+
         res = run_bounded_decomposition(
             plan, client,
             apply=args.apply,
