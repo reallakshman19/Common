@@ -1,0 +1,113 @@
+{
+  "schema": "tab2-q003-independent-original-maths-core1a-spec/v1",
+  "chat": "6acd1e6b",
+  "date_utc": "2026-10-12",
+  "issue": 183,
+  "aim": "v3.1.0",
+  "outcome": "O2",
+  "source_review": {
+    "origin": "school-hosted public mirror of SOF IMO 2023-24 Class 9 Set A",
+    "source_url": "https://iswkoman.com/uploads/olympiad/8919398-CL%20IX%20IMO%202023-24%20(1).pdf",
+    "pdf_page_index": 1,
+    "printed_page": 2,
+    "question_number": 3,
+    "visual_review": "INDEPENDENT_WEB_PDF_SCREENSHOT_PAGE_1",
+    "inspected_original_stem_and_all_option_pairs": true,
+    "paper_pdf_bytes_downloaded_or_sha_verified": false,
+    "comparison_to_owner_private_transcription": false,
+    "source_provenance_claim": "Source appears in school-hosted scan; primary publisher authenticity and Owner personal inspection NOT proven",
+    "permissions": "DEVELOPMENT_RESEARCH_ONLY; NO_PUBLISHER_PUBLICATION_LICENSE"
+  },
+  "source_safe_math": {
+    "type": "odd_one_out_fixed_pairs",
+    "input_output_role": "Interpret each printed option as input n and output y, maintaining direction and order",
+    "candidate_expression": "y = n^2 + 4",
+    "test_method": "For every option separately compute residual y - n^2; require the same offset in the consistent group; classify one exception without changing the model per option",
+    "observed_residual_counts": {
+      "4": 3,
+      "not_4": 1
+    },
+    "math_independently_checked": true,
+    "numerical_source_options_omitted": true,
+    "ambiguity_caution": "A finite list cannot establish a unique universal function; frame the judgement as the simplest coherent rule across the intended three cases, with an explicitly falsifying exception",
+    "printed_key_not_used": true
+  },
+  "authored_transfer_case": {
+    "provenance": "NEW_AUTHORED_NOT_ORIGINAL_Q003",
+    "example_pairs": [
+      {
+        "input": 4,
+        "output": 23
+      },
+      {
+        "input": 6,
+        "output": 43
+      },
+      {
+        "input": 7,
+        "output": 58
+      },
+      {
+        "input": 9,
+        "output": 88
+      }
+    ],
+    "candidate_expression": "y = n^2 + 7",
+    "residuals": [
+      7,
+      7,
+      9,
+      7
+    ],
+    "exception_index_zero_based": 2,
+    "independent_check": "Residual y-n^2 must be +7 for three authored pairs and differs for the third; checking the same offset on every pair determines the exception",
+    "options_copied_from_exam": false
+  },
+  "core1a_native_authoring_contract": {
+    "sole_renderer": "Shared/tools/render_core.py",
+    "registered_blueprint": "BP-CORE1A-CONSTRUCTION@1.8.0",
+    "candidate_comparator": "G-MATH-LINEAR-CONSTRAINT (technique only; do not copy math context)",
+    "record_to_extend": "MIC-IMO-NUMERIC-RELATIONSHIPS",
+    "frozen_tested_commit": "98ae06741f4d90865fcd313d609aeabba46826e2",
+    "existing_status": "teaching_path and generic exit exist; construction_units absent at 98ae067",
+    "proposed_units": [
+      {
+        "unit_id": "CU-IMO-PAIR-INVARIANT-1",
+        "decision": "Fix input-output orientation and compute the proposed square-offset residual for each pair",
+        "step_refs": [
+          "IMO-PAIR-M1",
+          "IMO-PAIR-M2"
+        ],
+        "why_valid": "One unchanged relation must account for every member of the claimed regular group"
+      },
+      {
+        "unit_id": "CU-IMO-PAIR-INVARIANT-2",
+        "decision": "Compare all residuals, reject a mismatch without changing the rule, then independently transfer to fresh pairs",
+        "step_refs": [
+          "IMO-PAIR-M3"
+        ],
+        "why_valid": "One counterexample disproves a claimed common rule for every displayed pair"
+      }
+    ],
+    "crux_question_refs": "Q003 protected bank identity; do not duplicate protected original stem/option bytes in authored Core1A file",
+    "independent_checks": [
+      "Compute the residual of each given pair with exactly one formula",
+      "Use a fresh authored example with a different offset and changed anomalous pair",
+      "Explain why choosing a new offset per option invalidates the check"
+    ],
+    "source_vs_authored": "Any worked or changed-case examples are explicitly authored; Q003 source data remains in secure bank only",
+    "rendering_policy": "Any package/manifest changes must be tested with exact original input via native renderer; never publish standalone HTML"
+  },
+  "gates_and_limitations": {
+    "actual_core1a_native_page": "NOT_RENDERED",
+    "authenticated_private_original_item": "NOT_OPENED_IN_THIS_EXECUTION",
+    "full_product_checkout": "NOT_AVAILABLE",
+    "original_paper_verified_by_owner": "NOT_CONFIRMED",
+    "production_code_or_branch_change": "NONE",
+    "same_page_a4": "NOT_RUN",
+    "qrt_acceptance": "NONE",
+    "newly_admitted_core2_of_68": 0,
+    "newly_admitted_core1a": 0
+  },
+  "next": "After secure operator confirms exact private source math and QA of frozen Core2 interaction, implement authored construction_units in isolated TEST and render selected CORE1A with Shared/tools/render_core.py against candidate maths golden; keep published body source-safe and do not claim a page from a specification."
+}
