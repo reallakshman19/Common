@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: reallakshman19/Common
-          ref: main
+          ref: proposal/v36-stress-plan-01
           path: common
 
       - name: Set up Python
