@@ -25,3 +25,4 @@
 2026-10-12 | chat=6accb5b3 | APPLY-D4 first scoped CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245052128 | QUEUED at first check; no cell credit until successful exact-head
 2026-10-12 | chat=6accb5b3 | APPLY-D4 exact draft | https://github.com/reallakshman19/Grade9v3.5/pull/196@93fcc6152a4ae57c92fb8dae0ad808845686f9ad | ten D4-owned files, not merged, original source
 2026-10-12 | chat=6accb5b3 | APPLY-D4 hosted CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245419910 | QUEUED, no generated-page proof
+2026-10-12 | chat=6accb5b3 | APPLY-D4 partial issue evidence | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6123925695 | exact EVIDENCE.log block; runner queue unresolved
