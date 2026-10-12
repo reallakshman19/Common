@@ -13,7 +13,7 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 import yaml
-from lifecycle_v36 import ContractError, TASK_REF, UniqueKeyLoader, load_label, writable_lab, require_explicit_lab
+from lifecycle_v36 import ContractError, REPO_REF, TASK_REF, UniqueKeyLoader, load_label, writable_lab, require_explicit_lab
 
 PLAN_KEYS = {"plan_version", "parent", "label", "tasks"}
 TASK_KEYS = {"task_id", "size", "outcome", "title", "acceptance", "for_user"}
