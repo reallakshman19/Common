@@ -93,6 +93,18 @@ class LabelTests(unittest.TestCase):
         with self.assertRaisesRegex(v36.ContractError, "contiguous"):
             v36.validate_label(changed)
 
+    def test_skill_documents_explicit_inputs_evidence_and_log_footer(self):
+        skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("--label relay/AIM/<WORK>.yaml", skill)
+        self.assertIn("Writable lab:", skill)
+        self.assertIn("There is no default V35-LIFECYCLE label.", skill)
+        self.assertIn("LOG | chat=<chat-id> | tab=<tab> | folder=", skill)
+        self.assertIn(" | aim=<label version> | outcome=<O#> | user=<yes or no>", skill)
+        self.assertIn("Outcome: <O# declared by the selected label>", skill)
+        self.assertIn("For the user:", skill)
+        self.assertIn("Proof:", skill)
+        self.assertNotIn("changes stay on draft PR #344, not main", skill)
+
     def test_bad_aim_id(self):
         with self.assertRaises(v36.ContractError):
             v36.validate_label(LABEL, "OTHER-LABEL")
