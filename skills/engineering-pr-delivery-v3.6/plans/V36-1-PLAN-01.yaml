@@ -1,0 +1,19 @@
+plan_version: V36-1-PLAN-01
+parent: reallakshman19/relay-v36-e2e-lab#1
+label:
+  work: V35-LIFECYCLE
+  version: 1.2.1
+  label_sha: 4b90240
+tasks:
+  - task_id: V36-1-WP1
+    size: S
+    outcome: O1
+    title: lab parent to child evidence transition
+    for_user: One parent links two real tasks with exact PR evidence
+    acceptance: Child evidence binds a current lab PR and parent index links both tasks
+  - task_id: V36-1-WP2
+    size: M
+    outcome: O3
+    title: automatic lab issue and PR titles
+    for_user: Issue and PR titles update from validated GitHub evidence
+    acceptance: Real provider title write and readback then idempotent replay, including PR O4
