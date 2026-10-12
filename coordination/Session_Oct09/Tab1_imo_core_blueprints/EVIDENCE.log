@@ -129,3 +129,21 @@ Claim: HOSTED_SOURCE_READBACK (not product CI)
 Blocker: none for handover; preserved O1 physical non-A4 PDF and human/Owner semantic/print gates
 Next: successor under existing authorization starts 182-S2-W01 O1 25m S exact Core1A HTML-linked PDF A4 boundary, then W02 O1 T02/T03/T11 and W03 O1 Core1B preserve check; G1 PREDECESSOR STOP
 LOG | chat=6acc3003 | tab=Tab1 | issue=182 | plan=S2-FINAL | progress=handover-2-closed | done=BUDDY_V16_2 | next=182-S2-W01 | ac=0/4 | blocker=O1:A4-humanness-pending | PR=184@86f17fa:draft,185@752b9ba:draft | tests=0/0-new | handover=s2ready:coordination/Session_Oct09/Tab1_imo_core_blueprints/handovers/2026-10-12-g1-2.md | aim=v2.1.0 | outcome=O1 | user=no | stage=2 | pub=https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116661726#sha256:decee70dc767f749ddce44789607e448d375a0700d120abddcf7ccfeaa97ed65
+Outcome: O1
+For the user: The real Core1A TEST PRINT_PDF remains a non-A4 learner link; a separate same-HTML A4 proof PDF is possible, but has not replaced the learner-linked artifact. No public learner workflow changed.
+Proof: https://github.com/reallakshman19/Common/blob/e2be89bd251c6aea493ee63291e6bea9227816d2/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-S2-W01-CORE1A-A4-COMPARISON.md
+TASK EVIDENCE | chat=6acc408a | P4 | aim=v2.1.0 | outcome=O1 | user=no
+Task: 182-S2-W01
+Goal (issue AC): Exact-head Core1A learner print linked PDF versus same source HTML A4 comparison; physical MediaBox, print receipt hash, proof stages and draft/protected behavior.
+Status: FAILED
+Met: no
+Done: Read downloaded hosted artifact 11722316202 from CI 38193075758. Verified HTML digest a91e8c273a20adfeb2553406420649b3145c161a1da5a67b0915f70b2da86bb3 and linked PDF digest 1e70460d855a729692a8a00735e1607fc74a5f4716bb6afddb690e906d00c17c match product receipts. Actual linked PDF has 7 pages at 793.92x497.04 pt, non-A4. Local Chromium same-input A4 preview has 5 pages at 595.92x842.88 pt, digest 01cb1d54f71321d548b18a2db3d09abbac4d2f3653b8cefb14ec28c090d8379c, not linked. All three mathematical figure headings and exit present, basic print reveal hidden; no owner physical review or full security claim.
+Code (repo branch @ commit | PR): Common main@e2be89bd251c6aea493ee63291e6bea9227816d2 report only | Grade9v3.5 PR #185 @752b9ba8315bbaa9be1f3b5aeee7322a93c87829 unchanged
+Tests (command -> pass/fail/skip): Local Playwright page.set_content(exact UTF-8 HTML) + Chromium PDF(format=A4) + pypdf/sha256 comparison -> 4 PASS, 2 FAIL (linked ISO A4 and preview receipt binding); Owner physical NOT_RUN
+CI (run -> result): Existing run 38193075758 -> success at old exact head, new CI NOT_RUN
+Evidence (link): https://github.com/reallakshman19/Common/blob/e2be89bd251c6aea493ee63291e6bea9227816d2/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-S2-W01-CORE1A-A4-COMPARISON.md ; https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116823865
+AC (before -> after): Core1A linked A4 suspected unmet -> actual hosted bytes independently confirm non-A4 and local proof shows feasible A4-only preview; acceptance still FAIL
+Claim: LOCAL
+Blocker: PERSON - coordinator/shared printer writer must approve a limited shared print-product.mjs correction plus compatibility oracle; Owner physical visual check outstanding
+Next: 182-S2-W02 (unblocked), 182-S2-W03; W01 print correction only after verified scope
+LOG | chat=6acc408a | tab=Tab1 | issue=182 | plan=P4 | progress=0/5 | done=none | next=182-S2-W02,182-S2-W03 | ac=0/4 | blocker=PERSON:shared-printer-writer-scope | PR=185@752b9ba:green | tests=4/6 | aim=v2.1.0 | outcome=O1 | user=no
