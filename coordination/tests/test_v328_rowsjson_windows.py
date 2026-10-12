@@ -14,7 +14,7 @@ import tempfile
 import unittest
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "v328_source"
-ORIGINAL_SHA = "c8e0e06a753f5663bfa3768a9b3a61d9a62ee5f489a40916e3d4e614171b"
+ORIGINAL_SHA = "c8e0e06a753f5663bfa3768a9b3a61df61d9a62ee5f489a40916e3d4e614171b"
 DEPS = {
     "state-io.ps1": "9f4a2164c5a31c636ebf1bfe991e84f9e4fe2adeed91820682c16c94252d8646",
     "aim-lib.ps1": "9623f038ba658cd254ee9bd0ad5498acd242c3e7d51ea0ca409083a41ae838ba",
