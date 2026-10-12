@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerEvidence",
+  "description": "Immutable task evidence anchored to canonical GitHub comment or supporting observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_id",
+    "work_id",
+    "task_id",
+    "candidate_sha",
+    "proof_digest",
+    "validator_verdict",
+    "is_canonical"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Canonical GitHub issue comment ID or tamper-resistant digest"
+    },
+    "work_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreign key referencing Work.work_id (enforces own-child boundary)"
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Task identifier from evidence header"
+    },
+    "candidate_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{40}$",
+      "description": "Exact git commit SHA under candidate test"
+    },
+    "proof_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$",
+      "description": "SHA-256 digest of canonical evidence block"
+    },
+    "validator_verdict": {
+      "enum": ["PASS", "FAIL", "NOT_RUN", "INVALID"]
+    },
+    "is_canonical": {
+      "type": "boolean",
+      "description": "True if verified GitHub TASK_EVIDENCE comment; False if local observation"
+    },
+    "source_ref": {
+      "type": ["string", "null"],
+      "description": "Provider URL or relative path for provenance"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+"""
+Automated Security & Hardening Tests (P0)
+Verifies path containment, DNS rebinding defenses, CORS removal,
+defensive security headers, 413 payload quotas, and loopback defaults.
+"""
+
+import unittest
+import socket
+import threading
+import urllib.request
+import urllib.error
+import json
+import time
+from pathlib import Path
+from coordination.coordination_ui import is_safe_contained_path, ApiHandler, UI_DIR, HERE
+
+
+class TestPathContainmentHelper(unittest.TestCase):
+
+    def setUp(self):
+        self.root = HERE.resolve()
+
+    def test_contained_path_allowed(self):
+        child = self.root / "ui" / "index.html"
+        self.assertTrue(is_safe_contained_path(child, self.root))
+
+    def test_traversal_parent_rejected(self):
+        escaped = self.root / ".." / "AGENTS.md"
+        self.assertFalse(is_safe_contained_path(escaped, self.root))
+
+    def test_double_traversal_rejected(self):
+        escaped = self.root / ".." / ".." / "Windows"
+        self.assertFalse(is_safe_contained_path(escaped, self.root))
+
+    def test_prefix_trick_rejected(self):
+        # A directory with same prefix name but not inside root
+        fake_neighbor = Path(str(self.root) + "_fake") / "secret.txt"
+        self.assertFalse(is_safe_contained_path(fake_neighbor, self.root))
+
+
+class TestSecurityHttpServer(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # Start a test server on loopback with ephemeral port
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.bind(("127.0.0.1", 0))
+        cls.port = sock.getsockname()[1]
+        sock.close()
+
+        import socketserver
+        class TestBoundHandler(ApiHandler):
+            pass
+        TestBoundHandler.config = {
+            "projects": [
+                {
+                    "id": "common",
+                    "name": "Common",
+                    "coordination_dir": str(HERE),
+                    "repo_url": "https://github.com/reallakshman19/Common"
+                }
+            ],
+            "server": {
+                "max_file_read_bytes": 1024,  # Small 1 KB quota to test 413
+                "allowed_origins": ["https://trusted.internal"]
+            }
+        }
+        TestBoundHandler.server_host = "127.0.0.1"
+
+        socketserver.TCPServer.allow_reuse_address = True
+        cls.httpd = socketserver.TCPServer(("127.0.0.1", cls.port), TestBoundHandler)
+        cls.thread = threading.Thread(target=cls.httpd.serve_forever, daemon=True)
+        cls.thread.start()
+        time.sleep(0.3)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.httpd.shutdown()
+        cls.httpd.server_close()
+
+    def test_no_wildcard_cors(self):
+        req = urllib.request.Request(f"http://127.0.0.1:{self.port}/api/status")
+        with urllib.request.urlopen(req) as resp:
+            headers = dict(resp.headers)
+            self.assertNotIn("Access-Control-Allow-Origin", headers)
+            self.assertEqual(headers.get("X-Content-Type-Options"), "nosniff")
+            self.assertEqual(headers.get("X-Frame-Options"), "DENY")
+            self.assertIn("Content-Security-Policy", headers)
+
+    def test_allowed_cors_origin_reflected(self):
+        req = urllib.request.Request(f"http://127.0.0.1:{self.port}/api/status")
+        req.add_header("Origin", "https://trusted.internal")
+        with urllib.request.urlopen(req) as resp:
+            headers = dict(resp.headers)
+            self.assertEqual(headers.get("Access-Control-Allow-Origin"), "https://trusted.internal")
+
+    def test_untrusted_cors_origin_not_reflected(self):
+        req = urllib.request.Request(f"http://127.0.0.1:{self.port}/api/status")
+        req.add_header("Origin", "https://evil-attacker.com")
+        with urllib.request.urlopen(req) as resp:
+            headers = dict(resp.headers)
+            self.assertNotIn("Access-Control-Allow-Origin", headers)
+
+    def test_dns_rebinding_host_header_blocked(self):
+        req = urllib.request.Request(f"http://127.0.0.1:{self.port}/api/status")
+        req.add_header("Host", "attacker-rebinding.com")
+        with self.assertRaises(urllib.error.HTTPError) as ctx:
+            urllib.request.urlopen(req)
+        self.assertEqual(ctx.exception.code, 400)
+
+    def test_api_file_path_traversal_blocked(self):
+        # Attempt traversal to parent
+        url = f"http://127.0.0.1:{self.port}/api/file?project=common&path=../../AGENTS.md"
+        with self.assertRaises(urllib.error.HTTPError) as ctx:
+            urllib.request.urlopen(url)
+        self.assertEqual(ctx.exception.code, 403)
+
+    def test_ui_path_traversal_blocked(self):
+        # Attempt traversal via /ui/ route
+        url = f"http://127.0.0.1:{self.port}/ui/../../coordination_ui.py"
+        with self.assertRaises(urllib.error.HTTPError) as ctx:
+            urllib.request.urlopen(url)
+        self.assertEqual(ctx.exception.code, 403)
+
+    def test_read_quota_exceeded_returns_413(self):
+        # The test server set max_file_read_bytes = 1024 (1 KB)
+        # README.md is ~7 KB, so it must return 413 TOO_LARGE
+        url = f"http://127.0.0.1:{self.port}/api/file?project=common&path=README.md"
+        with self.assertRaises(urllib.error.HTTPError) as ctx:
+            urllib.request.urlopen(url)
+        self.assertEqual(ctx.exception.code, 413)
+        body = json.loads(ctx.exception.read().decode())
+        self.assertEqual(body.get("code"), "TOO_LARGE")
+
+
+if __name__ == "__main__":
+    unittest.main()

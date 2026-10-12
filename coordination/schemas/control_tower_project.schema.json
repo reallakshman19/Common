@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerProject",
+  "description": "Canonical project entity anchored strictly to remote repository identity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_id",
+    "name",
+    "repo_url",
+    "coordination_dir",
+    "status",
+    "as_of",
+    "provider_reachability"
+  ],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Normalized canonical slug (owner/repo or configured ID)",
+      "pattern": "^[a-zA-Z0-9_.-]+(/[a-zA-Z0-9_.-]+)?$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repo_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "coordination_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": ["ACTIVE", "DEGRADED", "UNAVAILABLE"]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "provider_reachability": {
+      "enum": ["REACHABLE", "UNAVAILABLE", "RATE_LIMITED", "FORBIDDEN"]
+    }
+  }
+}

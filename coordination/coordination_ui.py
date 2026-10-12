@@ -489,34 +489,59 @@ class DataStore:
 
 STORE = DataStore()
 
+# ─── Path Containment Helper ──────────────────────────────────────────────────
+
+def is_safe_contained_path(target: Path, root: Path) -> bool:
+    """Ensure target path is strictly contained within root path and resolves safely."""
+    try:
+        resolved_target = target.resolve()
+        resolved_root = root.resolve()
+        return os.path.commonpath([str(resolved_target), str(resolved_root)]) == str(resolved_root)
+    except (ValueError, OSError):
+        return False
+
 # ─── HTTP API Handler ─────────────────────────────────────────────────────────
 
 class ApiHandler(http.server.BaseHTTPRequestHandler):
     config: dict = {}
+    server_host: str = "127.0.0.1"
 
     def log_message(self, fmt, *args):
         pass  # suppress request logs for cleanliness
 
+    def _send_common_headers(self, content_type: str, length: int):
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(length))
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;")
+        # Same-origin policy: do NOT send wildcard Access-Control-Allow-Origin: *
+        origin = self.headers.get("Origin")
+        if origin:
+            allowed_origins = self.config.get("server", {}).get("allowed_origins", [])
+            if origin in allowed_origins:
+                self.send_header("Access-Control-Allow-Origin", origin)
+                self.send_header("Vary", "Origin")
+
     def send_json(self, obj, status: int = 200):
         body = json.dumps(obj, separators=(",", ":")).encode()
         self.send_response(status)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self._send_common_headers("application/json", len(body))
         self.end_headers()
         self.wfile.write(body)
 
     def send_text(self, text: str, mime: str = "text/plain; charset=utf-8", status: int = 200):
         body = text.encode("utf-8", errors="replace")
         self.send_response(status)
-        self.send_header("Content-Type", mime)
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self._send_common_headers(mime, len(body))
         self.end_headers()
         self.wfile.write(body)
 
-    def send_file(self, path: Path):
-        if not path.exists():
+    def send_file(self, path: Path, root: Path = UI_DIR):
+        if not is_safe_contained_path(path, root):
+            self.send_text("Forbidden", status=403)
+            return
+        if not path.is_file():
             self.send_text("Not found", status=404)
             return
         mime_map = {
@@ -528,9 +553,7 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
         mime = mime_map.get(path.suffix.lower(), "text/plain")
         body = path.read_bytes()
         self.send_response(200)
-        self.send_header("Content-Type", mime)
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self._send_common_headers(mime, len(body))
         self.end_headers()
         self.wfile.write(body)
 
@@ -552,20 +575,33 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
         return params.get(key, [default])[0]
 
     def do_GET(self):
+        # Null-byte rejection
+        if "\x00" in self.path:
+            self.send_text("Invalid request path", status=400)
+            return
+
+        # DNS rebinding / Host header validation
+        host_header = self.headers.get("Host", "").split(":")[0].strip()
+        allowed_hosts = {"127.0.0.1", "localhost", "::1", getattr(self, "server_host", "127.0.0.1")}
+        if host_header and host_header not in allowed_hosts and not self.config.get("server", {}).get("allow_any_host", False):
+            self.send_text("Invalid Host header (DNS rebinding protection)", status=400)
+            return
+
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path.rstrip("/") or "/"
         qs = urllib.parse.parse_qs(parsed.query)
 
         # ── Static files ─────────────────────────────────
         if path == "/" or path == "/index.html":
-            self.send_file(UI_DIR / "index.html")
+            self.send_file(UI_DIR / "index.html", root=UI_DIR)
             return
         if path.startswith("/ui/"):
-            self.send_file(UI_DIR / path[4:])
+            target_file = UI_DIR / path[4:]
+            self.send_file(target_file, root=UI_DIR)
             return
-        asset_candidate = (UI_DIR / path.lstrip("/")).resolve()
-        if asset_candidate.is_file() and str(asset_candidate).startswith(str(UI_DIR)):
-            self.send_file(asset_candidate)
+        asset_candidate = UI_DIR / path.lstrip("/")
+        if is_safe_contained_path(asset_candidate, UI_DIR) and asset_candidate.is_file():
+            self.send_file(asset_candidate, root=UI_DIR)
             return
 
         # ── API Routes ────────────────────────────────────
@@ -726,15 +762,24 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
                 return
             rel_path = self._str(qs, "path")
             coord_dir = resolve_project_dir(proj)
-            target = (coord_dir / rel_path).resolve()
-            # Security: stay within project root
-            try:
-                target.relative_to(coord_dir)
-            except ValueError:
+            target = coord_dir / rel_path
+            # Security: strict canonical path containment check
+            if not is_safe_contained_path(target, coord_dir):
                 self.send_text("Forbidden", status=403)
                 return
             if not target.is_file():
                 self.send_text("Not found", status=404)
+                return
+            # Configurable read quota protection (HTTP 413 / TOO_LARGE)
+            max_quota = self.config.get("server", {}).get("max_file_read_bytes", 5 * 1024 * 1024)
+            file_size = target.stat().st_size
+            if file_size > max_quota:
+                self.send_json({
+                    "error": f"File size ({file_size:,} bytes) exceeds read quota ({max_quota:,} bytes)",
+                    "code": "TOO_LARGE",
+                    "size": file_size,
+                    "limit": max_quota
+                }, status=413)
                 return
             mime = ("application/json" if target.suffix == ".json"
                     else "text/plain; charset=utf-8")
@@ -762,8 +807,18 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
 
 # ─── Server ───────────────────────────────────────────────────────────────────
 
-def run_server(config: dict, port: int, open_browser: bool = True):
-    """Start the live HTTP server."""
+def run_server(config: dict, port: int, host: str = "127.0.0.1", open_browser: bool = True, allow_remote_unauthenticated: bool = False):
+    """Start the live HTTP server with loopback by default and security validation."""
+    if host not in ("127.0.0.1", "localhost", "::1") and not allow_remote_unauthenticated:
+        print(f"[SECURITY ERROR] Refusing to bind to non-loopback address ('{host}') without an authenticated TLS gateway.")
+        print("To override for testing only, pass --allow-remote-unauthenticated.")
+        sys.exit(1)
+    if host not in ("127.0.0.1", "localhost", "::1") and allow_remote_unauthenticated:
+        print("\n" + "!" * 65)
+        print("  [SECURITY WARNING] Binding to non-loopback address without authentication!")
+        print("  Coordination documents are exposed unauthenticated on the network.")
+        print("!" * 65 + "\n")
+
     # Pre-warm cache
     print("[INIT] Pre-scanning projects...")
     for proj in config["projects"]:
@@ -777,10 +832,11 @@ def run_server(config: dict, port: int, open_browser: bool = True):
     class BoundHandler(ApiHandler):
         pass
     BoundHandler.config = config
+    BoundHandler.server_host = host
 
     socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("", port), BoundHandler) as httpd:
-        url = f"http://localhost:{port}"
+    with socketserver.TCPServer((host, port), BoundHandler) as httpd:
+        url = f"http://{host}:{port}"
         print(f"\n{'='*55}")
         print(f"  Coordination Cockpit running at:  {url}")
         print(f"  REST API:  {url}/api/manifest?project=common")
@@ -888,6 +944,10 @@ def main():
                         help="Start live HTTP server (recommended)")
     parser.add_argument("--port", type=int, default=None,
                         help="HTTP port (overrides ui_config.json)")
+    parser.add_argument("--host", default="127.0.0.1",
+                        help="HTTP host to bind (default: 127.0.0.1 loopback only)")
+    parser.add_argument("--allow-remote-unauthenticated", action="store_true",
+                        help="Explicitly permit non-loopback binding without authentication")
     parser.add_argument("--no-browser", action="store_true",
                         help="Don't open browser automatically")
     parser.add_argument("--watch", action="store_true",
@@ -915,9 +975,11 @@ def main():
         sys.exit(1)
 
     port = args.port or config.get("server", {}).get("port", 8080)
+    host = args.host or config.get("server", {}).get("host", "127.0.0.1")
 
     if args.serve:
-        run_server(config, port, open_browser=not args.no_browser)
+        run_server(config, port, host=host, open_browser=not args.no_browser,
+                   allow_remote_unauthenticated=args.allow_remote_unauthenticated)
     elif args.watch:
         run_watcher(config)
     else:

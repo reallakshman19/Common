@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerAssignment",
+  "description": "Scoped responsibility assignment anchored to Owner task plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assignment_id",
+    "lane_id",
+    "responsibility_id",
+    "assigned_role",
+    "status"
+  ],
+  "properties": {
+    "assignment_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Composite identifier {lane_id}/assignment/{responsibility_id}"
+    },
+    "lane_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreign key referencing ExecutionLane.lane_id"
+    },
+    "responsibility_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Defined task obligation from plan (e.g. L0-IMP, L1-REV)"
+    },
+    "assigned_role": {
+      "enum": ["PRIMARY_IMPLEMENTER", "REVIEWER", "ORACLE"]
+    },
+    "status": {
+      "enum": ["ACTIVE", "STALE", "COMPLETED", "HELD"]
+    }
+  }
+}

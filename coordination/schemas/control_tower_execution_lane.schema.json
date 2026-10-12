@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerExecutionLane",
+  "description": "Responsibility lane defined by work plan; enforces single active tab policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "lane_id",
+    "work_id",
+    "lane_type",
+    "active_binding_policy"
+  ],
+  "properties": {
+    "lane_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Composite identifier {work_id}/lane/{responsibility_slug}"
+    },
+    "work_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreign key referencing Work.work_id"
+    },
+    "lane_type": {
+      "enum": ["DEVELOPMENT", "REVIEW", "RECOVERY", "ASSESSMENT"]
+    },
+    "active_binding_policy": {
+      "enum": ["ONE_ACTIVE_TAB_DEFAULT"]
+    }
+  }
+}

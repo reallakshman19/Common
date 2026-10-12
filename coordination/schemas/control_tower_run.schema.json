@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerRun",
+  "description": "Successive execution attempt; records handover continuity and per-run meter reset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "assignment_id",
+    "generation",
+    "chat_id",
+    "meter_started_at",
+    "evidence_cadence_count",
+    "run_state"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Composite identifier {assignment_id}/run/{generation}"
+    },
+    "assignment_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreign key referencing AgentAssignment.assignment_id"
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing sequence; increments on carry"
+    },
+    "predecessor_run_id": {
+      "type": ["string", "null"],
+      "description": "Foreign key referencing prior AgentRun.run_id; null on gen 1"
+    },
+    "chat_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Session chat GUID"
+    },
+    "meter_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Run start timestamp; reset on each carry transition"
+    },
+    "evidence_cadence_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Cumulative evidence count carried forward from prior runs"
+    },
+    "run_state": {
+      "enum": ["IN_PROGRESS", "SUCCEEDED", "FAILED", "STALE", "TIMED_OUT"]
+    }
+  }
+}

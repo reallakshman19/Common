@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerTabBinding",
+  "description": "Versioned ephemeral binding between an AgentRun and a session tab alias",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "binding_id",
+    "run_id",
+    "project_id",
+    "tab_alias",
+    "generation",
+    "binding_state"
+  ],
+  "properties": {
+    "binding_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique binding identifier"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreign key referencing AgentRun.run_id"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreign key referencing Project.project_id; isolates cross-project tab aliases"
+    },
+    "tab_alias": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Observed tab label string (e.g. Tab3)"
+    },
+    "session_alias": {
+      "type": ["string", "null"],
+      "description": "Historical session grouping (e.g. Session_Oct09)"
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Matching AgentRun.generation"
+    },
+    "binding_state": {
+      "enum": ["ACTIVE", "HISTORICAL", "IDENTITY_CONFLICT"]
+    }
+  }
+}
