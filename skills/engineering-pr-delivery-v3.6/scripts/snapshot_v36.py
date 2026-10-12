@@ -7,7 +7,7 @@ import re
 from urllib.parse import urlparse
 
 from decompose_v36 import GithubClient, PARENT_REF, is_task_issue, load_plan
-from lifecycle_v36 import ContractError, load_label, validate_evidence
+from lifecycle_v36 import ContractError, load_label, validate_evidence, require_explicit_lab
 
 SHA = re.compile(r"^([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@([0-9a-f]{40})$")
 PR = re.compile(r"^/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)/pull/([1-9][0-9]*)(?:/commits/([0-9a-f]{40}))?/?$")
@@ -122,9 +122,11 @@ def main():
     p = argparse.ArgumentParser(description="v3.6 read-only GitHub evidence snapshot")
     p.add_argument("--label", required=True)
     p.add_argument("--plan", required=True)
+    p.add_argument("--lab", help="explicit Writable lab: repository for lab-target snapshot")
     args = p.parse_args()
     label = load_label(args.label)
     plan = load_plan(args.plan, label)
+    require_explicit_lab(label, plan["parent"], args.lab)
     client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
     client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
     print(json.dumps(snapshot(plan, client), indent=2, sort_keys=True))
