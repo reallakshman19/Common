@@ -39,7 +39,7 @@
       "format": "date-time"
     },
     "provider_reachability": {
-      "enum": ["REACHABLE", "UNAVAILABLE", "RATE_LIMITED", "FORBIDDEN", "UNKNOWN"]
+      "enum": ["REACHABLE", "UNAVAILABLE", "RATE_LIMITED", "FORBIDDEN", "PARTIAL", "UNKNOWN"]
     }
   }
 }
