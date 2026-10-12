@@ -41,3 +41,26 @@ Propose validation matrix from actual original files rather than selecting a sin
 3. Follow-on direct-main small wiring to committed selection/page to actual XML matching + two CSVs, real input and source-authority negative, Owner decision if additional source-bounded hashing or retention budgets required.
 
 Workpack: T1 IN_PROGRESS, T2 DONE, T3 IN_PROGRESS partial. O1/O2/O3 0/3 independently met; no deployed source. PR #227 test-only draft / #228 product draft direct main.
+
+## Final T1 measured evidence, Owner decision D-AIM-2, T3 first CI — 12 Oct 2026
+Outcome: O1
+For the user: Nothing released; real main's large-JSON trace hangs, and draft worker intake is not a complete trace/CSV.
+Proof: [actual T1 run 38193362714 and artifact 11721934084](https://github.com/reallakshman19/3D_Converters/actions/runs/38193362714/artifacts/11721934084); [NC correction 38193975925](https://github.com/reallakshman19/3D_Converters/actions/runs/38193975925); [T3 Chromium 38193622267](https://github.com/reallakshman19/3D_Converters/actions/runs/38193622267).
+
+### Chromium 136, single run per input, real main code @4f14beb
+| JSON | Original bytes | JSON upload ms | Build attempt ms | max main rAF gap ms | sampled max renderer JS heap B | sampled max aggregate Chromium RSS KiB | actual trace |
+|---|---:|---:|---:|---:|---:|---:|---|
+| Firstpass original positive | 733806 | 286 | 31017 | 950.0 | 28297188 | 597976 | FAILED trace timeout |
+| NC original negative | 10232634 | NOT_RUN | NOT_RUN | 200.0 *navigation only* | 20750224 *preupload* | 531620 *preupload* | BLOCKED before JSON upload |
+| Firstpass-shaped generated ~30MiB | 30819769 | 5087 | 49323 | 19249.3 | 239589260 | 852916 | FAILED trace timeout |
+| Firstpass-shaped generated ~60MiB | 62373341 | 9602 | 67503 | 37431.8 | 328369336 | 908576 | FAILED trace timeout |
+| Firstpass-shaped generated ~100MiB | 104200169 | 14938 | 89892 | 59814.3 | 471596288 | 1128848 | FAILED trace timeout |
+
+Derived from LFJ226_CASE records in job 114630672152. Stated maxima refer to sampling, *not actual physical memory peaks*. Generated JSON repeats original Firstpass structures/identities: syntax and capacity only, NEVER an engineering golden. NC original topology XML fails transition to JSON Trace. NC-only attempted correction run 38193975925 also returned status success while the case failed on missing staged-json-file input after XML load (10,231ms), so NO NC JSON ingestion performance proof. CI success is not product PASS.
+
+### Owner approval requested: operating range NOT ACCEPTED YET
+Propose target support **up to 100 MiB (104857600 bytes) original JSON**. Representative original positive Firstpass 733806B + paired FirstpassXML, distinct real negative NC 10232634B + its original topology XML (must resolve navigation/source-mode compatibility first), plus generated 30/60/100 MiB stress cases only. Proposed longest acceptable foreground freeze: **200ms maximum rAF gap**, measured throughout File->Worker index->matched trace->render->CSV/cancel; none of the presently measured true-trace cases passes, not even Firstpass. Beyond 100 MiB, fail fast with typed recoverable capacity refusal *before full UI FileReader/JSON.parse*, allow replace/cancel and no synchronous fallback. 100 MiB / 200ms are engineering **proposals** needing Owner confirmation and positive output proof; do not apply old PR #180's 32 MiB cap.
+
+### T3 actual product wiring state
+Main-based draft PR #228 @bb7a78d invokes existing main LFJ native R10 source worker + durable R07 indexed store from real default Single and Mode-A staged JSON file controls on explicit opt-in. Source-only complete positive Firstpass measured 733806B, 23754 source occurrences, exact independently checked SHA256 6b2c8b01ab0ba6ec8e9e7c42eb4a719668ffd2dc4dbe4790d27cf426a1f60288, 18.9s elapsed and 16.8ms max rAF gap after 1024-event page batching. Yet exact-head run 38193622267 **FAIL** on NC distinct source receipt waiting 180s; malformed negative was not reached. NC stall diagnosis UNKNOWN, requires source-page/IDB timing instrumentation before changing semantics. Raw source index is not XML matching and must not grant either CSV export or engineering rights. App main unchanged, historical stack unmodified.
+T1 COMPLETE **as failure characterization**: four valid JSON-upload curves, NC source case explicitly UNMEASURED (acceptance gap); T2 read-only DONE; T3 WIP / blocked red NC; O1/O2/O3 all NOT_ACCEPTED, 0/3, user NO.
