@@ -12,3 +12,9 @@
 2026-10-12 | chat=new | upstream golden CI 38219621844 | frozen exact lock; semantic five-role technique benchmark
 2026-10-12 | chat=new | upstream H3 CI 38231707376 | reference scoped rendered proof, not yet worker-specific per-cell evidence
 2026-10-12 | chat=new | source rights | official organizer/SOF samples research-only; only AUTHORED TEST permitted in this lane
+2026-10-12 | chat=new | Grade9v3.5/#191 @31a1b518 | TEST/imo-research/qrt-d2/justify.v1.json | blob 37e24be0a24bd1a062107dd788ae6f3eb5e5059c | AUTHORED TEST exact source
+2026-10-12 | chat=new | Grade9v3.5/#191 @31a1b518 | TEST/products/imo182-qrt-d2-justify.manifest.json | blob d9ad7ab79268cdce406e40dbaed9a66071c155d1 | five registered roles / core2=[]
+2026-10-12 | chat=new | Grade9v3.5/#191 @31a1b518 | TEST/imo-research/qrt-d2/figures/justify-d2-input.svg | blob 64734a179aa4de9d324fb50405b156c5fb728906 | safe preattempt visual
+2026-10-12 | chat=new | Grade9v3.5/#190 frozen snapshot-lock.json | blob 888678554c41257e6d96c802f0009983ccbb5328 | verified source artifact 11732117118 five SHA256 exact
+2026-10-12 | chat=new | browser QA readout | SHA256 f69988cef1aecadb2d0ed80723516189575ca50f119f61a6245311c59a3644ef | exact artifact 11740817775; local Chromium five roles, no JS errors, H3/attempt/boundary pass
+2026-10-12 | chat=new | golden technique DOM compare | SHA256 35623afa4d43fbf9be73f7010771940278cc08297c0559240513c2baa058f0df | original artifact 11732117118 vs new artifact 11740817775, 5/5 registered role slots matched, Core2A H3 after-attempt intentionally differs
