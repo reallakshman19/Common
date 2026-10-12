@@ -96,3 +96,20 @@ AC: source-true Q003 learner Core2 absent -> absent; machine/runtime blocker now
 Claim: LOCAL
 Blocker: MACHINE - authorized complete local checkout + exact private q003.source.private.json sha256=b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9 OR actual Owner-side private run receipt and inspectable HTML; no rights/Owner TEST approval request
 Next: W1 retry/verify actual output; W2 only on first genuine failure, else T3, T4, T5
+2026-10-12 | chat=6acc4eaa | TASK EVIDENCE | G2 LOCAL CANDIDATE 17/17 | plan=r4 | aim=v2.2.0 | source-safe https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_G2_LOCAL_RENDER_CANDIDATE_2026-10-12.json
+Outcome: O1 O2 O3 supporting; no native admission
+For the user: Actually attemptable original Q003 and independent authored Core1A created in local self-contained browser artifacts; nothing deployed to Grade9v3.5.
+Proof: https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6119624029; https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_G2_LOCAL_RENDER_CANDIDATE_2026-10-12.json; exact source hash 31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2
+Task: 183-T2-G2-W1 | 183-T3-G2-W1 | 183-T4-G2-W1 | 183-T5-G2-W1 (separate itemized TASK EVIDENCE blocks in owning issue)
+Goal (issue AC): native faithful Core2; actual G-CORE2-R2 delta; canonical matched Core1A; Owner QRT and same-renderer A4
+Status: PARTIAL for each, not DONE
+Met: partial LOCAL standalone prototype/technique comparison only; 0 canonical admissions
+Done: visually transcribed source PDF Q003, recreated source identity hash, created standalone Core2/1A, tested 17/17 Chromium, printed candidate PDFs 2pp each, captured golden technique gap
+Code (repo branch @ commit | PR): Grade9v3.5 main@778eb35a TEST@b720b791 unchanged | none. Local HTML SHA256 ef5a2ff122dc4915db650babb8d317920ed428d5ac7da7a17e7fbbbea4d9b272 and 4eb3e5474705d001103a8fa6ad602c043fc0758e5e624dbbb2242ad2e56e38a3
+Tests (command -> pass/fail/skip): python build.py -> PASS; python test_browser.py -> 17/17 PASS Chromium; native render_core -> NOT_RUN; original organizer key/A4 Owner -> NOT_RUN
+CI (run -> result): none -> not-run
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6119624029; https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab2_imo_core2_core1a/Q003_G2_LOCAL_RENDER_CANDIDATE_2026-10-12.json
+AC (before -> after): 0 native Core2/1A -> 0 native; local prototype 0->2; G-CORE2-R2 native delta NOT_RUN; Owner QRT accepted 0/28
+Claim: LOCAL
+Blocker: MACHINE - native renderer checkout/complete exact private input not present; OWNER - later QRT/rights/A4 actual approval only when native pages exist
+Next: resume 183-T2-G2-W1 native execution, T3 actual golden, T4 canonical Core1A, T5 Owner packet; W2 conditional; T6 parked
