@@ -1,123 +1,59 @@
-# Engineering PR Delivery v3.6 — independent GitHub lifecycle (DRAFT)
+# Engineering PR Delivery v3.6 — independent, reusable GitHub lifecycle
 
-**Status:** v1.2.1 Owner label approved; this implementation remains DRAFT. **Owning issue:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Plan:** V36-341-PLAN-02 (source plan); current execution revision PLAN-05 on Common #341. **Owner aim card:** V35-LIFECYCLE / CP-V35-LIFECYCLE-01, approved master v1.2.1 / label_sha 4b90240.
+**Scope:** A v3.6-only lifecycle: an approved parent plan, real child issues, verified own-child task evidence, automatically updated issue/PR titles, and GitHub-only successor continuation. The [Common #341 lab benchmark](https://github.com/reallakshman19/Common/issues/341#issuecomment-6119409109) was Owner-accepted (7/7 workpacks, O1–O5); that benchmark is an example, **not** a fixed label, repo, or lab default. v3.6 has no runtime dependency on v3.5, v3.2, v3.1, Local v1.1, or DELP.
 
-## Scope, independence and safety
+## 1. Mandatory inputs — work-specific, never silently default
 
-v3.6 starts its own lifecycle. All of its runtime scripts, schemas, templates, prompt packs and tests must be under this directory. It never imports or executes v3.5, v3.2, v3.1, Local PR Delivery or DELP. Those historical systems are not its authority. No existing skill is changed by v3.6 work.
+- **Label path:** an explicit, Owner-approved `--label relay/AIM/<WORK>.yaml` from that work's repository. The work ID comes from the filename and must match the label's `work`. **There is no default V35-LIFECYCLE label.** A copied test fixture is not approval.
+- **Plan path:** an explicit `--plan <selected-plan.yaml>`, bound to the chosen label's `work`, `version`, `label_sha`, and real parent issue. Its `parent: owner/repo#N` is the explicit target for reads/writes; it may be the label's repository or the label's authorized writable lab.
+- **Writable lab:** read `guidance.notes` for **exactly one** `Writable lab: owner/repo` directive in the selected label. Resolve it using `lifecycle_v36.writable_lab(label)`, and verify the selected lab parent in the plan uses **that exact repository**. No hard-coded lab, no inference from old `Lab:` notes, `done_when`, old sample paths, or predecessor chats. If the label has no `Writable lab:`, read-only `validate-label` can still succeed, but **lab writes and lab-target plans are unauthorized** until the Owner supplies a valid directive. Multiple/invalid directives fail closed.
+- **Write consent:** for a write, require a separately authorized repo/issue scope, actual GitHub credentials and the relevant explicit `--apply --confirm-scope owner/repo#N`; default dry-run, then provider GET readback. Never assume permission from documentation. The trusted default-branch lab workflow is a separately scoped integration, not permission to execute untrusted PR code.
 
-The Owner controls aim approval, criticality, material scope, use of publisher credentials, acceptance and merge decisions. Source text, GitHub comments and sample labels do **not** grant those decisions. Until explicitly authorized, operate read-only; CLI WP1 commands are validation/rendering only. Engineering-critical technical doubt stops the doubtful step and asks the Owner. No merge, close, rebase, automatic release or write authority is inferred by this draft.
-
-## Outcomes
-
-- **O1:** Parent issue decomposes into child issues and a visible, versioned plan.
-- **O2:** A completed task posts truthful TASK_EVIDENCE on its *child* issue, with first lines `Outcome`, `For the user`, `Proof`.
-- **O3:** Parent and child issue titles update from current GitHub facts, never from an agent-asserted percentage.
-- **O4:** PR titles identify actual delivered outcome and current PR state, from current GitHub refs and valid evidence.
-- **O5:** A cold successor can reconstruct the aim, plan, task/evidence and live PR heads from GitHub alone.
-
-## Proposed data flow / work packages
-
-```text
-relay/AIM/<WORK>.yaml (Owner-approved external record)
-  -> validated aim/criticality [WP1]
-  -> versioned plan, parent-child issues [WP2]
-  -> provider-observed issues/evidence/live PR heads [WP3]
-  -> dry-run title/status diff -> approved publisher -> readback [WP4]
-  -> GitHub-only handover and BuddyRunner v1.6 [WP5]
-  -> aim/evidence-bound 2-pass or 3-pass prompts [WP6]
-  -> independent lab positive/negative acceptance [WP7]
-```
-
-**No secondary scoreboard database:** current GitHub child issue state, accepted evidence comments, plan version, and PR head/state are the only source facts. A closed child issue or merged PR does not by itself mean accepted evidence. Missing, stale, unverified or inaccessible facts are `UNKNOWN`, not green, zero or complete. Plan revisions must preserve the denominator or show an explicit approved scope change.
-
-## WP1 — runnable foundation (draft)
-
-Install `requirements.txt` into an isolated Python environment. This is a new dependency for *this* skill, not an import of older code.
+To select a work, supply paths explicitly; substitute the actual chosen work and plan rather than using a preloaded V35 example:
 
 ```sh
 python -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
-python -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -v
-python skills/engineering-pr-delivery-v3.6/scripts/lifecycle_v36.py validate-label relay/AIM/V35-LIFECYCLE.yaml
+python skills/engineering-pr-delivery-v3.6/scripts/lifecycle_v36.py validate-label relay/AIM/<WORK>.yaml
+python skills/engineering-pr-delivery-v3.6/scripts/decompose_v36.py --label relay/AIM/<WORK>.yaml --plan <PLAN_PATH>
+python skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py cold --label relay/AIM/<WORK>.yaml --plan <LAB_PLAN_PATH> --pr <PR_NUMBER>
 ```
 
-The `validate-label` command only parses and validates an explicit `relay/AIM/<WORK>.yaml` path; no GitHub write. `render-evidence` formats a comment from supplied verified task facts and refuses an empty placeholder proof; rendering is **not publication**. See `templates/sticky-label-v36.yaml` and `templates/task-evidence-v36.md`. The example label is a pinned read-only fixture of the approved master; only the master at relay/AIM/V35-LIFECYCLE.yaml governs. Label fields remain the Owner's exact words.
+The label can declare fewer than five outcomes (e.g. O1–O3) and can declare `engineering_critical: critical`; validation preserves the actual Owner text and metadata. Outcome identifiers in a plan must be declared in **that** label. **Do not** write to another work's repository merely because its label validates read-only. The Owner controls changes to the label and material scope.
 
-The v3.6 module requires Python 3.10+ and PyYAML 6.x. All public CLI commands remain read-only in WP1. Every future write command must implement dry-run as its default, fail closed on missing approval, verify selected exact repository/issue/PR and read back results. One scripting language: Python.
+## 2. O1–O5 end-to-end process
 
-## WP2–WP7 admission / acceptance intent
+1. **O1 — Decompose:** `scripts/decompose_v36.py` validates a label-bound plan with stable tasks/sizes/AC, observes real child issues and a unique managed parent index; default dry-run and duplicate-safe apply.
+2. **O2 — Evidence:** `scripts/lifecycle_v36.py` strictly renders a canonical finished-task record; publish on that task's child issue. `scripts/snapshot_v36.py` checks true provider author, selected issue/outcome, exact candidate SHA, Proof PR/commit consistency and current PR head. Stale, missing or unverified evidence never counts as current and never auto-proves acceptance.
+3. **O3/O4 — Titles:** `scripts/publisher_v36.py` projects parent/child titles and **PR-specific** outcomes from live evidence and PR draft/open/merged state. The approved lab's default-branch event runner uses immutable pinned v3.6 source, validates Git blobs, applies scoped title updates, GET-verifies results and replays to zero changes. Never checkout untrusted PR code in a `pull_request_target` workflow.
+4. **O5 — Cold successor:** `scripts/successor_v36.py` reads current Owner label/plan, child index, own-child evidence and live PR heads directly from GitHub, emits a portable packet, and supports BuddyRunner v1.6 **1a HOLD → 1b independent source reconstruction → 2 one reconciliation**, with optional one-shot Y only after later Xb evidence. Prompts are not executions or approvals.
+5. **O5 — Separate generators:** `scripts/prompt_2pass_v36.py` independently generates evidence-grounded plan→execution prompts; `scripts/prompt_3pass_v36.py` independently generates source/falsifier→implementation→independent validation prompts. Both accept explicit `--label --plan --task-id --pr` and preserve exact Owner words. Never combine them into one mode-driven generator.
+6. **Integrated acceptance:** execute a **real** parent→child→evidence→title→PR attribution→cold continuation in the **selected authorized** writable lab, with positive/negative cases, hosted CI and provider readbacks. Evidence count `E2/2` is not automatic Owner signoff. Record the Owner's actual acceptance separately. Do not use an old lab as a writable fallback.
 
-WP2 must validate stable workpack/task IDs, sizes, outcome and acceptance before materialization; replay must not duplicate children. WP3 must validate evidence references, current candidate, negative/stale tests and provider visibility. WP4 must preserve unmanaged human title text and refuse unauthorized writes; repeated runs must be idempotent and read back exact output. WP5 must implement BuddyRunner v1.6 as **1a execution HOLD → 1b independent reconstruction → 2 single reconciliation**, with an optional **Y** response to later Xb evidence, *not* a loop. WP6 must implement the Owner-approved D-V36-2: two separate 2-pass and 3-pass generators with distinct purposes and independent tests, inside v3.6. WP7 requires a real lab run with a fresh cold successor; synthetic lab proof must not be promoted to authentic programme acceptance.
+For the accepted **example only**, the label was `relay/AIM/V35-LIFECYCLE.yaml` v1.2.1, whose `Writable lab:` explicitly named `reallakshman19/relay-v36-e2e-lab`. The real parent is [lab #1](https://github.com/reallakshman19/relay-v36-e2e-lab/issues/1), children #2/#3, linked draft PR #4 and unrelated PR #5. The positive/negative trusted runs [38214023565](https://github.com/reallakshman19/relay-v36-e2e-lab/actions/runs/38214023565) and [38214091849](https://github.com/reallakshman19/relay-v36-e2e-lab/actions/runs/38214091849) and accepted [PLAN-07](https://github.com/reallakshman19/Common/issues/341#issuecomment-6119409109) are historical receipts, not a generic target.
 
-**Current state (12 Oct 2026):** Master label v1.2.1 / label_sha 4b90240 governs. D-V36-1/2/3 approved independence, two separately invoked generators, and writes confined to the new v3.6 lab; no wider writes/merge. WP1–WP3 are draft source-tested, WP4 E01/E02 verified with installed lab Actions workflow; E03 metadata reconciliation is underway. WP5 now has an independently testable GitHub-only packet/1a–1b–2/Y renderer but a genuinely independent cold successor action is still NOT_PROVEN; WP6 has two separately executable generators demonstrated in hosted CI (80/80 v3.6 tests). WP7 integrated cold successor acceptance remains NOT_PROVEN. Owner outcome acceptance remains 0/5. Older #294 decisions are **not v3.6 inputs**.
+## 3. TASK_EVIDENCE — exact opening and independent proof
 
-## WP2 — parent → real child issues (O1)
+Every finished task posts **on its own child issue**. Start with these three human-readable lines in exactly this order, then the canonical v3.6 record. A link, test total, and current head are *evidence*, not automatic final Owner acceptance.
 
-The approved master is always loaded from `relay/AIM/V35-LIFECYCLE.yaml`, not from this skill's fixture. The plan `plans/V36-341-PLAN-02.yaml` pins `work/version/label_sha` and each task's stable ID, size, single primary outcome, acceptance and owner-visible result. The WP2 implementation and tests are in `scripts/decompose_v36.py` and `tests/test_decompose_v36.py`.
-
-```sh
-# Repo root, read-only provider snapshot and proposed child list (default)
-python skills/engineering-pr-delivery-v3.6/scripts/decompose_v36.py \
-  --label relay/AIM/V35-LIFECYCLE.yaml \
-  --plan skills/engineering-pr-delivery-v3.6/plans/V36-341-PLAN-02.yaml
-
-# Only with an explicit scoped writing instruction and usable token:
-GITHUB_TOKEN=<token> python skills/engineering-pr-delivery-v3.6/scripts/decompose_v36.py \
-  --label relay/AIM/V35-LIFECYCLE.yaml \
-  --plan skills/engineering-pr-delivery-v3.6/plans/V36-341-PLAN-02.yaml \
-  --apply --confirm-scope 'reallakshman19/Common#341'
+```text
+Outcome: <O# declared by the selected label>
+For the user: <real user-visible workflow change or nothing yet>
+Proof: <concrete test/run/output link>
+TASK_EVIDENCE v3.6
+Task: <task ID from selected plan>
+Child issue: <owner/repo#number>
+Candidate: <owner/repo@40-character git SHA>
+Tests: <passed>/<run>
 ```
 
-WP2 is **not** a title/evidence publisher; it only makes missing child issues and a managed parent-plan index. GitHub reads precede every write; duplicate child matches or multiple parent indexes fail closed; existing manually created WP1 #345 is uniquely adopted, not recreated. Repeated `--apply` should produce zero new children and an unchanged index. The 12 Oct Common #341 child list #345–#351 was created using connected GitHub tooling and read back, *not* by executing the Python `--apply` command; do not count it as script-level integration proof or the final lab acceptance.
+The source formatter `render-evidence` rejects placeholder Proof and invalid task/test fields; the snapshot rejects foreign authors and mismatched Proof commit SHA. Publish canonical comments unchanged, and refer to acceptance separately. Never rewrite historical authored evidence to inflate title counts.
 
-Earlier WP1/WP2 test claims came from previous source heads and are not CI proof for the current PR head. Hosted v3.6 O4 publisher regression passed **15/15** at e046d3c (lab Actions run 38198821650); the full branch-head suite and integrated WP7 acceptance must still be run independently. Do not carry CI from earlier SHAs.
+## 4. Agent LOG line — mandatory terminal footer
 
-## Benchmark repository boundary
+Every execution or handover response ends with exactly **one LOG line in its own plain text code block**. The successor finds this contract in this GitHub-hosted skill, without prior chats. Fill every field from the selected label, current GitHub issue/plan, actual test result and latest **published log commit**, never from guesses. Use `@NOT_WRITTEN:<reason>` if the log file could not be updated. `aim` is **the selected label's version**, not a hardcoded example; `outcome` is an actual O# from the selected work.
 
-The approved master is maintained in Common, but its guidance explicitly names `Writable lab: reallakshman19/relay-v36-e2e-lab`. WP2 plan validation therefore permits only the master repository and that exact named lab repository, always with an exact `owner/repo#parent` `--confirm-scope` and current provider permissions; arbitrary repositories are rejected. To run the final benchmark, a fresh lab plan must bind the lab parent number and stable task IDs; the Common #341 plan remains a coordination example, not the lab's actual plan. As rechecked 12 Oct 2026, the connected GitHub identity has `push=true`, `triage=true` on the writable v3.6 lab. Lab parent #1, children #2/#3 and PR #4 are real; an unrelated negative PR #5 is also a fixture. Scoped v3.6 GitHub Actions title writes are proven by runs 38197870074, 38197925293, 38197962621 (E01) and 38198821650 (E02), with readbacks and zero-diff replay. These runs do not prove full WP7 or authorize Common merge.
-
-## Owner decisions — 12 October 2026
-
-D-V36-1: independent architecture APPROVED. D-V36-2: two **separate** generators, 2-pass and 3-pass, with distinct purposes; do not merge them into modes of one generator. D-V36-3: lab write intent approved; actual GitHub provider write permission must be observed before attempted lab mutations. Development and Common read-only/safe testing continue independently. Plan-03: https://github.com/reallakshman19/Common/issues/341#issuecomment-6116096075.
-
-WP3 script `scripts/snapshot_v36.py` is a GitHub read-only provider snapshot. It recognizes finished-task evidence only when the child issue, task/outcome, proof PR, 40-character candidate SHA and live PR head match. It reports stale or unknown evidence explicitly. Even CURRENT_EVIDENCE is *not* independently accepted completion; every output's complete flag remains false until a future separately specified acceptance mechanism. Workpack status and lab acceptance are distinct.
-
-## v1.2.1 lab acceptance target
-The only approved writable benchmark target for WP4/WP7 is `reallakshman19/relay-v36-e2e-lab` identified by the approved master guidance `Writable lab:`. Common v3.6 source changes stay on draft PR #344, not main. The existing Common seven-child managed index predates v1.2.1 and is metadata to reconcile; preserve child bodies and previous evidence comments as historical, not as current Owner-label authority. Older `reallaksh19/relay-v35-e2e-lab` is reference-only, and any prior `Lab:` note is not permission. See Common #341 PLAN-04. Lab parent #1, children #2/#3, PR #4 are real. Title changes must be computed from GitHub facts, scoped, applied and read back with no hand-authored completion number.
-
-## WP5 — read-only GitHub-only successor and BuddyRunner v1.6
-
-The v3.6-only `scripts/successor_v36.py` reads the approved master, validated lab plan, live parent managed index, real child TASK_EVIDENCE and exact live PR heads. It emits a portable packet with the **Owner's exact words** and child acceptance criteria. It does not write, execute agents, certify completion or depend on old BuddyRunner skills.
-
-```sh
-# Run from the Common repository root (Python 3.10+, PyYAML 6.x installed):
-python skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py cold \
-  --label relay/AIM/V35-LIFECYCLE.yaml \
-  --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
-  --pr 4 --pr 5
-
-python skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py buddy \
-  --phase 1a --handover-id V36-341-COLD \
-  --parent reallakshman19/relay-v36-e2e-lab#1 \
-  --assessed-sha 61a71a038cca56507040bdb365edf76a9c0d2469
+```text
+LOG | chat=<chat-id> | tab=<tab> | folder=<coordination/path>@<latest-log-commit> | issue=<owner/repo#number> | plan=<revision> | progress=<done>/<total> | done=<task IDs or none> | next=<task IDs or none> | ac=<met>/<total> | blocker=<NONE/OWNER/PERSON/CI/MACHINE/EXTERNAL> | PR=<number>@<sha7>:<green/red/queued/not-run/none> | tests=<passed>/<run> | handover=<no/due/ready:path> | aim=<label version> | outcome=<O#> | user=<yes or no>
 ```
 
-The four Buddy phases are independent, bounded **1a** (G1 prepares/holds), **1b** (G2 investigates/holds implementation), **2** (one G1 reconciliation; closes predecessor) and optional one-shot **Y** (on later evidence only). For 2 or Y, supply the exact `--evidence-url` and `--body-digest` (64 hex UTF-8 SHA-256) and verify the claim against the provider before relying on it. Rendering is not an agent run or digest verification. The live lab parent packet is [here](https://github.com/reallakshman19/relay-v36-e2e-lab/issues/1#issuecomment-6117217647). Hosted GitHub-only cold reconstruction with 71/71 tests and 1a HOLD rendering: [run 38199859956](https://github.com/reallakshman19/relay-v36-e2e-lab/actions/runs/38199859956). **Independent external cold engineer acceptance remains outstanding**.
-
-## WP6 — TWO standalone purpose-specific prompt generators
-
-Never combine these into a single mode-controlled generator. Both independently execute `--label --plan --task-id --pr` (PR may repeat), re-fetch provider facts via v3.6 only, preserve the Owner words and exact source links, and refuse missing selected child issues.
-
-```sh
-python skills/engineering-pr-delivery-v3.6/scripts/prompt_2pass_v36.py \
-  --label relay/AIM/V35-LIFECYCLE.yaml \
-  --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
-  --task-id V36-1-WP1 --pr 4 --pr 5
-
-python skills/engineering-pr-delivery-v3.6/scripts/prompt_3pass_v36.py \
-  --label relay/AIM/V35-LIFECYCLE.yaml \
-  --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
-  --task-id V36-1-WP2 --pr 4 --pr 5
-```
-
-Two-pass: **evidence-grounded task plan → bounded implementation/test/own-child proof**. Three-pass: **independent source/falsifier → bounded implementation → genuinely independent provider acceptance**, with both positive and negative oracles. They generate prompts; they do not run phases or appoint reviewers. Exact-source hosted test [run 38200093786](https://github.com/reallakshman19/relay-v36-e2e-lab/actions/runs/38200093786) passed 80/80 and logged TWO_SEPARATE_GENERATORS_OK. No O5 or WP7 release assertion without a real independent cold continuation.
+**Owner constraints:** Owner controls decisions and merges; engineering-critical doubt must stop the risky action. A generated packet/LOG, stale GitHub snapshot or passing check cannot invent an accepted task. Never merge, close, release, or silently change the Owner's aim without authorization.
