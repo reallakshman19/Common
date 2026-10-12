@@ -4,8 +4,8 @@
 work: "IMO-CORE-BLUEPRINTS"
 repository: "reallakshman19/Grade9v3.5"
 engineering_critical: "standard"
-version: "1.1.0"
-label_sha: "ec55f5d"
+version: "1.2.0"
+label_sha: "3f23d88"
 label:
   problem: "Core 1B is done with a golden fixture; other Cores are not yet created or optimized from blueprints based on QRT."
   main_aim: "Create or optimize blueprints for each Core based on QRT; Core 1B is done, golden fixture created, others remain."
@@ -17,7 +17,7 @@ label:
     - "Pages come from the existing blueprint registry and are aligned with the golden fixtures."
     - "This work grants no source rights, QRT acceptance, merge or release."
   task_outcome: "O1"
-  task_aim: "Plan: map each Core blueprint, golden and QRT cell to what exists, then propose the first Core to build."
+  task_aim: "Build the next Core page from its blueprint against its golden: Core 2A done structurally, Core 1A next, then 1B."
   done_when: "PENDING: the Owner sets which Cores, acceptance per QRT cell, real learner inputs and A4 print."
 guidance:
   not_now:
@@ -30,6 +30,7 @@ guidance:
     - "Blueprint registry v1.17.0 (7 blueprints). Goldens: G-MATH-LINEAR-CONSTRAINT (Core1, 1A, 1B, 2A, 2B) and G-CORE2-R2 (Core2)."
     - "Pending at source (main): one Core1A divisibility candidate, one Core1B journey manifest, QRT accepted 0 of 28."
 bindings:
-  - "Session_Oct09:1 coordination/Session_Oct09/Tab1_core-blueprints-qrt"
+  - "Session_Oct09:1 coordination/Session_Oct09/Tab1_imo_core_blueprints"
 history:
   - "v1.1.0 · 2026-10-12 04:52 · create · created · CP-IMO-CORE-BLUEPRINTS-01 · approved by the Owner"
+  - "v1.2.0 · 2026-10-12 05:36 · retarget · Task aim now: build each Core page from its blueprint against its golden, in the... · CP-IMO-CORE-BLUEPRINTS-04 · approved by the Owner"
