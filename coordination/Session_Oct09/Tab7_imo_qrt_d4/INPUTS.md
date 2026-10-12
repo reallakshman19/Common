@@ -10,3 +10,6 @@
 2026-10-12 | chat=new | five-role golden | Grade9v3.5 PR #188 golden/units/G-IMO-G9-FIVE-CORE-20261012/snapshot-lock.json | frozen role snapshot; golden CI https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219621844
 2026-10-12 | chat=new | pilot fixture | Grade9v3.5 PR #140@02ccdc75bb95bf3ce910438bf78622e24e66b226 TEST/imo-research/golden/imo-327-justify-d4.v1.json | authored REVIEW fixture, not Grade9 learner product or rights admission
 2026-10-12 | chat=new | H3 revised base | Grade9v3.5 PR #190@67c34dababb0da0ef7d5f4a532bfcf3119754961 | scoped CI https://github.com/reallakshman19/Grade9v3.5/actions/runs/38231707376; not merged main
+2026-10-12 | chat=new | pilot package | Grade9v3.5 PR #194@67f45bf1837a589435cdbdb22dec1e2e65f6cee1 TEST/imo-research/qrt-d4/justify-d4.package.json | AUTHORED, structural schema local 0 errors; full hosted jsonschema pending
+2026-10-12 | chat=new | pilot manifest | Grade9v3.5 PR #194@67f45bf1837a589435cdbdb22dec1e2e65f6cee1 TEST/products/imo182-qrt-d4-justify.manifest.json | five-role sole renderer, core2=[]
+2026-10-12 | chat=new | pilot independent math | local Python exhaustive -10000..10000 integer 24/48/exit iff comparisons | 3/3 PASS, 20001 integer cases each; not subject verdict
