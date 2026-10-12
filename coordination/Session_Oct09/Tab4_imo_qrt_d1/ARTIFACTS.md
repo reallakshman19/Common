@@ -30,3 +30,6 @@
 2026-10-12 | chat=6accb51c | EXPLAIN final | source SVG-font fix @f06825eab9e799384210f3886f6c8036b62fcc6d, focused CI 38251957578 SUCCESS (job 114820261094) artifact 11748552287; 5 HTML SHA receipt, 6/6 tests, local Chromium 45/45 and 0 JS errors
 2026-10-12 | chat=6accb51c | APPLY source | Grade9v3.5 PR#192 agent/imo182-qrt-d1-represent @771f808b5000ddef11d74bde45835eee0905cdc4 | original package, 4 SVG, manifest, verifier, six tests, dedicated workflow, per-cell review proposal
 2026-10-12 | chat=6accb51c | APPLY exact-head CI | run 38253294826 QUEUED at time of entry | rendered credit not yet given
+2026-10-12 | chat=6accb51c | EXPLAIN-D1 issue closure evidence | Grade9v3.5 issue#182 comment 6124989042 | matched EVIDENCE.log, success run 38251957578 artifact 11748552287
+2026-10-12 | chat=6accb51c | APPLY-D1 issue partial evidence | Grade9v3.5 issue#182 comment 6124997038 | matched EVIDENCE.log, exact-head run 38253294826 QUEUED; no HTML credit
+2026-10-12 | chat=6accb51c | EXPLAIN exact browser QA | local /mnt/data/imo182-qrt-d1-explain-browser-qa.py on artifact 11748552287 | PASS 45/45 and 0 JS errors, all five slot anatomies equal immutable golden
