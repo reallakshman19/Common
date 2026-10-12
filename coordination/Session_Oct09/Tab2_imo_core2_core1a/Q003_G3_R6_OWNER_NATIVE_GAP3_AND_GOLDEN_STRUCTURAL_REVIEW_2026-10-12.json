@@ -1,0 +1,160 @@
+{
+  "schema": "q003-v31-owner-native-report-and-review/v1",
+  "date_utc": "2026-10-12",
+  "report_time_utc": "2026-10-12T09:36:29Z",
+  "chat": "6acc9f8c",
+  "issue": 183,
+  "plan": "r6",
+  "aim": "v3.1.0",
+  "label_sha": "64a4e9c",
+  "report_provenance": "Owner-supplied Coordinator-authorized report, not a fetched original private runner receipt or independently opened generated HTML.",
+  "owner_authorization": "proceed for tab2",
+  "reported_native_run": {
+    "grade9v35_branch": "agent/183-q003-private-core2-test-6acc303b",
+    "head": "d1aa1e092fd5cb102eea3e6b85a1428ad085a42d",
+    "environment": "clean clone, jsonschema 4.26.0 virtual environment",
+    "original_input_sha256": "b263644cd1dd8aca689582232c9b8495f05ec07f3ffeaff3a18f414e6e1227f9",
+    "command_template": "python -I TEST/imo-research/core2-q003/benchmark_native.py --private-input <PRIVATE_FILE>",
+    "output_status": "NATIVE_GOLDEN_COMPARISON NATIVE_GAPS_OR_STRUCTURE_FINDINGS",
+    "command_exit_code": 1,
+    "exit_semantics": "benchmarker treats either native gaps or required structure errors as failure",
+    "q003": {
+      "generated_native_pages": 2,
+      "role_count": {
+        "microtopics": 0,
+        "core2": 1,
+        "core2a": 0,
+        "core2b": 0
+      },
+      "build_role": "DRAFT",
+      "gaps": 1,
+      "gap_duty": "AUTHOR_LEARNER_METADATA",
+      "gap_detail": "METADATA_PROVENANCE_INVALID: SOF-IMO-G09-L1-2023-24-A-Q003:None",
+      "private_test_render_done": true,
+      "core2_bytes": 59844,
+      "core2_sha256_prefix": "fd46d8a2",
+      "full_sha256": "NOT_PROVIDED"
+    },
+    "golden": {
+      "id": "G-CORE2-R2",
+      "status": "CANDIDATE_NOT_OWNER_BLESSED",
+      "generated_native_pages": 7,
+      "gaps": 0,
+      "renderer_digest": "8e37ab9dedeb5dcf",
+      "core2_bytes": 68330,
+      "core2_sha256_prefix": "b2f29068",
+      "full_sha256": "NOT_PROVIDED"
+    },
+    "structural": {
+      "native_structure_ok": {
+        "Q003": true,
+        "G-CORE2-R2": true
+      },
+      "registered_blueprint_marker": {
+        "Q003": true,
+        "G-CORE2-R2": true
+      },
+      "core2_role": {
+        "Q003": true,
+        "G-CORE2-R2": true
+      },
+      "typed_single_choice": {
+        "Q003": true,
+        "G-CORE2-R2": true
+      },
+      "typed_commit_count": {
+        "Q003": 1,
+        "G-CORE2-R2": 1
+      },
+      "attempt_box_count": {
+        "Q003": 1,
+        "G-CORE2-R2": 1
+      },
+      "missing_required_components": {
+        "Q003": [],
+        "G-CORE2-R2": []
+      },
+      "golden_components_absent_from_Q003": [
+        "CONDITIONS",
+        "SOURCE_PDF"
+      ],
+      "Q003_components_absent_from_golden": [],
+      "ladder_count": {
+        "Q003": 1,
+        "G-CORE2-R2": 2
+      },
+      "golden_blocks_absent_from_Q003": [
+        "conditions",
+        "source_hints",
+        "source_pdf"
+      ],
+      "Q003_extra_blocks": [
+        "after_attempt_support"
+      ]
+    },
+    "visual_comparison": "NOT_RUN",
+    "browser_gates": "NOT_RUN",
+    "a4": "NOT_RUN",
+    "owner_qrt_accepted": false,
+    "rights_cleared": false,
+    "published": false
+  },
+  "independent_static_review": {
+    "source_contracts": [
+      "Shared/tools/learner_metadata.py:_bank_question_metadata",
+      "Shared/vocabularies/learner-question-metadata.v1.json",
+      "TEST/imo-research/core2-q003/prepare_private.py:bank",
+      "TEST/imo-research/core2-q003/benchmark_native.py"
+    ],
+    "finding": "The TEST bank omitted grade9v3:provenance_class (None). The shared contract requires an enumerated source provenance, and the PYQ_VERIFIED enum further requires a source_status beginning PYQ_VERIFIED; the older owner-inspected source_status alone was insufficient.",
+    "patch": "https://github.com/reallakshman19/Grade9v3.5/commit/98ae06741f4d90865fcd313d609aeabba46826e2",
+    "patch_scope": "Only isolated TEST prepare_private.py:bank(); adds source provenance PYQ_VERIFIED with explicit owner-inspected development-only source status. The original question fields, private input source digest gates, rights hold, separate authored metadata, blueprint, shared renderer, and product main are untouched.",
+    "patch_status": "GitHub full-content readback exact; branch HEAD verified at 98ae06741f4d90865fcd313d609aeabba46826e2",
+    "checks": "7 source/static contract assertions passed; no original-input native rerun at patched head in this execution context",
+    "claim_scope": "SOURCE_ONLY; not a proven reduction in renderer gaps"
+  },
+  "golden_interpretation": {
+    "genuine_native_benchmark_happened": true,
+    "meaning": "The Coordinator ran the same approved native renderer on real original Q003 and candidate golden. Schema/role/typed commit parity holds at marker level, but the one Q003 learner-provenance gap prevents structure-only clean status.",
+    "component_differences": [
+      {
+        "marker": "CONDITIONS",
+        "interpretation": "Golden has a separately rendered conditions section; Q003 reports none; the TEST adapter describes no separately printed question conditions. Source-private check still needed before any waiver."
+      },
+      {
+        "marker": "SOURCE_PDF",
+        "interpretation": "Golden provides a source PDF block; Q003 source mirror has no retained source PDF artifact and no publisher license. Do not manufacture or silently waive source custody/rights; Q003 actual original text remains separately verified and must be used in the native page."
+      },
+      {
+        "marker": "source_hints",
+        "interpretation": "Candidate golden holds source hints; Q003 original hints absent from reported HTML. The authored after_attempt_support block is distinct, not allowed to be misrepresented as publisher-authored hints."
+      },
+      {
+        "marker": "ladder_count",
+        "interpretation": "1 Q003 vs 2 golden: not automatically a renderer failure, but potentially a meaningful learner-support/depth difference needing real behavior review."
+      },
+      {
+        "marker": "after_attempt_support",
+        "interpretation": "Q003-only authored support; must verify no protected solution leak before commit and correctly disclosed hints/solution after the typed attempt."
+      }
+    ],
+    "limitations": [
+      "No actual generated HTML provided to executor; no visual, keyboard, narrow-viewport, gating, A4, independent math or Owner QRT acceptance.",
+      "Golden is a method/interaction comparator with a different question, not a requirement to copy source-specific conditions or media.",
+      "Script exit status 1 is meaningful because Q003 had a metadata gap; do not label golden comparison complete/accepted.",
+      "Current patch was not in Coordinator's d1aa1e0 run."
+    ]
+  },
+  "status": {
+    "183-T2-G2-W2": "PARTIAL",
+    "183-T3-G2-W1": "PARTIAL",
+    "new_verified_pages": 0,
+    "accepted_qrt": 0,
+    "denominator_qrt": 28
+  },
+  "next": {
+    "first": "Existing authorized secure operator rerun exactly the same benchmark on 98ae06741f4d90865fcd313d609aeabba46826e2 with original SHA-pinned private JSON, recording any new first error and full source-safe gap/structural receipt.",
+    "second": "Privately inspect the actual native Q003 and golden HTML for source/option fidelity, precommit-denial -> typed commit -> after-attempt support -> solution, keyboard, viewport and candidate golden deltas; only then assess W2/T3 as complete.",
+    "third": "Then author concept-matched Core1A via existing registered blueprint and renderer; Owner retains QRT/rights/A4 approvals."
+  }
+}
