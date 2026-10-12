@@ -7,6 +7,14 @@ on:
       - 'coordination/Session_Oct07/Tab1_V32_Generic_Source_Lifecycle/**'
       - 'skills/engineering-pr-delivery-v3.1/tests/test_ci_terminal_checks.py'
       - '.github/workflows/v32-325-generic-source-preflight.yml'
+  # Draft-branch diagnostic: the new PR workflow is not installed on base main.
+  # Only this existing read-only candidate branch may run on push.
+  push:
+    branches:
+      - feature/v32-325-graph-bound-readonly-integration
+    paths:
+      - 'relay/INTEGRATION/V32_325_GENERIC_SOURCE_20261011/**'
+      - '.github/workflows/v32-325-generic-source-preflight.yml'
   workflow_dispatch:
 
 permissions:
