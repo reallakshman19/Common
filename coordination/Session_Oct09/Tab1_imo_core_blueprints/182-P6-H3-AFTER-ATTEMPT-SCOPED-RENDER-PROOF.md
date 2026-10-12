@@ -22,12 +22,12 @@ Owner message at 2026-10-12T09:23:26Z "H3 Hint, follow you recommendation!" reso
 
 | Actual role | Hosted HTML SHA256 |
 | --- | --- |
-| `core1.html` | `35616872153faedef7485c098da58e18c655399f64c7c784ab4ddbd40b459816` |
-| `core1a.html` | `cbf4a9aefee5b9dd65d21bd27dc9a9a743f1c7247aeb2b0c127598271794c86` |
-| `core1b.html` | `e172362aeb154e3eae0509bd28c7157af208e77949e2f6c83f4f2c9f394dfde5` |
+| `core1.html` | `35616872153faedef728024a7d174f6045fb0d591a86bde836aab1542537370e` |
+| `core1a.html` | `cbf4a9aefee5b9dd65a92988a62b4fb1ec87c88e791e359267a62069f7b9fd08` |
+| `core1b.html` | `e172362aeb154e3eae2e0485be20ff6f06c32eecc7e8fcdf3af00f18941b53f8` |
 | `core2a.html` | `ec78f359f7157def2b00e3d5c5b29452e22719e669aac2d31a9917e1caf36d27` |
-| `core2b.html` | `8f6cb1bf6caf82f550e33dd39700cdabf5018c30ac589e08f2230c11ed7ebd4` |
-| `index.html` | `d27dfdfef84637444764606856c96029e7d5b3e608241f8cdfbdd2b9a82a5ab8` |
+| `core2b.html` | `8f6cb1bf6caf82f55057b509a1a49cdf7faa486617242d418efd01609f9bf6c0` |
+| `index.html` | `d27dfdfef846374447256cd44f590df7c5d82ca2edb08854171fbc6d9daa5460` |
 
 **Local Chromium** `page.set_content()` with exact byte-identical hosted `core2a.html` (SHA above), **16/16 intended interaction checks PASS, 0 JS errors**: H3 absent from initial visible body; H1 available, NEXT HINT displays H2 then disables; H3 absent after H2; premature H3 summary click cannot open; blank attempt commit does not unlock; nonblank typed attempt unlocks but keeps H3 closed and slot empty; explicit H3 summary click opens and displays H3, independent FULL SOLUTION remains closed. Inert HTML `<template>` markup is inspectable in page source (not cryptographic secrecy), but not shown as learner hint before commit.
 
