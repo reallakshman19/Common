@@ -76,6 +76,14 @@ class TestIdentityContracts(unittest.TestCase):
             )
             w.validate()
 
+    def test_real_aim_label_sha_is_accepted(self):
+        # relay/AIM/3DC-XML-CII.yaml currently says label_sha: 5f9065d.
+        w = Work(work_id="work-real-aim", project_id=self.proj.project_id,
+                 aim_id="3DC-XML-CII", label_sha="5f9065d",
+                 issue_ref="https://github.com/reallakshman19/3D_Converters/issues/212",
+                 acceptance_status="IN_PROGRESS")
+        w.validate()
+
     def test_foreign_key_integrity(self):
         orphan_work = Work(
             work_id="work-orphan",
