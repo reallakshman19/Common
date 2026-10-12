@@ -34,7 +34,7 @@ jobs:
       - name: Verify original source digest
         shell: pwsh
         run: |
-          $wanted = 'c8e0e06a753f5663bfa3768a9b3a61d9a62ee5f489a40916e3d4e614171b'
+          $wanted = 'c8e0e06a753f5663bfa3768a9b3a61df61d9a62ee5f489a40916e3d4e614171b'
           $source = 'coordination/tests/fixtures/v328_source/watch.ps1'
           $actual = (Get-FileHash -Algorithm SHA256 $source).Hash.ToLowerInvariant()
           if ($actual -ne $wanted) { throw "Authoritative v3.28 SHA mismatch: $actual" }
