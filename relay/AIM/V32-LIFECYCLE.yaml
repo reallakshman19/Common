@@ -1,0 +1,36 @@
+# Sticky label: the Owner's aim for this work. Master copy, written by the coordinator (skill coordinator-protocol, scripts/aim.ps1)
+# only after the Owner approves a change card. The label text is the Owner's: never paraphrase it. Guidance (watch, not_now, notes) is
+# versioned too: a change of what may be done is a change of the label. Every copy carries version and label_sha.
+work: "V32-LIFECYCLE"
+repository: "reallakshman19/Common"
+engineering_critical: "standard"
+version: "1.1.0"
+label_sha: "6e81bd8"
+label:
+  problem: "You cannot see from GitHub what agents did or how far a work has got; each successor starts half-blind."
+  main_aim: "From one parent issue, GitHub alone shows the plan, evidence and live progress; any successor continues without chats."
+  outcomes:
+    O1: "A parent issue is decomposed into child issues with a visible plan"
+    O2: "Each finished task posts its evidence on its child issue"
+    O3: "Issue titles show live progress, updated automatically"
+    O4: "PR titles say what they deliver and their state, automatically"
+    O5: "A successor continues from GitHub alone, without chats"
+  owner_constraints:
+    - "The V3.2 lifecycle (skill engineering-pr-delivery-v3.2), not another version"
+  task_outcome: "O1-O5"
+  task_aim: "One real parent issue on the V3.2 lab runs end to end; its titles update themselves as evidence lands."
+  done_when: "On relay-v32-e2e-lab: a parent issue with child issues and evidence; issue and PR titles update automatically; a successor continues unaided."
+guidance:
+  not_now: []
+  watch:
+    - "Authenticating old labs or sources: say which outcome it serves"
+    - "Admission gates and authority debates"
+    - "Debates about evidence format"
+    - "Reports about the lifecycle instead of running it"
+  notes:
+    - "Lab: reallaksh19/relay-v32-e2e-lab (public since 11 Oct)"
+    - "Root issue: Common #200 (old #718); current issue #325, parent #289"
+bindings:
+  - "Session_Oct07:1 coordination/Session_Oct07/Tab1_V32_Generic_Source_Lifecycle"
+history:
+  - "v1.1.0 · 2026-10-12 04:56 · create · created · CP-V32-LIFECYCLE-01 · approved by the Owner"
