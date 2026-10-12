@@ -46,3 +46,6 @@ Exact-head merge gate: scoped CI green OR documented baseline-only red; sole ren
 
 ## r1 checkpoint 2026-10-12 after CI preflight
 182-INT-03 DONE: #197 merged in Grade9 main@4dbedc6; baseline gate evidence in Tab8/EVIDENCE.log. 182-INT-02 PARTIAL: baseline guard 2385/272 and exact-base zero-new on #197; new issues on #191 requiring separate repair. 182-INT-01 PARTIAL (per-cell SHA/receipt URLs audit outstanding). Next CI run on main currently QUEUED, no other PR merges.
+
+## r1.1 artifact audit checkpoint
+182-INT-01 inventory/verification DONE within indexed scope (25 authored, 3 unstarted). 182-INT-13 PARTIAL: 25 downloaded hosted artifacts with zero gaps and six independently computed SHA, but no receipt per-page SHA. #190 exact frozen lock fails and needs legitimate correction without golden-byte mutation / Owner D-182-3 for changed H3. No additional PR merged. Technical content still blocked CI under strict gate.
