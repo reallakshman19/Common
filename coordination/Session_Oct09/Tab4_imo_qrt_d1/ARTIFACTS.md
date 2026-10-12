@@ -43,3 +43,4 @@
 2026-10-12 | chat=6accb51c | MODEL D1 exact HTML | artifact 11751335796 imo182-qrt-d1-model-five-core-html; all five SHA256 match hosted receipt; local exact HTML Chromium 37/37 PASS, JS errors 0, golden role refs/slots PASS
 2026-10-12 | chat=6accb51c | MODEL D1 cell artifact | handovers/QRT-MODEL-D1.md @5a192c579ebac4722d76dbbd31be9b1b50f32080 | qualified verdict/Owner blank; this is NOT chat-successor handover
 2026-10-12 | chat=6accb51c | MODEL issue#182 exact TASK EVIDENCE comment 6125634577, identical in EVIDENCE.log
+2026-10-12 | chat=6accb51c | MODEL CI shared guardrail update | PR#192@0949e486, broad guardrails 38258022475 FAILURE, D1 six tests pass inside broad log, dedicated D1 model 38258022860 SUCCESS; exact-head lead reproduction https://github.com/reallakshman19/Grade9v3.5/pull/192#issuecomment-6125684056
