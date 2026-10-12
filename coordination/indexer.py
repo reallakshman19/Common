@@ -14,8 +14,6 @@ import threading
 import hashlib
 import json
 import re
-import importlib.util
-from functools import lru_cache
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
@@ -329,38 +327,58 @@ class EvidenceIndex:
             return row["provider_status"] if row else "UNKNOWN"
 
 
-@lru_cache(maxsize=1)
-def _v36_module():
-    """Use the source's exact canonical v3.6 validator."""
-    path = Path(__file__).resolve().parents[1] / "skills" / "engineering-pr-delivery-v3.6" / "scripts" / "lifecycle_v36.py"
-    spec = importlib.util.spec_from_file_location("_control_tower_v36", path)
-    if spec is None or spec.loader is None:
-        raise RuntimeError("Governing v3.6 validator not available")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
 class CanonicalV36Adapter:
-    """Use the exact eight-line format from lifecycle_v36.validate_evidence."""
+    """Stdlib-only, byte-exact mirror of lifecycle_v36.validate_evidence.
 
-    @staticmethod
-    def parse(text: str) -> Tuple[Optional[Dict[str, Any]], str]:
-        try:
-            fields = _v36_module().validate_evidence(text)
-        except Exception:
+    Conformance is verified against governing render_evidence/validate_evidence in
+    the CI suite. Never mutate the canonical eight-line TASK_EVIDENCE comment.
+    """
+    TASK = re.compile(r"^[A-Z0-9][A-Z0-9_.-]{2,79}$")
+    ISSUE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+#[1-9][0-9]*$")
+    TESTS = re.compile(r"([0-9]+)/([0-9]+)")
+
+    @classmethod
+    def parse(cls, text: str) -> Tuple[Optional[Dict[str, Any]], str]:
+        from urllib.parse import urlparse
+        if not isinstance(text, str):
             return None, "NONCANONICAL_REJECTED"
-        return {
-            "outcome": fields["outcome"],
-            "task_id": fields["task_id"],
-            "owner_issue": fields["issue_ref"],
-            "candidate": fields["candidate"],
-            "candidate_sha": fields["candidate"] if re.fullmatch(r"[0-9a-fA-F]{40}", fields["candidate"]) else "",
-            "for_user": text.splitlines()[1].split(": ", 1)[1],
-            "proof": text.splitlines()[2].split(": ", 1)[1],
-            "is_canonical_8line": True,
-            "raw_text": text,
-        }, "PARSED"
+        lines = text.splitlines()
+        prefixes = ("Outcome: ", "For the user: ", "Proof: ", "TASK_EVIDENCE v3.6",
+                    "Task: ", "Child issue: ", "Candidate: ", "Tests: ")
+        if len(lines) != 8 or not all(line.startswith(prefix) for line, prefix in zip(lines, prefixes)):
+            return None, "NONCANONICAL_REJECTED"
+        if lines[3] != "TASK_EVIDENCE v3.6":
+            return None, "NONCANONICAL_REJECTED"
+        try:
+            outcome, for_user, proof = [lines[i].split(": ", 1)[1] for i in range(3)]
+            task, issue, candidate, tests = [lines[i].split(": ", 1)[1] for i in range(4, 8)]
+        except (IndexError, ValueError):
+            return None, "NONCANONICAL_REJECTED"
+        match = cls.TESTS.fullmatch(tests)
+        parsed_url = urlparse(proof)
+        if (outcome not in ("O1", "O2", "O3", "O4", "O5")
+            or not for_user.strip() or for_user != for_user.strip()
+            or not cls.TASK.fullmatch(task) or not cls.ISSUE.fullmatch(issue)
+            or not candidate.strip() or not match
+            or parsed_url.scheme != "https" or not parsed_url.netloc
+            or parsed_url.username or parsed_url.password
+            or any(term in proof.lower() for term in ("example.com", "localhost", "todo", "<", ">"))
+            or any("<" in x and ">" in x for x in (for_user, candidate))):
+            return None, "NONCANONICAL_REJECTED"
+        if int(match[2]) < 1 or int(match[1]) > int(match[2]):
+            return None, "NONCANONICAL_REJECTED"
+        expected = (
+            f"Outcome: {outcome}\nFor the user: {for_user}\nProof: {proof}\n"
+            f"TASK_EVIDENCE v3.6\nTask: {task}\nChild issue: {issue}\n"
+            f"Candidate: {candidate}\nTests: {int(match[1])}/{int(match[2])}\n"
+        )
+        if text != expected:
+            return None, "NONCANONICAL_REJECTED"
+        return {"outcome": outcome, "task_id": task, "owner_issue": issue,
+                "candidate": candidate,
+                "candidate_sha": candidate if re.fullmatch(r"[0-9a-fA-F]{40}", candidate) else "",
+                "for_user": for_user, "proof": proof,
+                "is_canonical_8line": True, "raw_text": text}, "PARSED"
 
 
 class ExactHeadCIAdapter:
