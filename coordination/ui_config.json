@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "_comment": "Add extra projects below with absolute paths to their coordination directories",
+  "projects": [
+    {
+      "id": "common",
+      "name": "reallakshman19/Common",
+      "repo_url": "https://github.com/reallakshman19/Common",
+      "commit": "9d176f8e74bd71c7aa041aababd90ed31455bd9c",
+      "coordination_dir": ".",
+      "description": "Shared engineering skills, governance, coordination docs"
+    }
+  ],
+  "server": {
+    "port": 8080,
+    "cache_ttl_seconds": 15,
+    "page_size_default": 50,
+    "max_page_size": 500
+  },
+  "ui": {
+    "default_theme": "dark",
+    "polling_interval_ms": 15000
+  }
+}
