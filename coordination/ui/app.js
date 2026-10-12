@@ -72,6 +72,8 @@
         node.className = v;
       } else if (k === 'textContent') {
         node.textContent = v;
+      } else if (k === 'value' && tag === 'option') {
+        node.value = String(v);
       } else if (k === 'href') {
         const safe = safeHref(v);
         if (safe) {
@@ -149,7 +151,11 @@
 
     const isLocalHost = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
 
-    if (isLocalHost) {
+    // Explicit static preview is necessary when serving GitHub Pages assets
+    // from a local HTTP server. Never silently reinterpret a broken local API.
+    const explicitStatic = new URLSearchParams(window.location.search).get('mode') === 'static' ||
+      document.documentElement.dataset.controlTowerMode === 'static';
+    if (isLocalHost && !explicitStatic) {
       try {
         await loadLocalApi();
         return;
@@ -187,15 +193,27 @@
       publishedAt: null
     };
 
-    // Load each view
+    // Read every bounded cursor page from one immutable WP3 generation.
+    // Never silently display a partial first 200 items as a complete project.
     const views = ['portfolio', 'works', 'assignments', 'evidence', 'recovery', 'unassigned_observations'];
     for (const v of views) {
-      const res = await fetch(`${basePath}?view=${v}&limit=200`);
-      if (res.ok) {
-        const d = await res.json();
-        const targetKey = v === 'unassigned_observations' ? 'unassigned' : v;
-        state.viewsData[targetKey] = d.items || [];
-      }
+      let cursor = null;
+      const result = [];
+      do {
+        const qs = new URLSearchParams({view: v, limit: '200'});
+        if (cursor) qs.set('cursor', cursor);
+        const res = await fetch(`${basePath}?${qs.toString()}`, {cache: 'no-store'});
+        if (!res.ok) throw new Error(`Projection ${v} failed: HTTP ${res.status}`);
+        const data = await res.json();
+        if (data.generation !== state.metadata.generation || data.projection_digest !== state.metadata.digest) {
+          throw new Error('Projection generation changed during reading; refresh required');
+        }
+        if (!Array.isArray(data.items)) throw new Error('Invalid projection rows');
+        result.push(...data.items);
+        if (result.length > 10000) throw new Error('Local view exceeds 10,000 rows; refine the project scope');
+        cursor = data.next_cursor || null;
+      } while (cursor);
+      state.viewsData[v === 'unassigned_observations' ? 'unassigned' : v] = result;
     }
 
     if (el.tabUnassigned) {
