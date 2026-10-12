@@ -1,0 +1,26 @@
+# TAB3-O1-R9-W13 — Supported O1 default-route import closure / independent V4.1 owner separation
+
+Owner AIM 3DC-XML-CII v2.2.0 O1 (label_sha 5f9065d), chat 6accd172, issue [#226](https://github.com/reallakshman19/3D_Converters/issues/226). Plan [R9](https://github.com/reallakshman19/3D_Converters/issues/226#issuecomment-6124686039), handover [G5 response 2](../handovers/2026-10-12-g5-2.md). **W13 status: DONE (KEEP / NO_CHANGE O1; distinct V4.1 defect routed)**. **No product code, no new tests, no CI dispatch, no merge/deploy**. User=no; O1 public acceptance NOT MET.
+
+## Provenance
+
+Live working product identity: `reallakshman19/3D_Converters/main@4f14beb37bc0b719453c52a116c1c5d7183d2fd0`, OPEN/DRAFT #228 on branch `lfj/226-t3-main-worker-intake-20261012@227184ad09bc45ee0137b631fec950f8d0bfcc9c`, direct base main; source/CI at that exact head only. Last successful public Pages [dynamic deployment #38026616099](https://github.com/reallakshman19/3D_Converters/actions/runs/38026616099) is earlier main/docs. Current public asset SHA not independently verified, no inference of PR deployment.
+
+O1 consumer static path `index.html`/`docs/index.html` → `main-rhbg-fitguard.js` → `tabs/xml-cii-2019-standalone-tab.js` → `ui-adapted/xml-cii-adapted-workflow-shell-mode-a-easy-bulk-v6.js` → `ui-adapted/xml-cii-adapted-lfj-o1-intake.js` → `lfj/ports/source-browser-worker.mjs` → `source-worker-port.mjs` → `source-occurrence-index.mjs` / tokenizer / O1 IDB page record store; `xml-cii-adapted-lfj-o1-domain-ui.js` → independent `workers/lfj-o1-resolver-domain-worker.mjs` → existing JSON trace and CSV exporters. Root/docs index, O1 shell, intake, domain UI, domain Worker same Git blob in each pair at exact head.
+
+By contrast, known stale `lfj/query/pages/committed-selection-pages.mjs` is imported by `lfj/ports/committed-worker-query.mjs`, the separate LFJ V4.1 committed selection/query coordinator. W10 root-raw/docs-raw/docs-built Chromium run [38244848114](https://github.com/reallakshman19/3D_Converters/actions/runs/38244848114) has three successful cases with 523 network request records PER CASE, **zero requests for either of these query modules** in its supported O1 default user trace path. This is a supported O1 test route observation, not a universal absence of V4.1 imports from all app features.
+
+## Exact-head existing hosted evidence read back (NO new test run)
+
+- [W10 38244848114](https://github.com/reallakshman19/3D_Converters/actions/runs/38244848114): 3/3 SUCCESS (root-raw, docs-raw, docs-built). Each uses native O1 source+domain Workers, original Firstpass JSON SHA256 `6b2c8b01ab0ba6ec8e9e7c42eb4a719668ffd2dc4dbe4790d27cf426a1f60288`; both complete CSVs: Node **216 rows, 57945B**, SHA256 `0d8bb4482ed4a9d0d116faeac5e68ce564f07b6bba2dd73dfc3676b72ec2eddc`; Evidence **241 rows, 50399B**, SHA256 `653485ff968bf478fa0001488432bb210a9ce6e85a901e9cc19f368f53a24809`. Byte +1 original `104857601` and count +1 `2000001` typed no-stale-export cases checked. No synthetic inputs promoted to original semantic goldens; no invented 200ms SLA.
+- [W07 38244847904](https://github.com/reallakshman19/3D_Converters/actions/runs/38244847904) previously queued, **now COMPLETED SUCCESS 5/5** on same head (default-root/default-docs/optin-root/optin-docs/combined-optin).
+- [V4.1 38244847966](https://github.com/reallakshman19/3D_Converters/actions/runs/38244847966) real-browser-worker SUCCESS; `source-mirror` FAILED `docs/lfj/deployment-parity.test.mjs` because canonical `lfj/query/pages/committed-selection-pages.mjs` SHA256 `be903fb5d82ffd90f87191c926fd8f7bb8e8a221bc6c51dfa11a76a06589bd0f` versus docs mirror `10acaafc8d4c203cfafe9b2b5b2f5422386c5f6da2271dd1562777c33eca8ef5`. Resolver scope mirror PASSED. V4.1 owner issue [#118](https://github.com/reallakshman19/3D_Converters/issues/118) uniquely owns `docs/lfj/**`; [cross-workstream route comment](https://github.com/reallakshman19/3D_Converters/issues/118#issuecomment-6124741588) published and read back, no unwarranted O1 docs copy.
+- Exact head 42 workflow runs = **22 success / 20 failure / 0 queued**, separate C05 #203/Weight/release reds UNWAIVED. W11 active scope red belongs to next W14, not retroactively credited to W13.
+
+## W13 decision and AC
+
+Before: `committed-selection-pages.mjs` source/docs mismatch might be on O1 default browser path, W07 potentially queued, O1 docs branch entry success uncertain without W10 readback.
+
+After: current O1 eligible path and loaded 523 requests per three variants **exclude** query module; O1 protected complete CSV/typed limit/refusal supported by W10, W07 terminal 5/5; stale V4.1 source/docs mismatch remains real RED and routed to its distinct writer #118. **W13 is closed KEEP / NO_CHANGE for O1** because editing unrelated V4.1 mirrors would not advance the default supported O1 worker. O1 public-user acceptance remains NOT MET until authorized merge, deploy, actual browser network and Owner/reviewer assent; #118 parity is not waived.
+
+[W13 TASK EVIDENCE on #226](https://github.com/reallakshman19/3D_Converters/issues/226#issuecomment-6124760615) published and exact readback. Next `TAB3-O1-R9-W14` then `TAB3-O1-R9-W15`, one task per future reply. Owner AIM unchanged, O2/O3 standalone.
