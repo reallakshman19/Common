@@ -1,0 +1,6 @@
+# TASK_EVIDENCE — G9-C05-E / #860 (read-only final Weight qualification)
+Outcome: O1 #203 C05 release prerequisite.
+For the user: #860 already GREEN at integrated DRAFT #228@`8ec34719c46237df129fdad3fe23c31b82917260`; no file modification warranted.
+Proof: https://github.com/reallakshman19/3D_Converters/actions/runs/38296916761 ; job 114970098877 SUCCESS; hosted Node 9/9 PASS, covering retained #857 typed stale revision refusal, C05.4.4 hydrated Weight Match using datasetId without reimport, C05.4 final commit→cold restart, original rigid Weight eligibility and source/docs mirrors.
+Task: G9-C05-E. Goal: assess/close #860 without redundant patch. Status: DONE — VERIFIED_ALREADY_GREEN. Met: one targeted final qualification run, exact head, 9/9 tests. Done: read-only verify #860. Code: none. Tests: 9/9 hosted Node PASS (CI from existing exact head; no new test execution). CI: #860 SUCCESS; global old head 44/44 34 PASS/10 C05 FAIL. Evidence: run 38296916761; live #228 head from GitHub; captured 9 named tests in job 114970098877. AC: #860 is not part of original 15 failures, therefore cumulative repaired red C05 remains **4/15**, no false +1.
+Claim: no new regression or product edit, correctly scoped to #860 final gates. Blocker: remaining C05 failures, Owner-held baselines; release not green. Next: G9-C05-F #875, only after candidate/source provenance check.
