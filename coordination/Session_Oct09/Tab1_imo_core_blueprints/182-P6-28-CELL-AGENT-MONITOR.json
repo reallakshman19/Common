@@ -134,7 +134,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-EXPLAIN-D1",
@@ -167,7 +168,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-APPLY-D1",
@@ -200,7 +202,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-MODEL-D1",
@@ -233,7 +236,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-REPRESENT-D1",
@@ -268,7 +272,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-SYNTHESIZE-D1",
@@ -301,7 +306,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-JUSTIFY-D1",
@@ -336,7 +342,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-RETRIEVE-D2",
@@ -369,7 +376,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-EXPLAIN-D2",
@@ -402,7 +410,15 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": [
+        {
+          "pr": 140,
+          "ref": "02ccdc75bb95bf3ce910438bf78622e24e66b226",
+          "path": "TEST/imo-research/golden/imo-327-explain-d2.v1.json",
+          "kind": "AUTHOR_REVIEW_FIXTURE_NOT_LEARNER_PRODUCT"
+        }
+      ]
     },
     {
       "id": "QRT-APPLY-D2",
@@ -435,7 +451,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-MODEL-D2",
@@ -470,7 +487,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-REPRESENT-D2",
@@ -505,7 +523,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-SYNTHESIZE-D2",
@@ -538,7 +557,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-JUSTIFY-D2",
@@ -574,7 +594,21 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": [
+        {
+          "pr": 188,
+          "ref": "f87d2f627e3f05476d39fb04d7f26e453661dc68",
+          "path": "TEST/imo-research/pilots/imo182-core2b-transfer-pilot.v1.json",
+          "kind": "AUTHOR_ONLY_RENDERED_TEST_BASELINE"
+        },
+        {
+          "pr": 190,
+          "ref": "67c34dababb0da0ef7d5f4a532bfcf3119754961",
+          "path": "tests/test_imo182_core2a_h3_after_attempt.py",
+          "kind": "OWNER_H3_AFTER_ATTEMPT_PROOF_PENDING_NEW_GOLDEN"
+        }
+      ]
     },
     {
       "id": "QRT-RETRIEVE-D3",
@@ -607,7 +641,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-EXPLAIN-D3",
@@ -640,7 +675,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-APPLY-D3",
@@ -673,7 +709,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-MODEL-D3",
@@ -708,7 +745,15 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": [
+        {
+          "pr": 140,
+          "ref": "02ccdc75bb95bf3ce910438bf78622e24e66b226",
+          "path": "TEST/imo-research/golden/imo-327-model-d3.v1.json",
+          "kind": "AUTHOR_REVIEW_FIXTURE_NOT_LEARNER_PRODUCT"
+        }
+      ]
     },
     {
       "id": "QRT-REPRESENT-D3",
@@ -741,7 +786,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-SYNTHESIZE-D3",
@@ -774,7 +820,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-JUSTIFY-D3",
@@ -810,7 +857,21 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": [
+        {
+          "pr": 155,
+          "ref": "a9e68883d71afd2e8b7a0c067eedc23ee4da7ef8",
+          "path": "TEST/imo-research/pilots/core1a-qrt-justify-d3-authored.v1.json",
+          "kind": "D3_PROPOSED_NOT_CONFIRMED"
+        },
+        {
+          "pr": 166,
+          "ref": "48007ccf962ed03f9f6a5423fe7525eaba9cfdf1",
+          "path": "TEST/imo-research/pilots/blueprint-first-five-transfer.v1.json",
+          "kind": "AUTHORED_TEST_D3_CANDIDATE"
+        }
+      ]
     },
     {
       "id": "QRT-RETRIEVE-D4",
@@ -843,7 +904,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-EXPLAIN-D4",
@@ -876,7 +938,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-APPLY-D4",
@@ -909,7 +972,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-MODEL-D4",
@@ -942,7 +1006,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-REPRESENT-D4",
@@ -975,7 +1040,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-SYNTHESIZE-D4",
@@ -1008,7 +1074,8 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": []
     },
     {
       "id": "QRT-JUSTIFY-D4",
@@ -1041,7 +1108,23 @@
       "accepted": false,
       "blocker": null,
       "last_checked_at": null,
-      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering."
+      "next_action": "Choose source-authorized question OR create clearly AUTHORED TEST candidate, then bind demand/crux before rendering.",
+      "reuse_leads": [
+        {
+          "pr": 140,
+          "ref": "02ccdc75bb95bf3ce910438bf78622e24e66b226",
+          "path": "TEST/imo-research/golden/imo-327-justify-d4.v1.json",
+          "kind": "AUTHOR_REVIEW_FIXTURE_NOT_LEARNER_PRODUCT"
+        }
+      ]
     }
-  ]
+  ],
+  "latest_audit": "coordination/Session_Oct09/Tab1_imo_core_blueprints/182-P6-RECENT-PR-REUSE-AND-MATURE-BLUEPRINT-AUDIT.md",
+  "h3_owner_decision": {
+    "decision": "AFTER_ATTEMPT",
+    "issue_comment": "https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6121493094",
+    "scope": "CORE2A authored TEST hint 3; no QRT acceptance",
+    "implementation_preview_pr": 190,
+    "owner_golden_successor": "PENDING"
+  }
 }
