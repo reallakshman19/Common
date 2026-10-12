@@ -712,6 +712,38 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
             self.send_json(snap)
             return
 
+        # GET /api/v3/projections?view=&project=&limit=&cursor=
+        # Reads pre-materialized private SQLite only. Never runs PowerShell,
+        # ingests evidence or writes the DB during a request.
+        if route == "v3/projections":
+            import sqlite3
+            from coordination.projections import ProjectionQueryService
+            view = self._str(qs, "view") or "portfolio"
+            pid = self._str(qs, "project") or None
+            if pid and not any(p["id"] == pid for p in self.config.get("projects", [])):
+                self.send_json({"error": "UNKNOWN_PROJECT"}, 404)
+                return
+            raw_limit = self._str(qs, "limit") or "50"
+            try:
+                limit = int(raw_limit)
+                if not 1 <= limit <= 200:
+                    raise ValueError("Invalid limit")
+                path = Path(self.config.get("server", {}).get("projection_db_path")
+                            or (HERE / "projection_index.db"))
+                response = ProjectionQueryService(str(path)).page(
+                    view, project=pid, limit=limit,
+                    cursor=self._str(qs, "cursor") or None)
+                self.send_json(response)
+            except LookupError:
+                self.send_json({"error": "STALE_PROJECTION_CURSOR"}, 410)
+            except (ValueError, TypeError):
+                self.send_json({"error": "INVALID_PROJECTION_QUERY"}, 400)
+            except FileNotFoundError:
+                self.send_json({"error": "PROJECTION_NOT_MATERIALIZED"}, 503)
+            except sqlite3.DatabaseError:
+                self.send_json({"error": "PROJECTION_UNAVAILABLE"}, 503)
+            return
+
         # GET /api/projects
         if route == "projects":
             self.send_json([{"id": p["id"], "name": p["name"],
