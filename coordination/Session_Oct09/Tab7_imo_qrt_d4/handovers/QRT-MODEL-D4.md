@@ -1,0 +1,22 @@
+# QRT-MODEL-D4 — cell review artifact (not a chat handover)
+2026-10-12 | chat=6accb5b3 | worker AGENT-D4 | issue 182 | aim v3.1.0
+
+## State: AUTHORED TEST + SCHEMA_PASS, hosted renderer/Chromium still queued, NOT CLOSED.
+Draft PR #198 https://github.com/reallakshman19/Grade9v3.5/pull/198
+Exact code head cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50, branch agent/imo182-qrt-d4-model-pilot, stacked on unmerged H3 PR#190@67c34dababb0da0ef7d5f4a532bfcf3119754961.
+Sole renderer to run: Shared/tools/render_core.py build --manifest TEST/products/imo182-qrt-d4-model.manifest.json --out build/imo182-qrt/d4/model --draft --reference
+Latest required scope CI: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38250646298 QUEUED at checkpoint. There is NO MODEL actual generated HTML/receipt/browser artifact yet; do not assign RENDERED_TEST credit or SHA by guess.
+Source TEST/imo-research/qrt-d4/model-d4.package.json; review TEST/imo-research/qrt-d4/model-d4.review.json; original figures figures/model-core1a.svg, model-core1b.svg, model-core2a.svg, model-core2b.svg; test tests/test_imo182_qrt_d4_model.py; Chromium tests/imo182_qrt_d4_model_browser.py. All scoped paths in PR #198.
+Frozen golden benchmark: G-IMO-G9-FIVE-CORE-20261012 original_digest=ad02fef42f0d505a, five expected refs BP-CORE1-ORIENTATION@1.1.0, BP-CORE1A-CONSTRUCTION@1.8.0, BP-CORE1B-RECONSTRUCTION@1.1.0, BP-CORE2A-SUPPORTED-APPLICATION@1.1.0, BP-CORE2B-TRANSFER@1.1.0. Manifest specifies exactly these roles; golden actual slot comparison awaits CI.
+X: One chair per full outside-accessible unit-square table side; closed 4×4 border of tables surrounds sealed 2×2 courtyard.
+Y: For n tables each has 4 candidate sides. For e shared whole-side contacts two candidate chair sites disappear per contact; neutral PRELEARNED Core1 relation U=4n−2e counts unshared sides, NOT qualified outside seats.
+Z: Inspect connectivity of empty courtyard; introduce model variable c for unshared sides facing sealed inaccessible void, then A=4n−2e−c. Protected Core2A decision W is selecting this physically necessary correction, not merely performing formula arithmetic.
+W: On closed 4×4 ring, n12,e12,c8 => A16, cross-check outside length4×4=16. Changed transfer removes top row second-column noncorner table, opening a passage from center to exterior: n11,e10,c0 => A24; model updated rather than subtracting 4. Independent smaller 3×3 ring exit n8,e8,c4=>A12; opening its top center gives n7,e6,c0=>A16; small 3-table L concept yields n3,e2,c0=>A8.
+Wrong idea: unshared sides always accessible, and a shared seam removes only one chair. Core1B begins from false general claim, checks an inaccessible courtyard and reconstructs a corrected model with fresh changed boundary.
+Static QA: recursive Shared/library/package.schema.json validation ZERO errors @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50; independent JS exterior flood-fill on all 512 binary 3×3 grids plus 5 named shapes PASS; Core1 safe governing expression U=4n−2e, with explicit regression against protected full model appearing there. Python unittest schema/flood-fill/golden and browser H3+Core1B boundary test authored and QUEUED on GitHub Actions, not counted as executed.
+H1-H3: Core2A written MODEL W is protected; scaffold H1 counts unit sides, H2 counts seams, H3 introduces sealed-cavity decision only after nonblank committed answer (requires actual Chromium).
+S1-S3: three-stage L construction, separate Core1B closed-ring misconception, truly novel open-courtyard connectivity transfer with different model variables.
+P1-P3: physical side counting, independent flood-fill exterior oracle including all512 three-by-three configurations, 3x3 ring and changed opening exit. Grade9/D4 cognitive suitability independent decision remains open.
+M1-M3: source SVG/data/text wholly AUTHOR_CREATED TEST; no authentic exam source/KEY rights; golden frozen refs and semantic slot sequences must be proven by real pages; browser screenshot/assistive QA pending.
+Independent qualified reviewer verdict: BLANK. Owner QRT acceptance: BLANK. Successor golden D-182-3 OPEN.
+NOT a successor chat handover; chat handover=no.

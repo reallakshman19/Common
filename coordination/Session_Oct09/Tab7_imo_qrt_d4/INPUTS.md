@@ -25,3 +25,6 @@
 2026-10-12 | chat=6accb5b3 | APPLY-D4 five-role manifest | Grade9v3.5 draft PR#196@ed0c655fcbb7f4afdfaf19231174820a05c2d699 TEST/products/imo182-qrt-d4-apply.manifest.json | core2=[] and five registered roles
 2026-10-12 | chat=6accb5b3 | APPLY-D4 exact code | Grade9v3.5 PR#196@93fcc6152a4ae57c92fb8dae0ad808845686f9ad TEST/imo-research/qrt-d4/apply-d4.package.json | authorship AUTHORED, transfer.dimension=novelty, structural preflight 0 errors
 2026-10-12 | chat=6accb5b3 | APPLY-D4 source test | Grade9v3.5 PR#196@93fcc6152a4ae57c92fb8dae0ad808845686f9ad tests/test_imo182_qrt_d4_apply.py and tests/imo182_qrt_d4_apply_browser.py | hosted execution queued, not counted as pass
+2026-10-12 | chat=6accb5b3 | APPLY-D4 defect exact log | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245419910 job114797946977 | authored SVG desc false-positive, not math issue
+2026-10-12 | chat=6accb5b3 | MODEL-D4 source static | TEST/imo-research/qrt-d4/model-d4.package.json @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50 | schema0 errors, U=4n−2e safe Core1, protected c correction Core2A
+2026-10-12 | chat=6accb5b3 | MODEL-D4 math oracle | tests/test_imo182_qrt_d4_model.py @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50 | exterior flood-fill model 512x3x3 and five named layouts, hosted unittest queued

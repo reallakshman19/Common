@@ -26,3 +26,10 @@
 2026-10-12 | chat=6accb5b3 | APPLY-D4 exact draft | https://github.com/reallakshman19/Grade9v3.5/pull/196@93fcc6152a4ae57c92fb8dae0ad808845686f9ad | ten D4-owned files, not merged, original source
 2026-10-12 | chat=6accb5b3 | APPLY-D4 hosted CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245419910 | QUEUED, no generated-page proof
 2026-10-12 | chat=6accb5b3 | APPLY-D4 partial issue evidence | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6123925695 | exact EVIDENCE.log block; runner queue unresolved
+2026-10-12 | chat=6accb5b3 | APPLY-D4 source fix | Grade9v3.5 PR#196@0d36673633e115ecaa261917ee2066a80c3accc2 | harmless SVG Core2A <desc> trigger removed; no math/render/golden edit
+2026-10-12 | chat=6accb5b3 | APPLY-D4 latest CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38248875649 | QUEUED exact head after old failed-run assertion
+2026-10-12 | chat=6accb5b3 | APPLY-D4 diagnostic HTML/receipt | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245419910/artifacts/11745394663 | old head93fcc615 only, zero gaps, not final
+2026-10-12 | chat=6accb5b3 | MODEL-D4 source/draft | https://github.com/reallakshman19/Grade9v3.5/pull/198@cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50 | one original model + four figures + tests, static 0 schema errors
+2026-10-12 | chat=6accb5b3 | MODEL-D4 latest CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38250646298 | QUEUED, no final HTML credit
+2026-10-12 | chat=6accb5b3 | MODEL-D4 cell artifact | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-MODEL-D4.md | review packet only, NOT successor-chat handover
+2026-10-12 | chat=6accb5b3 | APPLY-D4 cell artifact | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-APPLY-D4.md | diagnosis and pending proof packet only
