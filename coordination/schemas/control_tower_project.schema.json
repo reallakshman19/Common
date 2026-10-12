@@ -32,14 +32,14 @@
       "minLength": 1
     },
     "status": {
-      "enum": ["ACTIVE", "DEGRADED", "UNAVAILABLE"]
+      "enum": ["ACTIVE", "DEGRADED", "UNAVAILABLE", "UNKNOWN"]
     },
     "as_of": {
       "type": "string",
       "format": "date-time"
     },
     "provider_reachability": {
-      "enum": ["REACHABLE", "UNAVAILABLE", "RATE_LIMITED", "FORBIDDEN"]
+      "enum": ["REACHABLE", "UNAVAILABLE", "RATE_LIMITED", "FORBIDDEN", "UNKNOWN"]
     }
   }
 }
