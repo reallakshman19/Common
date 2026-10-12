@@ -314,12 +314,12 @@ class ProjectionEngine:
                 w = registry.works[wid]
                 old = conn.execute("""SELECT body FROM projection_rows WHERE generation='__staging__'
                                       AND view='works' AND project_id=? AND sort_key=?""",
-                                   (w.project_id, wid)).fetchone()[0]
+                                   (w.project_id, w.project_id + "|" + wid)).fetchone()[0]
                 new = json.loads(old)
                 new["evidenced_tasks"] = len(tasks)
                 conn.execute("""UPDATE projection_rows SET body=? WHERE generation='__staging__'
                                 AND view='works' AND project_id=? AND sort_key=?""",
-                             (canon(new), w.project_id, wid))
+                             (canon(new), w.project_id, w.project_id + "|" + wid))
 
             # Final digest is of ordered FINAL rows and explicit source/clock vector.
             h = hashlib.sha256()
