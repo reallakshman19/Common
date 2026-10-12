@@ -48,52 +48,49 @@ class TestEvidenceIngestionAndIndexing(unittest.TestCase):
         self.tmp_dir.cleanup()
 
     def test_canonical_8line_parser_success(self):
-        raw = """
-        TASK_EVIDENCE: task-wp0-audit-001
-        PARENT_EVIDENCE: parent-task-000
-        CLAIMED_RESULT: WP0 and P0 delivered with green checks
-        CANDIDATE_SHA: c37187955fd9bf7b292779565eac9cc18bfa728a
-        PR_NUMBER: 352
-        PROOF_URL: https://github.com/reallakshman19/Common/pull/352
-        AUTHOR: Antigravity
-        TIMESTAMP: 2026-10-12T14:13:00Z
-        """
+        raw = (
+            "Outcome: O1\n"
+            "For the user: Worker is responsive\n"
+            "Proof: https://github.com/reallakshman19/Common/issues/353\n"
+            "TASK_EVIDENCE v3.6\n"
+            "Task: WP1-353-W01\n"
+            "Child issue: reallakshman19/Common#353\n"
+            "Candidate: c37187955fd9bf7b292779565eac9cc18bfa728a\n"
+            "Tests: 10/10\n"
+        )
         parsed, status = CanonicalV36Adapter.parse(raw)
         self.assertEqual(status, "PARSED")
-        self.assertIsNotNone(parsed)
-        self.assertEqual(parsed["pr_number"], 352)
+        self.assertEqual(parsed["outcome"], "O1")
+        self.assertEqual(parsed["owner_issue"], "reallakshman19/Common#353")
         self.assertEqual(parsed["candidate_sha"], "c37187955fd9bf7b292779565eac9cc18bfa728a")
         self.assertTrue(parsed["is_canonical_8line"])
 
     def test_canonical_8line_parser_rejects_trailing_metrics(self):
-        # v3.6 non-negotiable rule: Never append metrics to canonical 8-line TASK_EVIDENCE
-        raw_with_trailing = """
-        TASK_EVIDENCE: task-wp0-audit-001
-        PARENT_EVIDENCE: parent-task-000
-        CLAIMED_RESULT: WP0 and P0 delivered
-        CANDIDATE_SHA: c37187955fd9bf7b292779565eac9cc18bfa728a
-        PR_NUMBER: 352
-        PROOF_URL: https://github.com/reallakshman19/Common/pull/352
-        AUTHOR: Antigravity
-        TIMESTAMP: 2026-10-12T14:13:00Z
-        TASK_EVIDENCE_METRICS_V1: p95_latency=12ms
-        """
-        parsed, status = CanonicalV36Adapter.parse(raw_with_trailing)
-        self.assertEqual(status, "NONCANONICAL_REJECTED")
-        self.assertIsNone(parsed)
+        raw = (
+            "Outcome: O1\nFor the user: Worker responsive\n"
+            "Proof: https://github.com/reallakshman19/Common/issues/353\n"
+            "TASK_EVIDENCE v3.6\nTask: WP1-353-W01\n"
+            "Child issue: reallakshman19/Common#353\n"
+            "Candidate: " + "a"*40 + "\nTests: 9/10\n"
+        )
+        for tampered in (raw + "TASK_EVIDENCE_METRICS_V1: x\n", raw.rstrip("\n"), raw + "Tests: 1/1\n"):
+            with self.subTest(tampered=tampered[-25:]):
+                parsed, status = CanonicalV36Adapter.parse(tampered)
+                self.assertEqual(status, "NONCANONICAL_REJECTED")
+                self.assertIsNone(parsed)
 
     def test_canonical_8line_parser_rejects_malformed_sha(self):
-        raw_bad_sha = """
-        TASK_EVIDENCE: task-wp0-audit-001
-        PARENT_EVIDENCE: parent-task-000
-        CLAIMED_RESULT: WP0 and P0 delivered
-        CANDIDATE_SHA: not-a-valid-40-hex-sha
-        PR_NUMBER: 352
-        PROOF_URL: https://github.com/reallakshman19/Common/pull/352
-        AUTHOR: Antigravity
-        TIMESTAMP: 2026-10-12T14:13:00Z
-        """
-        parsed, status = CanonicalV36Adapter.parse(raw_bad_sha)
+        # v3.6 permits textual candidate refs; the semantic invalidity here
+        # is the missing mandatory repo/issue relationship, not SHA length.
+        bad_issue = (
+            "Outcome: O1\nFor the user: Worker responsive\n"
+            "Proof: https://github.com/reallakshman19/Common/issues/353\n"
+            "TASK_EVIDENCE v3.6\nTask: WP1-353-W01\n"
+            "Child issue: not-a-repo-issue\n"
+            "Candidate: c37187955fd9bf7b292779565eac9cc18bfa728a\n"
+            "Tests: 10/10\n"
+        )
+        parsed, status = CanonicalV36Adapter.parse(bad_issue)
         self.assertEqual(status, "NONCANONICAL_REJECTED")
         self.assertIsNone(parsed)
 
@@ -259,8 +256,10 @@ class TestEvidenceIngestionAndIndexing(unittest.TestCase):
         }
         self.index.store_evidence("project-common", ev)
 
-        snap = generate_control_tower_snapshot(reg, self.index, visibility="PUBLIC")
-        self.assertEqual(snap["visibility"], "PUBLIC")
+        snap = generate_control_tower_snapshot(reg, self.index, visibility="INTERNAL")
+        self.assertEqual(snap["visibility"], "INTERNAL")
+        with self.assertRaises(PermissionError):
+            generate_control_tower_snapshot(reg, self.index, visibility="PUBLIC")
         self.assertEqual(snap["evidence_count"], 1)
         self.assertIn("project-common", snap["source_watermarks"])
         self.assertEqual(snap["source_watermarks"]["project-common"], "2026-10-12T14:10:00Z")
