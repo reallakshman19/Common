@@ -4,3 +4,4 @@
 2026-10-12 | Tab2 | IMO 68 Core2/Core1A (new #183 lane) | coordination/Session_Oct09/Tab2_imo_core2_core1a/ | chat=new | issue=Grade9v3.5#183 | plan=r1 | Owner decisions OPEN | no learner page yet
 2026-10-12 | Tab4 | AGENT-D1 seven QRT cells | coordination/Session_Oct09/Tab4_imo_qrt_d1/ | chat=new | issue=Grade9v3.5#182 | plan=r1 | pilot=QRT-REPRESENT-D1 | accepted=0/28
 2026-10-12 | Tab6 | imo-qrt-d3 | coordination/Session_Oct09/Tab6_imo_qrt_d3/ | chat=new | issue=Grade9v3.5#182 | plan=r1 | state=pilot-MODEL-D3 | log=main
+2026-10-12 | Tab5 | IMO QRT D2 worker | coordination/Session_Oct09/Tab5_imo_qrt_d2/ | chat=new | issue=Grade9v3.5#182 | plan=r1 | seven owned D2 cells; pilot JUSTIFY-D2 | accepted=0/28
