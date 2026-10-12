@@ -172,18 +172,33 @@ class TestAdversarialScenarios(unittest.TestCase):
             self.assertEqual(entry["parse_status"], "TOO_LARGE")
             self.assertIsNone(entry["data"])
 
-    @unittest.skip("WP4 public snapshot exporter not yet implemented; allowlist fixture is not a privacy gate")
     def test_tc12_snapshot_privacy_redaction(self):
         """TC-12: Public snapshot excludes tokens, private local paths, and private chat IDs."""
-        private_keys = ["token", "password", "secret", "private_key"]
+        from coordination.public_exporter import PrivacyValidator, PrivacyViolationError
+
+        # 1. Verify clean export passes privacy validation
         sample_public_export = {
             "project_id": "common",
             "work_id": "work-common-182",
             "aim_id": "AIM-COMMON-CORE-V1",
             "status": "ACTIVE"
         }
+        private_keys = ["token", "password", "secret", "private_key", "chat_id", "coordination_dir"]
         for k in private_keys:
             self.assertNotIn(k, sample_public_export)
+        PrivacyValidator.assert_no_leaks(sample_public_export)
+
+        # 2. Verify forbidden key fails closed
+        with self.assertRaises(PrivacyViolationError):
+            PrivacyValidator.assert_no_leaks({"project_id": "common", "chat_id": "chat-secret-123"})
+
+        # 3. Verify GitHub token fails closed
+        with self.assertRaises(PrivacyViolationError):
+            PrivacyValidator.assert_no_leaks({"project_id": "common", "aim": "ghp_123456789012345678901234567890123456"})
+
+        # 4. Verify local Windows filesystem path fails closed
+        with self.assertRaises(PrivacyViolationError):
+            PrivacyValidator.assert_no_leaks({"project_id": "common", "path": r"C:\Users\operator\Common"})
 
 
 if __name__ == "__main__":

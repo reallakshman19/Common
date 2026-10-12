@@ -445,3 +445,70 @@ pre.code {
   .explorer-layout { grid-template-columns: 1fr; }
   .qrt-grid { grid-template-columns: 80px repeat(7, 90px); }
 }
+
+/* ── WP4 Telemetry Bar & Data Tables ───────────── */
+.telemetry-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border0);
+  font-size: 0.8rem;
+  color: var(--text1);
+  font-family: var(--mono);
+  flex-wrap: wrap;
+}
+.telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.table-container {
+  overflow-x: auto;
+  border: 1px solid var(--border0);
+  border-radius: var(--radius);
+  background: var(--card);
+  margin-top: 1rem;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  text-align: left;
+}
+.data-table th {
+  background: var(--bg2);
+  color: var(--text0);
+  padding: 0.65rem 0.85rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border1);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--border0);
+  color: var(--text0);
+}
+.data-table tr:hover td {
+  background: var(--bg2);
+}
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.badge-green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.badge-amber { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+.badge-red { background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.4); }
+.badge-gray { background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.4); }
+.loading-spinner {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text1);
+  font-size: 0.95rem;
+}
