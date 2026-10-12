@@ -38,9 +38,9 @@ tasks:
   - task_id: V36-341-WP6
     size: S
     outcome: O5
-    title: revamped two pass and three pass prompts
+    title: two independent purpose-specific generators for 2-pass and 3-pass
     for_user: Prompt workflows use the approved aim and real task evidence
-    acceptance: Both modes stay within v3.6 and preserve exact Owner label text and evidence links
+    acceptance: Two separately invocable generators and independent tests stay within v3.6; both preserve verbatim Owner label text and evidence links
   - task_id: V36-341-WP7
     size: M
     outcome: O5
