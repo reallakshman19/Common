@@ -215,6 +215,7 @@ class TestPublicDashboard(unittest.TestCase):
                 {"generation": "a" * 64, "as_of_utc": ASOF, "items": [], "next_cursor": None},
                 {"generation": "a" * 64, "as_of_utc": ASOF, "items": [], "next_cursor": None},
                 {"generation": "a" * 64, "as_of_utc": ASOF, "items": [], "next_cursor": None},
+                init_page,  # final generation recheck before atomic publication
             ]
             snap = export_public_snapshot(self.proj_db, self.out_json, approved_projects=["common"])
             self.assertIsNotNone(snap)
