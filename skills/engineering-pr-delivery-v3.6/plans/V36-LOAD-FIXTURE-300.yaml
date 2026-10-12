@@ -1,0 +1,47 @@
+# Stress test workload fixture plan: 300 generated test items for ST-02 / ST-03 / ST-04.
+# IMPORTANT: These tasks represent subject workload generated during Stage ST-02.
+# They do NOT alter or inflate the 6-stage controlling denominator (progress=E#/6) of parent issue #1.
+workload_id: "V36-LOAD-FIXTURE-300"
+workload_type: "SYNTHETIC_STRESS_FIXTURE"
+target_scale: 300
+controlling_stage: "V36-1-ST02"
+parent: "reallakshman19/relay-v36-stress-lab#1"
+label:
+  work: "V36-STRESS"
+  version: "1.0.0"
+  label_sha: "9f8e7d6"
+evidence_rules:
+  positive_controls:
+    count: 300
+    requirement: "Must reference verified test executions in the stress lab repository matching current PR head"
+    implication: "Indicates passing test evidence; NEVER implies Owner final acceptance or delivery signoff"
+  negative_controls:
+    count: 150
+    marking: "FIXTURE: NEGATIVE_TEST"
+    types: ["stale_candidate_sha", "mismatched_proof_url", "missing_required_headers"]
+  adversarial_controls:
+    count: 150
+    marking: "FIXTURE: ADVERSARIAL_TEST"
+    types: ["foreign_author_comment", "cross_repo_reference", "prompt_injection_payload", "malformed_yaml"]
+workload_batches:
+  tier_2a:
+    range: [1, 20]
+    description: "Initial baseline load: 20 issues"
+  tier_2b:
+    range: [21, 101]
+    description: "Pagination boundary test across 99, 100, and 101 issue thresholds"
+  tier_2c:
+    range: [102, 125]
+    description: "Mid-scale load: 125 issues"
+  tier_2d:
+    range: [126, 300]
+    description: "Full stress load: 300 issues"
+task_template:
+  id_prefix: "V36-LOAD-"
+  size: "S"
+  outcomes_distribution:
+    O1: 60
+    O2: 60
+    O3: 60
+    O4: 60
+    O5: 60
