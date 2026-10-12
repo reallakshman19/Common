@@ -13,7 +13,7 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 import yaml
-from lifecycle_v36 import ContractError, TASK_REF, UniqueKeyLoader, load_label, writable_lab
+from lifecycle_v36 import ContractError, TASK_REF, UniqueKeyLoader, load_label, writable_lab, require_explicit_lab
 
 PLAN_KEYS = {"plan_version", "parent", "label", "tasks"}
 TASK_KEYS = {"task_id", "size", "outcome", "title", "acceptance", "for_user"}
@@ -252,12 +252,14 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="v3.6 O1 parent child decomposition")
     parser.add_argument("--label", required=True, help="actual master relay/AIM/<WORK>.yaml")
     parser.add_argument("--plan", required=True)
+    parser.add_argument("--lab", help="explicit writable lab repo from selected label; required for lab-target plan")
     parser.add_argument("--apply", action="store_true", help="opt-in GitHub writes")
     parser.add_argument("--confirm-scope", default="", help="exact owner/repo#parent required for --apply")
     args = parser.parse_args(argv)
     try:
         label = load_label(args.label)
         plan = load_plan(args.plan, label)
+        require_explicit_lab(label, plan["parent"], args.lab)
         token = os.environ.get("GITHUB_TOKEN")
         if args.apply and (args.confirm_scope != plan["parent"] or not token):
             raise ContractError("write refused: --confirm-scope exact parent and GITHUB_TOKEN are required")
