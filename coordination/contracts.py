@@ -95,7 +95,7 @@ class AgentRun:
     chat_id: str
     meter_started_at: str
     evidence_cadence_count: int
-    run_state: str  # IN_PROGRESS, SUCCEEDED, FAILED, STALE, TIMED_OUT
+    run_state: str  # IN_PROGRESS, SUCCEEDED, FAILED, STALE, TIMED_OUT, SUPERSEDED, INTERRUPTED
     predecessor_run_id: Optional[str] = None
 
     def validate(self):
@@ -105,7 +105,7 @@ class AgentRun:
             raise ValueError("predecessor_run_id is required for generation > 1")
         if self.evidence_cadence_count < 0:
             raise ValueError("evidence_cadence_count cannot be negative")
-        if self.run_state not in ("IN_PROGRESS", "SUCCEEDED", "FAILED", "STALE", "TIMED_OUT"):
+        if self.run_state not in ("IN_PROGRESS", "SUCCEEDED", "FAILED", "STALE", "TIMED_OUT", "SUPERSEDED", "INTERRUPTED"):
             raise ValueError(f"Invalid run_state: {self.run_state}")
 
 
@@ -179,30 +179,44 @@ class ControlTowerRegistry:
 
     def register_project(self, p: Project):
         p.validate()
+        if p.project_id in self.projects:
+            raise ValueError(f"Duplicate project_id: {p.project_id}")
         self.projects[p.project_id] = p
 
     def register_work(self, w: Work):
         w.validate()
         if w.project_id not in self.projects:
             raise KeyError(f"Foreign key violation: project_id {w.project_id} does not exist")
+        if w.work_id in self.works:
+            raise ValueError(f"Duplicate work_id: {w.work_id}")
         self.works[w.work_id] = w
 
     def register_lane(self, l: ExecutionLane):
         l.validate()
         if l.work_id not in self.works:
             raise KeyError(f"Foreign key violation: work_id {l.work_id} does not exist")
+        if l.lane_id in self.lanes:
+            raise ValueError(f"Duplicate lane_id: {l.lane_id}")
         self.lanes[l.lane_id] = l
 
     def register_assignment(self, a: AgentAssignment):
         a.validate()
         if a.lane_id not in self.lanes:
             raise KeyError(f"Foreign key violation: lane_id {a.lane_id} does not exist")
+        if a.assignment_id in self.assignments:
+            raise ValueError(f"Duplicate assignment_id: {a.assignment_id}")
         self.assignments[a.assignment_id] = a
 
     def register_run(self, r: AgentRun):
         r.validate()
         if r.assignment_id not in self.assignments:
             raise KeyError(f"Foreign key violation: assignment_id {r.assignment_id} does not exist")
+        if r.run_id in self.runs:
+            raise ValueError(f"Duplicate run_id: {r.run_id}")
+        if r.predecessor_run_id:
+            prev = self.runs.get(r.predecessor_run_id)
+            if not prev or prev.assignment_id != r.assignment_id or prev.generation + 1 != r.generation:
+                raise ValueError("Invalid predecessor run or generation")
         self.runs[r.run_id] = r
 
     def register_binding(self, b: TabBinding):
@@ -211,6 +225,14 @@ class ControlTowerRegistry:
             raise KeyError(f"Foreign key violation: run_id {b.run_id} does not exist")
         if b.project_id not in self.projects:
             raise KeyError(f"Foreign key violation: project_id {b.project_id} does not exist")
+        run = self.runs[b.run_id]
+        assignment = self.assignments[run.assignment_id]
+        lane = self.lanes[assignment.lane_id]
+        work = self.works[lane.work_id]
+        if b.project_id != work.project_id or b.generation != run.generation:
+            raise ValueError("Binding project/generation mismatch")
+        if b.binding_id in self.bindings:
+            raise ValueError(f"Duplicate binding_id: {b.binding_id}")
         self.bindings[b.binding_id] = b
 
     def register_evidence(self, e: TaskEvidence):
@@ -218,6 +240,8 @@ class ControlTowerRegistry:
         if e.work_id not in self.works:
             raise KeyError(f"Foreign key violation: work_id {e.work_id} does not exist")
         # Idempotent replay: record in immutable history, keep canonical version
+        if self.evidence.get(e.evidence_id) == e:
+            return  # identical provider revision is idempotent
         self.evidence_history.append(e)
         self.evidence[e.evidence_id] = e
 
@@ -254,14 +278,13 @@ class ControlTowerRegistry:
                 # Conflict detected!
                 for b in active_list:
                     b.binding_state = "IDENTITY_CONFLICT"
-                work = self.works[work_id]
-                work.acceptance_status = "HOLD"
+                # Runtime conflicts cannot mutate Owner acceptance.
                 msg = f"IDENTITY_CONFLICT: Work {work_id} has {len(active_list)} simultaneous active tab bindings."
                 conflicts.append(msg)
 
         return conflicts
 
-    def perform_handover_carry(self, assignment_id: str, new_chat_id: str, new_tab_alias: str, project_id: str) -> AgentRun:
+    def perform_handover_carry(self, assignment_id: str, new_chat_id: str, new_tab_alias: str, project_id: str, handover_kind: str = "NORMAL") -> AgentRun:
         """
         Models watch.ps1 -Action carry:
         - Assignment preserved
@@ -270,7 +293,14 @@ class ControlTowerRegistry:
         - Evidence cadence count carried forward
         - Predecessor run marked historical
         """
+        if handover_kind not in ("NORMAL", "RECOVERY"):
+            raise ValueError("Invalid handover kind")
         assign = self.assignments[assignment_id]
+        work = self.works[self.lanes[assign.lane_id].work_id]
+        if work.project_id != project_id:
+            raise ValueError("Handover cannot cross project boundary")
+        if not new_chat_id.strip():
+            raise ValueError("Missing successor chat")
         # Find latest run
         runs = [r for r in self.runs.values() if r.assignment_id == assignment_id]
         runs.sort(key=lambda x: x.generation, reverse=True)
@@ -279,7 +309,10 @@ class ControlTowerRegistry:
         gen = (latest_run.generation + 1) if latest_run else 1
         carried_count = latest_run.evidence_cadence_count if latest_run else 0
         if latest_run:
-            latest_run.run_state = "SUCCEEDED"
+            if new_chat_id == latest_run.chat_id:
+                raise ValueError("Successor chat must differ from predecessor")
+            if latest_run.run_state == "IN_PROGRESS":
+                latest_run.run_state = "INTERRUPTED" if handover_kind == "RECOVERY" else "SUPERSEDED"
 
         new_run = AgentRun(
             run_id=f"{assignment_id}/run/{gen}",
