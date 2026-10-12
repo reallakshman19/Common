@@ -23,3 +23,5 @@
 2026-10-12 | chat=6accb5b3 | APPLY-D4 branch | Grade9v3.5 agent/imo182-qrt-d4-apply-pilot@ed0c655fcbb7f4afdfaf19231174820a05c2d699 | based on unmerged PR#190 exact H3 head
 2026-10-12 | chat=6accb5b3 | APPLY-D4 draft PR | https://github.com/reallakshman19/Grade9v3.5/pull/196 | wholly AUTHORED TEST source, original SVGs, independent QA
 2026-10-12 | chat=6accb5b3 | APPLY-D4 first scoped CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245052128 | QUEUED at first check; no cell credit until successful exact-head
+2026-10-12 | chat=6accb5b3 | APPLY-D4 exact draft | https://github.com/reallakshman19/Grade9v3.5/pull/196@93fcc6152a4ae57c92fb8dae0ad808845686f9ad | ten D4-owned files, not merged, original source
+2026-10-12 | chat=6accb5b3 | APPLY-D4 hosted CI | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38245419910 | QUEUED, no generated-page proof

@@ -23,3 +23,5 @@
 2026-10-12 | chat=6accb5b3 | independent maths | tests/test_imo182_qrt_d4_explain.py@6c00fae5c150cd580ab04c680414fba0a0c776e8 | 2727 multiples11 original length2..6, 900 three-digit exit, 3 tests PASS hosted
 2026-10-12 | chat=6accb5b3 | APPLY-D4 authored record | Grade9v3.5 draft PR#196@ed0c655fcbb7f4afdfaf19231174820a05c2d699 TEST/imo-research/qrt-d4/apply-d4.package.json | three non-coprime phases, interval, changed incompatibility, no authentic source
 2026-10-12 | chat=6accb5b3 | APPLY-D4 five-role manifest | Grade9v3.5 draft PR#196@ed0c655fcbb7f4afdfaf19231174820a05c2d699 TEST/products/imo182-qrt-d4-apply.manifest.json | core2=[] and five registered roles
+2026-10-12 | chat=6accb5b3 | APPLY-D4 exact code | Grade9v3.5 PR#196@93fcc6152a4ae57c92fb8dae0ad808845686f9ad TEST/imo-research/qrt-d4/apply-d4.package.json | authorship AUTHORED, transfer.dimension=novelty, structural preflight 0 errors
+2026-10-12 | chat=6accb5b3 | APPLY-D4 source test | Grade9v3.5 PR#196@93fcc6152a4ae57c92fb8dae0ad808845686f9ad tests/test_imo182_qrt_d4_apply.py and tests/imo182_qrt_d4_apply_browser.py | hosted execution queued, not counted as pass
