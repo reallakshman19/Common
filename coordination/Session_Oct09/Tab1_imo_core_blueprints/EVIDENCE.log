@@ -73,3 +73,22 @@ Claim: HOSTED_CI
 Blocker: NONE - A4 same-page renderer-generated PDF receipt and Owner visual signoff not yet obtained; no new authorization required for scoped TEST branch
 Next: 182-T5 integrated page/A4 receipt and Owner review, then 182-T2 Core1A
 LOG | chat=6acc3003 | tab=Tab1 | issue=182 | plan=P2 | progress=2/10 | done=none | next=182-T5,182-T2 | ac=0/4 | blocker=NONE | aim=v1.1.0 | outcome=O1 | user=no
+
+Outcome: O1
+For the user: an actual authored TEST Core1A learner HTML, hash-bound printable PDF and browser screenshots can now be reviewed on isolated draft PR #185, but there is no published real-learner workflow.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38193075758
+TASK EVIDENCE
+Task: 182-T2
+Goal (issue AC): Render Core1A from existing BP-CORE1A-CONSTRUCTION@1.8.0 and its authored TEST manifest, compare actual learner output with candidate golden core1a.html.
+Status: PARTIAL
+Met: partial (O1 structural technique verified; Owner A4 print and golden/academic approval NOT met)
+Done: Generated real Core1A TEST draft using sole renderer through deploy_test.py --no-mirror; rendered same-run candidate golden; 11 of 11 technique/slot/REQUIRED component/staged figure/independent exit/provenance checks passed with zero reference-depth gaps, four browser widths + 200%-text + keyboard disclosure audit zero failures. Exact digest-linked learner PDF generated but physical paper 280x175 mm (not ISO A4).
+Code: reallakshman19/Grade9v3.5 agent/issue-182-core1a-v120-golden @752b9ba8315bbaa9be1f3b5aeee7322a93c87829 | PR #185 DRAFT, unmerged
+Tests: tests.test_core1a_renderer_maturity + tests.test_core_authored_qrt_repair_journey -> pass; QRT 28-cell check -> pass; render_core gaps --reference -> 0; sole render and candidate golden -> pass; tests/imo_182_core1a_golden.py -> 11/11 pass; Chromium 320,390,768,1280 and 200% -> 0 failures; print PDF hash -> pass; ISO A4 size -> FAIL (793.92x497.04pt); Owner visual, real learners, pixel/mathematics independent verdict -> NOT_RUN
+CI: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38192811231 -> failure (comparator assumed no duplicate closing slot); https://github.com/reallakshman19/Grade9v3.5/actions/runs/38192925010 -> success; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38193075758 -> success exact head
+Evidence: https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6116290481 ; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38193075758 ; https://github.com/reallakshman19/Grade9v3.5/pull/185
+AC: no Core1A learner page/golden evidence -> actual sole-renderer TEST page and candidate-golden structural proof exists; A4 Owner acceptance and QRT Owner acceptance not met, so aim O1/O2 not complete
+Claim: HOSTED_CI
+Blocker: TECH - shared existing printer defaults to non-A4 280x175mm, so same-page PDF does not meet D-182-4 A4 acceptance, Owner visual remains NOT_RUN; no public route or source rights
+Next: 182-T10 Core1B golden inspection, then Core1 and Core2B; Core1A A4 receipt remediation scoped to blocking O1 only
+LOG | chat=6acc3003 | tab=Tab1 | issue=182 | plan=P3 | progress=2/10 | done=none | next=182-T10 | ac=0/4 | blocker=TECH:O1-A4-print-noncompliant | PR=185@752b9ba:green | tests=11/11 | handover=no | aim=v1.2.0 | outcome=O1 | user=no
