@@ -181,3 +181,20 @@ AC (before -> after): actual Core1A admitted 0->0, Q003 Core2 admitted 0->0, Own
 Claim: INDEPENDENT (source-only review)
 Blocker: MACHINE - actual native Q003 renderer in full checkout not executed; this review not product-render evidence
 Next: 183-T2-G2-W1 native source-faithful Core2, T3 actual G-CORE2-R2 compare, T4 native construction against five-role Core1A snapshot, T5 Owner QRT/A4
+2026-10-12 | chat=6acc4eaa | TASK EVIDENCE | G2 owner-reported first native Q003 failure | aim=v3.1.0 plan=r5
+Outcome: O1
+For the user: Missing Q003 package microtopic corrected in isolated source, but no successful native learner Core2 yet.
+Proof: https://github.com/reallakshman19/Grade9v3.5/commit/9fa6bb37e7c855a7cb72a2aedd59e32074f712b7 (verified one-file adapter diff, NOT actual renderer proof); https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120278504 (issue evidence)
+Task: 183-T2-G2-W2
+Goal (issue AC): Correct observed native package schema failure and rerun original-source Q003 through sole render_core
+Status: PARTIAL
+Met: partial
+Done: Source/schema inspection root microtopics minItems 1, new authored TEST microtopic and authored source record (not an admitted Core1A), push/branch readback on one adapter file +59/-2
+Code (repo branch @ commit | PR): Grade9v3.5 agent/183-q003-private-core2-test-6acc303b@9fa6bb37e7c855a7cb72a2aedd59e32074f712b7 | PR none
+Tests (command -> pass/fail/skip): Owner prior exact private-input prepare -> REPORTED_PASS; native renderer at b720b79 -> REPORTED_FAIL PRODUCT_STRUCTURE_INVALID microtopics []; post-patch exact native -> NOT_RUN/awaiting Owner; local post-patch only static review
+CI (run -> result): hosted learner-platform-code-tests 38221438638 -> SUCCESS, v31-relay 38221438630 -> SUCCESS, guardrails 38221438595 -> IN_PROGRESS at check (generic workflows, no Q003 original)
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6120278504; https://github.com/reallakshman19/Grade9v3.5/commit/9fa6bb37e7c855a7cb72a2aedd59e32074f712b7
+AC (before -> after): true native original-Q003 page 0->0, first named structural schema defect source corrected, golden actual NOT_RUN, Owner QRT 0/28 unchanged
+Claim: INDEPENDENT source/schema/commit; HOSTED_CI generic; OWNER-REPORTED native prior error
+Blocker: PERSON - Owner promised local clean checkout rerun on @9fa6bb3 and sanitized native output receipt/HTML
+Next: Owner rerun of T2 native Q003; if true success T3 actual golden, T4 canonical lesson, T5 QRT/A4; if first new error conditional W2 fix
