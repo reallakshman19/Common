@@ -291,7 +291,9 @@ def export_public_snapshot(
                         proj = _project_entity(item, WORKS_ALLOWLIST)
                         # Optional WP3 CI mapping is absent unless the source
                         # actually carries verified required-job observations.
-                        proj.setdefault("pr_check_observations", None)
+                        # Detailed check URLs/jobs may expose internal delivery
+                        # structure. Public CI remains the qualified ci_status.
+                        proj["pr_check_observations"] = None
                         proj["issue_ref"] = URLSanitizer.sanitize(proj.get("issue_ref"))
                         proj["candidate_pr_ref"] = URLSanitizer.sanitize(proj.get("candidate_pr_ref"))
                         works_items.append(proj)
