@@ -1,0 +1,89 @@
+{
+  "schema": "q003-g2-local-prototype-receipt/v1",
+  "date_utc": "2026-10-12",
+  "chat": "6acc4eaa",
+  "issue": 183,
+  "plan": "r4",
+  "aim": "v2.2.0",
+  "outcomes": [
+    "O1",
+    "O2",
+    "O3"
+  ],
+  "classification": "RUNNABLE_LOCAL_STANDALONE_CANDIDATE_NOT_CANONICAL_RENDERER",
+  "source": {
+    "source_pdf": "https://iswkoman.com/uploads/olympiad/8919398-CL%20IX%20IMO%202023-24%20(1).pdf",
+    "pdf_page_index": 1,
+    "printed_page": 2,
+    "printed_question_number": 3,
+    "source_item_sha256": "31ce624340b8d223c50c27797d6e5f7211b03f9365f2f0db387461e7375051b2",
+    "matches_existing_normalized_component_receipt": true,
+    "prior_private_json_byte_digest_reproduced": false,
+    "organizer_key_readback": false,
+    "original_components_committed_to_git": false
+  },
+  "products": {
+    "local_core2": {
+      "type": "STANDALONE_HTML_NONCANONICAL",
+      "sha256": "ef5a2ff122dc4915db650babb8d317920ed428d5ac7da7a17e7fbbbea4d9b272",
+      "browser_attemptable": true,
+      "learner_commit": true,
+      "after_commit_hints": true,
+      "solution_authored_unlocked_by_commit": true,
+      "canonical_grade9v3_renderer": false
+    },
+    "local_core1a": {
+      "type": "AUTHORED_STANDALONE_HTML_NONCANONICAL",
+      "sha256": "4eb3e5474705d001103a8fa6ad602c043fc0758e5e624dbbb2242ad2e56e38a3",
+      "construction_warrants": true,
+      "wrong_route_repair": true,
+      "changed_case_exit": true,
+      "canonical_grade9v3_renderer": false
+    }
+  },
+  "browser_test": {
+    "engine": "headless Chromium / Playwright",
+    "load": "set_content from local self-contained HTML because browser file and localhost navigation are restricted",
+    "passed": 17,
+    "run": 17,
+    "failed": 0,
+    "claim": "INDEPENDENT_LOCAL_STANDALONE_BROWSER_ONLY",
+    "ci": "NOT_RUN",
+    "canonical_test": "NOT_RUN"
+  },
+  "golden_review": {
+    "G_CORE2_R2": "TECHNIQUE_LEVEL_LOCAL_COMPARISON_PARTIAL_NO_NATIVE_PIXEL_DIFF",
+    "G_MATH_LINEAR_CONSTRAINT": "TECHNIQUE_LEVEL_LOCAL_COMPARISON_PARTIAL_NO_NATIVE_PIXEL_DIFF",
+    "source_options_t15": "LOCAL_PASS",
+    "attempt_first_t01": "LOCAL_PASS",
+    "hint_disclosure_t05": "LOCAL_PARTIAL_HTML_MARKUP_STILL_CONTAINS_HIDDEN_STRINGS",
+    "source_key_vs_independent_answer_t13": "INDEPENDENT_MATH_ONLY_OFFICIAL_KEY_UNKNOWN",
+    "construction_t02": "LOCAL_CANDIDATE",
+    "changed_case_transfer": "LOCAL_PASS",
+    "owner_blessed": false
+  },
+  "print": {
+    "core2_browser_print_a4_pages": 2,
+    "core1a_browser_print_a4_pages": 2,
+    "core2_pdf_sha256": "5be00f61f9b6ef1e6f3c8d9c9a1f72c9f2be725554e233ca366ad93ff660297f",
+    "core1a_pdf_sha256": "577c5276551cb15187a7f74dc70d7be0a61fca238a685dd4b3afbef755afd433",
+    "same_page_canonical_renderer_pdf": "NOT_RUN",
+    "owner_visual_accepted": false
+  },
+  "external_artifacts": {
+    "location": "Chat sandbox /mnt/data/Q003_local_learner_preview_2026-10-12.zip",
+    "repo_copy": false,
+    "source_data_in_public_github": false
+  },
+  "product_state": {
+    "Grade9_main": "778eb35a70517a46108ad0a5dc01dfc89f61c0e3",
+    "isolated_test": "b720b791f87ff0b78f1d9ff3e32f169ef0851850",
+    "product_mutations": 0,
+    "admitted_original_core2": 0,
+    "admitted_core1a": 0,
+    "qrt_owner_accepted": "0/28",
+    "publisher_rights_granted": false
+  },
+  "next": "Re-enter native TEST adapter with source reconstructed and exact component SHA match, preserve existing authorized private input digest boundary, run canonical renderer, inspect HTML for actual disclosure and golden gaps, then owner QRT/A4 decisions. Do not claim standalone prototype is native product.",
+  "note": "Question wording and answer omitted deliberately from this public receipt; learning artifacts linked only inside chat sandbox."
+}
