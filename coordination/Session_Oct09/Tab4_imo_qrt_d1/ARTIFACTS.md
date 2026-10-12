@@ -23,3 +23,6 @@
 2026-10-12 | chat=6accb51c | cell artifact | handovers/QRT-RETRIEVE-D1.md @0906aa3c907b0202d49b1efb0548598e97f6c802 | NOT successor-chat handover
 2026-10-12 | chat=6accb51c | issue evidence | Grade9v3.5 issue#182 comment 6123725775 | identical TASK EVIDENCE block in EVIDENCE.log
 2026-10-12 | chat=6accb51c | shared CI reproduction to lead | Grade9v3.5 PR#192 comment 6123776631 | guardrails run 38244512653 FAILURE, job 114794950678, named raw intake/evidence snapshot/search-index failures; D1 focused run 38244512806 SUCCESS
+2026-10-12 | chat=6accb51c | EXPLAIN source | Grade9v3.5 PR#192 agent/imo182-qrt-d1-represent @3540909404324130f29501df88d2a46ef0cc40cc | original EXPLAIN-D1 package, four SVG, manifest, independent oracle, six-test suite, dedicated workflow; no merge
+2026-10-12 | chat=6accb51c | EXPLAIN candidate hosted run | 38248301556 queued at source pin | requires actual sole-renderer receipt for D1-EXP-03 closure
+2026-10-12 | chat=6accb51c | EXPLAIN review artifact | coordination/Session_Oct09/Tab4_imo_qrt_d1/handovers/QRT-EXPLAIN-D1.md | per-cell review packet, NOT successor-chat handover
