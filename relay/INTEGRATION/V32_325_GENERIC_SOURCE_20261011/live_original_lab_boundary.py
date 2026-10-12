@@ -121,8 +121,8 @@ class OriginalPublicLabNativeSourceBoundary(unittest.TestCase):
             self.fail("Original full owner/repo#PR unexpectedly passed frozen native core")
         self.assertGreaterEqual(len(reader.calls), 20,
                                 "This must run the actual double-read native source path")
-        self.assertTrue(all(path.startswith(("/issues/", "/pulls/", "/contents/", "/git/ref/",
-                                             "")) for path in reader.calls))
+        self.assertTrue(all(path.startswith(("/issues/", "/pulls/", "/contents/", "/git/ref/"))
+                            for path in reader.calls))
         # This test is a negative physical characterization, not E>0 or release.
 
 if __name__ == "__main__":
