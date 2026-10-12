@@ -620,8 +620,16 @@ def ingest_issue_evidence(
         # An explicit registered repository must match provider identity.
         if canonical_full_name.lower() != repository.lower():
             raise ValueError("Provider repository identity mismatch")
+        # A bounded pass must resume at the next page, never claim that a
+        # truncated first 500 comments represent the entire project history.
+        previous = index.get_project_observation(project_id, source_kind)
+        cursor = previous["last_cursor"] if previous else None
+        start_page = int(cursor[5:]) if cursor and re.fullmatch(r"page:[1-9][0-9]*", cursor) else 1
         newest = None
-        for page in range(1, max_pages + 1):
+        completed = False
+        last_page = start_page
+        for page in range(start_page, start_page + max_pages):
+            last_page = page
             rows = provider.get_json(f"repos/{repository}/issues/{issue_number}/comments",
                                      {"per_page": 100, "page": page})
             if not isinstance(rows, list):
@@ -671,10 +679,15 @@ def ingest_issue_evidence(
                 })
                 stats["canonical"] += 1
             if len(rows) < 100:
+                completed = True
                 break
-        index.update_project_status(project_id, source_kind, "REACHABLE", newest)
-        index.update_project_status(project_id, "GITHUB_ISSUE_COMMENT", "REACHABLE", newest)
-        stats["provider_status"] = "REACHABLE"
+        state = "REACHABLE" if completed else "PARTIAL"
+        next_page = 1 if completed else last_page + 1
+        index.update_project_status(project_id, source_kind, state, f"page:{next_page}")
+        index.update_project_status(project_id, "GITHUB_ISSUE_COMMENT", state)
+        stats["provider_status"] = state
+        stats["next_page"] = next_page
+        stats["as_of_utc"] = datetime.now(timezone.utc).isoformat()
     except ProviderFailure as exc:
         state = _provider_status(exc.status)
         index.update_project_status(project_id, source_kind, state)
