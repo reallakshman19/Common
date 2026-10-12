@@ -3,3 +3,9 @@ TAB2 OWNER DECISIONS — append only; proposed values are not accepted values
 2026-10-12 | chat=new | D-183-2 | OPEN | Authority, granularity and evidence for accepted 7-demand x 4-band QRT cell per page; raised https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
 2026-10-12 | chat=new | D-183-3 | OPEN | Rights and exact source-component verification boundary for Q003 verbatim publication; no right inferred from Owner 68 identity approval; raised https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
 2026-10-12 | chat=new | D-183-4 | OPEN | A4 print acceptance criteria / same-page renderer-generated PDF receipt; raised https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6115870779
+2026-10-12 | chat=6acc303b | OWNER APPROVAL | 2026-10-12T01:24:01Z in this chat supersedes earlier D-183-1..4 OPEN entries; isolated branch from main for TEST Core only; no merge/relay/STATE.yaml change/publication and no further authorization ask.
+2026-10-12 | chat=6acc303b | D-183-1 | ANSWERED | Embed faithful original on TEST Core2 page from non-public input; Git retains only identity, locator, checksum, receipts; no stems/options/figures in public repo.
+2026-10-12 | chat=6acc303b | D-183-2 | ANSWERED | Owner individually decides each QRT cell; agent prepares packet and does not self-accept.
+2026-10-12 | chat=6acc303b | D-183-3 | ANSWERED | Owner identifies 68 sources as referenced/verified for development use; no publisher license inferred and publication forbidden without Owner rights disposition.
+2026-10-12 | chat=6acc303b | D-183-4 | ANSWERED | Later A4 acceptance requires same-page renderer-generated PDF receipt and Owner visual check; currently not accepted.
+2026-10-12 | chat=6acc303b | OWNER NO-HOLD | Development may proceed without a further authorization request; Owner chat instruction is development approval evidence, not independent byte-level source verification or publication right.
