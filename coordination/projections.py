@@ -86,6 +86,57 @@ def _evidence_match(registry, mapping: list, evidence: dict) -> tuple:
     return None, (["ATTRIBUTION_CONFLICT"] if len(candidates) > 1 else ["UNATTRIBUTED"])
 
 
+def _ci_for_binding(registry, evidence_index, binding: dict, as_of: str) -> dict:
+    """One explicitly provider-observed PR; never infer all-green from one job."""
+    required = ("project_id", "work_id", "repo_id", "pr_number",
+                "current_head_sha", "observed_at_utc", "source_ref", "required_jobs")
+    if (not all(binding.get(k) for k in required) or
+        not isinstance(binding["required_jobs"], list) or
+        not all(isinstance(x,str) and x for x in binding["required_jobs"]) or
+        not re.fullmatch(r"[0-9a-fA-F]{40}",binding["current_head_sha"]) or
+        not binding["source_ref"].startswith("https://") or
+        not isinstance(binding["pr_number"],int) or binding["pr_number"]<1):
+        raise ValueError("Unverifiable PR-to-Work/current-head mapping")
+    work=registry.works.get(binding["work_id"])
+    if not work or work.project_id != binding["project_id"]:
+        raise ValueError("CI binding points to a wrong Work/project")
+    observed, current = dt(binding["observed_at_utc"]), dt(as_of)
+    fresh = bool(observed and current and
+                 0 <= (current-observed).total_seconds() <= 3600)
+    all_checks = evidence_index.get_checks_for_pr(binding["project_id"],binding["pr_number"])
+    relevant = [r for r in all_checks if str(r["repo_id"])==str(binding["repo_id"])]
+    latest = {}
+    head = binding["current_head_sha"]
+    for r in relevant:
+        if r["head_sha"] != head:
+            continue
+        name=r["job_name"]
+        if name not in latest or r["observed_at"] > latest[name]["observed_at"]:
+            latest[name]=r
+    required_jobs = set(binding["required_jobs"])
+    results = [latest[n]["conclusion"] if n in latest else "UNKNOWN"
+               for n in sorted(required_jobs)]
+    if not fresh:
+        status="UNKNOWN"
+    elif any(x=="FAILED" for x in results):
+        status="FAILED"
+    elif any(x=="PENDING" for x in results):
+        status="PENDING"
+    elif all(x=="EXACT_HEAD_PASSED" for x in results):
+        status="EXACT_HEAD_PASSED"
+    elif all(x=="GREEN_NOT_APPLICABLE" for x in results):
+        status="NOT_APPLICABLE"
+    elif not latest and any(r["head_sha"]!=head for r in relevant):
+        status="OLD_HEAD"
+    else:
+        status="UNKNOWN"
+    return {"pr_number":binding["pr_number"],
+            "repo_id":str(binding["repo_id"]),
+            "current_head_sha":head,"source_ref":binding["source_ref"],
+            "observed_at_utc":binding["observed_at_utc"],
+            "status":status,"required_jobs":sorted(required_jobs)}
+
+
 class ProjectionEngine:
     """Explicit producer: transactions publish one immutable generation at a time."""
 
@@ -320,6 +371,37 @@ class ProjectionEngine:
                 conn.execute("""UPDATE projection_rows SET body=? WHERE generation='__staging__'
                                 AND view='works' AND project_id=? AND sort_key=?""",
                              (canon(new), w.project_id, w.project_id + "|" + wid))
+
+            # Explicit Work/PR/provider-head bindings only. No inferred Owner
+            # acceptance and no green if any required job is missing/skipped.
+            checks_by_work = {}
+            for binding in pr_bindings:
+                item = _ci_for_binding(registry,evidence_index,binding,as_of_utc)
+                checks_by_work.setdefault(binding["work_id"],[]).append(item)
+            for wid, entries in sorted(checks_by_work.items()):
+                work=registry.works[wid]
+                key=work.project_id+"|"+wid
+                got=conn.execute("""SELECT body FROM projection_rows
+                  WHERE generation='__staging__' AND view='works'
+                  AND project_id=? AND sort_key=?""",
+                  (work.project_id,key)).fetchone()
+                if not got:
+                    raise ValueError("Unresolved Work-to-PR projection")
+                row=json.loads(got[0])
+                statuses=[x["status"] for x in entries]
+                if "FAILED" in statuses: overall="FAILED"
+                elif "PENDING" in statuses: overall="PENDING"
+                elif statuses and all(x=="EXACT_HEAD_PASSED" for x in statuses):
+                    overall="EXACT_HEAD_PASSED"
+                elif "OLD_HEAD" in statuses: overall="OLD_HEAD"
+                elif statuses and all(x=="NOT_APPLICABLE" for x in statuses):
+                    overall="NOT_APPLICABLE"
+                else: overall="UNKNOWN"
+                row["ci_status"]=overall
+                row["pr_check_observations"]=sorted(entries,key=lambda x:x["pr_number"])
+                conn.execute("""UPDATE projection_rows SET body=? WHERE generation='__staging__'
+                  AND view='works' AND project_id=? AND sort_key=?""",
+                  (canon(row),work.project_id,key))
 
             # Final digest is of ordered FINAL rows and explicit source/clock vector.
             h = hashlib.sha256()
