@@ -28,6 +28,8 @@ CONFIG_FILE = HERE / "ui_config.json"
 UI_DIR = HERE / "ui"
 EXCLUDED_FILES = {"coordination_data.json", "index.html", "ui_config.json"}
 IGNORED_DIRS = {"ui", "__pycache__", ".git"}
+MAX_SCANNED_TEXT_BYTES = 5 * 1024 * 1024
+MAX_INLINE_RECEIPT_BYTES = 1024 * 1024
 
 # ─── Config Loading ───────────────────────────────────────────────────────────
 
@@ -87,8 +89,13 @@ CACHE = ScanCache()
 # ─── File Parsers ─────────────────────────────────────────────────────────────
 
 def _read(path: Path) -> str:
+    """Bounded metadata/document scanner; never read unbounded files into RAM."""
     try:
-        return path.read_text(encoding="utf-8", errors="ignore")
+        with path.open("rb") as f:
+            data = f.read(MAX_SCANNED_TEXT_BYTES + 1)
+        if len(data) > MAX_SCANNED_TEXT_BYTES:
+            return ""  # caller must surface SCAN_TEXT_TOO_LARGE if relevant
+        return data.decode("utf-8", errors="replace")
     except OSError:
         return ""
 
@@ -299,6 +306,11 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
     # JSON receipts & special reports (flat files in tab dir)
     json_receipts = []
     special_files = []
+    scan_warnings = []
+    for fname in ("DECISIONS.md", "CHECKPOINTS.md", "LINEAGE.md", "EVIDENCE.log"):
+        fp = t_path / fname
+        if fp.is_file() and fp.stat().st_size > MAX_SCANNED_TEXT_BYTES:
+            scan_warnings.append({"file": fname, "code": "SCAN_TEXT_TOO_LARGE"})
     known = {"DECISIONS.md", "CHECKPOINTS.md", "LINEAGE.md", "INPUTS.md",
               "ARTIFACTS.md", "STATUS.md", "EVIDENCE.log"}
     if t_path.exists():
@@ -308,17 +320,33 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
             if f.name in known:
                 continue
             if f.suffix == ".json":
+                if not is_safe_contained_path(f, coord_dir):
+                    scan_warnings.append({"file": f.name, "code": "OUTSIDE_PROJECT"})
+                    continue
+                size = f.stat().st_size
+                rel = str(f.relative_to(coord_dir)).replace("\\", "/")
+                if size > MAX_INLINE_RECEIPT_BYTES:
+                    json_receipts.append({"filename": f.name, "path": rel,
+                                          "schema": None, "size": size, "data": None,
+                                          "parse_status": "TOO_LARGE"})
+                    scan_warnings.append({"file": f.name, "code": "RECEIPT_TOO_LARGE"})
+                    continue
                 try:
-                    data = json.loads(f.read_text(encoding="utf-8", errors="ignore"))
-                    json_receipts.append({
-                        "filename": f.name,
-                        "path": str(f.relative_to(coord_dir)).replace("\\", "/"),
-                        "schema": data.get("schema", data.get("$schema", "receipt")),
-                        "size": f.stat().st_size,
-                        "data": data,
-                    })
-                except Exception:
-                    pass
+                    with f.open("rb") as stream:
+                        raw = stream.read(MAX_INLINE_RECEIPT_BYTES + 1)
+                    if len(raw) > MAX_INLINE_RECEIPT_BYTES:
+                        raise ValueError("Receipt grew beyond scan quota")
+                    data = json.loads(raw.decode("utf-8"))
+                    if not isinstance(data, dict):
+                        raise ValueError("Expected JSON object receipt")
+                    json_receipts.append({"filename": f.name, "path": rel,
+                                          "schema": data.get("schema", data.get("$schema", "receipt")),
+                                          "size": size, "data": data, "parse_status": "OK"})
+                except (OSError, UnicodeError, ValueError):
+                    json_receipts.append({"filename": f.name, "path": rel,
+                                          "schema": None, "size": size, "data": None,
+                                          "parse_status": "INVALID"})
+                    scan_warnings.append({"file": f.name, "code": "RECEIPT_INVALID"})
             elif f.suffix == ".md":
                 special_files.append({
                     "filename": f.name,
@@ -335,6 +363,7 @@ def scan_tab(coord_dir: Path, session_name: str, tab_name: str) -> dict:
         "evidence": evidence,
         "handovers": handovers_list,
         "json_receipts": json_receipts,
+        "scan_warnings": scan_warnings,
         "special_files": special_files,
         "counts": {
             "decisions": len(decisions),
@@ -767,6 +796,7 @@ class ApiHandler(http.server.BaseHTTPRequestHandler):
                 "name": tab_data["name"],
                 "counts": tab_data["counts"],
                 "json_receipts": tab_data["json_receipts"],
+                "scan_warnings": tab_data["scan_warnings"],
                 "special_files": tab_data["special_files"],
             })
             return
