@@ -1,0 +1,148 @@
+{
+  "schema": "tab2-q003-coordinator-core1a-browser-observation/v1",
+  "issue": 183,
+  "plan": "r7",
+  "aim": "v3.1.0",
+  "chat": "6acd1e6b",
+  "timestamp_user_message_utc": "2026-10-12T20:54:06Z",
+  "date_local": "2026-10-13 00:54 Dubai",
+  "tasks": [
+    "183-T3-G2-W1",
+    "183-T4-G2-W1"
+  ],
+  "outcomes": [
+    "O1",
+    "O2",
+    "O3"
+  ],
+  "evidence_class": "COORDINATOR_REPORTED_LOCAL_NOT_INDEPENDENTLY_REPRODUCED",
+  "execution_context": {
+    "operator": "Coordinator",
+    "computer": "Owner private local machine",
+    "environment": "Chromium 152.0.7977.130 inside Claude desktop app browser pane",
+    "server": "127.0.0.1 (local only)",
+    "repository": "reallakshman19/Grade9v3.5",
+    "branch": "agent/183-q003-private-core2-test-6acc303b",
+    "commit": "f030a0aca51038575778de3489f75d1d629a6b74",
+    "page_role": "CORE1A",
+    "registered_blueprint": "BP-CORE1A-CONSTRUCTION@1.8.0",
+    "renderer_reported": "render_core/2",
+    "page_bytes": 76401,
+    "page_sha256": "d1fe23c43d1eeae67c69600beef1b5054c361854c3e5cd6742545859592998c0",
+    "hash_matched": true,
+    "fresh_local_storage": true,
+    "fresh_session_storage": true,
+    "real_mouse_keyboard_observation": true,
+    "headless_suite": false,
+    "screen_reader_run": false,
+    "pixel_diff_run": false,
+    "a4_print_run": false,
+    "protected_page_or_html_published": false
+  },
+  "checks": {
+    "A0": {
+      "status": "PASS",
+      "observation": "Local page 76401 bytes and SHA matched; render_core/2 receipt and fresh state."
+    },
+    "A1": {
+      "status": "PASS_STRUCTURE_ONLY",
+      "observation": "Two construction-unit headers; one key step; two worked explanations; two results/checks; two quick checks; two formula disclosures and mistake clinics; independent exit response/paper checkbox/commit. LEARNING_TRANSITIONS absent, allowed optional."
+    },
+    "A2": {
+      "status": "PASS",
+      "observation": "Both formula disclosures open with the same mathematical relationship/meaning, 561 characters each, one math element each, no visible render error. Private source Q003 stem/options absent from Core1A."
+    },
+    "A3": {
+      "status": "PASS_MOUSE_ONLY",
+      "observation": "Three rendered states/stage chips per unit, six chips total. Click changes pressed state and diagram/caption distinctly; Next/Previous returns to first. No aria-live region observed. Full stage keyboard and announcements not tested."
+    },
+    "A4": {
+      "status": "PARTIAL",
+      "observation": "Only exit keyboard pathway tested via A8; stage chips, formula tiles and clinics clicked, not tab/keyboard traversed."
+    },
+    "A5": {
+      "status": "PASS",
+      "observation": "At 375x812 body/document width 375, no horizontal body overflow, all 35 visible interactive elements at least 48x48 CSS px, one intended overflow-x:auto equation/table region. Diagram 318x67 CSS px, displayed text font-size 14px: legibility to Owner."
+    },
+    "A6": {
+      "status": "PASS",
+      "observation": "Fresh state, empty free-response and unchecked paper checkbox commit refused; focus returned to response; Model answer disclosure could not open and had zero displayed content pre-commit. One inert template present in source."
+    },
+    "A7": {
+      "status": "PASS",
+      "observation": "Typing own response, committing, and opening Model answer worked; 274 characters rendered."
+    },
+    "A8": {
+      "status": "PASS",
+      "observation": "Keyboard: type in response; Tab twice reaches commit; Enter commits; Tab reaches Model answer; Enter opens 274-character disclosure."
+    },
+    "A9": {
+      "status": "NOT_RUN_CONTENT",
+      "observation": "Two clinics and two quick checks counted; their semantic correctness not reviewed."
+    },
+    "A10": {
+      "status": "NOT_RUN",
+      "observation": "Side-by-side Core1A / math golden on Owner's machine, visual/pedagogic verdict pending Owner."
+    },
+    "A11": {
+      "status": "NOT_RUN",
+      "observation": "No Core2 complementary follow-up executed in this session."
+    }
+  },
+  "summary_fields": {
+    "stage_count_unit1": 3,
+    "stage_count_unit2": 3,
+    "stage_chips_total": 6,
+    "viewport_narrow_css_px": [
+      375,
+      812
+    ],
+    "document_width_css_px": 375,
+    "body_horizontal_scroll": false,
+    "visible_interactive_elements": 35,
+    "min_control_dimensions_css_px": "at least 48 x 48",
+    "author_table_intended_region_overflow": true,
+    "stage_diagram_css_px": [
+      318,
+      67
+    ],
+    "diagram_text_css_px": 14,
+    "exit_blank_refused": true,
+    "exit_answer_visible_characters_before_valid_commit": 0,
+    "exit_answer_visible_characters_after_commit": 274,
+    "exit_valid_commit_reveals": true,
+    "keyboard_commit_reveals": true,
+    "protected_html_source_template_count_observed": 1,
+    "stage_aria_live_region_observed": false,
+    "stage_keyboard_navigation": "NOT_TESTED",
+    "screen_reader": "NOT_RUN",
+    "pixel_diff": "NOT_RUN",
+    "same_page_a4": "NOT_RUN",
+    "owner_visual_verdict": "PENDING",
+    "owner_academic_verdict": "PENDING",
+    "owner_qrt_accepted": false,
+    "publisher_rights_granted": false,
+    "defect_first": "NONE_FOUND_IN_TESTED_SCOPE; follow-up note: absence of aria-live stage announcements and 318x67px narrow visual requires focused accessibility and Owner-legibility evaluation"
+  },
+  "interpretation": {
+    "status": "PARTIAL_REAL_BROWSER_BEHAVIOUR_LOCALLY_REPORTED",
+    "T3_impact": "Core2 original prior browser report unchanged; now a separate Core1A browser attempt/gate and responsive result supports cross-page learner QA. Not equivalent to Core2 SHA browser rerun or source custody.",
+    "T4_impact": "Core1A native structural 0 gaps from previous report plus real local browser A0/A1/A2/A3-mouse/A5/A6/A7/A8; A4 keyboard stage/disclosure, A9 semantic review and A10 visual/pedagogy pending.",
+    "owner_packet_impact": "T5 supplemental evidence only; no 28-cell acceptance",
+    "no_early_protected_content_claim_scope": "Before a valid exit commitment no Model answer content was revealed through UI (0 rendered visible characters). The source contains one template; no universal source/DOM byte-absence claim.",
+    "learning_transitions": "EXPECTED_ABSENT; registered OPTIONAL in isolated TEST without real portal root, no filler navigation",
+    "aria_live_note": "Missing aria-live region alone is not proven accessibility failure; test keyboard operability, programmatic pressed state and accessible stage/caption status before deciding whether any fix is necessary.",
+    "independent_verification": "NOT_DONE_ON_G4_MACHINE"
+  },
+  "next_operator_checks": [
+    "Small delta only: keyboard-only through BOTH staged controls, Next/Previous, and formula and trap disclosures; record focus visibility, Enter/Space operability, stage state and keyboard return. Do not repeat already passing exit flow.",
+    "Inspect whether each selected stage is announced meaningfully in the browser accessibility tree (button pressed state, label/caption association). If no programmatic state/announcement, record precise first deficiency; no screen-reader PASS without running one.",
+    "Owner privately inspect 318x67 narrow visual and Core1A vs math golden at matching zoom for readability, progression and academic authenticity; separately review two clinics and two checks, and preserve Owner-only QRT/rights/A4 decisions.",
+    "Do not request private source words, unredacted page, or new renderer run."
+  ],
+  "status_counts": {
+    "admitted_original_core2_of_68": 0,
+    "admitted_core1a": 0,
+    "accepted_qrt_of_28": 0
+  }
+}
