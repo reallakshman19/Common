@@ -66,7 +66,7 @@ class LabelTests(unittest.TestCase):
             v36.validate_label({**LABEL, "label_sha": "unknown"})
 
     def test_owner_master_example_is_accepted(self):
-        master = ROOT / "tests" / "fixtures" / "V35-LIFECYCLE.yaml"
+        master = ROOT / "tests" / "fixtures" / "relay" / "AIM" / "V35-LIFECYCLE.yaml"
         self.assertEqual(v36.load_label(master)["label_sha"], "775f2bc")
 
     def test_no_ambiguous_yaml_duplicate_keys(self):

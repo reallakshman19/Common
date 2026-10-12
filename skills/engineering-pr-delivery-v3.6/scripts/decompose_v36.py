@@ -213,7 +213,13 @@ def execute(plan: dict, client, *, apply: bool = False) -> dict:
         else:
             missing.append(task)
     planned = [task["task_id"] for task in missing]
+    # Preflight managed-index uniqueness BEFORE creating any issues.
+    existing_index = []
     if apply:
+        existing_index = [c for c in client.list_comments(int(match[2]))
+                          if index_marker(plan) in (c.get("body") or "")]
+        if len(existing_index) > 1:
+            raise ContractError("duplicate managed parent indexes; manual reconciliation required")
         for task in missing:
             created = client.create_issue(child_title(task), child_body(task, plan))
             if not isinstance(created.get("html_url"), str) or not isinstance(created.get("number"), int):
@@ -222,15 +228,11 @@ def execute(plan: dict, client, *, apply: bool = False) -> dict:
     proposed_index = render_index(plan, mapping)
     index_action = "pending"
     if apply:
-        existing = [c for c in client.list_comments(int(match[2]))
-                    if index_marker(plan) in (c.get("body") or "")]
-        if len(existing) > 1:
-            raise ContractError("duplicate managed parent indexes; manual reconciliation required")
-        if not existing:
+        if not existing_index:
             client.create_comment(int(match[2]), proposed_index)
             index_action = "created"
-        elif existing[0]["body"] != proposed_index:
-            client.update_comment(existing[0]["id"], proposed_index)
+        elif existing_index[0]["body"] != proposed_index:
+            client.update_comment(existing_index[0]["id"], proposed_index)
             index_action = "updated"
         else:
             index_action = "unchanged"
