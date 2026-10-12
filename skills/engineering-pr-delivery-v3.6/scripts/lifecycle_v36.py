@@ -135,6 +135,25 @@ def writable_lab(label: dict, *, required: bool = True) -> str | None:
     return found[0]
 
 
+
+def require_explicit_lab(label: dict, parent: str, selected_lab: str | None) -> None:
+    """Require --lab for lab-target operations, bound to the chosen label.
+
+    Coordination in label.repository may run without --lab. A different parent
+    must be the label-declared writable lab and selected explicitly by caller.
+    """
+    repo = parent.split("#", 1)[0]
+    if repo == label["repository"]:
+        if selected_lab is not None:
+            raise ContractError("--lab only applies when parent targets a writable lab")
+        return
+    allowed = writable_lab(label, required=True)
+    if selected_lab is None:
+        raise ContractError("lab-target operation requires explicit --lab from selected label")
+    if selected_lab != allowed or repo != allowed:
+        raise ContractError("--lab must equal selected label's Writable lab: and plan parent")
+
+
 def load_label(path: str | Path) -> dict:
     file_path = Path(path)
     if len(file_path.parts) < 3 or tuple(file_path.parts[-3:-1]) != ("relay", "AIM"):
