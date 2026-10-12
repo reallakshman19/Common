@@ -16,3 +16,9 @@
 2026-10-12 | chat=6accb51c | first RETRIEVE CI | 38243907031 FAILURE authored score metadata 2 gaps; 5/6 unittest pass and schema/H3/math pass; fixed by own commit bc4debf54ba80be65ff7a2e97e996da200dddf3d
 2026-10-12 | chat=6accb51c | corrected RETRIEVE CI | 38244512806 queued when recorded; no final rendered credit yet
 2026-10-12 | chat=6accb51c | browser | initial generated draft pages local Chromium 35/35 interaction assertions PASS / JS errors 0; corrected exact head not yet tested
+2026-10-12 | chat=6accb51c | verified code | Grade9v3.5 PR#192 agent/imo182-qrt-d1-represent @bc4debf54ba80be65ff7a2e97e996da200dddf3d | RETRIEVE-D1 final exact source; stacked on PR#190 H3, no merge
+2026-10-12 | chat=6accb51c | hosted CI | run 38244512806 SUCCESS, job 114794951520 | 6/6 unittest, 100 integer classification oracle + 7 boundaries, 6 pages 0 gaps, 5 Owner golden SHA intact
+2026-10-12 | chat=6accb51c | hosted artifact | 11744825810 imo182-qrt-d1-retrieve-five-core-html | 5 real HTML + index and receipt, SHA256 5/5 MATCH
+2026-10-12 | chat=6accb51c | browser final | exact-hosted HTML Chrome/Playwright 35/35 PASS JS errors 0 | H3, initial/blank/commit, staged Core1A, Core1B independent boundary, Core2B attempt gates
+2026-10-12 | chat=6accb51c | cell artifact | handovers/QRT-RETRIEVE-D1.md @0906aa3c907b0202d49b1efb0548598e97f6c802 | NOT successor-chat handover
+2026-10-12 | chat=6accb51c | issue evidence | Grade9v3.5 issue#182 comment 6123725775 | identical TASK EVIDENCE block in EVIDENCE.log
