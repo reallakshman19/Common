@@ -164,3 +164,21 @@ AC (before -> after): Unstarted SYNTHESIZE-D2 -> original authored D2 conjunctiv
 Claim: Worker HOSTED CI + LOCAL genuine downloaded renderer HTML browser + original frozen-golden structural QA; never academic/QRT acceptance, no merge/release.
 Blocker: NONE for worker technical gate. Independent qualified reviewer and conditional Owner successor golden decision D-182-8 OPEN in Common Tab5 DECISIONS.md; these decisions do not prevent RETRIEVE-D2.
 Next: QRT-RETRIEVE-D2, LAST D2 technical cell, one cell in next reply, using separate authored TEST package, sole renderer, actual browser/frozen-golden evidence. handover=no.
+
+2026-10-12 | chat=6acce97b | TASK EVIDENCE S2-D2-01 | issue=Grade9v3.5#182 comment=6126902718 | plan=r2 | aim=v3.1.0 outcome=O1 user=no
+Outcome: O1
+For the user: No public learner workflow changed; actual TEST Core1A/Core2A artifact independently benchmarked against golden slots/components/blocks and staged attempt/H3 learner DOM.
+Proof: https://github.com/reallakshman19/Common/blob/9e1b6c4697d80c97231e6764af5fdadfa34bce3d/coordination/Session_Oct09/Tab5_imo_qrt_d2/evidence/2026-10-12-s2-d2-01-core1a-core2a-golden.md
+Task: S2-D2-01
+Goal (issue AC): Independently compare exact hosted SYNTHESIZE-D2 Core1A/Core2A renderer HTML to frozen golden and O1 learner gates, separate A no-change/B blueprint gap/C authored defect/D artifact absence.
+Status: DONE (technical scoped only)
+Met: partial (read-only oracle yes, Owner successor golden/QRT acceptance no)
+Done: PR#191@24efd758/CI38256527057/artifact11750692196 read back; 6/6 HTML digest matches; golden role ordered slot/component/block arrays match; Core1A stage/exit and Core2A H1/H2/blank/H3/solution Chromium DOM checks pass; 21/21 local checks; A KEEP blueprints; original golden untouched. Chrome file and loopback navigation forbidden by administrator; tested exact HTML via page.set_content, no public learner route claim.
+Code (repo branch @ commit | PR): Grade9v3.5 agent/imo182-qrt-d2-justify-20261012@24efd758 | #191 unchanged; Common report@9e1b6c4
+Tests (command -> pass/fail/skip): local verify_s2_d2_01.py 21/21 PASS; Chromium Playwright DOM via set_content PASS; public hosted route/print and academic review NOT_RUN
+CI (run -> result): existing exact-head 38256527057 SUCCESS, no new CI
+Evidence (link): https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6126902718
+AC (before -> after): inherited slot parity -> independently observed Core1A/2A A no-change oracle; 0/28 QRT accepted unchanged
+Claim: INDEPENDENT for local verification, HOSTED_CI for preexisting run
+Blocker: NONE next authored cell; PERSON:qualified reviewer and OWNER:D-182-8 acceptance only
+Next: S2-D2-02, S2-D2-03; conditional S2-D2-01B only if future B
