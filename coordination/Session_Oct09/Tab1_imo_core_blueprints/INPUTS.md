@@ -1,0 +1,18 @@
+INPUTS -- APPEND ONLY | byte SHA = Git blob SHA unless explicitly SHA-256 | record paths and intent, never pasted content
+2026-10-12 | chat=new | Owner aim: reallakshman19/Common main relay/AIM/IMO-CORE-BLUEPRINTS.yaml | git-blob=84b040ef20f03dae81a64680c5a3e3927ef510c5 | label v1.1.0 / label_sha=ec55f5d; Owner-only changes
+2026-10-12 | chat=new | Registry: Grade9v3.5/Shared/web/interactive-page-blueprints.v1.json | git-blob=591ba061b8771c30fdffc4506aa720ca9ba89335 | registry v1.17.0, existing Core blueprint authority
+2026-10-12 | chat=new | Golden index: Grade9v3.5/golden/INDEX.md | git-blob=e6ad5a71ece3056f46fdb72a82fec14b75cd75f0 | core role -> candidate golden map
+2026-10-12 | chat=new | Golden technique contract: Grade9v3.5/golden/units/G-MATH-LINEAR-CONSTRAINT/GOLDEN.md | git-blob=0cf42ead25564a71de824b4e41a62e1502af6183 | CANDIDATE, not Owner-blessed
+2026-10-12 | chat=new | Golden records: Grade9v3.5/golden/units/G-MATH-LINEAR-CONSTRAINT/records.json | git-blob=3e63b03b8b549d014124932c852ad226f1d692ef | fixture input to render_core
+2026-10-12 | chat=new | Golden bank: Grade9v3.5/golden/units/G-MATH-LINEAR-CONSTRAINT/bank.json | git-blob=23b6b7e242c4d132025857ebd61f3a7313af29af | fixture input
+2026-10-12 | chat=new | Golden manifest: Grade9v3.5/golden/units/G-MATH-LINEAR-CONSTRAINT/manifest.json | git-blob=cd543b3f1169a57c3c5ad8f2135a90b941d41a4b | fixture input
+2026-10-12 | chat=new | TEST QRT grid: Grade9v3.5/TEST/imo-research/verification/qrt-proposed-coverage.v1.json | git-blob=c81b32875be6f239a877e8df95252be1b7741a00 | sample proposals 6; acceptance 0/28
+2026-10-12 | chat=new | TEST QRT source record: Grade9v3.5/TEST/imo-research/verification/official-sample-2026-27-math-qrt-pilot.v1.json | git-blob=555d2719d917d30758acdc3ebc8d9270421d9e62 | proposals not accepted/source rights not admitted
+2026-10-12 | chat=new | Authored pilot: Grade9v3.5/TEST/imo-research/pilots/core1a-render-qualified-divisibility.v1.json | git-blob=e8b1dcae1014f9a9a2cce7c2489b21b36c049f81 | bounded first Core1A TEST input + adjacent authored Core2A
+2026-10-12 | chat=new | TEST Core1A manifest: Grade9v3.5/TEST/products/core1a-divisibility-render-maturity.manifest.json | git-blob=7997b6cb63bb0f6d4868daa85cd509f000a0679b | renderer output role CORE1A
+2026-10-12 | chat=new | TEST Core1B manifest: Grade9v3.5/TEST/products/core1b-authored-reconstruction-journey.manifest.json | git-blob=35b57884c605e324542201d99c62ff42174a2699 | prior done Core1B reference, Core2A selected
+2026-10-12 | chat=new | TEST joined manifest: Grade9v3.5/TEST/products/core-authored-qrt-repair-journey.manifest.json | git-blob=70e24ec3420e0429ea71f167e220ff2603a25873 | authored CORE1A+CORE2A journey, provisional JUSTIFY-D2
+2026-10-12 | chat=new | TEST preview: Grade9v3.5/public/test/imo-grade9/core1a.html | git-blob=4072574779e26682071210dd2176aae6236f6971 | hand-authored sandbox preview, not accepted blueprint/golden match
+2026-10-12 | chat=new | Authority: Grade9v3.5/Shared/roles/CORE-AUTHORITY-CONTRACT.md | git-blob=304ad36a502a81f7174f3b52b9622f6e4a47d21c | canonical mathematical truth separate from authored practice and source rights
+2026-10-12 | chat=new | CHAT-ONLY attached file: AA3_BM4L_Technical_Handover_2026-10-10(1).md | SHA-256=f23eaaa056d98c3cfc40868fcdb5c86c0532f88a0b0e55cbd4091d676b40d85c | out-of-scope AA3 handover; not imported as IMO/Core authority; no contents retained
+2026-10-12 | chat=new | CHAT-ONLY Owner instruction: STICKY LABEL v1.1.0 | label_sha=ec55f5d | intent held verbatim in Owner-controlled Common AIM; no modification to it
