@@ -19,3 +19,23 @@ Blocker: NONE
 QRT: proposal only, source AUTHORED TEST, independent qualified reviewer verdict blank, Owner acceptance blank; no admission/merge/release.
 Next: AGENT-D4/QRT-EXPLAIN-D4; qualified reviewer may independently assess the recorded H1–M3 packet; D-182-3 Owner successor golden remains OPEN.
 END TASK EVIDENCE
+2026-10-12 | chat=6accb5b3 | cell=QRT-EXPLAIN-D4 | TASK EVIDENCE
+Outcome: O1 + O2 (authored TEST EXPLAIN-D4; no academic admission)
+For the user: Five distinct learner-visible registered blueprint-role TEST pages explain decimal digit-rotation invariants and a two-digit-prefix transfer exception; not released.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242619673 SUCCESS at 6c00fae5c150cd580ab04c680414fba0a0c776e8; HTML and six Chromium screenshots https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242619673/artifacts/11743552219; registered renderer receipt reference-depth gaps=0.
+Task: AGENT-D4/QRT-EXPLAIN-D4
+Goal (issue AC): A legitimate authored D4 EXPLAIN question with X/Y/Z/W, misconception and independent check, five roles from the sole renderer, frozen five-role golden technique benchmark, H3-after-committed-attempt QA, scoped source-rights/CI and independent-review packet.
+Status: DONE
+Met: yes (worker implementation only; independent academic/Owner approvals pending)
+Done: Original N=a10^(L-1)+B and R=10B+a modulo11 causal explanation: for initial 11|N, one-digit left rotation preserves iff original L even; for odd L residue is 2a and cannot vanish for a=1..9. Core2B independently changes to two-digit rotation N=A10^(L-2)+C, R=100C+A, preserving at even L and at odd L precisely when 11|A. Core1B falsifies all-length rule via 121->211, repairs it, then tests 110 and1232; Core1A independent three-digit alternating-sum exit at 209. All original AUTHORED TEST.
+Code: reallakshman19/Grade9v3.5 agent/imo182-qrt-d4-explain-pilot @ 6c00fae5c150cd580ab04c680414fba0a0c776e8 | DRAFT PR #195 stacked on unmerged H3 dependency PR #190 @ 67c34dababb0da0ef7d5f4a532bfcf3119754961
+Tests: python -m unittest tests.test_imo182_qrt_d4_explain -v -> PASS (3 tests; arithmetic oracle 2727 qualifying numbers L=2..6, plus 900 three-digit independent exit candidates, schema, five golden slots, H3 release contract); python tests/imo182_qrt_d4_explain_browser.py -> PASS (five actual Chromium pages, blank attempt rejected, Core1B separate boundary gate, H3 only after nonblank committed attempt, six screenshots).
+CI: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242619673 -> SUCCESS; artifact 11743552219 actual HTML/six screenshots/zero-gap receipt.
+Golden: G-IMO-G9-FIVE-CORE-20261012 original_digest=ad02fef42f0d505a preserved, same five registered blueprint refs/slot sequences as frozen snapshot; new source has intentionally different bytes, compare frozen/new sha256 per role in Tab7 cell handover; Owner successor golden D-182-3 OPEN.
+Evidence: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242619673/artifacts/11743552219 | https://github.com/reallakshman19/Grade9v3.5/pull/195 | https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-EXPLAIN-D4.md
+AC: Tab7 rendered worker implementations 1/7 -> 2/7; academically Owner-accepted QRT 0/28 -> 0/28; no qualified reviewer or Owner signature.
+Claim: HOSTED_CI
+Blocker: NONE
+QRT: AUTHORED TEST candidate only; qualified reviewer verdict BLANK; Owner acceptance BLANK; frozen golden unchanged; no merge/release.
+Next: AGENT-D4/QRT-APPLY-D4; independent reviewer to examine EXPLAIN-D4 H1-H3/S1-S3/P1-P3/M1-M3; Owner successor golden D-182-3 remains open.
+END TASK EVIDENCE

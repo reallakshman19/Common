@@ -18,3 +18,6 @@
 2026-10-12 | chat=new | hosted five-role golden-technique comparator | tests/test_imo182_qrt_d4_justify.py@e39db6a8607bf64b09274d38bb222ed90f22459a | matching 5 role/slot sequences, expected distinct page bytes, frozen original unmodified
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 original source | Grade9v3.5 draft PR #195@68e319f6adb1aa4f624381a344af6f43c29b14b2 TEST/imo-research/qrt-d4/explain-d4.package.json | AUTHORED, no official exam source admitted
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 manifest | Grade9v3.5 draft PR #195@68e319f6adb1aa4f624381a344af6f43c29b14b2 TEST/products/imo182-qrt-d4-explain.manifest.json | five registered output roles, core2=[]
+2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 final renderer | Grade9v3.5 PR#195@6c00fae5c150cd580ab04c680414fba0a0c776e8 build/imo182-qrt/d4/explain/render-receipt.json | renderer=render_core/2 digest=4288fa8c817df8fe semantic_digest=a25c7f4881d523c0 gaps=[]
+2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 five-role hashes | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-EXPLAIN-D4.md | original frozen owner G-IMO-G9-FIVE-CORE-20261012 vs exact head 6c00fae5c150cd580ab04c680414fba0a0c776e8
+2026-10-12 | chat=6accb5b3 | independent maths | tests/test_imo182_qrt_d4_explain.py@6c00fae5c150cd580ab04c680414fba0a0c776e8 | 2727 multiples11 original length2..6, 900 three-digit exit, 3 tests PASS hosted

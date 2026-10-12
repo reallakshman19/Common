@@ -16,3 +16,6 @@
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 branch | reallakshman19/Grade9v3.5 agent/imo182-qrt-d4-explain-pilot@68e319f6adb1aa4f624381a344af6f43c29b14b2 | exact PR #190 base, not merged main
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 draft PR | https://github.com/reallakshman19/Grade9v3.5/pull/195 | source/manifest/figures/scoped tests; no review acceptance
 2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 CI initial | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242130433 | QUEUED initially; sole renderer + 5 browser roles
+2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 hosted exact-head | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242619673 | SUCCESS @6c00fae5c150cd580ab04c680414fba0a0c776e8; five registered roles, zero gaps, math/Chromium pass
+2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 actual HTML/screenshots | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38242619673/artifacts/11743552219 | artifact 11743552219; index+five pages+6 screenshots+receipt
+2026-10-12 | chat=6accb5b3 | EXPLAIN-D4 cell artifact | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-EXPLAIN-D4.md | qualified reviewer packet, not successor-chat handover
