@@ -109,10 +109,10 @@ class LabelTests(unittest.TestCase):
         with self.assertRaises(v36.ContractError):
             v36.validate_label(LABEL, "OTHER-LABEL")
 
-    def test_missing_outcome(self):
-        changed = {**LABEL, "label": {**LABEL["label"], "outcomes": {"O1": "Only one"}}}
-        with self.assertRaises(v36.ContractError):
-            v36.validate_label(changed)
+    def test_one_declared_outcome_is_valid_for_one_outcome_work(self):
+        changed = {**LABEL, "label": {**LABEL["label"],
+                   "outcomes": {"O1": "Only one"}, "task_outcome": "O1"}}
+        self.assertEqual(list(v36.validate_label(changed)["label"]["outcomes"]), ["O1"])
 
     def test_unknown_extra_field_is_rejected(self):
         with self.assertRaises(v36.ContractError):
