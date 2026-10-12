@@ -1,0 +1,23 @@
+# TAB3-O1-W06 — independent original-meaning and served-route qualification
+Date 2026-10-12 | chat=6acc7d4e | AIM 3DC-XML-CII v2.2.0, label_sha 5f9065d | outcome O1
+Issue: https://github.com/reallakshman19/3D_Converters/issues/226
+R6 plan: https://github.com/reallakshman19/3D_Converters/issues/226#issuecomment-6119316935
+Preceding W04 DONE https://github.com/reallakshman19/3D_Converters/issues/226#issuecomment-6119490728
+Preceding W05 DONE https://github.com/reallakshman19/3D_Converters/issues/226#issuecomment-6119678971
+
+## First decision: do broader reds block O1 task aim?
+NO. At initial W06 takeover existing PR #228 exact head 82d318dd0ae9c5abb62597a4f66f6aa1e840e41a had **17 green /19 red** GitHub workflows, but all four O1-focused workflows were separately verified green on that head:
+- https://github.com/reallakshman19/3D_Converters/actions/runs/38216635553 (4/4 exact Owner limits, real authoring and CSV)
+- https://github.com/reallakshman19/3D_Converters/actions/runs/38216635564 (4/4 capacity positives and expected typed refusals)
+- https://github.com/reallakshman19/3D_Converters/actions/runs/38216635698 (original XML+JSON and NC source, IDB 10/10)
+- https://github.com/reallakshman19/3D_Converters/actions/runs/38216635414 (Node22/24/Chromium source port)
+The seemingly related Issue #776 XML-CII authority RED run 38216635633 has one failing 'focused-regressions' job and one GREEN WSW browser job. Its logs explicitly state `Adjacent applicability: head=1 base=1 classification=baseline-only-failures` and actual failing test `batch execution preserves result isolation and immutability with a genuinely blocked mechanism` (not native large JSON intake); prior base and head each fail one adjacent test. Its red `Enforce applicable regression result` step is a conservative unrelated release gate, not an O1 source trace test. C05.1/C05.2/C05 cold-hydration, persistent masters, Valve Weight, J04, Issue 781 and #841 failures likewise remain broader inherited release/scope checks. **Not fixing/waiving/parking** their release policy; parking is Owner's decision. A future test that demonstrably fails O1 native source trace/source authority would be an O1 critical blocker; none was present at assessed head.
+
+## W06 source-first work
+Candidate remains existing direct-main DRAFT PR #228 branch lfj/226-t3-main-worker-intake-20261012 base main@4f14beb37bc0b719453c52a116c1c5d7183d2fd0. No production source algorithm changes W06 at initial implementation. Script newly committed:
+- scripts/lfj-226-o1-semantic-served-browser.mjs
+- .github/workflows/lfj-226-o1-semantic-served.yml
+New W06 test-only candidate HEAD aab9bc24b8efcae5c2b36e2043d45e6e20f9cfb8.
+Original input XML Benchmarks/1885Sjson/FirstpassXML SHA256 feee5a5a6399207337e63bc56c8afb001fe37ab30c6a7a9283333ec60f6eea38; original JSON Benchmarks/1885Sjson/Sjson.json SHA256 6b2c8b01ab0ba6ec8e9e7c42eb4a719668ffd2dc4dbe4790d27cf426a1f60288. Independently parse originals without importing unchanged resolver/exporter helpers; XML source contains five Branch elements and 216 Node elements, generated complete Node-wise CSV must match all 216 original XML node no/type/branch in order; 241 Evidence CSV source paths must exist as real original JSON object occurrences and type must match every original JSON occurrence, no duplicate source paths. Independently pin and compare seven representative original JSON paths $[0].children[1], [2], [4], [5], [6], [7], [8], with branch, bore, NAME, REF and POS direct from the ORIGINAL JSON (not a frozen CSV SHA), plus node #50 XML ComponentRefNo matching original JSON OLET REF path $[0].children[2]. Authored page uses actual native source and domain Workers to download both CSV bytes, tests malformed source replacement revokes controls and reload doesn't resurrect old exports. Navigate root index.html and generated docs/index.html via Chromium HTTP 200 and dynamic import actual O1 native source Worker port, intake and domain modules. Only local served docs qualifies; it is NOT live production Pages or engineering semantic truth for all possible XML shapes.
+
+New W06 GitHub exact-head run https://github.com/reallakshman19/3D_Converters/actions/runs/38219000835 initially QUEUED. No new outcome claimed until hosted terminal and JSON log artifact inspected. W06 can only be marked DONE if this source-derived witness and served test genuinely pass, compatible NC negative/context config/source-replacement coverage is reported precisely, and live Pages is either verified with proper authority or explicitly NOT_PROVEN as release gate. Do not change main, merge, deploy or waive C05.
