@@ -26,7 +26,8 @@ VERSION = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
 LABEL_SHA = re.compile(r"^[0-9a-f]{7,40}$")
 ISSUE_REF = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+#[1-9][0-9]*$")
 TASK_REF = re.compile(r"^[A-Z0-9][A-Z0-9_.-]{2,79}$")
-LABEL_NAME = re.compile(r"^[A-Z][A-Z0-9-]{2,79}$")
+LABEL_NAME = re.compile(r"^[A-Z0-9][A-Z0-9-]{2,79}$")
+OUTCOME_NAME = re.compile(r"^O[1-9][0-9]*$")
 
 
 class ContractError(ValueError):
@@ -85,8 +86,8 @@ def validate_label(document: object, expected_id: str | None = None) -> dict:
     repo = _text(document["repository"], "repository")
     if not REPO_REF.fullmatch(repo):
         raise ContractError("repository must be owner/repo")
-    if document["engineering_critical"] not in ("standard", "engineering-critical"):
-        raise ContractError("engineering_critical must be standard or engineering-critical")
+    if document["engineering_critical"] not in ("standard", "critical", "engineering-critical"):
+        raise ContractError("engineering_critical must be standard, critical or engineering-critical")
     version = _text(document["version"], "version")
     label_sha = _text(document["label_sha"], "label_sha")
     if not VERSION.fullmatch(version) or not LABEL_SHA.fullmatch(label_sha):
@@ -95,7 +96,11 @@ def validate_label(document: object, expected_id: str | None = None) -> dict:
     for name in ("problem", "main_aim", "task_outcome", "task_aim", "done_when"):
         _text(label[name], "label." + name)
     outcomes = label["outcomes"]
-    _keys(outcomes, OUTCOME_IDS, "label.outcomes")
+    if (not isinstance(outcomes, dict) or not outcomes
+            or any(not isinstance(key, str) or not OUTCOME_NAME.fullmatch(key)
+                   for key in outcomes)
+            or set(outcomes) != {f"O{i}" for i in range(1, len(outcomes) + 1)}):
+        raise ContractError("label.outcomes must be contiguous O1..ON")
     for key, value in outcomes.items():
         _text(value, "label.outcomes." + key)
     _strings(label["owner_constraints"], "label.owner_constraints", minimum=1)
@@ -104,7 +109,30 @@ def validate_label(document: object, expected_id: str | None = None) -> dict:
         _strings(guidance[field], "guidance." + field)
     _strings(document["bindings"], "bindings", minimum=1)
     _strings(document["history"], "history", minimum=1)
+    writable_lab(document, required=False)  # validate optional explicit lab; never infer a fallback
     return dict(document)
+
+
+
+def writable_lab(label: dict, *, required: bool = True) -> str | None:
+    """Only an explicit, unique Writable lab: directive grants a lab target.
+
+    Historic 'Lab:' references and free-text done_when never authorize writes.
+    Work labels without a writable lab still validate read-only.
+    """
+    notes = label["guidance"]["notes"]
+    prefix = "Writable lab: "
+    found = [note[len(prefix):].split(" ", 1)[0] for note in notes
+             if note.startswith(prefix)]
+    if len(found) > 1:
+        raise ContractError("multiple Writable lab: directives")
+    if not found:
+        if required:
+            raise ContractError("label has no explicit Writable lab: directive")
+        return None
+    if not REPO_REF.fullmatch(found[0]):
+        raise ContractError("invalid Writable lab: repository")
+    return found[0]
 
 
 def load_label(path: str | Path) -> dict:
