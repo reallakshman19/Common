@@ -1,0 +1,36 @@
+# Sticky label: the Owner's aim for this work. Master copy, written by the coordinator (skill coordinator-protocol, scripts/aim.ps1)
+# only after the Owner approves a change card. The label text is the Owner's: never paraphrase it. Guidance (watch, not_now, notes) is
+# versioned too: a change of what may be done is a change of the label. Every copy carries version and label_sha.
+work: "3DC-XML-CII"
+repository: "reallakshman19/3D_Converters"
+engineering_critical: "critical"
+version: "1.1.0"
+label_sha: "9c35909"
+label:
+  problem: "The XML→CII app freezes on large JSON, 4 Preview hangs, and weight decisions are split between Weight Match and \"Rigid Weights Need Review\"; fixes so far were patches."
+  main_aim: "Large-JSON trace, Preview and Weight Match stay responsive on large inputs, traceable to source, with one weight review flow."
+  outcomes:
+    O1: "Large JSON loads and traces without freezing the app"
+    O2: "Preview stays responsive and every value traces to its source"
+    O3: "Weight Match-1 and Rigid Weights Need Review work as one flow"
+  owner_constraints:
+    - "Each of the three is an independent, standalone revamped module/worker (Owner, 12 Oct)"
+    - "No more patches on the old design (Owner, 8 Oct, #96)"
+  task_outcome: "O1"
+  task_aim: "Large-JSON trace runs in its own worker; the app stays responsive across the agreed size range."
+  done_when: "PENDING: you set the operating range (critical work): largest file, representative real inputs, longest acceptable freeze, behaviour beyond the range; the agent proposes it from the real files."
+guidance:
+  not_now: []
+  watch:
+    - "Hunting one specific authentic file instead of the capability"
+    - "Legacy C05 CI (#203): prerequisite or not, decided with evidence"
+    - "Source-authority gates: needed for correctness here?"
+    - "Reports instead of product change"
+  notes:
+    - "Rigid ... needs review = screen \"Rigid Weights Need Review — Consolidated\" (Mode A), tabs/xml-cii-2019-standalone/ui-adapted/xml-cii-adapted-rigid-review-mode-a.js"
+    - "30 MiB = the first uploaded test file, not a target size"
+    - "Root issues: 3D_Converters #63, #96, #97, #98; plan #129; current #212"
+bindings:
+  - "Session_Oct07:3 coordination/Session_Oct07/Tab3_LFJ_Resolver_Review"
+history:
+  - "v1.1.0 · 2026-10-12 04:56 · create · created · CP-3DC-XML-CII-01 · approved by the Owner"
