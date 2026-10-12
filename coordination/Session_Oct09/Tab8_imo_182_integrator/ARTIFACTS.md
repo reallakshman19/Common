@@ -1,2 +1,3 @@
 # Tab8 artifacts (append only)
 2026-10-12 | [28-cell index](INDEX-28-CELLS.md) | [plan r1](PLAN.md) | [blank rubric](REVIEW-CHECKLIST.md) | 25 candidate / 3 absent (scoped CI only), six actual HTML files and SHA receipts per candidate require independent check. All draft PRs unmerged, no public changes.
+2026-10-12 | [#197 merge](https://github.com/reallakshman19/Grade9v3.5/pull/197) | Grade9/main@4dbedc6773482bbecb146ff8959614b2c32dcc6e | [exact-head guardrails](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38249723271) | [canonical regression delta](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38249723570) | [post-main Actions](https://github.com/reallakshman19/Grade9v3.5/actions?query=branch%3Amain) QUEUED

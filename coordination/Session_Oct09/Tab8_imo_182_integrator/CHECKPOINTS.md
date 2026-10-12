@@ -1,2 +1,3 @@
 # Checkpoints (append only)
 2026-10-12 | 182-INT-01 | PARTIAL (artifact/receipt audit still needed); 182-INT-02 | IN_PROGRESS shared CI baseline diagnosis; accepted=0/28, merge=0/16; no learner public changes.
+2026-10-12 | CP-182-INT-03 | DONE workflow-concurrency #197 merged@4dbedc6, exact-base zero new failing test IDs, red baseline explicitly documented, jobs/gates unchanged. Main post-merge CI QUEUED; do not claim green. 182-INT-01 inventory published PARTIAL receipt/SHA per-cell; 182-INT-02 PARTIAL shared baseline attribution and independent #191 new regressions still to fix; next 182-INT-02 then 04/05. No QRT accepted and no handover complete.

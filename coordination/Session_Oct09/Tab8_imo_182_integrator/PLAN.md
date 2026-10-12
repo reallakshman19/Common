@@ -43,3 +43,6 @@ All listed PRs are OPEN DRAFT, mergeable=true GitHub metadata at preflight; zero
 | [#199](https://github.com/reallakshman19/Grade9v3.5/pull/199) | 84fe228 | #190 | D4 REPRESENT | scoped candidate success; shared red |
 
 Exact-head merge gate: scoped CI green OR documented baseline-only red; sole renderer receipt zero gaps, SHA-256 match for 5 roles+index; five-role golden techniques and frozen original byte lock intact; blank attempt refused and H3 only after nonblank commitment; no hidden accessible preattempt answer; TEST only, no public route, accepted 0/28. If any fails, DO NOT MERGE. Do not touch Track A #166/#172/#175/#177/#178/#180/#181, Tab2 #183, Tab3, relay/STATE.yaml, shared printer, registry accepted field, or source rights. Owner decisions only reviewer, cell acceptance with IDs, D-182-3 successor Core2A golden, rights, release.
+
+## r1 checkpoint 2026-10-12 after CI preflight
+182-INT-03 DONE: #197 merged in Grade9 main@4dbedc6; baseline gate evidence in Tab8/EVIDENCE.log. 182-INT-02 PARTIAL: baseline guard 2385/272 and exact-base zero-new on #197; new issues on #191 requiring separate repair. 182-INT-01 PARTIAL (per-cell SHA/receipt URLs audit outstanding). Next CI run on main currently QUEUED, no other PR merges.
