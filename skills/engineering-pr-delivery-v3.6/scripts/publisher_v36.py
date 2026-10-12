@@ -9,7 +9,7 @@ import re
 from dataclasses import dataclass
 
 from decompose_v36 import GithubClient, PARENT_REF, is_task_issue, load_plan
-from lifecycle_v36 import ContractError, load_label
+from lifecycle_v36 import ContractError, load_label, require_explicit_lab
 from snapshot_v36 import snapshot
 
 MANAGED = re.compile(r"^(?:\[[^\]\r\n]{1,64}\]){1,7}\s*")
@@ -119,6 +119,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="v3.6 title publisher; dry-run default")
     parser.add_argument("--label", required=True)
     parser.add_argument("--plan", required=True)
+    parser.add_argument("--lab", help="explicit Writable lab: repository when plan targets lab")
     parser.add_argument("--pr", type=int)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--confirm-scope", default="")
@@ -126,6 +127,7 @@ def main(argv=None) -> int:
     try:
         label = load_label(args.label)
         plan = load_plan(args.plan, label)
+        require_explicit_lab(label, plan["parent"], args.lab)
         repo = PARENT_REF.fullmatch(plan["parent"])[1]
         token = os.environ.get("GITHUB_TOKEN")
         if args.apply and (args.confirm_scope != plan["parent"] or not token):
