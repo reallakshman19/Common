@@ -32,3 +32,5 @@
 2026-10-12 | chat=6accb5b3 | MODEL static not admission | PR#198@cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50 run38250646298 queued | no rendered-role hashes; source AUTHORED TEST
 2026-10-12 | chat=6accb5b3 | MODEL-D4 schema failure | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38250646298 | renderer PRODUCT_STRUCTURE_INVALID four numeric exit_task.oracle.verification.bindings, no HTML generated
 2026-10-12 | chat=6accb5b3 | MODEL-D4 corrected source | TEST/imo-research/qrt-d4/model-d4.package.json @c6cb89e25222d4b7148b381560336d966e27f7c6 | binding keys shape,n,e,c,A all string values; math/source rights unchanged
+2026-10-12 | chat=6accb5b3 | MODEL exact final | PR#198@c6cb89e25222d4b7148b381560336d966e27f7c6 run38251762173 | renderer receipt gaps=[], digest 11edef4633a3635d, semantic 886fc5ba0eafe57f, five role hashes in handovers/QRT-MODEL-D4.md
+2026-10-12 | chat=6accb5b3 | MODEL 512-grid oracle/final chromium | tests/test_imo182_qrt_d4_model.py and tests/imo182_qrt_d4_model_browser.py @c6cb89e25222d4b7148b381560336d966e27f7c6 | both PASS hosted; independently accessible interior classifications covered

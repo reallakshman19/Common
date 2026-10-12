@@ -40,3 +40,5 @@
 2026-10-12 | chat=6accb5b3 | MODEL-D4 rerun after schema correction | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38251762173 | QUEUED exact head, no rendered page claims
 2026-10-12 | chat=6accb5b3 | APPLY-D4 closed and MODEL-D4 active issue evidence | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6124622053 | exact EVIDENCE.log updated two-cell block
 2026-10-12 | chat=6accb5b3 | MODEL-D4 renderer defect correction | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6124660809 | correction addendum and rerun, does not self-accept
+2026-10-12 | chat=6accb5b3 | MODEL-D4 FINAL five-role page+browser artifact | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38251762173/artifacts/11748226534 | run38251762173 SUCCESS@c6cb89e25222d4b7148b381560336d966e27f7c6, zero gaps, six PNG, five role SHA in cell packet
+2026-10-12 | chat=6accb5b3 | APPLY+MODEL both closed worker combined evidence | coordination/Session_Oct09/Tab7_imo_qrt_d4/EVIDENCE.log | updated final combined block, academic accepted0/28
