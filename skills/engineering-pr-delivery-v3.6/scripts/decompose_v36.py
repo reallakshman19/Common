@@ -13,7 +13,7 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 import yaml
-from lifecycle_v36 import ContractError, OUTCOME_IDS, REPO_REF, TASK_REF, UniqueKeyLoader, load_label
+from lifecycle_v36 import ContractError, TASK_REF, UniqueKeyLoader, load_label, writable_lab
 
 PLAN_KEYS = {"plan_version", "parent", "label", "tasks"}
 TASK_KEYS = {"task_id", "size", "outcome", "title", "acceptance", "for_user"}
@@ -45,14 +45,11 @@ def validate_plan(plan: object, label: dict) -> dict:
     if not match:
         raise ContractError("parent must be owner/repo#N")
     allowed = {label["repository"]}
-    for note in label["guidance"]["notes"]:
-        if note.startswith("Writable lab: "):
-            target = note[len("Writable lab: "):].split(" ", 1)[0]
-            if not REPO_REF.fullmatch(target):
-                raise ContractError("master label has invalid lab repository")
-            allowed.add(target)
+    lab = writable_lab(label, required=False)
+    if lab is not None:
+        allowed.add(lab)
     if match[1] not in allowed:
-        raise ContractError("parent repository not in approved master or named lab")
+        raise ContractError("parent repository not in explicit master repository or Writable lab:")
     expected = {key: label[key] for key in LABEL_KEYS}
     if require_keys(plan["label"], LABEL_KEYS, "label binding") != expected:
         raise ContractError("plan must bind exact approved work/version/label_sha")
@@ -70,8 +67,8 @@ def validate_plan(plan: object, label: dict) -> dict:
         names.add(task_id)
         if task["size"] not in SIZES:
             raise ContractError("size must be XS/S/M/L")
-        if task["outcome"] not in OUTCOME_IDS:
-            raise ContractError("task outcome must be O1..O5")
+        if task["outcome"] not in label["label"]["outcomes"]:
+            raise ContractError("task outcome must be declared in the selected label")
         for field in ("title", "acceptance", "for_user"):
             required_text(task[field], field)
     return plan
