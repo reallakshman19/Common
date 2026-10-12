@@ -105,6 +105,18 @@ class LabelTests(unittest.TestCase):
         self.assertIn("Proof:", skill)
         self.assertNotIn("changes stay on draft PR #344, not main", skill)
 
+    def test_explicit_lab_required_and_must_match_selected_work(self):
+        master = v36.load_label(ROOT/"tests/fixtures/relay/AIM/V35-LIFECYCLE.yaml")
+        lab = v36.writable_lab(master)
+        v36.require_explicit_lab(master, lab+"#1", lab)
+        v36.require_explicit_lab(master, master["repository"]+"#341", None)
+        for wrong in (None, "reallakshman19/other-lab", master["repository"]):
+            with self.subTest(wrong=wrong):
+                with self.assertRaises(v36.ContractError):
+                    v36.require_explicit_lab(master, lab+"#1", wrong)
+        with self.assertRaises(v36.ContractError):
+            v36.require_explicit_lab(master, master["repository"]+"#341", lab)
+
     def test_bad_aim_id(self):
         with self.assertRaises(v36.ContractError):
             v36.validate_label(LABEL, "OTHER-LABEL")
