@@ -165,3 +165,21 @@ Claim: LOCAL
 Blocker: NONE for next W03; authored corrections and human decision to be separately tracked; W01 shared printer parked with Owner
 Next: 182-S2-W03, conditional W04 if genuine blueprint gap, then 182-S2-W05
 LOG | chat=6acc408a | tab=Tab1 | issue=182 | plan=P4 | progress=1/5 | done=182-S2-W02 | next=182-S2-W03,182-S2-W05 | ac=0/4 | blocker=NONE | PR=185@752b9ba:green | tests=13/14 | aim=v2.1.0 | outcome=O1 | user=no
+Outcome: O1
+For the user: No public learner change; the authored Core1A TEST accessible image now reveals only stage-one math initially, and its pre-exit quick check no longer gives the independent four-factor method.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38198786141
+TASK EVIDENCE | 182-S2-W02-FIX | P4 | chat=6acc408a | aim=v2.1.0 | outcome=O1 | user=no
+Task: 182-S2-W02-FIX
+Goal (issue AC): Fix accessible SVG stage-1 exposure (T03) and premature four-factor exit-method quick-check (T11) before starting any new Core task.
+Status: DONE
+Met: yes, source-level regressions corrected and independently/hostedly tested; not Owner A4/golden/QRT acceptance
+Done: Prior 13/14 diagnostic included one local AX T03 failure, not failed CI. Named test test_first_stage_svg_accessibility_does_not_announce_later_proof new PASS: static SVG desc no longer states later modulo3/coprime conclusions; 3-stage visual and current-stage descriptions retained. Named test test_independent_exit_method_not_displayed_in_pre_exit_quick_check new PASS: removed authored pre-exit four-factor modulo24 hint while preserving exit prompt, locked model answer and answer/check. PR #186 isolated from main (TEST asset, TEST package and Core1A unittest only), no printer/renderer/registry/KEY/right/merge/release changes. Earlier W01 non-A4 printer ticket remains parked by Owner.
+Code (repo branch @ commit | PR): Grade9v3.5 agent/issue-182-core1a-stage-disclosure-6acc408a @ef3d3e2dd7055d4d89d8aa154a861be2f37e11e1 | PR #186 DRAFT/unmerged
+Tests (command -> pass/fail/skip): exact-head HOSTED python -m unittest tests.test_core1a_renderer_maturity -v -> 8/8 PASS (including both new gates); tests.test_question_review_matrix -> 28/28 PASS; tests.test_core_authored_qrt_repair_journey -> 5/5 PASS; 41/41 in focused workflow. LOCAL Chromium before AX leak FAIL -> after PASS; stage visibility 3/3 PASS.
+CI (run -> result): https://github.com/reallakshman19/Grade9v3.5/actions/runs/38198786141 -> SUCCESS exact head, actual renderer, TEST HTML/PDF, browser and authored CORE1A-CORE2A journey smoke passed; other PR-wide CI pending at issue evidence write.
+Evidence (link): https://github.com/reallakshman19/Common/blob/ab155e556dbac6da186f2789a8756a4cff288ec4/coordination/Session_Oct09/Tab1_imo_core_blueprints/182-S2-W02-FIX-ACCESSIBLE-STAGES-AND-INDEPENDENT-EXIT.md ; https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6117080575
+AC (before -> after): T03 accessible-stage FAIL / T11 method spoiler -> authored-only fixes with named regressions GREEN; O1 Owner approval/O2 QRT 0/28 unchanged; W01 A4 parked
+Claim: HOSTED_CI
+Blocker: NONE for next 182-S2-W03; parked shared printer owner not on this task
+Next: 182-S2-W03 preserve-first Core1B T06/T10/T12, W05 Owner QRT packet, conditional W04 only if a true golden blueprint gap
+LOG | chat=6acc408a | tab=Tab1 | issue=182 | plan=P4 | progress=1/5 | done=182-S2-W02-FIX | next=182-S2-W03,182-S2-W05 | ac=0/4 | blocker=NONE | PR=186@ef3d3e2:queued | tests=41/41 | aim=v2.1.0 | outcome=O1 | user=no
