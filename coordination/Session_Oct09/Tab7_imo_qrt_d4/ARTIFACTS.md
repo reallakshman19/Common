@@ -36,3 +36,5 @@
 2026-10-12 | chat=6accb5b3 | APPLY-D4 FINAL five role HTML/screenshots | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38248875649/artifacts/11747409718 | run 38248875649 SUCCESS @0d36673633e115ecaa261917ee2066a80c3accc2, receipt gaps=[], 6 screenshots
 2026-10-12 | chat=6accb5b3 | APPLY-D4 final sha and golden role benchmark | coordination/Session_Oct09/Tab7_imo_qrt_d4/handovers/QRT-APPLY-D4.md | five exact-head sha, role slot MATCH to frozen golden
 2026-10-12 | chat=6accb5b3 | MODEL-D4 static source latest | https://github.com/reallakshman19/Grade9v3.5/pull/198 | @cc40fb23cf2bc25ecaeea4774df3d41df8ff1c50, 512 flood-fill grids and schema 0 errors, hosted CI queued
+2026-10-12 | chat=6accb5b3 | MODEL-D4 source-owned renderer schema correction | https://github.com/reallakshman19/Grade9v3.5/pull/198@c6cb89e25222d4b7148b381560336d966e27f7c6 | oracle verification.bindings n/e/c/A numbers -> strings
+2026-10-12 | chat=6accb5b3 | MODEL-D4 rerun after schema correction | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38251762173 | QUEUED exact head, no rendered page claims

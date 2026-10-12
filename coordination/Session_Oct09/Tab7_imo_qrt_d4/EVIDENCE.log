@@ -100,3 +100,7 @@ Blocker: MODEL CI runner queue only; APPLY worker implementation blocker NONE. I
 QRT: Both are AUTHORED TEST candidates; no official rights or admissions claimed, no merge/release, no change to accepted0/28.
 Next: Complete AGENT-D4/QRT-MODEL-D4 from exact-head hosted five-role render, actual browser and golden receipt when available; only then close MODEL worker cell and move to REPRESENT-D4. No successor chat handover (handover=no).
 END UPDATED TWO-CELL TASK EVIDENCE SET
+2026-10-12 | chat=6accb5b3 | CORRECTIVE ADDENDUM to UPDATED TWO-CELL TASK EVIDENCE SET
+APPLY: worker DONE exact-head run38248875649 SUCCESS @0d36673633e115ecaa261917ee2066a80c3accc2, five real pages+golden+Chromium; count3/7 rendered, academic Owner accepted0/28.
+MODEL: failed first hosted run38250646298 (PRODUCT_STRUCTURE_INVALID because four oracle binding values were numeric); source-owned authoring correction pushed @c6cb89e25222d4b7148b381560336d966e27f7c6, replacing numeric 8/8/4/12 with string "8"/"8"/"4"/"12" in microtopics[0].exit_task.oracle.verification.bindings only. New exact-head scoped run https://github.com/reallakshman19/Grade9v3.5/actions/runs/38251762173 QUEUED; no role receipt, browser or golden claim. Qualified reviewer and Owner unsigned. No second cell closed, no successor-chat handover.
+END CORRECTIVE ADDENDUM
