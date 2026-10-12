@@ -19,3 +19,4 @@
 2026-10-12 | chat=6accb584 | RETRIEVE-D3 five-role manifest | Grade9v3.5 PR#193@c3506cc:TEST/products/imo182-qrt-d3-retrieve.manifest.json | core2=[]; exact role names and two distinct question IDs in reviewer packet
 2026-10-12 | chat=6accb584 | RETRIEVE-D3 five-role receipt | CI run 38242658290 artifact=11743277133 | render_digest=838c4e589b276fa4 semantic_digest=afb1ced74c81b6c3 | six SHA in cell artifact, no REFERENCE gaps
 2026-10-12 | chat=6accb584 | freeze golden | G-IMO-G9-FIVE-CORE-20261012 original five snapshots | all five golden SHA locks PASS in same-head CI; semantically matched five role slots, not identical new-content HTML
+2026-10-12 | chat=6accb584 | EXPLAIN-D3 source | Grade9v3.5 PR#193@9172f4e:TEST/imo-research/qrt-d3/explain.v1.json; TEST/products/imo182-qrt-d3-explain.manifest.json; four figures qrt-d3-explain-*.svg | AUTHORED TEST, selection.core2=[], no official provenance
