@@ -34,7 +34,8 @@ class AtomicSnapshotWriter:
     def write_snapshot(target_path: Union[Path, str], snapshot_data: dict) -> Path:
         p = Path(target_path).resolve()
         p.parent.mkdir(parents=True, exist_ok=True)
-        tmp_p = p.with_name(f"{p.name}.tmp.{os.getpid()}")
+        import uuid
+        tmp_p = p.with_name(f"{p.name}.tmp.{os.getpid()}.{uuid.uuid4().hex}")
         try:
             with open(tmp_p, "w", encoding="utf-8") as f:
                 json.dump(snapshot_data, f, indent=2)
@@ -299,6 +300,8 @@ class CoordinatorBridge:
         safe_proj = self.project_id.replace("/", "_").replace("\\", "_")
         safe_sess = self.session_id.replace("/", "_").replace("\\", "_")
         fn = file_name or f"observations_{safe_proj}_{safe_sess}.json"
+        if not fn or fn != Path(fn).name or any(x in fn for x in ("/", "\\", "\x00", "..")):
+            raise ValueError("Invalid private snapshot filename")
         target_path = self.snapshot_dir / fn
         return AtomicSnapshotWriter.write_snapshot(target_path, snapshot_data)
 
@@ -349,13 +352,18 @@ def get_observations_for_api(
             "cycle_seconds": DEFAULT_CYCLE_SECONDS,
             "observations": []
         }
-    s_dir = Path(snapshot_dir) if snapshot_dir else Path(__file__).parent / "snapshots"
+    s_dir = (Path(snapshot_dir) if snapshot_dir else Path(__file__).parent / "snapshots").resolve()
     safe_proj = project_id.replace("/", "_").replace("\\", "_")
 
     if session_id:
         safe_sess = session_id.replace("/", "_").replace("\\", "_")
         target = s_dir / f"observations_{safe_proj}_{safe_sess}.json"
-        snap = AtomicSnapshotReader.read_snapshot(target)
+        # An attacker-controlled symlink inside the snapshot store must never
+        # bypass project/session isolation or disclose files outside this store.
+        if target.is_symlink() or not target.resolve().is_relative_to(s_dir):
+            snap = None
+        else:
+            snap = AtomicSnapshotReader.read_snapshot(target)
         if snap and snap.get("project_id") == project_id and snap.get("session_id") == session_id:
             return snap
 
