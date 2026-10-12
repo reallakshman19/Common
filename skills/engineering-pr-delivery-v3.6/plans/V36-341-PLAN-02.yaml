@@ -46,4 +46,4 @@ tasks:
     outcome: O5
     title: live lab end to end lifecycle benchmark
     for_user: One real lab parent progresses through child evidence title changes and independent continuation
-    acceptance: Prove O1 through O5 on relay-v35-e2e-lab using v3.6 only with positive and negative records
+    acceptance: Prove O1 through O5 on reallakshman19/relay-v36-e2e-lab using v3.6 only with positive and negative records, automatic issue/PR titles and a GitHub-only cold successor
