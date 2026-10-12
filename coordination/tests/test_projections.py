@@ -194,6 +194,42 @@ class TestWP3MaterializedProjections(unittest.TestCase):
         with self.assertRaises(LookupError):
             self.rows("assignments",limit=2,cursor=first["next_cursor"])
 
+    def test_adv15_ten_thousand_evidence_rows_are_paged_without_bulk_load(self):
+        # Ingest is deliberately out-of-scope here: populate source SQLite in
+        # one transaction to stress the WP3 materializer's 200-row fetchmany.
+        raw=canonical()
+        rows=[(f"bulk-{i}", "common", str(100000+i),
+               "WP3-353-W01", CHILD, "a"*40, None, "source",
+               "2026-10-12T11:00:00Z", None, "a"*64,
+               "https://github.com/reallakshman19/Common/issues/353",
+               1, raw, 1, 1) for i in range(10000)]
+        with self.idx._lock, self.idx._get_connection() as conn:
+            conn.executemany(
+                """INSERT INTO task_evidence(
+                   evidence_id,project_id,provider_comment_id,task_id,owner_issue,
+                   candidate_sha,pr_number,author,created_at,updated_at,
+                   content_sha,proof_url,is_canonical_8line,raw_text,version,is_active_version)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", rows)
+        import tracemalloc
+        tracemalloc.start()
+        try:
+            built=self.build()
+            peak=tracemalloc.get_traced_memory()[1]
+        finally:
+            tracemalloc.stop()
+        self.assertEqual(built["counts"]["evidence"],10000)
+        self.assertLess(peak,50*1024*1024)
+        seen=0
+        cur=None
+        while True:
+            page=self.rows("evidence",limit=200,cursor=cur)
+            self.assertLessEqual(len(page["items"]),200)
+            seen+=len(page["items"])
+            cur=page["next_cursor"]
+            if not cur:
+                break
+        self.assertEqual(seen,10000)
+
     def test_adv16_private_api_get_never_creates_or_writes_db(self):
         self.build()
         before=Path(self.path).stat().st_mtime_ns
