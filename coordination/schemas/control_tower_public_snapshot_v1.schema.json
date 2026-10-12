@@ -1,0 +1,278 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CONTROL_TOWER_PUBLIC_SNAPSHOT_V1",
+  "description": "Sanitized, allowlist-only public snapshot for static hosting on GitHub Pages. Contains no secrets, private chat IDs, or local filesystem paths.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "published_at_utc",
+    "as_of_utc",
+    "source_generation",
+    "content_digest",
+    "visibility",
+    "policy_version",
+    "source_watermarks",
+    "portfolio",
+    "works",
+    "assignments",
+    "unassigned_observations_summary",
+    "evidence",
+    "recovery"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "control_tower_public_snapshot_v1"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "pattern": "^snap-[a-f0-9]{12,64}$"
+    },
+    "published_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "as_of_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_generation": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "content_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "visibility": {
+      "const": "PUBLIC"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "source_watermarks": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "portfolio": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "project_id",
+          "name",
+          "verified_repo_id",
+          "provider_reachability",
+          "provider_observed_at_utc",
+          "work_count",
+          "registered_assignments",
+          "registered_active_assignments",
+          "coordinator_source_state",
+          "stale_observation_count",
+          "evidence_count",
+          "latest_evidence_at_utc"
+        ],
+        "properties": {
+          "project_id": { "type": "string" },
+          "name": { "type": "string" },
+          "verified_repo_id": { "type": ["string", "null"] },
+          "provider_reachability": { "type": "string" },
+          "provider_observed_at_utc": { "type": ["string", "null"] },
+          "work_count": { "type": "integer", "minimum": 0 },
+          "registered_assignments": { "type": "integer", "minimum": 0 },
+          "registered_active_assignments": { "type": "integer", "minimum": 0 },
+          "coordinator_source_state": { "type": "string" },
+          "stale_observation_count": { "type": "integer", "minimum": 0 },
+          "evidence_count": { "type": "integer", "minimum": 0 },
+          "latest_evidence_at_utc": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "works": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "work_id",
+          "project_id",
+          "aim_id",
+          "label_sha",
+          "issue_ref",
+          "acceptance_status",
+          "candidate_pr_ref",
+          "candidate_head_sha",
+          "ci_status",
+          "reported_done",
+          "tasks_total",
+          "evidenced_tasks",
+          "accepted_ac",
+          "pr_check_observations"
+        ],
+        "properties": {
+          "work_id": { "type": "string" },
+          "project_id": { "type": "string" },
+          "aim_id": { "type": "string" },
+          "label_sha": { "type": "string" },
+          "issue_ref": { "type": ["string", "null"] },
+          "acceptance_status": { "type": "string" },
+          "candidate_pr_ref": { "type": ["string", "null"] },
+          "candidate_head_sha": { "type": ["string", "null"] },
+          "ci_status": { "type": "string" },
+          "reported_done": { "type": ["integer", "null"] },
+          "tasks_total": { "type": ["integer", "null"] },
+          "evidenced_tasks": { "type": ["integer", "null"] },
+          "accepted_ac": { "type": ["integer", "null"] },
+          "pr_check_observations": { "type": ["array", "null"] }
+        }
+      }
+    },
+    "assignments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tab",
+          "status",
+          "aim",
+          "plan",
+          "ac",
+          "ci",
+          "meter",
+          "due",
+          "checked",
+          "next",
+          "probe_status",
+          "project_id",
+          "snapshot_freshness",
+          "agent_probe_freshness",
+          "assignment_id",
+          "work_id",
+          "run_id",
+          "lane_id",
+          "latest_task_id",
+          "latest_candidate_sha",
+          "latest_evidence_verdict",
+          "latest_evidence_source_ref",
+          "conflicts",
+          "assignment_state"
+        ],
+        "properties": {
+          "tab": { "type": "string" },
+          "status": { "type": "string" },
+          "aim": { "type": "string" },
+          "plan": { "type": "string" },
+          "ac": { "type": "string" },
+          "ci": { "type": "string" },
+          "meter": { "type": "string" },
+          "due": { "type": "string" },
+          "checked": { "type": "string" },
+          "next": { "type": ["string", "null"] },
+          "probe_status": { "type": "string" },
+          "project_id": { "type": "string" },
+          "snapshot_freshness": { "type": "string" },
+          "agent_probe_freshness": { "type": "string" },
+          "assignment_id": { "type": "string" },
+          "work_id": { "type": "string" },
+          "run_id": { "type": ["string", "null"] },
+          "lane_id": { "type": ["string", "null"] },
+          "latest_task_id": { "type": ["string", "null"] },
+          "latest_candidate_sha": { "type": ["string", "null"] },
+          "latest_evidence_verdict": { "type": ["string", "null"] },
+          "latest_evidence_source_ref": { "type": ["string", "null"] },
+          "conflicts": { "type": "array", "items": { "type": "string" } },
+          "assignment_state": { "type": "string" }
+        }
+      }
+    },
+    "unassigned_observations_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "project_id",
+          "task_id",
+          "child_issue",
+          "provider_comment_id",
+          "source_ref",
+          "content_sha",
+          "candidate_sha",
+          "candidate_text",
+          "parsed_canonical",
+          "validator_verdict",
+          "author",
+          "created_at",
+          "updated_at",
+          "version",
+          "work_id",
+          "assignment_id",
+          "run_id",
+          "attribution",
+          "conflicts"
+        ],
+        "properties": {
+          "evidence_id": { "type": "string" },
+          "project_id": { "type": "string" },
+          "task_id": { "type": "string" },
+          "child_issue": { "type": "string" },
+          "provider_comment_id": { "type": "string" },
+          "source_ref": { "type": ["string", "null"] },
+          "content_sha": { "type": "string" },
+          "candidate_sha": { "type": ["string", "null"] },
+          "candidate_text": { "type": ["string", "null"] },
+          "parsed_canonical": { "type": "boolean" },
+          "validator_verdict": { "type": ["string", "null"] },
+          "author": { "type": "string" },
+          "created_at": { "type": "string" },
+          "updated_at": { "type": ["string", "null"] },
+          "version": { "type": "integer" },
+          "work_id": { "type": ["string", "null"] },
+          "assignment_id": { "type": ["string", "null"] },
+          "run_id": { "type": ["string", "null"] },
+          "attribution": { "type": "string" },
+          "conflicts": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "recovery": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "anomaly_type",
+          "project_id",
+          "assignment_id",
+          "run_id",
+          "detected_at_utc",
+          "coordinator_next",
+          "probe_status",
+          "status_verbatim"
+        ],
+        "properties": {
+          "anomaly_type": { "type": "string" },
+          "project_id": { "type": "string" },
+          "assignment_id": { "type": ["string", "null"] },
+          "run_id": { "type": ["string", "null"] },
+          "detected_at_utc": { "type": "string" },
+          "coordinator_next": { "type": ["string", "null"] },
+          "probe_status": { "type": ["string", "null"] },
+          "status_verbatim": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}
