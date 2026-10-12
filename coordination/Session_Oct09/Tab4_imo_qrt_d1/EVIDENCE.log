@@ -53,3 +53,38 @@ AC (before -> after): 2/7 D1 verified-rendered -> 2/7 unchanged; EXPLAIN source 
 Claim: LOCAL
 Blocker: CI — exact ask: run 38248301556 and verify five generated HTML SHA/zero gaps, browser and immutable-golden technique. Shared guardrails owned by technical lead, not Owner.
 Next: finish D1-EXP-03 render/browser/golden evidence; then D1-APP-04. Academic review and Owner acceptance separate.
+2026-10-12 | chat=6accb51c | Issue#182 TASK EVIDENCE 6124989042
+Outcome: O1
+For the user: QRT-EXPLAIN-D1 has five actual sole-renderer Core HTML pages, verified SHA receipts, browser gates and frozen-golden role comparison. No academic/Owner QRT acceptance or release.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38251957578 SUCCESS; artifact 11748552287; local Chromium exact artifact 45/45 PASS.
+Task: D1-EXP-03 / QRT-EXPLAIN-D1
+Goal (issue AC): Original D1 mechanism explanation, five registered blueprint roles, zero gaps, golden and attempt-gate audit.
+Status: DONE
+Met: partial — O1 technical/golden worker benchmark yes; O2 independent qualified review/Owner acceptance pending; O3 unnecessary.
+Done: AUTHORED protected explanation of odd 7+9 via two lone counters pairing, distinct 3+5 teaching, disputed 5+7 repair, independent 9+4 boundary, inverse Core2B 18/7/11. Four original SVG, zero reference-depth gaps, 5 page SHA256 receipts match; blueprint versions/ordered slots match frozen five-role golden; golden immutable. Original 13.5px SVG legibility defect was ours, fixed all figures to 27 units, successful rerun.
+Code (repo branch @ commit | PR): Grade9v3.5 agent/imo182-qrt-d1-represent @f06825eab9e799384210f3886f6c8036b62fcc6d (EXPLAIN exact source) | DRAFT PR #192 (later source-only APPLY commits).
+Tests (command -> pass/fail/skip): python TEST/imo-research/qrt-d1/verify_explain.py -> PASS 225 cases+6 boundaries; python Shared/tools/render_core.py build --manifest TEST/products/imo182-qrt-d1-explain.manifest.json --out build/imo182-qrt/d1/explain --draft --reference -> PASS 6 HTML/0 gaps; python -m unittest tests.test_imo182_qrt_d1_explain -v -> PASS 6/6; Playwright Chromium exact HTML -> PASS 45/45, 0 JS errors; frozen golden SHA lock 5/5 PASS; academic review NOT_RUN.
+CI (run -> result): 38251957578 SUCCESS, artifact 11748552287. Older 38248301556 FAILED author-owned tiny SVG text, now fixed. PR#192@bc4debf shared guardrails RED is unrelated intake/snapshot/index integration; lead reproduction https://github.com/reallakshman19/Grade9v3.5/pull/192#issuecomment-6123776631.
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab4_imo_qrt_d1/handovers/QRT-EXPLAIN-D1.md
+AC (before -> after): 2/7 D1 cells technically rendered -> 3/7. Owner accepted QRT 0/28 -> 0/28.
+Claim: HOSTED_CI
+Blocker: NONE for D1 authoring; PERSON: independent academic reviewer and Owner acceptance separate.
+Next: D1-APP-04 authored area-rule TEST, verify its hosted five-role render; thereafter D1-MOD-05.
+
+2026-10-12 | chat=6accb51c | Issue#182 TASK EVIDENCE 6124997038
+Outcome: O1
+For the user: APPLY-D1 original AUTHORED TEST package and five-role manifest are authored, with four accessible diagrams, independent oracle, renderer tests and review packet. Five rendered learner HTML receipts are not yet verified because the Actions run is queued.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38253294826 QUEUED; source draft PR #192@771f808b5000ddef11d74bde45835eee0905cdc4.
+Task: D1-APP-04 / QRT-APPLY-D1
+Goal (issue AC): Apply supplied A=length×width rule independently; five actual blueprint-rendered Core pages and immutable golden/browser checks.
+Status: PARTIAL
+Met: partial — authored content and test harness complete; hosted five HTML, SHA receipts and qualified review pending.
+Done: Protected W apply 7cm×4cm rectangle area = 28cm²; distinct Core1A 3×5 worked, Core1B false addition 5+3=8 and changed 4×4 boundary, Core2B reverse A=24cm² and width=4cm to length 6cm. Three original questions, four staged source-safe SVG with 27-unit labels (viewBox width 760), five-role manifest with core2=[], 625-case oracle, six-test regression suite, dedicated CI, reviewer packet. None of the initial SVGs prints target answer.
+Code (repo branch @ commit | PR): Grade9v3.5 agent/imo182-qrt-d1-represent @771f808b5000ddef11d74bde45835eee0905cdc4 | DRAFT PR #192, stacked on unmerged H3 PR #190.
+Tests (command -> pass/fail/skip): static package/source consistency -> PASS; four SVG safe-text/stage scan -> PASS; independent local 625 area/inverse checks +6 boundaries -> PASS; python Shared/tools/render_core.py build --manifest TEST/products/imo182-qrt-d1-apply.manifest.json --out build/imo182-qrt/d1/apply --draft --reference -> QUEUED; python -m unittest tests.test_imo182_qrt_d1_apply -v -> QUEUED; Chromium exact-output and frozen five-role golden -> NOT_RUN.
+CI (run -> result): exact-head 38253294826 QUEUED (not fail); shared guardrails prior red at PR#192@bc4debf is LEAD-owned raw intake/external snapshot/index, not D1, reproduced in PR#192 comment 6123776631.
+Evidence (link): https://github.com/reallakshman19/Common/blob/main/coordination/Session_Oct09/Tab4_imo_qrt_d1/handovers/QRT-APPLY-D1.md
+AC (before -> after): 3/7 verified-rendered -> 3/7 unchanged; APPLY authored source absent -> prepared. Academic Owner accepted remains 0/28.
+Claim: LOCAL
+Blocker: CI — exact ask: execute run 38253294826, verify five HTML SHA and zero depth gaps, then Chromium/golden comparison. No Owner implementation decision.
+Next: complete D1-APP-04 technical render gate before counting; next distinct cell D1-MOD-05.
