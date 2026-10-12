@@ -4,8 +4,8 @@
 work: "IMO-CORE-BLUEPRINTS"
 repository: "reallakshman19/Grade9v3.5"
 engineering_critical: "standard"
-version: "2.1.0"
-label_sha: "adb005e"
+version: "3.1.0"
+label_sha: "2ff9246"
 label:
   problem: "Core 1B is done with a golden fixture; other Cores are not yet created or optimized from blueprints based on QRT."
   main_aim: "Create or optimize blueprints for each Core based on QRT; Core 1B is done, golden fixture created, others remain."
@@ -17,6 +17,7 @@ label:
     - "Pages come from the existing blueprint registry and are aligned with the golden fixtures."
     - "This work grants no source rights, QRT acceptance, merge or release."
     - "Use the existing blueprints for Core 2, Core 1A and Core 1B and reuse them wherever possible; create a new one adapted to QRT only where one is missing; benchmark every page against the available golden fixtures (Owner, 12 Oct)."
+    - "Parent aim: every page is generated from its registered blueprint through Shared/tools/render_core.py and benchmarked against its golden fixture. A standalone, hand-written or composer-made HTML page is never a deliverable and is never presented as one; if the renderer cannot run, report BLOCKED (Owner, 12 Oct)."
   task_outcome: "O1"
   task_aim: "Build the next Core page from its blueprint against its golden: Core 2A done structurally, Core 1A next, then 1B."
   done_when: "PENDING: the Owner sets which Cores, acceptance per QRT cell, real learner inputs and A4 print."
@@ -36,3 +37,4 @@ history:
   - "v1.1.0 · 2026-10-12 04:52 · create · created · CP-IMO-CORE-BLUEPRINTS-01 · approved by the Owner"
   - "v1.2.0 · 2026-10-12 05:36 · retarget · Task aim now: build each Core page from its blueprint against its golden, in the... · CP-IMO-CORE-BLUEPRINTS-04 · approved by the Owner"
   - "v2.1.0 · 2026-10-12 05:37 · rescope · Add an Owner constraint: reuse existing Core 2, 1A and 1B blueprints, create new... · CP-IMO-CORE-BLUEPRINTS-05 · approved by the Owner"
+  - "v3.1.0 · 2026-10-12 11:37 · rescope · Make the parent aim a hard rule: pages only through the registered blueprint and... · CP-IMO-CORE-BLUEPRINTS-08 · approved by the Owner"
