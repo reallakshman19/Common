@@ -156,6 +156,11 @@ class TestWP3MaterializedProjections(unittest.TestCase):
         e=self.rows("evidence")["items"][0]
         self.assertEqual(e["attribution"],"ATTRIBUTED")
         self.assertEqual(e["run_id"],"common-run-0")
+        assigned=next(x for x in self.rows("assignments")["items"]
+                      if x["run_id"]=="common-run-0")
+        self.assertEqual(assigned["latest_task_id"],"WP3-353-W01")
+        self.assertEqual(assigned["latest_candidate_sha"],"a"*40)
+        self.assertIsNone(assigned["latest_evidence_verdict"])
         self.assertEqual(next(x for x in self.rows("works")["items"]
                               if x["work_id"]=="common-work-0")["evidenced_tasks"],1)
         self.assertEqual(e["validator_verdict"],None)
