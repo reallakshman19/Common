@@ -42,3 +42,6 @@
 2026-10-12 | chat=6accb5b3 | MODEL-D4 renderer defect correction | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6124660809 | correction addendum and rerun, does not self-accept
 2026-10-12 | chat=6accb5b3 | MODEL-D4 FINAL five-role page+browser artifact | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38251762173/artifacts/11748226534 | run38251762173 SUCCESS@c6cb89e25222d4b7148b381560336d966e27f7c6, zero gaps, six PNG, five role SHA in cell packet
 2026-10-12 | chat=6accb5b3 | APPLY+MODEL both closed worker combined evidence | coordination/Session_Oct09/Tab7_imo_qrt_d4/EVIDENCE.log | updated final combined block, academic accepted0/28
+2026-10-12 | chat=6accb5b3 | APPLY broader guardrails (not scoped cell CI) | https://github.com/reallakshman19/Grade9v3.5/actions/runs/38248875759 | FAILED; unrelated legacy topic-independence, Physics receipts and navigation tests; lead triage
+2026-10-12 | chat=6accb5b3 | MODEL broader guardrails (not scoped cell CI) | Grade9v3.5 PR#198 head c6cb89e25222d4b7148b381560336d966e27f7c6 | FAILED general job despite successful dedicated run38251762173; lead triage
+2026-10-12 | chat=6accb5b3 | FINAL two-cell issue TASK EVIDENCE | https://github.com/reallakshman19/Grade9v3.5/issues/182#issuecomment-6124766819 | identical EVIDENCE.log block; handover=no
