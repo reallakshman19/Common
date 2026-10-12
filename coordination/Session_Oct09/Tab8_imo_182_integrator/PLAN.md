@@ -52,3 +52,35 @@ Exact-head merge gate: scoped CI green OR documented baseline-only red; sole ren
 
 ## r2 checkpoint, 2026-10-12
 182-INT-03 DONE #197 merged; 182-INT-04 DONE dispositions/fold of older #184–#189 source/Owner index; 182-INT-05 PARTIAL #190 strict frozen golden/H3/page SHA engineering subgates pass, waiting on exact canonical regression delta and tablet; 182-INT-02 PARTIAL shared baseline and two newly introduced golden-regression IDs repaired. 182-INT-01/13 PARTIAL 25 technical artifact sets and 28-row monitor, 0/28 accepted. 182-INT-06–12 remain unmerged/unfinished. [r2 handover](handovers/2026-10-12-tab8-int-r2.md) is the exact next-work contract.
+
+## r3 successor workpack — chat 6acd3a5b (2026-10-12; supersedes r2 execution order, preserves history)
+
+**Authority:** Owner v3.1.0 / label_sha 2ff9246; Coordinator closed BuddyRunner after verified 1b comment 6131617598 and 1a handover, with no Stage 2 wait. Authoritative instruction: take over, continue, fix and merge existing PRs under actual exact-head gates; one integrator, D1–D4 chats retired. **No new source, acceptance, merge-gate waiver, or release rights.** The integrator is the designated reviewer but must declare authorship/fix conflicts and cannot set accepted=true without QRT-specific sign-off AND Owner decision ID.
+
+**Fresh provider preflight (not predecessor count):** Grade9 main `4dbedc6773482bbecb146ff8959614b2c32dcc6e`; of scoped PRs #184–#199, **#197 merged 1/16**, other 15 OPEN DRAFT. #190 head `865ef59b6ddd00adf7c12b738163f9c17fd7f69b`, unmerged, CI RED (same-head canonical 38297307793, guardrails 38297307819, Core1A tablet 38297307684 FAILED; golden 38297307827, H3 38297307764, five-role combined 38297307718 SUCCESS). Existing original Owner golden immutable; no accepted cells/28. Stacked PRs #191–#196/#198–#199 target an earlier #190 base, not a validated merged integration.
+
+**First critical-path task is O1 Core1A page-to-golden.** Nonessential printer, route, lease, generic CI, and source-68 effort remain parked unless one blocks a named Core page. All estimates below are **working minutes, not task/aim percentage**; scoped results, not task counts, decide progress.
+
+| Priority | Task ID | Expected observable outcome / stop condition | Outcome | Work min | Size | Status at r3 |
+|---|---|---|---|---:|---|---|
+| 1 | 182-INT-15 | Identify exact renderer-generated Core1A page and one named QRT cell; compare frozen Core1A golden T02/T03/T11, learner precommit/exit and source->blueprint->HTML provenance; record mismatch class or exact evidence boundary. If renderer inaccessible, BLOCKED, no handmade substitute. | O1/O2 | 45 | M | START |
+| 2 | 182-INT-02 | Exact-base failed IDs for #190 canonical/guardrails/tablet; identify genuine introduced regressions; remedy only named Core-page blockers without weaker checks. | O1 prerequisite | 65 | L | PARTIAL carried |
+| 3 | 182-INT-05 | At current #190 head, verify actual five-role renderer receipts/page SHA, immutable golden, H3 nonblank gate and browser/AT precommit; only merge if ALL section-6 gates met. | O1 | 60 | L | PARTIAL carried |
+| 4 | 182-INT-04 | Re-review #184–#189 one-by-one under renewed Owner review/fix/merge; compare exact changed blobs against #190/main and eliminate duplicate/no-net-effect merges, satisfying exact-head gate for any safe merge. | O1/O3 | 80 | L | REOPENED |
+| 5 | 182-INT-06 | Rebase/qualify #191–#192 authored D2/D1 against admitted #190; protect QRT cell mapping, golden and changed attempt semantics. | O1/O2 | 90 | L | PENDING |
+| 6 | 182-INT-07 | Rebase/qualify #193 D3 authored TEST cells, exact head/role outputs. | O1/O2 | 60 | L | PENDING |
+| 7 | 182-INT-08 | Rebase/qualify #194–#196/#198–#199 D4 authored TEST cells. | O1/O2 | 95 | L | PENDING |
+| 8 | 182-INT-09 | Audit/fix MODEL-D1 and MODEL-D4 candidate preattempt cue concerns only where learner-surface evidence proves defect. | O2 | 60 | L | PENDING |
+| 9 | 182-INT-10 | Author TEST QRT-JUSTIFY-D1 five-role journey only if still missing after current-head inventory. | O1/O2 | 50 | L | PENDING |
+| 10 | 182-INT-11 | Author TEST QRT-RETRIEVE-D4 only if still missing after inventory. | O1/O2 | 50 | L | PENDING |
+| 11 | 182-INT-12 | Author TEST QRT-SYNTHESIZE-D4 only if still missing after inventory. | O1/O2 | 50 | L | PENDING |
+| 12 | 182-INT-13 | Independently reconcile hosted receipt hashes, 28 QRT rows, reviewer edit/conflict declarations, decision IDs; never auto-accept. | O1/O2 | 70 | L | PARTIAL carried |
+| 13 | 182-INT-14 | Publish exact task evidence/coordination and handover; preserve Owner decisions, no fabricated acceptance. | O1/O2/O3 | 30 | M | PARTIAL carried |
+| history | 182-INT-01 | Verify scope inventory and 28-cell link index; maintain only when an actual stale locator blocks a page. | O1/O2 | 35 | M | PARTIAL carried |
+| history | 182-INT-03 | #197 concurrency-only PR merged before takeover; no further claim or retest from inherited receipts. | O1 prerequisite | 30 | M | DONE inherited |
+
+**First task acceptance:** The named Core1A page must be traced from explicit authored QRT demand, manifest, registered BP-CORE1A-CONSTRUCTION and Shared/tools/render_core.py to the exact actual HTML; compare T02/T03/T11 and learner attempt/protected representation against a frozen SHA-locked Core1A snapshot. Return PASS/FAIL/UNKNOWN and mismatch owner; no accepted status. A necessary renderer inability is BLOCKED. All changes to protected golden require new Owner fixture, D-182-3 for Core2A successor remains reserved.
+
+**Merge gate preserved:** exact current SHA; focused CI green or exact-base-only red with same failing IDs; renderer PAGES + zero REFERENCE gaps + 6/6 actual HTML receipt SHA; five registered role refs / printed golden techniques and old golden byte lock; Core2A H3 only after nonblank attempt, no visible/accessible/search preattempt decisive leak; TEST only, no source-righted Core2, no accepted-QRT change. `mergeable=true` alone not sufficient. No old-head green carryover. Track A/Tab2/Tab3 remain separate.
+
+**Audit/report contract:** Every completed/partial task posts separately to issue #182 with first lines Outcome / For the user / Proof and required TASK EVIDENCE fields. Record real PR count as #merged/16 and QRT count only when source-reviewed accepted evidence is *merged* and Owner decision recorded. The next task after first Core1A oracle is #182-INT-02 or #182-INT-05 depending on observed blocker.
