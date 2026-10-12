@@ -1,6 +1,6 @@
 # Engineering PR Delivery v3.6 — independent GitHub lifecycle (DRAFT)
 
-**Status:** v1.1.0 Owner label approved; this implementation remains DRAFT. **Owning issue:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Plan:** V36-341-PLAN-02. **Owner aim card:** V35-LIFECYCLE / CP-V35-LIFECYCLE-01, approved master v1.1.0 / label_sha 775f2bc.
+**Status:** v1.2.1 Owner label approved; this implementation remains DRAFT. **Owning issue:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Plan:** V36-341-PLAN-02. **Owner aim card:** V35-LIFECYCLE / CP-V35-LIFECYCLE-01, approved master v1.2.1 / label_sha 4b90240.
 
 ## Scope, independence and safety
 
@@ -49,7 +49,7 @@ The v3.6 module requires Python 3.10+ and PyYAML 6.x. All public CLI commands re
 
 WP2 must validate stable workpack/task IDs, sizes, outcome and acceptance before materialization; replay must not duplicate children. WP3 must validate evidence references, current candidate, negative/stale tests and provider visibility. WP4 must preserve unmanaged human title text and refuse unauthorized writes; repeated runs must be idempotent and read back exact output. WP5 must implement BuddyRunner v1.6 as **1a execution HOLD → 1b independent reconstruction → 2 single reconciliation**, with an optional **Y** response to later Xb evidence, *not* a loop. WP6 must implement the Owner-approved D-V36-2: two separate 2-pass and 3-pass generators with distinct purposes and independent tests, inside v3.6. WP7 requires a real lab run with a fresh cold successor; synthetic lab proof must not be promoted to authentic programme acceptance.
 
-**Current state:** Master label v1.1.0 approved; scope of automatic lab writes and two separate purpose-specific prompt generators are approved (D-V36-2). WP1 draft scaffolding is not approval of these decisions. WP4/WP7 live publisher writes HOLD pending explicit scoped permission. Older #294 decisions are **not v3.6 inputs**.
+**Current state:** Master label v1.2.1 approved; scope of automatic lab writes and two separate purpose-specific prompt generators are approved (D-V36-2). WP1 draft scaffolding is not approval of these decisions. WP4/WP7 live publisher writes HOLD pending explicit scoped permission. Older #294 decisions are **not v3.6 inputs**.
 
 ## WP2 — parent → real child issues (O1)
 
@@ -74,10 +74,13 @@ Exact-source WP1/WP2 offline tests have not yet been executed at branch head; th
 
 ## Benchmark repository boundary
 
-The approved master is maintained in Common, but its guidance explicitly names `Lab: reallaksh19/relay-v35-e2e-lab`. WP2 plan validation therefore permits only the master repository and that exact named lab repository, always with an exact `owner/repo#parent` `--confirm-scope` and current provider permissions; arbitrary repositories are rejected. To run the final benchmark, a fresh lab plan must bind the lab parent number and stable task IDs; the Common #341 plan remains a coordination example, not the lab's actual plan. As observed 12 Oct 2026, the connected GitHub identity has `push=false` and `triage=false` on the lab; no lab issue creation/title writes are claimed. This is an actionable lab write-access blocker to WP7, not a generic prior protocol gate.
+The approved master is maintained in Common, but its guidance explicitly names `Writable lab: reallakshman19/relay-v36-e2e-lab`. WP2 plan validation therefore permits only the master repository and that exact named lab repository, always with an exact `owner/repo#parent` `--confirm-scope` and current provider permissions; arbitrary repositories are rejected. To run the final benchmark, a fresh lab plan must bind the lab parent number and stable task IDs; the Common #341 plan remains a coordination example, not the lab's actual plan. As observed 12 Oct 2026, the connected GitHub identity has `push=false` and `triage=false` on the lab; no lab issue creation/title writes are claimed. This is an actionable lab write-access blocker to WP7, not a generic prior protocol gate.
 
 ## Owner decisions — 12 October 2026
 
 D-V36-1: independent architecture APPROVED. D-V36-2: two **separate** generators, 2-pass and 3-pass, with distinct purposes; do not merge them into modes of one generator. D-V36-3: lab write intent approved; actual GitHub provider write permission must be observed before attempted lab mutations. Development and Common read-only/safe testing continue independently. Plan-03: https://github.com/reallakshman19/Common/issues/341#issuecomment-6116096075.
 
 WP3 script `scripts/snapshot_v36.py` is a GitHub read-only provider snapshot. It recognizes finished-task evidence only when the child issue, task/outcome, proof PR, 40-character candidate SHA and live PR head match. It reports stale or unknown evidence explicitly. Even CURRENT_EVIDENCE is *not* independently accepted completion; every output's complete flag remains false until a future separately specified acceptance mechanism. Workpack status and lab acceptance are distinct.
+
+## v1.2.1 lab acceptance target
+The only current writable target for WP4/WP7 is `reallakshman19/relay-v36-e2e-lab` identified by the approved master guidance `Writable lab:`. Older `reallaksh19/relay-v35-e2e-lab` is reference-only, and any prior `Lab:` note is not permission. See Common #341 PLAN-04. Lab parent #1, children #2/#3, PR #4 are real. Title changes must be computed from GitHub facts, scoped, applied and read back with no hand-authored completion number.

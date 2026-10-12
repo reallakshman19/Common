@@ -2,15 +2,15 @@ plan_version: V36-341-PLAN-02
 parent: reallakshman19/Common#341
 label:
   work: V35-LIFECYCLE
-  version: 1.1.0
-  label_sha: 775f2bc
+  version: 1.2.1
+  label_sha: 4b90240
 tasks:
   - task_id: V36-341-WP1
     size: S
     outcome: O1
     title: independent approved aim reader and task evidence foundation
     for_user: Validated aim and task evidence format can be read from GitHub; no automatic lifecycle yet
-    acceptance: The exact approved v1.1.0 master parses; tests pass; no imports from older skills
+    acceptance: The exact approved v1.2.1 master parses; tests pass; no imports from older skills
   - task_id: V36-341-WP2
     size: M
     outcome: O1

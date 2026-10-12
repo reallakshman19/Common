@@ -66,7 +66,7 @@ class PlanTests(unittest.TestCase):
             dc.validate_plan(plan, LABEL)
 
     def test_named_lab_target_is_valid_for_real_o1_benchmark(self):
-        parent = "reallaksh19/relay-v35-e2e-lab#20"
+        parent = "reallakshman19/relay-v36-e2e-lab#20"
         translated = [{**t, "task_id": t["task_id"].replace("V36-341-", "V36-20-")}
                       for t in PLAN["tasks"]]
         approved_lab = {**PLAN, "parent": parent,

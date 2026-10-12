@@ -15,8 +15,8 @@ LABEL = {
     "work": "V35-LIFECYCLE",
     "repository": "reallakshman19/Common",
     "engineering_critical": "standard",
-    "version": "1.1.0",
-    "label_sha": "775f2bc",
+    "version": "1.2.1",
+    "label_sha": "4b90240",
     "label": {
         "problem": "You cannot see from GitHub what agents did or how far a work has got; each successor starts half-blind.",
         "main_aim": "From one parent issue, GitHub alone shows the plan, evidence and live progress; any successor continues without chats.",
@@ -24,7 +24,7 @@ LABEL = {
         "owner_constraints": ["A new, independent v3.6 lifecycle skill", "BuddyRunner v1.6 and revamped 2-pass / 3-pass prompts inside v3.6"],
         "task_outcome": "O1-O5",
         "task_aim": "Build v3.6; one real parent issue on the lab runs end to end, titles updating themselves as evidence lands.",
-        "done_when": "With v3.6 only, on relay-v35-e2e-lab: parent and child issues with evidence, automatic titles, and a handover a successor continues from.",
+        "done_when": "With v3.6 only, on reallakshman19/relay-v36-e2e-lab (copy of the v3.5 lab): parent and child issues, evidence, automatic titles, successor handover.",
     },
     "guidance": {"not_now": [], "watch": ["Reports about the lifecycle instead of running it"], "notes": []},
     "bindings": ["Session_Oct07:2 coordination/Session_Oct07/Tab2_Lifecycle_Evidence_Reconciliation"],
@@ -42,7 +42,7 @@ EVIDENCE = dict(
 class LabelTests(unittest.TestCase):
     def test_label_reads_approved_master_shape(self):
         item = v36.validate_label(LABEL, "V35-LIFECYCLE")
-        self.assertEqual(item["version"], "1.1.0")
+        self.assertEqual(item["version"], "1.2.1")
 
     def test_bad_aim_id(self):
         with self.assertRaises(v36.ContractError):
@@ -67,7 +67,7 @@ class LabelTests(unittest.TestCase):
 
     def test_owner_master_example_is_accepted(self):
         master = ROOT / "tests" / "fixtures" / "relay" / "AIM" / "V35-LIFECYCLE.yaml"
-        self.assertEqual(v36.load_label(master)["label_sha"], "775f2bc")
+        self.assertEqual(v36.load_label(master)["label_sha"], "4b90240")
 
     def test_no_ambiguous_yaml_duplicate_keys(self):
         source = "label_id: A\nlabel_id: B\n"

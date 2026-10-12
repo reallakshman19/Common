@@ -46,8 +46,8 @@ def validate_plan(plan: object, label: dict) -> dict:
         raise ContractError("parent must be owner/repo#N")
     allowed = {label["repository"]}
     for note in label["guidance"]["notes"]:
-        if note.startswith("Lab: "):
-            target = note[len("Lab: "):]
+        if note.startswith("Writable lab: "):
+            target = note[len("Writable lab: "):].split(" ", 1)[0]
             if not REPO_REF.fullmatch(target):
                 raise ContractError("master label has invalid lab repository")
             allowed.add(target)
