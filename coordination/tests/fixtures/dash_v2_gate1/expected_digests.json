@@ -1,0 +1,11 @@
+{
+  "manifest_version": "1.0.0-gate1-r4",
+  "algorithm": "sha256",
+  "artifacts": {
+    "SOURCE_CONTRACT.md": "4b19ce88098c133895080467dfd73206757a6e0482106fa7f227290c56a2de8f",
+    "coordinator_state_v330_negative.json": "d2601ba8adbb885110fb6adf7f9a33e5dbdd7e9c1b4415ea2e6d0c53aaea530e",
+    "coordinator_state_v330_positive.json": "683e1ff8de430774f2156f162b0c3c964d226282a0fff8a46ff0ac848009f17d",
+    "source_contract.schema.json": "76c2369f666d16338102b40894b87ad4ac640330951b18dbd54f05953eee6740",
+    "validate_fixtures.py": "1a792ee95e38336776fcfc47ebe26176367c4d746442afb673a09b65e2de7be9"
+  }
+}

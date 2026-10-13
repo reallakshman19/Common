@@ -1,0 +1,1024 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoordinatorStateV330",
+  "description": "Strict JSON Schema for Coordinator Protocol v3.30 state files (coordinator-state.json)",
+  "type": "object",
+  "properties": {
+    "claude_code_log_anchor": {
+      "type": "integer",
+      "const": 0
+    }
+  },
+  "required": [
+    "claude_code_log_anchor"
+  ],
+  "patternProperties": {
+    "^claude_code_cycle_[A-Za-z0-9_]+$": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "RUNNING",
+            "HOLD",
+            "WAIT"
+          ]
+        },
+        "cycle": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "since": {
+          "type": "string"
+        },
+        "lastFull": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "job": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "until": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "map": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "cycle",
+        "since",
+        "map",
+        "seen"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_gh_cfg_[A-Za-z0-9_]+$": {
+      "type": "string"
+    },
+    "^claude_code_gh_seen_[A-Za-z0-9_]+$": {
+      "type": "string"
+    },
+    "^claude_code_gh_waiter_[A-Za-z0-9_]+$": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "pid": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "string"
+        },
+        "since": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "pid",
+        "start",
+        "since"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_gh_relay_[A-Za-z0-9_]+$": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "forLa": {
+            "type": "string"
+          },
+          "laDone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "forLa"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "^claude_code_aim_[A-Za-z0-9_-]+$": {
+      "type": "object",
+      "properties": {
+        "work": {
+          "type": "string"
+        },
+        "repo": {
+          "type": "string"
+        },
+        "crit": {
+          "enum": [
+            "critical",
+            "standard",
+            "unknown",
+            ""
+          ]
+        },
+        "status": {
+          "enum": [
+            "ACTIVE",
+            "DRAFT",
+            "RETIRED",
+            "STUB"
+          ]
+        },
+        "vMain": {
+          "type": "integer"
+        },
+        "vTask": {
+          "type": "integer"
+        },
+        "vGuide": {
+          "type": "integer"
+        },
+        "sha": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "problem": {
+              "type": "string"
+            },
+            "main": {
+              "type": "string"
+            },
+            "mainAim": {
+              "type": "string"
+            },
+            "outcomes": {
+              "type": "object"
+            },
+            "constraints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "taskOutcome": {
+              "type": "string"
+            },
+            "task": {
+              "type": "string"
+            },
+            "done": {
+              "type": "string"
+            },
+            "doneWhen": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "watch": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notNow": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bind": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hist": {
+          "type": "array"
+        },
+        "cpN": {
+          "type": "integer"
+        },
+        "judge": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "at": {
+              "type": "string"
+            },
+            "hold": {
+              "type": "string"
+            },
+            "color": {
+              "enum": [
+                "green",
+                "amber",
+                "red",
+                "yellow",
+                "none",
+                ""
+              ]
+            },
+            "sum": {
+              "type": "string"
+            },
+            "why": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "adopt": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "card": {
+              "type": "string"
+            },
+            "at": {
+              "type": "string"
+            },
+            "why": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "pub": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "groundDue": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "work",
+        "repo",
+        "crit",
+        "status",
+        "vMain",
+        "vTask",
+        "vGuide"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_cp_[A-Za-z0-9_-]+_\\d{2}$": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "work": {
+          "type": "string"
+        },
+        "cls": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "PROPOSED",
+            "ACCEPTED",
+            "REJECTED",
+            "APPLIED",
+            "CANCELLED"
+          ]
+        },
+        "change": {
+          "type": "string"
+        },
+        "why": {
+          "type": "string"
+        },
+        "raised": {
+          "type": "string"
+        },
+        "answers": {
+          "type": [
+            "object",
+            "array",
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "work",
+        "state"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_judge_[A-Za-z0-9_-]+_\\d{14}$": {
+      "type": "object",
+      "properties": {
+        "work": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string"
+        },
+        "hold": {
+          "type": "string"
+        },
+        "ver": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "col": {
+          "type": "string"
+        },
+        "sum": {
+          "type": "string"
+        },
+        "why": {
+          "type": "string"
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next": {
+          "type": "string"
+        },
+        "adopt": {
+          "type": [
+            "string",
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "work",
+        "at",
+        "sum"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_hw_[0-9a-f]{8}$": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        },
+        "lastState": {
+          "type": "string"
+        },
+        "actAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "unknown": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fLine": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prevId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nextId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aLane": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bRev": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bPrompt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fHr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "buddy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bPub1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bPub2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bAss": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bWhy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bV": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aPub": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "yLast": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pStage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sentWhat": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "yDec": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "costDay": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fAim": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fOut": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fUser": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aimIntro": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ciLimSent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "firstAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hard": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "redSent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "folder": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastLog": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reconMode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reconDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastSeen": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "soonSent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "heavySent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "planDoneAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ciSent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fixSent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rcAsk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastBk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prState": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastTests": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fPlan": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fDone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fNext": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fRel": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fBk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fBr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fHv": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fPr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fTests": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fMissing": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fHead": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fProof": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "footAsk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastKind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parkAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pingAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parkWhy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nudgeTurn": {
+          "type": "integer"
+        },
+        "bSent": {
+          "type": "integer"
+        },
+        "bTry": {
+          "type": "integer"
+        },
+        "bNeed": {
+          "type": "integer"
+        },
+        "evChat": {
+          "type": "integer"
+        },
+        "userNoN": {
+          "type": "integer"
+        },
+        "aimSends": {
+          "type": "integer"
+        },
+        "turns": {
+          "type": "integer"
+        },
+        "gen": {
+          "type": "integer"
+        },
+        "rcn": {
+          "type": "integer"
+        },
+        "pd": {
+          "type": "integer"
+        },
+        "pt": {
+          "type": "integer"
+        },
+        "aca": {
+          "type": "integer"
+        },
+        "act": {
+          "type": "integer"
+        },
+        "dPd": {
+          "type": "integer"
+        },
+        "dAc": {
+          "type": "integer"
+        },
+        "noProg": {
+          "type": "integer"
+        },
+        "evN": {
+          "type": "integer"
+        },
+        "evLast": {
+          "type": "integer"
+        },
+        "evSince": {
+          "type": "integer"
+        },
+        "ckAt": {
+          "type": "integer"
+        },
+        "driftTurn": {
+          "type": "integer"
+        },
+        "lastTp": {
+          "type": "integer"
+        },
+        "lastTp2": {
+          "type": "integer"
+        },
+        "redN": {
+          "type": "integer"
+        },
+        "costK": {
+          "type": "number"
+        },
+        "sumMin": {
+          "type": "number"
+        },
+        "sumPages": {
+          "type": "number"
+        },
+        "bMed": {
+          "type": "number"
+        },
+        "fresh": {
+          "type": "boolean"
+        },
+        "seenK": {
+          "type": "array"
+        },
+        "doneHist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "planSeen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "judgeKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ciHeads": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "last3": {
+          "type": "array"
+        },
+        "soft": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bAfter": {
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "lastState",
+        "turns"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_url_[0-9a-f]{8}$": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        },
+        "url": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "tab": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "url"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_ho_\\d{14}_[0-9a-f]{8}_[A-Z]+$": {
+      "type": "object",
+      "properties": {
+        "t": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ev": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "t",
+        "id",
+        "ev"
+      ],
+      "additionalProperties": false
+    },
+    "^claude_code_repo_[A-Za-z0-9_]+$": {
+      "type": "object",
+      "properties": {
+        "repo": {
+          "type": "string"
+        },
+        "vis": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "repo",
+        "vis"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
