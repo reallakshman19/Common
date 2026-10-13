@@ -68,11 +68,13 @@ class CommandEngine:
         registry: Optional[ControlTowerRegistry] = None,
         transport: Optional[TransportAdapter] = None,
         allow_test_transport: bool = False,
+        decision_card_verifier=None,
     ):
         self.db = db
         self.registry = registry
         self.transport = transport or NoOpTransportAdapter()
         self.allow_test_transport = allow_test_transport
+        self.decision_card_verifier = decision_card_verifier
         # In-memory observation lookup for live coordinator state checks
         self.live_observations: Dict[str, Dict[str, Any]] = {}
 
@@ -119,6 +121,10 @@ class CommandEngine:
             outcome = cmd.payload.get("decision_outcome") or cmd.decision_outcome
             if not card_id or not outcome:
                 raise DecisionCardRequiredError("DECISION_RESOLVE requires valid decision_card_id and outcome")
+            if (self.decision_card_verifier is None or
+                    not self.decision_card_verifier(cmd)):
+                raise DecisionCardRequiredError(
+                    "DECISION_CARD_NOT_VERIFIED: governing source authorization required")
 
         # 3. Single-Flight Database Check
         active = self.db.get_active_command_for_assignment(cmd.target.assignment_id)
