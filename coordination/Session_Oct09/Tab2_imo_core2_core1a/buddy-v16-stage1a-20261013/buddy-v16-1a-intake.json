@@ -1,0 +1,62 @@
+{
+  "schema_version": "buddy-runner-v1.6",
+  "phase": "1a",
+  "mode": "OPEN_SOURCE_PURPOSE_RECONSTRUCTION",
+  "actor_id": "G1_TAB2_IMO183",
+  "handover": {
+    "id": "IMO183_QRT68_BUDDY16_20261013_R1",
+    "outgoing_id": "G1_TAB2_IMO183",
+    "incoming_id": "G2_FRESH_IMO183",
+    "coordination_ref": "https://github.com/reallakshman19/Common/tree/main/coordination/Session_Oct09/Tab2_imo_core2_core1a"
+  },
+  "case": {
+    "repository": "reallakshman19/Grade9v3.5",
+    "current_issue": "https://github.com/reallakshman19/Grade9v3.5/issues/183",
+    "parent_issue": "https://github.com/reallakshman19/Grade9v3.5/issues/137",
+    "roadmap_refs": [
+      "https://github.com/reallakshman19/Grade9v3.5/issues/130",
+      "https://github.com/reallakshman19/Common/blob/80a5f66022177fc2884b04917cd31379112fbd3f/relay/AIM/IMO-CORE2-CORE1A-68.yaml",
+      "https://github.com/reallakshman19/Grade9v3.5/issues/182"
+    ],
+    "inherited_commit": "7cc27b7508282f1efed07b78e0285e2128aae643",
+    "candidate_pr_refs": [],
+    "owner_source_grade": "DIRECT_OWNER_VERIFIED",
+    "owner_intent_ref": "https://github.com/reallakshman19/Grade9v3.5/issues/183",
+    "objective_hint": "Independently reconstruct how the Owner can obtain authentic, source-faithful SOF IMO Class IX Core2 pages and question-concept-specific Core1A lessons for 68 fixed source positions, through the sole registered native renderer, aligned to Owner-reviewed visual golden and genuinely accepted QRT cells. The Owner's recent direct instructions requested an offline 68-position 7-by-4 QRT HTML/JSON map before further batches, variation of Core1A by each question's demand/concept, and batching by compatible QRT only when justified. Investigate whether the existing 68-row triage evidence can support a defensible first deliverable and what smallest original-source, academic and output oracles would settle uncertainty; do not assume summary-only QRT proposals are accepted or that visually approved authored demo HTML is an authentic original question.",
+    "source_refs": [
+      "Common/main@80a5f66022177fc2884b04917cd31379112fbd3f:relay/AIM/IMO-CORE2-CORE1A-68.yaml (Owner aim v3.1.0, blob 16e23fdab304d2d34f20b1351febe3da06a913d5)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:TEST/imo-research/qrt-68-map-r1/qrt-68-triage-map.v1.json (68 rows, proposal/evidence flags)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:TEST/imo-research/qrt-68-map-r1/imo-qrt-68-interactive.html (offline reviewer-facing projection)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:TEST/imo-research/intake/core2-source-custody-eligibility.v1.json (68 source-position custody census)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:TEST/imo-research/taxonomy/seed-question-topic-map.v1.jsonl (66 provisional concepts)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:TEST/imo-research/verification/official-sample-2026-27-math-qrt-pilot.v1.json (unaccepted pilot proposals)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:Shared/quality/question-demand-matrix.v1.json (canonical 7x4 demand-band rules)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:Shared/quality/question-demand-templates.v1.json (28 derived templates)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:Shared/web/interactive-page-blueprints.v1.json (native Core2 and Core1A blueprints)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:Shared/tools/render_core.py (sole native HTML renderer)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:golden/units/G-IMO-CORE2-UI-R1/GOLDEN.md (Owner-approved authored UI only)",
+      "Grade9v3.5@7cc27b7508282f1efed07b78e0285e2128aae643:TEST/imo-research/core2-q003/core1a-qrt-demand-adaptation.v1.json (concept- and demand-specific design guard)",
+      "Common/main@80a5f66022177fc2884b04917cd31379112fbd3f:coordination/Session_Oct09/Tab2_imo_core2_core1a/LINEAGE.md (prior claims/evidence, not G2's independent conclusion)",
+      "Issue #183 current body, relevant Task Evidence comments and Owner packet, plus #137/#130 original WHAT/WHY; refetch before asserting provider reality"
+    ],
+    "scope_constraints": [
+      "Do not start original-question product work or run the incoming investigation during 1a; handoff execution is HOLD until a distinct G2 is invoked.",
+      "Never copy protected SOF exam stems/options/figures/keys or private HTML/PDF into Common/chat/public materials; publisher rights are NOT_GRANTED.",
+      "Authentic Core2 requires source custody and exact original option/figure fidelity; authored demonstration is not an original Core2 page.",
+      "Core1A must be independently authored from the question-specific mathematical concept, prerequisite and actual inferential QRT demand, not from the printed key.",
+      "A matching tentative QRT cell alone never authorizes same-lesson reuse, native admission, Owner acceptance or publication; confirm crux and five difficulty components.",
+      "Use the registered Shared/tools/render_core.py and real Core2/Core1A blueprints for native products, not hand-composed HTML substitution.",
+      "Keep Owner acceptance separately reserved for actual QRT cells, original-source display/rights, A4 print legibility and release; zero approvals may be inferred.",
+      "Keyboard/accessibility follow-up is DEFERRED_BY_USER, not passed. A4 PDF media-box geometry was Coordinator-reported LOCAL; Owner visual print review remains pending.",
+      "No Shared/main changes, PR merge, GitHub publisher/release, Grade9v3.5 relay/STATE.yaml or issue #212 serial writer lease modification without separate authority."
+    ],
+    "known_competing_paths": [
+      "Native original Q003 private Core2/Core1A pair with Coordinator-local zero-gap and A4 geometry reports; independent owner paper/academic/visual review still pending.",
+      "IMO G-IMO-CORE2-UI-R1 approved source-safe visual mock vs G-CORE2-R2 candidate native golden; do not conflate.",
+      "Prior MODEL-D2 authored batch demo vs 68-position QRT map whose 59 summary-only placements are low-confidence.",
+      "Predecessor Track B unmerged draft PRs #145/#155/#176/#179; source-reuse and renderer alternatives need independent evaluation, not blind merge."
+    ],
+    "task_evidence_summary": "Unverified contextual summary: 68/68 fixed source positions are listed (66 seed + 2 sample), but only 67 tentative cell hypotheses and 1 figure-held case, including 59 metadata-only low-confidence placements. Owner accepted QRT 0/28, admitted original Core2 0/68, admitted Core1A 0, licensed source reuse NOT_GRANTED. Stage1 successor must check all facts against actual issues/source. G1 does not claim independent incoming Agent G2, freeze, publication or new product acceptance.",
+    "notes": "Outgoing G1 is the present chat actor and intentionally will not act as incoming G2. Incoming identifier G2_FRESH_IMO183 is an uninstantiated target role; a real distinct agent identity must be bound by the operator on invocation. Inherited_commit is a fixed Grade9 TEST assessment baseline, not a live main ref; main was observed separately @4dbedc6773482bbecb146ff8959614b2c32dcc6e. COMMON source of v1.6 skill verified in main at 80a5f66022177fc2884b04917cd31379112fbd3f. The issue body is a roadmap/Owner-quote record; where source is only mirrored, recheck its authority instead of treating direct chat instructions as a code lease."
+  }
+}
