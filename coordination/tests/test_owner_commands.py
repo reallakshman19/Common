@@ -42,6 +42,7 @@ from coordination.command_db import CommandDatabase
 from coordination.command_engine import (
     CASConflictError,
     CommandEngine,
+    CommandEngineError,
     DecisionCardRequiredError,
     IdempotencyConflictError,
     SingleFlightConflictError,
