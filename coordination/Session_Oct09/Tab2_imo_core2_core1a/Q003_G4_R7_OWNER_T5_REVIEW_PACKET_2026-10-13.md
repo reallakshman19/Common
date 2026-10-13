@@ -19,6 +19,20 @@
 
 **Batch-review status:** two-question development/demo first batch **CREATED**, original Q008 Core2 **NOT_RENDERED**, original Q008 linked native Core1A **NOT_RENDERED**, Q003 native source pair **LOCAL** only. No source content published. Academic reviewer must distinguish MODEL versus APPLY/REPRESENT and certify per-question chosen crux/demand/band before Owner QRT acceptance. **No admission 0/68, no Core1A admission 0, QRT acceptance 0/28, rights NOT_GRANTED, Owner A4 pending, keyboard/AX followup DEFERRED_BY_USER.**
 
+## 13 Oct 2026 priority correction — complete 68-position interactive QRT triage BEFORE more content batches
+
+Owner: “fist map all 68 in QRT matrix ... Open the interactive QRT HTML JSON ... similar a standalone HTML page is required.” A source-safe **68/68 source-position research ledger** now exists on Grade9v3.5 isolated `agent/183-q003-private-core2-test-6acc303b@7cc27b7508282f1efed07b78e0285e2128aae643`:
+
+- [Offline interactive 7 × 4 QRT HTML](https://github.com/reallakshman19/Grade9v3.5/blob/7cc27b7508282f1efed07b78e0285e2128aae643/TEST/imo-research/qrt-68-map-r1/imo-qrt-68-interactive.html) — all 68 embedded, clickable cell heat matrix, source ID/concept/topic search, demand/band/evidence filters, individual review pane and filtered JSON/CSV download; no source stems, options, figure, keys, HTML or PDF.
+- [Source-safe QRT JSON](https://github.com/reallakshman19/Grade9v3.5/blob/7cc27b7508282f1efed07b78e0285e2128aae643/TEST/imo-research/qrt-68-map-r1/qrt-68-triage-map.v1.json) — 68 records, 28 generated canon templates and H/S/P/M review asks, input Git blobs, classification evidence level and source eligibility/rights holds.
+- [Method and acceptance caveats](https://github.com/reallakshman19/Grade9v3.5/blob/7cc27b7508282f1efed07b78e0285e2128aae643/TEST/imo-research/qrt-68-map-r1/README.md).
+
+**Critical distinction:** 68 distinct source positions = 58 full-paper seed + 8 sample seed + 2 additional organizer sample. **67 are placed TENTATIVELY into canonical cells; 1 sample Q005 remains UNCLASSIFIED** because of a known original figure interpretation hold. Of the 67 proposals, **7** are previous source-inspected AI pilot proposals, **1** is the unaccepted Q003 `QRT-MODEL-D2` proposal, and **59** are **LOW_CONFIDENCE source-safe metadata-only work-queue hypotheses**, lacking independently resolved crux move and five-component difficulty. None should be called an accepted QRT classification. No source QRT acceptance has changed: **0/28**; no Core2 admitted: **0/68**; no Core1A admitted: **0**; rights **NOT_GRANTED**.
+
+A preliminary `QRT-APPLY-D2` work-queue bucket has 23 tentative positions but **not** 23 interchangeable lessons; compare actual concept/prerequisites, protected learner move and independently reviewed five difficulty dimensions before batching. Previously generated 2-position authored `MODEL-D2` demonstration remains a preview, not a gate-clearing authentic original Core2 pair. Owner-approved source-safe G-IMO-CORE2-UI-R1 visual golden remains separate. No new native render/Shared/main changes.
+
+**Verification:** exact GitHub source readbacks; 19/19 census/template/HTML/JS integrity checks; offline chat copy Node syntax and 68-position JSON embed checks PASSED. Browser executable unavailable for independent runtime launch (**NOT_RUN**). T5 remains **PARTIAL** awaiting original source/academic QRT/Owner review, Owner same-page A4 print-quality and rights; keyboard/AX **DEFERRED_BY_USER**, T6 original 68 roll-out not authorized.
+
 ## 13 Oct 2026 Owner visual decision — new IMO-specific Core2 golden UI reference, QRT-specific Core1A next
 
 **Owner:** “looks perfect. save this as IMO golden fixture, proceed next. For Core 1A, remember to change as per demand/concepts of each question see QRT.” (2026-10-13T05:55:58Z). The object reviewed and approved was the **source-safe independently authored in-chat Core2 UI/interaction demonstration** after repair against `BP-CORE2-SOURCE-QUESTION@1.11.0` and the existing G-CORE2-R2 technique golden, **not** the lost native original Q003 HTML or original paper.
