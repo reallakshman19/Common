@@ -67,10 +67,12 @@ class CommandEngine:
         db: CommandDatabase,
         registry: Optional[ControlTowerRegistry] = None,
         transport: Optional[TransportAdapter] = None,
+        allow_test_transport: bool = False,
     ):
         self.db = db
         self.registry = registry
         self.transport = transport or NoOpTransportAdapter()
+        self.allow_test_transport = allow_test_transport
         # In-memory observation lookup for live coordinator state checks
         self.live_observations: Dict[str, Dict[str, Any]] = {}
 
@@ -225,7 +227,13 @@ class CommandEngine:
                 reason=cas_error
             )
 
-        # 3. Target Composer Safety Check
+        # 3. Test-only transports may NOT fabricate production delivery.
+        if isinstance(self.transport, NoOpTransportAdapter) and not self.allow_test_transport:
+            return self.db.transition_state(
+                command_id, CommandState.DENIED.value, worker_id,
+                reason="DRY_RUN_ONLY: No verified real transport configured")
+
+        # 4. Target Composer Safety Check
         try:
             safety = self.transport.check_composer_safe(cmd.target)
         except Exception:
