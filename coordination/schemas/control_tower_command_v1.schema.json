@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ControlTowerOwnerCommandV1",
+  "type": "object",
+  "required": [
+    "command_id",
+    "idempotency_key",
+    "authenticated_actor",
+    "action",
+    "target",
+    "payload"
+  ],
+  "properties": {
+    "command_id": {
+      "type": "string",
+      "pattern": "^cmd-[a-zA-Z0-9_-]{8,64}$",
+      "description": "Unique command identifier"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Client-provided idempotency key"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cid-[a-zA-Z0-9_-]{8,64}$",
+      "description": "Immutable correlation identifier for transport readback"
+    },
+    "authenticated_actor": {
+      "type": "string",
+      "enum": ["OWNER", "OWNER_DELEGATE"],
+      "description": "Authorized actor submitting the command"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "DIRECTIVE",
+        "DECISION_RESOLVE",
+        "RECON_MODE",
+        "PAUSE_WORK",
+        "RESUME_WORK"
+      ],
+      "description": "Strict typed-action allowlist"
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "project_id",
+        "work_id",
+        "lane_id",
+        "assignment_id",
+        "run_id",
+        "binding_id",
+        "coordinator_id",
+        "session_id",
+        "chat_id",
+        "binding_generation",
+        "expected_label_sha"
+      ],
+      "properties": {
+        "project_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "work_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "lane_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "assignment_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "run_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "binding_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "coordinator_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "session_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "chat_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "binding_generation": { "type": "integer", "minimum": 1 },
+        "expected_label_sha": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-fA-F]{7}|[0-9a-fA-F]{40}|[0-9a-fA-F]{64})$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "required": ["instruction"],
+      "properties": {
+        "instruction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "decision_card_id": {
+          "type": "string",
+          "pattern": "^card-[a-zA-Z0-9_-]{4,64}$"
+        },
+        "decision_outcome": {
+          "type": "string",
+          "enum": ["APPROVED", "REJECTED", "MODIFIED", "DEFERRED"]
+        },
+        "recon_probe_type": {
+          "type": "string",
+          "enum": ["LIVENESS", "METER", "GIT_STATUS", "EVIDENCE_SWEEP"]
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
