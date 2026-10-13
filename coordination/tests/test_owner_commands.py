@@ -67,7 +67,7 @@ class TestOwnerCommands(unittest.TestCase):
         self.db = CommandDatabase(self.db_path)
         self.registry = self._build_test_registry()
         self.transport = NoOpTransportAdapter()
-        self.engine = CommandEngine(self.db, self.registry, self.transport)
+        self.engine = CommandEngine(self.db, self.registry, self.transport, allow_test_transport=True)
 
     def tearDown(self):
         self.db.close()
@@ -181,6 +181,15 @@ class TestOwnerCommands(unittest.TestCase):
             idem="idem-mixed-binding-01",target=mixed)
         with self.assertRaises(CASConflictError):
             self.engine.submit_command(cmd)
+
+    def test_production_noop_cannot_claim_real_delivery(self):
+        cmd=self._sample_command(cmd_id="cmd-noop-prod-01",idem="idem-noop-prod-01")
+        engine=CommandEngine(self.db,self.registry,self.transport)
+        queued,_=engine.submit_command(cmd)
+        result=engine.reserve_and_dispatch(queued.command_id)
+        self.assertEqual(result.state,"DENIED")
+        self.assertIn("DRY_RUN_ONLY",result.denial_reason)
+        self.assertEqual(self.transport.dispatched_commands,[])
 
     def test_missing_registry_cannot_admit_owner_command(self):
         no_source=CommandEngine(self.db,None,self.transport)
