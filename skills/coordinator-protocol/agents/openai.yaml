@@ -1,0 +1,4 @@
+interface:
+  display_name: "Coordinator Protocol"
+  short_description: "Ground chat coordination in aims and checked evidence"
+  default_prompt: "Use $coordinator-protocol to coordinate my selected chats at my chosen interval, preserving aims, evidence and handover decisions."
