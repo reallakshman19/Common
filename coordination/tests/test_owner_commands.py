@@ -442,7 +442,16 @@ class TestOwnerCommands(unittest.TestCase):
         cmd_valid_card.decision_card_id = "card-governance-01"
         cmd_valid_card.decision_outcome = "APPROVED"
 
-        res, is_new = self.engine.submit_command(cmd_valid_card)
+        # Syntactically plausible card IDs are NOT Owner authorization.
+        with self.assertRaises(DecisionCardRequiredError):
+            self.engine.submit_command(cmd_valid_card)
+        # Only a separately verified governing-source card can be admitted.
+        verified_engine = CommandEngine(self.db,self.registry,self.transport,
+            allow_test_transport=True,
+            decision_card_verifier=lambda command: (
+                command.decision_card_id == "card-governance-01"
+                and command.decision_outcome == "APPROVED"))
+        res, is_new = verified_engine.submit_command(cmd_valid_card)
         self.assertTrue(is_new)
         self.assertEqual(res.state, CommandState.QUEUED.value)
 
