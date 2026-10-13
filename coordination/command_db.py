@@ -288,6 +288,14 @@ class CommandDatabase:
                 if not row:
                     raise KeyError(f"Command not found: {command_id}")
                 old_state = row["state"]
+                allowed = {
+                    "QUEUED": {"RESERVED", "CANCELLED", "DENIED"},
+                    "RESERVED": {"DISPATCHING", "DENIED", "CANCELLED"},
+                    "DISPATCHING": {"DELIVERED_CONFIRMED", "DELIVERY_UNCERTAIN"},
+                    "DELIVERY_UNCERTAIN": {"DELIVERED_CONFIRMED", "DENIED"},
+                }
+                if new_state not in allowed.get(old_state, set()):
+                    raise ValueError(f"Illegal command transition: {old_state} -> {new_state}")
                 now_utc = datetime.now(timezone.utc).isoformat()
 
                 conn.execute("""
