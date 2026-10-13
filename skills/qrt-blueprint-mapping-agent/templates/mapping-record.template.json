@@ -1,0 +1,237 @@
+{
+  "schema": "qrt-blueprint-mapping/v1",
+  "record_status": "DRAFT_UNREVIEWED",
+  "task": {
+    "issue_url": null,
+    "repo": "reallakshman19/Grade9v3.5",
+    "head_sha": null,
+    "base_sha": null,
+    "mode": "ANALYZE_ONLY",
+    "scope_note": "Example blank five-role AUTHORED_TEST template; include CORE2 only when genuine source and explicit admission rights allow it"
+  },
+  "source": {
+    "kind": "AUTHORED_TEST",
+    "question_id": null,
+    "source_path": null,
+    "source_git_blob": null,
+    "source_sha256": null,
+    "verified_exact_text": false,
+    "source_rights": "WHOLLY_AUTHORED_TEST_ONLY",
+    "real_source_admitted": false,
+    "stem_given_moves": []
+  },
+  "math": {
+    "main_proof_status": "NOT_RUN",
+    "proof_ref": null,
+    "domain_check_status": "NOT_RUN",
+    "changed_case_status": "NOT_RUN",
+    "changed_case_ref": null,
+    "independent_oracle_status": "NOT_RUN",
+    "independent_oracle_ref": null
+  },
+  "qrt": {
+    "primary_demand": null,
+    "alternative_demand": null,
+    "band": null,
+    "difficulty_components": {
+      "concept_model_selection": {
+        "score": null,
+        "evidence": null
+      },
+      "representation_translation": {
+        "score": null,
+        "evidence": null
+      },
+      "reasoning_chain_length": {
+        "score": null,
+        "evidence": null
+      },
+      "algebra_computational_load": {
+        "score": null,
+        "evidence": null
+      },
+      "trap_exception_sensitivity": {
+        "score": null,
+        "evidence": null
+      }
+    },
+    "x": null,
+    "y": null,
+    "y_evidence": "NOT_OBSERVED",
+    "z": null,
+    "w": null,
+    "learner_owns_w": "UNASSESSED",
+    "band_boundary_d1_d2_d3_d4": null,
+    "asks": {
+      "H1": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "H2": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "H3": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "S1": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "S2": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "S3": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "P1": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "P2": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "P3": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "M1": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "M2": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      },
+      "M3": {
+        "verdict": "PENDING",
+        "evidence_ref": null,
+        "reviewer_id": null,
+        "reason": null
+      }
+    }
+  },
+  "roles": [
+    {
+      "role": "CORE1",
+      "registered_blueprint": null,
+      "learner_act": null,
+      "allowed_disclosure": null,
+      "protected_w_test": "NOT_RUN",
+      "native_html_sha256": null,
+      "render_receipt_ref": null
+    },
+    {
+      "role": "CORE1A",
+      "registered_blueprint": null,
+      "learner_act": null,
+      "allowed_disclosure": null,
+      "protected_w_test": "NOT_RUN",
+      "native_html_sha256": null,
+      "render_receipt_ref": null
+    },
+    {
+      "role": "CORE1B",
+      "registered_blueprint": null,
+      "learner_act": null,
+      "allowed_disclosure": null,
+      "protected_w_test": "NOT_RUN",
+      "native_html_sha256": null,
+      "render_receipt_ref": null
+    },
+    {
+      "role": "CORE2A",
+      "registered_blueprint": null,
+      "learner_act": null,
+      "allowed_disclosure": null,
+      "protected_w_test": "NOT_RUN",
+      "native_html_sha256": null,
+      "render_receipt_ref": null
+    },
+    {
+      "role": "CORE2B",
+      "registered_blueprint": null,
+      "learner_act": null,
+      "allowed_disclosure": null,
+      "protected_w_test": "NOT_RUN",
+      "native_html_sha256": null,
+      "render_receipt_ref": null
+    }
+  ],
+  "golden": {
+    "fixture_id": null,
+    "snapshot_lock_git_blob": null,
+    "original_snapshots_intact": "NOT_RUN",
+    "same_question_as_fixture": null,
+    "comparison_mode": "CROSS_QUESTION_TECHNIQUE",
+    "slot_component_result": "NOT_RUN",
+    "semantic_result": "PENDING_INDEPENDENT",
+    "policy_deltas": [],
+    "new_golden_designation": "NOT_AUTHORIZED"
+  },
+  "browser": {
+    "site_assets_loaded": "NOT_RUN",
+    "roles_viewports": "NOT_RUN",
+    "h2_precommit": "NOT_RUN",
+    "h3_post_nonblank": "NOT_RUN",
+    "blank_commit_blocked": "NOT_RUN",
+    "precommit_w_semantics": "PENDING_INDEPENDENT",
+    "svg_aria_leaks": "NOT_RUN",
+    "core1b_exit": "NOT_RUN",
+    "core2b_transfer": "NOT_RUN",
+    "pdf_a4_same_page": "NOT_RUN",
+    "screenshots_sha_refs": []
+  },
+  "ci": {
+    "scope_run_url": null,
+    "head_only_failure_ids": null,
+    "global_status": "NOT_RUN",
+    "exact_head_run_confirmed": false
+  },
+  "academic": {
+    "status": "PENDING_INDEPENDENT",
+    "reviewer_identity": null,
+    "qualifications": null,
+    "independent_of_author": null,
+    "conflict_declaration": null,
+    "reviewed_on": null,
+    "decision": null,
+    "signature_ref": null
+  },
+  "owner": {
+    "status": "PENDING",
+    "decision_id": null,
+    "decision_date": null,
+    "successor_golden_approved": false,
+    "release_authorized": false,
+    "merge_authorized": false
+  },
+  "evidence_refs": [],
+  "limitations": []
+}
