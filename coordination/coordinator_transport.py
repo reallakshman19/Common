@@ -3,9 +3,9 @@ Control Tower v3 Coordinator Transport Adapter (WP5)
 =====================================================
 Integrates the delivery plane with coordinator v3.28 session directories:
 - Non-destructive composer buffer inspection (never clobbers unsent drafts)
-- Atomic file-based delivery using correlation ID
-- Cryptographic delivery receipts
-- Readback verification scanning session histories and evidence logs
+- Explicitly no file-based SEND: v3.28 has no verified command consumer
+- No fabricated cryptographic receipt or sender-created acknowledgment
+- Fail-closed composer inspection until browser/IDE transport is verified
 """
 from __future__ import annotations
 
@@ -26,13 +26,10 @@ from coordination.command_contracts import (
 
 
 class CoordinatorTransportAdapter(TransportAdapter):
-    """File-based transport adapter operating within coordinator session workspaces."""
+    """Fail-closed v3.28 compatibility boundary; not an active SEND adapter."""
 
     def __init__(self, base_coordination_dir: Path | str):
         self.base_dir = Path(base_coordination_dir)
-
-    def _resolve_session_dir(self, target: TargetIdentity) -> Path:
-        return self.base_dir / target.session_id
 
     def _resolve_session_dir(self, target: TargetIdentity) -> Path:
         # Session names are identifiers, never arbitrary relative or absolute paths.
