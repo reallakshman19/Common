@@ -1,0 +1,97 @@
+{
+  "schema": "tab2-q003-user-deferred-keyboard-next-technical-a4/v1",
+  "chat": "6acd1e6b",
+  "issue": 183,
+  "plan": "r7",
+  "aim": "v3.1.0",
+  "date_local": "2026-10-13 Asia/Muscat",
+  "outcome": "O3",
+  "user_direction": "skip this keyboard/accessibility check; park this as pending item in your issue; focus on next technical one",
+  "deferred_scope": {
+    "task_ids": [
+      "183-T3-G2-W1",
+      "183-T4-G2-W1"
+    ],
+    "requested_keyboard_accessibility_stage_probes": "DEFERRED_BY_USER",
+    "components": [
+      "both construction units stage chips via Tab/Shift+Tab/Enter/Space",
+      "stage Next/Previous",
+      "formula and mistake clinic disclosures",
+      "active stage AX/aria-live announcement/check"
+    ],
+    "not_performed": true,
+    "not_passed": true,
+    "not_failed": true,
+    "reporting": "Existing Coordinator browser receipt A4 (QA check identifier) remains PARTIAL, A9 semantics NOT_RUN, A10 Owner visual pending; prior typed independent exit keyboard PASS retained. Do not ask for or run deferred checks in active queue.",
+    "issue_comment": "https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6136262143"
+  },
+  "next_technical": {
+    "gate": "SAME_NATIVE_PAGE_A4_PRINT_QA",
+    "investigated_native_tool": "Grade9v3.5 tools/print/print-product.mjs @ f030a0a blob 6d98c081fa303f972becdebb5f7fbd48833729fa",
+    "production_print_default_mm": [
+      280,
+      175
+    ],
+    "not_a4": true,
+    "registry": "BP-CORE1A-CONSTRUCTION + shell PRINT_PDF requires linked PDF printed from same page and exact print-receipt before publishing; no such PDF is accepted here",
+    "decision": "Do not alter Shared print tool/registered policy or fake A4 from standard landscape default; add source-safe isolated private TEST audit only.",
+    "repo": "reallakshman19/Grade9v3.5",
+    "branch": "agent/183-q003-private-core2-test-6acc303b",
+    "previous_browser_tested_head": "f030a0aca51038575778de3489f75d1d629a6b74",
+    "new_test_branch_head": "c5afd5ae07493952730514743724ab618fe5572e",
+    "branch_delta_paths": [
+      "TEST/imo-research/core2-q003/audit_private_a4.mjs",
+      "TEST/imo-research/core2-q003/README.md"
+    ],
+    "script_blob": "27bb4d2f168eb87d314a482d50727309d2a6d73d",
+    "registered_native_page_sha256": "d1fe23c43d1eeae67c69600beef1b5054c361854c3e5cd6742545859592998c0",
+    "registered_native_page_bytes": 76401,
+    "optional_frozen_core2_page_sha256": "827a8a99128601721c3c13dfd99806b5a563624526edfd8ba137ab8d4b64b6a0",
+    "QA_script_local_only_path": "TEST/imo-research/core2-q003/audit_private_a4.mjs",
+    "commands": [
+      "node TEST/imo-research/core2-q003/audit_private_a4.mjs",
+      "node TEST/imo-research/core2-q003/audit_private_a4.mjs --include-core2"
+    ],
+    "required_local_deps": [
+      "Playwright Chromium installed locally",
+      "Poppler pdfinfo executable"
+    ],
+    "source_safe_private_receipt_path": "TEST/imo-research/core2-q003/.private/a4-audit/source-safe-a4-audit-receipt.json",
+    "output_pdf_stays_private": true,
+    "output_gitignore": "TEST/imo-research/core2-q003/.gitignore includes /.private/",
+    "source_html_untouched": true,
+    "protected_template_not_materialised": true,
+    "QA_checks": [
+      "exact native HTML SHA/bytes for Core1A (+ optional Core2)",
+      "render-receipt renderer=render_core/2, page selected, zero gaps",
+      "PDF only from original unedited HTML through Playwright Chromium",
+      "A4 portrait pdf({format:A4}) with margins 10mm",
+      "Poppler pdfinfo Page size and Pages read, A4 595.276×841.890 points within tolerance",
+      "no protected answer reveals opened or print-visible",
+      "source HTML original SHA unchanged",
+      "source-safe PDF digest, bytes, page count, media size and Owner pending flags"
+    ],
+    "independent_static_tests": {
+      "passed": 15,
+      "total": 15,
+      "result": "PASS_STATIC_ONLY",
+      "actual_node_syntax_or_pdf_execution": "NOT_RUN",
+      "not_a_native_a4_verdict": true
+    },
+    "actual_private_a4_run": "NOT_RUN",
+    "status": "QA_CODE_READY_FOR_PRIVATE_RUN; A4 PRINT AND OWNER VISUAL STILL_NOT_RUN"
+  },
+  "non_effects": {
+    "admitted_original_core2_of_68": 0,
+    "admitted_core1a": 0,
+    "owner_qrt_accepted_of_28": 0,
+    "same_page_a4_accepted": false,
+    "rights_granted": false,
+    "published": false,
+    "source_original_personal_owner_inspection": "UNCONFIRMED",
+    "main_shared_changed": false,
+    "PR": "none",
+    "writer_serial_issue": 212,
+    "rollout_183_T6": "PARKED"
+  }
+}
