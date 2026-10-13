@@ -146,3 +146,32 @@ Claim: INDEPENDENT
 Blocker: PERSON:Dash v2 LA - publish sanitized typed contract and versioned fixture for Gate 1
 Next: Coordinator delivers bounded Gate 1 evidence request to LA; reviewer rechecks proof, then D2-1/D2-5 draft exact-head audit
 ```
+
+## 2026-10-13 — D2-G1R2 CASP Gate 1 independent evidence re-review
+
+- Original existing request https://github.com/reallakshman19/Common/issues/360#issuecomment-6146762867; request ID `8f610838-4244-4767-aa13-d66a338fab22`; target `common/common-360-casp/reviewer/dash-v2-casp-relay-reviewer/dash-casp-reviewer-g1`, revision 2, reply_to `a4720d53-dfb5-4b3b-b328-03a688a5fd89`, recomputed canonical request SHA-256 `8490148fa73ee678a40390c52f938d6ae46371c4a6c57b516c65aa1a289e2ec9`. No duplicate REQUEST posted.
+- LA ACK/RESULT examined: https://github.com/reallakshman19/Common/issues/360#issuecomment-6146484113 and https://github.com/reallakshman19/Common/issues/360#issuecomment-6146484778; candidate `4bed2bd7c5b4b27466c06206f8942874fe1e85a7`.
+- Independently fetched five candidate artifacts and commit file list; candidate is evidence-only, not application code. Cross-checked positive/negative fixtures and inspected schema/validator; reproducer implemented an independent strict schema-subset checker and replica of published validator. Both original fixtures accepted. Mutants cycle=0, map=[123], malformed HW.id, numeric relay value **rejected by strict schema but accepted by published validator**. Published validator ignores minimum, items, pattern and nested additionalProperties, only checks row count + 10 field count for purported source parity, computes unpinned digest values, unconditionally claims LOCAL_VERIFIED. No source rowsjson expected-value parity test.
+- Contract and fixtures do not establish full observed field/null/absent semantics: fLine numeric in fixture/schema despite coordinator-reported installed string; four-segment cycle map despite coordinator-reported fifth pane field; consumed HW, nested AIM/CP/judgement, source-derived AC/Aim/Meter/Next incomplete. Installed scripts unavailable to reviewer, so those discrepancies remain attributed to controller's static inspection rather than independently locally rehashed. Public contract includes host-specific absolute path/sample chat-shaped IDs without an explicit synthetic provenance statement; assess sanitization as incomplete, not confirmed secret leak.
+- Compare confirms evidence commit one ahead of `7527c03`, 39 behind previously logged `03acfad` (diverged). Stale parent contradicts main-first requirement; no branch rewrite made.
+- Classification: commit scope PASS; original fixture conformance PASS (independent subset); published strict-schema negatives FAIL; source-value 10-cell parity NOT_RUN; typed contract PARTIAL; pinned manifest FAIL; installed-source independent rehash NOT_RUN; exact-head implementation tests/hosted CI NOT_RUN; historical 113 not applicable.
+- Verdict **Gate 1 PARTIAL / NOT ACCEPTED**. Smallest next LA action is evidence-only repair of same five artifacts on fresh-main-based branch, strict negatives and genuine source-cell expected-value proof or honest NOT_RUN; then return for independent review. Coordinator delivers; reviewer did not directly dispatch to LA. No application code, protected authority, existing PR operations, merge, deploy, real SEND or scheduler.
+- CASP ACK published and read back: https://github.com/reallakshman19/Common/issues/360#issuecomment-6146919470
+- CASP RESULT with coordinator-mediated `FOR LA:` next direction published and read back: https://github.com/reallakshman19/Common/issues/360#issuecomment-6146969723
+- Plan D2-R1 remains, 0/3 product AC accepted. Cumulative reviewer/reconciliation tasks D2-0,D2-P1,D2-S1,D2-S2,D2-G1,D2-G1R2 DONE; 6/12 including D2-1..D2-6 not closed.
+
+```text
+Task: D2-G1R2
+Goal (issue AC): Independently re-review exact Gate 1 evidence candidate and publish correlated CASP reviewer ACK/RESULT
+Status: DONE
+Met: yes
+Done: Verified five evidence files and commit scope; independently reproduced four schema-negative failures, no ten-cell source parity, incomplete typed contract/manifest and stale branch base; published and read back ACK/RESULT; Gate 1 NOT ACCEPTED
+Code: reallakshman19/Common feature/dash-v2-d2-1-d2-5-foundations @ 4bed2bd7c5b4b27466c06206f8942874fe1e85a7 | PR none (evidence-only LA branch); Common main log updated
+Tests: Independent schema subset 2 originals + 4 malformed variants -> 6/6 expected outcomes; published validator adversarial acceptance -> FAIL (4/4 wrongly accepted); D2 app tests -> skip
+CI: no D2-1/D2-5 implementation PR/head run -> not-run
+Evidence: https://github.com/reallakshman19/Common/issues/360#issuecomment-6146919470 ; https://github.com/reallakshman19/Common/issues/360#issuecomment-6146969723
+AC: Gate 1 source artifacts published but unaccepted -> independent failure/partial verdict and smallest evidence-only repair requested; product AC 0/3
+Claim: INDEPENDENT
+Blocker: PERSON:Dash v2 LA - correct source-grounded typed contract, strict negative tests, parity and provenance; coordinator to deliver
+Next: Coordinator-delivered D2-G1 evidence repair, then independent re-review; D2-1/D2-5 live code remains held
+```
