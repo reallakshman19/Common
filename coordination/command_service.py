@@ -105,8 +105,14 @@ class CommandServiceHandler(http.server.BaseHTTPRequestHandler):
         origin = self.headers.get("Origin")
         if origin:
             parsed = urllib.parse.urlparse(origin)
-            if parsed.hostname not in self.allowed_hosts:
-                return False, f"Cross-origin requests forbidden: {origin}"
+            if (parsed.scheme != "http" or parsed.username or parsed.password or
+                parsed.hostname not in self.allowed_hosts or parsed.path not in ("","/") or
+                parsed.query or parsed.fragment):
+                return False, "Cross-origin request forbidden"
+            # An Origin from a different loopback port is not same-origin.
+            bound_port = self.server.server_address[1]
+            if parsed.port != bound_port:
+                return False, "Cross-origin request forbidden"
 
         return True, ""
 
@@ -207,6 +213,10 @@ class CommandServiceHandler(http.server.BaseHTTPRequestHandler):
         except (ValueError, TypeError):
             content_length = 0
 
+        if (content_length < 1 or self.headers.get("Transfer-Encoding") or
+            self.headers.get("Content-Type","").split(";",1)[0].strip() != "application/json"):
+            self.send_json({"error": "Bad Request", "detail": "JSON Content-Length required"}, status=400)
+            return
         if content_length > MAX_COMMAND_BODY_BYTES:
             self.send_json(
                 {"error": "Payload Too Large", "detail": f"Max request size is {MAX_COMMAND_BODY_BYTES} bytes"},
@@ -256,6 +266,41 @@ class CommandServiceHandler(http.server.BaseHTTPRequestHandler):
         self.send_json({"error": "Not Found"}, status=404)
 
     def _handle_submit_command(self, data: Dict[str, Any]):
+        if not isinstance(data, dict):
+            self.send_json({"error": "Bad Request", "detail": "Expected JSON object"}, status=400)
+            return
+        allowed_keys = {"command_id","idempotency_key","correlation_id","action",
+                        "target","payload","auto_dispatch"}
+        if any(k not in allowed_keys for k in data):
+            self.send_json({"error": "Bad Request", "detail": "Unrecognized command field"}, status=400)
+            return
+        # There is no approved coordinator consumer or authenticated composer
+        # readback yet. A POST is an admission request, never a send command.
+        if data.get("auto_dispatch", False) is not False:
+            self.send_json({"error":"Unprocessable Entity",
+                            "detail":"Auto dispatch disabled pending verified transport"},
+                           status=422)
+            return
+        if not isinstance(data.get("target"),dict) or not isinstance(data.get("payload"),dict):
+            self.send_json({"error":"Bad Request","detail":"Invalid target or payload"},status=400)
+            return
+        allowed_payload = {"instruction","decision_card_id","decision_outcome",
+                           "recon_probe_type","parameters"}
+        if any(k not in allowed_payload for k in data["payload"]):
+            self.send_json({"error":"Bad Request","detail":"Unexpected payload field"},status=400)
+            return
+        instruction = data["payload"].get("instruction")
+        if not isinstance(instruction,str) or not 1 <= len(instruction) <= 4096:
+            self.send_json({"error":"Bad Request","detail":"Invalid instruction"},status=400)
+            return
+        if "parameters" in data["payload"] and data["payload"]["parameters"]:
+            self.send_json({"error":"Bad Request",
+                            "detail":"Executable parameters not supported"},status=400)
+            return
+        if not isinstance(data.get("idempotency_key"),str) or not isinstance(data.get("command_id"),str):
+            self.send_json({"error":"Bad Request","detail":"Invalid command identity"},status=400)
+            return
+
         # Validate required fields
         required = ["command_id", "idempotency_key", "action", "target", "payload"]
         for field in required:
@@ -273,8 +318,8 @@ class CommandServiceHandler(http.server.BaseHTTPRequestHandler):
             return
 
         # Security check on instruction content: No arbitrary scripts or path traversal
-        instruction = data["payload"].get("instruction", "")
-        if any(bad in instruction for bad in ["Invoke-Expression", "powershell -enc", "rm -rf", "../../"]):
+        instruction = data["payload"]["instruction"]
+        if any(bad in instruction.lower() for bad in ["invoke-expression", "powershell -enc", "rm -rf", "../../"]):
             self.send_json(
                 {"error": "Bad Request", "detail": "Arbitrary command execution patterns are strictly forbidden"},
                 status=400
@@ -308,12 +353,9 @@ class CommandServiceHandler(http.server.BaseHTTPRequestHandler):
             # Submit through engine
             queued_cmd, is_new = self.command_engine.submit_command(cmd, actor="OWNER")
 
-            # Attempt immediate dispatch if auto-dispatch requested
-            auto_dispatch = data.get("auto_dispatch", True)
-            if auto_dispatch and is_new and queued_cmd.state == CommandState.QUEUED.value:
-                final_cmd = self.command_engine.reserve_and_dispatch(queued_cmd.command_id)
-            else:
-                final_cmd = queued_cmd
+            # HTTP cannot dispatch. An explicitly authorized local operator
+            # may separately exercise the dry-run worker/adapter.
+            final_cmd = queued_cmd
 
             status_code = 201 if is_new else 200
             self.send_json({"ok": True, "is_new": is_new, "command": final_cmd.to_dict()}, status=status_code)
@@ -324,5 +366,6 @@ class CommandServiceHandler(http.server.BaseHTTPRequestHandler):
             self.send_json({"error": "Unprocessable Entity", "detail": str(exc)}, status=422)
         except (IdempotencyConflictError, SingleFlightConflictError, CASConflictError) as exc:
             self.send_json({"error": "Conflict", "detail": str(exc)}, status=409)
-        except Exception as exc:
-            self.send_json({"error": "Internal Error", "detail": str(exc)}, status=500)
+        except Exception:
+            # Never echo private target, token, or payload details on server error.
+            self.send_json({"error": "Internal Error"}, status=500)
