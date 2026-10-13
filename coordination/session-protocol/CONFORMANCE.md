@@ -40,6 +40,7 @@ These are future integration acceptance tests, **NOT_RUN** by this package:
 | INTAKE | Actual authenticated actor/repository/comment reads; shared-login human-authority negative; registered PR-vs-issue routing; edited/deleted source snapshots and UNKNOWN history gaps |
 | INTAKE | Concurrent same-assignment requests, durable monotonic sequence/CAS, dropped notification replay, restart before/after admission, source-location conflict, no lost writes |
 | INTAKE | Priority STOP during an active command, stale-worker fencing, preserved uncertain slot after expired lease, explicit authorized resume |
+| DELIVERY | Two assignments/projects sharing one session cannot race the composer; an uncertain send holds that session without globally stopping unrelated sessions |
 | INTAKE | Real 403/429/Retry-After response handling with restart-safe budgets; crash before/after comment publication and no duplicate write |
 | DELIVERY | Real exact-account/conversation/draft/generation observations, one send, independently observed real receipt, no sender-manufactured receipt |
 | DELIVERY | Crash before/after possible Send, unknown provider message ID, composer draft protection, generating chat, wrong route and stale UI; no blind resend |

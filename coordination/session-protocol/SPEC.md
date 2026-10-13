@@ -84,6 +84,8 @@ An ACK/RESULT must match request ID, reply_to, target, historical revision and r
 
 Before automated dispatch, reuse WP5 admission and immediately-pre-send checks where available. Persist a single-flight attempt token and monotonic fencing generation. Expired leases allow reconciliation, never automatic resend after a possible side effect. A stale worker must be rejected before publication/delivery; adapters unable to fence side effects must use one supervised sender and remain manual. No generic exactly-once guarantee is made.
 
+Single-flight is required on **both** the assignment and the actual destination conversation. One session with several project bindings still has one composer/execution stream. Serialize its sends/consumption across those bindings; use a consistent lock order for assignment and session fences. An uncertain send holds the destination session as well as the affected assignment until reconciled. Independent projects may continue on other sessions; this shared-conversation hold does not revoke their engineering authority.
+
 STOP/hold commands are priority control observations: apply the existing control immediately, record them even when ordinary work is active, and stop before the next side effect. They do not silently withdraw an already-sent instruction or erase history. Resume requires the applicable live authority and resolution of uncertain effects; timeout/lease expiry is not permission.
 
 ## 7. Edits, deletes, interruption and rate limits
