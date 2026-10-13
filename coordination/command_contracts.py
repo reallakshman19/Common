@@ -175,6 +175,20 @@ class OwnerCommandRecord:
         if self.state not in [s.value for s in CommandState]:
             raise ValueError(f"Invalid state: {self.state}")
         self.target.validate()
+        if not isinstance(self.payload, dict):
+            raise ValueError("Command payload must be an object")
+        allowed = {"instruction", "decision_card_id", "decision_outcome",
+                   "recon_probe_type", "parameters"}
+        if any(key not in allowed for key in self.payload):
+            raise ValueError("Unsupported command payload field")
+        instruction = self.payload.get("instruction")
+        if not isinstance(instruction, str) or not 1 <= len(instruction) <= 4096:
+            raise ValueError("Instruction must be 1..4096 characters")
+        if self.payload.get("parameters"):
+            raise ValueError("Executable command parameters are unsupported")
+        if self.action == CommandAction.DECISION_RESOLVE.value:
+            if "decision_card_id" not in self.payload or "decision_outcome" not in self.payload:
+                raise ValueError("Decision card fields must be part of the audited payload")
 
         expected_digest = compute_payload_digest(self.payload)
         if self.payload_digest != expected_digest:
