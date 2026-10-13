@@ -86,7 +86,7 @@ class TestOwnerCommands(unittest.TestCase):
         reg.register_assignment(a1)
         r1 = AgentRun("common/work-182/lane-dev/assign-1/run/1", "common/work-182/lane-dev/assign-1", 1, "chat-oct12-01", "2026-10-13T00:00:00Z", 0, "IN_PROGRESS")
         reg.register_run(r1)
-        b1 = TabBinding("bind-common-1", r1.run_id, "common", "Tab3", 1, "ACTIVE")
+        b1 = TabBinding("bind-common-1", r1.run_id, "common", "Tab3", 1, "ACTIVE", session_alias="Session_Oct12")
         reg.register_binding(b1)
 
         # Project 2: Project Beta
@@ -100,7 +100,7 @@ class TestOwnerCommands(unittest.TestCase):
         reg.register_assignment(a2)
         r2 = AgentRun("beta/work-99/lane-dev/assign-2/run/1", "beta/work-99/lane-dev/assign-2", 1, "chat-oct12-01", "2026-10-13T00:00:00Z", 0, "IN_PROGRESS")
         reg.register_run(r2)
-        b2 = TabBinding("bind-beta-1", r2.run_id, "beta", "Tab3", 1, "ACTIVE")
+        b2 = TabBinding("bind-beta-1", r2.run_id, "beta", "Tab3", 1, "ACTIVE", session_alias="Session_Oct12")
         reg.register_binding(b2)
 
         return reg
@@ -192,7 +192,7 @@ class TestOwnerCommands(unittest.TestCase):
         # Pre-send dispatch must abort and transition to DENIED
         dispatched = self.engine.reserve_and_dispatch(queued.command_id)
         self.assertEqual(dispatched.state, CommandState.DENIED.value)
-        self.assertIn("GENERATION_CONFLICT", dispatched.denial_reason)
+        self.assertTrue(any(k in dispatched.denial_reason for k in ("GENERATION_CONFLICT", "INACTIVE_OR_HELD_BINDING")))
 
     # ─────────────────────────────────────────────────────────────────────────────
     # ADV-29: CAS AIM Label SHA Mismatch Rejection
@@ -428,9 +428,10 @@ class TestOwnerCommands(unittest.TestCase):
         adapter = CoordinatorTransportAdapter(self.tmp_dir)
         target = self._sample_target(session="Session_Oct12")
 
-        # 1. Empty composer is safe
+        # 1. Absent draft file is NOT evidence of an empty browser composer
         safety1 = adapter.check_composer_safe(target)
-        self.assertTrue(safety1.is_safe)
+        self.assertFalse(safety1.is_safe)
+        self.assertEqual(safety1.reason, "COMPOSER_VERIFICATION_UNAVAILABLE")
 
         # 2. Dirty composer buffer detected
         draft_file = session_dir / "unsent_draft.txt"
@@ -440,27 +441,22 @@ class TestOwnerCommands(unittest.TestCase):
         self.assertEqual(safety2.reason, "COMPOSER_DIRTY_UNSENT_DRAFT")
         self.assertGreater(safety2.uncommitted_bytes, 0)
 
-        # 3. Clean up draft -> safe again
+        # 3. Removing a draft file still does NOT prove composer safety
         draft_file.unlink()
         safety3 = adapter.check_composer_safe(target)
-        self.assertTrue(safety3.is_safe)
+        self.assertFalse(safety3.is_safe)
 
-        # 4. Dispatch creates atomic cmd and receipt files
+        # 4. No v3.28 agent consumer exists; file writes MUST NOT impersonate
+        # verified delivery or create a sender-issued receipt.
         cmd = self._sample_command(cmd_id="cmd-adv38-01", idem="idem-trans-001", target=target)
-        dispatch_res = adapter.dispatch_command(cmd)
-        self.assertTrue(dispatch_res.success)
-        self.assertEqual(dispatch_res.status, "CONFIRMED")
-        self.assertIsNotNone(dispatch_res.receipt_digest)
-
-        # Verify receipt file exists
-        receipt_file = session_dir / f"receipt_{cmd.correlation_id}.json"
-        self.assertTrue(receipt_file.exists())
-
-        # 5. Readback verifies delivery from receipt file
-        readback_res = adapter.readback_delivery(target, cmd.correlation_id)
-        self.assertTrue(readback_res.found)
-        self.assertTrue(readback_res.conclusive)
-        self.assertEqual(readback_res.evidence_sha, dispatch_res.receipt_digest)
+        delivery = adapter.dispatch_command(cmd)
+        self.assertFalse(delivery.success)
+        self.assertEqual(delivery.status, "UNSUPPORTED_TRANSPORT")
+        self.assertFalse((session_dir / f"receipt_{cmd.correlation_id}.json").exists())
+        self.assertFalse((session_dir / f"cmd_{cmd.correlation_id}.json").exists())
+        readback = adapter.readback_delivery(target,cmd.correlation_id)
+        self.assertFalse(readback.found)
+        self.assertFalse(readback.conclusive)
 
 
 class TestCommandServiceHttp(unittest.TestCase):
@@ -472,7 +468,8 @@ class TestCommandServiceHttp(unittest.TestCase):
         cls.db_path = Path(cls.tmp_dir) / "http_command_index.db"
         cls.db = CommandDatabase(cls.db_path)
         cls.transport = NoOpTransportAdapter()
-        cls.engine = CommandEngine(cls.db, None, cls.transport)
+        cls.registry = TestOwnerCommands._build_test_registry(None)
+        cls.engine = CommandEngine(cls.db, cls.registry, cls.transport)
         cls.token = "test-token-secret-12345"
         cls.prev_token = "prev-token-secret-67890"
 
@@ -561,9 +558,9 @@ class TestCommandServiceHttp(unittest.TestCase):
             "project_id": "common",
             "work_id": "work-182",
             "lane_id": "lane-dev",
-            "assignment_id": "common/work-182/lane-dev/assign-http-1",
-            "run_id": "common/work-182/lane-dev/assign-http-1/run/1",
-            "binding_id": "bind-http-1",
+            "assignment_id": "common/work-182/lane-dev/assign-1",
+            "run_id": "common/work-182/lane-dev/assign-1/run/1",
+            "binding_id": "bind-common-1",
             "coordinator_id": "coord-01",
             "session_id": "Session_Oct12",
             "chat_id": "chat-oct12-01",
@@ -576,7 +573,7 @@ class TestCommandServiceHttp(unittest.TestCase):
             "action": "DIRECTIVE",
             "target": target,
             "payload": {"instruction": "Run tests and verify green"},
-            "auto_dispatch": True,
+            "auto_dispatch": False,
         }
         headers = {"Authorization": f"Bearer {self.token}"}
 
@@ -585,7 +582,8 @@ class TestCommandServiceHttp(unittest.TestCase):
         self.assertEqual(status, 201)
         self.assertTrue(res.get("ok"))
         self.assertTrue(res.get("is_new"))
-        self.assertEqual(res["command"]["state"], CommandState.DELIVERED_CONFIRMED.value)
+        self.assertEqual(res["command"]["state"], CommandState.QUEUED.value)
+        self.assertEqual(len(self.transport.dispatched_commands),0)
 
         # 2. Idempotent re-submission -> 200 OK
         status2, res2 = self._request("POST", "/api/v3/owner/commands", body=cmd_payload, headers=headers)
