@@ -118,3 +118,31 @@ Claim: NONE
 Blocker: PERSON:Dash v2 LA - publish source checkpoint/implementation PR or blocker
 Next: D2-1/D2-5 exact-head verification after LA DONE
 ```
+
+## 2026-10-13 — D2-G1 CASP independent Gate 1 assessment (report-only)
+
+- Existing CASP request (NOT duplicated): https://github.com/reallakshman19/Common/issues/360#issuecomment-6143935422; request ID `1b4de989-f518-40ea-b82c-e840dd347135`, sender_id `dash-v2-reviewer`, target `common/common-360-casp/reviewer/dash-v2-casp-relay-reviewer/casp-exchange-20261013-1/dash-casp-reviewer-g1/dash-reviewer-casp-20261013`, revision `2`; preserved reply_to `123fd143-2dfd-46a3-ae74-f53e04d1c829`, digest `634d4cace8433d48324f7a5419d97a37f4cfef90a4e212a5fa1f28c2e7bfe35a`.
+- Pinned CASP AGENT.md read at `d9180904af5c6a54c4ea42213af68422087e7da7`. Public Common does not expose current `coordination/sessions/dash-reviewer-casp-20261013/session.json`; manual reviewer response only, descriptor revision not independently verified.
+- Independently recomputed original LA request CASP digest `86fc4d10727490f6fbdbfe21240bac734e9631cab32d0396a590d020069bce39` and verified full target, revision and reply_to correlation of ACK https://github.com/reallakshman19/Common/issues/360#issuecomment-6143858407 and RESULT https://github.com/reallakshman19/Common/issues/360#issuecomment-6143859908.
+- Coordinator request records verification of 5 local source SHA-256 files; reviewer cannot independently rehash installed Windows files. Hash identity evidence is not complete type/schema authority. LA named key families, no sanitized field-level type/schema table and no versioned fixture; legacy 113 passing tests claimed for historical `7527c03`, no new candidate head/CI. GitHub search found no Dash v2 foundation PR or dash-v2 branch.
+- Verdict: **Gate 1 PARTIAL / NOT ACCEPTED**; request execution (read-only reviewer assessment) **DONE**. Preserve D2-1/D2-5 scope. Hold only dynamic D2-1 source mapping until Gate 1 typed contract+fixture is reviewed. Next smallest permitted LA work (for coordinator to relay, not independently sent): publish sanitized field/type contract with exact mapping, 60/120 heartbeat vs 60/30/10 meter, v3.29/legacy handover samples, hash provenance, versioned safe positive/negative fixture, then LA DONE for re-review.
+- Correlated ACK posted and read back: https://github.com/reallakshman19/Common/issues/360#issuecomment-6145931199
+- Correlated RESULT posted and read back: https://github.com/reallakshman19/Common/issues/360#issuecomment-6145967871
+- No new uncoordinated `FOR LA:` request, code, new branch, merge, deployment, browser SEND, Owner command, or scheduler action. Existing #360 D2-R1 plan is unchanged; D2-2/D2-4/public Pages and real SEND parked.
+- Cumulative reviewer/coordination tasks complete: D2-0, D2-P1, D2-S1, D2-S2, D2-G1; 5/11 including six D2 module tasks not yet closed. Issue AC 0/3.
+
+```text
+Task: D2-G1
+Goal (issue AC): Independently assess Gate 1 and publish correlated manual CASP reviewer ACK/RESULT against existing #360 request
+Status: DONE
+Met: yes
+Done: Read protocol and LA ACK/RESULT, recomputed LA correlation digest, assessed five-hash attestation, identified missing typed contract/fixture/current-head CI, posted/read back two correlated messages; Gate 1 remains PARTIAL
+Code: reallakshman19/Common main @ cfe7fc1dc6ea17ae5162fc82d034807d0f8452a6 | PR none
+Tests: Manual CASP envelope/digest comparison -> pass; D2-1/D2-5 tests -> skip (no candidate)
+CI: D2-1/D2-5 exact-head runs -> not-run
+Evidence: https://github.com/reallakshman19/Common/issues/360#issuecomment-6145931199 ; https://github.com/reallakshman19/Common/issues/360#issuecomment-6145967871
+AC: reviewer Gate 1 pending -> independent partial verdict and correlated reporting done; 0/3 product AC accepted
+Claim: INDEPENDENT
+Blocker: PERSON:Dash v2 LA - publish sanitized typed contract and versioned fixture for Gate 1
+Next: Coordinator delivers bounded Gate 1 evidence request to LA; reviewer rechecks proof, then D2-1/D2-5 draft exact-head audit
+```
