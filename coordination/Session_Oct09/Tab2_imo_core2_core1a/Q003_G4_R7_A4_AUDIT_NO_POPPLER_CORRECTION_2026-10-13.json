@@ -1,0 +1,85 @@
+{
+  "schema": "tab2-q003-a4-audit-no-poppler-route-b/v1",
+  "chat": "6acd1e6b",
+  "issue": 183,
+  "task": "183-T5-G2-W1",
+  "plan": "r7",
+  "aim": "v3.1.0",
+  "outcome": "O3",
+  "date_utc": "2026-10-13",
+  "operator_preflight": {
+    "claim": "COORDINATOR_REPORTED_LOCAL",
+    "exact_test_head": "c5afd5ae07493952730514743724ab618fe5572e",
+    "clean_clone": true,
+    "native_core1a_html_exists": true,
+    "source_page_sha256": "d1fe23c43d1eeae67c69600beef1b5054c361854c3e5cd6742545859592998c0",
+    "source_page_bytes": 76401,
+    "node": "v22.23.2",
+    "playwright_global": "1.63.0",
+    "playwright_import_from_clone": "UNVERIFIED",
+    "playwright_chromium_binary": "UNVERIFIED",
+    "pdfinfo": "NOT_INSTALLED",
+    "poppler_install": "NOT_AUTHORISED_NOT_REQUESTED",
+    "audit_executed": false
+  },
+  "route_decision": {
+    "selected": "B",
+    "rationale": "Keep the test local and dependency-free: parse PDF page-tree Count and every leaf MediaBox in JS without Poppler; do not request third-party install or change Shared printer.",
+    "options_not_selected": {
+      "A": "requires explicit Owner Poppler-install approval; unnecessary",
+      "C": "A4 NOT_RUN remains until code executes, but technical dependency now removed"
+    }
+  },
+  "code": {
+    "repository": "reallakshman19/Grade9v3.5",
+    "branch": "agent/183-q003-private-core2-test-6acc303b",
+    "script_change_commit": "a319b88191d8f615867145e59450f5fc7df67b98",
+    "exact_final_head": "c62b1cc50d98efcf5ccf400337b34f862a0e440e",
+    "file": "TEST/imo-research/core2-q003/audit_private_a4.mjs",
+    "docs": "TEST/imo-research/core2-q003/README.md",
+    "scope": "TEST_ONLY_NO_SHARED_MAIN_OR_PRINT_PRODUCTION_CHANGES",
+    "native_page_contents_unchanged": true,
+    "canonical_280x175_printer_unchanged": true,
+    "delta": [
+      "Removed execFileSync pdfinfo invocation; retained npm root -g Playwright resolution",
+      "Read PDF Buffer latin1 and require PDF header and EOF",
+      "Walk catalog /Pages /Kids tree, verify /Parent, reject repeated/cyclic/unknown nodes and inconsistent /Count",
+      "Count all leaf /Page objects and validate every leaf MediaBox, incl. inherited box; reject invalid or rotated page",
+      "Check all page boxes match portrait A4 geometry within 1.5pt and emit method marker in sanitized receipt",
+      "Fail closed as PLAYWRIGHT_CHROMIUM_UNAVAILABLE if Chromium cannot launch; verify geometry before private PDF write"
+    ],
+    "run_from_repo_root": [
+      "git checkout c62b1cc50d98efcf5ccf400337b34f862a0e440e",
+      "node TEST/imo-research/core2-q003/audit_private_a4.mjs"
+    ],
+    "output_private": "TEST/imo-research/core2-q003/.private/a4-audit/source-safe-a4-audit-receipt.json",
+    "pdf_private": "TEST/imo-research/core2-q003/.private/a4-audit/core1a-native-a4.private.pdf"
+  },
+  "validation": {
+    "local_unprotected_node_parser_syntax": "PASS",
+    "benign_3_page_A4": "PASS (3 pages, 210x297mm)",
+    "benign_3_page_US_letter": "PASS correctly classified non-A4",
+    "negative_eof_truncation": "PASS expected PDF_EOF_MISSING",
+    "negative_page_tree_count": "PASS expected PDF_PAGE_COUNT_MISMATCH",
+    "negative_missing_mediabox": "PASS expected PDF_MEDIA_BOX_MISSING",
+    "github_exact_script_readback": "PASS",
+    "github_readme_readback": "PASS",
+    "new_native_private_playwright_execution": "NOT_RUN",
+    "actual_private_pdf_generated": false,
+    "chromium_launch_on_owner": "UNVERIFIED",
+    "protected_html_source_available_to_our_executor": false
+  },
+  "limits": {
+    "same_page_a4": "NOT_RUN",
+    "owner_print_approval": "PENDING",
+    "browser_keyboard_followup": "DEFERRED_BY_USER",
+    "owner_qrt_accepted": false,
+    "accepted_qrt_count": 0,
+    "admitted_original_core2_of_68": 0,
+    "admitted_core1a": 0,
+    "publisher_rights_granted": false,
+    "no_publication": true,
+    "pr": "none"
+  },
+  "next": "Coordinator run exact one-line local Node A4 audit on existing original Core1A native SHA; return sanitized first blocker or only source-safe-a4-audit-receipt.json. If passes geometry, still needs Owner visual legibility/page-break judgement and separate production PDF policy/rights decisions."
+}
