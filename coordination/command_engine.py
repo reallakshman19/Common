@@ -94,11 +94,16 @@ class CommandEngine:
         Returns: (record, is_newly_queued)
         """
         cmd.validate()
+        if self.registry is None:
+            raise CASConflictError("AUTHORITATIVE_REGISTRY_REQUIRED: Cannot admit without a source-bound registry")
 
         # 1. Idempotency Check
         existing = self.db.get_command_by_idempotency_key(cmd.idempotency_key)
         if existing:
-            if existing.payload_digest == cmd.payload_digest:
+            if (existing.payload_digest == cmd.payload_digest
+                    and existing.authenticated_actor == cmd.authenticated_actor
+                    and existing.action == cmd.action
+                    and existing.target == cmd.target):
                 # Idempotent replay: return existing record
                 return existing, False
             raise IdempotencyConflictError(
@@ -135,51 +140,51 @@ class CommandEngine:
         return queued_cmd, True  # type: ignore
 
     def _verify_cas_stage1(self, target: TargetIdentity):
-        """Verifies authority against registry and live observations at admission."""
-        if self.registry:
-            work = self.registry.works.get(target.work_id)
-            if not work:
-                raise CASConflictError(f"Target work '{target.work_id}' not found in registry")
-            if work.label_sha != target.expected_label_sha:
-                raise CASConflictError(
-                    f"AIM label SHA mismatch: target expected '{target.expected_label_sha}', "
-                    f"registry has '{work.label_sha}'"
-                )
-
-            assign = self.registry.assignments.get(target.assignment_id)
-            if not assign:
-                raise CASConflictError(f"Target assignment '{target.assignment_id}' not found in registry")
-
-            run = self.registry.runs.get(target.run_id)
-            if not run:
-                raise CASConflictError(f"Target run '{target.run_id}' not found in registry")
-            if run.generation != target.binding_generation:
-                raise CASConflictError(
-                    f"Binding generation mismatch: target expected {target.binding_generation}, "
-                    f"registry run has {run.generation}"
-                )
-            if run.run_state in ("SUPERSEDED", "INTERRUPTED", "SUCCEEDED", "FAILED"):
-                raise CASConflictError(f"Target run '{target.run_id}' is no longer active (state: {run.run_state})")
-
-            assign_runs = [r for r in self.registry.runs.values() if r.assignment_id == target.assignment_id]
-            assign_runs.sort(key=lambda x: x.generation, reverse=True)
-            if assign_runs and assign_runs[0].generation != target.binding_generation:
-                raise CASConflictError(
-                    f"Binding generation mismatch: target expected {target.binding_generation}, "
-                    f"assignment has advanced to generation {assign_runs[0].generation}"
-                )
-
-        # Check live observation if present
+        """Fail-closed composite identity verification; no chat-only attribution."""
+        reg = self.registry
+        if reg is None:
+            raise CASConflictError("AUTHORITATIVE_REGISTRY_REQUIRED")
+        project = reg.projects.get(target.project_id)
+        work = reg.works.get(target.work_id)
+        lane = reg.lanes.get(target.lane_id)
+        assignment = reg.assignments.get(target.assignment_id)
+        run = reg.runs.get(target.run_id)
+        binding = reg.bindings.get(target.binding_id)
+        if not all((project, work, lane, assignment, run, binding)):
+            raise CASConflictError("INCOMPLETE_AUTHORITY: project/work/lane/assignment/run/binding")
+        if not (work.project_id == target.project_id
+                and lane.work_id == target.work_id
+                and assignment.lane_id == target.lane_id
+                and run.assignment_id == target.assignment_id
+                and binding.run_id == target.run_id
+                and binding.project_id == target.project_id
+                and binding.generation == target.binding_generation
+                and run.generation == target.binding_generation
+                and run.chat_id == target.chat_id
+                and binding.session_alias == target.session_id):
+            raise CASConflictError("COMPOSITE_IDENTITY_CONFLICT")
+        if work.label_sha != target.expected_label_sha:
+            raise CASConflictError("AIM_LABEL_CONFLICT")
+        if assignment.status != "ACTIVE" or run.run_state != "IN_PROGRESS" or binding.binding_state != "ACTIVE":
+            raise CASConflictError("INACTIVE_OR_HELD_BINDING")
+        for other in reg.bindings.values():
+            if other.binding_id != binding.binding_id and other.binding_state == "ACTIVE":
+                linked = reg.resolve_work_for_binding(other.binding_id)
+                if linked and linked.work_id == target.work_id:
+                    raise CASConflictError("ONE_ACTIVE_TAB_CONFLICT")
+        generations = [r.generation for r in reg.runs.values()
+                       if r.assignment_id == target.assignment_id]
+        if generations and max(generations) != target.binding_generation:
+            raise CASConflictError("GENERATION_CONFLICT")
         obs = self.live_observations.get(target.assignment_id)
         if obs:
-            if obs.get("binding_generation") and obs["binding_generation"] != target.binding_generation:
-                raise CASConflictError(
-                    f"Live coordinator generation advanced: expected {target.binding_generation}, "
-                    f"found {obs['binding_generation']}"
-                )
-            status = obs.get("status", "")
-            if "HOLD" in status or "OUT" in status:
-                raise CASConflictError(f"Coordinator status in '{status}'; commands cannot bypass coordinator holds")
+            if (obs.get("binding_generation") != target.binding_generation
+                    or obs.get("chat_id") != target.chat_id
+                    or obs.get("session_id") != target.session_id
+                    or obs.get("coordinator_id") != target.coordinator_id):
+                raise CASConflictError("LIVE_SOURCE_IDENTITY_CONFLICT")
+            if obs.get("hold") or obs.get("out") or obs.get("identity_conflict"):
+                raise CASConflictError("COORDINATOR_HOLD_OR_CONFLICT")
 
     def reserve_and_dispatch(
         self,
@@ -221,7 +226,11 @@ class CommandEngine:
             )
 
         # 3. Target Composer Safety Check
-        safety = self.transport.check_composer_safe(cmd.target)
+        try:
+            safety = self.transport.check_composer_safe(cmd.target)
+        except Exception:
+            return self.db.transition_state(command_id, CommandState.DENIED.value,
+                                            worker_id, reason="COMPOSER_VERIFICATION_FAILED")
         if not safety.is_safe:
             return self.db.transition_state(
                 command_id,
@@ -296,38 +305,13 @@ class CommandEngine:
             )
 
     def _verify_cas_stage2(self, target: TargetIdentity) -> Optional[str]:
-        """Stage 2 check immediately before dispatch. Returns error message or None."""
-        if self.registry:
-            work = self.registry.works.get(target.work_id)
-            if not work or work.label_sha != target.expected_label_sha:
-                return "AIM_LABEL_CONFLICT: AIM plan label changed before dispatch"
-
-            run = self.registry.runs.get(target.run_id)
-            if not run or run.generation != target.binding_generation:
-                return "GENERATION_CONFLICT: Agent run generation changed before dispatch"
-
-            if run.run_state in ("SUPERSEDED", "INTERRUPTED", "SUCCEEDED", "FAILED"):
-                return f"GENERATION_CONFLICT: Agent run state is {run.run_state}"
-
-            assign_runs = [r for r in self.registry.runs.values() if r.assignment_id == target.assignment_id]
-            assign_runs.sort(key=lambda x: x.generation, reverse=True)
-            if assign_runs and assign_runs[0].generation != target.binding_generation:
-                return f"GENERATION_CONFLICT: Assignment run generation advanced to {assign_runs[0].generation}"
-
-            conflicts = self.registry.validate_single_active_tab_invariants()
-            if conflicts:
-                return f"ONE_ACTIVE_TAB_CONFLICT: {'; '.join(conflicts)}"
-
-        obs = self.live_observations.get(target.assignment_id)
-        if obs:
-            if obs.get("binding_generation") and obs["binding_generation"] != target.binding_generation:
-                return "GENERATION_CONFLICT: Live coordinator generation advanced before dispatch"
-            if obs.get("chat_id") and obs["chat_id"] != target.chat_id:
-                return "CHAT_ID_CONFLICT: Active chat switched before dispatch"
-            status = obs.get("status", "")
-            if "HOLD" in status or "OUT" in status:
-                return f"COORDINATOR_HOLD: Work entered '{status}' before dispatch"
-
+        """Refresh authoritative target and require actual composer proof."""
+        try:
+            self._verify_cas_stage1(target)
+        except CASConflictError as exc:
+            return str(exc)
+        # In-memory values are at most observations; they cannot establish a
+        # browser transport reservation. The actual adapter must prove this.
         return None
 
     def reconcile_uncertain_command(
