@@ -36,3 +36,17 @@
 | QRT-JUSTIFY-D4 | RENDERED_TEST | Construct sufficiency after excluding two obstructions | [six HTML + index artifact](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38239770116/artifacts/11742381985) · [run 38239770116](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38239770116) · Core2A SHA-256 `5316d5d018fc0667…` · [frozen golden](https://github.com/reallakshman19/Grade9v3.5/tree/67c34dababb0da0ef7d5f4a532bfcf3119754961/golden/units/G-IMO-G9-FIVE-CORE-20261012) · [PR #194](https://github.com/reallakshman19/Grade9v3.5/pull/194) · [authored manifest](https://github.com/reallakshman19/Grade9v3.5/blob/e39db6a8607bf64b09274d38bb222ed90f22459a/TEST/products/imo182-qrt-d4-justify.manifest.json) |
 
 **Per-cell reviewer:** Use the blank H/S/P/M checklist and the extracted six HTML bytes in each artifact. No academic acceptance implied. The downloadable in-conversation ZIP additionally supplies 25 individual reviewer packets and independent SHA manifests; it is not a public release.
+
+## 2026-10-13 g3 exact-head D3 receipt refresh — technical TEST only, accepted 0/28
+
+The original seven D3 authored records/figures/workflows are 62/62 identical blob SHAs on #193@c1ba25f. Each linked ZIP contains six actual render_core/2 HTML pages (five blueprints + index), gaps=[] and a 6/6 SHA-matching page receipt. Local Chromium 14 viewport cases/84 assertions pass H3 after nonblank attempt, but no independent academic verdict or Owner decision IDs exist. #190/#193 remain unmerged. Review signer authored no D3 question source, but integrated renderer affecting generated HTML.
+
+| D3 cell | Same-head scoped CI | Six actual HTML and receipt | Accepted |
+|---|---|---|---|
+| QRT-APPLY-D3 | [38335635333](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635333) | [11784926190](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635333/artifacts/11784926190) | OPEN |
+| QRT-EXPLAIN-D3 | [38335635334](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635334) | [11784406743](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635334/artifacts/11784406743) | OPEN |
+| QRT-JUSTIFY-D3 | [38335635360](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635360) | [11785250270](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635360/artifacts/11785250270) | OPEN |
+| QRT-MODEL-D3 | [38335635384](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635384) | [11784706394](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635384/artifacts/11784706394) | OPEN |
+| QRT-REPRESENT-D3 | [38335635369](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635369) | [11784357133](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635369/artifacts/11784357133) | OPEN |
+| QRT-RETRIEVE-D3 | [38335635364](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635364) | [11785415020](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635364/artifacts/11785415020) | OPEN |
+| QRT-SYNTHESIZE-D3 | [38335635381](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635381) | [11784406731](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38335635381/artifacts/11784406731) | OPEN |
