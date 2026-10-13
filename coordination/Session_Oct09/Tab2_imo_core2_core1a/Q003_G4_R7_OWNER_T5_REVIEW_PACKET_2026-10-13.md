@@ -6,6 +6,14 @@
 **For the user:** A real native Core2/Core1A **TEST pair** now exists solely on the Owner's local secure machine as Coordinator-reported rendered pages with zero structural gaps. The Core1A has been exercised in a real browser by the Coordinator on the Owner's machine, but has **not** been accepted by the Owner for visuals, pedagogy or QRT. This package queues the precise Owner/independent reviewer decisions; it does NOT accept or merge a QRT cell, license original text, assert printed-source custody, or publish learner pages.  
 **Proof:** [Coordinator Core1A native receipt](Q003_G4_R7_COORDINATOR_CORE1A_ZERO_GAP_RECEIPT_2026-10-13.json), [Core1A secure browser checklist](Q003_G4_R7_SECURE_CORE1A_BROWSER_ORACLE_2026-10-13.md), [Owner-approved narrow private Core2 contextual comparison](Q003_G4_R7_OWNER_CONTEXT_COMPARISON_2026-10-12.json).
 
+## 13 Oct 2026 scope reconciliation — no in-chat HTML-upload gate
+
+**Issue #183 does NOT require posting an exact protected/private native HTML page or unredacted screenshot into this chat.** Its O1/O2/O3 acceptance obligations are authentic native renderer-generated pages, source/lesson quality and golden comparison, and the Owner's per-QRT-cell decision under the source-rights/A4 gates. The exact two role pages and candidate golden are already kept in the authorized Owner-local environment; the Coordinator reports they are side by side. This fulfills *review access*, not the Owner's *review verdict*.
+
+Disposition of a proposed request to attach `core1a.html` here: **NOT_REQUIRED_BY_ISSUE / WITHDRAWN**. Do not create a new blocker or seek public transfer of the original stem/options, protected HTML, source JSON, unredacted screenshots, or local PDFs. The Owner may review privately and communicate a source-safe decision with exact SHA, qualitative defects and approval/hold status. If the Owner expressly asks for an in-chat view, only a separately reviewed, independently authored and source-safe illustrative extract may be used; it must **never be presented as the exact native page**. Such an illustration is optional and earns no acceptance credit.
+
+**Unchanged blockers:** actual Owner visual/pedagogic and independent academic verdict (not yet supplied); per-cell QRT decision; original-source Owner confirmation; rights; same-page A4 local run (NOT_RUN). Keyboard/AX check remains **DEFERRED_BY_USER**. The next technical gate remains the SHA-pinned private A4 audit; no extra HTML upload task.
+
 ## 13 Oct 2026 technical priority change — keyboard parked; A4 source-page geometry next
 
 The user explicitly instructed **skip and park the remaining keyboard/accessibility inspection** on [issue #183](https://github.com/reallakshman19/Grade9v3.5/issues/183#issuecomment-6136262143). This is **DEFERRED_BY_USER**, not a pass or a waived blueprint requirement. No further keyboard operator prompts should block the current technical lane.
