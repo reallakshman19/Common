@@ -9,7 +9,7 @@ WP5 delivers the operational command plane for the Multi-Project Control Tower v
    - **Stage 2 (Immediately Pre-Send)**: Re-verifies active run generation, active chat ID, one-active-tab invariants, and coordinator HOLD/OUT status.
 3. **Pluggable Delivery Transport (`coordination/coordinator_transport.py`)**:
    - `NoOpTransportAdapter`: Deterministic dry-run adapter for unit and integration testing.
-   - `CoordinatorTransportAdapter`: Safe file-based adapter operating within coordinator v3.28 session workspaces, featuring non-destructive composer inspection that strictly protects unsent human drafts.
+   - `CoordinatorTransportAdapter`: Explicit fail-closed compatibility boundary: v3.28 has no verified command consumer or real browser-composer inspection; no filesystem write is accepted as agent delivery.
 4. **Authenticated Command Service (`coordination/command_service.py`)**: Loopback-only HTTP service (`/api/v3/owner/...`) with constant-time Bearer token comparison (`hmac.compare_digest`), token rotation, zero token logging, CSRF/Origin/Host validation, 64 KB request limit, and Private Owner Inbox.
 
 ---
@@ -23,8 +23,8 @@ WP5 delivers the operational command plane for the Multi-Project Control Tower v
 | **Authentication** | Bearer token authentication verified with constant-time `hmac.compare_digest`; tokens are never logged or stored in DB. Supports seamless token rotation. |
 | **Typed Action Allowlist** | Only `DIRECTIVE`, `DECISION_RESOLVE`, `RECON_MODE`, `PAUSE_WORK`, `RESUME_WORK` permitted. Arbitrary scripts (`Invoke-Expression`, `rm -rf`, `../../`) rejected with 400 Bad Request. |
 | **Governance Decisions** | Actions resolving governance cards (`DECISION_RESOLVE`) require explicit `decision_card_id` and `decision_outcome`; unprovenanced actions fail closed (422). |
-| **Draft Protection** | Target composer buffer is inspected before delivery; any uncommitted human text aborts dispatch (`DENIED`, `COMPOSER_DIRTY_UNSENT_DRAFT`). Buffer preserved 100% byte-for-byte. |
-| **Readback & Double-Send** | Transport timeouts move commands to `DELIVERY_UNCERTAIN`. Retry requires verified readback proof; no blind auto-resends. `DELIVERY_UNCERTAIN` holds the single-flight slot. |
+| **Draft Protection** | The file adapter cannot prove a real browser composer is empty: it denies dispatch with `COMPOSER_VERIFICATION_UNAVAILABLE`. Draft files do not establish browser safety. |
+| **Readback & Double-Send** | Transport errors or crashes move attempted commands to `DELIVERY_UNCERTAIN`; sender-written receipts are never authoritative. Uncertain commands hold the single-flight slot, and HTTP never auto-dispatches. |
 
 ---
 
@@ -91,3 +91,17 @@ All 12 adversarial test scenarios pass with 100% compliance in `coordination/tes
 - **ADV-36**: Decision Card Provenance Enforcement.
 - **ADV-37**: Multi-Project & Multi-Session Tab3 Isolation (5 Agents, 2 Projects).
 - **ADV-38**: Windows v3.28 Parity & Regression Invariance (113 total coordination tests pass).
+
+
+## 6. Independent audit correction: transport is NOT activated
+
+The original PR implementation **fabricated a successful delivery** by writing both `cmd_{correlation_id}.json` and `receipt_{correlation_id}.json` itself, without an agent-side command consumer or authenticated readback. It also inferred a clean browser composer merely because some files were absent. These were unsafe assumptions and are corrected.
+
+- `CoordinatorTransportAdapter` is **fail-closed**: it will not claim the coordinator delivered a command, does not create an artificial receipt, and rejects composer safety if there is no independently verified browser adapter.
+- The HTTP endpoint admits only typed commands to a **durable private queue**. `auto_dispatch=true` is rejected; admission cannot proceed without an authoritative registry. An authenticated API request alone does not authorize SEND, lifecycle acceptance, or decision-card bypass.
+- `NoOpTransportAdapter` produces **test-only simulated receipts** and must never be presented as actual agent delivery.
+- Following a process crash while DISPATCHING, the operator readback reconciliation path marks the entry DELIVERY_UNCERTAIN and never repeats the transmission.
+- WP5 real-agent dispatch and remote access require a separate, operator-verified transport consumer, authoritative live coordinator refresh, composer-state inspection and independent receipt protocol before activation. This repository change does not install or enable those.
+- Public GitHub Pages remains unprivileged. There is no public command endpoint, token or authenticated delivery bridge in static UI assets.
+
+**Completion boundary:** The private command ledger, typed admission service, anti-replay/CAS rules, dry-run testing and historical inbox are delivered as a safe foundation. End-to-end live coordinator delivery remains **unproven and inactive**, and Issue #353 must remain open for operational activation/acceptance; green unit tests do not imply that a real agent received a command.
