@@ -329,6 +329,12 @@ class CommandEngine:
         if not cmd:
             raise KeyError(f"Command not found: {command_id}")
 
+        if cmd.state == CommandState.DISPATCHING.value:
+            # On process restart a persisted DISPATCHING record can mean the
+            # external send happened before a receipt was stored. Never retry.
+            cmd = self.db.transition_state(
+                command_id, CommandState.DELIVERY_UNCERTAIN.value, actor,
+                reason="Process recovery: incomplete dispatch; readback required")
         if cmd.state != CommandState.DELIVERY_UNCERTAIN.value:
             return cmd
 
