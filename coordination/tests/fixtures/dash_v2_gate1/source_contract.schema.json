@@ -1,0 +1,319 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoordinatorStateV330",
+  "description": "Strict JSON Schema for Coordinator Protocol v3.30 state files (coordinator-state.json)",
+  "type": "object",
+  "properties": {
+    "claude_code_log_anchor": {
+      "type": "integer",
+      "const": 0
+    }
+  },
+  "required": [
+    "claude_code_log_anchor"
+  ],
+  "patternProperties": {
+    "^claude_code_cycle_[A-Za-z0-9_]+$": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": ["RUNNING", "HOLD", "WAIT"]
+        },
+        "cycle": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "since": {
+          "type": "string"
+        },
+        "lastFull": {
+          "type": ["string", "null"]
+        },
+        "mode": {
+          "type": ["string", "null"]
+        },
+        "scope": {
+          "type": ["string", "null"]
+        },
+        "job": {
+          "type": ["string", "null"]
+        },
+        "until": {
+          "type": ["string", "null"]
+        },
+        "map": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["status", "cycle", "since", "map", "seen"],
+      "additionalProperties": false
+    },
+    "^claude_code_gh_cfg_[A-Za-z0-9_]+$": {
+      "type": "string"
+    },
+    "^claude_code_gh_seen_[A-Za-z0-9_]+$": {
+      "type": "string"
+    },
+    "^claude_code_gh_waiter_[A-Za-z0-9_]+$": {
+      "type": ["object", "null"],
+      "properties": {
+        "pid": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "string"
+        },
+        "since": {
+          "type": "string"
+        }
+      },
+      "required": ["pid", "start", "since"],
+      "additionalProperties": false
+    },
+    "^claude_code_gh_relay_[A-Za-z0-9_]+$": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "forLa": {
+            "type": "string"
+          },
+          "laDone": {
+            "type": "string"
+          }
+        },
+        "required": ["forLa", "laDone"],
+        "additionalProperties": false
+      }
+    },
+    "^claude_code_aim_[A-Za-z0-9_-]+$": {
+      "type": "object",
+      "properties": {
+        "work": {
+          "type": "string"
+        },
+        "repo": {
+          "type": "string"
+        },
+        "crit": {
+          "enum": ["critical", "standard", "unknown"]
+        },
+        "status": {
+          "enum": ["ACTIVE", "DRAFT", "RETIRED"]
+        },
+        "vMain": {
+          "type": "integer"
+        },
+        "vTask": {
+          "type": "integer"
+        },
+        "vGuide": {
+          "type": "integer"
+        },
+        "sha": {
+          "type": "string"
+        },
+        "label": {
+          "type": "object"
+        },
+        "bind": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "judge": {
+          "type": ["object", "null"]
+        },
+        "adopt": {
+          "type": ["object", "null"]
+        },
+        "groundDue": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["work", "repo", "crit", "status", "vMain", "vTask", "vGuide"],
+      "additionalProperties": false
+    },
+    "^claude_code_cp_[A-Za-z0-9_-]+_\\d{2}$": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "work": {
+          "type": "string"
+        },
+        "cls": {
+          "type": "string"
+        },
+        "state": {
+          "enum": ["PROPOSED", "ACCEPTED", "REJECTED"]
+        },
+        "change": {
+          "type": "string"
+        },
+        "why": {
+          "type": "string"
+        },
+        "raised": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "work", "state"],
+      "additionalProperties": false
+    },
+    "^claude_code_judge_[A-Za-z0-9_-]+_\\d{14}$": {
+      "type": "object",
+      "properties": {
+        "work": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "sum": {
+          "type": "string"
+        }
+      },
+      "required": ["work", "at", "color", "sum"],
+      "additionalProperties": false
+    },
+    "^claude_code_hw_[0-9a-f]{8}$": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        },
+        "lastState": {
+          "type": "string"
+        },
+        "turns": {
+          "type": "integer"
+        },
+        "costK": {
+          "type": "number"
+        },
+        "actAt": {
+          "type": ["string", "null"]
+        },
+        "lastSeen": {
+          "type": ["string", "null"]
+        },
+        "fLine": {
+          "type": ["string", "null"]
+        },
+        "fPlan": {
+          "type": ["string", "null"]
+        },
+        "fAc": {
+          "type": ["string", "null"]
+        },
+        "fCi": {
+          "type": ["string", "null"]
+        },
+        "fAim": {
+          "type": ["string", "null"]
+        },
+        "fHv": {
+          "type": ["string", "null"]
+        },
+        "fBk": {
+          "type": ["string", "null"]
+        },
+        "aLane": {
+          "type": ["string", "null"]
+        },
+        "buddy": {
+          "type": ["string", "null"]
+        },
+        "bV": {
+          "type": ["string", "null"]
+        },
+        "parkAt": {
+          "type": ["string", "null"]
+        },
+        "parkWhy": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["id", "lastState", "turns"],
+      "additionalProperties": false
+    },
+    "^claude_code_url_[0-9a-f]{8}$": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        },
+        "url": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "tab": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "url"],
+      "additionalProperties": false
+    },
+    "^claude_code_ho_\\d{14}_[0-9a-f]{8}_[A-Z]+$": {
+      "type": "object",
+      "properties": {
+        "t": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ev": {
+          "type": "string"
+        }
+      },
+      "required": ["t", "id", "ev"],
+      "additionalProperties": false
+    },
+    "^claude_code_repo_[A-Za-z0-9_]+$": {
+      "type": "object",
+      "properties": {
+        "repo": {
+          "type": "string"
+        },
+        "vis": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string"
+        }
+      },
+      "required": ["repo", "vis"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

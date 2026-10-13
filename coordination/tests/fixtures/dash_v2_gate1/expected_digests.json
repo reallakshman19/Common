@@ -1,0 +1,10 @@
+{
+  "manifest_version": "1.0.0",
+  "manifest_profile": "dash_v2_gate1_r3_expected_digests",
+  "artifacts": {
+    "source_contract.schema.json": "f46b6c4b0014d33eaea0eb182560c8a5e3b93c40fc347344bcba3e28711cdc61",
+    "coordinator_state_v330_positive.json": "738d2ab43cd2096959c99d7ee8708655dca4aaec95498cac7f8a2d2cc38eee32",
+    "coordinator_state_v330_negative.json": "0e6d0af3abfac75741c8a0e2986a5d35e0c59cfcee1886825b37149507cb8f44",
+    "SOURCE_CONTRACT.md": "2a0fd9fd075b006a617d922397b2c86e26576b5404e5d23d73878ab652b96b85"
+  }
+}
