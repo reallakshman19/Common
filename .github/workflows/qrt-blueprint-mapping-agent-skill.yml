@@ -1,0 +1,37 @@
+name: QRT Blueprint Mapping Agent skill contract
+
+on:
+  push:
+    paths:
+      - "skills/qrt-blueprint-mapping-agent/**"
+      - ".github/workflows/qrt-blueprint-mapping-agent-skill.yml"
+  pull_request:
+    paths:
+      - "skills/qrt-blueprint-mapping-agent/**"
+      - ".github/workflows/qrt-blueprint-mapping-agent-skill.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-safe-negative-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate unsigned mapping template
+        run: |
+          python skills/qrt-blueprint-mapping-agent/scripts/validate_mapping.py \
+            skills/qrt-blueprint-mapping-agent/templates/mapping-record.template.json
+      - name: Exercise 12 adversarial skill contract tests
+        run: |
+          python -m unittest discover -s skills/qrt-blueprint-mapping-agent/scripts \
+            -p 'test_*.py' -v
+      - name: Check Python syntax
+        run: |
+          python -m py_compile skills/qrt-blueprint-mapping-agent/scripts/*.py
