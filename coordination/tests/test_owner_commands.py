@@ -164,6 +164,53 @@ class TestOwnerCommands(unittest.TestCase):
         with self.assertRaises(IdempotencyConflictError):
             self.engine.submit_command(cmd_altered)
 
+    def test_idempotency_same_payload_but_changed_target_rejected(self):
+        cmd=self._sample_command(cmd_id="cmd-identity-01",idem="idem-target-scope-01")
+        self.engine.submit_command(cmd)
+        changed=self._sample_command(cmd_id="cmd-identity-02",
+            idem="idem-target-scope-01",target=self._sample_target(chat="different-chat"))
+        with self.assertRaises(IdempotencyConflictError):
+            self.engine.submit_command(changed)
+
+    def test_cross_project_binding_spoof_rejected_with_valid_generation(self):
+        mixed=self._sample_target(project="beta",work="work-beta-99",
+            lane="lane-beta-dev",assign="beta/work-99/lane-dev/assign-2",
+            run="beta/work-99/lane-dev/assign-2/run/1",bind="bind-common-1",
+            label="7c889aa")
+        cmd=self._sample_command(cmd_id="cmd-mixed-binding-01",
+            idem="idem-mixed-binding-01",target=mixed)
+        with self.assertRaises(CASConflictError):
+            self.engine.submit_command(cmd)
+
+    def test_missing_registry_cannot_admit_owner_command(self):
+        no_source=CommandEngine(self.db,None,self.transport)
+        cmd=self._sample_command(cmd_id="cmd-missing-source-01",
+            idem="idem-missing-source-01")
+        with self.assertRaises(CASConflictError):
+            no_source.submit_command(cmd)
+
+    def test_terminal_command_cannot_be_requeued_or_cancelled(self):
+        cmd=self._sample_command(cmd_id="cmd-terminal-test-01",idem="idem-terminal-test-01")
+        queued,_=self.engine.submit_command(cmd)
+        completed=self.engine.reserve_and_dispatch(queued.command_id)
+        self.assertEqual(completed.state,CommandState.DELIVERED_CONFIRMED.value)
+        with self.assertRaises(ValueError):
+            self.db.transition_state(queued.command_id,"QUEUED","OWNER")
+        with self.assertRaises(CommandEngineError):
+            self.engine.cancel_command(queued.command_id)
+
+    def test_crash_stuck_dispatching_becomes_uncertain_without_retry(self):
+        cmd=self._sample_command(cmd_id="cmd-crash-stuck-01",idem="idem-crash-stuck-01")
+        queued,_=self.engine.submit_command(cmd)
+        self.assertTrue(self.db.reserve_command(queued.command_id,"worker"))
+        self.db.transition_state(queued.command_id,"DISPATCHING","worker")
+        recovered=self.engine.reconcile_uncertain_command(queued.command_id)
+        self.assertEqual(recovered.state,"DELIVERY_UNCERTAIN")
+        self.assertEqual(self.transport.dispatched_commands,[])
+        with self.assertRaises(SingleFlightConflictError):
+            self.engine.submit_command(self._sample_command(
+                cmd_id="cmd-followup-blocked-01",idem="idem-followup-blocked-01"))
+
     # ─────────────────────────────────────────────────────────────────────────────
     # ADV-28: CAS Binding Generation Mismatch Rejection
     # ─────────────────────────────────────────────────────────────────────────────
@@ -552,6 +599,24 @@ class TestCommandServiceHttp(unittest.TestCase):
         }
         status, res = self._request("POST", "/api/v3/owner/commands", body=oversized, headers=headers)
         self.assertEqual(status, 413)
+
+    def test_http_auto_dispatch_is_explicitly_forbidden(self):
+        target = {
+            "project_id":"common","work_id":"work-182","lane_id":"lane-dev",
+            "assignment_id":"common/work-182/lane-dev/assign-1",
+            "run_id":"common/work-182/lane-dev/assign-1/run/1",
+            "binding_id":"bind-common-1","coordinator_id":"coord-01",
+            "session_id":"Session_Oct12","chat_id":"chat-oct12-01",
+            "binding_generation":1,"expected_label_sha":"5f9065d"}
+        cmd = {"command_id":"cmd-no-autosend-01",
+               "idempotency_key":"idem-no-autosend-01","action":"DIRECTIVE",
+               "target":target,"payload":{"instruction":"Do not auto-send"},
+               "auto_dispatch":True}
+        status,response=self._request("POST","/api/v3/owner/commands",
+            body=cmd,headers={"Authorization":f"Bearer {self.token}"})
+        self.assertEqual(status,422)
+        self.assertIsNone(self.db.get_command(cmd["command_id"]))
+        self.assertEqual(self.transport.dispatched_commands,[])
 
     def test_http_submit_command_lifecycle(self):
         target = {
