@@ -1,0 +1,38 @@
+{
+  "schema": "workflow-progress-monitor/v1",
+  "workflows": [
+    {
+      "id": "sample-buddyrunner",
+      "enabled": false,
+      "repository": "owner/repo",
+      "issue": 1,
+      "description": "Sample only. Verify actual contract, owning issue, exact evidence tokens and trusted GitHub author allowlists before enabling.",
+      "stages": [
+        {
+          "id": "1a",
+          "title": "G1 preparation",
+          "evidence_markers": [
+            "BUDDY_RUNNER_V1.6_1A"
+          ],
+          "trusted_authors": []
+        },
+        {
+          "id": "1b",
+          "title": "G2 investigation",
+          "evidence_markers": [
+            "BUDDY_RUNNER_V1.6_1B"
+          ],
+          "trusted_authors": []
+        },
+        {
+          "id": "2",
+          "title": "G1 final direction",
+          "evidence_markers": [
+            "BUDDY_RUNNER_V1.6_STAGE_2"
+          ],
+          "trusted_authors": []
+        }
+      ]
+    }
+  ]
+}
