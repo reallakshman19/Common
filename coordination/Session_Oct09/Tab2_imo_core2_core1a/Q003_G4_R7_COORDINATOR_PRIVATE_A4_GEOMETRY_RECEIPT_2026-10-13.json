@@ -1,0 +1,113 @@
+{
+  "schema": "tab2-q003-coordinator-private-native-a4-geometry/v1",
+  "chat": "6acd1e6b",
+  "issue": 183,
+  "plan": "r7",
+  "aim": "v3.1.0",
+  "task": "183-T5-G2-W1",
+  "outcome": "O3",
+  "reported_local_date": "2026-10-13 06:2x Dubai",
+  "evidence_class": "COORDINATOR_REPORTED_LOCAL; not independently rerun or PDF-viewed by G4",
+  "run": {
+    "repo": "reallakshman19/Grade9v3.5",
+    "branch": "agent/183-q003-private-core2-test-6acc303b",
+    "tested_commit": "c62b1cc50d98efcf5ccf400337b34f862a0e440e",
+    "clean_clone": true,
+    "operator": "Coordinator",
+    "script": "TEST/imo-research/core2-q003/audit_private_a4.mjs",
+    "args": [
+      "--include-core2"
+    ],
+    "source_preflight": "native source SHA pinned, private pages present, node v22.23.2, global playwright 1.63.0",
+    "first_run": {
+      "exit_code": 2,
+      "displayed_error": "A4_AUDIT_BLOCKED: Playwright is not locally installed",
+      "cause": "Windows npm is npm.cmd; execFileSync('npm', ['root','-g']) failed to spawn npm without shell, although global Playwright and Chromium were present",
+      "scope": "PORTABILITY_DEFECT_NOT_MISSING_INSTALL"
+    },
+    "second_run": {
+      "environment_workaround": "NODE_PATH set locally to already-installed global npm root -g (absolute operator path withheld)",
+      "exit_code": 0,
+      "status": "A4_AUDIT_GEOMETRY_VERIFIED_ONLY",
+      "browser": "Chromium 153.0.8010.12",
+      "print_pdf_format": "A4",
+      "published": false,
+      "protected_reveal_visible_before_print": false,
+      "keyboard_accessibility": "DEFERRED_BY_USER",
+      "owner_visual_approval": "PENDING",
+      "owner_same_page_a4_accepted": false,
+      "rights_granted": false,
+      "qrt_accepted": false
+    }
+  },
+  "printed_pages": [
+    {
+      "role": "CORE1A",
+      "source_page_sha256": "d1fe23c43d1eeae67c69600beef1b5054c361854c3e5cd6742545859592998c0",
+      "source_page_bytes": 76401,
+      "native_gaps": 0,
+      "private_local_file": "TEST/imo-research/core2-q003/.private/a4-audit/core1a-native-a4.private.pdf",
+      "printed_pdf_sha256": "040e8eeffc1527c89d3995c04f611cac70ef68eff1cbcb61edb8a6617765e088",
+      "printed_pdf_bytes": 122174,
+      "page_count": 5,
+      "paper_size_pt": [
+        595.92,
+        842.88
+      ],
+      "paper_size_mm": [
+        210.2,
+        297.3
+      ],
+      "a4_portrait_geometry": true,
+      "protected_reveal_visible_before_print": false,
+      "content_clipping_and_print_legibility": "NOT_VISUALLY_REVIEWED",
+      "owner_same_page_a4_accepted": false
+    },
+    {
+      "role": "CORE2",
+      "source_page_sha256": "827a8a99128601721c3c13dfd99806b5a563624526edfd8ba137ab8d4b64b6a0",
+      "source_page_bytes": 62277,
+      "native_gaps": 0,
+      "private_local_file": "TEST/imo-research/core2-q003/.private/a4-audit/core2-native-a4.private.pdf",
+      "printed_pdf_sha256": "3547f5487d492dd67f498ee685432a29d21b796ea425e6b6907501b2645057f5",
+      "printed_pdf_bytes": 133519,
+      "page_count": 2,
+      "paper_size_pt": [
+        595.92,
+        842.88
+      ],
+      "paper_size_mm": [
+        210.2,
+        297.3
+      ],
+      "a4_portrait_geometry": true,
+      "protected_reveal_visible_before_print": false,
+      "content_clipping_and_print_legibility": "NOT_VISUALLY_REVIEWED",
+      "owner_same_page_a4_accepted": false
+    }
+  ],
+  "QA_status": {
+    "A4_GEOMETRY": "COORDINATOR_LOCAL_PASS",
+    "A4_VISUAL_PRINT": "PENDING_OWNER_NOT_RUN",
+    "PDF_PAGE_COUNT": "5_CORE1A_AND_2_CORE2_NOT_SINGLE_PHYSICAL_SHEET",
+    "DEPLOYED_PRINT_PDF_LINK": "NOT_TESTED_OR_CERTIFIED",
+    "KEYBOARD_AX": "DEFERRED_BY_USER",
+    "PIXEL_DIFF": "NOT_RUN",
+    "SCREEN_READER": "NOT_RUN",
+    "ORIGINAL_OWNER_PERSONAL_PRINT_INSPECTION": "UNCONFIRMED",
+    "ADMITTED_CORE2_ORIGINAL_OF_68": 0,
+    "ADMITTED_CORE1A": 0,
+    "OWNER_QRT_ACCEPTED_OF_28": 0,
+    "PUBLISHER_RIGHTS_GRANTED": false,
+    "NEW_HOSTED_CI": false
+  },
+  "technical_followup": {
+    "scope": "NARROW_TEST_ONLY_WINDOWS_GLOBAL_PLAYWRIGHT_LOOKUP",
+    "initial_script_failure_fixed_commit": "a72d2bab47f465cf608e2add96a40d5cb7d8c97d",
+    "final_script_readme_commit": "0fa687492e459f0ee6a47661d5da83b6a444fb37",
+    "strategy": "Search NODE_PATH and process.execPath-adjacent node_modules (plus Windows APPDATA npm modules), invoke npm root -g only on non-Windows. No new dependencies, installations, shells or private page recomposition.",
+    "new_script_execution": "NOT_RUN; original local geometry success remains @c62b1cc, not misattributed to later correction.",
+    "next": "Owner reviews privately held native A4 PDFs for physical page breaks, clipping, maths/layout and appropriate print workflow; independent academic QRT and publisher rights separately. No redundant audit run required to re-prove geometry. Keyboard QA stays parked."
+  },
+  "data_handling": "No private PDF, HTML, original source question/options, answer text or unredacted screenshots stored in GitHub/Common."
+}
