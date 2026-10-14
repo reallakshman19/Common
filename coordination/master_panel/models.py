@@ -205,7 +205,8 @@ def build_row(
     if review_ref is None and review_sha is not None:
         raise ValueError("Review candidate without reviewer source")
     comparison = "UNKNOWN"
-    compare_sha = review_sha if review_sha else candidate_sha
+    # A reviewer source without a reviewed head cannot borrow a provider claim.
+    compare_sha = review_sha if review_ref else candidate_sha
     if compare_sha and current_head:
         comparison = "CURRENT" if compare_sha == current_head else "OLD_HEAD"
     _safe_stamp(coordinator.get("observed_at_utc"))

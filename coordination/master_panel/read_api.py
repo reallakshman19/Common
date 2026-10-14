@@ -46,6 +46,13 @@ def _fresh(stamp: Any, as_of: datetime, max_age: int = 3600) -> str:
     return "UNKNOWN" if age < 0 else "FRESH" if age <= max_age else "STALE"
 
 
+def _source_freshness(state: Mapping[str, Any], as_of: datetime) -> str:
+    # A recent failed/partial attempt is not a refresh of successful evidence.
+    if state.get("status") != "REACHABLE" or not state.get("completed_at"):
+        return "UNKNOWN"
+    return _fresh(state["completed_at"], as_of)
+
+
 class MasterReadService:
     """SQLite mode=ro; if generation changes, reject old pagination cursor."""
 
@@ -139,7 +146,7 @@ class MasterReadService:
                     "project_id": pid, "repo_id": reg.repo_id,
                     "repo_full_name": reg.repo_full_name,
                     "source_state": state["status"],
-                    "source_freshness": _fresh(state["last_fetch_at"], as_of),
+                    "source_freshness": _source_freshness(state, as_of),
                 })
             return {"schema_version": ROW_SCHEMA_VERSION, "projects": projects}
 
@@ -153,7 +160,7 @@ class MasterReadService:
                     "project_id": pid, "repo_id": reg.repo_id,
                     "repo_full_name": reg.repo_full_name,
                     "state": row["status"],
-                    "freshness": _fresh(row["last_fetch_at"], as_of),
+                    "freshness": _source_freshness(row, as_of),
                     "last_fetch_at_utc": row["last_fetch_at"],
                     "completed_at_utc": row["completed_at"],
                     "error_code": row["failure_code"],
@@ -205,7 +212,7 @@ class MasterReadService:
                     current_pr_head_sha=self.current_heads.get(key),
                     source_state=state["status"],
                     observed_at_utc=state["last_fetch_at"],
-                    freshness=_fresh(state["last_fetch_at"], as_of),
+                    freshness=_source_freshness(state, as_of),
                     completed_scan=state["status"] == "REACHABLE" and
                                    state["completed_at"] is not None,
                     present=not bool(item["deleted"]),

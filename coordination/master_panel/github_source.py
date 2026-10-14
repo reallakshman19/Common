@@ -189,6 +189,8 @@ class GitHubSourceScanner:
         status("PARTIAL")
         try:
             meta = read(f"repos/{reg.repo_full_name}")
+            if not isinstance(meta, dict):
+                raise SourceConflict("Invalid repository object")
             if (str(meta.get("id")) != reg.repo_id or
                 str(meta.get("full_name", "")).lower() != reg.repo_full_name.lower()):
                 raise SourceConflict("Repository identity mismatch")
@@ -197,7 +199,8 @@ class GitHubSourceScanner:
                     "state": "all", "sort": "created", "direction": "asc",
                     "per_page": self.PAGE_SIZE, "page": page,
                 })
-                if not isinstance(issues, list) or len(issues) > self.PAGE_SIZE:
+                if (not isinstance(issues, list) or len(issues) > self.PAGE_SIZE
+                        or any(not isinstance(item, dict) for item in issues)):
                     raise SourceConflict("Invalid provider issue page")
                 while index < len(issues):
                     issue = issues[index]
@@ -212,7 +215,8 @@ class GitHubSourceScanner:
                             f"repos/{reg.repo_full_name}/issues/{n}/comments",
                             {"per_page": self.PAGE_SIZE, "page": comment_page},
                         )
-                        if not isinstance(comments, list) or len(comments) > self.PAGE_SIZE:
+                        if (not isinstance(comments, list) or len(comments) > self.PAGE_SIZE
+                                or any(not isinstance(item, dict) for item in comments)):
                             raise SourceConflict("Invalid provider comment page")
                         for comment in comments:
                             observe(comment, SourceKind.ISSUE_COMMENT, n, True)
