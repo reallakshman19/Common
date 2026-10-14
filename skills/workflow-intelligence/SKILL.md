@@ -28,3 +28,8 @@ This optional coordinator is independent of the Software MCDA engine, the GitHub
 The observer contains **no scheduler or SMTP integration**. A later integration must reuse the single monitor/cron proposed by draft PR #364, not create another timer or controller. Comment markers, even from configured trusted authors, never establish independent verification or Owner approval. Unverified observations are never allowed to become MCDA decision triggers. Preserve repository AGENTS.md, BuddyRunner stage roles, selected governing policy and explicit Owner merge rights.
 
 Run tests: python3 -m unittest discover -s skills/workflow-intelligence/tests -v.
+
+
+## Compare an advisory decision with its prior state
+
+Run decision_gate.py with a typed decision request to create an assessment artifact. Pass that artifact to state.py with --assessment; the logical decision ID is isolated per repository/workflow/issue, and a changed recommendation becomes a diagnostic decision event. Every event remains NOT alert-eligible. The exact CLI sequence and event schemas are in references/integration-contract.md.
