@@ -69,8 +69,14 @@ def github_get(repository, check_run_id, token=None):
                "User-Agent": "workflow-intelligence-check-reader/v1"}
     if token:
         headers["Authorization"] = f"Bearer {token}"
-    with urllib.request.urlopen(urllib.request.Request(url, headers=headers),
-                                timeout=20) as response:
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, req, fp, code, msg, headers, newurl):
+            raise ValueError("Unexpected GitHub API redirect")
+
+    opener = urllib.request.build_opener(NoRedirect())
+    with opener.open(urllib.request.Request(url, headers=headers), timeout=20) as response:
+        if response.url != url:
+            raise ValueError("Unexpected GitHub API response location")
         return json.load(response)
 
 
