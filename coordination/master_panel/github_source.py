@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from typing import Any, Optional
 
 from .models import SourceIdentity, SourceKind
+from .report_parser import extract_report
 from .storage import SourceStore, SourceConflict
 
 
@@ -176,7 +177,8 @@ class GitHubSourceScanner:
                     is_comment: bool = False):
             nonlocal new, replayed
             source = self._source(reg, kind, item, issue_number, is_comment)
-            result = self.store.observe(source, scan_id)
+            claim = extract_report(item.get("body"), source) if is_comment else None
+            result = self.store.observe(source, scan_id, claim)
             if result == "REPLAY":
                 replayed += 1
             else:
