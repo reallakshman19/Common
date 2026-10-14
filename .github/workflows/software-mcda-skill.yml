@@ -38,6 +38,7 @@ jobs:
           python -m py_compile skills/workflow-intelligence/scripts/decision_gate.py
           python -m py_compile skills/workflow-intelligence/scripts/github_check_facts.py
           python -m py_compile skills/workflow-intelligence/scripts/monitor_handoff.py
+          python -m py_compile skills/workflow-intelligence/scripts/restore_previous.py
       - name: Test standalone MCDA
         run: python -m unittest discover -s skills/software-mcda/tests -v
       - name: Test read-only observation adapter

@@ -47,3 +47,8 @@ An enabled `scripts/decision_gate.py` request can take `--github-check-request <
 The optional scripts/monitor_handoff.py consumes PR #364's proposed workflow-progress-monitor/v1 snapshot directly and emits **one** reusable diagnostic-only state artifact. The first run requires explicit --bootstrap; every later run requires --previous-artifact. Missing, corrupted or incompatible prior state fails closed, not a silent reset. It can optionally carry an advisory decision assessment in the same state. All output events are non-notifying and unqualified for MCDA scoring.
 
 Read references/monitor-handoff.md for exact commands and the future bounded connection to PR #364's *existing single scheduler*. The handoff does not modify PR #364, send mail, or create a new cron workflow. Run all read-only skill tests before changing the monitor integration seam.
+
+
+## Optional same-workflow diagnostic sidecar
+
+The existing Universal Workflow Progress GitHub Actions workflow now supports an **opt-in diagnostic job** via repository variable UWI_DIAGNOSTIC_HANDOFF_ENABLED=true. It retains the only 15-minute scheduler; PR events remain tests-only. The job requires an explicit one-time manual baseline using workflow_dispatch input uwi_bootstrap=true, then restores a vetted prior successful artifact from the same workflow ID, repository, and branch. With the variable absent or false, the diagnostic job is skipped. This does not activate live workflow monitoring, MCDA rating authority, notifications, or ChatGPT Work. See references/scheduled-handoff-activation.md.
