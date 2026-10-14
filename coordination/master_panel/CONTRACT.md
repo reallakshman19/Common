@@ -36,6 +36,12 @@ The proposed M2 read seam for M1-U03 is local GET `/api/master/v1/projects`, GET
 
 ## Integration and writer boundaries
 
+### F01 separate PR/check source family
+
+`PullCheckIntake(store, reader).run(project_id, pr_number, max_requests=20)` performs only bounded GETs on the public Common/AA3 allowlist. PR detail and check runs have separate typed provider records, revision history, links and collection scan cursor/health; they do not refresh or tombstone the issue/comment ledger. Check revisions hash the whitelisted provider fields (`safe-provider-fields-v1`), not a manufactured provider timestamp. Null queued clocks remain null. Exact replay and A→B→A remain distinct; same-name different-ID checks stay separate. PR/head movement, identity conflicts, partial scans, count drift and provider errors retain last-good data with uncertainty. No check absence is asserted.
+
+GET `/api/master/v1/pr-checks?project_id=common&pr_number=377` reads a consistent SQLite snapshot only. `limit`1–200 and an opaque cursor bound to collection/generation provide pagination; a stale/cross-collection cursor returns409. Missing family state remains UNKNOWN. Provider state, head relationship and observation/freshness are explicit; independent acceptance remains UNKNOWN. Output/summary/private links/auth are omitted. The existing loopback Host/Origin/GET-only protections apply. This family is additive and distinct from `/rows`; it does not bind agents, activate a sync worker, dispatch commands, implement F07 trusted correlation, qualify live global absence or release M2.
+
 ### Codex F04/F06 correction profile
 
 Source claims now retain `transport_status`: identity-only historical envelopes are `UNQUALIFIED_LEGACY`; transport-bearing envelopes must pass minimum timestamp, reply/digest, positive revision/generation and kind/status checks to be `MINIMUM_FIELDS_VALID`. Neither label establishes full CASP-schema validation, request correlation, sender binding, independent review or acceptance. REQUEST has null reply/digest; replies require both. Duplicate JSON fields and invalid calendar times are rejected. Full correlated/trusted attribution qualification remains separate.

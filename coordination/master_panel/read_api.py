@@ -173,6 +173,12 @@ class MasterReadService:
                 })
             return {"schema_version": ROW_SCHEMA_VERSION, "sources": items}
 
+    def pr_checks(self, pid: str, number: int, limit: int = 50, cursor: Optional[str] = None):
+        from .pr_checks import collection_rows
+        with closing(self._conn()) as conn:
+            conn.execute("BEGIN")
+            return collection_rows(conn, pid, number, limit, cursor)
+
     def rows(self, pid: str, limit: int = 50,
              cursor: Optional[str] = None) -> dict[str, Any]:
         if pid not in ALLOWLIST:
@@ -264,6 +270,14 @@ class MasterPanelHandler(http.server.BaseHTTPRequestHandler):
                 result = self.service.rows(
                     pid, int(raw_limit), params.get("cursor", [None])[0]
                 )
+            elif parsed.path == "/api/master/v1/pr-checks":
+                if set(params) - {"project_id", "pr_number", "limit", "cursor"}:
+                    raise ValueError("Unknown query")
+                raw_number = params.get("pr_number", [""])[0]
+                raw_limit = params.get("limit", ["50"])[0]
+                if not re.fullmatch(r"[0-9]{1,9}", raw_number) or not re.fullmatch(r"[0-9]{1,3}", raw_limit):
+                    raise ValueError("Invalid bounded provider query")
+                result = self.service.pr_checks(params.get("project_id", [""])[0], int(raw_number), int(raw_limit), params.get("cursor", [None])[0])
             else:
                 return self._reply(404, {"error": "Not Found"})
             return self._reply(200, result)
