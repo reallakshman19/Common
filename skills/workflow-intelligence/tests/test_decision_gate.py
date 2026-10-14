@@ -148,7 +148,9 @@ class EvidenceDecisionTests(unittest.TestCase):
         check_request = {"schema": "workflow-intelligence.github-check-request/v1",
                          "enabled": False,
                          "scope": {"repository": "other/repo", "assessed_sha": "a" * 40}}
-        result = mod.assessment(request, check_request, lambda *_: None)
+        def do_not_fetch(*_):
+            raise AssertionError("Cross-repository validation must happen before GET")
+        result = mod.assessment(request, check_request, do_not_fetch)
         self.assertEqual(result["status"], "NOT_EVALUATED")
 
 
