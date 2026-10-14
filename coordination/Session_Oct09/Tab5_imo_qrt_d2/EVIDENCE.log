@@ -218,3 +218,18 @@ AC (before -> after): RETRIEVE authored but no clean hosted proof -> actual zero
 Claim: INDEPENDENT exact downloaded HTML/Chromium/SHA/golden slots, HOSTED_CI source test/render
 Blocker: PERSON qualified independent QRT reviewer and OWNER D-182-9 question-specific successor golden and QRT verdict (not technical), no more critical-path authoring tasks
 Next: independent math/demand/band review then Owner golden and acceptance decision; no further unsanctioned product edits
+Outcome: O1
+For the user: No released learner experience changed. A confirmed successful exact frozen Core1A/1B rebuild and seven-D2 renderer evidence are now separated from pending qualified academic decisions and red general CI; the current Core1A browser-coverage gap has a precise next test.
+Proof: https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219621844 ; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38437153878
+TASK EVIDENCE | TAB5-20261014-HANDOVER-RECONCILE | 2026-10-14 | aim=v3.1.0 | label_sha=2ff9246 | outcome=O1 | user=no
+Task: Tab5 D2 exact-head v3.1.0 reconcile and handover-first history update
+Goal: Distinguish real sole-renderer Core1A/1B golden proof, question-specific D2 candidate technical receipts, reviewer/Owner authority and CI gate status; preserve exact lineage without counting task-number completion as O1 progress.
+Status: TECHNICAL EVIDENCE RECONCILED; ACADEMIC/OWNER BLOCKED
+Done: Reverified Common master label_sha2ff9246; frozen Owner-golden PR#189@6307e5d 38219621844 SUCCESS 4/4 and renderer 6 pages zero gaps; separate #236@d41cdd1 exact run38494582815 SUCCESS 4 frozen lock + 4 source identity unittests and 6-page zero-gap rebuilt page. D2 candidate #205@5b382356 run38437153878 SUCCESS scoped five roles across seven D2 candidates at three viewport sizes 105/105 plus Core2A staged 21/21. Reviewer frontdoor #226 attempt2 scoped SUCCESS, W-warning #229 scoped SUCCESS 9/9 two warnings; #233 diagnostics draft real canonical+guardrails FAILURE (not waived). #211/#214/#237 remain OPEN/UNASSIGNED; QRT 0/28. Original #189 question IDs and new #201 seven-cell source IDs are different.
+Code: No page, registry, renderer, immutable golden, accepted QRT, release or printer changed in reconcile. Separate drafts #189,#191,#205,#226,#229,#233,#236 all unmerged on distinct branch ancestry.
+Tests: Hosted original frozen renderer check 38219621844 PASS, original #236 exact-head 38494582815 PASS, D2 actual browser 38437153878 PASS; benchmark_201.py browser excludes Core1A while checking its static role technique; broaden narrowly only to serve O1.
+CI: D2 scoped PASS does not imply canonical-assurance or guardrails PASS. #233 run38486367609 FAILED and guardrails38486367594 FAILED.
+Claim: HOSTED_SCOPE_ONLY + EXACT_GITHUB_SOURCE_READBACK, no independent qualified math verdict.
+Blocker: O1 Core1A behavior still needs direct browser gate proof in the D2 native seven-cell benchmark; O2 reviewer nomination and per-cell Owner decision; A4 linked print, real learner input, broad CI separately pending.
+Next: Extend existing benchmark Core1A browser (without altering generated source/Owner golden), verify focused hosted run, then preserve/recheck Core1B. Keep Owner task wording unchanged.
+LOG | 2026-10-14 | tab=Tab5 | task=handover-log-reconciliation | result=FIVE_FILES_APPEND_ONLY_PREPARED; NEXT_CORE1A_BROWSER_GATE | aim=v3.1.0 | outcome=O1 | user=no | proof=https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219621844
