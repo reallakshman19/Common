@@ -32,6 +32,15 @@ These are confirmed failure **IDs from canonical runner comparison**, not indepe
 - [Guardrails log comparison](2026-10-14-6ace7d89-d1-guardrails-base-vs-head.md) independently found current #231 vs #228 **153/153 identical FAIL/ERROR test-ID entries**, no new or removed IDs, but guardrails **FAILED** in both; separate runners/definitions, do not equate canonical and guardrails totals.
 - Canonical **Assurance (no worse than baseline) FAILED** [#231 run 38489492996](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38489492996); release status job is explicitly **informational**, not a pass.
 
+## 3a. Two source-level inherited defects localized without changing code
+
+Read-only provider `fetch_file` at **both** initial D1 matrix review base `59031c2a9ea5cdfa71c6d195c3d20e807f3ddfc0` and review tip `6310905e85d4883e634681f798875d33002fd364`:
+
+- `public/mathematics/imo-grade9/index.html` Git blob is **identically** `5876b54db5699cf13139d64e40d3ff24b88541c1` on base and tip. It contains both `href="../../test/index.html"` and `href="../../test/imo-grade9/core1a.html"`. This directly matches canonical `test_theme_and_owner_isolation.TestThemeAndOwnerIsolation.test_zero_test_links_in_learner_surfaces` failing because *two TEST links* occur on a restricted public learner route. It is **not** caused by D1 viewer #208.
+- `public/test/imo-grade9/core1a.html` Git blob is identically `4072574779e26682071210dd2176aae6236f6971` on base and tip, and does **not** contain `data-g9-test-banner`. The canonical `test_test_area.TestPages.test_every_test_page_says_it_is_a_sandbox_draft` asserts this marker. The same native TEST preview source existed before #208; do not treat its existing `data-g9-test="sandbox-draft"` root attribute as equivalent to the separately required banner.
+
+These two findings are **exact source-level reproductions of specific failure conditions** and confirm they predate #208. They do not assign who authored the files nor grant authority to modify public routes in a review-only PR. More investigation is needed before proposing an independent minimal product TEST isolation/visual fix. The GitHub connector did not resolve the abbreviated `24b81328` as a fetch_file ref (404), so this source-object readback makes **no claim** about the pinned main file objects.
+
 ## 4. Decision and minimal next action
 
 1. **r6-00 closed as CI evidence attribution, not as release gate success.** The exact-ID job no longer "IN_PROGRESS"; it has completed FAILURE with a stable seven-case new-vs-main set already present at #208.
