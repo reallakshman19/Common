@@ -131,8 +131,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--input", required=True, type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--print-target", action="store_true", help="Print the stable response target only")
+    parser.add_argument("--status-json", action="store_true", help="Emit an explicit prepared/NOT-invoked receipt with --output")
     args = parser.parse_args(argv)
     try:
+        if args.status_json and (not args.output or args.print_target):
+            raise ValueError("--status-json requires --output and cannot be combined with --print-target")
         if args.print_target and args.output:
             raise ValueError("--print-target cannot be combined with --output")
         request = json.loads(args.input.read_text(encoding="utf-8"))
@@ -143,7 +146,25 @@ def main(argv: list[str] | None = None) -> int:
         rendered = render_request(request)
         if args.output:
             write_atomic(args.input, args.output, rendered)
-            print(args.output)
+            if args.status_json:
+                result = {
+                    "schema": "buddy-runner.invocation-status/v1",
+                    "phase": request["phase"],
+                    "state": "PROMPT_PREPARED",
+                    "target_id": response_target(request),
+                    "prompt_sha256": body_digest(rendered),
+                    "artifact_path": str(args.output),
+                    "agent_invoked": False,
+                    "workflow_executed": False,
+                    "approval_granted": False,
+                    "next_action": (
+                        "INVOKE_ASSIGNED_G2_WITH_1A_PACKET" if request["phase"] == "1a"
+                        else "ASSIGNED_ACTOR_EXECUTES_IN_GOVERNING_WORKFLOW"
+                    ),
+                }
+                print(json.dumps(result, sort_keys=True))
+            else:
+                print(args.output)
         else:
             sys.stdout.write(rendered)
     except DuplicateResponseClaim as exc:
