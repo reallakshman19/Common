@@ -40,3 +40,10 @@ Run decision_gate.py with a typed decision request to create an assessment artif
 When a project explicitly supplies the expected GitHub check-run IDs, exact names, trusted GitHub App IDs and assessed commit SHA, use `scripts/github_check_facts.py` to query only GitHub's exact check-run REST resources. See `references/github-ci-evidence.md`. Successful provider results attest to the configured CI check facts, **not** MCDA scores, workflow acceptance, or Owner approval.
 
 An enabled `scripts/decision_gate.py` request can take `--github-check-request <path>`; mismatched repository/SHA is refused before provider fetch, and missing/failed CI facts produce `NOT_EVALUATED`. Even fully matched checks leave the evaluation `ADVISORY_REVIEW_REQUIRED` and notifications disabled, pending independent approval and rubric-to-rating verification. Never claim the sample rating evidence is verified.
+
+
+## Portable monitor snapshot handoff
+
+The optional scripts/monitor_handoff.py consumes PR #364's proposed workflow-progress-monitor/v1 snapshot directly and emits **one** reusable diagnostic-only state artifact. The first run requires explicit --bootstrap; every later run requires --previous-artifact. Missing, corrupted or incompatible prior state fails closed, not a silent reset. It can optionally carry an advisory decision assessment in the same state. All output events are non-notifying and unqualified for MCDA scoring.
+
+Read references/monitor-handoff.md for exact commands and the future bounded connection to PR #364's *existing single scheduler*. The handoff does not modify PR #364, send mail, or create a new cron workflow. Run all read-only skill tests before changing the monitor integration seam.

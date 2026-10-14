@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Read-only UWI Monitor State Handoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "mode",
+    "source_schema",
+    "source_digest",
+    "state",
+    "state_digest",
+    "previous_state_digest",
+    "events"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-intelligence.handoff/v1"
+    },
+    "mode": {
+      "const": "DIAGNOSTIC_ONLY"
+    },
+    "source_schema": {
+      "const": "workflow-progress-monitor/v1"
+    },
+    "source_digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "state": {
+      "type": "object"
+    },
+    "state_digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "previous_state_digest": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "schema",
+          "event_id",
+          "alert_eligible",
+          "mcda_eligible"
+        ],
+        "properties": {
+          "alert_eligible": {
+            "const": false
+          },
+          "mcda_eligible": {
+            "const": false
+          },
+          "event_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

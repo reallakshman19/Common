@@ -37,6 +37,7 @@ jobs:
           python -m py_compile skills/workflow-intelligence/scripts/state.py
           python -m py_compile skills/workflow-intelligence/scripts/decision_gate.py
           python -m py_compile skills/workflow-intelligence/scripts/github_check_facts.py
+          python -m py_compile skills/workflow-intelligence/scripts/monitor_handoff.py
       - name: Test standalone MCDA
         run: python -m unittest discover -s skills/software-mcda/tests -v
       - name: Test read-only observation adapter
@@ -55,3 +56,8 @@ jobs:
         run: |
           python skills/workflow-intelligence/scripts/github_check_facts.py --request skills/workflow-intelligence/examples/github-checks.disabled.json --output /tmp/github-facts.json
           python -c 'import json; d=json.load(open("/tmp/github-facts.json")); assert d["status"] == "DISABLED"; assert not d["eligible_for_mcda_rating"]; assert not d["notification_eligible"]; assert not d["checks"]'
+      - name: Smoke test single-artifact monitor handoff with explicit bootstrap and replay
+        run: |
+          python skills/workflow-intelligence/scripts/monitor_handoff.py --monitor-current skills/workflow-intelligence/examples/monitor-snapshot.json --bootstrap --output-artifact /tmp/uwi-handoff-first.json
+          python skills/workflow-intelligence/scripts/monitor_handoff.py --monitor-current skills/workflow-intelligence/examples/monitor-snapshot.json --previous-artifact /tmp/uwi-handoff-first.json --output-artifact /tmp/uwi-handoff-repeat.json
+          python -c 'import json; a=json.load(open("/tmp/uwi-handoff-first.json")); b=json.load(open("/tmp/uwi-handoff-repeat.json")); assert a["events"] == b["events"] == []; assert a["state_digest"] == b["state_digest"]; assert a["mode"] == "DIAGNOSTIC_ONLY"'
