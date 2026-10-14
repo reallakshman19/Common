@@ -233,6 +233,8 @@ def build_row(
         },
         "report": {
             "provenance": "PROVIDER_REPORT",
+            "transport_status": report.get("transport_status") if report.get("transport_status") in (
+                "UNQUALIFIED_LEGACY", "MINIMUM_FIELDS_VALID") else "UNKNOWN",
             "task_id": _safe_id(report.get("task_id")),
             "candidate_sha": candidate_sha,
             "reported_status": _safe_id(report.get("reported_status")),

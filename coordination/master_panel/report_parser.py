@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime
 from typing import Any, Optional
 
 from .models import SourceIdentity, SourceKind
@@ -17,6 +18,25 @@ _PUBLIC_ID = re.compile(r"^[a-zA-Z0-9_.:-]{1,128}$")
 _SHA = re.compile(r"^[a-fA-F0-9]{40}$")
 _KINDS = {"REQUEST", "ACK", "RESULT", "REVIEW"}
 _STATUS = {"REQUESTED", "RECEIVED", "REPORTED"}
+
+
+def _unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Duplicate envelope field")
+        result[key] = value
+    return result
+
+
+def _utc(value: Any) -> bool:
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", value):
+        return False
+    try:
+        datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
+        return True
+    except ValueError:
+        return False
 
 
 def _id(value: Any) -> Optional[str]:
@@ -40,7 +60,7 @@ def extract_report(body: Any, source: SourceIdentity) -> Optional[dict[str, Any]
     if len(matches) != 1:
         return None
     try:
-        envelope = json.loads(matches[0])
+        envelope = json.loads(matches[0], object_pairs_hook=_unique_object)
     except (TypeError, ValueError):
         return None
     if not isinstance(envelope, dict):
@@ -67,6 +87,27 @@ def extract_report(body: Any, source: SourceIdentity) -> Optional[dict[str, Any]
     if (envelope.get("protocol_version") != "1.0.0"
             or kind not in _KINDS or status not in _STATUS):
         return None
+    if status != {"REQUEST": "REQUESTED", "ACK": "RECEIVED", "RESULT": "REPORTED", "REVIEW": "REPORTED"}[kind]:
+        return None
+    # Old identity-only source fixtures remain readable as explicitly
+    # unqualified claims. Once transport metadata appears, reject incomplete
+    # or invalid transport rather than laundering it into a typed claim.
+    transport = ("created_at", "request_digest", "reply_to", "expected_revision")
+    has_transport = any(key in envelope for key in transport) or "binding_generation" in target
+    if has_transport:
+        if (not _utc(envelope.get("created_at"))
+                or (kind != "REQUEST" and (
+                    not isinstance(envelope.get("request_digest"), str)
+                    or not re.fullmatch(r"[a-f0-9]{64}", envelope["request_digest"])))
+                or (kind == "REQUEST" and envelope.get("request_digest") is not None)
+                or type(envelope.get("expected_revision")) is not int
+                or envelope["expected_revision"] < 1
+                or type(target.get("binding_generation")) is not int
+                or target["binding_generation"] < 1
+                or (kind != "REQUEST" and not _id(envelope.get("reply_to")))
+                or (kind == "REQUEST" and envelope.get("reply_to") is not None)
+                or (envelope.get("expires_at") is not None and not _utc(envelope["expires_at"]))):
+            return None
     for key in ("project_id", "work_id", "assignment_id",
                 "run_id", "lane_id"):
         if not _id(target.get(key)):
@@ -92,4 +133,5 @@ def extract_report(body: Any, source: SourceIdentity) -> Optional[dict[str, Any]
         "work_id": target["work_id"], "assignment_id": target["assignment_id"],
         "run_id": target["run_id"], "lane_id": target["lane_id"],
         "candidate_sha": candidate,
+        "transport_status": "MINIMUM_FIELDS_VALID" if has_transport else "UNQUALIFIED_LEGACY",
     }

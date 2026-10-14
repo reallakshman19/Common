@@ -108,7 +108,7 @@ class SourceStore:
         key = (source.project_id, source.repo_id, source.kind.value, source.entity_id)
         allowed = {
             "kind","reported_status","request_id","message_id","sender_id",
-            "project_id","work_id","assignment_id","run_id","lane_id","candidate_sha",
+            "project_id","work_id","assignment_id","run_id","lane_id","candidate_sha","transport_status",
         }
         if report is not None and (
             not isinstance(report, dict) or

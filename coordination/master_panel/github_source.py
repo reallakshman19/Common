@@ -140,6 +140,9 @@ class GitHubSourceScanner:
         if prior and prior["repo_id"] != reg.repo_id:
             raise SourceConflict("Registered repo identity changed")
         restart = prior is None or prior["status"] == "REACHABLE"
+        # GitHub's offset pages are not a snapshot. Neither resumed reads nor
+        # a collection spanning multiple pages establish trustworthy absence.
+        absence_verified = restart
         scan_id = uuid.uuid4().hex if restart else prior["scan_id"]
         page = 1 if restart else prior["issue_page"]
         index = 0 if restart else prior["issue_index"]
@@ -171,6 +174,7 @@ class GitHubSourceScanner:
                     "comment_page": comment_page,
                 },
                 "error_code": error_code, "error_kind": error_kind,
+                "absence_verified": completed and absence_verified,
             }
 
         def observe(item: dict, kind: SourceKind, issue_number: int,
@@ -202,6 +206,8 @@ class GitHubSourceScanner:
                 if (not isinstance(issues, list) or len(issues) > self.PAGE_SIZE
                         or any(not isinstance(item, dict) for item in issues)):
                     raise SourceConflict("Invalid provider issue page")
+                if len(issues) == self.PAGE_SIZE:
+                    absence_verified = False
                 while index < len(issues):
                     issue = issues[index]
                     n = issue.get("number")
@@ -218,6 +224,8 @@ class GitHubSourceScanner:
                         if (not isinstance(comments, list) or len(comments) > self.PAGE_SIZE
                                 or any(not isinstance(item, dict) for item in comments)):
                             raise SourceConflict("Invalid provider comment page")
+                        if len(comments) == self.PAGE_SIZE:
+                            absence_verified = False
                         for comment in comments:
                             observe(comment, SourceKind.ISSUE_COMMENT, n, True)
                         if len(comments) < self.PAGE_SIZE:
@@ -228,10 +236,12 @@ class GitHubSourceScanner:
                     # Durable progress after every full issue, not after every scan.
                     status("PARTIAL")
                 if len(issues) < self.PAGE_SIZE:
-                    tombstones = self.store.complete_scan(
-                        reg.project_id, reg.repo_id, scan_id
-                    )
-                    return status("REACHABLE", completed=True)
+                    if absence_verified:
+                        tombstones = self.store.complete_scan(
+                            reg.project_id, reg.repo_id, scan_id
+                        )
+                    return status("REACHABLE", completed=True,
+                                  error_kind=None if absence_verified else "ABSENCE_UNVERIFIED")
                 page += 1
                 index = 0
         except PageBudgetExhausted:

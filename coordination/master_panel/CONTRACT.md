@@ -36,4 +36,10 @@ The proposed M2 read seam for M1-U03 is local GET `/api/master/v1/projects`, GET
 
 ## Integration and writer boundaries
 
+### Codex F04/F06 correction profile
+
+Source claims now retain `transport_status`: identity-only historical envelopes are `UNQUALIFIED_LEGACY`; transport-bearing envelopes must pass minimum timestamp, reply/digest, positive revision/generation and kind/status checks to be `MINIMUM_FIELDS_VALID`. Neither label establishes full CASP-schema validation, request correlation, sender binding, independent review or acceptance. REQUEST has null reply/digest; replies require both. Duplicate JSON fields and invalid calendar times are rejected. Full correlated/trusted attribution qualification remains separate.
+
+Enumeration completion is distinct from absence proof. Resumed scans and collections spanning offset pages preserve unseen rows and report `absence_verified:false` plus durable `ABSENCE_UNVERIFIED`. Only uninterrupted single-page collection enumeration permits observed-absence tombstones. This conservative policy may retain truly absent records until absence is qualified; it does not manufacture a GitHub deletion time or solve live multi-page snapshot parity. Existing independent fixtures/oracles remain unchanged.
+
 U01 uses isolated new `coordination/master_panel/` and new tests/fixtures only. U02 may add `github_source.py` plus `storage.py`. U03 may add read API and a justified minimal integration with existing `coordination_ui.py`; M2 owns visual panel and C3b. U04 is conditioned on an actual authorized private destination and coordinator consumption policy; existing `command_service.py` has local admission but does not authorize SEND. M1 final handoff ends M1 writes; Codex repairs and M3 independently verifies its corrected SHA. No changes to project policy, oracle, skills, workflows, public deploy or protected controls.
