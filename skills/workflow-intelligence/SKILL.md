@@ -5,6 +5,31 @@ description: Read-only companion for Software MCDA and Universal Workflow Progre
 
 # Workflow Intelligence — read-only foundation
 
+## Invocation monitoring switch — offer when called
+
+At each invocation of **workflow-intelligence** or a combined Software MCDA evaluation, expose one **Monitoring** toggle to the user:
+
+- **OFF (default)** — evaluate the supplied engineering alternatives and/or saved evidence; no live GitHub requests, no workflow polling, no notifications.
+- **ON (one-time, read-only)** — fetch only the explicitly selected workflow's configured issue comments once, display SUBMITTED/UNVERIFIED or UNKNOWN with evidence refs, then return. It does not turn on scheduled monitoring.
+
+Show this as a two-choice control when the host can render controls, otherwise use a short conversational choice such as **Monitoring: [OFF] [ON — check GitHub once]**. Do not imply the skill installs a permanent ChatGPT UI switch. Honor explicit ON/OFF in the user request without asking again. For an ordinary MCDA request without a preference, proceed immediately with OFF and offer the option to enable ON; do not block the decision evaluation for a prompt.
+
+ON requires an explicit workflow ID, a reviewed source config with enabled=true for that workflow, real repository/issue, and trusted-author marker mapping. If those are absent, report **MONITORING UNAVAILABLE — CONFIGURATION REQUIRED**, continue MCDA independently where possible, and **do not** silently enable the sample mapping or background checks. Comment markers are never certification.
+
+Deterministic one-invocation implementation from repository root:
+
+    python3 skills/workflow-intelligence/scripts/invoke.py \
+      --monitor off \
+      --decision skills/software-mcda/assets/example-decision.json
+
+    python3 skills/workflow-intelligence/scripts/invoke.py \
+      --monitor on \
+      --workflow-config path/to/reviewed-workflows.json \
+      --workflow-id approved-workflow-id \
+      --decision path/to/decision.json
+
+Only ON invokes a GitHub read. Both modes leave the repository variable UWI_DIAGNOSTIC_HANDOFF_ENABLED, the existing 15-minute schedule, SMTP, and ChatGPT Work untouched. See references/invocation-toggle.md and the JSON response schema. An ON invocation is not a durable scheduled-monitoring activation.
+
 This optional coordinator is independent of the Software MCDA engine, the GitHub monitor, and ChatGPT Work. It is not an execution controller.
 
 1. Obtain a real monitor snapshot from the approved provider, or use an explicitly labeled offline fixture. Draft monitor PR #364 produces workflow-progress-monitor/v1 comment observations; these can be SUBMITTED/UNVERIFIED or UNKNOWN only.
