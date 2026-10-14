@@ -18,6 +18,17 @@
 4. Enable Actions and run `workflow_dispatch` once. First run establishes a baseline and should not email. Subsequent runs compare with the prior successful snapshot artifact and email only changes. Inspect the workflow run logs and artifacts. GitHub schedule is best-effort, not a guaranteed exact 15-minute SLA.
 5. Use `WORK_TRIGGER.md` to configure a new-mail event-triggered Work task and enable ChatGPT notifications.
 
+## Invoking in a ChatGPT conversation
+
+**Progress request:** "show/check status" invokes read-only observation; select Monitoring ON only for a verified, one-time live source read, otherwise disclose `NOT LIVE`. **Start request:** "start/kick off" must be routed to the named *governing* execution skill, not the monitor. For BuddyRunner v1.7, that means preparing a real Stage 1a packet and returning its `PROMPT_PREPARED` receipt; this is not G2 dispatch. The [skill's invocation-routing contract](SKILL.md#intent-sensitive-invocation-routing-before-rendering-progress) is accompanied by a pure diagnostic:
+
+```sh
+python skills/universal-workflow-progress/scripts/route_invocation.py --intent start --workflow buddy-runner-v1-7
+python skills/universal-workflow-progress/scripts/route_invocation.py --intent progress --workflow buddy-runner-v1-7 --monitor ON
+```
+
+The diagnostic returns a **routing recommendation, never a source read or agent execution**. A ChatGPT skill mention does not itself install an agent runner; authorized tool/runtime execution must be performed separately. This addition does not change the existing scheduled GitHub observer, email or Work trigger.
+
 ## Current behavior and important limits
 
 This is an **observation bridge**. The supplied monitor is disabled; pull request checks test the script but do not run the notifier. It does not magically understand every engineering workflow. The shared ChatGPT skill can interpret a workflow contract during a chat, but unattended automated checks require an explicit adapter/mapping to authoritative evidence. The sample uses comment token observations only: matching text produces **SUBMITTED / UNVERIFIED**, never VERIFIED. It cannot establish whether the author truly performed the task, agent independence, Owner approval, current head or engineering acceptance.
