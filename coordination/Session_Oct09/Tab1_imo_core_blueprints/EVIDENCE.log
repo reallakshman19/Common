@@ -391,3 +391,12 @@ AC (before -> after): CI backlog undiagnosed and D4 render misreported -> exact 
 Claim: LOCAL
 Blocker: CI queue congestion, no action cancellation tool, CI owner permission to apply throttle; QRT Owner acceptance unrelated and still pending
 Next: monitor latest-head D2/D3/D4 runs and repair true failing tests; PR #197 CI owner review
+Outcome: O1
+For the user: An existing TEST Core1A learning page now has an Owner-frozen-golden role/teaching benchmark and actual independent-exit browser check in draft #235. The generated learner page is not published, and new O1 regression success remains unconfirmed.
+Proof: https://github.com/reallakshman19/Grade9v3.5/pull/235 ; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38493464383 (new assertion failed: escaped test regex); https://github.com/reallakshman19/Grade9v3.5/actions/runs/38494102187 (fix recheck queued).
+TASK EVIDENCE | 2026-10-14 | Tab1 v3.1.0 cross-tab source-to-golden Core1A O1.
+Exact Owner master https://github.com/reallakshman19/Common/blob/main/relay/AIM/IMO-CORE-BLUEPRINTS.yaml version=3.1.0 label_sha=2ff9246; task aim: Build the next Core page from its blueprint against its golden: Core 2A done structurally, Core 1A next, then 1B.
+O1 native registered input: authored TEST QRT-RETRIEVE-D4 manifest TEST/products/imo203-qrt-d4-retrieve.manifest.json -> Shared/tools/render_core.py PAGES REFERENCE -> core1a.html BP-CORE1A-CONSTRUCTION@1.8.0. Owner frozen Core1A G-IMO-G9-FIVE-CORE-20261012 at exact source 67c34dababb0da0ef7d5f4a532bfcf3119754961. Five-role prior #225 run38485001887 PASS, golden role slots match; #235 adds Core1A component and independent modulo16 exit comparison plus attempted/unattempted browser controls.
+Current defect: #235 run38493464383 unit 7 of8 PASS? Actual 8 total: RETRIEVE five pass, Core1A 2/3 pass and third failed newly authored test '<details\\\\b>' incorrectly escaped; corrected test source at ed23ae3104a59f9bca7ff5b4fe66b5e80c7b16c9; rerun38494102187 QUEUED as of this record. No new product/renderer/blueprint/golden edit, O3 no demonstrated gap.
+O2 named cell is authored PROPOSED, qualified review and per-cell Owner acceptance PENDING (0/28). Earlier Tab7 #207/#219/#225/#227/#232 evidence still supports W/learner math checks, but not O1 Core1A rendered golden acceptance or O2 academic acceptance.
+LOG: 2026-10-14 | O1-Core1A registered TEST native/golden witness #235; fix latest CI pending, zero Owner promotion | aim=v3.1.0 | outcome=O1 | user=no
