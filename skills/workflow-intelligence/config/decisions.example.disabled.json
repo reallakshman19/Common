@@ -1,0 +1,10 @@
+{
+  "schema": "workflow-intelligence.config/v1",
+  "enabled": false,
+  "description": "Example only. No approved live score configuration, notification or monitoring is enabled.",
+  "decisions": [],
+  "notifications": {
+    "enabled": false,
+    "delivery": "NONE"
+  }
+}

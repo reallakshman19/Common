@@ -1,28 +1,30 @@
 ---
 name: workflow-intelligence
-description: Read-only companion for the standalone Software MCDA and Universal Workflow Progress skills. Use to normalize versioned workflow observations, detect semantic changes and prepare an optional future decision analysis without upgrading stage evidence.
+description: Read-only companion for Software MCDA and Universal Workflow Progress, used to normalize workflow observations, persist semantic state, and run advisory-only decision scoring with explicit evidence references. Does not authorize workflow stage changes or notifications.
 ---
 
-# Workflow Intelligence — observer adapter (v1.2 foundation)
+# Workflow Intelligence — read-only foundation
 
-This is a **foundation only**. It does not deploy a scheduler, an alert sender, an active decision policy, a new Relay ledger or a ChatGPT Work trigger.
+This optional coordinator is independent of the Software MCDA engine, the GitHub monitor, and ChatGPT Work. It is not an execution controller.
 
-The adapter consumes the workflow-progress-monitor/v1 snapshot format proposed in draft PR #364. Stage comment observations remain SUBMITTED/UNVERIFIED or UNKNOWN. An issue-comment match does not prove execution, review, Owner approval or MCDA input quality.
+1. Obtain a real monitor snapshot from the approved provider, or use an explicitly labeled offline fixture. Draft monitor PR #364 produces workflow-progress-monitor/v1 comment observations; these can be SUBMITTED/UNVERIFIED or UNKNOWN only.
+2. Run scripts/observe.py to compare current and previous monitor snapshots, or scripts/state.py for namespace-scoped, durable, semantic observations. Preserve its returned next state for the subsequent poll. Initial baseline is silent; corrupt prior state fails closed.
+3. For a project-approved MCDA decision request, run scripts/decision_gate.py. It requires exact candidate and declared evidence bindings. It cannot authenticate GitHub itself, so results are ADVISORY_REVIEW_REQUIRED or NOT_EVALUATED, never a verified live architecture decision.
+4. Use the independent Software MCDA skill to examine weights, rubric, hard constraints and sensitivity; never treat a monitoring event as a substitute for measurable score evidence.
+5. Report sources, candidate SHA, unknowns, unchanged/changed semantics and review obligations. Do not advance a workflow, launch agents, write GitHub comments, merge PRs, send email, or activate a Work trigger.
 
-Run from repository root:
+## Core interfaces
 
-    python3 skills/workflow-intelligence/scripts/observe.py --current snapshot.json --output changed-events.json
+- scripts/observe.py: stateless monitor-snapshot normalization and comparison.
+- scripts/state.py: versioned durable state, idempotent diagnostic event identities, silent first poll.
+- scripts/decision_gate.py: explicitly bound **advisory** MCDA computation; no automatic alert eligibility.
+- schemas/: documentation of versioned boundaries; Python provides strict cross-field validation.
+- config/decisions.example.disabled.json: intentionally disabled sample.
+- references/integration-contract.md: CLI examples, trust limits, state restoration and future integration.
+- tests/: offline falsifiers and regression cases.
 
-To compare to a previous persisted snapshot, add:
+## Safe mode and governance
 
-    --previous previous-snapshot.json
+The observer contains **no scheduler or SMTP integration**. A later integration must reuse the single monitor/cron proposed by draft PR #364, not create another timer or controller. Comment markers, even from configured trusted authors, never establish independent verification or Owner approval. Unverified observations are never allowed to become MCDA decision triggers. Preserve repository AGENTS.md, BuddyRunner stage roles, selected governing policy and explicit Owner merge rights.
 
-Use this as a boundary contract for a later verified-evidence adapter. Do not convert its event records directly to scoring inputs; MCDA requires separately approved project criteria, score provenance and mandatory-constraint evidence.
-
-- No integration changes to existing monitor/CI while PR #364 remains draft.
-- Missing previous state is a silent baseline.
-- Changes are based on stable semantic evidence identity, not poll timestamps.
-- Fail closed for malformed inputs, duplicate workflow IDs, unsupported states or attempts to upgrade v1 observation verification.
-- Neither this skill nor MCDA grants progress, release, writer or Owner authority.
-
-Offline tests: python3 -m unittest discover -s skills/workflow-intelligence/tests -v
+Run tests: python3 -m unittest discover -s skills/workflow-intelligence/tests -v.
