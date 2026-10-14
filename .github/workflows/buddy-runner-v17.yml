@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'skills/buddy-runner-v1-7/**'
-      - '.github/workflows/buddy-runner-v16.yml'
+      - '.github/workflows/buddy-runner-v17.yml'
   workflow_dispatch:
 
 permissions:
@@ -36,6 +36,8 @@ jobs:
         run: python -m py_compile skills/buddy-runner-v1-7/scripts/buddy_runner_v17.py
       - name: Validate v1.7 interaction boundaries
         run: python -m unittest discover -s skills/buddy-runner-v1-7/tests -p test_buddy_runner_v17.py -v
+      - name: Verify v1.6 remains compatible (unchanged runner)
+        run: python -m unittest discover -s skills/buddy-runner-v1-6/tests -p test_buddy_runner_v16.py -v
       - name: Render preparation and standalone evidence examples without provider writes
         run: |
           python skills/buddy-runner-v1-7/scripts/buddy_runner_v17.py --input skills/buddy-runner-v1-7/examples/handover-1a.json --output /tmp/buddy-v17-1a.md
