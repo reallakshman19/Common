@@ -1,0 +1,34 @@
+{
+  "schema": "workflow-progress-monitor/v1",
+  "observed_at": "2026-10-14T00:00:00Z",
+  "workflows": [
+    {
+      "id": "sample-buddy",
+      "repository": "owner/repo",
+      "issue": 17,
+      "stages": [
+        {
+          "id": "1a",
+          "title": "Preparation",
+          "state": "SUBMITTED",
+          "verification": "UNVERIFIED",
+          "evidence": [
+            {
+              "comment_id": 7,
+              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "author": "sample-author",
+              "source_ref": "https://github.com/owner/repo/issues/17#issuecomment-7"
+            }
+          ]
+        },
+        {
+          "id": "1b",
+          "title": "Investigation",
+          "state": "UNKNOWN",
+          "verification": "UNKNOWN",
+          "evidence": []
+        }
+      ]
+    }
+  ]
+}

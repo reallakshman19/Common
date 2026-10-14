@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UWI Decision Request v1 (declaration is not provider verification)",
+  "type": "object",
+  "required": [
+    "schema",
+    "enabled",
+    "scope"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-intelligence.decision-request/v1"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "repository",
+        "workflow_id",
+        "decision_id",
+        "issue",
+        "assessed_sha"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "workflow_id": {
+          "type": "string"
+        },
+        "decision_id": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "assessed_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "decision": {
+      "type": "object"
+    },
+    "authority": {
+      "type": "object",
+      "properties": {
+        "approval_ref": {
+          "type": "string"
+        },
+        "decision_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "rating_evidence": {
+      "type": "object"
+    }
+  }
+}

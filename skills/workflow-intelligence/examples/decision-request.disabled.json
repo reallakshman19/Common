@@ -1,0 +1,11 @@
+{
+  "schema": "workflow-intelligence.decision-request/v1",
+  "enabled": false,
+  "scope": {
+    "repository": "owner/repo",
+    "workflow_id": "sample-buddy",
+    "issue": 17,
+    "decision_id": "architecture",
+    "assessed_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}
