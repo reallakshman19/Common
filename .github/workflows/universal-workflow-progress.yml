@@ -1,0 +1,75 @@
+name: Universal Workflow Progress — read-only observer
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'skills/universal-workflow-progress/**'
+      - '.github/workflows/universal-workflow-progress.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: universal-workflow-progress-observer
+  cancel-in-progress: false
+
+jobs:
+  tests:
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate read-only monitor logic
+        run: python -m unittest discover -s skills/universal-workflow-progress/tests -v
+      - name: Python syntax
+        run: python -m py_compile skills/universal-workflow-progress/scripts/*.py
+  observe:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Restore last snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .state
+          run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts?name=universal-workflow-progress-state&per_page=50" --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')"
+          if [ -n "$run_id" ]; then
+            gh run download "$run_id" --name universal-workflow-progress-state --dir .state
+            test -s .state/latest.json
+            mv .state/latest.json .state/previous.json
+          fi
+      - name: Observe GitHub read-only
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          WF_GITHUB_TOKEN: ${{ secrets.WF_GITHUB_TOKEN }}
+        run: python skills/universal-workflow-progress/scripts/check.py
+      - name: Email changed observations only
+        env:
+          WF_SMTP_HOST: ${{ secrets.WF_SMTP_HOST }}
+          WF_SMTP_PORT: ${{ secrets.WF_SMTP_PORT }}
+          WF_SMTP_USER: ${{ secrets.WF_SMTP_USER }}
+          WF_SMTP_PASSWORD: ${{ secrets.WF_SMTP_PASSWORD }}
+          WF_ALERT_FROM: ${{ secrets.WF_ALERT_FROM }}
+          WF_ALERT_TO: ${{ secrets.WF_ALERT_TO }}
+        run: python skills/universal-workflow-progress/scripts/send_email.py .state/changes.json
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: universal-workflow-progress-state
+          path: .state/latest.json
+          retention-days: 30
