@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GitHub exact-check-run verification request v1 (read only)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "enabled",
+    "scope",
+    "checks"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-intelligence.github-check-request/v1"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "assessed_sha"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^(?=[A-Za-z0-9_.-]*[A-Za-z0-9_-])[A-Za-z0-9_.-]+/(?=[A-Za-z0-9_.-]*[A-Za-z0-9_-])[A-Za-z0-9_.-]+$"
+        },
+        "assessed_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "alias",
+          "check_run_id",
+          "expected_name",
+          "trusted_app_id"
+        ],
+        "properties": {
+          "alias": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "check_run_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expected_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "trusted_app_id": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  }
+}

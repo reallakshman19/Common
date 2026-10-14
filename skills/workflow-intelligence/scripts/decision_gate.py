@@ -35,7 +35,8 @@ def scope_of(request):
     if not isinstance(scope, dict):
         raise ValueError("Decision scope required")
     repository = scope.get("repository")
-    if not isinstance(repository, str) or not REPOSITORY.fullmatch(repository):
+    if (not isinstance(repository, str) or not REPOSITORY.fullmatch(repository) or
+            any(not component.strip(".") for component in repository.split("/"))):
         raise ValueError("Invalid repository scope")
     if not isinstance(scope.get("workflow_id"), str) or not scope["workflow_id"]:
         raise ValueError("Workflow ID required")
@@ -50,7 +51,7 @@ def scope_of(request):
                                   "issue", "assessed_sha")}
 
 
-def assessment(request):
+def assessment(request, github_check_request=None, check_reader=None):
     if not isinstance(request, dict) or request.get("schema") != REQUEST_SCHEMA:
         raise ValueError("Unsupported decision request schema")
     scope = scope_of(request)
@@ -99,20 +100,41 @@ def assessment(request):
                     or not claim["ref"].startswith("https://github.com/" + scope["repository"] + "/")):
                 return {**base, "status": "NOT_EVALUATED",
                         "reason": "Unqualified, stale or cross-repository rating evidence"}
+    if any(option.get("evidence_level") != "OBSERVED" for option in decision["options"]):
+        return {**base, "status": "NOT_EVALUATED",
+                "reason": "Enabled decision requires OBSERVED evidence level for every option"}
+    verified_check_facts = None
+    if github_check_request is not None:
+        from github_check_facts import validate as validate_github_checks
+        from github_check_facts import verify as verify_github_checks
+        ci_repo, ci_sha, _ = validate_github_checks(github_check_request)
+        if ci_repo != scope["repository"] or ci_sha != scope["assessed_sha"]:
+            return {**base, "status": "NOT_EVALUATED",
+                    "reason": "GitHub CI fact scope does not match decision candidate"}
+        verified_check_facts = verify_github_checks(github_check_request, check_reader)
+        if github_check_request["enabled"] and verified_check_facts["status"] != "CHECKS_VERIFIED":
+            return {**base, "status": "NOT_EVALUATED",
+                    "reason": "Required exact-commit CI checks not verified",
+                    "ci_check_facts": verified_check_facts}
     calculated = engine.report(decision)
     return {**base, "status": "ADVISORY_REVIEW_REQUIRED",
             "reason": "Evidence/approval references are self-declared; no independent provider verification",
-            "configuration_digest": bound_digest, "mcda": calculated}
+            "configuration_digest": bound_digest, "mcda": calculated,
+            **({"ci_check_facts": verified_check_facts}
+               if verified_check_facts is not None else {})}
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--request", required=True, type=Path)
     p.add_argument("--output", required=True, type=Path)
+    p.add_argument("--github-check-request", type=Path)
     args = p.parse_args()
     try:
         request = json.loads(args.request.read_text(encoding="utf-8"))
-        result = assessment(request)
+        ci_request = (json.loads(args.github_check_request.read_text(encoding="utf-8"))
+                      if args.github_check_request else None)
+        result = assessment(request, ci_request)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n",
                                encoding="utf-8")

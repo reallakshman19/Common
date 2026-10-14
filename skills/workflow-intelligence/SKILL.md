@@ -33,3 +33,10 @@ Run tests: python3 -m unittest discover -s skills/workflow-intelligence/tests -v
 ## Compare an advisory decision with its prior state
 
 Run decision_gate.py with a typed decision request to create an assessment artifact. Pass that artifact to state.py with --assessment; the logical decision ID is isolated per repository/workflow/issue, and a changed recommendation becomes a diagnostic decision event. Every event remains NOT alert-eligible. The exact CLI sequence and event schemas are in references/integration-contract.md.
+
+
+## Verify GitHub CI source facts (optional, read-only)
+
+When a project explicitly supplies the expected GitHub check-run IDs, exact names, trusted GitHub App IDs and assessed commit SHA, use `scripts/github_check_facts.py` to query only GitHub's exact check-run REST resources. See `references/github-ci-evidence.md`. Successful provider results attest to the configured CI check facts, **not** MCDA scores, workflow acceptance, or Owner approval.
+
+An enabled `scripts/decision_gate.py` request can take `--github-check-request <path>`; mismatched repository/SHA is refused before provider fetch, and missing/failed CI facts produce `NOT_EVALUATED`. Even fully matched checks leave the evaluation `ADVISORY_REVIEW_REQUIRED` and notifications disabled, pending independent approval and rubric-to-rating verification. Never claim the sample rating evidence is verified.

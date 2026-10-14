@@ -1,0 +1,9 @@
+{
+  "schema": "workflow-intelligence.github-check-request/v1",
+  "enabled": false,
+  "scope": {
+    "repository": "owner/repo",
+    "assessed_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "checks": []
+}

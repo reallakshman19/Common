@@ -26,10 +26,13 @@ def example():
             evidence[option["name"]][criterion["id"]] = {
                 "ref": "https://github.com/owner/repo/commit/" + "a" * 40,
                 "assessed_sha": "a" * 40, "status": "OBSERVED"}
+    observed = copy.deepcopy(MCDA_EXAMPLE)
+    for option in observed["options"]:
+        option["evidence_level"] = "OBSERVED"  # still self-declared, not independently verified
     return {"schema": mod.REQUEST_SCHEMA, "enabled": True, "scope": copy.deepcopy(SCOPE),
-            "decision": copy.deepcopy(MCDA_EXAMPLE),
+            "decision": observed,
             "authority": {"approval_ref": "https://github.com/owner/repo/issues/10#issuecomment-1",
-                          "decision_digest": "sha256:" + fingerprint(MCDA_EXAMPLE)},
+                          "decision_digest": "sha256:" + fingerprint(observed)},
             "rating_evidence": evidence}
 
 
@@ -102,6 +105,54 @@ class EvidenceDecisionTests(unittest.TestCase):
         request["enabled"] = 1
         with self.assertRaises(ValueError):
             mod.assessment(request)
+
+
+    def test_assumed_ratings_never_automatically_evaluated(self):
+        request = example()
+        request["decision"]["options"][0]["evidence_level"] = "ASSUMED"
+        request["authority"]["decision_digest"] = "sha256:" + fingerprint(request["decision"])
+        self.assertEqual(mod.assessment(request)["status"], "NOT_EVALUATED")
+
+    def test_bound_exact_commit_ci_check_does_not_certify_scores(self):
+        request = example()
+        check_request = {"schema": "workflow-intelligence.github-check-request/v1",
+                         "enabled": True,
+                         "scope": {"repository": "owner/repo", "assessed_sha": "a" * 40},
+                         "checks": [{"alias": "unit-tests", "check_run_id": 42,
+                                     "expected_name": "tests", "trusted_app_id": 15368}]}
+        source = {"id": 42, "head_sha": "a" * 40, "name": "tests",
+                  "status": "completed", "conclusion": "success",
+                  "app": {"id": 15368}}
+        result = mod.assessment(request, check_request, lambda *_: source)
+        self.assertEqual(result["status"], "ADVISORY_REVIEW_REQUIRED")
+        self.assertEqual(result["ci_check_facts"]["status"], "CHECKS_VERIFIED")
+        self.assertFalse(result["notification_eligible"])
+        self.assertFalse(result["ci_check_facts"]["eligible_for_mcda_rating"])
+
+    def test_failed_required_check_prevents_assessment(self):
+        request = example()
+        check_request = {"schema": "workflow-intelligence.github-check-request/v1",
+                         "enabled": True,
+                         "scope": {"repository": "owner/repo", "assessed_sha": "a" * 40},
+                         "checks": [{"alias": "unit-tests", "check_run_id": 42,
+                                     "expected_name": "tests", "trusted_app_id": 15368}]}
+        source = {"id": 42, "head_sha": "a" * 40, "name": "tests",
+                  "status": "completed", "conclusion": "skipped",
+                  "app": {"id": 15368}}
+        result = mod.assessment(request, check_request, lambda *_: source)
+        self.assertEqual(result["status"], "NOT_EVALUATED")
+        self.assertFalse(result["notification_eligible"])
+
+    def test_mismatched_check_scope_rejected(self):
+        request = example()
+        check_request = {"schema": "workflow-intelligence.github-check-request/v1",
+                         "enabled": False,
+                         "scope": {"repository": "other/repo", "assessed_sha": "a" * 40}}
+        def do_not_fetch(*_):
+            raise AssertionError("Cross-repository validation must happen before GET")
+        result = mod.assessment(request, check_request, do_not_fetch)
+        self.assertEqual(result["status"], "NOT_EVALUATED")
+
 
 
 if __name__ == "__main__":

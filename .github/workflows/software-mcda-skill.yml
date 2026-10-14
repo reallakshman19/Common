@@ -36,6 +36,7 @@ jobs:
           python -m py_compile skills/workflow-intelligence/scripts/observe.py
           python -m py_compile skills/workflow-intelligence/scripts/state.py
           python -m py_compile skills/workflow-intelligence/scripts/decision_gate.py
+          python -m py_compile skills/workflow-intelligence/scripts/github_check_facts.py
       - name: Test standalone MCDA
         run: python -m unittest discover -s skills/software-mcda/tests -v
       - name: Test read-only observation adapter
@@ -50,3 +51,7 @@ jobs:
           python skills/workflow-intelligence/scripts/state.py --current skills/workflow-intelligence/examples/monitor-snapshot.json --assessment /tmp/assessment.json --state-output /tmp/uwi-state.json --events-output /tmp/uwi-first.json
           python skills/workflow-intelligence/scripts/state.py --current skills/workflow-intelligence/examples/monitor-snapshot.json --assessment /tmp/assessment.json --previous-state /tmp/uwi-state.json --state-output /tmp/uwi-state-2.json --events-output /tmp/uwi-repeat.json
           python -c 'import json; a=json.load(open("/tmp/assessment.json")); b=json.load(open("/tmp/uwi-first.json")); c=json.load(open("/tmp/uwi-repeat.json")); assert a["status"] == "NOT_EVALUATED"; assert not a["notification_eligible"]; assert b["events"] == c["events"] == []'
+      - name: Smoke test disabled GitHub fact reader without token
+        run: |
+          python skills/workflow-intelligence/scripts/github_check_facts.py --request skills/workflow-intelligence/examples/github-checks.disabled.json --output /tmp/github-facts.json
+          python -c 'import json; d=json.load(open("/tmp/github-facts.json")); assert d["status"] == "DISABLED"; assert not d["eligible_for_mcda_rating"]; assert not d["notification_eligible"]; assert not d["checks"]'
