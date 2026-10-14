@@ -15,6 +15,21 @@ G2 tests the inherited claims rather than copying the predecessor's role summary
 
 [Optional Owner comprehension nudge](references/OWNER_COMPREHENSION_NUDGE.md) may be used *during ordinary successor work* when a material misunderstanding arises; it is **not phase 3**, no 2 acknowledgement, no new response/publication, no transfer of writer/merge/release authority.
 
+## Invocation and activation boundary
+
+An explicit Owner request to **start BuddyRunner** selects the existing phase (usually `1a` for a genuinely new handover), not Universal Workflow Progress. The acting assistant must **perform the allowed phase action now** when a real governing issue, actor assignment, source baseline and intake are available: render the actual phase packet, report the factual output state, and stop at that phase's boundary. If the necessary case or permission is missing, ask for the missing essential item or return `BLOCKED_MISSING_INPUT`; **do not answer a start request with a progress chart or claim a launched agent**.
+
+To prepare and record a new, real 1a packet, with validated `case.json` on disk:
+
+```sh
+python skills/buddy-runner-v1-7/scripts/buddy_runner_v17.py \
+  --input case.json --output handover-1a.md --status-json
+```
+
+The JSON response identifies `PROMPT_PREPARED`, exact target and UTF-8 prompt digest, and explicitly sets `agent_invoked=false`, `workflow_executed=false`, `approval_granted=false`. This **kicks off preparation**, not G2 execution. Only a real authorized G2 invocation under the project's governing controller may advance to 1b, and only G1's evidence reconciliation may close 2. The runner cannot dispatch other agents, make API calls, advance providers or issue custody leases; never synthesize `AGENT_INVOKED` or `HANDOVER_CLOSED` from a generated packet. Existing closed v1.6 handovers must not be reopened.
+
+For **show/check progress**, route to Universal Workflow Progress and keep that view read-only; for **start/run** the selected BuddyRunner phase, use this skill, not the observer. For vague "workflow" requests, resolve intent conversationally before changing state. The choice of skill name in a chat does not install a dispatcher or imply source mapping/authorization.
+
 ## Interaction contract
 
 | Artifact | Responsible agent | Result | Boundary |
