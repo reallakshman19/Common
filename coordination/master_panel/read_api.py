@@ -199,6 +199,7 @@ class MasterReadService:
                 output.append(build_row(
                     source,
                     bindings=self.bindings.get(key, ()),
+                    report=json.loads(item["report_json"]) if item.get("report_json") else None,
                     review=self.reviews.get(key),
                     current_pr_head_sha=self.current_heads.get(key),
                     source_state=state["status"],
