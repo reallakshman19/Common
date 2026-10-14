@@ -44,3 +44,9 @@ jobs:
         run: |
           python skills/software-mcda/scripts/mcda.py skills/software-mcda/assets/example-decision.json --sensitivity cost=0.50 --break-even cost --format json > /tmp/mcda.json
           python -m json.tool /tmp/mcda.json > /dev/null
+      - name: Smoke test disabled decision and state replay
+        run: |
+          python skills/workflow-intelligence/scripts/decision_gate.py --request skills/workflow-intelligence/examples/decision-request.disabled.json --output /tmp/assessment.json
+          python skills/workflow-intelligence/scripts/state.py --current skills/workflow-intelligence/examples/monitor-snapshot.json --assessment /tmp/assessment.json --state-output /tmp/uwi-state.json --events-output /tmp/uwi-first.json
+          python skills/workflow-intelligence/scripts/state.py --current skills/workflow-intelligence/examples/monitor-snapshot.json --assessment /tmp/assessment.json --previous-state /tmp/uwi-state.json --state-output /tmp/uwi-state-2.json --events-output /tmp/uwi-repeat.json
+          python -c 'import json; a=json.load(open("/tmp/assessment.json")); b=json.load(open("/tmp/uwi-first.json")); c=json.load(open("/tmp/uwi-repeat.json")); assert a["status"] == "NOT_EVALUATED"; assert not a["notification_eligible"]; assert b["events"] == c["events"] == []'
