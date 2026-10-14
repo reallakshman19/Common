@@ -35,7 +35,8 @@ def scope_of(request):
     if not isinstance(scope, dict):
         raise ValueError("Decision scope required")
     repository = scope.get("repository")
-    if not isinstance(repository, str) or not REPOSITORY.fullmatch(repository):
+    if (not isinstance(repository, str) or not REPOSITORY.fullmatch(repository) or
+            any(not component.strip(".") for component in repository.split("/"))):
         raise ValueError("Invalid repository scope")
     if not isinstance(scope.get("workflow_id"), str) or not scope["workflow_id"]:
         raise ValueError("Workflow ID required")
