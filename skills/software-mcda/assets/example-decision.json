@@ -1,0 +1,60 @@
+{
+  "schema": "software-mcda.decision/v1",
+  "title": "Refactor vs Rewrite (illustrative, not verified)",
+  "assumptions": [
+    "All ratings are illustrative only, not measured evidence.",
+    "No live decision or notification is authorized by this example."
+  ],
+  "criteria": [
+    {
+      "id": "cost",
+      "label": "Development Cost / Time",
+      "weight": 0.25
+    },
+    {
+      "id": "maintainability",
+      "label": "Maintainability",
+      "weight": 0.25
+    },
+    {
+      "id": "performance",
+      "label": "Performance / Scalability",
+      "weight": 0.2
+    },
+    {
+      "id": "risk",
+      "label": "Technical Risk",
+      "weight": 0.15
+    },
+    {
+      "id": "tech_fit",
+      "label": "Tech Stack Fit",
+      "weight": 0.15
+    }
+  ],
+  "options": [
+    {
+      "name": "Refactor Existing Code",
+      "scores": {
+        "cost": 4,
+        "maintainability": 3,
+        "performance": 3,
+        "risk": 4,
+        "tech_fit": 2
+      },
+      "evidence_level": "ASSUMED"
+    },
+    {
+      "name": "Rewrite From Scratch",
+      "scores": {
+        "cost": 2,
+        "maintainability": 5,
+        "performance": 5,
+        "risk": 2,
+        "tech_fit": 5
+      },
+      "evidence_level": "ASSUMED"
+    }
+  ],
+  "constraints": []
+}
