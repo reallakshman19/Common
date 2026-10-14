@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Unverified workflow observation event v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "event_id",
+    "source",
+    "observation",
+    "authority",
+    "alert_eligible",
+    "mcda_eligible"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-intelligence.event/v1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "repository",
+        "workflow_id",
+        "issue"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "workflow_id": {
+          "type": "string"
+        },
+        "issue": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "required": [
+        "stage",
+        "state",
+        "verification",
+        "evidence"
+      ],
+      "properties": {
+        "stage": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "SUBMITTED",
+            "UNKNOWN"
+          ]
+        },
+        "verification": {
+          "enum": [
+            "UNVERIFIED",
+            "UNKNOWN"
+          ]
+        },
+        "evidence": {
+          "type": "array"
+        }
+      }
+    },
+    "authority": {
+      "const": "UNVERIFIED_COMMENT_OBSERVATION"
+    },
+    "alert_eligible": {
+      "const": false
+    },
+    "mcda_eligible": {
+      "const": false
+    }
+  }
+}

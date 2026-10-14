@@ -1,0 +1,45 @@
+name: Software MCDA and Workflow Intelligence — offline skill tests
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'skills/software-mcda/**'
+      - 'skills/workflow-intelligence/**'
+      - '.github/workflows/software-mcda-skill.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Verify exact candidate
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile Python modules
+        run: |
+          python -m py_compile skills/software-mcda/scripts/mcda.py
+          python -m py_compile skills/workflow-intelligence/scripts/observe.py
+      - name: Test standalone MCDA
+        run: python -m unittest discover -s skills/software-mcda/tests -v
+      - name: Test read-only observation adapter
+        run: python -m unittest discover -s skills/workflow-intelligence/tests -v
+      - name: Smoke test JSON results
+        run: |
+          python skills/software-mcda/scripts/mcda.py skills/software-mcda/assets/example-decision.json --sensitivity cost=0.50 --break-even cost --format json > /tmp/mcda.json
+          python -m json.tool /tmp/mcda.json > /dev/null
