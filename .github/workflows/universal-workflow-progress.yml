@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
+    inputs:
+      uwi_bootstrap:
+        description: 'Explicit initial diagnostic state baseline (requires UWI opt-in)'
+        type: boolean
+        required: false
+        default: false
   pull_request:
     paths:
       - 'skills/universal-workflow-progress/**'
@@ -73,3 +79,69 @@ jobs:
           name: universal-workflow-progress-state
           path: .state/latest.json
           retention-days: 30
+
+  uwi-handoff:
+    # Opt-in diagnostic sidecar. Runs within the EXISTING monitor workflow only.
+    # A failed sidecar cannot stop or rewrite the upstream observation/email job.
+    needs: observe
+    if: github.event_name != 'pull_request' && vars.UWI_DIAGNOSTIC_HANDOFF_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download same-run upstream snapshot
+        uses: actions/download-artifact@v4
+        with:
+          name: universal-workflow-progress-state
+          path: .state/upstream
+      - name: Restore trusted prior UWI artifact
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.uwi_bootstrap == true) }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF_NAME}" = main
+          run_id="$(python skills/workflow-intelligence/scripts/restore_previous.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --current-run-id "$GITHUB_RUN_ID" \
+            --branch main)"
+          mkdir -p .state/restored
+          gh run download "$run_id" \
+            --name uwi-diagnostic-handoff-state \
+            --dir .state/restored
+          test -s .state/restored/uwi-handoff.json
+          mv .state/restored/uwi-handoff.json .state/previous-uwi-handoff.json
+      - name: Reconcile diagnostic-only monitor state
+        env:
+          UWI_BOOTSTRAP: ${{ inputs.uwi_bootstrap }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF_NAME}" = main
+          test -s .state/upstream/latest.json
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ] && [ "${UWI_BOOTSTRAP}" = true ]; then
+            python skills/workflow-intelligence/scripts/monitor_handoff.py \
+              --monitor-current .state/upstream/latest.json \
+              --bootstrap \
+              --output-artifact .state/uwi-handoff.json
+          else
+            test -s .state/previous-uwi-handoff.json
+            python skills/workflow-intelligence/scripts/monitor_handoff.py \
+              --monitor-current .state/upstream/latest.json \
+              --previous-artifact .state/previous-uwi-handoff.json \
+              --output-artifact .state/uwi-handoff.json
+          fi
+      - name: Publish diagnostic state only
+        uses: actions/upload-artifact@v4
+        with:
+          name: uwi-diagnostic-handoff-state
+          path: .state/uwi-handoff.json
+          retention-days: 30
+          if-no-files-found: error
