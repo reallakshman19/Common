@@ -39,6 +39,7 @@ class SourceStore:
                 revision_id TEXT NOT NULL, latest_version INTEGER NOT NULL,
                 last_seen_scan TEXT NOT NULL, last_seen_at TEXT NOT NULL,
                 deleted INTEGER NOT NULL DEFAULT 0, missing_observed_at TEXT,
+                report_json TEXT,
                 PRIMARY KEY(project_id,repo_id,kind,entity_id)
             );
             CREATE TABLE IF NOT EXISTS versions(
@@ -59,6 +60,10 @@ class SourceStore:
             CREATE INDEX IF NOT EXISTS idx_objects_scan
               ON objects(project_id,repo_id,last_seen_scan);
         """)
+        columns = {col[1] for col in self.conn.execute("PRAGMA table_info(objects)")}
+        if "report_json" not in columns:
+            self.conn.execute("ALTER TABLE objects ADD COLUMN report_json TEXT")
+            self.conn.commit()
 
     def close(self) -> None:
         self.conn.close()
@@ -93,13 +98,27 @@ class SourceStore:
                   comment_page, status, utc_now(),
                   utc_now() if completed else None, failure_code, failure_kind))
 
-    def observe(self, source: SourceIdentity, scan_id: str) -> str:
+    def observe(self, source: SourceIdentity, scan_id: str,
+                report: Optional[dict[str, Any]] = None) -> str:
         """Observe one provider revision, including body reversion A-B-A.
 
         Never make a new version from an exact retry. A different payload
         at the same provider updated_at is an identity conflict.
         """
         key = (source.project_id, source.repo_id, source.kind.value, source.entity_id)
+        allowed = {
+            "kind","reported_status","request_id","message_id","sender_id",
+            "project_id","work_id","assignment_id","run_id","lane_id","candidate_sha",
+        }
+        if report is not None and (
+            not isinstance(report, dict) or
+            set(report) - allowed or
+            any(value is not None and (
+                not isinstance(value, str) or len(value) > 128
+            ) for value in report.values())
+        ):
+            raise ValueError("Unsafe provider claim metadata")
+        claim = json.dumps(report, sort_keys=True) if report else None
         now = utc_now()
         with self.conn:
             old = self.conn.execute("""
@@ -149,6 +168,10 @@ class SourceStore:
                 VALUES (?,?,?,?,?,?,?,?,?,?)
             """, (*key, version, source.revision_id,
                   source.updated_at_utc, source.body_sha256, action, now))
+            self.conn.execute("""
+                UPDATE objects SET report_json=? WHERE project_id=? AND
+                repo_id=? AND kind=? AND entity_id=?
+            """, (claim, *key))
         return action
 
     def complete_scan(self, project_id: str, repo_id: str, scan_id: str) -> int:
