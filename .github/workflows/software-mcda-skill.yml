@@ -2,7 +2,6 @@ name: Software MCDA and Workflow Intelligence — offline skill tests
 
 on:
   pull_request:
-    branches: [main]
     paths:
       - 'skills/software-mcda/**'
       - 'skills/workflow-intelligence/**'
@@ -35,6 +34,8 @@ jobs:
         run: |
           python -m py_compile skills/software-mcda/scripts/mcda.py
           python -m py_compile skills/workflow-intelligence/scripts/observe.py
+          python -m py_compile skills/workflow-intelligence/scripts/state.py
+          python -m py_compile skills/workflow-intelligence/scripts/decision_gate.py
       - name: Test standalone MCDA
         run: python -m unittest discover -s skills/software-mcda/tests -v
       - name: Test read-only observation adapter
