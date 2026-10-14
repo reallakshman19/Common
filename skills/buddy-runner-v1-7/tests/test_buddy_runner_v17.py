@@ -288,5 +288,56 @@ class BuddyV17ComprehensionTests(unittest.TestCase):
         self.assertIn("NO_FOLLOWUP_REVIEW", result)
         self.assertNotIn("OWNER_COMPREHENSION_NUDGE", result)
 
+
+class BuddyV17InvocationTests(unittest.TestCase):
+    """A generated prompt must never masquerade as an invoked agent or a closed handover."""
+
+    def test_real_1a_invocation_emits_digest_bound_prepared_receipt(self):
+        request = example("handover-1a.json")
+        with tempfile.TemporaryDirectory() as td:
+            intake, output = Path(td) / "case.json", Path(td) / "handover.md"
+            intake.write_text(json.dumps(request), encoding="utf-8")
+            with redirect_stdout(io.StringIO()) as stdout:
+                result = buddy.main(["--input", str(intake), "--output", str(output),
+                                     "--status-json"])
+            self.assertEqual(result, 0)
+            status = json.loads(stdout.getvalue())
+            self.assertEqual(status["schema"], "buddy-runner.invocation-status/v1")
+            self.assertEqual(status["phase"], "1a")
+            self.assertEqual(status["state"], "PROMPT_PREPARED")
+            self.assertEqual(status["next_action"], "INVOKE_ASSIGNED_G2_WITH_1A_PACKET")
+            self.assertEqual(status["target_id"], request["handover"]["id"])
+            self.assertEqual(status["prompt_sha256"],
+                             buddy.body_digest(output.read_text(encoding="utf-8")))
+            for key in ("agent_invoked", "workflow_executed", "approval_granted"):
+                self.assertIs(status[key], False)
+
+    def test_status_requires_real_output_and_does_not_claim_execution(self):
+        request = example("handover-1a.json")
+        with tempfile.TemporaryDirectory() as td:
+            intake = Path(td) / "case.json"
+            intake.write_text(json.dumps(request), encoding="utf-8")
+            with redirect_stderr(io.StringIO()) as err:
+                self.assertEqual(buddy.main(["--input", str(intake), "--status-json"]), 2)
+            self.assertIn("requires --output", err.getvalue())
+            self.assertEqual(sorted(p.name for p in Path(td).iterdir()), ["case.json"])
+
+    def test_status_cannot_mask_duplicate_final_response(self):
+        request = example("handover-2.json")
+        request["response_receipts"] = [{
+            "phase": "2", "target_id": request["handover"]["id"],
+            "response_ref": "https://github.com/sample/project/issues/17#issuecomment-99",
+        }]
+        with tempfile.TemporaryDirectory() as td:
+            intake, output = Path(td) / "case.json", Path(td) / "handover.md"
+            intake.write_text(json.dumps(request), encoding="utf-8")
+            with redirect_stderr(io.StringIO()) as err, redirect_stdout(io.StringIO()) as stdout:
+                code = buddy.main(["--input", str(intake), "--output", str(output),
+                                   "--status-json"])
+            self.assertEqual(code, 3)
+            self.assertIn("DUPLICATE_RESPONSE_CLAIM", err.getvalue())
+            self.assertEqual(stdout.getvalue(), "")
+            self.assertFalse(output.exists())
+
 if __name__ == "__main__":
     unittest.main()
