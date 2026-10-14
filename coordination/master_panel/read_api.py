@@ -8,6 +8,7 @@ never infers those from source author or comment prose.
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 import base64
 import hashlib
 import http.server
@@ -129,7 +130,7 @@ class MasterReadService:
         return obj["offset"]
 
     def projects(self) -> dict[str, Any]:
-        with self._conn() as conn:
+        with closing(self._conn()) as conn:
             as_of = _now()
             projects = []
             for pid, reg in sorted(ALLOWLIST.items()):
@@ -143,7 +144,7 @@ class MasterReadService:
             return {"schema_version": ROW_SCHEMA_VERSION, "projects": projects}
 
     def sources(self) -> dict[str, Any]:
-        with self._conn() as conn:
+        with closing(self._conn()) as conn:
             as_of = _now()
             items = []
             for pid, reg in sorted(ALLOWLIST.items()):
@@ -171,7 +172,7 @@ class MasterReadService:
             raise ValueError("Unregistered project")
         if type(limit) is not int or not 1 <= limit <= 200:
             raise ValueError("Invalid page limit")
-        with self._conn() as conn:
+        with closing(self._conn()) as conn:
             state = self._source_state(conn, pid)
             generation = self._generation(conn, pid)
             offset = self._cursor_decode(cursor, generation, pid) if cursor else 0
