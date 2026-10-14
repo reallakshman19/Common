@@ -233,3 +233,17 @@ Claim: HOSTED_SCOPE_ONLY + EXACT_GITHUB_SOURCE_READBACK, no independent qualifie
 Blocker: O1 Core1A behavior still needs direct browser gate proof in the D2 native seven-cell benchmark; O2 reviewer nomination and per-cell Owner decision; A4 linked print, real learner input, broad CI separately pending.
 Next: Extend existing benchmark Core1A browser (without altering generated source/Owner golden), verify focused hosted run, then preserve/recheck Core1B. Keep Owner task wording unchanged.
 LOG | 2026-10-14 | tab=Tab5 | task=handover-log-reconciliation | result=FIVE_FILES_APPEND_ONLY_PREPARED; NEXT_CORE1A_BROWSER_GATE | aim=v3.1.0 | outcome=O1 | user=no | proof=https://github.com/reallakshman19/Grade9v3.5/actions/runs/38219621844
+Outcome: O1
+For the user: Existing seven TEST Core1A native pages can now undergo the missing browser-state check in the same approved sole-renderer/Owner-golden benchmark path; no page has shipped or been accepted, and hosted run is pending.
+Proof: https://github.com/reallakshman19/Grade9v3.5/pull/239 ; https://github.com/reallakshman19/Grade9v3.5/actions/runs/38498500699
+TASK EVIDENCE | TAB5-D2-20261014-CORE1A-BROWSER-EXTENSION | 2026-10-14 | aim=v3.1.0 | outcome=O1 | user=no
+Task: O1 Core1A next native behavioral golden probe before Core1B preserve/check
+Goal: Address documented gap in D2 benchmark, which checked Core1A frozen golden blueprint/slot/component but only exercised CORE1B/CORE2A/CORE2B browser after-attempt path.
+Status: DRAFT_ONLY; HOSTED CI QUEUED, do not claim green
+Code: Grade9v3.5 draft PR #239 head9bc67e69036c43c09a1672070563cc69c7f88765, base #205 head5b382356e792ae50884241fb047c328e304d011d; exactly one TEST code file TEST/imo-research/qrt-d2/benchmark_201.py; no source/page, blueprint registry, golden, renderer, QRT status, printer, release or Core1B changes.
+Tests: Real Chromium role selection now includes Core1A for all seven D2 cases, checking existing inert pre-commit solution, blank/nonblank independent commit/exit, 390px overflow and JS, plus first→second→first stage button if actually exposed. Existing five-role strict golden-slot/component and core2a H3 after-attempt assertions unchanged. No new hosted PASS claimed.
+CI: native scoped run https://github.com/reallakshman19/Grade9v3.5/actions/runs/38498500699 QUEUED at readback; other head workflows QUEUED. Prior head native38437153878 SUCCESS remains historical O1 support only.
+Claim: SOURCE_DIFF_EXACT; NEW_NATIVE_BROWSER_NOT_YET_VERIFIED
+Blocker: Exact-head hosted browser result then any narrow correction; O2 independent reviewer #211/#214/#237 and Owner acceptance still 0/28, Core1B still preserve-first.
+Next: Evaluate #239 exact native Core1A result, fix only proven TEST benchmark/browser fixture errors; do not release/accept based on technical test.
+LOG | 2026-10-14 | tab=Tab5 | task=core1a-native-golden-browser-exit | result=ONE_FILE_DRAFT_PR_239; CI_38498500699_QUEUED; ACCEPTED_0_OF_28 | aim=v3.1.0 | outcome=O1 | user=no | proof=https://github.com/reallakshman19/Grade9v3.5/pull/239
