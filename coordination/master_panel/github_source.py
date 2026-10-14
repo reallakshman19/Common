@@ -236,7 +236,10 @@ class GitHubSourceScanner:
             error_kind = (
                 "AUTHENTICATION" if error.code == 401 else
                 "AUTHORIZATION" if error.code == 403 else
-                "RATE_LIMIT" if error.code == 429 else error.reason
+                "RATE_LIMIT" if error.code == 429 else
+                error.reason if error.reason in (
+                    "RESPONSE_TOO_LARGE", "MALFORMED_JSON", "NETWORK_OR_TIMEOUT"
+                ) else "HTTP_ERROR"
             )
             return status(self._state(error.code),
                           error_code=error.code, error_kind=error_kind)
