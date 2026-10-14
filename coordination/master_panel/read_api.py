@@ -272,7 +272,7 @@ class MasterPanelHandler(http.server.BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(raw)))
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header("Access-Control-Allow-Origin", "null")
+        # Deliberately no CORS authorization header: reject cross-origin reads.
         self.end_headers()
         self.wfile.write(raw)
 
