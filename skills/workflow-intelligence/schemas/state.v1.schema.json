@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Workflow Intelligence state v1",
+  "title": "Read-only UWI state v1 (diagnostic only)",
   "type": "object",
   "required": [
     "schema",
@@ -25,6 +25,30 @@
           },
           "observation": {
             "type": "object"
+          }
+        }
+      }
+    },
+    "decisions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "semantic_sha256",
+          "summary"
+        ],
+        "properties": {
+          "semantic_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "summary": {
+            "type": "object",
+            "required": [
+              "scope",
+              "status",
+              "reason"
+            ]
           }
         }
       }

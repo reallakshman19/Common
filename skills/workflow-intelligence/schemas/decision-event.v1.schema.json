@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Advisory decision change diagnostic v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "event_id",
+    "namespace",
+    "kind",
+    "alert_eligible",
+    "mcda_eligible",
+    "authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-intelligence.decision-event/v1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "namespace": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "kind": {
+      "enum": [
+        "ADVISORY_RECOMMENDATION_CHANGED",
+        "DECISION_INPUT_CHANGED"
+      ]
+    },
+    "previous_digest": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "current_digest": {
+      "type": "string"
+    },
+    "previous_recommendation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "current_recommendation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "alert_eligible": {
+      "const": false
+    },
+    "mcda_eligible": {
+      "const": false
+    },
+    "authority": {
+      "const": "SELF_DECLARED_INPUTS_NOT_INDEPENDENTLY_VERIFIED"
+    }
+  }
+}
