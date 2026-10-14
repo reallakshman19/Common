@@ -1,0 +1,129 @@
+{
+  "repository": "reallakshman19/Common",
+  "candidate": "f31d8d35f8f6d2fa3d212e6d0801207d278eea84",
+  "profile": "Exact raw Git blob bytes via git cat-file; no archive/text conversion",
+  "source_files": {
+    "coordination/master_panel/CONTRACT.md": {
+      "bytes": 15094,
+      "sha256": "5b32b04570c4d81bc8aac0fa9520e80bd601dcd5ae394122030a3c2db93ede91"
+    },
+    "coordination/master_panel/HANDOFF.md": {
+      "bytes": 5948,
+      "sha256": "27fd713d82f0e9a1064d5df557cda10e25d42ff9cb07b2a6faa0831b11365793"
+    },
+    "coordination/master_panel/__init__.py": {
+      "bytes": 150,
+      "sha256": "84aef1c72dfa25d9c32f553c6cdbde0ef8cc7cd985c38135705db3032c56d0e9"
+    },
+    "coordination/master_panel/casp_schemas/PIN.json": {
+      "bytes": 757,
+      "sha256": "b5d4535d039a20c7f6e8616aacebdc4fcbc6a5557e8a94ed6d65f57fc17663ca"
+    },
+    "coordination/master_panel/casp_schemas/common.schema.json": {
+      "bytes": 2599,
+      "sha256": "10b20d6ccc4f973cd77593ee875ab1f99e9422e9ae0aab9a54f3b67f4c2667bc"
+    },
+    "coordination/master_panel/casp_schemas/message.schema.json": {
+      "bytes": 3942,
+      "sha256": "1c39848c86c6e17ccc93e6ffe691e2e69efdfca60f3ce8e12973985f38d7e65c"
+    },
+    "coordination/master_panel/casp_schemas/session.schema.json": {
+      "bytes": 2198,
+      "sha256": "47f66c525f2068bef1aca184518f32a61252c67810f799274d8c0c38f1853448"
+    },
+    "coordination/master_panel/casp_schemas/source-observation.schema.json": {
+      "bytes": 2013,
+      "sha256": "e7d1212ff24bfc3d7b76ad72ece8e614e55ca88a7886df7d01dabbb39c0d518e"
+    },
+    "coordination/master_panel/casp_store.py": {
+      "bytes": 13069,
+      "sha256": "579bfbb84474168faee0374e8366a9d280341c764f9e121b758085cad9bb8629"
+    },
+    "coordination/master_panel/casp_validation.py": {
+      "bytes": 13383,
+      "sha256": "608ab21ecfa17e2279052c24fc8c791e2142f3c653211ed52128d81c20c53f44"
+    },
+    "coordination/master_panel/demo_fixture.py": {
+      "bytes": 3563,
+      "sha256": "247511c3d43aec3ee429aef3413c270c0e111fbcdd5fd5a7fd784eb0d7eac661"
+    },
+    "coordination/master_panel/github_source.py": {
+      "bytes": 11470,
+      "sha256": "4370f41ff9ed7219642914598c5be8bb4e1c7a0b0cb9b3969bcd9e95e027ce1d"
+    },
+    "coordination/master_panel/models.py": {
+      "bytes": 12403,
+      "sha256": "87eefb8410f2ae14223002cfc785bc9fffbb8cf1c3cf55cdc47d490d7907f8ad"
+    },
+    "coordination/master_panel/pr_checks.py": {
+      "bytes": 19226,
+      "sha256": "890ece40fbc5a3023ddaa34a0fe87a4f8b8e670380b9b4c78b3480b5bb438057"
+    },
+    "coordination/master_panel/read_api.py": {
+      "bytes": 13915,
+      "sha256": "39e9aa2580757dfc215d3b1f4ef2213f21936ad0ecb35c8ddaddfc73a8f97964"
+    },
+    "coordination/master_panel/registration.py": {
+      "bytes": 12531,
+      "sha256": "af7b1ac1fb0b30f04406b0d0bb60b39f75fe6e843b6b9ddd5d6f48f5a5b3c926"
+    },
+    "coordination/master_panel/report_parser.py": {
+      "bytes": 5705,
+      "sha256": "9526a0d5e52db15f8658be319d2ccfd7562b3ce69e68615d4c69e18ac19b6fbd"
+    },
+    "coordination/master_panel/storage.py": {
+      "bytes": 11080,
+      "sha256": "2e565a17a469f75e719bcf4f7ef37c7b6e62d3c43fc10921e7006901568fc2dd"
+    },
+    "coordination/tests/fixtures/master_panel/negative.json": {
+      "bytes": 1973,
+      "sha256": "00658998db1a5c128efb9e6de9b82379370122c62bf762c075ff0c611de18f9c"
+    },
+    "coordination/tests/fixtures/master_panel/positive.json": {
+      "bytes": 2207,
+      "sha256": "937592390188302f860326f538de6c7948fc7248cabb18d7409d73dd245becdc"
+    },
+    "coordination/tests/test_master_panel_casp_store.py": {
+      "bytes": 13994,
+      "sha256": "a238bf0781e4296356f9b0ca0f51ee0ca4a2b321a7837151a4475e7e44cc84dc"
+    },
+    "coordination/tests/test_master_panel_casp_validation.py": {
+      "bytes": 8205,
+      "sha256": "7e799e692c324eec206a8d9d10eb3655b7d00f945b879f07d2956c5af137afe6"
+    },
+    "coordination/tests/test_master_panel_contract.py": {
+      "bytes": 5870,
+      "sha256": "dce1bdf3c49eb9cd443d202d411245139a0fb9b48d854e8cd88bc780644710cc"
+    },
+    "coordination/tests/test_master_panel_intake.py": {
+      "bytes": 6977,
+      "sha256": "82ed70f510ec6021f9eec0e20bd770de59a27153d37a3505b3bb455f087c7a1b"
+    },
+    "coordination/tests/test_master_panel_pr_checks.py": {
+      "bytes": 13700,
+      "sha256": "d38a8736242831069414a7fdab202889c38404b90b4f80ea345bd8c2a77d6367"
+    },
+    "coordination/tests/test_master_panel_read_api.py": {
+      "bytes": 7094,
+      "sha256": "27e00bc249e68e123d64be01055b5f990e2fc4a0687967f0f71a4b4dbec956cf"
+    },
+    "coordination/tests/test_master_panel_registration.py": {
+      "bytes": 12708,
+      "sha256": "f42fe2a715458f029bae4d87b890aec17976801e1865f77515089083792c3f07"
+    },
+    "coordination/tests/test_master_panel_report_parser.py": {
+      "bytes": 5603,
+      "sha256": "493ba2703fcc7fc3657b4c5532561781e5f4ea6b1295a801932291dbac7e02b9"
+    },
+    "coordination/tests/test_master_panel_review_negatives.py": {
+      "bytes": 7438,
+      "sha256": "2386e6e391f2063f0d3f709d81fc1aad70bef57953617c95119a432ee38c46bf"
+    }
+  },
+  "scope": "Reference package for original M3 B1 challenge and committed registration tests only; no coordinator tests or acceptance",
+  "superseded_export": {
+    "path": "C:\\Users\\reall\\Documents\\Codex\\2026-10-11\\an\\outputs\\dash-v2-M3-f31d8d3-pinned-public-source.zip",
+    "sha256": "17cead41ff347f61b714e40096d184b1261221c045460534e0ffc92f0c825fc2",
+    "disposition": "FAILED_IDENTITY_CHECK; retained. Archive export bytes differ from raw Git blobs by line endings; earlier raw-commit mismatch interpretation corrected."
+  }
+}
