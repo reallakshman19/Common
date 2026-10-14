@@ -29,6 +29,24 @@ When this progress skill is invoked as part of MCDA or Workflow Intelligence, of
 
 This is a **per-invocation source toggle**, not a persistent repository setting, a new scheduled check, a native permanent ChatGPT control or authorization to change stage state. Do not enable the disabled monitor sample, set `UWI_DIAGNOSTIC_HANDOFF_ENABLED`, send email, or create tasks by toggling ON. The runnable GitHub snapshot adapter lives at `skills/workflow-intelligence/scripts/invoke.py`; its ON path requires a real, reviewed workflow mapping.
 
+## Intent-sensitive invocation routing (before rendering progress)
+
+A user may say **"show/check workflow progress"** or **"start/run the workflow"**. These are not equivalent, even if the request mentions this skill. **Do not turn a start request into a progress chart and call it execution.**
+
+- **Show, monitor, track, status, current progress:** use this read-only skill. If the user explicitly requests current/live progress, perform one authorized read-only source inspection using verified source mapping (equivalent to monitoring ON); for combined MCDA with no selection, default OFF. Label OFF `NOT LIVE`. A source-unavailable or unconfigured live mapping yields `OBSERVATION UNAVAILABLE` or `MONITORING UNAVAILABLE — CONFIGURATION REQUIRED`, never a fabricated fresh result.
+- **Start, run, kick off, execute, hand over now:** **do not execute through the observer**. Resolve the user's intended governing executor and route to its own skill/authorized action. For an explicitly selected new BuddyRunner v1.7 handover, use BuddyRunner's `1a` preparation with real case inputs and return its `PROMPT_PREPARED` digest-backed status. This does not invoke G2; a real G2 invocation must be separately effected through an authorized agent/controller.
+- **Ambiguous "invoke the workflow" with no observable intent:** ask whether the user wants the progress view or to start the workflow. If a governing workflow or target is missing, ask for the essential selector. Never silently choose an adjacent program.
+- **Evidence state:** an issue comment, packet, output digest, GitHub Actions check or routing decision proves only its own event. Never label a generated prompt `AGENT_INVOKED`, or claim that a workflow changed because its progress was observed.
+
+Pure, no-side-effect routing helper:
+
+```sh
+python skills/universal-workflow-progress/scripts/route_invocation.py --intent start --workflow buddy-runner-v1-7
+python skills/universal-workflow-progress/scripts/route_invocation.py --intent progress --workflow buddy-runner-v1-7 --monitor ON
+```
+
+This helper **does not start an agent, fetch source, activate monitoring, install a ChatGPT skill or mutate a workflow**. Its JSON declares a route/next action, `source_checked=false` and `agent_invoked=false`. An invoking agent must perform any authorized subsequent action in the correct runtime; the routed decision is not a completion receipt. Do not modify the existing scheduled monitor/email bridge, opt-in diagnostic job or workflow configuration just to route a chat request.
+
 ## Operating contract
 
 1. **Locate the target:** use the user's explicitly named workflow and issue/
