@@ -33,7 +33,9 @@ def validate(request):
     if not isinstance(scope, dict) or not isinstance(scope.get("repository"), str):
         raise ValueError("Missing repository scope")
     repository, sha = scope["repository"], scope.get("assessed_sha")
-    if not REPO.fullmatch(repository) or not isinstance(sha, str) or not SHA.fullmatch(sha):
+    if (not REPO.fullmatch(repository) or
+            any(not component.strip(".") for component in repository.split("/")) or
+            not isinstance(sha, str) or not SHA.fullmatch(sha)):
         raise ValueError("Invalid repository or exact assessed SHA")
     requested = request.get("checks", [])
     if not isinstance(requested, list) or len(requested) > MAX_CHECKS:
