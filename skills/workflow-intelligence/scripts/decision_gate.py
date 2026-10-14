@@ -104,13 +104,13 @@ def assessment(request, github_check_request=None, check_reader=None):
                 "reason": "Enabled decision requires OBSERVED evidence level for every option"}
     verified_check_facts = None
     if github_check_request is not None:
+        from github_check_facts import validate as validate_github_checks
         from github_check_facts import verify as verify_github_checks
-        verified_check_facts = verify_github_checks(github_check_request, check_reader)
-        ci_scope = verified_check_facts["scope"]
-        if (ci_scope["repository"] != scope["repository"] or
-                ci_scope["assessed_sha"] != scope["assessed_sha"]):
+        ci_repo, ci_sha, _ = validate_github_checks(github_check_request)
+        if ci_repo != scope["repository"] or ci_sha != scope["assessed_sha"]:
             return {**base, "status": "NOT_EVALUATED",
                     "reason": "GitHub CI fact scope does not match decision candidate"}
+        verified_check_facts = verify_github_checks(github_check_request, check_reader)
         if github_check_request["enabled"] and verified_check_facts["status"] != "CHECKS_VERIFIED":
             return {**base, "status": "NOT_EVALUATED",
                     "reason": "Required exact-commit CI checks not verified",
