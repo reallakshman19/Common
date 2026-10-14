@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GitHub exact-commit CI check facts (not rating verification)",
+  "type": "object",
+  "required": [
+    "schema",
+    "scope",
+    "status",
+    "checks",
+    "authority",
+    "eligible_for_mcda_rating",
+    "notification_eligible"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-intelligence.github-check-result/v1"
+    },
+    "status": {
+      "enum": [
+        "DISABLED",
+        "NOT_VERIFIED",
+        "CHECKS_VERIFIED"
+      ]
+    },
+    "scope": {
+      "type": "object"
+    },
+    "checks": {
+      "type": "array"
+    },
+    "authority": {
+      "const": "EXACT_COMMIT_GITHUB_CI_CHECK_ONLY"
+    },
+    "eligible_for_mcda_rating": {
+      "const": false
+    },
+    "notification_eligible": {
+      "const": false
+    },
+    "verification_digest": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
