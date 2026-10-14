@@ -1,0 +1,31 @@
+{
+  "schema_version": "buddy-runner-v1.7",
+  "phase": "1a",
+  "mode": "OPEN_SOURCE_PURPOSE_RECONSTRUCTION",
+  "actor_id": "<outgoing-agent-id>",
+  "handover": {
+    "id": "<stable-handover-id>",
+    "outgoing_id": "<outgoing-agent-id>",
+    "incoming_id": "<incoming-agent-id>",
+    "coordination_ref": "<existing-coordination-reference>"
+  },
+  "case": {
+    "repository": "<owner/repo>",
+    "current_issue": "<current-issue-https-url>",
+    "parent_issue": "<parent-issue-https-url>",
+    "roadmap_refs": [
+      "<roadmap-https-url>"
+    ],
+    "inherited_commit": "<exact-40-lowercase-hex-sha>",
+    "candidate_pr_refs": [],
+    "owner_source_grade": "UNKNOWN",
+    "owner_intent_ref": "UNKNOWN",
+    "objective_hint": "<Owner user outcome and uncertainty to investigate; not a prescribed solution>",
+    "source_refs": [
+      "<pinned-path:function or authentic-input-reference>"
+    ],
+    "scope_constraints": [
+      "<original semantics or protected expectations to preserve>"
+    ]
+  }
+}
