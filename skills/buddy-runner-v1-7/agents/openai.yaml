@@ -1,0 +1,4 @@
+interface:
+  display_name: "BuddyRunner v1.7"
+  short_description: "Evidence-grounded successor investigation and final direction"
+  default_prompt: "Use $buddy-runner-v1-7 to prepare a 1a handover prompt or return one final 2 or Y engineering direction."

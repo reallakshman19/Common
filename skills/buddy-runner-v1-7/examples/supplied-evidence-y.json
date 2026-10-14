@@ -1,0 +1,36 @@
+{
+  "schema_version": "buddy-runner-v1.7",
+  "phase": "Y",
+  "mode": "OPEN_SOURCE_PURPOSE_RECONSTRUCTION",
+  "actor_id": "BUDDY",
+  "case": {
+    "repository": "sample/project",
+    "current_issue": "https://github.com/sample/project/issues/17",
+    "parent_issue": "https://github.com/sample/project/issues/3",
+    "roadmap_refs": [
+      "https://github.com/sample/project/issues/5"
+    ],
+    "inherited_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "candidate_pr_refs": [],
+    "owner_source_grade": "UNKNOWN",
+    "owner_intent_ref": "UNKNOWN",
+    "objective_hint": "ILLUSTRATIVE ONLY: preserve every original record through the real user export; investigate the current route without presupposing a fix.",
+    "source_refs": [
+      "src/preview.py:build_preview",
+      "src/export.py:write_csv"
+    ],
+    "scope_constraints": [
+      "ILLUSTRATIVE ONLY: all sample URLs, agent IDs, hashes and publications are fictional.",
+      "Preserve original occurrence identity and protected golden expectations."
+    ]
+  },
+  "task_evidence": {
+    "task_id": "EXPORT-01",
+    "responder_id": "BUDDY",
+    "artifact_digest": "sha256:d6080b389a0b0d9f6d267885371019b9ca28c21c0ea3fe97c6c1e3894af41d0c",
+    "assessed_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "evidence_grade": "AGENT_CLAIM_ONLY",
+    "body_text": "ILLUSTRATIVE Task Evidence: export contains only the visible page. Source and provenance require independent verification.\n",
+    "supplied_ref": "conversation:illustrative-task-evidence"
+  }
+}
