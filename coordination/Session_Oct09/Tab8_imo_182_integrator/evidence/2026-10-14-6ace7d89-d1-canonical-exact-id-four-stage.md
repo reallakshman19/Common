@@ -1,0 +1,43 @@
+# r6-00 exact canonical CI — origin and scope of seven new-vs-main failures
+
+**Issue:** [Grade9v3.5 #200](https://github.com/reallakshman19/Grade9v3.5/issues/200). **Chat:** `6ace7d89`. **UTC:** 2026-10-14. **Method:** direct independent read of completed GitHub Actions job statuses and entire canonical exact-ID job logs. **Result:** canonical gate **FAIL**. No waiver / academic review / merge clearance.
+
+## 1. Exact observed branch stages
+
+| Draft branch | Commit at run | Canonical exact-ID run / job | Head-vs-PR-base delta | Versus pinned `main` `24b81328` | State |
+|---|---|---|---|---|---|
+| Original D1 review viewer [#208](https://github.com/reallakshman19/Grade9v3.5/pull/208) | `6310905e85d4883e634681f798875d33002fd364` | [run 38441678369](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38441678369), job `115449566052` | new 0, fixed 0, inherited 153 | **new 7, fixed 20, still failing 146** | FAILURE |
+| Bridge ablation [#223](https://github.com/reallakshman19/Grade9v3.5/pull/223) | `852aa732ff80c4b5809b7bf20fd8f6238d78f063` | [run 38484244242](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38484244242), job `115593929013` | new 0, fixed 0, inherited 153 | **new 7, fixed 20, still failing 146** | FAILURE |
+| JUSTIFY feedback [#228](https://github.com/reallakshman19/Grade9v3.5/pull/228) | `b1839f692ce0a47985d794f093d5dc945a522229` | [run 38485239380](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38485239380), job `115597163922` | new 0, fixed 0, inherited 153 | **new 7, fixed 20, still failing 146** | FAILURE |
+| Evidence/qualified handoff [#231](https://github.com/reallakshman19/Grade9v3.5/pull/231) | **`a924eeb518c3aba035cd5320a0f76b3cf3c6823f`** | [run 38489492996](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38489492996), job **`115611064946`** | **new 0, fixed 0, inherited 153** | **new 7, fixed 20, still failing 146** | **FAILURE** |
+
+All four logs explicitly checked out pinned `main` `24b81328` for the three-way comparator. Each run's merge-ref and branch-base checkout are printed in its respective raw log. The "inherited 153" refers to **the selected PR's immediate base**, not to `main`. **Do not convert it into "0 new against main" or into CI success.** Full 7-vs-main lists were byte-for-byte equal across these four checked logs.
+
+## 2. Seven baseline-relative new exact test cases (unchanged from #208 through #231)
+
+1. `test_library.DepictionIsBackedByTheContract.test_every_committed_bridge_names_a_drawn_part_and_a_used_symbol` for `REP-TEST-IMO-G9-RESIDUE-TABLE`, symbol `n mod 3 ∈ {0,1,2}`.
+2. Same exact test with `REP-TEST-IMO-G9-RESIDUE-TABLE`, symbol `n, n+2, or n+1`.
+3. `test_library.FieldsAddedMustCarryWhatTheyPromise.test_the_committed_packages_still_admit_with_none_of_the_new_fields_set` for `imo-g9-divisibility-core1a.v1.json`.
+4. `test_quality_gate.Gate.test_removing_both_required_practice_visuals_reports_each_core`.
+5. `test_test_area.TestPages.test_every_test_page_says_it_is_a_sandbox_draft`.
+6. `test_theme_and_owner_isolation.TestThemeAndOwnerIsolation.test_zero_test_links_in_learner_surfaces`.
+7. `test_web_blueprint_projection.WebBlueprintProjectionTests.test_committed_core_learning_data_matches_the_governed_generator`.
+
+These are confirmed failure **IDs from canonical runner comparison**, not independently root-caused fixes. The first three involve representation and package validation; later findings involve visual requirements, sandbox boundaries and generated web data. Do not automatically attribute to D1 authored math or patch broader code/global generated output without isolating the producing commit and exact contract.
+
+## 3. Exact-head latest run and independent guardrails comparison
+
+- Newest #231 canonical head-vs-base ran **2990 tests**, failed **120 FAIL +33 ERROR**, skipped 1; base #228 ran **2988 tests**, also **120 FAIL +33 ERROR**; pinned main canonical run printed **2379 tests**, **133 FAIL +33 ERROR**, skipped 1. Main/head totals are from **different suite sizes**; comparison must be exact test IDs, not raw number alone.
+- [#231 scoped reviewer run 38489493068](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38489493068) **SUCCESS**; native learner source and frozen golden untouched.
+- [Guardrails log comparison](2026-10-14-6ace7d89-d1-guardrails-base-vs-head.md) independently found current #231 vs #228 **153/153 identical FAIL/ERROR test-ID entries**, no new or removed IDs, but guardrails **FAILED** in both; separate runners/definitions, do not equate canonical and guardrails totals.
+- Canonical **Assurance (no worse than baseline) FAILED** [#231 run 38489492996](https://github.com/reallakshman19/Grade9v3.5/actions/runs/38489492996); release status job is explicitly **informational**, not a pass.
+
+## 4. Decision and minimal next action
+
+1. **r6-00 closed as CI evidence attribution, not as release gate success.** The exact-ID job no longer "IN_PROGRESS"; it has completed FAILURE with a stable seven-case new-vs-main set already present at #208.
+2. Next engineering route: isolate upstream provenance for these seven *at the original viewer baseline / learner branch ancestry*, not in the added #223/#228/#231 review-only commits. Prefer a separate **read-only** inspect of affected canonical packages, sandbox page visibility and generator parity against pinned main. If a truly causal small patch is identified, stage it narrowly without changing licensed Q003, frozen Owner golden, review verdict, or public product output; require exact-head new CI.
+3. Qualified human reviewer, actual learner observations for D1 SYNTHESIZE and JUSTIFY, twelve H/S/P/M per cell, and Owner cell-specific acceptance IDs remain **completely separate gates**. Current D1 accepted 0/7; programme 0/28; no merge/publication/release.
+
+**Evidence cap:** Reports what the GitHub Actions log printed, not a locally rerun canonical suite or an independent actual six-HTML ZIP hash verification. The 7 cases were present from #208 and hence were not introduced by our three later changes. This alone does not resolve whether #208 or an even earlier shared ancestor introduced them.
+
+LOG | Outcome=canonical #231 exact-ID failure state reconciled; 0 new vs immediate #228, 7 vs pinned main inherited since #208 | For user=precise blocker attribution, no false green gate | Proof=four raw canonical GitHub job logs and archived run IDs | Open=upstream root causes, independent academic review, Owner QRT 0/28 and release.
