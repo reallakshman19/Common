@@ -23,6 +23,12 @@ This is an instruction-level skill for use in an environment where ChatGPT can
 read the workflow's records. It is not an always-running daemon, an MCP server,
 a background poller, or an installable change to the ChatGPT client UI.
 
+## Optional invocation source toggle
+
+When this progress skill is invoked as part of MCDA or Workflow Intelligence, offer **Monitoring: OFF / ON (read GitHub once)**. OFF renders only existing supplied/cached evidence, clearly labeled `NOT LIVE`; ON performs a single read-only source inspection of the selected workflow after its source configuration is verified. An explicit request to "check progress now" is already an ON selection; do not ask redundantly. If no monitoring selection was made for a combined MCDA request, default OFF and continue MCDA.
+
+This is a **per-invocation source toggle**, not a persistent repository setting, a new scheduled check, a native permanent ChatGPT control or authorization to change stage state. Do not enable the disabled monitor sample, set `UWI_DIAGNOSTIC_HANDOFF_ENABLED`, send email, or create tasks by toggling ON. The runnable GitHub snapshot adapter lives at `skills/workflow-intelligence/scripts/invoke.py`; its ON path requires a real, reviewed workflow mapping.
+
 ## Operating contract
 
 1. **Locate the target:** use the user's explicitly named workflow and issue/

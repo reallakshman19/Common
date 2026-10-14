@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "One-invocation Workflow Intelligence monitoring toggle v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "monitoring",
+    "mcda"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-intelligence.invocation/v1"
+    },
+    "monitoring": {
+      "type": "object",
+      "required": [
+        "mode",
+        "scope",
+        "status",
+        "scheduled_monitoring_changed"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "off",
+            "on"
+          ]
+        },
+        "scope": {
+          "const": "this_invocation_only"
+        },
+        "status": {
+          "enum": [
+            "SKIPPED",
+            "OBSERVED_UNVERIFIED"
+          ]
+        },
+        "scheduled_monitoring_changed": {
+          "const": false
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "snapshot": {
+          "type": "object"
+        }
+      }
+    },
+    "mcda": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  }
+}

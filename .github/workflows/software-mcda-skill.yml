@@ -39,6 +39,7 @@ jobs:
           python -m py_compile skills/workflow-intelligence/scripts/github_check_facts.py
           python -m py_compile skills/workflow-intelligence/scripts/monitor_handoff.py
           python -m py_compile skills/workflow-intelligence/scripts/restore_previous.py
+          python -m py_compile skills/workflow-intelligence/scripts/invoke.py
       - name: Test standalone MCDA
         run: python -m unittest discover -s skills/software-mcda/tests -v
       - name: Test read-only observation adapter
@@ -62,3 +63,13 @@ jobs:
           python skills/workflow-intelligence/scripts/monitor_handoff.py --monitor-current skills/workflow-intelligence/examples/monitor-snapshot.json --bootstrap --output-artifact /tmp/uwi-handoff-first.json
           python skills/workflow-intelligence/scripts/monitor_handoff.py --monitor-current skills/workflow-intelligence/examples/monitor-snapshot.json --previous-artifact /tmp/uwi-handoff-first.json --output-artifact /tmp/uwi-handoff-repeat.json
           python -c 'import json; a=json.load(open("/tmp/uwi-handoff-first.json")); b=json.load(open("/tmp/uwi-handoff-repeat.json")); assert a["events"] == b["events"] == []; assert a["state_digest"] == b["state_digest"]; assert a["mode"] == "DIAGNOSTIC_ONLY"'
+      - name: Smoke test skill invocation monitoring defaults OFF
+        run: |
+          python skills/workflow-intelligence/scripts/invoke.py --decision skills/software-mcda/assets/example-decision.json > /tmp/uwi-invocation-off.json
+          python -c 'import json; x=json.load(open("/tmp/uwi-invocation-off.json")); assert x["monitoring"]["mode"] == "off"; assert x["monitoring"]["status"] == "SKIPPED"; assert not x["monitoring"]["scheduled_monitoring_changed"]; assert x["mcda"]["result"]["original"]["winner"] == "Rewrite From Scratch"'
+      - name: Smoke test ON refuses disabled sample and makes no provider read
+        run: |
+          if python skills/workflow-intelligence/scripts/invoke.py --monitor on --workflow-id sample-buddyrunner --workflow-config skills/universal-workflow-progress/config/workflows.json > /tmp/should-not-pass.json; then
+            echo "ERROR: Disabled sample workflow unexpectedly activated" >&2
+            exit 1
+          fi

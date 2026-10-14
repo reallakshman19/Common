@@ -7,6 +7,10 @@ description: Evaluate competing coding approaches and architectures using reprod
 
 An independent, read-only decision-support skill. It requires neither the Workflow Progress Monitor nor GitHub, SMTP or ChatGPT Work.
 
+## Optional monitoring toggle at invocation
+
+When this skill is called, expose **Workflow monitoring: OFF (default) / ON (one-time read-only GitHub check)**. If unspecified, run MCDA in OFF mode immediately; do not require GitHub, a monitor config, or a confirmation prompt to calculate scores. Honor an explicit ON selection and request only the missing named workflow/configuration if it is required; never invent a mapping. ON uses the standalone `skills/workflow-intelligence/scripts/invoke.py --monitor on` runner, with an explicitly selected workflow ID and reviewed source config. ON never changes scheduled monitoring, adds an approval, or sends a notification. The monitored stage observation remains SUBMITTED/UNVERIFIED or UNKNOWN and does not affect MCDA ratings. See the Workflow Intelligence skill's invocation-toggle reference.
+
 ## Workflow
 
 1. Define the decision, time horizon, equivalent scope, competing engineering alternatives and mandatory requirements. Do not mistake a workflow stage (e.g. BuddyRunner 1a/1b/2) for an MCDA option.
