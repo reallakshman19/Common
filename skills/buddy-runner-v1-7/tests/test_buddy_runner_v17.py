@@ -69,8 +69,8 @@ class BuddyV17Tests(unittest.TestCase):
     def test_all_twelve_handover_sections_survive(self):
         prompt = buddy.render_request(example("handover-2.json"))
         for index, title in enumerate(("Original problem and Owner WHY", "Repository migration and identity",
-                "What exists", "How data flows", "What changed and why", "Input provenance and acceptance oracles",
-                "Actual execution evidence", "Known failures and unresolved defects", "Reconciled ROI decisions",
+                "What exists", "How data flows", "What changed and why", "Input and artifact authority",
+                "Actual execution evidence", "Original-issue gaps and unresolved defects", "Reconciled ROI decisions",
                 "Authority, security and preservation", "What remains", "Exact next engineer start"), 1):
             self.assertIn(f"{index}. **{title}", prompt)
 
