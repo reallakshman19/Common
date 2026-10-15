@@ -13,7 +13,7 @@ REPO = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 SHA = re.compile(r"^[0-9a-f]{40}$")
 WORK = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$")
 TARGET_KEYS = frozenset({"schema", "repository", "issue", "work_id", "mode",
-                         "source_heads", "source_health", "owner_decision", "observed_at"})
+                         "source_heads", "candidate_heads", "source_health", "owner_decision", "observed_at"})
 EVIDENCE_KEYS = frozenset({"schema", "source_repository", "source_url", "assessed_sha",
                            "kind", "observation", "privacy"})
 KINDS = frozenset({"SOURCE", "ISSUE", "PR", "CI", "TASK_EVIDENCE", "TEST",
@@ -65,6 +65,17 @@ def validate_target(value: object) -> dict:
                    or not isinstance(h, str) or not SHA.fullmatch(h)
                    for r, h in heads.items())):
         raise ContractError("missing/invalid exact source head or target repo")
+    candidates = o["candidate_heads"]
+    if not isinstance(candidates, dict):
+        raise ContractError("candidate_heads must be explicitly mapped")
+    for url, head in candidates.items():
+        if (not isinstance(url, str) or github_repo(url) not in heads
+                or not isinstance(head, str) or not SHA.fullmatch(head)):
+            raise ContractError("invalid or foreign candidate PR head")
+        from urllib.parse import urlsplit as _split
+        segments = _split(url).path.strip("/").split("/")
+        if len(segments) != 4 or segments[2] != "pull" or not segments[3].isdigit() or int(segments[3]) < 1:
+            raise ContractError("candidate_head must be a numbered GitHub PR URL")
     if o["source_health"] not in HEALTH:
         raise ContractError("unknown source health")
     decision = require_keys(o["owner_decision"], frozenset({"status", "ref"}), "owner decision")
@@ -100,15 +111,18 @@ def validate_evidence(value: object, target: dict) -> dict:
         raise ContractError("invalid assessed SHA")
     if e["kind"] not in KINDS or e["observation"] not in OBSERVATIONS or e["privacy"] not in PRIVACY:
         raise ContractError("invalid evidence kind/observation/privacy")
+    if e["kind"] == "PR" and e["source_url"] not in target["candidate_heads"]:
+        raise ContractError("WRONG_SCOPE: PR evidence must bind an explicitly selected candidate")
     return e
 
 
 def verdict(status: str, reasons: list[str], next_action: str, target: dict | None,
             n: int) -> dict:
-    return {"schema": "onboarding.verdict/v1", "status": status,
+    return {"schema": "onboarding.local-assessment/v1", "status": status,
             "reason_codes": sorted(set(reasons)), "next_action": next_action,
             "execution_authorized": False, "source_basis": target["source_heads"] if target else {},
-            "evidence_count": n, "refreshed_live": False}
+            "evidence_count": n, "refreshed_live": False,
+            "candidate_heads": target["candidate_heads"] if target else {}}
 
 
 def assess(target: object, evidence: object) -> dict:
@@ -130,7 +144,13 @@ def assess(target: object, evidence: object) -> dict:
         if identity in seen:
             return verdict("BLOCKED", ["DUPLICATE_EVIDENCE"], "Deduplicate exact source pointer", t, len(evidence))
         seen.add(identity)
-        if e["assessed_sha"] != t["source_heads"][e["source_repository"]]:
+        if e["kind"] == "PR":
+            accepted = {t["candidate_heads"][e["source_url"]]}
+        else:
+            accepted = {t["source_heads"][e["source_repository"]]}
+            accepted.update(sha for url, sha in t["candidate_heads"].items()
+                            if github_repo(url) == e["source_repository"])
+        if e["assessed_sha"] not in accepted:
             return verdict("STALE", ["CANDIDATE_HEAD_STALE"], "Re-fetch exact provider heads; invalidate candidate claims", t, len(evidence))
     if t["source_health"] != "COMPLETE":
         return verdict("BLOCKED", ["SOURCE_INCOMPLETE"], "Re-fetch the incomplete/unknown source census", t, len(evidence))
