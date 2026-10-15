@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ONB original input/oracle/benchmark custody receipt",
+  "title": "ONB-RWI input custody claim (no self-authored byte verification)",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -59,9 +59,7 @@
     "verification": {
       "enum": [
         "CLAIMED_ONLY",
-        "BYTES_VERIFIED",
-        "UNAVAILABLE",
-        "MISMATCH"
+        "UNAVAILABLE"
       ]
     },
     "authority": {
