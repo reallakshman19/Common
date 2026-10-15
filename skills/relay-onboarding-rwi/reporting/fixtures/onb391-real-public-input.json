@@ -1,0 +1,450 @@
+{
+  "schema": "onboarding.handover-input/v1",
+  "target": {
+    "repository": "reallakshman19/Common",
+    "issue": 391,
+    "observed_at": "2026-10-15T17:08:23Z",
+    "source_heads": {
+      "reallakshman19/Common": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "reallakshman19/XML_Compare_Utilities": "040f2f88b54a746808486615230e5a8625d04527",
+      "reallakshman19/CoordinatorLandingpage": "15caea96faa6c7138d624bb4eebac9ddb489ecf2"
+    },
+    "candidate_heads": {
+      "https://github.com/reallakshman19/Common/pull/392": "c7b7829d276ae9b16eb7fc0b63a6737c9d449077",
+      "https://github.com/reallakshman19/Common/pull/393": "2bcc563d493a4878ba94136397c79268c2a687f6",
+      "https://github.com/reallakshman19/Common/pull/394": "7ea537738a8b32c2855b75575b8395b533acf91e",
+      "https://github.com/reallakshman19/Common/pull/395": "cc212635f4e014880e5e2bd5999f391d8f53e666",
+      "https://github.com/reallakshman19/Common/pull/396": "01b86e1e8d10748c3eca77eb292337ec2ee518c8"
+    },
+    "subject": "Zero-exit engineering onboarding and reusable source-bound handover protocol"
+  },
+  "sections": [
+    {
+      "index": 1,
+      "paragraphs": [
+        "The original user-visible goal is a successor who can safely continue an engineering project without a predecessor's last response, hidden chat, or prepared LOG. The handover must explain the real engineering WHY and current evidence rather than list PR counts.",
+        "Success also requires a bounded Relay with Improvement decision: a successor can challenge an ineffective inherited path without drifting from Owner outcomes or silently executing an unapproved change."
+      ],
+      "claim_ids": [
+        "C01"
+      ]
+    },
+    {
+      "index": 2,
+      "paragraphs": [
+        "The governing programme is Common #391, a child extension of accepted v3.6 O5 but not a rewrite of its lifecycle. It reserves Owner authority over scope, benchmarks, protected decisions and merges.",
+        "The Owner corrected the dashboard target to the existing CoordinatorLandingpage #21 and its Team Protocol v2.3 final candidate. Any future read-only display integration must use that site's established ingestion and actors."
+      ],
+      "claim_ids": [
+        "C02",
+        "C03"
+      ]
+    },
+    {
+      "index": 3,
+      "paragraphs": [
+        "Common main is the shared base; ONB drafts #392, #393, #394, #395 and #396 are independently main-rooted, not merged or deployed. Each tested candidate has its own exact commit and tests.",
+        "The example also binds XML Compare main for authentic fixture custody and CoordinatorLandingpage main for the consumer decision; these repositories are not modified by the current report workpack."
+      ],
+      "claim_ids": [
+        "C04",
+        "C05"
+      ]
+    },
+    {
+      "index": 4,
+      "paragraphs": [
+        "An incoming engineer selects the authorized repository and issue, reads current source and candidate revisions, then correlates provider issue/comment/PR evidence with Owner intentions. WP2 can support this read-only observation without a predecessor exit signal.",
+        "The complete application runtime call graph and user-visible functional result are not established by a provider snapshot or Git SHA. Entry point, owning layer, mutation boundary and downstream output require independent code review and relevant executable tests."
+      ],
+      "claim_ids": [
+        "C06",
+        "C07"
+      ]
+    },
+    {
+      "index": 5,
+      "paragraphs": [
+        "The programme began with the distinction between v3.6's delivery mechanisms and an independent zero-exit onboarding module. WP0 source reconciliation found existing Software MCDA and Workflow Intelligence, so duplicate scorer and monitoring designs were rejected.",
+        "An authentic WP2 live smoke exposed a repository-root allowlist defect despite green offline tests; that defect was corrected and the public lab/XML reads repeated. WP3 added source-claim chronology, and WP4 advanced from issue-declared hashes to original Git byte checks."
+      ],
+      "claim_ids": [
+        "C08"
+      ]
+    },
+    {
+      "index": 6,
+      "paragraphs": [
+        "WP1a defines strict target/evidence/verdict contracts; WP1b defines original-input/experiment/decision custody; WP2 adds GitHub read-only source collection; WP3 adds claim history and partial source-byte verification; WP4 provides verified Git object-byte identity.",
+        "The proposed architecture is additive under a new ONB skill folder, with protected Common and CoordinatorLandingpage files untouched. The current cross-workpack adapter path is not yet reviewed as one installed, mergeable module, and full functional code-path semantics are missing."
+      ],
+      "claim_ids": [
+        "C09",
+        "C10"
+      ]
+    },
+    {
+      "index": 7,
+      "paragraphs": [
+        "The original XML Compare #69 corpus includes S1.CII, S2.CII, S3.CII and T.CII pinned to the exact original repository commit. WP4 compared real Git blob bytes against the issue-declared SHA-256 values and stored a metadata-only receipt.",
+        "A matching file hash proves immutable byte identity at that source cut, not the completeness or correctness of the domain correspondence. The ordered source-set aggregate algorithm and complete golden mapping remain separate unresolved custody obligations."
+      ],
+      "claim_ids": [
+        "C11",
+        "C12"
+      ]
+    },
+    {
+      "index": 8,
+      "paragraphs": [
+        "The current positive source witnesses are the four original CII hashes and a partial 36-delta TEXPECTED postimage. Negative cases in unit tests include wrong source, stale candidate, incorrect blob bytes, unsafe references, missing Owner decisions and false authority promotion.",
+        "Do not count the partial TEXPECTED postimage or passing parser tests as a complete Owner Phase 2 oracle. A 70-percent functional acceptance claim requires the complete original PS-to-SL mapping and authentic independent execution evidence."
+      ],
+      "claim_ids": [
+        "C13",
+        "C14"
+      ]
+    },
+    {
+      "index": 9,
+      "paragraphs": [
+        "WP3 ran 43 hosted offline tests at its exact candidate commit, and WP4 ran 26 hosted negative tests plus actual original file-byte checks on its exact draft revision. The referenced CI runs must be independently read back before final readiness.",
+        "These tests demonstrate specific source tools and regression guards. They do not prove v3.6 protocol reacceptance, a deployed end-to-end application result, complete code ownership flow, or an approved Owner business outcome."
+      ],
+      "claim_ids": [
+        "C15",
+        "C16"
+      ]
+    },
+    {
+      "index": 10,
+      "paragraphs": [
+        "Known blockers are the missing complete functional golden, unverified real source call chain, pending independent reviewer and lack of Owner merge authorization. The optional landing projection is separately governed and remains parked.",
+        "The critical falsifier is a real source/final-output scenario that disagrees with the stated program flow or violates Owner semantics. Treat any changed PR head, private-only decision, missing byte receipt or red CI as unresolved until independently reconciled."
+      ],
+      "claim_ids": [
+        "C17",
+        "C18"
+      ]
+    },
+    {
+      "index": 11,
+      "paragraphs": [
+        "KEEP is the safe provisional approach because the current project has not demonstrated a superior root-cause correction. Software MCDA already exists; creating another scoring algorithm, monitoring service or dashboard would duplicate governed interfaces.",
+        "A future improvement proposal must name the earliest failing owning layer, preserved Owner invariants, smallest implementable change, realistic effort and positive/negative test falsifier. Without calibrated Owner rubric and independent review, RWI stays NOT_EVALUATED."
+      ],
+      "claim_ids": [
+        "C19",
+        "C20"
+      ]
+    },
+    {
+      "index": 12,
+      "paragraphs": [
+        "The cold successor's first act is to re-fetch issue #391, Common and target repository heads, exact PR candidate heads, protected protocol and all recorded source receipts. Then identify the earliest unverified program edge and run one bounded fact-producing test.",
+        "Do not merge, deploy, send messages to coordinator chats, alter CoordinatorLandingpage, or reinterpret raw fixture hashes as Owner acceptance. Release requires independent qualified reviewers and explicit Owner decision after full evidence reconciliation."
+      ],
+      "claim_ids": [
+        "C21",
+        "C22"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "C01",
+      "section": 1,
+      "statement": "The Owner requires a zero-exit, technically complete engineering handover from durable evidence, even without the outgoing agent's final LOG or cooperation.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C02",
+      "section": 2,
+      "statement": "Common #391 records Owner intent, separate WP contracts, RWI no-drift constraints and distinct protected implementation and merge gates.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C03",
+      "section": 2,
+      "statement": "The Owner superseded Dash V2; CoordinatorLandingpage #21 owns the existing eight-view Pages site and Team Protocol v2.3 remains the independent authority.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/CoordinatorLandingpage",
+      "revision": "15caea96faa6c7138d624bb4eebac9ddb489ecf2",
+      "source_url": "https://github.com/reallakshman19/CoordinatorLandingpage/issues/21",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C04",
+      "section": 3,
+      "statement": "The current Common main used as the integration base is ae3c0139a46bbffcc03d9a50f3d9067d59d78633; no WP1-WP4 PR is merged into it.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C05",
+      "section": 3,
+      "statement": "Five independently main-rooted draft workpacks exist in Common as PRs #392 through #396, with separate exact-head evidence.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "01b86e1e8d10748c3eca77eb292337ec2ee518c8",
+      "source_url": "https://github.com/reallakshman19/Common/pull/396",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C06",
+      "section": 4,
+      "statement": "The WP2 provider reader collects exact repo, issue, comments, PR heads/files and check-run observations and handles v3.6 managed-index links without granting acceptance.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "7ea537738a8b32c2855b75575b8395b533acf91e",
+      "source_url": "https://github.com/reallakshman19/Common/pull/394",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C07",
+      "section": 4,
+      "statement": "A complete independently traced program flow from repository source entrypoint through owning layer to real downstream user-visible result has not yet been attested.",
+      "status": "UNKNOWN",
+      "repository": null,
+      "revision": null,
+      "source_url": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C08",
+      "section": 5,
+      "statement": "During WP2 real-provider smoke, a strict REST allowlist initially rejected repository metadata; a regression fix followed before real public read-only verification.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391#issuecomment-6196055064",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C09",
+      "section": 6,
+      "statement": "WP3 draft PR #395 adds a typed engineering history normalizer and source-line digest code, but does not prove semantic call-edge behavior.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "cc212635f4e014880e5e2bd5999f391d8f53e666",
+      "source_url": "https://github.com/reallakshman19/Common/pull/395",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C10",
+      "section": 6,
+      "statement": "The actual tested mapping from the underlying code's entrypoint into all owning functions and consumers remains independently unverified.",
+      "status": "UNKNOWN",
+      "repository": null,
+      "revision": null,
+      "source_url": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C11",
+      "section": 7,
+      "statement": "WP4's hosted Git object verification confirmed all four original CII source-file SHA-256 values from XML Compare #69 at pinned revision 040f2f88b54a746808486615230e5a8625d04527.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "01b86e1e8d10748c3eca77eb292337ec2ee518c8",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38774598148",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C12",
+      "section": 7,
+      "statement": "The canonical concatenation rule behind the declared ordered-source-set aggregate digest has not yet been proven or independently reproduced.",
+      "status": "UNKNOWN",
+      "repository": null,
+      "revision": null,
+      "source_url": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C13",
+      "section": 8,
+      "statement": "XML Compare #69 identifies TEXPECTED-PARTIALLLYDONE.CII as a partial 36-delta known-positive postimage and not a complete correspondence oracle.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/XML_Compare_Utilities",
+      "revision": "040f2f88b54a746808486615230e5a8625d04527",
+      "source_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/69",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C14",
+      "section": 8,
+      "statement": "The complete Owner PS-to-SL mapping and real 70-percent or better physical acceptance remain unavailable for this ONB proof set.",
+      "status": "UNKNOWN",
+      "repository": null,
+      "revision": null,
+      "source_url": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C15",
+      "section": 9,
+      "statement": "WP4's exact-head Actions job #38774598148 recorded 26 passing tests, four original CII file hash matches, and a matching WP2 source-code blob check.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "01b86e1e8d10748c3eca77eb292337ec2ee518c8",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38774598148",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C16",
+      "section": 9,
+      "statement": "WP3's exact-head hosted run #38766491229 recorded 43 passing offline tests and a partial report with missing real code-path evidence.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "cc212635f4e014880e5e2bd5999f391d8f53e666",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38766491229",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C17",
+      "section": 10,
+      "statement": "All ONB PRs remain draft/unmerged, and neither a successful byte hash nor a green check-run grants engineering, merge or Owner acceptance.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C18",
+      "section": 10,
+      "statement": "Independent full semantic program-flow review and final Owner benchmark authority remain outstanding.",
+      "status": "UNKNOWN",
+      "repository": null,
+      "revision": null,
+      "source_url": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C19",
+      "section": 11,
+      "statement": "RWI must permit KEEP and only one bounded high-ROI improvement; its scoring rubric and Owner approval are not yet accepted, so NOT_EVALUATED is required.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C20",
+      "section": 11,
+      "statement": "There is no validated source-backed high-ROI change proposal with approved rubric, implementation cost, falsifier and no-drift proof for this case.",
+      "status": "UNKNOWN",
+      "repository": null,
+      "revision": null,
+      "source_url": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C21",
+      "section": 12,
+      "statement": "An incoming engineer should start at Common #391, inspect the five exact draft PR heads and source receipts, then verify the earliest unproved functional code boundary before implementation.",
+      "status": "SOURCE_REPORTED",
+      "repository": "reallakshman19/Common",
+      "revision": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "C22",
+      "section": 12,
+      "statement": "Owner review, a complete original functional acceptance oracle and final integration/release authorization remain open after the byte-custody milestone.",
+      "status": "UNKNOWN",
+      "repository": null,
+      "revision": null,
+      "source_url": null,
+      "visibility": "PUBLIC"
+    }
+  ],
+  "custody": [
+    {
+      "id": "XML-S1",
+      "path": "Benchmark/S1.CII",
+      "repository": "reallakshman19/XML_Compare_Utilities",
+      "revision": "040f2f88b54a746808486615230e5a8625d04527",
+      "sha256": "9a9cb14db4c13f5aac41cc74a60e7e528722eb5003d09f07192762ab6bfb1a2b",
+      "status": "HASH_MATCH_REPORTED",
+      "source_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/69"
+    },
+    {
+      "id": "XML-S2",
+      "path": "Benchmark/S2.CII",
+      "repository": "reallakshman19/XML_Compare_Utilities",
+      "revision": "040f2f88b54a746808486615230e5a8625d04527",
+      "sha256": "7ec48b76b65eedfd5ecc9c8e8feca1a45dd8c83721a68b53aa0db3363e6d27fd",
+      "status": "HASH_MATCH_REPORTED",
+      "source_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/69"
+    },
+    {
+      "id": "XML-S3",
+      "path": "Benchmark/S3.CII",
+      "repository": "reallakshman19/XML_Compare_Utilities",
+      "revision": "040f2f88b54a746808486615230e5a8625d04527",
+      "sha256": "c2143b31c482158ac5514d2709406c14a9179e656277c654e932bb845d090caa",
+      "status": "HASH_MATCH_REPORTED",
+      "source_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/69"
+    },
+    {
+      "id": "XML-T",
+      "path": "Benchmark/T.CII",
+      "repository": "reallakshman19/XML_Compare_Utilities",
+      "revision": "040f2f88b54a746808486615230e5a8625d04527",
+      "sha256": "abfa3ffc9281fe75d4170b2d885d554cb1f120dadedae7c7ab609548b63cc060",
+      "status": "HASH_MATCH_REPORTED",
+      "source_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/69"
+    }
+  ],
+  "tests": [
+    {
+      "id": "WP2-PUBLIC",
+      "repository": "reallakshman19/Common",
+      "candidate_sha": "7ea537738a8b32c2855b75575b8395b533acf91e",
+      "command": "python -m unittest discover -s skills/relay-onboarding-rwi/tests -p test_provider_wp2.py -v",
+      "result": "PASS_REPORTED",
+      "oracle": "Mocked provider negatives plus credential-free two-repo HTTP read-only smoke",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38762378488"
+    },
+    {
+      "id": "WP3-HISTORY",
+      "repository": "reallakshman19/Common",
+      "candidate_sha": "cc212635f4e014880e5e2bd5999f391d8f53e666",
+      "command": "python -m unittest discover -s skills/relay-onboarding-rwi/tests -p test_reconstruction_wp3.py -v",
+      "result": "PASS_REPORTED",
+      "oracle": "Synthetic chronology, untrusted source, main/PR identity and privacy negative cases",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38766491229"
+    },
+    {
+      "id": "WP4-BYTES",
+      "repository": "reallakshman19/Common",
+      "candidate_sha": "01b86e1e8d10748c3eca77eb292337ec2ee518c8",
+      "command": "python -m unittest discover -s skills/relay-onboarding-rwi/tests -p test_attestation_wp4.py -v",
+      "result": "PASS_REPORTED",
+      "oracle": "Synthetic Git object failures plus independent real public original-byte checks",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38774598148"
+    }
+  ],
+  "critical_gaps": [
+    "OWNER_APPROVAL_MISSING",
+    "CODE_PATH_NOT_ATTESTED",
+    "COMPLETE_GOLDEN_MISSING",
+    "CURRENT_PROVIDER_RECHECK_REQUIRED",
+    "INDEPENDENT_REVIEW_MISSING"
+  ],
+  "first_verification": "Re-fetch current heads for Common, XML Compare and CoordinatorLandingpage; recheck PRs #392–#396; inspect the actual earliest unverified entrypoint-to-owning-layer code path on a pinned head, and test it against a genuinely complete Owner acceptance oracle."
+}
