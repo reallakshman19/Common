@@ -87,7 +87,7 @@ def source_url(url, repo):
             or parsed.username or parsed.password or parsed.query
             or len(parts) < 3 or "/".join(parts[:2]) != repo
             or any(part in (".", "..", "") for part in parts)
-            or (parsed.fragment and not re.fullmatch(r"issuecomment-[0-9]+", parsed.fragment))):
+            or (parsed.fragment and not re.fullmatch(r"(?:issuecomment-[0-9]+|L[1-9][0-9]*(?:-L[1-9][0-9]*)?)", parsed.fragment))):
         raise ReconstructionError("source URL is not bound to its declared repository")
     return url
 
