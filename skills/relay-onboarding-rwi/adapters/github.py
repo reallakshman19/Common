@@ -177,7 +177,7 @@ def list_all(transport, route, *, key=None, max_pages=MAX_PAGES):
 
 
 def collect(client, target_repo, issue_number, pr_numbers=(), *, expected_main=None,
-            now=None):
+            expected_pr_heads=None, now=None):
     """Collect an exact-cut observer snapshot. Data is historical fact, NOT Owner approval.
 
     A provider interruption is an exception, never partial-success. CI source errors
@@ -191,6 +191,13 @@ def collect(client, target_repo, issue_number, pr_numbers=(), *, expected_main=N
         raise SourceError("duplicate PR selection")
     if expected_main is not None:
         require_sha(expected_main, "expected main")
+    if expected_pr_heads is None:
+        expected_pr_heads = {}
+    if (not isinstance(expected_pr_heads, dict) or
+            any(type(n) is not int or n not in pr_numbers or
+                not isinstance(h, str) or not SHA_RE.fullmatch(h)
+                for n, h in expected_pr_heads.items())):
+        raise SourceError("invalid explicit PR revision binding")
     prefix = "/repos/" + repo
     meta, _ = client.get(prefix)
     meta = as_dict(meta, "repo metadata")
@@ -239,6 +246,8 @@ def collect(client, target_repo, issue_number, pr_numbers=(), *, expected_main=N
         pr = as_dict(pr, "pull request")
         number_from(pr, pr_no, "PR")
         head = require_sha(as_dict(pr.get("head"), "PR head").get("sha"), "PR head")
+        if pr_no in expected_pr_heads and expected_pr_heads[pr_no] != head:
+            raise SourceError("STALE: expected PR head no longer current")
         base = require_sha(as_dict(pr.get("base"), "PR base").get("sha"), "PR base")
         if pr.get("state") not in {"open", "closed"} or type(pr.get("draft")) is not bool:
             raise SourceError("PR state/draft malformed")
@@ -319,10 +328,19 @@ def cli(argv=None):
     parser.add_argument("--issue", type=int, required=True)
     parser.add_argument("--pr", type=int, action="append", default=[])
     parser.add_argument("--expected-main")
+    parser.add_argument("--expect-pr", action="append", default=[],
+                        help="exact candidate binding, NUM=40-hex SHA; repeat per PR")
     args = parser.parse_args(argv)
     try:
+        expected_pr_heads = {}
+        for binding in args.expect_pr:
+            number, sep, sha = binding.partition("=")
+            if not sep or not number.isdecimal() or int(number) in expected_pr_heads:
+                raise SourceError("malformed/duplicate --expect-pr binding")
+            expected_pr_heads[int(number)] = require_sha(sha, "expected PR head")
         data = collect(HttpReadTransport(os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")),
-                       args.repo, args.issue, args.pr, expected_main=args.expected_main)
+                       args.repo, args.issue, args.pr, expected_main=args.expected_main,
+                       expected_pr_heads=expected_pr_heads)
         print(json.dumps(public_projection(data), indent=2, sort_keys=True))
         return 0
     except SourceError as exc:
