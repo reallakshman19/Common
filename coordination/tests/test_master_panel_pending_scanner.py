@@ -78,7 +78,7 @@ class PendingScannerTests(unittest.TestCase):
 
     def test_invalid_provider_actor_fails_before_source_commit(self):
         self.reader.comments["common"][0]["user"] = {
-            "id": 7, "login": "synthetic", "private_token": "SECRET"
+            "id": "bad-identifier", "login": "synthetic"
         }
         result = self.scan()
         self.assertEqual(result["source_status"], "UNAVAILABLE")
@@ -86,6 +86,18 @@ class PendingScannerTests(unittest.TestCase):
         self.assertEqual(self.counts(), (0, 0, 0))
         self.assertEqual(self.source.revisions("common", "1412133785",
                                                "ISSUE_COMMENT", "1001"), [])
+
+    def test_provider_private_fields_not_retained_or_projected(self):
+        self.reader.comments["common"][0]["user"] = {
+            "id": 7, "login": "synthetic", "private_token": "SECRET"
+        }
+        self.assertEqual(self.scan()["source_status"], "REACHABLE")
+        raw = self.journal.conn.execute(
+            "SELECT actor_json FROM pending_captures"
+        ).fetchone()[0]
+        self.assertEqual(json.loads(raw), {"id": "7", "login": "synthetic"})
+        self.assertNotIn("SECRET", raw)
+        self.assertNotIn("private_token", raw)
 
     def test_crash_before_source_commit_replays_orphan_without_promotion(self):
         real = self.source.observe
