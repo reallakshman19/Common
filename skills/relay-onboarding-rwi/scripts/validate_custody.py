@@ -18,7 +18,7 @@ EXPERIMENT_KEYS = {"schema", "id", "repository", "candidate_sha", "input_ids",
 DECISION_KEYS = {"schema", "id", "repository", "statement", "actor_role",
                  "disposition", "source_url", "supersedes", "visibility"}
 CUSTODY_ROLES = {"ORIGINAL_INPUT", "POSITIVE_ORACLE", "NEGATIVE_FIXTURE", "BENCHMARK", "GENERATED_OUTPUT"}
-VERIFICATION = {"CLAIMED_ONLY", "BYTES_VERIFIED", "UNAVAILABLE", "MISMATCH"}
+VERIFICATION = {"CLAIMED_ONLY", "UNAVAILABLE"}  # caller input only; no asserted observation
 AUTHORITY = {"OWNER_SOURCE", "ISSUE_DECLARATION", "CANDIDATE", "SYNTHETIC"}
 VISIBILITY = {"PUBLIC", "PRIVATE", "RESTRICTED"}
 STATUS = {"PASS", "FAIL", "NOT_RUN", "NOT_APPLICABLE"}
@@ -58,7 +58,8 @@ def source_url(url, repository):
     parts = parsed.path.strip("/").split("/")
     if (parsed.scheme != "https" or parsed.netloc != "github.com"
             or parsed.query or (parsed.fragment and not re.fullmatch(r"issuecomment-[0-9]+", parsed.fragment))
-            or len(parts) < 3 or "/".join(parts[:2]) != repository):
+            or len(parts) < 3 or "/".join(parts[:2]) != repository
+            or any(p in ("", ".", "..") for p in parts)):
         raise InvalidReceipt("source URL repository/host/scope mismatch")
     return url
 
@@ -85,9 +86,9 @@ def validate_custody(item):
     claimed = d["claimed_sha256"]
     if claimed is not None and (not isinstance(claimed, str) or not SHA64.fullmatch(claimed)):
         raise InvalidReceipt("invalid claimed hash")
-    # Never accept user-declared BYTES_VERIFIED without an actual byte-based verifier.
-    if d["verification"] == "BYTES_VERIFIED":
-        raise InvalidReceipt("BYTES_VERIFIED must be emitted by verify_bytes, not input")
+    # Neither a 'verified' status nor a 'mismatch' observation may be supplied
+    # as self-authored custody evidence. Only an independent source attestor
+    # can subsequently promote a provenance-bearing Git byte result.
     return d
 
 
@@ -97,9 +98,17 @@ def verify_bytes(custody, data):
         raise InvalidReceipt("original bytes required")
     d = validate_custody(custody)
     digest = hashlib.sha256(data).hexdigest()
-    return {"id": d["id"], "observed_sha256": digest,
-            "verification": "BYTES_VERIFIED" if d["claimed_sha256"] == digest else "MISMATCH",
-            "semantic_owner_acceptance": False}
+    comparison = ("UNCLAIMED_BYTES" if d["claimed_sha256"] is None else
+                  "SUPPLIED_BYTES_MATCH" if d["claimed_sha256"] == digest else
+                  "SUPPLIED_BYTES_MISMATCH")
+    return {"schema": "onboarding.supplied-byte-comparison/v1",
+            "id": d["id"], "observed_sha256": digest,
+            "claimed_sha256": d["claimed_sha256"],
+            "comparison": comparison,
+            "source_git_blob_verified": False,
+            "provider_authenticated": False,
+            "semantic_owner_acceptance": False,
+            "execution_authorized": False}
 
 
 def validate_experiment(item, custody_ids):
