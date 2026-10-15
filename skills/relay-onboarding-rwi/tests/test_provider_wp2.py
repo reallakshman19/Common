@@ -117,6 +117,21 @@ class WP2ProviderTests(unittest.TestCase):
         with self.assertRaisesRegex(gh.SourceError, "STALE"):
             self.collect(f)
 
+    def test_expected_pr_head_explicitly_stale(self):
+        fake = self.fake()
+        with self.assertRaisesRegex(gh.SourceError, "STALE"):
+            gh.collect(fake, "acme/demo", 7, (2,), expected_main=A,
+                       expected_pr_heads={2: A})
+
+    def test_expected_pr_head_correct(self):
+        self.assertEqual(gh.collect(self.fake(), "acme/demo", 7, (2,),
+                                    expected_main=A, expected_pr_heads={2: B},
+                                    now="2026-10-15T00:00:00Z")["prs"][0]["head_sha"], B)
+
+    def test_expected_pr_head_outside_selection(self):
+        with self.assertRaises(gh.SourceError):
+            gh.collect(self.fake(), "acme/demo", 7, (2,), expected_pr_heads={3: B})
+
     def test_wrong_issue_number_fails(self):
         f = self.fake()
         f.map[BASE + "/issues/7"] = ({"number": 8, "title": "Wrong"}, "")
