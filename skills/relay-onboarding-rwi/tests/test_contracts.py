@@ -191,6 +191,25 @@ class WP1aContractTests(unittest.TestCase):
         self.assertNotEqual(assessment["status"], "READY")
         self.assertFalse(assessment["execution_authorized"])
 
+    def test_actual_merged_wp5_verdict_uses_matching_contract(self):
+        """A PR checkout includes current main; raw feature-branch pushes do not."""
+        compiler = ROOT / "reporting" / "compile_report.py"
+        fixture = ROOT / "reporting" / "fixtures" / "onb391-real-public-input.json"
+        if not compiler.is_file() or not fixture.is_file():
+            self.skipTest("WP5 is absent from isolated WP1a branch; run on PR merge ref")
+        module_spec = importlib.util.spec_from_file_location("wp5_source_contract", compiler)
+        wp5 = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(wp5)
+        _, _, emitted = wp5.build(json.loads(fixture.read_text(encoding="utf-8")))
+        schema = json.loads((ROOT / "schemas" / "verdict.v1.schema.json").read_text())
+        self.assertEqual(schema["properties"]["schema"]["const"], emitted["schema"])
+        self.assertEqual(set(schema["required"]), set(emitted))
+        self.assertFalse(schema["additionalProperties"])
+        for field, definition in schema["properties"].items():
+            if "const" in definition:
+                self.assertEqual(emitted[field], definition["const"], field)
+        self.assertFalse(emitted["execution_authorized"])
+
     def test_foreign_decision_authority_ref_fails(self):
         t, es = self.instance()
         t["owner_decision"]["ref"] = "https://github.com/unknown/other/issues/1"
