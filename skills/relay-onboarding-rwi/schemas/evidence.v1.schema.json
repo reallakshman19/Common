@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/reallakshman19/Common/blob/main/skills/relay-onboarding-rwi/schemas/evidence.v1.schema.json",
+  "title": "ONB-RWI evidence pointer v1 (not proof of validity)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "source_repository",
+    "source_url",
+    "assessed_sha",
+    "kind",
+    "observation",
+    "privacy"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.evidence/v1"
+    },
+    "source_repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "source_url": {
+      "type": "string",
+      "pattern": "^https://github\\.com/"
+    },
+    "assessed_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "kind": {
+      "enum": [
+        "SOURCE",
+        "ISSUE",
+        "PR",
+        "CI",
+        "TASK_EVIDENCE",
+        "TEST",
+        "FIXTURE",
+        "BENCHMARK",
+        "OWNER_DECISION",
+        "HANDOVER",
+        "LOG"
+      ]
+    },
+    "observation": {
+      "enum": [
+        "REPORTED",
+        "PROVIDER_OBSERVED",
+        "UNKNOWN"
+      ]
+    },
+    "privacy": {
+      "enum": [
+        "PUBLIC",
+        "PRIVATE",
+        "RESTRICTED"
+      ]
+    }
+  }
+}
