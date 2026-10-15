@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "const": "1.0.0"
+    },
+    "protocol_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+@[0-9a-f]{40}:coordination/session-protocol$"
+    },
+    "session_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "agent_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "lifecycle": {
+      "enum": ["REGISTERED", "HOLD", "ACTIVE", "RETIRED"]
+    },
+    "provider": {
+      "type": "object",
+      "properties": {"kind": {"$ref": "common.schema.json#/$defs/id"}, "instance_id": {"$ref": "common.schema.json#/$defs/id"}, "capabilities": {"type": "array", "items": {"enum": ["MANUAL_READ", "MANUAL_REPLY", "AUTHENTICATED_INTAKE", "VERIFIED_DELIVERY"]}, "minItems": 1, "maxItems": 4, "uniqueItems": true}},
+      "required": ["kind", "instance_id", "capabilities"],
+      "additionalProperties": false
+    },
+    "bindings": {
+      "type": "array",
+      "items": {"type": "object", "properties": {"target": {"$ref": "common.schema.json#/$defs/target"}, "repository": {"$ref": "common.schema.json#/$defs/repository"}, "mailbox": {"$ref": "common.schema.json#/$defs/mailbox"}, "mode": {"enum": ["REPORT_ONLY", "READ_ONLY", "IMPLEMENTATION"]}, "allowed_actions": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/action"}, "minItems": 1, "maxItems": 5, "uniqueItems": true}, "write_paths": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 512}, "minItems": 0, "maxItems": 64}, "authority_refs": {"$ref": "common.schema.json#/$defs/refs"}}, "required": ["target", "repository", "mailbox", "mode", "allowed_actions", "write_paths", "authority_refs"], "additionalProperties": false},
+      "minItems": 1,
+      "maxItems": 32
+    }
+  },
+  "required": [
+    "protocol_version",
+    "protocol_ref",
+    "session_id",
+    "agent_id",
+    "revision",
+    "lifecycle",
+    "provider",
+    "bindings"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

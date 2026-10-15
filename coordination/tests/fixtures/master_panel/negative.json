@@ -1,0 +1,74 @@
+{
+  "fixture_kind": "SYNTHETIC_NOT_LIVE",
+  "schema_version": "1.0.0",
+  "cases": [
+    {
+      "name": "partial_page_missing_not_absent",
+      "source_state": "PARTIAL",
+      "completed_scan": false,
+      "present": false,
+      "expected_absence": "UNAVAILABLE"
+    },
+    {
+      "name": "rate_limited_missing_not_absent",
+      "source_state": "RATE_LIMITED",
+      "completed_scan": false,
+      "present": false,
+      "expected_absence": "UNAVAILABLE"
+    },
+    {
+      "name": "completed_scan_missing_is_tombstone_candidate",
+      "source_state": "REACHABLE",
+      "completed_scan": true,
+      "present": false,
+      "expected_absence": "ABSENT"
+    },
+    {
+      "name": "two_eligible_bindings_conflict",
+      "bindings": [
+        {
+          "project_id": "common",
+          "work_id": "one",
+          "assignment_id": "agent1"
+        },
+        {
+          "project_id": "common",
+          "work_id": "two",
+          "assignment_id": "agent2"
+        }
+      ],
+      "expected_binding": "CONFLICT"
+    },
+    {
+      "name": "old_review_head",
+      "report": {
+        "candidate_sha": "1111111111111111111111111111111111111111",
+        "reported_verdict": "PASS"
+      },
+      "review": {
+        "review_verdict": "PASS",
+        "review_ref": "https://github.com/reallakshman19/Common/issues/373#issuecomment-123",
+        "review_candidate_sha": "1111111111111111111111111111111111111111"
+      },
+      "current_pr_head_sha": "2222222222222222222222222222222222222222",
+      "expected_relation": "OLD_HEAD"
+    },
+    {
+      "name": "unsupported_review_without_source",
+      "review": {
+        "review_verdict": "PASS"
+      },
+      "expected_error": "Review verdict needs an independently attributable source"
+    },
+    {
+      "name": "cross_project_binding",
+      "bindings": [
+        {
+          "project_id": "aa3",
+          "work_id": "wrong"
+        }
+      ],
+      "expected_error": "Cross-project binding"
+    }
+  ]
+}

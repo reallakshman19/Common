@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "const": "1.0.0"
+    },
+    "message_id": {
+      "$ref": "common.schema.json#/$defs/uuid"
+    },
+    "request_id": {
+      "$ref": "common.schema.json#/$defs/uuid"
+    },
+    "kind": {
+      "enum": ["REQUEST", "ACK", "PLAN", "RESULT", "REVIEW", "INVALIDATION"]
+    },
+    "sender_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "reply_to": {
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "request_digest": {
+      "type": ["string", "null"],
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/instant"
+    },
+    "expires_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ$"
+    },
+    "expected_revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "target": {
+      "$ref": "common.schema.json#/$defs/target"
+    },
+    "repository": {
+      "$ref": "common.schema.json#/$defs/repository"
+    },
+    "mailbox": {
+      "$ref": "common.schema.json#/$defs/mailbox"
+    },
+    "action": {
+      "$ref": "common.schema.json#/$defs/action"
+    },
+    "status": {
+      "enum": ["REQUESTED", "RECEIVED", "BLOCKED", "REJECTED", "PROPOSED", "REPORTED", "FAILED", "ACCEPTED", "INVALIDATED"]
+    },
+    "authority_refs": {
+      "$ref": "common.schema.json#/$defs/refs"
+    },
+    "basis": {
+      "type": "object",
+      "properties": {"candidate": {"type": ["string", "null"], "minLength": 40, "maxLength": 40, "pattern": "^[0-9a-f]{40}$"}, "sources": {"$ref": "common.schema.json#/$defs/refs"}, "fixtures": {"$ref": "common.schema.json#/$defs/refs"}, "profiles": {"$ref": "common.schema.json#/$defs/refs"}},
+      "required": ["candidate", "sources", "fixtures", "profiles"],
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "properties": {"text": {"type": "string", "minLength": 1, "maxLength": 12000}, "refs": {"$ref": "common.schema.json#/$defs/refs"}, "decision": {"type": ["object", "null"], "properties": {"card_id": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^card-[A-Za-z0-9_-]{4,64}$"}, "outcome": {"enum": ["APPROVED", "REJECTED", "MODIFIED", "DEFERRED"]}}, "required": ["card_id", "outcome"], "additionalProperties": false}},
+      "required": ["text", "refs", "decision"],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "items": {"type": "object", "properties": {"criterion": {"type": "string", "minLength": 1, "maxLength": 128}, "outcome": {"enum": ["PASS", "FAIL", "NOT_RUN", "NOT_OBSERVED", "BLOCKED"]}, "basis": {"type": "object", "properties": {"candidate": {"type": ["string", "null"], "minLength": 40, "maxLength": 40, "pattern": "^[0-9a-f]{40}$"}, "sources": {"$ref": "common.schema.json#/$defs/refs"}, "fixtures": {"$ref": "common.schema.json#/$defs/refs"}, "profiles": {"$ref": "common.schema.json#/$defs/refs"}}, "required": ["candidate", "sources", "fixtures", "profiles"], "additionalProperties": false}, "proof_ref": {"type": ["string", "null"], "minLength": 1, "maxLength": 2048}}, "required": ["criterion", "outcome", "basis", "proof_ref"], "additionalProperties": false},
+      "minItems": 0,
+      "maxItems": 64
+    }
+  },
+  "required": [
+    "protocol_version",
+    "message_id",
+    "request_id",
+    "kind",
+    "sender_id",
+    "reply_to",
+    "request_digest",
+    "created_at",
+    "expires_at",
+    "expected_revision",
+    "target",
+    "repository",
+    "mailbox",
+    "action",
+    "status",
+    "authority_refs",
+    "basis",
+    "payload",
+    "evidence"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
