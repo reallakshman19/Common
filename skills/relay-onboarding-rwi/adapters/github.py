@@ -77,12 +77,18 @@ def link_for(repo, kind, number):
     return "https://github.com/" + repo + "/" + kind + "/" + str(number)
 
 
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None  # Do not forward bearer credentials to a different host.
+
+
 class HttpReadTransport:
     """Allowlisted HTTPS GitHub REST GET only; no workflow, writes or redirects."""
 
     def __init__(self, token=None, timeout=15):
         self.token = token
         self.timeout = timeout
+        self.opener = urllib.request.build_opener(NoRedirect())
 
     def get(self, path):
         if not isinstance(path, str) or not path.startswith("/repos/"):
@@ -100,7 +106,7 @@ class HttpReadTransport:
         req = urllib.request.Request(url, method="GET", headers=headers)
         try:
             # Authentication and redirects are not interpreted as source authority.
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+            with self.opener.open(req, timeout=self.timeout) as resp:
                 if resp.geturl().split("?", 1)[0] != url.split("?", 1)[0]:
                     raise SourceError("provider redirected endpoint; canonical target unknown")
                 raw = resp.read(MAX_RESPONSE_BYTES + 1)
