@@ -28,6 +28,7 @@ STORY = {
     "target": {
         "repository": OWNER, "issue": 7,
         "source_heads": {OWNER: A, LANDING: B},
+        "candidate_heads": {},
         "observed_at": "2026-10-15T15:00:00+00:00"
     },
     "events": [
@@ -170,6 +171,8 @@ class ReconstructionWP3Tests(unittest.TestCase):
     def test_old_code_trace_not_current(self):
         p = self.case()
         p["code_path"][1]["revision"] = "e" * 40
+        p["code_path"][1]["source_url"] = ("https://github.com/acme/project/blob/"
+                                          + "e"*40 + "/src/core.py#L5")
         r = h.reconstruct(p)
         self.assertIn("CODE_PATH_INCOMPLETE", r["reason_codes"])
         self.assertFalse(next(c for c in r["code_path"] if c["id"] == "OWNER")["current_head"])
@@ -273,6 +276,47 @@ class ReconstructionWP3Tests(unittest.TestCase):
         self.assertEqual(result["status"], "BYTE_SLICE_MATCH")
         self.assertFalse(result["semantic_call_edge_verified"])
         self.assertFalse(result["source_provider_authenticated"])
+
+    def test_candidate_pr_head_independent_of_main(self):
+        p = self.case()
+        rev = "e" * 40
+        p["target"]["candidate_heads"] = {"https://github.com/acme/project/pull/9": rev}
+        p["code_path"][1]["revision"] = rev
+        p["code_path"][1]["source_url"] = "https://github.com/acme/project/blob/" + rev + "/src/core.py#L5"
+        c = next(c for c in h.reconstruct(p)["code_path"] if c["id"] == "OWNER")
+        self.assertTrue(c["current_head"])
+        self.assertEqual(h.reconstruct(p)["candidate_heads"]["https://github.com/acme/project/pull/9"], rev)
+
+    def test_unbound_candidate_pr_head_stays_historical(self):
+        p = self.case()
+        rev = "e" * 40
+        p["code_path"][1]["revision"] = rev
+        p["code_path"][1]["source_url"] = "https://github.com/acme/project/blob/" + rev + "/src/core.py#L5"
+        self.assertFalse(next(c for c in h.reconstruct(p)["code_path"] if c["id"] == "OWNER")["current_head"])
+
+    def test_candidate_pr_url_must_bind_authorized_repo(self):
+        p = self.case()
+        p["target"]["candidate_heads"] = {"https://github.com/outside/repo/pull/9": "e" * 40}
+        with self.assertRaises(h.ReconstructionError):
+            h.reconstruct(p)
+
+    def test_candidate_pr_url_requires_numbered_pull(self):
+        p = self.case()
+        p["target"]["candidate_heads"] = {"https://github.com/acme/project/tree/main": "e" * 40}
+        with self.assertRaises(h.ReconstructionError):
+            h.reconstruct(p)
+
+    def test_code_url_must_be_pinned_to_claimed_commit_and_path(self):
+        p = self.case()
+        p["code_path"][0]["source_url"] = "https://github.com/acme/project/blob/" + B + "/src/work.py#L1-L2"
+        with self.assertRaises(h.ReconstructionError):
+            h.reconstruct(p)
+
+    def test_future_event_after_observed_cut_refused(self):
+        p = self.case()
+        p["events"][2]["recorded_at"] = "2026-10-16T11:00:00Z"
+        with self.assertRaises(h.ReconstructionError):
+            h.reconstruct(p)
 
     def test_source_slice_change_detected(self):
         data = b"a\nb\n"
