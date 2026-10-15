@@ -48,4 +48,4 @@ jobs:
           PY
       - name: Run fail-closed main-vs-PR and report-schema collision tests
         run: |
-          python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_contracts.py' -v
+          python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_*.py' -v
