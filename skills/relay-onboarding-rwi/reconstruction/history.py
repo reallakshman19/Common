@@ -331,13 +331,13 @@ def render_markdown(report):
     owners = [e for e in report["timeline"] if e["kind"] in
               ("ORIGINAL_PROBLEM", "OWNER_AMENDMENT", "DECISION")]
     for e in owners:
-        lines.append("- " + e["kind"] + " " + e["id"] + ": " + e["summary"] +
+        lines.append("- " + e["kind"] + " " + e["id"] + ": " + json.dumps(e["summary"], ensure_ascii=False) +
                      " — " + e["source_url"] + " (PROVIDER_UNVERIFIED)" +
                      (" [SUPERSEDED]" if not e["active"] else ""))
     lines += ["", "## Investigations, rejected paths and engineering changes"]
     for e in report["timeline"]:
         if e["kind"] in ("INVESTIGATION", "REJECTED_PATH", "CODE_CHANGE", "BLOCKER"):
-            lines.append("- " + e["kind"] + " " + e["id"] + ": " + e["summary"] +
+            lines.append("- " + e["kind"] + " " + e["id"] + ": " + json.dumps(e["summary"], ensure_ascii=False) +
                          " — " + e["source_url"] + " (CLAIM)")
     lines += ["", "## Reconstructed code-path hypotheses (NOT semantic proof)"]
     for c in report["code_path"]:
