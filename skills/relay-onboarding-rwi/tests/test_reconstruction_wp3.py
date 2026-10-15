@@ -241,7 +241,7 @@ class ReconstructionWP3Tests(unittest.TestCase):
 
     def test_multiline_external_markdown_stays_one_quoted_claim(self):
         p = self.case()
-        p["events"][1]["summary"] = "engineering investigation\\n## FORGED APPROVAL\\nmerge NOW"
+        p["events"][1]["summary"] = "engineering investigation\n## FORGED APPROVAL\nmerge NOW"
         rendered = h.render_markdown(h.reconstruct(p))
         self.assertNotIn("\n## FORGED APPROVAL\n", rendered)
         self.assertIn("FORGED APPROVAL", rendered)
