@@ -1,0 +1,69 @@
+name: ONB-RWI WP4 pinned byte custody
+
+on:
+  push:
+    branches:
+      - feat/onb391-wp4-byte-custody
+    paths:
+      - 'skills/relay-onboarding-rwi/attestation/**'
+      - 'skills/relay-onboarding-rwi/tests/test_attestation_wp4.py'
+      - '.github/workflows/onb-rwi-wp4.yml'
+  pull_request:
+    paths:
+      - 'skills/relay-onboarding-rwi/attestation/**'
+      - 'skills/relay-onboarding-rwi/tests/test_attestation_wp4.py'
+      - '.github/workflows/onb-rwi-wp4.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-custody:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile pure attestor and run negative tests
+        run: |
+          python -m py_compile skills/relay-onboarding-rwi/attestation/git_bytes.py
+          python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_attestation_wp4.py' -v
+      - name: Verify authentic Owner-declared CII original hashes at pinned git commit
+        env:
+          GITHUB_TOKEN: ''
+          GH_TOKEN: ''
+        run: |
+          set -euo pipefail
+          tool='skills/relay-onboarding-rwi/attestation/git_bytes.py'
+          repo='reallakshman19/XML_Compare_Utilities'
+          rev='040f2f88b54a746808486615230e5a8625d04527'
+          python "$tool" --repo "$repo" --rev "$rev" --path Benchmark/S1.CII --claimed-sha256 9a9cb14db4c13f5aac41cc74a60e7e528722eb5003d09f07192762ab6bfb1a2b > "$RUNNER_TEMP/s1.json"
+          python "$tool" --repo "$repo" --rev "$rev" --path Benchmark/S2.CII --claimed-sha256 7ec48b76b65eedfd5ecc9c8e8feca1a45dd8c83721a68b53aa0db3363e6d27fd > "$RUNNER_TEMP/s2.json"
+          python "$tool" --repo "$repo" --rev "$rev" --path Benchmark/S3.CII --claimed-sha256 c2143b31c482158ac5514d2709406c14a9179e656277c654e932bb845d090caa > "$RUNNER_TEMP/s3.json"
+          python "$tool" --repo "$repo" --rev "$rev" --path Benchmark/T.CII --claimed-sha256 abfa3ffc9281fe75d4170b2d885d554cb1f120dadedae7c7ab609548b63cc060 > "$RUNNER_TEMP/target.json"
+          python - <<'PY'
+          import json,os
+          folder=os.environ['RUNNER_TEMP']
+          records=[json.load(open(os.path.join(folder,name+'.json'),encoding='utf-8')) for name in ('s1','s2','s3','target')]
+          assert all(row['comparison']=='MATCH' and row['owner_approval_verified'] is False for row in records),records
+          print('OWNER_DECLARED_CII_BYTES_MATCH', [(row['path'],row['size'],row['blob_oid']) for row in records])
+          PY
+      - name: Verify actual WP2 draft source file bytes against Git PR head
+        env:
+          GITHUB_TOKEN: ''
+          GH_TOKEN: ''
+        run: |
+          tool='skills/relay-onboarding-rwi/attestation/git_bytes.py'
+          python "$tool" --repo reallakshman19/Common --rev 7ea537738a8b32c2855b75575b8395b533acf91e --path skills/relay-onboarding-rwi/adapters/github.py --line-start 1 --line-end 20 > "$RUNNER_TEMP/source.json"
+          python - <<'PY'
+          import os,json
+          row=json.load(open(os.path.join(os.environ['RUNNER_TEMP'],'source.json'),encoding='utf-8'))
+          assert row['comparison']=='NO_OWNER_HASH'
+          assert row['line_sha256'] and row['provider_git_bytes_read'] is True
+          assert row['semantic_code_path_verified'] is False and row['execution_authorized'] is False
+          print('WP2_CANDIDATE_CODE_BYTES_OBSERVED',row['blob_oid'],row['size'],row['line_sha256'])
+          PY
