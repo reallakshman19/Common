@@ -1,0 +1,48 @@
+name: ONB-RWI WP3 read-only reconstruction tests
+
+on:
+  push:
+    branches:
+      - feat/onb391-wp3-source-reconstruction
+    paths:
+      - 'skills/relay-onboarding-rwi/reconstruction/**'
+      - 'skills/relay-onboarding-rwi/schemas/reconstruction.v1.schema.json'
+      - 'skills/relay-onboarding-rwi/tests/test_reconstruction_wp3.py'
+      - 'skills/relay-onboarding-rwi/examples/coordinatorlandingpage-public-reconstruction.json'
+      - '.github/workflows/onb-rwi-wp3.yml'
+  pull_request:
+    paths:
+      - 'skills/relay-onboarding-rwi/reconstruction/**'
+      - 'skills/relay-onboarding-rwi/schemas/reconstruction.v1.schema.json'
+      - 'skills/relay-onboarding-rwi/tests/test_reconstruction_wp3.py'
+      - 'skills/relay-onboarding-rwi/examples/coordinatorlandingpage-public-reconstruction.json'
+      - '.github/workflows/onb-rwi-wp3.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pure-reconstruction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout untrusted candidate without credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile and parse schema
+        run: |
+          python -m py_compile skills/relay-onboarding-rwi/reconstruction/history.py skills/relay-onboarding-rwi/reconstruction/source.py
+          python -c 'import json; json.load(open("skills/relay-onboarding-rwi/schemas/reconstruction.v1.schema.json"))'
+      - name: Run 41 negative and positive offline reconstruction tests
+        run: python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_reconstruction_wp3.py' -v
+      - name: Render public-source-only partial history without network or secrets
+        run: |
+          python skills/relay-onboarding-rwi/reconstruction/history.py --input skills/relay-onboarding-rwi/examples/coordinatorlandingpage-public-reconstruction.json --markdown > "$RUNNER_TEMP/onb-wp3-partial.md"
+          grep -F 'CoordinatorLandingpage' "$RUNNER_TEMP/onb-wp3-partial.md" > /dev/null
+          grep -F 'CURRENT_CODE_TRACE_MISSING' "$RUNNER_TEMP/onb-wp3-partial.md" > /dev/null
+          grep -F 'NOT_EVALUATED' "$RUNNER_TEMP/onb-wp3-partial.md" > /dev/null
+          grep -F 'NOT VERIFIED' "$RUNNER_TEMP/onb-wp3-partial.md" > /dev/null

@@ -1,0 +1,92 @@
+{
+  "schema": "onboarding.reconstruction/v1",
+  "target": {
+    "repository": "reallakshman19/Common",
+    "issue": 391,
+    "source_heads": {
+      "reallakshman19/Common": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "reallakshman19/CoordinatorLandingpage": "5c7497386f0e45082284e3dc598814ef0a5b7c8b"
+    },
+    "candidate_heads": {
+      "https://github.com/reallakshman19/Common/pull/394": "7ea537738a8b32c2855b75575b8395b533acf91e"
+    },
+    "observed_at": "2026-10-15T16:00:00Z"
+  },
+  "events": [
+    {
+      "id": "L1",
+      "kind": "INVESTIGATION",
+      "repository": "reallakshman19/CoordinatorLandingpage",
+      "source_sha": "5c7497386f0e45082284e3dc598814ef0a5b7c8b",
+      "source_url": "https://github.com/reallakshman19/CoordinatorLandingpage/issues/21",
+      "recorded_at": "2026-10-15T10:34:52Z",
+      "actor": "REPORTED_OWNER",
+      "summary": "Issue #21 directs that the existing landing page become live, with two-way multi-project feedback, no revamp and no core protocol change.",
+      "visibility": "PUBLIC",
+      "supersedes": []
+    },
+    {
+      "id": "C1",
+      "kind": "ORIGINAL_PROBLEM",
+      "repository": "reallakshman19/Common",
+      "source_sha": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "recorded_at": "2026-10-15T13:51:55Z",
+      "actor": "REPORTED_OWNER",
+      "summary": "A successor needs source-first, zero-exit technical onboarding and bounded high-ROI Relay with Improvement without Owner intent drift.",
+      "visibility": "PUBLIC",
+      "supersedes": []
+    },
+    {
+      "id": "C2",
+      "kind": "OWNER_AMENDMENT",
+      "repository": "reallakshman19/Common",
+      "source_sha": "ae3c0139a46bbffcc03d9a50f3d9067d59d78633",
+      "source_url": "https://github.com/reallakshman19/Common/issues/391",
+      "recorded_at": "2026-10-15T15:25:00Z",
+      "actor": "REPORTED_OWNER",
+      "summary": "CoordinatorLandingpage #21 now supersedes Dash V2/Common #360 as the read-only UI consumer; preserve current landing page and Team Protocol.",
+      "visibility": "PUBLIC",
+      "supersedes": []
+    },
+    {
+      "id": "C3",
+      "kind": "CODE_CHANGE",
+      "repository": "reallakshman19/Common",
+      "source_sha": "7ea537738a8b32c2855b75575b8395b533acf91e",
+      "source_url": "https://github.com/reallakshman19/Common/pull/394",
+      "recorded_at": "2026-10-15T15:36:54Z",
+      "actor": "ENGINEER",
+      "summary": "Draft PR #394 implements the read-only GitHub cold successor collector and v3.6 managed-index observation without merging.",
+      "visibility": "PUBLIC",
+      "supersedes": []
+    },
+    {
+      "id": "C4",
+      "kind": "TEST_RESULT",
+      "repository": "reallakshman19/Common",
+      "source_sha": "7ea537738a8b32c2855b75575b8395b533acf91e",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38762378488",
+      "recorded_at": "2026-10-15T15:40:29Z",
+      "actor": "REVIEWER",
+      "summary": "Hosted Actions log reports 31 Python tests PASS and credential-free read-only smoke on v3.6 lab and XML Compare. This citation is not reproduced by the pure WP3 fixture.",
+      "visibility": "PUBLIC",
+      "supersedes": []
+    }
+  ],
+  "code_path": [],
+  "test_results": [
+    {
+      "id": "WP2-CI",
+      "repository": "reallakshman19/Common",
+      "candidate_sha": "7ea537738a8b32c2855b75575b8395b533acf91e",
+      "source_url": "https://github.com/reallakshman19/Common/actions/runs/38762378488",
+      "command": "python -m unittest discover -s skills/relay-onboarding-rwi/tests -p test_provider_wp2.py -v",
+      "status": "PASS",
+      "oracle": "SYNTHETIC",
+      "expected": "31 offline tests pass; two public read-only smokes succeed",
+      "observed": "Recorded by GitHub Actions job log on exact WP2 candidate, not independently re-executed by WP3"
+    }
+  ],
+  "first_verification": "Re-fetch Common #391, CoordinatorLandingpage #21 and #7, PR #394 exact head, and independently inspect the owning code path plus its current test/readback before claiming a final technical handover"
+}
