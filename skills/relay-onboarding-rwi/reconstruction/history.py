@@ -25,7 +25,7 @@ ACTORS = frozenset({"REPORTED_OWNER", "ENGINEER", "REVIEWER", "COORDINATOR", "UN
 VISIBILITY = frozenset({"PUBLIC", "RESTRICTED", "PRIVATE"})
 CODE_ROLES = frozenset({"ENTRYPOINT", "OWNING_LAYER", "DOWNSTREAM_CONSUMER", "TEST_ORACLE"})
 STATUSES = frozenset({"PASS", "FAIL", "NOT_RUN", "NOT_APPLICABLE"})
-TARGET_FIELDS = frozenset({"repository", "issue", "source_heads", "observed_at"})
+TARGET_FIELDS = frozenset({"repository", "issue", "source_heads", "candidate_heads", "observed_at"})
 EVENT_FIELDS = frozenset({"id", "kind", "repository", "source_sha", "source_url",
                           "recorded_at", "actor", "summary", "visibility", "supersedes"})
 CODE_FIELDS = frozenset({"id", "repository", "revision", "source_url", "path",
@@ -112,6 +112,19 @@ def validate(bundle):
     for repo, candidate in heads.items():
         repository(repo)
         sha(candidate)
+    candidate_heads = t["candidate_heads"]
+    if not isinstance(candidate_heads, dict):
+        raise ReconstructionError("candidate_heads must be an explicit mapping")
+    for url, rev in candidate_heads.items():
+        parts = urlsplit(url).path.strip("/").split("/") if isinstance(url, str) else []
+        if (len(parts) != 4 or parts[2] != "pull" or not parts[3].isdigit()
+                or int(parts[3]) < 1):
+            raise ReconstructionError("candidate-head key must be an exact PR URL")
+        rep = "/".join(parts[:2])
+        if rep not in heads:
+            raise ReconstructionError("candidate head outside authorized repositories")
+        source_url(url, rep)
+        sha(rev)
 
     events = b["events"]
     if not isinstance(events, list):
@@ -128,7 +141,8 @@ def validate(bundle):
             raise ReconstructionError("cross-repository history not authorized")
         sha(e["source_sha"])
         source_url(e["source_url"], rep)
-        date(e["recorded_at"])
+        if date(e["recorded_at"]) > date(t["observed_at"]):
+            raise ReconstructionError("event recorded after source observation cut")
         text(e["summary"], "summary")
         if e["kind"] not in EVENT_KINDS or e["actor"] not in ACTORS or e["visibility"] not in VISIBILITY:
             raise ReconstructionError("unknown event classification")
@@ -168,6 +182,10 @@ def validate(bundle):
         if (not isinstance(c["path"], str) or not c["path"] or c["path"].startswith("/")
                 or any(part in ("", ".", "..") for part in c["path"].split("/"))):
             raise ReconstructionError("path traversal or invalid source path")
+        expected_blob_url = ("https://github.com/" + rep + "/blob/" + c["revision"]
+                             + "/" + c["path"])
+        if c["source_url"].split("#", 1)[0] != expected_blob_url:
+            raise ReconstructionError("code URL is not bound to the claimed file and revision")
         text(c["symbol"], "symbol", 200)
         if c["role"] not in CODE_ROLES:
             raise ReconstructionError("invalid architecture role")
@@ -213,6 +231,11 @@ def reconstruct(bundle):
     b, by_id, superseded = validate(bundle)
     target = b["target"]
     heads = target["source_heads"]
+    candidates = target["candidate_heads"]
+    live = {repo: {base} for repo, base in heads.items()}
+    for url, candidate in candidates.items():
+        rep = "/".join(urlsplit(url).path.strip("/").split("/")[:2])
+        live[rep].add(candidate)
     events = sorted(by_id.values(), key=lambda e: (date(e["recorded_at"]), e["id"]))
     public = []
     for e in events:
@@ -221,7 +244,7 @@ def reconstruct(bundle):
             "id": e["id"], "kind": e["kind"], "repository": e["repository"],
             "recorded_at": e["recorded_at"], "actor_claim": e["actor"],
             "source_sha": e["source_sha"], "source_url": e["source_url"],
-            "head_matches_current": e["source_sha"] == heads[e["repository"]],
+            "head_matches_current": e["source_sha"] in live[e["repository"]],
             "superseded_by": superseded.get(e["id"]),
             "active": active, "visibility": e["visibility"],
             "summary": e["summary"] if e["visibility"] == "PUBLIC" else "[REDACTED]",
@@ -232,7 +255,7 @@ def reconstruct(bundle):
     required = [e for e in public if e["kind"] == "ORIGINAL_PROBLEM"]
     active_owner = [e for e in public if e["kind"] == "OWNER_AMENDMENT" and e["id"] in active_ids]
     failures = [r for r in b["test_results"] if r["status"] == "FAIL"]
-    active_code = [c for c in b["code_path"] if c["revision"] == heads[c["repository"]]]
+    active_code = [c for c in b["code_path"] if c["revision"] in live[c["repository"]]]
     roles = {c["role"] for c in active_code}
     gaps = []
     if not required:
@@ -258,14 +281,14 @@ def reconstruct(bundle):
         "source_url": c["source_url"], "path": c["path"], "symbol": c["symbol"],
         "revision": c["revision"], "line_start": c["line_start"],
         "line_end": c["line_end"], "line_sha256": c["line_sha256"],
-        "current_head": c["revision"] == heads[c["repository"]],
+        "current_head": c["revision"] in live[c["repository"]],
         "line_bytes_attested_by_provider": False,
         "call_edge_verified": False,
     } for c in b["code_path"]]
     tests = [{
         "id": r["id"], "repository": r["repository"],
         "candidate_sha": r["candidate_sha"],
-        "matches_current_head": r["candidate_sha"] == heads[r["repository"]],
+        "matches_current_head": r["candidate_sha"] in live[r["repository"]],
         "status_claim": r["status"], "status_provider_verified": False,
         "oracle_claim": r["oracle"], "source_url": r["source_url"],
         "command": r["command"], "expected": r["expected"],
@@ -274,7 +297,8 @@ def reconstruct(bundle):
     return {
         "schema": "onboarding.reconstructed-history/v1",
         "repository": target["repository"], "issue": target["issue"],
-        "source_heads": heads, "observed_at": target["observed_at"],
+        "source_heads": heads, "candidate_heads": candidates,
+        "observed_at": target["observed_at"],
         "status": "CONDITIONAL" if required else "BLOCKED",
         "reason_codes": sorted(set(gaps)),
         "timeline": public,
