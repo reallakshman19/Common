@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from typing import Any, Optional
 
 from .models import SourceIdentity, SourceKind
+from .pending_capture import PendingCaptureJournal
 from .report_parser import extract_report
 from .storage import SourceStore, SourceConflict
 
@@ -96,9 +97,12 @@ class GitHubSourceScanner:
     """
     PAGE_SIZE = 100
 
-    def __init__(self, store: SourceStore, reader: PublicGitHubReader):
+    def __init__(self, store: SourceStore, reader: PublicGitHubReader,
+                 pending_capture: Optional[PendingCaptureJournal] = None):
         self.store = store
         self.reader = reader
+        # Explicitly opt-in: no CASP request admission or trusted-row projection.
+        self.pending_capture = pending_capture
 
     @staticmethod
     def _state(code: int) -> str:
@@ -181,8 +185,24 @@ class GitHubSourceScanner:
                     is_comment: bool = False):
             nonlocal new, replayed
             source = self._source(reg, kind, item, issue_number, is_comment)
+            pending = None
+            if is_comment and self.pending_capture is not None:
+                # Capture raw decoded provider body and observed actor before
+                # the legacy minimum parser drops both. This is NEVER admitted
+                # registration, correlated evidence or authenticated identity.
+                provider_user = item.get("user")
+                actor = ({"id": str(provider_user.get("id")),
+                          "login": provider_user.get("login")}
+                         if isinstance(provider_user, dict) else None)
+                pending = self.pending_capture.capture(
+                    uuid.uuid4().hex, source, item.get("body"), actor=actor)
             claim = extract_report(item.get("body"), source) if is_comment else None
             result = self.store.observe(source, scan_id, claim)
+            if pending is not None:
+                # Separate commits: crash here leaves a durable PENDING orphan,
+                # never an admitted CASP request or SOURCE_CORRELATED row.
+                self.pending_capture.mark_source_observed(
+                    pending["capture_id"], scan_id, result)
             if result == "REPLAY":
                 replayed += 1
             else:
