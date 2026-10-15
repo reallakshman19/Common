@@ -276,11 +276,17 @@ class WP2ProviderTests(unittest.TestCase):
         self.assertEqual(transport.opener.req.get_method(), "GET")
 
     def test_transport_rejects_foreign_or_path_traversal(self):
+        class NoNetwork:
+            def open(self, *args, **kwargs):
+                raise AssertionError("network access must not occur")
         transport = gh.HttpReadTransport()
-        with self.assertRaises(gh.SourceError):
-            transport.get("/untrusted/other")
-        with self.assertRaises(gh.SourceError):
-            transport.get("/repos/acme/demo/../secrets")
+        transport.opener = NoNetwork()
+        for path in ("/untrusted/other", "/repos/acme/demo/../secrets",
+                     "/repos/acme/demo/%2e%2e/secrets",
+                     "/repos/acme/demo/%252e%252e/secrets",
+                     "/repos/acme/demo//pulls/1"):
+            with self.subTest(path=path), self.assertRaises(gh.SourceError):
+                transport.get(path)
         self.assertIsNone(gh.NoRedirect().redirect_request(None,None,302,"Moved",{},"https://evil.invalid"))
 
     def test_hard_read_only_transport_no_post_method(self):
