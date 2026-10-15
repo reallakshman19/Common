@@ -181,6 +181,7 @@ class WP1aContractTests(unittest.TestCase):
                         "next_verification"}
         self.assertEqual(set(final["required"]), expected_wp5)
         self.assertFalse(final["additionalProperties"])
+        self.assertNotIn("READY", local["properties"]["status"]["enum"])
         self.assertEqual(final["properties"]["status"]["const"], "BLOCKED")
 
     def test_source_cannot_claim_ready_from_local_contract(self):
