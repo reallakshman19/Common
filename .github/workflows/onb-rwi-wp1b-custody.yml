@@ -44,4 +44,4 @@ jobs:
           PY
       - name: Fail-closed fixture, decision and provenance tests
         run: |
-          python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_custody.py' -v
+          python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_*.py' -v
