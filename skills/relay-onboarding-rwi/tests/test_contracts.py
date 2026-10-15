@@ -47,7 +47,7 @@ class WP1aContractTests(unittest.TestCase):
 
     def test_n02_stale_head(self):
         t, es = self.instance()
-        es[0]["assessed_sha"] = "b" * 40
+        es[0]["assessed_sha"] = "d" * 40
         result = contract.assess(t, es)
         self.assertEqual(result["status"], "STALE")
         self.assertIn("CANDIDATE_HEAD_STALE", result["reason_codes"])
@@ -126,7 +126,7 @@ class WP1aContractTests(unittest.TestCase):
         expected = {
             "target.v1.schema.json": contract.TARGET_KEYS,
             "evidence.v1.schema.json": contract.EVIDENCE_KEYS,
-            "verdict.v1.schema.json": frozenset(contract.verdict("CONDITIONAL", [],
+            "local-assessment.v1.schema.json": frozenset(contract.verdict("CONDITIONAL", [],
                                            "inspect", BASE["target"], 0)),
         }
         for name, keys in expected.items():
@@ -134,6 +134,61 @@ class WP1aContractTests(unittest.TestCase):
             with self.subTest(schema=name):
                 self.assertEqual(set(schema["required"]), keys)
                 self.assertFalse(schema["additionalProperties"])
+
+    def test_candidate_pr_head_is_not_main_head(self):
+        t, es = self.instance()
+        self.assertNotEqual(t["source_heads"]["acme/app"], t["candidate_heads"][es[0]["source_url"]])
+        result = contract.assess(t, es)
+        self.assertEqual(result["status"], "CONDITIONAL")
+        self.assertEqual(result["candidate_heads"][es[0]["source_url"]], "b" * 40)
+        self.assertEqual(result["schema"], "onboarding.local-assessment/v1")
+
+    def test_missing_pr_head_mapping_blocks(self):
+        t, es = self.instance()
+        del t["candidate_heads"][es[0]["source_url"]]
+        self.assertIn("WRONG_SCOPE", contract.assess(t, es)["reason_codes"])
+
+    def test_wrong_candidate_head_is_stale(self):
+        t, es = self.instance()
+        t["candidate_heads"][es[0]["source_url"]] = "e" * 40
+        self.assertIn("CANDIDATE_HEAD_STALE", contract.assess(t, es)["reason_codes"])
+
+    def test_foreign_pr_head_registration_blocks(self):
+        t, es = self.instance()
+        t["candidate_heads"]["https://github.com/foreign/repo/pull/9"] = "f" * 40
+        self.assertIn("TARGET_INVALID", contract.assess(t, es)["reason_codes"])
+
+    def test_unrelated_branch_head_not_sufficient(self):
+        t, es = self.instance()
+        t["candidate_heads"] = {"https://github.com/acme/app/tree/feature": "b" * 40}
+        self.assertIn("TARGET_INVALID", contract.assess(t, es)["reason_codes"])
+
+    def test_ci_on_selected_candidate_is_not_stale(self):
+        t, es = self.instance()
+        es[0]["kind"] = "CI"
+        es[0]["source_url"] = "https://github.com/acme/app/actions/runs/100"
+        self.assertEqual(contract.assess(t, es)["status"], "CONDITIONAL")
+
+    def test_report_verdict_is_not_local_assessment(self):
+        local = json.loads((ROOT / "schemas" / "local-assessment.v1.schema.json").read_text())
+        final = json.loads((ROOT / "schemas" / "verdict.v1.schema.json").read_text())
+        self.assertEqual(local["properties"]["schema"]["const"], "onboarding.local-assessment/v1")
+        self.assertEqual(final["properties"]["schema"]["const"], "onboarding.verdict/v1")
+        self.assertNotEqual(set(local["required"]), set(final["required"]))
+        expected_wp5 = {"schema","status","reason_codes","source_sha256",
+                        "report_sha256","manifest_sha256","provider_freshness_verified",
+                        "owner_approval_verified","execution_authorized","rwi_disposition",
+                        "next_verification"}
+        self.assertEqual(set(final["required"]), expected_wp5)
+        self.assertFalse(final["additionalProperties"])
+        self.assertEqual(final["properties"]["status"]["const"], "BLOCKED")
+
+    def test_source_cannot_claim_ready_from_local_contract(self):
+        t, es = self.instance()
+        assessment = contract.assess(t, es)
+        self.assertNotEqual(assessment["schema"], "onboarding.verdict/v1")
+        self.assertNotEqual(assessment["status"], "READY")
+        self.assertFalse(assessment["execution_authorized"])
 
     def test_foreign_decision_authority_ref_fails(self):
         t, es = self.instance()
