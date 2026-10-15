@@ -93,7 +93,7 @@ class HttpReadTransport:
     def get(self, path):
         if not isinstance(path, str) or not path.startswith("/repos/"):
             raise SourceError("request outside approved /repos scope")
-        if not re.fullmatch(r"/repos/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/[-A-Za-z0-9_./?&=%]+", path):
+        if not re.fullmatch(r"/repos/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:/[-A-Za-z0-9_./?&=%]+)?", path):
             raise SourceError("unsafe REST request path")
         url = "https://api.github.com" + path
         headers = {
