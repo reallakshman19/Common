@@ -1,0 +1,128 @@
+# Stress test workload fixture mapping and classification contract.
+#
+# IMPORTANT OPERATIONAL CONSTRAINTS:
+# 1. snapshot_v36.py calculates status PER TASK, not per comment.
+# 2. Never include "FIXTURE:" or custom markers in comment bodies on GitHub.
+#    lifecycle_v36.py validate_evidence() strictly enforces text == expected (canonical 8 lines);
+#    any extraneous lines cause ContractError and prematurely flag tasks as INVALID_EVIDENCE.
+# 3. All fixture assignments and wave schedules are maintained externally in this manifest.
+# 4. If a PR does not exist, GitHub API returns 404, which GithubClient.request() raises as
+#    ContractError and snapshot_v36.py records as PROVIDER_UNAVAILABLE (not UNKNOWN_PR).
+# 5. Invalid comments never overwrite previously valid evidence (tested in Wave 2 on LOAD001..LOAD150).
+# 6. Total volume: exactly 600 LIVE comments across Two Waves (300 positive + 300 negative/control).
+# 7. Live foreign-author replacement: On live GitHub with a single token, tasks LOAD241..LOAD260
+#    use live malformed syntax rejection as an equivalent negative control, ensuring 600 LIVE comments.
+#    Foreign-author filtering is executed and reported separately via the isolated simulation suite.
+
+workload_id: "V36-LOAD-FIXTURE-300"
+workload_plan_path: "skills/engineering-pr-delivery-v3.6/plans/V36-8-PLAN-01.yaml"
+workload_parent: "reallakshman19/relay-v36-stress-lab#8"
+controlling_parent: "reallakshman19/relay-v36-stress-lab#1"
+controlling_stage: "V36-1-ST03"
+total_tasks: 300
+total_live_comments: 600
+
+github_numbering_reservation:
+  rule: "GitHub shares a single sequence counter across issues and PRs."
+  parent_1: "reallakshman19/relay-v36-stress-lab#1 (Controlling test parent)"
+  stage_children: "reallakshman19/relay-v36-stress-lab#2 through #7 (ST-01..ST-06)"
+  workload_parent: "reallakshman19/relay-v36-stress-lab#8 (MUST be created before first PR)"
+  proof_pr_number: 9
+  proof_pr_url: "https://github.com/reallakshman19/relay-v36-stress-lab/pull/9"
+  target_prs: 20
+  pr_discovery_rule: "Proof PR #9 counts as PR 1 of 20. The remaining 19 PRs are discovered dynamically from GitHub (client.request('GET', '/pulls') or API create response), never hardcoded."
+
+foreign_author_control_policy:
+  live_replacement: "To preserve 600 LIVE comments without requiring a secondary GitHub account, tasks V36-8-LOAD241..LOAD260 are executed as live malformed-syntax negative controls."
+  isolated_simulation: "Foreign-author filtering (actor.login != owner) is executed separately via the isolated simulation test suite (test_foreign_author_simulation_isolated) and reported as SIMULATED_CONTROL."
+  optional_live_dual_identity: "If GITHUB_TOKEN_2 is explicitly provided, tasks V36-8-LOAD241..LOAD260 may optionally be posted live by the secondary account."
+
+two_wave_execution_schedule:
+  wave_1:
+    description: "Initial baseline evidence and live control injection (300 live comments)"
+    total_live_comments: 300
+    subsets:
+      positive_controls:
+        task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
+        count: 150
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "Positive valid canonical 8-line record referencing live Proof PR #9"
+        candidate_sha: "<LIVE_PR_HEAD_SHA>"
+        tests: "84/84"
+        author: "reallakshman19 (Owner)"
+        expected_status: "CURRENT_EVIDENCE"
+      stale_candidate_sha:
+        task_range: ["V36-8-LOAD151", "V36-8-LOAD200"]
+        count: 50
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "Live comment with candidate SHA pointing to prior commit superseded by PR head"
+        expected_status: "STALE_EVIDENCE"
+      unverified_proof:
+        task_range: ["V36-8-LOAD201", "V36-8-LOAD240"]
+        count: 40
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "Live comments: 20 commit Proof URLs (/commit/<sha>) + 20 mismatched PR commit URLs (/pull/9/commits/<sha1> != sha2)"
+        expected_status: "UNVERIFIED_PROOF"
+      live_malformed_syntax_rejection:
+        task_range: ["V36-8-LOAD241", "V36-8-LOAD260"]
+        count: 20
+        verification_mode: "LIVE_VERIFIED (equivalent live negative control replacing foreign author)"
+        comment_nature: "Live comments with malformed 8-line format (extra lines, truncated fields, corrupt header) causing ContractError in validate_evidence()"
+        expected_status: "INVALID_EVIDENCE"
+      live_task_outcome_mismatch:
+        task_range: ["V36-8-LOAD261", "V36-8-LOAD280"]
+        count: 20
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "Live comments with declared task ID or outcome mismatching plan (e.g. outcome O3 vs declared O4)"
+        expected_status: "INVALID_EVIDENCE"
+      nonexistent_pr:
+        task_range: ["V36-8-LOAD281", "V36-8-LOAD300"]
+        count: 20
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "Live comments referencing non-existent PR /pull/99999 (HTTP 404)"
+        expected_status: "PROVIDER_UNAVAILABLE"
+
+    wave_1_snapshot_oracle:
+      CURRENT_EVIDENCE: 150
+      STALE_EVIDENCE: 50
+      UNVERIFIED_PROOF: 40
+      INVALID_EVIDENCE: 40
+      PROVIDER_UNAVAILABLE: 20
+      verified_complete: 0
+      total_tasks_evaluated: 300
+
+  wave_2:
+    description: "Invariance verification and recovery (300 live comments)"
+    total_live_comments: 300
+    subsets:
+      adversarial_non_overwrite:
+        task_range: ["V36-8-LOAD001", "V36-8-LOAD150"]
+        count: 150
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "Live invalid/malformed comments posted to tasks already having valid Wave 1 evidence"
+        expected_behavior: "snapshot_v36.py discards invalid comments; eligible[-1] remains Wave 1 valid comment"
+        expected_status: "CURRENT_EVIDENCE"
+        verified_invariant: "Invalid comments MUST NOT overwrite or degrade previously valid evidence"
+      positive_recovery:
+        task_range: ["V36-8-LOAD151", "V36-8-LOAD300"]
+        count: 150
+        verification_mode: "LIVE_VERIFIED"
+        comment_nature: "Fresh live canonical 8-line records pointing to live PR #9 with current head SHA"
+        expected_behavior: "New valid comments added to eligible; chronologically supersede prior negative/control states"
+        expected_status: "CURRENT_EVIDENCE"
+        verified_invariant: "Fresh valid evidence cleanly supersedes prior stale/invalid/error states"
+
+    wave_2_snapshot_oracle:
+      CURRENT_EVIDENCE: 300
+      STALE_EVIDENCE: 0
+      UNVERIFIED_PROOF: 0
+      INVALID_EVIDENCE: 0
+      PROVIDER_UNAVAILABLE: 0
+      verified_complete: 0
+      total_tasks_evaluated: 300
+
+workload_summary:
+  total_positive_live_comments: 300
+  total_negative_live_comments: 300
+  grand_total_live_comments: 600
+  synthetic_evidence_notice: "Synthetic evidence fixtures are restricted to test validation; they NEVER represent Owner delivery acceptance"

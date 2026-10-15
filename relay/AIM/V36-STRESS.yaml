@@ -1,0 +1,46 @@
+# Sticky label proposal: the Owner's aim for V3.6 full-scale stress testing.
+# Proposed by coordinator/agent via change card CP-V36-STRESS-01; pending Owner approval.
+# Guidance (watch, not_now, notes) is versioned: an update to directives is a change of the label.
+work: "V36-STRESS"
+repository: "reallakshman19/Common"
+engineering_critical: "critical"
+version: "1.0.0"
+label_sha: "9f8e7d6"
+label:
+  problem: "We do not know whether the merged v3.6 lifecycle can reliably sustain large, concurrent, real GitHub workloads without data loss, race conditions, or performance degradation."
+  main_aim: "Demonstrate that v3.6 manages 300 real child issues, 600 evidence cases, 20 PRs, and 8 concurrent workers in a dedicated disposable lab with zero duplicate tasks and exact readback."
+  outcomes:
+    O1: "Progressive decomposition scales accurately from 20 to 300 child issues with complete pagination and stable indices"
+    O2: "High-volume TASK_EVIDENCE correctly verifies positive cases while rejecting stale, invalid, and adversarial comments"
+    O3: "Issue and parent progress titles update reliably under multi-worker concurrency and recover from API faults"
+    O4: "PR titles accurately project evidence status across draft, ready, closed, and merged lifecycles"
+    O5: "A cold successor reconstructs complete state from GitHub alone and sustains multi-cycle endurance"
+  owner_constraints:
+    - "Dedicated disposable lab only: reallakshman19/relay-v36-stress-lab; never touch Common or the accepted v3.6 benchmark lab"
+    - "All operations require explicit --label, --plan, --lab, and write operations require --apply --confirm-scope"
+    - "Separate the 6 test-stage tasks from the 300 generated workload tasks; progress denominator strictly 6"
+    - "Preserve truthful evidence: positive cases must use genuinely verified test facts; synthetic evidence marked as fixtures"
+    - "Rate-limited pacing respecting GitHub secondary limits; zero intentional spamming or API denial of service"
+    - "Zero-tolerance gates: 0 unauthorized writes, 0 duplicate child tasks, 0 false evidence acceptances, 0 title readback mismatches"
+  task_outcome: "O1-O5"
+  task_aim: "Execute full-scale stress test plan V36-STRESS-PLAN-01 across phases ST-01 through ST-06 on reallakshman19/relay-v36-stress-lab."
+  done_when: "All six stages (ST-01 to ST-06) pass their respective acceptance gates at declared scale on reallakshman19/relay-v36-stress-lab with a comprehensive machine-readable report."
+guidance:
+  not_now:
+    - "Executing untested third-party stress frameworks"
+    - "Merging stress test artifacts into production Common main branch"
+    - "Executing ST-01 through ST-06 before Owner approval and lab creation"
+  watch:
+    - "GitHub REST API secondary content-creation rate limits"
+    - "Cascading event triggers amplifying GitHub Actions runner consumption"
+    - "Race conditions during concurrent child issue decomposition"
+    - "False trust of non-owner comment authors"
+    - "Inflating progress by confusing 300 workload fixtures with stage milestones"
+  notes:
+    - "Writable lab: reallakshman19/relay-v36-stress-lab (proposed disposable lab; requires Owner creation and write authorization)"
+    - "Baseline source: skills/engineering-pr-delivery-v3.6"
+    - "Zero mutations allowed to reallakshman19/relay-v36-e2e-lab or reallakshman19/Common"
+bindings:
+  - "Stress_Lab:1 coordination/Stress_Lab/Tab1_Full_Scale_Stress_Testing"
+history:
+  - "v1.0.0-draft · 2026-10-12 18:55 · propose · proposed stress test label for V36-STRESS-PLAN-01 · CP-V36-STRESS-01 · pending Owner approval"

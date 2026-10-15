@@ -1,0 +1,43 @@
+name: v36-stress-lab-publisher
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  issue_comment:
+    types: [created, edited]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  update-titles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Common Baseline
+        uses: actions/checkout@v4
+        with:
+          repository: reallakshman19/Common
+          ref: proposal/v36-stress-plan-01
+          path: common
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install --disable-pip-version-check PyYAML
+
+      - name: Run V3.6 Publisher
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python common/skills/engineering-pr-delivery-v3.6/scripts/publisher_v36.py \
+            --label common/relay/AIM/V36-STRESS.yaml \
+            --plan common/skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-02.yaml \
+            --lab ${{ github.repository }} \
+            --apply \
+            --confirm-scope "${{ github.repository }}#1"
