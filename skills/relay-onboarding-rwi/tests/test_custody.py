@@ -45,12 +45,50 @@ class CustodyTests(unittest.TestCase):
         b=self.fresh();c=b["custody"][0]
         import hashlib
         c["claimed_sha256"]=hashlib.sha256(b"original").hexdigest()
-        self.assertEqual(m.verify_bytes(c,b"original")["verification"],"BYTES_VERIFIED")
+        self.assertEqual(m.verify_bytes(c,b"original")["comparison"],"SUPPLIED_BYTES_MATCH")
         self.assertFalse(m.verify_bytes(c,b"original")["semantic_owner_acceptance"])
-        self.assertEqual(m.verify_bytes(c,b"changed")["verification"],"MISMATCH")
+        self.assertEqual(m.verify_bytes(c,b"changed")["comparison"],"SUPPLIED_BYTES_MISMATCH")
 
     def test_self_asserted_verified_rejected(self):
         b=self.fresh();b["custody"][0]["verification"]="BYTES_VERIFIED"
+        with self.assertRaises(m.InvalidReceipt):m.validate_bundle(b)
+
+    def test_unclaimed_original_bytes_never_count_as_matching(self):
+        observation=m.verify_bytes(self.fresh()["custody"][0],b"original")
+        self.assertEqual(observation["comparison"],"UNCLAIMED_BYTES")
+        self.assertFalse(observation["source_git_blob_verified"])
+        self.assertFalse(observation["provider_authenticated"])
+
+    def test_caller_claimed_mismatch_not_admitted_as_observed_status(self):
+        b=self.fresh();b["custody"][0]["verification"]="MISMATCH"
+        with self.assertRaises(m.InvalidReceipt):m.validate_bundle(b)
+
+    def test_hash_match_is_not_provider_source_attestation(self):
+        b=self.fresh();c=b["custody"][0]
+        import hashlib
+        c["claimed_sha256"]=hashlib.sha256(b"original").hexdigest()
+        observed=m.verify_bytes(c,b"original")
+        self.assertEqual(observed["schema"],"onboarding.supplied-byte-comparison/v1")
+        self.assertEqual(observed["comparison"],"SUPPLIED_BYTES_MATCH")
+        self.assertFalse(observed["source_git_blob_verified"])
+        self.assertFalse(observed["provider_authenticated"])
+        self.assertFalse(observed["semantic_owner_acceptance"])
+        self.assertFalse(observed["execution_authorized"])
+
+    def test_observation_schema_fields_are_exact(self):
+        b=self.fresh()
+        observed=m.verify_bytes(b["custody"][0],b"untrusted")
+        import json
+        schema=json.loads((root/"schemas"/"supplied-byte-comparison.v1.schema.json").read_text())
+        self.assertEqual(set(schema["required"]),set(observed))
+        self.assertFalse(schema["additionalProperties"])
+        self.assertEqual(schema["properties"]["schema"]["const"],observed["schema"])
+        claimed=json.loads((root/"schemas"/"custody.v1.schema.json").read_text())
+        self.assertNotIn("BYTES_VERIFIED",claimed["properties"]["verification"]["enum"])
+        self.assertNotIn("MISMATCH",claimed["properties"]["verification"]["enum"])
+
+    def test_source_traversal_link_not_authoritative(self):
+        b=self.fresh();b["custody"][0]["source_url"]="https://github.com/acme/app/blob/../secrets"
         with self.assertRaises(m.InvalidReceipt):m.validate_bundle(b)
 
     def test_path_traversal_rejected(self):
