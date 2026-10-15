@@ -251,6 +251,38 @@ class WP2ProviderTests(unittest.TestCase):
         self.assertFalse(data["prs"][0]["candidate_accepted"])
         self.assertFalse(data["owner_acceptance_verified"])
 
+    def test_actual_rest_root_repo_metadata_allowed(self):
+        """Regression: GitHub's GET /repos/owner/repo has no suffix."""
+        class Reply:
+            headers = {}
+            def __init__(self, url):
+                self.url = url
+            def __enter__(self):
+                return self
+            def __exit__(self, *_):
+                return False
+            def geturl(self):
+                return self.url
+            def read(self, size):
+                return b'{"full_name":"acme/demo","default_branch":"main"}'
+        class FakeOpener:
+            def open(self, req, timeout):
+                self.req = req
+                return Reply(req.full_url)
+        transport = gh.HttpReadTransport()
+        transport.opener = FakeOpener()
+        payload, link = transport.get(BASE)
+        self.assertEqual(payload["full_name"], "acme/demo")
+        self.assertEqual(transport.opener.req.get_method(), "GET")
+
+    def test_transport_rejects_foreign_or_path_traversal(self):
+        transport = gh.HttpReadTransport()
+        with self.assertRaises(gh.SourceError):
+            transport.get("/untrusted/other")
+        with self.assertRaises(gh.SourceError):
+            transport.get("/repos/acme/demo/../secrets")
+        self.assertIsNone(gh.NoRedirect().redirect_request(None,None,302,"Moved",{},"https://evil.invalid"))
+
     def test_hard_read_only_transport_no_post_method(self):
         self.assertFalse(hasattr(gh.HttpReadTransport(), "post"))
         self.assertFalse(hasattr(gh.HttpReadTransport(), "patch"))
