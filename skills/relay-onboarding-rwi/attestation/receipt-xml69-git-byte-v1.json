@@ -1,0 +1,54 @@
+{
+  "schema": "onboarding.original-byte-receipt/v1",
+  "status": "GIT_BYTES_AND_DECLARED_HASHES_MATCHED",
+  "source_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/69",
+  "repository": "reallakshman19/XML_Compare_Utilities",
+  "pinned_commit": "040f2f88b54a746808486615230e5a8625d04527",
+  "verification_run": "https://github.com/reallakshman19/Common/actions/runs/38774452417",
+  "observations": [
+    {
+      "path": "Benchmark/S1.CII",
+      "size": 108330,
+      "blob_oid": "73c49165b9d33a8c776ef76f480efec3a90e0c93",
+      "sha256": "9a9cb14db4c13f5aac41cc74a60e7e528722eb5003d09f07192762ab6bfb1a2b"
+    },
+    {
+      "path": "Benchmark/S2.CII",
+      "size": 90961,
+      "blob_oid": "a04622553720cb41a6fc2a4b85d8290eac7a3b0a",
+      "sha256": "7ec48b76b65eedfd5ecc9c8e8feca1a45dd8c83721a68b53aa0db3363e6d27fd"
+    },
+    {
+      "path": "Benchmark/S3.CII",
+      "size": 90942,
+      "blob_oid": "a20b1ab87dd4e854cf2f453f8fd206be4b566b42",
+      "sha256": "c2143b31c482158ac5514d2709406c14a9179e656277c654e932bb845d090caa"
+    },
+    {
+      "path": "Benchmark/T.CII",
+      "size": 2866002,
+      "blob_oid": "96b4a4b12bf66bcb0264c56e7767a857c4cc11e6",
+      "sha256": "abfa3ffc9281fe75d4170b2d885d554cb1f120dadedae7c7ab609548b63cc060"
+    }
+  ],
+  "additional_code_source": {
+    "repository": "reallakshman19/Common",
+    "commit": "7ea537738a8b32c2855b75575b8395b533acf91e",
+    "path": "skills/relay-onboarding-rwi/adapters/github.py",
+    "blob_oid": "a687db2fdb0514319b5994a43552fa0603380c0e",
+    "size": 17505,
+    "line_range": [
+      1,
+      20
+    ],
+    "line_sha256": "93ee981fe01c0d27f1c41eafd08a650e5f11482787bc5ea14304a96bd8cbbe0d"
+  },
+  "limitations": [
+    "individual file identity only; source-set aggregate digest not verified",
+    "TEXPECTED partial postimage not independently semantically qualified",
+    "not complete PS-to-SL Owner golden or 70-percent acceptance",
+    "does not attest runtime call graph or Owner approvals"
+  ],
+  "owner_semantic_acceptance": false,
+  "execution_authorized": false
+}
