@@ -1,62 +1,65 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/reallakshman19/Common/blob/main/skills/relay-onboarding-rwi/schemas/verdict.v1.schema.json",
-  "title": "ONB-RWI conservative local verdict v1",
+  "title": "ONB-RWI WP5 full report-readiness verdict v1 (BLOCKED without Owner admission)",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schema",
     "status",
     "reason_codes",
-    "next_action",
+    "source_sha256",
+    "report_sha256",
+    "manifest_sha256",
+    "provider_freshness_verified",
+    "owner_approval_verified",
     "execution_authorized",
-    "source_basis",
-    "evidence_count",
-    "refreshed_live"
+    "rwi_disposition",
+    "next_verification"
   ],
   "properties": {
     "schema": {
       "const": "onboarding.verdict/v1"
     },
     "status": {
-      "enum": [
-        "READY",
-        "CONDITIONAL",
-        "BLOCKED",
-        "STALE"
-      ]
+      "const": "BLOCKED"
     },
     "reason_codes": {
       "type": "array",
       "uniqueItems": true,
+      "minItems": 1,
       "items": {
         "type": "string",
         "minLength": 1
       }
     },
-    "next_action": {
+    "source_sha256": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "report_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "provider_freshness_verified": {
+      "const": false
+    },
+    "owner_approval_verified": {
+      "const": false
     },
     "execution_authorized": {
       "const": false
     },
-    "source_basis": {
-      "type": "object",
-      "propertyNames": {
-        "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
-      },
-      "additionalProperties": {
-        "type": "string",
-        "pattern": "^[0-9a-f]{40}$"
-      }
+    "rwi_disposition": {
+      "const": "NOT_EVALUATED"
     },
-    "evidence_count": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "refreshed_live": {
-      "const": false
+    "next_verification": {
+      "type": "string",
+      "minLength": 1
     }
   }
 }
