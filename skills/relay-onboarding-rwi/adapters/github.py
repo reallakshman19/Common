@@ -95,6 +95,16 @@ class HttpReadTransport:
             raise SourceError("request outside approved /repos scope")
         if not re.fullmatch(r"/repos/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:/[-A-Za-z0-9_./?&=%]+)?", path):
             raise SourceError("unsafe REST request path")
+        # Reject traversal and double-encoded traversal before any GET or token forwarding.
+        raw_path = path.split("?", 1)[0]
+        if "//" in raw_path:
+            raise SourceError("unsafe REST path component")
+        for component in raw_path.split("/")[1:]:
+            decoded = component
+            for _ in range(2):
+                decoded = urllib.parse.unquote(decoded)
+                if any(part in ("", ".", "..") for part in decoded.split("/")):
+                    raise SourceError("unsafe REST path component")
         url = "https://api.github.com" + path
         headers = {
             "Accept": "application/vnd.github+json",
