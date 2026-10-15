@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/reallakshman19/Common/blob/main/skills/relay-onboarding-rwi/schemas/target.v1.schema.json",
-  "title": "ONB-RWI target v1 (caller-supplied binding, not provider attestation)",
+  "title": "ONB-RWI target v1, explicit main and PR candidate cut (source-reported only)",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -11,6 +11,7 @@
     "work_id",
     "mode",
     "source_heads",
+    "candidate_heads",
     "source_health",
     "owner_decision",
     "observed_at"
@@ -81,6 +82,16 @@
     "observed_at": {
       "type": "string",
       "format": "date-time"
+    },
+    "candidate_heads": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^https://github\\.com/"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
     }
   }
 }
