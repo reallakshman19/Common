@@ -1,0 +1,30 @@
+# INACTIVE read-only skeleton. It does not admit, deliver, reply or start agents.
+# Copy only as part of an authorized, tested intake implementation.
+name: CASP source notification
+on:
+  issue_comment:
+    types: [created, edited, deleted]
+  repository_dispatch:
+    types: [casp-source-notification-v1]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read untrusted event as data; record no delivery claim
+        run: |
+          python3 - <<'PY'
+          import json, os
+          with open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8') as stream:
+              event = json.load(stream)
+          print(json.dumps({
+              'event_name': os.environ['GITHUB_EVENT_NAME'],
+              'repository_id': event.get('repository', {}).get('id'),
+              'source_id': event.get('comment', {}).get('id'),
+              'intake': 'NOT_IMPLEMENTED',
+              'delivery': 'NOT_ATTEMPTED'
+          }))
+          PY

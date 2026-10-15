@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "const": "1.0.0"
+    },
+    "event_id": {
+      "$ref": "common.schema.json#/$defs/uuid"
+    },
+    "message_id": {
+      "$ref": "common.schema.json#/$defs/uuid"
+    },
+    "repository": {
+      "$ref": "common.schema.json#/$defs/repository"
+    },
+    "issue_number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "comment_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "actor": {
+      "type": "object",
+      "properties": {"id": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[1-9][0-9]{0,19}$"}, "login": {"type": "string", "minLength": 1, "maxLength": 128}},
+      "required": ["id", "login"],
+      "additionalProperties": false
+    },
+    "source_created_at": {
+      "$ref": "common.schema.json#/$defs/instant"
+    },
+    "source_updated_at": {
+      "$ref": "common.schema.json#/$defs/instant"
+    },
+    "observed_at": {
+      "$ref": "common.schema.json#/$defs/instant"
+    },
+    "source_body_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "envelope_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "source_action": {
+      "enum": ["CREATED", "EDITED", "DELETED", "READBACK"]
+    },
+    "observation_method": {
+      "enum": ["AUTHENTICATED_PROVIDER_READ", "MANUAL_PROVIDER_READ"]
+    },
+    "observation_proof_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "required": [
+    "protocol_version",
+    "event_id",
+    "message_id",
+    "repository",
+    "issue_number",
+    "comment_id",
+    "actor",
+    "source_created_at",
+    "source_updated_at",
+    "observed_at",
+    "source_body_sha256",
+    "envelope_sha256",
+    "source_action",
+    "observation_method",
+    "observation_proof_ref"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
