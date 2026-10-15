@@ -21,7 +21,6 @@
     },
     "status": {
       "enum": [
-        "READY",
         "CONDITIONAL",
         "BLOCKED",
         "STALE"
