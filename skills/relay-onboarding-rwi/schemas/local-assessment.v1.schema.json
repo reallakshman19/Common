@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/reallakshman19/Common/blob/main/skills/relay-onboarding-rwi/schemas/local-assessment.v1.schema.json",
+  "title": "ONB-RWI local source-pointer assessment v1 (NOT report readiness)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "reason_codes",
+    "next_action",
+    "execution_authorized",
+    "source_basis",
+    "evidence_count",
+    "refreshed_live",
+    "candidate_heads"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.local-assessment/v1"
+    },
+    "status": {
+      "enum": [
+        "CONDITIONAL",
+        "BLOCKED",
+        "STALE"
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "next_action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_authorized": {
+      "const": false
+    },
+    "source_basis": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    },
+    "evidence_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "refreshed_live": {
+      "const": false
+    },
+    "candidate_heads": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^https://github\\.com/"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    }
+  }
+}

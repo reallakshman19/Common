@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/reallakshman19/Common/blob/main/skills/relay-onboarding-rwi/schemas/target.v1.schema.json",
+  "title": "ONB-RWI target v1, explicit main and PR candidate cut (source-reported only)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "repository",
+    "issue",
+    "work_id",
+    "mode",
+    "source_heads",
+    "candidate_heads",
+    "source_health",
+    "owner_decision",
+    "observed_at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.target/v1"
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "issue": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "work_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+    },
+    "mode": {
+      "const": "READ_ONLY"
+    },
+    "source_heads": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    },
+    "source_health": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "UNAVAILABLE",
+        "UNKNOWN"
+      ]
+    },
+    "owner_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "ref"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PRESENT",
+            "UNKNOWN",
+            "CONFLICT"
+          ]
+        },
+        "ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "candidate_heads": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^https://github\\.com/"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    }
+  }
+}
