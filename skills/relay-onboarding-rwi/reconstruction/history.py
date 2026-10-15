@@ -240,14 +240,18 @@ def reconstruct(bundle):
     public = []
     for e in events:
         active = e["id"] not in superseded
+        is_public = e["visibility"] == "PUBLIC"
         public.append({
-            "id": e["id"], "kind": e["kind"], "repository": e["repository"],
-            "recorded_at": e["recorded_at"], "actor_claim": e["actor"],
-            "source_sha": e["source_sha"], "source_url": e["source_url"],
-            "head_matches_current": e["source_sha"] in live[e["repository"]],
+            "id": e["id"], "kind": e["kind"],
+            "repository": e["repository"] if is_public else "[REDACTED]",
+            "recorded_at": e["recorded_at"] if is_public else None,
+            "actor_claim": e["actor"] if is_public else "UNKNOWN",
+            "source_sha": e["source_sha"] if is_public else None,
+            "source_url": e["source_url"] if is_public else "[REDACTED_SOURCE]",
+            "head_matches_current": e["source_sha"] in live[e["repository"]] if is_public else None,
             "superseded_by": superseded.get(e["id"]),
             "active": active, "visibility": e["visibility"],
-            "summary": e["summary"] if e["visibility"] == "PUBLIC" else "[REDACTED]",
+            "summary": e["summary"] if is_public else "[REDACTED]",
             "provider_verified": False,
             "owner_approval_verified": False
         })
