@@ -301,7 +301,8 @@ def public_projection(snapshot):
     """Remove raw managed-index bodies; preserve digest and markers for audit."""
     d = json.loads(json.dumps(snapshot))
     d["v36_index_candidates"] = [
-        {k: v for k, v in index.items() if k != "body"}
+        {**{k: v for k, v in index.items() if k not in ("body", "markers")},
+         "index_marker_count": len(index.get("markers", []))}
         for index in d["v36_index_candidates"]]
     return d
 
