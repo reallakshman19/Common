@@ -215,7 +215,7 @@ class SourceCustodyTests(unittest.TestCase):
             c.audit(doc, client)
 
     def test_real_repository_fixture_is_pinned_but_cannot_grant_acceptance(self):
-        source = ROOT / "tests" / "fixtures" / "c2-3d-firstpass-nc-pinned.json"
+        source = SOURCE.parents[1] / "tests" / "fixtures" / "c2-3d-firstpass-nc-pinned.json"
         entry = json.loads(source.read_text(encoding="utf-8"))
         c.validate_manifest(entry)
         self.assertEqual(entry["repository"], "reallakshman19/3D_Converters")
