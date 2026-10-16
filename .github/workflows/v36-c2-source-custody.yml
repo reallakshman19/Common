@@ -6,6 +6,8 @@ on:
       - 'skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py'
       - 'skills/engineering-pr-delivery-v3.6/tests/test_source_custody_v36.py'
       - 'skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-common-public-demo.json'
+      - 'skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-3d-firstpass-nc-pinned.json'
+      - 'skills/engineering-pr-delivery-v3.6/SOURCE_CUSTODY_C2.md'
       - '.github/workflows/v36-c2-source-custody.yml'
   workflow_dispatch:
 
