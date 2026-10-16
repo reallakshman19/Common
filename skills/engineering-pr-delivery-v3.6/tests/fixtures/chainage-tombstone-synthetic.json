@@ -1,0 +1,26 @@
+{
+  "repository": "example/tracker",
+  "nodes": [
+    {
+      "issue": 123,
+      "parent": null,
+      "state": "ACTIVE",
+      "reason": null,
+      "decision_ref": null
+    },
+    {
+      "issue": 125,
+      "parent": 123,
+      "state": "INVALID_REPORTED",
+      "reason": "Previously assigned to the wrong engineering responsibility",
+      "decision_ref": "https://github.com/example/tracker/issues/123#issuecomment-12345"
+    },
+    {
+      "issue": 126,
+      "parent": 125,
+      "state": "ACTIVE",
+      "reason": null,
+      "decision_ref": null
+    }
+  ]
+}
