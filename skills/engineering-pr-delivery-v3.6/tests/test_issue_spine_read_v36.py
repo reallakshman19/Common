@@ -85,6 +85,12 @@ class R2Tests(unittest.TestCase):
         self.assertFalse(a["may_merge_or_release"])
         self.assertFalse(a["twelve_section_recovery_complete"])
 
+    def test_reference_only_index_without_events_is_hold(self):
+        result=sp.audit(ISSUE_URL,Fake())
+        self.assertEqual(result["event_chronology"]["status"],"CHRONOLOGY_NOT_INDEXED")
+        self.assertIn("HOLD",result["status"])
+        self.assertFalse(result["owner_accepted"])
+
     def test_missing_index_holds(self):
         f=Fake();f.index_missing=True
         with self.assertRaisesRegex(sp.SpineError,"INDEX_MISSING"):
