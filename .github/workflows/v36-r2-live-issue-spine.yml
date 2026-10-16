@@ -76,6 +76,13 @@ jobs:
           assert "STOP: No approval or release inferred" in body
           print("R3_REAL_EXISTING_COLD_SUCCESSOR_ONE_URL_12_OF_12_CITED")
           PY
+      - name: Upload generated twelve-section cold handover for independent inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: v36-r3-issue400-twelve-section-handover
+          path: /tmp/v36-r3-twelve.md
+          if-no-files-found: error
+          retention-days: 14
       - name: Standalone no older Relay or draft imports
         run: |
           python3 - <<'PY'
