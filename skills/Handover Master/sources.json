@@ -1,0 +1,76 @@
+{
+  "schema": "handover-master.sources/v1",
+  "base_repository": "reallakshman19/Common",
+  "source_policy": "Always re-fetch each selected skill, schema and file from current main and verify its live blob/content SHA before applying; this index is navigational, not a second protocol.",
+  "sources": {
+    "technical": {
+      "path": "relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md",
+      "purpose": "12-section factual technical explanation, after independently authenticated Stage-1 freeze",
+      "scope": "Stage2-after-freeze only; never disclose unreleased predecessor implementation to a blind agent",
+      "owner": "Native PLAN_HANDOVER/HANDOVER_CONTEXT; template has no transaction/write authority"
+    },
+    "two_standalone": {
+      "path": "skills/two-pass-prompt-generator/SKILL.md",
+      "schema": "skills/two-pass-prompt-generator/schema.md",
+      "validator": "skills/two-pass-prompt-generator/validate.py",
+      "purpose": "Exactly two prompts: blind independent system baseline, then improve/reconcile/plan",
+      "scope": "V3.1 standalone generator; Pass 1 cannot receive task, PR, solution or implementation details"
+    },
+    "three_standalone": {
+      "path": "skills/three-pass-prompt-generator/SKILL.md",
+      "schema": "skills/three-pass-prompt-generator/schema.md",
+      "validator": "skills/three-pass-prompt-generator/validate.py",
+      "purpose": "Exactly schema-defined 0.5/1/2/2.5/3 prompts (three main passes)",
+      "scope": "Independent imagination/reality/reconciliation process; no stage grafting"
+    },
+    "v36": {
+      "path": "skills/engineering-pr-delivery-v3.6/SKILL.md",
+      "two_script": "skills/engineering-pr-delivery-v3.6/scripts/prompt_2pass_v36.py",
+      "three_script": "skills/engineering-pr-delivery-v3.6/scripts/prompt_3pass_v36.py",
+      "cold_script": "skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py",
+      "purpose": "Native O1–O5 lifecycle, cold successor and governed project-specific 2-/3-pass prompts",
+      "scope": "Requires exact Owner-approved label/plan/issue and writable lab if needed; dry-run unless explicit scoped write authorization"
+    },
+    "buddy17": {
+      "path": "skills/buddy-runner-v1-7/SKILL.md",
+      "script": "skills/buddy-runner-v1-7/scripts/buddy_runner_v17.py",
+      "purpose": "1a→1b→2 and one Xb→Y; v1.7 additionally verifies successor and peer role assumptions",
+      "scope": "Use only when explicitly selected or named by governing project; no automatically invoked next stage"
+    },
+    "buddy16": {
+      "path": "skills/buddy-runner-v1-6/SKILL.md",
+      "script": "skills/buddy-runner-v1-6/scripts/buddy_runner_v16.py",
+      "purpose": "Pinned 1a→1b→2 or Xb→Y continuity on governing projects still using v1.6",
+      "scope": "Do not silently upgrade an explicitly pinned v1.6 workflow to v1.7"
+    },
+    "onb": {
+      "path": "skills/relay-onboarding-rwi/reporting/WP5.md",
+      "compiler": "skills/relay-onboarding-rwi/reporting/compile_report.py",
+      "validator": "skills/relay-onboarding-rwi/reporting/validate_report.py",
+      "purpose": "Zero-exit twelve-section source-referenced report, manifest and fail-closed verdict",
+      "scope": "WP5 merged to main; WP1a–WP4 drafts #392–#396 NOT installed on main; RWI NOT_EVALUATED/Owner BLOCKED until proofs"
+    },
+    "v35_legacy": {
+      "path": "skills/engineering-pr-delivery-v3.5/SKILL.md",
+      "script": "skills/engineering-pr-delivery-v3.5/scripts/handover_context.py",
+      "purpose": "Historical v3.5 native handover and continuity projection",
+      "scope": "Legacy/read-only by default. Not a v3.6 dependency or chosen for new v3.6 work"
+    },
+    "observer": {
+      "path": "skills/universal-workflow-progress/SKILL.md",
+      "purpose": "Read-only observe/check status, not start a BuddyRunner or handover phase",
+      "scope": "No scheduler, Owner approval, data mutation or phase advancement"
+    },
+    "mcda": {
+      "path": "skills/software-mcda/SKILL.md",
+      "purpose": "Optional established MCDA evaluation after actual evidence and Owner-approved weights",
+      "scope": "Never use as a substitute for eligibility/Owner intent gate or demand novelty"
+    }
+  },
+  "owner_trackers": {
+    "onboarding": "https://github.com/reallakshman19/Common/issues/391",
+    "engineering_v36": "https://github.com/reallakshman19/Common/issues/341",
+    "landing": "https://github.com/reallakshman19/CoordinatorLandingpage/issues/21",
+    "landing_protocol": "https://github.com/reallakshman19/CoordinatorLandingpage/issues/7"
+  }
+}
