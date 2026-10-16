@@ -340,8 +340,9 @@ def audit(issue_url,c):
             "source_comments":links,"versioned_contracts":files,
             "event_chronology":chronology,
             "missing_or_contradicted":failures,
-            "status":("LIVE_INDEX_OBSERVED_SOURCE_AUTHORITY_UNVERIFIED" if current
-                      and not failures else "LIVE_INDEX_HOLD_STALE_OR_MISSING"),
+            "status":("LIVE_INDEX_OBSERVED_CHRONOLOGY_PROVIDER_ONLY" if current
+                      and not failures and chronology["provider_observed_contiguous"]
+                      else "LIVE_INDEX_HOLD_STALE_MISSING_OR_NO_CHRONOLOGY"),
             "verified_chain_categories":0,"owner_accepted":False,
             "semantic_accepted":False,"complete_golden_accepted":False,
             "twelve_section_recovery_complete":False,
