@@ -1,0 +1,51 @@
+name: v3.6 coding practices addendum and lossless issue-chain tests
+on:
+  push:
+    branches:
+      - docs/v36-coding-practices-addendum-400
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - 'skills/Handover Master/DECISION_GUIDE.md'
+      - '.github/workflows/v36-coding-practices-addendum.yml'
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - 'skills/Handover Master/DECISION_GUIDE.md'
+      - '.github/workflows/v36-coding-practices-addendum.yml'
+permissions:
+  contents: read
+jobs:
+  addendum-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install unchanged v3.6 requirements
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Full existing v3.6 regression and addendum negative tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: Render tombstoned middle issue without erasing its chronology
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/continuity_addendum_v36.py \
+            --chain skills/engineering-pr-delivery-v3.6/tests/fixtures/chainage-tombstone-synthetic.json \
+            > chainage-rendered.md
+          python3 - <<'PY'
+          from pathlib import Path
+          text=Path("chainage-rendered.md").read_text()
+          assert "~~[#125]" in text
+          assert text.count(" → ") == 2
+          assert "INVALID_REPORTED" in text
+          assert "issuecomment-12345" in text
+          print("V36_HISTORY_TOMBSTONE_RETAINED_ADHOC_DOES_NOT_COUNT")
+          PY
+      - name: Upload synthetically grounded chain example only
+        uses: actions/upload-artifact@v4
+        with:
+          name: v36-synthetic-struck-issue-chain-example-not-provider-verification
+          path: chainage-rendered.md
+          retention-days: 30
