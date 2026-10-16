@@ -28,13 +28,14 @@ Initial GET/JSON blob prototype handles declared files up to 16 MiB. Larger inpu
 
 ## Demonstration vs original product fixture
 
-`tests/fixtures/c2-common-public-demo.json` points to the **real** 17-byte Common v3.6 `requirements.txt` at pinned commit and Git blob. This is explicitly `DEMONSTRATION_ONLY`, **NOT** the Owner's original 3D_Converters positive/negative fixture or a complete acceptance golden. It also references Common #400 to show current provider-actor observation. C1 still reports missing original product fixtures as UNKNOWN until independently attested. The fixture is not an Owner instruction.
+`tests/fixtures/c2-common-public-demo.json` points to the **real** 17-byte Common v3.6 `requirements.txt` at pinned commit and Git blob. This is explicitly `DEMONSTRATION_ONLY`, **NOT** the Owner's original 3D_Converters positive/negative fixture or a complete acceptance golden. It also references Common #400 to show current provider-actor observation. The demonstration is not an Owner instruction. The separate `tests/fixtures/c2-3d-firstpass-nc-pinned.json` now binds five REAL checked-in `3D_Converters` files at commit `6e7f4b98e286d19598fc6cb27f007c12811fbc4d`: Firstpass XML (144,471 B), Firstpass JSON (733,806 B), NC topology XML (1,067,628 B), NC JSON (10,232,634 B), and expected condensed enriched XML (144,029 B). The last is conservatively `PARTIAL_GOLDEN`, never a complete user acceptance oracle. Git blobs, actual SHA-256 and byte lengths were independently matched in hosted [source discovery #38948899884](https://github.com/reallakshman19/Common/actions/runs/38948899884); the native C2 module itself then passed all five and observed GitHub issue #274's account actor without promoting Owner authorization in [run #38949055886](https://github.com/reallakshman19/Common/actions/runs/38949055886). This does not authenticate the Owner's separate 41-branch/423-component private session, original complete golden or final converter behaviour.
 
 ## Execution
 
 ```bash
 python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_source_custody_v36.py' -v
 python3 skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py --manifest skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-common-public-demo.json
+python3 skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py --manifest skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-3d-firstpass-nc-pinned.json
 ```
 
 Actual second command is a **live read-only GitHub API attempt** using optional `GITHUB_TOKEN` (never logs the token). Its success/failure must be reported from the real run, not inferred from offline mocked tests. Offline CI tests inject a controlled provider response and never call GitHub. Run against a trusted environment only.
@@ -46,7 +47,7 @@ Actual second command is a **live read-only GitHub API attempt** using optional 
 | C0 | DONE (inventory) | #400 source/Owner intent, accepted #341, Handover Master #398, current main and distinct CoordinatorLandingpage #49 checked |
 | C1 | CODE + CI DONE / NOT MERGED | #401 eleven-category validator reconciled into #403, source reported only |
 | C1A | CODE + CI DONE / NOT MERGED | #402 coding and lineage/ad-hoc compatibility reconciled into #403 |
-| C2 | PARTIAL IMPLEMENTATION (this PR) | Pinned Git byte/actor read-only adapter and synthetic negative tests; 16 MiB pilot; real original fixtures not certified |
+| C2 | REAL PUBLIC BYTES VERIFIED; OVERALL PARTIAL / NOT MERGED | Five Firstpass/NC/partial expected artifacts passed real GitHub byte custody and issue #274 actor observed in hosted read-only run; still missing Owner 41-branch private source, complete golden, source-specific acceptance and independent review |
 | C3 | NOT STARTED | Original intent + byte proof + actual codepath into existing `successor_v36.py`; twelve-section source-backed reconstruction |
 | C4 | NOT STARTED | Existing publisher only, lab backwards compatibility and smart human title preservation |
 | C5 | NOT STARTED | Phase-filtered BuddyRunner/2-/3-pass and Handover Master without blind leaks |
@@ -56,8 +57,8 @@ Actual second command is a **live read-only GitHub API attempt** using optional 
 
 ## C2 remaining acceptance conditions
 
-- Provider-readback on genuine original positive AND negative product fixture, full golden or explicit UNKNOWN with concrete custody reason.
-- Actual matching Git bytes with pinned commit, byte count and true SHA-256, at known product source paths.
+- **Met for checked-in Firstpass and NC fixtures only:** live provider original positive/negative bytes and Git SHA1/SHA256/length matched pinned commit. **Not met:** private Owner 41-branch/423-component original input, its complete acceptance golden or physical benchmark. Keep these explicitly UNKNOWN, not inferred from public fixtures.
+- Acquire or identify a separately governed complete golden/benchmark for the target 41-branch session; the checked-in ExpectedCondensedEnrichedXML is source-linked but marked a partial oracle, not product approval.
 - Owner amendments sourced to attributable, authorized issue comments; no private chat assumptions.
 - Large-file custody beyond pilot cap if the selected original exceeds 16 MiB.
 - Independent review and exact candidate-head CI, then hand facts forward to C3. Do not claim "C2 DONE" before this.
