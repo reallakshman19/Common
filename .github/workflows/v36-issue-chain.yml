@@ -1,0 +1,63 @@
+name: v3.6 Issue Continuity Chain — C1 reported-only proof
+
+on:
+  push:
+    branches:
+      - feat/v36-issue-chainage-spine-400
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - 'skills/Handover Master/DECISION_GUIDE.md'
+      - '.github/workflows/v36-issue-chain.yml'
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - 'skills/Handover Master/DECISION_GUIDE.md'
+      - '.github/workflows/v36-issue-chain.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  chain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install the existing independent v3.6 dependencies
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Run existing v3.6 regressions plus 24 new chain negative tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: Materialize example reported-only chain without title/label writes
+        run: |
+          mkdir -p build/v36-issue-chain
+          python3 skills/engineering-pr-delivery-v3.6/scripts/issue_chain_v36.py \
+            --input skills/engineering-pr-delivery-v3.6/tests/fixtures/issue-chain-274-reported.json \
+            --output build/v36-issue-chain/274-continuity-structural-audit.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          obj=json.loads(Path("build/v36-issue-chain/274-continuity-structural-audit.json").read_text())
+          assert obj["accounted_categories"]==11
+          assert obj["reported_categories"]==7
+          assert obj["unknown_categories"]==4
+          assert obj["verified_source_categories"]==0
+          assert obj["authenticated_owner_decisions"]==0
+          assert obj["semantic_acceptances"]==0
+          assert obj["accounting_coverage_percent"]==100
+          assert obj["verified_coverage_percent"]==0
+          assert obj["permission_to_write"] is False
+          assert obj["may_change_titles_or_labels"] is False
+          assert obj["may_merge_or_release"] is False
+          print("V36_REPORTED_CHAIN_ACCOUNTED_NOT_VERIFIED")
+          PY
+      - name: Upload read-only evidence of gaps — not source attestation
+        uses: actions/upload-artifact@v4
+        with:
+          name: v36-issue-chain-274-structural-report-only
+          path: build/v36-issue-chain/274-continuity-structural-audit.json
+          retention-days: 30
