@@ -1,0 +1,46 @@
+name: v3.6 C1-C1A continuity integration read-only
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - 'skills/Handover Master/DECISION_GUIDE.md'
+      - '.github/workflows/v36-continuity-c1a-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  continuity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install native v3.6 dependencies
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Native old plus new regressions
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: Assert bridge is only a reported evidence projection
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/continuity_bridge_v36.py --input skills/engineering-pr-delivery-v3.6/tests/fixtures/issue-chain-274-reported.json --inspect-protocol --governed-v36 --has-issue > /tmp/audit.json
+          python3 - <<'PY'
+          import json
+          with open('/tmp/audit.json', encoding='utf-8') as f: a=json.load(f)
+          assert a['reported_categories']==7
+          assert a['unknown_categories']==4
+          assert a['verified_source_categories']==0
+          assert a['authenticated_owner_decisions']==0
+          assert a['semantic_acceptances']==0
+          assert a['projection_only'] is True
+          assert a['may_publish'] is False
+          assert a['may_count_for_native_o2'] is False
+          assert a['may_grant_owner_acceptance'] is False
+          assert a['evidence_routing']['mode']=='NATIVE_V36_REQUIRED'
+          print('C1A_REPORTED_ONLY_NO_NATIVE_EVIDENCE_OR_OWNER_AUTHORITY')
+          PY
