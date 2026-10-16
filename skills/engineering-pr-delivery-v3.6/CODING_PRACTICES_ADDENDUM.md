@@ -54,6 +54,18 @@ Owner/academic/merge acceptance: NOT_GRANTED
 
 If no exact commit exists, the **programmatic receipt refuses** instead of printing fake SHA. Human-only draft can explicitly say UNKNOWN without claiming an exact source. Never publish Owner-provided private chat or source files to public GitHub without authorization.
 
+
+### Native v3.6: continuity must be a SEPARATE issue-context receipt
+
+Source-first compatibility: `lifecycle_v36.validate_evidence` requires the **exact eight-line canonical task-evidence comment** produced by `render_evidence`. It rejects **all trailing lines**. `snapshot_v36.snapshot` scans issue comments for the exact `TASK_EVIDENCE v3.6` marker before applying validation, so even an explanatory human comment containing that marker may generate a spurious invalid-evidence observation.
+
+Therefore, on a **governed** child publish:
+1. The existing **unchanged canonical eight-line task-evidence comment** on that child's issue (exact source, proof, candidate, tests).
+2. A **different** linked comment, headed `CONTINUITY_CONTEXT v3.6`, containing the issue genealogy (`#123 → ~~#125~~ → #126`), original fixture/golden/benchmark source pointers, actual implementation crux, Owner amendments, causal known gaps, parked/adopted decisions, and one next verification. **Do not include the canonical task-evidence marker anywhere in this context comment.**
+3. Link the context comment in the parent/child evidence spine, or if the protocol disallows a comment, in a separate authorized versioned issue index. It is **advisory context, not a second O2 proof or acceptance record**.
+
+This is not yet an automatic publisher or index writer. The two-comment pattern is **planned** until the source-custody/provider integration C2/C3 is implemented, and requires the same authorized issue publication scope and privacy review as other technical Owner context.
+
 ## Issue lineage as a complete time-indexed path
 
 Use a historical list/graph, not only today's active issue hops. An invalid/superseded middle step still represents a real attempted agent handoff, source decision or fixture.
