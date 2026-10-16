@@ -6,10 +6,14 @@ on:
       - feat/handover-master-single-entry
     paths:
       - 'skills/Handover Master/**'
+      - 'superseded/**'
+      - 'coordination/Session_Oct07/Tab6_Dashboard_V2/**'
       - '.github/workflows/handover-master-focused.yml'
   pull_request:
     paths:
       - 'skills/Handover Master/**'
+      - 'superseded/**'
+      - 'coordination/Session_Oct07/Tab6_Dashboard_V2/**'
       - '.github/workflows/handover-master-focused.yml'
 
 permissions:
@@ -32,7 +36,7 @@ jobs:
           python -m json.tool "skills/Handover Master/sources.json" > /dev/null
       - name: Run native protocol routing and negative test cases
         run: |
-          python -m unittest discover -s "skills/Handover Master/tests" -p 'test_route.py' -v
+          python -m unittest discover -s "skills/Handover Master/tests" -p 'test_*.py' -v
       - name: Smoke actual single invocation selects native v3.6 generator
         run: |
           python "skills/Handover Master/route.py" --intent "three-pass for v3.6" --format json > "$RUNNER_TEMP/route.json"
