@@ -117,6 +117,19 @@ class ReceiptTests(unittest.TestCase):
         with self.assertRaisesRegex(c.ReceiptError,"ORPHAN"):
             c.validate_stream(a)
 
+    def test_owner_amendment_must_link_predecessor_not_rewrite_original(self):
+        a=fixture()
+        x=extra(kind="OWNER_AMENDMENT")
+        x["source_class"]="OWNER_DIRECT_REPORTED"
+        append(a,x)
+        with self.assertRaisesRegex(c.ReceiptError,"OWNER_AMENDMENT_MUST_LINK"):
+            c.validate_stream(a)
+        x["supersedes"]=["EV-0001"]
+        r=c.validate_stream(a)
+        self.assertEqual(r["events"],2)
+        self.assertEqual(r["authenticated_owner_decisions"],0)
+        self.assertIn("Supersedes: EV-0001",c.render(a))
+
     def test_claimed_owner_authority_never_self_verifies(self):
         a=fixture()
         a["events"][0]["actor_authentication"]="OWNER_ACCEPTED"
