@@ -173,8 +173,8 @@ def audit(issue_url,c):
                    "/comments?per_page=100&page="+str(page))
         need(isinstance(rows,list),"ISSUE_COMMENTS_UNAVAILABLE")
         for row in rows:
-            if isinstance(row,dict) and isinstance(row.get("body"),str) and
-               MARKER.format(parent) in row["body"]:
+            if (isinstance(row,dict) and isinstance(row.get("body"),str) and
+                    MARKER.format(parent) in row["body"]):
                 found.append(row)
         if len(rows)<100: break
     need(len(found)==1,"INDEX_MISSING" if not found else "INDEX_AMBIGUOUS")
