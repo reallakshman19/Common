@@ -163,8 +163,9 @@ def main(argv=None) -> int:
     p = argparse.ArgumentParser(description="v3.6 read-only GitHub successor and BuddyRunner")
     sub = p.add_subparsers(dest="mode", required=True)
     cold = sub.add_parser("cold", help="fetch GitHub-only evidence and render packet")
-    cold.add_argument("--label", required=True)
-    cold.add_argument("--plan", required=True)
+    cold.add_argument("--label")
+    cold.add_argument("--plan")
+    cold.add_argument("--issue-url", help="R3: twelve cited sections from one owning GitHub issue URL")
     cold.add_argument("--lab", help="explicit lab repo from selected label when parent is lab")
     cold.add_argument("--pr", type=int, action="append", default=[])
     buddy = sub.add_parser("buddy", help="render a read-only v1.6 stage prompt")
@@ -177,6 +178,19 @@ def main(argv=None) -> int:
     args = p.parse_args(argv)
     try:
         if args.mode == "cold":
+            if args.issue_url:
+                if args.label or args.plan or args.lab or args.pr:
+                    raise ContractError("R3 issue URL cannot mix with governed label/plan/lab/PR arguments")
+                from issue_spine_read_v36 import Reader as R3Read
+                from successor_issue_recovery_v36 import build, render, RecoveryError
+                import os
+                try:
+                    print(render(build(args.issue_url,R3Read(os.environ.get("GITHUB_TOKEN")))),end="")
+                except (RecoveryError,ValueError) as exc:
+                    raise ContractError("R3 source recovery blocked: "+str(exc)) from exc
+                return 0
+            if not args.label or not args.plan:
+                raise ContractError("governed cold successor requires label and plan")
             label = load_label(args.label)
             plan = load_plan(args.plan, label)
             require_explicit_lab(label, plan["parent"], args.lab)
