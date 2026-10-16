@@ -46,7 +46,7 @@ jobs:
           assert subprocess.check_output(["git","rev-parse",data["revision"]+":"+a["path"]],text=True).strip()==a["expected_blob_sha1"]
           print("C2_DEMONSTRATION_GIT_OBJECT_AND_BYTES_MATCHED_NOT_OWNER_ORIGINAL")
           PY
-      - name: Independence: forbid legacy Relay imports
+      - name: 'Independence - forbid legacy Relay imports'
         run: |
           python3 - <<'PY'
           import ast
