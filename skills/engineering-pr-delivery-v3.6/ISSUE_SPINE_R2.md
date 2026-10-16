@@ -18,6 +18,25 @@ A previously authenticated real GitHub issue URL is the only CLI input. For the 
 
 The single existing issue index was published as [Common #400 comment #6223440822](https://github.com/reallakshman19/Common/issues/400#issuecomment-6223440822), not as a new GitHub issue or edited-away historical comment. It deliberately keeps 3D_Converters #274 external and the Owner original source and complete golden UNKNOWN. This #400 index is a **manual declared pilot**, not an automatically maintained production receipt generator.
 
+
+## R2 remainder — source-bound live event chronology (added 17 October 2026)
+
+The existing [managed index](https://github.com/reallakshman19/Common/issues/400#issuecomment-6223440822) now includes two chronological `ISSUE_COMMENT` references named `EVENT_0001` and `EVENT_0002`. They point to genuine GitHub issue comments [EV-0001](https://github.com/reallakshman19/Common/issues/400#issuecomment-6226645841) (original Owner statement **reported**, *not authenticated Owner approval*) and [EV-0002](https://github.com/reallakshman19/Common/issues/400#issuecomment-6226646245) (agent's proposed revised plan). The index is a mutable projection, while the event comments are intended as an append-only historical record. They were published sequentially; there is no separate GitHub writer service.
+
+The new `verify_event_chronology()` operates inside the **same native** `issue_spine_read_v36.py` (no import of unmerged #406). It checks the indexed event reference order and full provider comment ID, parent URL and actual publishing-account login, then verifies that:
+
+1. Event IDs and envelope sequences are contiguous `EV-0001`, `EV-0002`, …, with no omitted middle event or reversed index order.
+2. Each current GitHub comment appears unedited (`created_at == updated_at`), its byte hash agrees with a second GET during the read, and publication timestamps/IDs progress monotonically.
+3. The previous-digest field equals the SHA-256 of the preceding canonical event JSON, and source-event occurrence times do not move backward.
+4. The first event's complete typed data equals the immutable pinned C1B source fixture in draft #406. All public event `source_ref` links must resolve to observed, separately indexed source comments.
+5. No event claims authenticated Owner approval or access to unpublished/private ChatGPT conversations. Source readback proves GitHub account observation, **not Owner authority**.
+
+The output `event_chronology.status` is `PROVIDER_OBSERVED_UNEDITED_CONTIGUOUS_NOT_OWNER_APPROVED` only for an intact read. With no indexed events, the overall issue status is **HOLD**, not a success inferred from seven source references. Missing events, a gap, reordering, changed predecessor hash, tampered source, lost provider comment or edited event cause the reader to **reject** the chronology. Old v3.6 task evidence, publisher and BuddyRunner stages are unchanged.
+
+**Limit of proof:** GitHub issue comments and their managed index can subsequently be edited. The module detects edits visible at read time and verifies its pinned initial prefix, but cannot establish permanent server-side immutability or detect every coordinated deletion of a *trailing* unanchored event. A separately version-pinned trusted tail witness or an authorized append-only Git writer is needed for a stronger non-truncation guarantee. This qualification does **not** authenticate the underlying Owner document author, prove complete product goldens, or produce the native 12-section technical successor report.
+
+The included adversarial `test_issue_spine_read_v36.py` verifies explicit rejection of missing-first/missing-middle/reordered event sequences, wrong predecessor digest, backward source/provider time, edited comments and changed bodies. The hosted workflow also replays the **real #400 index**, requiring the two-event chronology and **7/7 provider-observed references**.
+
 ## How to reproduce
 
 ```bash
@@ -31,10 +50,10 @@ The live read requires public GitHub read availability or `GITHUB_TOKEN` with **
 
 - [x] New standalone native read-only index reader and adversarial test doubles (coded in this draft).
 - [x] One actual unique tagged index comment on owning GitHub issue #400 (provider publication).
-- [ ] Hosted **exact-head** CI executes full v3.6 suite and this R2 live provider-read check.
-- [ ] Index source refs 5/5 independently verified from current GitHub commit bytes/account readback; do not mistake 5 refs for 11 engineering categories.
+- [x] Hosted **exact-head** CI executes full v3.6 suite and this R2 live provider-read check.
+- [x] Index source refs 7/7 observed (two source comments, three pinned JSON files, two provider event comments); this is not 11/11 engineering evidence categories.
 - [ ] Independent source/security review and freeze/visibility qualification.
-- [ ] Future R2 managed index integration with C1B append-only provider comment identities and real C2 original Owner fixture bytes and benchmark; not supplied by this small PR.
+- [x] Bounded R2 remainder: indexed two real provider-observed C1B-shaped event comments, pinned-first-event source join, contiguous sequence/hash/actor/timestamp checks, negative gap/reorder tests.\n- [ ] Independent immutable witnessed tail, automatic event admission and complete provider-verifiable original fixture/oracle chronology; GitHub comments and mutable index alone cannot guarantee permanent append-only history.
 - [ ] R3 one-issue URL → full native twelve-section causal source-reconstruction, with external stage-disclosure control and no chat/LOG.
 - [ ] R4 independent #274 plus Physics academic review cold pilot; no production/source/approval changes.
 - [ ] R5/R6/R7 phase-specific Handover/2-/3-pass, optional title projection and Owner review/release.
