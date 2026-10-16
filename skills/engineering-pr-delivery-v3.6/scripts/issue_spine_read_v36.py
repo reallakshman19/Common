@@ -257,7 +257,7 @@ def verify_event_chronology(c,repo,parent,idx,links,pinned):
              "EVENT_CHAIN_GAP_REORDER_OR_HASH_MISMATCH")
         occurred=ev.get("occurred_at")
         need(isinstance(occurred,str) and
-             re.fullmatch(r"\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ",occurred)
+             re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ",occurred)
              and occurred>=last_occurred,"EVENT_OCCURRED_AT_REORDERED")
         last_occurred=occurred
         need(ev.get("source_ref") in provider_sources,
