@@ -41,10 +41,15 @@ class StandaloneContinuityTests(unittest.TestCase):
             # No other Common skills, historical Relay modules or repo packages.
             self.assertEqual(sorted(p.name for p in base.iterdir()),
                              sorted((*SCRIPTS, FIXTURE)))
+            # -I excludes script directories; explicitly allow ONLY the
+            # temporary isolated v3.6 modules, never the full Common repo.
+            invocation = ("import sys; sys.path.insert(0, " +
+                          repr(str(base)) + "); import continuity_bridge_v36; " +
+                          "raise SystemExit(continuity_bridge_v36.main(" +
+                          repr(["--input", str(base / FIXTURE),
+                                "--inspect-protocol", "--governed-v36"]) + "))")
             completed = subprocess.run(
-                [sys.executable, "-I", str(base / "continuity_bridge_v36.py"),
-                 "--input", str(base / FIXTURE),
-                 "--inspect-protocol", "--governed-v36"],
+                [sys.executable, "-I", "-c", invocation],
                 cwd=str(base), text=True, capture_output=True, check=False)
             self.assertEqual(completed.returncode, 0, completed.stderr)
             result = json.loads(completed.stdout)
