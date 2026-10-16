@@ -36,8 +36,8 @@ jobs:
           v=json.load(open("/tmp/r2-live-audit.json",encoding="utf-8"))
           assert v["schema"]=="v36.live-issue-spine-audit/v1"
           assert v["index_comment_id"]==6223440822
-          assert v["references_total"]==7
-          assert v["references_observed"]==7,(v["missing_or_contradicted"],v["versioned_contracts"])
+          assert v["references_total"]==8
+          assert v["references_observed"]==8,(v["missing_or_contradicted"],v["versioned_contracts"])
           chain=v["event_chronology"]
           assert v["status"]=="LIVE_INDEX_OBSERVED_CHRONOLOGY_PROVIDER_ONLY"
           assert chain["status"]=="PROVIDER_OBSERVED_UNEDITED_CONTIGUOUS_NOT_OWNER_APPROVED",chain
@@ -54,8 +54,27 @@ jobs:
           assert any("FOREIGN_PARENT_EXAMPLE" in p["status"] for p in v["versioned_contracts"])
           assert any("NOT_REATTESTED" in p["status"] for p in v["versioned_contracts"])
           assert any(p.get("source_refs_matched")==1 for p in v["versioned_contracts"])
-          print("R2_REAL_GITHUB_ONE_ISSUE_READ_7_OF_7_WITH_2_LINKED_EVENTS")
+          print("R2_REAL_GITHUB_ONE_ISSUE_READ_8_OF_8_WITH_2_LINKED_EVENTS")
           print("R2_FOREIGN_PARENT_AND_EXTERNAL_MANIFEST_NOT_ACCEPTED")
+          PY
+      - name: Existing v3.6 cold successor one issue URL to twelve cited sections
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py cold --issue-url https://github.com/reallakshman19/Common/issues/400 > /tmp/v36-r3-twelve.md
+          python3 - <<'PY'
+          from pathlib import Path
+          body=Path("/tmp/v36-r3-twelve.md").read_text(encoding="utf-8")
+          assert body.startswith("<!-- v36-native-r3-cold-recovery -->")
+          assert body.count("\nSource references:\n")==12,"R3_SECTION_UNCITED"
+          assert "## 1. Original Owner problem and why" in body
+          assert "## 12. Next reproducible verification and successor handover" in body
+          assert "119/119" in body
+          assert "UNKNOWN" in body and "423" in body
+          assert "EVENT_0002" in body
+          assert "Authority: NOT Owner authenticated" in body
+          assert "STOP: No approval or release inferred" in body
+          print("R3_REAL_EXISTING_COLD_SUCCESSOR_ONE_URL_12_OF_12_CITED")
           PY
       - name: Standalone no older Relay or draft imports
         run: |
