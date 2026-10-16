@@ -89,3 +89,10 @@ python "skills/Handover Master/route.py" --mode status
 Return compact human summary: `MODE`, `GOVERNANCE`, `LIVE SOURCE (path, SHA, revision)`, `WHY THIS MODE`, `PHASE`, `AUTHORITY`, `EVIDENCE`, `BLOCKERS`, `GENERATED ARTIFACT`, `NEXT VERIFY`. If insufficient evidence: `HOLD` and list missing source/role/approval, rather than inventing a selected answer.
 
 **Do not** turn this Master into a new Common lifecycle skill, Dashboard v2, protocol governor, Project Coordinator or automated actions service. See [MODULE_INDEX.md](MODULE_INDEX.md) for all actual links, [SKILL.md](SKILL.md) for canonical agent instruction and [sources.json](sources.json) for machine navigation.
+
+
+## Coding-practice and ad-hoc evidence addendum (Issue #400)
+
+When the governing workflow is v3.6, read [native v3.6 coding and evidence addendum](../engineering-pr-delivery-v3.6/CODING_PRACTICES_ADDENDUM.md) in addition to the existing AIM, plan and source. This is a coding-practice supplement, not a new operating mode. Project-specific evidence (including TeamOwner `TASK EVIDENCE v2`) wins; genuine bound v3.6 O2 evidence stays mandatory. Only when NO evidence protocol is specified on a truly ad-hoc assignment may an agent **optionally** draft an advisory receipt without claiming O2 or publishing without permission.
+
+An issue chain must retain e.g. `#123 → ~~#125~~ (invalid reported, decision link) → #126` so an agent ten can reconstruct what issue #125 attempted. A 404/private/inaccessible issue is not proof of deletion. The parent issue remains the traceable index for original Owner input, source fixtures/goldens, benchmark, implementation crux, parked/adopted improvements and known missing evidence. The renderer does not itself authenticate any issue status or Owner approval.
