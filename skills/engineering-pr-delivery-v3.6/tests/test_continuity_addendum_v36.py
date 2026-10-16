@@ -110,7 +110,7 @@ class CodingAddendumTests(unittest.TestCase):
         self.refusal(x,"DECISION_REF_FOREIGN_OR_INVALID")
     def test_query_redirect_rejected(self):
         x=self.chain()
-        x["nodes"][1]["decision_ref"]+="?token=abc"
+        x["nodes"][1]["decision_ref"]="https://github.com/example/tracker/issues/123?token=abc#issuecomment-12345"
         self.refusal(x,"DECISION_REF_FOREIGN_OR_INVALID")
     def test_active_issue_cannot_have_invalid_reason(self):
         x=self.chain()
