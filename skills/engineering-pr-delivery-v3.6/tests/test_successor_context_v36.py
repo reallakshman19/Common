@@ -154,7 +154,12 @@ class ContextTests(unittest.TestCase):
             cmd=["cold","--label",paths[0],"--plan",paths[1],
                  "--lab",REPO,"--pr","4",
                  "--continuity-chain",str(a),"--custody-manifest",str(b)]
-            with patch.object(sv,"GithubClient",lambda _:Provider()):
+            class NativeProvider(Provider):
+                def request(self,method,path,body=None):
+                    if method=="GET" and path=="/pulls/4":
+                        return self.pr
+                    return super().request(method,path,body)
+            with patch.object(sv,"GithubClient",lambda _:NativeProvider()):
                 with self.assertRaises(SystemExit) as e:
                     with redirect_stdout(io.StringIO()):
                         sv.main(cmd)
