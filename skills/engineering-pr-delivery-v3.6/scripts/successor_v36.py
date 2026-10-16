@@ -14,6 +14,7 @@ import re
 from decompose_v36 import GithubClient, PARENT_REF, load_plan
 from lifecycle_v36 import ContractError, load_label, require_explicit_lab
 from snapshot_v36 import snapshot
+from successor_context_v36 import ContextError, attach as attach_continuity, load_input as load_continuity_input, render as render_continuity
 
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 PHASES = frozenset({"1a", "1b", "2", "Y"})
@@ -167,6 +168,9 @@ def main(argv=None) -> int:
     cold.add_argument("--plan", required=True)
     cold.add_argument("--lab", help="explicit lab repo from selected label when parent is lab")
     cold.add_argument("--pr", type=int, action="append", default=[])
+    cold.add_argument("--continuity-chain", help="optional public reported-only C1 source index")
+    cold.add_argument("--custody-manifest", help="optional pinned C2 source-pointer manifest")
+    cold.add_argument("--stage2-freeze-verified", action="store_true", help="caller asserts independent stage2 disclosure authorization; this flag is not proof")
     buddy = sub.add_parser("buddy", help="render a read-only v1.6 stage prompt")
     buddy.add_argument("--phase", choices=sorted(PHASES), required=True)
     buddy.add_argument("--handover-id", required=True)
@@ -177,12 +181,25 @@ def main(argv=None) -> int:
     args = p.parse_args(argv)
     try:
         if args.mode == "cold":
+            requested = bool(args.continuity_chain or args.custody_manifest)
+            if requested and (not args.continuity_chain or not args.custody_manifest or
+                              not args.stage2_freeze_verified):
+                raise ContractError("C3 requires both source documents and independently verified stage2 freeze; caller flag is not verification")
             label = load_label(args.label)
             plan = load_plan(args.plan, label)
             require_explicit_lab(label, plan["parent"], args.lab)
             client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
             client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
-            print(render_markdown(build_packet(label, plan, client, args.pr)), end="")
+            packet = build_packet(label, plan, client, args.pr)
+            rendered = render_markdown(packet)
+            if requested:
+                try:
+                    context = attach_continuity(packet, load_continuity_input(args.continuity_chain),
+                                                load_continuity_input(args.custody_manifest))
+                except (ContextError, OSError, ValueError) as exc:
+                    raise ContractError("C3 CONTEXT_HOLD: " + str(exc)) from exc
+                rendered += render_continuity(context)
+            print(rendered, end="")
         else:
             print(buddy_prompt(args.phase, handover_id=args.handover_id,
                                parent=args.parent, assessed_sha=args.assessed_sha,

@@ -1,0 +1,82 @@
+name: v3.6 C3 native cold successor context regression
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - '.github/workflows/v36-successor-c3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-successor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install native v3.6 requirements
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Execute all preexisting and C3 native tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: Verify old v3.6 Buddy 1a still holds without context
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py buddy --phase 1a --handover-id C3-CI-001 --parent reallakshman19/relay-v36-e2e-lab#1 --assessed-sha 61a71a038cca56507040bdb365edf76a9c0d2469 > /tmp/buddy-1a.txt
+          grep -q 'EXECUTION=HOLD' /tmp/buddy-1a.txt
+          if grep -q 'Issue-first engineering continuity' /tmp/buddy-1a.txt; then exit 2; fi
+      - name: GitHub-only real lab cold successor (public read only)
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py cold \
+            --label relay/AIM/V35-LIFECYCLE.yaml \
+            --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
+            --lab reallakshman19/relay-v36-e2e-lab \
+            --pr 4 > /tmp/v36-c3-live-cold.md
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('/tmp/v36-c3-live-cold.md').read_text(encoding='utf-8')
+          assert s.startswith("<!-- v36-cold-successor-packet -->")
+          assert "https://github.com/reallakshman19/relay-v36-e2e-lab/issues/1" in s
+          assert "V36-1-WP1" in s and "V36-1-WP2" in s
+          assert "61a71a038cca56507040bdb365edf76a9c0d2469" in s
+          assert "Owner constraints:" in s and "Main aim:" in s
+          assert "Issue-first engineering continuity" not in s
+          assert "Next: INDEPENDENT_ACCEPTANCE_REQUIRED" in s
+          assert "accepted=0" in s
+          print("C3_LIVE_PROVIDER_GITHUB_ONLY_COLD_NATIVE_PASS")
+          print("C3_NO_STAGE2_CONTEXT_LEAK_OR_AUTOMATIC_OWNER_APPROVAL")
+          PY
+      - name: No Stage2 C3 data disclosure without external freeze
+        run: |
+          set +e
+          python3 skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py cold \
+            --label relay/AIM/V35-LIFECYCLE.yaml \
+            --plan skills/engineering-pr-delivery-v3.6/plans/V36-1-PLAN-01.yaml \
+            --lab reallakshman19/relay-v36-e2e-lab \
+            --continuity-chain missing-chain.json \
+            --custody-manifest missing-manifest.json \
+            > /tmp/v36-c3-unauthorized.out 2> /tmp/v36-c3-unauthorized.err
+          code=$?
+          set -e
+          test "$code" -ne 0
+          test ! -s /tmp/v36-c3-unauthorized.out
+          grep -q 'requires both source documents and independently verified stage2 freeze' /tmp/v36-c3-unauthorized.err
+          echo C3_UNAUTHORIZED_DISCLOSURE_BLOCKED_BEFORE_GITHUB_READ
+      - name: C3 module has no historical Relay or draft dependency
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          p=Path("skills/engineering-pr-delivery-v3.6/scripts/successor_context_v36.py")
+          imported=set()
+          for n in ast.walk(ast.parse(p.read_text(encoding="utf-8"))):
+              if isinstance(n,ast.Import): imported.update(x.name.split(".")[0] for x in n.names)
+              if isinstance(n,ast.ImportFrom): imported.add((n.module or "").split(".")[0])
+          assert imported <= {"__future__","hashlib","json","re","pathlib","urllib"}, imported
+          print("V36_C3_READ_ONLY_STDLIB_NO_V35_V32_V31_DELP_OR_DRAFT_IMPORTS")
+          PY
