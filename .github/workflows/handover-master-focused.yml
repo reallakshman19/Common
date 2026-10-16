@@ -1,0 +1,61 @@
+name: Handover Master single-entry routing (read only)
+
+on:
+  push:
+    branches:
+      - feat/handover-master-single-entry
+    paths:
+      - 'skills/Handover Master/**'
+      - '.github/workflows/handover-master-focused.yml'
+  pull_request:
+    paths:
+      - 'skills/Handover Master/**'
+      - '.github/workflows/handover-master-focused.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  routing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile entrypoint and verify schema index
+        run: |
+          python -m py_compile "skills/Handover Master/route.py"
+          python -m json.tool "skills/Handover Master/sources.json" > /dev/null
+      - name: Run native protocol routing and negative test cases
+        run: |
+          python -m unittest discover -s "skills/Handover Master/tests" -p 'test_route.py' -v
+      - name: Smoke actual single invocation selects native v3.6 generator
+        run: |
+          python "skills/Handover Master/route.py" --intent "three-pass for v3.6" --format json > "$RUNNER_TEMP/route.json"
+          python - <<'PY'
+          import json, os
+          obj=json.load(open(os.environ["RUNNER_TEMP"]+"/route.json",encoding="utf-8"))
+          assert obj["status"] == "READ_SOURCE_NOW"
+          assert obj["selection"]["source_key"] == "v36"
+          assert any("prompt_3pass_v36.py" in p for p in obj["canonical_read_paths"])
+          assert obj["may_write_or_publish"] is False
+          print("ONE_MASTER_ROUTE_V36_VALIDATED")
+          PY
+      - name: Smoke freeze requirement refuses technical-handover
+        run: |
+          set +e
+          python "skills/Handover Master/route.py" --mode technical --format json > "$RUNNER_TEMP/freeze.json"
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python - <<'PY'
+          import json,os
+          obj=json.load(open(os.environ["RUNNER_TEMP"]+"/freeze.json"))
+          assert obj["status"] == "HOLD_FREEZE"
+          assert obj["canonical_read_paths"] == []
+          print("BLIND_STAGE_FREEZE_FAIL_CLOSED")
+          PY
