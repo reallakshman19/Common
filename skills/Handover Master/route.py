@@ -49,6 +49,14 @@ def route(intent="",mode="auto",workflow="auto",phase=None,buddy_version=None,
         raise ValueError("invalid Buddy phase")
     if buddy_version is not None and buddy_version not in VERSIONS:
         raise ValueError("invalid Buddy version")
+    intent_lower=(intent or "").casefold()
+    if workflow=="auto":
+        has36=bool(re.search(r"\bv3[.]6\b|engineering-pr-delivery-v3[.]6",intent_lower))
+        has35=bool(re.search(r"\bv3[.]5\b|engineering-pr-delivery-v3[.]5",intent_lower))
+        if has36 and has35:
+            return decision("NEEDS_WORKFLOW",None,
+                            "Conflicting v3.5 and v3.6 governance mentions; select governing protocol explicitly.")
+        workflow="v3.6" if has36 else "v3.5" if has35 else "standalone"
     index=json.loads((HERE/"sources.json").read_text(encoding="utf-8"))
     auto_hits=[]
     if mode=="auto":
@@ -63,8 +71,14 @@ def route(intent="",mode="auto",workflow="auto",phase=None,buddy_version=None,
                         choices=["technical","status"])
     if mode=="buddy":
         if not buddy_version:
-            return decision("NEEDS_VERSION",None,
+            if workflow=="v3.6":
+                buddy_version="1.6"  # explicitly pinned by v3.6 SKILL.md; not by new Master
+            else:
+                return decision("NEEDS_VERSION",None,
                             "Select the exact project-governing BuddyRunner version (1.6 or 1.7).")
+        if workflow=="v3.6" and buddy_version!="1.6":
+            return decision("HOLD_VERSION",None,
+                 "v3.6 skill currently pins BuddyRunner v1.6; do not silently upgrade to v1.7.")
         if phase is None:
             return decision("NEEDS_PHASE",None,
                             "Supply 1a, 1b, 2 or Y from live owning issue; do not repeat a completed phase.")
@@ -77,12 +91,23 @@ def route(intent="",mode="auto",workflow="auto",phase=None,buddy_version=None,
          "Check existing workflow permissions; phase publication requires separate scope authority."
         ]
     elif mode=="technical":
-        if not stage1_freeze_verified:
+        if workflow=="v3.5":
+            if not stage1_freeze_verified:
+                return decision("HOLD_FREEZE",None,
+                  "Native v3.5 technical handover must preserve actual successor isolation; verify Stage-1 freeze first.")
+            source_key="v35_legacy"
+            selected_script=None
+            reason="Historically governed v3.5 native handover projection; do not reinterpret as v3.6 or write acceptance."
+            checks=["Verify live v3.5 native source snapshot, PLAN_HANDOVER and HANDOVER_CONTEXT.",
+                    "Verify Stage-1 recipient isolation and exact source/test head before sharing.",
+                    "Do not auto-upgrade to v3.6 or mistake an old projected status for Owner admission."]
+        elif not stage1_freeze_verified:
             return decision("HOLD_FREEZE",None,
                  "Native HANDOVER_TECHNICAL_V2 is Stage2-after-authenticated-Stage1-freeze only. No verified isolation: do not expose predecessor implementation.")
-        source_key="technical"
-        reason="Use native twelve-section technical report after verified isolation, without replacing PLAN_HANDOVER/HANDOVER_CONTEXT."
-        checks=[
+        elif stage1_freeze_verified:
+            source_key="technical"
+            reason="Use native twelve-section technical report after verified isolation, without replacing PLAN_HANDOVER/HANDOVER_CONTEXT."
+            checks=[
          "Prove the Stage-1 blind snapshot was independently frozen and its recipient isolation verified.",
          "Bind the report to native PLAN_HANDOVER and HANDOVER_CONTEXT, not chat memory.",
          "Trace exact source→entrypoint→owning function→consumer and separate historical/main/PR/test SHAs.",
