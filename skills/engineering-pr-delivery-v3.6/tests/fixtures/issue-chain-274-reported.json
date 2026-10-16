@@ -1,0 +1,233 @@
+{
+  "schema": "v36.issue-continuity-chain/v1",
+  "parent": "reallakshman19/3D_Converters#274",
+  "subject": "XML229 source-to-Preview/GC-PW/Final/Output readiness investigation and proposed cutover",
+  "observed_main": {
+    "reallakshman19/3D_Converters": "9944a5bf521cb67dcabf887d8a5ccce61d4857d2"
+  },
+  "owner_intent": {
+    "excerpt": "Major problem piled up when robust new weight match logics got wired to UI in PR 271. Look for older PR with new weight logic and older UI; adapt the wiring with minimal adapters.",
+    "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274",
+    "source_class": "OWNER_DIRECT_REPORTED",
+    "actor_authentication": "NOT_VERIFIED_BY_THIS_TOOL",
+    "captured_by": "Issue #274 Owner-intent section; technical quote and authorship require independent provider readback"
+  },
+  "records": [
+    {
+      "id": "EV-001",
+      "kind": "OWNER_INPUT",
+      "summary": "Owner requested recovery of robust weight logic through earlier stable UI adapters, not another stack rewrite.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274",
+      "source_class": "OWNER_DIRECT_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": null,
+      "source_sha256": null,
+      "related_ids": [],
+      "disposition": "N_A",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "EV-002",
+      "kind": "SOURCE_FLOW",
+      "summary": "Agent source audit: original Output/Run checklist mutates DOM presentation after Worker completion without rebuilding canonical readiness.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274",
+      "source_class": "AGENT_ANALYSIS_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": null,
+      "source_sha256": null,
+      "related_ids": [],
+      "disposition": "N_A",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "EV-003",
+      "kind": "AGENT_EVIDENCE",
+      "summary": "A prior reported session counted 41 selected branches, 423 physical components and 2961 FactRecords; none of those counts proves accepted source masses or Final weights.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274",
+      "source_class": "TEST_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": null,
+      "source_sha256": null,
+      "related_ids": [],
+      "disposition": "N_A",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "EV-004",
+      "kind": "AGENT_EVIDENCE",
+      "summary": "The read-only G0 evidence-audit candidate PR281 reported local 8/8 Node tests; hosted and real owner workload were not verified in the cited receipt.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274#issuecomment-6219471920",
+      "source_class": "TEST_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": "8ca495b459ef6f5d6fcaba72cf663a0d974eb17d",
+      "source_sha256": null,
+      "related_ids": [
+        "EV-003"
+      ],
+      "disposition": "N_A",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "EV-005",
+      "kind": "IDEA",
+      "summary": "G0–G7 architecture, separate Worker data calculation authority, unified InputBasis receipts and canonical Output/Run were proposed for review, not adopted as production authority.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274#issuecomment-6219173446",
+      "source_class": "AGENT_ANALYSIS_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": null,
+      "source_sha256": null,
+      "related_ids": [
+        "EV-002",
+        "EV-003"
+      ],
+      "disposition": "PROPOSED",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "EV-006",
+      "kind": "KNOWN_FAILURE",
+      "summary": "Reported UI mixed 28/28 legacy regex error with a 41/41 branch checklist; missing nativeOutputParticipation and zero Match-1/Final source mass remain unresolved; exact served JS provenance unknown.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274",
+      "source_class": "AGENT_ANALYSIS_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": null,
+      "source_sha256": null,
+      "related_ids": [
+        "EV-002",
+        "EV-003"
+      ],
+      "disposition": "N_A",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "EV-007",
+      "kind": "NEXT_VERIFICATION",
+      "summary": "Capture exact served JS hashes and redacted real readiness/GC-PW evidence, classify errors and source mass coverage before G1 interface lease.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274#issuecomment-6219471920",
+      "source_class": "AGENT_ANALYSIS_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": null,
+      "source_sha256": null,
+      "related_ids": [
+        "EV-006"
+      ],
+      "disposition": "N_A",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    },
+    {
+      "id": "EV-008",
+      "kind": "HANDOVER",
+      "summary": "Issue 274 links a long G0–G7 technical architecture and cutover plan with explicit HOLD on native release.",
+      "source_ref": "https://github.com/reallakshman19/3D_Converters/issues/274#issuecomment-6219173446",
+      "source_class": "AGENT_ANALYSIS_REPORTED",
+      "repository": "reallakshman19/3D_Converters",
+      "source_revision": null,
+      "source_sha256": null,
+      "related_ids": [
+        "EV-005",
+        "EV-007"
+      ],
+      "disposition": "N_A",
+      "decision_ref": null,
+      "revisit_trigger": null,
+      "visibility": "PUBLIC"
+    }
+  ],
+  "chain": [
+    {
+      "category": "ROOT_OWNER_INTENT",
+      "state": "PRESENT_REPORTED",
+      "record_ids": [
+        "EV-001"
+      ],
+      "reason": null
+    },
+    {
+      "category": "OWNER_AMENDMENTS",
+      "state": "UNKNOWN",
+      "record_ids": [],
+      "reason": "Owner direct later correction chronology has not been independently authenticated as a complete sequence."
+    },
+    {
+      "category": "ORIGINAL_INPUT",
+      "state": "UNKNOWN",
+      "record_ids": [],
+      "reason": "Original full Owner production JSON file and exact Git blob / SHA custody not attested by this example."
+    },
+    {
+      "category": "COMPLETE_GOLDEN",
+      "state": "UNKNOWN",
+      "record_ids": [],
+      "reason": "No owner-authenticated complete native CII physical component output oracle established in this example."
+    },
+    {
+      "category": "MEASURED_BENCHMARK",
+      "state": "UNKNOWN",
+      "record_ids": [],
+      "reason": "Counts 423 and 2961 are reported coverage observations; no exact-head actual-JSON throughput benchmark is established."
+    },
+    {
+      "category": "SOURCE_IMPLEMENTATION_CRUX",
+      "state": "PRESENT_REPORTED",
+      "record_ids": [
+        "EV-002",
+        "EV-003"
+      ],
+      "reason": null
+    },
+    {
+      "category": "AGENT_CONTRIBUTIONS",
+      "state": "PRESENT_REPORTED",
+      "record_ids": [
+        "EV-004"
+      ],
+      "reason": null
+    },
+    {
+      "category": "DECISION_AND_PARKED_IDEAS",
+      "state": "PRESENT_REPORTED",
+      "record_ids": [
+        "EV-005"
+      ],
+      "reason": null
+    },
+    {
+      "category": "KNOWN_FAILURES",
+      "state": "PRESENT_REPORTED",
+      "record_ids": [
+        "EV-006"
+      ],
+      "reason": null
+    },
+    {
+      "category": "SELECTED_NEXT_VERIFICATION",
+      "state": "PRESENT_REPORTED",
+      "record_ids": [
+        "EV-007"
+      ],
+      "reason": null
+    },
+    {
+      "category": "TECHNICAL_HANDOVER",
+      "state": "PRESENT_REPORTED",
+      "record_ids": [
+        "EV-008"
+      ],
+      "reason": null
+    }
+  ]
+}
