@@ -48,6 +48,10 @@ Tests: <passed>/<run>
 
 The source formatter `render-evidence` rejects placeholder Proof and invalid task/test fields; the snapshot rejects foreign authors and mismatched Proof commit SHA. Publish canonical comments unchanged, and refer to acceptance separately. Never rewrite historical authored evidence to inflate title counts.
 
+## 3A. Issue-first engineering continuity (C1/C1A — advisory only)
+
+For original Owner intent, authentic input/golden/benchmark pointers, actual implementation crux, historical agents' contributions, decisions and explicit gaps, see [the C1/C1A integration guide](CONTINUITY_C1A_INTEGRATION.md). This links the [canonical reported-only chain contract](CONTINUITY_CHAIN_V1.md) and [coding-practices addendum](CODING_PRACTICES_ADDENDUM.md) through a single no-write bridge; it is NOT new v3.6 Task Evidence or an acceptance controller. For a governed child, retain precisely the established eight-line TASK_EVIDENCE v3.6 and current O1–O5 publisher and successor contracts. Ad-hoc advisory records must not count as O2 or create a new workflow. Blind pass, Owner, fixture and reviewer authority gates still apply.
+
 ## 4. Agent LOG line — mandatory terminal footer
 
 Every execution or handover response ends with exactly **one LOG line in its own plain text code block**. The successor finds this contract in this GitHub-hosted skill, without prior chats. Fill every field from the selected label, current GitHub issue/plan, actual test result and latest **published log commit**, never from guesses. Use `@NOT_WRITTEN:<reason>` if the log file could not be updated. `aim` is **the selected label's version**, not a hardcoded example; `outcome` is an actual O# from the selected work.
