@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feat/handover-master-single-entry
+      - docs/handover-master-superseded-audit
     paths:
       - 'skills/Handover Master/**'
       - 'superseded/**'
