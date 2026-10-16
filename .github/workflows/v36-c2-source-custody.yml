@@ -1,0 +1,60 @@
+name: v3.6 C2 source custody isolated offline tests
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py'
+      - 'skills/engineering-pr-delivery-v3.6/tests/test_source_custody_v36.py'
+      - 'skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-common-public-demo.json'
+      - '.github/workflows/v36-c2-source-custody.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-custody:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Adversarial C2 tests, standard library only
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_source_custody_v36.py' -v
+      - name: Byte-verify pinned demonstration manifest locally
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          data=json.loads(Path("skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-common-public-demo.json").read_text())
+          a=data["artifacts"][0]
+          assert a["role"]=="DEMONSTRATION_ONLY"
+          p=Path(a["path"])
+          raw=p.read_bytes()
+          observed_blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+          assert len(raw)==a["expected_size_bytes"]
+          assert observed_blob==a["expected_blob_sha1"]
+          assert hashlib.sha256(raw).hexdigest()==a["expected_sha256"]
+          assert data["revision"]=="0a7c4d45d3fa0787d3e80858a27015b09a85eac2"
+          assert subprocess.check_output(["git","rev-parse",data["revision"]+":"+a["path"]],text=True).strip()==a["expected_blob_sha1"]
+          print("C2_DEMONSTRATION_GIT_OBJECT_AND_BYTES_MATCHED_NOT_OWNER_ORIGINAL")
+          PY
+      - name: Independence: forbid legacy Relay imports
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          p=Path("skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py")
+          root=ast.parse(p.read_text(encoding="utf-8"))
+          modules=set()
+          for node in ast.walk(root):
+              if isinstance(node,ast.Import): modules.update(n.name.split(".")[0] for n in node.names)
+              elif isinstance(node,ast.ImportFrom): modules.add((node.module or "").split(".")[0])
+          allowed={"__future__","argparse","base64","binascii","hashlib","json","os","re","urllib","pathlib"}
+          assert modules<=allowed, sorted(modules-allowed)
+          print("C2_STANDARD_LIBRARY_ONLY_NO_V35_V32_V31_DELP_RUNTIME")
+          PY
