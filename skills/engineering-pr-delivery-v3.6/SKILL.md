@@ -57,3 +57,12 @@ LOG | chat=<chat-id> | tab=<tab> | folder=<coordination/path>@<latest-log-commit
 ```
 
 **Owner constraints:** Owner controls decisions and merges; engineering-critical doubt must stop the risky action. A generated packet/LOG, stale GitHub snapshot or passing check cannot invent an accepted task. Never merge, close, release, or silently change the Owner's aim without authorization.
+
+
+## Addendum — source-first coding practices and ad-hoc evidence (Common #400)
+
+See [CODING_PRACTICES_ADDENDUM.md](CODING_PRACTICES_ADDENDUM.md) for an independent v3.6 port of proven v3.5 **behavior**: source/Owner-intent continuity, original fixture/golden and benchmark custody, exact-head child evidence, source-to-consumer implementation crux, material drift, bounded source ownership, durable PARKED/ADOPTED high-ROI options, and lossless chainage even across invalid/superseded issues. It does not import v3.5, DELP or another coordinator.
+
+**Protocol precedence:** A project-selected evidence contract (e.g. TeamOwner `TASK EVIDENCE v2`) takes precedence. A genuinely approved v3.6 AIM+plan+owned child **still requires** the canonical `TASK_EVIDENCE v3.6` on its own child; this requirement is NOT optional. For an unbound ad-hoc agent with no selected evidence contract, merely **offer** a compact `TASK_EVIDENCE — ADHOC / ADVISORY` receipt, chat-only until issue publication is separately authorized. It never triggers native O2, scoreboard/title mutations or protected permissions. A verbal "follow v3.6" is not a substitute for the approved label/plan.
+
+The pure, no-network `scripts/continuity_addendum_v36.py` renders synthetic or caller-reported issue chains while preserving invalid/superseded middle issues as sourced strikethrough tombstones. An inaccessible or 404 issue stays visibly **UNVERIFIED** and is **not** treated as proved deleted. Full original chain custody/actor verification belongs to later Issue #400 C2/C3.
