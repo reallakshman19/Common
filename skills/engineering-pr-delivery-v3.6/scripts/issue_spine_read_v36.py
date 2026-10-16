@@ -140,7 +140,9 @@ def resolve_json(c,repo,ref,parent,links):
         data=json.loads(raw)
         need(data.get("schema")==ref["schema"],"FILE_SCHEMA_CONTRADICTED")
         out.update(provider_observed=True,sha256=hashlib.sha256(raw).hexdigest(),
-                   schema=ref["schema"],status="PINNED_JSON_BYTES_VERIFIED")
+                   schema=ref["schema"],status="PINNED_JSON_BYTES_VERIFIED",
+                   url="https://github.com/"+repo+"/blob/"+ref["revision"]+"/"+
+                       ref["path"],revision=ref["revision"],source_path=ref["path"])
         if ref["schema"]=="v36.issue-receipt-stream/v1":
             need(data.get("parent")==parent,"C1B_PARENT_MISMATCH")
             rows=data.get("events",[])
@@ -224,6 +226,7 @@ def verify_event_chronology(c,repo,parent,idx,links,pinned):
     last_created=""
     last_provider_id=0
     ids=[]
+    evidence_events=[]
     for i,ref in enumerate(refs,1):
         eid="EV-"+str(i).zfill(4)
         need(ref["id"]=="EVENT_"+str(i).zfill(4),
@@ -283,6 +286,12 @@ def verify_event_chronology(c,repo,parent,idx,links,pinned):
         if i<=len(baseline):
             need(ev==baseline[i-1],"EVENT_PINNED_C1B_PREFIX_MISMATCH")
         ids.append(eid)
+        evidence_events.append({"id":eid,"kind":ev["kind"],
+            "summary":ev["summary"],"occurred_at":ev["occurred_at"],
+            "source_ref":ev["source_ref"],"source_class":ev["source_class"],
+            "disposition":ev["disposition"],
+            "event_url":prior_link["url"],"body_sha256":prior_link["body_sha256"],
+            "owner_authenticated":False})
         prior=event_digest(ev)
     return {"status":"PROVIDER_OBSERVED_UNEDITED_CONTIGUOUS_NOT_OWNER_APPROVED",
             "event_count":len(refs),
@@ -292,6 +301,7 @@ def verify_event_chronology(c,repo,parent,idx,links,pinned):
             "last_event_sha256":prior,
             "pinned_c1b_prefix_events":len(baseline),
             "source_refs_provider_observed":len(ids),
+            "provider_events":evidence_events,
             "owner_authenticated":False,
             "provider_append_only_immutability_guaranteed":False}
 
@@ -332,7 +342,10 @@ def audit(issue_url,c):
     failures=[x["id"] for x in all_sources if not x["provider_observed"]]
     current=sha==index["source_cut"]["revision"]
     return {"schema":"v36.live-issue-spine-audit/v1","parent":parent,
-            "index_comment_id":found[0]["id"],"index_actor_observed":actor,
+            "index_comment_id":found[0]["id"],
+            "index_url":"https://github.com/"+repo+"/issues/"+str(num)+
+                        "#issuecomment-"+str(found[0]["id"]),
+            "index_actor_observed":actor,
             "index_status":"ONE_PROVIDER_OBSERVED_INDEX_NOT_OWNER_AUTHENTICATED",
             "source_cut_current":current,"live_main":sha,
             "references_total":len(all_sources),
