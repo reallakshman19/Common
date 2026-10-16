@@ -1,0 +1,64 @@
+name: v3.6 R2 one-issue GitHub live spine
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - '.github/workflows/v36-r2-live-issue-spine.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  source-first-live-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing native v3.6 Python requirements
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Full native v3.6 suite, R2 adversarial index tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: One issue URL -> real provider index, comments, pinned C1B/C1/C2 docs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/issue_spine_read_v36.py --issue-url https://github.com/reallakshman19/Common/issues/400 > /tmp/r2-live-audit.json
+          python3 - <<'PY'
+          import json
+          v=json.load(open("/tmp/r2-live-audit.json",encoding="utf-8"))
+          assert v["schema"]=="v36.live-issue-spine-audit/v1"
+          assert v["index_comment_id"]==6223440822
+          assert v["references_total"]==5
+          assert v["references_observed"]==5,(v["missing_or_contradicted"],v["versioned_contracts"])
+          assert v["source_cut_current"] is True
+          assert v["owner_accepted"] is False and v["semantic_accepted"] is False
+          assert v["complete_golden_accepted"] is False
+          assert v["twelve_section_recovery_complete"] is False
+          assert v["may_publish"] is False and v["may_count_for_o2"] is False
+          assert any("FOREIGN_PARENT_EXAMPLE" in p["status"] for p in v["versioned_contracts"])
+          assert any("NOT_REATTESTED" in p["status"] for p in v["versioned_contracts"])
+          assert any(p.get("source_refs_matched")==1 for p in v["versioned_contracts"])
+          print("R2_REAL_GITHUB_ONE_ISSUE_READ_5_OF_5_PINNED_AND_COMMENT_SOURCES")
+          print("R2_FOREIGN_PARENT_AND_EXTERNAL_MANIFEST_NOT_ACCEPTED")
+          PY
+      - name: Standalone no older Relay or draft imports
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          f=Path("skills/engineering-pr-delivery-v3.6/scripts/issue_spine_read_v36.py")
+          names=set()
+          for n in ast.walk(ast.parse(f.read_text(encoding="utf-8"))):
+              if isinstance(n,ast.Import):names.update(x.name.split(".")[0] for x in n.names)
+              if isinstance(n,ast.ImportFrom):names.add((n.module or "").split(".")[0])
+          assert names<={"__future__","argparse","base64","hashlib","json","os","re","urllib"}
+          print("R2_NO_RUNTIME_IMPORT_OLD_RELAY_OR_UNMERGED_DRAFTS")
+          PY
