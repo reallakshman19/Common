@@ -91,14 +91,14 @@ jobs:
           with open("/tmp/v36-c2-real-original-custody.json",encoding="utf-8") as f: audit=json.load(f)
           assert audit["repository"]=="reallakshman19/3D_Converters"
           assert audit["revision"]=="6e7f4b98e286d19598fc6cb27f007c12811fbc4d"
-          assert audit["artifact_count"]==5 and audit["byte_verified"]==5, audit["artifacts"]
+          assert audit["artifact_count"]==6 and audit["byte_verified"]==6, audit["artifacts"]
           assert audit["provider_actors_observed"]==1, audit["issue_records"]
           assert all(x["status"]=="BYTE_VERIFIED_ON_PINNED_GIT_REVISION" for x in audit["artifacts"])
           assert audit["issue_records"][0]["status"]=="PROVIDER_RECORD_OBSERVED_NOT_OWNER_AUTHENTICATED"
           assert audit["semantic_verified"]==0 and audit["owner_decisions_authenticated"]==0
           assert audit["may_publish"] is False and audit["may_merge_or_release"] is False
           assert audit["may_count_for_o2"] is False and audit["may_change_titles_or_labels"] is False
-          print("C2_LIVE_ORIGINAL_GIT_BYTES_5_OF_5_VERIFIED")
+          print("C2_LIVE_PUBLIC_GIT_BYTES_6_OF_6_VERIFIED")
           print("C2_ISSUE_274_PROVIDER_ACTOR_OBSERVED_NOT_OWNER_AUTHENTICATED")
           print("C2_PRODUCT_SEMANTICS_AND_COMPLETE_GOLDEN_NOT_QUALIFIED")
           PY
