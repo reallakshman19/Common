@@ -135,6 +135,25 @@ class CodingAddendumTests(unittest.TestCase):
         self.assertIn("NOT_GRANTED",result)
         self.assertNotIn("TASK_EVIDENCE v3.6",result)
         self.assertNotIn("Outcome:",result)
+    def test_native_v36_evidence_rejects_appended_issue_chain(self):
+        import sys
+        sys.path.insert(0,str(ROOT/"scripts"))
+        import lifecycle_v36 as native
+        head="f"*40
+        repo="reallakshman19/relay-v36-e2e-lab"
+        comment=native.render_evidence(
+            outcome="O1",for_user="Original source check completed",
+            proof=f"https://github.com/{repo}/pull/4/commits/{head}",
+            task_id="V36-1-WP1",issue_ref=f"{repo}#2",
+            candidate=f"{repo}@{head}",tests_passed=1,tests_run=1)
+        self.assertEqual(native.validate_evidence(comment)["outcome"],"O1")
+        with self.assertRaisesRegex(native.ContractError,"noncanonical evidence comment"):
+            native.validate_evidence(comment+"Issue chain: "+c.render_chain(self.chain())+"\n")
+    def test_separate_context_marker_does_not_impersonate_native_o2(self):
+        context="CONTINUITY_CONTEXT v3.6\nIssue chain: "+c.render_chain(self.chain())
+        self.assertNotIn("TASK_EVIDENCE v3.6",context)
+        self.assertIn("INVALID_REPORTED",context)
+
     def test_advisory_receipt_requires_real_sha(self):
         opts=dict(chain=self.chain(),outcome="Source evidence remains subject to review",
             source_sha="abc",implementation_crux="The source reader feeds the worker result",
