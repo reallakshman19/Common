@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   owner-source-and-native-tests:
@@ -54,12 +55,15 @@ jobs:
           print("C1B_STRUCTURE_ONLY_NOT_AN_OWNER_APPROVAL")
           PY
       - name: Read-only GitHub provider metadata check of full Owner document issue comment
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
-          import json
+          import json,os
           from urllib.request import Request,urlopen
           u="https://api.github.com/repos/reallakshman19/Common/issues/comments/6223067953"
-          with urlopen(Request(u,headers={"Accept":"application/vnd.github+json","User-Agent":"v36-c1b-readonly"}),timeout=25) as r: obj=json.load(r)
+          headers={"Accept":"application/vnd.github+json","User-Agent":"v36-c1b-readonly","Authorization":"Bearer "+os.environ["GH_TOKEN"]}
+          with urlopen(Request(u,headers=headers),timeout=25) as r: obj=json.load(r)
           assert obj["id"]==6223067953
           assert obj["user"]["login"]=="reallakshman19"
           assert obj["issue_url"]=="https://api.github.com/repos/reallakshman19/Common/issues/400"
