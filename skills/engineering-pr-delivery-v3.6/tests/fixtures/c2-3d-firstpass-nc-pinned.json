@@ -1,0 +1,72 @@
+{
+  "schema": "v36.source-custody/v1",
+  "repository": "reallakshman19/3D_Converters",
+  "revision": "6e7f4b98e286d19598fc6cb27f007c12811fbc4d",
+  "artifacts": [
+    {
+      "id": "FIRSTPASS_XML",
+      "role": "ORIGINAL_POSITIVE",
+      "path": "Benchmarks/1885Sjson/FirstpassXML",
+      "expected_blob_sha1": "9baed223d1fe10644bc4ea6be1b9e36b10eb3e1f",
+      "expected_sha256": "feee5a5a6399207337e63bc56c8afb001fe37ab30c6a7a9283333ec60f6eea38",
+      "expected_size_bytes": 144471,
+      "oracle_complete": null
+    },
+    {
+      "id": "FIRSTPASS_JSON",
+      "role": "ORIGINAL_POSITIVE",
+      "path": "Benchmarks/1885Sjson/Sjson.json",
+      "expected_blob_sha1": "f3400dc9cbffa079d89ad850f0acc7a3709a21d9",
+      "expected_sha256": "6b2c8b01ab0ba6ec8e9e7c42eb4a719668ffd2dc4dbe4790d27cf426a1f60288",
+      "expected_size_bytes": 733806,
+      "oracle_complete": null
+    },
+    {
+      "id": "NC_XML",
+      "role": "ORIGINAL_NEGATIVE",
+      "path": "Benchmarks/1885_NC/1885_NC.topology.input.xml",
+      "expected_blob_sha1": "e08eaae598bdf5b506eb8b62336086135a570986",
+      "expected_sha256": "516f61dce7074dcf55b3c43325612141c1b7c2fb006b6f6b67d07f112f88f8a2",
+      "expected_size_bytes": 1067628,
+      "oracle_complete": null
+    },
+    {
+      "id": "NC_JSON",
+      "role": "ORIGINAL_NEGATIVE",
+      "path": "Benchmarks/1885_NC/1885_NC.json",
+      "expected_blob_sha1": "9ac18595acdf8938f01579b5c211f0deebc5dc0a",
+      "expected_sha256": "89f9c2ab7a9f1df15c1b9e1e0e30a8ca6c97ef994dcd56aec86c3a90f7d71646",
+      "expected_size_bytes": 10232634,
+      "oracle_complete": null
+    },
+    {
+      "id": "GLRD_PUBLIC_41_BRANCH_CANDIDATE",
+      "role": "BENCHMARK_INPUT",
+      "path": "Benchmarks/XML to CII 2019/GLRD-1000-PI-01.xml",
+      "expected_blob_sha1": "8769ffe538ecacc621daf39919ca00ba27008211",
+      "expected_sha256": "923a2b493483ecaaebe696f3d08a0b688f3ce3c9f456fb11b8e6a5889eea22ba",
+      "expected_size_bytes": 627599,
+      "oracle_complete": null
+    },
+    {
+      "id": "EXPECTED_CONDENSED_XML_PARTIAL_ORACLE",
+      "role": "PARTIAL_GOLDEN",
+      "path": "Benchmarks/1885Sjson/ExpectedCondensedEnrichedXML",
+      "expected_blob_sha1": "f3c7404827e086c8a8a1bed713ce6c4c844cea6d",
+      "expected_sha256": "81b433de3ec1c6d58a3583e8b65cad9d42f1136869aa3191a478ea1bcb01c2d9",
+      "expected_size_bytes": 144029,
+      "oracle_complete": false
+    }
+  ],
+  "issue_records": [
+    {
+      "id": "CURRENT_ISSUE_274",
+      "kind": "ISSUE",
+      "issue_number": 274,
+      "comment_id": null,
+      "claimed_actor": null,
+      "expected_body_sha256": null,
+      "expected_updated_at": null
+    }
+  ]
+}

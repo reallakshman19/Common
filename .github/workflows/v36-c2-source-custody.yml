@@ -1,0 +1,119 @@
+name: v3.6 C2 source custody isolated offline tests
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py'
+      - 'skills/engineering-pr-delivery-v3.6/tests/test_source_custody_v36.py'
+      - 'skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-common-public-demo.json'
+      - 'skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-3d-firstpass-nc-pinned.json'
+      - 'skills/engineering-pr-delivery-v3.6/SOURCE_CUSTODY_C2.md'
+      - '.github/workflows/v36-c2-source-custody.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-custody:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Native v3.6 dependencies (C2 module itself remains stdlib-only)
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Full native v3.6 regression suite including adversarial C2 tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: Byte-verify pinned demonstration manifest locally
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          data=json.loads(Path("skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-common-public-demo.json").read_text())
+          a=data["artifacts"][0]
+          assert a["role"]=="DEMONSTRATION_ONLY"
+          p=Path(a["path"])
+          raw=p.read_bytes()
+          observed_blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+          assert len(raw)==a["expected_size_bytes"]
+          assert observed_blob==a["expected_blob_sha1"]
+          assert hashlib.sha256(raw).hexdigest()==a["expected_sha256"]
+          assert data["revision"]=="0a7c4d45d3fa0787d3e80858a27015b09a85eac2"
+          assert subprocess.check_output(["git","rev-parse",data["revision"]+":"+a["path"]],text=True).strip()==a["expected_blob_sha1"]
+          print("C2_DEMONSTRATION_GIT_OBJECT_AND_BYTES_MATCHED_NOT_OWNER_ORIGINAL")
+          PY
+      - name: Discover original source fixture hashes at pinned 3D commit
+        run: |
+          python3 - <<'PY'
+          import base64
+          import hashlib
+          import json
+          import sys
+          sys.path.insert(0, "skills/engineering-pr-delivery-v3.6/scripts")
+          import source_custody_v36 as c
+          client=c.GitHubReadOnly()
+          repo="reallakshman19/3D_Converters"
+          rev="6e7f4b98e286d19598fc6cb27f007c12811fbc4d"
+          files=[
+            ("ORIGINAL_POSITIVE","Benchmarks/1885Sjson/FirstpassXML","9baed223d1fe10644bc4ea6be1b9e36b10eb3e1f",144471),
+            ("ORIGINAL_POSITIVE","Benchmarks/1885Sjson/Sjson.json","f3400dc9cbffa079d89ad850f0acc7a3709a21d9",733806),
+            ("ORIGINAL_NEGATIVE","Benchmarks/1885_NC/1885_NC.topology.input.xml","e08eaae598bdf5b506eb8b62336086135a570986",1067628),
+            ("ORIGINAL_NEGATIVE","Benchmarks/1885_NC/1885_NC.json","9ac18595acdf8938f01579b5c211f0deebc5dc0a",10232634),
+            ("BENCHMARK_INPUT","Benchmarks/XML to CII 2019/GLRD-1000-PI-01.xml","8769ffe538ecacc621daf39919ca00ba27008211",627599),
+          ]
+          reports=[]
+          for role,path,sha,size in files:
+              p=client.get("/repos/"+repo+"/contents/"+c.valid_path(path)+"?ref="+rev)
+              assert p.get("type")=="file" and p.get("sha")==sha and p.get("size")==size,(path,"PATH_OR_REVISION_CHANGED")
+              obj=client.get("/repos/"+repo+"/git/blobs/"+sha)
+              assert obj.get("sha")==sha and obj.get("encoding")=="base64" and isinstance(obj.get("content"),str)
+              b64=obj["content"]
+              assert len(b64)<c.MAX_BLOB_BYTES*4//3+16384,(path,"SIZE_OUT_OF_BOUNDED_DISCOVERY")
+              raw=base64.b64decode(b64)
+              assert len(raw)==size and c.git_blob_sha1(raw)==sha,(path,"SOURCE_BYTES_MISMATCH")
+              reports.append(dict(role=role,path=path,git_sha1=sha,sha256=hashlib.sha256(raw).hexdigest(),bytes=size,semantic_accepted=False))
+          print("C2_ORIGINAL_PINNED_BYTES_ONLY_NOT_PRODUCT_ACCEPTANCE")
+          print(json.dumps(reports,indent=2))
+          PY
+      - name: Execute native C2 verifier on original Firstpass NC and partial-oracle files
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py \
+            --manifest skills/engineering-pr-delivery-v3.6/tests/fixtures/c2-3d-firstpass-nc-pinned.json \
+            > /tmp/v36-c2-real-original-custody.json
+          python3 - <<'PY'
+          import json
+          with open("/tmp/v36-c2-real-original-custody.json",encoding="utf-8") as f: audit=json.load(f)
+          assert audit["repository"]=="reallakshman19/3D_Converters"
+          assert audit["revision"]=="6e7f4b98e286d19598fc6cb27f007c12811fbc4d"
+          assert audit["artifact_count"]==6 and audit["byte_verified"]==6, audit["artifacts"]
+          assert audit["provider_actors_observed"]==1, audit["issue_records"]
+          assert all(x["status"]=="BYTE_VERIFIED_ON_PINNED_GIT_REVISION" for x in audit["artifacts"])
+          assert audit["issue_records"][0]["status"]=="PROVIDER_RECORD_OBSERVED_NOT_OWNER_AUTHENTICATED"
+          assert audit["semantic_verified"]==0 and audit["owner_decisions_authenticated"]==0
+          assert audit["may_publish"] is False and audit["may_merge_or_release"] is False
+          assert audit["may_count_for_o2"] is False and audit["may_change_titles_or_labels"] is False
+          print("C2_LIVE_PUBLIC_GIT_BYTES_6_OF_6_VERIFIED")
+          print("C2_ISSUE_274_PROVIDER_ACTOR_OBSERVED_NOT_OWNER_AUTHENTICATED")
+          print("C2_PRODUCT_SEMANTICS_AND_COMPLETE_GOLDEN_NOT_QUALIFIED")
+          PY
+      - name: 'Independence - forbid legacy Relay imports'
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          p=Path("skills/engineering-pr-delivery-v3.6/scripts/source_custody_v36.py")
+          root=ast.parse(p.read_text(encoding="utf-8"))
+          modules=set()
+          for node in ast.walk(root):
+              if isinstance(node,ast.Import): modules.update(n.name.split(".")[0] for n in node.names)
+              elif isinstance(node,ast.ImportFrom): modules.add((node.module or "").split(".")[0])
+          allowed={"__future__","argparse","base64","binascii","hashlib","json","os","re","urllib","pathlib"}
+          assert modules<=allowed, sorted(modules-allowed)
+          print("C2_STANDARD_LIBRARY_ONLY_NO_V35_V32_V31_DELP_RUNTIME")
+          PY
