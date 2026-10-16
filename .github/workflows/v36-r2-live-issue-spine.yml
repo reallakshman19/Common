@@ -39,6 +39,7 @@ jobs:
           assert v["references_total"]==7
           assert v["references_observed"]==7,(v["missing_or_contradicted"],v["versioned_contracts"])
           chain=v["event_chronology"]
+          assert v["status"]=="LIVE_INDEX_OBSERVED_CHRONOLOGY_PROVIDER_ONLY"
           assert chain["status"]=="PROVIDER_OBSERVED_UNEDITED_CONTIGUOUS_NOT_OWNER_APPROVED",chain
           assert chain["event_count"]==2 and chain["pinned_c1b_prefix_events"]==1
           assert chain["last_event_id"]=="EV-0002"
