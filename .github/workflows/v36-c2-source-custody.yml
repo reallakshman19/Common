@@ -20,11 +20,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Adversarial C2 tests, standard library only
-        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_source_custody_v36.py' -v
+      - name: Native v3.6 dependencies (C2 module itself remains stdlib-only)
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Full native v3.6 regression suite including adversarial C2 tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
       - name: Byte-verify pinned demonstration manifest locally
         run: |
           python3 - <<'PY'
