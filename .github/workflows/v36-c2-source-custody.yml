@@ -65,6 +65,7 @@ jobs:
             ("ORIGINAL_POSITIVE","Benchmarks/1885Sjson/Sjson.json","f3400dc9cbffa079d89ad850f0acc7a3709a21d9",733806),
             ("ORIGINAL_NEGATIVE","Benchmarks/1885_NC/1885_NC.topology.input.xml","e08eaae598bdf5b506eb8b62336086135a570986",1067628),
             ("ORIGINAL_NEGATIVE","Benchmarks/1885_NC/1885_NC.json","9ac18595acdf8938f01579b5c211f0deebc5dc0a",10232634),
+            ("BENCHMARK_INPUT","Benchmarks/XML to CII 2019/GLRD-1000-PI-01.xml","8769ffe538ecacc621daf39919ca00ba27008211",627599),
           ]
           reports=[]
           for role,path,sha,size in files:
