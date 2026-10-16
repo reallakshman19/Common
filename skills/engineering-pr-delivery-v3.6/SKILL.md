@@ -57,3 +57,14 @@ LOG | chat=<chat-id> | tab=<tab> | folder=<coordination/path>@<latest-log-commit
 ```
 
 **Owner constraints:** Owner controls decisions and merges; engineering-critical doubt must stop the risky action. A generated packet/LOG, stale GitHub snapshot or passing check cannot invent an accepted task. Never merge, close, release, or silently change the Owner's aim without authorization.
+
+
+## 5. Additive issue-first continuity chain — Common #400
+
+The existing O1–O5 lifecycle, label_sha authority, child TASK_EVIDENCE and live title/PR projection remain unchanged. For new Owner-selected engineering work, follow [CONTINUITY_CHAIN_V1.md](CONTINUITY_CHAIN_V1.md) to reconstruct the original Owner WHY, later technical Owner inputs, real original fixtures/goldens, measured benchmarks, code/Worker implementation crux, agent contributions, tested decisions, adopted versus parked improvements, failures and next exact verification from the owning issue.
+
+**C1 available now:** `scripts/issue_chain_v36.py` performs a strict, read-only 11-category **reported-history** structural audit and negative checks. The [Issue #274 example](tests/fixtures/issue-chain-274-reported.json) accounts for 11 categories with 4 explicit missing inputs; accounting 100% does **not** mean any source or Owner decision was independently verified. Output always holds write, title/label mutation, merge and release permission. Never promote an Owner quotation, cited fixture hash or green unit test into authenticated authority.
+
+**Source-aware links, not new protocol stages:** Handover Master chooses actual v3.6 versus standalone; BuddyRunner v1.6 still executes 1a HOLD → 1b independent reconstruction → 2 single reconciliation, or one Xb→Y; native 2-/3-pass remain separate generators. Pass-1 blind inputs must never receive authored solutions. Use the same issue-chain *navigation references* in permitted stages without inventing a new loop or coordinator. A twelve-section implementation handover is a view of durable source evidence; zero-exit must work without a predecessor LOG.
+
+**Pending C2–C7:** authenticated Git/source fixture custody and live provider actor checks; issue index/cold successor enrichment; opt-in smart dynamic titles and GitHub status labels using the existing publisher; tenth-agent cold drills; independent semantic/Owner acceptance. Do not change the approved work's AIM label, accepted titles or privileges from this C1 addition. v3.5 mechanisms are design references, never v3.6 runtime dependencies.
