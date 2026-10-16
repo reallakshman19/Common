@@ -181,16 +181,16 @@ def main(argv=None) -> int:
     args = p.parse_args(argv)
     try:
         if args.mode == "cold":
+            requested = bool(args.continuity_chain or args.custody_manifest)
+            if requested and (not args.continuity_chain or not args.custody_manifest or
+                              not args.stage2_freeze_verified):
+                raise ContractError("C3 requires both source documents and independently verified stage2 freeze; caller flag is not verification")
             label = load_label(args.label)
             plan = load_plan(args.plan, label)
             require_explicit_lab(label, plan["parent"], args.lab)
             client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
             client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
             packet = build_packet(label, plan, client, args.pr)
-            requested = bool(args.continuity_chain or args.custody_manifest)
-            if requested and (not args.continuity_chain or not args.custody_manifest or
-                              not args.stage2_freeze_verified):
-                raise ContractError("C3 requires both source documents and independently verified stage2 freeze; caller flag is not verification")
             rendered = render_markdown(packet)
             if requested:
                 try:
