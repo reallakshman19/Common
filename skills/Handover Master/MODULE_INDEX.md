@@ -56,4 +56,10 @@ The existing paths are load-bearing in imports, workflow jobs and original sourc
 
 **Source authority:** Common #391, accepted v3.6 #341, and CoordinatorLandingpage #21/#7 are the decision anchors. Historical #360 Dash V2 is superseded for downstream read-only consumer design. A link alone does not mean Owner approval or current source correctness.
 
+## Current vs superseded (please do not confuse them)
+
+**Current Handover Master** is [SKILL.md](SKILL.md). All native paths in the table remain available as explicitly governed or version-pinned modules. The Master does NOT make its underlying two-pass, three-pass, v3.6, BuddyRunner or ONB implementation folders obsolete.
+
+**Truly superseded Dash V2 workspace** has moved byte-for-byte to [`/superseded/coordination/Session_Oct07/Tab6_Dashboard_V2/`](../../superseded/coordination/Session_Oct07/Tab6_Dashboard_V2/). Its old location now has a compatibility navigation README. The active UI destination is [CoordinatorLandingpage #21](https://github.com/reallakshman19/CoordinatorLandingpage/issues/21). See [archive migration audit](../../superseded/HANDOVER_FOLDER_AUDIT.md).
+
 Return to [one entrypoint](SKILL.md) or [decision guideline](DECISION_GUIDE.md).
