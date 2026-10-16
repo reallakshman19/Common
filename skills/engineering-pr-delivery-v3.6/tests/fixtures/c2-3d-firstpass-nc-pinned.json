@@ -40,6 +40,15 @@
       "oracle_complete": null
     },
     {
+      "id": "GLRD_PUBLIC_41_BRANCH_CANDIDATE",
+      "role": "BENCHMARK_INPUT",
+      "path": "Benchmarks/XML to CII 2019/GLRD-1000-PI-01.xml",
+      "expected_blob_sha1": "8769ffe538ecacc621daf39919ca00ba27008211",
+      "expected_sha256": "923a2b493483ecaaebe696f3d08a0b688f3ce3c9f456fb11b8e6a5889eea22ba",
+      "expected_size_bytes": 627599,
+      "oracle_complete": null
+    },
+    {
       "id": "EXPECTED_CONDENSED_XML_PARTIAL_ORACLE",
       "role": "PARTIAL_GOLDEN",
       "path": "Benchmarks/1885Sjson/ExpectedCondensedEnrichedXML",
