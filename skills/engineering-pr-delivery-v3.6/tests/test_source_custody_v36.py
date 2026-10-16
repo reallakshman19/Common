@@ -221,11 +221,12 @@ class SourceCustodyTests(unittest.TestCase):
         self.assertEqual(entry["repository"], "reallakshman19/3D_Converters")
         self.assertEqual(entry["revision"],
                          "6e7f4b98e286d19598fc6cb27f007c12811fbc4d")
-        self.assertEqual(len(entry["artifacts"]), 5)
+        self.assertEqual(len(entry["artifacts"]), 6)
         self.assertEqual(sum(x["role"] == "ORIGINAL_POSITIVE" for x in entry["artifacts"]), 2)
         self.assertEqual(sum(x["role"] == "ORIGINAL_NEGATIVE" for x in entry["artifacts"]), 2)
         self.assertEqual(sum(x["role"] == "PARTIAL_GOLDEN" for x in entry["artifacts"]), 1)
         self.assertFalse(any(x["role"] == "COMPLETE_GOLDEN" for x in entry["artifacts"]))
+        self.assertEqual(sum(x["role"] == "BENCHMARK_INPUT" for x in entry["artifacts"]), 1)
         self.assertEqual(entry["issue_records"][0]["claimed_actor"], None)
 
     def test_python_imports_are_stdlib_only_and_no_legacy_relay(self):
