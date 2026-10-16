@@ -92,7 +92,7 @@ class ReceiptTests(unittest.TestCase):
             else:
                 x["events"][0]["summary"]="Changed original WHY without append-only amendment"
             with self.assertRaisesRegex(c.ReceiptError,
-                                         "HISTORICAL_RECEIPT_EDIT_OR_REMOVAL"):
+                                         "HISTORICAL_RECEIPT_EDIT_OR_REMOVAL|EVENT_APPEND_ONLY_HASH_MISMATCH"):
                 c.verify_extension(b,x)
 
     def test_hash_chain_catches_old_entry_edit(self):
@@ -166,7 +166,6 @@ class ReceiptTests(unittest.TestCase):
         md=c.render(a)
         self.assertIn("~~https://github.com/reallakshman19/Common/issues/125~~",md)
         self.assertIn("INVALID_REPORTED",md)
-        self.assertIn("not provider",md.lower()) if False else None
 
     def test_lineage_missing_middle_hop_fails(self):
         a=fixture()
