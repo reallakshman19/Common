@@ -185,6 +185,8 @@ def validate_stream(data):
         need(isinstance(links,list) and len(links)==len(set(links)) and
              all(x in known for x in links),
              "EVENT_SUPERSESSION_ORPHAN_OR_CYCLE")
+        if e["kind"]=="OWNER_AMENDMENT":
+            need(bool(links), "OWNER_AMENDMENT_MUST_LINK_CHANGED_PRIOR_EVENT")
         disposition=e["disposition"]
         need(disposition in DISPOSITIONS,"DISPOSITION_INVALID")
         if disposition=="PARKED":
