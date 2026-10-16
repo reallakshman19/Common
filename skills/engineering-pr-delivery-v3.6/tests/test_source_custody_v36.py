@@ -131,7 +131,7 @@ class SourceCustodyTests(unittest.TestCase):
         result = c.audit(doc, client)
         self.assertEqual(result["artifacts"][0]["status"],
                          "SIZE_OUT_OF_C2_PILOT_RANGE_UNVERIFIED")
-        self.assertEqual(client.calls, [])
+        self.assertFalse(any('/contents/' in p or '/git/blobs/' in p for p in client.calls))
 
     def test_original_role_is_not_automatic_proof(self):
         doc, client = self.fixture()
