@@ -165,9 +165,9 @@ def validate(data):
             require(not record_ids,"UNKNOWN_CANNOT_CLAIM_EVIDENCE")
             substance(edge["reason"],"UNKNOWN_OR_NOT_APPLICABLE_REASON")
         states.append(status)
-    require(set(by_id)==refs,"UNREFERENCED_HISTORY_EVENT")
     if chain[0]["state"]!="PRESENT_REPORTED":
         raise ChainError("ROOT_OWNER_INTENT_MISSING")
+    require(set(by_id)==refs,"UNREFERENCED_HISTORY_EVENT")
     source_count=sum(x=="PRESENT_REPORTED" for x in states)
     unknown_count=states.count("UNKNOWN")
     not_applicable_count=states.count("NOT_APPLICABLE")
