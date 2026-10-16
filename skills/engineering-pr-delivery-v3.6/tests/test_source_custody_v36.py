@@ -214,6 +214,20 @@ class SourceCustodyTests(unittest.TestCase):
         with self.assertRaisesRegex(c.InvalidManifest, "INVALID_OR_DUPLICATE_RECORD_ID"):
             c.audit(doc, client)
 
+    def test_real_repository_fixture_is_pinned_but_cannot_grant_acceptance(self):
+        source = ROOT / "tests" / "fixtures" / "c2-3d-firstpass-nc-pinned.json"
+        entry = json.loads(source.read_text(encoding="utf-8"))
+        c.validate_manifest(entry)
+        self.assertEqual(entry["repository"], "reallakshman19/3D_Converters")
+        self.assertEqual(entry["revision"],
+                         "6e7f4b98e286d19598fc6cb27f007c12811fbc4d")
+        self.assertEqual(len(entry["artifacts"]), 5)
+        self.assertEqual(sum(x["role"] == "ORIGINAL_POSITIVE" for x in entry["artifacts"]), 2)
+        self.assertEqual(sum(x["role"] == "ORIGINAL_NEGATIVE" for x in entry["artifacts"]), 2)
+        self.assertEqual(sum(x["role"] == "PARTIAL_GOLDEN" for x in entry["artifacts"]), 1)
+        self.assertFalse(any(x["role"] == "COMPLETE_GOLDEN" for x in entry["artifacts"]))
+        self.assertEqual(entry["issue_records"][0]["claimed_actor"], None)
+
     def test_python_imports_are_stdlib_only_and_no_legacy_relay(self):
         source = SOURCE.read_text(encoding="utf-8")
         for token in ("import lifecycle_v32", "import lifecycle_v35",
