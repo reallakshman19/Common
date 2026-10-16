@@ -89,3 +89,7 @@ python "skills/Handover Master/route.py" --mode status
 Return compact human summary: `MODE`, `GOVERNANCE`, `LIVE SOURCE (path, SHA, revision)`, `WHY THIS MODE`, `PHASE`, `AUTHORITY`, `EVIDENCE`, `BLOCKERS`, `GENERATED ARTIFACT`, `NEXT VERIFY`. If insufficient evidence: `HOLD` and list missing source/role/approval, rather than inventing a selected answer.
 
 **Do not** turn this Master into a new Common lifecycle skill, Dashboard v2, protocol governor, Project Coordinator or automated actions service. See [MODULE_INDEX.md](MODULE_INDEX.md) for all actual links, [SKILL.md](SKILL.md) for canonical agent instruction and [sources.json](sources.json) for machine navigation.
+
+## 7. v3.6 issue continuity — C1/C1A integration (advisory)
+
+For an authorized v3.6 issue, use the [integrated C1/C1A continuity guide](../engineering-pr-delivery-v3.6/CONTINUITY_C1A_INTEGRATION.md) to find one canonical eleven-category reported-only issue spine, a lossless historical-issue presentation and an optional ungoverned advisory receipt. The native Handover Master still routes to its selected protocol; the continuity bridge is read-only and cannot issue TASK_EVIDENCE v3.6, authenticate Owner amendments, certify original fixture/golden, update titles, advance blind stages, dispatch NEXT_MOVE, merge or release. In a blind first pass, do not open solution-bearing continuity content before the authorized isolation boundary. CoordinatorLandingpage #49 is merged; its native evaluator remains separately owned and must not be cloned.
