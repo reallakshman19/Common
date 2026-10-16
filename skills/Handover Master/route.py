@@ -33,8 +33,8 @@ def match_mode(intent):
       "buddy":r"\bbuddyrunner\b|\b1a\s*(?:→|->)\s*1b\b|\bxb\s*(?:→|->)\s*y\b",
       "zero-exit":r"\bzero.exit\b|\babrupt (?:exit|handover)\b|\bno predecessor\b|\bno outgoing\b|\bwithout (?:a )?(?:handover|log)\b|\bcold successor\b",
       "technical":r"\btechnical handover\b|\b12.section (?:report|handover)\b|\btechnical report\b",
-      "two-pass":r"\btwo.pass\b|\b2.pass\b|\bindependent baseline\b|\bblind baseline\b",
-      "three-pass":r"\bthree.pass\b|\b3.pass\b|\bprompt 2\.5\b|\bprogramme imagination\b|\bq1.q5\b"
+      "two-pass":r"\btwo[- ]?pass\b|\b2[- ]?pass\b|\bindependent baseline\b|\bblind baseline\b",
+      "three-pass":r"\bthree[- ]?pass\b|\b3[- ]?pass\b|\bprompt 2\.5\b|\bprogramme imagination\b|\bq1.q5\b"
     }
     hits=[name for name,pattern in tokens.items() if re.search(pattern,raw)]
     if not hits:return None,hits
