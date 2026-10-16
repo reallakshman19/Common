@@ -29,6 +29,16 @@ class RouterTests(unittest.TestCase):
         self.assert_selected(x,"two_standalone")
         self.assertTrue(any("schema.md" in p for p in x["canonical_read_paths"]))
 
+    def test_two_pass_compact_invocation(self):
+        self.assert_selected(self.sel(intent="Generate 2pass for this system"),"two_standalone")
+
+    def test_three_pass_compact_invocation(self):
+        self.assert_selected(self.sel(intent="Generate 3pass for this system"),"three_standalone")
+
+    def test_compact_two_three_ambiguity(self):
+        result=self.sel(intent="Which of 2pass or 3pass is better?")
+        self.assertEqual(result["status"],"NEEDS_SELECTION")
+
     def test_three_standalone(self):
         x=self.sel(mode="three-pass")
         self.assert_selected(x,"three_standalone")
