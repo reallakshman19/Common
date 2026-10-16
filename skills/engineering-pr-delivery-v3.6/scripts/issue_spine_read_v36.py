@@ -212,8 +212,8 @@ def verify_event_chronology(c,repo,parent,idx,links,pinned):
     observed_links={r["id"]:r for r in links if r["provider_observed"]}
     baseline=None
     for item in pinned:
-        if item.get("schema")=="v36.issue-receipt-stream/v1" and
-           item.get("reported_parent")==parent:
+        if (item.get("schema")=="v36.issue-receipt-stream/v1" and
+                item.get("reported_parent")==parent):
             need(baseline is None,"MULTIPLE_C1B_AUTHORITIES")
             baseline=item.get("_events_for_readback")
     need(baseline is not None and isinstance(baseline,list) and baseline,
