@@ -54,4 +54,4 @@ Movement direction: Open both rearward-swinging doors and hold them open. Narasi
 
 **2:53-3:00 - Everyone:** Be brave! Be kind! Do what is right! Jai Narasimha!
 
-Movement direction: Once Narasimha is fully in front of the opening, raise his one controlled arm to bless. Prahlada bows using whole-body tilt of about 15 degrees, then returns upright. Complete group chant and final small bow without another backdrop or mechanical curtain.
+Movement direction: Once Narasimha is fully in front of the opening, raise his one controlled arm to bless. Prahlada starts at proposed stage x=660 mm (35 mm farther right than inherited x=625), bows using whole-body tilt 15 to 20 degrees toward Narasimha, then returns upright. Movement is a geometry hypothesis, not an instruction to fabricate without full-stage clearance testing. Complete group chant and final small bow without another backdrop or mechanical curtain.
