@@ -150,6 +150,16 @@ class ReadModelTests(unittest.TestCase):
         self.assertFalse(r["read_complete"])
         self.assertIn("pr:344", r["unread_sources"])
 
+    def test_issue_list_or_unexpected_errors_are_incomplete(self):
+        class IssuesDown(Provider):
+            def list_issues(self): raise lc.ContractError("issues down")
+        class OsDown(Provider):
+            def list_comments(self, n): raise OSError("socket")
+        r = rm.read_model(PLAN, IssuesDown([]), NOW)
+        self.assertEqual((r["read_complete"], r["unread_sources"], r["tasks"]), (False, ["issues"], []))
+        r = rm.read_model(PLAN, OsDown([]), NOW)
+        self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["345"]))
+
     def test_latest_self_check_by_created_at(self):
         older = comment(SC_ID, self_check(claim="PARTIAL")); older["created_at"] = "2026-10-17T06:00Z"
         newer = comment(9010, self_check()); newer["created_at"] = "2026-10-17T08:00Z"

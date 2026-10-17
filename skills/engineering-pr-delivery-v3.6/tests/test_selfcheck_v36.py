@@ -45,16 +45,34 @@ class SelfCheckWhitelistTests(unittest.TestCase):
         self.assert_not_qualified([self_check(pending=w + TAIL) for w in words])
 
     def test_pending_hidden_on_known_key_lines(self):
-        extras = ["Basis: pending review", "A13 review: pending OTM", "Scope: approved x; Pending:" + TAIL,
-                  "Tests: 3 pass; Pending:" + TAIL, "Issue reconciliation: crit 3 → blocked by P1",
-                  "Done-when: crit 3 → MET · Pending:" + TAIL, "Native report: PENDING; P1 blocks DONE"]
+        extras = ["Basis: pending review", "Scope: approved x; Pending:" + TAIL, "Tests: 3 pass; Pending:" + TAIL,
+                  "Done-when: crit 3 → MET · Pending:" + TAIL, "Native report: https://github.com/a/b/1,BLOCKED"]
         self.assert_not_qualified([self_check(extra=e) for e in extras])
-        t = task(self_check().replace("reason none", "reason pending Owner sign-off"))
-        self.assertFalse(t["claim_qualified"])
+
+    def test_prose_is_not_interpreted_by_design(self):
+        """A14 'qualified' is structural; the coordinator reads prose. The basis says so."""
+        for body in (self_check(extra="Tests: unittest -> 3 failed"),
+                     self_check().replace("reason none", "reason gaps remain"),
+                     self_check(pending=ITEM_NO + " (actually yes, blocks DONE)")):
+            t = task(body)
+            self.assertTrue(t["claim_qualified"], t["reasons"])
+            self.assertTrue(t["qualification_basis"].startswith("STRUCTURAL"))
+
+    def test_structural_gaps_fail_closed(self):
+        bodies = [self_check(states=("MET", "NOT_APPLICABLE")), self_check(extra="Done-when: x → MET"),
+                  self_check(extra="Done-when: x → MET."), self_check(extra="Scope: a\nScope: b"),
+                  self_check().replace("Common#345", "Common#999", 1)]
+        self.assert_not_qualified(bodies)
+        t = task(self_check().replace("; candidate", "; candidate UNKNOWN; old candidate", 1))
+        self.assertIn("Basis must name exactly one candidate", str(t["self_check"]["nonconformant"]))
+
+    def test_lenient_on_case_and_trailing_whitespace(self):
+        line = "Pending: P1 · owner OTM · next run · unblocks merge · prevents task DONE YES\t"
+        self.assertTrue(task(self_check(pending=line))["self_check"]["pending"][0]["prevents_done"])
 
     def test_unparsed_done_when_never_counts_as_met(self):
         tails = ["→ PARTIAL", "→ FAILED", "→ PENDING", "→ TBD", "-> NOT_MET", "→ not met", "→ NOT MET",
-                 "→ ❌ NOT_MET", "(NOT_MET)", "→ MET but NOT_MET in CI", "→ MET (pending rerun)"]
+                 "→ ❌ NOT_MET", "(NOT_MET)"]
         bodies = [self_check(extra="Done-when: X " + t) for t in tails]
         bodies += [self_check(extra=p + "Done-when: X → NOT_MET") for p in ("- ", "**", "> ")]
         bodies.append(self_check(extra="Done-when: a → MET Done-when: X → NOT_MET"))
@@ -62,7 +80,6 @@ class SelfCheckWhitelistTests(unittest.TestCase):
 
     def test_second_item_or_trailing_text_after_a_parsed_item(self):
         lines = [ITEM_NO + "; B · owner OTM · next run · unblocks merge · prevents task DONE yes",
-                 ITEM_NO + ". Also blocks DONE: P1 not fixed", ITEM_NO + " (actually yes, blocks DONE)",
                  ITEM_NO + "/yes", ITEM_NO + "pe"]
         self.assert_not_qualified([self_check(pending=line) for line in lines])
 
@@ -75,8 +92,17 @@ class SelfCheckWhitelistTests(unittest.TestCase):
     def test_claim_must_be_single_and_exact(self):
         self.assert_not_qualified([self_check(extra="Proposed claim: BLOCKED · reason P1"),
                                    self_check().replace("DONE · reason none", "DONE but PARTIAL"),
-                                   self_check().replace("reason none", "reason PARTIAL scope"),
                                    self_check(extra="Basis: second basis line")])
+
+    def test_newer_unparseable_self_check_blocks(self):
+        for header in ("**SELF-CHECK v1 · V36-341-WP1 · reallakshman19/Common#345**",
+                       "﻿SELF-CHECK v1 · V36-341-WP1 · reallakshman19/Common#345",
+                       "Intro\nSELF-CHECK v1 · V36-341-WP1 · reallakshman19/Common#345 (updated)"):
+            newer = comment(9010, header + "\nProposed claim: BLOCKED · reason P1")
+            newer["created_at"] = "2026-10-17T09:00Z"
+            t = run([comment(SC_ID, self_check()), newer, comment(9002, evidence())])[0]["tasks"][0]
+            self.assertFalse(t["claim_qualified"], header)
+            self.assertEqual(t["unparsed_self_check_comments"], [9010])
 
     def test_header_must_be_first_line(self):
         t = task("Intro line\n" + self_check())
