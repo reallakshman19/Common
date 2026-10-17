@@ -45,15 +45,16 @@ def analyze(cfg: dict) -> dict:
       'arm_down_passes_opening': min_side_clearance >= threshold,
       'hidden_puppet_behind_leaf_sweep': rear_gap >= threshold,
       'revealed_puppet_in_front_of_leaf_sweep': front_gap >= threshold,
-      'vertical_head_clearance_after_rise': upper_gap >= threshold,
+      'vertical_head_clearance_after_rise': upper_gap >= threshold+5,
       'vertical_feet_clearance_initial': lower_gap >= threshold,
       'substage_handle_clearance': st['substage_clearance_required'] >= below_floor_handle,
-      'prahlada_bow_vs_narasimha_blessing_nominal': pr_bow_gap >= threshold,
+      'prahlada_bow_vs_narasimha_blessing_nominal': pr_bow_gap >= max(threshold, tol['bow_design_gap']),
       'king_active_arm_reaches_pillar_opening_edge': king_reach_gap <= 0,
       'pillar_fits_stage': outer_l >= 0 and outer_r <= st['width'] and p['overall_height'] <= st['visible_height']
     }
     expanded_envelope_w = (n['active_arm_span_to_audience_right_from_centre'] +
         n['opposite_body_span_from_centre'])
+    checks['door_leaf_fit'] = (p['left_and_right_leaf_height'] + 2*p['top_bottom_trial_clearance_each'] == p['opening_top_y'] - p['opening_bottom_y']) and (2*p['left_and_right_leaf_width'] + p['center_seam_nominal'] == p['clear_opening_width_nominal'])
     checks['blessing_arm_outside_aperture_only'] = (
         expanded_envelope_w > p['clear_opening_width_nominal'] and
         n['arm_pose_in_aperture'] == 'DOWN_ONLY' and
