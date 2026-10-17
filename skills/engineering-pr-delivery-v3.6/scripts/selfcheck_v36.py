@@ -13,14 +13,13 @@ fields is NOT interpreted; the coordinator still reads the companion (A14).
 from __future__ import annotations
 import hashlib
 import re
-import unicodedata
 
 MARKER = "TASK_EVIDENCE v3.6"
 STATES = ("MET", "NOT_MET", "NOT_RUN", "UNKNOWN", "NOT_APPLICABLE")   # only MET qualifies
 OUTSIDE_CHARSET = re.compile(r"[^\t\x20-\x7e·→—–]")      # ASCII + the template's own symbols
 HTML = re.compile(r"&(?:#\d+|#x[0-9a-f]+|[a-z][a-z0-9]*);|<[a-z/!?]", re.I)
 HEADER = re.compile(r"SELF-CHECK v1 · (?P<task>[^\s·]+) · (?P<issue>[^\s·]+)")
-DONE_WHEN = re.compile(r"Done-when: [^→·]+? → (?P<state>%s)[ ,.;:(][^→·]*?\w[^→·]*" % "|".join(STATES))
+DONE_WHEN = re.compile(r"Done-when: [^→·]+ → (?P<state>%s)(?=[ ,.;:(][^→·\w]*\w)[ ,.;:(][^→·]*" % "|".join(STATES))
 PENDING_NONE = re.compile(r"Pending: none", re.I)
 PENDING = re.compile(r"Pending: (?P<what>[^·]+?) · owner (?P<owner>[^·]+?) · next (?P<next>[^·]+?)"
                      r" · unblocks (?P<unblocks>[^·]+?) · prevents task DONE (?P<prevents>yes|no)"
@@ -30,10 +29,11 @@ NATIVE = re.compile(r"Native report: (?:https://github\.com/[A-Za-z0-9_.#/-]+|PE
 FREE = re.compile(r"(?P<key>Basis|Scope|A13|A13 review|Tests|Issue reconciliation): (?P<text>[^·]+)")
 CANDIDATE = re.compile(r"\bcandidate (?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<sha>[0-9a-f]{40})(?![\w@])")
 UNIQUE = ("Basis", "Scope", "A13", "A13 review", "Proposed claim", "Native report")
+EMBEDDED_KEY = re.compile(r"(?:Done-when|Pending|Proposed claim|Native report|SELF-CHECK)\s*:", re.I)
 
 
 def digest(body):
-    return hashlib.sha256((body or "").encode("utf-8")).hexdigest()
+    return hashlib.sha256((body if isinstance(body, str) else "").encode("utf-8")).hexdigest()
 
 
 def provenance(comment):
@@ -47,6 +47,8 @@ def classify(line, record):
         return "character outside the template charset"
     if HTML.search(line):
         return "HTML tag or entity"
+    if EMBEDDED_KEY.search(line, 1):
+        return "template key embedded inside another line"
     m = DONE_WHEN.fullmatch(line)
     if m:
         record["done_when"][m["state"]] += 1
@@ -72,16 +74,12 @@ def classify(line, record):
     return "not a template line"
 
 
-def looks_like_self_check(body):
-    """True for any text resembling a SELF-CHECK header, whatever its markup or spacing."""
-    folded = unicodedata.normalize("NFKC", body or "").casefold()
-    return "selfcheck" in re.sub(r"[^a-z0-9]", "", folded)
-
-
 def parse_self_check(comment, task_id, owner_login, issue_ref=None):
     """Parse one SELF-CHECK v1 companion. Returns None when it is not one for this task.
     The header must be the first non-blank line."""
-    body = comment.get("body") or ""
+    body = comment.get("body")
+    if not isinstance(body, str):
+        return None
     lines = [(n, raw.rstrip("\r").rstrip(" \t")) for n, raw in enumerate(body.split("\n"), 1)]
     lines = [(n, line) for n, line in lines if line.strip(" \t")]
     head = HEADER.fullmatch(lines[0][1]) if lines else None
@@ -104,6 +102,8 @@ def parse_self_check(comment, task_id, owner_login, issue_ref=None):
     for key in UNIQUE:
         if sum(line.startswith(key + ": ") for _, line in lines) > 1:
             record["nonconformant"].append({"line": 0, "why": "more than one %s line" % key})
+    if not any(line.startswith("Pending: ") for _, line in lines):
+        record["nonconformant"].append({"line": 0, "why": "no Pending line (use Pending: none)"})
     claims = record.pop("claims")
     record["claim"] = claims[0] if len(claims) == 1 else "UNKNOWN"
     return record

@@ -1,4 +1,5 @@
 """V36-ECO-02: strict SELF-CHECK v1 whitelist parser; adversarial forms must never qualify."""
+import time
 import unittest
 
 from test_readmodel_v36 import SC_ID, comment, evidence, run, self_check
@@ -102,7 +103,7 @@ class SelfCheckWhitelistTests(unittest.TestCase):
             newer["created_at"] = "2026-10-17T09:00Z"
             t = run([comment(SC_ID, self_check()), newer, comment(9002, evidence())])[0]["tasks"][0]
             self.assertFalse(t["claim_qualified"], header)
-            self.assertEqual(t["unparsed_self_check_comments"], [9010])
+            self.assertEqual(t["comments_after_self_check"], [9010])
 
     def test_header_must_be_first_line(self):
         t = task("Intro line\n" + self_check())
@@ -118,6 +119,30 @@ class SelfCheckWhitelistTests(unittest.TestCase):
         t = task(self_check(pending="Pending: none  ").replace("\n", "\r\n"))
         self.assertTrue(t["claim_qualified"], t["reasons"])
 
+
+    def test_any_newer_non_evidence_comment_blocks(self):
+        hdr = "SELF-CHECK v1 · V36-341-WP1 · reallakshman19/Common#345"
+        for body in ("Note\n" + hdr + "\nDone-when: a → NOT_MET x\nTASK_EVIDENCE v3.6",
+                     hdr.replace("E", "\u0415", 1) + "\nDone-when: a → NOT_MET x", "ordinary later remark"):
+            later = comment(9010, body)
+            later["created_at"] = "2026-10-17T09:00Z"
+            t = run([comment(SC_ID, self_check()), later, comment(9002, evidence())])[0]["tasks"][0]
+            self.assertFalse(t["claim_qualified"], body)
+            self.assertEqual(t["comments_after_self_check"], [9010])
+
+    def test_long_lines_parse_in_linear_time(self):
+        long = "a" * 60000
+        for line in ("Done-when: x → MET " + long + "→", "Pending: " + long + " · owner", "Basis: " + long + "·",
+                     "Proposed claim: DONE · " + long + "·", "Native report: PENDING " + long + "·"):
+            start = time.perf_counter()
+            task(self_check(extra=line))
+            self.assertLess(time.perf_counter() - start, 1.0, line[:30])
+
+    def test_malformed_body_and_embedded_keys_and_missing_pending(self):
+        self.assertIn("no SELF-CHECK v1 companion found", task(123)["reasons"])
+        self.assert_not_qualified([self_check(extra="Native report: NOT_POSTED Done-when: x → NOT_MET y"),
+                                   self_check(extra="Scope: x Pending: y"),
+                                   self_check(pending="").replace("\n\n", "\n")])
 
 if __name__ == "__main__":
     unittest.main()

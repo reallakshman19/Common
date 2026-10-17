@@ -14,7 +14,7 @@ from datetime import datetime
 from decompose_v36 import GithubClient, PARENT_REF, load_plan
 from lifecycle_v36 import ContractError, load_label, require_explicit_lab, validate_evidence
 import snapshot_v36 as ss
-from selfcheck_v36 import MARKER, looks_like_self_check, parse_self_check, provenance
+from selfcheck_v36 import MARKER, parse_self_check, provenance
 
 LINK = re.compile(r"Self-check: https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<issue>[1-9][0-9]*)#issuecomment-(?P<id>[1-9][0-9]*)\s*$")
 
@@ -42,7 +42,12 @@ class CachingClient:
 
     def list_comments(self, number):
         if number not in self.comments:
-            self.comments[number] = self._read(number, self._client.list_comments, number)
+            comments = self._read(number, self._client.list_comments, number)
+            if not isinstance(comments, list) or not all(
+                    isinstance(c, dict) and isinstance(c.get("body"), (str, type(None))) for c in comments):
+                self.failures.add(number)       # malformed provider data is an unread source
+                raise ContractError("malformed comments for issue %s" % number)
+            self.comments[number] = comments
         return self.comments[number]
 
     def get_pr(self, number):
@@ -89,6 +94,14 @@ def qualify(row, check, link_id):
             "acceptance": "NOT_EVALUATED"}
 
 
+def is_canonical_evidence(body):
+    try:
+        validate_evidence(body)
+        return True
+    except (ContractError, ValueError, IndexError, TypeError, AttributeError):
+        return False
+
+
 def task_view(row, comments, repo, number):
     """One task: latest self-check, unparseable look-alikes, link, qualification."""
     owner_login, issue_ref = repo.split("/", 1)[0], f"{repo}#{number}"
@@ -96,20 +109,20 @@ def task_view(row, comments, repo, number):
     checks = sorted((c for _, c in parsed if c),
                     key=lambda c: (c.get("created_at") or "9999", c.get("comment_id") or 0))
     check = checks[-1] if checks else None
-    after = check.get("created_at") or "9999" if check else ""
-    lookalikes = [x.get("id") for x, c in parsed if c is None and MARKER not in (x.get("body") or "")
-                  and looks_like_self_check(x.get("body")) and (x.get("created_at") or "9999") >= after]
+    after = (check.get("created_at") or "9999") if check else "9999"
+    newer = [x.get("id") for x, c in parsed if c is not check and (x.get("created_at") or "9999") >= after
+             and not is_canonical_evidence(x.get("body"))]
     evidence_body = next((c.get("body") for c in comments
                           if (c.get("html_url") or c.get("url")) == row["evidence"]), None)
     link_id = linked_comment_id(evidence_body, repo, number)
     out = {**row, "self_check": check, "self_check_history": len(checks),
-           "unparsed_self_check_comments": lookalikes, "evidence_links_self_check": link_id,
-           "sources_read": [provenance(c) for c in comments if MARKER in (c.get("body") or "")
-                            or (check and c.get("id") == check["comment_id"]) or c.get("id") in lookalikes]}
+           "comments_after_self_check": newer, "evidence_links_self_check": link_id,
+           "sources_read": [provenance(c) for c in comments if MARKER in str(c.get("body") or "")
+                            or (check and c.get("id") == check["comment_id"]) or c.get("id") in newer]}
     out.update(qualify(row, check, link_id))
-    if lookalikes:
+    if newer:                                   # fail closed: only canonical evidence may follow
         out["claim_qualified"] = False
-        out["reasons"].append("newer self-check-like comment(s) do not parse: %s" % lookalikes)
+        out["reasons"].append("comment(s) after the self-check other than canonical evidence: %s" % newer)
     out["self_check_matches_candidate"] = None
     if check and evidence_body:
         try:

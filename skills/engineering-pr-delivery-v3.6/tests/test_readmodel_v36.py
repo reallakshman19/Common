@@ -29,7 +29,7 @@ def evidence(sha=HEAD, link=True):
         candidate="reallakshman19/Common@" + sha, tests_passed=16, tests_run=16)
 
 
-def self_check(sha=HEAD, states=("MET", "MET"), pending="", claim="DONE", extra=""):
+def self_check(sha=HEAD, states=("MET", "MET"), pending="Pending: none", claim="DONE", extra=""):
     lines = ["SELF-CHECK v1 · V36-341-WP1 · reallakshman19/Common#345",
              "Basis: plan V36-341-PLAN-02; candidate reallakshman19/Common@%s; source fixtures" % sha]
     lines += ["Done-when: criterion %d → %s proof" % (i, s) for i, s in enumerate(states)]
