@@ -224,7 +224,18 @@ def board(readmodel):
     repo = match["repo"] if match else None
     rows = [task_row(t, observed, pending, repo) for t in tasks]
     ids = [r["task_id"] for r in rows]
-    duplicate = len(set(ids)) != len(ids)
+    duplicate_ids = {task_id for task_id in ids if ids.count(task_id) > 1}
+    duplicate = bool(duplicate_ids)
+    if duplicate:
+        for r in rows:
+            if r["task_id"] in duplicate_ids:
+                r["E"] = "SOURCE_MISMATCH"
+                r["claim_qualified"] = False
+                r["child_attributed"] = False
+                r["pr_attributed"] = False
+                r["gaps"].append("duplicated task id in read model; attribution invalid")
+                r["next"] = {"actor": "coordinator", "action": "repair duplicated plan task identity",
+                             "source": "task_ids:duplicate"}
     incomplete = (readmodel.get("read_complete") is not True or not match or duplicate
                   or any(r["E"] in ("SOURCE_MISMATCH", "HEAD_UNREAD") for r in rows)
                   or (readmodel.get("native") or {}).get("total", len(rows)) != len(rows))
