@@ -9,7 +9,9 @@
     "stage_pr": "https://github.com/reallakshman19/Common/pull/418",
     "study_head_before_mockup": "aa0c335f4cefad4acb92a830bbd13b78034c820b",
     "narasimha_source": "Narasimha_Puppet_Source_and_Previews(1).zip",
-    "source_grade": "CANDIDATE_SUPPLIED_AND_STAGE01_HYPOTHESIS"
+    "source_grade": "CANDIDATE_SUPPLIED_AND_STAGE01_HYPOTHESIS",
+    "corrected_v2_pr": "https://github.com/reallakshman19/Common/pull/419",
+    "corrected_v2_assessed_head": "bfe02e7a687451f940a1b47a83caa55659cc775f"
   },
   "stage": {
     "width": 750,
@@ -25,7 +27,12 @@
       "below_baseline_min": 140,
       "physical_clearance_proven": false
     },
-    "solid_floor_in_corridor_allowed": false
+    "solid_floor_in_corridor_allowed": false,
+    "prahlada_trial_center_x": 660,
+    "prahlada_bow_trial_degrees": [
+      15,
+      20
+    ]
   },
   "pillar": {
     "outer_width": 180,
@@ -33,7 +40,7 @@
     "opening_left": 20,
     "opening_right": 160,
     "opening_bottom": 15,
-    "opening_top": 245,
+    "opening_top": 255,
     "vertical_hinge_axes_x": [
       20,
       160
@@ -62,13 +69,13 @@
   "leaves": {
     "quantity": 2,
     "width": 69,
-    "height": 227,
+    "height": 237,
     "clearance_under_lintel": 1.5,
     "clearance_above_sill": 1.5,
     "nominal_center_seam_gap": 2,
     "pull_hole_diameter": 2,
     "pull_hole_margin_from_free_edge": 10,
-    "pull_hole_height_above_leaf_bottom": 113.5,
+    "pull_hole_height_above_leaf_bottom": 118.5,
     "hinge_tape_rearward": true,
     "hold_open": "REMOVABLE_SOFT_TAB_EXPERIMENT_NOT_VERIFIED",
     "one_pull_link": "EXPERIMENT_UNDEFINED_PATH_DO_NOT_APPROVE"
