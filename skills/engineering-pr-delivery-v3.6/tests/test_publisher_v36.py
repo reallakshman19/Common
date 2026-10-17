@@ -12,7 +12,7 @@ LAB = lc.load_label(ROOT/"tests/fixtures/relay/AIM/V35-LIFECYCLE.yaml")
 PLAN = dc.load_plan(ROOT/"plans/V36-1-PLAN-01.yaml", LAB)
 PARENT = {"number":1,"title":"[V3.6][LAB][O1–O5][0/2] Independent lifecycle acceptance — planned","body":"","html_url":"https://github.com/reallakshman19/relay-v36-e2e-lab/issues/1"}
 CHILDREN = [dict(number=n,title=f"[V3.6][O{outcome}][PLANNED] V36-1-WP{i} — example",body=dc.child_body(PLAN["tasks"][i-1],PLAN),html_url=f"https://github.com/reallakshman19/relay-v36-e2e-lab/issues/{n}") for i,(n,outcome) in enumerate([(2,1),(3,3)],1)]
-PR={"number":4,"head":{"sha":"8ec979746b0a7f55532c804fbb959ed1a29eb3a2"},"title":"[V3.6][LAB][O1][DRAFT] Evidence probe — candidate created","draft":True,"state":"open","merged":False}
+PR={"number":4,"head":{"sha":"8ec979746b0a7f55532c804fbb959ed1a29eb3a2"},"title":"[V3.6][LAB][O1][DRAFT] Evidence probe — candidate created","draft":True,"state":"open","merged":False,"body":""}
 
 
 def report(current=0, statuses=("NO_EVIDENCE","NO_EVIDENCE"), links=(None,None)):
@@ -30,7 +30,9 @@ class Fake:
     def request(self,method,path,body=None):
         if method=="GET": return self.records[path].copy()
         if method=="PATCH":
-            self.records[path]["title"]=body["title"]
+            if set(body) not in ({"title"}, {"body"}):
+                raise AssertionError("fake must patch exactly one scoped surface")
+            self.records[path].update(body)
             self.writes.append(path)
             return self.records[path].copy()
         raise AssertionError(method)
@@ -101,7 +103,13 @@ class PublisherTests(unittest.TestCase):
     def test_apply_verifies_readback(self):
         cl=Fake()
         changes=[u for u in pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,report()) if u["before"]!=u["after"]]
-        result=pu.apply_projection({"parent":PLAN["parent"],"changes":changes},cl,confirm_scope=PLAN["parent"],allow_write=True)
+        projected={"parent":PLAN["parent"],"label_sha":PLAN["label"]["label_sha"],
+                   "source_pin":"a"*64,"changes":changes}
+        result=pu.apply_projection(
+            projected,cl,confirm_scope=PLAN["parent"],allow_write=True,
+            authorized_surfaces=frozenset({"title"}),
+            authorized_targets=frozenset((r["kind"],r["number"]) for r in changes),
+            lab_scope=cl.repo,source_probe=lambda:"a"*64)
         self.assertEqual(result["applied"],4)
         self.assertTrue(result["readback_ok"])
         self.assertEqual(len(cl.writes),4)
@@ -122,13 +130,25 @@ class PublisherTests(unittest.TestCase):
         cl=Fake()
         p=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,report())[-1]
         cl.records["/pulls/4"]["head"]={"sha":"f"*40}
-        with self.assertRaises(lc.ContractError):
-            pu.apply_projection({"parent":PLAN["parent"],"changes":[p]},cl,confirm_scope=PLAN["parent"],allow_write=True)
+        result=pu.apply_projection(
+            {"parent":PLAN["parent"],"label_sha":PLAN["label"]["label_sha"],
+             "source_pin":"a"*64,"changes":[p]},cl,confirm_scope=PLAN["parent"],
+            allow_write=True,authorized_surfaces=frozenset({"title"}),
+            authorized_targets=frozenset({("pr",4)}),lab_scope=cl.repo,
+            source_probe=lambda:"a"*64)
+        self.assertEqual(result["status"],"BLOCKED")
+        self.assertEqual(cl.writes,[])
 
     def test_untouched_second_projection_idempotent(self):
         cl=Fake()
         updates=pu.title_plan(PLAN,[PARENT,*CHILDREN],PR,report())
-        pu.apply_projection({"parent":PLAN["parent"],"changes":updates},cl,confirm_scope=PLAN["parent"],allow_write=True)
+        result=pu.apply_projection(
+            {"parent":PLAN["parent"],"label_sha":PLAN["label"]["label_sha"],
+             "source_pin":"a"*64,"changes":updates},cl,confirm_scope=PLAN["parent"],
+            allow_write=True,authorized_surfaces=frozenset({"title"}),
+            authorized_targets=frozenset((r["kind"],r["number"]) for r in updates),
+            lab_scope=cl.repo,source_probe=lambda:"a"*64)
+        self.assertEqual(result["status"],"VERIFIED")
         after=[cl.records[f"/issues/{n}"] for n in (1,2,3)]
         pr=cl.records["/pulls/4"]
         second=pu.title_plan(PLAN,after,pr,report())
