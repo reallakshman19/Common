@@ -33,10 +33,30 @@ class StageModelTests(unittest.TestCase):
         case['narasimha']['rise_during_reveal'] = 45
         self.assertFalse(analyze(case)['checks']['vertical_head_clearance_after_rise'])
 
-    def test_twenty_degree_prahlada_bow_conflicts(self):
-        case = copy.deepcopy(BASE)
-        case['prahlada']['bow_degrees_toward_pillar'] = 20
+    def test_twenty_degree_bow_with_relocated_prahlada_passes_candidate_screen(self):
+        result=analyze(BASE)
+        self.assertTrue(result['checks']['prahlada_bow_vs_narasimha_blessing_nominal'])
+        self.assertGreater(result['metrics_mm']['worst_case_prahlada_bow_to_blessing_right_gap'],20)
+
+    def test_old_prahlada_center_cannot_be_reused(self):
+        case=copy.deepcopy(BASE)
+        case['prahlada']['center_x']=625
         self.assertFalse(analyze(case)['checks']['prahlada_bow_vs_narasimha_blessing_nominal'])
+
+    def test_twenty_five_degree_bow_conflicts(self):
+        case=copy.deepcopy(BASE)
+        case['prahlada']['bow_degrees_toward_pillar']=25
+        self.assertFalse(analyze(case)['checks']['prahlada_bow_vs_narasimha_blessing_nominal'])
+
+    def test_old_pillar_height_has_insufficient_headroom_reserve(self):
+        case=copy.deepcopy(BASE)
+        case['pillar']['opening_top_y']=245
+        self.assertFalse(analyze(case)['checks']['vertical_head_clearance_after_rise'])
+
+    def test_old_door_leaf_height_fails_portal_fit(self):
+        case=copy.deepcopy(BASE)
+        case['pillar']['left_and_right_leaf_height']=227
+        self.assertFalse(analyze(case)['checks']['door_leaf_fit'])
 
     def test_arm_must_remain_down_in_aperture(self):
         case = copy.deepcopy(BASE)
