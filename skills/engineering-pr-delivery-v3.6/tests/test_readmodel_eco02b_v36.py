@@ -157,6 +157,19 @@ class HopTests(unittest.TestCase):
         hops = rm.read_model(PLAN, p, NOW)["tasks"][0]["issue_hops"]
         self.assertEqual(hops[-1]["status"], "CYCLE")
 
+    def test_failed_hop_fetch_does_not_advance_cursor(self):
+        first = rm.read_model(PLAN, Provider(good()), NOW)
+        issue = {**ISSUE, "body": ISSUE["body"] + "\nSuperseded by #360: moved"}
+        r = rm.read_model(PLAN, HopProvider(good(), [issue], {360: OSError("x")}), LATER, prior=first)
+        self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["issue:360"]))
+        self.assertEqual(r["cursor"]["last_complete_read_at"], NOW)
+
+    def test_fetched_hop_with_other_number_is_mismatched(self):
+        issue = {**ISSUE, "body": ISSUE["body"] + "\nSuperseded by #360: moved"}
+        r = rm.read_model(PLAN, HopProvider(good(), [issue], {360: self.old(361, "x")}), NOW)
+        self.assertEqual(r["tasks"][0]["issue_hops"][-1]["status"], "MISMATCHED")
+        self.assertIn("issue:360", r["unread_sources"])
+
 
 class HardeningTests(unittest.TestCase):
     def test_huge_int_ids_are_unread_not_crash(self):
