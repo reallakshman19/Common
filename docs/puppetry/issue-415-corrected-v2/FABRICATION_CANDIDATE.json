@@ -5,10 +5,12 @@
   "source_authority": {
     "project_issue": "https://github.com/reallakshman19/Common/issues/415",
     "related_stage_pr": "https://github.com/reallakshman19/Common/pull/418",
-    "stage_source_revision": "74523866287ffddb231c21b7cf0314a1e827f61e",
+    "stage_source_revision": "92ec3442173062e642ca52c0a9dc9285192ee973",
     "v2_quick_print_pdf_bytes": "NOT_COMMITTED_NO_DIMENSIONAL_INSPECTION",
     "character_dimensions": "INHERITED_CANDIDATE_NOT_CONFIRMED_V2_PDF",
-    "stage_coordinates": "NEW_BOUNDED_CORRECTION_REQUIRES_STAGE_PR_RECONCILIATION"
+    "stage_coordinates": "NEW_BOUNDED_CORRECTION_REQUIRES_STAGE_PR_RECONCILIATION",
+    "stage_ci_run": "https://github.com/reallakshman19/Common/actions/runs/39046803009",
+    "stage_source_grade": "CANDIDATE_VECTOR_GEOMETRY_TESTED_NOT_CARD_TESTED"
   },
   "characters": {
     "king": {
@@ -252,7 +254,7 @@
     "design_margin_for_bow": 20,
     "unobstructed_below_stage": 140,
     "open_questions": [
-      "pillar leaf geometry revision must be reconciled with PR418",
+      "Pillar and v2 geometry are aligned in source at pinned PR418 revision; actual stage/character physical fit remains NOT_RUN",
       "two rod path and side sightlines",
       "stage stand and full-size printing"
     ],
