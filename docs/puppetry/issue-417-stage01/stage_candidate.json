@@ -1,0 +1,87 @@
+{
+  "schema": "puppet-stage-candidate/v1",
+  "units": "mm",
+  "authority": "ENGINEERING_HYPOTHESIS_NOT_FABRICATION_APPROVED",
+  "source": {
+    "issue": "https://github.com/reallakshman19/Common/issues/415",
+    "workpack": "https://github.com/reallakshman19/Common/issues/417",
+    "intake_pr": "https://github.com/reallakshman19/Common/pull/416",
+    "intake_head": "919417019f8cc22b2b348351b3acfca54472ae0a",
+    "narasimha_zip_sha256": "7a600a32f384e8a35a15c2375e586d051bce17c6e5eda9d418839ba63560fab5",
+    "story": "35+40+55+50=180 candidate, rehearsal NOT_RUN"
+  },
+  "stage": {
+    "width": 750,
+    "visible_height": 400,
+    "depth": 150,
+    "floor_y": 0,
+    "front_z": 0,
+    "rear_z": 150,
+    "substage_clearance_required": 150
+  },
+  "pillar": {
+    "center_x": 375,
+    "outer_width": 180,
+    "overall_height": 280,
+    "clear_opening_width_nominal": 140,
+    "opening_bottom_y": 15,
+    "opening_top_y": 245,
+    "left_and_right_leaf_width": 70,
+    "door_plane_z": 40,
+    "hinge_axis": "vertical",
+    "door_open_direction": "toward_rear",
+    "opening_angle_degrees": 90,
+    "edge_intrusion_each": 2,
+    "coupled_actuation": "candidate_single_pull_NOT_DESIGNED",
+    "latch": "candidate_passive_hold_NOT_DESIGNED"
+  },
+  "narasimha": {
+    "center_x": 375,
+    "body_height": 180,
+    "arm_down_width": 92,
+    "active_arm_span_to_audience_right_from_centre": 107,
+    "opposite_body_span_from_centre": 45,
+    "body_bottom_initial_y": 30,
+    "rise_during_reveal": 20,
+    "hidden_plane_z": 130,
+    "front_plane_z": 20,
+    "main_stick": 260,
+    "body_overlap": 90,
+    "arm_pose_in_aperture": "DOWN_ONLY",
+    "arm_pose_after_front_clearance": "BLESS_90_DEGREES"
+  },
+  "king": {
+    "center_x": 220,
+    "body_width": 90,
+    "body_height": 200,
+    "body_bottom_y": 30,
+    "shoulder_offset_from_center_x": 30,
+    "active_arm_reach_from_pivot": 70,
+    "active_arm_orientation": "audience_right",
+    "far_left_exit_center_x": 140
+  },
+  "prahlada": {
+    "center_x": 625,
+    "body_width": 70,
+    "body_height": 160,
+    "body_bottom_y": 35,
+    "main_stick": 250,
+    "body_overlap": 90,
+    "bow_degrees_toward_pillar": 15,
+    "rotation_pivot": "lower_handle_candidate"
+  },
+  "tolerances": {
+    "horizontal_placement_each": 5,
+    "vertical_placement_each": 5,
+    "depth_placement_each": 5,
+    "required_worst_case_gap": 10
+  },
+  "physical_unknowns": [
+    "Actual door linkage, pulling force and latching geometry",
+    "Door thickness, hinge fold radius, and control-string sweep",
+    "True silhouette and rod/envelope at every pose",
+    "Operator count, handedness, grip positions and access under masking",
+    "Actual support for 150mm substage grip clearance",
+    "Physical recoil, wobble and audience sightlines"
+  ]
+}
