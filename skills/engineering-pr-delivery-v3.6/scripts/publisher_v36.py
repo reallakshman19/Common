@@ -238,8 +238,14 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict,
     if pr is not None:
         if not isinstance(pr.get("number"), int) or not isinstance(pr.get("head"), dict):
             raise ContractError("malformed PR")
-        status = "MERGED" if pr.get("merged") else "DRAFT" if pr.get("draft") else (
-            "OPEN" if pr.get("state") == "open" else "CLOSED")
+        if pr.get("merged") is True:
+            status = "MERGED"
+        elif pr.get("state") == "closed":
+            status = "CLOSED"
+        elif pr.get("state") == "open":
+            status = "DRAFT" if pr.get("draft") is True else "OPEN"
+        else:
+            raise ContractError("PR state unavailable or unsupported; refusing title projection")
         pr_ref = f"https://github.com/{parent[1]}/pull/{pr['number']}"
         linked = pr_linkage(plan, report, pr_ref, scoreboard, board_rows)
         linked_ids = {t["task_id"] for t in linked}
