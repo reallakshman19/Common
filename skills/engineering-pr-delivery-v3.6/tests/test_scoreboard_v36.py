@@ -169,32 +169,42 @@ class ScoreboardTests(unittest.TestCase):
     def test_two_prs_do_not_borrow_each_others_e_denominator(self):
         import copy
         m = copy.deepcopy(run([comment(SC_ID, self_check()), comment(9002, evidence())])[0])
-        second = copy.deepcopy(m["tasks"][0])
-        second["task_id"] = "V36-341-WP2"
+        # WP2 is already present in the selected plan; modify its model row.
+        # Appending a second WP2 makes the duplicate-ID fail-closed guard
+        # deliberately exclude it from PR attribution (not a PR grouping bug).
+        second = next(t for t in m["tasks"] if t["task_id"] == "V36-341-WP2")
         second["issue"] = "https://github.com/reallakshman19/Common/issues/346"
         second["pr"] = "https://github.com/reallakshman19/Common/pull/355"
         second["status"] = "NO_EVIDENCE"
         second["claim_qualified"] = False
-        m["tasks"].append(second)
-        m["native"]["total"] = 2
+        self.assertEqual(len(m["tasks"]), len(PLAN["tasks"]))
         b = sb.board(m)
         self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/344"]["E_current"], 1)
         self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/344"]["tasks"], 1)
         self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/355"]["E_current"], 0)
         self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/355"]["tasks"], 1)
-        self.assertEqual(b["totals"]["tasks"], 2)
+        self.assertEqual(b["totals"]["tasks"], len(PLAN["tasks"]))
         self.assertNotIn("tests_passed", b["totals"])
 
     def test_repeated_task_id_never_inflates_e_or_pr_numerator(self):
         import copy
         m = copy.deepcopy(run([comment(SC_ID, self_check()), comment(9002, evidence())])[0])
         m["tasks"].append(copy.deepcopy(m["tasks"][0]))
-        m["native"]["total"] = 2
+        # Keep native total consistent so this test isolates duplicate identity,
+        # not a separate native-total mismatch.
+        m["native"]["total"] = len(m["tasks"])
         b = sb.board(m)
         self.assertTrue(b["totals"]["partial"])
         self.assertEqual(b["totals"]["E_current"], 0)
         self.assertEqual(b["by_pr"], {})
         self.assertIn("task_ids:duplicate", b["unread_sources"])
+        duplicated = [r for r in b["rows"] if r["task_id"] == "V36-341-WP1"]
+        self.assertEqual(len(duplicated), 2)
+        for row in duplicated:
+            self.assertEqual(row["E"], "SOURCE_MISMATCH")
+            self.assertTrue(any("duplicated task id" in gap for gap in row["gaps"]))
+            self.assertEqual(row["next"]["source"], "task_ids:duplicate")
+            self.assertIsNone(row["pr_denominator"])
 
 
 if __name__ == "__main__":
