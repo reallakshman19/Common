@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
-from dataclasses import dataclass
 
 from decompose_v36 import GithubClient, PARENT_REF, is_task_issue, load_plan
 from lifecycle_v36 import ContractError, load_label, require_explicit_lab
@@ -285,7 +285,9 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict,
     new_parent = compose_title(parent_issue.get("title"), "Independent lifecycle acceptance",
                                f"{parent_marker}[E{count}/{total}]")
     updates.append({"kind": "issue", "number": int(parent[2]), "before": parent_issue["title"],
-                    "after": new_parent, "display_profile": profile})
+                    "after": new_parent, "display_profile": profile,
+                    "body_before": parent_issue.get("body"),
+                    "labels_before": parent_issue.get("labels")})
     for task in plan["tasks"]:
         matches = [x for x in issues if is_task_issue(x, task, plan["parent"])]
         if len(matches) != 1:
@@ -297,7 +299,10 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict,
         new_title = compose_title(before, task["task_id"] + " — " + task["title"],
                                   f"[V3.6][{task['outcome']}][{state}]")
         updates.append({"kind": "issue", "number": matches[0]["number"],
-                        "before": before, "after": new_title})
+                        "before": before, "after": new_title,
+                        "body_before": matches[0].get("body"),
+                        "labels_before": matches[0].get("labels"),
+                        "task_id": task["task_id"]})
     if pr is not None:
         if not isinstance(pr.get("number"), int) or not isinstance(pr.get("head"), dict):
             raise ContractError("malformed PR")
@@ -322,9 +327,93 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict,
         after = compose_title(pr.get("title"), "Lifecycle work", managed)
         updates.append({"kind": "pr", "number": pr["number"], "before": pr["title"],
                         "after": after, "head_sha": pr["head"].get("sha"),
+                        "body_before": pr.get("body"), "labels_before": pr.get("labels"),
                         "attention_grammar": ATTENTION_GRAMMAR, "attention": attention,
                         "pr_e_denominator": pr_total, "pr_e_current": pr_count})
     return updates
+
+
+
+def source_digest(plan: dict, report: dict) -> str:
+    """Digest native source observations, not an endorsement or accepted outcome."""
+    value = {"parent": plan["parent"], "label_sha": plan["label"]["label_sha"],
+             "plan_version": plan["plan_version"], "native_snapshot": report}
+    data = json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(data.encode("utf-8")).hexdigest()
+
+
+def scoreboard_body_change(parent_issue: dict, region: str, *, parent_number: int) -> dict:
+    """Pure parent-only ECO-03 region update. No destructive body replacement."""
+    from scoreboard_v36 import merge_managed_region
+    if (type(parent_number) is not int or parent_number < 1 or
+            parent_issue.get("number") != parent_number or
+            not isinstance(parent_issue.get("body"), str) or
+            not isinstance(parent_issue.get("title"), str)):
+        raise ContractError("scoreboard target lacks parent identity/body/title")
+    before = parent_issue["body"]
+    try:
+        after = merge_managed_region(before, region)
+    except ValueError as exc:
+        raise ContractError("ambiguous scoreboard region: " + str(exc)) from exc
+    return {"surface": "scoreboard", "kind": "issue", "number": parent_number,
+            "before": parent_issue["title"], "after": parent_issue["title"],
+            "body_before": before, "after_body": after,
+            "labels_before": parent_issue.get("labels")}
+
+
+def _item_surface(item):
+    return item.get("surface", "title")
+
+
+def _endpoint(item):
+    if not isinstance(item, dict):
+        raise ContractError("malformed projection item")
+    kind, number = item.get("kind"), item.get("number")
+    if kind not in ("issue", "pr") or type(number) is not int or number <= 0:
+        raise ContractError("unscoped projected target")
+    return (kind, number), (f"/issues/{number}" if kind == "issue" else f"/pulls/{number}")
+
+
+def _surface_receipt(item):
+    return {"surface": _item_surface(item), "kind": item["kind"], "number": item["number"]}
+
+
+def _outcome(status, changes, verified, reason, attempted=None):
+    return {"status": status, "dry_run": False, "complete": status == "VERIFIED",
+            "applied": len(verified), "applied_surfaces": verified,
+            "pending_surfaces": [_surface_receipt(x) for x in changes[len(verified):]],
+            "attempted_surfaces": attempted or [], "readback_ok": status == "VERIFIED",
+            "next_reconciliation": reason}
+
+
+def _observed_state(item, observed):
+    """Fresh expected title/body/PR-head/labels comparison; not atomic CAS."""
+    surface = _item_surface(item)
+    if not isinstance(observed, dict):
+        return "provider returned malformed target"
+    if not isinstance(item.get("before"), str) or not isinstance(item.get("body_before"), str):
+        return "expected title/body unavailable"
+    if item.get("labels_before") != observed.get("labels"):
+        return "human labels changed; inspect AIM governance"
+    if item["kind"] == "pr" and (
+            not isinstance(item.get("head_sha"), str) or
+            observed.get("head", {}).get("sha") != item["head_sha"]):
+        return "PR head changed"
+    if observed.get("body") != item["body_before"] and not (
+            surface == "scoreboard" and observed.get("body") == item.get("after_body")):
+        return "provider body changed; protect Owner edits"
+    if surface == "title":
+        if observed.get("title") not in (item["before"], item["after"]):
+            return "provider title changed; protect human title"
+        return "already" if observed["title"] == item["after"] else "ready"
+    if surface == "scoreboard":
+        if item["kind"] != "issue" or not isinstance(item.get("after_body"), str):
+            return "invalid scoreboard body target"
+        if observed.get("title") != item["before"]:
+            return "provider title changed"
+        return "already" if observed.get("body") == item["after_body"] else "ready"
+    return "unauthorised/unsupported surface"
+
 
 
 def calculate(plan: dict, client, pr_number: int | None = None,
@@ -340,6 +429,7 @@ def calculate(plan: dict, client, pr_number: int | None = None,
     pr = client.get_pr(pr_number) if pr_number is not None else None
     updates = title_plan(plan, issues, pr, report, scoreboard=scoreboard)
     return {"parent": plan["parent"], "label_sha": plan["label"]["label_sha"],
+            "source_pin": source_digest(plan, report),
             "current_evidence": report["current_evidence"], "total": report["total"],
             "accepted_complete": report["verified_complete"],
             "changes": [u for u in updates if u["before"] != u["after"]],
