@@ -519,5 +519,12 @@ class ECO05GuardTests(unittest.TestCase):
         self.assertEqual(client.writes, [])
 
 
+    def test_eco05_native_http_client_refused_even_with_synthetic_permissions(self):
+        _, plan, options = self.setup_guard()
+        real = pu.GithubClient(Fake.repo)
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(plan, real, **options)
+
+
 if __name__=="__main__":
     unittest.main()
