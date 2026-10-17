@@ -38,7 +38,7 @@ All values are **mock-up hypotheses**, not an Owner-approved final design. No ph
 
 1. Print generated **100% actual-size A4 vector PDF** without scaling; measure 100-mm and 50-mm calibration bars. Printer is NOT validated merely by PDF vector geometry.
 2. Join the two pillar **paper** tiles on common y=140 registration crosses; use traced full outline to transfer the whole 180 × 280 mm frame onto larger card. **Do not cut the frame as two separate 145-mm cardboard halves without reinforcement.**
-3. Adult cuts aperture x20..160, y15..245. Cut two 69 × 237 mm leaves, holes Ø2 placed 10 mm from free edge at midheight; reinforce thread holes.
+3. Adult cuts aperture x20..160, y15..255. Cut two 69 × 237 mm leaves, holes Ø2 placed 10 mm from free edge at midheight; reinforce thread holes.
 4. Tape each leaf at its **OUTER** vertical edge so it swings backward. With the two leaves shut, measure the real seam and vertical gaps; if excessive light reveals Narasimha, fix *masking* without creating a jam.
 5. **Experiment B baseline:** helper manually opens both leaves rearward to about 90°, parks them with simple removable soft tabs, then operator lifts/moves Narasimha arm-DOWN through the opening. Verify actual puppet silhouette and rod travel.
 6. **Experiment A challenge:** try two light strings joined into one pull. Determine actual routing, pull force, stops and whether both leaves open and remain open unattended. **Do not declare a functioning one-pull linkage until it is demonstrated.**
