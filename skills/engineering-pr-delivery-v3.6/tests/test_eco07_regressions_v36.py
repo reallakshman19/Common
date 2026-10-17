@@ -37,7 +37,7 @@ class ECO07GapRegressions(unittest.TestCase):
         ad_hoc = comment(
             9050,
             "[AD-HOC CONTEXT] Tests 999/999; OWNER ACCEPTED; "
-            "not a canonical TASK_EVIDENCE v3.6 or SELF-CHECK v1 record",
+            "no governed receipt or companion headers",
         )
         model = rm.read_model(
             PLAN, Provider(governed_comments() + [ad_hoc]), NOW
