@@ -187,27 +187,47 @@ def task_row(task, observed, all_pending, repo):
     }
 
 
-def _group(rows, field):
+def _group(rows, field, repo):
+    """Group *linked plan tasks*, even when they have no native evidence.
+
+    A valid same-repository PR reference is a linkage fact; a current receipt is
+    a separate evidence fact. Do not require CURRENT_EVIDENCE to create a PR
+    denominator. Refuse foreign/ambiguous child bindings and duplicate identities.
+    """
     groups = {}
     for r in rows:
-        valid = r["child_attributed"] if field == "issue" else r["pr_attributed"]
-        if not valid or not r.get(field):
+        link = r.get(field)
+        if field == "issue":
+            valid = r["child_attributed"] and proper_link(link, repo, ISSUE)
+        else:
+            valid = (r["child_attributed"] and proper_link(link, repo, PR)
+                     and r["E"] != "SOURCE_MISMATCH")
+        if not valid:
             continue
-        link = r[field]
-        g = groups.setdefault(link, {"tasks": 0, "E_current": 0, "E_stale": 0,
-                                     "task_ids": [], "heads": [], "counting_unit": "linked plan task"})
+        g = groups.setdefault(link, {
+            "tasks": 0, "E_current": 0, "E_stale": 0, "E_unknown": 0,
+            "task_ids": [], "heads": [], "counting_unit": "linked plan task",
+        })
         g["tasks"] += 1
-        g["E_current"] += r["E"] == "CURRENT_EVIDENCE"
-        g["E_stale"] += r["E"] == "STALE_EVIDENCE"
+        g["E_current"] += int(r["E"] == "CURRENT_EVIDENCE")
+        g["E_stale"] += int(r["E"] == "STALE_EVIDENCE")
+        g["E_unknown"] += int(r["E"] in (
+            "UNKNOWN", "UNKNOWN_PR", "PROVIDER_UNAVAILABLE", "HEAD_UNREAD",
+        ))
         g["task_ids"].append(r["task_id"])
         head = r.get("observed_head")
         if head and head not in g["heads"]:
             g["heads"].append(head)
+
     for r in rows:
+        link = r.get(field)
         if field == "issue":
-            r["child_denominator"] = groups[r[field]]["tasks"] if r.get(field) in groups else None
+            valid = r["child_attributed"] and proper_link(link, repo, ISSUE)
+            r["child_denominator"] = groups[link]["tasks"] if valid else None
         else:
-            r["pr_denominator"] = groups[r[field]]["tasks"] if r.get(field) in groups and r["pr_attributed"] else None
+            valid = (r["child_attributed"] and proper_link(link, repo, PR)
+                     and r["E"] != "SOURCE_MISMATCH")
+            r["pr_denominator"] = groups[link]["tasks"] if valid else None
     return groups
 
 
@@ -239,8 +259,8 @@ def board(readmodel):
     incomplete = (readmodel.get("read_complete") is not True or not match or duplicate
                   or any(r["E"] in ("SOURCE_MISMATCH", "HEAD_UNREAD") for r in rows)
                   or (readmodel.get("native") or {}).get("total", len(rows)) != len(rows))
-    by_child = _group(rows, "issue")
-    by_pr = _group(rows, "pr")
+    by_child = _group(rows, "issue", repo)
+    by_pr = _group(rows, "pr", repo)
     native = readmodel.get("native") or {}
     unread = list(readmodel.get("unread_sources") or [])
     if not match:
