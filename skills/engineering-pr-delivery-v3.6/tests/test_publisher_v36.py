@@ -135,5 +135,183 @@ class PublisherTests(unittest.TestCase):
         self.assertEqual([u for u in second if u["before"]!=u["after"]],[])
 
 
+    def test_eco04_preserves_nonowned_brackets_and_human_child_suffix(self):
+        import copy
+        pr = dict(PR, title="[SECURITY][V3.6][O1][DRAFT][E0/1] [Human] Fix mechanism")
+        issues = [dict(PARENT), *[dict(c) for c in CHILDREN]]
+        issues[1]["title"] = "[PERSONAL][V3.6][O1][PENDING] Human child description [keep]"
+        changes = pu.title_plan(PLAN, issues, pr, report())
+        self.assertIn("[SECURITY][V3.6]", changes[-1]["after"])
+        self.assertTrue(changes[-1]["after"].endswith("[Human] Fix mechanism"))
+        self.assertIn("[PERSONAL][V3.6]", changes[1]["after"])
+        self.assertTrue(changes[1]["after"].endswith("Human child description [keep]"))
+        self.assertNotIn("[SECURITY][V3.6][SECURITY]", changes[-1]["after"])
+
+    def test_eco04_repeated_managed_prefix_normalises_without_losing_nonowned(self):
+        pr = dict(PR, title="[TEAM][V3.6][O1][OPEN][E1/1][V3.6][O1][DRAFT] Keep this")
+        first = pu.title_plan(PLAN, [PARENT, *CHILDREN], pr, report())[-1]["after"]
+        self.assertEqual(first.count("[V3.6]"), 1)
+        self.assertIn("[TEAM]", first)
+        self.assertTrue(first.endswith("Keep this"))
+        second = pu.title_plan(PLAN, [PARENT, *CHILDREN], dict(pr, title=first), report())[-1]["after"]
+        self.assertEqual(first, second)
+
+    def test_eco04_empty_and_overlong_title_never_truncated(self):
+        pr = dict(PR, title="[V3.6][O1][DRAFT]")
+        self.assertTrue(pu.title_plan(PLAN, [PARENT, *CHILDREN], pr, report())[-1]["after"].endswith("Lifecycle work"))
+        pr["title"] = "[HUMAN] " + "keep" * 70
+        with self.assertRaises(lc.ContractError):
+            pu.title_plan(PLAN, [PARENT, *CHILDREN], pr, report())
+
+    def test_eco04_parent_profile_from_selected_repo_preserves_lab_and_nonlab(self):
+        import copy
+        self.assertEqual(pu.parent_display_profile(PLAN), "lab")
+        lab = pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, report())[0]["after"]
+        self.assertIn("[V3.6][LAB][E0/2]", lab)
+        alt = copy.deepcopy(PLAN)
+        alt["parent"] = "reallakshman19/Common#1"
+        self.assertEqual(pu.parent_display_profile(alt), "non_lab")
+        children = [dict(CHILDREN[i], body=dc.child_body(t, alt)) for i, t in enumerate(alt["tasks"])]
+        alt_report = dict(report(), parent=alt["parent"])
+        title = pu.title_plan(alt, [dict(PARENT), *children], None, alt_report)[0]["after"]
+        self.assertIn("[V3.6][E0/2]", title)
+        self.assertNotIn("[LAB]", title)
+
+    def test_eco04_signal_stale_from_native_and_preserves_pr_e(self):
+        pr_ref = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("STALE_EVIDENCE", "NO_EVIDENCE"), (pr_ref, None))
+        u = pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, rep)[-1]
+        self.assertIn("[O1][DRAFT][E0/1][STALE]", u["after"])
+        self.assertEqual(u["attention"]["signal"], "STALE")
+        self.assertEqual(u["attention"]["source"], "native:STALE_EVIDENCE")
+        self.assertEqual(u["attention_grammar"], "v36.attention/v1")
+
+    def test_eco04_attention_precedence_is_stage_specific_and_source_based(self):
+        pr_ref = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("STALE_EVIDENCE", "NO_EVIDENCE"), (pr_ref, None))
+        b = {"schema": "v36.scoreboard/v1", "plan": PLAN["plan_version"],
+             "parent": PLAN["parent"], "label_sha": PLAN["label"]["label_sha"],
+             "read_complete": True,
+             "rows": [{"task_id": PLAN["tasks"][0]["task_id"], "pr": pr_ref, "E": "STALE_EVIDENCE",
+                       "pending": [{"what": "Owner hold", "owner": "Owner", "prevents_done": True}],
+                       "original_input": {"input": "MISSING"}, "gaps": ["golden unavailable"]}],
+             "by_pr": {pr_ref: {"tasks": 1, "E_current": 0, "task_ids": [PLAN["tasks"][0]["task_id"]]}}}
+        u = pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, rep, scoreboard=b)[-1]
+        self.assertIn("[HOLD]", u["after"])
+        self.assertEqual(u["attention"]["source"], "board:pending:Owner hold")
+        self.assertNotIn("[ORIGINALS_MISSING]", u["after"])
+        self.assertNotIn("[STALE]", u["after"])
+
+    def test_eco04_unknown_not_success_and_routine_gate_not_constant_alarm(self):
+        pr_ref = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("PROVIDER_UNAVAILABLE", "NO_EVIDENCE"), (pr_ref, None))
+        u = pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, rep)[-1]
+        self.assertIn("[UNKNOWN]", u["after"])
+        self.assertNotIn("[ACCEPTED]", u["after"])
+        rep = report(1, ("CURRENT_EVIDENCE", "NO_EVIDENCE"), (pr_ref, None))
+        u = pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, rep)[-1]
+        self.assertIn("[E1/1]", u["after"])
+        self.assertIsNone(u["attention"]["signal"])
+        for token in ("[OWNER_GATE]", "[ORIGINALS_MISSING]", "[ACCEPTED]"):
+            self.assertNotIn(token, u["after"])
+
+    def test_eco04_board_conflicts_cannot_promote_e_or_acceptance(self):
+        pr_ref = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("STALE_EVIDENCE", "NO_EVIDENCE"), (pr_ref, None))
+        b = {"schema": "v36.scoreboard/v1", "parent": PLAN["parent"], "plan": PLAN["plan_version"],
+             "label_sha": PLAN["label"]["label_sha"], "read_complete": True,
+             "rows": [{"task_id": PLAN["tasks"][0]["task_id"], "E": "CURRENT_EVIDENCE",
+                       "pr": pr_ref, "gaps": [], "pending": []}],
+             "by_pr": {pr_ref: {"tasks": 1, "E_current": 1, "task_ids": [PLAN["tasks"][0]["task_id"]]}}}
+        with self.assertRaises(lc.ContractError):
+            pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, rep, scoreboard=b)
+        b["parent"] = "mallory/other#1"
+        with self.assertRaises(lc.ContractError):
+            pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, rep, scoreboard=b)
+
+
+    def test_eco04_calculate_accepts_board_projection_without_writing(self):
+        from unittest.mock import patch
+        link = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("STALE_EVIDENCE", "NO_EVIDENCE"), (link, None))
+        b = {"schema": "v36.scoreboard/v1", "parent": PLAN["parent"],
+             "plan": PLAN["plan_version"], "label_sha": PLAN["label"]["label_sha"],
+             "read_complete": True,
+             "rows": [{"task_id": PLAN["tasks"][0]["task_id"], "E": "STALE_EVIDENCE",
+                       "pr": link, "pending": [], "gaps": []}],
+             "by_pr": {link: {"tasks": 1, "E_current": 0,
+                             "task_ids": [PLAN["tasks"][0]["task_id"]]}}}
+        client = Fake()
+        client.list_issues = lambda: [PARENT, *CHILDREN]
+        with patch.object(pu, "snapshot", return_value=rep):
+            projected = pu.calculate(PLAN, client, 4, scoreboard=b)
+        pr_projection = projected["all"][-1]
+        self.assertIn("[STALE]", pr_projection["after"])
+        self.assertEqual(pr_projection["pr_e_denominator"], 1)
+        self.assertEqual(client.writes, [])
+
+    def test_eco04_board_cli_cannot_trigger_provider_writes(self):
+        from unittest.mock import patch
+        with patch.object(pu, "GithubClient") as provider:
+            with self.assertRaises(SystemExit):
+                pu.main(["--label", "unused", "--plan", "unused",
+                         "--scoreboard", "unused", "--apply"])
+            provider.assert_not_called()
+
+
+    def test_eco04_closed_draft_status_precedes_draft_flag(self):
+        closed = dict(PR, state="closed", draft=True, merged=False)
+        projected = pu.title_plan(PLAN, [PARENT, *CHILDREN], closed, report())[-1]
+        self.assertIn("[CLOSED][E0/0]", projected["after"])
+        self.assertNotIn("[DRAFT]", projected["after"])
+        merged = dict(PR, state="closed", draft=True, merged=True)
+        projected = pu.title_plan(PLAN, [PARENT, *CHILDREN], merged, report())[-1]
+        self.assertIn("[MERGED][E0/0]", projected["after"])
+        with self.assertRaises(lc.ContractError):
+            pu.title_plan(PLAN, [PARENT, *CHILDREN], dict(PR, state="invalid",
+                                                         draft=False, merged=False), report())
+
+
+    def test_eco04_human_attention_word_after_bare_version_marker_is_not_stripped(self):
+        for supplied in ("[V3.6] [UNKNOWN] x", "[V3.6][HOLD] fix login"):
+            with self.subTest(supplied=supplied):
+                projected = pu.title_plan(
+                    PLAN, [PARENT, *CHILDREN], dict(PR, title=supplied), report()
+                )[-1]["after"]
+                human = supplied.split("[V3.6]", 1)[1].strip()
+                self.assertTrue(projected.endswith(human), projected)
+                self.assertIn(human, projected)
+                self.assertEqual(projected.count(human), 1)
+
+    def test_eco04_human_attention_word_after_complete_legacy_pr_prefix_is_preserved(self):
+        pr = dict(PR, title="[V3.6][O1][DRAFT][E0/0][HOLD] fix login")
+        projected = pu.title_plan(PLAN, [PARENT, *CHILDREN], pr, report())[-1]
+        self.assertIsNone(projected["attention"]["signal"])
+        self.assertTrue(projected["after"].endswith("[HOLD] fix login"))
+        self.assertEqual(projected["after"].count("[HOLD]"), 1)
+
+    def test_eco04_emitted_attention_marker_allows_idempotent_reprojection(self):
+        link = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("STALE_EVIDENCE", "NO_EVIDENCE"), (link, None))
+        original = dict(PR, title="[TEAM] [HOLD] fix login")
+        first = pu.title_plan(PLAN, [PARENT, *CHILDREN], original, rep)[-1]["after"]
+        self.assertIn("[O1][DRAFT][E0/1][STALE]", first)
+        self.assertIn("[v36.attention/v1]", first)
+        self.assertTrue(first.endswith("[HOLD] fix login"))
+        second = pu.title_plan(PLAN, [PARENT, *CHILDREN],
+                               dict(original, title=first), rep)[-1]["after"]
+        self.assertEqual(first, second)
+
+    def test_eco04_title_tail_intentionally_retains_foreign_prefix_and_human_word(self):
+        self.assertEqual(
+            pu.title_tail("[TEAM][V3.6] [UNKNOWN] x", "fallback"),
+            "[TEAM] [UNKNOWN] x",
+        )
+        self.assertEqual(
+            pu.title_tail("[V3.6][HOLD] fix login", "fallback"),
+            "[HOLD] fix login",
+        )
+
+
 if __name__=="__main__":
     unittest.main()
