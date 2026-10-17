@@ -37,7 +37,20 @@ def screen(mockup: dict, study: dict) -> dict:
         "supports_run_from_pillar_to_backdrop": pill["proposed_side_return_z"] == [
             pill["door_plane_z"], st["rear_backdrop_z"]],
         "mockup_opening_matches_study": (
-            pill["opening_right"]-pill["opening_left"] == spec["clear_opening_width_nominal"])
+            pill["opening_right"]-pill["opening_left"] == spec["clear_opening_width_nominal"]
+            and pill["opening_bottom"] == spec["opening_bottom_y"]
+            and pill["opening_top"] == spec["opening_top_y"]),
+        "leaf_height_and_clearance_match_study": (
+            mockup["leaves"]["height"] == spec["left_and_right_leaf_height"]
+            and mockup["leaves"]["height"] + mockup["leaves"]["clearance_under_lintel"]
+              + mockup["leaves"]["clearance_above_sill"] ==
+                  spec["opening_top_y"] - spec["opening_bottom_y"]
+            and 2*mockup["leaves"]["width"] + mockup["leaves"]["nominal_center_seam_gap"]
+                  == spec["clear_opening_width_nominal"]),
+        "prahlada_trial_location_and_bow_match_study": (
+            st["prahlada_trial_center_x"] == study["prahlada"]["center_x"]
+            and st["prahlada_bow_trial_degrees"][-1] ==
+                study["prahlada"]["bow_degrees_toward_pillar"])
     }
     return {
         "schema":"puppet-portal-preflight/v1",
