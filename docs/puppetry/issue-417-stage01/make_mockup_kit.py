@@ -76,11 +76,11 @@ def pillar_tile(c, cfg, idx):
     for world_y in (0, 280):
         if a <= world_y <= b:
             line(c, x0, y0+world_y-a, x0+180, y0+world_y-a, .7)
-    if b > 15 and a < 245:
-        lo, hi = max(a, 15), min(b, 245)
+    if b > cfg["pillar"]["opening_bottom"] and a < cfg["pillar"]["opening_top"]:
+        lo, hi = max(a, cfg["pillar"]["opening_bottom"]), min(b, cfg["pillar"]["opening_top"])
         for x in (20, 160):
             line(c, x0+x, y0+lo-a, x0+x, y0+hi-a, .7)
-    for world_y in (15, 245):
+    for world_y in (cfg["pillar"]["opening_bottom"], cfg["pillar"]["opening_top"]):
         if a <= world_y <= b:
             line(c, x0+20, y0+world_y-a, x0+160, y0+world_y-a, .7)
     if a <= 140 <= b:
@@ -98,9 +98,9 @@ def pillar_tile(c, cfg, idx):
 
 def doors(c, cfg):
     leaf = cfg["leaves"]
-    y = 37
-    label(c, 14, 274, "TWO TEST DOORS - ADJUSTED CLEARANCE FIT", 11)
-    label(c, 14, 268, "Outer vertical hinges; doors swing REARWARD; adult cuts.", 8)
+    y = 29  # 237-mm leaves need space above the 100-mm calibration/footer
+    label(c, 14, 285, "TWO TEST DOORS - ADJUSTED CLEARANCE FIT", 11)
+    label(c, 14, 279, "Outer vertical hinges; doors swing REARWARD; adult cuts.", 8)
     for i, x in enumerate((20, 121)):
         is_left = (i == 0)
         w, h = leaf["width"], leaf["height"]
@@ -113,7 +113,7 @@ def doors(c, cfg):
         c.setLineWidth(pt(.35))
         c.circle(pt(hole_x), pt(hole_y), pt(leaf["pull_hole_diameter"]/2), fill=0, stroke=1)
         cross(c, hole_x, hole_y)
-        label(c, x+2, y+h-9, ("LEFT" if is_left else "RIGHT") + " 69 x 227", 8)
+        label(c, x+2, y+h-9, ("LEFT" if is_left else "RIGHT") + f"  {w} x {h}", 8)
         label(c, x+2, y+9, "HINGE " + ("LEFT" if is_left else "RIGHT"), 7)
         label(c, x+2, y+128, "PULL: dia 2", 7)
         label(c, x+2, y+123, "10 mm from edge", 7)
@@ -139,9 +139,9 @@ def adult_instructions(c):
         "1. Print on A4 at ACTUAL SIZE (100%); turn off fit-to-page.",
         "2. Measure the 100-mm horizontal and 50-mm vertical calibration.",
         "3. Tape two pillar paper tiles at three world y=140 registration crosses.",
-        "4. Transfer full outer 180 x 280 and inner 140 x 230 aperture to card.",
-        "5. Adult cuts inner aperture (20-mm posts, 15-mm sill, 35-mm lintel).",
-        "6. Cut two door leaves 69 x 227, each with one dia-2 pull hole.",
+        "4. Transfer full outer 180 x 280 and inner 140 x 240 aperture to card.",
+        "5. Adult cuts inner aperture (20-mm posts, 15-mm sill, 25-mm lintel).",
+        "6. Cut two door leaves 69 x 237, each with one dia-2 pull hole.",
         "7. Fix outer vertical edges with flexible tape so doors swing rearward.",
         "8. Mount door plane z40, rear wall z150; NEVER glue flush.",
         "9. Keep x305..445 and z15..140 shaft corridor OPEN below stage.",
@@ -171,7 +171,7 @@ def test_receipt(c):
         ("M2", "Five reveal cycles", "5/5 smooth; doors stay open"),
         ("M3", "Handoff and hands", "No unassigned helper"),
         ("M4", "Concealment", "Invisible from class seats"),
-        ("M5", "Prahlada 15 degree bow", ">=10 mm real gap"),
+        ("M5", "Prahlada 15-20 degree bow", ">=10 mm real gap"),
         ("M6", "King tap/exit", "3 gestures, clear exit"),
         ("M7", "Open shaft corridor", "140 mm below + 110 mm travel"),
         ("M8", "1:15-1:25 reveal", "N visible by 1:25"),
@@ -192,12 +192,14 @@ def validate(cfg):
     p, leaf, t = cfg["pillar"], cfg["leaves"], cfg["template"]
     assert p["outer_width"] == 180 and p["outer_height"] == 280
     assert p["opening_right"] - p["opening_left"] == 140
-    assert p["opening_top"] - p["opening_bottom"] == 230
+    assert p["opening_top"] - p["opening_bottom"] == 240
     assert 2*leaf["width"] < 140
-    assert leaf["height"] < 230
+    assert leaf["height"] < 240
     assert math.isclose(140-2*leaf["width"], leaf["nominal_center_seam_gap"])
-    assert math.isclose(230-leaf["height"], leaf["clearance_under_lintel"]+leaf["clearance_above_sill"])
+    assert math.isclose(240-leaf["height"], leaf["clearance_under_lintel"]+leaf["clearance_above_sill"])
     assert t["tiled_pillar_regions_y"] == [[0, 145], [135, 280]]
+    assert leaf["height"] == 237
+    assert p["outer_height"] - p["opening_top"] >= 25
     assert t["overlap"] == 10 and t["calibration_bar_mm"] == 100
 
 
