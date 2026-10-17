@@ -36,6 +36,12 @@ def source_checks(root):
             missing.append(f"timing {time} missing")
     if panels.count("PERMANENT PALACE") != 4:
         missing.append("four permanent palace panels required")
+    from story_parity import inspect as inspect_story
+    from geometry_gate import inspect as inspect_geometry, load as load_geometry
+    story_report = inspect_story(root)
+    missing.extend(story_report["problems"])
+    geometry_report = inspect_geometry(load_geometry(root / "FABRICATION_CANDIDATE.json"))
+    missing.extend(geometry_report["errors"])
     if "[||]" not in panels or "OPEN PILLAR" not in panels:
         missing.append("closed/open pillar continuity missing")
     return missing
@@ -99,7 +105,7 @@ def main():
     if args.zip is not None:
         problems.extend(archive_checks(args.zip, manifest))
     report = {
-        "scope": "SOURCE_ONLY__BINARY_NOT_CHECKED" if args.zip is None else "SOURCE_AND_LOCAL_BINARY",
+        "scope": "SOURCE_PLUS_CANDIDATE_GEOMETRY__BINARY_NOT_CHECKED" if args.zip is None else "SOURCE_GEOMETRY_AND_LOCAL_BINARY",
         "passed": len(problems) == 0,
         "issues": problems,
         "github_binary_custody": "NOT_ESTABLISHED_BY_THIS_SCRIPT",
