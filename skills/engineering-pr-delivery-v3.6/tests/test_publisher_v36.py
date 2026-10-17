@@ -313,5 +313,155 @@ class PublisherTests(unittest.TestCase):
         )
 
 
+class ECO05GuardTests(unittest.TestCase):
+    """Strict fake-provider-only authorisation; no live GitHub operations."""
+
+    PIN = "a" * 64
+
+    def setup_guard(self, *, pr=True):
+        client = Fake()
+        client.records["/pulls/4"]["body"] = "Human PR body"
+        client.records["/pulls/4"]["labels"] = [{"name": "human-label"}]
+        issues = [client.records[f"/issues/{n}"] for n in (1, 2, 3)]
+        projection = pu.title_plan(PLAN, issues, client.records["/pulls/4"] if pr else None,
+                                   report())
+        changes = [r for r in projection if r["before"] != r["after"]]
+        calculated = {"parent": PLAN["parent"], "label_sha": PLAN["label"]["label_sha"],
+                      "source_pin": self.PIN, "changes": changes}
+        targets = frozenset((r["kind"], r["number"]) for r in changes)
+        options = {"confirm_scope": PLAN["parent"], "allow_write": True,
+                   "authorized_surfaces": frozenset({"title"}),
+                   "authorized_targets": targets, "lab_scope": client.repo,
+                   "source_probe": lambda: self.PIN}
+        return client, calculated, options
+
+    def test_eco05_dry_run_default_never_patches(self):
+        client, plan, options = self.setup_guard()
+        options["allow_write"] = False
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "NOT_RUN")
+        self.assertEqual(result["applied"], 0)
+        self.assertFalse(result["complete"])
+        self.assertEqual(client.writes, [])
+
+    def test_eco05_separate_surface_consent_and_exact_target_scope(self):
+        client, plan, options = self.setup_guard()
+        options["authorized_surfaces"] = frozenset({"scoreboard"})
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(plan, client, **options)
+        self.assertEqual(client.writes, [])
+        options["authorized_surfaces"] = frozenset({"title"})
+        options["authorized_targets"] = frozenset({("issue", 1)})
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(plan, client, **options)
+        options["authorized_targets"] = frozenset((r["kind"], r["number"]) for r in plan["changes"])
+        options["confirm_scope"] = "another/repository#1"
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(plan, client, **options)
+        self.assertEqual(client.writes, [])
+
+    def test_eco05_fresh_source_pin_required_before_any_write(self):
+        client, plan, options = self.setup_guard()
+        options["source_probe"] = lambda: "b" * 64
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertIn("source", result["next_reconciliation"])
+        self.assertEqual(result["applied"], 0)
+        self.assertEqual(client.writes, [])
+
+    def test_eco05_concurrent_body_edit_refused_without_restoring_owner_text(self):
+        client, plan, options = self.setup_guard()
+        client.records["/issues/1"]["body"] += "\nOWNER NEW PARAGRAPH"
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertEqual(result["applied"], 0)
+        self.assertIn("OWNER NEW PARAGRAPH", client.records["/issues/1"]["body"])
+        self.assertEqual(client.writes, [])
+
+    def test_eco05_head_change_refused_without_patch(self):
+        client, plan, options = self.setup_guard()
+        plan["changes"] = [r for r in plan["changes"] if r["kind"] == "pr"]
+        options["authorized_targets"] = frozenset({("pr", 4)})
+        client.records["/pulls/4"]["head"] = {"sha": "b" * 40}
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertIn("head", result["next_reconciliation"].lower())
+        self.assertEqual(client.writes, [])
+
+    def test_eco05_partial_provider_error_records_completed_and_pending(self):
+        client, plan, options = self.setup_guard()
+        original = client.request
+        def fail_on_second(method, path, body=None):
+            if method == "PATCH" and path == "/issues/2":
+                raise lc.ContractError("simulated provider 503")
+            return original(method, path, body)
+        client.request = fail_on_second
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "PARTIAL")
+        self.assertEqual(result["applied"], 1)
+        self.assertFalse(result["complete"])
+        self.assertTrue(result["pending_surfaces"])
+        self.assertIn("reconcile", result["next_reconciliation"])
+        self.assertEqual(client.writes, ["/issues/1"])
+
+    def test_eco05_readback_mismatch_marks_uncertain_and_stops(self):
+        client, plan, options = self.setup_guard()
+        original = client.request
+        def bad_readback(method, path, body=None):
+            if method == "PATCH" and path == "/issues/1":
+                result = original(method, path, body)
+                client.records[path]["title"] = "CONCURRENT CHANGED"
+                return result
+            return original(method, path, body)
+        client.request = bad_readback
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "UNCERTAIN")
+        self.assertFalse(result["complete"])
+        self.assertTrue(result["pending_surfaces"])
+        self.assertIn("readback", result["next_reconciliation"])
+        self.assertEqual(client.writes, ["/issues/1"])
+
+    def test_eco05_success_get_verified_then_safe_zero_change_replay(self):
+        client, plan, options = self.setup_guard()
+        first = pu.apply_projection(plan, client, **options)
+        self.assertEqual(first["status"], "VERIFIED")
+        self.assertTrue(first["complete"])
+        self.assertEqual(first["applied"], 4)
+        original_writes = list(client.writes)
+        second = pu.apply_projection(plan, client, **options)
+        self.assertEqual(second["status"], "VERIFIED")
+        self.assertEqual(second["applied"], 0)
+        self.assertEqual(client.writes, original_writes)
+
+    def test_eco05_scoreboard_body_scope_preserves_owner_and_never_writes_labels(self):
+        client, plan, options = self.setup_guard(pr=False)
+        client.records["/issues/1"]["body"] = "OWNER AMENDMENT\nDo not overwrite.\n"
+        change = pu.scoreboard_body_change(
+            client.records["/issues/1"], "Managed score", parent_number=1)
+        plan["changes"] = [change]
+        options["authorized_surfaces"] = frozenset({"scoreboard"})
+        options["authorized_targets"] = frozenset({("issue", 1)})
+        first = pu.apply_projection(plan, client, **options)
+        self.assertEqual(first["status"], "VERIFIED")
+        self.assertEqual(first["applied"], 1)
+        self.assertTrue(client.records["/issues/1"]["body"].startswith("OWNER AMENDMENT\n"))
+        self.assertEqual(client.records["/issues/1"].get("labels"), None)
+        again = pu.apply_projection(plan, client, **options)
+        self.assertEqual(again["applied"], 0)
+        self.assertEqual(len(client.writes), 1)
+
+    def test_eco05_namespace_and_live_cli_writes_remain_denied(self):
+        from unittest.mock import patch
+        client, plan, options = self.setup_guard()
+        options["authorized_surfaces"] = frozenset({"title", "namespace"})
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(plan, client, **options)
+        with patch.object(pu, "GithubClient") as provider:
+            with self.assertRaises(SystemExit):
+                pu.main(["--label", "unused", "--plan", "unused", "--apply"])
+            provider.assert_not_called()
+        self.assertEqual(client.writes, [])
+
+
 if __name__=="__main__":
     unittest.main()
