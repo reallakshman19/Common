@@ -23,25 +23,80 @@ BRACKET = re.compile(r"\[([^\]\r\n]{1,64})\]")
 OUTCOMES = re.compile(r"O[1-5](?:[/–-]O?[1-5])*")
 ECOUNT = re.compile(r"E[0-9]+/[0-9]+")
 OLD_COUNT = re.compile(r"[0-9]+/[0-9]+")
-OWNED_WORDS = frozenset((
-    "LAB", "DRAFT", "OPEN", "MERGED", "CLOSED", "EVIDENCED",
-    "PLANNED", "PENDING", "UNATTRIBUTED", "STALE", "HOLD",
-    "ORIGINALS_MISSING", "CHAIN_GAP", "OWNER_GATE", "UNKNOWN",
+PR_STATES = frozenset(("DRAFT", "OPEN", "MERGED", "CLOSED"))
+CHILD_STATES = frozenset(("PLANNED", "PENDING", "EVIDENCED", "STALE"))
+ATTENTION_WORDS = frozenset((
+    "HOLD", "STALE", "ORIGINALS_MISSING", "CHAIN_GAP", "OWNER_GATE", "UNKNOWN",
 ))
+# A human [HOLD] immediately after a legacy [E1/1] could be indistinguishable
+# from an old, unmarked projected attention signal. Prefer preserving human
+# content. All *new* generated attention signals carry this exact grammar
+# marker, so re-projection may safely remove only that tool-owned pair.
+ATTENTION_MARKER = "[v36.attention/v1]"
 
 
-def is_owned_token(token):
-    """Only tokens following our literal [V3.6] marker belong to us."""
-    return token in OWNED_WORDS or bool(OUTCOMES.fullmatch(token) or
-                                      ECOUNT.fullmatch(token) or OLD_COUNT.fullmatch(token))
+def managed_block_end(current: str, start: int) -> int:
+    """End of one *structurally recognised* native prefix, not any owned-looking word.
+
+    Native supported shapes (with legacy lab form retained):
+      [V3.6][LAB?][E#/#]                        parent
+      [V3.6][LAB?][O1–O5][#/#]                  legacy parent
+      [V3.6][O#][PLANNED|PENDING|EVIDENCED|STALE] child
+      [V3.6][LAB?][outcomes][PR-state][E#/#?]  PR
+      [V3.6][outcomes][PR-state][E#/#][attention][v36.attention/v1]
+    A bare [V3.6] is ours, but an adjacent free-standing [UNKNOWN] or
+    [HOLD] is *never* ours. An unmarked trailing attention word also stays
+    human-owned, even if it resembles one of our historical projections.
+    """
+    first = BRACKET.match(current, start)
+    if not first or first[1] != "V3.6":
+        return start
+    marker_end = first.end()
+    cursor = marker_end
+
+    def token(at):
+        m = BRACKET.match(current, at)
+        return (m[1], m.end()) if m else (None, at)
+
+    value, nxt = token(cursor)
+    if value == "LAB":
+        cursor = nxt
+        value, nxt = token(cursor)
+
+    if value is not None and ECOUNT.fullmatch(value):
+        return nxt  # parent
+
+    if value is None or not (OUTCOMES.fullmatch(value) or value == "UNATTRIBUTED"):
+        return marker_end
+
+    cursor = nxt
+    state, after_state = token(cursor)
+    if state is not None and OLD_COUNT.fullmatch(state):
+        return after_state  # legacy parent
+    if state in CHILD_STATES:
+        return after_state
+    if state not in PR_STATES:
+        return marker_end  # do not consume partial or human tokens
+
+    cursor = after_state
+    value, nxt = token(cursor)
+    if value is not None and ECOUNT.fullmatch(value):
+        cursor = nxt
+        attention, attention_end = token(cursor)
+        if (attention in ATTENTION_WORDS
+                and current.startswith(ATTENTION_MARKER, attention_end)):
+            cursor = attention_end + len(ATTENTION_MARKER)
+        return cursor
+    return cursor  # old PR grammar without an E counter
 
 
 def split_title(current: str, fallback: str) -> tuple[str, str]:
-    """Return (foreign leading brackets, human suffix), without generic stripping.
+    """Return (foreign preamble, human suffix), stripping only structured own prefixes.
 
-    Foreign bracket tokens BEFORE the managed namespace retain their position;
-    those AFTER it start human suffix. Adjacent repeated managed sequences collapse.
-    No [V3.6] marker means all existing bracket text is human-owned.
+    When there is no leading [V3.6] namespace, the *entire original title* is
+    human-owned, including all leading bracket text. This avoids guessing
+    which foreign brackets are metadata vs actual title words. If an owned
+    prefix follows foreign leading brackets, preserve that preamble separately.
     """
     if not isinstance(current, str):
         raise ContractError("missing GitHub title")
@@ -58,20 +113,28 @@ def split_title(current: str, fallback: str) -> tuple[str, str]:
         while pos < length and current[pos] == " ":
             pos += 1
     first = BRACKET.match(current, pos)
-    if first and first[1] == "V3.6":
-        pos = first.end()
-        while pos < length:
-            while pos < length and current[pos] == " ":
-                pos += 1
-            match = BRACKET.match(current, pos)
-            if not match or not (match[1] == "V3.6" or is_owned_token(match[1])):
-                break
-            pos = match.end()
+    if not first or first[1] != "V3.6":
+        return "", current.strip() or fallback
+    pos = managed_block_end(current, pos)
+
+    # Older projections sometimes repeated their entire owned header. Strip
+    # another header only when it actually parses as a full managed sequence.
+    while pos < length:
+        candidate = pos
+        while candidate < length and current[candidate] == " ":
+            candidate += 1
+        marker = BRACKET.match(current, candidate)
+        if not marker or marker[1] != "V3.6":
+            break
+        following = managed_block_end(current, candidate)
+        if following <= marker.end():
+            break
+        pos = following
     return "".join(foreign), current[pos:].strip() or fallback
 
 
 def title_tail(current: str, fallback: str) -> str:
-    """Legacy helper: expose preserved human content, never discard foreign brackets."""
+    """Compatibility helper; intentionally retains foreign brackets plus human tail."""
     prefix, tail = split_title(current, fallback)
     return (prefix + " " + tail).strip()
 
@@ -254,7 +317,7 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict,
         pr_count = sum(t["E"] == "CURRENT_EVIDENCE" for t in linked)
         pr_total = len(linked)
         attention = title_attention(linked, board_rows)
-        token = f"[{attention['signal']}]" if attention["signal"] else ""
+        token = f"[{attention['signal']}]{ATTENTION_MARKER}" if attention["signal"] else ""
         managed = f"[V3.6][{outcomes}][{status}][E{pr_count}/{pr_total}]{token}"
         after = compose_title(pr.get("title"), "Lifecycle work", managed)
         updates.append({"kind": "pr", "number": pr["number"], "before": pr["title"],
