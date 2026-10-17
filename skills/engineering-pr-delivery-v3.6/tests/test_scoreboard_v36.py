@@ -166,5 +166,36 @@ class ScoreboardTests(unittest.TestCase):
         self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/344"]["tasks"], 1)
 
 
+    def test_two_prs_do_not_borrow_each_others_e_denominator(self):
+        import copy
+        m = copy.deepcopy(run([comment(SC_ID, self_check()), comment(9002, evidence())])[0])
+        second = copy.deepcopy(m["tasks"][0])
+        second["task_id"] = "V36-341-WP2"
+        second["issue"] = "https://github.com/reallakshman19/Common/issues/346"
+        second["pr"] = "https://github.com/reallakshman19/Common/pull/355"
+        second["status"] = "NO_EVIDENCE"
+        second["claim_qualified"] = False
+        m["tasks"].append(second)
+        m["native"]["total"] = 2
+        b = sb.board(m)
+        self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/344"]["E_current"], 1)
+        self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/344"]["tasks"], 1)
+        self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/355"]["E_current"], 0)
+        self.assertEqual(b["by_pr"]["https://github.com/reallakshman19/Common/pull/355"]["tasks"], 1)
+        self.assertEqual(b["totals"]["tasks"], 2)
+        self.assertNotIn("tests_passed", b["totals"])
+
+    def test_repeated_task_id_never_inflates_e_or_pr_numerator(self):
+        import copy
+        m = copy.deepcopy(run([comment(SC_ID, self_check()), comment(9002, evidence())])[0])
+        m["tasks"].append(copy.deepcopy(m["tasks"][0]))
+        m["native"]["total"] = 2
+        b = sb.board(m)
+        self.assertTrue(b["totals"]["partial"])
+        self.assertEqual(b["totals"]["E_current"], 0)
+        self.assertEqual(b["by_pr"], {})
+        self.assertIn("task_ids:duplicate", b["unread_sources"])
+
+
 if __name__ == "__main__":
     unittest.main()
