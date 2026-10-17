@@ -56,7 +56,7 @@
     "body_height": 200,
     "body_bottom_y": 30,
     "shoulder_offset_from_center_x": 30,
-    "active_arm_reach_from_pivot": 70,
+    "active_arm_reach_from_pivot": 80,
     "active_arm_orientation": "audience_right",
     "far_left_exit_center_x": 140
   },
