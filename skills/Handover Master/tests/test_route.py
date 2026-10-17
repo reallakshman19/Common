@@ -339,7 +339,9 @@ class AmendmentRefTests(unittest.TestCase):
         for ref in ("https://github.com/a/../issues/1","https://github.com/a/./issues/1",
                     "https://github.com/a/.../issues/1","https://github.com/a/r.git/issues/1",
                     "https://github.com/a-/r/issues/1","HTTPS://github.com/a/r/issues/1",
-                    "https://github.com/a/r/issues/1#"):
+                    "https://github.com/a/r/issues/1#",
+                    "https://github.com/o/r/issues/1?","https://github.com/o/r.git./issues/1",
+                    "https://github.com/o/r./issues/1"):
             x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",phase="1a",amendment_ref=ref)
             self.assertEqual(x["status"],"INVALID_AMENDMENT_REF",ref)
 

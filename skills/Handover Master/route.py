@@ -68,13 +68,13 @@ def amendment_ref_problem(ref):
         return "scheme must be lowercase https"
     if parts.netloc!="github.com" or parts.username or parts.password or port is not None:
         return "host must be exactly github.com (no credentials or port)"
-    if parts.query:
+    if parts.query or "?" in ref:
         return "query strings are not accepted"
     path_match=REF_PATH.match(parts.path)
     if not path_match:
         return "path must be /<owner>/<repo>/issues/<n> or /<owner>/<repo>/pull/<n>"
     repo=path_match.group(2)
-    if set(repo)=={"."} or repo.lower().endswith(".git"):
+    if set(repo)=={"."} or repo.lower().rstrip(".").endswith(".git") or repo.endswith("."):
         return "repository segment must be a real repository name"
     if "#" in ref and not REF_FRAGMENT.match(parts.fragment):
         return "only an #issuecomment-<id> fragment is accepted"

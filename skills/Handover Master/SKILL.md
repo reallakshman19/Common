@@ -33,6 +33,8 @@ This CLI prints source paths/instructions only; it NEVER fetches remote authorit
 6. **Perform only the authorized module action.** The Master router has no apply flag. Any actual script, GitHub publication or workflow advancement uses the native module's own guarded commands, scope and fresh provider readback.
 7. **Return a human report:** chosen method and reason; canonical skill/schema and fetched SHA; exact generated phase/result (or HOLD), original user outcome, reality and tests, explicit unknowns, and ONE next evidence-producing verification.
 
+**Relay integration (keeping a project's meaning across runners; who owns each transfer fact):** [RELAY_INTEGRATION.md](RELAY_INTEGRATION.md).
+
 ## Source/authority precedence and overlap
 
 - Explicit Owner/project-pinned version beats intent keyword routing; native pins still apply.
