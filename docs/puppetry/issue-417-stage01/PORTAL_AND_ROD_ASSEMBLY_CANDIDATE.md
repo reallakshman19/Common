@@ -1,5 +1,6 @@
 # STAGE-01-MOCKUP — buildable passage topology and operator handoff (CANDIDATE)
 
+> **Candidate dimensional reconciliation (17 October 2026):** This Stage-01 study now adopts the proposed x660 Prahlada position, 15–20° bow, opening top y255 (140×240 opening), and two 69×237-mm trial doors from draft PR #419. This is a revised trial design only; printing, rod/collision tests, door cycling and manufacture remain NOT_RUN. The corrected-v2 character PDFs on #419 remain without authenticated GitHub binary custody.\n\n
 **Parent:** [#415](https://github.com/reallakshman19/Common/issues/415)  
 **Investigation:** [#417](https://github.com/reallakshman19/Common/issues/417)  
 **Draft study:** [PR #418](https://github.com/reallakshman19/Common/pull/418)
@@ -66,7 +67,7 @@ The analysis only locates the proposed main stick path. The 220 mm Narasimha arm
 ## 4. Build experiment and stop conditions
 
 1. Print existing Stage-01 PDF on ordinary A4 at 100%, measure both calibration scales.
-2. Adult transfer paper tiles to a *continuous or reinforced* 180×280 mm frame. Cut the 140×230 aperture. Cut two **69×227** trial doors and hinge on the outer edges so they swing rearward.
+2. Adult transfer paper tiles to a *continuous or reinforced* 180×280 mm frame. Cut the 140×240 aperture. Cut two **69×237** trial doors and hinge on the outer edges so they swing rearward.
 3. **Do not fix the frame flush against the palace rear wall.** Mount at z40 with a removable, adequately supported 110-mm stand-off and side masking outside the passage. Verify it cannot fall when doors open.
 4. Keep the central floor/handle corridor clear; verify sufficient controlled fore/aft movement between z130 and z20 and below-baseline space.
 5. Use the original Narasimha *candidate* cutting guide (separate PDF) and an actual rod/coupler mock-up. The 92×180 rectangular gauge is a preliminary fit screen only.
