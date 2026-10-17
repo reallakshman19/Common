@@ -17,8 +17,14 @@ jobs:
           python-version: '3.11'
       - name: Validate four distinct scenes and ASCII panels (SOURCE-ONLY)
         run: python3 docs/puppetry/issue-415-corrected-v2/verify_corrected_v2.py
+      - name: Verify exact four-scene dialogue parity and timed slots
+        run: python3 docs/puppetry/issue-415-corrected-v2/story_parity.py
+      - name: Screen candidate dimensions, holes, joints and safer bow
+        run: python3 docs/puppetry/issue-415-corrected-v2/geometry_gate.py
+      - name: Falsify dimension and timing regressions (synthetic checks)
+        run: python3 -m unittest discover -s docs/puppetry/issue-415-corrected-v2/tests -v
       - name: Explicitly classify the limited result
-        run: echo 'This is SOURCE_ONLY; no uploaded PDFs or final fabrication approval are proven.' >> "$GITHUB_STEP_SUMMARY"
+        run: echo 'Source and CANDIDATE_GEOMETRY are screened only; v2 PDFs absent and no physical fabrication approval.' >> "$GITHUB_STEP_SUMMARY"
   exact-binary-custody:
     runs-on: ubuntu-latest
     steps:
