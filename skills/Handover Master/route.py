@@ -9,6 +9,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from urllib.parse import urlsplit
 
 HERE=Path(__file__).resolve().parent
 REPO_ROOT=HERE.parents[1]
@@ -41,14 +42,70 @@ def match_mode(intent):
     if len(hits)>1:return None,hits
     return hits[0],hits
 
+REF_PATH=re.compile(r"^/([A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?)/([A-Za-z0-9._-]{1,100})/(issues|pull)/[1-9][0-9]{0,9}$")
+REF_FRAGMENT=re.compile(r"^issuecomment-[1-9][0-9]{0,15}$")
+CONTROLLER_CHECKS=(
+ "Resolve the cited decision: exact Owner words and attribution (a shared-account post is a claim, not authentication).",
+ "Scope: the amendment must cover THIS handover; a lane already begun on BuddyRunner 1.6 finishes on 1.6.",
+ "Currency: not superseded or expired, and no HOLD on the project or agent.",
+ "Native contract: the governing v3.6 contract must accommodate the candidate version for this phase; otherwise CONFLICT, not a workaround.",
+ "Phase receipts: actual completed-phase receipts are current; no duplicate or stale phase.",
+ "Fresh source and separate work/custody authority before any action. Unresolved = CONFLICT/UNKNOWN; do not act."
+)
+
+def amendment_ref_problem(ref):
+    """Offline syntax check only (v1 grammar). Never fetches, follows redirects or authenticates."""
+    if not isinstance(ref,str) or not ref or len(ref)>300:
+        return "empty or overlong reference"
+    if any(c.isspace() or ord(c)<32 or ord(c)==127 for c in ref) or "%" in ref or "\\" in ref:
+        return "whitespace, control, percent-encoded or backslash characters are not accepted"
+    try:
+        parts=urlsplit(ref)
+        port=parts.port
+    except ValueError:
+        return "unparseable URL"
+    if not ref.startswith("https://") or parts.scheme!="https":
+        return "scheme must be lowercase https"
+    if parts.netloc!="github.com" or parts.username or parts.password or port is not None:
+        return "host must be exactly github.com (no credentials or port)"
+    if parts.query:
+        return "query strings are not accepted"
+    path_match=REF_PATH.match(parts.path)
+    if not path_match:
+        return "path must be /<owner>/<repo>/issues/<n> or /<owner>/<repo>/pull/<n>"
+    repo=path_match.group(2)
+    if set(repo)=={"."} or repo.lower().endswith(".git"):
+        return "repository segment must be a real repository name"
+    if "#" in ref and not REF_FRAGMENT.match(parts.fragment):
+        return "only an #issuecomment-<id> fragment is accepted"
+    return None
+
+def _ref_note(ref,applied):
+    if not ref:
+        return None
+    return {"value":ref,"applied":applied,"verified":False,
+            "note":"Caller claim. Syntax-checked only; not fetched, attributed, applicable, current, compatible or approved."}
+
 def route(intent="",mode="auto",workflow="auto",phase=None,buddy_version=None,
-          stage1_freeze_verified=False):
+          stage1_freeze_verified=False,amendment_ref=None):
+    result=_route(intent,mode,workflow,phase,buddy_version,stage1_freeze_verified,amendment_ref)
+    if (amendment_ref and "amendment_ref" not in result
+            and result["status"] not in ("INVALID_AMENDMENT_REF","PROVISIONAL_ROUTE")):
+        result["amendment_ref"]=_ref_note(amendment_ref,False)
+    return result
+
+def _route(intent,mode,workflow,phase,buddy_version,stage1_freeze_verified,amendment_ref):
     if mode not in ALLOWED_MODES or workflow not in WORKFLOWS:
         raise ValueError("invalid mode/workflow")
     if phase is not None and phase not in PHASES:
         raise ValueError("invalid Buddy phase")
     if buddy_version is not None and buddy_version not in VERSIONS:
         raise ValueError("invalid Buddy version")
+    if amendment_ref is not None:
+        problem=amendment_ref_problem(amendment_ref)
+        if problem:
+            return decision("INVALID_AMENDMENT_REF",None,
+                            "Rejected --amendment-ref ("+problem+"). Accepted v1 grammar: https://github.com/<owner>/<repo>/issues/<n> or /pull/<n>, optionally #issuecomment-<id>.")
     intent_lower=(intent or "").casefold()
     if workflow=="auto":
         has36=bool(re.search(r"\bv3[.]6\b|engineering-pr-delivery-v3[.]6",intent_lower))
@@ -77,8 +134,25 @@ def route(intent="",mode="auto",workflow="auto",phase=None,buddy_version=None,
                 return decision("NEEDS_VERSION",None,
                             "Select the exact project-governing BuddyRunner version (1.6 or 1.7).")
         if workflow=="v3.6" and buddy_version!="1.6":
-            return decision("HOLD_VERSION",None,
-                 "v3.6 skill currently pins BuddyRunner v1.6; do not silently upgrade to v1.7.")
+            if not amendment_ref:
+                return decision("HOLD_VERSION",None,
+                     "v3.6 currently pins BuddyRunner 1.6. With no claimed governing-amendment reference: no candidate selection or read paths. "
+                     "A reference can enable only a read-only candidate preview, never admission or execution; alternatively use the native 1.6.")
+            if phase is None:
+                return decision("NEEDS_PHASE",None,
+                                "Supply 1a, 1b, 2 or Y from live owning issue; an amendment reference does not replace the phase.")
+            def paths(key):
+                src=index["sources"][key]
+                return [src["path"],src["script"]]
+            item=decision("PROVISIONAL_ROUTE",None,
+                 "Unverified candidate-source preview ONLY. v3.6 natively pins BuddyRunner 1.6; a caller claims an amendment selecting "
+                 +buddy_version+". Not admitted: do not execute, publish or advance any phase from this result.")
+            item["preview"]={"workflow":"v3.6","phase":phase,"requested_version":buddy_version,
+                             "native_pin":{"buddy_version":"1.6","source_key":"buddy16","read_paths":paths("buddy16")},
+                             "candidate":{"buddy_version":buddy_version,"source_key":"buddy17","read_paths":paths("buddy17")}}
+            item["amendment_ref"]=_ref_note(amendment_ref,"preview_only")
+            item["controller_must_verify"]=list(CONTROLLER_CHECKS)
+            return item
         if phase is None:
             return decision("NEEDS_PHASE",None,
                             "Supply 1a, 1b, 2 or Y from live owning issue; do not repeat a completed phase.")
@@ -177,7 +251,8 @@ def route(intent="",mode="auto",workflow="auto",phase=None,buddy_version=None,
       "reason":reason,"preflight":checks,"global_guards":list(GUARDED),
       "may_execute_generator":False,"may_write_or_publish":False,
       "owner_approval_verified":False,
-      "source_freshness_verified":False
+      "source_freshness_verified":False,
+      **({"amendment_ref":_ref_note(amendment_ref,False)} if amendment_ref else {})
     }
 
 def decision(status,mode,reason,choices=None):
@@ -201,8 +276,21 @@ def as_markdown(item):
                   for p in item["canonical_read_paths"]]
         lines += ["","## Preflight (not a write grant)"]
         lines += ["- "+p for p in item["preflight"]]
+    elif item.get("preview"):
+        pv=item["preview"]
+        lines += ["**PROVISIONAL - unverified caller claim. NOT ADMITTED. Do not execute, publish or advance any phase.**","",
+                  "**Native pin (v3.6):** BuddyRunner "+pv["native_pin"]["buddy_version"],
+                  "**Candidate (claimed):** BuddyRunner "+pv["candidate"]["buddy_version"]+" / phase "+pv["phase"],
+                  "**Claimed reference:** "+item["amendment_ref"]["value"]+" (not fetched or verified)","",
+                  "## Sources to compare (reading only)"]
+        lines += ["- native: "+p for p in pv["native_pin"]["read_paths"]]
+        lines += ["- candidate: "+p for p in pv["candidate"]["read_paths"]]
+        lines += ["","## The controller must verify before ANY action"]
+        lines += ["- "+c for c in item["controller_must_verify"]]
     elif item.get("choices"):
         lines += ["**Choices:** "+", ".join(item["choices"])]
+    if item.get("amendment_ref") and not item.get("preview"):
+        lines += ["","**Amendment reference:** supplied but not applied to version selection (claim only, not verified)."]
     lines += ["","**Safety:** Router made no provider read, file edits, generator invocation or Owner decision."]
     return "\n".join(lines)+"\n"
 
@@ -214,9 +302,11 @@ def main(argv=None):
     p.add_argument("--phase",choices=sorted(PHASES))
     p.add_argument("--buddy-version",choices=sorted(VERSIONS))
     p.add_argument("--stage1-freeze-verified",action="store_true")
+    p.add_argument("--amendment-ref",default=None,help="claimed GitHub issue/PR/comment URL of a governing version amendment (preview only; never verified)")
     p.add_argument("--format",choices=["json","markdown"],default="markdown")
     args=p.parse_args(argv)
-    result=route(args.intent,args.mode,args.workflow,args.phase,args.buddy_version,args.stage1_freeze_verified)
+    result=route(args.intent,args.mode,args.workflow,args.phase,args.buddy_version,args.stage1_freeze_verified,
+                 amendment_ref=args.amendment_ref)
     print(as_markdown(result) if args.format=="markdown" else json.dumps(result,indent=2))
     return 0 if result["status"]=="READ_SOURCE_NOW" else 2
 

@@ -117,6 +117,8 @@ class RouterTests(unittest.TestCase):
     def test_no_silent_upgrade_v36_to_buddy17(self):
         x=self.sel(mode="buddy",workflow="v3.6",buddy_version="1.7",phase="2")
         self.assertEqual(x["status"],"HOLD_VERSION")
+        self.assertIsNone(x["selection"])
+        self.assertEqual(x["canonical_read_paths"],[])
 
     def test_buddy_final_is_not_fourth_stage(self):
         x=self.sel(mode="buddy",buddy_version="1.6",phase="2")
@@ -215,5 +217,137 @@ class RouterTests(unittest.TestCase):
         view=m.as_markdown(x)
         self.assertIn("HOLD_FREEZE",view)
         self.assertNotIn("github.com/reallakshman19/Common/blob/main/",view)
+
+
+# --- Common #408 HM-01/HM-04: v3.6 version-amendment preview (contract v2, #408 comment 6230181135) ---
+FIXTURE_REF="https://github.com/reallakshman19/CoordinatorLandingpage/issues/1#issuecomment-6230132308"
+
+class AmendmentRefTests(unittest.TestCase):
+    def flags_false(self,x):
+        for k in ("may_execute_generator","may_write_or_publish","owner_approval_verified","source_freshness_verified"):
+            self.assertIs(x[k],False,k)
+
+    def test_preview_with_valid_ref_is_not_admission(self):
+        for phase in ("1a","1b","2","Y"):
+            x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",phase=phase,amendment_ref=FIXTURE_REF)
+            self.assertEqual(x["status"],"PROVISIONAL_ROUTE")
+            self.assertIsNone(x["selection"])
+            self.assertEqual(x["canonical_read_paths"],[])
+            self.flags_false(x)
+            pv=x["preview"]
+            self.assertEqual(pv["native_pin"]["buddy_version"],"1.6")
+            self.assertEqual(pv["candidate"]["buddy_version"],"1.7")
+            self.assertEqual(pv["workflow"],"v3.6")
+            self.assertEqual(pv["phase"],phase)
+            self.assertTrue(pv["native_pin"]["read_paths"] and pv["candidate"]["read_paths"])
+            self.assertIs(x["amendment_ref"]["verified"],False)
+            self.assertEqual(x["amendment_ref"]["applied"],"preview_only")
+            self.assertTrue(len(x["controller_must_verify"])>=5)
+
+    def test_preview_cli_exit_is_non_success_and_markdown_is_explicit(self):
+        args=["--mode","buddy","--workflow","v3.6","--buddy-version","1.7","--phase","1b","--amendment-ref",FIXTURE_REF]
+        import contextlib,io
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(m.main(args+["--format","json"]),2)
+        self.assertIn("PROVISIONAL_ROUTE",out.getvalue())
+        view=m.as_markdown(m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",phase="1b",amendment_ref=FIXTURE_REF))
+        self.assertIn("PROVISIONAL",view)
+        self.assertIn("NOT ADMITTED",view)
+        self.assertIn("controller must verify",view)
+        self.assertIn(FIXTURE_REF,view)
+        self.assertNotIn("Read these current-main sources",view)
+        self.assertNotIn("Execute only",view)
+
+    def test_ref_does_not_replace_phase(self):
+        x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",amendment_ref=FIXTURE_REF)
+        self.assertEqual(x["status"],"NEEDS_PHASE")
+        self.flags_false(x)
+
+    def test_ref_without_upgrade_request_keeps_native_16(self):
+        x=m.route(mode="buddy",workflow="v3.6",phase="1a",amendment_ref=FIXTURE_REF)
+        self.assertEqual(x["status"],"READ_SOURCE_NOW")
+        self.assertEqual(x["selection"]["buddy_version"],"1.6")
+        self.assertIs(x["amendment_ref"]["applied"],False)
+        self.flags_false(x)
+
+    def test_explicit_16_with_ref_unused(self):
+        x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.6",phase="2",amendment_ref=FIXTURE_REF)
+        self.assertEqual(x["selection"]["source_key"],"buddy16")
+        self.assertIs(x["amendment_ref"]["applied"],False)
+        self.assertIn("not applied",m.as_markdown(x))
+
+    def test_ref_unused_outside_v36(self):
+        x=m.route(mode="two-pass",amendment_ref=FIXTURE_REF)
+        self.assertEqual(x["status"],"READ_SOURCE_NOW")
+        self.assertEqual(x["selection"]["source_key"],"two_standalone")
+        self.assertIs(x["amendment_ref"]["applied"],False)
+        y=m.route(mode="buddy",buddy_version="1.7",phase="1b",amendment_ref=FIXTURE_REF)
+        self.assertEqual(y["selection"]["source_key"],"buddy17")
+        self.assertIs(y["amendment_ref"]["applied"],False)
+
+    def test_ref_does_not_cure_selection_or_workflow(self):
+        self.assertEqual(m.route(intent="Which of 2pass or 3pass is better?",amendment_ref=FIXTURE_REF)["status"],"NEEDS_SELECTION")
+        self.assertEqual(m.route(intent="v3.5 and v3.6 buddy",amendment_ref=FIXTURE_REF)["status"],"NEEDS_WORKFLOW")
+        self.assertEqual(m.route(mode="buddy",workflow="v3.5",amendment_ref=FIXTURE_REF)["status"],"HOLD")
+
+    def test_malformed_and_lookalike_refs_rejected(self):
+        bad=["http://github.com/reallakshman19/Common/issues/408",
+             "https://github.com.evil.example/reallakshman19/Common/issues/408",
+             "https://github.com@evil.example/reallakshman19/Common/issues/408",
+             "https://user:pw@github.com/reallakshman19/Common/issues/408",
+             "https://github.com:443/reallakshman19/Common/issues/408",
+             "https://github.com/reallakshman19",
+             "https://github.com/reallakshman19/Common",
+             "https://github.com/reallakshman19/Common/issues/0",
+             "https://github.com/reallakshman19/Common/issues/408#issuecomment-abc",
+             "https://github.com/reallakshman19/Common/issues/408#top",
+             "https://github.com/reallakshman19/Common/issues/408?x=1",
+             "https://github.com/reallakshman19/Common/blob/main/README.md",
+             "https://github.com/reallakshman19/Common/issues/40%38",
+             "https://github.com/reallakshman19/Common/issues/408 ",
+             "https://github.com/reallakshman19/Common/issues/4\n08",
+             "","x"*301]
+        for ref in bad:
+            x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",phase="1b",amendment_ref=ref)
+            self.assertEqual(x["status"],"INVALID_AMENDMENT_REF",ref)
+            self.assertIsNone(x["selection"])
+            self.flags_false(x)
+            self.assertNotIn("preview",x)
+
+    def test_well_formed_wrong_scope_ref_is_still_only_a_preview(self):
+        # Syntax validity is never authority validity: an unrelated issue URL still yields only an unverified preview.
+        x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",phase="1a",
+                  amendment_ref="https://github.com/reallakshman19/Common/pull/398")
+        self.assertEqual(x["status"],"PROVISIONAL_ROUTE")
+        self.flags_false(x)
+        self.assertIs(x["amendment_ref"]["verified"],False)
+
+    def test_unused_ref_reported_on_every_denial(self):
+        cases=[dict(mode="buddy",workflow="v3.6",buddy_version="1.6"),            # NEEDS_PHASE
+               dict(intent="Which of 2pass or 3pass is better?"),                  # NEEDS_SELECTION
+               dict(intent="v3.5 and v3.6 buddy"),                                 # NEEDS_WORKFLOW
+               dict(mode="buddy",workflow="v3.5"),                                 # HOLD
+               dict(mode="technical")]                                             # HOLD_FREEZE
+        for args in cases:
+            x=m.route(amendment_ref=FIXTURE_REF,**args)
+            self.assertNotIn(x["status"],("READ_SOURCE_NOW","PROVISIONAL_ROUTE"),args)
+            self.assertIs(x["amendment_ref"]["applied"],False,args)
+            self.assertIn("not applied",m.as_markdown(x))
+            self.flags_false(x)
+
+    def test_dot_and_git_repo_segments_rejected(self):
+        for ref in ("https://github.com/a/../issues/1","https://github.com/a/./issues/1",
+                    "https://github.com/a/.../issues/1","https://github.com/a/r.git/issues/1",
+                    "https://github.com/a-/r/issues/1","HTTPS://github.com/a/r/issues/1",
+                    "https://github.com/a/r/issues/1#"):
+            x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",phase="1a",amendment_ref=ref)
+            self.assertEqual(x["status"],"INVALID_AMENDMENT_REF",ref)
+
+    def test_positional_api_unchanged(self):
+        x=m.route("","buddy","v3.6","1a",None,False)
+        self.assertEqual(x["selection"]["source_key"],"buddy16")
+        self.assertNotIn("amendment_ref",x)
+        y=m.route("","buddy","v3.6","1a","1.7",False)
+        self.assertEqual(y["status"],"HOLD_VERSION")
 
 if __name__=="__main__":unittest.main()
