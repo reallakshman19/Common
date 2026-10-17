@@ -282,5 +282,23 @@ class ECO06SuccessorRecoveryTests(unittest.TestCase):
         self.assertEqual(sv.PHASES, frozenset(("1a", "1b", "2", "Y")))
 
 
+    def test_eco06_wrong_owning_issue_preflight_before_any_provider_reads(self):
+        class Spy(ECO06ContextProvider):
+            def __init__(self):
+                super().__init__()
+                self.reads = []
+            def list_issues(self):
+                self.reads.append("issues")
+                return super().list_issues()
+            def request(self, method, path, body=None):
+                self.reads.append(method + " " + path)
+                return super().request(method, path, body)
+        provider = Spy()
+        with self.assertRaises(lc.ContractError):
+            sv.build_packet(LABEL, PLAN, provider, [4],
+                            owning_issue_url=f"https://github.com/{REPO}/issues/2")
+        self.assertEqual(provider.reads, [])
+
+
 if __name__=="__main__":
     unittest.main()
