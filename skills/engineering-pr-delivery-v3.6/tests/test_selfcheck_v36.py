@@ -61,7 +61,7 @@ class SelfCheckWhitelistTests(unittest.TestCase):
 
     def test_structural_gaps_fail_closed(self):
         bodies = [self_check(states=("MET", "NOT_APPLICABLE")), self_check(extra="Done-when: x → MET"),
-                  self_check(extra="Done-when: x → MET."), self_check(extra="Scope: a\nScope: b"),
+                  self_check(extra="Done-when: x → MET."), self_check(extra="Done-when:    → MET proof"), self_check(extra="Scope: a\nScope: b"),
                   self_check().replace("Common#345", "Common#999", 1)]
         self.assert_not_qualified(bodies)
         t = task(self_check().replace("; candidate", "; candidate UNKNOWN; old candidate", 1))

@@ -17,7 +17,7 @@ import snapshot_v36 as ss
 from selfcheck_v36 import MARKER, parse_self_check, provenance
 
 SHA40 = re.compile(r"[0-9a-f]{40}")
-LINK = re.compile(r"Self-check: https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<issue>[1-9][0-9]*)#issuecomment-(?P<id>[1-9][0-9]*)\s*$")
+LINK = re.compile(r"Self-check: https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<issue>[1-9][0-9]{0,14})#issuecomment-(?P<id>[1-9][0-9]{0,14})\s*$")
 
 
 def utc_stamp(value):
@@ -194,7 +194,9 @@ def read_model(plan, client, now):
     base = {"schema": "v36.readmodel/v1", "observed_at": now, "acceptance": "NOT_EVALUATED"}
     try:
         snap = ss.snapshot(plan, cached)
-    except ContractError as exc:                 # e.g. the issue list itself is unreadable
+    except Exception as exc:                     # unreadable issue list, or any native parse failure
+        if not isinstance(exc, ContractError):
+            cached.failures.add("snapshot")
         return {**base, "read_complete": False, "unread_sources": sorted(str(f) for f in cached.failures),
                 "error": str(exc), "claims_qualified": 0, "pending": [], "tasks": []}
     tasks, pending = [], []

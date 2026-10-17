@@ -19,7 +19,7 @@ STATES = ("MET", "NOT_MET", "NOT_RUN", "UNKNOWN", "NOT_APPLICABLE")   # only MET
 OUTSIDE_CHARSET = re.compile(r"[^\t\x20-\x7e·→—–]")      # ASCII + the template's own symbols
 HTML = re.compile(r"&(?:#\d+|#x[0-9a-f]+|[a-z][a-z0-9]*);|<[a-z/!?]", re.I)
 HEADER = re.compile(r"SELF-CHECK v1 · (?P<task>[^\s·]+) · (?P<issue>[^\s·]+)")
-DONE_WHEN = re.compile(r"Done-when: [^→·]+ → (?P<state>%s)(?=[ ,.;:(][^→·\w]*\w)[ ,.;:(][^→·]*" % "|".join(STATES))
+DONE_WHEN = re.compile(r"Done-when: (?=[^→·]*\w)[^→·]+ → (?P<state>%s)(?=[ ,.;:(][^→·\w]*\w)[ ,.;:(][^→·]*" % "|".join(STATES))
 PENDING_NONE = re.compile(r"Pending: none", re.I)
 PENDING = re.compile(r"Pending: (?P<what>[^·]+?) · owner (?P<owner>[^·]+?) · next (?P<next>[^·]+?)"
                      r" · unblocks (?P<unblocks>[^·]+?) · prevents task DONE (?P<prevents>yes|no)"

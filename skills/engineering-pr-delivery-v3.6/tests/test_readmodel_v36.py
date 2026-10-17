@@ -208,6 +208,14 @@ class ReadModelTests(unittest.TestCase):
         t = run([comment(SC_ID, self_check()), cur, stale])[0]["tasks"][0]
         self.assertEqual(t["status"], "STALE_EVIDENCE")
 
+    def test_huge_numbers_never_crash(self):
+        link = evidence().replace("#issuecomment-%d" % SC_ID, "#issuecomment-" + "9" * 5000)
+        t = run([comment(SC_ID, self_check()), comment(9002, link)])[0]["tasks"][0]
+        self.assertIsNone(t["evidence_links_self_check"])
+        proof = evidence().replace("/pull/344/", "/pull/" + "9" * 5000 + "/")
+        r = run([comment(SC_ID, self_check()), comment(9002, proof)])[0]
+        self.assertEqual((r["read_complete"], r["unread_sources"], r["claims_qualified"]), (False, ["snapshot"], 0))
+
     def test_latest_self_check_by_created_at(self):
         older = comment(SC_ID, self_check(claim="PARTIAL")); older["created_at"] = "2026-10-17T06:00Z"
         newer = comment(9010, self_check()); newer["created_at"] = "2026-10-17T08:00Z"
