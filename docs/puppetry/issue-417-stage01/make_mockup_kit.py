@@ -143,14 +143,14 @@ def adult_instructions(c):
         "5. Adult cuts inner aperture (20-mm posts, 15-mm sill, 35-mm lintel).",
         "6. Cut two door leaves 69 x 227, each with one dia-2 pull hole.",
         "7. Fix outer vertical edges with flexible tape so doors swing rearward.",
-        "8. First try manual 90-degree opening and soft hold-open stops.",
-        "9. Then compare separate strings versus one joined light pull loop.",
-        "10. Do not assume a latch or a one-pull routing works until tested.",
-        "11. Check hidden Narasimha through the 2-mm centre seam from seats.",
-        "12. Confirm 140 mm free control-stick access under the stage.",
-        "13. Keep blessing arm DOWN until Narasimha is fully in front.",
-        "14. Run five complete open/reveal/hold cycles with actual operators.",
-        "15. Record min gaps, hand count, catches, timings and failures.",
+        "8. Mount door plane z40, rear wall z150; NEVER glue flush.",
+        "9. Keep x305..445 and z15..140 shaft corridor OPEN below stage.",
+        "10. Allow 140 mm below baseline; avoid solid floor across rods.",
+        "11. Try manual 90-degree opening with soft stops FIRST.",
+        "12. Compare one-pull only after manual hold test; check strings.",
+        "13. Check 2-mm seam; blessing arm DOWN until fully in front.",
+        "14. Run five full reveals with declared operators and hands.",
+        "15. STOP for unstable stand, trapped rod or visible hidden N.",
     ]
     y = 264
     for text in rows:
@@ -173,7 +173,7 @@ def test_receipt(c):
         ("M4", "Concealment", "Invisible from class seats"),
         ("M5", "Prahlada 15 degree bow", ">=10 mm real gap"),
         ("M6", "King tap/exit", "3 gestures, clear exit"),
-        ("M7", "Below-stage stick space", ">=140 mm travel"),
+        ("M7", "Open shaft corridor", "140 mm below + 110 mm travel"),
         ("M8", "1:15-1:25 reveal", "N visible by 1:25"),
         ("M9", "Full 180-second show", "Separate later gate"),
     ]
