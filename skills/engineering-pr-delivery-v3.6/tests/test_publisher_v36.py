@@ -259,5 +259,18 @@ class PublisherTests(unittest.TestCase):
             provider.assert_not_called()
 
 
+    def test_eco04_closed_draft_status_precedes_draft_flag(self):
+        closed = dict(PR, state="closed", draft=True, merged=False)
+        projected = pu.title_plan(PLAN, [PARENT, *CHILDREN], closed, report())[-1]
+        self.assertIn("[CLOSED][E0/0]", projected["after"])
+        self.assertNotIn("[DRAFT]", projected["after"])
+        merged = dict(PR, state="closed", draft=True, merged=True)
+        projected = pu.title_plan(PLAN, [PARENT, *CHILDREN], merged, report())[-1]
+        self.assertIn("[MERGED][E0/0]", projected["after"])
+        with self.assertRaises(lc.ContractError):
+            pu.title_plan(PLAN, [PARENT, *CHILDREN], dict(PR, state="invalid",
+                                                         draft=False, merged=False), report())
+
+
 if __name__=="__main__":
     unittest.main()
