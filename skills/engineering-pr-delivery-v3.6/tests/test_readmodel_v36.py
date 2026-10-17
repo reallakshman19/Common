@@ -151,6 +151,29 @@ class ReadModelTests(unittest.TestCase):
             parsed = bool(r["pending"]) and r["pending"][0]["prevents_done"]
             self.assertTrue(parsed or t["self_check"]["unparsed_pending"] == 1, prefix)
 
+    def test_no_silent_drop_for_natural_or_obfuscated_forms(self):
+        tail = " P1 fix · owner OTM · next run · unblocks merge · prevents task DONE yes"
+        forms = ["**Pending**:" + tail, "_Pending_:" + tail, "<b>Pending</b>:" + tail, "Pending item:" + tail,
+                 "Pending (1):" + tail, "Pending\uff1a" + tail, "Pen\u200bding:" + tail, "Pend\u00ading:" + tail,
+                 "Pending\\:" + tail, "| x | y | Pending:" + tail, "Pending",
+                 "Pending: A · owner O · next n · unblocks u · prevents task DONE no; Pending:" + tail]
+        for form in forms:
+            r = run([comment(SC_ID, self_check(pending=form)), comment(9002, evidence())])[0]
+            t = r["tasks"][0]
+            self.assertFalse(t["claim_qualified"], form)
+            blocked = any(p["prevents_done"] for p in r["pending"])
+            self.assertTrue(blocked or t["self_check"]["unparsed_pending"] >= 1, form)
+
+    def test_explicit_pending_none_is_empty(self):
+        r = run([comment(SC_ID, self_check(pending="Pending: none")), comment(9002, evidence())])[0]
+        self.assertEqual((r["pending"], r["tasks"][0]["self_check"]["unparsed_pending"]), ([], 0))
+        self.assertTrue(r["tasks"][0]["claim_qualified"])
+
+    def test_native_report_pending_is_not_a_pending_item(self):
+        r = run([comment(SC_ID, self_check(extra="Native report: PENDING")), comment(9002, evidence())])[0]
+        self.assertEqual(r["tasks"][0]["self_check"]["unparsed_pending"], 0)
+        self.assertTrue(r["tasks"][0]["claim_qualified"])
+
     def test_ambiguous_prevents_token_fails_closed(self):
         line = "Pending: P1 · owner OTM · next run · unblocks merge · prevents task DONE no/yes"
         t = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]["tasks"][0]

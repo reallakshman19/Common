@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import re
+import unicodedata
 from datetime import datetime
 
 from decompose_v36 import GithubClient, PARENT_REF, load_plan
@@ -20,8 +21,13 @@ MARKER = "TASK_EVIDENCE v3.6"
 SELF_CHECK = re.compile(r"^SELF-CHECK v1 · (?P<task>\S+) · ", re.M)
 CANDIDATE = re.compile(r"candidate (?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<sha>[0-9a-f]{40})")
 DONE_WHEN = re.compile(r"^Done-when: .*?→ (?P<state>MET|NOT_MET|NOT_RUN|UNKNOWN)\b", re.M)
-PENDING_HINT = re.compile(r"\bpending\s*:", re.I)   # loose: any line that looks like a Pending entry
-PENDING = re.compile(r"^\W*(?:\d+[.)]\s*)?(?:\[[ xX]\]\s*)?Pending\s*:\s*(?P<what>.+?)\s*·\s*owner\s+(?P<owner>.+?)"
+# Fail-closed pending detection (A14): normalise, skip known template keys, and require
+# every other line mentioning "pend" to match the strict Pending grammar exactly once.
+INVISIBLE = re.compile("[\u00ad\u200b-\u200f\u2060\ufeff]")
+MARKUP = re.compile(r"<[^>]*>|[*_`~\\]")
+KNOWN_KEYS = ("SELF-CHECK v1", "Basis:", "Done-when:", "Scope:", "A13:", "A13 review:", "Tests:",
+              "Issue reconciliation:", "Proposed claim:", "Native report:")
+PENDING = re.compile(r"^(?:\d+[.)]\s*)?(?:\[[ xX]\]\s*)?Pending\s*:\s*(?P<what>.+?)\s*·\s*owner\s+(?P<owner>.+?)"
                      r"\s*·\s*next\s+(?P<next>.+?)\s*·\s*unblocks\s+(?P<unblocks>.+?)"
                      r"\s*·\s*prevents task DONE\s+(?P<prevents>yes|no)(?![/\w])", re.I)
 CLAIM = re.compile(r"^Proposed claim: (?P<claim>DONE|PARTIAL|BLOCKED|FAILED)\b", re.M)
@@ -84,12 +90,16 @@ def parse_self_check(comment, task_id, owner_login):
     claim = CLAIM.search(body)
     record["claim"] = claim["claim"] if claim else "UNKNOWN"
     record["pending"], record["unparsed_pending"] = [], 0
-    for line in body.splitlines():
-        if not PENDING_HINT.search(line[:40]) or line.lstrip().startswith("Done-when:"):
+    for raw in body.splitlines():
+        line = MARKUP.sub("", INVISIBLE.sub("", unicodedata.normalize("NFKC", raw)))
+        line = re.sub(r"^[^\w\[]*", "", line).strip()      # bullets, quotes, table bars, emoji
+        if line.startswith(KNOWN_KEYS) or "pend" not in line.lower():
             continue
+        if re.fullmatch(r"Pending\s*:\s*none\.?", line, re.I):
+            continue                           # explicit empty list
         m = PENDING.match(line)
-        if not m:
-            record["unparsed_pending"] += 1   # fail closed: it may hide a blocking item
+        if not m or "pend" in line[m.end():].lower():
+            record["unparsed_pending"] += 1   # fail closed: unknown shape or several items on one line
             continue
         record["pending"].append({k: m[k].strip() for k in ("what", "owner", "next", "unblocks")}
                                  | {"prevents_done": m["prevents"].lower() == "yes"})
