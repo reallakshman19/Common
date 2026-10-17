@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 HEAD = re.compile(r"^## Scene ([1-4]):", re.M)
-SLOT = re.compile(r"^\\*\\*(\\d:\\d{2})-(\\d:\\d{2}) - [^\\n]*?\\*\\*:", re.M)
+SLOT = re.compile(r"^\*\*(\d:\d{2})-(\d:\d{2}) - [^\n]*?\*\*:", re.M)
 EXPECTED = (35,40,55,50)
 
 
