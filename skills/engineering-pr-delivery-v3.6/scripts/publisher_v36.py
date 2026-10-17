@@ -388,19 +388,41 @@ def _outcome(status, changes, verified, reason, attempted=None):
             "next_reconciliation": reason}
 
 
-def _observed_state(item, observed):
-    """Fresh expected title/body/PR-head/labels comparison; not atomic CAS."""
+def _observed_state(item, observed, repo):
+    """Fresh expected title/body/head/identity/labels check; NOT atomic CAS."""
     surface = _item_surface(item)
     if not isinstance(observed, dict):
         return "provider returned malformed target"
+    if observed.get("number") != item["number"]:
+        return "unrelated provider target identity"
+    category = "issues" if item["kind"] == "issue" else "pull"
+    expected_url = f"https://github.com/{repo}/{category}/{item['number']}"
+    if observed.get("html_url") != expected_url:
+        return "unrelated provider target URL or repository"
     if not isinstance(item.get("before"), str) or not isinstance(item.get("body_before"), str):
         return "expected title/body unavailable"
     if item.get("labels_before") != observed.get("labels"):
         return "human labels changed; inspect AIM governance"
     if item["kind"] == "pr" and (
             not isinstance(item.get("head_sha"), str) or
-            observed.get("head", {}).get("sha") != item["head_sha"]):
+            not isinstance(observed.get("head"), dict) or
+            observed["head"].get("sha") != item["head_sha"]):
         return "PR head changed"
+    if surface == "scoreboard":
+        from scoreboard_v36 import MANAGED_BEGIN, MANAGED_END, merge_managed_region
+        target_body = item.get("after_body")
+        if not isinstance(target_body, str) or (
+                target_body.count(MANAGED_BEGIN) != 1 or
+                target_body.count(MANAGED_END) != 1):
+            return "scoreboard payload lacks one owned region"
+        begin = target_body.index(MANAGED_BEGIN)
+        end = target_body.index(MANAGED_END) + len(MANAGED_END)
+        try:
+            rebuilt = merge_managed_region(item["body_before"], target_body[begin:end])
+        except ValueError:
+            return "ambiguous scoreboard body region"
+        if rebuilt != target_body:
+            return "scoreboard payload would change unowned Owner body"
     if observed.get("body") != item["body_before"] and not (
             surface == "scoreboard" and observed.get("body") == item.get("after_body")):
         return "provider body changed; protect Owner edits"
@@ -510,7 +532,7 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
     try:
         for item in changes:
             _, endpoint = _endpoint(item)
-            state = _observed_state(item, client.request("GET", endpoint))
+            state = _observed_state(item, client.request("GET", endpoint), client.repo)
             if state not in ("ready", "already"):
                 return _outcome("BLOCKED", changes, verified,
                                 "reconcile precondition: " + state)
@@ -534,14 +556,14 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
             return _outcome("PARTIAL" if verified else "BLOCKED", changes,
                             verified, "reconcile source drift before next patch", attempted)
         try:
-            if _observed_state(item, client.request("GET", endpoint)) != "ready":
+            if _observed_state(item, client.request("GET", endpoint), client.repo) != "ready":
                 return _outcome("PARTIAL" if verified else "BLOCKED", changes,
                                 verified, "reconcile concurrent title/body/head edit", attempted)
             payload = {"title": item["after"]} if _item_surface(item) == "title" else {
                 "body": item["after_body"]}
             attempted.append(receipt)
             client.request("PATCH", endpoint, payload)
-            state = _observed_state(item, client.request("GET", endpoint))
+            state = _observed_state(item, client.request("GET", endpoint), client.repo)
             if state != "already":
                 return _outcome("UNCERTAIN", changes, verified,
                                 "reconcile readback mismatch after PATCH", attempted)
