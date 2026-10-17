@@ -99,8 +99,8 @@ def pillar_tile(c, cfg, idx):
 def doors(c, cfg):
     leaf = cfg["leaves"]
     y = 29  # 237-mm leaves need space above the 100-mm calibration/footer
-    label(c, 14, 285, "TWO TEST DOORS - ADJUSTED CLEARANCE FIT", 11)
-    label(c, 14, 279, "Outer vertical hinges; doors swing REARWARD; adult cuts.", 8)
+    # Footer owns the repeated header at y285/279; keep this local title BELOW it.
+    label(c, 14, 272, "TWO TEST DOORS - REARWARD SWING / ADULT CUT", 8)
     for i, x in enumerate((20, 121)):
         is_left = (i == 0)
         w, h = leaf["width"], leaf["height"]
@@ -134,7 +134,7 @@ def silhouette_gauge(c, cfg, width, page, name):
 
 
 def adult_instructions(c):
-    label(c, 14, 280, "PILLAR MOCK-UP: PARENT BUILD ORDER", 13)
+    label(c, 14, 270, "PILLAR MOCK-UP: PARENT BUILD ORDER", 12)
     rows = [
         "1. Print on A4 at ACTUAL SIZE (100%); turn off fit-to-page.",
         "2. Measure the 100-mm horizontal and 50-mm vertical calibration.",
@@ -152,7 +152,7 @@ def adult_instructions(c):
         "14. Run five full reveals with declared operators and hands.",
         "15. STOP for unstable stand, trapped rod or visible hidden N.",
     ]
-    y = 264
+    y = 255
     for text in rows:
         label(c, 14, y, text, 8)
         y -= 13
@@ -163,9 +163,9 @@ def adult_instructions(c):
 
 
 def test_receipt(c):
-    label(c, 14, 280, "STAGE-01 TEST RECEIPT - PHYSICAL OBSERVATIONS", 12)
-    label(c, 14, 270, "Date: ______  Operator count: ____   Material thickness: _____", 8)
-    label(c, 14, 263, "Puppet source: __________   Kit revision: __________________", 8)
+    label(c, 14, 268, "STAGE-01 TEST RECEIPT - PHYSICAL OBSERVATIONS", 11)
+    label(c, 14, 258, "Date: ______  Operator count: ____   Material thickness: _____", 8)
+    label(c, 14, 251, "Puppet source: __________   Kit revision: __________________", 8)
     tests = [
         ("M1", "Passage incl rods", ">=10 mm actual gap"),
         ("M2", "Five reveal cycles", "5/5 smooth; doors stay open"),
@@ -177,7 +177,7 @@ def test_receipt(c):
         ("M8", "1:15-1:25 reveal", "N visible by 1:25"),
         ("M9", "Full 180-second show", "Separate later gate"),
     ]
-    y = 248
+    y = 236
     for task, label_text, criterion in tests:
         label(c, 14, y, task + " " + label_text + " | " + criterion, 7.5)
         label(c, 18, y-6, "PASS/FAIL/NOT_RUN: ____  Measurements / observations: _________________", 7)
