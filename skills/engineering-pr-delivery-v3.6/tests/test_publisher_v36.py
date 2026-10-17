@@ -12,7 +12,8 @@ LAB = lc.load_label(ROOT/"tests/fixtures/relay/AIM/V35-LIFECYCLE.yaml")
 PLAN = dc.load_plan(ROOT/"plans/V36-1-PLAN-01.yaml", LAB)
 PARENT = {"number":1,"title":"[V3.6][LAB][O1–O5][0/2] Independent lifecycle acceptance — planned","body":"","html_url":"https://github.com/reallakshman19/relay-v36-e2e-lab/issues/1"}
 CHILDREN = [dict(number=n,title=f"[V3.6][O{outcome}][PLANNED] V36-1-WP{i} — example",body=dc.child_body(PLAN["tasks"][i-1],PLAN),html_url=f"https://github.com/reallakshman19/relay-v36-e2e-lab/issues/{n}") for i,(n,outcome) in enumerate([(2,1),(3,3)],1)]
-PR={"number":4,"head":{"sha":"8ec979746b0a7f55532c804fbb959ed1a29eb3a2"},"title":"[V3.6][LAB][O1][DRAFT] Evidence probe — candidate created","draft":True,"state":"open","merged":False,"body":""}
+PR={"number":4,"head":{"sha":"8ec979746b0a7f55532c804fbb959ed1a29eb3a2"},"title":"[V3.6][LAB][O1][DRAFT] Evidence probe — candidate created","draft":True,"state":"open","merged":False,"body":"",
+    "html_url":"https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"}
 
 
 def report(current=0, statuses=("NO_EVIDENCE","NO_EVIDENCE"), links=(None,None)):
