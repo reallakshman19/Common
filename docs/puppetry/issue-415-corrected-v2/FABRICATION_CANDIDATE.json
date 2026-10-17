@@ -255,7 +255,8 @@
       "pillar leaf geometry revision must be reconciled with PR418",
       "two rod path and side sightlines",
       "stage stand and full-size printing"
-    ]
+    ],
+    "portal_trial_leaf_height_proposal": 237
   },
   "bill_of_materials_candidate": {
     "body_or_arm_cutouts": 6,
