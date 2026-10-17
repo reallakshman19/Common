@@ -14,7 +14,8 @@ from datetime import datetime, timezone
 from decompose_v36 import GithubClient, PARENT_REF, load_plan
 from lifecycle_v36 import ContractError, load_label, require_explicit_lab, validate_evidence
 import snapshot_v36 as ss
-from selfcheck_v36 import MARKER, parse_self_check, provenance
+from selfcheck_v36 import MARKER, digest, parse_self_check, provenance
+import sources_v36 as src
 
 SHA40 = re.compile(r"[0-9a-f]{40}")
 LINK = re.compile(r"Self-check: https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<issue>[1-9][0-9]{0,14})#issuecomment-(?P<id>[1-9][0-9]{0,14})\s*$")
@@ -34,7 +35,7 @@ def utc_stamp(value):
 
 def clean_comment(c):
     """Validated copy of one provider comment; ValueError when malformed."""
-    if (not isinstance(c, dict) or type(c.get("id")) is not int or not isinstance(c.get("body"), (str, type(None)))
+    if (not isinstance(c, dict) or not src.bounded_id(c.get("id")) or not isinstance(c.get("body"), (str, type(None)))
             or not isinstance(c.get("html_url"), str) or not isinstance(c.get("updated_at"), (str, type(None)))
             or not isinstance(c.get("user"), dict) or not isinstance(c["user"].get("login"), str)):
         raise ValueError("malformed comment")
@@ -42,7 +43,7 @@ def clean_comment(c):
 
 
 def clean_issue(i):
-    if (not isinstance(i, dict) or type(i.get("number")) is not int or not isinstance(i.get("html_url"), str)
+    if (not isinstance(i, dict) or not src.bounded_id(i.get("number")) or not isinstance(i.get("html_url"), str)
             or not all(isinstance(i.get(k), (str, type(None))) for k in ("title", "body", "state"))):
         raise ValueError("malformed issue")
     return i
@@ -54,7 +55,7 @@ class CachingClient:
     def __init__(self, client):
         self._client = client
         self.repo = client.repo
-        self.comments, self.failures = {}, set()
+        self.comments, self.failures, self.prs, self.issues = {}, set(), {}, {}
 
     def _read(self, source, call, *args):
         """Any provider error is recorded as an unread source and re-raised as ContractError."""
@@ -76,7 +77,27 @@ class CachingClient:
             raise ContractError("malformed provider data for %s: %s" % (source, exc)) from exc
 
     def list_issues(self):
-        return self._checked("issues", self._client.list_issues, lambda d: [clean_issue(i) for i in list_of(d)])
+        issues = self._checked("issues", self._client.list_issues, lambda d: [clean_issue(i) for i in list_of(d)])
+        self.issues = {i["number"]: i for i in issues}
+        return issues
+
+    def fetch_issue(self, number):
+        """(status, issue) for a hop target outside the listing; never raises."""
+        get = getattr(self._client, "get_issue", None)
+        if get is None:
+            self.failures.add("issue:%d" % number)
+            return "UNREAD", None
+        try:
+            issue = clean_issue(get(number))
+        except Exception as exc:
+            status = src.hop_status(exc)
+            if status == "UNREAD":
+                self.failures.add("issue:%d" % number)
+            return status, None
+        if issue["number"] != number:          # provider answered for another issue
+            self.failures.add("issue:%d" % number)
+            return "MISMATCHED", None
+        return "FOUND", issue
 
     def list_comments(self, number):
         if number not in self.comments:
@@ -85,7 +106,9 @@ class CachingClient:
         return self.comments[number]
 
     def get_pr(self, number):
-        return self._checked("pr:%s" % number, self._client.get_pr, clean_pr, number)
+        pr = self._checked("pr:%s" % number, self._client.get_pr, clean_pr, number)
+        self.prs[number] = pr["head"]["sha"]
+        return pr
 
 
 def list_of(data):
@@ -165,20 +188,21 @@ def task_view(row, comments, repo, number):
     evidence_body = next((c.get("body") for c in comments
                           if (c.get("html_url") or c.get("url")) == row["evidence"]), None)
     link_id = linked_comment_id(evidence_body, repo, number)
+    native_candidate = native_candidate_of(evidence_body)
     out = {**row, "self_check": check, "self_check_history": len(checks),
            "comments_after_self_check": newer, "evidence_links_self_check": link_id,
            "sources_read": [provenance(c) for c in comments if MARKER in str(c.get("body") or "")
                             or (check and c.get("id") == check["comment_id"]) or c.get("id") in newer]}
     out.update(qualify(row, check, link_id))
+    problem = src.link_problem(evidence_body, repo, number)
+    if problem:
+        out["reasons"].append(problem)
+    out["candidate_sha"] = native_candidate.split("@", 1)[1] if native_candidate else None
     if newer:                                   # fail closed: only canonical evidence may follow
         out["claim_qualified"] = False
         out["reasons"].append("comment(s) after the self-check other than canonical evidence: %s" % newer)
     out["self_check_matches_candidate"] = None
     if check and evidence_body:
-        try:
-            native_candidate = validate_evidence(evidence_body)["candidate"]
-        except (ContractError, ValueError, IndexError):
-            native_candidate = None
         out["self_check_matches_candidate"] = check["candidate"] == native_candidate
         if not out["self_check_matches_candidate"]:
             out["claim_qualified"] = False
@@ -186,8 +210,61 @@ def task_view(row, comments, repo, number):
     return out
 
 
-def read_model(plan, client, now):
-    """Native snapshot + self-check companions + provenance; one read per source."""
+def native_candidate_of(evidence_body):
+    if not evidence_body:
+        return None
+    try:
+        return validate_evidence(evidence_body)["candidate"]
+    except (ContractError, ValueError, IndexError):
+        return None
+
+
+def fail(out, reason):
+    out["claim_qualified"] = False
+    out["reasons"].append(reason)
+
+
+def context_view(out, comments, repo, number, cached, edited):
+    """ECO-02b fields: observed head, edits since the prior read, inputs, Owner input, issue hops."""
+    pr_no = int(out["pr"].rsplit("/", 1)[1]) if out["pr"] else None
+    head, cand = cached.prs.get(pr_no), out["candidate_sha"]
+    out["observed_head"] = head
+    out["head_matches_candidate"] = None if head is None or cand is None else head == cand
+    if out["head_matches_candidate"] is False:
+        fail(out, "observed PR head %s differs from candidate %s" % (head, cand))
+    if out["issue"] and number is None:
+        fail(out, "child issue url form not recognised: %s (expected https://github.com/%s/issues/<n>)"
+             % (out["issue"], repo))
+    for key in ("comment:%s" % s["comment_id"] for s in out["sources_read"]):
+        if key in edited:
+            fail(out, "source edited since prior read: " + key)
+    check = out["self_check"]
+    body = next((c.get("body") for c in comments if check and c["id"] == check["comment_id"]), None)
+    out["inputs"] = src.declared_inputs(body)
+    skip = {check["comment_id"]} if check else set()
+    out["owner_inputs"] = src.owner_inputs(comments, repo.split("/", 1)[0], skip)
+    out["issue_hops"] = src.issue_hops(number, cached.issues, cached.fetch_issue) if number else []
+    return out
+
+
+def source_cursor(cached, now, prior):
+    read = {"comment:%d" % c["id"]: {"issue": n, "url": c["html_url"], "updated_at": c.get("updated_at"),
+                                     "body_sha256": digest(c.get("body"))}
+            for n, cs in cached.comments.items() for c in cs}
+    cursor, history, edited = src.merge_cursor(read, set(cached.comments), now, prior)
+    return {"source_cursor": cursor, "source_history": history, "edited_sources": edited,
+            "cursor": complete_cursor(cached, now, prior)}
+
+
+def complete_cursor(cached, now, prior):
+    """Advances only when nothing failed; call again after any later reads (hop fetches)."""
+    last = now if not cached.failures else ((prior or {}).get("cursor") or {}).get("last_complete_read_at")
+    return {"last_complete_read_at": last}
+
+
+def read_model(plan, client, now, prior=None):
+    """Native snapshot + self-check companions + provenance; one read per source.
+    prior: an earlier read_model result; its history is carried forward, never rewritten."""
     if not isinstance(now, str) or datetime.fromisoformat(now.replace("Z", "+00:00")).tzinfo is None:
         raise ValueError("now must be an ISO timestamp with timezone")
     cached = CachingClient(client)
@@ -197,17 +274,20 @@ def read_model(plan, client, now):
     except Exception as exc:                     # unreadable issue list, or any native parse failure
         if not isinstance(exc, ContractError):
             cached.failures.add("snapshot")
-        return {**base, "read_complete": False, "unread_sources": sorted(str(f) for f in cached.failures),
+        return {**base, **source_cursor(cached, now, prior), "read_complete": False, "unread_sources": sorted(str(f) for f in cached.failures),
                 "error": str(exc), "claims_qualified": 0, "pending": [], "tasks": []}
-    tasks, pending = [], []
+    tasks, pending, cur = [], [], source_cursor(cached, now, prior)
     by_issue = {f"https://github.com/{client.repo}/issues/{n}": n for n in cached.comments}
     for row in snap["tasks"]:
         number = by_issue.get(row["issue"])
-        out = task_view(row, cached.comments.get(number, []) if number else [], client.repo, number)
+        comments = cached.comments.get(number, []) if number else []
+        out = context_view(task_view(row, comments, client.repo, number), comments, client.repo, number,
+                           cached, cur["edited_sources"])
         for item in (out["self_check"] or {}).get("pending", []):
             pending.append({"task_id": row["task_id"], "source": out["self_check"]["url"], **item})
         tasks.append(out)
-    return {**base, "plan": snap["plan"], "parent": snap["parent"], "label_sha": snap["label_sha"],
+    cur["cursor"] = complete_cursor(cached, now, prior)          # hop fetches may have failed since
+    return {**base, **cur, "plan": snap["plan"], "parent": snap["parent"], "label_sha": snap["label_sha"],
             "read_complete": not cached.failures,
             "unread_sources": sorted(str(f) for f in cached.failures),
             "native": {k: snap[k] for k in ("total", "current_evidence", "stale_evidence", "verified_complete")},
@@ -221,13 +301,16 @@ def main():
     p.add_argument("--plan", required=True)
     p.add_argument("--lab", help="explicit Writable lab: repository for lab-target reads")
     p.add_argument("--now", required=True, help="observation time, ISO with timezone")
+    p.add_argument("--prior", help="earlier read-model JSON whose source history is carried forward")
     args = p.parse_args()
     label = load_label(args.label)
     plan = load_plan(args.plan, label)
     require_explicit_lab(label, plan["parent"], args.lab)
     client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
     client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
-    print(json.dumps(read_model(plan, client, args.now), indent=2, sort_keys=True))
+    client.get_issue = lambda n: client.request("GET", f"/issues/{n}")
+    prior = json.load(open(args.prior, encoding="utf-8")) if args.prior else None
+    print(json.dumps(read_model(plan, client, args.now, prior), indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
