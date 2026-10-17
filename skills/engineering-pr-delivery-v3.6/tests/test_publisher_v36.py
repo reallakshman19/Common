@@ -272,5 +272,46 @@ class PublisherTests(unittest.TestCase):
                                                          draft=False, merged=False), report())
 
 
+    def test_eco04_human_attention_word_after_bare_version_marker_is_not_stripped(self):
+        for supplied in ("[V3.6] [UNKNOWN] x", "[V3.6][HOLD] fix login"):
+            with self.subTest(supplied=supplied):
+                projected = pu.title_plan(
+                    PLAN, [PARENT, *CHILDREN], dict(PR, title=supplied), report()
+                )[-1]["after"]
+                human = supplied.split("[V3.6]", 1)[1].strip()
+                self.assertTrue(projected.endswith(human), projected)
+                self.assertIn(human, projected)
+                self.assertEqual(projected.count(human), 1)
+
+    def test_eco04_human_attention_word_after_complete_legacy_pr_prefix_is_preserved(self):
+        pr = dict(PR, title="[V3.6][O1][DRAFT][E0/0][HOLD] fix login")
+        projected = pu.title_plan(PLAN, [PARENT, *CHILDREN], pr, report())[-1]
+        self.assertIsNone(projected["attention"]["signal"])
+        self.assertTrue(projected["after"].endswith("[HOLD] fix login"))
+        self.assertEqual(projected["after"].count("[HOLD]"), 1)
+
+    def test_eco04_emitted_attention_marker_allows_idempotent_reprojection(self):
+        link = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("STALE_EVIDENCE", "NO_EVIDENCE"), (link, None))
+        original = dict(PR, title="[TEAM] [HOLD] fix login")
+        first = pu.title_plan(PLAN, [PARENT, *CHILDREN], original, rep)[-1]["after"]
+        self.assertIn("[O1][DRAFT][E0/1][STALE]", first)
+        self.assertIn("[v36.attention/v1]", first)
+        self.assertTrue(first.endswith("[HOLD] fix login"))
+        second = pu.title_plan(PLAN, [PARENT, *CHILDREN],
+                               dict(original, title=first), rep)[-1]["after"]
+        self.assertEqual(first, second)
+
+    def test_eco04_title_tail_intentionally_retains_foreign_prefix_and_human_word(self):
+        self.assertEqual(
+            pu.title_tail("[TEAM][V3.6] [UNKNOWN] x", "fallback"),
+            "[TEAM] [UNKNOWN] x",
+        )
+        self.assertEqual(
+            pu.title_tail("[V3.6][HOLD] fix login", "fallback"),
+            "[HOLD] fix login",
+        )
+
+
 if __name__=="__main__":
     unittest.main()
