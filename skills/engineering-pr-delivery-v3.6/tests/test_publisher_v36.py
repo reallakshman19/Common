@@ -230,5 +230,34 @@ class PublisherTests(unittest.TestCase):
             pu.title_plan(PLAN, [PARENT, *CHILDREN], PR, rep, scoreboard=b)
 
 
+    def test_eco04_calculate_accepts_board_projection_without_writing(self):
+        from unittest.mock import patch
+        link = "https://github.com/reallakshman19/relay-v36-e2e-lab/pull/4"
+        rep = report(0, ("STALE_EVIDENCE", "NO_EVIDENCE"), (link, None))
+        b = {"schema": "v36.scoreboard/v1", "parent": PLAN["parent"],
+             "plan": PLAN["plan_version"], "label_sha": PLAN["label"]["label_sha"],
+             "read_complete": True,
+             "rows": [{"task_id": PLAN["tasks"][0]["task_id"], "E": "STALE_EVIDENCE",
+                       "pr": link, "pending": [], "gaps": []}],
+             "by_pr": {link: {"tasks": 1, "E_current": 0,
+                             "task_ids": [PLAN["tasks"][0]["task_id"]]}}}
+        client = Fake()
+        client.list_issues = lambda: [PARENT, *CHILDREN]
+        with patch.object(pu, "snapshot", return_value=rep):
+            projected = pu.calculate(PLAN, client, 4, scoreboard=b)
+        pr_projection = projected["all"][-1]
+        self.assertIn("[STALE]", pr_projection["after"])
+        self.assertEqual(pr_projection["pr_e_denominator"], 1)
+        self.assertEqual(client.writes, [])
+
+    def test_eco04_board_cli_cannot_trigger_provider_writes(self):
+        from unittest.mock import patch
+        with patch.object(pu, "GithubClient") as provider:
+            with self.assertRaises(SystemExit):
+                pu.main(["--label", "unused", "--plan", "unused",
+                         "--scoreboard", "unused", "--apply"])
+            provider.assert_not_called()
+
+
 if __name__=="__main__":
     unittest.main()
