@@ -1,139 +1,426 @@
 #!/usr/bin/env python3
-"""V36-ECO-03: read-only smart scoreboard over the ECO-02 read model (dry-run render only).
+"""V36-ECO-03: pure read-only scoreboard over ECO-02b; no provider writes.
 
-Dimensions stay independent and are never inferred from each other:
-  E  native evidence status (snapshot_v36), per task and as current/total of the plan's tasks;
-  A  chain accounting: NOT_EVALUATED until the #401 chain is admitted (#409 Q13);
-  V  verification: NOT_EVALUATED; the native verified_complete is a constant 0, not data;
-  acceptance: always NOT_EVALUATED; only the Owner accepts.
-A claim shown as qualified is the A14 structural check of the author's self-check, not truth.
-Nothing here writes to GitHub. MANAGED_BEGIN/END name the one region a future, separately
-authorised writer (ECO-05) may own; text outside it is never touched.
+E = native current evidence, never test success or acceptance.
+A = NOT_EVALUATED until the #401 11-category audit is admitted.
+V = NOT_EVALUATED without external source-attestation evidence.
+Acceptance = NOT_EVALUATED without an authorised sourced Owner decision.
+
+Only plan-selected tasks enter denominators. PR/child views are intersections
+of that selection with verified same-repository links; repeated test suites
+are never summed. Incomplete provider reads are not zeros.
 """
 from __future__ import annotations
+
 import argparse
 import json
-from datetime import datetime
+import re
+from datetime import datetime, timezone
 
 SCHEMA = "v36.scoreboard/v1"
 MANAGED_BEGIN = "<!-- v36-scoreboard:begin (managed; text outside is never changed) -->"
 MANAGED_END = "<!-- v36-scoreboard:end -->"
 NOT_EVALUATED = {
     "A": "NOT_EVALUATED: #401 chain accounting not admitted (#409 Q13)",
-    "V": "NOT_EVALUATED: native verified_complete is a constant 0, not verification data",
-    "acceptance": "NOT_EVALUATED: only the Owner accepts",
+    "V": "NOT_EVALUATED: no external source attestation; native verified_complete=0 is a constant",
+    "acceptance": "NOT_EVALUATED: no authorised acceptance-source reader; only the Owner accepts",
 }
-FROM_ECO02B = "UNKNOWN: not in the read model yet (ECO-02b)"
-TITLE_NOTE = "A title or this board is a projection of the sources above, not engineering truth."
+CATEGORIES = (
+    "ROOT_OWNER_INTENT", "OWNER_AMENDMENTS", "ORIGINAL_INPUT",
+    "COMPLETE_GOLDEN", "MEASURED_BENCHMARK", "SOURCE_IMPLEMENTATION_CRUX",
+    "AGENT_CONTRIBUTIONS", "DECISION_AND_PARKED_IDEAS", "KNOWN_FAILURES",
+    "SELECTED_NEXT_VERIFICATION", "TECHNICAL_HANDOVER",
+)
+UNKNOWN_OUTCOME = "UNKNOWN: original Owner outcome/amendments not in ECO-02b read model"
+UNKNOWN_CRUX = "UNKNOWN: source implementation crux not in ECO-02b read model"
+TITLE_NOTE = "A title or this board is a projection of cited sources, not engineering truth."
+PARENT = re.compile(r"^(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)#[1-9][0-9]*$")
+ISSUE = re.compile(r"^https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/[1-9][0-9]*$")
+PR = re.compile(r"^https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/pull/[1-9][0-9]*$")
 
 
 def parse_time(value):
-    try:
-        stamp = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
-    except ValueError:
+    if not isinstance(value, str):
         return None
-    return stamp if stamp.tzinfo else None
+    try:
+        stamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except (ValueError, OverflowError):
+        return None
+    return stamp.astimezone(timezone.utc) if stamp.tzinfo else None
 
 
 def source_age_minutes(task, observed):
-    """Minutes since the newest source used for this task changed; None when unknown."""
-    stamps = [parse_time(s.get("updated_at")) for s in task.get("sources_read") or []]
-    stamps = [s for s in stamps if s]
+    """Newest author-companion source age; missing or future timestamps remain UNKNOWN."""
+    stamps = [parse_time(s.get("updated_at")) for s in (task.get("sources_read") or [])
+              if isinstance(s, dict)]
+    stamps = [s for s in stamps if s is not None]
     now = parse_time(observed)
-    if not stamps or not now:
+    if not stamps or now is None or max(stamps) > now:
         return None
     return int((now - max(stamps)).total_seconds() // 60)
 
 
+def proper_link(url, repo, regex):
+    hit = regex.fullmatch(url) if isinstance(url, str) else None
+    return bool(hit and hit["repo"] == repo)
+
+
+def status_and_gaps(task, repo):
+    """Fail closed for a contradictory model, without altering the native input."""
+    native = task.get("status", "UNKNOWN")
+    status = native
+    gaps = list(task.get("reasons") or [])
+    issue, pr = task.get("issue"), task.get("pr")
+    child_valid = proper_link(issue, repo, ISSUE) if issue is not None else False
+    pr_valid = proper_link(pr, repo, PR) if pr is not None else False
+    if issue is not None and not child_valid:
+        status = "SOURCE_MISMATCH"
+        gaps.append("foreign child issue or malformed child URL; cannot attribute native evidence")
+    if pr is not None and not pr_valid:
+        status = "SOURCE_MISMATCH"
+        gaps.append("foreign PR or malformed PR URL; cannot attribute PR evidence")
+    if issue is None and native in ("CURRENT_EVIDENCE", "STALE_EVIDENCE"):
+        status = "SOURCE_MISMATCH"
+        gaps.append("missing child issue for evidence status")
+    if pr is None and native in ("CURRENT_EVIDENCE", "STALE_EVIDENCE"):
+        status = "SOURCE_MISMATCH"
+        gaps.append("missing PR for evidence status")
+    if status != "SOURCE_MISMATCH" and task.get("head_matches_candidate") is False:
+        status = "STALE_EVIDENCE"
+        gaps.append("observed PR head differs from candidate; current evidence is invalidated")
+    if status == "CURRENT_EVIDENCE" and (not task.get("observed_head")
+                                         or not task.get("candidate_sha")):
+        status = "HEAD_UNREAD"
+        gaps.append("current evidence cannot be displayed without an observed and candidate head")
+    return status, gaps, child_valid, pr_valid
+
+
 def next_step(task, pending):
-    """Exact next actor/action, in a fixed precedence, with its source."""
-    if task["status"] in ("PROVIDER_UNAVAILABLE", "UNKNOWN", "UNKNOWN_PR"):
-        return {"actor": "coordinator", "action": "re-read the unavailable source", "source": task["status"]}
-    if task["status"] in ("MISSING_CHILD", "AMBIGUOUS_CHILD"):
-        return {"actor": "coordinator", "action": "resolve the task's one child issue", "source": task["status"]}
-    blocking = [p for p in pending if p["prevents_done"]]
+    """Named actor/action under fixed precedence; source of the instruction is visible."""
+    status = task["status"]
+    if status == "SOURCE_MISMATCH":
+        return {"actor": "coordinator", "action": "resolve this task's owned child/repository binding",
+                "source": status}
+    if status in ("MISSING_CHILD", "AMBIGUOUS_CHILD"):
+        return {"actor": "coordinator", "action": "resolve the task's one child issue",
+                "source": status}
+    if status in ("PROVIDER_UNAVAILABLE", "UNKNOWN", "UNKNOWN_PR", "HEAD_UNREAD"):
+        return {"actor": "coordinator", "action": "re-read the unavailable source",
+                "source": status}
+    if status == "STALE_EVIDENCE":
+        return {"actor": "implementer", "action": "publish current evidence",
+                "source": status}
+    blocking = [p for p in pending if p.get("prevents_done")]
     if blocking:
         p = blocking[0]
-        return {"actor": p["owner"], "action": p["next"], "source": "pending: " + p["what"]}
-    if task["status"] != "CURRENT_EVIDENCE":
-        return {"actor": "implementer", "action": "publish current evidence", "source": task["status"]}
-    if not task["claim_qualified"]:
-        return {"actor": "implementer", "action": "fix: " + task["reasons"][0], "source": "self-check"}
-    return {"actor": "coordinator", "action": "read the companion; independent check; Owner decides acceptance",
-            "source": "claim structurally qualified"}
+        return {"actor": p.get("owner") or "UNKNOWN",
+                "action": p.get("next") or "resolve pending action",
+                "source": "pending: " + str(p.get("what") or "UNKNOWN")}
+    if status != "CURRENT_EVIDENCE":
+        return {"actor": "implementer", "action": "publish current evidence",
+                "source": status}
+    if not task.get("claim_qualified"):
+        reasons = task.get("reasons") or ["self-check requires independent verification"]
+        return {"actor": "implementer", "action": "fix: " + str(reasons[0]),
+                "source": "self-check"}
+    return {"actor": "coordinator",
+            "action": "read companion, verify originals and scope independently; request Owner decision",
+            "source": "claim structurally qualified; Owner acceptance undecided"}
 
 
-def task_row(task, observed, all_pending):
+def source_revisions(task):
+    """Source identities from ECO-02b, not an endorsement of their content."""
+    return [
+        {k: s.get(k) for k in ("comment_id", "url", "updated_at", "body_sha256")
+         if k in s}
+        for s in (task.get("sources_read") or []) if isinstance(s, dict)
+    ]
+
+
+def task_row(task, observed, all_pending, repo):
+    task_id = task.get("task_id", "UNKNOWN")
+    status, gaps, child_ok, pr_ok = status_and_gaps(task, repo)
     check = task.get("self_check") or {}
-    pending = [p for p in all_pending if p["task_id"] == task["task_id"]]
+    pending = [p for p in all_pending if isinstance(p, dict) and p.get("task_id") == task_id]
+    view = {**task, "status": status, "reasons": gaps,
+            "claim_qualified": bool(task.get("claim_qualified")) and status == "CURRENT_EVIDENCE"}
+    inputs = task.get("inputs") if isinstance(task.get("inputs"), dict) else {}
+    originals = {k: inputs.get(k, "UNKNOWN") for k in ("input", "golden", "benchmark")}
+    originals["attribution"] = inputs.get("attribution", "UNKNOWN")
+    if originals["input"] == "UNKNOWN":
+        gaps.append("original input UNKNOWN; no source-authenticated input identification")
+    if originals["golden"] == "UNKNOWN":
+        gaps.append("complete/partial golden UNKNOWN")
+    if originals["benchmark"] == "UNKNOWN":
+        gaps.append("benchmark/oracle UNKNOWN")
+    if not task.get("observed_head") and task.get("pr"):
+        gaps.append("observed PR head UNKNOWN")
     return {
-        "task_id": task["task_id"], "issue": task.get("issue"), "pr": task.get("pr"),
-        "evidence": task.get("evidence"), "E": task["status"], **NOT_EVALUATED,
-        "claim": check.get("claim", "NONE"), "claim_qualified": task["claim_qualified"],
-        "qualification_basis": task.get("qualification_basis"), "gaps": task.get("reasons", []),
-        "done_when": check.get("done_when"), "pending": pending,
+        "task_id": task_id, "outcome": task.get("outcome", "UNKNOWN"),
+        "issue": task.get("issue"), "pr": task.get("pr"),
+        "evidence": task.get("evidence"), "E": status, "native_E": task.get("status"),
+        **NOT_EVALUATED,
+        "A_detail": {"status": "NOT_EVALUATED", "source": "#401 not admitted"},
+        "claim": check.get("claim", "NONE"), "claim_qualified": view["claim_qualified"],
+        "qualification_basis": task.get("qualification_basis"),
+        "done_when": check.get("done_when"), "gaps": gaps, "pending": pending,
         "candidate_matches": task.get("self_check_matches_candidate"),
+        "candidate_sha": task.get("candidate_sha"),
+        "observed_head": task.get("observed_head"),
+        "head_matches_candidate": task.get("head_matches_candidate"),
         "source_age_minutes": source_age_minutes(task, observed),
-        "user_outcome": FROM_ECO02B, "implementation_crux": FROM_ECO02B, "original_input": FROM_ECO02B,
-        "next": next_step(task, pending),
+        "source_revisions": source_revisions(task),
+        "source_history_hops": task.get("issue_hops") or [],
+        "owner_inputs": task.get("owner_inputs") or [],
+        "user_outcome": UNKNOWN_OUTCOME, "implementation_crux": UNKNOWN_CRUX,
+        "original_input": originals,
+        "verification_scope": {
+            "reported_done_when": check.get("done_when"),
+            "structural_self_check": "QUALIFIED" if view["claim_qualified"] else "NOT_QUALIFIED",
+            "run_verified": "NOT_EVALUATED", "tested_head": "UNKNOWN",
+            "note": "SELF-CHECK is author-reported; native E is a source/head binding, not test validation",
+        },
+        "child_attributed": child_ok,
+        "pr_attributed": child_ok and pr_ok,
+        "child_denominator": None, "pr_denominator": None,
+        "next": next_step(view, pending),
     }
+
+
+def _group(rows, field, repo):
+    """Group *linked plan tasks*, even when they have no native evidence.
+
+    A valid same-repository PR reference is a linkage fact; a current receipt is
+    a separate evidence fact. Do not require CURRENT_EVIDENCE to create a PR
+    denominator. Refuse foreign/ambiguous child bindings and duplicate identities.
+    """
+    groups = {}
+    for r in rows:
+        link = r.get(field)
+        if field == "issue":
+            valid = r["child_attributed"] and proper_link(link, repo, ISSUE)
+        else:
+            valid = (r["child_attributed"] and proper_link(link, repo, PR)
+                     and r["E"] != "SOURCE_MISMATCH")
+        if not valid:
+            continue
+        g = groups.setdefault(link, {
+            "tasks": 0, "E_current": 0, "E_stale": 0, "E_unknown": 0,
+            "task_ids": [], "heads": [], "counting_unit": "linked plan task",
+        })
+        g["tasks"] += 1
+        g["E_current"] += int(r["E"] == "CURRENT_EVIDENCE")
+        g["E_stale"] += int(r["E"] == "STALE_EVIDENCE")
+        g["E_unknown"] += int(r["E"] in (
+            "UNKNOWN", "UNKNOWN_PR", "PROVIDER_UNAVAILABLE", "HEAD_UNREAD",
+        ))
+        g["task_ids"].append(r["task_id"])
+        head = r.get("observed_head")
+        if head and head not in g["heads"]:
+            g["heads"].append(head)
+
+    for r in rows:
+        link = r.get(field)
+        if field == "issue":
+            valid = r["child_attributed"] and proper_link(link, repo, ISSUE)
+            r["child_denominator"] = groups[link]["tasks"] if valid else None
+        else:
+            valid = (r["child_attributed"] and proper_link(link, repo, PR)
+                     and r["E"] != "SOURCE_MISMATCH")
+            r["pr_denominator"] = groups[link]["tasks"] if valid else None
+    return groups
 
 
 def board(readmodel):
-    """Pure projection of one read model. Totals use only the plan's own tasks."""
-    if readmodel.get("schema") != "v36.readmodel/v1":
+    """Pure projection; no source fetch, provider mutation, or derived approval."""
+    if not isinstance(readmodel, dict) or readmodel.get("schema") != "v36.readmodel/v1":
         raise ValueError("expected a v36.readmodel/v1 document")
+    tasks = readmodel.get("tasks", [])
+    pending = readmodel.get("pending") or []
+    if not isinstance(tasks, list) or not isinstance(pending, list) or any(not isinstance(t, dict) for t in tasks):
+        raise ValueError("malformed readmodel tasks/pending; cannot produce a trustworthy board")
     observed = readmodel.get("observed_at")
-    rows = [task_row(t, observed, readmodel.get("pending", [])) for t in readmodel.get("tasks", [])]
-    complete = bool(readmodel.get("read_complete"))
+    match = PARENT.fullmatch(readmodel.get("parent") or "")
+    repo = match["repo"] if match else None
+    rows = [task_row(t, observed, pending, repo) for t in tasks]
+    ids = [r["task_id"] for r in rows]
+    duplicate_ids = {task_id for task_id in ids if ids.count(task_id) > 1}
+    duplicate = bool(duplicate_ids)
+    if duplicate:
+        for r in rows:
+            if r["task_id"] in duplicate_ids:
+                r["E"] = "SOURCE_MISMATCH"
+                r["claim_qualified"] = False
+                r["child_attributed"] = False
+                r["pr_attributed"] = False
+                r["gaps"].append("duplicated task id in read model; attribution invalid")
+                r["next"] = {"actor": "coordinator", "action": "repair duplicated plan task identity",
+                             "source": "task_ids:duplicate"}
+    incomplete = (readmodel.get("read_complete") is not True or not match or duplicate
+                  or any(r["E"] in ("SOURCE_MISMATCH", "HEAD_UNREAD") for r in rows)
+                  or (readmodel.get("native") or {}).get("total", len(rows)) != len(rows))
+    by_child = _group(rows, "issue", repo)
+    by_pr = _group(rows, "pr", repo)
     native = readmodel.get("native") or {}
+    unread = list(readmodel.get("unread_sources") or [])
+    if not match:
+        unread.append("parent:missing_or_invalid")
+    if duplicate:
+        unread.append("task_ids:duplicate")
+    count = len(rows) if rows or not incomplete else None
     return {
         "schema": SCHEMA, "observed_at": observed, "plan": readmodel.get("plan"),
-        "parent": readmodel.get("parent"), "read_complete": complete,
-        "unread_sources": readmodel.get("unread_sources", []),
-        "totals": {"denominator": "tasks in this plan", "tasks": len(rows),
-                   "E_current": sum(r["E"] == "CURRENT_EVIDENCE" for r in rows),
-                   "E_stale": sum(r["E"] == "STALE_EVIDENCE" for r in rows),
-                   "claims_qualified": sum(r["claim_qualified"] for r in rows),
-                   "native_total_matches": native.get("total") == len(rows) if native else None,
-                   "partial": not complete},
+        "parent": readmodel.get("parent"), "label_sha": readmodel.get("label_sha"),
+        "read_complete": not incomplete,
+        "unread_sources": unread,
+        "source_cursor": readmodel.get("source_cursor") or {},
+        "edited_sources": readmodel.get("edited_sources") or [],
+        "last_complete_read_at": (readmodel.get("cursor") or {}).get("last_complete_read_at"),
+        "totals": {
+            "denominator": "selected tasks of this plan only",
+            "tasks": count, "known_rows": len(rows),
+            "E_current": sum(r["E"] == "CURRENT_EVIDENCE" for r in rows) if count is not None else None,
+            "E_stale": sum(r["E"] == "STALE_EVIDENCE" for r in rows) if count is not None else None,
+            "claims_qualified": sum(r["claim_qualified"] for r in rows) if count is not None else None,
+            "native_total_matches": native.get("total") == len(rows) if native else None,
+            "partial": incomplete, "zero_is_not_established": incomplete,
+            "note": "No cross-PR test-suite addition or acceptance inference.",
+        },
+        "by_child": by_child, "by_pr": by_pr,
+        "A_detail": {
+            "status": "NOT_EVALUATED", "required_categories": list(CATEGORIES),
+            "accounted": None, "reported": None, "unknown": None, "not_applicable": None,
+            "attested": None, "reason": "#401 chain audit not admitted; no 11/11 or A100% claim",
+            "external_attestation": "NOT_EVALUATED",
+        },
+        "V_detail": {
+            "status": "NOT_EVALUATED", "external_attestation": "NOT_EVALUATED",
+            "reported_only_tool_limit": "C1 reports 0/11 externally verified by this tool, not zero proof in existence",
+            "native_zero_limit": "snapshot verified_complete=0 is a constant, not a query",
+        },
         **NOT_EVALUATED, "rows": rows, "title_note": TITLE_NOTE,
-        "managed_region": [MANAGED_BEGIN, MANAGED_END],
+        "managed_region": [MANAGED_BEGIN, MANAGED_END], "render_mode": "READ_ONLY_DRY_RUN",
     }
 
 
-def cell(text):
-    return str(text).replace("|", "\\|").replace("\n", " ")
+def cell(value):
+    """Single Markdown cell; never allow untrusted text to escape a managed table."""
+    return str(value if value is not None else "UNKNOWN").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("|", r"\|").replace("\r", " ").replace("\n", " ")
+
+
+def merge_managed_region(original, projection):
+    """Pure *proposal* for ECO-05; preserves every byte of human text outside one region.
+
+    Never writes to a provider. Refuse ambiguous/duplicated or unbalanced markers.
+    A projection may be a framed render_markdown() result or just region contents.
+    """
+    if not isinstance(original, str) or not isinstance(projection, str):
+        raise ValueError("both source and projection must be text")
+    if projection.startswith(MANAGED_BEGIN) and projection.endswith(MANAGED_END):
+        if projection.count(MANAGED_BEGIN) != 1 or projection.count(MANAGED_END) != 1:
+            raise ValueError("ambiguous replacement projection")
+        payload = projection[len(MANAGED_BEGIN):-len(MANAGED_END)].strip("\n")
+    else:
+        if MANAGED_BEGIN in projection or MANAGED_END in projection:
+            raise ValueError("unexpected marker inside replacement")
+        payload = projection.strip("\n")
+    region = MANAGED_BEGIN + "\n" + payload + "\n" + MANAGED_END
+    begins, ends = original.count(MANAGED_BEGIN), original.count(MANAGED_END)
+    if begins != ends or begins > 1:
+        raise ValueError("unbalanced or repeated owned scoreboard region")
+    if begins == 0:
+        separator = "" if not original or original.endswith("\n") else "\n"
+        return original + separator + region
+    start = original.index(MANAGED_BEGIN)
+    end = original.index(MANAGED_END, start) + len(MANAGED_END)
+    return original[:start] + region + original[end:]
 
 
 def render_markdown(b):
-    """Dry-run Markdown inside the managed region markers."""
+    """No provider calls or writes; render only the uniquely-owned managed region."""
     t = b["totals"]
-    head = ("**INCOMPLETE READ** - unread: %s. Totals below are partial.\n\n" % ", ".join(b["unread_sources"])
-            if not b["read_complete"] else "")
-    lines = [MANAGED_BEGIN, "### v3.6 scoreboard - %s" % cell(b["plan"]), "", head +
-             "Observed %s. E current %d/%d (stale %d) over %s. Claims structurally qualified: %d. "
-             "A, V and acceptance: NOT_EVALUATED." % (b["observed_at"], t["E_current"], t["tasks"],
-                                                       t["E_stale"], t["denominator"], t["claims_qualified"]),
-             "", "| Task | E | Claim | Qualified | Gaps | Next | Age (min) |", "|---|---|---|---|---|---|---|"]
+    lines = [MANAGED_BEGIN, "### v3.6 smart scoreboard — " + cell(b.get("plan")), ""]
+    if not b["read_complete"]:
+        src = ", ".join(map(cell, b["unread_sources"])) or "incomplete provider/readmodel data"
+        lines += ["**INCOMPLETE READ** - unread: " + src +
+                  ". Known rows are partial, not a zero or a complete denominator.", ""]
+    counts = (str(t["E_current"]) + "/" + str(t["tasks"])) if t["tasks"] is not None else "UNKNOWN/UNKNOWN"
+    lines += [
+        "Observed " + cell(b["observed_at"]) + " · Parent " + cell(b["parent"]) +
+        " · label " + cell(b["label_sha"]) + " · selected-plan E current " + counts +
+        " (stale " + cell(t["E_stale"]) + ").",
+        "**A: NOT_EVALUATED** (#401 11-category audit unadmitted); "
+        "**V: NOT_EVALUATED** (no external attestation; native zero is constant); "
+        "**Owner acceptance: NOT_EVALUATED** (no authorised decision reader).",
+        "A categories required: " + ", ".join(CATEGORIES) + ". Accounting is not attestation.",
+        "",
+        "| Task | Child | PR | Observed head | E | Claim | Gaps | Next actor/action | Age min |",
+        "|---|---|---|---|---|---|---|---|---|",
+    ]
     for r in b["rows"]:
-        nxt = "%s: %s" % (r["next"]["actor"], r["next"]["action"])
-        age = "UNKNOWN" if r["source_age_minutes"] is None else r["source_age_minutes"]
-        lines.append("| %s | %s | %s | %s | %s | %s | %s |" % (
-            cell(r["task_id"]), r["E"], r["claim"], "yes" if r["claim_qualified"] else "no",
-            cell("; ".join(r["gaps"]) or "none"), cell(nxt), age))
-    lines += ["", "_%s A: %s V: %s_" % (TITLE_NOTE, b["A"], b["V"]), MANAGED_END]
+        nxt = str(r["next"]["actor"]) + ": " + str(r["next"]["action"])
+        lines.append("| " + " | ".join(map(cell, (
+            r["task_id"], r["issue"] or "UNKNOWN",
+            r["pr"] or "UNATTRIBUTED", r["observed_head"] or "UNKNOWN",
+            r["E"], r["claim"], "; ".join(r["gaps"]) or "none", nxt,
+            r["source_age_minutes"] if r["source_age_minutes"] is not None else "UNKNOWN"
+        ))) + " |")
+    lines += ["", "#### PR-specific evidence denominators (selected linked tasks only)", "",
+              "| PR | Current/linked | Stale | Linked task IDs |",
+              "|---|---|---|---|"]
+    for pr, g in sorted(b["by_pr"].items()):
+        lines.append("| " + " | ".join(map(cell, (
+            pr, str(g["E_current"]) + "/" + str(g["tasks"]), g["E_stale"], ", ".join(g["task_ids"])
+        ))) + " |")
+    if not b["by_pr"]:
+        lines.append("No securely linked PR denominator established.")
+    lines += ["", "#### Child-specific evidence denominators", ""]
+    for issue, g in sorted(b["by_child"].items()):
+        lines.append("- " + cell(issue) + ": " + str(g["E_current"]) + "/" + str(g["tasks"]) +
+                     " current; stale " + str(g["E_stale"]))
+    if not b["by_child"]:
+        lines.append("No securely linked child denominator established.")
+    lines += ["", "#### Source/verification notes by task", ""]
+    for r in b["rows"]:
+        original = r["original_input"]
+        verification = r["verification_scope"]
+        lines += [
+            "**" + cell(r["task_id"]) + "** — source-bound details",
+            "- User outcome: " + cell(r["user_outcome"]) + " (native outcome " + cell(r["outcome"]) + ")",
+            "- Implementation crux: " + cell(r["implementation_crux"]),
+            "- Original input / golden / benchmark: " + cell(original["input"]) + " / " +
+                cell(original["golden"]) + " / " + cell(original["benchmark"]) +
+                " [" + cell(original["attribution"]) + "; not source-authenticated]",
+            "- Verification scope: author-reported done-when " +
+                cell(verification["reported_done_when"]) + "; run-verified " +
+                cell(verification["run_verified"]) + "; tested head " + cell(verification["tested_head"]),
+            "- Observed head " + cell(r["observed_head"]) + "; candidate head " +
+                cell(r["candidate_sha"]) + "; source age min " + cell(r["source_age_minutes"]),
+            "- Source revisions: " + ("; ".join(cell(s.get("url", "UNKNOWN")) + " @ " +
+                cell(s.get("body_sha256", "UNKNOWN")) for s in r["source_revisions"])
+                if r["source_revisions"] else "UNKNOWN"),
+            "- Owner input attribution: " + cell(len(r["owner_inputs"])) +
+                " reported links; no authenticated human approval inferred",
+            "- Issue hops: " + cell(len(r["source_history_hops"])) +
+                " reported (not authenticated deletion proof)",
+            "- Known gaps: " + cell("; ".join(r["gaps"]) or "none"),
+            "- Next actor/action: " + cell(r["next"]["actor"]) + " → " +
+                cell(r["next"]["action"]) + " [basis " + cell(r["next"]["source"]) + "]",
+            "",
+        ]
+    lines += ["_" + cell(TITLE_NOTE) + " Native evidence, author self-check, chain accounting, "
+              "source verification and Owner decisions are different stages._", MANAGED_END]
     return "\n".join(lines)
 
 
 def main():
-    p = argparse.ArgumentParser(description="v3.6 read-only scoreboard (dry-run) from a read-model JSON file")
-    p.add_argument("--readmodel", required=True, help="output of readmodel_v36.py")
-    p.add_argument("--markdown", action="store_true", help="print the dry-run Markdown instead of JSON")
+    p = argparse.ArgumentParser(description="v3.6 read-only scoreboard/dry-run JSON or Markdown")
+    p.add_argument("--readmodel", required=True, help="ECO-02b readmodel_v36.py output")
+    p.add_argument("--markdown", action="store_true", help="print managed Markdown instead of JSON")
     args = p.parse_args()
     with open(args.readmodel, encoding="utf-8") as f:
-        b = board(json.load(f))
-    print(render_markdown(b) if args.markdown else json.dumps(b, indent=2, sort_keys=True))
+        projected = board(json.load(f))
+    print(render_markdown(projected) if args.markdown else json.dumps(projected, sort_keys=True, indent=2))
 
 
 if __name__ == "__main__":
