@@ -29,6 +29,10 @@ All values are **mock-up hypotheses**, not an Owner-approved final design. No ph
 - Rounded cardboard silhouette placeholder and **actual** Narasimha source cutout/rods for decisive M1-M3.
 - Operator cue/timer and paper evidence sheet. **Adult performs cutting and hole-punching; no exposed pins, sharp wires or strong springs.**
 
+## Critical three-dimensional assembly condition
+
+**Do not mount the pillar flush to a solid palace backdrop or over a solid tabletop:** the frame is provisionally at z=40 mm, the unchanged permanent rear palace wall at z=150 mm, and Narasimha must pass z=130 to z=20. Keep the central corridor x=305..445, z=15..140 and at least 140 mm beneath baseline open for the actual main stick and arm control. Proposed removable side returns occupy only x=285..300 and x=450..465 at z=40..150; they require separate adult stability, tape-hinge and oblique-sightline tests. See [PORTAL_AND_ROD_ASSEMBLY_CANDIDATE.md](PORTAL_AND_ROD_ASSEMBLY_CANDIDATE.md). These numbers are hypotheses, not source-verified cardboard measurements.
+
 ## Build and comparison sequence
 
 1. Print generated **100% actual-size A4 vector PDF** without scaling; measure 100-mm and 50-mm calibration bars. Printer is NOT validated merely by PDF vector geometry.
@@ -38,7 +42,7 @@ All values are **mock-up hypotheses**, not an Owner-approved final design. No ph
 5. **Experiment B baseline:** helper manually opens both leaves rearward to about 90°, parks them with simple removable soft tabs, then operator lifts/moves Narasimha arm-DOWN through the opening. Verify actual puppet silhouette and rod travel.
 6. **Experiment A challenge:** try two light strings joined into one pull. Determine actual routing, pull force, stops and whether both leaves open and remain open unattended. **Do not declare a functioning one-pull linkage until it is demonstrated.**
 7. Compare B and A against observed hand count, timing, reliability and pinch risks; park sliding doors unless necessary.
-8. Ensure a measured **140-mm unobstructed region below puppet baseline** and enough fore/aft movement for the concealed-to-front journey.
+8. Physically verify an **OPEN x305..445, z15..140 shaft corridor**, at least **140 mm unobstructed BELOW y=0**, and a **110-mm fore/aft movement** from z130 to z20. A continuous tabletop under this route fails regardless of a correct door opening.
 9. Test audience concealment before reveal; the new 2-mm centre seam is a specific potential light leak.
 10. Record M1-M8 from the PDF test sheet and photos/measurement notes. The M9 full 180-second show remains a separate qualification gate.
 
@@ -60,7 +64,7 @@ All values are **mock-up hypotheses**, not an Owner-approved final design. No ph
 | M4 Concealment | Class-seat and oblique sightline check with doors closed | Fix masking/seam light leak |
 | M5 Prahlada bow | Actual 15° pose >=10 mm from Narasimha blessing envelope/rods | Move Prahlada or reduce angle |
 | M6 King cues | Three safe apparent taps; no collision; clear retreat | Use synchronized sound / change cue |
-| M7 Grip space | >=140 mm free below stage baseline and no rod collision | Change stand/riser or control reach |
+| M7 Grip and depth passage | >=140 mm free below baseline, plus no obstruction through x305..445/z15..140 during 110-mm travel | Change stand/riser or open control corridor |
 | M8 Timed reveal | Door + puppet opening visible by 1:25 | Simplify opening / adjust within show |
 
 This workpack is **source preparation** only: the generated trial PDF may be printed, but neither the PDF nor passing analytical tests establishes child-safe operability, full story timing, or final cut-template approval. **STOP product design change** when M1-M3 fail and address the earliest failed mechanism first.
