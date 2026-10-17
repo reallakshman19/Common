@@ -15,7 +15,17 @@
     "width": 750,
     "visible_height": 400,
     "depth": 150,
-    "unobstructed_below_baseline_required": 140
+    "unobstructed_below_baseline_required": 140,
+    "rear_backdrop_z": 150,
+    "puppet_stick_corridor": {
+      "x_min": 305,
+      "x_max": 445,
+      "z_min": 15,
+      "z_max": 140,
+      "below_baseline_min": 140,
+      "physical_clearance_proven": false
+    },
+    "solid_floor_in_corridor_allowed": false
   },
   "pillar": {
     "outer_width": 180,
@@ -32,7 +42,22 @@
     "door_open_angle_deg": 90,
     "door_swing_direction": "rearward",
     "front_frame_material": "adult-cut flat cardboard; disposable",
-    "backdrop_location": "fixed at stage x=285..465"
+    "backdrop_location": "fixed at stage x=285..465",
+    "proposed_side_returns_world_x": [
+      [
+        285,
+        300
+      ],
+      [
+        450,
+        465
+      ]
+    ],
+    "proposed_side_return_z": [
+      40,
+      150
+    ],
+    "flush_mount_against_rear_backdrop_allowed": false
   },
   "leaves": {
     "quantity": 2,
