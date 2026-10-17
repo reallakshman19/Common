@@ -20,10 +20,10 @@ MARKER = "TASK_EVIDENCE v3.6"
 SELF_CHECK = re.compile(r"^SELF-CHECK v1 · (?P<task>\S+) · ", re.M)
 CANDIDATE = re.compile(r"candidate (?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<sha>[0-9a-f]{40})")
 DONE_WHEN = re.compile(r"^Done-when: .*?→ (?P<state>MET|NOT_MET|NOT_RUN|UNKNOWN)\b", re.M)
-PENDING_LINE = re.compile(r"^[ \t>*-]*Pending:", re.M | re.I)
-PENDING = re.compile(r"^[ \t>*-]*Pending:\s*(?P<what>.+?)\s*·\s*owner\s+(?P<owner>.+?)\s*·\s*next\s+(?P<next>.+?)"
-                     r"\s*·\s*unblocks\s+(?P<unblocks>.+?)\s*·\s*prevents task DONE\s+(?P<prevents>yes|no)\b",
-                     re.M | re.I)
+PENDING_HINT = re.compile(r"\bpending\s*:", re.I)   # loose: any line that looks like a Pending entry
+PENDING = re.compile(r"^\W*(?:\d+[.)]\s*)?(?:\[[ xX]\]\s*)?Pending\s*:\s*(?P<what>.+?)\s*·\s*owner\s+(?P<owner>.+?)"
+                     r"\s*·\s*next\s+(?P<next>.+?)\s*·\s*unblocks\s+(?P<unblocks>.+?)"
+                     r"\s*·\s*prevents task DONE\s+(?P<prevents>yes|no)(?![/\w])", re.I)
 CLAIM = re.compile(r"^Proposed claim: (?P<claim>DONE|PARTIAL|BLOCKED|FAILED)\b", re.M)
 LINK = re.compile(r"Self-check: https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<issue>[1-9][0-9]*)#issuecomment-(?P<id>[1-9][0-9]*)\s*$")
 
@@ -83,10 +83,16 @@ def parse_self_check(comment, task_id, owner_login):
     record["candidate"] = f"{cand['repo']}@{cand['sha']}" if cand else "UNKNOWN"
     claim = CLAIM.search(body)
     record["claim"] = claim["claim"] if claim else "UNKNOWN"
-    record["pending"] = [{k: m[k].strip() for k in ("what", "owner", "next", "unblocks")}
-                         | {"prevents_done": m["prevents"].lower() == "yes"} for m in PENDING.finditer(body)]
-    # Fail closed: a Pending line we cannot parse may hide a blocking item.
-    record["unparsed_pending"] = len(PENDING_LINE.findall(body)) - len(record["pending"])
+    record["pending"], record["unparsed_pending"] = [], 0
+    for line in body.splitlines():
+        if not PENDING_HINT.search(line[:40]) or line.lstrip().startswith("Done-when:"):
+            continue
+        m = PENDING.match(line)
+        if not m:
+            record["unparsed_pending"] += 1   # fail closed: it may hide a blocking item
+            continue
+        record["pending"].append({k: m[k].strip() for k in ("what", "owner", "next", "unblocks")}
+                                 | {"prevents_done": m["prevents"].lower() == "yes"})
     return record
 
 

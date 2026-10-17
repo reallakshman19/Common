@@ -142,6 +142,21 @@ class ReadModelTests(unittest.TestCase):
             self.assertFalse(t["claim_qualified"], line)
             self.assertIn("unparsed Pending line(s) in self-check", t["reasons"])
 
+    def test_list_styles_never_silently_dropped(self):
+        tail = " P1 fix · owner OTM · next run · unblocks merge · prevents task DONE yes"
+        for prefix in ("1. Pending:", "• Pending:", "+ Pending:", "- [ ] Pending:", "Pending :", "**Pending:**"):
+            r = run([comment(SC_ID, self_check(pending=prefix + tail)), comment(9002, evidence())])[0]
+            t = r["tasks"][0]
+            self.assertFalse(t["claim_qualified"], prefix)
+            parsed = bool(r["pending"]) and r["pending"][0]["prevents_done"]
+            self.assertTrue(parsed or t["self_check"]["unparsed_pending"] == 1, prefix)
+
+    def test_ambiguous_prevents_token_fails_closed(self):
+        line = "Pending: P1 · owner OTM · next run · unblocks merge · prevents task DONE no/yes"
+        t = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]["tasks"][0]
+        self.assertEqual(t["self_check"]["unparsed_pending"], 1)
+        self.assertFalse(t["claim_qualified"])
+
     def test_tolerant_pending_spacing_still_blocks(self):
         line = "  - Pending:  P1 fix  ·  owner OTM ·\tnext run · unblocks merge · prevents task DONE YES"
         r = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]
