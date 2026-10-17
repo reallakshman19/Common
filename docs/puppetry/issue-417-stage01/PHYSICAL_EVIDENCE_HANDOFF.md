@@ -8,7 +8,7 @@
 ## What the parent/adult actually needs to do
 
 1. Print the seven-page [A4 trial kit](https://github.com/reallakshman19/Common/actions/workflows/puppet-415-stage01.yml) at **100% actual size** and physically measure its 100-mm calibration line. If it measures outside the proposed 99–101 mm range, stop and correct print scaling.
-2. Assemble one temporary, safely supported 180×280-mm cardboard frame with a 140×230-mm clear opening; two 69×227-mm rearward-opening doors. Mount it apart from the solid rear palace wall, not flush against it.
+2. Assemble one temporary, safely supported 180×280-mm cardboard frame with a 140×240-mm clear opening; two 69×237-mm rearward-opening doors. Mount it apart from the solid rear palace wall, not flush against it.
 3. Preserve an open rod corridor for the real Narasimha puppet, shoulder actuator and main stick; do not place a solid tabletop across the 110-mm front/back translation and leave at least 140 mm free beneath the puppet baseline.
 4. Start with manually opened and positively held doors. Use the **real candidate Narasimha silhouette WITH its control rods**, not just the 92×180-mm rectangle gauge.
 5. **M1:** record minimum physical gap, measured in millimetres, at **approach**, **door plane** and **emerged** positions, including all rods/connectors. Proposed acceptance threshold is 10 mm in each case.
