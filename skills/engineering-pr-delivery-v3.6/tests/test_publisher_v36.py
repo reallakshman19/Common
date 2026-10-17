@@ -483,5 +483,40 @@ class ECO05GuardTests(unittest.TestCase):
         self.assertEqual(client.writes, [])
 
 
+    def test_eco05_wrong_provider_identity_and_human_label_change_are_blocked(self):
+        client, plan, options = self.setup_guard()
+        client.records["/issues/1"]["number"] = 98
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertEqual(client.writes, [])
+        client.records["/issues/1"]["number"] = 1
+        client.records["/issues/1"]["labels"] = [{"name": "Owner changed"}]
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertEqual(client.writes, [])
+
+    def test_eco05_scoreboard_rejects_destructive_body_payload(self):
+        client, plan, options = self.setup_guard(pr=False)
+        client.records["/issues/1"]["body"] = "OWNER AIM stays\n"
+        change = pu.scoreboard_body_change(client.records["/issues/1"],
+                                           "Scorecard", parent_number=1)
+        change["after_body"] = "DESTRUCTIVE REPLACEMENT"
+        plan["changes"] = [change]
+        options["authorized_surfaces"] = frozenset({"scoreboard"})
+        options["authorized_targets"] = frozenset({("issue", 1)})
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertEqual(client.records["/issues/1"]["body"], "OWNER AIM stays\n")
+        self.assertEqual(client.writes, [])
+
+    def test_eco05_partial_execution_cannot_be_blindly_replayed(self):
+        client, plan, options = self.setup_guard()
+        client.records["/issues/1"]["title"] = plan["changes"][0]["after"]
+        result = pu.apply_projection(plan, client, **options)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertIn("partial", result["next_reconciliation"])
+        self.assertEqual(client.writes, [])
+
+
 if __name__=="__main__":
     unittest.main()
