@@ -28,7 +28,7 @@
     "clear_opening_width_nominal": 140,
     "opening_bottom_y": 15,
     "opening_top_y": 255,
-    "left_and_right_leaf_width": 70,
+    "left_and_right_leaf_width": 69,
     "door_plane_z": 40,
     "hinge_axis": "vertical",
     "door_open_direction": "toward_rear",
