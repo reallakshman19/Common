@@ -376,7 +376,8 @@ def recover_context(label: dict, plan: dict, client, *, owning_issue_url: str,
     }
 
 
-def build_packet(label: dict, plan: dict, client, pr_numbers: list[int]) -> dict:
+def build_packet(label: dict, plan: dict, client, pr_numbers: list[int],
+                 *, owning_issue_url: str | None = None, prior: dict | None = None) -> dict:
     """All facts come from approved label, checked plan and current GitHub reads."""
     match = PARENT_REF.fullmatch(plan["parent"])
     if not match or client.repo != match[1]:
@@ -411,6 +412,10 @@ def build_packet(label: dict, plan: dict, client, pr_numbers: list[int]) -> dict
         prs.append({"number": number, "url": f"https://github.com/{client.repo}/pull/{number}",
                     "head": head, "state": pr.get("state"), "draft": bool(pr.get("draft")),
                     "merged": bool(pr.get("merged")), "title": pr["title"]})
+    owner_url = f"https://github.com/{client.repo}/issues/{match[2]}"
+    recovery = recover_context(label, plan, client,
+                               owning_issue_url=owning_issue_url or owner_url,
+                               native_snapshot=report, prior=prior)
     task_rows = []
     spec_by_id = {t["task_id"]: t for t in plan["tasks"]}
     for t in report["tasks"]:
@@ -433,6 +438,7 @@ def build_packet(label: dict, plan: dict, client, pr_numbers: list[int]) -> dict
                      "stale_evidence": report["stale_evidence"],
                      "total": report["total"], "accepted_complete": 0},
         "tasks": task_rows, "prs": prs,
+        "recovery": recovery,
         "next": pending[0] if pending else "INDEPENDENT_ACCEPTANCE_REQUIRED",
         "unproven": ["Current evidence is not accepted task completion",
                      "O5 cold agent must independently continue from GitHub",
@@ -469,6 +475,24 @@ def render_markdown(packet: dict) -> str:
                      f"draft={pr['draft']} merged={pr['merged']} | {pr['title']}")
     lines += [f"Next: {packet['next']}", "Unknowns / stop conditions:"]
     lines.extend(f"- {u}" for u in packet["unproven"])
+    recovery = packet.get("recovery")
+    if recovery:
+        lines.extend([
+            "## ECO-06 source-first recovery (code/synthetic only)",
+            "Owning issue: " + recovery["owning_issue_url"],
+            "Investigation: " + recovery["investigation"]["mode"]
+            + "; blind review=" + recovery["investigation"]["blind_review"],
+            "Acceptance demonstration: " + recovery["acceptance_demonstration"]
+            + " (no live participation authority)",
+            "Source freshness: " + recovery["source_state"],
+        ])
+        for name, item in recovery["outcomes"].items():
+            lines.append("- " + name + ": " + item["status"] + "; " + item["reason"])
+            for url in item["source_refs"]:
+                lines.append("  Source read/reference: " + url)
+        if recovery["unavailable_sources"]:
+            lines.append("Unavailable sources: " + ", ".join(recovery["unavailable_sources"]))
+        lines.extend(recovery["limitations"])
     lines += ["To continue without chats: refresh these GitHub issue/PR links, verify "
               "the current Owner label and exact PR head, then perform one authorized "
               "next step with its own task evidence. A title count is not approval."]
@@ -524,6 +548,8 @@ def main(argv=None) -> int:
     cold.add_argument("--plan", required=True)
     cold.add_argument("--lab", help="explicit lab repo from selected label when parent is lab")
     cold.add_argument("--pr", type=int, action="append", default=[])
+    cold.add_argument("--owning-issue-url",
+                      help="must equal the one validated plan.parent GitHub issue URL")
     buddy = sub.add_parser("buddy", help="render a read-only v1.6 stage prompt")
     buddy.add_argument("--phase", choices=sorted(PHASES), required=True)
     buddy.add_argument("--handover-id", required=True)
@@ -539,7 +565,9 @@ def main(argv=None) -> int:
             require_explicit_lab(label, plan["parent"], args.lab)
             client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
             client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
-            print(render_markdown(build_packet(label, plan, client, args.pr)), end="")
+            print(render_markdown(build_packet(
+                label, plan, client, args.pr,
+                owning_issue_url=args.owning_issue_url)), end="")
         else:
             print(buddy_prompt(args.phase, handover_id=args.handover_id,
                                parent=args.parent, assessed_sha=args.assessed_sha,
