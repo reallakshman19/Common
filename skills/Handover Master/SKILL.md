@@ -35,7 +35,8 @@ This CLI prints source paths/instructions only; it NEVER fetches remote authorit
 
 ## Source/authority precedence and overlap
 
-- Explicit Owner/project-pinned version beats intent keyword routing.
+- Explicit Owner/project-pinned version beats intent keyword routing; native pins still apply.
+- **v3.6 version amendments (Common #408 HM-01):** v3.6 natively pins BuddyRunner 1.6. A request for another version **without** `--amendment-ref` returns `HOLD_VERSION`. With a well-formed GitHub issue/PR/comment reference, the router returns `PROVISIONAL_ROUTE`: an **unverified, read-only candidate preview** (exit 2) showing the native pin and the candidate sources, never admission. The **controller** must verify the cited Owner decision, its scope (a lane begun on 1.6 finishes on 1.6), currency/HOLD, native compatibility, phase receipts, source freshness and work/custody authority before any action; anything unresolved is CONFLICT/UNKNOWN. A malformed reference returns `INVALID_AMENDMENT_REF`; an unused reference is reported as not applied.
 - Conflicting versions or ambiguous method ⇒ request one discriminator, do not choose by habit.
 - A report under blind-stage isolation ⇒ HOLD unless freeze and recipient isolation were verified externally; command-line assertions alone are not proof.
 - If a BuddyRunner 2 response contains a 12-section report, **no fourth Buddy phase** is created. Likewise `three-pass` is NOT BuddyRunner's `1a→1b→2`.
