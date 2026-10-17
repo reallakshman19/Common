@@ -79,6 +79,14 @@ class MockupTests(unittest.TestCase):
                         self.assertLessEqual(r.x1,p.rect.width+.1)
                         self.assertLessEqual(r.y1,p.rect.height+.1)
 
+    def test_assembly_page_requires_clear_rod_corridor(self):
+        instructions=self.doc[5].get_text()
+        receipt=self.doc[6].get_text()
+        self.assertIn("NEVER glue flush",instructions)
+        self.assertIn("shaft corridor OPEN",instructions)
+        self.assertIn("140 mm below",instructions)
+        self.assertIn("Open shaft corridor",receipt)
+
     def test_oversize_door_rejected(self):
         c=copy.deepcopy(CFG);c["leaves"]["width"]=71
         with self.assertRaises(AssertionError):validate(c)
