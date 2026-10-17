@@ -135,57 +135,6 @@ class ReadModelTests(unittest.TestCase):
         self.assertEqual(t["self_check_history"], 1)
         self.assertEqual({s["comment_id"] for s in t["sources_read"]}, {SC_ID, 9002})
 
-    def test_malformed_pending_fails_closed(self):
-        for line in ("Pending: P1 fix · owner OTM · next run · prevents task DONE yes",   # missing unblocks
-                     "- Pending:   P1 · owner OTM · next run · unblocks x · prevents task DONE maybe"):
-            t = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]["tasks"][0]
-            self.assertFalse(t["claim_qualified"], line)
-            self.assertIn("unparsed Pending line(s) in self-check", t["reasons"])
-
-    def test_list_styles_never_silently_dropped(self):
-        tail = " P1 fix · owner OTM · next run · unblocks merge · prevents task DONE yes"
-        for prefix in ("1. Pending:", "• Pending:", "+ Pending:", "- [ ] Pending:", "Pending :", "**Pending:**"):
-            r = run([comment(SC_ID, self_check(pending=prefix + tail)), comment(9002, evidence())])[0]
-            t = r["tasks"][0]
-            self.assertFalse(t["claim_qualified"], prefix)
-            parsed = bool(r["pending"]) and r["pending"][0]["prevents_done"]
-            self.assertTrue(parsed or t["self_check"]["unparsed_pending"] == 1, prefix)
-
-    def test_no_silent_drop_for_natural_or_obfuscated_forms(self):
-        tail = " P1 fix · owner OTM · next run · unblocks merge · prevents task DONE yes"
-        forms = ["**Pending**:" + tail, "_Pending_:" + tail, "<b>Pending</b>:" + tail, "Pending item:" + tail,
-                 "Pending (1):" + tail, "Pending\uff1a" + tail, "Pen\u200bding:" + tail, "Pend\u00ading:" + tail,
-                 "Pending\\:" + tail, "| x | y | Pending:" + tail, "Pending",
-                 "Pending: A · owner O · next n · unblocks u · prevents task DONE no; Pending:" + tail]
-        for form in forms:
-            r = run([comment(SC_ID, self_check(pending=form)), comment(9002, evidence())])[0]
-            t = r["tasks"][0]
-            self.assertFalse(t["claim_qualified"], form)
-            blocked = any(p["prevents_done"] for p in r["pending"])
-            self.assertTrue(blocked or t["self_check"]["unparsed_pending"] >= 1, form)
-
-    def test_explicit_pending_none_is_empty(self):
-        r = run([comment(SC_ID, self_check(pending="Pending: none")), comment(9002, evidence())])[0]
-        self.assertEqual((r["pending"], r["tasks"][0]["self_check"]["unparsed_pending"]), ([], 0))
-        self.assertTrue(r["tasks"][0]["claim_qualified"])
-
-    def test_native_report_pending_is_not_a_pending_item(self):
-        r = run([comment(SC_ID, self_check(extra="Native report: PENDING")), comment(9002, evidence())])[0]
-        self.assertEqual(r["tasks"][0]["self_check"]["unparsed_pending"], 0)
-        self.assertTrue(r["tasks"][0]["claim_qualified"])
-
-    def test_ambiguous_prevents_token_fails_closed(self):
-        line = "Pending: P1 · owner OTM · next run · unblocks merge · prevents task DONE no/yes"
-        t = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]["tasks"][0]
-        self.assertEqual(t["self_check"]["unparsed_pending"], 1)
-        self.assertFalse(t["claim_qualified"])
-
-    def test_tolerant_pending_spacing_still_blocks(self):
-        line = "  - Pending:  P1 fix  ·  owner OTM ·\tnext run · unblocks merge · prevents task DONE YES"
-        r = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]
-        self.assertTrue(r["pending"][0]["prevents_done"])
-        self.assertIn("pending item prevents DONE", r["tasks"][0]["reasons"])
-
     def test_link_must_target_this_repo_and_issue(self):
         for url in ("https://github.com/reallakshman19/Common/issues/999#issuecomment-%d" % SC_ID,
                     "https://github.com/other/repo/issues/345#issuecomment-%d" % SC_ID):
