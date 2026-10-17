@@ -1,16 +1,17 @@
 # PUPPET-415-STAGE-01 — Full-scale cardboard mock-up trial
 
+> **Candidate dimensional reconciliation (17 October 2026):** This Stage-01 study now adopts the proposed x660 Prahlada position, 15–20° bow, opening top y255 (140×240 opening), and two 69×237-mm trial doors from draft PR #419. This is a revised trial design only; printing, rod/collision tests, door cycling and manufacture remain NOT_RUN. The corrected-v2 character PDFs on #419 remain without authenticated GitHub binary custody.\n\n
 **Scope:** Child-operability investigation, **not** approved manufacturing. Parent [#415](https://github.com/reallakshman19/Common/issues/415); workpack [#417](https://github.com/reallakshman19/Common/issues/417); draft stage PR [#418](https://github.com/reallakshman19/Common/pull/418). BuddyRunner **1a=HOLD**; G2 **NOT_INVOKED**.
 
 ## Engineering change after first screen
 
-The Stage-01 geometric study used **two 70 × 230 mm flaps in an exactly 140 × 230 mm opening**. That is a zero-play candidate and is inappropriate to assume will work when cut from thick cardboard. The disposable trial therefore uses:
+The Stage-01 geometric study used **two 70 × 240 mm flaps in an exactly 140 × 240 mm opening**. That is a zero-play candidate and is inappropriate to assume will work when cut from thick cardboard. The disposable trial therefore uses:
 
 | Trial part | Dimensions, mm | Why |
 |---|---|---|
 | Fixed pillar blank | 180 wide × 280 high | Original stage candidate |
-| Opening | x=20..160, y=15..245 -> 140 × 230 | 20-mm posts, 15-mm sill, 35-mm lintel |
-| Two leaf cutouts | **69 × 227 each** | Creates 2-mm nominal centre gap and 1.5-mm top/bottom play |
+| Opening | x=20..160, y=15..255 -> 140 × 240 | 20-mm posts, 15-mm sill, 25-mm lintel |
+| Two leaf cutouts | **69 × 237 each** | Creates 2-mm nominal centre gap and 1.5-mm top/bottom play |
 | Door hinge axes | x=20/160 at proposed plane z=40 | Vertical axes, rearward 90° swing |
 | Narasimha arm-down rectangular gauge | 92 × 180 | Conservative first passage fixture, NOT silhouette |
 | Narasimha blessing envelope | 155 × 180 | MUST deploy only after front clearance |
@@ -37,7 +38,7 @@ All values are **mock-up hypotheses**, not an Owner-approved final design. No ph
 
 1. Print generated **100% actual-size A4 vector PDF** without scaling; measure 100-mm and 50-mm calibration bars. Printer is NOT validated merely by PDF vector geometry.
 2. Join the two pillar **paper** tiles on common y=140 registration crosses; use traced full outline to transfer the whole 180 × 280 mm frame onto larger card. **Do not cut the frame as two separate 145-mm cardboard halves without reinforcement.**
-3. Adult cuts aperture x20..160, y15..245. Cut two 69 × 227 mm leaves, holes Ø2 placed 10 mm from free edge at midheight; reinforce thread holes.
+3. Adult cuts aperture x20..160, y15..245. Cut two 69 × 237 mm leaves, holes Ø2 placed 10 mm from free edge at midheight; reinforce thread holes.
 4. Tape each leaf at its **OUTER** vertical edge so it swings backward. With the two leaves shut, measure the real seam and vertical gaps; if excessive light reveals Narasimha, fix *masking* without creating a jam.
 5. **Experiment B baseline:** helper manually opens both leaves rearward to about 90°, parks them with simple removable soft tabs, then operator lifts/moves Narasimha arm-DOWN through the opening. Verify actual puppet silhouette and rod travel.
 6. **Experiment A challenge:** try two light strings joined into one pull. Determine actual routing, pull force, stops and whether both leaves open and remain open unattended. **Do not declare a functioning one-pull linkage until it is demonstrated.**
@@ -62,7 +63,7 @@ All values are **mock-up hypotheses**, not an Owner-approved final design. No ph
 | M2 Repeatable door operation | 5/5 uninterrupted opening/hold/reveal cycles | Modify latch or use helper baseline |
 | M3 Hand assignment | Every action operable with explicitly assigned hands; no hidden helper | Reallocate door operation |
 | M4 Concealment | Class-seat and oblique sightline check with doors closed | Fix masking/seam light leak |
-| M5 Prahlada bow | Actual 15° pose >=10 mm from Narasimha blessing envelope/rods | Move Prahlada or reduce angle |
+| M5 Prahlada bow | Actual 15–20° sweep >=10 mm from Narasimha blessing envelope/rods | Move Prahlada or reduce angle |
 | M6 King cues | Three safe apparent taps; no collision; clear retreat | Use synchronized sound / change cue |
 | M7 Grip and depth passage | >=140 mm free below baseline, plus no obstruction through x305..445/z15..140 during 110-mm travel | Change stand/riser or open control corridor |
 | M8 Timed reveal | Door + puppet opening visible by 1:25 | Simplify opening / adjust within show |
