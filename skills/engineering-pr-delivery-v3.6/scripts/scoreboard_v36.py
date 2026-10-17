@@ -98,14 +98,17 @@ def status_and_gaps(task, repo):
 def next_step(task, pending):
     """Named actor/action under fixed precedence; source of the instruction is visible."""
     status = task["status"]
-    if status in ("SOURCE_MISMATCH", "MISSING_CHILD", "AMBIGUOUS_CHILD"):
+    if status == "SOURCE_MISMATCH":
         return {"actor": "coordinator", "action": "resolve this task's owned child/repository binding",
+                "source": status}
+    if status in ("MISSING_CHILD", "AMBIGUOUS_CHILD"):
+        return {"actor": "coordinator", "action": "resolve the task's one child issue",
                 "source": status}
     if status in ("PROVIDER_UNAVAILABLE", "UNKNOWN", "UNKNOWN_PR", "HEAD_UNREAD"):
         return {"actor": "coordinator", "action": "re-read the unavailable source",
                 "source": status}
     if status == "STALE_EVIDENCE":
-        return {"actor": "implementer", "action": "publish current evidence bound to the observed PR head",
+        return {"actor": "implementer", "action": "publish current evidence",
                 "source": status}
     blocking = [p for p in pending if p.get("prevents_done")]
     if blocking:
@@ -122,7 +125,7 @@ def next_step(task, pending):
                 "source": "self-check"}
     return {"actor": "coordinator",
             "action": "read companion, verify originals and scope independently; request Owner decision",
-            "source": "claim structurally qualified; not accepted"}
+            "source": "claim structurally qualified; Owner acceptance undecided"}
 
 
 def source_revisions(task):
@@ -320,13 +323,13 @@ def render_markdown(b):
         "**Owner acceptance: NOT_EVALUATED** (no authorised decision reader).",
         "A categories required: " + ", ".join(CATEGORIES) + ". Accounting is not attestation.",
         "",
-        "| Task/outcome | Child | PR | Observed head | E | Claim | Gaps | Next actor/action | Age min |",
+        "| Task | Child | PR | Observed head | E | Claim | Gaps | Next actor/action | Age min |",
         "|---|---|---|---|---|---|---|---|---|",
     ]
     for r in b["rows"]:
         nxt = str(r["next"]["actor"]) + ": " + str(r["next"]["action"])
         lines.append("| " + " | ".join(map(cell, (
-            r["task_id"] + " / " + str(r["outcome"]), r["issue"] or "UNKNOWN",
+            r["task_id"], r["issue"] or "UNKNOWN",
             r["pr"] or "UNATTRIBUTED", r["observed_head"] or "UNKNOWN",
             r["E"], r["claim"], "; ".join(r["gaps"]) or "none", nxt,
             r["source_age_minutes"] if r["source_age_minutes"] is not None else "UNKNOWN"
