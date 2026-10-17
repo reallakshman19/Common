@@ -2,6 +2,8 @@
 
 **Scope:** A v3.6-only lifecycle: an approved parent plan, real child issues, verified own-child task evidence, automatically updated issue/PR titles, and GitHub-only successor continuation. The [Common #341 lab benchmark](https://github.com/reallakshman19/Common/issues/341#issuecomment-6119409109) was Owner-accepted (7/7 workpacks, O1–O5); that benchmark is an example, **not** a fixed label, repo, or lab default. v3.6 has no runtime dependency on v3.5, v3.2, v3.1, Local v1.1, or DELP.
 
+**Agent addendum (A01–A14, incl. Owner-required A13 coding practice and A14 pre-claim SELF-CHECK):** [CODING_PRACTICES_ADDENDUM.md](CODING_PRACTICES_ADDENDUM.md). It is additive. The canonical 8-line evidence and the terminal LOG are unchanged.
+
 ## 1. Mandatory inputs — work-specific, never silently default
 
 - **Label path:** an explicit, Owner-approved `--label relay/AIM/<WORK>.yaml` from that work's repository. The work ID comes from the filename and must match the label's `work`. **There is no default V35-LIFECYCLE label.** A copied test fixture is not approval.
