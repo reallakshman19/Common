@@ -436,27 +436,126 @@ def calculate(plan: dict, client, pr_number: int | None = None,
             "all": updates}
 
 
-def apply_projection(calculated: dict, client, *, confirm_scope: str, allow_write: bool = False) -> dict:
-    """Write only to an explicitly selected parent repository. Verify exact readback."""
+def apply_projection(calculated: dict, client, *, confirm_scope: str,
+                     allow_write: bool = False, authorized_surfaces=frozenset(),
+                     authorized_targets=frozenset(), lab_scope: str | None = None,
+                     source_probe=None) -> dict:
+    """Sole native writer: fake-provider ECO-05; never an atomic CAS.
+
+    The production CLI refuses live --apply without future exact consent.
+    For synthetic execution, require exact target/surface permissions, source
+    pinning, and GET preflight/readback. Neither human labels nor the AIM master
+    are ever patched. Namespace modification is deliberately unsupported.
+    Token permission minimisation requires controller-side verification; this
+    local method cannot infer actual GitHub token scope.
+    """
+    changes = calculated.get("changes")
+    if not isinstance(changes, list):
+        raise ContractError("projection changes must be a list")
     if not allow_write:
-        return {"dry_run": True, "proposed": len(calculated["changes"]), "applied": 0}
-    if confirm_scope != calculated["parent"] or client.repo != PARENT_REF.fullmatch(confirm_scope)[1]:
-        raise ContractError("scope confirmation mismatch")
-    changed = 0
-    for item in calculated["changes"]:
-        kind, number = item["kind"], item["number"]
-        endpoint = f"/issues/{number}" if kind == "issue" else f"/pulls/{number}"
-        observed = client.request("GET", endpoint)
-        if observed.get("title") != item["before"]:
-            raise ContractError(f"provider title drift for {kind} #{number}")
-        if kind == "pr" and observed.get("head", {}).get("sha") != item["head_sha"]:
-            raise ContractError("PR head changed before title write")
-        client.request("PATCH", endpoint, {"title": item["after"]})
-        verified = client.request("GET", endpoint)
-        if verified.get("title") != item["after"]:
-            raise ContractError(f"title readback mismatch for {kind} #{number}")
-        changed += 1
-    return {"dry_run": False, "applied": changed, "readback_ok": True}
+        return {"status": "NOT_RUN", "dry_run": True, "complete": False,
+                "proposed": len(changes), "applied": 0, "applied_surfaces": [],
+                "pending_surfaces": [_surface_receipt(x) for x in changes],
+                "readback_ok": False,
+                "next_reconciliation": "live demonstration NOT_RUN; no exact-scope write consent"}
+    parent = PARENT_REF.fullmatch(calculated.get("parent") or "")
+    if not parent or confirm_scope != calculated["parent"] or client.repo != parent[1]:
+        raise ContractError("scope confirmation or repository mismatch")
+    if parent[1] == LAB_REPO and lab_scope != LAB_REPO:
+        raise ContractError("explicit writable lab required, no implicit lab")
+    pin = calculated.get("source_pin")
+    if (not isinstance(calculated.get("label_sha"), str) or
+            not isinstance(pin, str) or not re.fullmatch(r"[0-9a-f]{64}", pin)):
+        raise ContractError("trusted label and source pin required")
+    if (not isinstance(authorized_surfaces, (set, frozenset)) or
+            not authorized_surfaces or not authorized_surfaces <= {"title", "scoreboard"}):
+        raise ContractError("separate surface consent required; namespace/labels disabled")
+    if not isinstance(authorized_targets, (set, frozenset)):
+        raise ContractError("exact target allowlist required")
+    if not callable(source_probe):
+        raise ContractError("trusted source re-read required")
+    target_keys = []
+    for item in changes:
+        ident, _ = _endpoint(item)
+        surface = _item_surface(item)
+        if surface not in authorized_surfaces or ident not in authorized_targets:
+            raise ContractError("unauthorised surface or target")
+        if surface == "scoreboard" and ident != ("issue", int(parent[2])):
+            raise ContractError("scoreboard target must be exact parent")
+        if surface == "title" and ident[0] == "issue" and ident[1] != int(parent[2]):
+            marker = "<!-- v36-task:{} parent:{} -->".format(item.get("task_id"), calculated["parent"])
+            if marker not in (item.get("body_before") or ""):
+                raise ContractError("child lacks owned issue marker; do not guess")
+        if surface == "title" and ident[0] == "pr" and not item.get("head_sha"):
+            raise ContractError("PR head pin required")
+        target_keys.append((ident, surface))
+    if len(target_keys) != len(set(target_keys)):
+        raise ContractError("duplicate writer responsibility")
+    if len({entry[0] for entry in target_keys}) != len(target_keys):
+        raise ContractError("multiple surfaces per target need fresh separate projections")
+
+    verified, attempted, prepared = [], [], []
+    def pin_is_current():
+        try:
+            return source_probe() == pin
+        except Exception:
+            return False
+
+    if not pin_is_current():
+        return _outcome("BLOCKED", changes, verified, "reconcile source: stale/unavailable pin")
+    # Preflight every target. Mixed already/ready after an interrupted run
+    # cannot be treated as a safe automatic replay.
+    try:
+        for item in changes:
+            _, endpoint = _endpoint(item)
+            state = _observed_state(item, client.request("GET", endpoint))
+            if state not in ("ready", "already"):
+                return _outcome("BLOCKED", changes, verified,
+                                "reconcile precondition: " + state)
+            prepared.append(state)
+    except Exception as exc:
+        return _outcome("BLOCKED", changes, verified,
+                        "reconcile provider GET failure: " + str(exc))
+    if "ready" in prepared and "already" in prepared:
+        return _outcome("BLOCKED", changes, verified,
+                        "reconcile prior partial application; do not blindly replay")
+    if changes and all(x == "already" for x in prepared):
+        return {"status": "VERIFIED", "dry_run": False, "complete": True,
+                "proposed": len(changes), "applied": 0, "applied_surfaces": [],
+                "pending_surfaces": [], "attempted_surfaces": [], "readback_ok": True,
+                "next_reconciliation": "none; GET-verified zero-change replay"}
+
+    for item in changes:
+        receipt = _surface_receipt(item)
+        _, endpoint = _endpoint(item)
+        if not pin_is_current():
+            return _outcome("PARTIAL" if verified else "BLOCKED", changes,
+                            verified, "reconcile source drift before next patch", attempted)
+        try:
+            if _observed_state(item, client.request("GET", endpoint)) != "ready":
+                return _outcome("PARTIAL" if verified else "BLOCKED", changes,
+                                verified, "reconcile concurrent title/body/head edit", attempted)
+            payload = {"title": item["after"]} if _item_surface(item) == "title" else {
+                "body": item["after_body"]}
+            attempted.append(receipt)
+            client.request("PATCH", endpoint, payload)
+            state = _observed_state(item, client.request("GET", endpoint))
+            if state != "already":
+                return _outcome("UNCERTAIN", changes, verified,
+                                "reconcile readback mismatch after PATCH", attempted)
+            verified.append(receipt)
+        except Exception as exc:
+            # A thrown PATCH/GET may have committed despite the exception.
+            uncertain = bool(attempted and attempted[-1] == receipt)
+            return _outcome("UNCERTAIN" if uncertain else "PARTIAL" if verified else "BLOCKED",
+                            changes, verified,
+                            "reconcile provider failure / uncertain write: " + str(exc),
+                            attempted)
+    return {"status": "VERIFIED", "dry_run": False, "complete": True,
+            "proposed": len(changes), "applied": len(verified),
+            "applied_surfaces": verified, "pending_surfaces": [],
+            "attempted_surfaces": attempted, "readback_ok": True,
+            "next_reconciliation": "none; fresh source replay should project zero changes"}
 
 
 def main(argv=None) -> int:
@@ -469,8 +568,9 @@ def main(argv=None) -> int:
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--confirm-scope", default="")
     args = parser.parse_args(argv)
-    if args.scoreboard and args.apply:
-        parser.error("ECO-04 board projection is dry-run only; ECO-05 write gate is not implemented")
+    # Code and fake-provider tests authorised; exact-scope live writes NOT authorised.
+    if args.apply:
+        parser.error("ECO-05 live demonstration: NOT_RUN (no exact-scope write consent)")
     try:
         label = load_label(args.label)
         plan = load_plan(args.plan, label)
