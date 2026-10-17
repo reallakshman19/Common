@@ -46,14 +46,14 @@ class MockupTests(unittest.TestCase):
             self.assertTrue(near(r.height*25.4/72,145))
         self.assertEqual(CFG["template"]["overlap"],10)
 
-    def test_door_outlines_69_by_227(self):
+    def test_door_outlines_69_by_237(self):
         shapes=[x["rect"] for x in self.doc[2].get_drawings()
                 if x["items"] and x["items"][0][0]=="re"]
         leaves=[r for r in shapes if near(r.width*25.4/72,69)]
         self.assertEqual(len(leaves),2)
-        for r in leaves:self.assertTrue(near(r.height*25.4/72,227))
+        for r in leaves:self.assertTrue(near(r.height*25.4/72,237))
         self.assertEqual(140-2*69,2)
-        self.assertEqual(230-227,3)
+        self.assertEqual(240-237,3)
 
     def test_narasimha_envelopes_scale(self):
         for index,width in ((3,92),(4,155)):
@@ -93,6 +93,14 @@ class MockupTests(unittest.TestCase):
 
     def test_unfitted_height_rejected(self):
         c=copy.deepcopy(CFG);c["leaves"]["height"]=230
+        with self.assertRaises(AssertionError):validate(c)
+
+    def test_old_leaf_227mm_rejected(self):
+        c=copy.deepcopy(CFG);c["leaves"]["height"]=227
+        with self.assertRaises(AssertionError):validate(c)
+
+    def test_old_opening_230mm_rejected(self):
+        c=copy.deepcopy(CFG);c["pillar"]["opening_top"]=245
         with self.assertRaises(AssertionError):validate(c)
 
     def test_no_tiling_overlap_rejected(self):
