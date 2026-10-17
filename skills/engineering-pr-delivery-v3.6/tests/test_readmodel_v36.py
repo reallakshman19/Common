@@ -171,7 +171,8 @@ class ReadModelTests(unittest.TestCase):
 
     def test_missing_or_malformed_ids_and_stamps_are_unread(self):
         for key, value in (("created_at", None), ("created_at", 12345), ("created_at", "2026-10-17T07:41"),
-                           ("id", "x"), ("id", True)):
+                           ("created_at", "0001-01-01T00:00:00+05:00"), ("created_at", "9999-12-31T23:59:59-05:00"),
+                           ("id", "x"), ("id", True), ("html_url", ["x"]), ("updated_at", 7), ("user", None)):
             sc = comment(SC_ID, self_check()); sc[key] = value
             r = run([sc, comment(9002, evidence())])[0]
             self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["345"]), (key, value))
@@ -192,12 +193,14 @@ class ReadModelTests(unittest.TestCase):
                 super().__init__(*a); self.issues = issues
             def list_issues(self): return self.issues
         class BadPr(Provider):
-            def get_pr(self, n): return "oops"
+            def get_pr(self, n): return self.pr
         for issues in ("x", [None], ["a"], [{**ISSUE, "number": "345"}], [{**ISSUE, "html_url": None}]):
             r = rm.read_model(PLAN, BadIssues(issues, []), NOW)
             self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["issues"]), issues)
-        r = rm.read_model(PLAN, BadPr([comment(SC_ID, self_check()), comment(9002, evidence())]), NOW)
-        self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["pr:344"]))
+        for pr in ("oops", {"head": "x"}, {"head": {}}, {"head": {"sha": 5}}):
+            p = BadPr([comment(SC_ID, self_check()), comment(9002, evidence())]); p.pr = pr
+            r = rm.read_model(PLAN, p, NOW)
+            self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["pr:344"]), pr)
 
     def test_native_latest_evidence_uses_normalised_time(self):
         stale = comment(9003, evidence(sha=OLD)); stale["created_at"] = "2026-10-17T07:42:30Z"

@@ -16,6 +16,7 @@ from lifecycle_v36 import ContractError, load_label, require_explicit_lab, valid
 import snapshot_v36 as ss
 from selfcheck_v36 import MARKER, parse_self_check, provenance
 
+SHA40 = re.compile(r"[0-9a-f]{40}")
 LINK = re.compile(r"Self-check: https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<issue>[1-9][0-9]*)#issuecomment-(?P<id>[1-9][0-9]*)\s*$")
 
 
@@ -26,12 +27,16 @@ def utc_stamp(value):
     stamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
     if stamp.tzinfo is None:
         raise ValueError("timestamp has no timezone")
-    return stamp.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    u = stamp.astimezone(timezone.utc)       # OverflowError at the range edges -> unread source
+    return "%04d-%02d-%02dT%02d:%02d:%02d.%06dZ" % (u.year, u.month, u.day, u.hour, u.minute, u.second,
+                                                     u.microsecond)
 
 
 def clean_comment(c):
     """Validated copy of one provider comment; ValueError when malformed."""
-    if not isinstance(c, dict) or type(c.get("id")) is not int or not isinstance(c.get("body"), (str, type(None))):
+    if (not isinstance(c, dict) or type(c.get("id")) is not int or not isinstance(c.get("body"), (str, type(None)))
+            or not isinstance(c.get("html_url"), str) or not isinstance(c.get("updated_at"), (str, type(None)))
+            or not isinstance(c.get("user"), dict) or not isinstance(c["user"].get("login"), str)):
         raise ValueError("malformed comment")
     return {**c, "created_at": utc_stamp(c.get("created_at"))}
 
@@ -66,7 +71,7 @@ class CachingClient:
         data = self._read(source, call, *args)
         try:
             return check(data)
-        except (ValueError, TypeError, AttributeError) as exc:
+        except Exception as exc:                # any malformed shape, incl. OverflowError
             self.failures.add(source)
             raise ContractError("malformed provider data for %s: %s" % (source, exc)) from exc
 
@@ -80,7 +85,7 @@ class CachingClient:
         return self.comments[number]
 
     def get_pr(self, number):
-        return self._checked("pr:%s" % number, self._client.get_pr, dict_of, number)
+        return self._checked("pr:%s" % number, self._client.get_pr, clean_pr, number)
 
 
 def list_of(data):
@@ -89,9 +94,10 @@ def list_of(data):
     return data
 
 
-def dict_of(data):
-    if not isinstance(data, dict):
-        raise ValueError("expected an object")
+def clean_pr(data):
+    head = data.get("head") if isinstance(data, dict) else None
+    if not isinstance(head, dict) or not isinstance(head.get("sha"), str) or not SHA40.fullmatch(head["sha"]):
+        raise ValueError("expected a pull request with a head sha")
     return data
 
 
