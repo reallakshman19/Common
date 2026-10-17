@@ -42,7 +42,7 @@ def match_mode(intent):
     if len(hits)>1:return None,hits
     return hits[0],hits
 
-REF_PATH=re.compile(r"^/[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9._-]{1,100}/(issues|pull)/[1-9][0-9]{0,9}$")
+REF_PATH=re.compile(r"^/([A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?)/([A-Za-z0-9._-]{1,100})/(issues|pull)/[1-9][0-9]{0,9}$")
 REF_FRAGMENT=re.compile(r"^issuecomment-[1-9][0-9]{0,15}$")
 CONTROLLER_CHECKS=(
  "Resolve the cited decision: exact Owner words and attribution (a shared-account post is a claim, not authentication).",
@@ -64,15 +64,19 @@ def amendment_ref_problem(ref):
         port=parts.port
     except ValueError:
         return "unparseable URL"
-    if parts.scheme!="https":
-        return "scheme must be https"
+    if not ref.startswith("https://") or parts.scheme!="https":
+        return "scheme must be lowercase https"
     if parts.netloc!="github.com" or parts.username or parts.password or port is not None:
         return "host must be exactly github.com (no credentials or port)"
     if parts.query:
         return "query strings are not accepted"
-    if not REF_PATH.match(parts.path):
+    path_match=REF_PATH.match(parts.path)
+    if not path_match:
         return "path must be /<owner>/<repo>/issues/<n> or /<owner>/<repo>/pull/<n>"
-    if parts.fragment and not REF_FRAGMENT.match(parts.fragment):
+    repo=path_match.group(2)
+    if set(repo)=={"."} or repo.lower().endswith(".git"):
+        return "repository segment must be a real repository name"
+    if "#" in ref and not REF_FRAGMENT.match(parts.fragment):
         return "only an #issuecomment-<id> fragment is accepted"
     return None
 
@@ -84,6 +88,13 @@ def _ref_note(ref,applied):
 
 def route(intent="",mode="auto",workflow="auto",phase=None,buddy_version=None,
           stage1_freeze_verified=False,amendment_ref=None):
+    result=_route(intent,mode,workflow,phase,buddy_version,stage1_freeze_verified,amendment_ref)
+    if (amendment_ref and "amendment_ref" not in result
+            and result["status"] not in ("INVALID_AMENDMENT_REF","PROVISIONAL_ROUTE")):
+        result["amendment_ref"]=_ref_note(amendment_ref,False)
+    return result
+
+def _route(intent,mode,workflow,phase,buddy_version,stage1_freeze_verified,amendment_ref):
     if mode not in ALLOWED_MODES or workflow not in WORKFLOWS:
         raise ValueError("invalid mode/workflow")
     if phase is not None and phase not in PHASES:

@@ -322,6 +322,27 @@ class AmendmentRefTests(unittest.TestCase):
         self.flags_false(x)
         self.assertIs(x["amendment_ref"]["verified"],False)
 
+    def test_unused_ref_reported_on_every_denial(self):
+        cases=[dict(mode="buddy",workflow="v3.6",buddy_version="1.6"),            # NEEDS_PHASE
+               dict(intent="Which of 2pass or 3pass is better?"),                  # NEEDS_SELECTION
+               dict(intent="v3.5 and v3.6 buddy"),                                 # NEEDS_WORKFLOW
+               dict(mode="buddy",workflow="v3.5"),                                 # HOLD
+               dict(mode="technical")]                                             # HOLD_FREEZE
+        for args in cases:
+            x=m.route(amendment_ref=FIXTURE_REF,**args)
+            self.assertNotIn(x["status"],("READ_SOURCE_NOW","PROVISIONAL_ROUTE"),args)
+            self.assertIs(x["amendment_ref"]["applied"],False,args)
+            self.assertIn("not applied",m.as_markdown(x))
+            self.flags_false(x)
+
+    def test_dot_and_git_repo_segments_rejected(self):
+        for ref in ("https://github.com/a/../issues/1","https://github.com/a/./issues/1",
+                    "https://github.com/a/.../issues/1","https://github.com/a/r.git/issues/1",
+                    "https://github.com/a-/r/issues/1","HTTPS://github.com/a/r/issues/1",
+                    "https://github.com/a/r/issues/1#"):
+            x=m.route(mode="buddy",workflow="v3.6",buddy_version="1.7",phase="1a",amendment_ref=ref)
+            self.assertEqual(x["status"],"INVALID_AMENDMENT_REF",ref)
+
     def test_positional_api_unchanged(self):
         x=m.route("","buddy","v3.6","1a",None,False)
         self.assertEqual(x["selection"]["source_key"],"buddy16")
