@@ -125,7 +125,7 @@ class ReadModelTests(unittest.TestCase):
     def test_provider_failure_is_incomplete_not_zero(self):
         r = run([], fail=True)[0]
         self.assertFalse(r["read_complete"])
-        self.assertEqual(r["unread_issue_numbers"], [345])
+        self.assertEqual(r["unread_sources"], ["345"])
         self.assertEqual(r["tasks"][0]["status"], "PROVIDER_UNAVAILABLE")
 
     def test_provenance_digest_and_history(self):
@@ -134,6 +134,40 @@ class ReadModelTests(unittest.TestCase):
         self.assertEqual(len(t["self_check"]["body_sha256"]), 64)
         self.assertEqual(t["self_check_history"], 1)
         self.assertEqual({s["comment_id"] for s in t["sources_read"]}, {SC_ID, 9002})
+
+    def test_malformed_pending_fails_closed(self):
+        for line in ("Pending: P1 fix · owner OTM · next run · prevents task DONE yes",   # missing unblocks
+                     "- Pending:   P1 · owner OTM · next run · unblocks x · prevents task DONE maybe"):
+            t = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]["tasks"][0]
+            self.assertFalse(t["claim_qualified"], line)
+            self.assertIn("unparsed Pending line(s) in self-check", t["reasons"])
+
+    def test_tolerant_pending_spacing_still_blocks(self):
+        line = "  - Pending:  P1 fix  ·  owner OTM ·\tnext run · unblocks merge · prevents task DONE YES"
+        r = run([comment(SC_ID, self_check(pending=line)), comment(9002, evidence())])[0]
+        self.assertTrue(r["pending"][0]["prevents_done"])
+        self.assertIn("pending item prevents DONE", r["tasks"][0]["reasons"])
+
+    def test_link_must_target_this_repo_and_issue(self):
+        for url in ("https://github.com/reallakshman19/Common/issues/999#issuecomment-%d" % SC_ID,
+                    "https://github.com/other/repo/issues/345#issuecomment-%d" % SC_ID):
+            body = evidence(link=False).replace("A usable lifecycle plan exists",
+                                                "A usable lifecycle plan exists Self-check: " + url, 1)
+            t = run([comment(SC_ID, self_check()), comment(9002, body)])[0]["tasks"][0]
+            self.assertIn("evidence does not link the self-check on its For the user line", t["reasons"])
+
+    def test_pr_read_failure_is_incomplete(self):
+        class PrDown(Provider):
+            def get_pr(self, n): raise lc.ContractError("pr down")
+        r = rm.read_model(PLAN, PrDown([comment(SC_ID, self_check()), comment(9002, evidence())]), NOW)
+        self.assertFalse(r["read_complete"])
+        self.assertIn("pr:344", r["unread_sources"])
+
+    def test_latest_self_check_by_created_at(self):
+        older = comment(SC_ID, self_check(claim="PARTIAL")); older["created_at"] = "2026-10-17T06:00Z"
+        newer = comment(9010, self_check()); newer["created_at"] = "2026-10-17T08:00Z"
+        t = run([newer, older, comment(9002, evidence())])[0]["tasks"][0]
+        self.assertEqual(t["self_check"]["comment_id"], 9010)
 
     def test_now_requires_timezone(self):
         with self.assertRaises(ValueError):

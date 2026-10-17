@@ -20,9 +20,12 @@ MARKER = "TASK_EVIDENCE v3.6"
 SELF_CHECK = re.compile(r"^SELF-CHECK v1 · (?P<task>\S+) · ", re.M)
 CANDIDATE = re.compile(r"candidate (?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<sha>[0-9a-f]{40})")
 DONE_WHEN = re.compile(r"^Done-when: .*?→ (?P<state>MET|NOT_MET|NOT_RUN|UNKNOWN)\b", re.M)
-PENDING = re.compile(r"^Pending: (?P<what>.+?) · owner (?P<owner>.+?) · next (?P<next>.+?) · unblocks (?P<unblocks>.+?) · prevents task DONE (?P<prevents>yes|no)\b", re.M)
+PENDING_LINE = re.compile(r"^[ \t>*-]*Pending:", re.M | re.I)
+PENDING = re.compile(r"^[ \t>*-]*Pending:\s*(?P<what>.+?)\s*·\s*owner\s+(?P<owner>.+?)\s*·\s*next\s+(?P<next>.+?)"
+                     r"\s*·\s*unblocks\s+(?P<unblocks>.+?)\s*·\s*prevents task DONE\s+(?P<prevents>yes|no)\b",
+                     re.M | re.I)
 CLAIM = re.compile(r"^Proposed claim: (?P<claim>DONE|PARTIAL|BLOCKED|FAILED)\b", re.M)
-LINK = re.compile(r"Self-check: (?P<url>https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/issues/[1-9][0-9]*#issuecomment-(?P<id>[1-9][0-9]*))\s*$")
+LINK = re.compile(r"Self-check: https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<issue>[1-9][0-9]*)#issuecomment-(?P<id>[1-9][0-9]*)\s*$")
 
 
 class CachingClient:
@@ -46,7 +49,11 @@ class CachingClient:
         return self.comments[number]
 
     def get_pr(self, number):
-        return self._client.get_pr(number)
+        try:
+            return self._client.get_pr(number)
+        except ContractError:
+            self.failures.add("pr:%s" % number)
+            raise
 
 
 def digest(body):
@@ -64,7 +71,7 @@ def parse_self_check(comment, task_id, owner_login):
     head = SELF_CHECK.search(body)
     if not head or head["task"] != task_id:
         return None
-    record = {**provenance(comment), "status": "PARSED"}
+    record = {**provenance(comment), "created_at": comment.get("created_at"), "status": "PARSED"}
     actor = comment.get("user")
     if MARKER in body:
         record["status"] = "REJECTED_CONTAINS_CANONICAL_MARKER"
@@ -77,16 +84,21 @@ def parse_self_check(comment, task_id, owner_login):
     claim = CLAIM.search(body)
     record["claim"] = claim["claim"] if claim else "UNKNOWN"
     record["pending"] = [{k: m[k].strip() for k in ("what", "owner", "next", "unblocks")}
-                         | {"prevents_done": m["prevents"] == "yes"} for m in PENDING.finditer(body)]
+                         | {"prevents_done": m["prevents"].lower() == "yes"} for m in PENDING.finditer(body)]
+    # Fail closed: a Pending line we cannot parse may hide a blocking item.
+    record["unparsed_pending"] = len(PENDING_LINE.findall(body)) - len(record["pending"])
     return record
 
 
-def linked_comment_id(evidence_body):
+def linked_comment_id(evidence_body, repo, issue_number):
+    """Comment id linked on the For the user line, only if it is on this repo and child issue."""
     lines = (evidence_body or "").splitlines()
     if len(lines) < 2 or not lines[1].startswith("For the user: "):
         return None
     hit = LINK.search(lines[1])
-    return int(hit["id"]) if hit else None
+    if not hit or hit["repo"] != repo or int(hit["issue"]) != issue_number:
+        return None
+    return int(hit["id"])
 
 
 def qualify(row, check, link_id):
@@ -111,6 +123,8 @@ def qualify(row, check, link_id):
             reasons.append("done-when not all MET")
         if any(p["prevents_done"] for p in check["pending"]):
             reasons.append("pending item prevents DONE")
+        if check["unparsed_pending"]:
+            reasons.append("unparsed Pending line(s) in self-check")
     return {"claim_qualified": not reasons, "reasons": reasons,
             "acceptance": "NOT_EVALUATED"}
 
@@ -128,10 +142,11 @@ def read_model(plan, client, now):
         number = by_issue.get(row["issue"])
         comments = cached.comments.get(number, []) if number else []
         checks = [c for c in (parse_self_check(x, row["task_id"], owner_login) for x in comments) if c]
+        checks.sort(key=lambda c: (c.get("created_at") or "", c.get("comment_id") or 0))
         check = checks[-1] if checks else None
         evidence_body = next((c.get("body") for c in comments
                               if (c.get("html_url") or c.get("url")) == row["evidence"]), None)
-        link_id = linked_comment_id(evidence_body)
+        link_id = linked_comment_id(evidence_body, client.repo, number)
         out = {**row, "self_check": check, "self_check_history": len(checks),
                "evidence_links_self_check": link_id,
                "sources_read": [provenance(c) for c in comments if MARKER in (c.get("body") or "")
@@ -153,7 +168,7 @@ def read_model(plan, client, now):
     return {"schema": "v36.readmodel/v1", "observed_at": now, "plan": snap["plan"],
             "parent": snap["parent"], "label_sha": snap["label_sha"],
             "read_complete": not cached.failures,
-            "unread_issue_numbers": sorted(cached.failures),
+            "unread_sources": sorted(str(f) for f in cached.failures),
             "native": {k: snap[k] for k in ("total", "current_evidence", "stale_evidence", "verified_complete")},
             "claims_qualified": sum(t["claim_qualified"] for t in tasks),
             "acceptance": "NOT_EVALUATED", "pending": pending, "tasks": tasks}
