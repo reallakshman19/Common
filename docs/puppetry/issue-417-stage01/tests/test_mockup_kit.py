@@ -79,6 +79,24 @@ class MockupTests(unittest.TestCase):
                         self.assertLessEqual(r.x1,p.rect.width+.1)
                         self.assertLessEqual(r.y1,p.rect.height+.1)
 
+    def test_no_overlapping_text_spans_on_any_page(self):
+        for p in self.doc:
+            spans=[]
+            for block in p.get_text("dict")["blocks"]:
+                if block["type"]!=0:
+                    continue
+                for line in block["lines"]:
+                    for span in line["spans"]:
+                        if span["text"].strip():
+                            spans.append((span["text"],fitz.Rect(span["bbox"])))
+            collisions=[]
+            for i,(name,box) in enumerate(spans):
+                for other,box_other in spans[i+1:]:
+                    intersection=box & box_other
+                    if not intersection.is_empty and intersection.width*intersection.height > .5:
+                        collisions.append((name,other))
+            self.assertEqual(collisions,[],f"Page {p.number+1} text overlap: {collisions}")
+
     def test_assembly_page_requires_clear_rod_corridor(self):
         instructions=self.doc[5].get_text()
         receipt=self.doc[6].get_text()
