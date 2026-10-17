@@ -95,13 +95,13 @@ Draft #402's synthetic fixture and pure renderer (not included in this PR) test 
 |---|---|
 | A01 | Select the actual governing protocol, approved work/plan/owned child and valid permission. Titles, START or a checker PASS are not grants |
 | A02 | Reconcile the original Aim, effective amendments, task benefit and non-goals at assignment and on material change |
-| A03 | Capture material Owner technical input with complete conditions, source and provenance grade; an agent quotation never authenticates Owner authority |
+| A03 | Capture material Owner technical input with complete conditions, source and privacy/provenance grade; never authenticate an agent quotation as Owner authority |
 | A04 | Identify original positive/negative input, full/partial golden and benchmark at exact source/hash, or declare missing/unknown/synthetic |
 | A05 | Explain input → owning function/decision → consumer/output, before/after, preserved components, falsifier and excluded claims |
 | A06 | Publish unchanged canonical evidence on the real own child when valid; keep the LOG; link richer context separately |
 | A07 | Report real failures/PARTIAL/BLOCKED/NOT_RUN, tested source and capability needs, with no fake completion |
 | A08 | Preserve older contributions, causal decisions and sourced superseded/invalid issue hops; a 404 stays availability-unverified |
-| A09 | Keep improvement rationale, author, source, disposition and revisit trigger; KEEP/NO_CHANGE is valid; no unilateral redesign |
+| A09 | Keep improvement rationale, author, source, disposition and revisit trigger. KEEP/NO_CHANGE and bounded reuse are valid; no unilateral redesign or adoption authority |
 | A10 | Link PR → task/issue/evidence → conversation or a permitted restricted reference; acknowledge missing provenance and shared-account limits |
 | A11 | Use the actually selected native successor/multipass method and protected phase inputs; no stage graft or automatic version migration |
 | A12 | Supply facts to the one scoreboard/title publisher; no hand-authored inflated progress, self-granted acceptance or extra timers |
