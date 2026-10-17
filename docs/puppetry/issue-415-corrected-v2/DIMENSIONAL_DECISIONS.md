@@ -39,7 +39,7 @@ Holes are bounded inside rectangular part boxes by `geometry_gate.py`. That chec
 
 ### Critical cross-PR ownership seam
 
-The 255-mm opening, 237-mm leaves and x=660 Prahlada position are **proposals in #419**. The independent Stage-01 generator in PR #418 still embodies 245 mm / 227 mm / x625. Neither geometry nor paper from PR #418 can be silently certified as matching #419. Revise the Stage-01 trial under its owning workstream and repeat its focused tests before printing an integrated final kit. **Do not merge conflicting geometry based only on source-green checks.**
+The 255-mm opening, 237-mm leaves and x=660 Prahlada position are **candidate proposals**, now adopted in PR #418 source at pinned head `92ec3442173062e642ca52c0a9dc9285192ee973`. The owning Stage-01 generator and its seven-page A4 vector trial PDF were rebuilt; [exact-head run 39046803009](https://github.com/reallakshman19/Common/actions/runs/39046803009) passed 44 focused tests. The generated vector sheet was read back (PDF SHA-256 `05c494e412dbdc0a52ed3f25ea927fc6ca9460ab1b546547a39b551125031e30`, seven A4 pages, two 69×237-mm vector doors, zero overlapping text spans). **This resolves the old SOURCE-GEOMETRY mismatch only.** The corrected-v2 *character* ZIP/PDFs remain unavailable in PR #419; physical mm print accuracy, actual pin/rod envelopes, build clearance, and rehearsal remain untested. PRs remain separate draft branches based directly on main.
 
 ### Remaining P0/P1 holds
 
