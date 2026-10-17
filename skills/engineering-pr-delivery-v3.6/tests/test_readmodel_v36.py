@@ -160,6 +160,51 @@ class ReadModelTests(unittest.TestCase):
         r = rm.read_model(PLAN, OsDown([]), NOW)
         self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["345"]))
 
+    def test_timestamps_compared_as_times_not_strings(self):
+        sc, chat = comment(SC_ID, self_check()), comment(9010, "later remark")
+        for a, b in (("2026-10-17T07:41Z", "2026-10-17T07:41:30Z"),
+                     ("2026-10-17T11:00:00+04:00", "2026-10-17T08:00:00Z")):
+            sc["created_at"], chat["created_at"] = a, b
+            ev = comment(9002, evidence()); ev["created_at"] = a
+            t = run([sc, ev, chat])[0]["tasks"][0]
+            self.assertEqual(t["comments_after_self_check"], [9010], (a, b))
+
+    def test_missing_or_malformed_ids_and_stamps_are_unread(self):
+        for key, value in (("created_at", None), ("created_at", 12345), ("created_at", "2026-10-17T07:41"),
+                           ("id", "x"), ("id", True)):
+            sc = comment(SC_ID, self_check()); sc[key] = value
+            r = run([sc, comment(9002, evidence())])[0]
+            self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["345"]), (key, value))
+            self.assertFalse(r["tasks"][0]["claim_qualified"])
+
+    def test_only_own_evidence_for_this_task_may_follow(self):
+        foreign = comment(9010, evidence(), login="mallory")
+        other = comment(9011, evidence().replace("V36-341-WP1", "OTHER-1"))
+        for later in (foreign, other):
+            later["created_at"] = "2026-10-17T09:00Z"
+            t = run([comment(SC_ID, self_check()), comment(9002, evidence()), later])[0]["tasks"][0]
+            self.assertFalse(t["claim_qualified"])
+            self.assertEqual(t["comments_after_self_check"], [later["id"]])
+
+    def test_malformed_issue_or_pr_data_is_unread(self):
+        class BadIssues(Provider):
+            def __init__(self, issues, *a):
+                super().__init__(*a); self.issues = issues
+            def list_issues(self): return self.issues
+        class BadPr(Provider):
+            def get_pr(self, n): return "oops"
+        for issues in ("x", [None], ["a"], [{**ISSUE, "number": "345"}], [{**ISSUE, "html_url": None}]):
+            r = rm.read_model(PLAN, BadIssues(issues, []), NOW)
+            self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["issues"]), issues)
+        r = rm.read_model(PLAN, BadPr([comment(SC_ID, self_check()), comment(9002, evidence())]), NOW)
+        self.assertEqual((r["read_complete"], r["unread_sources"]), (False, ["pr:344"]))
+
+    def test_native_latest_evidence_uses_normalised_time(self):
+        stale = comment(9003, evidence(sha=OLD)); stale["created_at"] = "2026-10-17T07:42:30Z"
+        cur = comment(9002, evidence()); cur["created_at"] = "2026-10-17T07:42Z"
+        t = run([comment(SC_ID, self_check()), cur, stale])[0]["tasks"][0]
+        self.assertEqual(t["status"], "STALE_EVIDENCE")
+
     def test_latest_self_check_by_created_at(self):
         older = comment(SC_ID, self_check(claim="PARTIAL")); older["created_at"] = "2026-10-17T06:00Z"
         newer = comment(9010, self_check()); newer["created_at"] = "2026-10-17T08:00Z"

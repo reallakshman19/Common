@@ -29,7 +29,8 @@ NATIVE = re.compile(r"Native report: (?:https://github\.com/[A-Za-z0-9_.#/-]+|PE
 FREE = re.compile(r"(?P<key>Basis|Scope|A13|A13 review|Tests|Issue reconciliation): (?P<text>[^·]+)")
 CANDIDATE = re.compile(r"\bcandidate (?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<sha>[0-9a-f]{40})(?![\w@])")
 UNIQUE = ("Basis", "Scope", "A13", "A13 review", "Proposed claim", "Native report")
-EMBEDDED_KEY = re.compile(r"(?:Done-when|Pending|Proposed claim|Native report|SELF-CHECK)\s*:", re.I)
+EMBEDDED_KEY = re.compile(r"(?:Done-when|Pending|Proposed claim|Native report|SELF-CHECK|Basis|Scope|A13"
+                          r"|A13 review|Tests|Issue reconciliation)\s*:", re.I)
 
 
 def digest(body):
