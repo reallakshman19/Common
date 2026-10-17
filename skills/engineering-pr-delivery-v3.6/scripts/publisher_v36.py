@@ -482,6 +482,10 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
                 "pending_surfaces": [_surface_receipt(x) for x in changes],
                 "readback_ok": False,
                 "next_reconciliation": "live demonstration NOT_RUN; no exact-scope write consent"}
+    # ECO-05 permits synthetic provider execution ONLY. Production GithubClient
+    # cannot PATCH/POST until future explicit scoped Owner consent and gate revision.
+    if isinstance(client, GithubClient):
+        raise ContractError("live demonstration: NOT_RUN (no exact-scope write consent)")
     parent = PARENT_REF.fullmatch(calculated.get("parent") or "")
     if not parent or confirm_scope != calculated["parent"] or client.repo != parent[1]:
         raise ContractError("scope confirmation or repository mismatch")
