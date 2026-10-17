@@ -19,11 +19,372 @@ HEX40 = re.compile(r"^[0-9a-f]{40}$")
 PHASES = frozenset({"1a", "1b", "2", "Y"})
 
 
-def build_packet(label: dict, plan: dict, client, pr_numbers: list[int]) -> dict:
+
+# ECO-06 extends the EXISTING cold successor read path, without another agent
+# stage or separate publisher. Treat fetched text as *reported sources*, not
+# authoritative conclusions. No title, scoreboard, producer claim or CI count
+# authenticates original intent, a causal model, approval, or release.
+RECOVERY_SCHEMA = "v36.successor.recovery/v1"
+OUTCOMES = (
+    "original_intent_amendments",
+    "originals_golden_benchmark",
+    "causal_code_path",
+    "decision_rationale",
+    "issue_lineage",
+    "permitted_provenance",
+    "proof_vs_acceptance",
+    "handover_next_verification",
+    "stale_source_brief",
+    "safety_boundaries",
+)
+MAX_LINKED_ISSUES = 20
+MAX_ORIGINAL_FILES = 12
+ISSUE_URL = re.compile(
+    r"https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/issues/(?P<n>[1-9][0-9]*)"
+)
+BLOB_URL = re.compile(
+    r"https://github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/blob/"
+    r"(?P<sha>[0-9a-f]{40})/(?P<path>[A-Za-z0-9_./%+\-]+)"
+)
+ORIGINAL_LINE = re.compile(
+    r"(?im)^\s*(?P<kind>Original input|Golden|Benchmark|Causal source)\s*:\s*(?P<url>https://\S+)"
+)
+CONTEXT_WORDS = {
+    "original_intent_amendments": ("original owner intent:", "owner amendment:"),
+    "decision_rationale": ("decision:", "adopted:", "rejected:", "parked:"),
+    "handover_next_verification": ("handover:", "next verification:"),
+}
+
+
+def _hash_text(body):
+    return hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+
+def _outcome(status, reason, refs=(), **extra):
+    """Every reported outcome cites a read source; all others explain gaps."""
+    refs = list(dict.fromkeys(refs))
+    if status == "REPORTED" and not refs:
+        status, reason = "UNKNOWN", "no directly read source reference"
+    return {"status": status, "source_refs": refs, "reason": reason, **extra}
+
+
+def _owner_url(plan, client, url):
+    parent = PARENT_REF.fullmatch(plan.get("parent", ""))
+    if not parent or client.repo != parent[1]:
+        raise ContractError("successor owner repository mismatch")
+    expected = f"https://github.com/{parent[1]}/issues/{parent[2]}"
+    if url != expected:
+        raise ContractError("one authorised owning-issue URL required; other issue/repo/ref rejected")
+    return expected, int(parent[2])
+
+
+def recover_context(label: dict, plan: dict, client, *, owning_issue_url: str,
+                    native_snapshot: dict | None = None, prior: dict | None = None) -> dict:
+    """Read-only, bounded, source-first context collection for existing successor.
+
+    Sources come from one exact owning issue, plan-selected children and their
+    linked same-repository issue/original URLs. A quoted/linked source is only
+    reported provenance, never a scientific verdict. The optional prior pins
+    compare source revisions; without them freshness cannot be certified.
+    Blind independent participation is NOT_RUN, not inferred from this open read.
+    """
+    owner_url, owner_no = _owner_url(plan, client, owning_issue_url)
+    if (plan.get("label", {}).get("label_sha") != label.get("label_sha") or
+            plan["label"].get("version") != label.get("version") or
+            plan["label"].get("work") != label.get("work")):
+        raise ContractError("successor Owner label/plan mismatch")
+    if prior is not None and not isinstance(prior, dict):
+        raise ContractError("prior pin set must be a dict")
+    unavailable, sources, observed, statements, linked_history = [], [], {}, [], []
+    original_urls = {}
+    issue_links = set()
+    repo = client.repo
+    owner_login = repo.split("/", 1)[0]
+
+    def add_source(kind, url, body, *, author=None, updated=None):
+        if not isinstance(body, str):
+            unavailable.append(kind + ":body_missing:" + url)
+            return
+        if url in observed:
+            return
+        record = {"kind": kind, "url": url, "body_sha256": _hash_text(body),
+                  "updated_at": updated if isinstance(updated, str) else "UNKNOWN",
+                  "attribution": "REPORTED", "author": author or "UNKNOWN"}
+        sources.append(record)
+        observed[url] = record["body_sha256"]
+        lower = body.lower()
+        statements.append((url, lower))
+        for found in ISSUE_URL.finditer(body):
+            if found["repo"] == repo:
+                n = int(found["n"])
+                if n != owner_no:
+                    issue_links.add(n)
+        for hit in ORIGINAL_LINE.finditer(body):
+            kind_name, raw = hit["kind"].lower(), hit["url"].rstrip(".,;)")
+            m = BLOB_URL.fullmatch(raw)
+            if not m or m["repo"] != repo:
+                unavailable.append("unqualified_original_link:" + raw)
+                continue
+            original_urls.setdefault(kind_name, []).append((raw, url, m["sha"]))
+
+    def read_issue(issue, kind):
+        if not isinstance(issue, dict):
+            unavailable.append(kind + ":malformed_issue")
+            return
+        number = issue.get("number")
+        if type(number) is not int or number < 1:
+            unavailable.append(kind + ":malformed_issue_number")
+            return
+        expected = f"https://github.com/{repo}/issues/{number}"
+        if issue.get("html_url", expected) != expected:
+            unavailable.append(kind + ":foreign_issue_identity:" + expected)
+            return
+        add_source(kind, expected, issue.get("body"),
+                   updated=issue.get("updated_at"))
+
+    # Read the Owner issue from its exact authorised URL, independent of the
+    # human title's current wording. Fail visibly if the provider is unavailable.
+    try:
+        owner = client.request("GET", f"/issues/{owner_no}")
+        if not isinstance(owner, dict) or owner.get("number") != owner_no:
+            raise ValueError("owning issue identity changed")
+        read_issue(owner, "owning_issue")
+    except Exception as exc:
+        unavailable.append("owning_issue:provider_unavailable:" + type(exc).__name__)
+
+    def comments_of(number):
+        try:
+            comments = client.list_comments(number)
+            if not isinstance(comments, list):
+                raise ValueError("comments not a list")
+        except Exception as exc:
+            unavailable.append(f"comments:{number}:provider_unavailable:{type(exc).__name__}")
+            return
+        for c in comments:
+            if not isinstance(c, dict) or not isinstance(c.get("body"), str):
+                unavailable.append(f"comments:{number}:malformed_record")
+                continue
+            url = c.get("html_url") or c.get("url")
+            prefix = f"https://github.com/{repo}/issues/{number}#issuecomment-"
+            if not isinstance(url, str) or not url.startswith(prefix) or not url[len(prefix):].isdigit():
+                unavailable.append(f"comments:{number}:foreign_or_missing_reference")
+                continue
+            author = c.get("user") if isinstance(c.get("user"), dict) else {}
+            add_source("issue_comment", url, c["body"],
+                       author=author.get("login"), updated=c.get("updated_at"))
+
+    comments_of(owner_no)
+    try:
+        child_issues = client.list_issues()
+        if not isinstance(child_issues, list):
+            raise ValueError("issue list not an array")
+    except Exception as exc:
+        unavailable.append("issues:provider_unavailable:" + type(exc).__name__)
+        child_issues = []
+    from decompose_v36 import is_task_issue
+    owned = {owner_no}
+    for task in plan["tasks"]:
+        matches = [i for i in child_issues if isinstance(i, dict)
+                   and is_task_issue(i, task, plan["parent"])]
+        if len(matches) != 1:
+            unavailable.append("plan_child:" + task["task_id"] + ":missing_or_ambiguous")
+            continue
+        issue = matches[0]
+        number = issue.get("number")
+        if type(number) is not int:
+            unavailable.append("plan_child:" + task["task_id"] + ":number_unavailable")
+            continue
+        owned.add(number)
+        read_issue(issue, "plan_child")
+        comments_of(number)
+        linked_history.append({"issue": f"https://github.com/{repo}/issues/{number}",
+                               "kind": "plan_child", "status": "READ"})
+
+    # Bounded issue lineage following *explicit source links*, not inferred from
+    # numeric PRs or unrelated GitHub issues. Never cross into another repo.
+    for number in sorted(issue_links - owned)[:MAX_LINKED_ISSUES]:
+        url = f"https://github.com/{repo}/issues/{number}"
+        try:
+            getter = getattr(client, "get_issue", None)
+            issue = getter(number) if callable(getter) else client.request("GET", f"/issues/{number}")
+            if not isinstance(issue, dict) or issue.get("number") != number:
+                raise ValueError("linked issue identity mismatch")
+            previous_count = len(sources)
+            read_issue(issue, "linked_issue")
+            status = "READ" if len(sources) > previous_count else "UNKNOWN"
+            linked_history.append({"issue": url, "kind": "linked_issue", "status": status})
+            if status == "READ":
+                comments_of(number)
+        except Exception as exc:
+            unavailable.append("linked_issue:" + url + ":not_found_or_inaccessible:" + type(exc).__name__)
+            linked_history.append({"issue": url, "kind": "linked_issue",
+                                   "status": "NOT_FOUND_OR_INACCESSIBLE"})
+
+    checked_originals = []
+    original_failures = []
+    refs_by_type = {}
+    for kind in ("original input", "golden", "benchmark", "causal source"):
+        for url, citing_url, sha in original_urls.get(kind, [])[:MAX_ORIGINAL_FILES]:
+            item = {"kind": kind, "url": url, "cited_by": citing_url,
+                    "pinned_commit": sha, "status": "REPORTED_LINK"}
+            fetcher = getattr(client, "fetch_source", None)
+            if not callable(fetcher):
+                item["status"] = "NOT_RUN"
+                item["reason"] = "provider lacks exact-source content reader capability"
+            else:
+                try:
+                    fetched = fetcher(url)
+                    if (not isinstance(fetched, dict) or fetched.get("url") != url or
+                            fetched.get("sha") != sha or
+                            not isinstance(fetched.get("content"), str)):
+                        raise ValueError("source content/commit mismatch")
+                    add_source("pinned_source", url, fetched["content"], updated=None)
+                    item["status"] = "READ_PINNED_SOURCE"
+                    refs_by_type.setdefault(kind, []).append(url)
+                except Exception as exc:
+                    item["status"] = "UNKNOWN"
+                    item["reason"] = "private/unavailable or mismatched pinned source: " + type(exc).__name__
+            if item["status"] != "READ_PINNED_SOURCE":
+                original_failures.append(item["reason"])
+            checked_originals.append(item)
+
+    brief_input = {
+        "plan": plan.get("plan_version"),
+        "parent": plan["parent"],
+        "label": {"work": label["work"], "version": label["version"],
+                  "label_sha": label["label_sha"], "content": label.get("label")},
+        "tasks": plan.get("tasks"),
+    }
+    brief_sha = _hash_text(json.dumps(brief_input, sort_keys=True, ensure_ascii=False))
+    changes = []
+    if prior is not None:
+        for url, old_sha in (prior.get("source_hashes") or {}).items():
+            if not isinstance(old_sha, str) or not re.fullmatch("[0-9a-f]{64}", old_sha):
+                raise ContractError("malformed earlier source pin")
+            if url not in observed:
+                changes.append({"url": url, "state": "UNREAD_OR_MISSING"})
+            elif observed[url] != old_sha:
+                changes.append({"url": url, "state": "SOURCE_EDITED"})
+        if prior.get("brief_sha256") is not None and prior["brief_sha256"] != brief_sha:
+            changes.append({"url": "approved_label_and_plan", "state": "BRIEF_CHANGED"})
+    source_state = "STALE" if changes else "NO_PRIOR_PINS" if prior is None else "NO_DETECTED_CHANGE"
+    def matched_words(words):
+        return [url for url, low in statements if any(w in low for w in words)]
+
+    intent_refs = matched_words(CONTEXT_WORDS["original_intent_amendments"])
+    decision_refs = matched_words(CONTEXT_WORDS["decision_rationale"])
+    next_refs = matched_words(("next verification:",))
+    handover_refs = matched_words(("handover:",))
+    proof_refs = ([t.get("evidence") for t in native_snapshot.get("tasks", [])
+                   if isinstance(t, dict) and t.get("evidence")]
+                  if isinstance(native_snapshot, dict) else [])
+    valid_proof_refs = [u for u in proof_refs if isinstance(u, str) and
+                        u.startswith(f"https://github.com/{repo}/issues/")]
+    original_ref_list = [u for kind in ("original input", "golden", "benchmark")
+                         for u in refs_by_type.get(kind, [])]
+    needed_originals = all(refs_by_type.get(k) for k in ("original input", "golden", "benchmark"))
+    original_status = "REPORTED" if needed_originals else "UNKNOWN" if checked_originals else "MISSING"
+    original_reason = ("pinned files read; source authenticity, golden completeness and benchmark correctness NOT_EVALUATED"
+                       if needed_originals else
+                       "private/inaccessible or unverified originals: " + "; ".join(original_failures)
+                       if checked_originals else "no pinned original input, full golden or benchmark sources cited")
+    source_refs = [x["url"] for x in sources]
+    read_complete = not unavailable and not original_failures
+    outcomes = {
+        "original_intent_amendments": _outcome(
+            "REPORTED" if intent_refs else "UNKNOWN",
+            "Owner intent/amendment appears in read issue text; source identity and interpretation not independently approved"
+            if intent_refs else "original Owner intent/amendment not found in readable owning issue context",
+            intent_refs),
+        "originals_golden_benchmark": _outcome(
+            original_status, original_reason,
+            original_ref_list if needed_originals else [
+                x["cited_by"] for x in checked_originals],
+            originals=checked_originals, complete_golden="NOT_EVALUATED"),
+        "causal_code_path": _outcome(
+            "NOT_RUN", "independent source-level causal analysis not authorised or executed; links do not prove cause",
+            refs_by_type.get("causal source", []), causal_verified=False),
+        "decision_rationale": _outcome(
+            "REPORTED" if decision_refs else "UNKNOWN",
+            "adopted/rejected/parked words are cited, but alternative reasoning is not independently audited"
+            if decision_refs else "no cited decision/parked-rationale sources",
+            decision_refs),
+        "issue_lineage": _outcome(
+            "UNKNOWN" if unavailable else "REPORTED",
+            "bounded linked issues read; complete historical lineage not authenticated"
+            if not unavailable else "one or more linked issues or comments unavailable; full lineage UNKNOWN",
+            [x["issue"] for x in linked_history if x["status"] == "READ"],
+            completeness="UNKNOWN"),
+        "permitted_provenance": _outcome(
+            "REPORTED" if sources else "UNKNOWN",
+            "provider-observed body hashes identify fetched records, not human or citation authenticity"
+            if sources else "provider sources unavailable; cannot reconstruct provenance",
+            source_refs, authenticated_approval=False),
+        "proof_vs_acceptance": _outcome(
+            "REPORTED" if valid_proof_refs else "NOT_RUN",
+            "native snapshot E is an evidence indicator only; no Owner acceptance reader or independent review run"
+            if valid_proof_refs else "native evidence source unavailable; no proof or approval may be inferred",
+            valid_proof_refs, acceptance="NOT_EVALUATED",
+            native_statuses=[{"task_id": t["task_id"], "E": t["status"]}
+                             for t in native_snapshot["tasks"]]
+            if isinstance(native_snapshot, dict) else []),
+        "handover_next_verification": _outcome(
+            "REPORTED" if next_refs and handover_refs else "UNKNOWN",
+            "handover and next verification cited, but source-grounded independent continuation NOT_RUN"
+            if next_refs and handover_refs else
+            "complete handover and next verification cannot both be established from readable sources",
+            next_refs + handover_refs),
+        "stale_source_brief": _outcome(
+            "UNKNOWN" if changes or prior is None else "REPORTED",
+            "source or approved brief changed; re-read/reconcile before next action"
+            if changes else "no prior source/brief pin supplied; freshness UNKNOWN"
+            if prior is None else "no differences against supplied pins; provider completeness still requires review",
+            [x["url"] for x in changes if x["url"].startswith("https://") and x["url"] in observed],
+            changes=changes),
+        "safety_boundaries": _outcome(
+            "REPORTED" if source_refs else "NOT_RUN",
+            "read-only owner-issue scope; no private chat access, no authorisation, merge, release or acceptance granted",
+            [owner_url] if owner_url in observed else [],
+            live_participation="NOT_RUN"),
+    }
+    return {
+        "schema": RECOVERY_SCHEMA,
+        "owning_issue_url": owner_url,
+        "scope": "one plan-bound owning issue; only explicit same-repository links and selected plan children",
+        "investigation": {
+            "mode": "OPEN_SOURCE_INSPECTION",
+            "blind_review": "NOT_RUN",
+            "reason": "reading linked issues and source comments is not a blinded independent investigation",
+        },
+        "acceptance_demonstration": "NOT_RUN",
+        "acceptance_reason": "no live participation authority; code/synthetic evaluation only",
+        "prior_chats": {"status": "NOT_RUN", "reason": "earlier chat unavailable/not used; GitHub-only recovery"},
+        "read_complete": read_complete,
+        "unavailable_sources": sorted(set(unavailable)),
+        "sources": sources,
+        "source_hashes": observed,
+        "source_changes": changes,
+        "source_state": source_state,
+        "brief_sha256": brief_sha,
+        "linked_history": linked_history,
+        "outcomes": outcomes,
+        "limitations": [
+            "Reported textual assertions are not engineering truth or independent causal proof",
+            "No blind/G2 participation, no Owner acceptance, no launch or fixtures invented",
+            "Untrusted source text never becomes shell/code, writes, or trusted instructions",
+        ],
+    }
+
+
+def build_packet(label: dict, plan: dict, client, pr_numbers: list[int],
+                 *, owning_issue_url: str | None = None, prior: dict | None = None) -> dict:
     """All facts come from approved label, checked plan and current GitHub reads."""
     match = PARENT_REF.fullmatch(plan["parent"])
     if not match or client.repo != match[1]:
         raise ContractError("cold successor repository mismatch")
+    # Authorise the one owning URL *before* any snapshot or GitHub reads.
+    _owner_url(plan, client, owning_issue_url or
+               f"https://github.com/{match[1]}/issues/{match[2]}")
     if (plan["label"]["work"], plan["label"]["version"], plan["label"]["label_sha"]) != (
         label["work"], label["version"], label["label_sha"]
     ):
@@ -54,6 +415,10 @@ def build_packet(label: dict, plan: dict, client, pr_numbers: list[int]) -> dict
         prs.append({"number": number, "url": f"https://github.com/{client.repo}/pull/{number}",
                     "head": head, "state": pr.get("state"), "draft": bool(pr.get("draft")),
                     "merged": bool(pr.get("merged")), "title": pr["title"]})
+    owner_url = f"https://github.com/{client.repo}/issues/{match[2]}"
+    recovery = recover_context(label, plan, client,
+                               owning_issue_url=owning_issue_url or owner_url,
+                               native_snapshot=report, prior=prior)
     task_rows = []
     spec_by_id = {t["task_id"]: t for t in plan["tasks"]}
     for t in report["tasks"]:
@@ -76,6 +441,7 @@ def build_packet(label: dict, plan: dict, client, pr_numbers: list[int]) -> dict
                      "stale_evidence": report["stale_evidence"],
                      "total": report["total"], "accepted_complete": 0},
         "tasks": task_rows, "prs": prs,
+        "recovery": recovery,
         "next": pending[0] if pending else "INDEPENDENT_ACCEPTANCE_REQUIRED",
         "unproven": ["Current evidence is not accepted task completion",
                      "O5 cold agent must independently continue from GitHub",
@@ -112,6 +478,24 @@ def render_markdown(packet: dict) -> str:
                      f"draft={pr['draft']} merged={pr['merged']} | {pr['title']}")
     lines += [f"Next: {packet['next']}", "Unknowns / stop conditions:"]
     lines.extend(f"- {u}" for u in packet["unproven"])
+    recovery = packet.get("recovery")
+    if recovery:
+        lines.extend([
+            "## ECO-06 source-first recovery (code/synthetic only)",
+            "Owning issue: " + recovery["owning_issue_url"],
+            "Investigation: " + recovery["investigation"]["mode"]
+            + "; blind review=" + recovery["investigation"]["blind_review"],
+            "Acceptance demonstration: " + recovery["acceptance_demonstration"]
+            + " (no live participation authority)",
+            "Source freshness: " + recovery["source_state"],
+        ])
+        for name, item in recovery["outcomes"].items():
+            lines.append("- " + name + ": " + item["status"] + "; " + item["reason"])
+            for url in item["source_refs"]:
+                lines.append("  Source read/reference: " + url)
+        if recovery["unavailable_sources"]:
+            lines.append("Unavailable sources: " + ", ".join(recovery["unavailable_sources"]))
+        lines.extend(recovery["limitations"])
     lines += ["To continue without chats: refresh these GitHub issue/PR links, verify "
               "the current Owner label and exact PR head, then perform one authorized "
               "next step with its own task evidence. A title count is not approval."]
@@ -167,6 +551,8 @@ def main(argv=None) -> int:
     cold.add_argument("--plan", required=True)
     cold.add_argument("--lab", help="explicit lab repo from selected label when parent is lab")
     cold.add_argument("--pr", type=int, action="append", default=[])
+    cold.add_argument("--owning-issue-url",
+                      help="must equal the one validated plan.parent GitHub issue URL")
     buddy = sub.add_parser("buddy", help="render a read-only v1.6 stage prompt")
     buddy.add_argument("--phase", choices=sorted(PHASES), required=True)
     buddy.add_argument("--handover-id", required=True)
@@ -182,7 +568,9 @@ def main(argv=None) -> int:
             require_explicit_lab(label, plan["parent"], args.lab)
             client = GithubClient(PARENT_REF.fullmatch(plan["parent"])[1])
             client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
-            print(render_markdown(build_packet(label, plan, client, args.pr)), end="")
+            print(render_markdown(build_packet(
+                label, plan, client, args.pr,
+                owning_issue_url=args.owning_issue_url)), end="")
         else:
             print(buddy_prompt(args.phase, handover_id=args.handover_id,
                                parent=args.parent, assessed_sha=args.assessed_sha,
