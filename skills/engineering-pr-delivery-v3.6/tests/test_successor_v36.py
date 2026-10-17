@@ -130,5 +130,157 @@ class ColdSuccessorTests(unittest.TestCase):
             sv.buddy_prompt("1a",handover_id="a",parent=f"{REPO}#1",assessed_sha="abcdef0")
 
 
+class ECO06ContextProvider(Provider):
+    """Source records only; no mutation methods and no external service."""
+    def __init__(self, *, private=False, fail_comments=False, source_reader=True):
+        super().__init__()
+        self.private, self.fail_comments = private, fail_comments
+        self.source_reader = source_reader
+        self.owner = ("Original Owner intent: keep user input intact.\n"
+                      "Decision: ADOPTED preserve source identity; REJECTED inferred matching; "
+                      "PARKED deployment.\n"
+                      "Superseded by: https://github.com/" + REPO + "/issues/9\n"
+                      "Original input: https://github.com/" + REPO + "/blob/" + HEAD
+                      + "/fixtures/input.xml\n"
+                      "Golden: https://github.com/" + REPO + "/blob/" + HEAD
+                      + "/fixtures/full-golden.json\n"
+                      "Benchmark: https://github.com/" + REPO + "/blob/" + HEAD
+                      + "/benchmarks/expected.json\n")
+        self.issues[0]["body"] += "\nDecision: REJECTED fabricated accuracy claims\n"
+        self.comments[1].append({
+            "body": "Owner amendment: preserve physical identity; Next verification: independent Chromium run.",
+            "html_url": f"https://github.com/{REPO}/issues/1#issuecomment-99",
+            "id": 99, "user": {"login": "reallakshman19"},
+            "updated_at": "2026-10-17T05:00:00Z"})
+        self.linked = {"number": 9, "title": "Superseded context",
+                       "body": "Decision: PARKED experimental path",
+                       "html_url": f"https://github.com/{REPO}/issues/9"}
+
+    def request(self, method, path, body=None):
+        assert method == "GET" and path == "/issues/1"
+        return {"number": 1, "title": "[V3.6][E2/2] Reported success",
+                "body": self.owner,
+                "html_url": f"https://github.com/{REPO}/issues/1"}
+
+    def get_issue(self, number):
+        if number != 9:
+            raise lc.ContractError("unrelated issue")
+        return self.linked
+
+    def fetch_source(self, url):
+        if not self.source_reader:
+            raise NotImplementedError("blob retrieval capability unavailable")
+        if self.private:
+            raise PermissionError("403 private source")
+        return {"url": url, "content": "<original occurrence id='7'/>",
+                "sha": HEAD}
+
+    def list_comments(self, n):
+        if self.fail_comments and n == 1:
+            raise lc.ContractError("provider 503")
+        return super().list_comments(n)
+
+
+class ECO06SuccessorRecoveryTests(unittest.TestCase):
+    OWNER_URL = f"https://github.com/{REPO}/issues/1"
+    TEN = (
+        "original_intent_amendments", "originals_golden_benchmark",
+        "causal_code_path", "decision_rationale", "issue_lineage",
+        "permitted_provenance", "proof_vs_acceptance",
+        "handover_next_verification", "stale_source_brief", "safety_boundaries",
+    )
+
+    def test_eco06_packet_reports_all_ten_from_fresh_owned_sources(self):
+        provider = ECO06ContextProvider()
+        packet = sv.build_packet(LABEL, PLAN, provider, [4])
+        recovery = packet["recovery"]
+        self.assertEqual(recovery["schema"], "v36.successor.recovery/v1")
+        self.assertEqual(recovery["owning_issue_url"], self.OWNER_URL)
+        self.assertEqual(tuple(recovery["outcomes"]), self.TEN)
+        self.assertEqual(recovery["investigation"]["mode"], "OPEN_SOURCE_INSPECTION")
+        self.assertEqual(recovery["investigation"]["blind_review"], "NOT_RUN")
+        self.assertEqual(recovery["acceptance_demonstration"], "NOT_RUN")
+        self.assertEqual(recovery["outcomes"]["original_intent_amendments"]["status"], "REPORTED")
+        self.assertTrue(recovery["outcomes"]["original_intent_amendments"]["source_refs"])
+        self.assertEqual(recovery["outcomes"]["proof_vs_acceptance"]["acceptance"], "NOT_EVALUATED")
+        self.assertEqual(recovery["outcomes"]["causal_code_path"]["status"], "NOT_RUN")
+        self.assertIn("issues/9", str(recovery["linked_history"]))
+        self.assertIn("Owner intent", sv.render_markdown(packet))
+        for item in recovery["outcomes"].values():
+            self.assertTrue(item["source_refs"] or
+                            (item["status"] in ("MISSING", "UNKNOWN", "NOT_RUN")
+                             and item["reason"]), item)
+        self.assertNotIn("ACCEPTED", str(recovery["outcomes"]).upper())
+
+    def test_eco06_one_exact_authorized_owner_issue_only(self):
+        provider = ECO06ContextProvider()
+        for url in (f"https://github.com/{REPO}/issues/2",
+                    f"https://github.com/other/repo/issues/1",
+                    self.OWNER_URL + "?draft=1",
+                    self.OWNER_URL + "#issuecomment-99"):
+            with self.subTest(url=url), self.assertRaises(lc.ContractError):
+                sv.recover_context(LABEL, PLAN, provider, owning_issue_url=url)
+        with self.assertRaises(lc.ContractError):
+            sv.recover_context(LABEL, PLAN,
+                               Provider(repo="foreign/repo"),
+                               owning_issue_url=self.OWNER_URL)
+
+    def test_eco06_private_original_not_certified(self):
+        result = sv.recover_context(LABEL, PLAN, ECO06ContextProvider(private=True),
+                                    owning_issue_url=self.OWNER_URL)
+        entry = result["outcomes"]["originals_golden_benchmark"]
+        self.assertIn(entry["status"], ("UNKNOWN", "MISSING"))
+        self.assertIn("private", entry["reason"].lower())
+        self.assertNotIn("accepted", str(entry).lower())
+
+    def test_eco06_provider_unavailable_is_explicit_unknown(self):
+        result = sv.recover_context(LABEL, PLAN, ECO06ContextProvider(fail_comments=True),
+                                    owning_issue_url=self.OWNER_URL)
+        self.assertFalse(result["read_complete"])
+        self.assertIn("comments", str(result["unavailable_sources"]))
+        self.assertIn(result["outcomes"]["handover_next_verification"]["status"],
+                      ("UNKNOWN", "NOT_RUN"))
+
+    def test_eco06_stale_source_and_owner_brief_downgrade(self):
+        provider = ECO06ContextProvider()
+        first = sv.recover_context(LABEL, PLAN, provider, owning_issue_url=self.OWNER_URL)
+        stale = sv.recover_context(
+            LABEL, PLAN, provider, owning_issue_url=self.OWNER_URL,
+            prior={"source_hashes": {self.OWNER_URL: "f" * 64},
+                   "brief_sha256": "e" * 64})
+        self.assertEqual(stale["outcomes"]["stale_source_brief"]["status"], "UNKNOWN")
+        self.assertTrue(stale["source_changes"])
+        self.assertIn("STALE", stale["source_state"])
+        self.assertNotEqual(first["brief_sha256"], "e" * 64)
+
+    def test_eco06_capability_gap_and_no_earlier_chat_are_honest(self):
+        provider = ECO06ContextProvider(source_reader=False)
+        result = sv.recover_context(LABEL, PLAN, provider, owning_issue_url=self.OWNER_URL)
+        self.assertEqual(result["prior_chats"]["status"], "NOT_RUN")
+        self.assertEqual(result["outcomes"]["causal_code_path"]["status"], "NOT_RUN")
+        originals = result["outcomes"]["originals_golden_benchmark"]
+        self.assertIn(originals["status"], ("UNKNOWN", "NOT_RUN"))
+        self.assertTrue(originals["reason"])
+        self.assertEqual(result["acceptance_demonstration"], "NOT_RUN")
+
+    def test_eco06_no_scoreboard_title_or_fabricated_claim_grants_acceptance(self):
+        provider = ECO06ContextProvider()
+        provider.owner += "\n# BOARD ACCEPTED 100% SUCCESS -- unsupported claim\n"
+        packet = sv.build_packet(LABEL, PLAN, provider, [4])
+        self.assertEqual(packet["snapshot"]["accepted_complete"], 0)
+        self.assertEqual(packet["recovery"]["outcomes"]["proof_vs_acceptance"]["acceptance"],
+                         "NOT_EVALUATED")
+        self.assertEqual(packet["recovery"]["acceptance_demonstration"], "NOT_RUN")
+
+    def test_eco06_blind_stages_and_legacy_buddy_prompt_unchanged(self):
+        provider = ECO06ContextProvider()
+        report = sv.recover_context(LABEL, PLAN, provider, owning_issue_url=self.OWNER_URL)
+        self.assertEqual(report["investigation"]["blind_review"], "NOT_RUN")
+        prompt = sv.buddy_prompt("1b", handover_id="case", parent=f"{REPO}#1",
+                                 assessed_sha=HEAD)
+        self.assertIn("PRODUCT_IMPLEMENTATION=HOLD", prompt)
+        self.assertEqual(sv.PHASES, frozenset(("1a", "1b", "2", "Y")))
+
+
 if __name__=="__main__":
     unittest.main()
