@@ -40,3 +40,19 @@ King and Prahlada **new silhouettes** are creative candidates, NOT byte-identica
 4. Only then remove `BINARY_TRANSFER_PENDING` in a new auditable commit. Remain draft until engineering review and physical tests; do not merge as acceptance.
 
 **Status:** `LOCAL_CORRECTED_PACKAGE_VERIFIED | GITHUB_BINARY_CUSTODY=PENDING | PR=DRAFT | PHYSICAL_TEST=NOT_RUN | BUDDY_1A=HOLD`.
+
+## Source-level dimensional correction (17 Oct 2026; CANDIDATE ONLY)
+
+The earlier review's unbounded bow and unexamined geometry now have a source-grounded correction proposal:
+
+- [FABRICATION_CANDIDATE.json](FABRICATION_CANDIDATE.json): inherited body/arm dimensions, explicit hole coordinates and diameters, nominal DOF/BOM, control lengths, and 2.5D placement assumptions.
+- [DIMENSIONAL_DECISIONS.md](DIMENSIONAL_DECISIONS.md): movement-by-movement justification, retained unknowns and the **cross-PR** dimensional amendment.
+- [geometry_gate.py](geometry_gate.py): conservative source-only hole/DOF, Narasimha portal and bow-motion screen; deliberately does **not** approve real cut lines or operator mechanics.
+- [story_parity.py](story_parity.py): checks exact text/clock parity among the 4 scene files and master story.
+- 14 focused tests exercised by the editable-source CI job; separate PDF custody job still fails closed.
+
+**Concrete candidate deltas:** move Prahlada's proposed stage centre **x625→660 mm**, retaining a whole-body bow trial of **15–20°**; raise the pillar aperture top **y245→255 mm** and trial leaf height **227→237 mm** to add 10 mm head clearance. Nominal 20° bow clearance changes from **overlap (−11.45 mm)** to **23.55 mm** using the recorded rectangular proxy. Actual clearance must include the mane, joints and rods.
+
+**CRITICAL mismatch not silently waived:** [PR #418](https://github.com/reallakshman19/Common/pull/418) still specifies the inherited x625/y245/227 trial geometry. The PR #419 changes are a proposed correction, not an updated Stage-01 printable kit. Do not combine #418 and #419 as an accepted fabrication package until the separate stage source and full-size mock-up agree.
+
+The *actual corrected v2 PDF and ZIP bytes remain absent from GitHub*. Consequently no contour, hole centre, printed length, colour layer, scale bar or physical hinge in those PDFs has been certified. Source-green means **TESTED_CANDIDATE_ONLY**; `BINARY_CUSTODY=PENDING`, `DIMENSIONED_PDF_REVIEW=NOT_RUN`, `PHYSICAL_TEST=NOT_RUN`, `180_SECOND_REHEARSAL=NOT_RUN`. Keep draft.
