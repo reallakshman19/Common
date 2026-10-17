@@ -382,7 +382,9 @@ def _outcome(status, changes, verified, reason, attempted=None):
     return {"status": status, "dry_run": False, "complete": status == "VERIFIED",
             "applied": len(verified), "applied_surfaces": verified,
             "pending_surfaces": [_surface_receipt(x) for x in changes[len(verified):]],
-            "attempted_surfaces": attempted or [], "readback_ok": status == "VERIFIED",
+            "attempted_surfaces": attempted or [],
+            "uncertain_surfaces": (attempted or [])[len(verified):],
+            "readback_ok": status == "VERIFIED",
             "next_reconciliation": reason}
 
 
@@ -547,7 +549,7 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
         except Exception as exc:
             # A thrown PATCH/GET may have committed despite the exception.
             uncertain = bool(attempted and attempted[-1] == receipt)
-            return _outcome("UNCERTAIN" if uncertain else "PARTIAL" if verified else "BLOCKED",
+            return _outcome("PARTIAL" if verified else "UNCERTAIN" if uncertain else "BLOCKED",
                             changes, verified,
                             "reconcile provider failure / uncertain write: " + str(exc),
                             attempted)
