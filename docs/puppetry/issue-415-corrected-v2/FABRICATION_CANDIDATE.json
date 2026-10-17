@@ -1,0 +1,285 @@
+{
+  "schema": "puppet-415-fabrication-candidate/v1",
+  "status": "SOURCE_GEOMETRY_CANDIDATE_NOT_PDF_OR_PHYSICAL_ACCEPTANCE",
+  "units": "mm",
+  "source_authority": {
+    "project_issue": "https://github.com/reallakshman19/Common/issues/415",
+    "related_stage_pr": "https://github.com/reallakshman19/Common/pull/418",
+    "stage_source_revision": "74523866287ffddb231c21b7cf0314a1e827f61e",
+    "v2_quick_print_pdf_bytes": "NOT_COMMITTED_NO_DIMENSIONAL_INSPECTION",
+    "character_dimensions": "INHERITED_CANDIDATE_NOT_CONFIRMED_V2_PDF",
+    "stage_coordinates": "NEW_BOUNDED_CORRECTION_REQUIRES_STAGE_PR_RECONCILIATION"
+  },
+  "characters": {
+    "king": {
+      "body": {
+        "width": 90,
+        "height": 200,
+        "count": 1
+      },
+      "arms": {
+        "width": 20,
+        "height": 90,
+        "count": 2
+      },
+      "coordinate_datum": "body: top-left; arms: top-left",
+      "holes": [
+        {
+          "part": "body",
+          "id": "H1",
+          "x": 15,
+          "y": 70,
+          "diameter": 3
+        },
+        {
+          "part": "body",
+          "id": "H2",
+          "x": 75,
+          "y": 70,
+          "diameter": 3
+        },
+        {
+          "part": "arm_preset",
+          "id": "A1",
+          "x": 10,
+          "y": 10,
+          "diameter": 3
+        },
+        {
+          "part": "arm_active",
+          "id": "A1",
+          "x": 10,
+          "y": 10,
+          "diameter": 3
+        },
+        {
+          "part": "arm_active",
+          "id": "C1",
+          "x": 10,
+          "y": 80,
+          "diameter": 2
+        }
+      ],
+      "internal_hinge_dof": 2,
+      "active_joint_dof": 1,
+      "arm_angle_deg_from_down": {
+        "preset": 120,
+        "boast": 120,
+        "point": 90
+      },
+      "control_sticks": {
+        "main_length_range": [
+          300,
+          350
+        ],
+        "active_arm_length_range": [
+          250,
+          300
+        ]
+      },
+      "open_mechanical_questions": [
+        "wrist pivot coupler",
+        "preset-arm retainer",
+        "safe three-tap contact",
+        "stick overlap and hand reach"
+      ]
+    },
+    "prahlada": {
+      "body": {
+        "width": 70,
+        "height": 160,
+        "count": 1
+      },
+      "coordinate_datum": "body: top-left; mounting hole coordinates converted from feet-origin",
+      "holes": [
+        {
+          "part": "body",
+          "id": "M1",
+          "x": 28,
+          "y": 94,
+          "diameter": 2
+        },
+        {
+          "part": "body",
+          "id": "M2",
+          "x": 42,
+          "y": 94,
+          "diameter": 2
+        },
+        {
+          "part": "body",
+          "id": "M3",
+          "x": 28,
+          "y": 120,
+          "diameter": 2
+        },
+        {
+          "part": "body",
+          "id": "M4",
+          "x": 42,
+          "y": 120,
+          "diameter": 2
+        }
+      ],
+      "internal_hinge_dof": 0,
+      "active_joint_dof": 0,
+      "stick": {
+        "length": 250,
+        "overlap": 90
+      },
+      "bow": {
+        "target_deg": 15,
+        "max_trial_deg": 20,
+        "pivot": "lower_handle_hypothesis"
+      },
+      "open_mechanical_questions": [
+        "adult tie attachment pull-and-twist test",
+        "bow rotation axis actual grip",
+        "physical max-angle rehearsal"
+      ]
+    },
+    "narasimha": {
+      "body": {
+        "width": 90,
+        "height": 180,
+        "count": 1
+      },
+      "arms": {
+        "width": 20,
+        "height": 80,
+        "count": 1
+      },
+      "coordinate_datum": "body: top centre (x right+, y down+); arm: top-left",
+      "holes": [
+        {
+          "part": "body",
+          "id": "H1",
+          "x": 37,
+          "y": 80,
+          "diameter": 3
+        },
+        {
+          "part": "body",
+          "id": "M1",
+          "x": -7,
+          "y": 106,
+          "diameter": 2
+        },
+        {
+          "part": "body",
+          "id": "M2",
+          "x": 7,
+          "y": 106,
+          "diameter": 2
+        },
+        {
+          "part": "body",
+          "id": "M3",
+          "x": -7,
+          "y": 134,
+          "diameter": 2
+        },
+        {
+          "part": "body",
+          "id": "M4",
+          "x": 7,
+          "y": 134,
+          "diameter": 2
+        },
+        {
+          "part": "arm_active",
+          "id": "A1",
+          "x": 10,
+          "y": 10,
+          "diameter": 3
+        },
+        {
+          "part": "arm_active",
+          "id": "C1",
+          "x": 10,
+          "y": 70,
+          "diameter": 2
+        }
+      ],
+      "internal_hinge_dof": 1,
+      "active_joint_dof": 1,
+      "control_sticks": {
+        "main_length": 260,
+        "main_overlap": 90,
+        "active_arm_length": 220
+      },
+      "arm_angle_deg_from_down": {
+        "hidden": 0,
+        "roar": 0,
+        "bless_after_clear": 90
+      },
+      "open_mechanical_questions": [
+        "actual mane width",
+        "pin and wrist coupler protrusion",
+        "control rod envelope during travel"
+      ]
+    }
+  },
+  "stage": {
+    "width": 750,
+    "height": 400,
+    "depth": 150,
+    "pillar_center_x": 375,
+    "pillar_outer_width": 180,
+    "pillar_height": 280,
+    "portal_width": 140,
+    "portal_bottom": 15,
+    "portal_top": 245,
+    "portal_open_top_proposal": 255,
+    "door_plane_z": 40,
+    "hidden_n_z": 130,
+    "emerged_n_z": 20,
+    "king_center_x": 220,
+    "king_shoulder_right_offset": 30,
+    "king_arm_reach": 80,
+    "prahlada_center_x_inherited": 625,
+    "prahlada_center_x_proposal": 660,
+    "n_center_x": 375,
+    "n_down_width": 92,
+    "n_blessing_reach_right": 107,
+    "n_initial_bottom": 30,
+    "n_rise": 20,
+    "door_edge_intrusion_each": 2,
+    "tolerance_horizontal": 5,
+    "tolerance_vertical": 5,
+    "tolerance_depth": 5,
+    "min_clearance": 10,
+    "design_margin_for_bow": 20,
+    "unobstructed_below_stage": 140,
+    "open_questions": [
+      "pillar leaf geometry revision must be reconciled with PR418",
+      "two rod path and side sightlines",
+      "stage stand and full-size printing"
+    ]
+  },
+  "bill_of_materials_candidate": {
+    "body_or_arm_cutouts": 6,
+    "split_pins": 3,
+    "main_sticks": 3,
+    "active_arm_rods": 2,
+    "rear_mount_tie_pairs": 4,
+    "swivel_couplers_min": 2,
+    "pillar_tape_hinges": 2,
+    "pillar_leaf_count": 2,
+    "cardboard_material": "1.5-2 mm puppet card; pillar trial separate",
+    "excluded_until_defined": [
+      "pillar stop/latch",
+      "operator pull cord",
+      "frame supports",
+      "backdrop fasteners"
+    ]
+  },
+  "required_physical_checks": [
+    "1:1 paper print and hole-centre caliper check",
+    "arm rotates and returns without pin tears",
+    "N passes full portal including control rods",
+    "door 5/5 consecutive cycles and hold open",
+    "Prahlada 15-20 deg bow has >=10mm measured gap",
+    "180 second complete rehearsal"
+  ]
+}
