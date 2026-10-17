@@ -94,6 +94,9 @@ class CachingClient:
             if status == "UNREAD":
                 self.failures.add("issue:%d" % number)
             return status, None
+        if issue["number"] != number:          # provider answered for another issue
+            self.failures.add("issue:%d" % number)
+            return "MISMATCHED", None
         return "FOUND", issue
 
     def list_comments(self, number):
@@ -249,9 +252,14 @@ def source_cursor(cached, now, prior):
                                      "body_sha256": digest(c.get("body"))}
             for n, cs in cached.comments.items() for c in cs}
     cursor, history, edited = src.merge_cursor(read, set(cached.comments), now, prior)
-    last = now if not cached.failures else ((prior or {}).get("cursor") or {}).get("last_complete_read_at")
     return {"source_cursor": cursor, "source_history": history, "edited_sources": edited,
-            "cursor": {"last_complete_read_at": last}}
+            "cursor": complete_cursor(cached, now, prior)}
+
+
+def complete_cursor(cached, now, prior):
+    """Advances only when nothing failed; call again after any later reads (hop fetches)."""
+    last = now if not cached.failures else ((prior or {}).get("cursor") or {}).get("last_complete_read_at")
+    return {"last_complete_read_at": last}
 
 
 def read_model(plan, client, now, prior=None):
@@ -278,6 +286,7 @@ def read_model(plan, client, now, prior=None):
         for item in (out["self_check"] or {}).get("pending", []):
             pending.append({"task_id": row["task_id"], "source": out["self_check"]["url"], **item})
         tasks.append(out)
+    cur["cursor"] = complete_cursor(cached, now, prior)          # hop fetches may have failed since
     return {**base, **cur, "plan": snap["plan"], "parent": snap["parent"], "label_sha": snap["label_sha"],
             "read_complete": not cached.failures,
             "unread_sources": sorted(str(f) for f in cached.failures),
