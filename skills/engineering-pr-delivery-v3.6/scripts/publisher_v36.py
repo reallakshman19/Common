@@ -258,7 +258,8 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict,
     return updates
 
 
-def calculate(plan: dict, client, pr_number: int | None = None) -> dict:
+def calculate(plan: dict, client, pr_number: int | None = None,
+              *, scoreboard: dict | None = None) -> dict:
     """All reads are fresh. No GET failure turns into a completed task."""
     repo = PARENT_REF.fullmatch(plan["parent"])[1]
     if client.repo != repo:
@@ -268,7 +269,7 @@ def calculate(plan: dict, client, pr_number: int | None = None) -> dict:
         client.get_pr = lambda n: client.request("GET", f"/pulls/{n}")
     report = snapshot(plan, client)
     pr = client.get_pr(pr_number) if pr_number is not None else None
-    updates = title_plan(plan, issues, pr, report)
+    updates = title_plan(plan, issues, pr, report, scoreboard=scoreboard)
     return {"parent": plan["parent"], "label_sha": plan["label"]["label_sha"],
             "current_evidence": report["current_evidence"], "total": report["total"],
             "accepted_complete": report["verified_complete"],
@@ -305,9 +306,12 @@ def main(argv=None) -> int:
     parser.add_argument("--plan", required=True)
     parser.add_argument("--lab", help="explicit Writable lab: repository when plan targets lab")
     parser.add_argument("--pr", type=int)
+    parser.add_argument("--scoreboard", help="optional ECO-03 board JSON; dry-run projection only")
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--confirm-scope", default="")
     args = parser.parse_args(argv)
+    if args.scoreboard and args.apply:
+        parser.error("ECO-04 board projection is dry-run only; ECO-05 write gate is not implemented")
     try:
         label = load_label(args.label)
         plan = load_plan(args.plan, label)
@@ -317,7 +321,15 @@ def main(argv=None) -> int:
         if args.apply and (args.confirm_scope != plan["parent"] or not token):
             raise ContractError("write requires token and exact --confirm-scope")
         client = GithubClient(repo, token)
-        result = calculate(plan, client, args.pr)
+        if args.scoreboard:
+            try:
+                with open(args.scoreboard, encoding="utf-8") as f:
+                    board_input = json.load(f)
+            except (OSError, json.JSONDecodeError) as exc:
+                raise ContractError(f"unreadable ECO-03 scoreboard: {exc}") from exc
+        else:
+            board_input = None
+        result = calculate(plan, client, args.pr, scoreboard=board_input)
         applied = apply_projection(result, client, confirm_scope=args.confirm_scope, allow_write=args.apply)
         print(json.dumps({"projection": result, "write": applied}, indent=2, sort_keys=True))
         return 0
