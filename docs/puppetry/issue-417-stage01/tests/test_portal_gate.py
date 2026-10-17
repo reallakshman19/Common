@@ -50,6 +50,21 @@ class PortalTopologyTests(unittest.TestCase):
         c["pillar"]["proposed_side_returns_world_x"][0]=[295,310]
         self.assertFalse(screen(c,STUDY)["checks"]["side_returns_stay_out_of_portal"])
 
+    def test_old_door_height_rejected(self):
+        c=copy.deepcopy(MOCK)
+        c["leaves"]["height"]=227
+        self.assertFalse(screen(c,STUDY)["checks"]["leaf_height_and_clearance_match_study"])
+
+    def test_old_pillar_opening_top_rejected(self):
+        c=copy.deepcopy(MOCK)
+        c["pillar"]["opening_top"]=245
+        self.assertFalse(screen(c,STUDY)["checks"]["mockup_opening_matches_study"])
+
+    def test_old_prahlada_center_rejected(self):
+        c=copy.deepcopy(MOCK)
+        c["stage"]["prahlada_trial_center_x"]=625
+        self.assertFalse(screen(c,STUDY)["checks"]["prahlada_trial_location_and_bow_match_study"])
+
     def test_thin_floor_slot_rejected(self):
         c=copy.deepcopy(MOCK)
         c["stage"]["puppet_stick_corridor"]["x_max"]=430
