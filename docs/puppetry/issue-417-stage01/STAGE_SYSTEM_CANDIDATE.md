@@ -37,7 +37,7 @@ Pillar outer centre x375; exterior x285..465, y0..280. Opening width140 x305..44
 
 ## Inherited measurements versus novel hypotheses
 
-Inherited candidate Narasimha arm-down width ~92 mm, body height180, raised arm horizontal width ~152–155, main stick260 with 90 mm overlap. King body 200×90, active arm approx70 mm pivot-to-tip. Prahlada body160×70, rigid with joined hands and 250 mm rear stick/90 mm overlap. These have not been physically qualified.
+Inherited candidate Narasimha arm-down width ~92 mm, body height180, raised arm horizontal width ~152–155, main stick260 with 90 mm overlap. King body 200×90, active arm approx80 mm pivot-to-tip (70 mm pivot-to-control-hole). Prahlada body160×70, rigid with joined hands and 250 mm rear stick/90 mm overlap. These have not been physically qualified.
 
 **New values under test**: 750×400×150 stage; 180×280 pillar and 140×230 opening; z positions 20/40/110/130; Narasimha rise20; Prahlada bow15°. These are not final fabrication sizes.
 
@@ -51,7 +51,7 @@ Inherited candidate Narasimha arm-down width ~92 mm, body height180, raised arm 
 | Front N z20 versus door plane z40 | 15 mm margin after allowance |
 | N top y210 +20 rise vs opening y245 | 10 mm top margin after allowance |
 | N stick260−90 overlap−feet y30 | 140 mm extends BELOW y=0 |
-| King shoulder x250 +70 reach vs door starts x305 | nominal 15 mm reach beyond edge |
+| King shoulder x250 +80 reach vs door starts x305 | nominal 25 mm reach beyond edge |
 | 15° Prahlada bow toward extended blessing arm | ~15 mm worst-case horizontal gap |
 | 20° bow under same model | FAIL conservative collision screen |
 | Raised N arm (~152) within opening140 | FAIL; arm stays DOWN until fully in front |
