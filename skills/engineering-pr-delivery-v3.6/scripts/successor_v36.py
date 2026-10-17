@@ -382,6 +382,9 @@ def build_packet(label: dict, plan: dict, client, pr_numbers: list[int],
     match = PARENT_REF.fullmatch(plan["parent"])
     if not match or client.repo != match[1]:
         raise ContractError("cold successor repository mismatch")
+    # Authorise the one owning URL *before* any snapshot or GitHub reads.
+    _owner_url(plan, client, owning_issue_url or
+               f"https://github.com/{match[1]}/issues/{match[2]}")
     if (plan["label"]["work"], plan["label"]["version"], plan["label"]["label_sha"]) != (
         label["work"], label["version"], label["label_sha"]
     ):
