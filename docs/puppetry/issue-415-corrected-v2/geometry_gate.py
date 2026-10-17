@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Fail-closed candidate dimension/motion screen, not print or physical approval."""
 from __future__ import annotations
-import copy
 import json
 import math
 from pathlib import Path
@@ -65,13 +64,21 @@ def inspect(config: dict) -> dict:
 
     # Nominal 2.5D screen derived from PR #418; never substitute for full outline.
     opening_l = stage["pillar_center_x"] - stage["portal_width"]/2
+    opening_r = stage["pillar_center_x"] + stage["portal_width"]/2
     n_l = stage["n_center_x"] - stage["n_down_width"]/2
-    side_gap = n_l - opening_l - stage["door_edge_intrusion_each"] - stage["tolerance_horizontal"]
+    n_r = stage["n_center_x"] + stage["n_down_width"]/2
+    side_gap = min(
+        n_l - opening_l - stage["door_edge_intrusion_each"] - stage["tolerance_horizontal"],
+        opening_r - n_r - stage["door_edge_intrusion_each"] - stage["tolerance_horizontal"]
+    )
     puppet_top = stage["n_initial_bottom"] + stage["n_rise"] + n["body"]["height"]
     headroom_existing = stage["portal_top"] - puppet_top - stage["tolerance_vertical"]
     headroom_proposed = stage["portal_open_top_proposal"] - puppet_top - stage["tolerance_vertical"]
-    if not (stage["portal_open_top_proposal"] < stage["pillar_height"]):
-        errors.append("proposed portal must leave a pillar lintel")
+    if not (stage["portal_open_top_proposal"] <= stage["pillar_height"] - 20):
+        errors.append("proposed portal must leave at least 20mm of pillar lintel")
+    proposed_aperture_height = stage["portal_open_top_proposal"] - stage["portal_bottom"]
+    if proposed_aperture_height - stage["portal_trial_leaf_height_proposal"] != 3:
+        errors.append("proposed trial leaf must have 1.5mm top and bottom play")
     if side_gap < stage["min_clearance"]:
         errors.append("Narasimha DOWN arm side passage fails")
     if headroom_proposed < stage["min_clearance"] + 5:
