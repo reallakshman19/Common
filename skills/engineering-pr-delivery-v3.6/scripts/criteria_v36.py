@@ -1,4 +1,4 @@
-"""CRITERIA v1 source-bound parser; implemented after RED tests."""
+"""RED-only inert criteria parser: returns missing source and no qualified clauses."""
 
 def parse_criteria_v1(body):
-    raise NotImplementedError("CRITERIA v1 validation pending")
+    return {"criteria": {}, "source_coverage": "0/0", "types": {}, "source": ""}
