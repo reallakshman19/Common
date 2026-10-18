@@ -155,7 +155,7 @@ class CheckpointTests(unittest.TestCase):
     def test_c5_checkpoint_table_has_18_three_mode_rows(self):
         text = (ROOT / "CODING_PRACTICES_ADDENDUM.md").read_text("utf-8")
         lines = [line for line in text.splitlines()
-                 if line.startswith("| C") and " | " in line]
+                 if line.startswith(tuple(f"| C{n} |" for n in range(1, 100)))]
         self.assertEqual(len(lines), 18)
         for number, line in enumerate(lines, 1):
             self.assertTrue(line.startswith(f"| C{number} |"), line)
