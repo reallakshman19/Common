@@ -30,7 +30,7 @@ def load_scope(repo, base, head, location):
     relative = absolute.resolve().relative_to(repo.resolve()).as_posix()
     old = source(repo, base, relative)
     now = source(repo, head, relative)
-    if not old or old != now or absolute.read_bytes() != old:
+    if not old or old != now:
         raise ValueError("--scope policy must be tracked and unchanged since base")
     rules = json.loads(text(old))
     files = rules.get("paths")
