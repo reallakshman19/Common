@@ -19,7 +19,7 @@ from test_scored_v36 import PLAN, LABEL, valid_check, FROZEN
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "QUICKSTART_STANDALONE.md"
-FENCES = re.compile(r"(?ms)^\x60\x60\x60([^\\r\\n]*)\\r?\\n(.*?)^\x60\x60\x60[ \\t]*\\r?$")
+FENCES = re.compile(r"(?ms)^\x60\x60\x60([^\r\n]*)\r?\n(.*?)^\x60\x60\x60[ \t]*\r?$")
 
 
 class QuickstartTests(unittest.TestCase):
@@ -32,7 +32,7 @@ class QuickstartTests(unittest.TestCase):
         for language, content in blocks:
             if language in ("yaml", "text"):
                 continue  # examples, never executable
-            match = re.fullmatch(r"bash exit=(\\d+)", language)
+            match = re.fullmatch(r"bash exit=(\d+)", language)
             self.assertIsNotNone(match, f"unsupported fence: {language!r}")
             commands.append((match[1], content))
         return commands
@@ -43,7 +43,7 @@ class QuickstartTests(unittest.TestCase):
                          "bash exit=bad", "bash exit=0 extra"):
             with self.subTest(language=language), self.assertRaises(AssertionError):
                 self._documented_commands(
-                    page + f"\\n\x60\x60\x60{language}\\npython -c \\"print(99)\\"\\n\x60\x60\x60\\n")
+                    page + f"\n\x60\x60\x60{language}\npython -c 'print(99)'\n\x60\x60\x60\n")
 
     def test_windows_owner_setup_and_visible_label_path(self):
         page = PAGE.read_text(encoding="utf-8")
