@@ -32,7 +32,7 @@ def request(mode="RECOVERY", policy="CONTINUE_AUTHORIZED_TASK"):
 
 def reconstruction():
     return {
-        "actor": "incoming", "phase": "RECOVERY", "assessed_commit": "a" * 40,
+        "takeover_id": "relay-42", "actor": "incoming", "phase": "RECOVERY", "assessed_commit": "a" * 40,
         "sections": [
             {"id": i, "text": "Source-backed section " + str(i),
              "state": "REPORTED", "refs": ["https://github.com/example/project/issues/1"]}

@@ -14,7 +14,6 @@ FIXTURE = REPO / "skills/engineering-pr-delivery-v3.6/tests/fixtures"
 
 class NativeTests(unittest.TestCase):
     def native_inputs(self, directory):
-        label_file = next(FIXTURE.rglob("*.yaml"))
         labels = []
         for path in FIXTURE.rglob("*.yaml"):
             item = yaml.safe_load(path.read_text())
@@ -70,7 +69,13 @@ class NativeTests(unittest.TestCase):
     def test_uncommitted_protocol_worktree_is_not_executed(self):
         with tempfile.TemporaryDirectory() as tmp:
             label, plan, child = self.native_inputs(Path(tmp))
-            result = preflight(REPO, label, plan, "V36-1-RELAY", child)
+            worktree = Path(tmp) / "untrusted-worktree"
+            worktree.mkdir()
+            (worktree / ".git").write_text("gitdir: " + str(REPO / ".git") + "\n")
+            fake = worktree / "skills/engineering-pr-delivery-v3.6/scripts/lifecycle_v36.py"
+            fake.parent.mkdir(parents=True)
+            fake.write_text("raise RuntimeError('untrusted worktree executed')\n")
+            result = preflight(worktree, label, plan, "V36-1-RELAY", child)
         self.assertEqual(result["loaded_from"], "PINNED_GIT_OBJECTS")
         self.assertEqual(result["protocol_commit"], PROTOCOL_COMMIT)
 

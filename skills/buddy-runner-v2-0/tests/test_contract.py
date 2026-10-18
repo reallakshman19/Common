@@ -93,6 +93,18 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_reconstruction(request(), rec)
 
+    def test_another_takeover_cannot_reuse_the_record(self):
+        case = request()
+        case["id"] = "different-relay"
+        with self.assertRaises(ValueError):
+            validate_reconstruction(case, reconstruction())
+
+    def test_nonobject_extra_section_is_rejected_cleanly(self):
+        rec = reconstruction()
+        rec["sections"].append("untrusted extra data")
+        with self.assertRaises(ValueError):
+            validate_reconstruction(request(), rec)
+
     def test_newly_introduced_needs_before_and_after(self):
         rec = reconstruction()
         rec["findings"] = [{"id": "F1", "kind": "DEFECT", "impact": "Missing rows",

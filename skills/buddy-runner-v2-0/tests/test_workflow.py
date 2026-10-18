@@ -84,6 +84,26 @@ class WorkflowTests(unittest.TestCase):
                            "action": "Retain separate repair", "refs": ["run:42"], "introduced": False}]
         self.assertEqual(assess(request(), rec)["next"], "ENTER_PINNED_CODING_PROTOCOL")
 
+    def test_owner_decision_route_does_not_start_coding(self):
+        rec = reconstruction()
+        rec["choices"][0]["decision"] = "OWNER_DECISION_REQUIRED"
+        result = assess(request(), rec)
+        self.assertEqual(result["state"], "OWNER_DIRECTION_DECISION_REQUIRED")
+        calls = []
+        invoke(result, {"task": "unapproved route"}, authorize=lambda _: True,
+               executor=lambda item: calls.append(item))
+        self.assertEqual(calls, [])
+
+    def test_new_onboard_task_can_supersede_decision_recommendation(self):
+        rec = reconstruction()
+        rec["choices"][0]["decision"] = "OWNER_DECISION_REQUIRED"
+        body = "Approve the reconstruction; investigate different task B."
+        event = self.event(body, rec)
+        result = assess(request("ONBOARD", "AWAIT_OWNER_TASK"), rec,
+                        approval=event, task=event, reader=lambda ref: source(body))
+        self.assertEqual(result["next"], "ENTER_PINNED_CODING_PROTOCOL")
+        self.assertEqual(result["task_prompt"], body)
+
     def test_profile_failure_preserves_source_investigation(self):
         case = request()
         case["profile"]["effort"] = "low"
