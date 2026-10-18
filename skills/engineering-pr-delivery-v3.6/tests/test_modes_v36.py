@@ -122,6 +122,9 @@ class ModeTests(TestCase):
                 data = (ROOT / name).read_text(encoding="utf-8")
                 self.assertLessEqual(len(data.splitlines()), 300)
         standalone = (ROOT / "MODE_STANDALONE.md").read_text(encoding="utf-8")
+        for number in range(1, 15):
+            with self.subTest(rule=number):
+                self.assertIn(f"| A{number:02d} |", standalone)
         classifications = {}
         for line in standalone.splitlines():
             cells = [cell.strip() for cell in line.split("|")[1:-1]]
