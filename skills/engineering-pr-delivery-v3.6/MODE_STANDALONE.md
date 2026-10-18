@@ -69,6 +69,8 @@ mirror live in [MODE_COORDINATOR.md](MODE_COORDINATOR.md). The exact native
 A01–A14 wording remains in [CODING_PRACTICES_ADDENDUM.md](CODING_PRACTICES_ADDENDUM.md);
 this table classifies it without weakening any protected part.
 
-**Staged additions:** C1–C18 and the unified checker arrive in WP2;
-CRITERIA v1 and SELF-CHECK v2 scoring arrive in WP3. Until then use
-existing A13/A14 and SELF-CHECK v1. No canonical evidence/LOG changes.
+**Start here:** the [standalone quickstart](QUICKSTART_STANDALONE.md)
+walks the Owner through a throwaway label, frozen criteria, native child
+receipt, scored companion, A13 checker, recompute and final Owner decision.
+C1–C18 checking and SELF-CHECK v2 are already available in native v3.6.
+Keep A13/A14, original v1 companions, canonical evidence and LOG unchanged.
