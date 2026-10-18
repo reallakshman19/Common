@@ -144,8 +144,8 @@ score never makes a human JUDGMENT MET and never grants acceptance.
 
 The Owner compares the frozen source words, checked child evidence,
 real before/after tests, Git diff and code, all unresolved criteria,
-pending items and the pilot's visible outcome. **The Owner may accept
-or reject** the proposed task; a passing score or draft PR is not
+pending items and the pilot's visible outcome. The Owner may **accept or reject**
+the proposed task; a passing score or draft PR is not
 approval. If an item is missing, mark PARTIAL/BLOCKED, request evidence
 or repair, and keep the decision open. If satisfied, the Owner records
 an explicit acceptance decision and controls the permitted merge.
