@@ -33,6 +33,8 @@ def load_scope(repo, base, head, location):
     if not old or old != now:
         raise ValueError("--scope policy must be tracked and unchanged since base")
     rules = json.loads(text(old))
+    if not isinstance(rules, dict):
+        raise ValueError("--scope must contain a JSON object")
     files = rules.get("paths")
     if (not isinstance(files, list) or not files or
             any(not isinstance(x, str) or x.startswith("/") or ".." in Path(x).parts
@@ -69,8 +71,10 @@ def c3_assertions(repo, base, head, changes):
         if any(current[statement] < count for statement, count in prior.items()):
             return False
         additions = newly_added(text(before), text(after))
-        if any(re.search(r"\bskipTest\(|@(?:unittest\.)?skip\b|\bpytest\.skip\(",
-                         row) for row in additions):
+        if any(re.search(
+                r"\bskipTest\(|\bpytest\.skip\(|"
+                r"@(?:unittest\.)?(?:skip|skipIf|skipUnless|expectedFailure)\b",
+                row) for row in additions):
             return False
     return True
 
@@ -191,8 +195,10 @@ def main(argv=None):
         print(f"A13_CHECK v36 | {values} | result={'FAIL' if failed else 'PASS'}"
               f" | failed={','.join(failed) if failed else 'none'}")
         return 1 if failed else 0
-    except (ValueError, OSError, UnicodeError, json.JSONDecodeError) as exc:
-        print(f"A13_CHECK v36 | result=FAIL | input={type(exc).__name__}: {exc}")
+    except Exception as exc:
+        # Unexpected input/provider errors must still produce exactly one line.
+        detail = str(exc).splitlines()[0][:160] if str(exc) else "unspecified"
+        print(f"A13_CHECK v36 | result=FAIL | input={type(exc).__name__}: {detail}")
         return 2
 
 

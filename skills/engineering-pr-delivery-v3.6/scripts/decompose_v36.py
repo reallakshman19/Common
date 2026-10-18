@@ -58,7 +58,9 @@ def validate_plan(plan: object, label: dict) -> dict:
         raise ContractError("tasks must be a nonempty list")
     names = set()
     for idx, task in enumerate(tasks):
-        task = require_keys(task, TASK_KEYS, f"tasks[{idx}]")
+        task = require_keys(task, TASK_KEYS | ({"criteria"} if isinstance(task, dict)
+                                                and "criteria" in task else set()),
+                            f"tasks[{idx}]")
         task_id = required_text(task["task_id"], "task_id")
         if not TASK_REF.fullmatch(task_id) or task_id in names:
             raise ContractError("invalid or duplicate task ID")
@@ -71,6 +73,13 @@ def validate_plan(plan: object, label: dict) -> dict:
             raise ContractError("task outcome must be declared in the selected label")
         for field in ("title", "acceptance", "for_user"):
             required_text(task[field], field)
+        if "criteria" in task:
+            items = task["criteria"]
+            if (not isinstance(items, list) or not items
+                    or any(not isinstance(x, str) or not x.strip()
+                           or x != x.strip() for x in items)
+                    or len(set(items)) != len(items)):
+                raise ContractError("criteria must be a nonempty unique list of source-backed clauses")
     return plan
 
 
@@ -91,6 +100,8 @@ def child_title(task: dict) -> str:
 
 
 def child_body(task: dict, plan: dict) -> str:
+    criteria = task.get("criteria")
+    detail = ("Criteria:\n" + "".join(f"- {item}\n" for item in criteria)) if criteria else ""
     return (
         f"{marker(task['task_id'], plan['parent'])}\n"
         f"Parent: {plan['parent']}\n"
@@ -102,6 +113,7 @@ def child_body(task: dict, plan: dict) -> str:
         f"Size: {task['size']}\n"
         f"For the user: {task['for_user']}\n"
         f"Acceptance: {task['acceptance']}\n"
+        f"{detail}"
         "\nTASK_EVIDENCE belongs on THIS issue after actual verified task completion;"
         " closing a child issue without evidence never proves completion.\n"
     )

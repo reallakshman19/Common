@@ -1,0 +1,17 @@
+CRITERIA v1 · V36.1 · FROZEN 2026-10-18 by OwnerTeammember · source: #430 body, with 2 pre-freeze corrections (AC3, K3)
+AC1 MUST "mode lives in the label" → test_modes_v36.py: standalone and coordinator accepted, any other value rejected · 3/3
+AC2 MUST "label without mode = coordinator" → real V35-LIFECYCLE label or its existing fixture · 1/1, coordinator behaviour unchanged
+AC3 MUST "standalone isolated: never reads or writes CoordinatorLandingpage" → every label/target CLI refuses a CoordinatorLandingpage target for reads and writes in standalone mode · refused n/n, zero network calls; coordinator mode unchanged
+AC4 MUST "one core + two modes" → SKILL.md + MODE_COORDINATOR.md + MODE_STANDALONE.md, each <=300 lines · 3/3 · A01–A14 classified 14/14
+AC5 MUST "18 checkpoints" → C1–C18 present exactly once with the three mode columns · 18/18
+AC6 MUST "one script for the ⚙ checks" → a13_check_v36.py: C1 (CI coverage), C3, C10, C11, C12, C13, C16, C17 + size ratchet = 9 categories · >=1 passing and >=1 failing fixture test each · >=18
+AC7 MUST "freeze" → CRITERIA v1 parser: 1 positive + missing source words, type and measure negatives · 4/4; reports source coverage
+AC8 MUST "measure" → SELF-CHECK v2: valid, missing criterion, extra criterion, malformed score, real #409 v1 companion still parses · >=5
+AC9 MUST "recompute" → positive recompute + altered score + false DONE · >=3; claimed != recomputed → not qualified
+AC10 MUST "standalone quickstart" → one page <=300 lines + a checked walkthrough
+K1 CONSTRAINT canonical TASK_EVIDENCE 8-line record and LOG line unchanged → existing formatter/parser tests pass unchanged
+K2 CONSTRAINT changes only under skills/engineering-pr-delivery-v3.6/ → git diff --name-only: 0 paths outside; any workflow change = scope stop
+K3 CONSTRAINT no NEW third-party dependency; existing PyYAML>=6.0,<7.0 stays → requirements and import diff: 0 new packages
+K4 CONSTRAINT full v3.6 suite green at base and head; no test removed, loosened or skipped → hosted CI counts at the tests-first commit and at head, plus OTM local runs
+J1 JUDGMENT documents readable in plain words → Owner review
+Criteria: 15 (10 MUST · 4 CONSTRAINT · 1 JUDGMENT) · source coverage: every clause of the #430 criteria block mapped
