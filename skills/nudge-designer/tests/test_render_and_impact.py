@@ -1,5 +1,6 @@
 """Worker context and selective revision impact are independently observable."""
 import copy
+import html
 import sys
 import unittest
 from pathlib import Path
@@ -52,6 +53,26 @@ class RenderAndImpactTests(unittest.TestCase):
     def test_unknown_nudge_is_a_useful_error(self):
         with self.assertRaisesRegex(ContractError, "nudge"):
             render_nudge(self.intent, self.plan, "does-not-exist", self.profiles)
+
+    def test_math_comparison_is_visible_without_raw_html(self):
+        fact = next(row for row in self.intent["items"] if row["id"] == "F-RACE")
+        fact["text"] = "Use 0 < t < 2 and preserve <script> as source data."
+        self.plan["intent_sha256"] = intent_digest(self.intent)
+        rendered = self.render()
+        self.assertNotIn("\\u003c", rendered)
+        self.assertNotIn("<script>", rendered)
+        self.assertIn(fact["text"], html.unescape(rendered))
+
+    def test_multiline_fact_and_condition_have_separate_boundaries(self):
+        fact = next(row for row in self.intent["items"] if row["id"] == "F-RACE")
+        fact.update(text="Source line one\nSource line two", condition="Only for supplied source")
+        self.plan["intent_sha256"] = intent_digest(self.intent)
+        rendered = self.render()
+        lines = rendered.splitlines()
+        self.assertIn("> Source line two", lines)
+        condition_line = next(line for line in lines if "Only for supplied source" in line)
+        self.assertFalse(condition_line.lstrip().startswith(">"))
+        self.assertTrue(condition_line.lstrip().startswith("Condition:"))
 
     def test_targeted_fact_change_preserves_unrelated_work(self):
         changed = copy.deepcopy(self.intent)

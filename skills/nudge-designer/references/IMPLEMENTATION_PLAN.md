@@ -147,10 +147,18 @@ reviewable implementation. Owner merge remains separate.
 
 ## Verification and publication
 
-Initial execution state: plan recorded; implementation and runtime verification
-pending. Update this section with actual evidence before publication. Do not
-convert a source-grounded LFEA example into a claim that its browser diagnosis
-or repair was executed by this package.
+Implementation checkpoint, 18 October 2026: W01–W04 are implemented, with the
+two schemas, seven profiles, offline support and four worked references. Three
+fresh-agent unseen-case pilots and their readability retests are recorded as
+portable replays. The 49 focused checks pass locally on Python 3.12, including
+actual CLI validation/rendering of all seven examples. Skill Creator validation,
+syntax, metadata and local-link checks pass. See [verification](VERIFICATION.md)
+for execution details and limits. W05 publication and hosted CI are reported on
+the delivery PR; this checkpoint does not claim them in advance.
+
+Do not convert the source-grounded LFEA example into a claim that its browser
+diagnosis or repair was executed by this package. No lower-capability worker
+benchmark, actual learner study or production FEA qualification was performed.
 
 Use the source-bound raw cases for manual pilots before considering a NextNudge
 import adapter or UI controls. A later adapter must preserve NextNudge's actual

@@ -1,4 +1,6 @@
 """Render a complete draft worker assignment from validated supplied objects."""
+import html
+
 from nd_contract import intent_index, nudge_context, validate_plan
 from nd_io import quoted, require
 
@@ -6,8 +8,8 @@ from nd_io import quoted, require
 def data(value):
     """Readable multiline data stays visibly quoted, never a top-level instruction."""
     if isinstance(value, str) and "\n" in value:
-        escaped = value.replace("`", "\\u0060").replace("<", "\\u003c")
-        return "\n" + "\n".join("> " + line for line in escaped.splitlines())
+        escaped = html.escape(value, quote=False).replace("`", "&#96;")
+        return "\n\n" + "\n".join("> " + line for line in escaped.splitlines()) + "\n\n"
     return quoted(value)
 
 
@@ -48,9 +50,9 @@ def render_nudge(intent, plan, nudge_id, profiles):
     source_lines += ["Declared context (conditions retained):"]
     for key in sorted(context_items):
         item = items[key]
-        source_lines.append("- " + key + " [" + item["kind"] + "/" + item["state"] + "] " +
-            data(item["text"]) + ("; condition: " + data(item["condition"])
-                                   if item["condition"] and item["condition"] != item["text"] else ""))
+        source_lines.append("- " + key + " [" + item["kind"] + "/" + item["state"] + "] " + data(item["text"]))
+        if item["condition"] and item["condition"] != item["text"]:
+            source_lines.append("  Condition: " + data(item["condition"]))
     section("Authoritative inputs", source_lines)
     section("Boundaries", ["Permitted scope (supplied):"] + [
         "- " + data(value) for value in intent["scope"]["permitted"]] + [
@@ -63,8 +65,8 @@ def render_nudge(intent, plan, nudge_id, profiles):
         "Configuration basis: " + quoted(intent["worker"]["configuration_basis"]),
         "Tools (reported): " + quoted(intent["worker"]["tools"]),
         "Reserved decisions:"] + ["- " + data(value) for value in intent["worker"]["reserved_decisions"]] + [
-        "Thinking protocol: " + quoted(intent["protocols"]["thinking"]),
-        "Delivery protocol: " + quoted(intent["protocols"]["delivery"]),
+        "Thinking protocol: " + quoted(intent["protocols"]["thinking"] or "Not selected"),
+        "Delivery protocol: " + quoted(intent["protocols"]["delivery"] or "Not selected"),
         "Protocol note: " + quoted(intent["protocols"]["note"])])
     section("Success criteria", ["Observable: " + data(nudge["success"]["observable"]),
                                 "Negative/contrast case: " + data(nudge["success"]["negative_case"])])

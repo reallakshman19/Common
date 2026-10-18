@@ -1,5 +1,6 @@
 """Strict local data handling; no provider reads, execution or authority checks."""
 import hashlib
+import html
 import json
 import math
 from pathlib import Path
@@ -107,4 +108,4 @@ def safe_locator(value):
 
 def quoted(value):
     """Keep source multiline prose as a single quoted data value in Markdown."""
-    return json.dumps(value, ensure_ascii=False).replace("`", "\\u0060").replace("<", "\\u003c")
+    return html.escape(json.dumps(value, ensure_ascii=False), quote=False).replace("`", "&#96;")

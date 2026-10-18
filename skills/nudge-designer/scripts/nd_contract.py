@@ -118,7 +118,8 @@ def validate_plan(intent, plan, profiles):
                        and (not item["outcome_refs"] or set(item["outcome_refs"]) & relevant)}
         preserved = nudge["boundaries"]["preserve_refs"]
         references(preserved, items, "preserved item")
-        require(constraints <= set(preserved), "applicable constraint omitted by " + ident)
+        require(constraints <= set(preserved), "applicable constraint omitted by " + ident + ": " +
+                ", ".join(sorted(constraints - set(preserved))))
         for branch in nudge["branches"]:
             references(branch["next_ids"], nudges, "branch nudge")
             require(ident not in branch["next_ids"], "branch cannot silently repeat the same nudge")
@@ -137,7 +138,7 @@ def validate_plan(intent, plan, profiles):
         for ident in row["nudge_ids"]:
             relevant, context_items, _, _ = nudge_context(intent, nudges[ident])
             require(row["target_id"] in relevant | context_items,
-                    "coverage nudge does not reference its target")
+                    "coverage nudge " + ident + " does not reference target " + row["target_id"])
         if row["disposition"] == "PLANNED":
             require(bool(row["nudge_ids"]), "planned coverage requires a nudge")
         if row["disposition"] == "EVIDENCE_REPORTED":

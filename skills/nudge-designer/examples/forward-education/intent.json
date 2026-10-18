@@ -1,0 +1,130 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-EDUCATION-FORWARD",
+  "revision": 2,
+  "owner_request": "Create the design for a short Grade 11 physics explanation and a new transfer\nquestion. Student knows v = u + at but says that a falling ball's acceleration\nmust be zero at the instant it is released because its velocity is zero. Help\nan agent produce understandable study material, keeping subject correctness\nseparate from whether this particular child has learned it.\n\nExplicit givens: release from rest, 12 m above level ground, no drag, g = 9.6\nm/s², downward is positive. No board syllabus, actual learner answers or existing\ncourse material supplied. Do not invent them. Cover the falling motion before\nimpact; no collision model is requested. Preserve a meaningful contrast with a\nball held at rest. Owner authorizes drafting, not contacting a child or publishing.\nAvailable tools: Python and text authoring. Worker configuration unknown.",
+  "purpose": "Design a short, correct Grade 11 explanation and transfer question; distinguish content verification from evidence of this learner's understanding.",
+  "sources": [
+    {
+      "id": "S-RAW",
+      "locator": "case.md",
+      "revision": "Supplied synthetic forward-pilot raw request read 2026-10-18",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN",
+      "note": "Raw synthetic Owner request read directly. Reported learner context is scenario data; no actual learner work was supplied."
+    }
+  ],
+  "items": [
+    {"id": "R-EXPLAIN", "kind": "REQUIREMENT", "text": "Design a short Grade 11 explanation addressing the reported misconception.", "source_refs": ["S-RAW"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-EXPLAIN"]},
+    {"id": "R-TRANSFER", "kind": "REQUIREMENT", "text": "Design a new transfer question that can expose the misconception.", "source_refs": ["S-RAW"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-TRANSFER"]},
+    {
+      "id": "R-CONTRAST",
+      "kind": "REQUIREMENT",
+      "text": "Preserve a meaningful contrast with a ball held at rest.",
+      "source_refs": ["S-RAW"],
+      "condition": "Preserve a meaningful contrast with a ball held at rest.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-EXPLAIN", "O-TRANSFER"]
+    },
+    {
+      "id": "R-EVIDENCE",
+      "kind": "REQUIREMENT",
+      "text": "keeping subject correctness separate from whether this particular child has learned it.",
+      "source_refs": ["S-RAW"],
+      "condition": "keeping subject correctness separate from whether this particular child has learned it.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-RECONCILE"]
+    },
+    {
+      "id": "C-GIVENS",
+      "kind": "CONSTRAINT",
+      "text": "Explicit givens: release from rest, 12 m above level ground, no drag, g = 9.6\nm/s², downward is positive.",
+      "source_refs": ["S-RAW"],
+      "condition": "Explicit givens: release from rest, 12 m above level ground, no drag, g = 9.6\nm/s², downward is positive.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-DOMAIN",
+      "kind": "CONSTRAINT",
+      "text": "Cover the falling motion before\nimpact; no collision model is requested.",
+      "source_refs": ["S-RAW"],
+      "condition": "Cover the falling motion before\nimpact; no collision model is requested.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-NOINVENT",
+      "kind": "CONSTRAINT",
+      "text": "No board syllabus, actual learner answers or existing\ncourse material supplied. Do not invent them.",
+      "source_refs": ["S-RAW"],
+      "condition": "No board syllabus, actual learner answers or existing\ncourse material supplied. Do not invent them.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-AUTHORITY",
+      "kind": "CONSTRAINT",
+      "text": "Owner authorizes drafting, not contacting a child or publishing.",
+      "source_refs": ["S-RAW"],
+      "condition": "Owner authorizes drafting, not contacting a child or publishing.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {"id": "F-PREREQUISITE", "kind": "FACT", "text": "The synthetic scenario reports that the student knows v = u + at.", "source_refs": ["S-RAW"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-EXPLAIN"]},
+    {
+      "id": "F-MISCONCEPTION",
+      "kind": "FACT",
+      "text": "The scenario reports: zero velocity at release must mean zero acceleration. No actual learner answer was inspected.",
+      "source_refs": ["S-RAW"],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": ["O-EXPLAIN", "O-TRANSFER"]
+    },
+    {"id": "U-SYLLABUS", "kind": "UNKNOWN", "text": "Board syllabus unknown; curriculum alignment cannot be claimed.", "source_refs": ["S-RAW"], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-PACK"]},
+    {"id": "U-LEARNING", "kind": "UNKNOWN", "text": "Actual learner explanation, transfer performance and learning gain unknown.", "source_refs": ["S-RAW"], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-RECONCILE"]},
+    {"id": "U-MATERIAL", "kind": "UNKNOWN", "text": "Existing course material unavailable; reuse or wording compatibility unknown.", "source_refs": ["S-RAW"], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-PACK"]},
+    {"id": "U-CONFIG", "kind": "UNKNOWN", "text": "Worker model, reasoning effort and capability unobserved; no configuration control known.", "source_refs": ["S-RAW"], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-PACK"]}
+  ],
+  "outcomes": [
+    {
+      "id": "O-PACK",
+      "parent_id": null,
+      "text": "A reviewable study-pack design.",
+      "done_when": "Explanation, transfer question, separate key and actual-checks report are returned; learning and curriculum alignment remain unclaimed.",
+      "item_refs": ["R-EXPLAIN", "R-TRANSFER", "R-CONTRAST", "R-EVIDENCE", "C-GIVENS", "C-DOMAIN", "C-NOINVENT", "C-AUTHORITY", "U-SYLLABUS", "U-LEARNING", "U-MATERIAL", "U-CONFIG"]
+    },
+    {
+      "id": "O-EXPLAIN",
+      "parent_id": "O-PACK",
+      "text": "Explain zero velocity with nonzero acceleration.",
+      "done_when": "Use the prerequisite, a worked method and the physical held/released contrast.",
+      "item_refs": ["R-EXPLAIN", "R-CONTRAST", "F-PREREQUISITE", "F-MISCONCEPTION"]
+    },
+    {"id": "O-TRANSFER", "parent_id": "O-PACK", "text": "Test transfer with staggered releases.", "done_when": "A new pre-impact prompt requires reasoning, with its checked key kept separate.", "item_refs": ["R-TRANSFER", "R-CONTRAST", "F-MISCONCEPTION"]},
+    {"id": "O-RECONCILE", "parent_id": "O-PACK", "text": "Separate content results from learning evidence.", "done_when": "Report actual subject checks, learning UNKNOWN and the next authorized action.", "item_refs": ["R-EVIDENCE", "U-LEARNING", "C-AUTHORITY"]}
+  ],
+  "knowledge": [
+    {
+      "topic": "Instantaneous value versus rate of change",
+      "reason": "Zero velocity alone does not determine acceleration. A held ball has zero net force because support balances gravity; after support removal gravity remains and a = +9.6 m/s². Explain this without requiring calculus.",
+      "outcome_refs": ["O-EXPLAIN", "O-TRANSFER"],
+      "source_refs": ["S-RAW"]
+    },
+    {"topic": "Evidence boundary", "reason": "A correct explanation and target key are content artifacts. Only actual learner-generated reasoning can supply evidence about this child's understanding.", "outcome_refs": ["O-RECONCILE"], "source_refs": ["S-RAW"]}
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN: supplied configuration unknown; this run exposes no model/configuration control.",
+    "tools": ["Python", "text authoring"],
+    "reserved_decisions": ["Owner decides later use or publication.", "Alignment claims require the missing syllabus/course material; learning claims require actual learner evidence.", "Return unresolved physical or pedagogical inconsistencies for Designer/subject review."]
+  },
+  "scope": {
+    "permitted": ["Draft the explanation, transfer question, separate reviewer key and checks report using Python and text."],
+    "forbidden": ["Contact a child or anyone else.", "Publish or send the material externally.", "Invent a board syllabus, learner answer, existing course material or learning gain.", "Model collision or post-impact behavior."],
+    "basis_refs": ["S-RAW"],
+    "note": "Drafting only. The plan neither dispatches a worker nor delivers teaching."
+  },
+  "protocols": {"thinking": null, "delivery": null, "note": "No separate thinking or delivery protocol was supplied or selected."}
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "nudge-designer.plan/v1",
+  "id": "P-RECORD-REVIEW",
+  "revision": 2,
+  "intent_id": "I-RECORD-REVIEW",
+  "intent_revision": 2,
+  "intent_sha256": "0e59d29e5670240bae24cd7dfd1c7804dfe957b956d6c4d7e004ac37770d14dc",
+  "profile_ids": ["core", "ui", "logic", "coding"],
+  "profiles_sha256": "a2c7ddab2c87c70bad7c5fe69bcd51e216d0e057c15d3149e782812cd741790f",
+  "strategy": "Investigate completion order independently of spinner appearance; keep repair separate and retain independent CSV drafting.",
+  "nudges": [
+    {
+      "id": "N-ONE",
+      "parent_id": null,
+      "type": "ground",
+      "outcome_refs": ["O-DIAG"],
+      "item_refs": ["R-NEXT", "F-CODE", "F-OBS", "F-PRIOR", "H-STALE"],
+      "source_refs": ["S-REQUEST", "S-CODE", "S-OBS"],
+      "profile_ids": ["core", "ui", "logic", "coding"],
+      "purpose": "Give the next worker discriminating evidence about the reported late-A overwrite before any repair.",
+      "deliverable": "One local diagnostic note with an event/state table. Use distinct A-text/B-text payloads; translate the supplied assignments literally, without guards or cancellation. Record selectedId, header, details and spinner.hidden after each event:\n1. select(A), select(B), resolve(B), resolve(A).\n2. Non-overlapping control: select(A), resolve(A), select(B), resolve(B).\n3. Alternate overlap: select(A), select(B), resolve(A), resolve(B).\nMark arbitrary initial model state as an assumption. Identify the first conflicting completion write, not merely the final state. An optional Python model must include its actual command/output if executed. Do not include a repair.",
+      "understanding": ["select sets selectedId/header synchronously; each completion writes details and hides the spinner unconditionally."],
+      "reasoning_moves": ["ground", "trace", "derive", "compare", "challenge"],
+      "evidence_methods": ["source_trace", "counterexample", "state_comparison"],
+      "depends_on": [],
+      "branches": [
+        {"observation": "Late A overwrites displayed B; the non-overlapping control does not.", "next_ids": [], "rationale": "Return evidence for a separately scoped repair proposal."},
+        {"observation": "Literal tracing does not reproduce the report or needs an unsupported assumption.", "next_ids": [], "rationale": "Return the falsifying trace or assumption; revise the hypothesis before repair planning."}
+      ],
+      "boundaries": {"preserve_refs": ["C-NAV", "C-INVEST", "C-LOCAL"], "do_not": ["Do not change the source/model to force a conclusion, apply a repair, or treat spinner appearance as record-identity evidence."]},
+      "success": {
+        "observable": "The table reproduces or falsifies H-STALE for synthetic-v1 and names the first conflicting write. Evidence is labeled supplied, source-derived, model-executed or NOT_RUN.",
+        "negative_case": "The non-overlapping control should avoid the late overwrite. If it fails, inspect model assumptions. Alternate overlap can end at B despite an intermediate A/header-B mismatch; final-state agreement alone is insufficient. Contradictory evidence must change the conclusion."
+      },
+      "uncertainty": {
+        "missing": ["Actual product source and browser/backend access; ordinary pointer and keyboard evidence."],
+        "return_with": "Return the trace, assumptions and any execution restriction. Python modeling cannot establish JavaScript runtime, actual navigation or product acceptance. Reserve unspecified loading/reselection policy.",
+        "independent_work": ["N-CSV: draft unresolved export choices now; do not wait for this investigation."]
+      },
+      "report": {
+        "required": ["Source revision, tables, assumptions and command/output only if executed; mark unrun checks NOT_RUN.", "Hypothesis status with source-linked reasoning, unresolved product evidence and no repair claim."],
+        "next_action": "Return the diagnosis to the Designer for separate repair planning; N-CSV remains eligible."
+      }
+    },
+    {
+      "id": "N-CSV",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": ["O-CSV-SPEC"],
+      "item_refs": ["R-CSV", "U-CSV", "F-TOOLS", "U-CONFIG"],
+      "source_refs": ["S-REQUEST"],
+      "profile_ids": ["core", "coding"],
+      "purpose": "Keep the pending independent CSV request actionable while the record-display investigation proceeds.",
+      "deliverable": "One local CSV specification checklist with columns/order and delimiter explicitly unresolved, plus a short draft clarification covering representative data, header naming, quoting/escaping, newlines and text encoding. Distinguish proposed review questions from supplied requirements. Do not send the questions or implement export.",
+      "understanding": ["No columns or delimiter were supplied; standards or personal defaults cannot establish Owner choices.", "CSV preparation is independent of the record completion-order diagnosis."],
+      "reasoning_moves": ["ground", "reconstruct", "construct"],
+      "evidence_methods": ["source_trace", "artifact_readback"],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {"preserve_refs": ["C-LOCAL"], "do_not": ["Do not invent columns, delimiter, acceptance defaults or export behavior.", "Do not edit product code or send the draft clarification externally.", "Do not make this work wait for N-ONE."]},
+      "success": {
+        "observable": "The checklist retains the pending export request and explicitly names missing columns/order and delimiter; draft questions are reviewable local text and claims stop at specification preparation.",
+        "negative_case": "A purported completed export or an apparently final specification with invented columns/delimiter fails this task, even if it looks conventional."
+      },
+      "uncertainty": {
+        "missing": ["Owner column list/order and delimiter.", "Representative export data and agreement on encoding/quoting/newline details."],
+        "return_with": "Return a short local checklist and draft questions for later Owner review; leave those choices unresolved.",
+        "independent_work": ["N-ONE remains eligible regardless of CSV choices."]
+      },
+      "report": {
+        "required": ["Quote the supplied lack of columns and delimiters.", "List explicit unresolved choices, proposed questions and next required input.", "State no export was implemented and no message was sent."],
+        "next_action": "When Owner specification and implementation authority become available, draft a separate export implementation nudge; do not tie it to record-race completion."
+      }
+    }
+  ],
+  "coverage": [
+    {"target_id": "R-TRUST", "disposition": "UNRESOLVED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "Offline diagnosis contributes evidence; no product repair or integrated acceptance is authorized."},
+    {"target_id": "R-NEXT", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The first bounded worker brief is an offline, discriminating investigation without an unproven repair."},
+    {"target_id": "R-CSV", "disposition": "PLANNED", "nudge_ids": ["N-CSV"], "evidence_refs": [], "rationale": "Independent local specification preparation retained; implementation remains pending."},
+    {"target_id": "C-NAV", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "No product edits permitted; both ordinary pointer and keyboard journeys remain explicit future acceptance work."},
+    {"target_id": "C-INVEST", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "First deliverable is a diagnostic note; repair choices are reserved."},
+    {"target_id": "C-LOCAL", "disposition": "PLANNED", "nudge_ids": ["N-ONE", "N-CSV"], "evidence_refs": [], "rationale": "Both tasks are limited to local analysis/drafting and forbid product edits/external writes."},
+    {"target_id": "U-LIVE", "disposition": "UNRESOLVED", "nudge_ids": [], "evidence_refs": [], "rationale": "No browser/backend or actual product source supplied; prepare future evidence requirements only."},
+    {"target_id": "U-CSV", "disposition": "UNRESOLVED", "nudge_ids": ["N-CSV"], "evidence_refs": [], "rationale": "Drafting identifies missing choices and cannot resolve them for the Owner."},
+    {"target_id": "U-CONFIG", "disposition": "UNRESOLVED", "nudge_ids": ["N-CSV"], "evidence_refs": [], "rationale": "No observed worker model/effort setting or configuration control; no capability claim."},
+    {"target_id": "U-LOADING", "disposition": "UNRESOLVED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "Diagnostic distinguishes the supplied late overwrite from broader unknown loading and repeated-selection semantics."},
+    {"target_id": "O-TRUST", "disposition": "UNRESOLVED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The parent outcome needs authorized repair and actual integrated product evidence."},
+    {"target_id": "O-DIAG", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "Exact source tracing and controlled event schedules provide bounded offline next work."},
+    {"target_id": "O-JOURNEY", "disposition": "DEFERRED", "nudge_ids": [], "evidence_refs": [], "rationale": "Actual pointer and keyboard journeys require product/browser access and appropriate scope; absent in this pilot."},
+    {"target_id": "O-CSV", "disposition": "DEFERRED", "nudge_ids": ["N-CSV"], "evidence_refs": [], "rationale": "Export implementation awaits specified columns/delimiter and separate implementation authority; local preparation stays eligible."},
+    {"target_id": "O-CSV-SPEC", "disposition": "PLANNED", "nudge_ids": ["N-CSV"], "evidence_refs": [], "rationale": "An explicit unresolved checklist can be drafted independently now."}
+  ],
+  "handover": {
+    "remaining": [
+      "Actual diagnostic execution; separately scoped repair if supported.",
+      "Real product/browser access, loading policy, and ordinary pointer/keyboard acceptance.",
+      "Owner CSV choices followed by separately authorized export implementation.",
+      "Future worker capability/configuration remains unknown."
+    ],
+    "next_action": "N-ONE for local diagnosis; N-CSV independently eligible.",
+    "changed_understanding": "Readability review condensed duplicated paraphrases; requirements, evidence distinctions, diagnostic schedules and deferred outcomes are retained."
+  }
+}

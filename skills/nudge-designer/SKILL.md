@@ -149,4 +149,8 @@ references demonstrate methods, not actual product acceptance.
   no production solver or design acceptance claim.
 
 Each case contains `intent.json`, `plan.json` and `ASSESSMENT.md`.
+Additional unseen-pilot replays are in `examples/forward-ui-logic/`,
+`examples/forward-education/` and `examples/forward-fea/`; their assessments
+distinguish original authoring, readability retest and portable packaging.
+Read [verification](references/VERIFICATION.md) for executed checks and limits.
 Check the package with `python -m unittest discover -s "$SKILL/tests" -v`.

@@ -1,0 +1,172 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-RECORD-REVIEW",
+  "revision": 2,
+  "owner_request": "Help me make the record-review screen trustworthy. Several patches have changed\nthe loading spinner but reviewers still sometimes see the wrong record. Give me\nuseful next work that a narrower implementation agent can carry out. Preserve\nordinary click and keyboard navigation. Do not combine an unproven repair with\nthe first investigation. Also retain the independent pending CSV export request.",
+  "purpose": "Trustworthy record display, preserved ordinary click/keyboard navigation, and the independent pending CSV export.",
+  "sources": [
+    {"id": "S-REQUEST", "locator": "case.md", "revision": "synthetic-v1", "kind": "OWNER", "assessment": "READ_THIS_RUN", "note": "Synthetic Owner request and scope read directly; not authenticated authority."},
+    {"id": "S-CODE", "locator": "case.md#supplied-source", "revision": "synthetic-v1", "kind": "SYNTHETIC", "assessment": "READ_THIS_RUN", "note": "Complete supplied snippet read; no product checkout was inspected."},
+    {"id": "S-OBS", "locator": "case.md#supplied-observations", "revision": "synthetic-v1", "kind": "RECEIPT", "assessment": "SUPPLIED", "note": "Reported sequence only; no fresh runtime, pointer trace or full browser run."}
+  ],
+  "items": [
+    {"id": "R-TRUST", "kind": "REQUIREMENT", "text": "Help me make the record-review screen trustworthy.", "source_refs": ["S-REQUEST"], "condition": "Help me make the record-review screen trustworthy.", "state": "CURRENT", "outcome_refs": ["O-TRUST"]},
+    {
+      "id": "R-NEXT",
+      "kind": "REQUIREMENT",
+      "text": "Give me useful next work that a narrower implementation agent can carry out.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "Give me useful next work that a narrower implementation agent can carry out.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-DIAG"]
+    },
+    {"id": "R-CSV", "kind": "REQUIREMENT", "text": "Also retain the independent pending CSV export request.", "source_refs": ["S-REQUEST"], "condition": "Also retain the independent pending CSV export request.", "state": "CURRENT", "outcome_refs": ["O-CSV"]},
+    {"id": "C-NAV", "kind": "CONSTRAINT", "text": "Preserve ordinary click and keyboard navigation.", "source_refs": ["S-REQUEST"], "condition": "Preserve ordinary click and keyboard navigation.", "state": "CURRENT", "outcome_refs": ["O-TRUST"]},
+    {
+      "id": "C-INVEST",
+      "kind": "CONSTRAINT",
+      "text": "Do not combine an unproven repair with the first investigation.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "Do not combine an unproven repair with the first investigation.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-DIAG"]
+    },
+    {
+      "id": "C-LOCAL",
+      "kind": "CONSTRAINT",
+      "text": "Owner authorizes local analysis and drafting only in this pilot, not product edits or external writes.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "Owner authorizes local analysis and drafting only in this pilot, not product edits or external writes.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-CODE",
+      "kind": "FACT",
+      "text": "Complete supplied source:\nlet selectedId = null;\nfunction select(id) {\n  selectedId = id;\n  header.textContent = id;\n  fetchRecord(id).then(record => {\n    details.textContent = record.description;\n    spinner.hidden = true;\n  });\n}",
+      "source_refs": ["S-CODE"],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": ["O-DIAG"]
+    },
+    {
+      "id": "F-OBS",
+      "kind": "FACT",
+      "text": "load A starts, reviewer selects B, load B resolves and B is shown; later A resolves and its text appears while the header still says B.",
+      "source_refs": ["S-OBS"],
+      "condition": "load A starts, reviewer selects B, load B resolves and B is shown; later A resolves and its text appears while the header still says B.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-DIAG"]
+    },
+    {
+      "id": "F-PRIOR",
+      "kind": "FACT",
+      "text": "Several patches have changed the loading spinner but reviewers still sometimes see the wrong record.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "Several patches have changed the loading spinner but reviewers still sometimes see the wrong record.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-DIAG"]
+    },
+    {
+      "id": "F-TOOLS",
+      "kind": "FACT",
+      "text": "Pilot reports Python and offline source inspection; browser and backend are absent.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "Available tools: Python, offline source inspection. Browser and backend absent.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "H-STALE",
+      "kind": "HYPOTHESIS",
+      "text": "The unconditional completion callback may overwrite B details with late A data.",
+      "source_refs": ["S-CODE", "S-OBS"],
+      "condition": "Hypothesis about the supplied snippet; product diagnosis is unverified.",
+      "state": "UNRESOLVED",
+      "outcome_refs": ["O-DIAG"]
+    },
+    {
+      "id": "U-LIVE",
+      "kind": "UNKNOWN",
+      "text": "Actual product revision, event handlers, browser behavior, focus state and ordinary pointer/keyboard traces are unavailable.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "No ordinary pointer trace or full browser run is supplied.",
+      "state": "UNRESOLVED",
+      "outcome_refs": ["O-JOURNEY"]
+    },
+    {
+      "id": "U-CSV",
+      "kind": "UNKNOWN",
+      "text": "CSV columns, delimiter and related export semantics remain unspecified; no defaults are authorized.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "CSV columns and delimiters have not yet been specified.",
+      "state": "UNRESOLVED",
+      "outcome_refs": ["O-CSV-SPEC"]
+    },
+    {
+      "id": "U-CONFIG",
+      "kind": "UNKNOWN",
+      "text": "Future worker model, reasoning effort and present Designer configuration are UNKNOWN; no exposed configuration control has been observed.",
+      "source_refs": ["S-REQUEST"],
+      "condition": "Actual future worker model and reasoning configuration are unknown.",
+      "state": "UNRESOLVED",
+      "outcome_refs": []
+    },
+    {"id": "U-LOADING", "kind": "UNKNOWN", "text": "Loading/error display, repeated same-ID selection and spinner policy are unspecified.", "source_refs": [], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-TRUST"]}
+  ],
+  "outcomes": [
+    {
+      "id": "O-TRUST",
+      "parent_id": null,
+      "text": "Trustworthy selection and display in the real application.",
+      "done_when": "Superseded completions cannot replace the selected record; ordinary pointer and keyboard journeys pass under the agreed loading/error policy.",
+      "item_refs": ["R-TRUST", "C-NAV", "U-LOADING"]
+    },
+    {
+      "id": "O-DIAG",
+      "parent_id": "O-TRUST",
+      "text": "Reproducible offline completion-order diagnosis.",
+      "done_when": "Source-linked event tables identify or falsify the stale overwrite, with model assumptions and unrun product checks explicit.",
+      "item_refs": ["R-NEXT", "C-INVEST", "F-CODE", "F-OBS", "H-STALE"]
+    },
+    {
+      "id": "O-JOURNEY",
+      "parent_id": "O-TRUST",
+      "text": "Preserved ordinary click and keyboard journeys in the real application.",
+      "done_when": "Once product source, browser and execution scope are available, ordinary pointer selection and keyboard selection/focus are each exercised against matching header/details with relevant completion orders.",
+      "item_refs": ["C-NAV", "U-LIVE"]
+    },
+    {
+      "id": "O-CSV",
+      "parent_id": null,
+      "text": "Independent CSV export remains tracked to completion.",
+      "done_when": "Owner-defined export columns and delimiter are delivered and checked under separately available implementation authority.",
+      "item_refs": ["R-CSV", "U-CSV"]
+    },
+    {
+      "id": "O-CSV-SPEC",
+      "parent_id": "O-CSV",
+      "text": "A concise export specification draft preserves missing choices.",
+      "done_when": "A local specification checklist records columns/order and delimiter as unresolved, identifies example-row and escaping requirements for later clarification, and claims no implemented export.",
+      "item_refs": ["R-CSV", "U-CSV"]
+    }
+  ],
+  "knowledge": [
+    {"topic": "Display invariant", "reason": "Once B is displayed while B remains selected, superseded A must not replace its details. Broader pending-load policy is unknown.", "outcome_refs": ["O-DIAG"], "source_refs": ["S-CODE", "S-OBS"]},
+    {"topic": "CSV choices", "reason": "Columns/order and delimiter require Owner specification; local drafting can proceed independently.", "outcome_refs": ["O-CSV"], "source_refs": ["S-REQUEST"]}
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN; no configuration control or observed Designer/future-worker setting supplied.",
+    "tools": ["Python", "Offline source inspection"],
+    "reserved_decisions": ["Product repair and integrated acceptance.", "Loading, errors, spinner and repeated-selection policy.", "CSV columns/order, delimiter and export behavior."]
+  },
+  "scope": {
+    "permitted": ["Local offline analysis and drafting, including optional Python schedule modeling."],
+    "forbidden": ["Product edits.", "External writes or messages."],
+    "basis_refs": ["S-REQUEST"],
+    "note": "The diagnostic and CSV drafting tasks remain independently eligible."
+  },
+  "protocols": {"thinking": null, "delivery": null, "note": "None selected. Return local artifacts under the assigned pilot directory."}
+}
