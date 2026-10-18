@@ -52,6 +52,8 @@ class FakeNative(pu.GithubClient):
         self.operations = []
         self.corrupt_readback = False
         self.fail_patch = False
+        self.corrupt_body_readback = False
+        self.race_before_patch = False
     def request(self, method, endpoint, body=None):
         self.operations.append((method, endpoint, copy.deepcopy(body)))
         if method == "GET" and endpoint == "/issues/comments/6244462145":
@@ -63,9 +65,14 @@ class FakeNative(pu.GithubClient):
                 raise lc.ContractError("fake 503 after attempted PATCH")
             if set(body) not in ({"title"}, {"body"}):
                 raise AssertionError("unexpected multi-surface PATCH")
+            if self.race_before_patch:
+                # Models the non-atomic gap AFTER second GET and BEFORE PATCH.
+                self.issue["body"] += "\nlate concurrent Owner edit"
             self.issue.update(body)
             if self.corrupt_readback:
                 self.issue["title"] = "concurrent Owner title"
+            if self.corrupt_body_readback:
+                self.issue["body"] += "\nprovider readback differs"
             return copy.deepcopy(self.issue)
         raise AssertionError(f"UNAUTHORISED provider operation: {method} {endpoint}")
 
@@ -150,6 +157,9 @@ class DisposableScopeTests(unittest.TestCase):
 
     def test_unexpected_owner_edit_blocks_and_never_restores_body(self):
         client = FakeNative()
+        # Simulate previously GET-verified title; this test isolates a later
+        # Owner body edit without issuing any fake or real PATCH.
+        client.issue["title"] = NEW_TITLE
         proposal, opts = prepare(client, "scoreboard")
         client.issue["body"] += "\nOwner added text"
         result = pu.apply_projection(proposal, client, **opts)
@@ -186,6 +196,100 @@ class DisposableScopeTests(unittest.TestCase):
         board, opts = prepare(client, "scoreboard")
         with self.assertRaises(lc.ContractError):
             pu.apply_projection(board, client, **opts)
+        self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
+    def test_patch_throws_without_false_verified(self):
+        client = FakeNative()
+        proposal, opts = prepare(client, "title")
+        client.fail_patch = True
+        result = pu.apply_projection(proposal, client, **opts)
+        self.assertIn(result["status"], ("UNCERTAIN", "PARTIAL"))
+        self.assertFalse(result["complete"])
+        self.assertEqual(result["applied"], 0)
+        self.assertTrue(result["pending_surfaces"])
+        self.assertTrue(result["attempted_surfaces"])
+        self.assertEqual(len([op for op in client.operations if op[0] == "PATCH"]), 1)
+
+    def test_concurrent_edit_after_second_get_before_patch_is_uncertain_not_cas(self):
+        client = FakeNative()
+        proposal, opts = prepare(client, "title")
+        client.race_before_patch = True
+        result = pu.apply_projection(proposal, client, **opts)
+        self.assertEqual(result["status"], "UNCERTAIN")
+        self.assertFalse(result["complete"])
+        self.assertIn("late concurrent Owner edit", client.issue["body"])
+        self.assertEqual(len([op for op in client.operations if op[0] == "PATCH"]), 1)
+
+    def test_scoreboard_readback_mismatch_is_uncertain_not_verified(self):
+        client = FakeNative()
+        client.issue["title"] = NEW_TITLE
+        proposal, opts = prepare(client, "scoreboard")
+        client.corrupt_body_readback = True
+        result = pu.apply_projection(proposal, client, **opts)
+        self.assertEqual(result["status"], "UNCERTAIN")
+        self.assertFalse(result["complete"])
+        self.assertEqual(result["applied"], 0)
+        self.assertTrue(result["pending_surfaces"])
+        self.assertEqual(len([op for op in client.operations if op[0] == "PATCH"]), 1)
+
+    def test_foreign_demo_authority_denied_before_write(self):
+        client = FakeNative()
+        proposal, opts = prepare(client, "title")
+        for value in (
+            "https://github.com/other/repo/issues/409#issuecomment-6244462145",
+            "https://github.com/reallakshman19/Common/issues/409#issuecomment-999",
+            "",
+        ):
+            with self.subTest(value=value), self.assertRaises(lc.ContractError):
+                pu.apply_projection(proposal, client, **(opts | {"demo_authority": value}))
+        self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
+    def test_client_repo_mismatch_denied_before_write(self):
+        client = FakeNative()
+        proposal, opts = prepare(client, "title")
+        client.repo = "foreign/repo"
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(proposal, client, **opts)
+        self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
+    def test_forged_consent_identity_not_sufficient_even_if_body_forged(self):
+        for key, value in (
+            ("id", 1234),
+            ("html_url", "https://github.com/foreign/other/issues/409#issuecomment-6244462145"),
+            ("user", {"login": "not-owner"}),
+        ):
+            client = FakeNative()
+            proposal, opts = prepare(client, "title")
+            client.comment[key] = value
+            with self.subTest(key=key):
+                result = pu.apply_projection(proposal, client, **opts)
+                self.assertEqual(result["status"], "BLOCKED")
+                self.assertEqual(result["applied"], 0)
+                self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
+    def test_consent_body_altered_but_required_fragments_remain_is_rejected(self):
+        client = FakeNative()
+        proposal, opts = prepare(client, "title")
+        client.comment["body"] = client.comment["body"].replace(
+            "Next: WP sent to Common coder (tab-3).",
+            "Next: WP sent to Common coder (tab-3). Reinterpreted authority.")
+        # Refreshing the digest of the *modified* comment must not bypass
+        # the frozen approved-body hash: this is NOT user-authorised consent.
+        with self.assertRaises(lc.ContractError):
+            pu.disposable_consent_pin(client)
+        result = pu.apply_projection(proposal, client, **opts)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
+    def test_nondict_projection_change_raises_contract_error(self):
+        client = FakeNative()
+        proposal, opts = prepare(client, "title")
+        for value in (None, 7, "[malformed]"):
+            with self.subTest(value=value):
+                changed = copy.deepcopy(proposal)
+                changed["changes"] = [value]
+                with self.assertRaises(lc.ContractError):
+                    pu.apply_projection(changed, client, **opts)
         self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
 
     def test_uncertain_readback_never_claims_verified_or_replays(self):
