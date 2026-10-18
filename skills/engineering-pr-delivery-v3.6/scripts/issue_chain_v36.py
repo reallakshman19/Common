@@ -30,6 +30,20 @@ CLASSES=frozenset(("OWNER_DIRECT_REPORTED","AGENT_ANALYSIS_REPORTED",
 DISPOSITIONS=frozenset(("N_A","PROPOSED","PARKED","ADOPTED_REPORTED",
                         "REJECTED_REPORTED","SUPERSEDED_REPORTED"))
 STATES=frozenset(("PRESENT_REPORTED","UNKNOWN","NOT_APPLICABLE"))
+# Category-to-kind validity checks are structural, never source authentication.
+CATEGORY_KINDS={
+    "ROOT_OWNER_INTENT":frozenset(("OWNER_INPUT",)),
+    "OWNER_AMENDMENTS":frozenset(("AMENDMENT","OWNER_INPUT")),
+    "ORIGINAL_INPUT":frozenset(("FIXTURE",)),
+    "COMPLETE_GOLDEN":frozenset(("GOLDEN",)),
+    "MEASURED_BENCHMARK":frozenset(("BENCHMARK",)),
+    "SOURCE_IMPLEMENTATION_CRUX":frozenset(("SOURCE_FLOW","AGENT_EVIDENCE")),
+    "AGENT_CONTRIBUTIONS":frozenset(("AGENT_EVIDENCE",)),
+    "DECISION_AND_PARKED_IDEAS":frozenset(("IDEA","DECISION")),
+    "KNOWN_FAILURES":frozenset(("KNOWN_FAILURE",)),
+    "SELECTED_NEXT_VERIFICATION":frozenset(("NEXT_VERIFICATION",)),
+    "TECHNICAL_HANDOVER":frozenset(("HANDOVER",)),
+}
 HEX40=re.compile(r"^[0-9a-f]{40}$")
 HEX64=re.compile(r"^[0-9a-f]{64}$")
 REPO=re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
@@ -88,6 +102,8 @@ def validate(data):
         require(isinstance(repo,str) and REPO.fullmatch(repo) and
                 isinstance(sha,str) and HEX40.fullmatch(sha),
                 "MAIN_SOURCE_CUT_INVALID")
+    # This allowlist is asserted by the REPORT ITSELF; no trusted repo scope
+    # is established without an independent caller/provider comparison.
     permitted=set(observed)
     intent=keys(data["owner_intent"],("excerpt","source_ref","source_class",
                                    "actor_authentication","captured_by"),"OWNER_INTENT")
@@ -159,6 +175,8 @@ def validate(data):
                 "CHAIN_DUPLICATE_LINK")
         if status=="PRESENT_REPORTED":
             require(record_ids and set(record_ids).issubset(by_id),"CHAIN_UNBOUND_ORPHAN")
+            require(all(by_id[r]["kind"] in CATEGORY_KINDS[edge["category"]]
+                        for r in record_ids),"CATEGORY_KIND_MISMATCH")
             require(edge["reason"] is None,"PRESENT_REASON_SHOULD_BE_NULL")
             refs.update(record_ids)
         else:
@@ -168,6 +186,10 @@ def validate(data):
     if chain[0]["state"]!="PRESENT_REPORTED":
         raise ChainError("ROOT_OWNER_INTENT_MISSING")
     require(set(by_id)==refs,"UNREFERENCED_HISTORY_EVENT")
+    # Every required edge has an explicit validated state, including UNKNOWN.
+    # This is STRUCTURAL coverage only, not independently verified coverage.
+    accounted_count=sum(state in STATES for state in states)
+    accounting_percent=100*accounted_count//len(CATEGORIES)
     source_count=sum(x=="PRESENT_REPORTED" for x in states)
     unknown_count=states.count("UNKNOWN")
     not_applicable_count=states.count("NOT_APPLICABLE")
@@ -178,7 +200,7 @@ def validate(data):
         "schema":"v36.issue-continuity-audit/v1",
         "parent":parent,"input_sha256":digest,
         "required_categories":len(CATEGORIES),
-        "accounted_categories":len(chain),
+        "accounted_categories":accounted_count,
         "reported_categories":source_count,
         "unknown_categories":unknown_count,
         "not_applicable_categories":not_applicable_count,
@@ -187,7 +209,7 @@ def validate(data):
         "verified_source_categories":0,
         "authenticated_owner_decisions":0,
         "semantic_acceptances":0,
-        "accounting_coverage_percent":100,
+        "accounting_coverage_percent":accounting_percent,
         "verified_coverage_percent":0,
         "status":"STRUCTURALLY_ACCOUNTED_NOT_SOURCE_VERIFIED",
         "permission_to_write":False,
@@ -209,15 +231,16 @@ def main(argv=None):
     args=p.parse_args(argv)
     try:
         result=validate(json.loads(args.input.read_text(encoding="utf-8")))
+        output=json.dumps(result,indent=2,sort_keys=True)+"\n"
+        if args.output:
+            args.output.parent.mkdir(parents=True,exist_ok=True)
+            args.output.write_text(output,encoding="utf-8")
+        else:
+            print(output,end="")
     except (ChainError,ValueError,OSError,TypeError) as exc:
         print(json.dumps({"status":"CHAINAGE_BLOCKED","reason":str(exc),
                           "permission_to_write":False,"may_merge_or_release":False}))
         return 2
-    output=json.dumps(result,indent=2,sort_keys=True)+"\n"
-    if args.output:
-        args.output.parent.mkdir(parents=True,exist_ok=True)
-        args.output.write_text(output,encoding="utf-8")
-    else: print(output,end="")
     return 0
 
 if __name__=="__main__":
