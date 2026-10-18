@@ -157,6 +157,37 @@ class DisposableScopeTests(unittest.TestCase):
         self.assertIn("Owner added text", client.issue["body"])
         self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
 
+    def test_manually_forged_title_or_board_cannot_bypass_builder(self):
+        client = FakeNative()
+        proposal, opts = prepare(client, "title")
+        forged = copy.deepcopy(proposal)
+        forged["changes"][0]["after"] = "[ACCEPTED] forged success"
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(forged, client, **opts)
+        self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
+        # A pure managed-region replacement is not enough: demo-only semantics
+        # must be enforced in the writer, even for an untrusted direct caller.
+        client.issue["title"] = NEW_TITLE
+        board, board_opts = prepare(client, "scoreboard")
+        forged_board = copy.deepcopy(board)
+        forged_board["changes"][0]["after_body"] = (
+            pu.scoreboard_body_change(
+                client.issue, "APPROVED 100% — arbitrary forged claims",
+                parent_number=426
+            )["after_body"]
+        )
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(forged_board, client, **board_opts)
+        self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
+    def test_scoreboard_requires_get_verified_title_first(self):
+        client = FakeNative()
+        board, opts = prepare(client, "scoreboard")
+        with self.assertRaises(lc.ContractError):
+            pu.apply_projection(board, client, **opts)
+        self.assertFalse(any(op[0] == "PATCH" for op in client.operations))
+
     def test_uncertain_readback_never_claims_verified_or_replays(self):
         client = FakeNative()
         proposal, opts = prepare(client, "title")
