@@ -100,6 +100,8 @@ def child_title(task: dict) -> str:
 
 
 def child_body(task: dict, plan: dict) -> str:
+    criteria = task.get("criteria")
+    detail = ("Criteria:\n" + "".join(f"- {item}\n" for item in criteria)) if criteria else ""
     return (
         f"{marker(task['task_id'], plan['parent'])}\n"
         f"Parent: {plan['parent']}\n"
@@ -111,6 +113,7 @@ def child_body(task: dict, plan: dict) -> str:
         f"Size: {task['size']}\n"
         f"For the user: {task['for_user']}\n"
         f"Acceptance: {task['acceptance']}\n"
+        f"{detail}"
         "\nTASK_EVIDENCE belongs on THIS issue after actual verified task completion;"
         " closing a child issue without evidence never proves completion.\n"
     )
