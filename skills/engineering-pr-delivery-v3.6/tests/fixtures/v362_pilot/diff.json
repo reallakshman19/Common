@@ -1,0 +1,14 @@
+{
+  "paths": [
+    "tests/test_wordcount.py",
+    "wordcount.py"
+  ],
+  "allowed_paths": [
+    "policy.json",
+    ".github/workflows/ci.yml",
+    "tests/test_wordcount.py",
+    "wordcount.py"
+  ],
+  "removed_tests": 0,
+  "test_first": true
+}

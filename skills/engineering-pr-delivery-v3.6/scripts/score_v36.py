@@ -11,13 +11,22 @@ from criteria_v36 import parse_criteria_v1
 from selfcheck_score_v36 import parse_self_check_v2
 
 
-def _green(result):
-    return (isinstance(result, dict) and type(result.get("run")) is int
-            and type(result.get("passed")) is int and result["run"] > 0
-            and result["passed"] == result["run"]
-            and isinstance(result.get("sha"), str)
-            and len(result["sha"]) == 40
-            and all(c in "0123456789abcdef" for c in result["sha"]))
+def _green(result, *, baseline=False):
+    """A new project's baseline may declare 0/0; a HEAD may never be empty."""
+    if not isinstance(result, dict):
+        return False
+    count, passed = result.get("run"), result.get("passed")
+    if type(count) is not int or type(passed) is not int:
+        return False
+    declared_zero = result.get("zero_test_baseline") is True
+    if (result.get("zero_test_baseline") not in (None, True)
+            or (count == 0 and not (baseline and declared_zero))
+            or (count > 0 and declared_zero)
+            or count < 0 or passed != count):
+        return False
+    sha = result.get("sha")
+    return (isinstance(sha, str) and len(sha) == 40
+            and all(c in "0123456789abcdef" for c in sha))
 
 
 def _diff_ok(diff):
@@ -41,7 +50,7 @@ def recompute(criteria, report, before, after, diff):
     observed = {key for key, value in claimed.items()
                 if value["state"] == "MET" and bool(value["proof"].strip())}
     score = (len(expected & observed), len(expected))
-    tests_ok = (_green(before) and _green(after)
+    tests_ok = (_green(before, baseline=True) and _green(after)
                 and after["run"] >= before["run"]
                 and report["candidate"].split("@")[-1] == after["sha"])
     diff_ok = _diff_ok(diff)

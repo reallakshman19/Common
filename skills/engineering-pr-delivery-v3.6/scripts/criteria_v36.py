@@ -5,7 +5,12 @@ source words exactly match a remote issue. No network, approvals or writes.
 """
 import re
 
-HEADER = re.compile(r"CRITERIA v1 · (?P<version>[^·\n]+) · (?P<freeze>[^·\n]+) · source: (?P<source>#[1-9]\d* [^,\n]+)(?:,.*)?")
+# Shared by CRITERIA and SELF-CHECK: comma belongs to source authority.
+SOURCE_PATTERN = r"#[1-9]\d* [^·\n]+"
+HEADER = re.compile(
+    r"CRITERIA v1 · (?P<version>[^·\n]+) · (?P<freeze>[^·\n]+) · source: "
+    r"(?P<source>" + SOURCE_PATTERN + r")"
+)
 ROW = re.compile(r"(?P<id>(?:AC|K|J)[1-9]\d*) (?P<kind>MUST|CONSTRAINT|JUDGMENT) (?P<words>.+?) → (?P<measure>.+)")
 SUMMARY = re.compile(r"Criteria: (?P<n>\d+) \((?P<m>\d+) MUST · (?P<c>\d+) CONSTRAINT · (?P<j>\d+) JUDGMENT\) · source coverage: (?P<coverage>.+)")
 

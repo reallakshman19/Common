@@ -1,0 +1,16 @@
+{
+  "paths": [
+    "policy.json",
+    ".github/workflows/ci.yml",
+    "tests/test_wordcount.py",
+    "wordcount.py"
+  ],
+  "ci_workflow": ".github/workflows/ci.yml",
+  "ci_pattern": "test_*.py",
+  "protected": [
+    "relay/"
+  ],
+  "forbidden_literals": [
+    "CoordinatorLandingpage"
+  ]
+}

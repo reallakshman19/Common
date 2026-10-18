@@ -1,0 +1,12 @@
+CRITERIA v1 · WORDCOUNT · FROZEN 2026-10-18 by Owner · source: #1 issue body, reallakshman19/v361-pilot
+AC1 MUST "Add a `wordcount.py` command-line tool that counts words in a text file, with tests." → Tool exists, runs, and has automated tests covering its behavior · wordcount.py + tests
+AC2 MUST "Usage: `python wordcount.py <file>` prints the word count as a single number." → CLI test verifies correct numeric stdout without additional output · wordcount.py
+AC3 MUST "Words are separated by whitespace." → Tests verify spaces, tabs, newlines and repeated whitespace produce correct counts · tests
+AC4 MUST "An empty file gives 0." → Empty-file test verifies stdout is 0 · tests
+AC5 MUST "A missing file prints an error and exits with a non-zero code." → Missing-file test verifies an error message and non-zero exit status · tests
+K1 CONSTRAINT "Owner task (v3.6.1 standalone pilot, throwaway repo)" → All implementation and evidence remain confined to the designated pilot workflow · v361-pilot
+K2 CONSTRAINT "Standard library only." → Dependency inspection verifies no third-party Python libraries · wordcount.py + tests
+K3 CONSTRAINT "Mode: **standalone** (Owner + one coding agent)." → No TeamCoordinator or coordinator-system dependency; Owner and agent only · standalone workflow
+K4 CONSTRAINT "The agent never approves its own work." → No self-approval, self-merge or claimed Owner acceptance · PR workflow
+J1 JUDGMENT "The Owner confirms criteria, reviews and merges." → Owner explicitly confirms this criteria block before implementation and retains review, acceptance and merge authority · Owner decision
+Criteria: 10 (5 MUST · 4 CONSTRAINT · 1 JUDGMENT) · source coverage: every clause of issue #1 mapped

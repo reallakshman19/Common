@@ -12,7 +12,12 @@ Python 3 and Git. **One-time prerequisite**, if PyYAML is missing:
 run `python -m pip install "PyYAML>=6.0,<7.0"` from this folder.
 This dependency install may access a package index; it is **manual
 setup**, not one of the offline/read-only pilot commands below.
-Check the installed Python and PyYAML first (expected exit 0):
+Check the installed Python and PyYAML first (expected exit 0).
+If this check reports `No module named yaml`, **use `py` on Windows**
+if `python` fails the PyYAML check: try `py -c "import yaml;print(yaml.__version__)"`.
+Use the *same* interpreter (`py` or `python`) for the guide commands,
+and run `py -m pip install "PyYAML>=6.0,<7.0"` if that interpreter also
+lacks the dependency. The commands below show `python` for consistency.
 
 ```bash exit=0
 python -c "import yaml;print('PyYAML '+yaml.__version__)"
@@ -28,7 +33,7 @@ read-only or dry-run and never post to GitHub.
 **Windows paths:** Replace `__NAME__` tokens with the actual approved
 values. In quoted `python -c` commands use **forward slashes**, e.g.
 `C:/pilot/my-repo/relay/AIM/MY-WORK.yaml` and `C:/pilot/my-repo`.
-Do **not** paste `C:\\pilot\\my-repo`: backslash escapes can break
+Do **not** paste `C:\pilot\my-repo`: backslash escapes can break
 Python strings and `os.chdir` (WinError 123). Quote paths with spaces.
 The temporary-repo and measurement examples are **not** Owner or CI
 evidence; use real sources for an actual pilot.
@@ -44,7 +49,12 @@ label `work:` value, including matching case: for example,
 `C:/pilot/my-repo/relay/AIM/MY-WORK.yaml` for `work: MY-WORK`.
 Do **not** put the file at repository root, in `relay/` alone, or
 use `<WORK>` literally: the validator checks this exact directory,
-filename and work identity. The top-level selection is:
+filename and work identity. **The validator also rejects any `<...>`
+text inside the real label**, even in a genuine descriptive sentence,
+as an unresolved placeholder. Write `FILE` instead of `<file>`, or
+rephrase without angle brackets. These angle brackets appear only in
+this guide's illustrative placeholders, not in the final YAML label.
+The top-level selection is:
 
 ```yaml
 mode: standalone
@@ -79,6 +89,13 @@ the closing inventory and source-coverage total. The **Owner confirms**
 the precise words, numbers, exclusions and decision rights *before*
 implementation. Preserve the confirmed block unchanged, with its
 source URL and digest. A changed aim needs an attributable new freeze.
+The required first line is exactly
+`CRITERIA v1 · <WORK> · FROZEN <date> by Owner · source: #N <text>`
+(replace angle fields in the **criteria**, not literally in the label).
+A measured row looks like
+`AC1 MUST "Add a word-count CLI" → CLI runs and tests pass · tool + tests`.
+The source can contain a comma; retain the full text after `source:`
+as the authority for the companion.
 
 Check the local frozen file (expected exit 0):
 
@@ -94,7 +111,12 @@ Do not use #430's checked sample as your project's frozen criteria.
 
 Agent creates tests first, records the RED commit and baseline/head
 full-suite results, and links the real child issue and PR. Publish a
-**separate SELF-CHECK v2 companion first on that real child issue**:
+**separate SELF-CHECK v2 companion first on that real child issue**.
+The required header is
+`SELF-CHECK v2 · <TASK> · owner/repo#N` followed **immediately** by
+`Basis: CRITERIA v1 · source #N <text> · candidate owner/repo@<sha40>`.
+The Basis source must match the CRITERIA `source:` **exactly**,
+including commas, repository spelling and spacing. Then provide
 one `Criterion: ID → STATE · proof: source` per frozen criterion,
 plus `Score: n/d · claim: PARTIAL|BLOCKED`, exact candidate,
 before/after test references, diff and pending Owner decisions.
@@ -142,7 +164,21 @@ the actual full test suite or independent source review.
 ## 5. Recompute the score
 
 Save the verified `before.json` and `after.json` with
-`run`, `passed`, exact `sha`; save `diff.json` with
+`run`, `passed`, exact `sha`. **`before.json` is the baseline suite before the change,
+not the RED commit**. A new throwaway project may
+start with no tests; declare a zero-test baseline explicitly, using
+`"zero_test_baseline": true` only with `"run": 0` and `"passed": 0`.
+For the actual pilot baseline, the filled `before.json` is:
+
+```text
+{"sha": "0bd3d9312196da49422efe4da54ca34e6c8a354b", "run": 0, "passed": 0, "zero_test_baseline": true}
+```
+
+This is the *historical* baseline, not the first tests-only RED commit;
+its head counterpart used `"run": 8, "passed": 8`. A baseline with
+0 tests but without the explicit flag is NOT qualified, and the
+candidate head must have `run > 0` and a completely passing suite.
+Save `diff.json` with
 `paths`, `allowed_paths`, `removed_tests` and `test_first`.
 Keep the complete SELF-CHECK v2 text in `__SELFCHECK__`.
 The next command reports score, claim and qualification

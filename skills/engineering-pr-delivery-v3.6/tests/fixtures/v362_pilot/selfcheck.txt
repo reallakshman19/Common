@@ -1,0 +1,14 @@
+SELF-CHECK v2 · V36-1-WORDCOUNT · reallakshman19/v361-pilot#1
+Basis: CRITERIA v1 · source #1 issue body, reallakshman19/v361-pilot · candidate reallakshman19/v361-pilot@cfc121be0c7c25cf298f1f0906080068ecf19b6e
+Criterion: AC1 → MET · proof: https://github.com/reallakshman19/v361-pilot/pull/2 (wordcount.py and eight tests)
+Criterion: AC2 → MET · proof: https://github.com/reallakshman19/v361-pilot/actions/runs/39116706571 (exact single-number stdout tests)
+Criterion: AC3 → MET · proof: https://github.com/reallakshman19/v361-pilot/blob/cfc121be0c7c25cf298f1f0906080068ecf19b6e/tests/test_wordcount.py (whitespace test cases)
+Criterion: AC4 → MET · proof: https://github.com/reallakshman19/v361-pilot/actions/runs/39116735371 (empty file and whitespace-only test pass)
+Criterion: AC5 → MET · proof: https://github.com/reallakshman19/v361-pilot/blob/cfc121be0c7c25cf298f1f0906080068ecf19b6e/tests/test_wordcount.py (missing file exit and stderr assertions)
+Criterion: K1 → MET · proof: https://github.com/reallakshman19/v361-pilot/pull/2 (only throwaway pilot files and task evidence)
+Criterion: K2 → MET · proof: https://github.com/reallakshman19/v361-pilot/blob/cfc121be0c7c25cf298f1f0906080068ecf19b6e/wordcount.py (argparse and sys standard library imports; no dependency files changed)
+Criterion: K3 → MET · proof: https://github.com/reallakshman19/v361-pilot/blob/main/relay/AIM/WORDCOUNT.yaml (standalone mode; no coordination system used)
+Criterion: K4 → MET · proof: https://github.com/reallakshman19/v361-pilot/pull/2 (still draft and unmerged; no agent approval)
+Criterion: J1 → UNKNOWN · proof: https://github.com/reallakshman19/v361-pilot/issues/1#issuecomment-6248376834 (criteria confirmed; Owner review, acceptance and merge decision still pending)
+Score: 9/9 · claim: PARTIAL
+Proposed claim: PARTIAL · reason: Owner acceptance pending; native offline A13 Git checker NOT_RUN against authenticated checkout; RED 0/8 at 069214e8 and GREEN 8/8 at cfc121be from GitHub Actions, scope diff tests/test_wordcount.py and wordcount.py against frozen baseline 0bd3d931
