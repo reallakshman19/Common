@@ -334,6 +334,92 @@ def title_plan(plan: dict, issues: list[dict], pr: dict | None, report: dict,
 
 
 
+# Scoped ECO-05 demonstration only. This is NOT a new work label or plan.
+# An independent OTM review/GO remains required before actual provider PATCH.
+DISPOSABLE_SCOPE = "reallakshman19/Common#426"
+DISPOSABLE_REPO = "reallakshman19/Common"
+DISPOSABLE_ISSUE = 426
+DISPOSABLE_CONSENT_COMMENT_ID = 6244462145
+# SHA-256 of the exact UTF-8 body of approved issue comment #6244462145
+# at the recorded Owner consent. Changing wording requires new review/commit.
+DISPOSABLE_CONSENT_BODY_SHA256 = "192bb966213f12ba01e2c6de28b583a29cd97b9dda5b9faaf4eeeaa0e3d14208"
+DISPOSABLE_CONSENT_URL = (
+    "https://github.com/reallakshman19/Common/issues/409"
+    "#issuecomment-6244462145"
+)
+DISPOSABLE_TITLE_PREFIX = "[ECO-05 DEMO] "
+DISPOSABLE_BOARD_PREFIX = "ECO-05 TEST ONLY"
+
+
+def disposable_consent_pin(client) -> str:
+    """Fetch the actual scoped consent comment and fingerprint its exact body.
+
+    One read of the explicitly identified consent is not a broad source sweep
+    or new delegated authority. Any edit, ambiguous identity or unavailable
+    comment is a STOP. Never treat the #426 human title as evidence admission.
+    """
+    if client.repo != DISPOSABLE_REPO:
+        raise ContractError("disposable consent repository mismatch")
+    comment = client.request("GET", f"/issues/comments/{DISPOSABLE_CONSENT_COMMENT_ID}")
+    if (not isinstance(comment, dict)
+            or comment.get("id") != DISPOSABLE_CONSENT_COMMENT_ID
+            or comment.get("html_url") != DISPOSABLE_CONSENT_URL
+            or not isinstance(comment.get("user"), dict)
+            or comment["user"].get("login") != "reallakshman19"
+            or not isinstance(comment.get("body"), str)):
+        raise ContractError("exact scoped consent comment unavailable/foreign")
+    body = comment["body"]
+    actual_sha256 = hashlib.sha256(body.encode("utf-8")).hexdigest()
+    if actual_sha256 != DISPOSABLE_CONSENT_BODY_SHA256:
+        raise ContractError("frozen disposable consent body SHA256 mismatch")
+    return actual_sha256
+
+def disposable_demo_projection(issue: dict, *, surface: str, consent_pin: str,
+                               title: str | None = None,
+                               scoreboard_region: str | None = None) -> dict:
+    """Pure one-surface #426 proposal; no invented work plan or label.
+
+    A single call proposes EITHER a harmless title prefix OR an ECO-03 managed
+    body region. Never combine two writes on the same stale issue snapshot.
+    After GET-verify title, refresh #426 before proposing scoreboard.
+    """
+    if (not isinstance(issue, dict)
+            or issue.get("number") != DISPOSABLE_ISSUE
+            or issue.get("html_url") !=
+            f"https://github.com/{DISPOSABLE_REPO}/issues/{DISPOSABLE_ISSUE}"
+            or not isinstance(issue.get("title"), str)
+            or not isinstance(issue.get("body"), str)
+            or not re.fullmatch(r"[0-9a-f]{64}", consent_pin)):
+        raise ContractError("exact disposable target/source identity required")
+    if surface == "title":
+        if (scoreboard_region is not None or not isinstance(title, str)
+                or not title.startswith(DISPOSABLE_TITLE_PREFIX)
+                or len(title) > MAX_TITLE):
+            raise ContractError("only the bounded disposable title prefix is authorised")
+        prior_human = issue["title"]
+        expected_suffix = (prior_human[len(DISPOSABLE_TITLE_PREFIX):]
+                           if prior_human.startswith(DISPOSABLE_TITLE_PREFIX)
+                           else prior_human)
+        if title != DISPOSABLE_TITLE_PREFIX + expected_suffix:
+            raise ContractError("disposable title must preserve all existing human text")
+        change = {"kind": "issue", "number": DISPOSABLE_ISSUE,
+                  "before": prior_human, "after": title,
+                  "body_before": issue["body"],
+                  "labels_before": issue.get("labels")}
+    elif surface == "scoreboard":
+        if (title is not None or not isinstance(scoreboard_region, str)
+                or not scoreboard_region.startswith(DISPOSABLE_BOARD_PREFIX)
+                or "NOT_EVALUATED" not in scoreboard_region
+                or "TASK_EVIDENCE" in scoreboard_region):
+            raise ContractError("disposable scoreboard must declare test-only unknowns")
+        change = scoreboard_body_change(issue, scoreboard_region,
+                                        parent_number=DISPOSABLE_ISSUE)
+    else:
+        raise ContractError("disposable scope supports only title or scoreboard")
+    return {"parent": DISPOSABLE_SCOPE, "source_pin": consent_pin,
+            "changes": [change], "demonstration_only": True}
+
+
 def source_digest(plan: dict, report: dict) -> str:
     """Digest native source observations, not an endorsement or accepted outcome."""
     value = {"parent": plan["parent"], "label_sha": plan["label"]["label_sha"],
@@ -463,7 +549,7 @@ def calculate(plan: dict, client, pr_number: int | None = None,
 def apply_projection(calculated: dict, client, *, confirm_scope: str,
                      allow_write: bool = False, authorized_surfaces=frozenset(),
                      authorized_targets=frozenset(), lab_scope: str | None = None,
-                     source_probe=None) -> dict:
+                     source_probe=None, demo_authority: str | None = None) -> dict:
     """Sole native writer: fake-provider ECO-05; never an atomic CAS.
 
     The production CLI refuses live --apply without future exact consent.
@@ -476,31 +562,79 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
     changes = calculated.get("changes")
     if not isinstance(changes, list):
         raise ContractError("projection changes must be a list")
+    if any(not isinstance(item, dict) for item in changes):
+        raise ContractError("every projected change must be a dict")
     if not allow_write:
         return {"status": "NOT_RUN", "dry_run": True, "complete": False,
                 "proposed": len(changes), "applied": 0, "applied_surfaces": [],
                 "pending_surfaces": [_surface_receipt(x) for x in changes],
                 "readback_ok": False,
                 "next_reconciliation": "live demonstration NOT_RUN; no exact-scope write consent"}
-    # ECO-05 permits synthetic provider execution ONLY. Production GithubClient
-    # cannot PATCH/POST until future explicit scoped Owner consent and gate revision.
-    if isinstance(client, GithubClient):
-        raise ContractError("live demonstration: NOT_RUN (no exact-scope write consent)")
+    # Only the exact disposable issue is eligible for the reviewed opt-in demo.
+    # For ordinary native work, the historical live-client lockout is unchanged.
+    demo = demo_authority == DISPOSABLE_CONSENT_URL
+    if demo_authority is not None and not demo:
+        raise ContractError("foreign/unrecognised demonstration authority")
+    if isinstance(client, GithubClient) and not demo:
+        raise ContractError("native live writer remains disabled outside exact #426 demo")
+    if demo:
+        if (not isinstance(client, GithubClient)
+                or client.repo != DISPOSABLE_REPO
+                or calculated.get("parent") != DISPOSABLE_SCOPE
+                or calculated.get("demonstration_only") is not True
+                or authorized_targets != frozenset({("issue", DISPOSABLE_ISSUE)})
+                or authorized_surfaces not in (
+                    frozenset({"title"}), frozenset({"scoreboard"}))
+                or len(changes) != 1
+                or changes[0].get("kind") != "issue"
+                or changes[0].get("number") != DISPOSABLE_ISSUE
+                or _item_surface(changes[0]) not in authorized_surfaces
+                or "label_sha" in calculated or "plan" in calculated):
+            raise ContractError("disposable mode is restricted to one #426 surface; no native plan")
+        item = changes[0]
+        surface = _item_surface(item)
+        if surface == "title":
+            before, after = item.get("before"), item.get("after")
+            if not isinstance(before, str) or not isinstance(after, str):
+                raise ContractError("disposable title requires exact before/after text")
+            human = before[len(DISPOSABLE_TITLE_PREFIX):] if before.startswith(
+                DISPOSABLE_TITLE_PREFIX) else before
+            if after != DISPOSABLE_TITLE_PREFIX + human or len(after) > MAX_TITLE:
+                raise ContractError("untrusted demo title could erase human text")
+        else:
+            # Title-first is mandatory. The caller must GET-verify the first
+            # operation and then project a fresh body against that title.
+            if not isinstance(item.get("before"), str) or not item["before"].startswith(
+                    DISPOSABLE_TITLE_PREFIX):
+                raise ContractError("scoreboard must follow verified demonstration title")
+            from scoreboard_v36 import MANAGED_BEGIN, MANAGED_END
+            after_body = item.get("after_body")
+            if (not isinstance(after_body, str) or
+                    after_body.count(MANAGED_BEGIN) != 1 or
+                    after_body.count(MANAGED_END) != 1):
+                raise ContractError("disposable scoreboard lacks one owned region")
+            region_start = after_body.index(MANAGED_BEGIN) + len(MANAGED_BEGIN)
+            region_end = after_body.index(MANAGED_END)
+            region = after_body[region_start:region_end].strip("\n")
+            if (not region.startswith(DISPOSABLE_BOARD_PREFIX)
+                    or "NOT_EVALUATED" not in region or
+                    "TASK_EVIDENCE" in region):
+                raise ContractError("untrusted demo scoreboard claims or source markers")
     parent = PARENT_REF.fullmatch(calculated.get("parent") or "")
     if not parent or confirm_scope != calculated["parent"] or client.repo != parent[1]:
         raise ContractError("scope confirmation or repository mismatch")
     if parent[1] == LAB_REPO and lab_scope != LAB_REPO:
         raise ContractError("explicit writable lab required, no implicit lab")
     pin = calculated.get("source_pin")
-    if (not isinstance(calculated.get("label_sha"), str) or
+    if ((not demo and not isinstance(calculated.get("label_sha"), str)) or
             not isinstance(pin, str) or not re.fullmatch(r"[0-9a-f]{64}", pin)):
-        raise ContractError("trusted label and source pin required")
+        raise ContractError("trusted selected label or consent source pin required")
     if (not isinstance(authorized_surfaces, (set, frozenset)) or
             not authorized_surfaces or not authorized_surfaces <= {"title", "scoreboard"}):
         raise ContractError("separate surface consent required; namespace/labels disabled")
     if not isinstance(authorized_targets, (set, frozenset)):
         raise ContractError("exact target allowlist required")
-    if not callable(source_probe):
+    if not demo and not callable(source_probe):
         raise ContractError("trusted source re-read required")
     target_keys = []
     for item in changes:
@@ -525,7 +659,9 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
     verified, attempted, prepared = [], [], []
     def pin_is_current():
         try:
-            return source_probe() == pin
+            # Demo ignores caller-supplied callbacks: source proof is fresh
+            # provider GET of the exact Owner-grant comment before each PATCH.
+            return (disposable_consent_pin(client) if demo else source_probe()) == pin
         except Exception:
             return False
 
