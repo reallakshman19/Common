@@ -596,6 +596,35 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
                 or _item_surface(changes[0]) not in authorized_surfaces
                 or "label_sha" in calculated or "plan" in calculated):
             raise ContractError("disposable mode is restricted to one #426 surface; no native plan")
+        item = changes[0]
+        surface = _item_surface(item)
+        if surface == "title":
+            before, after = item.get("before"), item.get("after")
+            if not isinstance(before, str) or not isinstance(after, str):
+                raise ContractError("disposable title requires exact before/after text")
+            human = before[len(DISPOSABLE_TITLE_PREFIX):] if before.startswith(
+                DISPOSABLE_TITLE_PREFIX) else before
+            if after != DISPOSABLE_TITLE_PREFIX + human or len(after) > MAX_TITLE:
+                raise ContractError("untrusted demo title could erase human text")
+        else:
+            # Title-first is mandatory. The caller must GET-verify the first
+            # operation and then project a fresh body against that title.
+            if not isinstance(item.get("before"), str) or not item["before"].startswith(
+                    DISPOSABLE_TITLE_PREFIX):
+                raise ContractError("scoreboard must follow verified demonstration title")
+            from scoreboard_v36 import MANAGED_BEGIN, MANAGED_END
+            after_body = item.get("after_body")
+            if (not isinstance(after_body, str) or
+                    after_body.count(MANAGED_BEGIN) != 1 or
+                    after_body.count(MANAGED_END) != 1):
+                raise ContractError("disposable scoreboard lacks one owned region")
+            region_start = after_body.index(MANAGED_BEGIN) + len(MANAGED_BEGIN)
+            region_end = after_body.index(MANAGED_END)
+            region = after_body[region_start:region_end].strip("\n")
+            if (not region.startswith(DISPOSABLE_BOARD_PREFIX)
+                    or "NOT_EVALUATED" not in region or
+                    "TASK_EVIDENCE" in region):
+                raise ContractError("untrusted demo scoreboard claims or source markers")
     parent = PARENT_REF.fullmatch(calculated.get("parent") or "")
     if not parent or confirm_scope != calculated["parent"] or client.repo != parent[1]:
         raise ContractError("scope confirmation or repository mismatch")
