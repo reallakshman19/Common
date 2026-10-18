@@ -19,7 +19,9 @@ The Owner always retains acceptance; the agent never self-approves.
 C1–C18 mechanical checking and the separate scored SELF-CHECK v2 view
 are described in [SCORED_SELF_CHECK.md](SCORED_SELF_CHECK.md). The freeze,
 score and mismatch check do not substitute for native evidence, LOG,
-independent review or Owner approval.
+independent review or Owner approval. For an Owner-run throwaway project,
+follow the [standalone quickstart](QUICKSTART_STANDALONE.md) in order;
+it uses only offline/dry-run commands and never grants acceptance.
 
 **Admitted C1 issue-history structural reader (#401 / #409):** [CONTINUITY_CHAIN_V1.md](CONTINUITY_CHAIN_V1.md) and `scripts/issue_chain_v36.py`, with a **constructed reported-only #274 illustration**, not an attested or production [fixture](tests/fixtures/issue-chain-274-reported.json). The offline JSON validator requires 11 ordered categories, allowed category→record kinds and explicit UNKNOWN/NOT_APPLICABLE reasons; **100% means mandatory states structurally present, never 100% verified**. `observed_main` and its repo allowlist are **supplied by the untrusted report**, while PUBLIC visibility, source SHA shapes and record order are **syntactic assertions only**—no independently authenticated repository scope, confidentiality, chronology, freshness, byte custody or Owner acceptance. There are no network/provider writes, canonical task-evidence changes, scoreboard A promotion, title or label updates. The contract's Handover Master/BuddyRunner references are NON-NORMATIVE; follow those protocols' own approved sources. C1 is **not** the active approved label/plan for any work and never replaces the canonical 8-line receipt, self-check or mandatory terminal LOG.
 
