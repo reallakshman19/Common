@@ -19,10 +19,44 @@ from test_scored_v36 import PLAN, LABEL, valid_check, FROZEN
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "QUICKSTART_STANDALONE.md"
-FENCES = re.compile(r"```bash exit=(\d+)\n([^\x60]*?)\n```", re.S)
+FENCES = re.compile(r"(?ms)^\x60\x60\x60([^\\r\\n]*)\\r?\\n(.*?)^\x60\x60\x60[ \\t]*\\r?$")
 
 
 class QuickstartTests(unittest.TestCase):
+    def _documented_commands(self, page):
+        # Account for ALL fenced blocks. Unknown languages must fail closed.
+        blocks = FENCES.findall(page)
+        self.assertEqual(page.count("\x60\x60\x60"), 2 * len(blocks),
+                         "unmatched or silently ignored fenced content")
+        commands = []
+        for language, content in blocks:
+            if language in ("yaml", "text"):
+                continue  # examples, never executable
+            match = re.fullmatch(r"bash exit=(\\d+)", language)
+            self.assertIsNotNone(match, f"unsupported fence: {language!r}")
+            commands.append((match[1], content))
+        return commands
+
+    def test_unsupported_fence_cannot_be_skipped(self):
+        page = PAGE.read_text(encoding="utf-8")
+        for language in ("sh", "powershell", "python", "bash", "",
+                         "bash exit=bad", "bash exit=0 extra"):
+            with self.subTest(language=language), self.assertRaises(AssertionError):
+                self._documented_commands(
+                    page + f"\\n\x60\x60\x60{language}\\npython -c \\"print(99)\\"\\n\x60\x60\x60\\n")
+
+    def test_windows_owner_setup_and_visible_label_path(self):
+        page = PAGE.read_text(encoding="utf-8")
+        for phrase in ("Git Bash", "PowerShell 5.1",
+                       'python -m pip install "PyYAML>=6.0,<7.0"',
+                       'python -c "import yaml;', "C:/",
+                       "relay/AIM/<WORK>.yaml",
+                       "1A. Create the label file"):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, page)
+        self.assertLess(page.index("1A. Create the label file"),
+                        page.index("validate-label"))
+
     def test_owner_steps_and_boundaries(self):
         self.assertTrue(PAGE.is_file(), "AC10 quickstart page missing")
         page = PAGE.read_text(encoding="utf-8")
@@ -43,10 +77,10 @@ class QuickstartTests(unittest.TestCase):
     def test_every_command_executes_offline_as_documented(self):
         self.assertTrue(PAGE.is_file(), "AC10 quickstart missing commands")
         page = PAGE.read_text(encoding="utf-8")
-        snippets = FENCES.findall(page)
-        self.assertGreaterEqual(len(snippets), 6)
-        self.assertEqual(page.count("```bash"), len(snippets),
-                         "every shell fence must declare an expected exit")
+        snippets = self._documented_commands(page)
+        self.assertGreaterEqual(len(snippets), 7)
+        self.assertEqual(page.count("\x60\x60\x60bash"), len(snippets),
+                         "every command fence must declare an expected exit")
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
             repo = folder / "pilot"
