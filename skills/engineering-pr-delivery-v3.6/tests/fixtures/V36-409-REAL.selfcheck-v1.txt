@@ -1,0 +1,18 @@
+SELF-CHECK v1 · V36-ECO-01 (agent addendum A01–A14) · reallakshman19/Common#409
+Basis: plan/criteria #409 body §7 V36-ECO-01 + A13/A14 (#409 comments 6230412765, 6230450337); candidate reallakshman19/Common@9e71053ac8d1ebe2f9801c9379c4d80ffac267d0; source: draft #402 addendum @727eac11 (reused)
+Done-when: reconcile A01–A12 + Owner A13/A14 into additive guidance → MET (CODING_PRACTICES_ADDENDUM.md, PR #412)
+Done-when: v3.5 practices via existing candidate addendum, no runtime import → MET (#402 port-audit section reused verbatim)
+Done-when: canonical 8-line formatter/parser and LOG unchanged → MET (no change under scripts/; SKILL.md +2 link lines only)
+Done-when: governed/ad-hoc/project precedence and separate context publication, no canonical marker in context → MET (precedence table + A14 linkage §1–6)
+Done-when: intent/amendments, originals, crux/falsifier, contribution/issue history, decisions, provenance included → MET (A01–A10 table + #402 sections)
+Done-when: native methods/phases/isolation preserved; no permission from titles/boards → MET (A11/A12 + phase-safe section)
+Done-when: independently reviewable, exact native regressions preserved → NOT_RUN (independent check pending); v3.6 tests 90 OK locally
+Scope: approved skills/engineering-pr-delivery-v3.6/**; actual changed CODING_PRACTICES_ADDENDUM.md (new), SKILL.md; extras none
+A13: applicable yes (docs/markdown, no source code); files new 0->190 (addendum), SKILL.md 54->56 physical lines; legacy split n/a
+A13 review: no functions changed; reuse of #402 text instead of a parallel document; author's assessment only
+Tests: python -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests (Windows, Py 3.12) @ 9e71053a → 90 OK; CI activation-and-version-guards/validate-* pass; routing not triggered (path-filtered)
+Issue reconciliation: #409 §7 ECO-01 checklist → 6 MET, 1 NOT_RUN (independent review)
+Pending: P1 independent exact-head check of PR #412 · owner OwnerTeammember (spawns non-doer checker) · next run check · unblocks merge · prevents task DONE yes
+Pending: P2 decide reuse of #402 renderer/fixture/workflow · owner OwnerTeammember · next ECO-02 · unblocks ECO-02 · prevents task DONE no (outside ECO-01)
+Proposed claim: PARTIAL · reason/limits: content complete; DONE only after the independent check passes
+Native report: NOT_POSTED (standalone work; team TASK EVIDENCE v2 follows after the check)
