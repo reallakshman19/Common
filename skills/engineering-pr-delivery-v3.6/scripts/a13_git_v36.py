@@ -88,7 +88,8 @@ def assertions(data):
     """Conservatively preserve original assertion/skip statements exactly."""
     lines = text(data).splitlines()
     return [x.strip() for x in lines if re.search(
-        r"\bassert\b|\.assert[A-Za-z]+\(|\bskipTest\(|@(?:unittest\.)?skip", x)]
+        r"\bassert\b|\.assert[A-Za-z]+\(|\bskipTest\(|"
+        r"@(?:unittest\.)?(?:skip|skipIf|skipUnless|expectedFailure)\b", x)]
 
 
 def forbidden_build(path):
