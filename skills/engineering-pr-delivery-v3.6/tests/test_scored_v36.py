@@ -20,7 +20,7 @@ SHA = "f" * 40
 
 def valid_check():
     lines = ["SELF-CHECK v2 · V36-430-WP3 · reallakshman19/Common#430",
-             f"Basis: CRITERIA v1 · source #430 body · candidate reallakshman19/Common@{SHA}"]
+             f"Basis: CRITERIA v1 · source #430 body, with 2 pre-freeze corrections (AC3, K3) · candidate reallakshman19/Common@{SHA}"]
     for prefix, limit in (("AC", 10), ("K", 4)):
         lines += [f"Criterion: {prefix}{n} → MET · proof: exact-head CI and diff" for n in range(1, limit + 1)]
     lines += ["Criterion: J1 → UNKNOWN · proof: Owner has not reviewed readability",
@@ -42,7 +42,7 @@ class CriteriaFreezeTests(unittest.TestCase):
         self.assertEqual(len(result["criteria"]), 15)
         self.assertEqual(result["source_coverage"], "15/15")
         self.assertEqual(result["types"], {"MUST": 10, "CONSTRAINT": 4, "JUDGMENT": 1})
-        self.assertEqual(result["source"], "#430 body")
+        self.assertEqual(result["source"], "#430 body, with 2 pre-freeze corrections (AC3, K3)")
 
     def test_missing_source_words_refused(self):
         body = FROZEN.replace('"mode lives in the label"', "", 1)
