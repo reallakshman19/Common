@@ -1,7 +1,9 @@
 # Worker prompt
 
 ```text
-Use Nudge Designer at {{SKILL_ROOT}}. Read SKILL.md and references/APPLYING_GUIDANCE.md.
+Follow the issued brief under actual project instructions. Nudge Designer reference
+location: {{SKILL_ROOT}}. Consult relevant guidance if needed; a complete worker
+brief should not require loading the whole process library or choosing its roles.
 Issued assignment/packet and input snapshots: {{direct references}}
 Known runtime/tool/scope conditions: {{actual conditions, otherwise UNKNOWN}}
 
@@ -13,6 +15,12 @@ At a fragile boundary, state a concrete prediction/contrast and compare it with
 the actual observation. Show decisive intermediate states or quantities, not a
 long acknowledgment of the instructions. Do not replace the original code/path,
 copy a target answer as evidence or weaken a failing oracle.
+
+Check input identity and interpretation before blaming source content: use the
+declared format/codec/units as relevant, preserve bytes and report uncertainty.
+Support material claims with applicable source relations or actual computations,
+not copied totals or assent. A verdict may summarize that evidence. Identify only
+genuine weak/uncertain cases; do not invent a fixed number of problems.
 
 If evidence contradicts a premise or the next judgment exceeds the assignment,
 report the affected action and retain independent authorized work. For a blocked

@@ -8,6 +8,7 @@
 - [Reuse and boundaries](#reuse-and-boundaries)
 - [Verification checkpoint](#verification-checkpoint)
 - [Prompt templates and Applying guidance](#prompt-templates-and-applying-guidance)
+- [Adaptive support amendment](#adaptive-support-amendment)
 
 ## Reconciled intent
 
@@ -111,3 +112,29 @@ mapping assumption and retained all originals. The 84 compatibility checks,
 skill/syntax/metadata/link and arithmetic checks pass locally. See the
 [prompt application assessment](../examples/guidance-forward/ASSESSMENT.md) and
 [verification](VERIFICATION.md); exact-head publication/CI remains on the draft PR.
+
+## Adaptive support amendment
+
+Owner follow-up, 19 October 2026 (Asia/Dubai): generalize the NLM pilot lessons,
+especially for limited/unestablished task fit, update, then merge after verification.
+The separate pilot-specific PR #439 remains held. This direct request authorizes
+the broader amendment; neither a pilot report nor that held change supplies
+shared-policy authority. Start from current main rather than stacking on #439.
+
+Keep runtime, schemas, adapters, profile contracts and native reporting unchanged.
+Add [adaptive support](ADAPTIVE_SUPPORT.md), selective role/assignment instructions
+and paired references for claim/evidence, interpretation and correction causes.
+Compile self-contained worker briefs rather than requiring narrower recipients
+to learn the process library. Use task-specific observations, risk-based checks
+and cause-specific correction without fixed passes, weakness counts, format bans
+or mandatory new gates. Preserve consequential judgments and actual project rules.
+
+Acceptance requires substantive fresh raw-task applications with original inputs
+and outputs preserved, parent source-derived checks of material claims, and honest
+limits. Include a small brief-only application to inspect usability without loading
+the library. Different tasks/sessions cannot establish a model or GUIDED-versus-OPEN
+effect. No low-thinking runtime is selected or qualified merely by these exercises.
+Run existing focused compatibility checks and skill/syntax/metadata/link checks;
+verify the published tree and exact-head hosted checks before the authorized merge.
+See the [adaptive assessment](../examples/adaptive-forward/ASSESSMENT.md) and the
+new [verification checkpoint](VERIFICATION.md#adaptive-support-amendment).

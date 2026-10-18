@@ -1,0 +1,111 @@
+{
+  "assignment": "packet.md: source claim review",
+  "runtime": {
+    "python": "3.12.14",
+    "bytecode_disabled": true,
+    "host_model": "UNKNOWN",
+    "reasoning_configuration": "UNKNOWN",
+    "formal_qualification": "UNKNOWN"
+  },
+  "sources": {
+    "packet": {
+      "path": "packet.md",
+      "file_bytes_sha256": "8673ef7f6c70370e15f1098d82292c3b21ea98fe7c9d15ee6a396f98333974d2"
+    },
+    "artifact": {
+      "path": "artifact.json",
+      "file_bytes_sha256": "9c61b732e759c5784d7de08441e014a2ed1a3b0ce298e907dedf1372700d894b"
+    },
+    "payload": {
+      "representation": "base64 original synthetic bytes",
+      "declared_encoding": "cp1252",
+      "byte_length": 89,
+      "declared_raw_sha256": "aa7d52b1e43de631793b18a9ffabe6aeca73498fe4aebabab9e043c189f70af8",
+      "computed_raw_sha256": "aa7d52b1e43de631793b18a9ffabe6aeca73498fe4aebabab9e043c189f70af8",
+      "digest_matches": true,
+      "base64_validation": "PASS",
+      "strict_decode": "PASS",
+      "strict_roundtrip_matches_raw": true
+    }
+  },
+  "algorithm": "After strict declared-codec decoding, parse id | claimed_tokens=<n> | text=<text>; count len(text.split()). Python str.split() with no argument splits on whitespace, excluding field labels, headers and blank lines. Standalone punctuation is a token.",
+  "prediction_before_execution": "A standalone punctuation token contributes one to len(text.split()); any earlier count derived from ignored decoding errors is not evidence against original-byte claims.",
+  "records": [
+    {
+      "line_number": 1,
+      "id": "R-A",
+      "claimed_tokens": 4,
+      "text": "crème — vert clair",
+      "tokens": [
+        "crème",
+        "—",
+        "vert",
+        "clair"
+      ],
+      "computed_tokens": 4,
+      "verdict": "MATCH",
+      "non_ascii_characters": [
+        {
+          "character": "è",
+          "codepoint": "U+00E8",
+          "declared_codec_hex": "e8"
+        },
+        {
+          "character": "—",
+          "codepoint": "U+2014",
+          "declared_codec_hex": "97"
+        }
+      ]
+    },
+    {
+      "line_number": 2,
+      "id": "R-B",
+      "claimed_tokens": 2,
+      "text": "bleu ciel",
+      "tokens": [
+        "bleu",
+        "ciel"
+      ],
+      "computed_tokens": 2,
+      "verdict": "MATCH",
+      "non_ascii_characters": []
+    }
+  ],
+  "coverage": {
+    "source_line_count": 2,
+    "nonempty_lines": 2,
+    "blank_lines": 0,
+    "candidate_record_lines": [
+      1,
+      2
+    ],
+    "reviewed_record_lines": [
+      1,
+      2
+    ],
+    "reviewed_record_ids": [
+      "R-A",
+      "R-B"
+    ],
+    "reviewed_record_count": 2,
+    "unparsed_nonempty_lines": [],
+    "duplicate_record_ids": [],
+    "complete_for_this_artifact": true
+  },
+  "findings": {
+    "token_claim_mismatches": [],
+    "input_digest_mismatch": false,
+    "interpretation_or_access_blockers": []
+  },
+  "preservation": {
+    "packet_unchanged_during_computation": true,
+    "artifact_unchanged_during_computation": true,
+    "decoded_source_bytes_written": false
+  },
+  "limits": [
+    "Synthetic artifact only; no wider product acceptance.",
+    "The sender's earlier UTF-8 view was not supplied or reproduced.",
+    "Strict decoding and a matching digest establish interpretation and identity for this assignment, not independent proof of intended encoding or source truth.",
+    "Self-check by the same worker; no independent reviewer or model qualification established."
+  ]
+}

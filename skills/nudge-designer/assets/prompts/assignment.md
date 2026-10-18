@@ -31,6 +31,7 @@ Uncertainty handling
 Evidence and continuation
 {{Actual results/artifacts in the native reporting format, attempts and execution limits}}
 {{Unresolved parent outcomes; next feasible action or proposal; issued binding if used}}
+{{Material claim witnesses, coverage and selected sender checks where relevant}}
 ```
 
 Read the filled brief as the recipient. Remove irrelevant boilerplate. A GUIDED

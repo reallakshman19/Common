@@ -1,0 +1,9 @@
+{
+  "digest_representation": "UTF-8 bytes of the packet string, not this JSON container",
+  "issued_revision": "R20",
+  "issued_packet_sha256": "ecdf59bbe62530aa7ad34a6563ac0d45414ee98f48390ed4972f29588562d138",
+  "delivery_declared_revision": "R20",
+  "delivered_packet_sha256": "5de494784c2972e275405ed4d2aafeb14a975ed3ef199e952bf3be0bc4ac0a53",
+  "recipient_recorded_revision": "R19",
+  "recipient_packet_sha256": "5de494784c2972e275405ed4d2aafeb14a975ed3ef199e952bf3be0bc4ac0a53"
+}

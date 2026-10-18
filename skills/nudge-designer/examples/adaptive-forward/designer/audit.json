@@ -1,0 +1,95 @@
+{
+  "scope": "Executed local audit of supplied sources; no transport inspected or performed",
+  "python_observed": "3.12.14",
+  "input_file_byte_sha256_before": {
+    "owner.md": "1e589505a0840882c3aeb9911f20368a04e7ab1bb47b44c10bc3c336e105720d",
+    "packets.json": "4ede3b93c9be7b6eaf7441397ea67ae6f9257e18e2eed6f7c4104bd6c1842635",
+    "receipts.json": "b9545b4b94f5cb2d9337548b0ea5726b53c9f3994df0b08e7be72e9c78759fa2",
+    "prior-review.md": "647882edd5230d0bd45960524bac67732b0e31c1941221405fae95baa2f762d7"
+  },
+  "input_file_byte_sha256_after": {
+    "owner.md": "1e589505a0840882c3aeb9911f20368a04e7ab1bb47b44c10bc3c336e105720d",
+    "packets.json": "4ede3b93c9be7b6eaf7441397ea67ae6f9257e18e2eed6f7c4104bd6c1842635",
+    "receipts.json": "b9545b4b94f5cb2d9337548b0ea5726b53c9f3994df0b08e7be72e9c78759fa2",
+    "prior-review.md": "647882edd5230d0bd45960524bac67732b0e31c1941221405fae95baa2f762d7"
+  },
+  "raw_inputs_unchanged": true,
+  "packet_digest_representation": "UTF-8 bytes of the packet string, not this JSON container",
+  "parsing_rule": "First splitlines() entry is the exact revision header. Count every later nonempty line; exclude header and empty lines, do not strip or deduplicate.",
+  "packet_observations": {
+    "R19": {
+      "header": "R19",
+      "utf8_byte_length": 16,
+      "packet_utf8_sha256": "5de494784c2972e275405ed4d2aafeb14a975ed3ef199e952bf3be0bc4ac0a53",
+      "record_count": 3,
+      "record_witnesses": [
+        {
+          "physical_line": 2,
+          "value": "X-1"
+        },
+        {
+          "physical_line": 3,
+          "value": "X-2"
+        },
+        {
+          "physical_line": 4,
+          "value": "X-3"
+        }
+      ]
+    },
+    "R20": {
+      "header": "R20",
+      "utf8_byte_length": 20,
+      "packet_utf8_sha256": "ecdf59bbe62530aa7ad34a6563ac0d45414ee98f48390ed4972f29588562d138",
+      "record_count": 4,
+      "record_witnesses": [
+        {
+          "physical_line": 2,
+          "value": "X-1"
+        },
+        {
+          "physical_line": 3,
+          "value": "X-2"
+        },
+        {
+          "physical_line": 4,
+          "value": "X-3"
+        },
+        {
+          "physical_line": 5,
+          "value": "X-4"
+        }
+      ]
+    }
+  },
+  "supplied_receipt_digest_matches": {
+    "issued_packet_sha256": [
+      "R20"
+    ],
+    "delivered_packet_sha256": [
+      "R19"
+    ],
+    "recipient_packet_sha256": [
+      "R19"
+    ]
+  },
+  "delivered_equals_recipient_digest": true,
+  "delivered_equals_issued_digest": false,
+  "local_candidate": {
+    "locator": "R20-draft.txt",
+    "state": "LOCAL_DRAFT_NOT_DELIVERED",
+    "byte_sha256": "ecdf59bbe62530aa7ad34a6563ac0d45414ee98f48390ed4972f29588562d138",
+    "equals_R20_packet_utf8_bytes": true
+  },
+  "interpretation": {
+    "retained": "Prior native count and listed witnesses agree with independently recomputed supplied R19 content.",
+    "unsupported": "R20 complete, all checks pass: the native report cites R19 and excludes other claims/production outcomes.",
+    "correction": "Fix source selection/identity before rerunning affected R20 claims."
+  },
+  "limits": [
+    "Receipt metadata is supplied evidence; actual delivery/access/execution and source authenticity were not observed.",
+    "This audit is a sender-side recomputation, not a new independent reviewer or next-worker execution.",
+    "Record count evidence does not establish complete R20 review or production acceptance.",
+    "Model, reasoning configuration, formal qualification and broader worker capability remain UNKNOWN."
+  ]
+}

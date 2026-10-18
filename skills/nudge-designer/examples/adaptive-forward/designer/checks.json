@@ -1,0 +1,51 @@
+{
+  "local_audit": {
+    "status": "EXECUTED",
+    "script": "audit.py",
+    "result": "audit.json",
+    "packet_counts": {
+      "R19": 3,
+      "R20": 4
+    },
+    "raw_inputs_unchanged": true,
+    "replacement_packet": "R20-draft.txt",
+    "delivery_performed": false
+  },
+  "contract_support": {
+    "status": "NOT_RUN",
+    "attempts": [
+      "Authoring bootstrap imported nd_contract; failed before intent/plan writes.",
+      "Nudge Designer validate CLI startup attempted; failed before input validation.",
+      "Nudge Designer render CLI startup attempted; failed before rendering."
+    ],
+    "observed": "ModuleNotFoundError: No module named jsonschema",
+    "structural_validation_performed": false,
+    "machine_render_performed": false,
+    "intent_plan_artifacts_created": false,
+    "fallback": "Usable seven-element prose contract in decision.md; manually inspected against raw sources. No machine/schema validity claimed."
+  },
+  "semantic_review": {
+    "status": "MANUAL_SOURCE_RECONCILIATION",
+    "basis": [
+      "owner.md",
+      "packets.json",
+      "receipts.json",
+      "prior-review.md",
+      "audit.json"
+    ],
+    "coverage": [
+      "Requested R20 identity",
+      "Supplied issued/delivered/recipient digest mapping",
+      "Record header/empty-line exclusion and enumerated witnesses",
+      "Historical R19 count retained without R20 acceptance",
+      "Local-only authority and unobserved next-worker configuration/qualification"
+    ],
+    "limit": "Self-review by the same Designer; no separate reviewer or broad task qualification."
+  },
+  "not_executed": [
+    "External delivery or recipient access verification",
+    "Agent dispatch or next-worker execution",
+    "Product/shared-skill edits",
+    "Integrated R20/production acceptance"
+  ]
+}

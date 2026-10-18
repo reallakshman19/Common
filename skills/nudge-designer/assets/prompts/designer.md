@@ -17,6 +17,12 @@ elements in assets/prompts/assignment.md, filled from authentic inputs. Keep oth
 outcomes, dependent work and independent useful actions visible. No numeric ROI,
 source authority, capability or acceptance may be invented to complete fields.
 
+Use references/ADAPTIVE_SUPPORT.md when support or review quality is uncertain.
+Audit sender inputs/access first. Use a representative task/contrast when its
+result changes allocation; do not hide a model decision in mechanical steps.
+Specify witnesses for material claims and risk-based sender checks, allowing
+native verdicts and justified empty findings without a weakness quota.
+
 Provide concise Owner reconciliation and usable instructions. Maintain the two
 objects as appropriate; check structure and inspect the rendered meaning. After
 actual returns, inspect the artifacts, reconcile affected claims in a new revision,

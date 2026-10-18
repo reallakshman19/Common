@@ -8,6 +8,7 @@
 - [Unexecuted and remaining limits](#unexecuted-and-remaining-limits)
 - [Role-adapter extension checkpoint](#role-adapter-extension-checkpoint)
 - [Prompt and Applying guidance extension](#prompt-and-applying-guidance-extension)
+- [Adaptive support amendment](#adaptive-support-amendment)
 
 ## Scope and provenance
 
@@ -211,3 +212,42 @@ FE solver, learner outcome or external dispatch was performed, and no broader
 reliability claim follows from these local tasks. Actual host configuration and
 formal qualification remain UNKNOWN. Prose guidance still needs substantive use;
 filled templates, golden wording and compatibility PASS cannot establish it.
+
+## Adaptive support amendment
+
+The later Owner request generalizes the NLM pilot lessons, especially for limited
+or unestablished task fit, and authorizes updating then merging after verification.
+The new change starts from main; the separately held pilot-specific PR #439 is
+unchanged. Its linter and fixed report/weakness rules are not imported. Runtime,
+schemas, APIs and profiles remain unchanged, with exactly two formal schemas.
+
+Added adaptive support guidance, selective role/assignment instructions and G08–G10
+raw/golden references. These cover evidence for conceptual factors, strict declared
+input interpretation and a correct computation attached to the wrong revision.
+The golden values are synthetic expected distinctions, not execution receipts.
+The worker prompt now permits a self-contained brief without loading the whole
+process library. No fixed calibration gate, pass count, weakness quota or binary
+verdict ban was added.
+
+Four fresh raw-task applications produced actual artifacts. The first three used
+the guide/role resources; the fourth used only its short assignment and payload.
+The worker counted 4/2 after declared cp1252 decoding and retained both valid
+claims. The reviewer rejected zero acceleration while retaining velocity −3.60 m/s
+under the supplied model. The Designer traced issued R20 versus delivered R19,
+retained the useful R19 count and drafted a source-bound correction. Its optional
+schema/render startup was blocked by missing `jsonschema`; NOT_RUN remains, with
+no intent/plan files or subsequent parent validation claimed. The brief-only worker
+counted 0/3 including the empty record, reporting one match and one mismatch.
+
+Parent source-derived checks confirmed the material quantities and worker file
+receipts. All nine raw inputs and 22 archived native/input files remain exact.
+See [actual artifacts and assessment](../examples/adaptive-forward/ASSESSMENT.md)
+for provenance, checks and limits. There was no corrected-task dispatch, production
+or learner outcome, selected low-thinking configuration or formal qualification.
+Different tasks/sessions/instruction exposure cannot establish a causal support or
+model comparison. A usable bounded result is not broader capability acceptance.
+
+The existing 84 compatibility checks passed locally on Python 3.12. Skill Creator
+validation, syntax/JSON/metadata, local-link, reference-value, archive-identity and
+diff checks are performed before publication; the delivery PR records exact-head
+hosted Python 3.10/3.12 results and remote readback before the authorized merge.
