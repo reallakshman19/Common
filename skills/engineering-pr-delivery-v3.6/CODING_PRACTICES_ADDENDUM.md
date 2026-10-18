@@ -165,6 +165,52 @@ Proposed claim: DONE | PARTIAL | BLOCKED · reason/limits <text>
 Native report: <permalink when published, or PENDING/NOT_POSTED with reason>
 ```
 
+## v3.6.1 — coding checkpoints C1–C18 (Owner #430, both modes)
+
+These supplement A13/A14; the **core** is mandatory in either mode.
+The coordinator additions follow Team protocol v3.2; standalone needs
+no CoordinatorLandingpage access or team review/registry. ⚙ marks a
+mechanical category of `scripts/a13_check_v36.py`, not proof of approval.
+
+| Checkpoint | Core | Coordinator adds | Standalone |
+|---|---|---|---|
+| C1 | ⚙ Full suite before/after; all added test files discovered in CI | Non-doer reruns both at exact commits before delegated merge | Owner checks script; where no CI, record local proof explicitly as no CI |
+| C2 | List initial failing assertions and causal reasons; load errors are not behavioral RED | Reviewer matches failures to frozen criteria | Owner reads failure reasons |
+| C3 | ⚙ Keep assertions; no loosened tests/new skips without recorded review | No reason means no merge | Mechanical FAIL blocks DONE; Owner decides the reason |
+| C4 | Expected answers from pinned fixtures, never live files | Protect registries and logs/ | Protect project's own live config, DB and API data |
+| C5 | Exercise case, spacing, missing, unknown and duplicated facts | Also role tags, 8-char IDs, GitHub states | Project-specific input boundaries |
+| C6 | Unknown/unreadable source blocks unsafe action with test | UNKNOWN grants no permission, custody or acceptance | Same core boundary |
+| C7 | Pure decisions; default dry-run; prove read-only path has no writes | Chat sends only by authorized logged route | Writes to own repo only; never CoordinatorLandingpage |
+| C8 | Second run is a no-op; test replay/idempotence | Delivery uncertainty forbids resend | Same core boundary |
+| C9 | Validate external data before use; escape output before rendering | GitHub posts/chat are untrusted data | Imports and backups are untrusted inputs |
+| C10 | ⚙ Declare touched paths in frozen scope; stay inside | Check leases; logs/, benchmarks/, protocol/ unless declared | Optional Owner-protected list |
+| C11 | ⚙ No whitespace/blank-line-only or line-ending churn | JSON registry edits use Python and preserve line endings | Same core boundary |
+| C12 | ⚙ New tests committed before implementation; no cache/build artifacts | Publish first tests commit SHA for review | Same core boundary |
+| C13 | ⚙ No baked-in project names, IDs, paths or dates in logic | Resolve names/IDs from registry | Resolve from config or CLI args |
+| C14 | UTF-8; preserve line endings; times from UTC source | Clock and GitHub created_at source receipts | Same core boundary |
+| C15 | Keep old samples readable or supply migration | Preserve registry/label/plan compatibility; no mode defaults coordinator | Preserve existing saved project data |
+| C16 | ⚙ Never commit credentials/tokens | Public posts use id8 only | Also required in private projects |
+| C17 | ⚙ New dependency only after Owner approval, pinned | Approval recorded in CoordinatorLandingpage #1 | Approval recorded in Owner chat |
+| C18 | Errors visible and known gaps documented | Link K-number from KNOWN_ISSUES into evidence | Record Known limits in PR |
+
+**Mechanical gate:** from the repository root, invoke
+`python skills/engineering-pr-delivery-v3.6/scripts/a13_check_v36.py
+--base <BASE_SHA> --head <HEAD_SHA> --scope <POLICY_JSON>`.
+The `--scope` policy must exist at the **base** commit and remain byte-identical
+at head and in the worktree. Example shape:
+`{"paths":["src/module.py","tests/test_module_v36.py"],
+"ci_workflow":".github/workflows/tests.yml","ci_pattern":"test_*_v36.py",
+"protected":["logs/","protocol/"],"forbidden_literals":[]}`.
+It declares allowed touched paths before implementation. The checker uses
+local Git only, never a provider call, and emits **one** PASS/FAIL line plus
+a nonzero exit on failure. All nine categories are C1, C3, C10, C11, C12,
+C13, C16, C17 and the A13 physical-line ratchet. CI discovery is checked
+statically; the actual **before/after full-suite run counts and CI readbacks**
+must be supplied separately in TASK EVIDENCE and SELF-CHECK. It does not
+authenticate test result claims, decide whether assertion semantics are
+adequate, or substitute for independent review and Owner acceptance.
+Any amended scope or dependency permission needs a recorded Owner decision.
+
 ## Workstream implementation coding checklist
 
 - [ ] Verify current main, exact PR head, selected Owner AIM label/plan and original user problem before coding.
