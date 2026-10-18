@@ -340,6 +340,9 @@ DISPOSABLE_SCOPE = "reallakshman19/Common#426"
 DISPOSABLE_REPO = "reallakshman19/Common"
 DISPOSABLE_ISSUE = 426
 DISPOSABLE_CONSENT_COMMENT_ID = 6244462145
+# SHA-256 of the exact UTF-8 body of approved issue comment #6244462145
+# at the recorded Owner consent. Changing wording requires new review/commit.
+DISPOSABLE_CONSENT_BODY_SHA256 = "192bb966213f12ba01e2c6de28b583a29cd97b9dda5b9faaf4eeeaa0e3d14208"
 DISPOSABLE_CONSENT_URL = (
     "https://github.com/reallakshman19/Common/issues/409"
     "#issuecomment-6244462145"
@@ -366,20 +369,10 @@ def disposable_consent_pin(client) -> str:
             or not isinstance(comment.get("body"), str)):
         raise ContractError("exact scoped consent comment unavailable/foreign")
     body = comment["body"]
-    required = (
-        'Owner words: "go ahead. Non critical project, you are authorized on my behalf."',
-        "exact scope = disposable test issue #426 only",
-        "surfaces = title + scoreboard only",
-        "allow_write on that one issue",
-        "delegation CL #1 6238268372",
-    )
-    # The authority comment uses "OTM runs these under delegation CL #1",
-    # so require the unchanged grant without inferring a label/plan binding.
-    required = required[:-1] + ("under delegation CL #1 6238268372",)
-    if not all(fragment in body for fragment in required):
-        raise ContractError("disposable consent text/scope not qualified")
-    return hashlib.sha256(body.encode("utf-8")).hexdigest()
-
+    actual_sha256 = hashlib.sha256(body.encode("utf-8")).hexdigest()
+    if actual_sha256 != DISPOSABLE_CONSENT_BODY_SHA256:
+        raise ContractError("frozen disposable consent body SHA256 mismatch")
+    return actual_sha256
 
 def disposable_demo_projection(issue: dict, *, surface: str, consent_pin: str,
                                title: str | None = None,
@@ -569,6 +562,8 @@ def apply_projection(calculated: dict, client, *, confirm_scope: str,
     changes = calculated.get("changes")
     if not isinstance(changes, list):
         raise ContractError("projection changes must be a list")
+    if any(not isinstance(item, dict) for item in changes):
+        raise ContractError("every projected change must be a dict")
     if not allow_write:
         return {"status": "NOT_RUN", "dry_run": True, "complete": False,
                 "proposed": len(changes), "applied": 0, "applied_surfaces": [],
