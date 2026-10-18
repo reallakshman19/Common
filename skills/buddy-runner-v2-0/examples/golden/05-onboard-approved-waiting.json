@@ -1,0 +1,23 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "Owner approves reconstruction without assigning a task",
+  "request_patch": {
+    "mode": "ONBOARD",
+    "continuation": "AWAIT_OWNER_TASK"
+  },
+  "expected": {
+    "state": "ONBOARDED_AWAITING_TASK",
+    "next": "AWAIT_OWNER_TASK",
+    "continuation_evidence.status": "OWNER_WAIT"
+  },
+  "human_checks": [
+    "No task, coding, timer or resumption of an older grant follows from approval alone."
+  ],
+  "approval": true,
+  "owner_source": {
+    "body": "I approve the reconstruction with its stated limits.",
+    "kinds": [
+      "RECONSTRUCTION_APPROVAL"
+    ]
+  }
+}

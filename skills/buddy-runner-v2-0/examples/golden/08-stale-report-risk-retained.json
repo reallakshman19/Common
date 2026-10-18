@@ -1,0 +1,40 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "Correct a stale report while preserving an unresolved safety discrepancy",
+  "request_patch": {
+    "known_items": [
+      "STALE-REPORT",
+      "TARGET-CUSTODY"
+    ]
+  },
+  "expected": {
+    "carry_forward.unaddressed": [],
+    "carry_forward.grade": "DECLARED_ITEMS_ONLY_NOT_SEMANTIC_REVIEW"
+  },
+  "human_checks": [
+    "Identify the current source/evidence that supersedes the stale claim.",
+    "A helper-level negative result does not prove an unsafe end-to-end Apply.",
+    "Document all material source findings; an empty declared-item remainder is not a complete project audit."
+  ],
+  "record_patch": {
+    "dispositions": {
+      "STALE-REPORT": {
+        "decision": "SUPERSEDED",
+        "reason": "Current source contains the adapter mount; the old report says unwired",
+        "refs": [
+          "fixture:src/ui.py",
+          "fixture:older-workreport"
+        ]
+      },
+      "TARGET-CUSTODY": {
+        "decision": "RETAIN",
+        "reason": "Served aggregation lacks the source cross-member conflict check; downstream Apply effect remains unproven",
+        "refs": [
+          "fixture:served/aggregate.py",
+          "fixture:source/aggregate.py",
+          "fixture:controlled-negative-probe"
+        ]
+      }
+    }
+  }
+}
