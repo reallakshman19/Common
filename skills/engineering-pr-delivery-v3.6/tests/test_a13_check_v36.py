@@ -166,6 +166,30 @@ class CheckpointTests(unittest.TestCase):
             self.assertIn("A13_CHECK v36 |", proc.stdout)
             return proc.stdout
 
+    def test_scope_policy_autocrlf_true_accepts_crlf_worktree(self):
+        """Use Git's committed policy, not platform-dependent worktree bytes."""
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            base, head, _, scope = fixture(repo)
+            git(repo, "config", "core.autocrlf", "true")
+            original = scope.read_bytes()
+            self.assertNotIn(b"\r\n", original)
+            scope.write_bytes(original.replace(b"\n", b"\r\n"))
+            self.assertIn(b"\r\n", scope.read_bytes())
+            checker = importlib.import_module("a13_check_v36")
+            report = checker.check(repo, base, head, scope)
+            self.assertTrue(all(report["checks"].values()), report)
+
+    def test_scope_policy_does_not_require_worktree_copy(self):
+        """A frozen policy must be read from Git even without a checkout copy."""
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            base, head, _, scope = fixture(repo)
+            scope.unlink()
+            checker = importlib.import_module("a13_check_v36")
+            report = checker.check(repo, base, head, scope)
+            self.assertTrue(all(report["checks"].values()), report)
+
     def test_cli_success_single_line_zero_exit(self):
         self.assertIn("result=PASS", self.cli_assessment("", 0))
 
