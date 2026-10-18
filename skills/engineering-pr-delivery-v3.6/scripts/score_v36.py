@@ -1,4 +1,4 @@
-"""Read-only score/claim verifier; implemented after RED tests."""
+"""RED-only inert score verifier: never qualifies a claim."""
 
 def recompute(criteria, report, before, after, diff):
-    raise NotImplementedError("score verification pending")
+    return {"qualified": False, "score": (0, 0), "claim_class": "UNKNOWN", "owner_accepted": False}
