@@ -3,9 +3,13 @@ from __future__ import annotations
 import re
 
 from selfcheck_v36 import parse_self_check as parse_native_v1
+from criteria_v36 import SOURCE_PATTERN
 
 HEADER = re.compile(r"SELF-CHECK v2 · (?P<task>[A-Za-z0-9_.-]+) · (?P<issue>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+#[1-9]\d*)")
-BASIS = re.compile(r"Basis: CRITERIA v1 · source (?P<source>#[1-9]\d* [^·]+) · candidate (?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<sha>[0-9a-f]{40})")
+BASIS = re.compile(
+    r"Basis: CRITERIA v1 · source (?P<source>" + SOURCE_PATTERN +
+    r") · candidate (?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<sha>[0-9a-f]{40})"
+)
 CLAUSE = re.compile(r"Criterion: (?P<id>(?:AC|K|J)[1-9]\d*) → (?P<state>MET|NOT_MET|NOT_RUN|UNKNOWN|NOT_APPLICABLE) · proof: (?P<proof>[^\n·]+)")
 SCORE = re.compile(r"Score: (?P<num>\d+)/(?P<den>\d+) · claim: (?P<claim>DONE|PARTIAL|BLOCKED)")
 CLAIM = re.compile(r"Proposed claim: (?P<claim>DONE|PARTIAL|BLOCKED) · reason: (?P<reason>[^\n·]+)")
