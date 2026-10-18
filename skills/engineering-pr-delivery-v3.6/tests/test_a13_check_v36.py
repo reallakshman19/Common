@@ -24,6 +24,7 @@ def write(repo, name, data):
 def fixture(repo, variant=""):
     """Three commits, including a test-only first implementation gate."""
     subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+    git(repo, "config", "core.autocrlf", "false")
     git(repo, "config", "user.email", "fixture@example.invalid")
     git(repo, "config", "user.name", "Fixture")
     write(repo, "src/engine.py", "def calculate():\n    return 0\n")
