@@ -152,6 +152,28 @@ class CheckpointTests(unittest.TestCase):
     def test_a13_negative_new_file_over_300_lines(self):
         self.assertFalse(self.assessment("SIZE")["A13"])
 
+    def cli_assessment(self, variant, expected_return):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            base, head, _, scope = fixture(repo, variant)
+            program = ROOT / "scripts/a13_check_v36.py"
+            proc = subprocess.run(
+                [sys.executable, str(program), "--base", base, "--head", head,
+                 "--scope", str(scope)], cwd=repo, text=True,
+                capture_output=True, check=False)
+            self.assertEqual(proc.returncode, expected_return, proc.stderr)
+            self.assertEqual(len(proc.stdout.splitlines()), 1)
+            self.assertIn("A13_CHECK v36 |", proc.stdout)
+            return proc.stdout
+
+    def test_cli_success_single_line_zero_exit(self):
+        self.assertIn("result=PASS", self.cli_assessment("", 0))
+
+    def test_cli_failure_single_line_nonzero_exit(self):
+        output = self.cli_assessment("C16", 1)
+        self.assertIn("result=FAIL", output)
+        self.assertIn("C16=FAIL", output)
+
     def test_c5_checkpoint_table_has_18_three_mode_rows(self):
         text = (ROOT / "CODING_PRACTICES_ADDENDUM.md").read_text("utf-8")
         lines = [line for line in text.splitlines()
