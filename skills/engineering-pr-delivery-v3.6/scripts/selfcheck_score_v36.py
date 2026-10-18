@@ -1,8 +1,8 @@
-"""SELF-CHECK v2 parser and v1 compatibility; implemented after RED tests."""
+"""RED-only inert self-check parsers: never grant claimed criteria or scores."""
 
 def parse_self_check_v2(body, criteria):
-    raise NotImplementedError("SELF-CHECK v2 validation pending")
+    return {"version": 2, "criteria": {}, "claimed_score": (0, 0), "claim": "UNKNOWN"}
 
 
 def parse_compatible(body, *, task_id, issue_ref, owner_login):
-    raise NotImplementedError("v1 and v2 compatibility pending")
+    return {"version": 1, "issue": "", "claim": "UNKNOWN"}
