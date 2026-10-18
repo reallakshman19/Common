@@ -5,21 +5,46 @@ coding agent; there is **no TeamCoordinator**, shared registry, chat-send
 route or CoordinatorLandingpage access. The Owner approves every scope,
 review and merge. The agent never approves its own work.
 
-The commands below run **from this skill folder**
-(`skills/engineering-pr-delivery-v3.6`) with Python 3, Git and the
-existing PyYAML dependency installed. Replace each `__NAME__` token
-with your **local path or verified value** before copying a command.
-Quoted paths also work when directories contain spaces. Each executable
-fence records its expected exit code (0 = success; 1 = intentional
-unqualified score). These commands are **local read-only or dry-run**
-and do not post to GitHub. For the checked example, tests use
-temporary local Git repos and invented measurement JSON; those files
-are **illustrations, never Owner or CI evidence**.
+**Windows shells:** Commands work in **Git Bash** and **PowerShell 5.1**.
+Open either shell and change directory to this skill folder:
+`skills/engineering-pr-delivery-v3.6` in your Common checkout. Use
+Python 3 and Git. **One-time prerequisite**, if PyYAML is missing:
+run `python -m pip install "PyYAML>=6.0,<7.0"` from this folder.
+This dependency install may access a package index; it is **manual
+setup**, not one of the offline/read-only pilot commands below.
+Check the installed Python and PyYAML first (expected exit 0):
+
+```bash exit=0
+python -c "import yaml;print('PyYAML '+yaml.__version__)"
+```
+
+Every executable `bash exit=N` fence is a shell-neutral Python command
+with expected exit N (0 = success; 1 = intentionally unqualified score);
+the tag **does not require** Git Bash instead of PowerShell. Allowed
+non-command fences (`yaml`, `text`) are examples only. All these
+pilot command blocks run **from this skill folder**, are local
+read-only or dry-run and never post to GitHub.
+
+**Windows paths:** Replace `__NAME__` tokens with the actual approved
+values. In quoted `python -c` commands use **forward slashes**, e.g.
+`C:/pilot/my-repo/relay/AIM/MY-WORK.yaml` and `C:/pilot/my-repo`.
+Do **not** paste `C:\\pilot\\my-repo`: backslash escapes can break
+Python strings and `os.chdir` (WinError 123). Quote paths with spaces.
+The temporary-repo and measurement examples are **not** Owner or CI
+evidence; use real sources for an actual pilot.
 
 ## 1. Standalone label
 
-In your throwaway repo, create `relay/AIM/<WORK>.yaml` using the
-approved full v3.6 master-label structure. The top-level selection is:
+### 1A. Create the label file in `relay/AIM/`
+
+**Do this before validation.** In the throwaway repository, create
+the folder `relay/AIM/` and save the Owner-approved **full** master
+label at `relay/AIM/<WORK>.yaml`. Replace `<WORK>` with the actual
+label `work:` value, including matching case: for example,
+`C:/pilot/my-repo/relay/AIM/MY-WORK.yaml` for `work: MY-WORK`.
+Do **not** put the file at repository root, in `relay/` alone, or
+use `<WORK>` literally: the validator checks this exact directory,
+filename and work identity. The top-level selection is:
 
 ```yaml
 mode: standalone
