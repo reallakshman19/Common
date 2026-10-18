@@ -77,15 +77,34 @@ def _strings(value: object, name: str, *, minimum: int = 0) -> list[str]:
     return value
 
 
+def label_mode(label: dict) -> str:
+    """Explicit standalone; absent mode preserves historical coordinator labels."""
+    mode = label.get("mode", "coordinator")
+    if type(mode) is not str or mode not in ("coordinator", "standalone"):
+        raise ContractError("mode must be coordinator or standalone")
+    return mode
+
+
+def forbid_coordination_target(label: dict, repo: str) -> None:
+    """Fail before GitHub I/O for a standalone coordination-repository target."""
+    if (label_mode(label) == "standalone" and isinstance(repo, str)
+            and repo.split("/")[-1].casefold() == "coordinatorlandingpage"):
+        raise ContractError("standalone isolation forbids CoordinatorLandingpage target")
+
+
 def validate_label(document: object, expected_id: str | None = None) -> dict:
     """Read actual relay/AIM v1.1.0+ structure; do not infer issuer authenticity."""
-    document = _keys(document, REQUIRED_LABEL_FIELDS, "master label")
+    fields = REQUIRED_LABEL_FIELDS | ({"mode"} if isinstance(document, dict)
+                                      and "mode" in document else set())
+    document = _keys(document, fields, "master label")
+    label_mode(document)
     work = _text(document["work"], "work")
     if not LABEL_NAME.fullmatch(work) or (expected_id and work != expected_id):
         raise ContractError("work is invalid or does not match path")
     repo = _text(document["repository"], "repository")
     if not REPO_REF.fullmatch(repo):
         raise ContractError("repository must be owner/repo")
+    forbid_coordination_target(document, repo)
     if document["engineering_critical"] not in ("standard", "critical", "engineering-critical"):
         raise ContractError("engineering_critical must be standard, critical or engineering-critical")
     version = _text(document["version"], "version")
@@ -132,6 +151,7 @@ def writable_lab(label: dict, *, required: bool = True) -> str | None:
         return None
     if not REPO_REF.fullmatch(found[0]):
         raise ContractError("invalid Writable lab: repository")
+    forbid_coordination_target(label, found[0])
     return found[0]
 
 
@@ -143,6 +163,7 @@ def require_explicit_lab(label: dict, parent: str, selected_lab: str | None) -> 
     must be the label-declared writable lab and selected explicitly by caller.
     """
     repo = parent.split("#", 1)[0]
+    forbid_coordination_target(label, repo)
     if repo == label["repository"]:
         if selected_lab is not None:
             raise ContractError("--lab only applies when parent targets a writable lab")
@@ -245,6 +266,7 @@ def main(argv: list[str] | None = None) -> int:
             label = load_label(args.path)
             print(json.dumps({"valid": True, "work": label["work"],
                               "version": label["version"],
+                              "mode": label_mode(label),
                               "label_sha": label["label_sha"],
                               "engineering_critical": label["engineering_critical"]}, sort_keys=True))
         else:
