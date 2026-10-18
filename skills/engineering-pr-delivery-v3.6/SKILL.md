@@ -4,6 +4,20 @@
 
 **Agent addendum (A01–A14, incl. Owner-required A13 coding practice and A14 pre-claim SELF-CHECK):** [CODING_PRACTICES_ADDENDUM.md](CODING_PRACTICES_ADDENDUM.md). It is additive. The canonical 8-line evidence and the terminal LOG are unchanged.
 
+## v3.6.1 amendment — one core, two operating modes
+
+The approved work label has optional top-level `mode: coordinator | standalone`.
+An omitted `mode` defaults to **coordinator** for every existing label;
+unknown, blank or ill-typed modes fail validation. This selects operating
+responsibilities, **not** a second lifecycle engine or different O1–O5.
+Read [MODE_COORDINATOR.md](MODE_COORDINATOR.md) or
+[MODE_STANDALONE.md](MODE_STANDALONE.md) before work. The latter provides
+the full A01–A14 core/coordinator-only/simplified classification.
+Standalone label/target CLIs reject CoordinatorLandingpage for **reads and
+writes before provider I/O**; coordinator behavior remains unchanged.
+The Owner always retains acceptance; the agent never self-approves.
+C1–C18 checking and scored SELF-CHECK v2 are subsequent WPs, not WP1 features.
+
 **Admitted C1 issue-history structural reader (#401 / #409):** [CONTINUITY_CHAIN_V1.md](CONTINUITY_CHAIN_V1.md) and `scripts/issue_chain_v36.py`, with a **constructed reported-only #274 illustration**, not an attested or production [fixture](tests/fixtures/issue-chain-274-reported.json). The offline JSON validator requires 11 ordered categories, allowed category→record kinds and explicit UNKNOWN/NOT_APPLICABLE reasons; **100% means mandatory states structurally present, never 100% verified**. `observed_main` and its repo allowlist are **supplied by the untrusted report**, while PUBLIC visibility, source SHA shapes and record order are **syntactic assertions only**—no independently authenticated repository scope, confidentiality, chronology, freshness, byte custody or Owner acceptance. There are no network/provider writes, canonical task-evidence changes, scoreboard A promotion, title or label updates. The contract's Handover Master/BuddyRunner references are NON-NORMATIVE; follow those protocols' own approved sources. C1 is **not** the active approved label/plan for any work and never replaces the canonical 8-line receipt, self-check or mandatory terminal LOG.
 
 ## 1. Mandatory inputs — work-specific, never silently default
