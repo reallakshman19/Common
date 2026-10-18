@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nudge-designer:plan:v1",
+  "title": "Draft nudge plan with declared coverage and conditional continuation",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema", "id", "revision", "intent_id", "intent_revision", "intent_sha256", "profile_ids", "profiles_sha256", "strategy", "nudges", "coverage", "handover"],
+  "properties": {
+    "schema": {"const": "nudge-designer.plan/v1"},
+    "id": {"$ref": "#/$defs/id"},
+    "revision": {"type": "integer", "minimum": 1},
+    "intent_id": {"$ref": "#/$defs/id"},
+    "intent_revision": {"type": "integer", "minimum": 1},
+    "intent_sha256": {"$ref": "#/$defs/digest"},
+    "profile_ids": {"allOf": [{"$ref": "#/$defs/refs"}], "minItems": 1},
+    "profiles_sha256": {"$ref": "#/$defs/digest"},
+    "strategy": {"$ref": "#/$defs/text"},
+    "nudges": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/nudge"}},
+    "coverage": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/coverage"}},
+    "handover": {"$ref": "#/$defs/handover"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,79}$"},
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "refs": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "nonempty_refs": {"allOf": [{"$ref": "#/$defs/refs"}], "minItems": 1},
+    "texts": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "nonempty_texts": {"allOf": [{"$ref": "#/$defs/texts"}], "minItems": 1},
+    "nudge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "parent_id", "type", "outcome_refs", "item_refs", "source_refs", "profile_ids", "purpose", "deliverable", "understanding", "reasoning_moves", "evidence_methods", "depends_on", "branches", "boundaries", "success", "uncertainty", "report"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "parent_id": {"anyOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "type": {"enum": ["new_requirement", "ground", "next_step", "course_correction"]},
+        "outcome_refs": {"$ref": "#/$defs/nonempty_refs"},
+        "item_refs": {"$ref": "#/$defs/nonempty_refs"},
+        "source_refs": {"$ref": "#/$defs/nonempty_refs"},
+        "profile_ids": {"$ref": "#/$defs/nonempty_refs"},
+        "purpose": {"$ref": "#/$defs/text"},
+        "deliverable": {"$ref": "#/$defs/text"},
+        "understanding": {"$ref": "#/$defs/nonempty_texts"},
+        "reasoning_moves": {"$ref": "#/$defs/nonempty_refs"},
+        "evidence_methods": {"$ref": "#/$defs/nonempty_refs"},
+        "depends_on": {"$ref": "#/$defs/refs"},
+        "branches": {"type": "array", "items": {"$ref": "#/$defs/branch"}},
+        "boundaries": {"$ref": "#/$defs/boundaries"},
+        "success": {"$ref": "#/$defs/success"},
+        "uncertainty": {"$ref": "#/$defs/uncertainty"},
+        "report": {"$ref": "#/$defs/report"}
+      }
+    },
+    "branch": {
+      "type": "object", "additionalProperties": false,
+      "required": ["observation", "next_ids", "rationale"],
+      "properties": {
+        "observation": {"$ref": "#/$defs/text"},
+        "next_ids": {"$ref": "#/$defs/refs"},
+        "rationale": {"$ref": "#/$defs/text"}
+      }
+    },
+    "boundaries": {
+      "type": "object", "additionalProperties": false,
+      "required": ["preserve_refs", "do_not"],
+      "properties": {
+        "preserve_refs": {"$ref": "#/$defs/refs"},
+        "do_not": {"$ref": "#/$defs/nonempty_texts"}
+      }
+    },
+    "success": {
+      "type": "object", "additionalProperties": false,
+      "required": ["observable", "negative_case"],
+      "properties": {
+        "observable": {"$ref": "#/$defs/text"},
+        "negative_case": {"$ref": "#/$defs/text"}
+      }
+    },
+    "uncertainty": {
+      "type": "object", "additionalProperties": false,
+      "required": ["missing", "return_with", "independent_work"],
+      "properties": {
+        "missing": {"$ref": "#/$defs/texts"},
+        "return_with": {"$ref": "#/$defs/text"},
+        "independent_work": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "report": {
+      "type": "object", "additionalProperties": false,
+      "required": ["required", "next_action"],
+      "properties": {
+        "required": {"$ref": "#/$defs/nonempty_texts"},
+        "next_action": {"$ref": "#/$defs/text"}
+      }
+    },
+    "coverage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target_id", "disposition", "nudge_ids", "evidence_refs", "rationale"],
+      "properties": {
+        "target_id": {"$ref": "#/$defs/id"},
+        "disposition": {"enum": ["PLANNED", "EVIDENCE_REPORTED", "UNRESOLVED", "DEFERRED", "SUPERSEDED"]},
+        "nudge_ids": {"$ref": "#/$defs/refs"},
+        "evidence_refs": {"$ref": "#/$defs/refs"},
+        "rationale": {"$ref": "#/$defs/text"}
+      }
+    },
+    "handover": {
+      "type": "object", "additionalProperties": false,
+      "required": ["remaining", "next_action", "changed_understanding"],
+      "properties": {
+        "remaining": {"$ref": "#/$defs/texts"},
+        "next_action": {"$ref": "#/$defs/text"},
+        "changed_understanding": {"$ref": "#/$defs/text"}
+      }
+    }
+  }
+}

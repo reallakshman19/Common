@@ -121,6 +121,13 @@ class ContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError, "nudge"):
             self.check()
 
+    def test_coverage_cannot_link_only_an_unrelated_nudge(self):
+        intent, plan = case("logic")
+        row = next(x for x in plan["coverage"] if x["target_id"] == "R-EXPORT")
+        row.update(disposition="PLANNED", nudge_ids=["N-PROBE"])
+        with self.assertRaisesRegex(ContractError, "coverage nudge"):
+            validate_plan(intent, plan, self.profiles)
+
     def test_orphan_and_self_dependencies_rejected(self):
         nudge = self.plan["nudges"][0]
         for dependency in ("missing", nudge["id"]):
@@ -180,7 +187,7 @@ class ContractTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "bad.json"
-            for data in ('{"id":1,"id":2}', '{"a":NaN}'):
+            for data in ('{"id":1,"id":2}', '{"a":NaN}', '{"a":1e999}'):
                 path.write_text(data)
                 with self.assertRaises(ContractError):
                     load_json(path)

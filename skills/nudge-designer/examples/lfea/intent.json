@@ -1,0 +1,56 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-LFEA",
+  "revision": 1,
+  "owner_request": "Make the authentic LFEA ACCDB journey usable: understandable findings, exact object interaction, supported corrections and a truthful route to Output.",
+  "purpose": "Make the authentic LFEA ACCDB journey usable: understandable findings, exact object interaction, supported corrections and a truthful route to Output.",
+  "sources": [
+    {"id": "S-OWNER", "locator": "https://github.com/reallakshman19/AA3/issues/47", "revision": null, "kind": "OWNER", "assessment": "SUPPLIED", "note": "Owner outcome as recorded in public issue; attribution is not independently authenticated."},
+    {
+      "id": "S-CODE",
+      "locator": "https://github.com/reallakshman19/AA3/blob/f26689a22598bc2c374c335a821d87d83493a02d/src/workspace/lfea-model-review/lfea-geometry-review-svg.js",
+      "revision": "f26689a22598bc2c374c335a821d87d83493a02d",
+      "kind": "SOURCE",
+      "assessment": "SUPPLIED",
+      "note": "Exact candidate source; revisit relevant files before a new action."
+    },
+    {"id": "S-QA", "locator": "https://github.com/reallakshman19/AA3/issues/53#issuecomment-6127787597", "revision": "f26689a22598bc2c374c335a821d87d83493a02d", "kind": "RECEIPT", "assessment": "SUPPLIED", "note": "Recorded 2 PASS / 1 FAIL; profiles differ; full trace bytes not inspected by this fixture."},
+    {"id": "S-PROPOSAL", "locator": "https://github.com/reallakshman19/AA3/issues/51#issuecomment-6127880371", "revision": "f26689a22598bc2c374c335a821d87d83493a02d", "kind": "RECEIPT", "assessment": "SUPPLIED", "note": "Existing read-only reconstruction and conditional selection-rail proposal; not a write grant."}
+  ],
+  "items": [
+    {"id": "R-USABLE", "kind": "REQUIREMENT", "text": "Preserve the complete findings-to-Output user outcome.", "source_refs": ["S-OWNER"], "condition": null, "state": "CURRENT", "outcome_refs": []},
+    {"id": "C-GEOMETRY", "kind": "CONSTRAINT", "text": "Preserve source geometry, physical IDs, fixture bytes and engineering authority.", "source_refs": ["S-OWNER"], "condition": null, "state": "CURRENT", "outcome_refs": []},
+    {"id": "C-ORDINARY", "kind": "CONSTRAINT", "text": "Retain ordinary E1/E2 pointer and keyboard selection and the original meaningful oracle.", "source_refs": ["S-QA"], "condition": "Do not substitute force-clicks, an easier segment, longer timeout or keyboard-only success.", "state": "CURRENT", "outcome_refs": []},
+    {"id": "F-HIT", "kind": "FACT", "text": "The retained original E1 PIPE click was intercepted by E2 FLANGE at the candidate head.", "source_refs": ["S-QA"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-SELECT"]},
+    {"id": "F-PROFILES", "kind": "FACT", "text": "Two focused tests passed under different preparation profiles; the original source-span test failed.", "source_refs": ["S-QA"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-SELECT"]},
+    {"id": "H-CAP", "kind": "HYPOTHESIS", "text": "A later-painted rounded E2 stroke covers the tiny projected E1 hit target.", "source_refs": ["S-PROPOSAL"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-SELECT"]},
+    {"id": "P-RAIL", "kind": "PROPOSAL", "text": "An existing display-only visible selection rail is a candidate remedy, conditional on the discriminant.", "source_refs": ["S-PROPOSAL"], "condition": null, "state": "PROPOSED", "outcome_refs": ["O-SELECT"]},
+    {"id": "U-POINT", "kind": "UNKNOWN", "text": "The actual failed CSS viewport click point and hit stack have not been inspected here.", "source_refs": ["S-QA"], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-SELECT"]}
+  ],
+  "outcomes": [
+    {"id": "O-USABLE", "parent_id": null, "text": "Complete the intended engineer journey.", "done_when": "Criterion-bound integrated evidence on an eligible artifact.", "item_refs": ["R-USABLE"]},
+    {"id": "O-SELECT", "parent_id": "O-USABLE", "text": "Accurate ordinary source-object interaction.", "done_when": "E1/E2 identities and relevant pointer/keyboard behavior established.", "item_refs": ["F-HIT", "F-PROFILES"]},
+    {"id": "O-REST", "parent_id": "O-USABLE", "text": "Retain findings, correction, state, cases and Output acceptance gaps.", "done_when": "Affected full journey tested without inheriting old acceptance.", "item_refs": ["R-USABLE"]}
+  ],
+  "knowledge": [
+    {"topic": "SVG units versus CSS click coordinates, hit testing, source identity and preparation scope", "reason": "Needed to interpret the concrete case and its limits.", "outcome_refs": ["O-USABLE"], "source_refs": ["S-OWNER"]}
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN in this example; a runtime must record actual settings and access.",
+    "tools": ["Source reader; actual runtime tools must be checked"],
+    "reserved_decisions": ["Any new authority, consequential design choice or scope expansion"]
+  },
+  "scope": {
+    "permitted": ["Source-grounded planning and read-only diagnosis under the actual project grant"],
+    "forbidden": ["Invent execution, source authority or acceptance"],
+    "basis_refs": ["S-OWNER"],
+    "note": "Supplied example scope; not an authenticated work grant."
+  },
+  "protocols": {
+    "thinking": null,
+    "delivery": null,
+    "note": "Select thinking and delivery separately from actual project authority; no automatic version substitution."
+  }
+}

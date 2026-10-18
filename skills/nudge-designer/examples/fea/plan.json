@@ -1,0 +1,70 @@
+{
+  "schema": "nudge-designer.plan/v1",
+  "id": "P-FEA",
+  "revision": 1,
+  "intent_id": "I-FEA",
+  "intent_revision": 1,
+  "intent_sha256": "7c7de940eb46b377af7af983590ddf18018e89fe7c5f638f033c8f6b654bbaaa",
+  "profile_ids": [
+    "core",
+    "quantitative",
+    "fea"
+  ],
+  "profiles_sha256": "035ba67153b9821b1154eb1842eb61b9eb11b4b02e72c34ebffca8bf03ba20cd",
+  "strategy": "Use the concrete unresolved question; reuse existing work and keep conditional future work distinct.",
+  "nudges": [
+    {
+      "id": "N-DERIVE",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": ["O-REFERENCE"],
+      "item_refs": ["R-REFERENCE", "F-SPECIAL"],
+      "source_refs": ["S-BAR"],
+      "profile_ids": ["core", "quantitative", "fea"],
+      "purpose": "Create an independent interpretable reference.",
+      "deliverable": "Derive free-end displacement, uniform stress and fixed-end reaction with units and assumptions.",
+      "understanding": ["Verification of a special-case implementation is distinct from validity for other physical uses."],
+      "reasoning_moves": ["derive", "challenge"],
+      "evidence_methods": ["hand_derivation", "unit_check", "sensitivity_check"],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {"preserve_refs": ["C-MODEL", "C-QUALIFICATION"], "do_not": ["Do not widen this assignment or weaken its evidence."]},
+      "success": {"observable": "Show the governing relation and reproducible intermediate arithmetic.", "negative_case": "Double the load within the stated linear model and predict which quantities scale."},
+      "uncertainty": {"missing": [], "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.", "independent_work": ["Retain source-grounded observations and other authorized independent work."]},
+      "report": {"required": ["Actual result and exact basis", "Evidence and execution limits", "Unresolved issues and changed understanding"], "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."}
+    },
+    {
+      "id": "N-COMPARE",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": ["O-COMPARE"],
+      "item_refs": ["R-REFERENCE", "U-SOLVER"],
+      "source_refs": ["S-BAR"],
+      "profile_ids": ["core", "quantitative", "fea"],
+      "purpose": "Assess numerical evidence only when a compatible result exists.",
+      "deliverable": "Define and, when inputs are available, perform a compatible one-/two-element comparison.",
+      "understanding": ["An exact linear-element special case does not require inventing mesh error; general models need appropriate numerical error assessment."],
+      "reasoning_moves": ["compare", "verify"],
+      "evidence_methods": ["independent_reference", "numerical_error_check"],
+      "depends_on": ["N-DERIVE"],
+      "branches": [],
+      "boundaries": {"preserve_refs": ["C-MODEL", "C-QUALIFICATION"], "do_not": ["Do not widen this assignment or weaken its evidence."]},
+      "success": {"observable": "Compare signed displacement, reaction and stress with declared numerical precision and actual execution evidence.", "negative_case": "Reject a comparison with incompatible units or boundary conditions."},
+      "uncertainty": {"missing": ["Actual solver/result and its source revision"], "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.", "independent_work": ["Retain source-grounded observations and other authorized independent work."]},
+      "report": {"required": ["Actual result and exact basis", "Evidence and execution limits", "Unresolved issues and changed understanding"], "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."}
+    }
+  ],
+  "coverage": [
+    {"target_id": "R-REFERENCE", "disposition": "PLANNED", "nudge_ids": ["N-DERIVE", "N-COMPARE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "C-MODEL", "disposition": "PLANNED", "nudge_ids": ["N-DERIVE", "N-COMPARE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "C-QUALIFICATION", "disposition": "PLANNED", "nudge_ids": ["N-DERIVE", "N-COMPARE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "U-SOLVER", "disposition": "UNRESOLVED", "nudge_ids": ["N-COMPARE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "O-REFERENCE", "disposition": "PLANNED", "nudge_ids": ["N-DERIVE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "O-COMPARE", "disposition": "UNRESOLVED", "nudge_ids": ["N-COMPARE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."}
+  ],
+  "handover": {
+    "remaining": ["U-SOLVER", "O-COMPARE"],
+    "next_action": "Derive free-end displacement, uniform stress and fixed-end reaction with units and assumptions.",
+    "changed_understanding": "This is a worked plan, not an executed assignment, authenticated grant or product acceptance."
+  }
+}

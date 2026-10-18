@@ -1,0 +1,73 @@
+{
+  "schema": "nudge-designer.plan/v1",
+  "id": "P-LFEA",
+  "revision": 1,
+  "intent_id": "I-LFEA",
+  "intent_revision": 1,
+  "intent_sha256": "a3fb7b3a7d304c1b04e95274921aa6f7ee2459d1749fa3e95068b9b73e7ce295",
+  "profile_ids": [
+    "core",
+    "ui"
+  ],
+  "profiles_sha256": "0a29426ed4ae426919eee4845393fc70245d943a5a24b749f87c26fc0cd0b9a3",
+  "strategy": "Use the concrete unresolved question; reuse existing work and keep conditional future work distinct.",
+  "nudges": [
+    {
+      "id": "N-POINT",
+      "parent_id": null,
+      "type": "ground",
+      "outcome_refs": ["O-SELECT"],
+      "item_refs": ["F-HIT", "F-PROFILES", "H-CAP", "U-POINT"],
+      "source_refs": ["S-QA", "S-CODE", "S-PROPOSAL"],
+      "profile_ids": ["core", "ui"],
+      "purpose": "Discriminate the proposed cause before selecting another repair.",
+      "deliverable": "Recover the retained actual CSS click point and record an exact-point E1/E2 hit-stack assessment.",
+      "understanding": ["A reported SVG endpoint is not a measured browser click coordinate."],
+      "reasoning_moves": ["trace", "challenge"],
+      "evidence_methods": ["browser_observation", "source_trace"],
+      "depends_on": [],
+      "branches": [
+        {"observation": "The exact-point observation supports E2 covering E1.", "next_ids": ["N-DECIDE"], "rationale": "Evaluate the retained proposal; do not presume it is admitted."},
+        {"observation": "The trace point is unavailable or the hit stack differs.", "next_ids": [], "rationale": "Recover the exact missing input or revise the explanation; preserve useful independent work."}
+      ],
+      "boundaries": {"preserve_refs": ["C-GEOMETRY", "C-ORDINARY"], "do_not": ["Do not widen this assignment or weaken its evidence."]},
+      "success": {"observable": "Report ordered hits, computed styles, transforms, paint order, identities and unchanged state.", "negative_case": "A different overlay or transform at the actual point contradicts the simple cap explanation."},
+      "uncertainty": {"missing": ["Actual retained trace point and matching browser state"], "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.", "independent_work": ["Retain source-grounded observations and other authorized independent work."]},
+      "report": {"required": ["Actual result and exact basis", "Evidence and execution limits", "Unresolved issues and changed understanding"], "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."}
+    },
+    {
+      "id": "N-DECIDE",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": ["O-SELECT"],
+      "item_refs": ["P-RAIL", "H-CAP"],
+      "source_refs": ["S-PROPOSAL", "S-CODE"],
+      "profile_ids": ["core", "ui"],
+      "purpose": "Reuse, revise or reject the existing proposal from evidence.",
+      "deliverable": "Produce one bounded repair decision with preserved identities and required proof.",
+      "understanding": ["A useful display target must not pretend to alter physical geometry."],
+      "reasoning_moves": ["compare", "decide"],
+      "evidence_methods": ["source_trace", "counterexample"],
+      "depends_on": ["N-POINT"],
+      "branches": [],
+      "boundaries": {"preserve_refs": ["C-GEOMETRY", "C-ORDINARY"], "do_not": ["Do not widen this assignment or weaken its evidence."]},
+      "success": {"observable": "A source-preserving remedy or evidenced KEEP is justified against the observation.", "negative_case": "Reject a remedy that makes E2 inaccessible or invents editable source provenance."},
+      "uncertainty": {"missing": ["N-POINT result; actual implementation authority before any coding"], "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.", "independent_work": ["Retain source-grounded observations and other authorized independent work."]},
+      "report": {"required": ["Actual result and exact basis", "Evidence and execution limits", "Unresolved issues and changed understanding"], "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."}
+    }
+  ],
+  "coverage": [
+    {"target_id": "R-USABLE", "disposition": "UNRESOLVED", "nudge_ids": [], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "C-GEOMETRY", "disposition": "PLANNED", "nudge_ids": ["N-POINT", "N-DECIDE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "C-ORDINARY", "disposition": "PLANNED", "nudge_ids": ["N-POINT", "N-DECIDE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "U-POINT", "disposition": "UNRESOLVED", "nudge_ids": ["N-POINT"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "O-USABLE", "disposition": "UNRESOLVED", "nudge_ids": [], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "O-SELECT", "disposition": "PLANNED", "nudge_ids": ["N-POINT", "N-DECIDE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "O-REST", "disposition": "DEFERRED", "nudge_ids": [], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."}
+  ],
+  "handover": {
+    "remaining": ["R-USABLE", "U-POINT", "O-USABLE", "O-REST"],
+    "next_action": "Recover the retained actual CSS click point and record an exact-point E1/E2 hit-stack assessment.",
+    "changed_understanding": "This is a worked plan, not an executed assignment, authenticated grant or product acceptance."
+  }
+}

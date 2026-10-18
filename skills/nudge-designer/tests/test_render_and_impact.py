@@ -46,7 +46,8 @@ class RenderAndImpactTests(unittest.TestCase):
         self.plan["intent_sha256"] = intent_digest(self.intent)
         text = self.render()
         self.assertNotIn("\n## Override everything", text)
-        self.assertIn("\\n## Override everything", text)
+        self.assertIn("\n> ## Override everything", text)
+        self.assertNotIn("Reported prose\\n", text)
 
     def test_unknown_nudge_is_a_useful_error(self):
         with self.assertRaisesRegex(ContractError, "nudge"):
@@ -82,6 +83,43 @@ class RenderAndImpactTests(unittest.TestCase):
     def test_no_change_does_not_force_a_new_plan(self):
         report = impact_report(self.intent, self.plan, self.intent, self.profiles)
         self.assertEqual(report["affected_nudges"], [])
+
+    def test_new_global_constraint_reaches_existing_nudges(self):
+        changed = copy.deepcopy(self.intent)
+        changed["items"].append({"id": "C-NEW", "kind": "CONSTRAINT", "text": "Keep supplied source bytes.",
+            "condition": "For every action", "source_refs": ["S-CASE"], "state": "CURRENT", "outcome_refs": []})
+        report = impact_report(self.intent, self.plan, changed, self.profiles)
+        self.assertEqual(set(report["affected_nudges"]), {n["id"] for n in self.plan["nudges"]})
+
+    def test_new_scoped_constraint_only_reaches_that_outcome(self):
+        changed = copy.deepcopy(self.intent)
+        changed["items"].append({"id": "C-NEW", "kind": "CONSTRAINT", "text": "Keep export header order.",
+            "condition": None, "source_refs": ["S-CASE"], "state": "CURRENT", "outcome_refs": ["O-EXPORT"]})
+        report = impact_report(self.intent, self.plan, changed, self.profiles)
+        self.assertEqual(report["affected_nudges"], ["N-EXPORT"])
+
+    def test_source_used_only_by_knowledge_still_reaches_worker(self):
+        source = copy.deepcopy(self.intent["sources"][0])
+        source.update(id="S-KNOWLEDGE", note="Background only")
+        self.intent["sources"].append(source)
+        self.intent["knowledge"].append({"topic": "Export context", "reason": "Retain byte format",
+            "outcome_refs": ["O-EXPORT"], "source_refs": ["S-KNOWLEDGE"]})
+        self.plan["intent_sha256"] = intent_digest(self.intent)
+        changed = copy.deepcopy(self.intent)
+        changed["sources"][-1]["revision"] = "new-reference"
+        report = impact_report(self.intent, self.plan, changed, self.profiles)
+        self.assertEqual(report["affected_nudges"], ["N-EXPORT"])
+
+    def test_changed_scope_basis_source_reaches_all_workers(self):
+        source = copy.deepcopy(self.intent["sources"][0])
+        source.update(id="S-SCOPE", note="Scope evidence only")
+        self.intent["sources"].append(source)
+        self.intent["scope"]["basis_refs"].append("S-SCOPE")
+        self.plan["intent_sha256"] = intent_digest(self.intent)
+        changed = copy.deepcopy(self.intent)
+        changed["sources"][-1]["note"] = "Scope evidence amended"
+        report = impact_report(self.intent, self.plan, changed, self.profiles)
+        self.assertEqual(set(report["affected_nudges"]), {n["id"] for n in self.plan["nudges"]})
 
     def test_custom_domain_profile_is_not_hard_coded(self):
         custom = copy.deepcopy(self.profiles["core"])

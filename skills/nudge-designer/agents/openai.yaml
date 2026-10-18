@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nudge Designer"
+  short_description: "Turn grounded intent into bounded, useful agent nudges"
+  default_prompt: "Use $nudge-designer to reconstruct my intent from the supplied sources and prepare a reusable nudge plan with appropriate reasoning and evidence."
