@@ -1,6 +1,6 @@
 # v3.6 Issue Continuity Chain v1
 
-**Original design source:** [Common #400](https://github.com/reallakshman19/Common/issues/400). **Admission authority and scope:** [Common #409](https://github.com/reallakshman19/Common/issues/409) (Owner-approved #401 admission; no general project activation or write authority). **Accepted lifecycle:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Zero-exit adjacency:** [ONB #391](https://github.com/reallakshman19/Common/issues/391). **Owner example:** [3D_Converters #274](https://github.com/reallakshman19/3D_Converters/issues/274).
+**Original design source:** [Common #400](https://github.com/reallakshman19/Common/issues/400). **Admission authority and scope:** [Common #409](https://github.com/reallakshman19/Common/issues/409) (Owner-approved #401 admission; no general project activation or write authority). **Accepted lifecycle:** [Common #341](https://github.com/reallakshman19/Common/issues/341). **Zero-exit adjacency:** [ONB #391](https://github.com/reallakshman19/Common/issues/391). **Illustrative reported source:** [3D_Converters #274](https://github.com/reallakshman19/3D_Converters/issues/274) (constructed example, not an attested real-run fixture).
 
 This is an ADDITIVE native v3.6 contract. It imports NO v3.5/DELP runtime, changes NO v3.6 evidence/scoreboard/label/publisher code, and does not make BuddyRunner, two-pass and three-pass one protocol. It preserves accepted O1–O5.
 
@@ -8,7 +8,7 @@ This is an ADDITIVE native v3.6 contract. It imports NO v3.5/DELP runtime, chang
 
 An issue must be an engineering evidence *spine*, not a stream of activity counts: original Owner WHY, technical conversation amendments and source, actual original input/golden, benchmark and measured acceptance, causal code path and implementation crux, every meaningful agent contribution, adopted and parked ideas and their decision rationale, current problems and clear next verification. A successor with only the issue URL should follow links and independently reconstruct; the native v3.6 outgoing terminal LOG remains mandatory; a cold successor must nevertheless report honestly when that LOG was not captured.
 
-A GitHub issue **cannot recover unpublished/private chat**. Captured Owner-direct text is initially SOURCE_REPORTED until provider actor/source verification. Never turn an assistant quotation or older PR into Owner authority. Redact or explicitly keep private user files; do not auto-export conversation history.
+A GitHub issue **cannot recover unpublished/private chat**. Captured Owner-direct text is always **OWNER_DIRECT_REPORTED** in this validator, never authenticated merely by a source-class string; later external provider actor/source verification is not implemented by C1. Never turn an assistant quotation or older PR into Owner authority. Redact or explicitly keep private user files; do not auto-export conversation history.
 
 ## Mandatory issue chain categories (11)
 
@@ -26,28 +26,37 @@ A GitHub issue **cannot recover unpublished/private chat**. Captured Owner-direc
 | SELECTED_NEXT_VERIFICATION | Current selected frontier, exact source/fixture/test and stop conditions |
 | TECHNICAL_HANDOVER | One 12-section causal handover, Handover Master/Buddy receipt/source refs |
 
-**Two denominators:** accounting_coverage_percent=100 means all 11 categories are recorded, even where UNKNOWN is explicitly stated. verified_coverage_percent is ZERO for this C1 tool because it makes no external requests or source attestations. That is NOT 100% reliable engineering evidence or Owner approval. Future C2/C3 attest bytes and semantics separately.
+**Two denominators:** `accounting_coverage_percent` is calculated as **validated mandatory category states / 11 × 100**, including `UNKNOWN` and `NOT_APPLICABLE`. Because this strict schema rejects absent categories, any *successful* validation necessarily yields **100% structural accounting**. A rejected/incomplete report produces `CHAINAGE_BLOCKED`, not partial approved progress. `verified_coverage_percent` remains ZERO: this offline C1 tool fetches no external sources and attests no bytes. Neither figure measures reliable engineering proof, truth or Owner approval. C2/C3 would need separate scoped, authenticated readers.
 
 ## Exactly what C1 implements
 
-The current additive scripts/issue_chain_v36.py validates reported JSON from an owning issue, strict source identities and roles, public GitHub URLs, source-cut SHA40 and optional reported SHA256, exact categories, unique historical record IDs, backward-only references (no orphan/cycles), parent and cross-repository allowlisting, explicit UNKNOWN reason. It rejects private notes in PUBLIC reports and fake direct-Owner authentication. A protected adoption claim needs a **reported decision link** but the checker never promotes it into authenticated Owner approval. Parked ideas must state the revisit trigger. Every record must be included in the index.
+The additive `scripts/issue_chain_v36.py` is a **purely offline structural checker** over caller-supplied JSON. It checks:
+- All eleven mandatory categories are present and ordered; each `PRESENT_REPORTED` category cites at least one record of its **permitted kind** (for example `ROOT_OWNER_INTENT→OWNER_INPUT`, `ORIGINAL_INPUT→FIXTURE`, `DECISION_AND_PARKED_IDEAS→IDEA/DECISION`). Explicit `UNKNOWN` or `NOT_APPLICABLE` states have reasons and no claimed evidence. This is *record-kind consistency*, not an attestation of what a record represents.
+- Records have syntactically unique IDs and `related_ids` that point to **previously listed** records. This prevents forward links and cycles in the declared array, **not** falsified timestamps, event-order provenance, actual historic chronology, changed source age or staleness. There is no timestamp field, freshness comparison or provider chronology reconstruction.
+- Repository names and SHA formats are checked for shape. The apparent `permitted_repos` set is **derived solely from untrusted `observed_main` fields inside the submitted JSON**. Thus the validator prevents undeclared cross-repository links *relative to that self-declared set*, but it is **not a trusted, externally approved repository allowlist**. A real approval gate must bind repository/scope using independent Owner/provider credentials and explicit authority before trusting any links.
+- GitHub URLs are syntax-filtered; `visibility=PUBLIC` is a **claim made by the input**, not verification that a link is actually public or that private content was safely redacted. `source_revision` SHA-40 and optional `source_sha256` SHA-64 are **regex shape checks only**; no Git object, document, byte content or actual current head is fetched or hashed. A fabricated but well-formed SHA passes this layer. `UNKNOWN` event source class cannot be misused as an evidenced event.
+- `ADOPTED_REPORTED` and `REJECTED_REPORTED` need a syntactically valid linked reported decision; non-decision kinds cannot be adopted/rejected, and a `PARKED` item requires a revisit trigger. These are source-*reported* dispositions and never authenticated Owner decisions. All declared records must appear in a compatible reported category or validation fails.
+
+There is **no trusted cross-repository scope, real time-order verification, staleness detection, public/private inspection, actual SHA comparison, or independent semantic acceptance** in this C1 implementation.
 
 It emits STRUCTURALLY_ACCOUNTED_NOT_SOURCE_VERIFIED with permission_to_write=false, may_change_titles_or_labels=false, may_merge_or_release=false. There is no network client, writer, workflow scheduler or acceptance engine.
 
-## Source example: 3D_Converters #274 (reported facts, not certification)
+## Constructed reported-only illustration referencing 3D_Converters #274 (not an authenticated fixture)
 
-The direct Owner request was to preserve working Weight Match logic and reconnect to older robust UI via small adapters. Reported in the engineering discussion: 41 branches, 423 physical components and 2961 FactRecords = 7 per physical component, but at the cited observation ZERO accepted Match-1 and Final masses, 423 unresolved. The legacy DOM-only checklist changed visible cells without updating canonical readiness and reported 28/28 regex identity while newer context showed 41/41. Exact served JS asset SHA has NOT been proved. Native CII remains separately held for Final→engine transfer, native physical-slot consumption and release authority.
+The source-reported Owner request in this constructed illustration was to preserve working Weight Match logic and reconnect to older robust UI via small adapters. Reported in the engineering discussion: 41 branches, 423 physical components and 2961 FactRecords = 7 per physical component, but at the cited observation ZERO accepted Match-1 and Final masses, 423 unresolved. The legacy DOM-only checklist changed visible cells without updating canonical readiness and reported 28/28 regex identity while newer context showed 41/41. Exact served JS asset SHA has NOT been proved. Native CII remains separately held for Final→engine transfer, native physical-slot consumption and release authority.
 
-This has critical ambiguity: **complete Facts ≠ accepted weights ≠ valid native CII**. The known G0–G7 proposal and PR #281 are planning/draft observations, not adopted release decisions. The example intentionally declares unknown Owner amendment chronology, original full input file, full owner golden and actual-JSON performance benchmark. An agent ten cannot silently replace these with synthetic files or inferred thresholds.
+This has critical ambiguity: **complete Facts ≠ accepted weights ≠ valid native CII**. The known G0–G7 proposal and PR #281 are planning/draft observations, not adopted release decisions. The **locally authored reported-only JSON illustration** intentionally declares unknown Owner amendment chronology, original full input file, full Owner golden and actual-JSON performance benchmark. It is neither a synthetic golden/oracle nor a provider-verified real fixture; its construction and every retained report claim remain unverified without separate source retrieval. An agent ten cannot silently replace these with synthetic files or inferred thresholds.
 
-## Interlink with existing native phase boundaries
+## Informative references to other independently governed workflows (NON-NORMATIVE)
 
-- Handover Master is the **single invocation**, choosing actual v3.6 vs standalone and approved version.
-- BuddyRunner 1a receives only approved source/intake pointers and HOLD. Buddy 1b independently reconstructs original issue, source, fixture and history, proposes KEEP or IMPROVE. Buddy 2 reconciles **one** investigation, records reported adopted/parked decisions with links, writes the existing twelve-section handover once, then closes. One Xb→Y intervention is not another stage.
-- v3.6 two-pass: independent first baseline is not contaminated with the predecessor solution; task-aware comparison comes later. v3.6 three-pass keeps the existing independent source/falsifier → implementation → validation division; no extra prompts added.
-- Zero-exit ONB WP5 compiles the twelve-section report and BLOCKED verdict from issue/provider-linked context. The outgoing native v3.6 terminal LOG remains mandatory. Zero-exit recovery does not invent a missing LOG and may independently reconstruct a BLOCKED report when the predecessor failed to publish it.
+**This section is explanatory navigation ONLY**. It does not define, amend, activate, relax, or replace any Handover Master, BuddyRunner, two-pass, three-pass or zero-exit protocol. For actions and phase isolation, read the **actual selected native skill and controlling approved plan/version**. C1 neither invokes these tools nor grants their permissions.
 
-No disclosure of private source or authored solution into a deliberately blind stage. Owner approval, acceptance and output publication remain independent.
+- Handover Master selection is governed by its own current decision guide, **not** by this C1 document. Do not infer agent authority or role from this mention.
+- BuddyRunner's actual versioned 1a HOLD → independent 1b → one predecessor 2 and optional separately-authorized Xb→Y use their own source and stage rules. The sequence here is illustrative, not an instruction to conduct or auto-close a handover.
+- Native v3.6 two-pass and three-pass generators are distinct, stage-isolated workflows under their own source contract; this illustration must not contaminate an independent/blind first pass.
+- Zero-exit ONB has a separate source-verification contract. C1 cannot satisfy it by an accounted 11/11 JSON report. Native v3.6 terminal LOG remains mandatory; a cold successor records a missing LOG as missing, not fabricated.
+
+The C1 validator publishes nothing, has no private-chat access and confers no new acceptance, output release or provider write authority.
 
 ## Existing smart titles and unadmitted dynamic-label writes
 
@@ -63,7 +72,7 @@ python3 skills/engineering-pr-delivery-v3.6/scripts/issue_chain_v36.py --input s
 python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_issue_chain_v36.py' -v
 ~~~
 
-Example status: 11 accounted, 7 source-reported, 4 UNKNOWN, ZERO authenticated/attested/accepted; merge/release HOLD. Avoid using example report as an Owner fixture or benchmark.
+Illustrative local output: 11 structurally accounted, 7 PRESENT_REPORTED, 4 UNKNOWN, ZERO independently authenticated/attested/accepted; merge/release HOLD. The JSON arrangement was constructed from reported #274 information and does not establish actual fixture or benchmark custody.
 
 ## Remaining gates
 
