@@ -1,0 +1,3 @@
+I-01 | claim=2 | source=red blue
+I-02 | claim=3 | source=red blue green
+I-03 | claim=2 | source=red
