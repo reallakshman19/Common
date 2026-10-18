@@ -1,0 +1,144 @@
+{
+  "binding": {
+    "intent_id": "I-LOGIC",
+    "intent_revision": 1,
+    "intent_sha256": "a7749c4b780748bb18f6b604b888e3cf4b956ee097a298cd1f9e9f9ba3ad1efe",
+    "plan_id": "P-LOGIC",
+    "plan_revision": 1,
+    "plan_sha256": "de16ae1ee984765aad47b64376889ba3bbea2b127bc733f900e4e0b7e682b025",
+    "nudge_id": "N-PROBE",
+    "nudge_sha256": "31de439dbe6a401880d2046761e6fe0088f80e8c896862b5ef053b67dd584410",
+    "participant_id": "W"
+  },
+  "actor_id": "W",
+  "claimed_status": "COMPLETE",
+  "native_report": {
+    "format": "text/markdown",
+    "locator": "diagnostic.md",
+    "revision": "1",
+    "content": "# N-PROBE diagnostic report\n\nThe bounded diagnostic is COMPLETE. The unchanged supplied receive function\nviolates the current-result invariant; no repair or product acceptance is claimed.\n\n## Actual execution and basis\n\nRead this run: case.md, intent.json, plan.json, packet.json and source.py. These are\nlocal synthetic inputs. Skill instructions, relevant references, profile library\nand support scripts were inspected. No examples, tests, other task folders or\nearlier agent outputs were read.\n\nprobe.py dynamically imports this task's source.py and calls its receive function\nfour times, using two fresh states and both controlled completion orders. It does\nnot reimplement or monkeypatch receive. Both states begin with\ncurrent_revision=10 and result=null, representing source replacement already done.\nOLD is request revision 9 with payload OLD; NEW is revision 10 with payload NEW.\n\nThe oracle requires an obsolete completion to leave the published result unchanged\nand a current completion to publish NEW. This checks intermediate state as well\nas final state. Source inspection predicted unconditional publication in both\norders before the probe ran.\n\n| Completion order | Event | Current revision | Result before | Result after | Expected result | Invariant |\n|---|---|---|---|---|---|---|\n| NEW then OLD | NEW rev10 | 10 | null | NEW | NEW | holds |\n| NEW then OLD | OLD rev9 | 10 | NEW | OLD | NEW | violated |\n| OLD then NEW | OLD rev9 | 10 | null | OLD | null | violated |\n| OLD then NEW | NEW rev10 | 10 | OLD | NEW | NEW | holds |\n\nIn NEW then OLD, the first violation is completion 2: OLD overwrites the already\npublished NEW result. Final state is current_revision=10, result=OLD.\n\nIn the reverse order, the first violation is completion 1: OLD publishes despite\ncurrent_revision=10. The current completion then succeeds and restores NEW.\nFinal correctness alone would miss the earlier obsolete publication. Both current\nrev10 completions publish successfully. Current revision remains 10 throughout.\n\nThis confirms the supplied F-RACE source observation and supplies the previously\nmissing U-ORDER runtime evidence. source.py ignores request_revision and writes\nstate[\"result\"] unconditionally. Rejecting every completion would fail the\ncurrent-completion contrast. Changing completion order changes the final result\nbut does not make obsolete publication permissible.\n\n## Reproduction and structural checks\n\nRun from /workspace/scratch/52eed2252c51/tmp/nd-adapter-forward/worker:\n\n```bash\nPYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B probe.py > probe-output.json\nPYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B /workspace/scratch/52eed2252c51/Common-nudge-designer/skills/nudge-designer/scripts/nudge_designer.py validate --intent intent.json --plan plan.json --out validation.json\nPYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B /workspace/scratch/52eed2252c51/Common-nudge-designer/skills/nudge-designer/scripts/nudge_designer.py bind --intent intent.json --plan plan.json --nudge N-PROBE --out issued-binding.json\n```\n\nAll three commands exited 0. The probe command's exact stdout is probe-output.json.\nExit 0 means the diagnostic ran; its event invariant checks report violations.\nValidation reports STRUCTURALLY_VALID, with semantic quality NOT_MACHINE_VERIFIED.\nThe bind command's output exactly matches packet.json's issued binding. Binding\ndoes not authenticate the actor, execution or authority.\n\nPython runtime: 3.12.14. Bytecode writes were disabled. Model and reasoning effort\nare UNKNOWN because their host configuration was unobserved.\n\nsource.py SHA-256 before and after execution:\n03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34\n\nprobe.py SHA-256:\n04456c42bc2dff692d9718b6335e08e0252f588e70582dccd9637b484d7f694a\n\n## Limits, unresolved work and continuation\n\nThis is actual local Python execution of the tiny synthetic function in controlled\nevent order. It does not execute a browser, external application, scheduler or\nproduction integration. The source is unchanged. Source revisions in the issued\nintent are unpinned; file hashes identify the observed bytes without authenticating\ntheir origin. No command or dependency problem occurred.\n\nN-PROBE is complete. O-CURRENT and R-CURRENT remain unsatisfied in this supplied\nimplementation. N-REPAIR was NOT_RUN: repair and product editing are outside this\nassignment. The Designer can use the measured violation to scope subsequent\nrepair work, preserving successful current completions and checking both orders.\n\nR-EXPORT / O-EXPORT remain separate pending CSV-format work. CSV requirements are\nunspecified, and no CSV implementation or verification ran. This diagnostic does\nnot resolve that obligation. No plan, intent, packet or source edit was made.\n"
+  },
+  "attempts": [
+    {
+      "id": "A-READ",
+      "action": "Inspect the five supplied task inputs and relevant skill support.",
+      "state": "EXECUTED",
+      "observed": "source.py unconditionally assigns payload to state.result; host model and reasoning settings are UNKNOWN.",
+      "evidence": [
+        "case.md",
+        "intent.json",
+        "plan.json",
+        "packet.json",
+        "source.py"
+      ]
+    },
+    {
+      "id": "A-PROBE",
+      "action": "Run python -B probe.py with bytecode disabled, calling the actual unchanged source.receive in NEW/OLD and OLD/NEW completion order.",
+      "state": "EXECUTED",
+      "observed": "Four actual calls completed. NEW/OLD produces NEW then OLD (first violation 2; final OLD). OLD/NEW produces OLD then NEW (first violation 1; final NEW). Both rev10 completions succeed; rev9 publication violates the invariant in both orders.",
+      "evidence": [
+        "probe.py",
+        "probe-output.json",
+        "source.py",
+        "diagnostic.md"
+      ]
+    },
+    {
+      "id": "A-VALIDATE",
+      "action": "Run the skill's validate command against the supplied intent.json and plan.json.",
+      "state": "EXECUTED",
+      "observed": "Exit 0; STRUCTURALLY_VALID; semantic quality NOT_MACHINE_VERIFIED.",
+      "evidence": [
+        "validation.json"
+      ]
+    },
+    {
+      "id": "A-BIND",
+      "action": "Run the skill's bind command for N-PROBE and compare its exact output with packet.json binding.",
+      "state": "EXECUTED",
+      "observed": "Exit 0; issued-binding.json exactly equals the supplied issued packet binding.",
+      "evidence": [
+        "issued-binding.json",
+        "packet.json",
+        "package_return.py"
+      ]
+    },
+    {
+      "id": "A-REPAIR",
+      "action": "Implement or edit product behavior under N-REPAIR.",
+      "state": "NOT_RUN",
+      "observed": "Repair and product editing are outside this assignment; the supplied source remains unchanged.",
+      "evidence": [
+        "case.md",
+        "probe-output.json"
+      ]
+    },
+    {
+      "id": "A-EXPORT",
+      "action": "Implement or verify the separate CSV-format requirement.",
+      "state": "NOT_RUN",
+      "observed": "CSV requirements are unspecified and separate; no export completion is claimed.",
+      "evidence": [
+        "case.md",
+        "intent.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "kind": "OBSERVATION",
+      "text": "Actual calls establish the completion-order evidence missing in U-ORDER and confirm unconditional stale publication described in F-RACE.",
+      "item_refs": [
+        "F-RACE",
+        "U-ORDER"
+      ],
+      "attempt_refs": [
+        "A-READ",
+        "A-PROBE"
+      ]
+    },
+    {
+      "kind": "DRIFT",
+      "text": "The supplied implementation violates the original current-result requirement and attribution constraint: rev9 OLD overwrites NEW when it completes last and publishes obsolete state when it completes first.",
+      "item_refs": [
+        "R-CURRENT",
+        "C-SOURCE"
+      ],
+      "attempt_refs": [
+        "A-PROBE"
+      ]
+    },
+    {
+      "kind": "OBSERVATION",
+      "text": "Valid rev10 NEW completions publish in both orders. Any later repair must preserve this positive case; rejecting all completions would fail the contrast.",
+      "item_refs": [
+        "R-CURRENT",
+        "C-SOURCE"
+      ],
+      "attempt_refs": [
+        "A-PROBE"
+      ]
+    }
+  ],
+  "source_observations": [
+    {
+      "source_id": "S-CASE",
+      "revision": null
+    },
+    {
+      "source_id": "S-CODE",
+      "revision": null
+    }
+  ],
+  "contributors": [
+    "W"
+  ],
+  "unresolved": [
+    "The supplied implementation still violates R-CURRENT / O-CURRENT; no repair, regression of a repaired version or integrated acceptance was executed.",
+    "CSV-format requirements remain unspecified, separate and unverified under R-EXPORT / O-EXPORT.",
+    "Sources have no pinned source revision in the issued intent; observed source bytes are hashed in the native report.",
+    "Model and reasoning effort are UNKNOWN; no host configuration was observed. No external/browser or production integration execution occurred."
+  ],
+  "next_proposal": "Designer reviews the actual four-call trace and scopes any subsequent N-REPAIR within actual authority; keep both completion orders and current-completion success as verification conditions. Preserve the independent CSV question without marking it complete."
+}

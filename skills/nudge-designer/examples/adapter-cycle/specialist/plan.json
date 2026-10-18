@@ -1,0 +1,109 @@
+{
+  "schema": "nudge-designer.plan/v1.1",
+  "id": "P-GRADE11",
+  "revision": 1,
+  "intent_id": "I-GRADE11",
+  "intent_revision": 1,
+  "intent_sha256": "a4404cf1adf89eb33b82b5ab0be2caee8bbe3c85eb4bee3abe7523f441d031bb",
+  "profile_ids": ["core", "education", "quantitative"],
+  "profiles_sha256": "cd052394a9f517110097c40070ed103ddbbe3b1f65133d1d4fb93c556b216196",
+  "strategy": "Use the concrete unresolved question; reuse existing work and keep conditional future work distinct.",
+  "nudges": [
+    {
+      "id": "N-EXAMPLE",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": ["O-CONTENT"],
+      "item_refs": ["F-PREREQ", "R-LEARN"],
+      "source_refs": ["S-TEACHER"],
+      "profile_ids": ["core", "education", "quantitative"],
+      "purpose": "Address the specific misconception with transparent reasoning.",
+      "deliverable": "Draft one short learner-facing explanation of the stipulated upward throw through the turning instant, with a separate reviewer calculation note and a held-at-rest contrast.",
+      "understanding": ["Zero instantaneous velocity does not imply zero acceleration."],
+      "reasoning_moves": ["derive", "construct"],
+      "evidence_methods": ["worked_example", "unit_check", "subject_review"],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {"preserve_refs": ["C-PHYSICS", "C-CLAIMS"], "do_not": ["Do not widen this assignment or weaken its evidence."]},
+      "success": {"observable": "Correct signed intermediate quantities support the explanation.", "negative_case": "Contrast an instant of rest under gravity with an object held at rest."},
+      "uncertainty": {"missing": [], "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.", "independent_work": ["Retain source-grounded observations and other authorized independent work."]},
+      "report": {"required": ["Actual result and exact basis", "Evidence and execution limits", "Unresolved issues and changed understanding"], "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."},
+      "assignment": {
+        "role": "SPECIALIST",
+        "participant_id": "W",
+        "capabilities": [{"id": "source_trace", "importance": "ESSENTIAL"}],
+        "tools": [{"id": "python", "importance": "ESSENTIAL"}],
+        "support": "GUIDED",
+        "method": "Draft one short learner-facing explanation of the stipulated upward throw through the turning instant, with a separate reviewer calculation note and a held-at-rest contrast.",
+        "worked_example": null,
+        "reserved_decisions": ["Consequential design/model choice stays with the Designer."],
+        "review_of": []
+      }
+    },
+    {
+      "id": "N-TRANSFER",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": ["O-LEARNING"],
+      "item_refs": ["R-LEARN", "U-RESPONSE"],
+      "source_refs": ["S-TEACHER"],
+      "profile_ids": ["core", "education"],
+      "purpose": "Check transfer independently of the worked wording.",
+      "deliverable": "Create a new motion problem and explanation rubric; keep actual learner outcomes unknown.",
+      "understanding": ["A new question must expose the concept, not only change the numbers."],
+      "reasoning_moves": ["construct", "challenge"],
+      "evidence_methods": ["transfer_problem", "learner_response"],
+      "depends_on": ["N-EXAMPLE"],
+      "branches": [],
+      "boundaries": {"preserve_refs": ["C-PHYSICS", "C-CLAIMS"], "do_not": ["Do not widen this assignment or weaken its evidence."]},
+      "success": {"observable": "Assessment distinguishes correct reasoning from copied formula steps.", "negative_case": "An answer with the correct number but wrong acceleration reasoning does not establish understanding."},
+      "uncertainty": {"missing": ["Actual learner response"], "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.", "independent_work": ["Retain source-grounded observations and other authorized independent work."]},
+      "report": {"required": ["Actual result and exact basis", "Evidence and execution limits", "Unresolved issues and changed understanding"], "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."}
+    }
+  ],
+  "coverage": [
+    {"target_id": "R-LEARN", "disposition": "UNRESOLVED", "nudge_ids": ["N-EXAMPLE", "N-TRANSFER"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "C-PHYSICS", "disposition": "PLANNED", "nudge_ids": ["N-EXAMPLE", "N-TRANSFER"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "C-CLAIMS", "disposition": "PLANNED", "nudge_ids": ["N-EXAMPLE", "N-TRANSFER"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "U-RESPONSE", "disposition": "UNRESOLVED", "nudge_ids": ["N-TRANSFER"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "O-CONTENT", "disposition": "PLANNED", "nudge_ids": ["N-EXAMPLE"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."},
+    {"target_id": "O-LEARNING", "disposition": "UNRESOLVED", "nudge_ids": ["N-TRANSFER"], "evidence_refs": [], "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."}
+  ],
+  "handover": {
+    "remaining": ["R-LEARN", "U-RESPONSE", "O-LEARNING"],
+    "next_action": "Work a 20 m/s upward throw through the turning instant and explain velocity versus acceleration.",
+    "changed_understanding": "This is a worked plan, not an executed assignment, authenticated grant or product acceptance."
+  },
+  "participants": [
+    {
+      "id": "W",
+      "label": "Study-material specialist",
+      "roles": ["SPECIALIST"],
+      "capabilities": [{"id": "source_trace", "status": "AVAILABLE", "basis": "OBSERVED", "evidence_refs": ["S-TEACHER"], "note": "Synthetic fixture declaration only."}],
+      "tools": [{"id": "python", "status": "AVAILABLE", "basis": "OBSERVED", "evidence_refs": ["S-TEACHER"], "note": "Synthetic fixture declaration only."}],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN; no host configuration was observed."
+    },
+    {
+      "id": "D",
+      "label": "Designer",
+      "roles": ["DESIGNER", "SPECIALIST", "COORDINATOR", "SUCCESSOR"],
+      "capabilities": [{"id": "source_trace", "status": "AVAILABLE", "basis": "OBSERVED", "evidence_refs": ["S-TEACHER"], "note": "Synthetic fixture declaration only."}],
+      "tools": [{"id": "python", "status": "AVAILABLE", "basis": "OBSERVED", "evidence_refs": ["S-TEACHER"], "note": "Synthetic fixture declaration only."}],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN; no host configuration was observed."
+    },
+    {
+      "id": "R",
+      "label": "Reviewer",
+      "roles": ["REVIEWER"],
+      "capabilities": [{"id": "source_trace", "status": "AVAILABLE", "basis": "OBSERVED", "evidence_refs": ["S-TEACHER"], "note": "Synthetic fixture declaration only."}],
+      "tools": [{"id": "python", "status": "AVAILABLE", "basis": "OBSERVED", "evidence_refs": ["S-TEACHER"], "note": "Synthetic fixture declaration only."}],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN; no host configuration was observed."
+    }
+  ]
+}

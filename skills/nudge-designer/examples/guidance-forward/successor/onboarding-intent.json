@@ -1,0 +1,301 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-SUCCESSOR-ONBOARD",
+  "revision": 1,
+  "owner_request": "# Current onboarding request\n\nThe original outcome is an ordinary UI comparison of original source sets loaded\nonce, with complete source identity and responsive inspection. Preserve these\nconditions. The predecessor is unavailable.\n\nOnboard independently using the supplied durable records. Only read-only\nreconstruction/local drafting is assigned. After reconstruction and any actually\napplicable review/approval I will provide the next task. Do not start a product\nrepair. No handover protocol selector or additional approval rule is supplied.\nNo checkout, browser or production edit authority is available in this assignment.\nWrite reconstruction.md here; preserve all supplied inputs and make no external writes.\n",
+  "purpose": "Preserve ordinary UI comparison of original source sets loaded once, complete source identity and responsive inspection. Independently reconstruct current meaning and evidence without starting repair.",
+  "sources": [
+    {
+      "id": "S-OWNER",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/owner.md",
+      "revision": "Supplied current request; no revision ID",
+      "kind": "OWNER",
+      "assessment": "READ_THIS_RUN",
+      "note": "Current assignment and retained original outcome; classification does not authenticate identity."
+    },
+    {
+      "id": "S-REPORT",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/report.md",
+      "revision": "Supplied handover excerpt; candidate C17",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN",
+      "note": "Supplied claims read; production PASS and activation are not fresh observations or current authority."
+    },
+    {
+      "id": "S-APP",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/app.py",
+      "revision": "Supplied C17 fragment; no commit identity",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN",
+      "note": "Only the read-only fragment was inspected, not full candidate/main/deployed code."
+    },
+    {
+      "id": "S-RECEIPT",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/helper-run-42.txt",
+      "revision": "Synthetic supplied helper-run-42; candidate C17",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN",
+      "note": "Receipt body inspected. Its claimed helper PASS is supplied synthetic evidence, not independently executed runtime evidence."
+    }
+  ],
+  "items": [
+    {
+      "id": "R-ORIGINALS",
+      "kind": "REQUIREMENT",
+      "text": "Ordinary UI comparison of original source sets loaded once.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-UI"
+      ]
+    },
+    {
+      "id": "R-IDENTITY",
+      "kind": "REQUIREMENT",
+      "text": "Complete source identity.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-UI"
+      ]
+    },
+    {
+      "id": "R-RESPONSIVE",
+      "kind": "REQUIREMENT",
+      "text": "Responsive inspection.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-UI"
+      ]
+    },
+    {
+      "id": "R-RECONSTRUCT",
+      "kind": "REQUIREMENT",
+      "text": "Onboard independently from the durable records without the unavailable predecessor and write reconstruction.md here.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-ONBOARD"
+      ]
+    },
+    {
+      "id": "C-SCOPE",
+      "kind": "CONSTRAINT",
+      "text": "Read-only reconstruction/local drafting only. Preserve supplied inputs. No checkout, browser or production edit authority and no external writes.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-NEXT",
+      "kind": "CONSTRAINT",
+      "text": "Do not start product repair. After reconstruction and any actually applicable review/approval, await the Owner next task. No handover protocol selector or additional approval rule is supplied.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-REPORT",
+      "kind": "FACT",
+      "text": "The handover reports C17 integration COMPLETE and production UI PASS based on helper-run-42 and suggests activation; deployment identity and full original-file UI journey are absent.",
+      "source_refs": [
+        "S-REPORT"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-ONBOARD"
+      ]
+    },
+    {
+      "id": "F-RECEIPT",
+      "kind": "FACT",
+      "text": "The synthetic receipt reports helper PASS with a temporarily substituted served entrypoint. It records unchanged production on_inspect exercised NO, original-file ordinary UI journey exercised NO and deployed identity UNKNOWN.",
+      "source_refs": [
+        "S-RECEIPT"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-ONBOARD"
+      ]
+    },
+    {
+      "id": "F-APP",
+      "kind": "FACT",
+      "text": "The supplied C17 fragment imports legacy.inspect_sync and on_inspect(originals) returns inspect_sync(originals); no worker helper call appears.",
+      "source_refs": [
+        "S-APP"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-ONBOARD"
+      ]
+    },
+    {
+      "id": "U-IDENTITIES",
+      "kind": "UNKNOWN",
+      "text": "Exact full candidate, main, temporarily modified tested entrypoint and deployed source identities, and their equivalence, are unverified.",
+      "source_refs": [
+        "S-APP",
+        "S-REPORT",
+        "S-RECEIPT"
+      ],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": [
+        "O-UI"
+      ]
+    },
+    {
+      "id": "U-JOURNEY",
+      "kind": "UNKNOWN",
+      "text": "Actual once-only loading, complete source identity and responsive original-file ordinary UI comparison remain unestablished.",
+      "source_refs": [
+        "S-OWNER",
+        "S-RECEIPT"
+      ],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": [
+        "O-UI"
+      ]
+    },
+    {
+      "id": "U-CAUSE",
+      "kind": "UNKNOWN",
+      "text": "Actual product failure status, causal diagnosis and correct repair are unknown; the synchronous function name/fragment alone proves none of them.",
+      "source_refs": [
+        "S-APP",
+        "S-RECEIPT"
+      ],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": [
+        "O-UI"
+      ]
+    },
+    {
+      "id": "U-CONFIG",
+      "kind": "UNKNOWN",
+      "text": "Runtime model, reasoning setting and formal qualification are UNKNOWN because no such configuration or qualification was observed.",
+      "source_refs": [],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": [
+        "O-ONBOARD"
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "O-UI",
+      "parent_id": null,
+      "text": "Ordinary UI comparison meets all original conditions.",
+      "done_when": "Authorized evidence establishes original source sets loaded once, complete source identity and responsive inspection on the actual ordinary UI path with identified source; integrated acceptance is separate.",
+      "item_refs": [
+        "R-ORIGINALS",
+        "R-IDENTITY",
+        "R-RESPONSIVE",
+        "U-IDENTITIES",
+        "U-JOURNEY",
+        "U-CAUSE"
+      ]
+    },
+    {
+      "id": "O-ONBOARD",
+      "parent_id": null,
+      "text": "Source-grounded independent onboarding is available.",
+      "done_when": "reconstruction.md preserves purpose, raw history, actual evidence limits, unknowns, unexecuted work and current continuation; supplied inputs remain unchanged.",
+      "item_refs": [
+        "R-RECONSTRUCT",
+        "C-SCOPE",
+        "C-NEXT",
+        "F-REPORT",
+        "F-RECEIPT",
+        "F-APP",
+        "U-CONFIG"
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "topic": "Helper benchmark versus actual entrypoint, journey and source identity",
+      "reason": "A substituted helper benchmark cannot establish the unchanged application journey or deployment acceptance.",
+      "outcome_refs": [
+        "O-UI",
+        "O-ONBOARD"
+      ],
+      "source_refs": [
+        "S-APP",
+        "S-REPORT",
+        "S-RECEIPT"
+      ]
+    },
+    {
+      "topic": "Current authority and preserved original conditions",
+      "reason": "Archived activation advice cannot expand the current read-only onboarding assignment.",
+      "outcome_refs": [
+        "O-UI",
+        "O-ONBOARD"
+      ],
+      "source_refs": [
+        "S-OWNER",
+        "S-REPORT"
+      ]
+    }
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN: model, reasoning setting and formal qualification were not observed. Role and JSON structure do not establish capability.",
+    "tools": [
+      "Observed local file read/write for permitted artifacts",
+      "Python standard library for local artifact drafting and content hashes"
+    ],
+    "reserved_decisions": [
+      "Owner assigns the next task",
+      "Product diagnosis, repair, release and outcome acceptance require applicable authority and evidence; none is performed here"
+    ]
+  },
+  "scope": {
+    "permitted": [
+      "Read supplied raw successor files and necessary skill guidance/support",
+      "Write reconstruction.md and new support artifacts only in this successor directory"
+    ],
+    "forbidden": [
+      "Modify supplied inputs or product code",
+      "Checkout, browser use, product runtime claims, production edits or external writes",
+      "Delegation or reading examples, tests, verification records, other agent outputs or other task directories"
+    ],
+    "basis_refs": [
+      "S-OWNER"
+    ],
+    "note": "The live assignment further confines all outputs to this successor directory. Local support artifacts do not issue or execute product work."
+  },
+  "protocols": {
+    "thinking": "Nudge Designer successor prompt and Applying guidance selected by this assignment",
+    "delivery": null,
+    "note": "No handover/recovery protocol selector or additional approval rule supplied. Do not import a default or invent an approval gate; await next task as instructed."
+  }
+}

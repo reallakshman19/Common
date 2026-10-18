@@ -1,0 +1,119 @@
+{
+  "status": "LOCAL_RECOMPUTATION_COMPLETE",
+  "issued_input_files_unchanged": 9,
+  "worker": {
+    "method": "Parent executed the original supplied function with independent expected-result tracking after reading the worker artifacts.",
+    "actual_calls": 6,
+    "violating_steps": 2,
+    "transitions": [
+      {
+        "order": [
+          "A12",
+          "B12"
+        ],
+        "input": {
+          "source_id": "A",
+          "request_revision": 12,
+          "payload": "A12"
+        },
+        "actual_matches_worker_trace": true,
+        "expected_matches_worker_oracle": true,
+        "invariant_holds": false
+      },
+      {
+        "order": [
+          "A12",
+          "B12"
+        ],
+        "input": {
+          "source_id": "B",
+          "request_revision": 12,
+          "payload": "B12"
+        },
+        "actual_matches_worker_trace": true,
+        "expected_matches_worker_oracle": true,
+        "invariant_holds": true
+      },
+      {
+        "order": [
+          "B12",
+          "A12"
+        ],
+        "input": {
+          "source_id": "B",
+          "request_revision": 12,
+          "payload": "B12"
+        },
+        "actual_matches_worker_trace": true,
+        "expected_matches_worker_oracle": true,
+        "invariant_holds": true
+      },
+      {
+        "order": [
+          "B12",
+          "A12"
+        ],
+        "input": {
+          "source_id": "A",
+          "request_revision": 12,
+          "payload": "A12"
+        },
+        "actual_matches_worker_trace": true,
+        "expected_matches_worker_oracle": true,
+        "invariant_holds": false
+      },
+      {
+        "order": [
+          "B11",
+          "B12"
+        ],
+        "input": {
+          "source_id": "B",
+          "request_revision": 11,
+          "payload": "B11"
+        },
+        "actual_matches_worker_trace": true,
+        "expected_matches_worker_oracle": true,
+        "invariant_holds": true
+      },
+      {
+        "order": [
+          "B11",
+          "B12"
+        ],
+        "input": {
+          "source_id": "B",
+          "request_revision": 12,
+          "payload": "B12"
+        },
+        "actual_matches_worker_trace": true,
+        "expected_matches_worker_oracle": true,
+        "invariant_holds": true
+      }
+    ],
+    "source_sha256": "766a81726984857c9e66c8ed07e9582e850ffeb651b65f81c80e30a4acd451f3"
+  },
+  "specialist": {
+    "method": "Parent recomputed the stipulated bar using Decimal, compared with exact Fraction outputs; same idealization, no independent physical validation.",
+    "extension_mm": "0.405",
+    "stress_MPa": "72",
+    "strain": "0.00045",
+    "matches_recorded_reference": true
+  },
+  "designer": {
+    "derived_center_CSS_px": [
+      140,
+      220
+    ],
+    "old_sample_CSS_px": [
+      280,
+      440
+    ],
+    "limit": "No actual native pointer/browser run or deployed identity was observed."
+  },
+  "limits": [
+    "Synthetic raw tasks only; no product repair, solver or learner outcome.",
+    "Parent recomputation is after seeing reports, not blind or formally qualified review.",
+    "Host model, reasoning effort and formal qualification remain UNKNOWN."
+  ]
+}

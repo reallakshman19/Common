@@ -1,0 +1,32 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-LOGIC",
+  "revision": 1,
+  "owner_request": "Keep the newest source result current despite out-of-order completion, while retaining the separate pending CSV-format work.",
+  "purpose": "Keep the newest source result current despite out-of-order completion, while retaining the separate pending CSV-format work.",
+  "sources": [
+    {"id": "S-CASE", "locator": "case.md", "revision": null, "kind": "SYNTHETIC", "assessment": "SUPPLIED", "note": "Synthetic Owner-style fixture, not a live project."},
+    {"id": "S-CODE", "locator": "source.py", "revision": null, "kind": "SYNTHETIC", "assessment": "SUPPLIED", "note": "Tiny supplied implementation; a real probe must execute it before claiming runtime evidence."}
+  ],
+  "items": [
+    {"id": "R-CURRENT", "kind": "REQUIREMENT", "text": "An obsolete completion must not overwrite the current result.", "source_refs": ["S-CASE"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-CURRENT"]},
+    {"id": "R-EXPORT", "kind": "REQUIREMENT", "text": "Retain the pending CSV-format requirement as separate work.", "source_refs": ["S-CASE"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-EXPORT"]},
+    {"id": "C-SOURCE", "kind": "CONSTRAINT", "text": "Preserve current source identity and result attribution.", "source_refs": ["S-CASE"], "condition": "After source replacement, an older request must never publish over the newer result.", "state": "CURRENT", "outcome_refs": []},
+    {"id": "F-RACE", "kind": "FACT", "text": "The supplied receive function writes every payload without comparing request revision.", "source_refs": ["S-CODE"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-CURRENT"]},
+    {"id": "U-ORDER", "kind": "UNKNOWN", "text": "The failing old/new completion sequence has not been executed in this worked plan.", "source_refs": ["S-CODE"], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-CURRENT"]}
+  ],
+  "outcomes": [
+    {"id": "O-CURRENT", "parent_id": null, "text": "Preserve the newest result.", "done_when": "Old completion rejected; current completion accepted.", "item_refs": ["R-CURRENT", "F-RACE"]},
+    {"id": "O-EXPORT", "parent_id": null, "text": "Preserve the separate CSV work.", "done_when": "Explicit export disposition and its own verification.", "item_refs": ["R-EXPORT"]}
+  ],
+  "knowledge": [{"topic": "State ownership, request revision and event ordering", "reason": "Needed to interpret the concrete case and its limits.", "outcome_refs": ["O-CURRENT"], "source_refs": ["S-CASE"]}],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN in this example; a runtime must record actual settings and access.",
+    "tools": ["Source reader; actual runtime tools must be checked"],
+    "reserved_decisions": ["Any new authority, consequential design choice or scope expansion"]
+  },
+  "scope": {"permitted": ["Read and probe the supplied synthetic implementation; prepare conditional repair work"], "forbidden": ["Invent execution, source authority or acceptance"], "basis_refs": ["S-CASE"], "note": "Supplied example scope; not an authenticated work grant."},
+  "protocols": {"thinking": null, "delivery": null, "note": "Select thinking and delivery separately from actual project authority; no automatic version substitution."}
+}

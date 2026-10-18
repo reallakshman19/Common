@@ -1,0 +1,6 @@
+Synthetic supplied receipt, candidate C17
+worker helper: PASS
+served entrypoint: temporarily replaced to call worker helper for benchmark
+unchanged production on_inspect exercised: NO
+original-file ordinary UI journey exercised: NO
+deployed source identity: UNKNOWN

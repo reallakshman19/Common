@@ -1,0 +1,11 @@
+{
+  "status": "STRUCTURALLY_VALID",
+  "semantic_quality": "NOT_MACHINE_VERIFIED",
+  "coverage_basis": "DECLARED_ITEMS_ONLY",
+  "sources_authenticated": false,
+  "authority_verified": false,
+  "execution_performed": false,
+  "intent_sha256": "bf060612f25efb218def0ea4dc7b73d2b7bef0804474a629e9cafbdfde59c5e4",
+  "nudges": 1,
+  "declared_coverage_targets": 4
+}

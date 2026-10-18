@@ -1,0 +1,177 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-GRADE11",
+  "revision": 2,
+  "owner_request": "Help a Grade 11 learner distinguish instantaneous velocity from acceleration and transfer the idea to a new motion problem.",
+  "purpose": "Help a Grade 11 learner distinguish instantaneous velocity from acceleration and transfer the idea to a new motion problem.",
+  "sources": [
+    {
+      "id": "S-TEACHER",
+      "locator": "case.md",
+      "revision": "sha256:8c9e234062491fab45a85a95e0e8b107b6fadb52ef3227fd9505aae199c39f2b",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN",
+      "note": "Observed synthetic case bytes, not an actual learner assessment or authenticated external source."
+    },
+    {
+      "id": "S-STUDY",
+      "locator": "../specialist/study-note.md",
+      "revision": "sha256:76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN",
+      "note": "Actual local specialist artifact; no learner response."
+    },
+    {
+      "id": "S-SUBJECT",
+      "locator": "../specialist/subject-check.md",
+      "revision": "sha256:4cbb6790f8c6c1a742d2fee7dc7e0333d891cde5bb5b42b14e3ce18ae823b31b",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN",
+      "note": "Specialist calculation/self-check and disclosed 20/18 handover conflict."
+    },
+    {
+      "id": "S-REVIEW",
+      "locator": "../reviewer/review.md",
+      "revision": "sha256:71022c1d1253a88a441f69a7a6e04f1339d8e91a852eba83c0b29b8a0bf49cd8",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN",
+      "note": "Separate local recomputation after seeing the supplied reports; not blind or formally qualified review."
+    }
+  ],
+  "items": [
+    {
+      "id": "R-LEARN",
+      "kind": "REQUIREMENT",
+      "text": "Teach and assess the velocity/acceleration distinction, not formula copying.",
+      "source_refs": [
+        "S-TEACHER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-PHYSICS",
+      "kind": "CONSTRAINT",
+      "text": "Use the declared one-dimensional constant-gravity model and explicit signs/units.",
+      "source_refs": [
+        "S-TEACHER"
+      ],
+      "condition": "For this example only: initial upward velocity 18 m/s, upward positive, g=9 m/s^2, no drag.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-CLAIMS",
+      "kind": "CONSTRAINT",
+      "text": "Do not claim learning gains without actual learner evidence.",
+      "source_refs": [
+        "S-TEACHER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-PREREQ",
+      "kind": "PROPOSAL",
+      "text": "Designer-proposed scaffold: contrast zero instantaneous velocity with zero acceleration. Actual learner prerequisites and beliefs were not supplied.",
+      "source_refs": [
+        "S-TEACHER",
+        "S-REVIEW"
+      ],
+      "condition": null,
+      "state": "PROPOSED",
+      "outcome_refs": [
+        "O-CONTENT"
+      ]
+    },
+    {
+      "id": "U-RESPONSE",
+      "kind": "UNKNOWN",
+      "text": "No actual learner explanation, transfer response or delayed retrieval is available.",
+      "source_refs": [],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": [
+        "O-LEARNING"
+      ]
+    },
+    {
+      "id": "F-LOCAL-CONTENT",
+      "kind": "FACT",
+      "state": "CURRENT",
+      "text": "A local study note uses 18 m/s upward and g=9 m/s^2; a separate reviewer recomputed the signed values. Transfer material, learner response and learning gain remain unobserved.",
+      "source_refs": [
+        "S-STUDY",
+        "S-SUBJECT",
+        "S-REVIEW"
+      ],
+      "condition": null,
+      "outcome_refs": [
+        "O-CONTENT"
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "O-CONTENT",
+      "parent_id": null,
+      "text": "Create correct scaffolded material.",
+      "done_when": "Worked reasoning, misconception contrast and meaningful transfer assessment.",
+      "item_refs": [
+        "R-LEARN",
+        "F-PREREQ"
+      ]
+    },
+    {
+      "id": "O-LEARNING",
+      "parent_id": "O-CONTENT",
+      "text": "Assess actual understanding separately.",
+      "done_when": "Learner explains and solves a new case without copied steps.",
+      "item_refs": [
+        "R-LEARN"
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "topic": "Instantaneous quantities, signed acceleration, prerequisites and transfer",
+      "reason": "Needed to interpret the concrete case and its limits.",
+      "outcome_refs": [
+        "O-CONTENT"
+      ],
+      "source_refs": [
+        "S-TEACHER"
+      ]
+    }
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN in this example; a runtime must record actual settings and access.",
+    "tools": [
+      "Source reader; actual runtime tools must be checked"
+    ],
+    "reserved_decisions": [
+      "Any new authority, consequential design choice or scope expansion"
+    ]
+  },
+  "scope": {
+    "permitted": [
+      "Create and subject-review synthetic lesson material; propose learner checks"
+    ],
+    "forbidden": [
+      "Invent execution, source authority or acceptance"
+    ],
+    "basis_refs": [
+      "S-TEACHER"
+    ],
+    "note": "Local synthetic computation/drafting only; no external writes or product edits."
+  },
+  "protocols": {
+    "thinking": null,
+    "delivery": null,
+    "note": "Select thinking and delivery separately from actual project authority; no automatic version substitution."
+  }
+}

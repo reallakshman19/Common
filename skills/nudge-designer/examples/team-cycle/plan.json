@@ -1,0 +1,498 @@
+{
+  "schema": "nudge-designer.plan/v1.1",
+  "id": "P-LOGIC",
+  "revision": 1,
+  "intent_id": "I-LOGIC",
+  "intent_revision": 1,
+  "intent_sha256": "b5ddd3df3a6128123134a899f85c69e7130d8a756314c3388d89a59d6160c916",
+  "profile_ids": [
+    "core",
+    "logic",
+    "coding"
+  ],
+  "profiles_sha256": "7eb83c25a56d553c5b1a735d948f234f253cc47417be5ed8bc70b31890f5d83a",
+  "strategy": "Use the concrete unresolved question; reuse existing work and keep conditional future work distinct.",
+  "nudges": [
+    {
+      "id": "N-PROBE",
+      "parent_id": null,
+      "type": "ground",
+      "outcome_refs": [
+        "O-CURRENT"
+      ],
+      "item_refs": [
+        "F-RACE",
+        "U-ORDER"
+      ],
+      "source_refs": [
+        "S-CASE",
+        "S-CODE"
+      ],
+      "profile_ids": [
+        "core",
+        "logic"
+      ],
+      "purpose": "Locate the first violation of the current-result invariant.",
+      "deliverable": "Execute one old/new completion contrast and report the actual result.",
+      "understanding": [
+        "A completed request may belong to an obsolete source revision."
+      ],
+      "reasoning_moves": [
+        "trace",
+        "challenge"
+      ],
+      "evidence_methods": [
+        "runtime_probe",
+        "counterexample"
+      ],
+      "depends_on": [],
+      "branches": [
+        {
+          "observation": "The original code overwrites the current result.",
+          "next_ids": [
+            "N-REPAIR"
+          ],
+          "rationale": "Use the measured violation to scope a guard; export remains independent."
+        }
+      ],
+      "boundaries": {
+        "preserve_refs": [
+          "C-SOURCE"
+        ],
+        "do_not": [
+          "Do not widen this assignment or weaken its evidence."
+        ]
+      },
+      "success": {
+        "observable": "Show the current revision, each event and resulting payload.",
+        "negative_case": "Reverse the completion order and preserve current-request success."
+      },
+      "uncertainty": {
+        "missing": [
+          "Actual probe results"
+        ],
+        "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.",
+        "independent_work": [
+          "Retain source-grounded observations and other authorized independent work."
+        ]
+      },
+      "report": {
+        "required": [
+          "Actual result and exact basis",
+          "Evidence and execution limits",
+          "Unresolved issues and changed understanding"
+        ],
+        "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."
+      },
+      "assignment": {
+        "role": "WORKER",
+        "participant_id": "W",
+        "capabilities": [
+          {
+            "id": "source_trace",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "tools": [
+          {
+            "id": "python",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "support": "GUIDED",
+        "method": "Read source.py and state the current-result invariant before executing it. Import its unchanged receive function. For each completion order, start a fresh state with current revision 10 and no result. Record state before/after every rev9 OLD and rev10 NEW completion, compare with the original invariant, and retain the first violating event. Do not repair the source or infer a browser result.",
+        "worked_example": null,
+        "reserved_decisions": [
+          "Consequential design/model choice stays with the Designer."
+        ],
+        "review_of": []
+      }
+    },
+    {
+      "id": "N-REPAIR",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": [
+        "O-CURRENT"
+      ],
+      "item_refs": [
+        "R-CURRENT",
+        "F-RACE"
+      ],
+      "source_refs": [
+        "S-CODE",
+        "S-CASE"
+      ],
+      "profile_ids": [
+        "core",
+        "logic",
+        "coding"
+      ],
+      "purpose": "Repair the measured boundary without changing unrelated behavior.",
+      "deliverable": "After actual scope is established, implement and verify the smallest coherent revision guard.",
+      "understanding": [
+        "Preserve valid current completions while discarding obsolete ones."
+      ],
+      "reasoning_moves": [
+        "implement",
+        "verify"
+      ],
+      "evidence_methods": [
+        "regression_test",
+        "counterexample"
+      ],
+      "depends_on": [
+        "N-PROBE"
+      ],
+      "branches": [],
+      "boundaries": {
+        "preserve_refs": [
+          "C-SOURCE"
+        ],
+        "do_not": [
+          "Do not widen this assignment or weaken its evidence."
+        ]
+      },
+      "success": {
+        "observable": "The original stale sequence is rejected and a current result still publishes.",
+        "negative_case": "A guard that rejects all completions fails."
+      },
+      "uncertainty": {
+        "missing": [
+          "Actual diagnosis and implementation scope"
+        ],
+        "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.",
+        "independent_work": [
+          "Retain source-grounded observations and other authorized independent work."
+        ]
+      },
+      "report": {
+        "required": [
+          "Actual result and exact basis",
+          "Evidence and execution limits",
+          "Unresolved issues and changed understanding"
+        ],
+        "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."
+      }
+    },
+    {
+      "id": "N-EXPORT",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": [
+        "O-EXPORT"
+      ],
+      "item_refs": [
+        "R-EXPORT"
+      ],
+      "source_refs": [
+        "S-CASE"
+      ],
+      "profile_ids": [
+        "core",
+        "logic"
+      ],
+      "purpose": "Keep the independent pending requirement visible.",
+      "deliverable": "Record the CSV-format question and its separate next verification.",
+      "understanding": [
+        "Fixing a race does not resolve an unrelated format obligation."
+      ],
+      "reasoning_moves": [
+        "ground",
+        "reconcile"
+      ],
+      "evidence_methods": [
+        "source_trace"
+      ],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {
+        "preserve_refs": [
+          "C-SOURCE"
+        ],
+        "do_not": [
+          "Do not widen this assignment or weaken its evidence."
+        ]
+      },
+      "success": {
+        "observable": "The export work retains an explicit disposition.",
+        "negative_case": "Do not mark CSV complete merely because the result race is fixed."
+      },
+      "uncertainty": {
+        "missing": [],
+        "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.",
+        "independent_work": [
+          "Retain source-grounded observations and other authorized independent work."
+        ]
+      },
+      "report": {
+        "required": [
+          "Actual result and exact basis",
+          "Evidence and execution limits",
+          "Unresolved issues and changed understanding"
+        ],
+        "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."
+      }
+    },
+    {
+      "id": "N-REVIEW",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": [
+        "O-CURRENT"
+      ],
+      "item_refs": [
+        "F-RACE",
+        "U-ORDER"
+      ],
+      "source_refs": [
+        "S-CASE",
+        "S-CODE"
+      ],
+      "profile_ids": [
+        "core",
+        "logic"
+      ],
+      "purpose": "Assess the actual probe and original conditions independently.",
+      "deliverable": "One review note with original-source checks, a counterexample and remaining integrated limits.",
+      "understanding": [
+        "A completed request may belong to an obsolete source revision."
+      ],
+      "reasoning_moves": [
+        "trace",
+        "challenge"
+      ],
+      "evidence_methods": [
+        "runtime_probe",
+        "counterexample"
+      ],
+      "depends_on": [
+        "N-PROBE"
+      ],
+      "branches": [],
+      "boundaries": {
+        "preserve_refs": [
+          "C-SOURCE"
+        ],
+        "do_not": [
+          "Do not widen this assignment or weaken its evidence."
+        ]
+      },
+      "success": {
+        "observable": "Show the current revision, each event and resulting payload.",
+        "negative_case": "Reverse the completion order and preserve current-request success."
+      },
+      "uncertainty": {
+        "missing": [
+          "Actual probe results"
+        ],
+        "return_with": "Report the exact missing fact/restriction, affected action and next feasible step.",
+        "independent_work": [
+          "Retain source-grounded observations and other authorized independent work."
+        ]
+      },
+      "report": {
+        "required": [
+          "Actual result and exact basis",
+          "Evidence and execution limits",
+          "Unresolved issues and changed understanding"
+        ],
+        "next_action": "Choose the next action from observations within actual authority; update affected assumptions only."
+      },
+      "assignment": {
+        "role": "REVIEWER",
+        "participant_id": "R",
+        "capabilities": [
+          {
+            "id": "source_trace",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "tools": [
+          {
+            "id": "python",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "support": "OPEN",
+        "method": null,
+        "worked_example": null,
+        "reserved_decisions": [
+          "Consequential design/model choice stays with the Designer."
+        ],
+        "review_of": [
+          "N-PROBE"
+        ]
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "target_id": "R-CURRENT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."
+    },
+    {
+      "target_id": "R-EXPORT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-EXPORT"
+      ],
+      "evidence_refs": [],
+      "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."
+    },
+    {
+      "target_id": "C-SOURCE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-PROBE",
+        "N-REPAIR",
+        "N-EXPORT"
+      ],
+      "evidence_refs": [],
+      "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."
+    },
+    {
+      "target_id": "U-ORDER",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-PROBE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."
+    },
+    {
+      "target_id": "O-CURRENT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-PROBE",
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."
+    },
+    {
+      "target_id": "O-EXPORT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-EXPORT"
+      ],
+      "evidence_refs": [],
+      "rationale": "Declared work or remaining obligation only; no execution or acceptance inferred."
+    }
+  ],
+  "handover": {
+    "remaining": [
+      "O-CURRENT",
+      "O-EXPORT",
+      "U-ORDER"
+    ],
+    "next_action": "Execute one old/new completion contrast and report the actual result.",
+    "changed_understanding": "This is a worked plan, not an executed assignment, authenticated grant or product acceptance."
+  },
+  "participants": [
+    {
+      "id": "W",
+      "label": "Guided worker",
+      "roles": [
+        "WORKER"
+      ],
+      "capabilities": [
+        {
+          "id": "source_trace",
+          "status": "AVAILABLE",
+          "basis": "OBSERVED",
+          "evidence_refs": [
+            "S-CASE"
+          ],
+          "note": "Synthetic fixture declaration only."
+        }
+      ],
+      "tools": [
+        {
+          "id": "python",
+          "status": "AVAILABLE",
+          "basis": "OBSERVED",
+          "evidence_refs": [
+            "S-CASE"
+          ],
+          "note": "Synthetic fixture declaration only."
+        }
+      ],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN; no host configuration was observed."
+    },
+    {
+      "id": "D",
+      "label": "Designer",
+      "roles": [
+        "DESIGNER",
+        "SPECIALIST",
+        "COORDINATOR",
+        "SUCCESSOR"
+      ],
+      "capabilities": [
+        {
+          "id": "source_trace",
+          "status": "AVAILABLE",
+          "basis": "OBSERVED",
+          "evidence_refs": [
+            "S-CASE"
+          ],
+          "note": "Synthetic fixture declaration only."
+        }
+      ],
+      "tools": [
+        {
+          "id": "python",
+          "status": "AVAILABLE",
+          "basis": "OBSERVED",
+          "evidence_refs": [
+            "S-CASE"
+          ],
+          "note": "Synthetic fixture declaration only."
+        }
+      ],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN; no host configuration was observed."
+    },
+    {
+      "id": "R",
+      "label": "Reviewer",
+      "roles": [
+        "REVIEWER"
+      ],
+      "capabilities": [
+        {
+          "id": "source_trace",
+          "status": "AVAILABLE",
+          "basis": "OBSERVED",
+          "evidence_refs": [
+            "S-CASE"
+          ],
+          "note": "Synthetic fixture declaration only."
+        }
+      ],
+      "tools": [
+        {
+          "id": "python",
+          "status": "AVAILABLE",
+          "basis": "OBSERVED",
+          "evidence_refs": [
+            "S-CASE"
+          ],
+          "note": "Synthetic fixture declaration only."
+        }
+      ],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN; no host configuration was observed."
+    }
+  ]
+}

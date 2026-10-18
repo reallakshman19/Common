@@ -1,0 +1,155 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-axial-forward",
+  "revision": 2,
+  "owner_request": "# Owner request — synthetic forward pilot\n\nPlan the verification of an axial bar calculation before we reuse any reasoning\nfor a lifting-bucket study. A narrower worker needs useful reproducible next work.\nThe bar is 1.2 m long with uniform area 240 mm², E = 70 GPa, fixed at the left,\nand has a 3.5 kN tensile load at the right. Use linear small-strain axial behavior;\nthere are no other loads. Right is positive. Keep the original mixed units visible.\n\nWe have no solver model or numerical results, bucket geometry, weld details,\nmaterial certificate, load spectrum or applicable design standard. Do not invent\nengineering acceptance or transfer the bar's qualification to a bucket. Still do\nthe useful reference work that is possible. Available tools: Python arithmetic\nand text; no FE solver or browser. Actual worker model/configuration unknown.\nOwner authorizes only local drafting and computation, not release or external writes.\n",
+  "purpose": "Prepare a reproducible axial-bar verification reference before any lifting-bucket reuse; preserve the engineering evidence gaps.",
+  "sources": [
+    {
+      "id": "S-raw",
+      "locator": "case.md",
+      "revision": "Raw synthetic forward-pilot request read in this run on 2026-10-18; no revision identifier supplied",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN",
+      "note": "Synthetic Owner request read directly; states givens, tools and local-only authority. No real engineering authority is authenticated."
+    }
+  ],
+  "items": [
+    {
+      "id": "R-reference",
+      "kind": "REQUIREMENT",
+      "text": "Plan the verification of an axial bar calculation before we reuse any reasoning for a lifting-bucket study. A narrower worker needs useful reproducible next work.",
+      "source_refs": ["S-raw"],
+      "condition": "Plan the verification of an axial bar calculation before we reuse any reasoning for a lifting-bucket study. A narrower worker needs useful reproducible next work.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-local"]
+    },
+    {
+      "id": "R-useful",
+      "kind": "REQUIREMENT",
+      "text": "Still do the useful reference work that is possible.",
+      "source_refs": ["S-raw"],
+      "condition": "Still do the useful reference work that is possible.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-reference", "O-comparison"]
+    },
+    {
+      "id": "F-givens",
+      "kind": "FACT",
+      "text": "The bar is 1.2 m long with uniform area 240 mm², E = 70 GPa, fixed at the left, and has a 3.5 kN tensile load at the right.",
+      "source_refs": ["S-raw"],
+      "condition": "The bar is 1.2 m long with uniform area 240 mm², E = 70 GPa, fixed at the left, and has a 3.5 kN tensile load at the right.",
+      "state": "CURRENT",
+      "outcome_refs": ["O-local"]
+    },
+    {
+      "id": "C-model",
+      "kind": "CONSTRAINT",
+      "text": "Use linear small-strain axial behavior; there are no other loads.",
+      "source_refs": ["S-raw"],
+      "condition": "Use linear small-strain axial behavior; there are no other loads.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {"id": "C-sign", "kind": "CONSTRAINT", "text": "Right is positive.", "source_refs": ["S-raw"], "condition": "Right is positive.", "state": "CURRENT", "outcome_refs": []},
+    {"id": "C-units", "kind": "CONSTRAINT", "text": "Keep the original mixed units visible.", "source_refs": ["S-raw"], "condition": "Keep the original mixed units visible.", "state": "CURRENT", "outcome_refs": []},
+    {
+      "id": "C-noacceptance",
+      "kind": "CONSTRAINT",
+      "text": "Do not invent engineering acceptance or transfer the bar's qualification to a bucket.",
+      "source_refs": ["S-raw"],
+      "condition": "Do not invent engineering acceptance or transfer the bar's qualification to a bucket.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-tools",
+      "kind": "CONSTRAINT",
+      "text": "Available tools: Python arithmetic and text; no FE solver or browser.",
+      "source_refs": ["S-raw"],
+      "condition": "Available tools: Python arithmetic and text; no FE solver or browser.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-authority",
+      "kind": "CONSTRAINT",
+      "text": "Owner authorizes only local drafting and computation, not release or external writes.",
+      "source_refs": ["S-raw"],
+      "condition": "Owner authorizes only local drafting and computation, not release or external writes.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "U-solver",
+      "kind": "UNKNOWN",
+      "text": "We have no solver model or numerical results, bucket geometry, weld details, material certificate, load spectrum or applicable design standard.",
+      "source_refs": ["S-raw"],
+      "condition": "We have no solver model or numerical results, bucket geometry, weld details, material certificate, load spectrum or applicable design standard.",
+      "state": "UNRESOLVED",
+      "outcome_refs": ["O-comparison"]
+    },
+    {"id": "U-bucket", "kind": "UNKNOWN", "text": "Bucket-specific model suitability and engineering acceptance remain unresolved.", "source_refs": ["S-raw"], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-bucket"]},
+    {"id": "U-worker", "kind": "UNKNOWN", "text": "Actual worker model/configuration unknown.", "source_refs": ["S-raw"], "condition": "Actual worker model/configuration unknown.", "state": "UNRESOLVED", "outcome_refs": []}
+  ],
+  "outcomes": [
+    {
+      "id": "O-purpose",
+      "parent_id": null,
+      "text": "Support credible reasoning before a lifting-bucket study.",
+      "done_when": "The bar reference is reviewable; consequential bucket reuse has suitable engineering evidence. The latter remains unresolved.",
+      "item_refs": ["R-reference", "C-noacceptance", "U-bucket"]
+    },
+    {
+      "id": "O-local",
+      "parent_id": "O-purpose",
+      "text": "Prepare the local bar reference and future comparison checklist.",
+      "done_when": "Both local notes retain supplied conditions and explicit evidence limits.",
+      "item_refs": ["R-reference", "R-useful", "F-givens", "C-model", "C-sign", "C-units", "C-tools", "C-authority"]
+    },
+    {
+      "id": "O-reference",
+      "parent_id": "O-local",
+      "text": "Establish the exact stipulated axial-bar reference.",
+      "done_when": "Derivation, unit routes, equilibrium, energy and discriminating contrasts reconcile.",
+      "item_refs": ["R-useful", "F-givens", "C-model", "C-sign", "C-units"]
+    },
+    {
+      "id": "O-comparison",
+      "parent_id": "O-local",
+      "text": "Prepare a compatible future numerical-comparison checklist.",
+      "done_when": "Required metadata, comparable quantities and discrepancy checks are explicit; solver work remains NOT_RUN.",
+      "item_refs": ["R-reference", "U-solver", "C-tools", "C-noacceptance"]
+    },
+    {
+      "id": "O-bucket",
+      "parent_id": "O-purpose",
+      "text": "Resolve the bucket engineering basis before consequential reuse.",
+      "done_when": "Appropriate reviewers assess bucket geometry, welds, material, loading and applicable standard. Outside current scope.",
+      "item_refs": ["U-bucket", "C-noacceptance", "C-authority"]
+    }
+  ],
+  "knowledge": [
+    {
+      "topic": "Axial reference method",
+      "reason": "For 0≤x≤L, dN/dx=0, N(L)=F and u(0)=0 give N=F, sigma=F/A, epsilon=F/(EA), u(x)=Fx/(EA), R=-F, k=EA/L and U=F*u(L)/2=N²L/(2EA). Internal tension is positive; R is the support force on the bar.",
+      "outcome_refs": ["O-local"],
+      "source_refs": ["S-raw"]
+    },
+    {"topic": "Unit routes", "reason": "Use N-mm: L=1200 mm, A=240 mm², E=70000 N/mm², F=+3500 N. Independently use SI: L=1.2 m, A=240e-6 m², E=70e9 N/m², F=+3500 N; compare after converting outputs.", "outcome_refs": ["O-local"], "source_refs": ["S-raw"]}
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN: supplied as unknown; no setting observed or control available.",
+    "tools": ["Python arithmetic", "Text drafting"],
+    "reserved_decisions": ["Bucket physical model, engineering evidence, standards, allowables, safety factors and acceptance tolerances.", "Solver/model validation, engineering release and claims about worker capability/configuration."]
+  },
+  "scope": {
+    "permitted": ["Local drafting and Python arithmetic for the stipulated bar and labeled diagnostic contrasts."],
+    "forbidden": ["Release or external writes.", "Invent missing evidence, claim unexecuted solver work, or transfer bar verification to bucket qualification."],
+    "basis_refs": ["S-raw"],
+    "note": "Future comparison is conditional drafting, not newly granted execution authority."
+  },
+  "protocols": {"thinking": null, "delivery": null, "note": "None supplied or imported; use local text reporting."}
+}

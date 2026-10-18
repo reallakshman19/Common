@@ -1,0 +1,11 @@
+{
+  "intent_id": "I-GRADE11",
+  "intent_revision": 1,
+  "intent_sha256": "a4404cf1adf89eb33b82b5ab0be2caee8bbe3c85eb4bee3abe7523f441d031bb",
+  "plan_id": "P-GRADE11",
+  "plan_revision": 1,
+  "plan_sha256": "7777572d6f41e34ea2afc14da5c90609677222f3fea8c4f582d7b579ef876b70",
+  "nudge_id": "N-EXAMPLE",
+  "nudge_sha256": "82f1d92c4518b1776c9fc2900684dfab78fbe6f9d8c3efce1141611fe5b6e9da",
+  "participant_id": "W"
+}

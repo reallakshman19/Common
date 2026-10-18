@@ -1,0 +1,48 @@
+{
+  "binding": {
+    "intent_id": "I-LOGIC",
+    "intent_revision": 1,
+    "intent_sha256": "b5ddd3df3a6128123134a899f85c69e7130d8a756314c3388d89a59d6160c916",
+    "plan_id": "P-LOGIC",
+    "plan_revision": 1,
+    "plan_sha256": "404a0a725a97ac8df7e12247bb786487052cff7a3bfa9b06099234c9c0e6e142",
+    "nudge_id": "N-PROBE",
+    "nudge_sha256": "c05038f7a497e461dfed1dd66010a80cf4e4300bc727bdbb8a540507490f8eb6",
+    "participant_id": "W"
+  },
+  "actor_id": "W",
+  "claimed_status": "NOT_RUN",
+  "native_report": {
+    "format": "project-markdown",
+    "locator": "work-report.md",
+    "revision": null,
+    "content": "# Synthetic native return\nNo probe executed in this supplied fixture.\n"
+  },
+  "attempts": [
+    {
+      "id": "A1",
+      "action": "Run supplied local probe",
+      "state": "NOT_RUN",
+      "observed": "Demonstration record only; no execution claimed.",
+      "evidence": []
+    }
+  ],
+  "findings": [
+    {
+      "kind": "OBSERVATION",
+      "text": "Actual result needs interpretation.",
+      "item_refs": [],
+      "attempt_refs": [
+        "A1"
+      ]
+    }
+  ],
+  "source_observations": [],
+  "contributors": [
+    "W"
+  ],
+  "unresolved": [
+    "Integrated outcome unassessed"
+  ],
+  "next_proposal": "Execute the original-source probe before treating this example as evidence."
+}

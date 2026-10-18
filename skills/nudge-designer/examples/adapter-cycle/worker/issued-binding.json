@@ -1,0 +1,11 @@
+{
+  "intent_id": "I-LOGIC",
+  "intent_revision": 1,
+  "intent_sha256": "a7749c4b780748bb18f6b604b888e3cf4b956ee097a298cd1f9e9f9ba3ad1efe",
+  "plan_id": "P-LOGIC",
+  "plan_revision": 1,
+  "plan_sha256": "de16ae1ee984765aad47b64376889ba3bbea2b127bc733f900e4e0b7e682b025",
+  "nudge_id": "N-PROBE",
+  "nudge_sha256": "31de439dbe6a401880d2046761e6fe0088f80e8c896862b5ef053b67dd584410",
+  "participant_id": "W"
+}

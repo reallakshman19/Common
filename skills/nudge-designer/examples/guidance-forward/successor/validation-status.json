@@ -1,0 +1,102 @@
+{
+  "official_structural_validation": {
+    "status": "NOT_RUN",
+    "attempt": "PYTHONDONTWRITEBYTECODE=1 python <skill>/scripts/nudge_designer.py validate --intent onboarding-intent.json --plan onboarding-plan.json",
+    "exit_code": 2,
+    "missing_module": "jsonschema",
+    "structural_validation_performed": false,
+    "execution_performed": false,
+    "receipt": {
+      "status": "NOT_RUN",
+      "missing_module": "jsonschema",
+      "reason": "Use a complete package and Python 3.10+ with jsonschema installed, or preserve manual checks as NOT_RUN.",
+      "structural_validation_performed": false,
+      "execution_performed": false
+    }
+  },
+  "dependency_observations": {
+    "default_python": "import jsonschema failed: ModuleNotFoundError",
+    "primary_runtime_python": "import jsonschema failed: ModuleNotFoundError"
+  },
+  "official_render": {
+    "status": "NOT_RUN",
+    "attempted": false,
+    "reason": "Same unavailable jsonschema import dependency; prose fallback used."
+  },
+  "limited_local_checks": {
+    "status": "PASSED",
+    "checks": [
+      "JSON parse without duplicate keys/nonfinite constants",
+      "Unique authored intent/nudge IDs",
+      "Plan intent identity and canonical content binding",
+      "Selected profile canonical content binding",
+      "Item references R-ORIGINALS",
+      "Item references R-IDENTITY",
+      "Item references R-RESPONSIVE",
+      "Item references R-RECONSTRUCT",
+      "Item references C-SCOPE",
+      "Item references C-NEXT",
+      "Item references F-REPORT",
+      "Item references F-RECEIPT",
+      "Item references F-APP",
+      "Item references U-IDENTITIES",
+      "Item references U-JOURNEY",
+      "Item references U-CAUSE",
+      "Item references U-CONFIG",
+      "Outcome references O-UI",
+      "Outcome references O-ONBOARD",
+      "Nudge references N-RECONSTRUCT",
+      "Declared requirement/constraint/unknown/outcome coverage",
+      "Coverage references R-ORIGINALS",
+      "Coverage references R-IDENTITY",
+      "Coverage references R-RESPONSIVE",
+      "Coverage references O-UI",
+      "Coverage references R-RECONSTRUCT",
+      "Coverage references C-SCOPE",
+      "Coverage references C-NEXT",
+      "Coverage references O-ONBOARD",
+      "Coverage references U-IDENTITIES",
+      "Coverage references U-JOURNEY",
+      "Coverage references U-CAUSE",
+      "Coverage references U-CONFIG",
+      "Supplied input bytes preserved: owner.md",
+      "Supplied input bytes preserved: report.md",
+      "Supplied input bytes preserved: app.py",
+      "Supplied input bytes preserved: helper-run-42.txt",
+      "Reconstruction contains retained ordinary UI conditions and continuation",
+      "Every reconstruction artifact/source link is confined to successor"
+    ],
+    "scope": "Local JSON/reference/content-binding/input-preservation and document consistency only. Not full schema validation, semantic approval, independent review, product execution or qualification."
+  },
+  "input_preservation": [
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/owner.md",
+      "sha256": "4d92b1f9403441f44d4fc8e197fc9782e9e766e54add803fdb8ff68cc278dc56",
+      "matches_pre_authoring": true
+    },
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/report.md",
+      "sha256": "0d80647126506d067f3edfbfd5fb927732cc936d4b6891452ce4b9c8d40250b8",
+      "matches_pre_authoring": true
+    },
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/app.py",
+      "sha256": "d403fb13f2ed95cffe660608f1af369bb9c8122aaac58a341671781dbb9b3c8a",
+      "matches_pre_authoring": true
+    },
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/helper-run-42.txt",
+      "sha256": "bc80d82b0190d51e615088c6eb8b14c9c8c79a223cd52ebaab22d5c4310df081",
+      "matches_pre_authoring": true
+    }
+  ],
+  "historical_impact": {
+    "status": "NOT_RUN",
+    "reason": "No prior structured intent/plan or issued binding was supplied; no frozen record was rewritten."
+  },
+  "product_execution": "NOT_RUN; outside assigned read-only onboarding scope",
+  "independent_review": "NOT_ESTABLISHED",
+  "model": "UNKNOWN",
+  "reasoning_setting": "UNKNOWN",
+  "formal_qualification": "UNKNOWN"
+}

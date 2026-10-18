@@ -1,0 +1,204 @@
+{
+  "binding": {
+    "intent_id": "I-ROLE-REVIEW",
+    "intent_revision": 1,
+    "intent_sha256": "bf060612f25efb218def0ea4dc7b73d2b7bef0804474a629e9cafbdfde59c5e4",
+    "plan_id": "P-ROLE-REVIEW",
+    "plan_revision": 1,
+    "plan_sha256": "c73191bcdd545a2b9cfadf41c9df4f5e3b0a7924a7c11b5b154de9b938c3ed16",
+    "nudge_id": "N-REVIEW",
+    "nudge_sha256": "8f5b91ae9f35e4e1c84dd7dabae211232a5d58fdc2840b609f9cac9967cc177e",
+    "participant_id": "R"
+  },
+  "actor_id": "R",
+  "claimed_status": "COMPLETE",
+  "native_report": {
+    "format": "text/markdown",
+    "locator": "review.md",
+    "revision": "1",
+    "content": "# N-REVIEW native review\n\nThe bounded review is COMPLETE. Independent local checks support the worker's\ndiagnosis and the specialist's study note. The issued education plan contains a\nmaterial handover inconsistency that needs reconciliation before reuse. Product\ncorrectness and learner understanding remain unresolved.\n\n## Findings against original conditions\n\n1. **The diagnostic correctly exposes the original invariant violation.**\n   `inputs/worker/source.py` ignores `request_revision` and unconditionally writes\n   the payload. My own checker executed that supplied function four times; it did\n   not execute `inputs/worker/probe.py`, replace the function, or implement a repair.\n   Starting each order with current revision 10 and no result gives:\n\n   | Completion order | Actual results after successive events | Required results | First violation |\n   |---|---|---|---|\n   | NEW rev10, OLD rev9 | NEW, OLD | NEW, NEW | Event 2 |\n   | OLD rev9, NEW rev10 | OLD, NEW | null, NEW | Event 1 |\n\n   Both current completions publish successfully. All four state transitions and\n   oracle results match `inputs/worker/probe-output.json` and `diagnostic.md`.\n   The reverse order's correct final result does not erase its earlier obsolete\n   publication. This supports the original `R-CURRENT`/`C-SOURCE` failure, not a\n   repaired or accepted product. The report correctly leaves CSV work separate.\n\n2. **The study note is correct for the supplied 18 m/s example.** From\n   `inputs/specialist/case.md` and `C-PHYSICS`, upward positive gives\n   `v(t) = 18 - 9t` and `y(t) - y(0) = 18t - 4.5t²`. Independently computed exact\n   Decimal values match all six rows in `arithmetic.json`: at 1.9, 2 and 2.1 s,\n   velocities are +0.9, 0 and -0.9 m/s; the maximum rise is 18 m at 2 s. The\n   velocity slope is -9 m/s² throughout free flight, including the turning instant.\n   The held-at-rest contrast is sound because velocity remains zero over an\n   interval and an upward holding force balances gravity. The note distinguishes\n   instantaneous velocity from its rate of change and preserves signs and units.\n   I recomputed the values without executing `inputs/specialist/arithmetic.py` or\n   relying on its PASS field.\n\n3. **Confirmed drift: the education handover says 20 m/s.**\n   `inputs/specialist/plan.json` at `handover.next_action` conflicts with the\n   explicit 18 m/s case and intent condition. The study note follows 18 m/s and\n   the specialist correctly disclosed the conflict. Using 20 m/s would change\n   the top time to 20/9 s and rise to 200/9 m. Preserve the issued snapshots and\n   reconcile the working handover before reuse; refreshing a digest alone would\n   not resolve the meaning. No input was edited here.\n\n4. **Keep scenario assumptions and learning evidence distinct.** The original\n   education intent's `F-PREREQ` describes a synthetic learner's prior knowledge\n   and misconception, but the copied case supplies no learner assessment or\n   evidence of those prerequisites. Treat that row as a synthetic scenario\n   assumption unless an actual source is supplied on revision. Neither native\n   report claims learning gain. `N-TRANSFER` remains unexecuted, and the original\n   `O-CONTENT` completion condition still requires transfer assessment material.\n   Correct worked content alone does not complete `O-LEARNING` or `R-LEARN`.\n\n## Actual checks and preserved evidence\n\nAll substantive Python checks ran locally with `python -B`,\n`PYTHONDONTWRITEBYTECODE=1`, and\n`PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps`.\n`independent_check.py` exited 0; its eight review checks and seven numerical\nchecks passed. The two detected invariant failures are diagnostic findings,\nnot failures to execute the checker. Exact commands and their results are in\n`commands.json`; detailed observations are in `independent-checks.json`.\n\nThe skill CLI validated this review's issued intent/plan as STRUCTURALLY_VALID\nand recomputed both supplied return intakes as RETURN_RECORDED. The worker's\nnative snapshot exactly matches `diagnostic.md`; the specialist's native snapshot\nexactly matches `study-note.md` (its separate calculation report is\n`subject-check.md`). Both recomputed worksheets match all shared fields in the\nsupplied worksheets. Current intake additionally emits\n`native_representation: TEXT_SNAPSHOT`; this is no binding or content discrepancy.\n`issued-binding.json`, obtained with `bind`, matches this review's supplied packet.\nValidation and intake establish structure and binding, not semantic acceptance.\n\nAll six pinned source hashes in the review intent match the observed files.\n`input-manifest-before.json` and `input-manifest-after.json` cover all 22 supplied\nfiles and match exactly; final packaging preservation is recorded separately.\n\n## Limits and next proposals\n\nThis is an independent local recomputation after reading the supplied reports,\nnot a blind review or authenticated proof of participant independence. Current\nmodel/reasoning configuration and formal domain qualification are UNKNOWN. Python\nexecution was observed; role labels and synthetic capability declarations add no\nqualification. Original worker/specialist packets, validation receipts, binding\nreceipts and the worker's packaging script were not supplied. Their historical\npacket-comparison and execution claims cannot be authenticated from these copies.\nThe original source revisions are unpinned; the current byte hashes identify\nobserved content without authenticating origin.\n\nThe Designer can retain both native results as bounded evidence, reconcile the\n20 m/s handover and synthetic prerequisite provenance in a new working revision,\nand assess affected conclusions while preserving issued history. The measured\nrace supports scoping later repair under actual authority, with both event orders\nand current-completion success retained. CSV requirements remain an independent\nunresolved question. Separately prepare the planned transfer problem and rubric;\nactual learner understanding, delayed retrieval and learning gain remain unknown.\nNo product edits, repair, learner contact, publication, browser execution or\nexternal writes occurred in this review.\n"
+  },
+  "attempts": [
+    {
+      "id": "A-READ",
+      "action": "Read the issued review contract and all supplied worker/specialist artifacts; inspect permitted skill support.",
+      "state": "EXECUTED",
+      "observed": "Reviewed original cases, source, reports, study note, scripts, numeric output, issued intents/plans, envelopes and worksheets without reading original agents’ other directories, worked examples or tests.",
+      "evidence": [
+        "case.md",
+        "intent.json",
+        "plan.json",
+        "packet.json",
+        "review.md"
+      ]
+    },
+    {
+      "id": "A-COMPUTE",
+      "action": "Run the independently authored local checker against the unchanged supplied receive function and original physics givens.",
+      "state": "EXECUTED",
+      "observed": "Exit 0. Four actual receive calls reproduce both stale publications and both valid current completions. Independent Decimal calculations match all six supplied rows: top at 2 s, rise 18 m, free-flight acceleration -9 m/s^2, held-at-rest acceleration zero. Eight review checks and seven numerical checks pass.",
+      "evidence": [
+        "independent_check.py",
+        "independent-checks.json",
+        "inputs/worker/source.py",
+        "inputs/worker/probe-output.json",
+        "inputs/specialist/arithmetic.json"
+      ]
+    },
+    {
+      "id": "A-INTAKE",
+      "action": "Validate the issued review intent/plan and recompute supplied worker and specialist return intakes using the skill CLI.",
+      "state": "EXECUTED",
+      "observed": "All three commands exit 0. Review intent/plan STRUCTURALLY_VALID; both supplied envelopes RETURN_RECORDED with unchanged native snapshots. Recomputed worksheets agree on all shared fields; current output additionally includes native_representation TEXT_SNAPSHOT.",
+      "evidence": [
+        "reviewer-validation.json",
+        "worker-intake-check.json",
+        "specialist-intake-check.json",
+        "independent-checks.json"
+      ]
+    },
+    {
+      "id": "A-BIND",
+      "action": "Run bind for N-REVIEW and compare the exact returned header with the issued packet binding.",
+      "state": "EXECUTED",
+      "observed": "Bind exits 0; issued-binding.json exactly equals packet.json binding. The return preserves review.md as exact UTF-8 text.",
+      "evidence": [
+        "issued-binding.json",
+        "packet.json",
+        "review.md",
+        "package_return.py"
+      ]
+    },
+    {
+      "id": "A-PRESERVE",
+      "action": "Hash every supplied file before and after independent checking.",
+      "state": "EXECUTED",
+      "observed": "All 22 supplied files have unchanged hashes; all six pinned review source revisions match. No issued intent, plan, packet, source or report was edited.",
+      "evidence": [
+        "input-manifest-before.json",
+        "input-manifest-after.json",
+        "independent-checks.json"
+      ]
+    },
+    {
+      "id": "A-INTEGRATED",
+      "action": "Implement repair, assess an actual learner, publish or accept an integrated outcome.",
+      "state": "NOT_RUN",
+      "observed": "These actions are outside the bounded local review. Source still violates the invariant; transfer material and actual learner evidence remain unresolved.",
+      "evidence": [
+        "case.md",
+        "review.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "kind": "OBSERVATION",
+      "text": "The diagnostic is substantiated by four independent actual calls: first violations at event 2 for NEW/OLD and event 1 for OLD/NEW; both current completions publish. This proves the supplied function violates the original invariant, not product acceptance.",
+      "item_refs": [
+        "R-REVIEW"
+      ],
+      "attempt_refs": [
+        "A-READ",
+        "A-COMPUTE"
+      ]
+    },
+    {
+      "kind": "OBSERVATION",
+      "text": "The 18 m/s study note and all six recorded arithmetic rows agree with the stipulated model. Zero velocity at the top coexists with acceleration -9 m/s^2; supported rest has zero acceleration over an interval. Correct content does not prove learner understanding.",
+      "item_refs": [
+        "R-REVIEW",
+        "U-QUALIFICATION"
+      ],
+      "attempt_refs": [
+        "A-READ",
+        "A-COMPUTE"
+      ]
+    },
+    {
+      "kind": "ASSUMPTION_CONFLICT",
+      "text": "The specialist issued plan handover uses 20 m/s while its original case and intent C-PHYSICS specify 18 m/s. The specialist correctly used 18 and reported drift. Preserve the issued snapshot and reconcile the working handover before reuse.",
+      "item_refs": [
+        "R-REVIEW"
+      ],
+      "attempt_refs": [
+        "A-READ",
+        "A-COMPUTE"
+      ]
+    },
+    {
+      "kind": "NEW_ISSUE",
+      "text": "The original specialist intent F-PREREQ declares synthetic learner prerequisites and misconception beyond what its supplied case supports. Preserve this as a scenario assumption unless a source is supplied; do not treat it as learner evidence.",
+      "item_refs": [
+        "R-REVIEW",
+        "U-QUALIFICATION"
+      ],
+      "attempt_refs": [
+        "A-READ"
+      ]
+    },
+    {
+      "kind": "OBSERVATION",
+      "text": "Copied envelopes pass current intake and native snapshots match exact bytes, but some historical evidence locators were not supplied. Intake and role labels establish no authenticated execution, independence, authority, formal qualification or integrated acceptance.",
+      "item_refs": [
+        "U-QUALIFICATION"
+      ],
+      "attempt_refs": [
+        "A-INTAKE",
+        "A-BIND"
+      ]
+    },
+    {
+      "kind": "OBSERVATION",
+      "text": "All supplied input bytes remain unchanged; only reviewer-local artifacts were written.",
+      "item_refs": [
+        "C-LOCAL"
+      ],
+      "attempt_refs": [
+        "A-PRESERVE"
+      ]
+    }
+  ],
+  "source_observations": [
+    {
+      "source_id": "S-CASE",
+      "revision": "sha256:ced5cd9890ed0c6f1c3a795bc190049bf17bf308ce2fb721ca09d095dd52bfd3"
+    },
+    {
+      "source_id": "S-W-CASE",
+      "revision": "sha256:e1b28c31b6c7c17f3db4d85cbddb211c6e7f6eee3806e5f98066a487819ebc96"
+    },
+    {
+      "source_id": "S-W-SOURCE",
+      "revision": "sha256:03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34"
+    },
+    {
+      "source_id": "S-W-REPORT",
+      "revision": "sha256:50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642"
+    },
+    {
+      "source_id": "S-S-CASE",
+      "revision": "sha256:8c9e234062491fab45a85a95e0e8b107b6fadb52ef3227fd9505aae199c39f2b"
+    },
+    {
+      "source_id": "S-S-REPORT",
+      "revision": "sha256:4cbb6790f8c6c1a742d2fee7dc7e0333d891cde5bb5b42b14e3ce18ae823b31b"
+    },
+    {
+      "source_id": "S-S-NOTE",
+      "revision": "sha256:76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31"
+    }
+  ],
+  "contributors": [
+    "R"
+  ],
+  "unresolved": [
+    "Original current-result implementation remains faulty; no repair or product integration acceptance was executed.",
+    "CSV requirements remain independent, unspecified and unverified.",
+    "The 20 m/s handover conflict and unsupported synthetic prerequisite provenance need Designer reconciliation in working revisions; issued inputs were preserved.",
+    "N-TRANSFER material, actual learner understanding, transfer response, delayed retrieval and learning gain remain unestablished.",
+    "Host model/reasoning configuration, formal domain qualification and authenticated review independence remain UNKNOWN or unverified.",
+    "Original packets and some supporting receipts were not supplied; historical execution/packet-comparison claims and source authenticity cannot be authenticated from these copies."
+  ],
+  "next_proposal": "Designer reconciles the supported findings, preserves all issued history and prepares a corrected working handover with explicit scenario assumptions. Use the measured event traces to scope subsequent repair under actual authority, keep CSV independent, and separately prepare transfer material while leaving learner and integrated outcome acceptance unresolved."
+}

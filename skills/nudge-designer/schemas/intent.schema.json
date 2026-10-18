@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nudge-designer:intent:v1",
+  "title": "Source-linked intent declarations, not authenticated authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "revision", "owner_request", "purpose", "sources", "items", "outcomes", "knowledge", "worker", "scope", "protocols"],
+  "properties": {
+    "schema": {"const": "nudge-designer.intent/v1"},
+    "id": {"$ref": "#/$defs/id"},
+    "revision": {"type": "integer", "minimum": 1},
+    "owner_request": {"$ref": "#/$defs/text"},
+    "purpose": {"$ref": "#/$defs/text"},
+    "sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}},
+    "items": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/item"}},
+    "outcomes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/outcome"}},
+    "knowledge": {"type": "array", "items": {"$ref": "#/$defs/knowledge"}},
+    "worker": {"$ref": "#/$defs/worker"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "protocols": {"$ref": "#/$defs/protocols"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,79}$"},
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "nullable_text": {"anyOf": [{"$ref": "#/$defs/text"}, {"type": "null"}]},
+    "refs": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "texts": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "locator", "revision", "kind", "assessment", "note"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "locator": {"$ref": "#/$defs/nullable_text"},
+        "revision": {"$ref": "#/$defs/nullable_text"},
+        "kind": {"enum": ["OWNER", "SOURCE", "RECEIPT", "SYNTHETIC", "UNKNOWN"]},
+        "assessment": {"enum": ["READ_THIS_RUN", "SUPPLIED", "NOT_INSPECTED", "UNKNOWN"]},
+        "note": {"$ref": "#/$defs/text"}
+      }
+    },
+    "item": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "text", "source_refs", "condition", "state", "outcome_refs"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "kind": {"enum": ["REQUIREMENT", "CONSTRAINT", "FACT", "HYPOTHESIS", "PROPOSAL", "UNKNOWN"]},
+        "text": {"$ref": "#/$defs/text"},
+        "source_refs": {"$ref": "#/$defs/refs"},
+        "condition": {"$ref": "#/$defs/nullable_text"},
+        "state": {"enum": ["CURRENT", "HISTORICAL", "UNRESOLVED", "PROPOSED", "SUPERSEDED"]},
+        "outcome_refs": {"$ref": "#/$defs/refs"}
+      }
+    },
+    "outcome": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "parent_id", "text", "done_when", "item_refs"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "parent_id": {"anyOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "text": {"$ref": "#/$defs/text"},
+        "done_when": {"$ref": "#/$defs/text"},
+        "item_refs": {"allOf": [{"$ref": "#/$defs/refs"}], "minItems": 1}
+      }
+    },
+    "knowledge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["topic", "reason", "outcome_refs", "source_refs"],
+      "properties": {
+        "topic": {"$ref": "#/$defs/text"},
+        "reason": {"$ref": "#/$defs/text"},
+        "outcome_refs": {"$ref": "#/$defs/refs"},
+        "source_refs": {"$ref": "#/$defs/refs"}
+      }
+    },
+    "worker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["model", "reasoning_effort", "configuration_basis", "tools", "reserved_decisions"],
+      "properties": {
+        "model": {"$ref": "#/$defs/nullable_text"},
+        "reasoning_effort": {"$ref": "#/$defs/nullable_text"},
+        "configuration_basis": {"$ref": "#/$defs/text"},
+        "tools": {"$ref": "#/$defs/texts"},
+        "reserved_decisions": {"$ref": "#/$defs/texts"}
+      }
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["permitted", "forbidden", "basis_refs", "note"],
+      "properties": {
+        "permitted": {"$ref": "#/$defs/texts"},
+        "forbidden": {"$ref": "#/$defs/texts"},
+        "basis_refs": {"$ref": "#/$defs/refs"},
+        "note": {"$ref": "#/$defs/text"}
+      }
+    },
+    "protocols": {
+      "type": "object", "additionalProperties": false,
+      "required": ["thinking", "delivery", "note"],
+      "properties": {
+        "thinking": {"$ref": "#/$defs/nullable_text"},
+        "delivery": {"$ref": "#/$defs/nullable_text"},
+        "note": {"$ref": "#/$defs/text"}
+      }
+    }
+  }
+}

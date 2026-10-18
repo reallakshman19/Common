@@ -1,0 +1,43 @@
+{
+  "bounded_task": "N-EXAMPLE",
+  "claimed_task_status": "COMPLETE",
+  "validate_exit": 0,
+  "bind_exit": 0,
+  "bind_matches_issued_packet": true,
+  "arithmetic_exit": 0,
+  "arithmetic_checks_passed": 9,
+  "receive_exit": 0,
+  "receive_status": "RETURN_RECORDED",
+  "native_content_exactly_preserved": true,
+  "native_content_sha256": "76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+  "source_observation_unpinned": [
+    "S-TEACHER"
+  ],
+  "accepted_outcomes": [],
+  "execution_verified_by_receive": false,
+  "host_model": "UNKNOWN",
+  "host_reasoning_effort": "UNKNOWN",
+  "independent_review": "NOT_ESTABLISHED",
+  "problems": [
+    "Issued handover says 20 m/s while the governing explicit condition says 18 m/s; preserved snapshots and used 18 m/s.",
+    "An attempted schemas/return.schema.json read found no file. The documented return API uses strict local checks in nd_returns.py; intake succeeded."
+  ],
+  "not_executed": [
+    "N-TRANSFER",
+    "learner contact",
+    "publication",
+    "external writes",
+    "independent subject review"
+  ],
+  "outputs": [
+    "study-note.md",
+    "subject-check.md",
+    "arithmetic.py",
+    "arithmetic.json",
+    "validation.json",
+    "issued-binding.json",
+    "return.json",
+    "reconciliation.json",
+    "execution-summary.json"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema": "nudge-designer.plan/v1",
+  "id": "P-EDUCATION-FORWARD",
+  "revision": 2,
+  "intent_id": "I-EDUCATION-FORWARD",
+  "intent_revision": 2,
+  "intent_sha256": "2c0517d7246e793dc18dcb131b0f6bb292cb526c47107f95cfc271848dc83a68",
+  "profile_ids": ["core", "education", "quantitative"],
+  "profiles_sha256": "cd052394a9f517110097c40070ed103ddbbe3b1f65133d1d4fb93c556b216196",
+  "strategy": "Keep one integrated draft-pack task. Use a worked rate-of-change method, the held/released contrast and proposed staggered releases; missing learner/course evidence limits claims rather than drafting.",
+  "nudges": [
+    {
+      "id": "N-ONE",
+      "parent_id": null,
+      "type": "new_requirement",
+      "outcome_refs": ["O-EXPLAIN", "O-TRANSFER", "O-RECONCILE"],
+      "item_refs": ["R-EXPLAIN", "R-TRANSFER", "R-CONTRAST", "R-EVIDENCE", "C-GIVENS", "C-DOMAIN", "C-NOINVENT", "C-AUTHORITY", "F-PREREQUISITE", "F-MISCONCEPTION", "U-SYLLABUS", "U-LEARNING", "U-MATERIAL", "U-CONFIG"],
+      "source_refs": ["S-RAW"],
+      "profile_ids": ["core", "education", "quantitative"],
+      "purpose": "Turn the reported misconception into a usable, checked draft pack.",
+      "deliverable": "Return one text pack: (1) short learner-facing explanation, suggested target 180–250 words; (2) one new transfer question; (3) a separate reviewer key and reasoning rubric; (4) concise actual-checks and limitations report. The word target is a Designer choice, not an Owner condition.",
+      "understanding": [
+        "Worked method: in v = u + at, substituting t = 0 and u = v = 0 gives 0 = a·0 for any a. Do not divide by zero. The no-drag physical model supplies a = +9.6 m/s² immediately after support removal. Let t be time since release and y downward displacement: v = 9.6t and y = 4.8t². Over the first 0.10 s, Δv = +0.96 m/s, so Δv/Δt = +9.6 m/s² despite zero initial velocity.",
+        "Bound the equations by t < sqrt(2·12/9.6) ≈ 1.58114 s for the original fall. This is a domain limit, not a collision model.",
+        "Proposed transfer: A and B start held at the 12 m release level under the original g, no-drag and sign convention. A is released from rest; B remains held for another 0.40 s, then is released from rest. Ask for each ball's v and a immediately after B's release, B's a immediately before release, and both velocities 0.20 s later. Require an explanation, not numbers alone.",
+        "Reviewer reference, not learner evidence: immediately after B release, A has (v,a) = (+3.84 m/s,+9.6 m/s²), B has (0,+9.6 m/s²). Just before release B has (0,0). At 0.20 s later, A has fallen for 0.60 s: v = +5.76 m/s, y = 1.728 m; B for 0.20 s: v = +1.92 m/s, y = 0.192 m. Both remain above ground with a = +9.6 m/s². Reproduce these values and units."
+      ],
+      "reasoning_moves": ["reconstruct", "derive", "compare", "construct", "challenge", "verify"],
+      "evidence_methods": ["source_trace", "worked_example", "subject_review", "transfer_problem", "hand_derivation", "unit_check", "artifact_readback"],
+      "depends_on": [],
+      "branches": [
+        {"observation": "Content checks pass; no learner response is available.", "next_ids": [], "rationale": "Return the draft with learning UNKNOWN."},
+        {"observation": "Physical explanation or key remains inconsistent.", "next_ids": [], "rationale": "Return the exact discrepancy and attempted checks for subject review."}
+      ],
+      "boundaries": {"preserve_refs": ["C-GIVENS", "C-DOMAIN", "C-NOINVENT", "C-AUTHORITY"], "do_not": ["Do not claim gravity switches on at release or disappears while held.", "Do not expose the key beside the learner question or treat answer exposure as learner evidence."]},
+      "success": {
+        "observable": "The draft uses the supplied model consistently, makes the held/released physical cause understandable and has a separate reasoned key with reproducible, unit-consistent pre-impact checks.",
+        "negative_case": "The rule zero velocity implies zero acceleration predicts a = 0 for B just before and after release. Reject it: support gives a = 0 while held; removing support gives +9.6 m/s² while initial v is still zero. A and B can also have different velocities with the same acceleration. A key that contradicts either comparison fails."
+      },
+      "uncertainty": {
+        "missing": ["No learner response: learning remains UNKNOWN.", "No syllabus or course material: alignment/reuse claims unavailable.", "Unknown worker configuration/capability: no setting or qualification claim."],
+        "return_with": "Return specific inconsistencies and attempted checks if the physical contrast or calculations cannot be reconciled; otherwise return the draft with the stated evidence limits.",
+        "independent_work": ["Draft in generic Grade 11 language; derive/check the model and key; write a rubric for a future unaided response without inventing one."]
+      },
+      "report": {
+        "required": [
+          "Return the four-part pack, preserving source conditions and identifying transfer timing as a Designer proposal.",
+          "Give actual formulas, units, Python results and check outcomes; label checks not run.",
+          "Separate SUBJECT CONTENT CHECKS from LEARNER UNDERSTANDING: UNKNOWN. Name unresolved issues and reserved decisions; report no contact/publication."
+        ],
+        "next_action": "Return the draft here for Owner review; return discrepancies for subject review if checks fail. No learner contact or publication follows."
+      }
+    }
+  ],
+  "coverage": [
+    {"target_id": "R-EXPLAIN", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "R-TRANSFER", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "R-CONTRAST", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "R-EVIDENCE", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "C-GIVENS", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "C-DOMAIN", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "C-NOINVENT", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "C-AUTHORITY", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "The single bounded study-pack nudge explicitly retains and checks this declared condition; execution and acceptance remain unclaimed."},
+    {"target_id": "U-SYLLABUS", "disposition": "UNRESOLVED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "A board syllabus and its preferred terminology are unknown; this limits claims of curriculum alignment, not a generic Grade 11 draft."},
+    {
+      "target_id": "U-LEARNING",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": ["N-ONE"],
+      "evidence_refs": [],
+      "rationale": "This particular learner's explanation, transfer performance and learning gain are unknown; a target answer or a correct draft cannot establish them."
+    },
+    {"target_id": "U-MATERIAL", "disposition": "UNRESOLVED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "Existing course material and its wording are unavailable; do not claim compatibility or reuse."},
+    {"target_id": "U-CONFIG", "disposition": "UNRESOLVED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "Worker model and reasoning configuration are unknown; no configuration control or capability assessment was observed."},
+    {"target_id": "O-PACK", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "N-ONE produces the integrated draft and evidence separation for this outcome. The current pilot only designs and renders those instructions."},
+    {"target_id": "O-EXPLAIN", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "N-ONE produces the integrated draft and evidence separation for this outcome. The current pilot only designs and renders those instructions."},
+    {"target_id": "O-TRANSFER", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "N-ONE produces the integrated draft and evidence separation for this outcome. The current pilot only designs and renders those instructions."},
+    {"target_id": "O-RECONCILE", "disposition": "PLANNED", "nudge_ids": ["N-ONE"], "evidence_refs": [], "rationale": "N-ONE produces the integrated draft and evidence separation for this outcome. The current pilot only designs and renders those instructions."}
+  ],
+  "handover": {
+    "remaining": ["Finished worker draft and content review not executed.", "Learner understanding, curriculum alignment and worker configuration remain unknown."],
+    "next_action": "Draft/check the pack under current authority, then return it for review.",
+    "changed_understanding": "Editorial condensation only: the misconception, physical contrast, transfer design and evidence boundary are retained."
+  }
+}

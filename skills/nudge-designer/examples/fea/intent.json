@@ -1,0 +1,42 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-FEA",
+  "revision": 1,
+  "owner_request": "Establish a transparent axial-bar reference and a meaningful FEA comparison for the declared special case.",
+  "purpose": "Establish a transparent axial-bar reference and a meaningful FEA comparison for the declared special case.",
+  "sources": [
+    {"id": "S-BAR", "locator": "case.md", "revision": null, "kind": "SYNTHETIC", "assessment": "SUPPLIED", "note": "Synthetic uniform linear-elastic axial bar, with explicitly supplied assumptions; no production model or governing code supplied."}
+  ],
+  "items": [
+    {"id": "R-REFERENCE", "kind": "REQUIREMENT", "text": "Derive the reference before interpreting a numerical result.", "source_refs": ["S-BAR"], "condition": null, "state": "CURRENT", "outcome_refs": []},
+    {"id": "C-MODEL", "kind": "CONSTRAINT", "text": "Keep uniform area, small deformation, linear elasticity, axial load and fixed/free boundary conditions explicit.", "source_refs": ["S-BAR"], "condition": "L=1000 mm; A=100 mm^2; E=200000 N/mm^2; P=1000 N at the free end.", "state": "CURRENT", "outcome_refs": []},
+    {"id": "C-QUALIFICATION", "kind": "CONSTRAINT", "text": "Do not generalize this synthetic reference into source/code authority or production engineering acceptance.", "source_refs": ["S-BAR"], "condition": null, "state": "CURRENT", "outcome_refs": []},
+    {"id": "F-SPECIAL", "kind": "FACT", "text": "A uniform axial bar is the only declared model.", "source_refs": ["S-BAR"], "condition": null, "state": "CURRENT", "outcome_refs": ["O-REFERENCE"]},
+    {"id": "U-SOLVER", "kind": "UNKNOWN", "text": "No actual FEA implementation, result file or independent production benchmark is supplied.", "source_refs": [], "condition": null, "state": "UNRESOLVED", "outcome_refs": ["O-COMPARE"]}
+  ],
+  "outcomes": [
+    {"id": "O-REFERENCE", "parent_id": null, "text": "Produce the transparent special-case reference.", "done_when": "Displacement, stress, reaction, units and assumptions are independently reproducible.", "item_refs": ["R-REFERENCE", "F-SPECIAL"]},
+    {"id": "O-COMPARE", "parent_id": "O-REFERENCE", "text": "Compare an actual compatible numerical result.", "done_when": "Compatible inputs, signed quantities and numerical error assessed with stated limits.", "item_refs": ["R-REFERENCE"]}
+  ],
+  "knowledge": [
+    {"topic": "Physical idealization, boundary conditions, units, governing relation and verification limits", "reason": "Needed to interpret the concrete case and its limits.", "outcome_refs": ["O-REFERENCE"], "source_refs": ["S-BAR"]}
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN in this example; a runtime must record actual settings and access.",
+    "tools": ["Source reader; actual runtime tools must be checked"],
+    "reserved_decisions": ["Any new authority, consequential design choice or scope expansion"]
+  },
+  "scope": {
+    "permitted": ["Derive the supplied synthetic bar case and design a comparison; do not claim an absent solver run"],
+    "forbidden": ["Invent execution, source authority or acceptance"],
+    "basis_refs": ["S-BAR"],
+    "note": "Supplied example scope; not an authenticated work grant."
+  },
+  "protocols": {
+    "thinking": null,
+    "delivery": null,
+    "note": "Select thinking and delivery separately from actual project authority; no automatic version substitution."
+  }
+}

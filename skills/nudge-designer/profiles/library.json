@@ -1,0 +1,61 @@
+{
+  "schema": "nudge-designer.profiles/v1",
+  "profiles": [
+    {
+      "id": "core", "revision": "1", "label": "Purpose and uncertainty",
+      "knowledge": ["Original human outcome, current constraints and source assessments"],
+      "reasoning_moves": ["ground", "reconstruct", "trace", "derive", "compare", "challenge", "construct", "implement", "verify", "reconcile", "decide"],
+      "evidence_methods": ["source_trace", "counterexample", "artifact_readback", "end_to_end_use"],
+      "review_questions": ["Which observation would change the conclusion?", "Does this step preserve the conditions in the original request?", "Which independent useful work remains possible?"],
+      "pitfalls": ["Do not treat a filled schema as understanding or approval.", "Do not impose novelty or a fixed number of passes.", "Declared coverage cannot establish a complete source or risk census."]
+    },
+    {
+      "id": "ui", "revision": "1", "label": "User journey and interaction",
+      "knowledge": ["Actual application entrypoint, user actions, state ownership, prerequisites and recovery", "Pointer, keyboard, focus, viewport and source identity"],
+      "reasoning_moves": ["trace", "compare", "challenge", "construct", "verify"],
+      "evidence_methods": ["browser_observation", "state_comparison", "source_trace", "end_to_end_use"],
+      "review_questions": ["Did an ordinary action select the intended object?", "Do header, current state and available actions agree?", "What remains unobserved in real use?"],
+      "pitfalls": ["Keyboard success does not establish pointer success.", "Keep main, candidate, tested and deployed identities separate.", "A screenshot or handler's existence does not establish a working journey."]
+    },
+    {
+      "id": "logic", "revision": "1", "label": "Contracts and causal logic",
+      "knowledge": ["The invariant, state owner and event/data dependency order"],
+      "reasoning_moves": ["reconstruct", "trace", "derive", "challenge", "verify"],
+      "evidence_methods": ["runtime_probe", "counterexample", "state_comparison", "source_trace"],
+      "review_questions": ["What is the first divergence from the contract?", "Can a different event order falsify this explanation?"],
+      "pitfalls": ["Preserve unrelated pending issues.", "A mocked path or implementation-shaped test may miss the actual boundary."]
+    },
+    {
+      "id": "education", "revision": "1", "label": "Learning and transfer",
+      "knowledge": ["Declared curriculum, learner prerequisites, misconception and target understanding"],
+      "reasoning_moves": ["reconstruct", "derive", "compare", "construct", "challenge", "verify"],
+      "evidence_methods": ["worked_example", "subject_review", "learner_response", "transfer_problem"],
+      "review_questions": ["Can the learner explain why the method applies?", "Does a new problem test transfer rather than copying?", "Is actual learner evidence available?"],
+      "pitfalls": ["Subject correctness and learner understanding are separate claims.", "Do not invent a board syllabus, learner response or learning gain.", "Use worked reasoning and a meaningful contrast without supplying the target answer as proof."]
+    },
+    {
+      "id": "quantitative", "revision": "1", "label": "Quantities and assumptions",
+      "knowledge": ["Given quantities, units, conventions, assumptions and meaningful comparison limits"],
+      "reasoning_moves": ["derive", "compare", "challenge", "verify"],
+      "evidence_methods": ["hand_derivation", "unit_check", "independent_reference", "sensitivity_check"],
+      "review_questions": ["Can the intermediate result be reproduced?", "What changes under a load-bearing perturbation?"],
+      "pitfalls": ["Do not invent quantitative ROI or numerical acceptance tolerances.", "Agreement requires compatible units, frames and assumptions."]
+    },
+    {
+      "id": "fea", "revision": "1", "label": "Model and numerical credibility",
+      "knowledge": ["Physical idealization, intended use, method applicability, governing equations, boundary conditions and numerical assumptions"],
+      "reasoning_moves": ["derive", "trace", "compare", "challenge", "verify", "decide"],
+      "evidence_methods": ["hand_derivation", "unit_check", "independent_reference", "numerical_error_check", "sensitivity_check"],
+      "review_questions": ["Is the physical model valid for the intended use?", "What numerical error is assessed?", "What does this reference establish and leave unresolved?"],
+      "pitfalls": ["Mesh convergence alone does not validate the physical model.", "Two solvers may share the same invalid assumption.", "A synthetic reference is not production source/code authority or engineering acceptance."]
+    },
+    {
+      "id": "coding", "revision": "1", "label": "Implementation and regression",
+      "knowledge": ["Owning boundary, current source revision, applicable delivery protocol and protected behavior"],
+      "reasoning_moves": ["trace", "implement", "challenge", "verify", "reconcile"],
+      "evidence_methods": ["runtime_probe", "regression_test", "artifact_readback", "source_trace", "end_to_end_use"],
+      "review_questions": ["Does the same meaningful check expose the old failure and establish the new behavior?", "Was affected integrated behavior checked?"],
+      "pitfalls": ["Do not weaken the oracle to pass.", "Use the separately selected coding protocol and actual authority.", "Prepared instructions and published plans are not executed continuation."]
+    }
+  ]
+}

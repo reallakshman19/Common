@@ -1,0 +1,160 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "I-ROLE-REVIEW",
+  "revision": 1,
+  "owner_request": "Independently review the supplied local diagnostic and study-material artifacts against their original requests, issued conditions and actual source. Recompute decisive observations/calculations where useful. Return one native review note with findings, evidence limits and next proposals, plus a task-bound return envelope. Preserve all input artifacts; no implementation, learner contact, publication or external writes. Current model/reasoning configuration and formal domain qualification are unobserved.\n",
+  "purpose": "Assess the actual artifacts against original conditions and identify a justified continuation.",
+  "sources": [
+    {
+      "id": "S-CASE",
+      "locator": "case.md",
+      "revision": null,
+      "kind": "SYNTHETIC",
+      "assessment": "SUPPLIED",
+      "note": "Local review assignment; no production authority is granted."
+    },
+    {
+      "id": "S-W-CASE",
+      "locator": "inputs/worker/case.md",
+      "revision": "sha256:e1b28c31b6c7c17f3db4d85cbddb211c6e7f6eee3806e5f98066a487819ebc96",
+      "kind": "SYNTHETIC",
+      "assessment": "SUPPLIED",
+      "note": "Copied actual local artifact; reviewer must inspect it independently."
+    },
+    {
+      "id": "S-W-SOURCE",
+      "locator": "inputs/worker/source.py",
+      "revision": "sha256:03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34",
+      "kind": "SOURCE",
+      "assessment": "SUPPLIED",
+      "note": "Copied actual local artifact; reviewer must inspect it independently."
+    },
+    {
+      "id": "S-W-REPORT",
+      "locator": "inputs/worker/diagnostic.md",
+      "revision": "sha256:50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642",
+      "kind": "RECEIPT",
+      "assessment": "SUPPLIED",
+      "note": "Copied actual local artifact; reviewer must inspect it independently."
+    },
+    {
+      "id": "S-S-CASE",
+      "locator": "inputs/specialist/case.md",
+      "revision": "sha256:8c9e234062491fab45a85a95e0e8b107b6fadb52ef3227fd9505aae199c39f2b",
+      "kind": "SYNTHETIC",
+      "assessment": "SUPPLIED",
+      "note": "Copied actual local artifact; reviewer must inspect it independently."
+    },
+    {
+      "id": "S-S-REPORT",
+      "locator": "inputs/specialist/subject-check.md",
+      "revision": "sha256:4cbb6790f8c6c1a742d2fee7dc7e0333d891cde5bb5b42b14e3ce18ae823b31b",
+      "kind": "RECEIPT",
+      "assessment": "SUPPLIED",
+      "note": "Copied actual local artifact; reviewer must inspect it independently."
+    },
+    {
+      "id": "S-S-NOTE",
+      "locator": "inputs/specialist/study-note.md",
+      "revision": "sha256:76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+      "kind": "SOURCE",
+      "assessment": "SUPPLIED",
+      "note": "Copied actual local artifact; reviewer must inspect it independently."
+    }
+  ],
+  "items": [
+    {
+      "id": "R-REVIEW",
+      "kind": "REQUIREMENT",
+      "text": "Assess original-source evidence, subject reasoning and claimed limits without inheriting a PASS.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-REVIEW"
+      ]
+    },
+    {
+      "id": "C-LOCAL",
+      "kind": "CONSTRAINT",
+      "text": "Preserve all inputs; local review and computation only.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "condition": "No product edits, learner contact, publication or external writes.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "U-QUALIFICATION",
+      "kind": "UNKNOWN",
+      "text": "Formal qualification, actual model configuration and integrated product/learner outcomes remain unestablished.",
+      "source_refs": [],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": [
+        "O-REVIEW"
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "O-REVIEW",
+      "parent_id": null,
+      "text": "A source-linked review with justified findings and limits.",
+      "done_when": "Decisive checks are reproduced and continuation distinguishes supported claims from unresolved outcomes.",
+      "item_refs": [
+        "R-REVIEW",
+        "U-QUALIFICATION"
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "topic": "Current-result invariants, constant-gravity signs and evidence independence",
+      "reason": "The two native reports need distinct source/model checks.",
+      "outcome_refs": [
+        "O-REVIEW"
+      ],
+      "source_refs": [
+        "S-CASE",
+        "S-W-CASE",
+        "S-W-SOURCE",
+        "S-W-REPORT",
+        "S-S-CASE",
+        "S-S-REPORT",
+        "S-S-NOTE"
+      ]
+    }
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN; no configuration or formal qualification was observed.",
+    "tools": [
+      "Python and local source readers are available in the task environment."
+    ],
+    "reserved_decisions": [
+      "Product, learner and engineering acceptance remain outside this review."
+    ]
+  },
+  "scope": {
+    "permitted": [
+      "Read supplied artifacts and run local independent checks."
+    ],
+    "forbidden": [
+      "Modify input artifacts or make external writes."
+    ],
+    "basis_refs": [
+      "S-CASE"
+    ],
+    "note": "Actual local review only; no release/acceptance authority."
+  },
+  "protocols": {
+    "thinking": null,
+    "delivery": null,
+    "note": "No other protocol is implicitly selected."
+  }
+}

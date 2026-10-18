@@ -1,0 +1,154 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "200_GPa_gives_0_324_mm": true,
+    "SI_and_mm_calculations_agree_exactly": true,
+    "double_load_doubles_extension": true,
+    "modulus_change_does_not_change_uniform_axial_stress": true,
+    "original_extension_equals_0_405_mm": true,
+    "reported_0_324_mm_does_not_equal_original_reference": true,
+    "strain_equals_0_00045": true,
+    "stress_equals_72_MPa": true,
+    "stress_strain_and_direct_calculations_agree_exactly": true,
+    "zero_load_gives_zero_extension": true
+  },
+  "convention": "Magnitudes; N, mm, N/mm^2. 1 N/mm^2 = 1 MPa.",
+  "execution_limits": {
+    "bucket_geometry_or_root_stress_evaluated": false,
+    "engineering_acceptance_authority": "NOT_ASSIGNED",
+    "formal_qualification": "UNKNOWN",
+    "host_model": "UNKNOWN",
+    "independent_domain_review": "NOT_PERFORMED",
+    "reasoning_effort": "UNKNOWN",
+    "screenshots_inspected": "NONE_SUPPLIED",
+    "solver_run": "NOT_RUN"
+  },
+  "handover_contrast": {
+    "conditional_extension": {
+      "exact": "81/250",
+      "unit": "mm",
+      "value": 0.324
+    },
+    "conditional_implied_modulus": {
+      "exact": "200",
+      "unit": "GPa",
+      "value": 200.0
+    },
+    "extension_difference_from_original": {
+      "exact": "-81/1000",
+      "unit": "mm",
+      "value": -0.081
+    },
+    "limit": "Numerical consistency under identical ideal-bar inputs does not identify the cause of unseen screenshots.",
+    "relative_extension_change": {
+      "exact": "-1/5",
+      "unit": "dimensionless",
+      "value": -0.2
+    },
+    "reported_extension": {
+      "exact": "81/250",
+      "unit": "mm",
+      "value": 0.324
+    },
+    "stress_for_same_P_and_A": {
+      "exact": "72",
+      "unit": "MPa",
+      "value": 72.0
+    },
+    "substituted_modulus": {
+      "exact": "200",
+      "unit": "GPa",
+      "value": 200.0
+    }
+  },
+  "inputs": {
+    "area": {
+      "exact": "250",
+      "unit": "mm^2",
+      "value": 250.0
+    },
+    "area_SI": {
+      "exact": "1/4000",
+      "unit": "m^2",
+      "value": 0.00025
+    },
+    "length": {
+      "exact": "900",
+      "unit": "mm",
+      "value": 900.0
+    },
+    "length_SI": {
+      "exact": "9/10",
+      "unit": "m",
+      "value": 0.9
+    },
+    "load": {
+      "exact": "18",
+      "unit": "kN",
+      "value": 18.0
+    },
+    "load_converted": {
+      "exact": "18000",
+      "unit": "N",
+      "value": 18000.0
+    },
+    "modulus": {
+      "exact": "160",
+      "unit": "GPa",
+      "value": 160.0
+    },
+    "modulus_SI": {
+      "exact": "160000000000",
+      "unit": "Pa",
+      "value": 160000000000.0
+    },
+    "modulus_converted": {
+      "exact": "160000",
+      "unit": "N/mm^2",
+      "value": 160000.0
+    }
+  },
+  "original_reference": {
+    "double_load_extension": {
+      "exact": "81/100",
+      "unit": "mm",
+      "value": 0.81
+    },
+    "extension": {
+      "exact": "81/200",
+      "unit": "mm",
+      "value": 0.405
+    },
+    "extension_SI": {
+      "exact": "81/200000",
+      "unit": "m",
+      "value": 0.000405
+    },
+    "extension_via_strain": {
+      "exact": "81/200",
+      "unit": "mm",
+      "value": 0.405
+    },
+    "strain": {
+      "exact": "9/20000",
+      "unit": "dimensionless",
+      "value": 0.00045
+    },
+    "stress": {
+      "exact": "72",
+      "unit": "MPa",
+      "value": 72.0
+    }
+  },
+  "relations": {
+    "displacement": "u(x) = P*x/(A*E), u(0)=0",
+    "free_end_extension": "delta = P*L/(A*E)",
+    "strain": "epsilon = sigma/E",
+    "stress": "sigma = P/A"
+  },
+  "scope": "Executed exact rational arithmetic for the supplied ideal axial bar only",
+  "source": {
+    "path": "case.md",
+    "sha256": "21eff4e41a325f65c30334b7a830ab0de21450bca3413344fcbe54233529dd60"
+  }
+}

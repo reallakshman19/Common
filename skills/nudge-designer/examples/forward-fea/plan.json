@@ -1,0 +1,145 @@
+{
+  "schema": "nudge-designer.plan/v1",
+  "id": "P-axial-forward",
+  "revision": 2,
+  "intent_id": "I-axial-forward",
+  "intent_revision": 2,
+  "intent_sha256": "4cdbac922c509b015cd08ee4486c65ae7478b3c054446dbc9e10fe696246c80a",
+  "profile_ids": ["core", "quantitative", "fea"],
+  "profiles_sha256": "035ba67153b9821b1154eb1842eb61b9eb11b4b02e72c34ebffca8bf03ba20cd",
+  "strategy": "Derive and check the exact bar reference, then draft a compatible numerical-comparison checklist. Missing solver evidence blocks numerical comparison; missing bucket evidence blocks engineering reuse. Both local drafts remain useful.",
+  "nudges": [
+    {
+      "id": "N-reference",
+      "parent_id": null,
+      "type": "ground",
+      "outcome_refs": ["O-reference"],
+      "item_refs": ["R-reference", "R-useful", "F-givens", "U-solver", "U-bucket", "U-worker"],
+      "source_refs": ["S-raw"],
+      "profile_ids": ["core", "quantitative", "fea"],
+      "purpose": "Supply the checked analytical reference for later compatible comparison.",
+      "deliverable": "One local reference note:\n1. Retain the original mixed-unit givens and derive the fields using the method below.\n2. Include runnable Python, actual values with units/signs, and N-mm/SI comparison.\n3. Report equilibrium and energy residuals, the labeled conversion-error contrast and doubled-load sensitivity.\n4. State calculation limits and remaining evidence gaps.",
+      "understanding": ["The stipulated uniform axial model gives an exact reference. Compatible arithmetic agreement establishes neither an FE result nor bucket qualification."],
+      "reasoning_moves": ["ground", "derive", "compare", "challenge", "verify"],
+      "evidence_methods": ["source_trace", "hand_derivation", "unit_check", "sensitivity_check"],
+      "depends_on": [],
+      "branches": [
+        {"observation": "Unit routes, residuals and contrasts reconcile.", "next_ids": ["N-comparison"], "rationale": "Use the checked reference for a local comparison checklist; solver execution remains unavailable."},
+        {"observation": "A sign, unit or sensitivity discrepancy remains.", "next_ids": [], "rationale": "Return the discrepancy for reconciliation; do not propagate a conflicting reference."}
+      ],
+      "boundaries": {"preserve_refs": ["C-model", "C-sign", "C-units", "C-noacceptance", "C-tools", "C-authority"], "do_not": ["Do not replace the nominal 3.5 kN case with diagnostic contrasts.", "Do not treat two unit routes as independent physical-model validation."]},
+      "success": {
+        "observable": "Runnable arithmetic reproduces N, sigma, epsilon, u(x), R, k and U with units/signs; both unit routes agree, R+F=0 and 2U=F*u(L).",
+        "negative_case": "Deliberately use E=70 N/mm² in the N-mm route: reject the resulting 1000-fold displacement error. Separately double F only: N, sigma, epsilon and u double, k stays fixed and U quadruples. Label both hypothetical cases; neither changes the Owner load."
+      },
+      "uncertainty": {
+        "missing": ["U-solver prevents numerical-model verification; U-bucket prevents bucket qualification; U-worker remains UNKNOWN."],
+        "return_with": "Return the reference note, or the first unexplained discrepancy with equations, inputs, units and output. Keep unavailable evidence NOT_RUN/UNKNOWN; return physical-model and acceptance decisions to the Designer/relevant reviewer.",
+        "independent_work": ["Complete the analytic and unit checks without solver or bucket inputs.", "Draft the N-comparison missing-input list while any arithmetic discrepancy is reconciled."]
+      },
+      "report": {
+        "required": ["Cite RAW.md; show derivation, conversions, runnable Python and actual output, including residuals and contrasts.", "Separate executed local arithmetic from unexecuted worker/solver work; retain unresolved bucket and parent outcomes."],
+        "next_action": "A reconciled reference enables N-comparison; otherwise return the discrepancy. Missing-input drafting stays eligible."
+      }
+    },
+    {
+      "id": "N-comparison",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": ["O-comparison"],
+      "item_refs": ["R-reference", "R-useful", "F-givens", "U-solver", "U-bucket", "U-worker"],
+      "source_refs": ["S-raw"],
+      "profile_ids": ["core", "quantitative", "fea"],
+      "purpose": "Make future numerical verification checkable without claiming bucket qualification.",
+      "deliverable": "One local comparison checklist anchored to N-reference. Request model identity, geometry/area, modulus, units/signs, load, restraint, physical/element idealization and numerical settings. Compare u(L), u(x), support equilibrium, axial force/stress/strain and energy; define dimensional discrepancy and relative error only for nonzero exact values. Request relevant discretization/numerical sensitivity evidence. Mark absent numerical comparisons NOT_RUN and retain missing bucket evidence.",
+      "understanding": [
+        "Matching a single output is insufficient: the model assumptions and the remaining fields/checks must be compatible.",
+        "Different load transfer or local stress concentrations need model reconciliation; no numerical discrepancy supplies an engineering acceptance tolerance."
+      ],
+      "reasoning_moves": ["trace", "compare", "challenge", "verify"],
+      "evidence_methods": ["source_trace", "hand_derivation", "unit_check"],
+      "depends_on": ["N-reference"],
+      "branches": [
+        {"observation": "No compatible numerical model or result is supplied, as in the current request.", "next_ids": [], "rationale": "Finish the local checklist and retain numerical verification and bucket qualification as unresolved; do not claim execution."},
+        {
+          "observation": "A future result uses a different unit scale, restraint, load or physical idealization.",
+          "next_ids": [],
+          "rationale": "Report the exact incompatibility and reserve model reconciliation; numerical agreement on one quantity cannot establish verification."
+        }
+      ],
+      "boundaries": {"preserve_refs": ["C-model", "C-sign", "C-units", "C-noacceptance", "C-tools", "C-authority"], "do_not": ["Use numeric reference values only after N-reference is reconciled.", "Reserve physical-model, standard, tolerance and engineering-release decisions."]},
+      "success": {
+        "observable": "The checklist names required model metadata, comparable quantities, discrepancy measures, unavailable evidence and reserved decisions; numerical execution stays NOT_RUN.",
+        "negative_case": "Reject comparison with an unfixed left end or E=70 N/mm² in an N-mm model. Matching u(L) alone leaves equilibrium, fields, numerical evidence and physical suitability unassessed."
+      },
+      "uncertainty": {
+        "missing": ["U-solver and U-bucket remain unresolved."],
+        "return_with": "Return the checklist, NOT_RUN comparisons and exact missing evidence; report future input incompatibilities before judging numeric agreement.",
+        "independent_work": ["Draft model-compatibility and evidence requirements while reference arithmetic is reconciled."]
+      },
+      "report": {
+        "required": ["Cite the reconciled reference or mark its numeric oracle pending.", "List metadata, comparison/discrepancy definitions and missing numerical/bucket evidence; invent no results or tolerances."],
+        "next_action": "Hand back the local drafts and missing-evidence list. Future numerical comparison requires actual compatible results/tools; engineering decisions remain reserved."
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "target_id": "R-reference",
+      "disposition": "PLANNED",
+      "nudge_ids": ["N-reference", "N-comparison"],
+      "evidence_refs": [],
+      "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."
+    },
+    {"target_id": "R-useful", "disposition": "PLANNED", "nudge_ids": ["N-reference", "N-comparison"], "evidence_refs": [], "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."},
+    {"target_id": "C-model", "disposition": "PLANNED", "nudge_ids": ["N-reference", "N-comparison"], "evidence_refs": [], "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."},
+    {"target_id": "C-sign", "disposition": "PLANNED", "nudge_ids": ["N-reference", "N-comparison"], "evidence_refs": [], "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."},
+    {"target_id": "C-units", "disposition": "PLANNED", "nudge_ids": ["N-reference", "N-comparison"], "evidence_refs": [], "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."},
+    {
+      "target_id": "C-noacceptance",
+      "disposition": "PLANNED",
+      "nudge_ids": ["N-reference", "N-comparison"],
+      "evidence_refs": [],
+      "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."
+    },
+    {"target_id": "C-tools", "disposition": "PLANNED", "nudge_ids": ["N-reference", "N-comparison"], "evidence_refs": [], "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."},
+    {
+      "target_id": "C-authority",
+      "disposition": "PLANNED",
+      "nudge_ids": ["N-reference", "N-comparison"],
+      "evidence_refs": [],
+      "rationale": "The local drafts preserve this declared requirement/constraint; completion requires actual bounded work and semantic review."
+    },
+    {
+      "target_id": "U-solver",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": ["N-reference", "N-comparison"],
+      "evidence_refs": [],
+      "rationale": "Explicitly missing in the raw request. Local reference/checklist work records the gap without supplying the absent evidence or configuration."
+    },
+    {
+      "target_id": "U-bucket",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": ["N-reference", "N-comparison"],
+      "evidence_refs": [],
+      "rationale": "Explicitly missing in the raw request. Local reference/checklist work records the gap without supplying the absent evidence or configuration."
+    },
+    {
+      "target_id": "U-worker",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": ["N-reference", "N-comparison"],
+      "evidence_refs": [],
+      "rationale": "Explicitly missing in the raw request. Local reference/checklist work records the gap without supplying the absent evidence or configuration."
+    },
+    {"target_id": "O-purpose", "disposition": "UNRESOLVED", "nudge_ids": ["N-reference", "N-comparison"], "evidence_refs": [], "rationale": "Local reference work contributes but cannot close bucket intended-use or engineering-basis gaps."},
+    {"target_id": "O-local", "disposition": "PLANNED", "nudge_ids": ["N-reference", "N-comparison"], "evidence_refs": [], "rationale": "The reference and conditional comparison checklist are coherent bounded local deliverables."},
+    {"target_id": "O-reference", "disposition": "PLANNED", "nudge_ids": ["N-reference"], "evidence_refs": [], "rationale": "First worker brief supplies equations, consistent-unit routes and discriminating checks; no worker execution is claimed."},
+    {"target_id": "O-comparison", "disposition": "PLANNED", "nudge_ids": ["N-comparison"], "evidence_refs": [], "rationale": "Checklist drafting is available locally; executing a numerical comparison is not."},
+    {"target_id": "O-bucket", "disposition": "DEFERRED", "nudge_ids": [], "evidence_refs": [], "rationale": "Required bucket inputs, applicable standard and engineering basis are unavailable and qualification is outside current local scope."}
+  ],
+  "handover": {
+    "remaining": ["Execute/reconcile the reference worker brief and prepare the comparison checklist; Designer preview arithmetic is not worker execution.", "Numerical-model verification and bucket qualification await absent evidence; worker configuration remains UNKNOWN."],
+    "next_action": "Use N-reference locally; draft N-comparison metadata independently. No dispatch, release or external write.",
+    "changed_understanding": "Exact reference arithmetic is possible now. Numerical credibility and bucket engineering suitability remain separate unresolved outcomes."
+  }
+}

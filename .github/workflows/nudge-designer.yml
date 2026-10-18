@@ -1,0 +1,37 @@
+name: Nudge Designer
+
+on:
+  pull_request:
+    paths:
+      - 'skills/nudge-designer/**'
+      - '.github/workflows/nudge-designer.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'skills/nudge-designer/**'
+      - '.github/workflows/nudge-designer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract-and-cli:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{ matrix.python-version }}'
+      - name: Install structural validator dependency
+        run: python -m pip install 'jsonschema>=4.18,<5'
+      - name: Run declared-contract, rendering, revision and CLI checks
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python -B -m unittest discover -s skills/nudge-designer/tests -v

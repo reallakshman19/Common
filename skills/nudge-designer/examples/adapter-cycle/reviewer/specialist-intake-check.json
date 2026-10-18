@@ -1,0 +1,147 @@
+{
+  "status": "RETURN_RECORDED",
+  "binding": {
+    "intent_id": "I-GRADE11",
+    "intent_revision": 1,
+    "intent_sha256": "a4404cf1adf89eb33b82b5ab0be2caee8bbe3c85eb4bee3abe7523f441d031bb",
+    "plan_id": "P-GRADE11",
+    "plan_revision": 1,
+    "plan_sha256": "7777572d6f41e34ea2afc14da5c90609677222f3fea8c4f582d7b579ef876b70",
+    "nudge_id": "N-EXAMPLE",
+    "nudge_sha256": "82f1d92c4518b1776c9fc2900684dfab78fbe6f9d8c3efce1141611fe5b6e9da",
+    "participant_id": "W"
+  },
+  "actor_id": "W",
+  "claimed_status": "COMPLETE",
+  "native_report": {
+    "format": "text/markdown",
+    "locator": "study-note.md",
+    "revision": null,
+    "content": "# Velocity and acceleration at the top of a throw\n\nAn object is thrown upward at **18 m/s**. Take upward as positive, assume no air resistance, and use constant gravitational acceleration **a = −9 m/s²**.\n\n**Velocity** tells you how fast position is changing and in which direction. **Acceleration** tells you how velocity is changing. Here, every second gravity makes the velocity 9 m/s more negative:\n\n**v = 18 − 9t**, with t in seconds and v in m/s.\n\n| Time after release | Velocity | Acceleration |\n|---|---|---|\n| 1 s | +9 m/s, upward | −9 m/s², downward |\n| 2 s | 0 m/s | −9 m/s², downward |\n| 3 s | −9 m/s, downward | −9 m/s², downward |\n\nAt **t = 2 s**, the object reaches its highest point: 18 − 9 × 2 = 0 m/s. Its velocity is zero at that instant because it is changing from upward motion to downward motion. Gravity still acts, so its acceleration remains −9 m/s². Just before the top, at 1.9 s, v = +0.9 m/s; just after, at 2.1 s, v = −0.9 m/s. Velocity keeps changing through the zero value.\n\nCompare an object **held at rest**. Its velocity stays zero over time, so its acceleration is zero. The upward holding force balances gravity. The thrown object has no holding force during flight.\n\nBoth objects can have zero velocity at an instant, yet different accelerations. To decide acceleration, ask **how the velocity is changing**, not only what the velocity is now.\n\nExplain to yourself: At the turning instant, which quantity is zero? What keeps the velocity changing? Why is the held object different?\n"
+  },
+  "native_content_sha256": "76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+  "native_representation": "TEXT_SNAPSHOT",
+  "attempts": [
+    {
+      "id": "A-READ",
+      "action": "Read the issued case, intent, plan, packet and permitted skill support.",
+      "state": "EXECUTED",
+      "observed": "Read the four assigned input files and skill guidance. An attempted return.schema.json read found no such file; ADAPTERS.md and nd_returns.py supplied the strict return API contract. No examples, tests, other task folders or earlier agent outputs were read.",
+      "evidence": [
+        "case.md",
+        "intent.json",
+        "plan.json",
+        "packet.json",
+        "subject-check.md"
+      ]
+    },
+    {
+      "id": "A-VALIDATE",
+      "action": "Run the skill validate command against the unchanged issued intent and plan.",
+      "state": "EXECUTED",
+      "observed": "The CLI exited 0 and saved validation.json. This is a structural check only.",
+      "evidence": [
+        "validation.json"
+      ]
+    },
+    {
+      "id": "A-BIND",
+      "action": "Run the skill bind command for N-EXAMPLE and compare its result with the issued packet binding.",
+      "state": "EXECUTED",
+      "observed": "The CLI exited 0 and the binding exactly matched packet.json.",
+      "evidence": [
+        "issued-binding.json",
+        "packet.json"
+      ]
+    },
+    {
+      "id": "A-CALCULATE",
+      "action": "Execute arithmetic.py using exact Fraction arithmetic for the throw and held-at-rest contrast.",
+      "state": "EXECUTED",
+      "observed": "The script exited 0; all nine arithmetic and contrast checks passed. Turning time 2 s, turning velocity 0 m/s, rise 18 m, and free-flight acceleration -9 m/s^2. Held-at-rest acceleration is 0 m/s^2.",
+      "evidence": [
+        "arithmetic.py",
+        "arithmetic.json",
+        "subject-check.md"
+      ]
+    },
+    {
+      "id": "A-DRAFT",
+      "action": "Create the short native study note and a separate subject-check note for N-EXAMPLE.",
+      "state": "EXECUTED",
+      "observed": "Created study-note.md and subject-check.md with explicit signs, the turning instant, held-at-rest contrast, actual arithmetic and evidence limits. This is the same specialist self-check; independence is not established.",
+      "evidence": [
+        "study-note.md",
+        "subject-check.md"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "declared_kind": "OBSERVATION",
+      "text": "The stipulated throw passes through v = 0 at t = 2 s while a remains -9 m/s^2. The before/after values +0.9 and -0.9 m/s demonstrate the changing velocity through the turning instant. Held-at-rest v stays zero and a is zero because support balances gravity.",
+      "item_refs": [
+        "C-PHYSICS",
+        "R-LEARN",
+        "F-PREREQ"
+      ],
+      "attempt_refs": [
+        "A-CALCULATE",
+        "A-DRAFT"
+      ]
+    },
+    {
+      "declared_kind": "DRIFT",
+      "text": "The issued plan handover says 20 m/s, conflicting with the 18 m/s condition in case.md, C-PHYSICS and packet.json. The notes use 18 m/s and preserve the issued inputs. The Designer should reconcile this handover before reuse.",
+      "item_refs": [
+        "C-PHYSICS"
+      ],
+      "attempt_refs": [
+        "A-READ",
+        "A-DRAFT"
+      ]
+    },
+    {
+      "declared_kind": "OBSERVATION",
+      "text": "No actual learner response, syllabus or learning gain is supplied or established; subject arithmetic does not prove learner understanding. Host model and reasoning configuration remain UNKNOWN.",
+      "item_refs": [
+        "C-CLAIMS"
+      ],
+      "attempt_refs": [
+        "A-READ",
+        "A-DRAFT"
+      ]
+    }
+  ],
+  "outside_nudge_refs": [],
+  "freshness": "DECLARED_OBSERVATIONS_ONLY",
+  "source_discrepancies": [],
+  "unpinned_observations": [
+    "S-TEACHER"
+  ],
+  "sources_not_observed": [],
+  "unresolved": [
+    "The 20 m/s handover conflicts with the explicit 18 m/s case; issued snapshots were not edited.",
+    "N-TRANSFER remains for a new motion problem and explanation rubric; it was not executed in this bounded task.",
+    "Actual learner understanding, transfer response, delayed retrieval, learning gain and integrated outcome acceptance remain unknown.",
+    "Independent subject review and host model/reasoning configuration were not established; S-TEACHER has no pinned revision."
+  ],
+  "next_proposal": "Designer reviews these local artifacts and reconciles the handover inconsistency, then prepares the separately planned N-TRANSFER material under existing authority. Actual learner contact requires its own authorization.",
+  "independent_candidates": [],
+  "independence": "NOT_ESTABLISHED",
+  "reconcile_questions": [
+    "Which observations support or contradict the current explanation?",
+    "Is each declared drift, improvement or new issue correctly scoped?",
+    "What independent work remains useful under existing authority?",
+    "What integrated outcome evidence is still missing?"
+  ],
+  "accepted_outcomes": [],
+  "execution_verified": false,
+  "authority_verified": false,
+  "evidence_authenticated": false,
+  "semantic_classification_verified": false,
+  "scope_expanded": false,
+  "workflow_locked": false,
+  "plan_modified": false,
+  "next_action": "Designer reviews evidence and affected conclusions; preserve issued history."
+}

@@ -1,0 +1,37 @@
+{
+  "issued_artifacts_unchanged": true,
+  "historical_intakes": {
+    "worker": {
+      "status": "RETURN_RECORDED",
+      "accepted_outcomes": [],
+      "native_content_sha256": "50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642",
+      "execution_verified": false
+    },
+    "specialist": {
+      "status": "RETURN_RECORDED",
+      "accepted_outcomes": [],
+      "native_content_sha256": "76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+      "execution_verified": false
+    },
+    "reviewer": {
+      "status": "RETURN_RECORDED",
+      "accepted_outcomes": [],
+      "native_content_sha256": "71022c1d1253a88a441f69a7a6e04f1339d8e91a852eba83c0b29b8a0bf49cd8",
+      "execution_verified": false
+    }
+  },
+  "old_return_against_current_revision": {
+    "status": "REJECTED",
+    "reason": "return binding differs; use the exact issued intent/plan snapshots for historical evidence"
+  },
+  "owner_outcomes_accepted": [],
+  "product_repair_executed": false,
+  "transfer_material_executed": false,
+  "learner_response_observed": false,
+  "semantic_review_performed_by": "Designer after reading native reports and separate local review",
+  "limits": [
+    "Historical source declarations are unpinned; current hashes identify observed bytes, not authentic origin.",
+    "Host model, effort and formal qualification remain UNKNOWN.",
+    "Current participant observations do not establish another task or actor independence."
+  ]
+}
