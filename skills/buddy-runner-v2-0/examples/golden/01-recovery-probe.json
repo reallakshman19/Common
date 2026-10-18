@@ -1,0 +1,25 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "Unavailable predecessor; a bounded source-grounded probe was run",
+  "request_patch": {
+    "progress": {
+      "status": "EXECUTED",
+      "activity": "INVESTIGATION",
+      "action": "Run original input through the public export entry",
+      "result": "Three original occurrences retained, including repeated node value; browser performance NOT_RUN",
+      "evidence": [
+        "fixture:public-entry-probe/stdout"
+      ]
+    }
+  },
+  "expected": {
+    "state": "DIRECTION_RECORDED",
+    "reconstruction_status": "STRUCTURALLY_RECORDED",
+    "continuation_evidence.status": "EXECUTION_REPORTED",
+    "continuation_evidence.grade": "SUPPLIED_UNVERIFIED"
+  },
+  "human_checks": [
+    "Compare inherited route with existing working capability.",
+    "A supplied test result is not independently authenticated execution or product acceptance."
+  ]
+}

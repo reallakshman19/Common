@@ -59,11 +59,16 @@ def main(argv=None):
     parser.add_argument("--record")
     parser.add_argument("--approval")
     parser.add_argument("--task")
+    parser.add_argument("--progress", help="untrusted continuation report; never a grant")
     parser.add_argument("--output")
     parser.add_argument("--status-json", action="store_true")
     args = parser.parse_args(argv)
     try:
         case = validate_request(read_json(args.input))
+        if args.progress:
+            if "progress" in case:
+                raise ValueError("supply progress in the request or --progress, not both")
+            case["progress"] = read_json(args.progress)
         record = read_json(args.record) if args.record else None
         approval = read_json(args.approval) if args.approval else None
         task = read_json(args.task) if args.task else None
@@ -71,7 +76,8 @@ def main(argv=None):
         report = assess(case, record, approval=approval, task=task)
         body = json.dumps(report, indent=2) + "\n" if args.status_json else render(case, report, record)
         if args.output:
-            write_output(args.output, body, [args.input, args.record, args.approval, args.task])
+            write_output(args.output, body, [args.input, args.record, args.approval,
+                                             args.task, args.progress])
             print(args.output)
         else:
             print(body, end="")

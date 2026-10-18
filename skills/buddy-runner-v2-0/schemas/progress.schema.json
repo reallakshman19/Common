@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Supplied continuation report; not execution verification or authority",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "NOT_STARTED",
+        "PLANNED",
+        "EXECUTED",
+        "BLOCKED"
+      ]
+    },
+    "activity": {
+      "enum": [
+        "RECONSTRUCTION",
+        "INVESTIGATION",
+        "CODING"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempted": {
+      "type": "boolean"
+    },
+    "observed_restriction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "not_attempted_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "next_feasible_action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "description": "EXECUTED is only a supplied claim. BLOCKED needs action, attempted, observed restriction, scope, next feasible action and evidence; an unattempted prohibited action needs a sourced reason. Runtime reporting marks incomplete claims unsupported."
+}

@@ -1,0 +1,23 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "A complete published reconstruction has no subsequent task experiment",
+  "request_patch": {
+    "progress": {
+      "status": "EXECUTED",
+      "activity": "RECONSTRUCTION",
+      "action": "Publish the twelve-section reconstruction",
+      "result": "Issue comment posted and read back",
+      "evidence": [
+        "fixture:issuecomment/reconstruction"
+      ]
+    }
+  },
+  "expected": {
+    "reconstruction_status": "STRUCTURALLY_RECORDED",
+    "continuation_evidence.status": "NOT_STARTED"
+  },
+  "human_checks": [
+    "Publication is a durable reconstruction checkpoint, not an experiment or implementation receipt.",
+    "For RECOVERY, take the next feasible authorized action; for ONBOARD, preserve the explicit wait."
+  ]
+}

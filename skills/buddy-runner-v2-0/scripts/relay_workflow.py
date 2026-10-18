@@ -1,6 +1,7 @@
 """Task-scoped relay continuation, with programmatic host invocation only."""
 from relay_contract import validate_request, validate_reconstruction, profile_status
 from relay_evidence import digest, verify_event, verify_prior
+from relay_progress import carry_forward, progress_report
 from copy import deepcopy
 
 PROTOCOL_COMMIT = "54c0f172e0ec017e338e9cc3596348a23abc1bf0"
@@ -8,8 +9,7 @@ PROTOCOL_REF = ("https://github.com/reallakshman19/Common/blob/" + PROTOCOL_COMM
                 + "/skills/engineering-pr-delivery-v3.6/SKILL.md")
 
 
-def assess(case, record=None, *, approval=None, task=None, reader=None):
-    case = validate_request(case)
+def _direction(case, record=None, *, approval=None, task=None, reader=None):
     source_reader, cached = reader, {}
     def read_once(ref):
         if ref not in cached:
@@ -62,6 +62,20 @@ def assess(case, record=None, *, approval=None, task=None, reader=None):
               if choice["id"] == record["chosen"])["decision"] == "OWNER_DECISION_REQUIRED":
         report.update(state="OWNER_DIRECTION_DECISION_REQUIRED",
                       next="REQUEST_OWNER_DIRECTION_DECISION")
+    return report
+
+
+def assess(case, record=None, *, approval=None, task=None, reader=None):
+    case = validate_request(case)
+    report = _direction(case, record, approval=approval, task=task, reader=reader)
+    report["reconstruction_status"] = ("STRUCTURALLY_RECORDED" if
+        "reconstruction_digest" in report else "NOT_SUPPLIED")
+    report["continuation_evidence"] = progress_report(
+        case.get("progress"), owner_wait=report["next"] in {
+            "AWAIT_OWNER_TASK", "AWAIT_OWNER_RECONSTRUCTION_DECISION"},
+        coding_eligible=report["next"] == "ENTER_PINNED_CODING_PROTOCOL")
+    dispositions = record.get("dispositions", {}) if isinstance(record, dict) else {}
+    report["carry_forward"] = carry_forward(case.get("known_items", []), dispositions)
     return report
 
 

@@ -1,0 +1,32 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "A reconstruction corrects the stale report but silently drops the supplied custody risk",
+  "request_patch": {
+    "known_items": [
+      "STALE-REPORT",
+      "TARGET-CUSTODY"
+    ]
+  },
+  "expected": {
+    "carry_forward.unaddressed": [
+      "TARGET-CUSTODY"
+    ],
+    "next": "ENTER_PINNED_CODING_PROTOCOL"
+  },
+  "human_checks": [
+    "The omission must remain visible and receive a source-backed disposition.",
+    "Do not automatically freeze unrelated investigation or claim all risks resolved."
+  ],
+  "record_patch": {
+    "dispositions": {
+      "STALE-REPORT": {
+        "decision": "SUPERSEDED",
+        "reason": "Current source contains the adapter mount; the old report says unwired",
+        "refs": [
+          "fixture:src/ui.py",
+          "fixture:older-workreport"
+        ]
+      }
+    }
+  }
+}

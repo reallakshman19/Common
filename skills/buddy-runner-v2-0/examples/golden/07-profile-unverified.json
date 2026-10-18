@@ -1,0 +1,28 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "Substantive supplied reconstruction has no observed model/effort evidence",
+  "request_patch": {
+    "profile": {
+      "assurance": "AGENT_CLAIM"
+    },
+    "progress": {
+      "status": "EXECUTED",
+      "activity": "INVESTIGATION",
+      "action": "Run original input through the public export entry",
+      "result": "Three original occurrences retained, including repeated node value; browser performance NOT_RUN",
+      "evidence": [
+        "fixture:public-entry-probe/stdout"
+      ]
+    }
+  },
+  "expected": {
+    "state": "PROFILE_UNQUALIFIED",
+    "profile": "UNVERIFIED",
+    "reconstruction_status": "STRUCTURALLY_RECORDED",
+    "continuation_evidence.status": "EXECUTION_REPORTED"
+  },
+  "human_checks": [
+    "Do not call long prose evidence of High reasoning or fabricate runtime settings.",
+    "Retain useful read-only investigation without declaring a qualified takeover."
+  ]
+}

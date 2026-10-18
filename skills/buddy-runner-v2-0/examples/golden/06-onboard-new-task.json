@@ -1,0 +1,27 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "One explicit Owner response approves reconstruction and supplies a different task",
+  "request_patch": {
+    "mode": "ONBOARD",
+    "continuation": "AWAIT_OWNER_TASK"
+  },
+  "expected": {
+    "state": "DIRECTION_RECORDED",
+    "next": "ENTER_PINNED_CODING_PROTOCOL",
+    "task_prompt": "I approve the reconstruction. Next task: investigate cancellation in the loader, not the recommended adapter repair.",
+    "continuation_evidence.status": "NOT_STARTED"
+  },
+  "human_checks": [
+    "Reuse understanding and refresh facts affected by the actual loader task.",
+    "Native source/label/plan/child/criteria/scope must be verified; task arrival is not an invocation receipt."
+  ],
+  "approval": true,
+  "task": true,
+  "owner_source": {
+    "body": "I approve the reconstruction. Next task: investigate cancellation in the loader, not the recommended adapter repair.",
+    "kinds": [
+      "RECONSTRUCTION_APPROVAL",
+      "TASK_PROMPT"
+    ]
+  }
+}

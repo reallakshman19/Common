@@ -261,6 +261,17 @@
         ]
       }
     },
+    "dispositions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object", "required": ["decision", "reason", "refs"],
+        "properties": {
+          "decision": {"enum": ["RETAIN", "RESOLVED", "SUPERSEDED", "PARK"]},
+          "reason": {"type": "string", "minLength": 1},
+          "refs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    },
     "takeover_id": {
       "type": "string",
       "minLength": 1

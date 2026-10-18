@@ -17,6 +17,27 @@ def overlay(base, patch):
 
 
 class GoldenTests(unittest.TestCase):
+    def test_worked_local_recovery_preserves_the_documented_boundary(self):
+        root = ROOT / "examples/golden/local-recovery"
+        paths = [path for path in root.rglob("*") if path.is_file()]
+        before = {path: path.read_bytes() for path in paths}
+        cases = json.loads((root / "cases.json").read_text())
+        modules = {}
+        for name in ("core", "view"):
+            path = root / "src" / (name + ".py")
+            namespace = {"__builtins__": {}}
+            exec(compile(path.read_text(), str(path), "exec"), namespace)
+            modules[name] = namespace
+        view_matches, helper_matches = [], []
+        for case in cases["cases"]:
+            response, epoch = case["response"], cases["current_epoch"]
+            view_matches.append(modules["view"]["finish"](epoch, response) == case["expected"])
+            helper_matches.append(modules["core"]["current_result"](
+                epoch, response["epoch"], response["payload"]) == case["expected"])
+        self.assertEqual(view_matches, [False, True])
+        self.assertEqual(helper_matches, [True, True])
+        self.assertEqual({path: path.read_bytes() for path in paths}, before)
+
     def test_synthetic_scenarios_keep_declared_expected_results(self):
         paths = sorted((ROOT / "examples/golden").glob("*.json"))
         self.assertGreaterEqual(len(paths), 10, "scenario corpus must be present")

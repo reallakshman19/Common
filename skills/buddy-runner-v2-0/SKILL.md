@@ -9,6 +9,8 @@ Preserve the Owner's aim. Independently reassess the route. Choose the highest j
 
 Read [CONTRACT.md](references/CONTRACT.md) first. Use [ASSISTED.md](references/ASSISTED.md) for a participating predecessor, or [RECOVERY.md](references/RECOVERY.md) without one. ONBOARD is RECOVERY with an explicit wait for the Owner's next task. Use [HOST.md](references/HOST.md) when integrating the Python API with source readers or an executor.
 
+For copyable starts use [Owner prompts](templates/OWNER_PROMPTS.md). Use the [reconstruction template](templates/RECONSTRUCTION.md) and [continuation template](templates/CONTINUATION.md) for actual reporting. Select a relevant [golden workflow reference](examples/golden/INDEX.md); synthetic expected states do not certify project understanding. The [pilot improvement plan](references/PILOT_IMPROVEMENTS.md) separates implemented checks from remaining real-use proof.
+
 ## Activate the requested work
 
 An explicit start request means perform the allowed stage now when actual sources, role and scope are available. Do not replace execution with a progress chart or pretend a generated packet launched another agent.
@@ -35,6 +37,10 @@ Treat CI, missing receipts and inherited blockers as evidence to understand. Inv
 
 A schema checks structure, never semantic judgment. Do not call a generic copied summary a successful takeover.
 
+Separate reconstruction, actual profile/qualification evidence, executed continuation and product acceptance. Publishing a complete reconstruction does not execute its next task. Carry source-discovered material risks and explicitly supersede stale reports; do not silently lose a risk omitted by the predecessor summary.
+
+For a restricted continuation record the concrete action, whether actually attempted, observed restriction, affected scope, evidence and next feasible action. Justify an unattempted prohibited/unavailable action from an actual source; never violate a restriction to manufacture failure evidence. Continue useful authorized investigation. Treat ONBOARD's explicit Owner wait as normal waiting.
+
 ## Produce one useful direction
 
 Include the seven assignment parts: purpose, one coherent deliverable, authoritative inputs, boundaries, observable success/falsifier, uncertainty handling, and evidence/continuation.
@@ -46,6 +52,7 @@ Use the local helper for reproducible preparation/inspection:
 ```sh
 python skills/buddy-runner-v2-0/scripts/buddy_runner_v20.py --input case.json --output relay.md
 python skills/buddy-runner-v2-0/scripts/buddy_runner_v20.py --input case.json --record reconstruction.json --status-json
+python skills/buddy-runner-v2-0/scripts/buddy_runner_v20.py --input case.json --record reconstruction.json --progress continuation.json --status-json
 ```
 
 The CLI performs no provider operations, dispatch or approvals. Supplied approval/task files remain unverified. Use examples/onboard.json and examples/reconstruction.json for shapes; their example identities are not live grants.

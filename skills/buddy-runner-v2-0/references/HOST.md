@@ -4,6 +4,12 @@
 
 The CLI reads JSON and writes local output. It never fetches providers, changes model settings, dispatches an agent or grants authority. Its status facts remain separate from real execution.
 
+Optional request `progress` (or CLI `--progress`, never both) describes a supplied stage claim. `reconstruction_status` records structural availability; `continuation_evidence` separately reports NOT_STARTED, OWNER_WAIT, planned/reported execution or supported/unsupported restriction reporting. All supplied evidence remains SUPPLIED_UNVERIFIED. Even EXECUTED input cannot set `workflow_executed` or `coding_authorized`.
+
+A restriction needs action, attempted boolean, observed restriction, affected scope, evidence and next feasible action. An unattempted action needs a sourced reason. Missing facts yield BLOCKER_UNSUPPORTED without globally denying unrelated work. Publication with activity RECONSTRUCTION never counts as continuation. ONBOARD's Owner wait remains normal; a coding-execution claim cannot bypass it.
+
+Optional request `known_items` lists declared source-linked IDs. Record `dispositions` maps IDs to RETAIN/RESOLVED/SUPERSEDED/PARK, reason and references. `carry_forward.unaddressed` exposes missing dispositions without granting acceptance or proving a complete risk census. Semantic source/impact review remains the engineer's job.
+
 relay_contract validates declared shapes, role and takeover bindings, exact source identity and required source/ROI reasoning fields. It cannot judge whether prose demonstrates understanding. profile_status reports the supplied host/UI configuration evidence; it does not query a model service.
 
 ## Source reader

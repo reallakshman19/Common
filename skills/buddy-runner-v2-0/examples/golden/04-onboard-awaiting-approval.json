@@ -1,0 +1,17 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "Onboarding reconstruction is submitted; no approval has arrived",
+  "request_patch": {
+    "mode": "ONBOARD",
+    "continuation": "AWAIT_OWNER_TASK"
+  },
+  "expected": {
+    "mode": "RECOVERY",
+    "state": "AWAITING_RECONSTRUCTION_APPROVAL",
+    "continuation_evidence.status": "OWNER_WAIT"
+  },
+  "human_checks": [
+    "Keep the full ROI reconstruction; do not invent reduced onboarding standards.",
+    "This is normal Owner-controlled waiting, not a failed checkout or an old-task continuation."
+  ]
+}

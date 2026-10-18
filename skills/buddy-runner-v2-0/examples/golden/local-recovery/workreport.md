@@ -1,0 +1,1 @@
+The stale-response guard is not implemented. Next engineer must create it. Known risk SESSION-RESET: cancellation may clear an already accepted result; implementation ownership remains separate, and no resolution evidence is present.

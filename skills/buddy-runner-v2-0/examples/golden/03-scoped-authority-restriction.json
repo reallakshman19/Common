@@ -1,0 +1,31 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "Observed Owner scope forbids one write; other investigation remains useful",
+  "request_patch": {
+    "progress": {
+      "status": "BLOCKED",
+      "activity": "CODING",
+      "action": "Modify the selected adapter",
+      "attempted": false,
+      "not_attempted_reason": "A directly observed Owner instruction excludes this file",
+      "observed_restriction": "Selected adapter is outside the current write grant",
+      "affected_scope": [
+        "selected adapter writes"
+      ],
+      "evidence": [
+        "fixture:owner-scope-message"
+      ],
+      "next_feasible_action": "Read the adapter consumers and compare original-output evidence"
+    }
+  },
+  "expected": {
+    "continuation_evidence.status": "BLOCKED_REPORTED",
+    "continuation_evidence.affected_scope": [
+      "selected adapter writes"
+    ]
+  },
+  "human_checks": [
+    "Never perform a prohibited write merely to produce failure evidence.",
+    "Reserve the unresolved decision to the excluded write; continue authorized source analysis."
+  ]
+}

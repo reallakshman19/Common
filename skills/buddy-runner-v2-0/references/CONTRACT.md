@@ -12,13 +12,19 @@ Distinguish authentic/derived/synthetic inputs, designated/approved-for-scope ar
 
 Every assignment contains seven parts: purpose, coherent deliverable, authoritative inputs, boundaries, observable success/falsifier, uncertainty handling, evidence and continuation. The implementation unit is bounded; thinking includes parent/roadmap purpose and actual consumers.
 
+Use success criteria appropriate to the deliverable: a diagnosis measures/falsifies a cause; a repair demonstrates changed behaviour. Report reconstruction, profile/qualification, continuation and acceptance separately. A publication receipt is not the continuation's execution receipt.
+
 For each material inherited blocker, establish its source, affected action and alternatives. Continue useful authorized investigation/work. Reserve Owner decisions only where the actual grant requires them. Keep valid existing permission; do not adopt a wider scope or invent busywork.
+
+For a restriction, give the actual action/attempt or sourced non-attempt, observed restriction, evidence, affected scope and next feasible action. Distinguish public reads, local runtime, publication credentials and write authority. Missing one does not prove all unavailable. Do not attempt forbidden actions to satisfy a report; preserve normal ONBOARD waits.
 
 ## ROI and findings
 
 Compare up to three credible routes, including KEEP. Record user benefit, existing capability to reuse, supporting source or hypothesis, effort XS/S/M/L, risk, dependencies and falsifier. Select KEEP, IMPROVE, VERIFY_FIRST or OWNER_DECISION_REQUIRED with rationale and an actionable next step.
 
 Classify findings as DRIFT, DEFECT, IMPROVEMENT, INPUT_GAP or DECISION_CONFLICT. Keep discovery separate from introduction: claiming introduction requires before/after evidence. Do not create one issue per observation or globally block useful work from a finding count.
+
+Carry material source-discovered risks and disposition inherited items with reason and references. Identify what supersedes a stale canonical report. Declared item coverage aids review but never proves all risks were found or resolved; a helper-level negative does not establish downstream product behaviour.
 
 Revalidate affected conclusions when source/decisions change. An unrelated commit does not automatically erase a grant or require another Owner decision. Stale CI cannot prove a later head.
 

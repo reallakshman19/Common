@@ -132,6 +132,19 @@
     "profile": {
       "type": "object",
       "description": "Supplied runtime observations; only a real host can establish their provenance."
+    },
+    "known_items": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Declared source-linked item IDs; not a complete project risk census."
+    },
+    "progress": {
+      "type": "object",
+      "description": "Untrusted stage report. Also validate progress.schema.json; missing blocker evidence remains an unsupported claim."
     }
   },
   "allOf": [

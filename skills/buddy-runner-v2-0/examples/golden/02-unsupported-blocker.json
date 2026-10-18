@@ -1,0 +1,21 @@
+{
+  "basis": "SYNTHETIC_REFERENCE_NOT_PROJECT_AUTHORITY",
+  "scenario": "The agent says checkout is impossible without reporting the restriction",
+  "request_patch": {
+    "progress": {
+      "status": "BLOCKED",
+      "activity": "CODING",
+      "action": "Obtain a checkout",
+      "attempted": false
+    }
+  },
+  "expected": {
+    "continuation_evidence.status": "BLOCKER_UNSUPPORTED",
+    "next": "ENTER_PINNED_CODING_PROTOCOL"
+  },
+  "human_checks": [
+    "Request a concrete capability restriction or attempted-action result; do not invent a command failure.",
+    "Do not infer that authentication is required for a public read; inspect available capabilities.",
+    "Unsupported blocker reporting neither authorizes coding nor globally stops read-only investigation."
+  ]
+}
