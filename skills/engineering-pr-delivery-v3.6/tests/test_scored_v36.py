@@ -143,6 +143,15 @@ class PlanCriteriaTests(unittest.TestCase):
         self.assertEqual(decompose.validate_plan({**PLAN, "tasks": [task]}, LABEL)["tasks"][0]["criteria"],
                          task["criteria"])
 
+    def test_optional_criteria_visible_in_child_issue(self):
+        task = {**PLAN["tasks"][0],
+                "criteria": ["First frozen source clause", "Second measured clause"]}
+        body = decompose.child_body(task, PLAN)
+        self.assertIn("Acceptance: " + task["acceptance"], body)
+        self.assertIn("Criteria:\\n", body)
+        self.assertIn("- First frozen source clause", body)
+        self.assertIn("- Second measured clause", body)
+
     def test_optional_criteria_rejects_empty_and_duplicates(self):
         for bad in ([], [""], ["same", "same"], "single string"):
             task = {**PLAN["tasks"][0], "criteria": bad}
