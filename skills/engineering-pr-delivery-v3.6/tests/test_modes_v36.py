@@ -125,3 +125,12 @@ class ModeTests(TestCase):
         for number in range(1, 15):
             with self.subTest(rule=number):
                 self.assertIn(f"| A{number:02d} |", standalone)
+        classifications = {}
+        for line in standalone.splitlines():
+            cells = [cell.strip() for cell in line.split("|")[1:-1]]
+            if len(cells) == 3 and cells[0].startswith("A") and cells[0][1:].isdigit():
+                self.assertNotIn(cells[0], classifications)
+                classifications[cells[0]] = cells[1]
+        expected = {f"A{n:02d}": ("Simplified" if n in (10, 12) else "Core")
+                    for n in range(1, 15)}
+        self.assertEqual(classifications, expected)
