@@ -148,7 +148,7 @@ class PlanCriteriaTests(unittest.TestCase):
                 "criteria": ["First frozen source clause", "Second measured clause"]}
         body = decompose.child_body(task, PLAN)
         self.assertIn("Acceptance: " + task["acceptance"], body)
-        self.assertIn("Criteria:\\n", body)
+        self.assertIn("Criteria:\n", body)
         self.assertIn("- First frozen source clause", body)
         self.assertIn("- Second measured clause", body)
 
