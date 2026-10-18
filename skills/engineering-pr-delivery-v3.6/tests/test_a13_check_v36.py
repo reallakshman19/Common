@@ -42,7 +42,7 @@ def fixture(repo, variant=""):
     policy = {"paths": paths, "ci_workflow": ".github/workflows/ci.yml",
               "ci_pattern": "test_*_v36.py", "protected": ["logs/", "protocol/"],
               "forbidden_literals": ["AcmeProject"]}
-    write(repo, "policy.json", json.dumps(policy, sort_keys=True) + "\n")
+    write(repo, "policy.json", json.dumps([] if variant == "BAD_SCOPE" else policy, sort_keys=True) + "\n")
     git(repo, "add", ".")
     git(repo, "commit", "-qm", "base")
     base = git(repo, "rev-parse", "HEAD")
@@ -71,6 +71,14 @@ def fixture(repo, variant=""):
             extra = "    token = 'ghp_" + ("a" * 36) + "'\n"
         write(repo, "src/engine.py",
               "def calculate():\n" + extra + "    return 1\n")
+    if variant in ("C3SKIPIF", "C3SKIPUNLESS", "C3EXPECTED"):
+        decorator = {"C3SKIPIF": '@unittest.skipIf(True, "unjustified")',
+                     "C3SKIPUNLESS": '@unittest.skipUnless(False, "unjustified")',
+                     "C3EXPECTED": "@unittest.expectedFailure"}[variant]
+        write(repo, "tests/test_base_v36.py",
+              "import unittest\nclass Base(unittest.TestCase):\n"
+              + "    " + decorator + "\n"
+              + "    def test_base(self):\n        self.assertEqual(1, 1)\n")
     if variant == "C3":
         write(repo, "tests/test_base_v36.py",
               "import unittest\nclass Base(unittest.TestCase):\n"
@@ -105,6 +113,23 @@ class CheckpointTests(unittest.TestCase):
 
     def test_c1_negative_ci_glob_misses_new_test(self):
         self.assertFalse(self.assessment("C1")["C1"])
+
+    def test_c3_new_skip_decorators_fail_closed(self):
+        for variant in ("C3SKIPIF", "C3SKIPUNLESS", "C3EXPECTED"):
+            with self.subTest(variant=variant):
+                self.assertFalse(self.assessment(variant)["C3"])
+
+    def test_invalid_scope_list_produces_one_line_and_nonzero(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            base, head, _, scope = fixture(repo, "BAD_SCOPE")
+            proc = subprocess.run(
+                [sys.executable, str(ROOT / "scripts/a13_check_v36.py"),
+                 "--base", base, "--head", head, "--scope", str(scope)],
+                cwd=repo, text=True, capture_output=True, check=False)
+            self.assertNotEqual(proc.returncode, 0)
+            self.assertEqual(len(proc.stdout.splitlines()), 1)
+            self.assertIn("result=FAIL", proc.stdout)
 
     def test_c3_positive(self):
         self.assertTrue(self.assessment()["C3"])
