@@ -38,7 +38,7 @@ def impact_report(previous_intent, previous_plan, current_intent, profiles):
         knowledge_outcomes.update(row["outcome_refs"])
     affected = set()
     for nudge in previous_plan["nudges"]:
-        relevant, context_items, declared_sources, _ = nudge_context(previous_intent, nudge)
+        relevant, context_items, declared_sources, _ = nudge_context(previous_intent, nudge, previous_plan)
         constraint_changed = any(not row["outcome_refs"] or set(row["outcome_refs"]) & relevant
                                  for row in changed_constraints)
         if (global_change or global_knowledge or constraint_changed or
@@ -48,7 +48,8 @@ def impact_report(previous_intent, previous_plan, current_intent, profiles):
     # Dependencies and decomposition ancestry inform reconciliation, not locks.
     while True:
         more = {row["id"] for row in previous_plan["nudges"]
-                if set(row["depends_on"]) & affected or row["parent_id"] in affected}
+                if set(row["depends_on"] + row.get("assignment", {}).get("review_of", [])) & affected
+                or row["parent_id"] in affected}
         if more <= affected:
             break
         affected.update(more)

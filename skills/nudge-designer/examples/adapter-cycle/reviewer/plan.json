@@ -1,0 +1,175 @@
+{
+  "schema": "nudge-designer.plan/v1.1",
+  "id": "P-ROLE-REVIEW",
+  "revision": 1,
+  "intent_id": "I-ROLE-REVIEW",
+  "intent_revision": 1,
+  "intent_sha256": "bf060612f25efb218def0ea4dc7b73d2b7bef0804474a629e9cafbdfde59c5e4",
+  "profile_ids": [
+    "core",
+    "logic",
+    "education",
+    "quantitative"
+  ],
+  "profiles_sha256": "63bbc14cdfbc4b80e67794180e9f361cdd7ba2f6436586b77c2544f0e43163eb",
+  "strategy": "Check supplied source and artifacts independently, preserve evidence limits, then return a concrete review.",
+  "nudges": [
+    {
+      "id": "N-REVIEW",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": [
+        "O-REVIEW"
+      ],
+      "item_refs": [
+        "R-REVIEW",
+        "U-QUALIFICATION"
+      ],
+      "source_refs": [
+        "S-CASE",
+        "S-W-CASE",
+        "S-W-SOURCE",
+        "S-W-REPORT",
+        "S-S-CASE",
+        "S-S-REPORT",
+        "S-S-NOTE"
+      ],
+      "profile_ids": [
+        "core",
+        "logic",
+        "education",
+        "quantitative"
+      ],
+      "purpose": "Review original evidence rather than the plausibility of report prose.",
+      "deliverable": "One concise native review note with decisive source/calculation checks, findings and next proposals.",
+      "understanding": [
+        "Diagnostic execution, product correctness, subject correctness and learner understanding are distinct claims."
+      ],
+      "reasoning_moves": [
+        "compare",
+        "challenge",
+        "verify"
+      ],
+      "evidence_methods": [
+        "source_trace",
+        "counterexample",
+        "hand_derivation"
+      ],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {
+        "preserve_refs": [
+          "C-LOCAL"
+        ],
+        "do_not": [
+          "Do not modify or silently reconcile the issued inputs."
+        ]
+      },
+      "success": {
+        "observable": "Source-linked findings with actual reproduced observations and limits.",
+        "negative_case": "A completed diagnostic or correct arithmetic must not become product acceptance or learner evidence."
+      },
+      "uncertainty": {
+        "missing": [
+          "Formal qualification and actual model configuration."
+        ],
+        "return_with": "Return actual findings and specific missing evidence; leave acceptance unresolved.",
+        "independent_work": [
+          "Source and numerical checks can proceed independently."
+        ]
+      },
+      "report": {
+        "required": [
+          "Actual commands/checks, conclusions, limits and justified continuation."
+        ],
+        "next_action": "Designer reconciles affected conclusions and preserves issued history."
+      },
+      "assignment": {
+        "role": "REVIEWER",
+        "participant_id": "R",
+        "capabilities": [
+          {
+            "id": "logic_review",
+            "importance": "ESSENTIAL"
+          },
+          {
+            "id": "subject_review",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "tools": [
+          {
+            "id": "python",
+            "importance": "HELPFUL"
+          }
+        ],
+        "support": "OPEN",
+        "method": null,
+        "worked_example": null,
+        "reserved_decisions": [
+          "No product or learner acceptance."
+        ],
+        "review_of": []
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "target_id": "R-REVIEW",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REVIEW"
+      ],
+      "evidence_refs": [],
+      "rationale": "Local review planned; no qualification or acceptance inferred."
+    },
+    {
+      "target_id": "C-LOCAL",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REVIEW"
+      ],
+      "evidence_refs": [],
+      "rationale": "Local review planned; no qualification or acceptance inferred."
+    },
+    {
+      "target_id": "U-QUALIFICATION",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "N-REVIEW"
+      ],
+      "evidence_refs": [],
+      "rationale": "Local review planned; no qualification or acceptance inferred."
+    },
+    {
+      "target_id": "O-REVIEW",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REVIEW"
+      ],
+      "evidence_refs": [],
+      "rationale": "Local review planned; no qualification or acceptance inferred."
+    }
+  ],
+  "handover": {
+    "remaining": [
+      "Actual review and subsequent Designer reconciliation."
+    ],
+    "next_action": "One concise native review note with decisive source/calculation checks, findings and next proposals.",
+    "changed_understanding": "Actual native returns now exist; their conclusions still need review."
+  },
+  "participants": [
+    {
+      "id": "R",
+      "label": "Reviewer",
+      "roles": [
+        "REVIEWER"
+      ],
+      "capabilities": [],
+      "tools": [],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN; no role-based qualification is asserted."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "status": "PACKAGED",
+  "packet_binding_matches": true,
+  "native_content_sha256": "50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642",
+  "native_content_matches_file": true,
+  "source_and_probe_hashes_match_output": true
+}

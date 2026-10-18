@@ -1,0 +1,59 @@
+{
+  "adapter": "plain",
+  "audience": "reviewer",
+  "recipient_id": "R",
+  "recipient_role_supported": true,
+  "binding": {
+    "intent_id": "I-ROLE-REVIEW",
+    "intent_revision": 1,
+    "intent_sha256": "bf060612f25efb218def0ea4dc7b73d2b7bef0804474a629e9cafbdfde59c5e4",
+    "plan_id": "P-ROLE-REVIEW",
+    "plan_revision": 1,
+    "plan_sha256": "c73191bcdd545a2b9cfadf41c9df4f5e3b0a7924a7c11b5b154de9b938c3ed16",
+    "nudge_id": "N-REVIEW",
+    "nudge_sha256": "8f5b91ae9f35e4e1c84dd7dabae211232a5d58fdc2840b609f9cac9967cc177e",
+    "participant_id": "R"
+  },
+  "content": "# Reviewer view\n\nOwner outcome: \"Assess the actual artifacts against original conditions and identify a justified continuation.\"\nDirection: \"Check supplied source and artifacts independently, preserve evidence limits, then return a concrete review.\"\nThis work: \"Review original evidence rather than the plausibility of report prose.\"\n\nNext proposed work: \"One concise native review note with decisive source/calculation checks, findings and next proposals.\"\n\n## Evidence and challenge\n\nObservable: \"Source-linked findings with actual reproduced observations and limits.\"\nContradicting/contrast case: \"A completed diagnostic or correct arithmetic must not become product acceptance or learner evidence.\"\n- C-LOCAL [CONSTRAINT]: \"Preserve all inputs; local review and computation only.\"\n- R-REVIEW [REQUIREMENT]: \"Assess original-source evidence, subject reasoning and claimed limits without inheriting a PASS.\"\n- U-QUALIFICATION [UNKNOWN]: \"Formal qualification, actual model configuration and integrated product/learner outcomes remain unestablished.\"\nReview the original conditions, model assumptions and actual returned artifact.\nA role label, recorded fit or supplied PASS does not establish independence or acceptance.\n\n## Preserved conditions and unresolved work\n\n- C-LOCAL: \"No product edits, learner contact, publication or external writes.\"\n- U-QUALIFICATION: \"Formal qualification, actual model configuration and integrated product/learner outcomes remain unestablished.\"\n- \"Formal qualification and actual model configuration.\"\nIndependent useful work: [\"Source and numerical checks can proceed independently.\"]\nReturn/decision condition: \"Return actual findings and specific missing evidence; leave acceptance unresolved.\"\nNext eligible action: \"Designer reconciles affected conclusions and preserves issued history.\"\n\n## Source references\n\n- S-CASE: \"case.md\" revision null\n- S-S-CASE: \"inputs/specialist/case.md\" revision \"sha256:8c9e234062491fab45a85a95e0e8b107b6fadb52ef3227fd9505aae199c39f2b\"\n- S-S-NOTE: \"inputs/specialist/study-note.md\" revision \"sha256:76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31\"\n- S-S-REPORT: \"inputs/specialist/subject-check.md\" revision \"sha256:4cbb6790f8c6c1a742d2fee7dc7e0333d891cde5bb5b42b14e3ce18ae823b31b\"\n- S-W-CASE: \"inputs/worker/case.md\" revision \"sha256:e1b28c31b6c7c17f3db4d85cbddb211c6e7f6eee3806e5f98066a487819ebc96\"\n- S-W-REPORT: \"inputs/worker/diagnostic.md\" revision \"sha256:50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642\"\n- S-W-SOURCE: \"inputs/worker/source.py\" revision \"sha256:03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34\"\n\nIssued work: P-ROLE-REVIEW revision 1; nudge N-REVIEW\nPlan digest: c73191bcdd545a2b9cfadf41c9df4f5e3b0a7924a7c11b5b154de9b938c3ed16; intent digest: bf060612f25efb218def0ea4dc7b73d2b7bef0804474a629e9cafbdfde59c5e4",
+  "capability_fit": {
+    "status": "NOT_ESTABLISHED",
+    "affected_nudge": "N-REVIEW",
+    "participant_id": "R",
+    "role_mismatch": false,
+    "requirements": [
+      {
+        "group": "capabilities",
+        "id": "logic_review",
+        "importance": "ESSENTIAL",
+        "status": "UNKNOWN",
+        "basis": "UNKNOWN"
+      },
+      {
+        "group": "capabilities",
+        "id": "subject_review",
+        "importance": "ESSENTIAL",
+        "status": "UNKNOWN",
+        "basis": "UNKNOWN"
+      },
+      {
+        "group": "tools",
+        "id": "python",
+        "importance": "HELPFUL",
+        "status": "UNKNOWN",
+        "basis": "UNKNOWN"
+      }
+    ],
+    "qualification_verified": false,
+    "execution_authorized": false,
+    "scope": "THIS_ASSIGNMENT_ONLY",
+    "workflow_locked": false
+  },
+  "review_conflict": "NOT_ESTABLISHED",
+  "independence_verified": false,
+  "authority_verified": false,
+  "execution_dispatched": false,
+  "native_import_object": false,
+  "workflow_locked": false,
+  "delivery": "MANUAL_UNDER_EXISTING_AUTHORITY",
+  "source_authentication": "NOT_PERFORMED"
+}

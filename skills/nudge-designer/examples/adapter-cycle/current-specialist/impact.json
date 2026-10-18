@@ -1,0 +1,31 @@
+{
+  "status": "RECONCILIATION_SUGGESTED",
+  "basis": "DECLARED_DEPENDENCIES_ONLY",
+  "changed_sources": [
+    "S-REVIEW",
+    "S-STUDY",
+    "S-SUBJECT",
+    "S-TEACHER"
+  ],
+  "changed_items": [
+    "C-CLAIMS",
+    "C-PHYSICS",
+    "F-LOCAL-CONTENT",
+    "F-PREREQ",
+    "R-LEARN"
+  ],
+  "changed_outcomes": [
+    "O-CONTENT",
+    "O-LEARNING"
+  ],
+  "global_context_changed": false,
+  "affected_nudges": [
+    "N-EXAMPLE",
+    "N-TRANSFER"
+  ],
+  "unaffected_by_declared_refs": [],
+  "plans_modified": false,
+  "execution_authorized": false,
+  "semantic_completeness_verified": false,
+  "next_action": "Review affected conclusions. Preserve sent instructions and history; use corrections where needed."
+}

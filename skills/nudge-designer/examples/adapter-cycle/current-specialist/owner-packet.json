@@ -1,0 +1,38 @@
+{
+  "adapter": "plain",
+  "audience": "owner",
+  "recipient_id": null,
+  "recipient_role_supported": null,
+  "binding": {
+    "intent_id": "I-GRADE11",
+    "intent_revision": 2,
+    "intent_sha256": "d812353f7b384b4b54ca28b4e74b55df2f5e6890121fa85b4751e196eaf30e4a",
+    "plan_id": "P-GRADE11",
+    "plan_revision": 2,
+    "plan_sha256": "c391b967ac6bf2946e7c98aa875e5f31083bfdcc71f9f8fa169272122140fad0",
+    "nudge_id": "N-TRANSFER",
+    "nudge_sha256": "80263c41177beabaa955f2acaf0b818608440572ad4b47adf82e6f06dbf0952b",
+    "participant_id": null
+  },
+  "content": "# Owner view\n\nOwner outcome: \"Help a Grade 11 learner distinguish instantaneous velocity from acceleration and transfer the idea to a new motion problem.\"\nDirection: \"Retain correct local worked content, reconcile source/proposal distinctions, and prepare the missing transfer material; assess real learning only from actual responses.\"\nThis work: \"Check transfer independently of the worked wording.\"\n\nNext proposed work: \"Create a new motion problem and explanation rubric; keep actual learner outcomes unknown.\"\nChanged understanding: \"The issued handover incorrectly said 20 m/s; the authoritative synthetic condition and actual artifact use 18 m/s. F-PREREQ was unsupported as a learner fact and is now a proposed scaffold. Worked content and separate local recomputation exist; transfer material and learner outcomes remain unexecuted.\"\n\n## Preserved conditions and unresolved work\n\n- C-CLAIMS: \"Do not claim learning gains without actual learner evidence.\"\n- C-PHYSICS: \"For this example only: initial upward velocity 18 m/s, upward positive, g=9 m/s^2, no drag.\"\n- U-RESPONSE: \"No actual learner explanation, transfer response or delayed retrieval is available.\"\n- \"Actual learner response is missing for outcome assessment; it does not block preparing a transfer problem and rubric.\"\n- \"Actual learner prerequisites and beliefs are unknown; do not personalize a factual claim without evidence.\"\nIndependent useful work: [\"Retain source-grounded observations and other authorized independent work.\"]\nReturn/decision condition: \"Report the exact missing fact/restriction, affected action and next feasible step.\"\nNext eligible action: \"Choose the next action from observations within actual authority; update affected assumptions only.\"\n\n## Source references\n\n- S-REVIEW: \"../reviewer/review.md\" revision \"sha256:71022c1d1253a88a441f69a7a6e04f1339d8e91a852eba83c0b29b8a0bf49cd8\"\n- S-STUDY: \"../specialist/study-note.md\" revision \"sha256:76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31\"\n- S-TEACHER: \"case.md\" revision \"sha256:8c9e234062491fab45a85a95e0e8b107b6fadb52ef3227fd9505aae199c39f2b\"\n\nIssued work: P-GRADE11 revision 2; nudge N-TRANSFER\nPlan digest: c391b967ac6bf2946e7c98aa875e5f31083bfdcc71f9f8fa169272122140fad0; intent digest: d812353f7b384b4b54ca28b4e74b55df2f5e6890121fa85b4751e196eaf30e4a",
+  "content_sha256": "9592d2a64b0da6374afcf93088c433eda513c5de0795dc450eec460700b98e1a",
+  "capability_fit": {
+    "status": "NOT_ESTABLISHED",
+    "affected_nudge": "N-TRANSFER",
+    "participant_id": null,
+    "role_mismatch": false,
+    "requirements": [],
+    "qualification_verified": false,
+    "execution_authorized": false,
+    "scope": "THIS_ASSIGNMENT_ONLY",
+    "workflow_locked": false
+  },
+  "review_conflict": "NOT_ESTABLISHED",
+  "independence_verified": false,
+  "authority_verified": false,
+  "execution_dispatched": false,
+  "native_import_object": false,
+  "workflow_locked": false,
+  "delivery": "MANUAL_UNDER_EXISTING_AUTHORITY",
+  "source_authentication": "NOT_PERFORMED"
+}

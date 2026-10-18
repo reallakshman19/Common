@@ -1,0 +1,306 @@
+{
+  "purpose": "Independent reviewer reproduction; no product or learner acceptance.",
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "bytecode_disabled": true,
+    "host_model": "UNKNOWN",
+    "reasoning_effort": "UNKNOWN",
+    "formal_qualification": "UNKNOWN"
+  },
+  "input_file_count": 22,
+  "source_revisions": [
+    {
+      "source_id": "S-CASE",
+      "locator": "case.md",
+      "issued_revision": null,
+      "observed_revision": "sha256:ced5cd9890ed0c6f1c3a795bc190049bf17bf308ce2fb721ca09d095dd52bfd3",
+      "matches_pinned_revision": null
+    },
+    {
+      "source_id": "S-W-CASE",
+      "locator": "inputs/worker/case.md",
+      "issued_revision": "sha256:e1b28c31b6c7c17f3db4d85cbddb211c6e7f6eee3806e5f98066a487819ebc96",
+      "observed_revision": "sha256:e1b28c31b6c7c17f3db4d85cbddb211c6e7f6eee3806e5f98066a487819ebc96",
+      "matches_pinned_revision": true
+    },
+    {
+      "source_id": "S-W-SOURCE",
+      "locator": "inputs/worker/source.py",
+      "issued_revision": "sha256:03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34",
+      "observed_revision": "sha256:03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34",
+      "matches_pinned_revision": true
+    },
+    {
+      "source_id": "S-W-REPORT",
+      "locator": "inputs/worker/diagnostic.md",
+      "issued_revision": "sha256:50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642",
+      "observed_revision": "sha256:50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642",
+      "matches_pinned_revision": true
+    },
+    {
+      "source_id": "S-S-CASE",
+      "locator": "inputs/specialist/case.md",
+      "issued_revision": "sha256:8c9e234062491fab45a85a95e0e8b107b6fadb52ef3227fd9505aae199c39f2b",
+      "observed_revision": "sha256:8c9e234062491fab45a85a95e0e8b107b6fadb52ef3227fd9505aae199c39f2b",
+      "matches_pinned_revision": true
+    },
+    {
+      "source_id": "S-S-REPORT",
+      "locator": "inputs/specialist/subject-check.md",
+      "issued_revision": "sha256:4cbb6790f8c6c1a742d2fee7dc7e0333d891cde5bb5b42b14e3ce18ae823b31b",
+      "observed_revision": "sha256:4cbb6790f8c6c1a742d2fee7dc7e0333d891cde5bb5b42b14e3ce18ae823b31b",
+      "matches_pinned_revision": true
+    },
+    {
+      "source_id": "S-S-NOTE",
+      "locator": "inputs/specialist/study-note.md",
+      "issued_revision": "sha256:76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+      "observed_revision": "sha256:76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+      "matches_pinned_revision": true
+    }
+  ],
+  "worker": {
+    "actual_calls": 4,
+    "source_sha256_before": "03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34",
+    "source_sha256_after": "03a94c76eba2802a7688d8bb8923cbb4ed37d8f624381428ef81120d6debdc34",
+    "orders": [
+      {
+        "completion_order": [
+          "NEW",
+          "OLD"
+        ],
+        "events": [
+          {
+            "completion_index": 1,
+            "request_name": "NEW",
+            "request_revision": 10,
+            "state_before": {
+              "current_revision": 10,
+              "result": null
+            },
+            "state_after": {
+              "current_revision": 10,
+              "result": "NEW"
+            },
+            "expected_result": "NEW",
+            "invariant_holds": true,
+            "current_completion_published": true,
+            "obsolete_completion_preserved_result": null,
+            "returned_same_state": true
+          },
+          {
+            "completion_index": 2,
+            "request_name": "OLD",
+            "request_revision": 9,
+            "state_before": {
+              "current_revision": 10,
+              "result": "NEW"
+            },
+            "state_after": {
+              "current_revision": 10,
+              "result": "OLD"
+            },
+            "expected_result": "NEW",
+            "invariant_holds": false,
+            "current_completion_published": null,
+            "obsolete_completion_preserved_result": false,
+            "returned_same_state": true
+          }
+        ],
+        "first_violation": 2,
+        "final_state": {
+          "current_revision": 10,
+          "result": "OLD"
+        },
+        "matches_supplied_trace": true
+      },
+      {
+        "completion_order": [
+          "OLD",
+          "NEW"
+        ],
+        "events": [
+          {
+            "completion_index": 1,
+            "request_name": "OLD",
+            "request_revision": 9,
+            "state_before": {
+              "current_revision": 10,
+              "result": null
+            },
+            "state_after": {
+              "current_revision": 10,
+              "result": "OLD"
+            },
+            "expected_result": null,
+            "invariant_holds": false,
+            "current_completion_published": null,
+            "obsolete_completion_preserved_result": false,
+            "returned_same_state": true
+          },
+          {
+            "completion_index": 2,
+            "request_name": "NEW",
+            "request_revision": 10,
+            "state_before": {
+              "current_revision": 10,
+              "result": "OLD"
+            },
+            "state_after": {
+              "current_revision": 10,
+              "result": "NEW"
+            },
+            "expected_result": "NEW",
+            "invariant_holds": true,
+            "current_completion_published": true,
+            "obsolete_completion_preserved_result": null,
+            "returned_same_state": true
+          }
+        ],
+        "first_violation": 1,
+        "final_state": {
+          "current_revision": 10,
+          "result": "NEW"
+        },
+        "matches_supplied_trace": true
+      }
+    ]
+  },
+  "physics": {
+    "method": "Independent exact Decimal arithmetic from case givens, with rational comparison of recorded values.",
+    "rows": [
+      {
+        "time_s": "0",
+        "velocity_m_per_s": "18",
+        "height_m": "0",
+        "acceleration_m_per_s_squared": "-9",
+        "matches_supplied_row": true
+      },
+      {
+        "time_s": "1",
+        "velocity_m_per_s": "9",
+        "height_m": "13.5",
+        "acceleration_m_per_s_squared": "-9",
+        "matches_supplied_row": true
+      },
+      {
+        "time_s": "1.9",
+        "velocity_m_per_s": "0.9",
+        "height_m": "17.955",
+        "acceleration_m_per_s_squared": "-9",
+        "matches_supplied_row": true
+      },
+      {
+        "time_s": "2",
+        "velocity_m_per_s": "0",
+        "height_m": "18",
+        "acceleration_m_per_s_squared": "-9",
+        "matches_supplied_row": true
+      },
+      {
+        "time_s": "2.1",
+        "velocity_m_per_s": "-0.9",
+        "height_m": "17.955",
+        "acceleration_m_per_s_squared": "-9",
+        "matches_supplied_row": true
+      },
+      {
+        "time_s": "3",
+        "velocity_m_per_s": "-9",
+        "height_m": "13.5",
+        "acceleration_m_per_s_squared": "-9",
+        "matches_supplied_row": true
+      }
+    ],
+    "turning_time_s": "2",
+    "turning_height_m": "18",
+    "checks": {
+      "turning_time_2_s": true,
+      "velocity_at_top_zero": true,
+      "height_18_m_by_two_relations": true,
+      "velocity_rate_through_top_minus_9": true,
+      "all_six_supplied_rows_match": true,
+      "held_interval_acceleration_zero": true,
+      "zero_instant_velocity_does_not_imply_zero_acceleration": true
+    },
+    "analytic_acceleration": "d(18 - 9t)/dt = -9 m/s^2 at every free-flight time, including t=2 s.",
+    "units": [
+      "(m/s^2)*s = m/s",
+      "(m/s)*s = m",
+      "(m/s^2)*s^2 = m",
+      "(m/s)/s = m/s^2"
+    ],
+    "held_model": "Velocity is constant over an interval; upward holding force balances downward weight.",
+    "issued_handover": "Work a 20 m/s upward throw through the turning instant and explain velocity versus acceleration.",
+    "handover_20_m_per_s_conflicts_with_case_18": true,
+    "if_wrong_20_used": {
+      "turning_time_s_exact": "20/9",
+      "turning_height_m_exact": "200/9"
+    }
+  },
+  "envelopes": [
+    {
+      "role": "worker",
+      "native_locator": "diagnostic.md",
+      "native_exact_bytes_match": true,
+      "native_content_sha256": "50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642",
+      "recomputed_intake_status": "RETURN_RECORDED",
+      "changed_shared_worksheet_fields": [],
+      "new_only_worksheet_keys": [
+        "native_representation"
+      ],
+      "old_only_worksheet_keys": [],
+      "evidence_locators_not_supplied_in_copy": [
+        "issued-binding.json",
+        "package_return.py",
+        "packet.json",
+        "validation.json"
+      ],
+      "independent_candidates_from_intake": [
+        "N-EXPORT"
+      ],
+      "sources_unpinned_in_original_intent": [
+        "S-CASE",
+        "S-CODE"
+      ]
+    },
+    {
+      "role": "specialist",
+      "native_locator": "study-note.md",
+      "native_exact_bytes_match": true,
+      "native_content_sha256": "76cfb3e9081622d145bda8054365148c9b844b496e20aa07c28c64552ade2e31",
+      "recomputed_intake_status": "RETURN_RECORDED",
+      "changed_shared_worksheet_fields": [],
+      "new_only_worksheet_keys": [
+        "native_representation"
+      ],
+      "old_only_worksheet_keys": [],
+      "evidence_locators_not_supplied_in_copy": [
+        "issued-binding.json",
+        "packet.json",
+        "validation.json"
+      ],
+      "independent_candidates_from_intake": [],
+      "sources_unpinned_in_original_intent": [
+        "S-TEACHER"
+      ]
+    }
+  ],
+  "checks": {
+    "all_pinned_review_source_revisions_match": true,
+    "all_worker_trace_events_reproduced": true,
+    "two_obsolete_publications_observed": true,
+    "both_current_completions_succeed": true,
+    "physics_recomputed": true,
+    "native_snapshots_exact": true,
+    "no_shared_worksheet_field_changes": true,
+    "all_issued_inputs_unchanged": true
+  },
+  "result": "REVIEW_CHECKS_COMPLETED",
+  "limits": [
+    "No original execution or actor authentication.",
+    "Original packets and some supporting receipts were not supplied.",
+    "The specialist self-check remains distinct from this independent recomputation.",
+    "No implementation, transfer problem, learner contact, publication or external execution."
+  ]
+}

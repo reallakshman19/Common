@@ -1,0 +1,45 @@
+{
+  "cwd": "/workspace/scratch/52eed2252c51/tmp/nd-adapter-forward/reviewer",
+  "commands": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B /workspace/scratch/52eed2252c51/Common-nudge-designer/skills/nudge-designer/scripts/nudge_designer.py validate --intent intent.json --plan plan.json --out reviewer-validation.json",
+      "exit_code": 0,
+      "observed": "STRUCTURALLY_VALID; semantic quality NOT_MACHINE_VERIFIED."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B /workspace/scratch/52eed2252c51/Common-nudge-designer/skills/nudge-designer/scripts/nudge_designer.py receive --intent inputs/worker/intent.json --plan inputs/worker/plan.json --report inputs/worker/return.json --out worker-intake-check.json",
+      "exit_code": 0,
+      "observed": "RETURN_RECORDED; no accepted outcomes or authenticated execution."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B /workspace/scratch/52eed2252c51/Common-nudge-designer/skills/nudge-designer/scripts/nudge_designer.py receive --intent inputs/specialist/intent.json --plan inputs/specialist/plan.json --report inputs/specialist/return.json --out specialist-intake-check.json",
+      "exit_code": 0,
+      "observed": "RETURN_RECORDED; no accepted outcomes or authenticated execution."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B independent_check.py",
+      "exit_code": 0,
+      "observed": "REVIEW_CHECKS_COMPLETED; 8 review checks and 7 numerical checks passed; invariant violations reproduced."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B /workspace/scratch/52eed2252c51/Common-nudge-designer/skills/nudge-designer/scripts/nudge_designer.py bind --intent intent.json --plan plan.json --nudge N-REVIEW --out issued-binding.json",
+      "exit_code": 0,
+      "observed": "Binding generated and exact packet match verified."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B package_return.py",
+      "exit_code": 0,
+      "observed": "Return constructed with exact native report and CLI-issued binding."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B /workspace/scratch/52eed2252c51/Common-nudge-designer/skills/nudge-designer/scripts/nudge_designer.py receive --intent intent.json --plan plan.json --report return.json --out receive-worksheet.json",
+      "exit_code": 0,
+      "observed": "RETURN_RECORDED; exact native text snapshot; no accepted outcomes or authentication."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/52eed2252c51/tmp/br20-deps python -B verify_packaging.py",
+      "exit_code": 0,
+      "observed": "PACKAGING_VERIFIED; all 11 final checks passed, including preservation of all 22 supplied files."
+    }
+  ]
+}

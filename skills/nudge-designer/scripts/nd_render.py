@@ -3,6 +3,7 @@ import html
 
 from nd_contract import intent_index, nudge_context, validate_plan
 from nd_io import quoted, require
+from nd_team import worker_context
 
 
 def data(value):
@@ -19,7 +20,16 @@ def render_nudge(intent, plan, nudge_id, profiles):
     require(bool(found), "unknown nudge: " + nudge_id)
     nudge = found[0]
     sources, items, outcomes = intent_index(intent)
-    relevant_outcomes, context_items, source_ids, knowledge = nudge_context(intent, nudge)
+    worker = worker_context(intent, plan, nudge)
+    assignment = nudge.get("assignment", {})
+    support = []
+    if assignment:
+        support.append("Assignment support: " + assignment["support"])
+        if assignment["method"]:
+            support.append("Method: " + data(assignment["method"]))
+        if assignment["worked_example"]:
+            support.append("Worked reference (not proof of transfer): " + data(assignment["worked_example"]))
+    relevant_outcomes, context_items, source_ids, knowledge = nudge_context(intent, nudge, plan)
     lines = ["# Draft nudge " + nudge_id,
              "", "Plan " + plan["id"] + " revision " + str(plan["revision"]),
              "Intent digest: " + plan["intent_sha256"],
@@ -37,7 +47,7 @@ def render_nudge(intent, plan, nudge_id, profiles):
                         "This step: " + data(nudge["purpose"])] + [
         "- " + key + ": " + data(outcomes[key]["text"]) +
         "; done when: " + data(outcomes[key]["done_when"]) for key in sorted(relevant_outcomes)])
-    section("Deliverable", [data(nudge["deliverable"]),
+    section("Deliverable", [data(nudge["deliverable"])] + support + [
         "Required understanding:"] + ["- " + data(value) for value in nudge["understanding"]] + [
         "- " + data(row["topic"] + ": " + row["reason"]) for row in knowledge] + [
         "Thinking operations: " + quoted(nudge["reasoning_moves"]),
@@ -60,11 +70,10 @@ def render_nudge(intent, plan, nudge_id, profiles):
         "- " + data(value) for value in nudge["boundaries"]["do_not"]] + [
         "Preserve item IDs: " + ", ".join(nudge["boundaries"]["preserve_refs"]),
         "Scope note: " + quoted(intent["scope"]["note"]),
-        "Worker model/effort: " + quoted(intent["worker"]["model"] or "UNKNOWN") + "/" +
-        quoted(intent["worker"]["reasoning_effort"] or "UNKNOWN"),
-        "Configuration basis: " + quoted(intent["worker"]["configuration_basis"]),
-        "Tools (reported): " + quoted(intent["worker"]["tools"]),
-        "Reserved decisions:"] + ["- " + data(value) for value in intent["worker"]["reserved_decisions"]] + [
+        "Worker model/effort: " + quoted(worker["model"] or "UNKNOWN") + "/" + quoted(worker["reasoning_effort"] or "UNKNOWN"),
+        "Configuration basis: " + quoted(worker["configuration_basis"]),
+        "Tools (reported): " + quoted(worker["tools"]),
+        "Reserved decisions:"] + ["- " + data(value) for value in worker["reserved_decisions"]] + [
         "Thinking protocol: " + quoted(intent["protocols"]["thinking"] or "Not selected"),
         "Delivery protocol: " + quoted(intent["protocols"]["delivery"] or "Not selected"),
         "Protocol note: " + quoted(intent["protocols"]["note"])])

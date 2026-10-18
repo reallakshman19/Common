@@ -163,3 +163,17 @@ benchmark, actual learner study or production FEA qualification was performed.
 Use the source-bound raw cases for manual pilots before considering a NextNudge
 import adapter or UI controls. A later adapter must preserve NextNudge's actual
 version, instruction freezing, correction review and manual delivery semantics.
+
+## Owner amendment — role and surface adapters
+
+The later Owner request broadens end-to-end support for different thinking agents
+and asks for robust applicable adapters. [The adapter plan](ADAPTER_PLAN.md) records
+this extension without replacing the v1 requirements or historic checkpoint above.
+Explicit `plan/v1.1` adds participants and per-task assignments within the same plan
+schema. Seven audience views and five manual document surfaces retain native
+reporting and separately selected protocols. No native import or UI change is added.
+
+The extension includes actual worker/specialist execution, a separate local review
+and a Designer working revision correcting observed semantic problems. Those
+bounded observations do not qualify lower-thinking models or accept domain
+outcomes. Current verification and limits are in [verification](VERIFICATION.md).

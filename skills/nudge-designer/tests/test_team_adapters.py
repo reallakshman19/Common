@@ -101,6 +101,36 @@ class TeamAdapterTests(unittest.TestCase):
         self.plan["participants"][0]["configuration_basis"] += " Updated observation."
         self.assertNotEqual(old, task_binding(self.intent, self.plan, self.ident))
 
+    def test_standard_renderer_uses_assignment_support_and_participant_basis(self):
+        from nd_render import render_nudge
+        self.plan["participants"][0].update(model="recorded-runtime-name", reasoning_effort="recorded-effort")
+        assignment = self.plan["nudges"][0]["assignment"]
+        assignment.update(method="Inspect one original result before changing source.", worked_example="A contrast method.")
+        result = render_nudge(self.intent, self.plan, self.ident, self.profiles)
+        self.assertIn("recorded-runtime-name", result)
+        self.assertIn(assignment["method"], result)
+        self.assertIn(assignment["worked_example"], result)
+        self.assertEqual(result.count("\n## "), 7)
+
+    def test_runtime_evidence_change_reaches_only_dependent_work(self):
+        from nd_contract import intent_digest
+        from nd_reconcile import impact_report
+        source = dict(self.intent["sources"][0], id="S-RUNTIME", revision="runtime-v1")
+        self.intent["sources"].append(source)
+        self.plan["participants"][0]["tools"][0]["evidence_refs"] = ["S-RUNTIME"]
+        self.plan["intent_sha256"] = intent_digest(self.intent)
+        changed = copy.deepcopy(self.intent)
+        changed["sources"][-1]["revision"] = "runtime-v2"
+        result = impact_report(self.intent, self.plan, changed, self.profiles)
+        self.assertIn("N-PROBE", result["affected_nudges"])
+        self.assertIn("N-REPAIR", result["affected_nudges"])
+        self.assertNotIn("N-EXPORT", result["affected_nudges"])
+
+    def test_review_relationship_cannot_make_an_execution_dependency_cycle(self):
+        self.plan["nudges"][0]["assignment"]["review_of"] = ["N-REPAIR"]
+        with self.assertRaisesRegex(ContractError, "cycle"):
+            validate_plan(self.intent, self.plan, self.profiles)
+
 
 if __name__ == "__main__":
     unittest.main()

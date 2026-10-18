@@ -51,6 +51,8 @@ service is installed.
 | Rendered nudge | Worker: seven-element brief, understanding, evidence and continuation |
 | Validation report | Author/tooling: structural status, never execution approval |
 | Impact report | Designer: candidate affected work; no mutations or dispatch |
+| Role/surface packet | Audience-specific content with issued binding, prepared-content digest and manual-delivery limits |
+| Native-return worksheet | Preserved report, attempts, declared discoveries and reconciliation questions |
 | Owner reconciliation | Human: direction, evidence limits, reserved decisions and next work |
 
 No claim is made that all risks or original sources have been discovered. A
@@ -102,6 +104,11 @@ SUPERSEDED. PLANNED requires a nudge. EVIDENCE_REPORTED requires a source, and d
 not mean accepted, independently reviewed or executed here. UNRESOLVED and DEFERRED
 are useful information, not automatically a failed plan.
 
+Explicit `plan/v1.1` adds per-nudge assignment requirements/support and participant
+records. Roles, domain profiles and communication surfaces remain independent.
+Legacy `plan/v1` keeps its original field contract. See [adapters](ADAPTERS.md)
+for task fit, seven audience views, five manual surface adapters and native returns.
+
 Bindings use SHA-256 over UTF-8 JSON with sorted keys, compact separators,
 `ensure_ascii=False`, `allow_nan=False`. Profile binding covers selected objects
 sorted by ID. These implementation-specific canonical digests detect stale
@@ -136,6 +143,12 @@ is not unchanged meaning. An unchanged digest is not source truth.
 Impact identifies candidate review work. It does not rewrite a plan, freeze work,
 cancel external tasks or modify sent instructions. Preserve history, review
 undeclared dependencies and issue visible corrections where needed.
+
+The result adapter completes the mechanical return path, preserving native text
+or a reference-only binary artifact and exact issued identity. A Designer still
+interprets the evidence and decides the semantic correction. A supplied COMPLETE
+status does not establish the integrated outcome. Reconcile against the original
+sources even when a stale handover sounds plausible.
 
 ## Limits and evaluation
 

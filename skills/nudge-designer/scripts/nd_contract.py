@@ -5,6 +5,7 @@ from jsonschema import Draft202012Validator
 
 from nd_io import acyclic, digest, indexed, load_json, references, require, safe_locator
 from nd_profiles import guidance, profile_digest
+from nd_team import validate_team
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -68,7 +69,7 @@ def outcome_ancestors(outcomes, ids):
     return result
 
 
-def nudge_context(intent, nudge):
+def nudge_context(intent, nudge, plan=None):
     """Shared rendered context, so revision checks follow the actual worker input."""
     sources, items, outcomes = intent_index(intent)
     relevant = outcome_ancestors(outcomes, nudge["outcome_refs"])
@@ -82,6 +83,11 @@ def nudge_context(intent, nudge):
                  if not row["outcome_refs"] or set(row["outcome_refs"]) & relevant]
     for row in knowledge:
         source_ids.update(row["source_refs"])
+    actor = nudge.get("assignment", {}).get("participant_id")
+    for participant in (plan or {}).get("participants", []):
+        if participant["id"] == actor:
+            for claim in participant["capabilities"] + participant["tools"]:
+                source_ids.update(claim["evidence_refs"])
     return relevant, context_items, source_ids, knowledge
 
 
@@ -95,6 +101,7 @@ def validate_plan(intent, plan, profiles):
             "plan profile content binding is stale")
     sources, items, outcomes = intent_index(intent)
     nudges = indexed(plan["nudges"], "nudge")
+    validate_team(plan, sources, nudges)
     require(not set(nudges).intersection(set(sources) | set(items) | set(outcomes)), "duplicate nudge/intent ID")
     dependency_edges, parent_edges = {}, {}
     for nudge in nudges.values():
@@ -136,7 +143,7 @@ def validate_plan(intent, plan, profiles):
         references(row["nudge_ids"], nudges, "coverage nudge")
         references(row["evidence_refs"], sources, "coverage evidence")
         for ident in row["nudge_ids"]:
-            relevant, context_items, _, _ = nudge_context(intent, nudges[ident])
+            relevant, context_items, _, _ = nudge_context(intent, nudges[ident], plan)
             require(row["target_id"] in relevant | context_items,
                     "coverage nudge " + ident + " does not reference target " + row["target_id"])
         if row["disposition"] == "PLANNED":

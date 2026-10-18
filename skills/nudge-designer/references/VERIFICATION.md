@@ -1,5 +1,13 @@
 # Verification checkpoint — 18 October 2026
 
+## Contents
+
+- [Scope and provenance](#scope-and-provenance)
+- [Executed local checks](#executed-local-checks)
+- [Fresh-agent pilots](#fresh-agent-pilots)
+- [Unexecuted and remaining limits](#unexecuted-and-remaining-limits)
+- [Role-adapter extension checkpoint](#role-adapter-extension-checkpoint)
+
 ## Scope and provenance
 
 New standalone `skills/nudge-designer/` package and one path-scoped read-only CI
@@ -107,3 +115,53 @@ learner-facing explanation. Inspect usability in real work before adding UI or
 claiming that a lower-capability worker can succeed. Structural validation,
 declared coverage and content digests do not establish semantic adequacy, source
 completeness, authenticity, acceptance or permission.
+
+## Role-adapter extension checkpoint
+
+The preceding sections preserve the original v1 prepublication record. The Owner's
+later broad-application request adds role/capability, manual surface and native
+return adapters, scoped entirely to this package. Exactly two schemas remain;
+`intent/v1` and old `plan/v1` stay valid, with explicit `plan/v1.1` team support.
+
+Current local result: **84 tests PASS** on Python 3.12. All original checks remain,
+with additional coverage for seven audiences across UI/logic/education/FEA, task
+requirements and guidance, all five manual surfaces, strict issued binding,
+same-participant review conflicts, transitive dependency/review propagation,
+source discrepancies, unknown tools/configuration, binary reference-only reports,
+Unicode/CRLF content preservation, malformed returns, no auto-acceptance, no input
+mutation, missing dependency fallback and actual CLI exchanges. A runtime check
+executes the unchanged original fixture function and carries its actual result
+through intake/review/successor views; it does not implement a repair.
+
+Tests-first adapter checkpoint: two missing imports initially prevented behavioral
+assertions from running. Later added assertions exposed real adapter defects:
+indirect dependents listed as independent, absent native content/attempts in the
+review view, ignored per-task guidance in the normal renderer, Python numeric
+equality accepting nonexact binding types, and a combined dependency/review cycle.
+Those assertions failed before the corresponding fixes and now pass. These are
+adapter defects, not reproduced product failures.
+
+Three additional fresh task threads performed actual bounded work: unchanged
+source execution (four calls/two completion orders), specialist study drafting and
+nine exact-arithmetic checks, and separate local review with eight review checks
+and seven numerical checks. No model/effort override or formal qualification was
+observed. The reviewer used an independent oracle/Decimal recomputation after
+seeing reports; this is not blind review or authenticated independence.
+
+The specialist caught a stale 20 m/s handover against the supplied 18 m/s case;
+the reviewer also caught an unsupported learner-prerequisite FACT. The Designer
+read the actual artifacts, corrected the handover, reclassified the item as a
+PROPOSAL and kept learning/transfer outcomes unresolved in working revision 2.
+All 65 archived files remain exact, including 22 supplied review inputs. Each
+native return still binds to its issued snapshots; the historical specialist
+return is rejected against the revised plan. Coverage records partial evidence,
+not accepted outcomes. See [the full role-cycle reference](../examples/adapter-cycle/ASSESSMENT.md).
+
+The execution scripts/receipts retain original machine paths and are archival;
+automated tests replay structure/binding/hash checks without rewriting that history.
+The portable NOT_RUN team fixture remains distinct from actual execution evidence.
+Current Skill Creator validation, syntax, interface metadata, local-link and diff
+checks are run before publication; the delivery PR records their results and
+hosted Python 3.10/3.12 CI. No live UI repair, actual learner assessment, solver or
+engineering acceptance, native import, automatic transport or new authority is
+claimed by these adapters.

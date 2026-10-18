@@ -1,0 +1,35 @@
+{
+  "worksheet_status": "RETURN_RECORDED",
+  "native_content_preserved": true,
+  "native_sha256_matches": true,
+  "all_bindings_match": true,
+  "source_hash_matches_probe": true,
+  "actor_id": "W",
+  "outside_nudge_refs": [],
+  "independent_candidates": [
+    "N-EXPORT"
+  ],
+  "unpinned_observations": [
+    "S-CASE",
+    "S-CODE"
+  ],
+  "source_discrepancies": [],
+  "sources_not_observed": [],
+  "accepted_outcomes": [],
+  "execution_verified_by_adapter": false,
+  "plan_modified_by_adapter": false,
+  "packaging": {
+    "status": "PACKAGED",
+    "packet_binding_matches": true,
+    "native_content_sha256": "50183d4f1c5a23672ebea984556eba1031aa264eade4d3d4d538ef18ce924642",
+    "native_content_matches_file": true,
+    "source_and_probe_hashes_match_output": true
+  },
+  "executed_commands_exit_status": {
+    "probe.py": 0,
+    "nudge_designer.py validate": 0,
+    "nudge_designer.py bind N-PROBE": 0,
+    "package_return.py": 0,
+    "nudge_designer.py receive": 0
+  }
+}

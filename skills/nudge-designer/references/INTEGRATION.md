@@ -40,7 +40,11 @@ The observed workbench uses Nudge Protocol v2 and manual Owner controls. This
 records the design boundary; it does not requalify every current deployment.
 The Designer's `type` vocabulary matches the observed labels: `new_requirement`,
 `ground`, `next_step`, `course_correction`. Those labels alone do not make the
-objects native workbench imports. **No adapter or UI change is implemented.**
+objects native workbench imports. The `nextnudge-manual` adapter now prepares a
+manual-copy draft packet. It is not a native import object, automatic send or UI
+change. GitHub, BuddyRunner checkpoint and selected-delivery adapters similarly
+prepare material under the existing authority and native reporting conventions.
+See [adapter contracts](ADAPTERS.md) for role views and native-return intake.
 
 For a later separately authorized adapter:
 

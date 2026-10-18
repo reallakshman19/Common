@@ -67,6 +67,16 @@ scope, outcome, engineering or pedagogical choices appropriately.
 
 ## Verification checkpoint
 
-Implementation and new checks pending at plan creation. Actual results will be
-recorded in the adapter reference and PR receipt. Existing v1 planning pilots are
-not lower-capability-worker qualification or production UI/FEA acceptance.
+Implemented checkpoint, 18 October 2026: explicit backward-compatible v1.1 team
+support, seven audience views, five manual surfaces, task binding/fit/native intake
+and a human-interpreted reconciliation worksheet. The 84 focused checks pass on
+local Python 3.12; all original v1 cases remain supported. This includes actual CLI
+round trips, cross-domain composition and archived history/current-revision checks.
+
+Fresh worker/specialist executions and a separate reviewer produced actual local
+artifacts. Review exposed a stale numeric handover and unsupported learner fact;
+the Designer corrected meaning in a separate revision while retaining issued
+history. See [the role-cycle assessment](../examples/adapter-cycle/ASSESSMENT.md)
+and [verification](VERIFICATION.md). No lower-capability-model qualification,
+production UI/FEA acceptance or actual learner outcome is established. Hosted CI
+and exact remote readback are reported on the draft PR after publication.

@@ -43,6 +43,13 @@ class ReturnAdapterTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError, "issued|binding"):
             self.check()
 
+    def test_binding_metadata_types_are_exact_not_python_numeric_equality(self):
+        for revision in (True, 1.0):
+            report = copy.deepcopy(self.report)
+            report["binding"]["plan_revision"] = revision
+            with self.assertRaisesRegex(ContractError, "binding"):
+                receive(self.intent, self.plan, report, self.profiles)
+
     def test_source_mismatch_is_recorded_as_stale_evidence_not_discarded(self):
         self.intent["sources"][0]["revision"] = "source-v1"
         from nd_contract import intent_digest
@@ -77,6 +84,34 @@ class ReturnAdapterTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError, "COMPLETE"):
             self.check()
 
+    def test_indirect_dependents_are_not_listed_as_independent(self):
+        descendant = copy.deepcopy(self.plan["nudges"][1])
+        descendant.update(id="N-DESCENDANT", depends_on=["N-REPAIR"])
+        self.plan["nudges"].append(descendant)
+        self.report["binding"] = task_binding(self.intent, self.plan, self.ident)
+        result = self.check()
+        self.assertNotIn("N-DESCENDANT", result["independent_candidates"])
+
+    def test_reviewer_gets_actual_native_content_and_attempts(self):
+        packet = adapt(self.intent, self.plan, self.ident, self.profiles, "reviewer", "plain",
+                       recipient_id="R", report=self.report)
+        self.assertIn("Native result: PASS", packet["content"])
+        self.assertIn(self.report["attempts"][0]["action"], packet["content"])
+
+    def test_review_relationship_participates_in_reconciliation(self):
+        from nd_reconcile import impact_report
+        review = copy.deepcopy(self.plan["nudges"][0])
+        review.update(id="N-REVIEW", depends_on=[])
+        review["assignment"].update(role="REVIEWER", participant_id="R", review_of=["N-PROBE"])
+        self.plan["nudges"].append(review)
+        self.report["binding"] = task_binding(self.intent, self.plan, self.ident)
+        result = self.check()
+        self.assertNotIn("N-REVIEW", result["independent_candidates"])
+        changed = copy.deepcopy(self.intent)
+        next(row for row in changed["items"] if row["id"] == "F-RACE")["text"] += " Changed observation."
+        impact = impact_report(self.intent, self.plan, changed, self.profiles)
+        self.assertIn("N-REVIEW", impact["affected_nudges"])
+
     def test_self_review_conflict_and_missing_independence_are_explicit(self):
         result = self.check()
         self.assertEqual(result["independence"], "NOT_ESTABLISHED")
@@ -95,6 +130,33 @@ class ReturnAdapterTests(unittest.TestCase):
             mutate(report)
             with self.assertRaises(ContractError):
                 receive(self.intent, self.plan, report, self.profiles)
+
+    def test_unicode_crlf_native_text_is_preserved_as_supplied(self):
+        import hashlib
+        content = "# முடிவு\r\nSigned displacement: +0.25 mm\r\n"
+        self.report["native_report"]["content"] = content
+        result = self.check()
+        self.assertEqual(result["native_report"]["content"], content)
+        self.assertEqual(result["native_content_sha256"], hashlib.sha256(content.encode("utf-8")).hexdigest())
+
+    def test_binary_native_artifact_can_be_referenced_without_inventing_content(self):
+        self.report["native_report"].update(format="application/pdf", locator="study.pdf", content=None)
+        result = self.check()
+        self.assertEqual(result["native_representation"], "REFERENCE_ONLY")
+        self.assertIsNone(result["native_content_sha256"])
+        packet = adapt(self.intent, self.plan, self.ident, self.profiles, "reviewer", "plain", report=self.report)
+        self.assertIn("authorized reader", packet["content"])
+        self.report["native_report"]["locator"] = None
+        with self.assertRaisesRegex(ContractError, "locator"):
+            self.check()
+
+    def test_owner_return_view_distinguishes_issued_work_from_new_continuation(self):
+        import hashlib
+        packet = adapt(self.intent, self.plan, self.ident, self.profiles, "owner", "plain", report=self.report)
+        self.assertIn("Issued task:", packet["content"])
+        self.assertNotIn("Next proposed work:", packet["content"])
+        self.assertIn(self.report["next_proposal"], packet["content"])
+        self.assertEqual(packet["content_sha256"], hashlib.sha256(packet["content"].encode("utf-8")).hexdigest())
 
 
 if __name__ == "__main__":

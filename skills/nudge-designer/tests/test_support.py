@@ -39,7 +39,7 @@ class SupportTests(unittest.TestCase):
     def test_real_validate_and_render_cli_for_each_case(self):
         with tempfile.TemporaryDirectory() as directory:
             for name in ("lfea", "logic", "grade11", "fea", "forward-ui-logic",
-                         "forward-education", "forward-fea"):
+                         "forward-education", "forward-fea", "team-cycle"):
                 with self.subTest(case=name):
                     folder = ROOT / "examples" / name
                     intent_path, plan_path = folder / "intent.json", folder / "plan.json"
