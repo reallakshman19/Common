@@ -135,6 +135,54 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(result["response_ref"], "session://actual")
         self.assertFalse(result["workflow_executed"])
 
+    def test_approval_only_source_cannot_be_reused_as_task(self):
+        rec = reconstruction()
+        event = self.event("Approve reconstruction", rec)
+        result = assess(request("ONBOARD", "AWAIT_OWNER_TASK"), rec,
+                        approval=event, task=event,
+                        reader=lambda ref: source("Approve reconstruction",
+                            kinds=["RECONSTRUCTION_APPROVAL"]))
+        self.assertEqual(result["state"], "OWNER_TASK_UNVERIFIED")
+
+    def test_verified_body_is_reused_without_second_fetch(self):
+        rec = reconstruction()
+        body = "Approve reconstruction and do task B"
+        event = self.event(body, rec)
+        calls = []
+        def read(ref):
+            calls.append(ref)
+            return source(body if len(calls) == 1 else "Unverified replacement")
+        result = assess(request("ONBOARD", "AWAIT_OWNER_TASK"), rec,
+                        approval=event, task=event, reader=read)
+        self.assertEqual(calls, [event["ref"]])
+        self.assertEqual(result["task_prompt"], body)
+
+    def test_exact_supplied_1b_does_not_require_publication(self):
+        import json
+        prior = reconstruction()
+        prior["phase"] = "1b"
+        case = request("ASSISTED")
+        case.update(phase="2", actor="previous")
+        record = reconstruction()
+        record.update(phase="2", actor="previous")
+        body = json.dumps(prior)
+        record["prior_1b"] = {"body_text": body, "supplied_ref": "conversation:incoming",
+                              "digest": digest(body)}
+        result = assess(case, record)
+        self.assertEqual(result["next"], "ENTER_PINNED_CODING_PROTOCOL")
+        self.assertEqual(result["prior_1b_grade"], "SUPPLIED_UNVERIFIED")
+
+    def test_duplicate_receipt_requires_host_reconciliation_without_resend(self):
+        report = assess(request(), reconstruction())
+        prepared = invoke(report, {"task": "T1"})
+        calls = []
+        result = invoke(report, {"task": "T1"}, authorize=lambda payload: True,
+                        executor=lambda payload: calls.append(payload),
+                        receipts=[{"target": prepared["target"], "response_ref": "session://prior"}])
+        self.assertEqual(result["state"], "VERIFY_EXISTING_INVOCATION")
+        self.assertEqual(calls, [])
+
+
     def test_ambiguous_delivery_never_becomes_fake_success(self):
         report = assess(request(), reconstruction())
         result = invoke(report, {"task": "T1"}, authorize=lambda item: True,
