@@ -1,6 +1,6 @@
 # Applying guidance — golden references
 
-All seven cases are synthetic teaching references. Supplied logs/receipts are case
+All cases are synthetic teaching references. Supplied logs/receipts are case
 data; no new browser, solver, learner or product execution is claimed. “Golden”
 specifies acceptable distinctions under the declared inputs, not unique wording,
 complete risk coverage or production acceptance. Justified alternatives can satisfy
@@ -15,6 +15,9 @@ the same conditions. Use existing schema examples when authoring machine objects
 | G05 cold successor | [raw.md](G05-cold-successor/raw.md) | [golden.md](G05-cold-successor/golden.md) | Successor/Owner; T01, T02, T07, T12, T14 |
 | G06 mixed team | [raw.md](G06-mixed-team/raw.md) | [golden.md](G06-mixed-team/golden.md) | Coordinator/worker/reviewer; T03, T06, T07, T08 |
 | G07 reconcile findings | [raw.md](G07-reconcile-findings/raw.md) | [golden.md](G07-reconcile-findings/golden.md) | Designer/coordinator/successor; T01, T06, T12, T13 |
+| G08 claim/evidence relation | [raw.md](G08-claim-evidence/raw.md) | [golden.md](G08-claim-evidence/golden.md) | Reviewer/specialist; T01, T15, T17 |
+| G09 input interpretation | [raw.md](G09-input-interpretation/raw.md) | [golden.md](G09-input-interpretation/golden.md) | Worker/sender; T04, T16, T18 |
+| G10 correction cause | [raw.md](G10-correction-cause/raw.md) | [golden.md](G10-correction-cause/golden.md) | Designer/coordinator; T02, T07, T14, T16 |
 
 Trap IDs are defined in [Applying guidance](../../references/APPLYING_GUIDANCE.md).
 Give a fresh agent only a raw case, the needed role prompt/guide and tools/scope.

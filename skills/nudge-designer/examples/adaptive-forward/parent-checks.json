@@ -1,0 +1,87 @@
+{
+  "basis": "Parent inspected original inputs and native outputs; material quantities recomputed from raw inputs, without executing recipient scripts.",
+  "raw_input_files_preserved": 9,
+  "native_archive_files_preserved": 22,
+  "archive_byte_sha256_manifest": "archive-sha256.json",
+  "worker": {
+    "declared_codec": "cp1252",
+    "raw_byte_sha256": "aa7d52b1e43de631793b18a9ffabe6aeca73498fe4aebabab9e043c189f70af8",
+    "strict_utf8_rejected": true,
+    "rows": [
+      {
+        "id": "R-A",
+        "claimed": 4,
+        "actual": 4
+      },
+      {
+        "id": "R-B",
+        "claimed": 2,
+        "actual": 2
+      }
+    ],
+    "native_values_agree": true,
+    "receipt_file_byte_digests_verified": 5,
+    "interpretation": "Both claims supported under the declared algorithm; no token defect found."
+  },
+  "reviewer": {
+    "model": "Supplied release from rest, upward positive, constant downward acceleration 7.2 m/s^2, no drag/free flight.",
+    "release_velocity_m_per_s": "0",
+    "acceleration_m_per_s_squared": "-7.2",
+    "time_s": "0.5",
+    "later_velocity_m_per_s": "-3.60",
+    "interpretation": "C1 zero-acceleration inference is false; its rest premise and C2 later velocity are retained. Arithmetic is not learner evidence."
+  },
+  "designer": {
+    "packets": {
+      "R19": {
+        "packet_utf8_sha256": "5de494784c2972e275405ed4d2aafeb14a975ed3ef199e952bf3be0bc4ac0a53",
+        "records": [
+          "X-1",
+          "X-2",
+          "X-3"
+        ],
+        "actual_count": 3
+      },
+      "R20": {
+        "packet_utf8_sha256": "ecdf59bbe62530aa7ad34a6563ac0d45414ee98f48390ed4972f29588562d138",
+        "records": [
+          "X-1",
+          "X-2",
+          "X-3",
+          "X-4"
+        ],
+        "actual_count": 4
+      }
+    },
+    "issued_maps_to": "R20",
+    "delivered_and_recipient_map_to": "R19",
+    "draft_equals_R20_bytes": true,
+    "receipt_metadata_authenticates_actual_transport": false,
+    "optional_schema_render": "Recipient startup was blocked by missing jsonschema; no intent/plan outputs exist, so no parent schema validation of them was attempted. Native NOT_RUN retained."
+  },
+  "brief_only": {
+    "rows": [
+      {
+        "id": "L-01",
+        "claimed": 0,
+        "actual": 0
+      },
+      {
+        "id": "L-02",
+        "claimed": 2,
+        "actual": 3
+      }
+    ],
+    "actual_records_reviewed": 2,
+    "empty_text_counted_as_record": true,
+    "interpretation": "Source-derived counts agree with native report: one match and one mismatch."
+  },
+  "semantic_assessment": "Native decisions reviewed against stated scope: preserve valid work, correct input identity before worker attribution, use evidence-backed verdicts and no fixed weakness quota. This assessment is parent review, not a blind or formally qualified acceptance.",
+  "limits": [
+    "Synthetic local tasks; no production, learner or engineering acceptance.",
+    "Host model, reasoning configuration and formal qualification UNKNOWN.",
+    "Separate threads share task premises and instruction lineage; independence is not authenticated.",
+    "Different raw tasks/sessions/exposure are not a controlled model or GUIDED-versus-OPEN comparison.",
+    "The wrong-revision case prepares a correction; no dispatch, transport or next-worker execution occurred."
+  ]
+}

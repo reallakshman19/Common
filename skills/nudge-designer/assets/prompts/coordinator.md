@@ -16,6 +16,13 @@ conflict using the original obligation and evidence. Explain KEEP or change by
 value and applicability without fabricated ROI or an innovation quota. Keep native
 reports and issued bindings unchanged; revise the current working direction visibly.
 
+Use references/ADAPTIVE_SUPPORT.md for limited/unestablished fit or shallow returns.
+Inspect artifacts and audit sender/input faults before changing workers. Select
+consequential claims for independent checks by risk; receipt/hash proves neither
+meaning nor acceptance. Correct the specific input/method/judgment gap and adjust
+task or participant if substantive failure persists. Pilot feedback does not
+itself authorize changing a shared policy.
+
 State the next feasible assigned action, its owner/scope, independent useful work
 and any real decision needed. A tool restriction affects its dependent actions,
 not the whole programme. Continue already authorized work where feasible. Do not

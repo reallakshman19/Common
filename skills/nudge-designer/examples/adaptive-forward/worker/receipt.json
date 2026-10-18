@@ -1,0 +1,52 @@
+{
+  "native_receipt": "bounded-worker-file-receipt/v1",
+  "assignment": "packet.md: Source claim review assignment",
+  "directory": "/workspace/scratch/52eed2252c51/tmp/nd-adaptive-forward/worker",
+  "bounded_status": "COMPLETE",
+  "parent_outcome_acceptance": "NOT_ASSESSED",
+  "input_files": [
+    {
+      "path": "packet.md",
+      "byte_length": 1679,
+      "file_bytes_sha256": "8673ef7f6c70370e15f1098d82292c3b21ea98fe7c9d15ee6a396f98333974d2"
+    },
+    {
+      "path": "artifact.json",
+      "byte_length": 307,
+      "file_bytes_sha256": "9c61b732e759c5784d7de08441e014a2ed1a3b0ce298e907dedf1372700d894b"
+    }
+  ],
+  "output_files": [
+    {
+      "path": "check.py",
+      "byte_length": 5746,
+      "file_bytes_sha256": "7f154348bbc8eacb9bbd33a24d4f936f697a753541e314cc013a077c56f77753"
+    },
+    {
+      "path": "computation.json",
+      "byte_length": 3445,
+      "file_bytes_sha256": "e0dd6f7d126f674dcaecf70c4f4f488c6d2ce08ff5bcef09004f5afd7c5881bb"
+    },
+    {
+      "path": "review.md",
+      "byte_length": 3362,
+      "file_bytes_sha256": "7d47b7f7c7facd68e17f043ba106817f1ffa15fcfbf9a4621bbde39615839c10"
+    }
+  ],
+  "verification": {
+    "input_files_unchanged": true,
+    "original_raw_bytes_written_to_disk": false,
+    "supporting_script_execution_exit_code": 0,
+    "reviewed_actual_records": 2,
+    "mismatched_token_claims": 0,
+    "raw_digest_matches_declaration": true,
+    "strict_declared_codec": "cp1252",
+    "receipt_digests_recomputed_after_write": true
+  },
+  "configuration": {
+    "host_model": "UNKNOWN",
+    "reasoning_configuration": "UNKNOWN",
+    "formal_qualification": "UNKNOWN"
+  },
+  "limits": "File-byte identity and self-check are distinct from independent claim review or Owner acceptance. No wider product, external action, source rewrite, or delegation."
+}

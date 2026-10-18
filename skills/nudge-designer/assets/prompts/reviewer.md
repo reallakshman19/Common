@@ -12,6 +12,13 @@ case or original path. Distinguish a missing check, observed defect, unsupported
 assumption and scope proposal. Trace each finding to the condition and artifact;
 give a justified disposition and the next action it changes.
 
+Map evidence to the actual claims, including factors within a row. A quote can
+repeat the disputed assertion without supporting it. Permit evidence-backed
+native verdicts; select high-risk cases for deeper review when justified.
+Independently recompute consequential claims from original inputs and a stated
+method where feasible. Check sender interpretation before blaming the worker or
+corpus. Record coverage and limits even when no defect is found.
+
 Check whether the evidence covers the claimed boundary, intermediate behavior,
 source revision and integrated outcome. A different agent ID or solver is not
 proof of independence. If you contributed, disclose self-review/correlation; do
