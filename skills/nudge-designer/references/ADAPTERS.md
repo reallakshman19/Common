@@ -17,6 +17,11 @@ can need specialist investigation, a worker can run a precise numerical contrast
 and a teacher can need both education and quantitative profiles. No fixed pass
 count, compulsory agent count or automatic model upgrade is added.
 
+For copyable role prompts and the thought process for applying them, use
+[Applying guidance](APPLYING_GUIDANCE.md). It explains support/evidence selection,
+assumption discipline and concrete pitfalls, with paired golden cases. These aids
+do not change the schema/API contracts below or the native project's authority.
+
 | Audience | Responsibility of the view |
 |---|---|
 | `owner` | Purpose, proposed direction, conditions, evidence changes and real decisions |

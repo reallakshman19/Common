@@ -1,0 +1,14 @@
+{
+  "scope": "Parent structural check after the successor returned; dependency supplied through isolated PYTHONPATH. Does not rewrite the successor NOT_RUN receipt.",
+  "validation": {
+    "status": "STRUCTURALLY_VALID",
+    "semantic_quality": "NOT_MACHINE_VERIFIED",
+    "coverage_basis": "DECLARED_ITEMS_ONLY",
+    "sources_authenticated": false,
+    "authority_verified": false,
+    "execution_performed": false,
+    "intent_sha256": "8a899fd4c3da217fdad95eda79ab9c5621a9d697c4aee76774f864e966bb7ffb",
+    "nudges": 1,
+    "declared_coverage_targets": 12
+  }
+}

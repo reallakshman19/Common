@@ -1,0 +1,292 @@
+{
+  "scope": "unchanged local receive function with synthetic inputs",
+  "source_path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/worker/source.py",
+  "source_sha256_before": "766a81726984857c9e66c8ed07e9582e850ffeb651b65f81c80e30a4acd451f3",
+  "source_sha256_after": "766a81726984857c9e66c8ed07e9582e850ffeb651b65f81c80e30a4acd451f3",
+  "source_unchanged": true,
+  "bytecode_disabled": true,
+  "host_model": "UNKNOWN",
+  "reasoning_configuration": "UNKNOWN",
+  "formal_qualification": "UNKNOWN",
+  "traces": [
+    {
+      "order": [
+        "A12",
+        "B12"
+      ],
+      "steps": [
+        {
+          "completion": "A12",
+          "input": {
+            "source_id": "A",
+            "request_revision": 12,
+            "payload": "A12"
+          },
+          "before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "A12"
+            }
+          },
+          "expected_before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_action": "ignore",
+          "actual_result_changed": true,
+          "returned_same_state": true,
+          "published_payload_origin": {
+            "source": "A",
+            "revision": 12
+          },
+          "published_payload_satisfies_invariant": false,
+          "actual_matches_expected": false
+        },
+        {
+          "completion": "B12",
+          "input": {
+            "source_id": "B",
+            "request_revision": 12,
+            "payload": "B12"
+          },
+          "before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "A12"
+            }
+          },
+          "after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_action": "publish",
+          "actual_result_changed": true,
+          "returned_same_state": true,
+          "published_payload_origin": {
+            "source": "B",
+            "revision": 12
+          },
+          "published_payload_satisfies_invariant": true,
+          "actual_matches_expected": true
+        }
+      ]
+    },
+    {
+      "order": [
+        "B12",
+        "A12"
+      ],
+      "steps": [
+        {
+          "completion": "B12",
+          "input": {
+            "source_id": "B",
+            "request_revision": 12,
+            "payload": "B12"
+          },
+          "before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_action": "publish",
+          "actual_result_changed": true,
+          "returned_same_state": true,
+          "published_payload_origin": {
+            "source": "B",
+            "revision": 12
+          },
+          "published_payload_satisfies_invariant": true,
+          "actual_matches_expected": true
+        },
+        {
+          "completion": "A12",
+          "input": {
+            "source_id": "A",
+            "request_revision": 12,
+            "payload": "A12"
+          },
+          "before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "A12"
+            }
+          },
+          "expected_before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_action": "ignore",
+          "actual_result_changed": true,
+          "returned_same_state": true,
+          "published_payload_origin": {
+            "source": "A",
+            "revision": 12
+          },
+          "published_payload_satisfies_invariant": false,
+          "actual_matches_expected": false
+        }
+      ]
+    },
+    {
+      "order": [
+        "B11",
+        "B12"
+      ],
+      "steps": [
+        {
+          "completion": "B11",
+          "input": {
+            "source_id": "B",
+            "request_revision": 11,
+            "payload": "B11"
+          },
+          "before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_action": "ignore",
+          "actual_result_changed": false,
+          "returned_same_state": true,
+          "published_payload_origin": null,
+          "published_payload_satisfies_invariant": true,
+          "actual_matches_expected": true
+        },
+        {
+          "completion": "B12",
+          "input": {
+            "source_id": "B",
+            "request_revision": 12,
+            "payload": "B12"
+          },
+          "before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_before": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": null
+          },
+          "expected_after": {
+            "selected_source": "B",
+            "current_revision": 12,
+            "result": {
+              "source": "B",
+              "payload": "B12"
+            }
+          },
+          "expected_action": "publish",
+          "actual_result_changed": true,
+          "returned_same_state": true,
+          "published_payload_origin": {
+            "source": "B",
+            "revision": 12
+          },
+          "published_payload_satisfies_invariant": true,
+          "actual_matches_expected": true
+        }
+      ]
+    }
+  ]
+}

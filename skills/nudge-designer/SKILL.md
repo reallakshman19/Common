@@ -32,6 +32,28 @@ need reasoning context, a worked method where useful, a falsifier, reserved
 decisions and a clear return condition. A long response, filled schema or
 self-description as a high-thinking agent proves none of these.
 
+## Apply the guidance and choose a prompt
+
+Read [Applying guidance](references/APPLYING_GUIDANCE.md) when choosing support,
+reasoning operations, evidence or continuation. Use its decision questions and
+concrete traps where relevant; do not turn them into compulsory phases. Preserve
+the WHY for narrower workers, and leave genuine investigation open for deeper
+uncertainty. State a concise decision basis and decisive evidence rather than
+requiring a reasoning transcript or a long acknowledgment.
+
+Use the [Owner entry prompts](assets/prompts/owner.md) for a short request. Select
+one role prompt: [Designer](assets/prompts/designer.md), [worker](assets/prompts/worker.md),
+[specialist](assets/prompts/specialist.md), [reviewer](assets/prompts/reviewer.md),
+[coordinator](assets/prompts/coordinator.md) or [successor](assets/prompts/successor.md).
+Fill the [assignment template](assets/prompts/assignment.md) from authentic inputs;
+use the [native result aid](assets/prompts/result.md) only as needed by the existing
+reporting format. The agent maintains records; the Owner need not fill the slots.
+Copy only needed context. A template does not confer authority or runtime capability.
+
+Use [the golden case index](examples/guidance/INDEX.md) for paired raw/acceptable
+continuations and tempting failures. Withhold golden answers during fresh-agent
+exercises; assess substance and changed-condition transfer, not phrase matching.
+
 ## Author the two layers
 
 **Intent model:** author `nudge-designer.intent/v1` using
@@ -203,5 +225,9 @@ distinguish original authoring, readability retest and portable packaging.
 For team exchanges use [team-cycle](examples/team-cycle/ASSESSMENT.md), whose
 sample return is NOT_RUN, and the [actual role cycle](examples/adapter-cycle/ASSESSMENT.md),
 which preserves execution, review and a separate semantic working revision.
+The [fresh prompt applications](examples/guidance-forward/ASSESSMENT.md) preserve
+actual worker/specialist/successor/Designer artifacts, a readability retest and
+the assumptions caught during parent reconciliation. These are worked outputs;
+withhold them from fresh exercises.
 Read [verification](references/VERIFICATION.md) for executed checks and limits.
 Check the package with `python -m unittest discover -s "$SKILL/tests" -v`.

@@ -1,5 +1,14 @@
 # Multi-role adapter implementation plan
 
+## Contents
+
+- [Reconciled intent](#reconciled-intent)
+- [Orthogonal dimensions](#orthogonal-dimensions)
+- [Work and acceptance](#work-and-acceptance)
+- [Reuse and boundaries](#reuse-and-boundaries)
+- [Verification checkpoint](#verification-checkpoint)
+- [Prompt templates and Applying guidance](#prompt-templates-and-applying-guidance)
+
 ## Reconciled intent
 
 Owner amendment, 18 October 2026: support broad application and different thinking
@@ -80,3 +89,25 @@ history. See [the role-cycle assessment](../examples/adapter-cycle/ASSESSMENT.md
 and [verification](VERIFICATION.md). No lower-capability-model qualification,
 production UI/FEA acceptance or actual learner outcome is established. Hosted CI
 and exact remote readback are reported on the draft PR after publication.
+
+## Prompt templates and Applying guidance
+
+Add reusable prompts for all seven roles, a filled seven-element assignment aid,
+native-result guidance and an explicit decision process for applying the flows.
+Provide paired raw/golden references for UI, logic, teaching, FEA, cold onboarding,
+mixed teams and reconciliation. Show superfluous assumptions and tempting invalid
+continuations. Keep goldens out of fresh-agent task context and accept justified
+alternatives preserving the same conditions. Preserve existing APIs, two schemas,
+native authority and archived execution evidence; add no fixed passes or gates.
+
+Validate usability on fresh raw tasks with emitted artifacts, then check links,
+skill metadata and the existing compatibility suite. Record actual observations
+and limitations separately from synthetic expected decisions.
+
+Implemented checkpoint: nine prompt/aid resources, Applying guidance and seven
+paired cases are present. Four fresh role applications plus a fresh Designer
+retest produced inspected artifacts; parent reconciliation corrected a screenshot
+mapping assumption and retained all originals. The 84 compatibility checks,
+skill/syntax/metadata/link and arithmetic checks pass locally. See the
+[prompt application assessment](../examples/guidance-forward/ASSESSMENT.md) and
+[verification](VERIFICATION.md); exact-head publication/CI remains on the draft PR.

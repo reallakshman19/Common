@@ -7,6 +7,7 @@
 - [Fresh-agent pilots](#fresh-agent-pilots)
 - [Unexecuted and remaining limits](#unexecuted-and-remaining-limits)
 - [Role-adapter extension checkpoint](#role-adapter-extension-checkpoint)
+- [Prompt and Applying guidance extension](#prompt-and-applying-guidance-extension)
 
 ## Scope and provenance
 
@@ -165,3 +166,48 @@ checks are run before publication; the delivery PR records their results and
 hosted Python 3.10/3.12 CI. No live UI repair, actual learner assessment, solver or
 engineering acceptance, native import, automatic transport or new authority is
 claimed by these adapters.
+
+## Prompt and Applying guidance extension
+
+The next Owner amendment requests role prompts, golden fixtures and the thought
+process for applying the flows, with superfluous assumptions/traps made explicit.
+Nine copyable resources cover seven roles, a seven-element assignment and native
+result aid. The Owner resource includes short general, narrower-worker, recovery
+and onboarding entry variants. [Applying guidance](APPLYING_GUIDANCE.md) explains
+purpose/uncertainty/evidence decisions, assumption discipline, selective warnings,
+support choice, reconciliation and 14 concrete traps. It imposes no new stages,
+team size, runtime configuration, authority or approval ritual.
+
+[Seven paired raw/golden references](../examples/guidance/INDEX.md) cover UI,
+event order, teaching, physical models, cold onboarding, mixed teams and findings.
+They are synthetic semantic references, not machine-graded unique answers
+or newly executed product evidence. Exactly two formal schemas remain; runtime
+and schema contracts are unchanged. The existing 84 checks pass locally on Python
+3.12. Skill validation, syntax, metadata, local links, reference arithmetic and diff
+checks pass. Hosted results for this exact extension are recorded on the draft PR.
+
+Four fresh task threads applied the prompts without golden/example answers:
+worker execution, specialist derivation/arithmetic, successor onboarding and UI
+assignment design. A fifth fresh Designer retested the same raw case after
+proportionality guidance. The worker executed six transitions and distinguished
+source identity from equal revision numbers. The specialist retained 160 GPa,
+computed 0.405 mm and 72 MPa, and exposed the 200 GPa substitution. The successor
+kept production acceptance unverified and honored the onboarding wait, reporting
+missing `jsonschema` as NOT_RUN. A later parent check with isolated dependencies
+validated its objects without rewriting that receipt.
+
+The first UI brief was useful but 1,170 words; the fresh retest was 927 words.
+These are observed lengths, not controlled model effects or usability acceptance.
+Parent review found an unnecessary inferred screenshot mapping in the retest;
+the final guide clarifies coordinate-contract evidence and a separate compact
+operational brief removes that assumption. Native outputs are preserved. That
+last clarification is parent-reviewed, not another fresh execution. Parent replay
+also reproduced the six worker transitions and specialist values; it is not blind
+review or physical validation. [Actual artifacts and assessment](../examples/guidance-forward/ASSESSMENT.md)
+preserve 27 archived files and all nine raw inputs byte for byte.
+
+No low-thinking model was selected/qualified, no live UI repair or native journey,
+FE solver, learner outcome or external dispatch was performed, and no broader
+reliability claim follows from these local tasks. Actual host configuration and
+formal qualification remain UNKNOWN. Prose guidance still needs substantive use;
+filled templates, golden wording and compatibility PASS cannot establish it.

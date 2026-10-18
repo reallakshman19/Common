@@ -1,0 +1,21 @@
+{
+  "purpose": "Byte identities of supplied inputs before local artifact authoring; not source authentication or runtime proof.",
+  "files": [
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/owner.md",
+      "sha256": "4d92b1f9403441f44d4fc8e197fc9782e9e766e54add803fdb8ff68cc278dc56"
+    },
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/report.md",
+      "sha256": "0d80647126506d067f3edfbfd5fb927732cc936d4b6891452ce4b9c8d40250b8"
+    },
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/app.py",
+      "sha256": "d403fb13f2ed95cffe660608f1af369bb9c8122aaac58a341671781dbb9b3c8a"
+    },
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/nd-guidance-forward/successor/helper-run-42.txt",
+      "sha256": "bc80d82b0190d51e615088c6eb8b14c9c8c79a223cd52ebaab22d5c4310df081"
+    }
+  ]
+}

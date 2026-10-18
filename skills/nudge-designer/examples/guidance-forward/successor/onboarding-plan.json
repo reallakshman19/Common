@@ -1,0 +1,241 @@
+{
+  "schema": "nudge-designer.plan/v1",
+  "id": "P-SUCCESSOR-ONBOARD",
+  "revision": 1,
+  "intent_id": "I-SUCCESSOR-ONBOARD",
+  "intent_revision": 1,
+  "intent_sha256": "8a899fd4c3da217fdad95eda79ab9c5621a9d697c4aee76774f864e966bb7ffb",
+  "profile_ids": [
+    "core",
+    "ui"
+  ],
+  "profiles_sha256": "0a29426ed4ae426919eee4845393fc70245d943a5a24b749f87c26fc0cd0b9a3",
+  "strategy": "Keep the original UI outcome and useful limited helper record. Correct unsupported production/activation conclusions in a new local reconstruction while preserving issued history. Source/receipt reconciliation is useful and authorized; immediate repair or activation lacks both evidence and authority. No speculative cause or product task is issued.",
+  "nudges": [
+    {
+      "id": "N-RECONSTRUCT",
+      "parent_id": null,
+      "type": "ground",
+      "outcome_refs": [
+        "O-ONBOARD"
+      ],
+      "item_refs": [
+        "R-ORIGINALS",
+        "R-IDENTITY",
+        "R-RESPONSIVE",
+        "R-RECONSTRUCT",
+        "C-SCOPE",
+        "C-NEXT",
+        "F-REPORT",
+        "F-RECEIPT",
+        "F-APP",
+        "U-IDENTITIES",
+        "U-JOURNEY",
+        "U-CAUSE",
+        "U-CONFIG"
+      ],
+      "source_refs": [
+        "S-OWNER",
+        "S-REPORT",
+        "S-APP",
+        "S-RECEIPT"
+      ],
+      "profile_ids": [
+        "core",
+        "ui"
+      ],
+      "purpose": "Recover project meaning without the predecessor while preserving all original UI conditions and evidence boundaries.",
+      "deliverable": "One reconstruction.md with sources, identity distinctions, reconciliation, remaining outcomes and a current start reference; JSON objects are local support drafts.",
+      "understanding": [
+        "This onboarding deliverable is separate from the unaccepted UI outcome.",
+        "Synthetic helper PASS through a substituted entrypoint does not prove unchanged ordinary application behavior.",
+        "A function name does not establish actual runtime blocking or a justified repair."
+      ],
+      "reasoning_moves": [
+        "reconstruct",
+        "trace",
+        "compare",
+        "challenge",
+        "reconcile"
+      ],
+      "evidence_methods": [
+        "source_trace",
+        "artifact_readback",
+        "counterexample"
+      ],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {
+        "preserve_refs": [
+          "C-SCOPE",
+          "C-NEXT",
+          "R-ORIGINALS",
+          "R-IDENTITY",
+          "R-RESPONSIVE"
+        ],
+        "do_not": [
+          "Treat archived activation advice as current authority.",
+          "Claim runtime execution, product PASS/failure, independent review, repair success or outcome acceptance from this reconstruction.",
+          "Start product work or invent a protocol/approval gate."
+        ]
+      },
+      "success": {
+        "observable": "The source-linked reconstruction corrects evidence scope, preserves inputs and explicitly awaits the next task.",
+        "negative_case": "Helper PASS remains compatible with an untested or failing ordinary UI journey because the receipt uses a substituted entrypoint and says the ordinary journey was NO. A conclusion of production PASS or release readiness from this receipt fails this contrast."
+      },
+      "uncertainty": {
+        "missing": [
+          "Full original history/code and exact candidate/main/test/deployed identity",
+          "Runtime original-file UI and responsiveness evidence",
+          "Unobserved model/reasoning configuration and formal qualification"
+        ],
+        "return_with": "Complete the reconstruction with unknowns and unexecuted work explicit, then await the Owner next task. Reconcile affected conclusions if new authoritative evidence is later supplied.",
+        "independent_work": [
+          "Read and reconcile the available raw records",
+          "Retain the limited helper claim and original requirements",
+          "Check local draft structure where support is available and read back artifacts"
+        ]
+      },
+      "report": {
+        "required": [
+          "Actual artifact paths and bounded completion",
+          "Supplied claims versus fresh file observations and derived conclusions",
+          "Source, runtime, authority and review limits",
+          "Remaining original outcomes and await-next-task continuation"
+        ],
+        "next_action": "Return the onboarding. No additional protocol/review rule is supplied; await the Owner next task without executing a product continuation."
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "target_id": "R-ORIGINALS",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [
+        "S-OWNER",
+        "S-RECEIPT"
+      ],
+      "rationale": "Original outcome retained; ordinary UI runtime evidence and integrated acceptance absent. Product work is outside this assignment."
+    },
+    {
+      "target_id": "R-IDENTITY",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [
+        "S-OWNER",
+        "S-RECEIPT"
+      ],
+      "rationale": "Original outcome retained; ordinary UI runtime evidence and integrated acceptance absent. Product work is outside this assignment."
+    },
+    {
+      "target_id": "R-RESPONSIVE",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [
+        "S-OWNER",
+        "S-RECEIPT"
+      ],
+      "rationale": "Original outcome retained; ordinary UI runtime evidence and integrated acceptance absent. Product work is outside this assignment."
+    },
+    {
+      "target_id": "O-UI",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [
+        "S-OWNER",
+        "S-RECEIPT"
+      ],
+      "rationale": "Original outcome retained; ordinary UI runtime evidence and integrated acceptance absent. Product work is outside this assignment."
+    },
+    {
+      "target_id": "R-RECONSTRUCT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [
+        "S-OWNER"
+      ],
+      "rationale": "Records the authorized bounded onboarding and its boundary, not a new product assignment."
+    },
+    {
+      "target_id": "C-SCOPE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [
+        "S-OWNER"
+      ],
+      "rationale": "Records the authorized bounded onboarding and its boundary, not a new product assignment."
+    },
+    {
+      "target_id": "C-NEXT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [
+        "S-OWNER"
+      ],
+      "rationale": "Records the authorized bounded onboarding and its boundary, not a new product assignment."
+    },
+    {
+      "target_id": "O-ONBOARD",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [
+        "S-OWNER"
+      ],
+      "rationale": "Records the authorized bounded onboarding and its boundary, not a new product assignment."
+    },
+    {
+      "target_id": "U-IDENTITIES",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [],
+      "rationale": "Reconstruction can complete with this unknown preserved; no runtime result, qualification or authority is invented."
+    },
+    {
+      "target_id": "U-JOURNEY",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [],
+      "rationale": "Reconstruction can complete with this unknown preserved; no runtime result, qualification or authority is invented."
+    },
+    {
+      "target_id": "U-CAUSE",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [],
+      "rationale": "Reconstruction can complete with this unknown preserved; no runtime result, qualification or authority is invented."
+    },
+    {
+      "target_id": "U-CONFIG",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "N-RECONSTRUCT"
+      ],
+      "evidence_refs": [],
+      "rationale": "Reconstruction can complete with this unknown preserved; no runtime result, qualification or authority is invented."
+    }
+  ],
+  "handover": {
+    "remaining": [
+      "All integrated original UI outcome evidence and acceptance",
+      "Full exact current, tested and deployed source identities",
+      "Any later authorized diagnosis or repair; none is started here"
+    ],
+    "next_action": "Current start: reconstruction.md. Return this reconstruction and await the Owner next task; no separate approval protocol is supplied.",
+    "changed_understanding": "The handover production UI PASS and activation advice exceed the synthetic receipt, which substituted the entrypoint and explicitly excluded unchanged on_inspect and the original-file ordinary UI journey. The supplied fragment still calls legacy.inspect_sync. Runtime behavior and cause remain unknown."
+  }
+}
