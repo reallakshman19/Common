@@ -197,7 +197,8 @@ mechanical category of `scripts/a13_check_v36.py`, not proof of approval.
 `python skills/engineering-pr-delivery-v3.6/scripts/a13_check_v36.py
 --base <BASE_SHA> --head <HEAD_SHA> --scope <POLICY_JSON>`.
 The `--scope` policy must exist at the **base** commit and remain byte-identical
-at head and in the worktree. Example shape:
+at head **in Git objects**. Working-tree CRLF conversion does not change this check.
+Example shape:
 `{"paths":["src/module.py","tests/test_module_v36.py"],
 "ci_workflow":".github/workflows/tests.yml","ci_pattern":"test_*_v36.py",
 "protected":["logs/","protocol/"],"forbidden_literals":[]}`.
