@@ -164,8 +164,8 @@ the actual full test suite or independent source review.
 ## 5. Recompute the score
 
 Save the verified `before.json` and `after.json` with
-`run`, `passed`, exact `sha`. **`before.json` is the baseline suite
-before the change, not the RED commit**. A new throwaway project may
+`run`, `passed`, exact `sha`. **`before.json` is the baseline suite before the change,
+not the RED commit**. A new throwaway project may
 start with no tests; declare a zero-test baseline explicitly, using
 `"zero_test_baseline": true` only with `"run": 0` and `"passed": 0`.
 For the actual pilot baseline, the filled `before.json` is:
