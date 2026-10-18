@@ -4,6 +4,8 @@
 
 **Agent addendum (A01–A14, incl. Owner-required A13 coding practice and A14 pre-claim SELF-CHECK):** [CODING_PRACTICES_ADDENDUM.md](CODING_PRACTICES_ADDENDUM.md). It is additive. The canonical 8-line evidence and the terminal LOG are unchanged.
 
+**Admitted C1 issue-history structural reader (#401 / #409):** [CONTINUITY_CHAIN_V1.md](CONTINUITY_CHAIN_V1.md) and `scripts/issue_chain_v36.py` with synthetic/reported-only [fixture](tests/fixtures/issue-chain-274-reported.json). These **account for 11 categories** while explicitly preserving UNKNOWN, missing originals and zero external source attestation. This is a pure JSON validator (no network, provider writes, new task evidence, approval, automatic scoreboard A promotion, title or label updates). It is **not** the active approved label/plan for any work, and it does not replace the canonical 8-line receipt, self-check or mandatory terminal LOG. Real provenance verification and activation are separate Owner-scoped gates.
+
 ## 1. Mandatory inputs — work-specific, never silently default
 
 - **Label path:** an explicit, Owner-approved `--label relay/AIM/<WORK>.yaml` from that work's repository. The work ID comes from the filename and must match the label's `work`. **There is no default V35-LIFECYCLE label.** A copied test fixture is not approval.
