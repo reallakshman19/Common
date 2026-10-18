@@ -1,0 +1,37 @@
+{
+  "version": "buddy-runner/v2",
+  "id": "relay-42",
+  "mode": "RECOVERY",
+  "continuation": "CONTINUE_AUTHORIZED_TASK",
+  "phase": "RECOVERY",
+  "actor": "incoming",
+  "incoming": "incoming",
+  "outgoing": "previous",
+  "owner": "owner",
+  "repository": "example/project",
+  "issue": "https://github.com/example/project/issues/1",
+  "assessed_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "assignment": {
+    "purpose": "Let the user export complete trace evidence.",
+    "deliverable": "Reconstruct purpose, source flow and best route.",
+    "inputs": [
+      "https://github.com/example/project/issues/1"
+    ],
+    "boundaries": [
+      "Preserve original fixtures and export semantics."
+    ],
+    "success": [
+      "Explain the real input to export path and a falsifier."
+    ],
+    "uncertainty": "Trace missing input custody; escalate only the affected change.",
+    "continuation": "Publish source-backed understanding and next action."
+  },
+  "profile": {
+    "model": "explicit-capable-model",
+    "effort": "xhigh",
+    "observed_model": "explicit-capable-model",
+    "observed_effort": "xhigh",
+    "basis": "runtime://selected-session",
+    "assurance": "HOST_OBSERVED"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "BuddyRunner v2.0"
+  short_description: "High-ROI relay, recovery and project onboarding"
+  default_prompt: "Use $buddy-runner-v2-0 to reconstruct this project, challenge the inherited route and select the best justified continuation."

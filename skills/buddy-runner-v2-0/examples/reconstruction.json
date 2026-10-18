@@ -1,0 +1,135 @@
+{
+  "actor": "incoming",
+  "phase": "RECOVERY",
+  "assessed_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sections": [
+    {
+      "id": 1,
+      "text": "Source-backed section 1",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Source-backed section 2",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Source-backed section 3",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Source-backed section 4",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Source-backed section 5",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Source-backed section 6",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Source-backed section 7",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Source-backed section 8",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Source-backed section 9",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Source-backed section 10",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 11,
+      "text": "Source-backed section 11",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Source-backed section 12",
+      "state": "REPORTED",
+      "refs": [
+        "https://github.com/example/project/issues/1"
+      ]
+    }
+  ],
+  "route_challenge": "The old route waits on unrelated UI CI; inspect the export consumer.",
+  "choices": [
+    {
+      "id": "reuse",
+      "decision": "IMPROVE",
+      "benefit": "Reuse the complete exporter.",
+      "route": "Connect the existing exporter through its adapter.",
+      "evidence": [
+        "src/export.py:write_trace"
+      ],
+      "effort": "S",
+      "risk": "Input identity could change.",
+      "falsifier": "Original rows differ."
+    },
+    {
+      "id": "keep",
+      "decision": "KEEP",
+      "benefit": "Preserve current behavior.",
+      "route": "Continue the inherited integration.",
+      "evidence": [
+        "src/ui.py:build"
+      ],
+      "effort": "M",
+      "risk": "Retains an unnecessary dependency.",
+      "falsifier": "Exporter cannot be reused."
+    }
+  ],
+  "chosen": "reuse",
+  "rationale": "Existing exporter preserves the oracle with less work.",
+  "next_action": "Verify original input identity through the existing adapter.",
+  "findings": [],
+  "takeover_id": "relay-42"
+}

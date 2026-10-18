@@ -58,4 +58,3 @@ def reconstruction():
 def source(body, author="owner", owner_instruction=True, kinds=None):
     return {"body": body, "author": author, "owner_instruction": owner_instruction,
             "instruction_kinds": kinds if kinds is not None else ["RECONSTRUCTION_APPROVAL", "TASK_PROMPT"]}
-
