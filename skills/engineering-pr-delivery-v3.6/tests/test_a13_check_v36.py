@@ -18,7 +18,8 @@ def git(repo, *args):
 def write(repo, name, data):
     path = repo / name
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(data, encoding="utf-8")
+    # Bypass Windows text-mode newline conversion; Git fixtures begin as LF bytes.
+    path.write_bytes(data.encode("utf-8"))
 
 
 def fixture(repo, variant=""):
@@ -174,8 +175,11 @@ class CheckpointTests(unittest.TestCase):
             base, head, _, scope = fixture(repo)
             git(repo, "config", "core.autocrlf", "true")
             original = scope.read_bytes()
-            self.assertNotIn(b"\r\n", original)
-            scope.write_bytes(original.replace(b"\n", b"\r\n"))
+            base_blob = subprocess.check_output(
+                ["git", "show", f"{base}:policy.json"], cwd=repo)
+            self.assertEqual(original, base_blob)
+            self.assertNotIn(b"\r\n", base_blob)
+            scope.write_bytes(base_blob.replace(b"\n", b"\r\n"))
             self.assertIn(b"\r\n", scope.read_bytes())
             checker = importlib.import_module("a13_check_v36")
             report = checker.check(repo, base, head, scope)
