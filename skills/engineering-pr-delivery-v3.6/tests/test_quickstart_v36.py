@@ -78,7 +78,12 @@ class QuickstartTests(unittest.TestCase):
                       "__CRITERIA__": criteria.as_posix(),
                       "__SELFCHECK__": check.as_posix(),
                       "__INFLATED__": bad.as_posix(), "__BEFORE__": before.as_posix(),
-                      "__AFTER__": after.as_posix(), "__DIFF__": diff.as_posix()}
+                      "__AFTER__": after.as_posix(), "__DIFF__": diff.as_posix(),
+                      "__BENEFIT__": "Offline example only",
+                      "__PROOF__": "https://github.com/reallakshman19/Common/pull/433",
+                      "__TASK__": "V36-341-WP1", "__CHILD__": "reallakshman19/Common#345",
+                      "__CANDIDATE__": "reallakshman19/Common@" + head,
+                      "__PASS__": "298", "__RUN__": "298"}
             netlog = folder / "network-attempts.log"
             blocker = folder / "sitecustomize.py"
             blocker.write_bytes((
