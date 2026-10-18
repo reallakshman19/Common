@@ -89,3 +89,12 @@ python "skills/Handover Master/route.py" --mode status
 Return compact human summary: `MODE`, `GOVERNANCE`, `LIVE SOURCE (path, SHA, revision)`, `WHY THIS MODE`, `PHASE`, `AUTHORITY`, `EVIDENCE`, `BLOCKERS`, `GENERATED ARTIFACT`, `NEXT VERIFY`. If insufficient evidence: `HOLD` and list missing source/role/approval, rather than inventing a selected answer.
 
 **Do not** turn this Master into a new Common lifecycle skill, Dashboard v2, protocol governor, Project Coordinator or automated actions service. See [MODULE_INDEX.md](MODULE_INDEX.md) for all actual links, [SKILL.md](SKILL.md) for canonical agent instruction and [sources.json](sources.json) for machine navigation.
+
+
+## 7. v3.6 tenth-agent issue continuity (Common #400)
+
+For v3.6 engineering work, read [native continuity chain contract](../engineering-pr-delivery-v3.6/CONTINUITY_CHAIN_V1.md) after choosing the governing work/label. The owning issue is the durable source of the original Owner WHY and significant Owner-supplied technical amendments, original fixtures and complete golden, measured benchmark, causal implementation crux, what agents 2/3/10 contributed, PARKED and high-ROI adopted ideas (with the actual Owner decision reference), failures and a reproducible next verification.
+
+The additive C1 `issue_chain_v36.py` only validates that all 11 categories are explicitly represented or marked UNKNOWN. **100% accounted is not 100% verified.** Re-fetch live issue/source and independently authenticate input bytes, actor and semantic result before engineering acceptance. A technical handover report is a filtered, source-referenced view; a last chat or predecessor LOG is never its only source.
+
+BuddyRunner 1a/1b/2 and Xb→Y, and separate native v3.6 2-/3-pass generators may consume **phase-safe issue evidence pointers** only. Early independent stages must not receive predecessor solutions. Do not append an extra phase or automatically promote a proposed improvement as adopted. This entrypoint remains a router, not an Owner decision issuer or GitHub title writer. Smart title/label enhancement is a later opt-in publisher workpack, not part of C1.
