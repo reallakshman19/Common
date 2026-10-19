@@ -1,0 +1,111 @@
+{
+  "kind": "Actual final local identity receipt; no authentication or acceptance",
+  "input_preservation": [
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-design.md",
+      "before_sha256": "f629ad828838d3e2690246ab1aaecb8c858b520bec487ec22358d0de1a5cfd68",
+      "after_sha256": "f629ad828838d3e2690246ab1aaecb8c858b520bec487ec22358d0de1a5cfd68",
+      "unchanged": true
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-map.json",
+      "before_sha256": "e3b93c74e9fa779644b8b076381c047f835b6f7b9781c49705eff98aa703d5d9",
+      "after_sha256": "e3b93c74e9fa779644b8b076381c047f835b6f7b9781c49705eff98aa703d5d9",
+      "unchanged": true
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/owner.md",
+      "before_sha256": "f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+      "after_sha256": "f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+      "unchanged": true
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/guard.js",
+      "before_sha256": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+      "after_sha256": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+      "unchanged": true
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/events.json",
+      "before_sha256": "9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+      "after_sha256": "9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+      "unchanged": true
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/analysis-checks.json",
+      "before_sha256": "51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+      "after_sha256": "51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+      "unchanged": true
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/consumer/owner.md",
+      "before_sha256": "68151e7db68db56488e369e7778f892d750dd081649e5f280b5141d9f041d10c",
+      "after_sha256": "68151e7db68db56488e369e7778f892d750dd081649e5f280b5141d9f041d10c",
+      "unchanged": true
+    }
+  ],
+  "prepared_binding_matches_current_native_objects": true,
+  "source_pins_match_current_bytes": true,
+  "output_artifacts": [
+    {
+      "file": "check_inputs.py",
+      "sha256": "1101616228db1d9ea02a5cd9b0a0d619f8a52d13577954fb0ecb87c33340ff11",
+      "bytes": 8445
+    },
+    {
+      "file": "source-checks.json",
+      "sha256": "62470a59b3290ff0dc45d82f70c2febccd495e2658aadef14843ce00734f6baf",
+      "bytes": 12116
+    },
+    {
+      "file": "intent.json",
+      "sha256": "cc2c9e46365d37c358faf3f3adf4cb4e92b7fccec39e9e10fec8e68f4b79b00b",
+      "bytes": 17398
+    },
+    {
+      "file": "plan.json",
+      "sha256": "e28ffb85609c39d68c05eaf018e10070bafb2b1eb0b7c95b9c32d55bd8715f9e",
+      "bytes": 15906
+    },
+    {
+      "file": "worker.md",
+      "sha256": "84d684d542e239d5760f9f23789c71092953d3c412ca5f5fbabb218259e30c9c",
+      "bytes": 19291
+    },
+    {
+      "file": "validation.json",
+      "sha256": "2d4f5ca487e8f50fa778c08dd71cd8801665428f7df6c727146d74c0808d90a6",
+      "bytes": 360
+    },
+    {
+      "file": "fit.json",
+      "sha256": "8d3a6a2957d70c120bf0ecc140fd842d912e4aafa72640a5564fd73810dd2937",
+      "bytes": 761
+    },
+    {
+      "file": "prepared-binding.json",
+      "sha256": "d3b9de21621587d36f5d7196fe46d4336bb8109bf65996f41423ace3aec76667",
+      "bytes": 465
+    },
+    {
+      "file": "reconciliation.md",
+      "sha256": "0d16a00baccc17e5f7aa7663015fced385511d03af6a6ee5a0b53af473ff8b9b",
+      "bytes": 4574
+    }
+  ],
+  "checks": {
+    "structural_status": "STRUCTURALLY_VALID",
+    "fit": "NOT_ESTABLISHED",
+    "sender_checks": {
+      "pass": 7,
+      "fail": 0
+    },
+    "worker_dispatched": false,
+    "product_execution": "NOT_RUN",
+    "external_write": "NOT_RUN",
+    "model": "UNKNOWN",
+    "reasoning_effort": "UNKNOWN",
+    "formal_qualification": "UNKNOWN"
+  },
+  "limits": "Manifest omits its own digest. Scope is the named allowed inputs and authored consumer artifacts; no global filesystem or product acceptance claim."
+}

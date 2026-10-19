@@ -1,0 +1,102 @@
+{
+  "kind": "Local analytical check receipt; not application execution or product acceptance",
+  "runtime": {
+    "python": "3.12.14",
+    "model": "UNKNOWN",
+    "reasoning_effort": "UNKNOWN",
+    "formal_qualification": "UNKNOWN"
+  },
+  "source_file_sha256": {
+    "owner.md": "f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+    "guard.js": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+    "events.json": "9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524"
+  },
+  "method": "Python -B read the original files, verified the supplied guard matches exactly the literal revision-equality function, and evaluated that expression for the finite integer revisions in the supplied event sequence. No JavaScript engine, browser, or production application was run. Source and revision equality is the Owner invariant, not a chosen implementation repair.",
+  "checks": [
+    {
+      "name": "supplied_guard_expression_recognized",
+      "result": "PASS"
+    },
+    {
+      "name": "exact_supplied_event_order_and_started_completion_identity",
+      "result": "PASS"
+    },
+    {
+      "name": "original_trace_exposes_revision_only_admission_of_wrong_source",
+      "result": "PASS"
+    },
+    {
+      "name": "positive_and_stale_revision_analytic_contrasts",
+      "result": "PASS"
+    }
+  ],
+  "original_trace_observation": [
+    {
+      "step": 5,
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "displayed": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "revision_only_guard_model": true,
+      "owner_source_and_revision_invariant": false
+    }
+  ],
+  "analytic_contrasts": [
+    {
+      "id": "original_same_revision_wrong_source",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "revision_only_guard_model": true,
+      "owner_source_and_revision_invariant": false,
+      "basis": "Supplied original pair"
+    },
+    {
+      "id": "current_source_and_revision",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "revision_only_guard_model": true,
+      "owner_source_and_revision_invariant": true,
+      "basis": "Locally constructed contrast, not an application event"
+    },
+    {
+      "id": "current_source_stale_revision",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "BETA",
+        "revision": 10
+      },
+      "revision_only_guard_model": false,
+      "owner_source_and_revision_invariant": false,
+      "basis": "Locally constructed contrast, not an application event"
+    }
+  ],
+  "limitations": [
+    "The supplied event record labels itself synthetic and disclaims production/browser execution.",
+    "The Python model is faithful to this literal expression for these integer inputs only; arbitrary JavaScript values and callers were not modeled.",
+    "The finding establishes an insufficiency of revision-only identity in this supplied sequence, not the cause or remedy of any production incident.",
+    "Current selection capture, call placement, publication timing, repeat selections, and all event orderings remain unverified."
+  ]
+}

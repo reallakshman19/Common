@@ -1,0 +1,444 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "revision",
+    "scale",
+    "request",
+    "purpose",
+    "performer_context",
+    "sources",
+    "items",
+    "scope",
+    "preserve_refs",
+    "tasks",
+    "coverage",
+    "focus",
+    "focus_reason"
+  ],
+  "properties": {
+    "schema": {
+      "const": "task-decomposer.map/v1"
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "scale": {
+      "enum": [
+        "PROGRAMME",
+        "SINGLE_PROBLEM"
+      ]
+    },
+    "request": {
+      "$ref": "#/$defs/text"
+    },
+    "purpose": {
+      "$ref": "#/$defs/text"
+    },
+    "performer_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "basis",
+        "limitations"
+      ],
+      "properties": {
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "basis": {
+          "enum": [
+            "OBSERVED",
+            "SUPPLIED",
+            "UNKNOWN"
+          ]
+        },
+        "limitations": {
+          "$ref": "#/$defs/texts"
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/item"
+      },
+      "minItems": 1
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "permitted",
+        "forbidden",
+        "source_refs"
+      ],
+      "properties": {
+        "permitted": {
+          "$ref": "#/$defs/texts"
+        },
+        "forbidden": {
+          "$ref": "#/$defs/texts"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/refs"
+        }
+      }
+    },
+    "preserve_refs": {
+      "$ref": "#/$defs/refs"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/task"
+      },
+      "minItems": 1
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/coverage"
+      }
+    },
+    "focus": {
+      "$ref": "#/$defs/refs"
+    },
+    "focus_reason": {
+      "$ref": "#/$defs/text"
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,79}$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "texts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "locator",
+        "revision",
+        "kind",
+        "assessment"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "locator": {
+          "$ref": "#/$defs/text"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/text"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "enum": [
+            "OWNER",
+            "SOURCE",
+            "RECEIPT",
+            "SYNTHETIC",
+            "UNKNOWN"
+          ]
+        },
+        "assessment": {
+          "enum": [
+            "READ_THIS_RUN",
+            "SUPPLIED",
+            "NOT_INSPECTED"
+          ]
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "statement",
+        "source_refs",
+        "blocks"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "REQUIREMENT",
+            "CONSTRAINT",
+            "FACT",
+            "HYPOTHESIS",
+            "PROPOSAL",
+            "UNKNOWN"
+          ]
+        },
+        "statement": {
+          "$ref": "#/$defs/text"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/refs"
+        },
+        "blocks": {
+          "$ref": "#/$defs/refs"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "not": {
+                  "const": "UNKNOWN"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_refs": {
+                "minItems": 1
+              },
+              "blocks": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "cut": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output",
+        "oracle",
+        "consumer",
+        "benefit",
+        "cost"
+      ],
+      "properties": {
+        "output": {
+          "$ref": "#/$defs/text"
+        },
+        "oracle": {
+          "$ref": "#/$defs/text"
+        },
+        "consumer": {
+          "$ref": "#/$defs/text"
+        },
+        "benefit": {
+          "$ref": "#/$defs/text"
+        },
+        "cost": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "parent_id",
+        "kind",
+        "detail",
+        "purpose",
+        "deliverable",
+        "item_refs",
+        "depends_on",
+        "understanding",
+        "decision_refs",
+        "limits",
+        "acceptance",
+        "boundary"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "enum": [
+            "DISCOVERY",
+            "WORK",
+            "INTEGRATION",
+            "REVIEW"
+          ]
+        },
+        "detail": {
+          "enum": [
+            "EXPANDED",
+            "BOUNDED",
+            "DEFERRED"
+          ]
+        },
+        "purpose": {
+          "$ref": "#/$defs/text"
+        },
+        "deliverable": {
+          "$ref": "#/$defs/text"
+        },
+        "item_refs": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/refs"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "depends_on": {
+          "$ref": "#/$defs/refs"
+        },
+        "understanding": {
+          "$ref": "#/$defs/texts"
+        },
+        "decision_refs": {
+          "$ref": "#/$defs/refs"
+        },
+        "limits": {
+          "$ref": "#/$defs/texts"
+        },
+        "acceptance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "observable",
+            "contrast",
+            "integration"
+          ],
+          "properties": {
+            "observable": {
+              "$ref": "#/$defs/text"
+            },
+            "contrast": {
+              "$ref": "#/$defs/text"
+            },
+            "integration": {
+              "$ref": "#/$defs/text"
+            }
+          }
+        },
+        "boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "choice",
+            "reason",
+            "cut"
+          ],
+          "properties": {
+            "choice": {
+              "enum": [
+                "KEEP",
+                "SPLIT",
+                "MERGE",
+                "DISCOVER_FIRST",
+                "DEFER"
+              ]
+            },
+            "reason": {
+              "$ref": "#/$defs/text"
+            },
+            "cut": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/cut"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_ref",
+        "disposition",
+        "task_refs",
+        "source_refs",
+        "reason"
+      ],
+      "properties": {
+        "item_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "disposition": {
+          "enum": [
+            "PLANNED",
+            "UNRESOLVED",
+            "DEFERRED",
+            "EVIDENCE_REPORTED",
+            "SUPERSEDED"
+          ]
+        },
+        "task_refs": {
+          "$ref": "#/$defs/refs"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/refs"
+        },
+        "reason": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "schema": "nudge-designer.plan/v1.1",
+  "id": "PLAN-SINGLE-SOURCE-IDENTITY",
+  "revision": 1,
+  "intent_id": "INTENT-SINGLE-SOURCE-IDENTITY",
+  "intent_revision": 1,
+  "intent_sha256": "3b606d900a7b05d2d8b9b5809ff4998cf448989635c8cca3c69d7620a1357218",
+  "profile_ids": [
+    "core",
+    "logic"
+  ],
+  "profiles_sha256": "8206572db53b2fb8367a152e96cad457a8c46f448249958125a7acf17ec263cc",
+  "strategy": "KEEP the issued one-task boundary and T-INVESTIGATE identity. Use a concrete GUIDED trace-and-contrast method because file/Python access is supplied while task-specific fit is unestablished. Finite evidence can expose revision-only identity insufficiency without choosing architecture or claiming production causality; splitting these reasoning operations would duplicate the same invariant and deliverable.",
+  "nudges": [
+    {
+      "id": "T-INVESTIGATE",
+      "parent_id": null,
+      "type": "ground",
+      "outcome_refs": [
+        "O-INVESTIGATION"
+      ],
+      "item_refs": [
+        "R-INVESTIGATE",
+        "R-IDENTITY",
+        "C-ORIGINAL",
+        "C-SCOPE",
+        "C-REPAIR",
+        "C-QUALIFICATION",
+        "F-ACCESS",
+        "F-GUARD",
+        "F-TRACE",
+        "F-COUNTEREXAMPLE",
+        "U-RUNTIME",
+        "U-PRODUCTION",
+        "U-REPAIR",
+        "C-DOWNSTREAM",
+        "F-SENDER-CHECK"
+      ],
+      "source_refs": [
+        "S-LOCAL",
+        "S-DESIGN",
+        "S-MAP",
+        "S-OWNER",
+        "S-GUARD",
+        "S-EVENTS",
+        "S-ANALYSIS",
+        "S-CHECKS"
+      ],
+      "profile_ids": [
+        "core",
+        "logic"
+      ],
+      "purpose": "Establish the source identity distinction and decisive evidence needed to investigate the wrong-source result without turning an unverified explanation into a prescribed product repair.",
+      "deliverable": "One source-grounded investigation note that reconstructs the exact supplied event sequence, states the current-source/current-revision publication invariant, explains the supplied guard counterexample with discriminating contrasts, and preserves the limits and open production/repair judgments.",
+      "understanding": [
+        "Track selected source, selected revision, request/completion identity and displayed identity separately across the exact event order; the completion occurs after the selection changes.",
+        "Revision 11 can belong to both ALPHA and BETA in the supplied record. A successful revision equality does not imply equal source identities.",
+        "The relevant oracle is the Owner condition at display: the published result corresponds to the then-current source and revision. The analytical equality oracle describes the condition without choosing storage, cancellation or request architecture.",
+        "Distinguish the observed synthetic trace, the finite Python model of the guard expression, and hypotheses about production execution. A model counterexample is sufficient to refute revision-only identity for these conditions but cannot validate every ordering or a production remedy.",
+        "A recipient must be able to evaluate the invariant, competing explanations and evidence limits. File/Python access does not establish that judgment; model, effort and qualification stay UNKNOWN."
+      ],
+      "reasoning_moves": [
+        "reconstruct",
+        "trace",
+        "derive",
+        "compare",
+        "challenge"
+      ],
+      "evidence_methods": [
+        "source_trace",
+        "counterexample",
+        "state_comparison",
+        "artifact_readback"
+      ],
+      "depends_on": [],
+      "branches": [
+        {
+          "observation": "An input pin, representation, literal guard or trace premise differs from the issued source.",
+          "next_ids": [],
+          "rationale": "Return that specific affected claim and original bytes/observations; preserve independent readable-input work. Do not silently substitute an easier case."
+        },
+        {
+          "observation": "The bounded note and finite checks are complete without contradiction.",
+          "next_ids": [],
+          "rationale": "Return to the Designer for semantic reconciliation. Production investigation and repair remain unassigned; no automatic continuation or acceptance follows."
+        }
+      ],
+      "boundaries": {
+        "preserve_refs": [
+          "C-ORIGINAL",
+          "C-SCOPE",
+          "C-REPAIR",
+          "C-QUALIFICATION",
+          "C-DOWNSTREAM"
+        ],
+        "do_not": [
+          "Do not split source identity, trace reconstruction and contrasts into separately accepted tasks.",
+          "Do not treat the supplied receipt, new sender check, a valid schema or a successful contrast as application reproduction or participant qualification."
+        ]
+      },
+      "success": {
+        "observable": "The investigation note cites exact pinned inputs; shows BETA@11 selected before ALPHA@11 completes/displays; evaluates the revision-only guard as true for that original pair while the Owner identity condition is false; and explains which evidence is supplied versus locally modeled. It states unknowns and the evidence needed for any later production decision.",
+        "negative_case": "It distinguishes the original same-revision/different-source failure from a matching current BETA@11 result and a same-source stale-revision result. Neither blocking every completion nor demonstrating only a different-revision stale result satisfies the investigation. These contrasts are analytical expectations, not an authorized replacement guard."
+      },
+      "uncertainty": {
+        "missing": [
+          "U-RUNTIME: task-specific recipient judgment, actual model/effort and formal qualification are UNKNOWN.",
+          "U-PRODUCTION: actual state/caller/publication behavior and incident correspondence are not supplied.",
+          "U-REPAIR: suitable architecture and all-ordering correctness are unestablished."
+        ],
+        "return_with": "Return the bounded note and actual computation witnesses. If a premise differs, identify which conclusion is affected and what was actually observed. These unknowns do not prevent local source analysis; stop only the unsupported production, qualification or remedy judgment.",
+        "independent_work": [
+          "Verify pinned input identity and preserve the original event trace.",
+          "Perform the finite integer comparisons and retain useful source-linked analysis even when a production claim cannot be made."
+        ]
+      },
+      "report": {
+        "required": [
+          "Return one investigation note with input byte hashes, exact state table, both predicates for the original pair and the two labeled contrasts, method, actual result and limits. Python must use -B; write new artifacts only in consumer/.",
+          "Link every material numerical/state claim to its source row or reproducible calculation; compare against the supplied receipt without copying its PASS labels as evidence.",
+          "State completed local work separately from unverified parent publication behavior, production cause, repair and recipient qualification. The Designer will check consequential computed claims against original inputs; no independent-agent review is claimed."
+        ],
+        "next_action": "Return the note and native evidence to the Designer within the existing local workflow. Current work only prepares this brief; it does not dispatch it. Any later production investigation is a proposal requiring actual scope."
+      },
+      "assignment": {
+        "role": "WORKER",
+        "participant_id": "P-RECIPIENT",
+        "capabilities": [
+          {
+            "id": "identity_order_judgment",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "tools": [
+          {
+            "id": "file_access",
+            "importance": "ESSENTIAL"
+          },
+          {
+            "id": "python_access",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "support": "GUIDED",
+        "method": "1. Read the fixed raw owner, guard and events inputs. Compute their byte SHA-256 values and compare the issued source pins; use strict UTF-8/JSON, retaining original bytes. If the guard is not the exact supplied literal or an input pin differs, report the affected analysis before making guard claims; the unchanged manifest and readable trace can still be prepared.\n2. From the raw events, construct one ordered table with step/action and then-current selected, started, completed and displayed (source, revision) pairs. Keep every original event, including the selection change before completion. Use an explicit absent value before a state exists.\n3. State a concrete prediction for admission and identity at display from that table. For these finite integer revisions only, evaluate the unchanged guard expression as revision equality. Separately evaluate the Owner condition as equality of both source and revision at display; this is an analytical oracle, not replacement product code.\n4. Derive two labeled analytical contrasts from the current selected pair: a matching completion, and a same-source completion with an older revision. Show inputs and both predicates, then compare your independently computed rows with the supplied analytical receipt. A copied result or the known target values is not evidence of recipient qualification.\n5. Write one note linking each material claim to raw source/step or a reproducible computation. State contradictions or restrictions precisely, retain production and repair unknowns, and return the note and actual checks without proposing an unverified fix as the conclusion.",
+        "worked_example": null,
+        "reserved_decisions": [
+          "Production caller/state ownership, authoritative source representation, selection capture and publication timing remain unresolved.",
+          "No architecture or implementation remedy is selected, including identity guard, request generation, cancellation or publication revalidation.",
+          "Recipient task-specific qualification, actual runtime model and reasoning effort remain UNKNOWN; source access, a guided prompt and known target contrasts cannot establish them.",
+          "Only an actually authorized later investigation may assess ordinary application behavior and any product acceptance."
+        ],
+        "review_of": []
+      }
+    }
+  ],
+  "participants": [
+    {
+      "id": "P-RECIPIENT",
+      "label": "Supplied intended recipient; no actual agent is allocated by this record",
+      "roles": [
+        "WORKER"
+      ],
+      "capabilities": [
+        {
+          "id": "identity_order_judgment",
+          "status": "UNKNOWN",
+          "basis": "UNKNOWN",
+          "evidence_refs": [
+            "S-OWNER",
+            "S-LOCAL"
+          ],
+          "note": "No task-specific trial or qualification evidence for the intended recipient. Known target answers cannot serve as independent qualification evidence."
+        }
+      ],
+      "tools": [
+        {
+          "id": "file_access",
+          "status": "AVAILABLE",
+          "basis": "REPORTED",
+          "evidence_refs": [
+            "S-OWNER"
+          ],
+          "note": "Supplied recipient context only; this Designer has not tested future-recipient access."
+        },
+        {
+          "id": "python_access",
+          "status": "AVAILABLE",
+          "basis": "REPORTED",
+          "evidence_refs": [
+            "S-OWNER"
+          ],
+          "note": "Supplied recipient context only; this run demonstrates the Designer runtime, not future-recipient runtime."
+        }
+      ],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN: neither runtime model nor reasoning effort is observable for the intended recipient. No model/effort override or formal qualification is established."
+    }
+  ],
+  "coverage": [
+    {
+      "target_id": "R-INVESTIGATE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved in the same T-INVESTIGATE task; planned coverage is not execution or acceptance."
+    },
+    {
+      "target_id": "R-IDENTITY",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved in the same T-INVESTIGATE task; planned coverage is not execution or acceptance."
+    },
+    {
+      "target_id": "C-ORIGINAL",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved in the same T-INVESTIGATE task; planned coverage is not execution or acceptance."
+    },
+    {
+      "target_id": "C-SCOPE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved in the same T-INVESTIGATE task; planned coverage is not execution or acceptance."
+    },
+    {
+      "target_id": "C-REPAIR",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved in the same T-INVESTIGATE task; planned coverage is not execution or acceptance."
+    },
+    {
+      "target_id": "C-QUALIFICATION",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved in the same T-INVESTIGATE task; planned coverage is not execution or acceptance."
+    },
+    {
+      "target_id": "U-RUNTIME",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Constrains dependent production/qualification/repair claims without stopping finite local analysis or planning."
+    },
+    {
+      "target_id": "U-PRODUCTION",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Constrains dependent production/qualification/repair claims without stopping finite local analysis or planning."
+    },
+    {
+      "target_id": "U-REPAIR",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Constrains dependent production/qualification/repair claims without stopping finite local analysis or planning."
+    },
+    {
+      "target_id": "C-DOWNSTREAM",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved in the same T-INVESTIGATE task; planned coverage is not execution or acceptance."
+    },
+    {
+      "target_id": "O-INVESTIGATION",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "T-INVESTIGATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "The bounded deliverable is preserved and prepared, not dispatched or completed by this plan."
+    },
+    {
+      "target_id": "O-PUBLICATION",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Ordinary product behavior remains outside local preparation scope and unverified; finite checks cannot accept it."
+    }
+  ],
+  "handover": {
+    "remaining": [
+      "The T-INVESTIGATE note is prepared work; no worker has been dispatched by this plan.",
+      "O-PUBLICATION remains unverified through the ordinary product path.",
+      "U-RUNTIME, U-PRODUCTION and U-REPAIR remain unresolved."
+    ],
+    "next_action": "Review the prepared brief and actual local check results under existing authority; no automatic production continuation is assigned.",
+    "changed_understanding": "No consequential change to the issued task, conditions or boundary. The explicit consumer/ output scope and GUIDED recipient method add local packaging and support; source identity, original evidence and reserved decisions are retained."
+  }
+}

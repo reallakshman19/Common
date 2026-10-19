@@ -1,0 +1,148 @@
+{
+  "schema": "task-decomposer.map/v1",
+  "id": "SINGLE-MODEL",
+  "revision": 1,
+  "scale": "SINGLE_PROBLEM",
+  "request": "Plan the complex mechanical calculation, preserving the actual physical conditions and unresolved model basis.",
+  "purpose": "Retain the complete calculation goal while first establishing the physical model; numerical production and engineering acceptance remain unresolved.",
+  "performer_context": {
+    "description": "Future performers and tool access are not yet established.",
+    "basis": "UNKNOWN",
+    "limitations": [
+      "No model, effort or formal qualification observed."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-CASE",
+      "locator": "raw.md",
+      "revision": "synthetic-case-1",
+      "kind": "SYNTHETIC",
+      "assessment": "SUPPLIED"
+    }
+  ],
+  "items": [
+    {
+      "id": "R-MODEL",
+      "kind": "REQUIREMENT",
+      "statement": "Identify the model basis needed for a trustworthy mechanical calculation.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-SCOPE",
+      "kind": "CONSTRAINT",
+      "statement": "Only local model reconstruction is assigned; no engineering design acceptance.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-SUPPORT",
+      "kind": "UNKNOWN",
+      "statement": "Actual restraint/load interpretation is missing.",
+      "source_refs": [],
+      "blocks": []
+    },
+    {
+      "id": "R-CALCULATION",
+      "kind": "REQUIREMENT",
+      "statement": "The requested complete mechanical calculation remains part of the intended outcome.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    }
+  ],
+  "scope": {
+    "permitted": [
+      "Local source analysis, task design and new planning artifacts."
+    ],
+    "forbidden": [
+      "Product edits, external dispatch and release."
+    ],
+    "source_refs": [
+      "S-CASE"
+    ]
+  },
+  "preserve_refs": [
+    "C-SCOPE"
+  ],
+  "tasks": [
+    {
+      "id": "T-MODEL",
+      "parent_id": null,
+      "kind": "DISCOVERY",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "A source-linked model-basis assessment and exact missing physical conditions.",
+      "item_refs": [
+        "R-MODEL",
+        "U-SUPPORT"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Unit consistency and numerical reproduction differ from physical model applicability."
+      ],
+      "decision_refs": [
+        "U-SUPPORT"
+      ],
+      "limits": [
+        "Reserve unresolved physical idealization and design acceptance for an appropriate domain participant."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Reproducing a number under an arbitrary support assumption cannot establish the actual model.",
+        "integration": "Model reconstruction leaves numerical production and engineering acceptance unresolved; retain the complete calculation goal."
+      },
+      "boundary": {
+        "choice": "DISCOVER_FIRST",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "item_ref": "R-MODEL",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-MODEL"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "C-SCOPE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-MODEL"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "U-SUPPORT",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-MODEL"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "R-CALCULATION",
+      "disposition": "DEFERRED",
+      "task_refs": [],
+      "source_refs": [],
+      "reason": "Retain numerical production after model reconstruction; no reliable physical basis or execution authority is supplied here."
+    }
+  ],
+  "focus": [
+    "T-MODEL"
+  ],
+  "focus_reason": "Choose work that establishes useful evidence while retaining unresolved parent outcomes."
+}

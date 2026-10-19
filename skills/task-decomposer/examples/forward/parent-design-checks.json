@@ -1,0 +1,122 @@
+{
+  "single": {
+    "task_count": 1,
+    "map_digest": "199638e23fdad84eacd8e0eaa80dd315d4fb8bbb3636fd29681b7560833c72c3",
+    "frontier": {
+      "scope": "DECLARED_DESIGN_CONTEXT_ONLY",
+      "candidates": [
+        {
+          "task": "T-INVESTIGATE",
+          "state": "DESIGN_CANDIDATE",
+          "blocking_unknowns": [],
+          "prerequisites": [],
+          "focus": true
+        }
+      ],
+      "deferred": [],
+      "unallocated": [],
+      "focus_reason": "A single BOUNDED investigation preserves the exact same-revision/different-source counterexample and the Owner publication invariant. No separate task or global stop is justified by missing production/configuration evidence; those limits remain explicit. This is a proposed design candidate, not an execution or acceptance decision.",
+      "authority_effects": []
+    },
+    "source_pins_verified": [
+      {
+        "id": "S-OWNER",
+        "file": "single/owner.md",
+        "whole_file_byte_sha256": "sha256:f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/owner.md"
+      },
+      {
+        "id": "S-GUARD",
+        "file": "single/guard.js",
+        "whole_file_byte_sha256": "sha256:0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/guard.js"
+      },
+      {
+        "id": "S-EVENTS",
+        "file": "single/events.json",
+        "whole_file_byte_sha256": "sha256:9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/events.json"
+      },
+      {
+        "id": "S-ANALYSIS",
+        "file": "single/analysis-checks.json",
+        "whole_file_byte_sha256": "sha256:51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/analysis-checks.json"
+      }
+    ],
+    "native_render_replay": "EXACT"
+  },
+  "long": {
+    "task_count": 6,
+    "map_digest": "b424b2df8cbbcd3635a69ff481ea007e59533b87abf8fdaffb99d2efc2edd591",
+    "frontier": {
+      "scope": "DECLARED_DESIGN_CONTEXT_ONLY",
+      "candidates": [
+        {
+          "task": "T-ORDINARY-JOURNEY",
+          "state": "DISCOVER_OR_DECIDE",
+          "blocking_unknowns": [
+            "U-CURRENT-MATERIALS",
+            "U-ORIGINAL-CONDITIONS"
+          ],
+          "prerequisites": [],
+          "focus": true
+        },
+        {
+          "task": "T-KEYBOARD",
+          "state": "DESIGN_CANDIDATE",
+          "blocking_unknowns": [],
+          "prerequisites": [],
+          "focus": true
+        }
+      ],
+      "deferred": [
+        "T-WORKFLOW-RESOLUTION",
+        "T-END-TO-END",
+        "T-BATCH"
+      ],
+      "unallocated": [
+        {
+          "item": "U-PERFORMER",
+          "disposition": "UNRESOLVED",
+          "statement": "Actual model/reasoning configuration and formal qualification are UNKNOWN. No wording in this design or successful structural check establishes them."
+        }
+      ],
+      "focus_reason": "T-ORDINARY-JOURNEY is the useful next product design: a source-bound ordinary-path investigation before any repair, with missing inputs explicitly scoped. It is a proposal outside current execution authority. T-KEYBOARD is independent local source work and its inventory is supplied now. Repair, whole-journey acceptance and unspecified batch implementation remain deferred; no global stop is inferred.",
+      "authority_effects": []
+    },
+    "source_pins_verified": [
+      {
+        "id": "S-OWNER",
+        "file": "long/owner.md",
+        "whole_file_byte_sha256": "sha256:e4ea5649cc156d3a716eb4d2a3ba3860a5c22e1ecf5f03cef42f5e23e36860de",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/owner.md:2-4"
+      },
+      {
+        "id": "S-ATTEMPTS",
+        "file": "long/records.md",
+        "whole_file_byte_sha256": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/records.md:2"
+      },
+      {
+        "id": "S-KEYBOARD",
+        "file": "long/records.md",
+        "whole_file_byte_sha256": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/records.md:4"
+      },
+      {
+        "id": "S-SCOPE",
+        "file": "long/records.md",
+        "whole_file_byte_sha256": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/records.md:6"
+      },
+      {
+        "id": "S-INVENTORY",
+        "file": "long/keyboard-help-inventory.md",
+        "whole_file_byte_sha256": "sha256:83dc94fcf291438ce761d63ca3b6dfedf50a0acce787dfdb8f91e86af8007971",
+        "declared_locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/keyboard-help-inventory.md"
+      }
+    ],
+    "native_render_replay": "EXACT"
+  }
+}

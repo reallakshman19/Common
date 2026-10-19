@@ -1,0 +1,77 @@
+{
+  "scope": "LOCAL_DECLARED_STRUCTURE_AND_ARTIFACT_INTEGRITY_ONLY",
+  "map_id": "M-LONG-DESKTOP",
+  "revision": 1,
+  "canonical_map_sha256": "b424b2df8cbbcd3635a69ff481ea007e59533b87abf8fdaffb99d2efc2edd591",
+  "validation_receipt_matches_map": true,
+  "frontier_receipt_matches_map": false,
+  "source_revision_checks": [
+    {
+      "source": "S-OWNER",
+      "matches_pinned_revision": true,
+      "actual_revision": "sha256:e4ea5649cc156d3a716eb4d2a3ba3860a5c22e1ecf5f03cef42f5e23e36860de"
+    },
+    {
+      "source": "S-ATTEMPTS",
+      "matches_pinned_revision": true,
+      "actual_revision": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f"
+    },
+    {
+      "source": "S-KEYBOARD",
+      "matches_pinned_revision": true,
+      "actual_revision": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f"
+    },
+    {
+      "source": "S-SCOPE",
+      "matches_pinned_revision": true,
+      "actual_revision": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f"
+    },
+    {
+      "source": "S-INVENTORY",
+      "matches_pinned_revision": true,
+      "actual_revision": "sha256:83dc94fcf291438ce761d63ca3b6dfedf50a0acce787dfdb8f91e86af8007971"
+    }
+  ],
+  "render_binding_checks": [
+    {
+      "task": "T-ORDINARY-JOURNEY",
+      "file": "ordinary-journey-task-design.md",
+      "equals_render_of_issued_map": true,
+      "contains_canonical_binding": true
+    },
+    {
+      "task": "T-KEYBOARD",
+      "file": "keyboard-task-design.md",
+      "equals_render_of_issued_map": true,
+      "contains_canonical_binding": true
+    }
+  ],
+  "actual_declared_blocking_unknowns_by_task": {
+    "T-WORKFLOW": [],
+    "T-ORDINARY-JOURNEY": [
+      "U-CURRENT-MATERIALS",
+      "U-ORIGINAL-CONDITIONS"
+    ],
+    "T-WORKFLOW-RESOLUTION": [
+      "U-CURRENT-MATERIALS",
+      "U-ORDINARY-BEHAVIOR",
+      "U-ORIGINAL-CONDITIONS"
+    ],
+    "T-END-TO-END": [
+      "U-CURRENT-MATERIALS",
+      "U-ORDINARY-BEHAVIOR",
+      "U-ORIGINAL-CONDITIONS"
+    ],
+    "T-KEYBOARD": [],
+    "T-BATCH": [
+      "U-BATCH"
+    ]
+  },
+  "authority_effects": [],
+  "limits": [
+    "No product, browser, repair, export or Owner acceptance was checked.",
+    "The supplied attempt/keyboard records remain synthetic supplied claims, not authenticated observations.",
+    "Declared dependency/blocking propagation can miss undeclared relationships.",
+    "No runtime model, reasoning effort or formal qualification was inferred."
+  ]
+}

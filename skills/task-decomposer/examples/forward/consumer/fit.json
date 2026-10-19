@@ -1,0 +1,33 @@
+{
+  "status": "NOT_ESTABLISHED",
+  "affected_nudge": "T-INVESTIGATE",
+  "participant_id": "P-RECIPIENT",
+  "role_mismatch": false,
+  "requirements": [
+    {
+      "group": "capabilities",
+      "id": "identity_order_judgment",
+      "importance": "ESSENTIAL",
+      "status": "UNKNOWN",
+      "basis": "UNKNOWN"
+    },
+    {
+      "group": "tools",
+      "id": "file_access",
+      "importance": "ESSENTIAL",
+      "status": "AVAILABLE",
+      "basis": "REPORTED"
+    },
+    {
+      "group": "tools",
+      "id": "python_access",
+      "importance": "ESSENTIAL",
+      "status": "AVAILABLE",
+      "basis": "REPORTED"
+    }
+  ],
+  "qualification_verified": false,
+  "execution_authorized": false,
+  "scope": "THIS_ASSIGNMENT_ONLY",
+  "workflow_locked": false
+}

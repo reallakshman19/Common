@@ -1,0 +1,36 @@
+{
+  "kind": "synthetic supplied event record",
+  "events": [
+    {
+      "step": 1,
+      "action": "select",
+      "source": "ALPHA",
+      "revision": 11
+    },
+    {
+      "step": 2,
+      "action": "start",
+      "source": "ALPHA",
+      "revision": 11
+    },
+    {
+      "step": 3,
+      "action": "select",
+      "source": "BETA",
+      "revision": 11
+    },
+    {
+      "step": 4,
+      "action": "complete",
+      "source": "ALPHA",
+      "revision": 11
+    },
+    {
+      "step": 5,
+      "action": "display",
+      "source": "ALPHA",
+      "revision": 11
+    }
+  ],
+  "limits": "No production application or browser execution is represented."
+}

@@ -1,0 +1,336 @@
+{
+  "schema": "task-decomposer.map/v1",
+  "id": "MAP-SINGLE-SOURCE-IDENTITY",
+  "revision": 1,
+  "scale": "SINGLE_PROBLEM",
+  "request": "# One problem, local task design\nDesign useful work for investigating a wrong-source result after a selection change. The intended recipient has file/Python access but task-specific judgment and model configuration are unestablished. Preserve original conditions and do not silently choose an architecture repair. The result must correspond to the currently selected source and revision.\n\nRead the supplied guard and event record. Produce a coherent task map, selected task design and concise explanation in this directory. Only local analysis/planning is assigned; no product edit, external action, agent dispatch or acceptance is assigned. Do not infer the recipient's competence from its label.\n",
+  "purpose": "Design a coherent investigation of wrong-source display after selection changes, preserving the exact supplied evidence and the current-source/current-revision requirement while retaining uncertainty about production behavior, recipient qualification and repair architecture.",
+  "performer_context": {
+    "description": "Intended recipient has file/Python access as supplied by the Owner. Task-specific judgment is unestablished. Runtime model: UNKNOWN; reasoning effort: UNKNOWN; formal qualification: UNKNOWN.",
+    "basis": "SUPPLIED",
+    "limitations": [
+      "Access is supplied, not a demonstrated competence assessment.",
+      "No intended-recipient runtime configuration, task-specific trial or qualification evidence was supplied.",
+      "The present local analytical replay demonstrates a finite evidence check only; it does not qualify a future performer."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-OWNER",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/owner.md",
+      "revision": "sha256:f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+      "kind": "OWNER",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-GUARD",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/guard.js",
+      "revision": "sha256:0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-EVENTS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/events.json",
+      "revision": "sha256:9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-ANALYSIS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/analysis-checks.json",
+      "revision": "sha256:51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN"
+    }
+  ],
+  "items": [
+    {
+      "id": "R-INVESTIGATE",
+      "kind": "REQUIREMENT",
+      "statement": "Design useful work investigating a wrong-source result after a selection change, with a coherent task map, selected task design and concise explanation.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "R-IDENTITY",
+      "kind": "REQUIREMENT",
+      "statement": "The result must correspond to the currently selected source and revision; equality of a revision value alone does not establish source identity.",
+      "source_refs": [
+        "S-OWNER",
+        "S-GUARD",
+        "S-EVENTS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-ORIGINAL",
+      "kind": "CONSTRAINT",
+      "statement": "Preserve the original supplied conditions: select ALPHA@11; start ALPHA@11; select BETA@11; complete ALPHA@11; display ALPHA@11. Keep the unchanged guard and synthetic event record as the basis, not a convenient substituted ordering.",
+      "source_refs": [
+        "S-OWNER",
+        "S-EVENTS",
+        "S-GUARD"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-SCOPE",
+      "kind": "CONSTRAINT",
+      "statement": "Only local analysis/planning is assigned, with artifacts in this directory. No product edit, external action, agent dispatch or product acceptance is assigned.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-REPAIR",
+      "kind": "CONSTRAINT",
+      "statement": "Do not silently choose an architecture repair; retain consequential model and repair decisions as open.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-QUALIFICATION",
+      "kind": "CONSTRAINT",
+      "statement": "Do not infer task-specific judgment or competence from the recipient label, file/Python access, or added prompt wording.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-ACCESS",
+      "kind": "FACT",
+      "statement": "The intended recipient is supplied as having file/Python access; task-specific judgment and model configuration are unestablished. This is supplied context, not a qualification.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-GUARD",
+      "kind": "FACT",
+      "statement": "The supplied mayDisplay(selected, completed) returns only selected.revision === completed.revision and does not compare source identities.",
+      "source_refs": [
+        "S-GUARD"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-TRACE",
+      "kind": "FACT",
+      "statement": "At supplied step 5, the most recent selection is BETA@11 while the completed and displayed result is ALPHA@11. The record explicitly says no production application or browser execution is represented.",
+      "source_refs": [
+        "S-EVENTS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-COUNTEREXAMPLE",
+      "kind": "FACT",
+      "statement": "A local Python analytical replay, restricted to the supplied integer inputs and literal guard expression, returns true for revision-only admission while the Owner source-and-revision invariant is false. Constructed matching-identity and stale-revision contrasts return (true,true) and (false,false). This is not JavaScript or production execution.",
+      "source_refs": [
+        "S-ANALYSIS",
+        "S-GUARD",
+        "S-EVENTS",
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-RUNTIME",
+      "kind": "UNKNOWN",
+      "statement": "The intended recipient runtime model, reasoning effort, task-specific competence and formal qualification are UNKNOWN. No qualification can be established from the supplied access or labels.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-PRODUCTION",
+      "kind": "UNKNOWN",
+      "statement": "The supplied inputs do not establish production caller behavior, authoritative source identity, how current selection is read at publication, or whether the synthetic ordering represents a real incident. This limits production causal and acceptance claims, not this local investigation design.",
+      "source_refs": [
+        "S-EVENTS",
+        "S-GUARD"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-REPAIR",
+      "kind": "UNKNOWN",
+      "statement": "The suitable architecture or implementation remedy and its all-ordering correctness are unestablished. Identity checks, request generations, cancellation, state capture, and publication revalidation would require an authorized production investigation before choosing among them; none is selected here.",
+      "source_refs": [
+        "S-OWNER",
+        "S-GUARD",
+        "S-EVENTS"
+      ],
+      "blocks": []
+    }
+  ],
+  "scope": {
+    "permitted": [
+      "Read the supplied owner request, guard and synthetic event record.",
+      "Perform local source-grounded analysis/planning and finite analytical checks.",
+      "Produce new map, selected neutral task design, actual check receipts and concise explanation in this task directory."
+    ],
+    "forbidden": [
+      "Product edits, external action, agent dispatch or product acceptance.",
+      "Silent architecture repair selection or recipient-competence inference.",
+      "Overwriting the supplied raw inputs or extending the local design into unassigned implementation."
+    ],
+    "source_refs": [
+      "S-OWNER"
+    ]
+  },
+  "preserve_refs": [
+    "C-ORIGINAL",
+    "C-SCOPE",
+    "C-REPAIR",
+    "C-QUALIFICATION"
+  ],
+  "tasks": [
+    {
+      "id": "T-INVESTIGATE",
+      "parent_id": null,
+      "kind": "DISCOVERY",
+      "detail": "BOUNDED",
+      "purpose": "Establish the source identity distinction and decisive evidence needed to investigate the wrong-source result without turning an unverified explanation into a prescribed product repair.",
+      "deliverable": "One source-grounded investigation note that reconstructs the exact supplied event sequence, states the current-source/current-revision publication invariant, explains the supplied guard counterexample with discriminating contrasts, and preserves the limits and open production/repair judgments.",
+      "item_refs": [
+        "R-INVESTIGATE",
+        "R-IDENTITY",
+        "C-ORIGINAL",
+        "C-SCOPE",
+        "C-REPAIR",
+        "C-QUALIFICATION",
+        "F-ACCESS",
+        "F-GUARD",
+        "F-TRACE",
+        "F-COUNTEREXAMPLE"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Track selected source, selected revision, request/completion identity and displayed identity separately across the exact event order; the completion occurs after the selection changes.",
+        "Revision 11 can belong to both ALPHA and BETA in the supplied record. A successful revision equality does not imply equal source identities.",
+        "The relevant oracle is the Owner condition at display: the published result corresponds to the then-current source and revision. The analytical equality oracle describes the condition without choosing storage, cancellation or request architecture.",
+        "Distinguish the observed synthetic trace, the finite Python model of the guard expression, and hypotheses about production execution. A model counterexample is sufficient to refute revision-only identity for these conditions but cannot validate every ordering or a production remedy.",
+        "A recipient must be able to evaluate the invariant, competing explanations and evidence limits. File/Python access does not establish that judgment; model, effort and qualification stay UNKNOWN."
+      ],
+      "decision_refs": [
+        "U-RUNTIME",
+        "U-PRODUCTION",
+        "U-REPAIR"
+      ],
+      "limits": [
+        "No product, shared policy, original raw input, external system or other task directory is changed; no dispatch or product acceptance follows from this design.",
+        "Keep source/revision identity and the exact supplied counterexample in one task. Source reads, identity reconstruction and contrast analysis are internal reasoning operations, not separately accepted tasks.",
+        "Production representation, selection capture, guard invocation/publication timing and remedies remain reserved decisions. No architecture repair is assigned or implied.",
+        "The three UNKNOWN items are retained with empty blocks because none prevents this local source-grounded analysis; they constrain later production claims and performer qualification. No production continuation is dispatched.",
+        "The existing local analytical receipt is useful finite evidence and must retain its Python-model and synthetic-record limits. Do not relabel it application reproduction, an executed repair, or product acceptance."
+      ],
+      "acceptance": {
+        "observable": "The investigation note cites exact pinned inputs; shows BETA@11 selected before ALPHA@11 completes/displays; evaluates the revision-only guard as true for that original pair while the Owner identity condition is false; and explains which evidence is supplied versus locally modeled. It states unknowns and the evidence needed for any later production decision.",
+        "contrast": "It distinguishes the original same-revision/different-source failure from a matching current BETA@11 result and a same-source stale-revision result. Neither blocking every completion nor demonstrating only a different-revision stale result satisfies the investigation. These contrasts are analytical expectations, not an authorized replacement guard.",
+        "integration": "The Owner outcome remains current-source/current-revision publication through the ordinary application path. That integrated product claim is retained but unverified: this local design and finite source analysis do not execute a repair, establish production causality, cover every ordering, or accept the product."
+      },
+      "boundary": {
+        "choice": "KEEP",
+        "reason": "This is one coherent identity-and-ordering investigation with one decisive counterexample and one stable deliverable. Separating the guard, event replay, source-identity reasoning or contrasts would divide the same explanatory model and duplicate context. No independent component output has a useful acceptance oracle before the unified analysis. Keep model and acceptance judgment visible; use checkpoints within the task if needed. DISCOVER_FIRST is unnecessary as an extra prerequisite because the original supplied inputs already support the local distinction, while production and repair questions remain unresolved within the task limits.",
+        "cut": null
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "item_ref": "R-INVESTIGATE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Retained in the one coherent investigation task and its source-linked design; planning coverage does not assert execution or product acceptance."
+    },
+    {
+      "item_ref": "R-IDENTITY",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Retained in the one coherent investigation task and its source-linked design; planning coverage does not assert execution or product acceptance."
+    },
+    {
+      "item_ref": "C-ORIGINAL",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Retained in the one coherent investigation task and its source-linked design; planning coverage does not assert execution or product acceptance."
+    },
+    {
+      "item_ref": "C-SCOPE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Retained in the one coherent investigation task and its source-linked design; planning coverage does not assert execution or product acceptance."
+    },
+    {
+      "item_ref": "C-REPAIR",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Retained in the one coherent investigation task and its source-linked design; planning coverage does not assert execution or product acceptance."
+    },
+    {
+      "item_ref": "C-QUALIFICATION",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Retained in the one coherent investigation task and its source-linked design; planning coverage does not assert execution or product acceptance."
+    },
+    {
+      "item_ref": "U-RUNTIME",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Explicitly retained as an open decision/limit. Empty blocks allows the finite local analysis to proceed; no production or performer-qualification claim is authorized by it."
+    },
+    {
+      "item_ref": "U-PRODUCTION",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Explicitly retained as an open decision/limit. Empty blocks allows the finite local analysis to proceed; no production or performer-qualification claim is authorized by it."
+    },
+    {
+      "item_ref": "U-REPAIR",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-INVESTIGATE"
+      ],
+      "source_refs": [],
+      "reason": "Explicitly retained as an open decision/limit. Empty blocks allows the finite local analysis to proceed; no production or performer-qualification claim is authorized by it."
+    }
+  ],
+  "focus": [
+    "T-INVESTIGATE"
+  ],
+  "focus_reason": "A single BOUNDED investigation preserves the exact same-revision/different-source counterexample and the Owner publication invariant. No separate task or global stop is justified by missing production/configuration evidence; those limits remain explicit. This is a proposed design candidate, not an execution or acceptance decision."
+}

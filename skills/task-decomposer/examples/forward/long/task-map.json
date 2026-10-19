@@ -1,0 +1,576 @@
+{
+  "schema": "task-decomposer.map/v1",
+  "id": "M-LONG-DESKTOP",
+  "revision": 1,
+  "scale": "PROGRAMME",
+  "request": "# Local planning assignment\nThe Owner wants the original desktop workflow to work end to end: load source files, choose the active source, compare, navigate the result and export it. Preserve original source conditions and existing useful work. Also prepare a source-linked keyboard-help inventory; its supplied note is available independently. A future batch feature is not yet specified.\n\nOnly local source analysis and task design are assigned. Do not edit a product, use a live browser, dispatch work, contact anyone or write externally. Prepare a task map, selected task designs and concise reconciliation in this directory. Actual model/reasoning configuration and formal qualification are UNKNOWN.",
+  "purpose": "Preserve the Owner’s original-source desktop outcome end to end and provide the independent source-linked keyboard-help inventory. This local assignment designs product continuation, reports note-derived inventory evidence and retains unspecified batch work without executing product work.",
+  "performer_context": {
+    "description": "The supplied assignment identifies a local source-analysis/task-design role only. Actual model/reasoning configuration and formal qualification are UNKNOWN.",
+    "basis": "SUPPLIED",
+    "limitations": [
+      "No runtime model/effort configuration or qualification evidence is supplied or inferred.",
+      "No current product source, full browser trace or live product observation is available in this assignment.",
+      "Successful local structural checks qualify the declared map structure only, not a performer or a product outcome."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-OWNER",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/owner.md:2-4",
+      "revision": "sha256:e4ea5649cc156d3a716eb4d2a3ba3860a5c22e1ecf5f03cef42f5e23e36860de",
+      "kind": "OWNER",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-ATTEMPTS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/records.md:2",
+      "revision": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-KEYBOARD",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/records.md:4",
+      "revision": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-SCOPE",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/records.md:6",
+      "revision": "sha256:375ce1b2d87cd190452592c4d28111ca788e3733483d8a434e00dcb75935255f",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-INVENTORY",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/keyboard-help-inventory.md",
+      "revision": "sha256:83dc94fcf291438ce761d63ca3b6dfedf50a0acce787dfdb8f91e86af8007971",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN"
+    }
+  ],
+  "items": [
+    {
+      "id": "R-WORKFLOW",
+      "kind": "REQUIREMENT",
+      "statement": "The original desktop workflow must work end to end: load source files, choose the active source, compare, navigate the result and export it.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "R-KEYBOARD",
+      "kind": "REQUIREMENT",
+      "statement": "Prepare a source-linked keyboard-help inventory from the independently supplied note.",
+      "source_refs": [
+        "S-OWNER",
+        "S-KEYBOARD"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-PRESERVE",
+      "kind": "CONSTRAINT",
+      "statement": "Preserve the original source conditions and existing useful work. Reported helper/alternate-entry results retain their actual scope; neither replace original conditions nor discard useful work without evidence.",
+      "source_refs": [
+        "S-OWNER",
+        "S-ATTEMPTS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-LOCAL",
+      "kind": "CONSTRAINT",
+      "statement": "This assignment permits only local source analysis and task design, with new outputs in this task directory. It does not permit product edits, a live browser, dispatching work, contacting anyone or external writes. Proposed investigation, resolution and acceptance work are not executed or authorized by this packet.",
+      "source_refs": [
+        "S-OWNER",
+        "S-SCOPE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-ATTEMPTS",
+      "kind": "FACT",
+      "statement": "The supplied synthetic record reports three previous PASS results from direct helper calls and an alternate entry screen. It supplies no demonstration of the ordinary navigation journey and no current product source or full browser trace. These are reported results, not observations made in this run.",
+      "source_refs": [
+        "S-ATTEMPTS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-MERGE-CLAIM",
+      "kind": "FACT",
+      "statement": "A predecessor calls the work merge-ready based on helper results. The supplied record does not contain Owner acceptance of that conclusion. This is a report of the predecessor claim, not an accepted status.",
+      "source_refs": [
+        "S-ATTEMPTS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-KEYBOARD-NOTE",
+      "kind": "FACT",
+      "statement": "The supplied note claims: Open selects the original source files; Choose source changes active source; Compare requests the current selection; Results opens the ordinary result screen; Export downloads the current report. None is a fresh browser observation.",
+      "source_refs": [
+        "S-KEYBOARD"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "P-INVESTIGATION",
+      "kind": "PROPOSAL",
+      "statement": "A future browser investigation may establish the ordinary journey and, only if supported by observations, motivate a repair. Neither investigation nor repair is authorized or executed by the local planning assignment.",
+      "source_refs": [
+        "S-SCOPE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-CURRENT-MATERIALS",
+      "kind": "UNKNOWN",
+      "statement": "Current product source/revision, a full ordinary-journey trace and product investigation access are not supplied. Obtain relevant materials and a permitted investigation context before completing the proposed ordinary-journey evidence report.",
+      "source_refs": [
+        "S-ATTEMPTS",
+        "S-SCOPE"
+      ],
+      "blocks": [
+        "T-ORDINARY-JOURNEY"
+      ]
+    },
+    {
+      "id": "U-ORIGINAL-CONDITIONS",
+      "kind": "UNKNOWN",
+      "statement": "The exact original source files, their versions, and relevant starting conditions are not enumerated in the supplied inputs. Their identity must be established rather than replaced with a convenient example.",
+      "source_refs": [
+        "S-OWNER",
+        "S-ATTEMPTS"
+      ],
+      "blocks": [
+        "T-ORDINARY-JOURNEY"
+      ]
+    },
+    {
+      "id": "U-ORDINARY-BEHAVIOR",
+      "kind": "UNKNOWN",
+      "statement": "Whether the ordinary desktop journey works, where it fails if it fails, and the causal explanation are unknown. Helper passes and an alternate entry do not establish either a defect or its repair.",
+      "source_refs": [
+        "S-ATTEMPTS"
+      ],
+      "blocks": [
+        "T-WORKFLOW-RESOLUTION"
+      ]
+    },
+    {
+      "id": "U-PRIOR-ACCEPTANCE",
+      "kind": "UNKNOWN",
+      "statement": "Owner acceptance of the predecessor merge-ready conclusion is not supplied. This historical evidence gap does not prevent local inventory work or gathering future ordinary-journey evidence.",
+      "source_refs": [
+        "S-ATTEMPTS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-KEYBOARD-BINDINGS",
+      "kind": "UNKNOWN",
+      "statement": "The supplied note gives action labels and claimed effects but no keyboard key combinations or verified focus/keyboard behavior. The local inventory must show these as UNKNOWN rather than invent them.",
+      "source_refs": [
+        "S-KEYBOARD"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-BATCH",
+      "kind": "UNKNOWN",
+      "statement": "A future batch feature is mentioned but its outcome, source conditions, interaction and acceptance criteria are unspecified. This affects only the retained future batch capability.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": [
+        "T-BATCH"
+      ]
+    },
+    {
+      "id": "U-PERFORMER",
+      "kind": "UNKNOWN",
+      "statement": "Actual model/reasoning configuration and formal qualification are UNKNOWN. No wording in this design or successful structural check establishes them.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    }
+  ],
+  "scope": {
+    "permitted": [
+      "Read the supplied local owner/records inputs and the Task Decomposer skill, needed schema/script/references.",
+      "Perform local source analysis and design a map, selected task designs, actual check receipts and concise reconciliation as new files in /workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long.",
+      "Prepare the source-linked keyboard-help inventory from the supplied note; report unknown bindings and unobserved product behavior.",
+      "Propose later investigation and evidence-conditioned resolution while retaining actual execution limits."
+    ],
+    "forbidden": [
+      "Do not edit a product, use a live browser, dispatch work, contact anyone or write externally.",
+      "Do not read skill examples/tests/verification, other task directories or other agents’ outputs.",
+      "Do not infer runtime model/reasoning effort, formal qualification, product completion or Owner acceptance."
+    ],
+    "source_refs": [
+      "S-OWNER",
+      "S-SCOPE"
+    ]
+  },
+  "preserve_refs": [
+    "C-PRESERVE",
+    "C-LOCAL"
+  ],
+  "tasks": [
+    {
+      "id": "T-WORKFLOW",
+      "parent_id": null,
+      "kind": "INTEGRATION",
+      "detail": "EXPANDED",
+      "purpose": "Retain the Owner’s complete original-source desktop outcome while exposing the missing ordinary-path evidence before prescribing any repair.",
+      "deliverable": "An integrated, original-condition desktop workflow outcome supported by ordinary-entry evidence and the resulting export; currently only its task design is supplied.",
+      "item_refs": [
+        "R-WORKFLOW",
+        "F-ATTEMPTS",
+        "F-MERGE-CLAIM",
+        "U-PRIOR-ACCEPTANCE"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Source identity, starting conditions, active-source state, comparison result, ordinary navigation and exported-report identity form one end-to-end claim.",
+        "The three reported helper/alternate-entry passes may remain useful within their demonstrated scope; neither their current applicability nor an ordinary-path failure is established.",
+        "Source-level defects, differing inputs, alternate entry conditions and missing verification are different explanations. Establish the relevant observations before assigning cause or judging a performer."
+      ],
+      "decision_refs": [
+        "U-PRIOR-ACCEPTANCE"
+      ],
+      "limits": [
+        "The container is a proposed integration outcome, not local execution or an assertion that product work is complete.",
+        "Retain all original workflow stages; component or helper completion does not discharge integrated acceptance."
+      ],
+      "acceptance": {
+        "observable": "At the relevant product revision and original source conditions, the ordinary entry supports loading files, selecting the active source, comparing that selection, navigating its result and exporting its current report, with evidence tying each stage together.",
+        "contrast": "An alternate entry demonstration, successful helper calls, a result for a stale/different source or an unrelated export cannot establish the Owner’s ordinary desktop outcome.",
+        "integration": "T-END-TO-END retains the final evidence claim after discovery and any evidence-supported resolution. The keyboard inventory and unspecified batch feature remain separate."
+      },
+      "boundary": {
+        "choice": "SPLIT",
+        "reason": "An ordinary-journey evidence report can be judged before a resolution is chosen; a conditional resolution can be reviewed against that report; final ordinary-entry acceptance still needs its own whole-journey evidence. These are durable outputs with different oracles, not one task per button.",
+        "cut": {
+          "output": "A source-bound journey evidence report, a conditional resolution record and a whole-journey acceptance report/export.",
+          "oracle": "The discovery report is judged by reproducibility, original conditions and explicit observed gaps; resolution by the established finding; final acceptance by the ordinary end-to-end result and matching export.",
+          "consumer": "T-WORKFLOW-RESOLUTION consumes journey findings; T-END-TO-END consumes findings and resolution; the Owner consumes the integrated evidence.",
+          "benefit": "Prevents a speculative repair or component-level PASS from replacing the original outcome while retaining useful earlier work.",
+          "cost": "Each handoff must carry source/version, conditions, action-state evidence and limits; changing those conditions requires reconciliation."
+        }
+      }
+    },
+    {
+      "id": "T-ORDINARY-JOURNEY",
+      "parent_id": "T-WORKFLOW",
+      "kind": "DISCOVERY",
+      "detail": "BOUNDED",
+      "purpose": "Establish the real ordinary desktop journey and the evidence gap before deciding whether product changes are needed.",
+      "deliverable": "A source- and revision-bound ordinary-journey evidence report: original inputs/starting conditions, expected and observed action/state transitions, export or exact failed transition, comparison with the scope of earlier helper/alternate-entry results, and unresolved causes. This is a proposed future report, not a trace produced here.",
+      "item_refs": [
+        "U-CURRENT-MATERIALS",
+        "U-ORIGINAL-CONDITIONS",
+        "U-ORDINARY-BEHAVIOR",
+        "P-INVESTIGATION"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "The original route is load original source files → choose active source → compare the current selection → navigate the ordinary result → export its current report.",
+        "Follow active-source and report identity across the ordinary controls and navigation rather than inferring connection from handler presence or helper success.",
+        "Confirm the supplied attempt/input/revision identity before attributing failure. A failure of the original route, a different setup and an untested successful route require different conclusions.",
+        "State a concise explanation supported by decisive observations, with unknowns preserved; a private reasoning transcript is not required."
+      ],
+      "decision_refs": [
+        "U-CURRENT-MATERIALS",
+        "U-ORIGINAL-CONDITIONS",
+        "U-ORDINARY-BEHAVIOR",
+        "P-INVESTIGATION"
+      ],
+      "limits": [
+        "Local work may design this investigation and report the absence of evidence only. Do not open a live browser, fetch product material, or execute an investigation under this assignment.",
+        "No route/state repair is preselected. Obtain the actual source conditions and a permitted investigation context for future evidence collection.",
+        "An observed failure location is not by itself a causal diagnosis. Leave unsupported cause claims explicit."
+      ],
+      "acceptance": {
+        "observable": "The future report identifies inputs/version/conditions and gives a reproducible ordinary-entry action/state trace through export, or the exact observed failure and its evidence. It distinguishes observed facts from expected behavior and reports unresolved cause.",
+        "contrast": "Helper/alternate-entry success cannot substitute for the ordinary trace; an unobserved route must remain unobserved, and differences in source/revision/entry conditions must be recorded before causal attribution.",
+        "integration": "The report becomes the stable basis for T-WORKFLOW-RESOLUTION and T-END-TO-END. It does not itself claim successful integrated behavior when the trace fails or remains unavailable."
+      },
+      "boundary": {
+        "choice": "DISCOVER_FIRST",
+        "reason": "The current record proves a verification gap, not a specific defect. Keep route reconstruction, state continuity and causal discrimination in one coherent evidence report rather than splitting by control or function.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-WORKFLOW-RESOLUTION",
+      "parent_id": "T-WORKFLOW",
+      "kind": "WORK",
+      "detail": "DEFERRED",
+      "purpose": "Resolve an established ordinary-journey problem if one exists, preserving useful work and original conditions.",
+      "deliverable": "A deferred evidence-based resolution record and any justified product correction, or a supported no-change determination if investigation establishes that no correction is needed.",
+      "item_refs": [
+        "U-ORDINARY-BEHAVIOR",
+        "P-INVESTIGATION"
+      ],
+      "depends_on": [
+        "T-ORDINARY-JOURNEY"
+      ],
+      "understanding": [
+        "A repair must follow a supported finding from the original ordinary route. The supplied reports do not establish the failing mechanism or even that a product defect exists.",
+        "Preserve helper/alternate-entry work when its basis survives; investigate source and revision differences instead of discarding or relabeling it."
+      ],
+      "decision_refs": [
+        "U-ORDINARY-BEHAVIOR",
+        "P-INVESTIGATION"
+      ],
+      "limits": [
+        "Implementation scope, architecture and specific code changes stay deferred until discovery establishes the relevant model and scope.",
+        "No product change or resolution execution is permitted by this local planning assignment."
+      ],
+      "acceptance": {
+        "observable": "Future resolution addresses the observed cause under the original conditions, or demonstrates why no change is needed, with the relationship to existing useful work and residual uncertainty stated.",
+        "contrast": "A speculative route fix or another isolated helper PASS does not establish resolution of the ordinary journey.",
+        "integration": "T-END-TO-END must still demonstrate the complete ordinary flow and the matching export at the resulting relevant revision."
+      },
+      "boundary": {
+        "choice": "DEFER",
+        "reason": "No causal basis or product source is available. Retain the outcome and dependency without forecasting implementation steps or treating every control as a separate repair task.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-END-TO-END",
+      "parent_id": "T-WORKFLOW",
+      "kind": "INTEGRATION",
+      "detail": "DEFERRED",
+      "purpose": "Establish the Owner’s original desktop outcome across all stages after discovery and any justified resolution.",
+      "deliverable": "A deferred ordinary-entry acceptance report and exported report artifact, tied to the original source conditions and the relevant product version.",
+      "item_refs": [
+        "U-ORIGINAL-CONDITIONS",
+        "U-PRIOR-ACCEPTANCE"
+      ],
+      "depends_on": [
+        "T-ORDINARY-JOURNEY",
+        "T-WORKFLOW-RESOLUTION"
+      ],
+      "understanding": [
+        "Source selection, displayed comparison, result navigation and export must refer to the same intended active source/current report.",
+        "Earlier helper PASS reports and a predecessor merge-ready claim do not carry Owner acceptance or establish the integrated route."
+      ],
+      "decision_refs": [
+        "U-ORIGINAL-CONDITIONS"
+      ],
+      "limits": [
+        "Do not execute the future acceptance run or create a product export in this local assignment.",
+        "The absence of historical Owner acceptance is an evidence limit, not an invented per-task approval ceremony. Evidence and any actual Owner acceptance remain distinct."
+      ],
+      "acceptance": {
+        "observable": "Future evidence follows the ordinary route from loading the original files to the intended active source, comparison, ordinary result navigation and successful export. The export is checked against the current result and original conditions.",
+        "contrast": "Passing components, using an alternate entry, omitting a navigation step or exporting an older/different report does not meet the full outcome.",
+        "integration": "This is the retained end-to-end claim for T-WORKFLOW; no map label, CLI result or local inventory completes it."
+      },
+      "boundary": {
+        "choice": "DEFER",
+        "reason": "Keep the full acceptance outcome explicit, but defer its execution design detail until actual product conditions and findings exist.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-KEYBOARD",
+      "parent_id": null,
+      "kind": "WORK",
+      "detail": "BOUNDED",
+      "purpose": "Provide the independently useful source-linked help inventory using only the supplied note.",
+      "deliverable": "keyboard-help-inventory.md: the five supplied action labels and claimed effects, each linked to records.md line 4 and its pinned revision, with absent keyboard bindings and observation status explicit.",
+      "item_refs": [
+        "R-KEYBOARD",
+        "F-KEYBOARD-NOTE",
+        "U-KEYBOARD-BINDINGS"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "The note supports an inventory of labels and claimed effects, not actual key combinations or observed product behavior.",
+        "Open refers to original source files; Choose source changes active source; Compare requests the current selection; Results uses the ordinary result screen; Export is for the current report. Preserve these conditions in the inventory."
+      ],
+      "decision_refs": [
+        "U-KEYBOARD-BINDINGS"
+      ],
+      "limits": [
+        "Do not invent bindings, shortcut names, focus behavior or fresh verification.",
+        "The inventory is local source analysis and can be produced without current product source, browser access or batch requirements.",
+        "Product-facing keyboard help would need additional verified bindings/behavior under a separate actual assignment."
+      ],
+      "acceptance": {
+        "observable": "The local inventory includes all five note entries, preserves their effects and original/current/ordinary qualifiers, gives source locators/revision, and marks every unsupplied binding UNKNOWN.",
+        "contrast": "A polished but invented shortcut list, an unlabeled statement of note claims as observed behavior, or a list that silently drops original-source/current-report conditions is insufficient.",
+        "integration": "The inventory is an independent source-based output. It does not establish desktop workflow success, and it does not wait for product discovery or unspecified batch design."
+      },
+      "boundary": {
+        "choice": "KEEP",
+        "reason": "One small, coherent source-linked inventory has its own note-comparison oracle and a stable help-design consumer. Missing product materials do not block accurate transcription with explicit unknowns.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-BATCH",
+      "parent_id": null,
+      "kind": "WORK",
+      "detail": "DEFERRED",
+      "purpose": "Retain the mentioned future batch capability without inventing its purpose or delaying independent work.",
+      "deliverable": "A future definition of the batch outcome, source conditions and acceptance criteria before any detailed implementation design.",
+      "item_refs": [
+        "U-BATCH"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "The Owner mentions a future batch feature without specifying its behavior. No relationship to present desktop repair or the note inventory is established."
+      ],
+      "decision_refs": [
+        "U-BATCH"
+      ],
+      "limits": [
+        "No batch requirements, dependencies or implementation details may be inferred from the feature name.",
+        "This unknown is scoped to T-BATCH and must not block the ordinary-journey design or source-linked inventory."
+      ],
+      "acceptance": {
+        "observable": "When future source material exists, the batch capability can be stated with its actual intended outcome, conditions and acceptance evidence; presently it remains unspecified.",
+        "contrast": "Inventing a batch UI/API or treating the feature as already specified or delivered does not satisfy the retained future work.",
+        "integration": "No batch dependency on the current original desktop outcome is supplied. Reassess actual relationships only when future requirements establish them."
+      },
+      "boundary": {
+        "choice": "DEFER",
+        "reason": "The requirement is not specified. Preserve the future capability coarsely, with uncertainty affecting this task only.",
+        "cut": null
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "item_ref": "R-WORKFLOW",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-WORKFLOW",
+        "T-ORDINARY-JOURNEY",
+        "T-END-TO-END"
+      ],
+      "source_refs": [],
+      "reason": "The full original desktop outcome is retained, with investigation before a conditional resolution and explicit final integration. No product evidence was produced locally."
+    },
+    {
+      "item_ref": "R-KEYBOARD",
+      "disposition": "EVIDENCE_REPORTED",
+      "task_refs": [
+        "T-KEYBOARD"
+      ],
+      "source_refs": [
+        "S-INVENTORY",
+        "S-KEYBOARD"
+      ],
+      "reason": "A local source-linked inventory was produced and read this run. This reports faithful note transcription and explicit unknown bindings; it is not verified product help or desktop acceptance."
+    },
+    {
+      "item_ref": "C-PRESERVE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-WORKFLOW",
+        "T-ORDINARY-JOURNEY",
+        "T-WORKFLOW-RESOLUTION",
+        "T-END-TO-END",
+        "T-KEYBOARD",
+        "T-BATCH"
+      ],
+      "source_refs": [],
+      "reason": "Globally preserved. Original conditions and useful work must survive continuation; helper/alternate-entry evidence keeps its actual scope."
+    },
+    {
+      "item_ref": "C-LOCAL",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-WORKFLOW",
+        "T-ORDINARY-JOURNEY",
+        "T-WORKFLOW-RESOLUTION",
+        "T-END-TO-END",
+        "T-KEYBOARD",
+        "T-BATCH"
+      ],
+      "source_refs": [],
+      "reason": "Globally preserved scope: this packet is local source analysis/task design only. Future product tasks remain proposals; design/frontier labels grant no permission."
+    },
+    {
+      "item_ref": "U-CURRENT-MATERIALS",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-ORDINARY-JOURNEY"
+      ],
+      "source_refs": [],
+      "reason": "No current product source/full trace/access is supplied. Explicit block is discovery and consequently its resolution/acceptance dependents, not keyboard inventory or batch definition."
+    },
+    {
+      "item_ref": "U-ORIGINAL-CONDITIONS",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-ORDINARY-JOURNEY",
+        "T-END-TO-END"
+      ],
+      "source_refs": [],
+      "reason": "Exact original files/versions/starting conditions must be reconstructed for meaningful investigation and acceptance; no substitute example is authorized."
+    },
+    {
+      "item_ref": "U-ORDINARY-BEHAVIOR",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-ORDINARY-JOURNEY",
+        "T-WORKFLOW-RESOLUTION"
+      ],
+      "source_refs": [],
+      "reason": "Investigation is designed to establish behavior/cause. This blocks choosing a resolution and its acceptance dependent, not the investigation design or inventory."
+    },
+    {
+      "item_ref": "U-PRIOR-ACCEPTANCE",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-WORKFLOW",
+        "T-END-TO-END"
+      ],
+      "source_refs": [],
+      "reason": "The missing historical Owner acceptance limits the predecessor status claim; it has no explicit blocking scope and imposes no new approval ceremony."
+    },
+    {
+      "item_ref": "U-KEYBOARD-BINDINGS",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-KEYBOARD"
+      ],
+      "source_refs": [],
+      "reason": "Bindings and keyboard behavior are absent. The inventory records UNKNOWN, so source-based inventory production remains independent and possible."
+    },
+    {
+      "item_ref": "U-BATCH",
+      "disposition": "DEFERRED",
+      "task_refs": [
+        "T-BATCH"
+      ],
+      "source_refs": [],
+      "reason": "Future batch behavior is retained without prediction. Its explicit blocking scope is T-BATCH only."
+    },
+    {
+      "item_ref": "U-PERFORMER",
+      "disposition": "UNRESOLVED",
+      "task_refs": [],
+      "source_refs": [],
+      "reason": "Actual runtime model, reasoning configuration and formal qualification remain UNKNOWN. No task-level block or participant qualification is inferred."
+    }
+  ],
+  "focus": [
+    "T-ORDINARY-JOURNEY",
+    "T-KEYBOARD"
+  ],
+  "focus_reason": "T-ORDINARY-JOURNEY is the useful next product design: a source-bound ordinary-path investigation before any repair, with missing inputs explicitly scoped. It is a proposal outside current execution authority. T-KEYBOARD is independent local source work and its inventory is supplied now. Repair, whole-journey acceptance and unspecified batch implementation remain deferred; no global stop is inferred."
+}

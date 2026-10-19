@@ -1,0 +1,11 @@
+{
+  "intent_id": "INTENT-SINGLE-SOURCE-IDENTITY",
+  "intent_revision": 1,
+  "intent_sha256": "3b606d900a7b05d2d8b9b5809ff4998cf448989635c8cca3c69d7620a1357218",
+  "plan_id": "PLAN-SINGLE-SOURCE-IDENTITY",
+  "plan_revision": 1,
+  "plan_sha256": "4e43a55d6016e967c6848994732930dd1016a808e3da4156c60903f42ecf4f23",
+  "nudge_id": "T-INVESTIGATE",
+  "nudge_sha256": "9f81a204df4e969c750abe23fe47e4178da86579576ed847d970e69fccd6c0fb",
+  "participant_id": "P-RECIPIENT"
+}
