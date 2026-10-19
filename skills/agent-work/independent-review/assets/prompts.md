@@ -8,7 +8,9 @@ format when it already carries them. Do not require a JSON record to begin work.
 > Use $independent-review to review <candidate/revision> for <Owner outcome> using
 > <original sources/amendments>. Use the participants and tools available; disclose
 > authorship and prior exposure. Inspect the artifact and try a meaningful contrary
-> case. Return evidence-backed findings, coverage, limits and the next useful action
+> case. Record what you have already seen. For each verdict explain what plausible
+> wrong result could survive the check, or justify an exhaustive checked scope.
+> Return evidence-backed findings, coverage, limits and the next useful action
 > in <native channel>. Product edits/publication: <actual authorized scope>.
 
 ## GUIDED evidence worker
@@ -35,3 +37,13 @@ this evidence task only; do not infer product or release acceptance.
 > verdict and record your response separately. State which claims changed, what
 > remains unverified and which affected task/next action is useful under existing
 > authority. Use Task Decomposer or Nudge Designer only if they help this work.
+
+## Selected-response learning review
+
+> Review these exact items against the original tile verbs and subject conditions.
+> Declare prior candidate/key/benchmark/verdict exposure. Check option lengths,
+> reasoning-marker cues, parallel grammar, verb-option match and question-word cues
+> first, then derive/check the subject answer. Could the key be picked without the
+> target knowledge? Cite actual supplied files and separate cue, demand and subject
+> verdicts. File-only evidence cannot make an exposed judge blind. For each verdict
+> name a plausible wrong result that could survive that check and a useful contrast.

@@ -28,6 +28,13 @@ result changes allocation; do not hide a model decision in mechanical steps.
 Specify witnesses for material claims and risk-based sender checks, allowing
 native verdicts and justified empty findings without a weakness quota.
 
+For selected-response learning generation, preserve the source tile verb and the
+option type it requires. Apply references/SELECTED_RESPONSE.md or the issued
+concrete method: compute final option word counts and correct-only question-word
+cues with a script before return, inspect grammar/verb fit and non-subject answer
+routes, and retain output plus flag dispositions. Required reasoning words and
+legitimate terminology are not automatically errors. Self-check is SELF-ASSESSED.
+
 Provide concise Owner reconciliation and usable instructions. Maintain the two
 objects as appropriate; check structure and inspect the rendered meaning. After
 actual returns, inspect the artifacts, reconcile affected claims in a new revision,

@@ -4,6 +4,7 @@ import html
 from nd_contract import intent_index, nudge_context, validate_plan
 from nd_io import quoted, require
 from nd_team import worker_context
+from nd_item_cues import assignment_support
 
 
 def data(value):
@@ -22,7 +23,7 @@ def render_nudge(intent, plan, nudge_id, profiles):
     sources, items, outcomes = intent_index(intent)
     worker = worker_context(intent, plan, nudge)
     assignment = nudge.get("assignment", {})
-    support = []
+    support = assignment_support() if "selected-response" in nudge["profile_ids"] else []
     if assignment:
         support.append("Assignment support: " + assignment["support"])
         if assignment["method"]:

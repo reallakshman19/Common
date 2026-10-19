@@ -22,8 +22,9 @@ Return: <native report location; optional task/map/tracker/assignment mappings>
 ```text
 Run / case / actual candidate: <distinct identities>
 Reviewer/contributions: <author relation and basis; earlier contributions>
-Independence/exposure: <context, expectation derivation, method, execution, lineage>
+Independence/exposure: <specific earlier candidate/key/reference/verdict access; context, expectation derivation, method, execution, lineage>
 Claim results: <supported / contradicted / inconclusive / not run, with witnesses>
+Surviving wrong result per verdict: <concrete residual risk and contrast, or justified exhaustive scope>
 Findings: <source/candidate locator, observed vs expected, consequence, reproduction>
 Coverage: <assessed and excluded scope, unknowns and missing checks>
 Verdict: <PASS / NEEDS_WORK / FAIL / INCONCLUSIVE within an explicit scope>

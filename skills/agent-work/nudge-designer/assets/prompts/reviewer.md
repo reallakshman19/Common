@@ -28,6 +28,13 @@ counts as exposure; a fresh instruction cannot undo it. Separate correctness,
 reproduction and unseen-transfer claims. Mark your own contributed judgments
 SELF-ASSESSED and state what was actually withheld for any independence claim.
 
+For selected-response learning items, inspect length/detail, reasoning-word cues,
+parallel grammar, verb-option fit and shared question words before subject
+judgment. Ask whether the key is selectable without the intended subject knowledge.
+Record what you have already seen; cite the actual supplied files without claiming
+that file-only evidence erases prior exposure. For each verdict state a concrete
+plausible wrong result that could survive that check, or justify exhaustive scope.
+
 Return a native review with actual checks, expected versus observed results,
 findings, unresolved evidence and acceptance limits. Preserve original artifacts.
 Retain sound work when its basis survives. Do not fix the reviewed product, weaken

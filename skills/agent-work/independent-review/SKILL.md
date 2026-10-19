@@ -61,6 +61,8 @@ them when useful. They are not compulsory passes or a lifecycle controller.
    findings, untouched scope, uncertainty and next useful action. Preserve known
    defects alongside missing checks. An evidence-backed empty finding set is valid.
    Review completion, coverage, independence and Owner acceptance are distinct.
+   For each verdict give a concrete plausible wrong result that could survive
+   that check, or explain an exhaustive checked scope; use it to bound the claim.
 7. **Reconcile and continue.** Have the available lead/Owner/reviewer compare the
    return with the original outcome and current candidate. Preserve the reviewer's
    actual verdict and record any disagreement separately. Revisit only affected
@@ -82,6 +84,11 @@ Use [review prompts](assets/prompts.md) and [record templates](assets/templates.
 as needed. A tidy ACK or repeated format compliance is not evidence of model,
 safety or architectural judgment. Adjust support from observed task performance;
 do not assign competence from a model label. No fixed worker or review count applies.
+
+For selected-response learning material, use [format/demand and subject review](references/SELECTED_RESPONSE_REVIEW.md).
+Declare earlier exposure, inspect possible non-subject answer cues first, then
+assess the subject. For each verdict, name a plausible wrong result that could
+survive its check, with the relevant contrast or justified exhaustive scope.
 
 ## Connect only the adapters that help
 

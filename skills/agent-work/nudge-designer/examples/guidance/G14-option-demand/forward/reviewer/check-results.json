@@ -1,0 +1,206 @@
+{
+  "execution": "Executed by reviewer; see execution.log for the captured invocation output.",
+  "input_sha256": {
+    "owner.md": "0a01ad076da86fdbe112c26d2605a4b6f59943bc47357d76e614956cf5899260",
+    "items.json": "3dcb40bcecf95f25ac54a14df4762888b5aea6b8f54968dabb86ec368d9e7d2b"
+  },
+  "form_measurements": [
+    {
+      "locator": "items[0] id=X1",
+      "whitespace_token_counts": {
+        "A": 12,
+        "B": 12,
+        "C": 12
+      },
+      "longest_options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "key_unique_longest": false,
+      "reasoning_markers": {
+        "A": [
+          "because"
+        ],
+        "B": [
+          "because"
+        ],
+        "C": [
+          "because"
+        ]
+      },
+      "question_option_content_word_overlap": {
+        "A": [
+          "constant",
+          "force"
+        ],
+        "B": [
+          "constant",
+          "force"
+        ],
+        "C": [
+          "force"
+        ]
+      }
+    },
+    {
+      "locator": "items[1] id=X2",
+      "whitespace_token_counts": {
+        "A": 15,
+        "B": 16,
+        "C": 16
+      },
+      "longest_options": [
+        "B",
+        "C"
+      ],
+      "key_unique_longest": false,
+      "reasoning_markers": {
+        "A": [
+          "gives"
+        ],
+        "B": [
+          "gives"
+        ],
+        "C": [
+          "gives"
+        ]
+      },
+      "question_option_content_word_overlap": {
+        "A": [
+          "acceleration",
+          "m",
+          "s"
+        ],
+        "B": [
+          "acceleration",
+          "force",
+          "m",
+          "net",
+          "s"
+        ],
+        "C": [
+          "acceleration",
+          "force",
+          "m",
+          "net",
+          "s"
+        ]
+      }
+    },
+    {
+      "locator": "items[2] id=X3",
+      "whitespace_token_counts": {
+        "A": 2,
+        "B": 2,
+        "C": 2
+      },
+      "longest_options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "key_unique_longest": false,
+      "reasoning_markers": {
+        "A": [],
+        "B": [],
+        "C": []
+      },
+      "question_option_content_word_overlap": {
+        "A": [],
+        "B": [],
+        "C": []
+      }
+    }
+  ],
+  "X1": {
+    "general_derivation": "For constant m>0 and constant F>0 right, a=F/m>0 is constant. While v0>0 right, v(t)=v0+(F/m)t stays right for t>=0; speed rises by (F/m)*dt for each equal interval dt.",
+    "expected_key_from_derivation": "B",
+    "candidate_key": "B",
+    "contrary_checks": [
+      {
+        "illustrative_only": true,
+        "mass_kg": 3,
+        "force_N_right": 6,
+        "initial_velocity_m_per_s_right": 2,
+        "a_m_per_s2_right": "2",
+        "velocities_at_t_0_1_2_3_s": [
+          "2",
+          "4",
+          "6",
+          "8"
+        ],
+        "successive_one_second_increases": [
+          "2",
+          "2",
+          "2"
+        ]
+      },
+      {
+        "illustrative_only": true,
+        "mass_kg": 5,
+        "force_N_right": 1,
+        "initial_velocity_m_per_s_right": 3,
+        "a_m_per_s2_right": "1/5",
+        "velocities_at_t_0_1_2_3_s": [
+          "3",
+          "16/5",
+          "17/5",
+          "18/5"
+        ],
+        "successive_one_second_increases": [
+          "1/5",
+          "1/5",
+          "1/5"
+        ]
+      },
+      {
+        "illustrative_only": true,
+        "mass_kg": 2,
+        "force_N_right": 9,
+        "initial_velocity_m_per_s_right": 1,
+        "a_m_per_s2_right": "9/2",
+        "velocities_at_t_0_1_2_3_s": [
+          "1",
+          "11/2",
+          "10",
+          "29/2"
+        ],
+        "successive_one_second_increases": [
+          "9/2",
+          "9/2",
+          "9/2"
+        ]
+      }
+    ],
+    "sample_limit": "Illustrative finite cases are not an exhaustive physical-model test."
+  },
+  "X2": {
+    "mass_kg": "3",
+    "net_force_N_right": "12",
+    "calculated_a_m_per_s2_right": "4",
+    "a_direction": "right",
+    "directions_asserted_by_options": {
+      "A": "left",
+      "B": "left",
+      "C": "right"
+    },
+    "compatible_options": [
+      "C"
+    ],
+    "candidate_key": "C"
+  },
+  "X3": {
+    "source": "owner.md supplied subject basis",
+    "expected_unit": "newton (N)",
+    "compatible_options": [
+      "A"
+    ],
+    "candidate_key": "A"
+  },
+  "limits": [
+    "Text review and local computations only; no learner trial.",
+    "The answer keys were visible when the candidate was first read.",
+    "Metrics do not certify absence of every test-taking cue or learner transfer."
+  ]
+}

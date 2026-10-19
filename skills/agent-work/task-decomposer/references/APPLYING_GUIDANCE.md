@@ -34,6 +34,14 @@ Do not mistake a large task tree for a good understanding of a small problem.
 | FEA or other physical modeling | Establish model/units/loads/boundary assumptions with appropriate expertise; identify bounded numerical checks | Reproducing a number differs from validating the physical idealization |
 | Recovery or unavailable predecessor | Reconstruct sources and actual tool limits; retain useful work and feasible next action | A reconstruction receipt is not executed product repair |
 
+For selected-response learning work, retain the source tile verb, intended option
+type and required learner action in the design. Explain needs causal reasons;
+justify needs an argument relation; retrieve can recognise a unit or sign, subject
+to the actual source definition. A ban on bare numbers is not a demand model.
+Keep format/cue screening and subject/transfer evidence distinct; a polished
+sentence option can still be off-demand. Reserve an unresolved target definition
+before delegating generation, rather than allowing a worker to guess it.
+
 For narrower performers, provide task context and prerequisites while reserving
 consequential unresolved decisions. Task Decomposer designs that boundary; a
 consumer can compile a concrete method/contrast into a brief. If no consumer is

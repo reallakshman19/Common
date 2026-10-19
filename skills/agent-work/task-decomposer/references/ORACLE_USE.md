@@ -113,3 +113,27 @@ subtasks, while [Lost in the Middle](https://arxiv.org/abs/2307.03172) and
 and explicit decisions. These task-specific studies do not establish that every
 fresh smaller task improves a low-thinking model. Measure useful result, correction
 effort, context/handoff cost and retained integration in the actual application.
+
+## Owner-selected ChatGPT-agent activity duty
+
+When the Owner selects standalone delivery with the ChatGPT-agent activity rule,
+the executing **ChatGPT agent** runs its own episode recorder at turn boundaries
+and useful checkpoints. Oracle ensures the issued brief retains that duty,
+inspects the returned observations and surfaces a due BuddyRunner recommendation.
+Oracle is not a background worker and cannot observe another agent's hidden time
+or calls. Without an Oracle, the executing agent owns both responsibilities.
+
+Suggest BuddyRunner after **more than five distinct GitHub-access turns OR more
+than 35 recorded active-turn minutes**. Keep each agent/project episode across
+subtasks; do not count calls as turns, sum separate agents or reset per nudge.
+Record actual surface and observation basis; ChatGPT Work and other surfaces are exempt; UNKNOWN applicability must remain
+explicit, rather than being claimed as an established exemption. An in-scope Oracle tracks its own episode separately.
+Retain missing host IDs/timing as UNKNOWN/gaps, not fabricated zero or precision.
+A known observed lower bound over either threshold still requires a suggestion.
+
+Use the separately selected delivery protocol's recording/check support when
+available; no import or runtime dependency is added here. Retain the actual
+recommendation reference and counter snapshot in native records. Recommend once
+per episode without automatic handover, a new permission ceremony or global work
+stop. Metrics measure activity, not reasoning quality. Do not claim this prose
+recipe installed host hooks, dispatched a worker or measured private thinking.
