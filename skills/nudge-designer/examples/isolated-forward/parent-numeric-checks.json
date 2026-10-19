@@ -1,0 +1,24 @@
+{
+  "kind": "Actual parent exact-rational check from generated givens",
+  "recorded_utc": "2026-10-19T05:04:52.617939+00:00",
+  "source_file_byte_sha256": "aac728d0d679dada9f7ee8031afdf923e7030a33782c67cdf852aa0bb07b97db",
+  "method": "Extract stated givens, apply signed force sum and F_net/m, divide millimetres by 1000, reverse frame and back-convert with Fraction.",
+  "results": {
+    "mass_kg": "9/2",
+    "right_N": "17",
+    "left_N": "8",
+    "net_N": "9",
+    "acceleration_m_per_s2": "2",
+    "length_mm": "735",
+    "length_m": "147/200",
+    "reverse_net_N": "-9",
+    "reverse_acceleration_m_per_s2": "-2",
+    "back_length_mm": "735"
+  },
+  "claims_agree": true,
+  "limits": [
+    "Derived after reading the producer report/solutions, not blind independent review.",
+    "The pre-return expectation record specified the relations, not these generated values.",
+    "Stipulated models and two finite exercises do not establish learner understanding or general generator validity."
+  ]
+}

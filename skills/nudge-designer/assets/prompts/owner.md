@@ -30,3 +30,10 @@ Reconstruct independently, reconcile drift and useful improvements, then take th
 Use Nudge Designer with the project's selected onboarding protocol to reconstruct {{project/issue}} from {{sources}}; do not depend on the predecessor.
 After reconstruction and the applicable review/approval, wait for my next task prompt. Keep remaining work visible without starting an unassigned product task.
 ```
+
+## Fresh task-local workers
+
+```text
+Use Nudge Designer for {{goal/sources}} with fresh workers where useful task boundaries support it.
+Give each worker necessary local context and a concrete method; keep global decisions with Oracle. For blind evaluation, state which references are withheld and disclose prior exposure and self-assessment.
+```

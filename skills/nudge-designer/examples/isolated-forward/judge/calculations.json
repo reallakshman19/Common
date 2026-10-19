@@ -1,0 +1,244 @@
+{
+  "assessment": "A-ASSESS revision 1 / T-ASSESS continuation of MAP-BP1-PILOT revision 1",
+  "scope": "Issued F/U prompt blocks against BP-1; no tracker alias, parent acceptance, or external action.",
+  "method": {
+    "runtime": "Python -B; standard-library pathlib, hashlib, json and fractions.Fraction",
+    "arithmetic": "Exact rational arithmetic for all given numerical values.",
+    "input_policy": "Read only assignment.md, judge-issued-inputs.sha256.json, and the four specified judge/inputs files; write only assessment.md and calculations.json."
+  },
+  "manifest": {
+    "path": "judge-issued-inputs.sha256.json",
+    "sha256": "1c7a42bf25d5f2730b195bfb2e3860d9e87c42a6d9d40986559f9aedb3afcfce",
+    "checks": [
+      {
+        "path": "judge/assignment.md",
+        "expected_sha256": "01538fcd0f51ce8b41a2a46fabd9ad916112ef1b9764c4b69998f375608179ee",
+        "actual_sha256": "01538fcd0f51ce8b41a2a46fabd9ad916112ef1b9764c4b69998f375608179ee",
+        "matches": true
+      },
+      {
+        "path": "judge/inputs/blueprint.md",
+        "expected_sha256": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546",
+        "actual_sha256": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546",
+        "matches": true
+      },
+      {
+        "path": "judge/inputs/problems.md",
+        "expected_sha256": "44c9d4ca7008637588ee869663fdae87a5eae87fce03edbcfa939b5a6fe6bf3d",
+        "actual_sha256": "44c9d4ca7008637588ee869663fdae87a5eae87fce03edbcfa939b5a6fe6bf3d",
+        "matches": true
+      },
+      {
+        "path": "judge/inputs/reference.md",
+        "expected_sha256": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c",
+        "actual_sha256": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c",
+        "matches": true
+      },
+      {
+        "path": "judge/inputs/setup.md",
+        "expected_sha256": "98e72a73620adeb28d3403ea6d9465be2bfa890c535ebc82d3ce256e92313247",
+        "actual_sha256": "98e72a73620adeb28d3403ea6d9465be2bfa890c535ebc82d3ce256e92313247",
+        "matches": true
+      }
+    ],
+    "all_match": true
+  },
+  "F": {
+    "inputs": {
+      "mass_kg": "4.5 = 9/2",
+      "right_force_N": "+17",
+      "left_force_N": "-8",
+      "positive_direction": "right",
+      "other_horizontal_forces": "none"
+    },
+    "derivation": [
+      "F_net = (+17 N) + (-8 N) = +9 N",
+      "F_net = m*a; m > 0, so a = F_net/m",
+      "a = (+9 N)/(4.5 kg) = +2 m/s^2"
+    ],
+    "results_exact": {
+      "mass_kg": "9/2",
+      "net_force_N": "9",
+      "acceleration_m_s2": "2"
+    },
+    "direction": "right",
+    "units": "N/kg = m/s^2",
+    "demand_coverage": [
+      {
+        "id": "F1",
+        "requirement": "Require assignment of signed horizontal forces and identification of signed net force, with units.",
+        "status": "MET",
+        "witness": "problems.md, F item 1: Assign a sign to each horizontal force and find the signed net horizontal force, including units."
+      },
+      {
+        "id": "F2",
+        "requirement": "Require derivation and calculation of signed acceleration from positive mass using F_net=m*a, with units.",
+        "status": "MET",
+        "witness": "problems.md, F opening: mass 4.5 kg and F_net=m*a; F item 2: Starting from F_net=m*a, derive and calculate the signed horizontal acceleration, including units."
+      }
+    ],
+    "demand_rollup": "FULFILLED",
+    "numerical_correctness": "The independently derived answer is +9 N and +2 m/s^2. The prompts contain no asserted output number; producer solution correctness remains UNKNOWN."
+  },
+  "U": {
+    "inputs": {
+      "length_mm": "735",
+      "relation": "1000 mm = 1 m"
+    },
+    "derivation": [
+      "735 mm * (1 m / 1000 mm) = 735/1000 m = 147/200 m = 0.735 m"
+    ],
+    "result_exact_m": "147/200",
+    "result_decimal_m": "0.735",
+    "explanation": "One metre contains 1000 millimetres, so the numerical magnitude in metres is the numerical magnitude in millimetres divided by 1000. The conversion factor is a ratio of equal lengths and equals one; units and numerical magnitude change, but the strip physical length does not.",
+    "demand_coverage": [
+      {
+        "id": "U1",
+        "requirement": "Require conversion of a positive length from millimetres to metres, with units.",
+        "status": "MET",
+        "witness": "problems.md, U opening: positive physical length of 735 mm; U item 1: Convert its length to metres, including units."
+      },
+      {
+        "id": "U2",
+        "requirement": "Require explanation of the factor 1000 using the supplied unit relation, without a misleading physical premise.",
+        "status": "MET",
+        "witness": "problems.md, U opening: 1000 mm = 1 m; U item 2: Explain why the conversion uses a factor of 1000 and whether the strip physical length changes."
+      }
+    ],
+    "demand_rollup": "FULFILLED",
+    "numerical_correctness": "The independently derived answer is 0.735 m. The producer solution and explanation were not supplied."
+  },
+  "cross_cutting_requirements": [
+    {
+      "id": "Q1",
+      "requirement": "Two short exercises, one per F/U profile.",
+      "status": "MET",
+      "witness": "problems.md contains one F block and one U block, each with two numbered requests."
+    },
+    {
+      "id": "Q2",
+      "requirement": "Self-contained stipulated F model with opposing horizontal forces, positive mass, no other horizontal forces and a sign direction.",
+      "status": "MET",
+      "witness": "problems.md, F opening: 4.5 kg, 17 N right, 8 N left, no other horizontal forces, right positive, F_net=m*a."
+    },
+    {
+      "id": "Q3",
+      "requirement": "Self-contained U conversion with the relation 1000 mm = 1 m and no misleading physical premise.",
+      "status": "MET",
+      "witness": "problems.md, U opening and item 2: positive physical length, supplied unit relation, and explicit question about physical-length invariance."
+    },
+    {
+      "id": "Q4",
+      "requirement": "Clear specified settings and values; no benchmark setting or number required by BP-1.",
+      "status": "MET",
+      "witness": "blueprint.md final paragraph permits clear invented settings and values without a particular benchmark; problems.md specifies a cart and strip with all necessary values."
+    },
+    {
+      "id": "Q5",
+      "requirement": "Correct source-grounded producer solutions.",
+      "status": "UNKNOWN",
+      "witness": "blueprint.md opening requires solutions; setup.md explicitly says producer solutions are withheld; problems.md is a prompt-only extraction."
+    },
+    {
+      "id": "Q6",
+      "requirement": "Full producer artifact keeps conceptual validity separate from actual learner understanding.",
+      "status": "UNKNOWN",
+      "witness": "blueprint.md opening requires the distinction; only prompt blocks are supplied and the complete artifact/report is withheld. The prompt blocks make no learner-understanding claim."
+    },
+    {
+      "id": "Q7",
+      "requirement": "Settings/values were actually invented rather than derived from undisclosed material.",
+      "status": "UNKNOWN",
+      "witness": "blueprint.md final paragraph says use invented settings and values; setup.md reports excluded issued inputs but says different settings/numbers alone do not authenticate independent derivation."
+    }
+  ],
+  "rollups": {
+    "F_required_demands": "FULFILLED",
+    "U_required_demands": "FULFILLED",
+    "combined_prompt_demands": "FULFILLED",
+    "full_BP1_authoring_requirements_on_issued_evidence": "UNKNOWN",
+    "known_NOT_MET": [],
+    "unknown_ids": [
+      "Q5",
+      "Q6",
+      "Q7"
+    ]
+  },
+  "missing_part_checks": [
+    {
+      "kind": "Counterfactual, not an observed artifact change",
+      "case": "Remove U item 2 while retaining the correct conversion 0.735 m.",
+      "part_statuses": {
+        "U1": "MET",
+        "U2": "NOT_MET"
+      },
+      "rollup": "PARTIAL",
+      "implication": "A correct conversion number alone does not cover the explanatory relation."
+    },
+    {
+      "kind": "Hypothetical response, not an observation about any learner",
+      "case": "An F response containing only +2 m/s^2 has the correct acceleration number.",
+      "missing_evidence": [
+        "signed force assignment and +9 N net force",
+        "derivation a=F_net/m with units"
+      ],
+      "implication": "Numerical correctness alone cannot establish satisfaction of both F demands."
+    }
+  ],
+  "reference_comparison": {
+    "source": "reference.md and setup.md, both allowed inputs",
+    "F": {
+      "reference_inputs": {
+        "mass_kg": "4",
+        "right_force_N": "30",
+        "left_force_N": "-10"
+      },
+      "reference_recomputed": {
+        "net_force_N": "20",
+        "acceleration_m_s2": "5"
+      },
+      "new_inputs": {
+        "mass_kg": "4.5",
+        "right_force_N": "17",
+        "left_force_N": "-8"
+      },
+      "new_results": {
+        "net_force_N": "9",
+        "acceleration_m_s2": "2"
+      }
+    },
+    "U": {
+      "reference_input_mm": "1600",
+      "reference_result_m_exact": "8/5",
+      "reference_result_m_decimal": "1.6",
+      "new_input_mm": "735",
+      "new_result_m_exact": "147/200",
+      "new_result_m_decimal": "0.735"
+    },
+    "observed_relationship": "New values differ from R-F/R-U; the task structure and physical/unit relations overlap with BP-1. These observations show numerical non-identity, not authenticated independent derivation.",
+    "old_artifact_evidence": "The supplied reference states that OLD-F was copied then renamed, OLD-U was adapted, and the old producer had read the reference. Those statements describe the supplied record; its independent-validity verdict is not used as an oracle.",
+    "setup_supports": "The setup records a fresh producer conversation with only an operational brief and BP-1 issued, reference/old examples/Oracle planning excluded from that issued set, and a producer self-report of using only those inputs.",
+    "setup_does_not_establish": [
+      "OS-enforced isolation or an access audit",
+      "training-data independence",
+      "authenticated independent derivation",
+      "formal assessor/producer qualification or verified model/effort",
+      "general generator reliability",
+      "learner understanding"
+    ]
+  },
+  "exposure_and_assumptions": {
+    "prior_exposure": "For this task, I read the supplied reference, including old answer values, before computing the new answers. I did not read original producer solutions/reports, other Oracle records, parent checks, other task outputs, or skill libraries. No assertion of blinding to the supplied reference is made.",
+    "isolation": "Instruction boundary on shared storage; not OS-enforced prevention. A different role or fresh conversation is not formal qualification or fully independent evidence.",
+    "shared_assumptions": [
+      "Stated decimal givens are exact for the synthetic calculation, with no measurement-uncertainty model.",
+      "Apply only the stipulated horizontal Newtonian model and right-positive sign convention.",
+      "Use standard SI unit identity N = kg*m/s^2 and the supplied equality 1000 mm = 1 m.",
+      "Unit conversion does not change physical length."
+    ],
+    "restrictions_encountered": "None: all exact named inputs were readable and all five manifest-listed digests matched."
+  },
+  "defects": [],
+  "defect_rationale": "No substantive defect is observable in the supplied prompt coverage, stipulated models or solvability. Withheld evidence produces UNKNOWN statuses rather than invented defects.",
+  "source_bound_conclusion": "These two prompt blocks fulfill both required demands of each BP-1 profile and admit the exact answers +9 N, +2 m/s^2 and 0.735 m. Full authoring compliance remains UNKNOWN on the issued evidence because producer solutions, broader claims and derivation provenance are not available. No learner, general model/skill effect, or parent acceptance is established."
+}

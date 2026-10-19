@@ -1,0 +1,33 @@
+{
+  "kind": "Continued Oracle direct-source computation and solution comparison",
+  "source": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md",
+  "source_file_byte_sha256": "aac728d0d679dada9f7ee8031afdf923e7030a33782c67cdf852aa0bb07b97db",
+  "method": "Strict UTF-8, select F/U prompt text before Solution markers; regex-read stated mass/force/length values and confirm sign, no-other-force and unit conditions; use fractions.Fraction on decimal strings. Compare independently formulated relations to saved producer results, assessor results and parent receipt.",
+  "givens_exact_and_results": {
+    "mass_kg": "9/2",
+    "right_N": "17",
+    "left_N": "8",
+    "net_N": "9",
+    "acceleration_m_per_s2": "2",
+    "length_mm": "735",
+    "length_m": "147/200",
+    "reverse_net_N": "-9",
+    "reverse_acceleration_m_per_s2": "-2",
+    "back_length_mm": "735"
+  },
+  "derivation": [
+    "F_net=(+17 N)+(-8 N)=+9 N",
+    "a=F_net/m=(+9 N)/(9/2 kg)=+2 m/s^2; N/kg=m/s^2",
+    "L=735 mm*(1 m/1000 mm)=147/200 m=0.735 m",
+    "Reverse axis: -17+8=-9 N; -9/(9/2)=-2 m/s^2",
+    "Back conversion: (147/200)*1000=735 mm"
+  ],
+  "producer_solution_results_match": true,
+  "assessor_answer_key_matches": true,
+  "parent_numeric_receipt_matches": true,
+  "limits": [
+    "This Oracle designed the task and previously read the old benchmark; it read the new solutions/native report and all returned check records before these computations.",
+    "Source-derived recomputation is not a fresh blind result or proof of independence; correctness assumes BP-1 stipulated model, exact synthetic givens and supplied unit equality.",
+    "The assessor did not inspect producer solutions. Current Oracle supplies the explicit bridge comparison, not an expanded retrospective assessor verdict."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "scope": "Byte/content identity checks only; no semantic approval or downstream execution",
+  "checks": [
+    {
+      "check": "original source bytes unchanged",
+      "file": "owner.md",
+      "sha256": "dabe7c2fd83b1ac992773b94770219bfe95172fd92c1eaa669c2e304d966475b",
+      "result": "PASS"
+    },
+    {
+      "check": "original source bytes unchanged",
+      "file": "blueprint.md",
+      "sha256": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546",
+      "result": "PASS"
+    },
+    {
+      "check": "original source bytes unchanged",
+      "file": "reference.md",
+      "sha256": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c",
+      "result": "PASS"
+    },
+    {
+      "check": "prepared brief bytes unchanged",
+      "file": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-brief.md",
+      "sha256": "76cb1b57ddd037c6bf3cef88c1352e3716f40c4e63f2f7f094b98d67e81d0b4a",
+      "result": "PASS"
+    },
+    {
+      "check": "prepared brief bytes unchanged",
+      "file": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-operational-view.md",
+      "sha256": "2fbf71ef49d5406dbf9c6c6c6a51004ebbfbc0f707fcc3a5f7ad0d34dade8047",
+      "result": "PASS"
+    },
+    {
+      "check": "screen for known reference labels/givens/answers",
+      "file": "worker/generation-brief.md",
+      "result": "PASS",
+      "scope": "Literal screen for named reference strings plus manual readback; not a semantic leakage/independence proof"
+    },
+    {
+      "check": "screen for known reference labels/givens/answers",
+      "file": "worker/generation-operational-view.md",
+      "result": "PASS",
+      "scope": "Literal screen for named reference strings plus manual readback; not a semantic leakage/independence proof"
+    },
+    {
+      "check": "owner wording, first brief BP-1 body, canonical map/native content bindings and both brief identity records",
+      "result": "PASS"
+    }
+  ]
+}

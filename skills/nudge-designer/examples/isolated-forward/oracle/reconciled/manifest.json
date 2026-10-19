@@ -1,0 +1,33 @@
+{
+  "files": [
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/reconciled/current-reconciliation.md",
+      "sha256": "398feacef55051467ac4a4cc88cd3e1ccd312285745415a0b3dd221f24756eaf",
+      "bytes": 4725
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/reconciled/evidence-ledger.json",
+      "sha256": "957d5d1b51225aae84009a6685f6e09521abeca3bb8152e271ff94aa987c010c",
+      "bytes": 8626
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/reconciled/oracle-computations.json",
+      "sha256": "17017c4e7a1c1ca716887015687c1c72a33227feedcf77faf57886c984ec0177",
+      "bytes": 1823
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/reconciled/input-integrity.json",
+      "sha256": "f14a453f73a77714cde6684ddc23b21653b0ee3e15880610bf508b78d2faac12",
+      "bytes": 14998
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/reconciled/provenance.json",
+      "sha256": "08118511d983aca977ac551f3e5ced52effdc4ab2255c4533864f7a3b3826ce2",
+      "bytes": 3534
+    }
+  ],
+  "meaning_change": false,
+  "originals_preserved": true,
+  "dispatch_performed": false,
+  "representation": "File-byte hashes, not signatures or acceptance."
+}

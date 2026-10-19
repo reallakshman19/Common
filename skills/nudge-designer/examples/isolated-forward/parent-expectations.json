@@ -1,0 +1,18 @@
+{
+  "recorded_utc": "2026-10-19T04:52:26.897730+00:00",
+  "kind": "Source-derived expectations before producer/reviewer returns",
+  "criteria": [
+    "Original copied/adapted items retain arithmetic value but do not establish unseen generation.",
+    "Generation inputs must exclude the reference and prior verdicts; record shared filesystem rather than claim OS-enforced isolation.",
+    "Each F item needs signed net force and acceleration under a stipulated model and positive mass.",
+    "Each U item needs millimetre-to-metre conversion and the factor relation.",
+    "Producer self-judgment is SELF-ASSESSED; separate assessment still shares supplied model assumptions.",
+    "Use actual canonical assignment/tracker mapping rather than silently replacing IDs."
+  ],
+  "checks_planned": [
+    "Inspect issued input set and full-file byte hashes.",
+    "Derive numeric claims from generated givens with exact arithmetic where feasible.",
+    "Assess the distinct claim of reproduction versus transfer and retain learner acceptance unverified."
+  ],
+  "limits": "These expectations can be falsified by actual inputs; they are not a hidden authoritative answer key or model qualification."
+}

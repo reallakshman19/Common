@@ -16,6 +16,11 @@ the actual observation. Show decisive intermediate states or quantities, not a
 long acknowledgment of the instructions. Do not replace the original code/path,
 copy a target answer as evidence or weaken a failing oracle.
 
+Use the brief's allowed inputs and report relevant prior exposure, including earlier
+conversation or files. A fresh step cannot make previously seen material unseen.
+Label any judgment of your own produced artifact SELF-ASSESSED. For multipart
+judgments apply the supplied part-level/roll-up rule and retain UNKNOWN/gaps.
+
 Check input identity and interpretation before blaming source content: use the
 declared format/codec/units as relevant, preserve bytes and report uncertainty.
 Support material claims with applicable source relations or actual computations,

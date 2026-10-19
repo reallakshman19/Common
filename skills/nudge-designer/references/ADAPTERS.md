@@ -6,6 +6,7 @@
 - [Choose support from the work](#choose-support-from-the-work)
 - [Two-schema compatibility](#two-schema-compatibility)
 - [Audience and surface APIs](#audience-and-surface-apis)
+- [Tracker identity and transport](#tracker-identity-and-transport-examples)
 - [Native-return envelope](#native-return-envelope)
 - [Reconcile and resume](#reconcile-and-resume)
 - [Examples and limits](#examples-and-limits)
@@ -118,6 +119,36 @@ participant/support data. GUIDED examples are references, not proof of transfer.
 Audience selection is a view, not a new allocation. Use a separate issued nudge
 when assigning a new specialist/review deliverable; cross-plan review inputs are
 source references to the other task's immutable records.
+
+## Tracker identity and transport examples
+
+Before issuing a manual packet, identify the existing system of record. Distinguish
+canonical assignment ID/revision/binding, a tracker's move ID and the reply's link
+to that move. Preserve an explicit mapping; do not silently replace a frozen packet's
+ID or treat a new app ID as the old task. Reserve a tracker ID before issue, record
+an external ID verbatim, or document an unambiguous alias according to the actual
+surface contract. These are choices, not a universal preference for app IDs.
+
+Where the channel uses `ACK <id>`, state which mapped ID the response echoes.
+Link the reply to the corresponding issued snapshot; refuse ambiguous correlation
+until reconciled. Preserve the designed content, purpose/conditions, inputs, scope,
+return/uncertainty rules and actual send history. An ACK neither establishes task
+execution nor replaces full content binding. The manual adapter prepares content;
+it does not implement tracker-native import, reply linking or a watcher.
+
+Example: assignment `A-OBSERVE` revision 2 is recorded as move `MOVE-71`; the chosen
+channel contract requests `ACK MOVE-71`. Its returned artifact still names/binds
+`A-OBSERVE` revision 2. A reply about `MOVE-70` must not be admitted as that return
+merely because its prose looks similar.
+
+An unreliable transport can add a leading BOM, garble decoded punctuation or
+duplicate a summary while the original file remains correct. Keep original bytes
+and compare the artifact's full byte digest separately. If the channel permits it,
+strip one leading BOM only in a separate working view for ACK matching; record that
+interpretation and retain the raw copy. Report mojibake/duplicates instead of silently
+repairing evidence. A prefix is display convenience, not full digest verification.
+These examples add no automatic normalization to `receive` or any app. Watching the
+actual reply destinations is a controller responsibility, not a thinking-skill API.
 
 ## Native-return envelope
 

@@ -38,6 +38,12 @@ https://github.com/reallakshman19/CoordinatorLandingpage/issues/97#issuecomment-
 
 The observed workbench uses Nudge Protocol v2 and manual Owner controls. This
 records the design boundary; it does not requalify every current deployment.
+This is an earlier deployment observation. The Owner's 19 October fresh-pilot
+proposal describes a revamped CoordinatorLandingpage app and
+[PR #107](https://github.com/reallakshman19/CoordinatorLandingpage/pull/107).
+Inspect the actual target/version before applying a surface contract; this skill
+does not verify that app's current import/reply behavior. Keep assignment/move/reply
+mapping explicit as described in [adapters](ADAPTERS.md).
 The Designer's `type` vocabulary matches the observed labels: `new_requirement`,
 `ground`, `next_step`, `course_correction`. Those labels alone do not make the
 objects native workbench imports. The `nextnudge-manual` adapter now prepares a

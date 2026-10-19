@@ -1,0 +1,151 @@
+{
+  "binding": {
+    "intent_id": "INTENT-BP1-PILOT",
+    "intent_revision": 1,
+    "intent_sha256": "aa9025cb19ac3fe4927cbb525a31f15be8d2533bfa9a051a6e4ac662c306d0c5",
+    "plan_id": "PLAN-BP1-PILOT",
+    "plan_revision": 1,
+    "plan_sha256": "a756175be35b6bb9988b227514870c6f0dd560096690c7f90efca8eb3dc3c491",
+    "nudge_id": "A-GENERATE",
+    "nudge_sha256": "1fcf797407dd8a116b2eeaa978ae30d94c141d034c5ab1c7277f0c86fce13b03",
+    "participant_id": "P-PRODUCER"
+  },
+  "canonical_map": {
+    "id": "MAP-BP1-PILOT",
+    "revision": 1,
+    "task": "T-GENERATE",
+    "canonical_sha256": "b3e8bd62c71a32e760b6da7687cac1dda707f7001617fcd086468a5f18f98fe2"
+  },
+  "record_kind": "Current evidence reconciliation; not a revised neutral map or plan and not an authority/qualification token",
+  "current_content_rollup": "FULFILLED_ON_COMBINED_LOCAL_EVIDENCE",
+  "part_results": [
+    {
+      "part": "F.model",
+      "status": "MET",
+      "witness": "F prompt explicitly gives 4.5 kg, Newton second law, 17 N right/8 N left, no other horizontal forces and right positive.",
+      "evidence_scope": "Assessor F2 and cross-cutting Q2 support prompt conditions; Oracle reads the full saved artifact.",
+      "artifact": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md"
+    },
+    {
+      "part": "F.net",
+      "status": "MET",
+      "witness": "F question 1 asks force signs and signed net force; solution adds +17 and -8 to yield +9 N.",
+      "evidence_scope": "Assessor F1 covers the demand and derives +9 N; Oracle verifies the saved solution against it.",
+      "artifact": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md"
+    },
+    {
+      "part": "F.acceleration",
+      "status": "MET",
+      "witness": "F question 2 asks derivation from F_net=m*a; solution derives a=F_net/m=+2 m/s², with units and rightward direction.",
+      "evidence_scope": "Assessor F2 derives the expected +2; Oracle compares the actual saved derivation and independently recomputes.",
+      "artifact": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md"
+    },
+    {
+      "part": "U.premise",
+      "status": "MET",
+      "witness": "U describes a positive 735 mm strip, supplies 1000 mm=1 m and asks whether physical length changes; solution preserves the physical quantity.",
+      "evidence_scope": "Assessor Q3 and U1 support the prompt; Oracle reads the complete solution.",
+      "artifact": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md"
+    },
+    {
+      "part": "U.conversion",
+      "status": "MET",
+      "witness": "U question 1 asks for metres; the saved solution uses unit cancellation to obtain 0.735 m.",
+      "evidence_scope": "Assessor U1 computes 147/200 m without seeing producer answers; Oracle compares it to the saved solution.",
+      "artifact": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md"
+    },
+    {
+      "part": "U.explanation",
+      "status": "MET",
+      "witness": "U question 2 asks why 1000; solution explains 1000 smaller units per metre and unchanged physical length.",
+      "evidence_scope": "Assessor U2 covers the demand and independently explains the relation; Oracle reads and compares the producer explanation.",
+      "artifact": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md"
+    }
+  ],
+  "content_rollup_rule": "All six required content parts MET -> FULFILLED; any UNKNOWN -> UNKNOWN retaining known misses; otherwise mixed MET/NOT_MET -> PARTIAL and no MET -> NOT_FULFILLED. Provenance is a separate claim.",
+  "source_grounded_solutions": "Supported by complete saved artifact inspection and source-derived numeric/unit checks; the separate assessor derived matching answers but intentionally did not view producer solutions.",
+  "assessor_original_unknowns": [
+    {
+      "id": "Q5",
+      "original": "UNKNOWN because solutions withheld",
+      "current": "Supported by direct Oracle full-solution inspection, exact recomputation and comparison to separate key; not reviewed by the prompt-only assessor."
+    },
+    {
+      "id": "Q6",
+      "original": "UNKNOWN because full artifact/report withheld",
+      "current": "Direct full-artifact/report inspection finds explicit separation from learner understanding and independence claims; this is continued-coordinator inspection."
+    },
+    {
+      "id": "Q7",
+      "original": "UNKNOWN invention/independent derivation",
+      "current": "Still unestablished as authenticated independent derivation. Fresh issued set is documented by setup and producer self-report; changed numbers alone do not resolve provenance."
+    }
+  ],
+  "task_evidence": [
+    {
+      "task": "T-GENERATE",
+      "status": "BOUNDED_RETURN_PRESENT_CONTENT_SUPPORTED",
+      "basis": [
+        "Saved exercises/native report",
+        "Original binding/byte checks",
+        "Oracle content comparison"
+      ],
+      "limit": "Producer content judgments stay SELF-ASSESSED; raw channel first-line delivery and a global access audit were not observed by this Oracle."
+    },
+    {
+      "task": "T-ASSESS",
+      "status": "PROMPT_ASSESSMENT_AND_SEPARATE_KEY_RETURNED",
+      "basis": [
+        "judge/assignment.md",
+        "judge/assessment.md",
+        "judge/calculations.json"
+      ],
+      "limit": "Parent selected a prompt-only view. Separate full producer-solution/narrative review is not claimed; current Oracle bridges content checks."
+    },
+    {
+      "task": "T-RECONCILE",
+      "status": "CURRENT_RECONCILIATION_PREPARED",
+      "basis": [
+        "This new record and current-reconciliation.md"
+      ],
+      "limit": "No Owner acceptance, product action or general blueprint validation is inferred."
+    }
+  ],
+  "changes_from_issued_absence_statements": [
+    {
+      "item": "U-ARTIFACT",
+      "change": "Returned artifact and actual input/exposure report now exist and are pinned; previous absence is historical."
+    },
+    {
+      "item": "U-ASSESSMENT",
+      "change": "A separate prompt assessment/key now exists. Actual model/effort, formal qualifications and complete assessor independence remain unestablished."
+    },
+    {
+      "item": "U-ACCESS",
+      "change": "Allowed-input setup, producer disclosure and input hashes now documented. No independent access audit or OS prevention established."
+    },
+    {
+      "item": "U-WORKER",
+      "change": "One bounded artifact and working-local-tool reports support this task under these conditions. They do not qualify broader judgment; runtime model/effort remain UNKNOWN."
+    }
+  ],
+  "preserved_evidence": {
+    "old_arithmetic": "+20 N, +5 m/s² and 1.6 m remain correct for the supplied old instances. Old copy/adaptation and self-review reports are unchanged.",
+    "new_numbers": "4.5 kg; 17/8 N; 735 mm differ from reference givens, while BP-1 requires the shared cart/unit structure. Difference is non-identity, not proof of independent invention."
+  },
+  "claims_not_established": [
+    "Authenticated independent generation/derivation or absence of all prior reference access.",
+    "OS-enforced reference exclusion or training-data independence.",
+    "Formal worker/assessor qualification, actual model/effort or statistically/generalizable blueprint/model/skill reliability.",
+    "A causal benefit from fresh context, GUIDED support, Task Decomposer or Nudge Designer versus alternatives.",
+    "Actual learner understanding/learning gain or product/Owner acceptance."
+  ],
+  "semantic_revision": {
+    "required": false,
+    "reason": "Purpose, profile conditions, task boundaries, dependencies, method and acceptance meaning remain useful. New observations replace historical absence in this evidence record, not the frozen issued map. The prompt-only assessor scope is recorded as an evidence-coverage limitation, not silently promoted to full-artifact review.",
+    "map_revision": 1,
+    "plan_revision": 1,
+    "impact": "NOT_RUN: no revised map/intent/plan was authored, so no revision impact comparison exists."
+  },
+  "next_useful_action": "Use this current record as the bounded local pilot outcome; retain its prompt-only separate-assessment exception. No repair or repeat generation is supported by the empty defect set. If a stronger claim of separate full-artifact acceptance is needed, the smallest remaining local work is a solution/narrative comparison against the pinned separate answer key, with producer self-verdict withheld; do not dispatch it from this reconciliation."
+}

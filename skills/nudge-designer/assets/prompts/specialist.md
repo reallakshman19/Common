@@ -22,4 +22,6 @@ Return native evidence, actual attempts, limits, unresolved outcomes and a next
 proposal. State what was supplied, derived, executed and independently checked.
 A specialist role label or two agreeing methods does not establish qualification
 or independence. Do not expand the task into approval of a larger system.
+If assessing your own produced artifact, label that judgment SELF-ASSESSED. Retain
+relevant prior exposure and distinguish reference-derived reproduction from transfer.
 ```

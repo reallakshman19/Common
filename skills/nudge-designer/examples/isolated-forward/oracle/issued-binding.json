@@ -1,0 +1,11 @@
+{
+  "intent_id": "INTENT-BP1-PILOT",
+  "intent_revision": 1,
+  "intent_sha256": "aa9025cb19ac3fe4927cbb525a31f15be8d2533bfa9a051a6e4ac662c306d0c5",
+  "plan_id": "PLAN-BP1-PILOT",
+  "plan_revision": 1,
+  "plan_sha256": "a756175be35b6bb9988b227514870c6f0dd560096690c7f90efca8eb3dc3c491",
+  "nudge_id": "A-GENERATE",
+  "nudge_sha256": "1fcf797407dd8a116b2eeaa978ae30d94c141d034c5ab1c7277f0c86fce13b03",
+  "participant_id": "P-PRODUCER"
+}
