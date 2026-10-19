@@ -35,3 +35,12 @@ Owner — fresh task-local workers:
 > can perform from a self-contained brief; minimize dependence on prior chat while
 > preserving necessary understanding. Keep coupled decisions and integration with
 > Oracle, and prepare selected designs for Nudge Designer if useful.
+
+Oracle — continue through execution:
+
+> Use Task Decomposer for [goal/sources] and carry the selected work through actual
+> returns and integrated verification. Establish a usable observation/method, give
+> fresh workers coherent tasks, inspect their artifacts and adapt direction from
+> evidence. Retain consequential judgment and remaining parent outcomes. Attribute
+> assistance and actual host configuration; maintain the records for me. Use Nudge
+> Designer only if separately selected and preserve the original task meaning.

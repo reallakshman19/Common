@@ -46,6 +46,9 @@ Read [Oracle application guidance](references/ORACLE_USE.md) for fresh task-loca
 workers and optional composition with Nudge Designer. Minimize remembered history
 while retaining necessary understanding. Distinguish context isolation from blind
 evaluation; trace artifact/reference exposure and keep self-assessment explicit.
+For execution requests, retain ownership of the observation method, actual return
+inspection, adaptive next action and integrated verification. Record assistance
+and actual configuration; structural checks cannot qualify a low-thinking worker.
 
 ## Choose meaningful boundaries
 

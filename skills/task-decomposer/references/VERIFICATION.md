@@ -38,3 +38,26 @@ The [fresh Oracle application](../examples/forward-isolated/ASSESSMENT.md)
 retains source inputs, native planning/bindings, parent assistance and the visible
 1,065 → 484 word packaging revision. It is preparation evidence, with unknown
 configuration/qualification and instruction-level exposure limits.
+
+## Oracle execution amendment
+
+The Owner asked to complete operating support before the live pilot. The Oracle
+guide/entry now allocates measurement design, actual return inspection, adaptive
+direction and integrated verification when execution is requested. Record actual
+versus intended configuration, assistance and coordination effort. No runtime,
+schema or dependency was added; the package remains independently usable.
+
+The existing 29 tests passed locally on Python 3.12 in 7.740 seconds after the
+first attempt omitted the existing optional `jsonschema` dependency path. Preserve
+that first startup restriction rather than claiming it passed. Skill metadata,
+links and scoped diff checks pass; exact-head hosted results belong to the PR.
+
+A fresh local Oracle used this package and separately selected Nudge Designer to
+design one coupled state repair, then carried actual worker execution through
+reconciliation and integrated checks. The native map remained r1 because evidence
+status changed without new task meaning. The complete application is recorded in
+[the optional consumer PR #442](https://github.com/reallakshman19/Common/pull/442),
+not imported into this package or required to use it. A final execution-only scope
+qualifier was parent-reviewed after initial guide use. This is local application
+evidence with assistance/configuration limits, not real LFEA repair or a qualified
+low-thinking model effect.

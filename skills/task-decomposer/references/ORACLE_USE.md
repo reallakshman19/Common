@@ -1,5 +1,12 @@
 # Oracle: task-local execution with retained project meaning
 
+## Contents
+
+- [Choose a context boundary](#choose-a-useful-context-boundary)
+- [Compose independent skills](#compose-the-two-independently-selected-skills)
+- [Focused context and blind evidence](#distinguish-focused-context-from-blind-evidence)
+- [Observe grounding](#observe-grounding-without-inventing-competence)
+
 Accept the Owner's human-language goal and available sources. Oracle maintains the
 map and reconciles results; the Owner need not operate schemas. An Oracle label
 or medium/high model label does not establish the consequential judgment needed.
@@ -46,6 +53,29 @@ source/coverage records. No participant-exposure JSON schema is added.
    claim changed, what is unverified and which tasks remain useful. Update affected
    map and downstream plan meaning visibly; run each tool's impact where useful.
    Preserve old bindings and actual results. Review the integrated outcome separately.
+
+When the Owner requests execution, carry these responsibilities through actual
+work rather than returning only the map.
+Use [the Oracle continuation prompt](../assets/entry-prompts.md) to make that scope
+explicit. Before delegating, establish who designs the discriminating observation,
+who sends/watches the actual channel, who interprets returns and who checks the
+integrated result. Oracle retains any unallocated responsibility. A smaller brief
+does not remove a difficult measurement/model decision.
+
+When a return contradicts the current explanation, revise the explanation and next
+useful task. When the sender's input or measurement failed, correct that cause
+before repeating work. A correct component may expose missing integration instead.
+Keep the change linked to evidence and original obligations; discoveries do not
+automatically expand scope. Preserve issued artifacts and update only affected
+working meaning. Status-only evidence need not cause a semantic map revision.
+
+Record concrete assistance, actual versus intended configuration and available
+coordination/correction effort. Do not attribute a parent's input projection,
+brief repair or verification to unaided Oracle operation. Default-runtime success
+supports that application; it does not qualify a low-thinking configuration or
+establish ROI without comparable evidence. Keep these facts in native records,
+not a compulsory new schema. An optional consumer must retain these duties even
+when its runtime only prepares packets and checks structure.
 
 These are application responsibilities, not mandatory phases, gates or a runtime
 controller. Both skills still work alone. No native converter, shared import,
