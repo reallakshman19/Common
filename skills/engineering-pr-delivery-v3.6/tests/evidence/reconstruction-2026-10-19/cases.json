@@ -1,0 +1,56 @@
+[
+  {
+    "id": "A",
+    "mode": "standalone",
+    "context": "New incoming agent; predecessor unavailable. No context process was selected.",
+    "prior_report": "The old report says DONE because displayed quantity became 3. It contains no consumer/subtotal witness.",
+    "request": "Continue from the original Owner goal and actual source.",
+    "source_sha256": "e40ad9b8317d0e67521cc57b9162c38df215e1e748b2fda37172549c5b508425",
+    "owner_source": "owner.md",
+    "candidate_source": "source.py",
+    "execution_witness": "observed.txt"
+  },
+  {
+    "id": "B",
+    "mode": "coordinator",
+    "context": "BuddyRunner 1a, 1b and final reconciliation 2 have completed.",
+    "outputs": {
+      "1b": "Source at the recorded digest changes displayed_quantity but not quantity. Actual local replay is observed.txt. The Owner outcome is unmet.",
+      "2": "Retain this finding. Next authorized task is bounded apply() repair plus model/subtotal regression, preserving price. Predecessor involvement is closed."
+    },
+    "request": "Recommend the next instruction for the available implementation worker.",
+    "source_sha256": "e40ad9b8317d0e67521cc57b9162c38df215e1e748b2fda37172549c5b508425",
+    "owner_source": "owner.md",
+    "candidate_source": "source.py",
+    "execution_witness": "observed.txt"
+  },
+  {
+    "id": "C",
+    "mode": "standalone",
+    "context": "The selected two-pass flow has completed.",
+    "outputs": {
+      "pass1": "Plan was to connect applied quantity to the model and test subtotal.",
+      "pass2": "Execution produced the current source. Actual observed.txt shows displayed value 3 but quantity 2 and subtotal 14. The repair remains unresolved; the record does not claim Owner acceptance."
+    },
+    "request": "Continue toward the remaining authorized repair.",
+    "source_sha256": "e40ad9b8317d0e67521cc57b9162c38df215e1e748b2fda37172549c5b508425",
+    "owner_source": "owner.md",
+    "candidate_source": "source.py",
+    "execution_witness": "observed.txt"
+  },
+  {
+    "id": "D",
+    "mode": "coordinator",
+    "context": "The selected three-pass flow has completed.",
+    "outputs": {
+      "pass1": "Expected subtotal for quantity 3 at price 7 is 21.",
+      "pass2": "The implementation candidate is the current source.",
+      "pass3": "Independent assessment within this synthetic record found observed subtotal 14 rather than 21. Product result FAIL; process finished. Next task is bounded correction and affected recheck."
+    },
+    "request": "Recommend the next task using the available lead and worker.",
+    "source_sha256": "e40ad9b8317d0e67521cc57b9162c38df215e1e748b2fda37172549c5b508425",
+    "owner_source": "owner.md",
+    "candidate_source": "source.py",
+    "execution_witness": "observed.txt"
+  }
+]

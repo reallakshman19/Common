@@ -19,6 +19,16 @@ The coding agent must not self-review, self-approve, close or merge.
 
 ## Native core obligations
 
+For takeover, use [independent reconstruction](references/INDEPENDENT_RECONSTRUCTION.md),
+never a Q1–Q5 questionnaire, pass mark or scored agent admission. The incoming
+agent derives the project model from original sources and the available lead
+reconciles its continuation. No compulsory examiner is added. This v3.6 rule
+supersedes inherited takeover-exam wording for the selected v3.6 work; actual team
+custody, independent product review and Owner acceptance remain separately bound.
+If BuddyRunner, two-pass or three-pass is selected, use only its native stages.
+After completion, additional reconstruction is **NOT_APPLICABLE**: reuse the
+outputs and continue authorized work, with targeted updates for new facts.
+
 Use the selected label, matching approved plan and real task/child issues.
 The existing O1–O5 lifecycle, dry-run defaults, explicit --apply/
 --confirm-scope, owner-controlled acceptance, eight-line TASK_EVIDENCE,

@@ -1,0 +1,3 @@
+Command: python observed.py
+Exit: 0
+{'displayed_quantity': 3, 'model_quantity': 2, 'subtotal': 14}

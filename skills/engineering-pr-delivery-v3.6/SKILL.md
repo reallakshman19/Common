@@ -28,6 +28,20 @@ independent review or Owner approval. For an Owner-run throwaway project,
 follow the [standalone quickstart](QUICKSTART_STANDALONE.md) in order;
 it uses only offline/dry-run commands and never grants acceptance.
 
+## Takeover policy — both modes, no questionnaire
+
+Use [independent reconstruction](references/INDEPENDENT_RECONSTRUCTION.md) for a cold
+takeover without a selected BuddyRunner, two-pass or three-pass flow. v3.6 has no
+Q1–Q5 takeover exam, agent pass mark, scored admission or compulsory examiner;
+do not import them from older protocols or team templates. Task self-check scores
+remain task-evidence checks, not agent qualification.
+
+Use only the native stages of a selected BuddyRunner/two-pass/three-pass flow.
+Once completed, **additional reconstruction is NOT_APPLICABLE**: reuse its outputs
+and continue the next authorized task. Do not require another note, stage or report.
+Reconcile material new facts through a targeted update, without reopening the flow.
+Keep actual source/engineering ownership, product validation and Owner authority.
+
 **Admitted C1 issue-history structural reader (#401 / #409):** [CONTINUITY_CHAIN_V1.md](CONTINUITY_CHAIN_V1.md) and `scripts/issue_chain_v36.py`, with a **constructed reported-only #274 illustration**, not an attested or production [fixture](tests/fixtures/issue-chain-274-reported.json). The offline JSON validator requires 11 ordered categories, allowed category→record kinds and explicit UNKNOWN/NOT_APPLICABLE reasons; **100% means mandatory states structurally present, never 100% verified**. `observed_main` and its repo allowlist are **supplied by the untrusted report**, while PUBLIC visibility, source SHA shapes and record order are **syntactic assertions only**—no independently authenticated repository scope, confidentiality, chronology, freshness, byte custody or Owner acceptance. There are no network/provider writes, canonical task-evidence changes, scoreboard A promotion, title or label updates. The contract's Handover Master/BuddyRunner references are NON-NORMATIVE; follow those protocols' own approved sources. C1 is **not** the active approved label/plan for any work and never replaces the canonical 8-line receipt, self-check or mandatory terminal LOG.
 
 ## 1. Mandatory inputs — work-specific, never silently default

@@ -1,0 +1,30 @@
+{
+  "cases.json": {
+    "bytes": 2764,
+    "sha256": "21b68f578ddfbad29bea11e075d34fdcfda1fb3ce50c4a57931a908b0cf685f6"
+  },
+  "executed-check-receipt.json": {
+    "bytes": 4619,
+    "sha256": "250fe5d1d7cb314a3e7552996c1acc13c7c8d869a2f2115a99cdd05c0d86091e"
+  },
+  "observed.py": {
+    "bytes": 176,
+    "sha256": "9b0889fab8e5229c30d6a2aec9ff15ce14d0f8679ea22a491bd6f599b9a2ccf6"
+  },
+  "observed.txt": {
+    "bytes": 99,
+    "sha256": "f82384741320ee9d1c5049a540b91010996c35be87bdf0e8a62d4d5f3b633692"
+  },
+  "owner.md": {
+    "bytes": 497,
+    "sha256": "e9488cac4fba94278a9935097a888efa0ea3a572c1abfc51c52f3781e02dafb0"
+  },
+  "response.md": {
+    "bytes": 10340,
+    "sha256": "4fb72ac6fddbee089e8af1968513e76fdbcb70b763c62d575107aec385e03342"
+  },
+  "source.py": {
+    "bytes": 274,
+    "sha256": "e40ad9b8317d0e67521cc57b9162c38df215e1e748b2fda37172549c5b508425"
+  }
+}
