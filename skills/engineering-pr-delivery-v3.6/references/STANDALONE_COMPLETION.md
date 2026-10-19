@@ -117,6 +117,17 @@ Do not replace v1 with v2 or append v2 lines to v1. Existing v2 scoring limitati
 remain unchanged, including its no-JUDGMENT vocabulary mismatch. The standalone
 completion route does not depend on the score, C1 CI discovery or team mirrors.
 
+## ChatGPT-agent activity duty
+
+For the Owner-selected ChatGPT-agent surface, apply the mandatory
+[activity policy](CHATGPT_AGENT_ACTIVITY.md): the executing agent records activity
+and suggests BuddyRunner at >5 GitHub-access turns OR >35 recorded active minutes.
+Oracle/lead consumes worker records when present; it is not a required runner.
+This does not apply to ChatGPT Work or other surfaces; UNKNOWN applicability stays
+explicit. Bind its episode
+and exact log bytes in native A14 and pass the activity options to the helper.
+Missing host measurement is reported as an observation gap, never fabricated.
+
 ## Optional local helper
 
 From the Common checkout, substitute the actual values:
@@ -135,6 +146,9 @@ Use shell-appropriate line continuation (`\` in Bash, backtick in PowerShell),
 or paste one line. Python/PyYAML and Git are the existing module prerequisites.
 No CI workflow, additional dependency, provider credentials or network is needed.
 The helper is optional; the evidence-based pre-DONE assessment is the requirement.
+The ChatGPT-agent recording/suggestion duty still applies when its runtime has no
+helper: keep equivalent native observations and limitations. Do not call it optional
+for that surface. The checker enforces the duty when that surface is declared.
 
 It refuses coordinator/default-mode labels before reading the plan, Git or proof
 files. It checks the exact row inventory, basis and candidate bindings, native

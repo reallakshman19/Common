@@ -23,6 +23,17 @@ dependency. Local configuration and sources cannot indirectly grant
 coordination-repository access. The Owner may use a separate NextNudge
 Tab later, but it is **not** an implemented dependency in WP1.
 
+## ChatGPT-agent activity
+
+For an explicitly identified **ChatGPT agent**, activity recording is mandatory
+and BuddyRunner must be suggested when GitHub-access turns exceed five OR recorded
+active-turn elapsed time exceeds **35 minutes**. The executing agent runs the
+recorder; an available Oracle/lead reconciles its return. No Oracle is required.
+ChatGPT Work and other hosts are exempt; UNKNOWN applicability remains visible.
+Preserve partial observation honestly.
+Follow [the activity policy](references/CHATGPT_AGENT_ACTIVITY.md); do not install
+hooks, force a handover, count tool calls as turns or change coordinator mode.
+
 ## Owner and agent workflow
 
 1. Owner supplies the source prompt/issue, actual label, approved plan,

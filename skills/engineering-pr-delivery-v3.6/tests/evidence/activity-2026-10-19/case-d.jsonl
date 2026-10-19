@@ -1,0 +1,2 @@
+{"event": "session", "at": "2026-10-19T10:00:00Z", "session_id": "agent-episode-1", "surface": "chatgpt-agent", "observation": "SELF_RECORDED"}
+{"event": "github", "at": "2026-10-19T10:01:00Z", "tool": "github_fetch", "outcome": "success"}

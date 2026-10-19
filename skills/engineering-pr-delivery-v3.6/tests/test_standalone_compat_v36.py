@@ -124,5 +124,74 @@ class StandaloneCompatibilityTests(unittest.TestCase):
             self.assertEqual(before, after)
 
 
+    def test_chatgpt_agent_requires_activity_while_work_does_not(self):
+        import standalone_done_v36 as cli
+        for surface, expected in [('chatgpt-agent', 1), ('chatgpt-work', 0), ('other', 0)]:
+            stream = io.StringIO()
+            with redirect_stdout(stream):
+                code = cli.main(self.args() + ['--agent-surface', surface])
+            self.assertEqual(code, expected, stream.getvalue())
+
+    def test_activity_unknown_is_reportable_without_fabrication(self):
+        from standalone_activity_check_v36 import check_activity
+        from standalone_activity_v36 import append_event
+        import hashlib
+        path = self.repo / 'activity.jsonl'
+        append_event(path, {'event': 'session', 'at': '2026-10-19T10:00:00Z',
+                           'session_id': 'ep-1', 'surface': 'chatgpt-agent',
+                           'observation': 'SELF_RECORDED'})
+        append_event(path, {'event': 'gap', 'at': '2026-10-19T10:01:00Z',
+                           'reason': 'native turn IDs and earlier active duration unavailable'})
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        body = self.body.replace('Owner acceptance separate', f'Owner acceptance separate; activity episode ep-1; activity sha256 {digest}')
+        result, gaps = check_activity('chatgpt-agent', path, 'ep-1', body)
+        self.assertEqual(gaps, [])
+        self.assertEqual(result['threshold_state'], 'UNKNOWN')
+        self.assertEqual(result['coverage'], 'INCOMPLETE')
+
+    def test_chatgpt_agent_must_report_actual_suggestion_when_due(self):
+        from standalone_activity_check_v36 import check_activity
+        from standalone_activity_v36 import append_event
+        from test_standalone_activity_v36 import events
+        import hashlib
+        path = self.repo / 'activity.jsonl'
+        for row in events(6): append_event(path, row)
+        def body():
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            return self.body.replace('Owner acceptance separate', f'Owner acceptance separate; activity episode agent-episode-1; activity sha256 {digest}')
+        result, gaps = check_activity('chatgpt-agent', path, 'agent-episode-1', body())
+        self.assertTrue(result['buddy_suggestion_due'])
+        self.assertTrue(gaps)
+        append_event(path, {'event': 'buddy-suggested', 'at': '2026-10-19T10:41:00Z',
+                           'reference': 'actual reply proposing BuddyRunner'})
+        result, gaps = check_activity('chatgpt-agent', path, 'agent-episode-1', body())
+        self.assertEqual(gaps, [])
+        self.assertFalse(result['buddy_suggestion_due'])
+
+    def test_full_chatgpt_agent_cli_consumes_native_activity_binding(self):
+        from standalone_activity_v36 import append_event
+        import standalone_done_v36 as cli
+        import hashlib
+        path = self.repo / 'activity.jsonl'
+        append_event(path, {'event': 'session', 'at': '2026-10-19T10:00:00Z',
+                           'session_id': 'ep-1', 'surface': 'chatgpt-agent',
+                           'observation': 'SELF_RECORDED'})
+        append_event(path, {'event': 'gap', 'at': '2026-10-19T10:01:00Z',
+                           'reason': 'historical host observations unavailable'})
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        body = self.body.replace('Owner acceptance separate',
+                                 f'Owner acceptance separate; activity episode ep-1; activity sha256 {digest}')
+        (self.repo / 'selfcheck.txt').write_text(body, encoding='utf-8')
+        out = io.StringIO()
+        with redirect_stdout(out):
+            code = cli.main(self.args() + ['--agent-surface', 'chatgpt-agent',
+                            '--activity-log', str(path), '--activity-session-id', 'ep-1'])
+        self.assertEqual(code, 0, out.getvalue())
+        result = json.loads(out.getvalue())
+        self.assertTrue(result['activity']['policy_applies'])
+        self.assertEqual(result['activity']['threshold_state'], 'UNKNOWN')
+        self.assertFalse(result['owner_accepted'])
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,4 @@
+{"event": "session", "at": "2026-10-19T10:00:00Z", "session_id": "agent-episode-1", "surface": "chatgpt-agent", "observation": "SELF_RECORDED"}
+{"event": "turn-start", "at": "2026-10-19T10:00:00Z", "turn_id": "timed"}
+{"event": "turn-end", "at": "2026-10-19T10:36:00Z", "turn_id": "timed"}
+{"event": "buddy-suggested", "at": "2026-10-19T10:40:00Z", "reference": "retained prior Owner-facing response"}

@@ -1,0 +1,7 @@
+{"event": "session", "at": "2026-10-19T10:00:00Z", "session_id": "agent-episode-1", "surface": "chatgpt-agent", "observation": "SELF_RECORDED"}
+{"event": "github", "at": "2026-10-19T10:40:00Z", "turn_id": "turn-0", "tool": "github_fetch", "outcome": "success"}
+{"event": "github", "at": "2026-10-19T10:40:01Z", "turn_id": "turn-1", "tool": "github_fetch", "outcome": "success"}
+{"event": "github", "at": "2026-10-19T10:40:02Z", "turn_id": "turn-2", "tool": "github_fetch", "outcome": "success"}
+{"event": "github", "at": "2026-10-19T10:40:03Z", "turn_id": "turn-3", "tool": "github_fetch", "outcome": "success"}
+{"event": "github", "at": "2026-10-19T10:40:04Z", "turn_id": "turn-4", "tool": "github_fetch", "outcome": "success"}
+{"event": "github", "at": "2026-10-19T10:40:05Z", "turn_id": "turn-5", "tool": "github_fetch", "outcome": "success"}
