@@ -4,6 +4,7 @@
 
 - [Start with a short request](#start-with-a-short-request)
 - [Choose only useful modules](#choose-only-useful-modules)
+- [Use an Oracle OnBoard Prompt](#use-an-oracle-onboard-prompt)
 - [Find task-specific support](#find-task-specific-support)
 - [Adapt to available participants](#adapt-to-available-participants)
 - [Carry work end to end](#carry-work-end-to-end)
@@ -76,6 +77,21 @@ applicable domain/support/adapter guidance. If an optional module is unavailable
 perform the useful native work and disclose the omitted support. Continue
 unaffected work rather than waiting for an entire toolchain.
 
+## Use an Oracle OnBoard Prompt
+
+For established context and a useful next task, ask:
+
+> Prepare an Oracle OnBoard Prompt for <task> from <original sources/current context>.
+> Preserve the whole outcome, a usable direction, evidence-based corrections and the next authorized action.
+
+Use the [guide](nudge-designer/references/ORACLE_ONBOARD.md) and
+[template](nudge-designer/assets/prompts/oracle-onboard.md). This is an optional
+instruction type; the Owner/available lead can prepare it without another Oracle
+or module. The receiver checks essential originals/current state, executes within
+authority and returns actual evidence, changed understanding and unfinished parent
+work. No separate reconstruction report or exam is added. Reuse completed
+BuddyRunner/two-pass/three-pass outputs directly; do not repeat those flows.
+
 ## Find task-specific support
 
 Choose the relevant row after selecting the task and available participants. Read
@@ -83,7 +99,7 @@ the linked guidance when applicable, rather than loading every module/reference.
 
 | Situation | Use | Applying guidance |
 |---|---|---|
-| Taking over work under separately selected v3.6, in either mode | [Independent reconstruction](../engineering-pr-delivery-v3.6/references/INDEPENDENT_RECONSTRUCTION.md) | Use source-based understanding and a justified continuation, without a Q1–Q5 exam or agent pass mark. A selected BuddyRunner/two-pass/three-pass uses only its native stages; after completion, additional reconstruction is NOT_APPLICABLE. Reuse outputs and continue authorized work. |
+| Taking over work under separately selected v3.6, in either mode | [Continuation/reconstruction applicability](../engineering-pr-delivery-v3.6/references/INDEPENDENT_RECONSTRUCTION.md) | Use a usable Oracle OnBoard Prompt directly; independently reconstruct only cold/missing context. No Q1–Q5 exam or agent pass mark. A selected BuddyRunner/two-pass/three-pass uses only its native stages; after completion, additional reconstruction is NOT_APPLICABLE. Reuse outputs and continue authorized work. |
 | Coding with separately selected v3.6 standalone delivery | [Standalone mode](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) and [pre-DONE self-check](../engineering-pr-delivery-v3.6/references/STANDALONE_COMPLETION.md) | Before calling the task done, complete the native SELF-CHECK v1 with source/candidate bindings, common checklist, frozen task criteria, actual witnesses and pending work. Keep coordinator mode separate. |
 | ChatGPT agent using that standalone protocol | [Activity and BuddyRunner policy](../engineering-pr-delivery-v3.6/references/CHATGPT_AGENT_ACTIVITY.md) | Recording is mandatory for this surface. Suggest the selected BuddyRunner once when distinct GitHub-access turns >5 OR recorded active-turn elapsed time >35 minutes. ChatGPT Work and other hosts are exempt. |
 | Learning-item task design | [Task Decomposer guidance](task-decomposer/references/APPLYING_GUIDANCE.md) | Preserve the source-defined verb, response type and an off-demand contrast: explain needs causal reasons, justify needs an argument, and retrieval may recognise a unit/sign. |

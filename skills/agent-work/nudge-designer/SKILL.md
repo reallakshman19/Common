@@ -64,7 +64,7 @@ fit. Keep consequential synthesis with an appropriate participant. Adapt from
 evidence instead of prescribing a fixed number of checks or passes.
 
 For execution through workers, use [Oracle execution](references/ORACLE_EXECUTION.md)
-and the [Oracle entry](assets/prompts/oracle.md). Assign responsibility for the
+and the [Oracle entry](assets/prompts/oracle.md); use an [Oracle OnBoard Prompt](references/ORACLE_ONBOARD.md) for established-context instructions. Assign responsibility for the
 measurement method, actual delivery/return inspection, adaptive direction and
 integrated verification. Record assistance and actual host configuration; a default
 rehearsal does not qualify a low-thinking configuration. The [LFEA pilot entry](assets/prompts/lfea-pilot.md)

@@ -23,7 +23,8 @@ active v3.6 admission requirements and must not be rewritten as current authorit
 |---|---|
 | BuddyRunner, two-pass or three-pass is selected and in progress | Use only its native stages; add no preliminary or final reconstruction step. |
 | That selected flow is completed for this work | Additional reconstruction is NOT_APPLICABLE. Reuse its outputs and continue the next authorized task. No new report or qualification score is required. |
-| Cold takeover/recovery without one of those selected flows | Independently reconstruct from authoritative sources using the method below. |
+| Usable Oracle OnBoard Prompt supplies established context and next task | Check essential originals/current candidate and execute within existing authority. Treat the explanation as revisable; no separate reconstruction report is needed. |
+| Cold takeover/recovery without reusable context or one of those selected flows | Independently reconstruct from authoritative sources using the method below. |
 | Continuing the same grounded task | Continue the work. New tasks, commits and replies do not automatically trigger another reconstruction. |
 
 Completion means the selected process was actually performed, not merely that a
@@ -34,6 +35,17 @@ receive a targeted update; they do not automatically reopen a completed flow.
 The next assignment still carries its necessary purpose, inputs, boundaries and
 evidence. If its execution exposes a misunderstanding, correct that specific
 problem and adjust support without restarting a qualification process.
+
+An Oracle OnBoard Prompt is an optional instruction type, not a new mode or required
+Oracle participant. It carries the Owner outcome, current sources, one bounded
+task, working explanation, boundaries, success/contrary evidence, uncertainty and
+native return. The Owner or available lead can prepare it. Check its actual basis,
+not its title; retrieve missing facts and correct source-backed contradictions
+locally rather than repeating all history. Return actual results, changed
+understanding, remaining parent work and the next justified action. It grants no
+extra authority and is not an independent-review certificate. Optional prompt
+support lives in [Nudge Designer](../../agent-work/nudge-designer/references/ORACLE_ONBOARD.md);
+v3.6 works without that module. A selected context flow's native stages still apply.
 
 Keep protocols explicitly selected. An existing repository still selecting another
 delivery protocol is not silently migrated by linking this guide; make a visible,

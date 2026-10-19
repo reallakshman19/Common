@@ -30,8 +30,12 @@ it uses only offline/dry-run commands and never grants acceptance.
 
 ## Takeover policy — both modes, no questionnaire
 
-Use [independent reconstruction](references/INDEPENDENT_RECONSTRUCTION.md) for a cold
-takeover without a selected BuddyRunner, two-pass or three-pass flow. v3.6 has no
+Use a usable Oracle OnBoard Prompt directly: check essential originals/current
+candidate, execute within authority and return evidence, changed understanding,
+remaining parent work and the next justified action. Its explanation is revisable;
+no separate reconstruction report or Oracle role is required. Use
+[independent reconstruction](references/INDEPENDENT_RECONSTRUCTION.md) for cold/missing
+context without a selected BuddyRunner, two-pass or three-pass flow. v3.6 has no
 Q1–Q5 takeover exam, agent pass mark, scored admission or compulsory examiner;
 do not import them from older protocols or team templates. Task self-check scores
 remain task-evidence checks, not agent qualification.
