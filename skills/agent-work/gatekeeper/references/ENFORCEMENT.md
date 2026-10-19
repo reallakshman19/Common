@@ -15,8 +15,11 @@ Every blocking check needs an exit:
   inputs refuses only the one action it guards, such as publishing this page
   without DRAFT. It never freezes the session, other work orders or unrelated
   tools. It prints why, so the agent can record a deviation and carry on.
-- **Owner override:** the Owner can always override it, for example with a code
-  typed in a prompt or a setting only the Owner changes.
+- **Owner override:** the Owner can always override it. The Owner either types the
+  `OVERRIDE` line from [Owner override](../SKILL.md#owner-override) in their own
+  prompt, or changes a setting only the Owner can change. The hook reads that line
+  only from the Owner's own message as the host records it, never from a file or a
+  tool result.
 - **Owner offline:** while the Owner is away, the guarded action waits. Everything
   else continues.
 
@@ -37,7 +40,7 @@ product page. It does not belong on comments, seals or messages to Agents.
 targets are post hoc. |
 | Branch protection, required status checks and CODEOWNERS on product paths | GK7: no merge into a product path without the Owner or a named reviewer; GK4 validator self-tests as a required check | Some repositories can't add CI. Run the validator locally, paste its output with the seeded-defect result, and mark it ADVISORY. |
 | A separate account, bot or app identity for Agents | A5: a return or verdict was not typed by the coordinator | If unavailable, put a role line and session id in each post, and state the shared-account limit in the claim. |
-| Chat-only hosts with no hooks (for example ChatGPT or Antigravity chats) | All checks, as prose | The return includes a short GK checklist with evidence links. The coordinator's own checks are notes, and the Owner preview decides. |
+| Chat-only hosts with no hooks (for example ChatGPT or Antigravity chats) | All checks, as prose | The producer's return ends with its own claim block, stating at most DRAFT · CHECKED; if the return carries a TASK_EVIDENCE block or LOG line, the claim block goes in a separate message. The participant who keeps the records posts the current block. Checks by anyone other than the reviewer of record are notes, and the Owner preview decides. |
 
 ## Suggested order
 

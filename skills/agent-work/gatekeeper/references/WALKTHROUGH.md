@@ -1,4 +1,4 @@
-# Walkthrough: one deliverable, end to end, in both modes
+# Walkthrough: one deliverable, end to end, across role setups
 
 This file contains worked answers. Withhold it from a participant whose fresh use
 of the guidance is being tested.
@@ -6,8 +6,9 @@ of the guidance is being tested.
 ## Contents
 
 - [The deliverable](#the-deliverable)
-- [Coordinator mode](#coordinator-mode)
+- [Coordinator mode](#coordinator-mode): noncritical setup without an Oracle
 - [Standalone agent mode](#standalone-agent-mode)
+- [Other role setups](#other-role-setups)
 - [Where each blocker lands](#where-each-blocker-lands)
 - [How this guidance was tested](#how-this-guidance-was-tested)
 
@@ -27,14 +28,17 @@ a desk walkthrough of the same request and was not executed.
 
 ## Coordinator mode
 
+Role setup: noncritical without an Oracle, and with no TeamCoordinator.
 Participants:
 - the Owner;
-- a coordinator, here OTM;
+- the OwnerTeammember as coordinator, here OTM;
 - a producer Agent in Antigravity, here nlmv2;
-- a fresh verifier, here a subagent with no earlier part in the work.
+- the reviewer of record: a fresh subagent that OTM briefed, with no earlier part
+  in the work.
 
 The coordinator issues work, seals targets and routes records. It does not
-produce, repair or assemble the product.
+produce, repair or assemble the product. It chose a fresh subagent over its own
+coordinator review, so the verdict needs no (coordinator review) qualifier.
 
 ### 1. Locate before building (GK1)
 
@@ -140,7 +144,13 @@ Use Nudge Designer, or a plain brief.
 
 ### 8. Coordinator note
 
-The coordinator may spot-check and record a note. A note never moves a label.
+OTM was not the reviewer of record here, so its spot-checks are notes and move no
+label. Had no subagent been available, OTM could have reviewed as the
+OwnerTeammember instead. It would have needed to seal before reading the return
+and run its own proven checks, and the label would read VERIFIED (coordinator review).
+Its seal was AFTER-RETURN (unread), so that route stayed open, with the late seal
+disclosed. Had OTM read the return first, the targets would have been post hoc,
+and the label would have stopped at DRAFT · CHECKED (targets post hoc).
 
 ### 9. Claim (GK6)
 
@@ -158,6 +168,20 @@ State the label with its scope. For WO-001 the honest claim is:
 > - Known issue: the stale "25 Cards" tab label.
 
 Do not write "Core 2 complete" or "52 verified questions".
+
+The same claim written as a claim block. Claim blocks did not exist during the
+run, so this one was written afterwards, and the class, tier and support were named
+afterwards too:
+
+```text
+GK-WO: WO-001 · class: noncritical · roles: OwnerTeammember (OTM) coordinates, nlmv2 produces, no Oracle or TeamCoordinator · tier: deliverable · support: DIRECT (the producer chose its method and wrote its own counting script and gates) · reviewer: fresh subagent
+GK-LABEL: DRAFT (NOT VERIFIED; shared account)
+GK-SHA: f128218c…98ace
+GK-COVERAGE: 13 of 28 blueprint grid cells by the new questions (REPRESENT and D4 not covered) · untested: rendering and clicks; physics of the unreviewed hints, ladders and badges
+GK-EVIDENCE: brief #300 6270001393 · seal #300 6270404438 (AFTER-RETURN, unread) · return #300 6270322095 · verdict local copy verdict_GK5.md (A2 fallback: copied by coordinator) · release none
+GK-DEVIATIONS: DR-001 late targets; DR-002 made-up packet id; DR-003 late seal; brief lacked seeded defects; verdict copied; shared account
+GK-OVERRIDE: none
+```
 
 ### 10. Repair, then preview and release (GK3, GK7)
 
@@ -245,9 +269,46 @@ sentence, including the worked reasons. Such a check fails when they are missing
 the WO-001 verifier's check did. Whether a standalone agent would run it fully is
 untested.
 
+## Other role setups
+
+This is a desk sketch of the same request in the other setups. It was not
+executed. Only the steps that change are shown.
+
+| Step | Critical: Owner, Oracle, coding Agent | Noncritical with an Oracle and a TeamCoordinator |
+|---|---|---|
+| Brief (step 3) | The Owner issues it, or approves the Oracle's draft. If the Oracle drafted it, any later review by the Oracle is labelled (coordinator review). | The OwnerTeammember issues it. The TeamCoordinator routes it and records the packet id. |
+| Seal (step 2) | The Oracle seals before reading the return. | The OwnerTeammember seals. The Oracle may seal its own targets too. |
+| Produce (step 4) | The coding Agent. The Oracle writes nothing into the product. | The coding Agent. Neither the OwnerTeammember nor the TeamCoordinator assembles. |
+| Verify (step 7) | The Oracle gives VERIFIED. If it is unavailable: a separate session or an Owner spot-check, with the label qualified; else DRAFT · CHECKED (SELF-ASSESSED). | The Oracle gives VERIFIED. If it is unavailable: OwnerTeammember coordinator review, or a fresh subagent. |
+| Release (step 10) | Only the Owner's own words. No standing grant applies. | The OwnerTeammember may merge VERIFIED work under the Owner's recorded grant; for coordinator review, only if the grant says so. Anything below VERIFIED needs the Owner. |
+
+With a TeamCoordinator but no Oracle, the TeamCoordinator routes and records as in
+the right-hand column, and review follows the coordinator-mode run above.
+
+**An excuse refused (desk example).** Suppose the producer had returned "BLOCKED:
+the validator crashes" without v2. Under
+[the rules against excuses](../SKILL.md#no-check-is-a-reason-to-stop-work), that
+return is incomplete. The coordinator sends it back with the fallback spelled out:
+- build v2 anyway;
+- mark the crashed check NOT_RUN;
+- run the counting script on both files;
+- return the artifact as DRAFT with that part untested.
+
+The verifier later re-runs the validator. If it runs on the same inputs in a
+comparable environment, the BLOCKED claim is recorded as unsupported against that
+return. If the environments differ, it is recorded as "not reproduced".
+
+**An override (desk example).** Suppose the Owner wanted v2 trialled with one class
+before the repair. They would post
+`RELEASE WO-001 f128218c trial with one class before repair`. Because those bytes
+are below VERIFIED, the release counts as an override of GK5. The label would
+become RELEASED (Owner override: GK5; NOT VERIFIED; shared account), and the
+claim block's GK-OVERRIDE line would link that comment. The falsifier result would
+stay visible.
+
 ## Where each blocker lands
 
-No blocker in either mode stops all work. The worst outcome of a fully blocked run
+No blocker in any setup stops all work. The worst outcome of a fully blocked run
 is a DRAFT or DRAFT · CHECKED (SELF-ASSESSED) deliverable that carries:
 - its qualifiers;
 - its deviations;
@@ -270,3 +331,8 @@ gates that didn't fit, and contradictions. These were fixed in SKILL.md. A
 pre-publication check then found four more steps without fallbacks; those were
 fixed too. A desk walkthrough is not a field trial; the
 coordinator-mode WO-001 run above is the only executed cycle so far.
+
+The role setups, the claim block, the override line and the rules against excuses
+came from the Owner's design review on 19 October. They were added afterwards and
+have never run. The "other role setups" sketch and both
+desk examples are unexecuted.

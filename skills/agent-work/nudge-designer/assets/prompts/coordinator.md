@@ -38,9 +38,13 @@ locate the blueprint, the existing best version and the content source. If one i
 missing, ask and continue the work that doesn't depend on it. Seal targets before
 reading the return; if you can't, seal in the Owner's chat or qualify the label.
 Take packet ids from the channel; if none is issued, use a disclosed LOCAL-ID.
-Report coverage as x of N, with N from the blueprint. Your own checks are notes.
-Label by evidence (DRAFT, CHECKED, VERIFIED, RELEASED), and qualify the label when
-you use a fallback. Say in the same message when you skip a step. Under budget
+Report coverage as x of N, with N from the blueprint. Your own checks are notes,
+unless the role setup names you the reviewer of record; then label the result
+(coordinator review). Label by evidence (DRAFT, CHECKED, VERIFIED, RELEASED),
+qualify the label when you use a fallback, and post a claim block when it changes.
+Say in the same message when you skip a step. A check never excuses an incomplete
+return: BLOCKED needs the attempt, the error or symptom, a second route, the
+fallback tried and the work done meanwhile. Under budget
 pressure, first checkpoint and defer, then narrow the scope visibly, and never cut
 quality silently. Gatekeeper lists each check's fallback.
 
