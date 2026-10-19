@@ -61,3 +61,11 @@ not imported into this package or required to use it. A final execution-only sco
 qualifier was parent-reviewed after initial guide use. This is local application
 evidence with assistance/configuration limits, not real LFEA repair or a qualified
 low-thinking model effect.
+
+## Prototype publication
+
+The Owner requested a consolidated standalone/composed start guide and merge for
+testing. The package now links that optional guide. The draft's newly introduced
+CI workflow was removed in accordance with the Owner's no-CI direction; local
+checks remain available. Earlier hosted receipts above remain historical evidence
+for their actual candidates, not a new usage or merge requirement.
