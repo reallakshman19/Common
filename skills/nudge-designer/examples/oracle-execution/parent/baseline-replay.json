@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "tmp/oracle-execution-parent/check.py",
+    "tmp/oracle-execution-application/raw/session.py"
+  ],
+  "exit_code": 1,
+  "stdout": "{\n  \"candidate\": \"/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/raw/session.py\",\n  \"sha256\": \"316b565738204bab3c81b6e2143d7bedaa3d8b13bcacf9960dde07c7deb03512\",\n  \"checks\": [\n    {\n      \"case\": \"same_scope\",\n      \"result\": \"FAIL\"\n    },\n    {\n      \"case\": \"return_to_scope\",\n      \"result\": \"FAIL\"\n    },\n    {\n      \"case\": \"cancelled\",\n      \"result\": \"FAIL\"\n    },\n    {\n      \"case\": \"reuse\",\n      \"result\": \"FAIL\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "note": "Frozen original-source replay saved after the earlier baseline observation, before inspecting a worker return; not a second application or an independent model trial."
+}

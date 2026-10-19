@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "tmp/oracle-execution-parent/check.py",
+    "tmp/oracle-execution-application/work/session.py"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"candidate\": \"/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/session.py\",\n  \"sha256\": \"1e00c29dd0262723ae3ec6d749a89c8c07d12ce4882e6b77414c53592de12f8d\",\n  \"checks\": [\n    {\n      \"case\": \"same_scope\",\n      \"result\": \"PASS\"\n    },\n    {\n      \"case\": \"return_to_scope\",\n      \"result\": \"PASS\"\n    },\n    {\n      \"case\": \"cancelled\",\n      \"result\": \"PASS\"\n    },\n    {\n      \"case\": \"reuse\",\n      \"result\": \"PASS\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "note": "Parent source-derived checks authored before worker completion. Results withheld from Oracle until its reconciliation; not a blind model trial."
+}

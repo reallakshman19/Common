@@ -1,0 +1,1146 @@
+{
+  "source": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/session.py",
+  "source_sha256": "1e00c29dd0262723ae3ec6d749a89c8c07d12ce4882e6b77414c53592de12f8d",
+  "method": "Compare callback acceptance and every public snapshot with latest noncancelled issued handle; preserve existing scope/query on cancel.",
+  "cases_passed": 10,
+  "cases_total": 10,
+  "cases": {
+    "same_scope_stale_success_while_busy": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "new",
+            "A",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "old",
+            [
+              "old"
+            ]
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "new",
+            [
+              "z",
+              "a"
+            ]
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "pass": true
+        }
+      ]
+    },
+    "same_scope_stale_success_after_success": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "new",
+            "A",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "new",
+            [
+              "z",
+              "a"
+            ]
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "old",
+            [
+              "old"
+            ]
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "pass": true
+        }
+      ]
+    },
+    "same_scope_stale_error_while_busy": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "new",
+            "A",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "old",
+            "stale error"
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "new",
+            "current error"
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [],
+            "error": "current error"
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [],
+            "error": "current error"
+          },
+          "pass": true
+        }
+      ]
+    },
+    "same_scope_stale_error_after_success": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "new",
+            "A",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "new",
+            [
+              "z",
+              "a"
+            ]
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "old",
+            "stale error"
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "pass": true
+        }
+      ]
+    },
+    "return_to_scope_stale_success": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "a0",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "b",
+            "B",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "B",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "B",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "a1",
+            "A",
+            "q2"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "a0",
+            [
+              "old"
+            ]
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "a1",
+            [
+              "z",
+              "a"
+            ]
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q2",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q2",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "pass": true
+        }
+      ]
+    },
+    "return_to_scope_stale_error": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "a0",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "b",
+            "B",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "B",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "B",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "a1",
+            "A",
+            "q2"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "a0",
+            "stale error"
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q2",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "a1",
+            "current error"
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q2",
+            "busy": false,
+            "rows": [],
+            "error": "current error"
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q2",
+            "busy": false,
+            "rows": [],
+            "error": "current error"
+          },
+          "pass": true
+        }
+      ]
+    },
+    "cancelled_success": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "cancel"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "old",
+            [
+              "late"
+            ]
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        }
+      ]
+    },
+    "cancelled_error": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "cancel"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "old",
+            "late error"
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        }
+      ]
+    },
+    "reuse_after_cancel_stale_success": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "cancel"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "new",
+            "A",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "old",
+            [
+              "late"
+            ]
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "new",
+            [
+              "z",
+              "a"
+            ]
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "pass": true
+        }
+      ]
+    },
+    "reuse_after_cancel_stale_error": {
+      "pass": true,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "old",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "cancel"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": false,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "new",
+            "A",
+            "q1"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "old",
+            "late error"
+          ],
+          "accepted": false,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "fail",
+            "new",
+            "current error"
+          ],
+          "accepted": true,
+          "expected_accepted": true,
+          "observed": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [],
+            "error": "current error"
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q1",
+            "busy": false,
+            "rows": [],
+            "error": "current error"
+          },
+          "pass": true
+        }
+      ]
+    }
+  }
+}

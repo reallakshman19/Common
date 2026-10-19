@@ -1,0 +1,23 @@
+{
+  "name": "td-selected-design",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+    "render",
+    "--map",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/task-map.json",
+    "--task",
+    "T-GENERATE",
+    "--out",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/selected-design.md"
+  ],
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/workspace/scratch/52eed2252c51/tmp/br20-deps"
+  },
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "scope": "Actual local structural/rendering/fit check, not semantic acceptance or execution"
+}

@@ -1,0 +1,31 @@
+--- raw/session.py
++++ work/session.py
+@@ -20,7 +20,8 @@
+         return {"scope": scope, "sequence": self._sequence}
+ 
+     def finish(self, ticket, rows):
+-        if ticket["scope"] != self._scope:
++        if (ticket["scope"] != self._scope
++                or ticket["sequence"] != self._sequence):
+             return False
+         self._rows = deepcopy(rows)
+         self._error = None
+@@ -28,7 +29,8 @@
+         return True
+ 
+     def fail(self, ticket, message):
+-        if ticket["scope"] != self._scope:
++        if (ticket["scope"] != self._scope
++                or ticket["sequence"] != self._sequence):
+             return False
+         self._rows = []
+         self._error = str(message)
+@@ -36,6 +38,8 @@
+         return True
+ 
+     def cancel(self):
++        # Revoke tickets without discarding the current scope/query metadata.
++        self._sequence += 1
+         self._rows = []
+         self._error = None
+         self._busy = False

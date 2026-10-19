@@ -1,0 +1,60 @@
+{
+  "role": "Continuing Oracle/coordinator, not a fresh task-local producer or an independent judge",
+  "continued_context": [
+    "Previously read Owner/BP-1/reference and designed map/native objects and both briefs.",
+    "Prepared the 484-word operational view after parent packaging feedback.",
+    "Now read actual saved producer solutions/report, the separate prompt assessment/key and setup, parent check/projection receipts, and native return/intake. All these exposures precede this continuation's calculations."
+  ],
+  "new_read_scope": [
+    "owner.md",
+    "blueprint.md",
+    "reference.md",
+    "oracle/task-map.json",
+    "oracle/intent.json",
+    "oracle/plan.json",
+    "oracle/issued-binding.json",
+    "oracle/identity.json",
+    "oracle/packaging-refinement.json",
+    "oracle/source-snapshot.json",
+    "oracle/arithmetic-evidence.json",
+    "oracle/worker/generation-brief.md",
+    "oracle/worker/generation-operational-view.md",
+    "oracle/generation/exercises.md",
+    "oracle/generation/native-report.md",
+    "judge/assessment.md",
+    "judge/calculations.json",
+    "judge/assignment.md",
+    "judge/inputs/setup.md",
+    "parent-oracle-checks.json",
+    "parent-numeric-checks.json",
+    "parent-prompt-projection.json",
+    "parent/producer-return.json",
+    "parent/producer-intake.json"
+  ],
+  "not_opened": [
+    "judge/inputs/problems.md",
+    "judge/inputs/blueprint.md",
+    "judge/inputs/reference.md",
+    "judge-issued-inputs.sha256.json",
+    "Other task outputs, unrelated artifacts, examples, tests or verification report files."
+  ],
+  "interpretation_limits": [
+    "The assessor input manifest/projection identity is receipt-reported by parent and assessor; this continuation did not open those omitted exact files. Direct original prompts and their arithmetic were inspected.",
+    "Parent setup reports a fresh conversation and permitted issued input set; producer reports relevant actual reads/exposure. This Oracle did not inspect an independent global access log or the raw worker channel first-line message.",
+    "The native intake flags remain structural declarations: RETURN_RECORDED, no accepted outcomes, independence NOT_ESTABLISHED and execution_verified=false. They neither prove nor refute correctness established by reading actual artifacts.",
+    "Assessor saw the benchmark reference before calculation, was shielded from producer solutions/self-verdict and parent expected results, and discloses those limits. Fresh role/conversation and matching arithmetic are not formal qualification or proof of independent cognition.",
+    "All new semantic judgments here are continued-coordinator judgments; the prior Designer and parent feedback can correlate them."
+  ],
+  "tools": [
+    "functions.exec/exec_command for exact named UTF-8 reads, standard-library JSON/hash/Fraction checks and new-file authoring.",
+    "collaboration.send_message only to parent; no worker dispatch, delegation, external tool or product action."
+  ],
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "model": "UNKNOWN",
+    "reasoning_effort": "UNKNOWN",
+    "configuration_changed": false
+  },
+  "checks_performed": "Current byte/content binding, native-text receipt comparisons, exact-rational computations and manual semantic reconciliation. No full compatibility/skill test suite or repeated structural validation was run.",
+  "preservation": "All original/issued/native inputs were read-only. Only new files under oracle/reconciled/ are written."
+}

@@ -1,0 +1,70 @@
+[
+  {
+    "name": "task-map-validate",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+      "validate",
+      "--map",
+      "out/task-map.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"scope\": \"DECLARED_STRUCTURE_ONLY\",\n  \"map_sha256\": \"f050392d7d06db8d23ca818baa6094c049766c1cb3f380dc112bfa1ed2975fc3\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "task-design-render",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+      "render",
+      "--map",
+      "out/task-map.json",
+      "--task",
+      "T-SESSION",
+      "--out",
+      "out/task-design.md"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "plan-validate",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nudge_designer.py",
+      "validate",
+      "--intent",
+      "out/intent.json",
+      "--plan",
+      "out/plan.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"status\": \"STRUCTURALLY_VALID\",\n  \"semantic_quality\": \"NOT_MACHINE_VERIFIED\",\n  \"coverage_basis\": \"DECLARED_ITEMS_ONLY\",\n  \"sources_authenticated\": false,\n  \"authority_verified\": false,\n  \"execution_performed\": false,\n  \"intent_sha256\": \"4a0c786f4879a25da01ddc5d8c4613087b642abd815bcce1319e7cd14a3ca542\",\n  \"nudges\": 1,\n  \"declared_coverage_targets\": 8\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "nudge-render",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nudge_designer.py",
+      "render",
+      "--intent",
+      "out/intent.json",
+      "--plan",
+      "out/plan.json",
+      "--nudge",
+      "N-REPAIR",
+      "--out",
+      "out/issued-worker.md"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,9 @@
+test_current_error_and_recovery (__main__.ExistingChecks.test_current_error_and_recovery) ... ok
+test_other_scope_is_ignored (__main__.ExistingChecks.test_other_scope_is_ignored) ... ok
+test_snapshot_is_detached (__main__.ExistingChecks.test_snapshot_is_detached) ... ok
+test_success_and_order (__main__.ExistingChecks.test_success_and_order) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

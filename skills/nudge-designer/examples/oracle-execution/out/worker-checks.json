@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "name": "existing",
+      "command": "python -B raw/test_existing.py -v > out/worker-existing.stdout.txt 2> out/worker-existing.stderr.txt",
+      "chunk_id": "4eee9f",
+      "wall_time_seconds": 0.67734826,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "name": "regression",
+      "command": "python -B work/test_regression.py -v > out/worker-regression.stdout.txt 2> out/worker-regression.stderr.txt",
+      "chunk_id": "25258f",
+      "wall_time_seconds": 0.449387441,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "name": "raw-contrast",
+      "command": "SEARCH_SESSION_SOURCE=raw/session.py python -B work/test_regression.py -v > out/worker-raw-contrast.stdout.txt 2> out/worker-raw-contrast.stderr.txt",
+      "chunk_id": "c2a62c",
+      "wall_time_seconds": 0.36887907,
+      "exit_code": 1,
+      "original_token_count": 0,
+      "output": ""
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "recorded_utc": "2026-10-19T05:12:25.833808+00:00",
+  "kind": "Parent record of observed local role application; not an access/security audit",
+  "sequence": [
+    "Fresh Oracle read owner/blueprint/reference and the selected skill resources, excluding worked references.",
+    "Parent supplied optional dependency path and task-output priority clarification.",
+    "Oracle produced map/native downstream artifacts and a frozen 1065-word view.",
+    "Parent requested a proportional packaging refinement; Oracle produced a separate 484-word view without changing task meaning/bindings.",
+    "Fresh producer received only that operational view and BP-1, authored two exercises and a SELF-ASSESSED report.",
+    "Parent extracted exact prompt blocks into a separate input projection, preserving complete producer artifacts.",
+    "Fresh assessor received its brief, hash manifest, prompts, BP-1, reference and setup; producer solutions/self-verdict and parent results were excluded from that issued set.",
+    "Parent wrapped the exact native producer report and ran existing receive; no semantic acceptance was produced.",
+    "Continuing Oracle reconciled actual producer/assessor/parent evidence without changing task meanings or revising frozen planning snapshots."
+  ],
+  "input_counts": {
+    "oracle_raw": 3,
+    "producer": 2,
+    "assessor": 6,
+    "assessor_manifest_file_entries": 5
+  },
+  "important_naming_limit": "producer-issued-inputs.sha256.json preserves the prepared first-view inputs; that 1065-word view was not dispatched. producer-operational-inputs.sha256.json identifies the actual producer input set.",
+  "parent_checks": "Initial expectations were recorded before producer return; numeric results were separately derived afterward, not blind.",
+  "limits": [
+    "All forward agents inherited the default runtime; no low-thinking model or effort was selected/qualified.",
+    "Input restrictions were instructions on shared storage, not OS-enforced access controls.",
+    "Task-context setup does not prove training independence or general reasoning/learning validity.",
+    "A later parent clarification about upstream blueprint/dataset/oracle lineage was not separately forward-tested."
+  ]
+}

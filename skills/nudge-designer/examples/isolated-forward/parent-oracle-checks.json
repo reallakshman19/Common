@@ -1,0 +1,141 @@
+{
+  "checks": [
+    {
+      "check": "td-validate",
+      "exit_code": 0,
+      "result": {
+        "valid": true,
+        "scope": "DECLARED_STRUCTURE_ONLY",
+        "map_sha256": "b3e8bd62c71a32e760b6da7687cac1dda707f7001617fcd086468a5f18f98fe2"
+      },
+      "stderr": ""
+    },
+    {
+      "check": "td-frontier",
+      "exit_code": 0,
+      "result": {
+        "scope": "DECLARED_DESIGN_CONTEXT_ONLY",
+        "candidates": [
+          {
+            "task": "T-GENERATE",
+            "state": "DESIGN_CANDIDATE",
+            "blocking_unknowns": [],
+            "prerequisites": [],
+            "focus": true
+          },
+          {
+            "task": "T-ASSESS",
+            "state": "DISCOVER_OR_DECIDE",
+            "blocking_unknowns": [
+              "U-ACCESS",
+              "U-ARTIFACT"
+            ],
+            "prerequisites": [
+              "T-GENERATE"
+            ],
+            "focus": false
+          },
+          {
+            "task": "T-RECONCILE",
+            "state": "DISCOVER_OR_DECIDE",
+            "blocking_unknowns": [
+              "U-ACCESS",
+              "U-ARTIFACT",
+              "U-ASSESSMENT"
+            ],
+            "prerequisites": [
+              "T-ASSESS"
+            ],
+            "focus": false
+          }
+        ],
+        "deferred": [],
+        "unallocated": [
+          {
+            "item": "U-LEARNER",
+            "disposition": "DEFERRED",
+            "statement": "Actual learner understanding is unobserved and outside this synthetic authoring pilot."
+          }
+        ],
+        "focus_reason": "The stipulated model and unit relation are already sufficient for one useful GUIDED generation bundle. New artifact/provenance and assessment unknowns restrict their downstream claims, not preparation. Existing arithmetic is retained; repeating old verdicts cannot answer the missing generation question.",
+        "authority_effects": []
+      },
+      "stderr": ""
+    },
+    {
+      "check": "nd-validate",
+      "exit_code": 0,
+      "result": {
+        "status": "STRUCTURALLY_VALID",
+        "semantic_quality": "NOT_MACHINE_VERIFIED",
+        "coverage_basis": "DECLARED_ITEMS_ONLY",
+        "sources_authenticated": false,
+        "authority_verified": false,
+        "execution_performed": false,
+        "intent_sha256": "aa9025cb19ac3fe4927cbb525a31f15be8d2533bfa9a051a6e4ac662c306d0c5",
+        "nudges": 1,
+        "declared_coverage_targets": 21
+      },
+      "stderr": ""
+    },
+    {
+      "check": "nd-fit",
+      "exit_code": 0,
+      "result": {
+        "status": "NOT_ESTABLISHED",
+        "affected_nudge": "A-GENERATE",
+        "participant_id": "P-PRODUCER",
+        "role_mismatch": false,
+        "requirements": [
+          {
+            "group": "capabilities",
+            "id": "signed_force_and_units",
+            "importance": "ESSENTIAL",
+            "status": "UNKNOWN",
+            "basis": "UNKNOWN"
+          },
+          {
+            "group": "tools",
+            "id": "local_files",
+            "importance": "ESSENTIAL",
+            "status": "AVAILABLE",
+            "basis": "REPORTED"
+          },
+          {
+            "group": "tools",
+            "id": "python",
+            "importance": "HELPFUL",
+            "status": "AVAILABLE",
+            "basis": "REPORTED"
+          }
+        ],
+        "qualification_verified": false,
+        "execution_authorized": false,
+        "scope": "THIS_ASSIGNMENT_ONLY",
+        "workflow_locked": false
+      },
+      "stderr": ""
+    },
+    {
+      "check": "nd-bind",
+      "exit_code": 0,
+      "result": {
+        "intent_id": "INTENT-BP1-PILOT",
+        "intent_revision": 1,
+        "intent_sha256": "aa9025cb19ac3fe4927cbb525a31f15be8d2533bfa9a051a6e4ac662c306d0c5",
+        "plan_id": "PLAN-BP1-PILOT",
+        "plan_revision": 1,
+        "plan_sha256": "a756175be35b6bb9988b227514870c6f0dd560096690c7f90efca8eb3dc3c491",
+        "nudge_id": "A-GENERATE",
+        "nudge_sha256": "1fcf797407dd8a116b2eeaa978ae30d94c141d034c5ab1c7277f0c86fce13b03",
+        "participant_id": "P-PRODUCER"
+      },
+      "stderr": ""
+    }
+  ],
+  "issued_inputs_unchanged": true,
+  "native_binding_match": true,
+  "limits": [
+    "Structural and source-identity checks; semantic assessment and actual producer work are separate."
+  ]
+}

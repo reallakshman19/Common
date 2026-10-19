@@ -177,3 +177,19 @@ The extension includes actual worker/specialist execution, a separate local revi
 and a Designer working revision correcting observed semantic problems. Those
 bounded observations do not qualify lower-thinking models or accept domain
 outcomes. Current verification and limits are in [verification](VERIFICATION.md).
+
+## Owner amendment — usable Oracle execution
+
+Owner instruction, 19 October 2026: complete the outstanding skill support before
+the live pilot. Implement [Oracle execution](ORACLE_EXECUTION.md), a short Owner/
+Oracle entry, optional native episode aid and source-bound LFEA pilot entry. Keep
+measurement design, actual return inspection, adaptive direction and integrated
+verification allocated. Attribute parent assistance and actual configuration;
+retain the original user outcome beyond component success.
+
+Acceptance for this amendment is usable, linked operating support plus an actual
+local application that exercises continuation with native artifacts and preserves
+assistance/coverage limits. It does not require a new controller, schema, model
+provider or app integration. The real LFEA browser repair, identified low-thinking
+configuration and comparative reliability/ROI remain pilot evidence to obtain,
+not completion claims that documentation or compatibility tests can satisfy.

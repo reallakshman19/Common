@@ -10,6 +10,10 @@ The agent performs the synthesis. The scripts check declared structure, render
 instructions and suggest revision impact; they do not infer purpose or approve
 execution. Select reasoning moves by the uncertainty, without a fixed pass count.
 
+For standalone and optional composed use, see the shared
+[Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/independent-review/references/START_HERE.md).
+It adds no dependency on the other modules.
+
 ## Start from the real assignment
 
 Accept a short natural-language request and available context. Do the modeling
@@ -46,12 +50,25 @@ the WHY for narrower workers, and leave genuine investigation open for deeper
 uncertainty. State a concise decision basis and decisive evidence rather than
 requiring a reasoning transcript or a long acknowledgment.
 
+Read [focused context and provenance](references/ISOLATED_WORK.md) when using fresh
+workers, judging generated artifacts or claiming blind/independent evidence. Give
+each worker a self-contained task-local brief; retain integration with Oracle.
+Earlier context counts as exposure. Trace artifacts-under-test to their producer
+and reference access; label a producer's own judgment SELF-ASSESSED.
+
 Use [adaptive support](references/ADAPTIVE_SUPPORT.md) for limited or unestablished
 task capability, shallow reviews or repeated correction. Prefer a concrete GUIDED
 method for bounded execution when recipient fit is limited or unestablished. Assess an
 actual representative result where useful; a model label or ACK cannot establish
 fit. Keep consequential synthesis with an appropriate participant. Adapt from
 evidence instead of prescribing a fixed number of checks or passes.
+
+For execution through workers, use [Oracle execution](references/ORACLE_EXECUTION.md)
+and the [Oracle entry](assets/prompts/oracle.md). Assign responsibility for the
+measurement method, actual delivery/return inspection, adaptive direction and
+integrated verification. Record assistance and actual host configuration; a default
+rehearsal does not qualify a low-thinking configuration. The [LFEA pilot entry](assets/prompts/lfea-pilot.md)
+prepares that real-source application without claiming its live repair has run.
 
 Use the [Owner entry prompts](assets/prompts/owner.md) for a short request. Select
 one role prompt: [Designer](assets/prompts/designer.md), [worker](assets/prompts/worker.md),
@@ -61,6 +78,9 @@ Fill the [assignment template](assets/prompts/assignment.md) from authentic inpu
 use the [native result aid](assets/prompts/result.md) only as needed by the existing
 reporting format. The agent maintains records; the Owner need not fill the slots.
 Copy only needed context. A template does not confer authority or runtime capability.
+Use the [pre-send check](assets/prompts/brief-check.md) for a GUIDED brief and the
+[isolated assignment](assets/prompts/isolated-assignment.md) where a useful task
+boundary supports fresh context. Select relevant checks, not universal rituals.
 
 Use [the golden case index](examples/guidance/INDEX.md) for paired raw/acceptable
 continuations and tempting failures. Withhold golden answers during fresh-agent
@@ -212,6 +232,12 @@ judgment gap before repeating an assignment, and retain observed restrictions.
 Preserve issued snapshots; historical returns bind to those snapshots, not a
 silently revised plan. Actual proof of review independence remains separate.
 
+Keep assignment, tracker-move and reply identities explicitly mapped through the
+selected channel; an ACK is correlation, not acceptance. See the tracker/transport
+examples in [adapters](references/ADAPTERS.md). The
+[fresh NLM lessons](references/PILOT_LESSONS.md) distinguish adopted guidance,
+qualified proposals, research and unverified pilot reports. No app is changed.
+
 Where Python support is unavailable, use the prose contract and preserve explicit
 NOT_RUN structural checks. Follow required project validation rather than
 claiming a manual plan satisfies an unavailable delivery qualification.
@@ -253,3 +279,13 @@ claim review, decoding, wrong-revision correction and a brief-only worker task,
 with source checks and explicit limits on capability or causal conclusions.
 Read [verification](references/VERIFICATION.md) for executed checks and limits.
 Check the package with `python -m unittest discover -s "$SKILL/tests" -v`.
+
+The [task-local role cycle](examples/isolated-forward/ASSESSMENT.md) preserves a fresh
+Oracle, brief-only producer, prompt-only assessor and continued reconciliation,
+including packaging feedback and evidence limits. It does not qualify a low-thinking
+model or prove access-enforced blinding. Withhold its outputs in fresh exercises.
+
+The [Oracle execution application](examples/oracle-execution/ASSESSMENT.md) retains
+an actual local defect reproduction, fresh guided repair, return inspection and
+integrated verification. It records assistance/configuration limits and is separate
+from the prepared live LFEA entry. Withhold its worked outputs from fresh exercises.

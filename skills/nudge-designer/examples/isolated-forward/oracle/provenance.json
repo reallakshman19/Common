@@ -1,0 +1,237 @@
+{
+  "snapshot": "Oracle preparation, before reading any downstream producer/assessor return",
+  "task_inputs": {
+    "owner.md": {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/owner.md",
+      "sha256": "dabe7c2fd83b1ac992773b94770219bfe95172fd92c1eaa669c2e304d966475b",
+      "bytes": 1509
+    },
+    "blueprint.md": {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/blueprint.md",
+      "sha256": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546",
+      "bytes": 937
+    },
+    "reference.md": {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/reference.md",
+      "sha256": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c",
+      "bytes": 641
+    }
+  },
+  "direct_messages": [
+    "Initial isolated Oracle assignment, including output/read restrictions.",
+    "Parent-supplied dependency path /workspace/scratch/52eed2252c51/tmp/br20-deps (runtime pointer only; no parent results read).",
+    "Parent request to freeze and report the original worker brief.",
+    "Parent packaging feedback requesting a proportional separate view; refinement is not a fresh unaided result."
+  ],
+  "skill_revisions": {
+    "Common-task-decomposer": "e97bc615196496a9cec960f21ecc29621c6b869e",
+    "Common-nd-isolated-nudges": "b5f8c5d53d319789e0b1219de2c6ec5302b02846"
+  },
+  "read_resources": [
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/AGENTS.md",
+      "file_byte_sha256": "342f285d1c1abb36248571b530a8fb8d029ea1c5b6b65b4b8ea6141643435f14",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/SKILL.md",
+      "file_byte_sha256": "1cd31e51d4886c00faee90043ce26a79c28b207fb5f774f819a7e138188570ff",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/APPLYING_GUIDANCE.md",
+      "file_byte_sha256": "cc533c112b379de0e5178a2043bd2a3793223a1ae0b222a3d41a86f2bf0763eb",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/ORACLE_USE.md",
+      "file_byte_sha256": "54cc11de546b0d8dcd228885f50ffce18ab16c29d1631cec9f9807960518b984",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/CONTRACT.md",
+      "file_byte_sha256": "63b2b7eaea3a311cd7feaac180379590ad91f6ba776a0ce8f810d2d34df020bd",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/INTEGRATION.md",
+      "file_byte_sha256": "b50165b5e96bcdfc3c793a0bd45028790433c65a7970af1140bc8978e898f1f7",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/schemas/task-map.schema.json",
+      "file_byte_sha256": "b59470f6ffb6de22895c544ba2c6c4d4515b6c9a695a3f9d7c35a3262ea3c56c",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+      "file_byte_sha256": "82d0ef256d95f35380834c0d70c265d6a4d84e0cb23073c79a71349da119d3c8",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/AGENTS.md",
+      "file_byte_sha256": "342f285d1c1abb36248571b530a8fb8d029ea1c5b6b65b4b8ea6141643435f14",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/SKILL.md",
+      "file_byte_sha256": "c35ac7dab127ef234acdf9dc0a5e6c35ca520fcae31c8df62f41be27520ac3ad",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/BLUEPRINT.md",
+      "file_byte_sha256": "5908bbadb05aa5cd1768051d83ff733081cd4df595aae5112431a1b454b85b68",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/PROFILES.md",
+      "file_byte_sha256": "0e7b3248f49fe035432c2eabaeff1335c797f2d756ef5c21135a460a3b5cc4dd",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/IMPLEMENTATION_PLAN.md",
+      "file_byte_sha256": "39091bfdc2e07fe303aa90a1b911e8ad7f5fd99d4363f576364762990c9b4bec",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/APPLYING_GUIDANCE.md",
+      "file_byte_sha256": "51bdc16e9d5a352a60476a2dc3ff1ff21492c1ed83075b82d14aec923952b120",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/ISOLATED_WORK.md",
+      "file_byte_sha256": "fd39a2d54a204224e7fc9ed25a5cce08a5273fb8c1441aef2bfa08c68e4d244f",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/ADAPTIVE_SUPPORT.md",
+      "file_byte_sha256": "6a2b7d8cefc18241a5fcb527a4e706c5fa8ebd9f506e84ed2ab548b051c79faf",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/ADAPTERS.md",
+      "file_byte_sha256": "7419efb7b57d1265292c09a5a54bf37dcfb66717168b7dfb846325ac3b7e9b29",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/schemas/intent.schema.json",
+      "file_byte_sha256": "b6277589b1a00cb607e1af4d37988ce4d07aa69abc679e592dfaf7be11f332eb",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/schemas/plan.schema.json",
+      "file_byte_sha256": "aff80a9b37e214f8c42e418f4d1a51f6dccb4ab854eb7a921d98a90da3d4fd38",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/owner.md",
+      "file_byte_sha256": "14a3dce39f1026663741191e52bb4a68576e3aa07d09c1e0d91111545a38eb10",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/designer.md",
+      "file_byte_sha256": "44227dee61a3a0ed7e7fcb490c6ae0cf9fa661af433b5d6e5077fc566f907d03",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/worker.md",
+      "file_byte_sha256": "3802eaeeb07dab1ef17768c0f5feea6acde25d0df5ba0326656031b1d6775301",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/assignment.md",
+      "file_byte_sha256": "b8ffdd583a1004cc52284bade87e7479a016a642085f5afc150441633cdb60bb",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/isolated-assignment.md",
+      "file_byte_sha256": "e1ec67382b2cd0a91cb9fa4f8d1ec351ae6c8d794aabd34c12b30308e77c953e",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/brief-check.md",
+      "file_byte_sha256": "311b74afc2417c8217b3ba8ec05f21458a55edba8fe295ae75288c17fa0e0add",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/result.md",
+      "file_byte_sha256": "cc36966d0bcdebae1c7d83c5ed0396ab3b948cbf3ea49cd8a934fcefc3a9d9d8",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nd_render.py",
+      "file_byte_sha256": "4fa42c86dc031e426cc6850e8d79469142783b1557f5e5944fb904928a2b5555",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nudge_designer.py",
+      "file_byte_sha256": "054ec2989afa248adfafa0f0db79a02ed4e6daa1b65a31961cfef28bd560e859",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nd_contract.py",
+      "file_byte_sha256": "448ce63d5b7d127e6243f103384758e3566e9d60da82ce1b1e95950c1aba1673",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nd_team.py",
+      "file_byte_sha256": "9e99c9d92a44e8bf353221e5daab1ff651d9759aa9181589bbe41bbb6f12df6a",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nd_io.py",
+      "file_byte_sha256": "b0c650ae84be2a01bbd32f56257ffcec403cefe78f34d03e521d718415e5212b",
+      "exposure": "Text inspected in this application; some initial combined tool output was truncated and applicable text was subsequently reread."
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/profiles/library.json",
+      "file_byte_sha256": "bd6e1ec832f160ec5d0affce1f7595b4ebfa1345b6a5e2c083b808fc39268808",
+      "exposure": "Loaded as a profile library; displayed selected core, education and quantitative objects. Other profile content was not used."
+    }
+  ],
+  "runtime_imports": "The skill CLIs import their own nd_* scripts and jsonschema/transitive runtime dependencies. Import is execution support, not independent semantic inspection of each module. Python -B / PYTHONDONTWRITEBYTECODE prevented cache writes to source/runtime directories.",
+  "tools_used": [
+    "functions.exec / exec_command for scoped shell/Python reads, authoring, subprocess CLI calls, hashes and exact arithmetic.",
+    "collaboration.send_message only to the parent for coordination, limits and artifact locators; no worker spawned.",
+    "No browser, web search, external connector, publication, tracker write or delivery tool."
+  ],
+  "observed_runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "jsonschema": "4.26.0",
+    "dependency_basis": "Parent-supplied directory, import and version observed."
+  },
+  "configuration": {
+    "Oracle_model": "UNKNOWN",
+    "Oracle_reasoning_effort": "UNKNOWN",
+    "producer_model": "UNKNOWN",
+    "producer_reasoning_effort": "UNKNOWN",
+    "producer_tools": "Local file/Python SUPPLIED by Owner; unobserved for the future participant.",
+    "qualification": "NOT_ESTABLISHED; native fit tool leaves qualification_verified=false and execution_authorized=false.",
+    "host_setting_changes": false
+  },
+  "exposure": {
+    "Oracle": "Read BP-1 and the full Oracle/assessor reference before preparing these artifacts. Not a reference-blind producer or independent assessor.",
+    "old_producer": "Reference reports prior access to both references, COPIED/ADAPTED derivations and a self-verdict. Old original artifacts/logs were not read.",
+    "proposed_producer": "Not instantiated by this application. Allowed inputs are the chosen issued worker view plus exact BP-1 only; actual prior exposure/access UNKNOWN.",
+    "proposed_assessor": "Not instantiated or qualified. Later must inspect actual pinned artifacts/criteria and record overlap/reference access.",
+    "screen": "Known reference strings absent in both prepared briefs; manual readback is planner self-inspection."
+  },
+  "enforcement_limits": [
+    "Allowed-input boundary is instructional; shared filesystem/ordinary tool permissions are not OS-enforced reference prevention.",
+    "No evidence here establishes training-data independence, truly independent generation, reviewer independence, broad blueprint reliability or learner understanding.",
+    "Prepared native bindings/file hashes establish content identity only.",
+    "No examples/**, tests/**, VERIFICATION.md report files, other workers' task outputs or parent result artifacts were opened. Required skill references contain illustrative text/reported history; no linked worked fixtures or verification reports were consulted.",
+    "No generation/assessment return was read; status statements are this pre-dispatch planning snapshot."
+  ],
+  "actual_results": [
+    "Source numerical instances independently recomputed by Oracle exact-rational arithmetic.",
+    "Actual TD validate/frontier/render and ND validate/fit/bind/render completed with exit 0; detailed receipts in checks/.",
+    "Original source bytes, first brief bytes, operational-view bytes and native/map bindings checked unchanged.",
+    "Semantic review is SELF-ASSESSED by this Oracle; parent feedback/readback does not constitute independent acceptance."
+  ],
+  "not_executed": [
+    "Dispatch/delegation, actual generation or separate artifact assessment.",
+    "Native return receive/impact (no actual return or changed intent/map revision exists).",
+    "Skill regression suites, examples/golden/test/verification-report reading or product work."
+  ]
+}

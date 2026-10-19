@@ -23,6 +23,10 @@ Check whether the evidence covers the claimed boundary, intermediate behavior,
 source revision and integrated outcome. A different agent ID or solver is not
 proof of independence. If you contributed, disclose self-review/correlation; do
 not claim blind or formally qualified review when that was not established.
+Check artifact-under-test provenance as well as source provenance. Earlier context
+counts as exposure; a fresh instruction cannot undo it. Separate correctness,
+reproduction and unseen-transfer claims. Mark your own contributed judgments
+SELF-ASSESSED and state what was actually withheld for any independence claim.
 
 Return a native review with actual checks, expected versus observed results,
 findings, unresolved evidence and acceptance limits. Preserve original artifacts.

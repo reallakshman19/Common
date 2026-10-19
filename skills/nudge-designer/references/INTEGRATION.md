@@ -38,6 +38,12 @@ https://github.com/reallakshman19/CoordinatorLandingpage/issues/97#issuecomment-
 
 The observed workbench uses Nudge Protocol v2 and manual Owner controls. This
 records the design boundary; it does not requalify every current deployment.
+This is an earlier deployment observation. The Owner's 19 October fresh-pilot
+proposal describes a revamped CoordinatorLandingpage app and
+[PR #107](https://github.com/reallakshman19/CoordinatorLandingpage/pull/107).
+Inspect the actual target/version before applying a surface contract; this skill
+does not verify that app's current import/reply behavior. Keep assignment/move/reply
+mapping explicit as described in [adapters](ADAPTERS.md).
 The Designer's `type` vocabulary matches the observed labels: `new_requirement`,
 `ground`, `next_step`, `course_correction`. Those labels alone do not make the
 objects native workbench imports. The `nextnudge-manual` adapter now prepares a
@@ -61,3 +67,20 @@ For a later separately authorized adapter:
 
 Pilot the blueprint and objects first. Add UI controls after actual use shows
 which decisions need support; field completeness is not the success metric.
+
+## Agent-led execution
+
+Use [Oracle execution](ORACLE_EXECUTION.md) and [the Oracle entry](../assets/prompts/oracle.md)
+to carry a selected task through real delivery, return inspection, revised
+direction and integrated verification. Oracle or the authorized host performs
+these actions; `adapt` prepares a packet and `receive` records a return worksheet.
+Neither invokes the next skill, dispatches a participant or watches a channel.
+Do not wait for an unimplemented controller to advance a manual episode.
+
+Select Task Decomposer independently for neutral task design when useful. Give
+the consumer the original sources and issued map/task binding; inspect its actual
+recipient brief against that meaning. Oracle reconciles observations and updates
+affected working records. No shared runtime, new schema or native converter is
+required for the manual application. The [LFEA entry](../assets/prompts/lfea-pilot.md)
+is a prepared live-case starting point; actual access/authority and browser work
+must be established during that pilot.

@@ -1,0 +1,12 @@
+{
+  "scope": "Parent authoring self-check, not independent brief review",
+  "before_issue_corrections": [
+    "Made the input digest manifest an explicitly allowed readable input.",
+    "Narrowed the prohibition on answers to parent/new-producer results; the allowed reference legitimately contains its own answers."
+  ],
+  "issued_brief_words": 350,
+  "source_inputs": 5,
+  "limits": [
+    "This does not establish semantic completeness or an error-free specification."
+  ]
+}

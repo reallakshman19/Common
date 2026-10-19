@@ -1,0 +1,183 @@
+{
+  "schema": "nudge-designer.plan/v1",
+  "id": "search-session-plan",
+  "revision": 1,
+  "intent_id": "search-session-intent",
+  "intent_revision": 1,
+  "intent_sha256": "4a0c786f4879a25da01ddc5d8c4613087b642abd815bcce1319e7cd14a3ca542",
+  "profile_ids": [
+    "core",
+    "logic",
+    "coding"
+  ],
+  "profiles_sha256": "7eb83c25a56d553c5b1a735d948f234f253cc47417be5ed8bc70b31890f5d83a",
+  "strategy": "Retain T-SESSION as one coupled repair. Baseline disproves scope-only authority. Use GUIDED implementation for a fresh worker; Oracle keeps model, method, interpretation and integration.",
+  "nudges": [
+    {
+      "id": "N-REPAIR",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": [
+        "O-SESSION"
+      ],
+      "item_refs": [
+        "R-LATEST",
+        "R-CANCEL",
+        "R-PRESERVE",
+        "R-ORDER",
+        "C-RAW",
+        "C-LOCAL",
+        "F-GUARD",
+        "F-BASE"
+      ],
+      "source_refs": [
+        "S-OWNER",
+        "S-SOURCE",
+        "S-TESTS",
+        "S-ACCESS",
+        "S-BASE",
+        "S-MAP"
+      ],
+      "profile_ids": [
+        "core",
+        "logic",
+        "coding"
+      ],
+      "purpose": "Repair local search-session callback authority and cancellation while preserving ranked rows, current responses and reusable state.",
+      "deliverable": "Repaired work/session.py with focused executable event-order regression checks and a native report.",
+      "understanding": [
+        "A project filter is not an operation identity: A\u2192A and A\u2192B\u2192A can have obsolete callbacks with the current scope.",
+        "Oracle established the public-state model before delegating: the latest begin owns the view, while cancel revokes that ownership; stale success/error callbacks return False without any snapshot change.",
+        "Sequence already exists in issued tickets; maintain a lifetime identity across begin and cancel, preserve source API and copy/order behavior.",
+        "Worker implements one coherent state repair and regression artifact; Oracle retains interpretation, scope choices, source/probe inspection and integrated acceptance.",
+        "GUIDED method: read the allowed raw files and candidate; apply the lifetime-identity correction to both finish and fail, invalidate on cancel, and preserve scope/query, row order, deep copies and signatures. Add checks for same-scope supersession, A\u2192B\u2192A, cancellation late success/error and successful/current-error reuse. Run native and your new focused checks. Do not edit Oracle probe or planning records."
+      ],
+      "reasoning_moves": [
+        "trace",
+        "implement",
+        "verify"
+      ],
+      "evidence_methods": [
+        "source_trace",
+        "runtime_probe",
+        "regression_test",
+        "artifact_readback"
+      ],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {
+        "preserve_refs": [
+          "R-ORDER",
+          "C-RAW",
+          "C-LOCAL"
+        ],
+        "do_not": [
+          "Change original fixtures, Oracle probe, unrelated files or callback payload/order semantics.",
+          "Claim independent acceptance, a known runtime configuration or broad concurrency proof."
+        ]
+      },
+      "success": {
+        "observable": "Native checks and original Oracle schedules pass on the actual candidate; current result/error is accepted and old/cancelled callbacks are rejected with full state unchanged.",
+        "negative_case": "The same fixed Oracle schedules fail on the original source, including A\u2192A, A\u2192B\u2192A and cancellation before late success/error."
+      },
+      "uncertainty": {
+        "missing": [
+          "Actual model/reasoning configuration UNKNOWN; worker fit unestablished."
+        ],
+        "return_with": "Return actual source/test paths, commands and results, concise decision basis, assistance and limits; stop only affected implementation if required input fails.",
+        "independent_work": [
+          "Preserve the usable baseline checks and report a concrete limitation without manufacturing global blockers."
+        ]
+      },
+      "report": {
+        "required": [
+          "Write native Markdown to out/worker-return.md; preserve concise actual checks, assistance and SELF-ASSESSED judgment.",
+          "Only worker writes work/session.py, work/test_regression.py and its out/worker-* evidence files.",
+          "Record artifact provenance as ADAPTED from raw/session.py; input references are shared, so this is repair correctness rather than unseen transfer."
+        ],
+        "next_action": "Oracle inspects actual artifacts and reruns integrated checks before accepting the local outcome."
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "target_id": "R-LATEST",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by repair and retained Oracle verification."
+    },
+    {
+      "target_id": "R-CANCEL",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by repair and retained Oracle verification."
+    },
+    {
+      "target_id": "R-PRESERVE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by repair and retained Oracle verification."
+    },
+    {
+      "target_id": "R-ORDER",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by repair and retained Oracle verification."
+    },
+    {
+      "target_id": "C-RAW",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by repair and retained Oracle verification."
+    },
+    {
+      "target_id": "C-LOCAL",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by repair and retained Oracle verification."
+    },
+    {
+      "target_id": "U-CONFIG",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "UNKNOWN configuration does not block local work."
+    },
+    {
+      "target_id": "O-SESSION",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "N-REPAIR"
+      ],
+      "evidence_refs": [],
+      "rationale": "Worker implementation is followed by Oracle integrated acceptance."
+    }
+  ],
+  "handover": {
+    "remaining": [
+      "Actual worker repair and return.",
+      "Oracle integrated source/state checks and raw integrity.",
+      "No production UI or low-thinking qualification is claimed."
+    ],
+    "next_action": "Render/review and manually issue N-REPAIR to one fresh task-local worker.",
+    "changed_understanding": "Baseline-native checks alone were insufficient: all ten added event-order witnesses reject scope-only authority."
+  }
+}

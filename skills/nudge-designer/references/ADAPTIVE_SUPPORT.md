@@ -39,6 +39,11 @@ another domain, establish independence or change the participant's runtime.
 
 ## Reduce avoidable decisions
 
+For fresh task-local workers, artifact/reference exposure, multipart roll-up,
+SELF-ASSESSED judgments and separate format-versus-judgment observations, use
+[focused context guidance](ISOLATED_WORK.md). Freshness reduces history dependence;
+it does not confer capability or prove blinding. Select the task boundary first.
+
 Give one coherent deliverable, original conditions and a short WHY. For GUIDED
 work specify the concrete operation, input interpretation, return condition and
 self-check. Reserve consequential model/scope/authority decisions. “Check everything
@@ -142,6 +147,7 @@ through the existing process.
 | Missing prerequisite understanding | Narrow/scaffold the task or reserve that judgment with an appropriate participant |
 | Repeated substantive failure after clear correction | Change method, task or participant; keep successful independent work |
 | New original condition/Owner amendment | Reconcile meaning, revise current bindings and visibly correct delivered instructions |
+| Corrected target example reveals its verdict | Mark that target exposed; teach the rule on different data and use an unexposed case if assessing transfer |
 | Feedback suggests a reusable lesson | Assess generality, counterexamples and actual change authority before modifying a shared skill/protocol |
 
 Do not assume every mistake is “low thinking,” a new session fixes it, or more

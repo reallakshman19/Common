@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "work/oracle_probe.py"
+  ],
+  "exit_code": 1
+}

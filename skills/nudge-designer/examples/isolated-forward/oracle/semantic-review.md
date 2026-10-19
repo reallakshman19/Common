@@ -1,0 +1,12 @@
+# Oracle semantic review — SELF-ASSESSED
+
+This records planner inspection against the three raw inputs and the actual prepared views; it is separate from the structural CLI receipts. No independent assessor or lower-capability qualification is claimed.
+
+- Preserved the Owner's generation question and full outcome. A reference-derived correct match is insufficient; the neutral map retains generation → separate assessment → Oracle reconciliation. The two profiles stay one useful authoring bundle rather than becoming tiny arithmetic subtasks.
+- Preserved BP-1's F net-force and acceleration decisions, explicit sign/mass/model/units, and U conversion plus explanation using 1000 mm = 1 m. Guided formulas and sign/inverse contrasts supply method without numeric target answers. No arbitrary benchmark setting/value rule or physical repair was added.
+- Preserved old numerical correctness with direct Oracle arithmetic. Copy/adaptation logs and prior self-judgment are reported from reference.md, not represented as inspected original files or an independent review receipt.
+- Kept the compact producer view to its allowed BP-1 source and issued brief. Neutral map/native render/intent/plan/assessment notes are Oracle context, excluded from producer inputs. Actual prior exposure, OS enforcement and training-data independence remain unknown or unestablished.
+- Confirmed the operational view after parent feedback retains task/map/native binding, A-GENERATE revision 1, MOVE-31 and ACK MOVE-31, concrete method/contrast, multipart unknown/failure treatment, output scope and native return requirements. It omits the duplicate full BP body because the exact allowed source is directly available and pinned. It is a packaging refinement, not a new unaided pilot result. The original first view and all bound objects remain unchanged.
+- New artifacts and access evidence block their dependent assessment; the absent assessment blocks integration. Unknown model/fit does not block preparation or silently become qualification. Actual learner evidence remains visible and unallocated outside the synthetic pilot.
+
+Limits: this inspection can miss source/risk/meaning defects. Structural validity and literal reference-string screening do not establish semantic adequacy, authentic sources, access isolation or an accepted pilot. No new producer artifact, independent assessment or learner response was read in this application.

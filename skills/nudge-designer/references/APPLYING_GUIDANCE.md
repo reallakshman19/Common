@@ -124,6 +124,12 @@ shows that distinction.
 
 ## Choose evidence that can change the conclusion
 
+For generated-artifact validation, first establish the relationship between the
+artifact and its reference, not only source provenance. Use
+[focused context guidance](ISOLATED_WORK.md) for exposure, self-assessment and
+claim-appropriate interpretation. Check GUIDED briefs with the relevant
+[pre-send questions](../assets/prompts/brief-check.md), including handwritten ones.
+
 | Domain/question | Understand and reason about | Evidence and important limit |
 |---|---|---|
 | UI/navigation | Actual entrypoint, ordinary actions, CSS point, target/state ownership and deployment identity | Native user journey plus hit/state observation; keyboard/programmatic success does not establish pointer success |
@@ -131,6 +137,7 @@ shows that distinction.
 | Teaching | Concept, stipulated model, prerequisite uncertainty and transfer | Subject reasoning plus a new explanation/problem; correct content alone does not establish learning |
 | FEA/numerical work | Physical idealization, units, boundary/load conditions and intended use | Analytic/reference comparison and appropriate numerical checks; agreement/convergence cannot validate a shared wrong model |
 | Research/analysis | Question, scope, source quality and alternative explanations | Trace conclusions to inspected sources and challenge with contrary evidence; source count is not independence |
+| Generator/blueprint validation | Artifact producer, derivation and reference access; correctness versus unseen transfer | A reference-derived match can establish reproduction, but cannot alone establish independent generalization; UNKNOWN provenance stays explicit |
 | Recovery/onboarding | Original aim, current source, useful history, unexecuted work and actual authority | Reconstruct from durable sources without waiting for the predecessor; published reconstruction is not executed repair |
 
 Select the smallest evidence set that answers the real question. Distinguish
@@ -196,6 +203,11 @@ applicable reconstruction review/approval. Do not invent a production task.
 | T16 | A wrong answer proves a weak worker or defective benchmark | Check sender inputs, revision, representation and method before attributing the cause |
 | T17 | Exactly three weaknesses or all-matching rows prove review quality | Select challenge by actual risk and coverage; allow justified empty findings |
 | T18 | A file receipt or decodable text proves meaning is correct | Verify bytes, interpretation, claim evidence and acceptance as separate facts |
+| T19 | A generated artifact matching its source validates unseen generation | Establish artifact/reference derivation and assess only the supported claim |
+| T20 | A new step saying “read the reference later” makes a producer blind | Count earlier exposure; state actual input isolation and its limits |
+| T21 | A producer's own verdict is independent acceptance evidence | Label SELF-ASSESSED and obtain the assessment appropriate to actual acceptance requirements |
+| T22 | Smaller fresh tasks need no project understanding | Supply a coherent task-local brief; retain required decisions and integration with Oracle |
+| T23 | Clean ACK/count/hash returns establish judgment | Track format, method execution and substantive judgment separately |
 
 ## Use golden references without copying their answers
 

@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "raw_hashes_equal": true,
+    "raw_file_set_equal": true,
+    "raw_manifest_byte_hash_equal": true
+  },
+  "pass": true,
+  "raw_manifest_sha256": "68af79133c4d1da0b0d37428fd496e9350b61571337449400c1c473672e14c00",
+  "raw_sha256": {
+    "raw/access.md": "20ac0efe244cf52ceaa0ab62b32f21d95ffc859d30345762933059d4443fd39f",
+    "raw/owner.md": "215813d15d8ea3d9404a8ba9e25c8006025139da3978618b8cf94c40dbdbdf59",
+    "raw/session.py": "316b565738204bab3c81b6e2143d7bedaa3d8b13bcacf9960dde07c7deb03512",
+    "raw/test_existing.py": "20b52ced9a30e0367994675446e056e7efd51ee31dc5c94cd79d0be43360dcca"
+  },
+  "candidate_sha256": "1e00c29dd0262723ae3ec6d749a89c8c07d12ce4882e6b77414c53592de12f8d",
+  "original_sha256": "316b565738204bab3c81b6e2143d7bedaa3d8b13bcacf9960dde07c7deb03512",
+  "artifacts": {
+    "work/test_regression.py": "094ceb316dcf57cf33c54c2f165317401f1e5d26250911ee80df6c9bb5c66e2d",
+    "work/oracle_probe.py": "1e1118a172f7fdea0ecc153c60ea977b8456ed0b13402fe2b69a75ca099af6d2",
+    "work/oracle_sequence_check.py": "a586de5422cca4ac5b40c430a863a66b1c4b473ab767f919a3b4c7b60fccc0b5",
+    "out/issued-worker.md": "b752508befc546c1e816b7f9ef37a357f1bddd9b30673936f6ef1c733f33f9c1",
+    "out/issued-dispatch.txt": "3d8bba9690d2e63cd2ed56dcb4132cc1ebf6591586d3825b57b78f8594b8ede5",
+    "out/worker-return.md": "d77750e1e95c5b98d79016c35c12e7cf599653fd2a6daa6d167c81b72dccdf35"
+  },
+  "checked_utc": "2026-10-19T05:44:29.044310+00:00"
+}

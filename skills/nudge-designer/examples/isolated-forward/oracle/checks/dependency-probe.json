@@ -1,0 +1,29 @@
+{
+  "capture": "Summary of actual earlier environment probe outputs, not a reconstructed raw transcript",
+  "default_python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "observations": [
+    {
+      "action": "importlib.metadata.version(\"jsonschema\") in default Python",
+      "result": "FAILED",
+      "observed": "PackageNotFoundError: No package metadata was found for jsonschema"
+    },
+    {
+      "action": "importlib.util.find_spec(\"jsonschema\") in default Python",
+      "result": "UNAVAILABLE",
+      "observed": "None"
+    },
+    {
+      "action": "/usr/bin/python3 imports jsonschema",
+      "result": "FAILED",
+      "observed": "ModuleNotFoundError: No module named jsonschema"
+    },
+    {
+      "action": "Use parent-supplied local runtime dependency pointer in PYTHONPATH",
+      "result": "AVAILABLE",
+      "observed": "jsonschema 4.26.0 at /workspace/scratch/52eed2252c51/tmp/br20-deps/jsonschema/__init__.py"
+    }
+  ],
+  "restriction_scope": "Initial default-interpreter dependency only. No validator PASS was claimed then. Actual subsequent CLI validations ran with the supplied dependency path and passed.",
+  "installation_performed": false,
+  "tests_run": false
+}

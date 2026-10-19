@@ -1,0 +1,364 @@
+{
+  "scope": "Actual local file/content binding and arithmetic receipt checks, not a semantic validator or qualification authority",
+  "checks": [
+    {
+      "check": "Original input identity: owner.md",
+      "result": "PASS",
+      "scope": "FILE_BYTE_IDENTITY",
+      "detail": "dabe7c2fd83b1ac992773b94770219bfe95172fd92c1eaa669c2e304d966475b"
+    },
+    {
+      "check": "Original input identity: blueprint.md",
+      "result": "PASS",
+      "scope": "FILE_BYTE_IDENTITY",
+      "detail": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546"
+    },
+    {
+      "check": "Original input identity: reference.md",
+      "result": "PASS",
+      "scope": "FILE_BYTE_IDENTITY",
+      "detail": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c"
+    },
+    {
+      "check": "Original prepared brief unchanged",
+      "result": "PASS",
+      "scope": "FILE_BYTE_IDENTITY",
+      "detail": "76cb1b57ddd037c6bf3cef88c1352e3716f40c4e63f2f7f094b98d67e81d0b4a"
+    },
+    {
+      "check": "Operational view unchanged",
+      "result": "PASS",
+      "scope": "FILE_BYTE_IDENTITY",
+      "detail": "2fbf71ef49d5406dbf9c6c6c6a51004ebbfbc0f707fcc3a5f7ad0d34dade8047"
+    },
+    {
+      "check": "Frozen map canonical binding",
+      "result": "PASS",
+      "scope": "CANONICAL_CONTENT_IDENTITY",
+      "detail": "b3e8bd62c71a32e760b6da7687cac1dda707f7001617fcd086468a5f18f98fe2"
+    },
+    {
+      "check": "Frozen intent/plan/nudge binding",
+      "result": "PASS",
+      "scope": "CANONICAL_CONTENT_IDENTITY",
+      "detail": "Original snapshots remain bound; no structural validation suite was repeated."
+    },
+    {
+      "check": "Return and intake bind to original issued task",
+      "result": "PASS",
+      "scope": "ISSUED_IDENTITY_CORRELATION",
+      "detail": "A-GENERATE revision 1; MAP-BP1-PILOT revision 1 / T-GENERATE; MOVE-31 / ACK MOVE-31 declared in native report."
+    },
+    {
+      "check": "Original native report preserved exactly through envelope/intake",
+      "result": "PASS",
+      "scope": "NATIVE_TEXT_AND_BYTE_IDENTITY",
+      "detail": "401cb8b57c86f54ac543a03d98b7498f809cf3da3006b315d79a37a7aadd2bcb"
+    },
+    {
+      "check": "Actual generated artifact matches parent numerical/projection source",
+      "result": "PASS",
+      "scope": "FILE_BYTE_IDENTITY",
+      "detail": "aac728d0d679dada9f7ee8031afdf923e7030a33782c67cdf852aa0bb07b97db"
+    },
+    {
+      "check": "Projection receipt agrees with assessor input receipt",
+      "result": "PASS",
+      "scope": "REPORTED_RECEIPT_AGREEMENT",
+      "detail": "Judge problems.md and the issued manifest were not opened in this continuation; exact extraction fidelity is parent-reported, not independently rehashed here."
+    },
+    {
+      "check": "Saved producer numeric solution comparison",
+      "result": "PASS",
+      "scope": "SOURCE_DERIVED_ORACLE_COMPUTATION",
+      "detail": "Signed sum, positive-mass division and unit conversion derived from parsed original prompt givens, then compared with saved producer results."
+    },
+    {
+      "check": "Separately derived assessor answer agreement",
+      "result": "PASS",
+      "scope": "ORACLE_COMPARISON_WITH_LIMITED_SEPARATE_ASSESSMENT",
+      "detail": "The assessor saw prompt blocks/reference, not producer solutions or self-verdict. This comparison is performed by continued Oracle after both are visible."
+    },
+    {
+      "check": "Parent source-derived numeric receipt agreement",
+      "result": "PASS",
+      "scope": "CORRELATED_NUMERICAL_CROSS_CHECK",
+      "detail": "Oracle and parent computations are both after exposure to generated solutions/reports; this is not a new blind assessment."
+    },
+    {
+      "check": "Declared contrast relations",
+      "result": "PASS",
+      "scope": "EXACT_RATIONAL_RELATIONS",
+      "detail": "Checks coordinate-sign reversal and unchanged magnitudes, and mm-to-m inverse relation on the same generated items."
+    },
+    {
+      "check": "Read-only preservation: owner.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "dabe7c2fd83b1ac992773b94770219bfe95172fd92c1eaa669c2e304d966475b"
+    },
+    {
+      "check": "Read-only preservation: blueprint.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546"
+    },
+    {
+      "check": "Read-only preservation: reference.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c"
+    },
+    {
+      "check": "Read-only preservation: oracle/task-map.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "b6e1bf630bacc4fedb845eb71cf7b7357bcdf571506eefd5250e8d8e57cccf02"
+    },
+    {
+      "check": "Read-only preservation: oracle/intent.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "e5d7527198a6934fb83aa6af7b7c66e131a43d9abd50f861d822f0267d551785"
+    },
+    {
+      "check": "Read-only preservation: oracle/plan.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "97754d39edb5275634271d786d30e332394dea89c3bd6951e5934d9fbf4132e0"
+    },
+    {
+      "check": "Read-only preservation: oracle/issued-binding.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "07fcf6f968cc1ff51ff39d0baefec09291055ea6b4d54c6ddd695a13887709d1"
+    },
+    {
+      "check": "Read-only preservation: oracle/identity.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "c4c9962c83093d46298335fb85c699649f585f624c1e601462dba986b01d3440"
+    },
+    {
+      "check": "Read-only preservation: oracle/packaging-refinement.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "977cfbc330d0dd84de2df9a837878f99819277cb18e4ea3f4774d28e9f09efbd"
+    },
+    {
+      "check": "Read-only preservation: oracle/source-snapshot.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "b672c21387bdaa2ec945b1dbbc13f835c957f5477c58b4f6fec07e38703be114"
+    },
+    {
+      "check": "Read-only preservation: oracle/arithmetic-evidence.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "844612151dbaaaf4086feea6641201f4cdd2c58e7f0462d7d69b6ee17bb63ba2"
+    },
+    {
+      "check": "Read-only preservation: oracle/worker/generation-brief.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "76cb1b57ddd037c6bf3cef88c1352e3716f40c4e63f2f7f094b98d67e81d0b4a"
+    },
+    {
+      "check": "Read-only preservation: oracle/worker/generation-operational-view.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "2fbf71ef49d5406dbf9c6c6c6a51004ebbfbc0f707fcc3a5f7ad0d34dade8047"
+    },
+    {
+      "check": "Read-only preservation: oracle/generation/exercises.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "aac728d0d679dada9f7ee8031afdf923e7030a33782c67cdf852aa0bb07b97db"
+    },
+    {
+      "check": "Read-only preservation: oracle/generation/native-report.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "401cb8b57c86f54ac543a03d98b7498f809cf3da3006b315d79a37a7aadd2bcb"
+    },
+    {
+      "check": "Read-only preservation: judge/assessment.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "77742638f652bf9690a980a099b00ef8d25f81a1109afb491bcf5c2b41d58729"
+    },
+    {
+      "check": "Read-only preservation: judge/calculations.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "73dd51177770da1e368f126ded88fa0c8e19237776ce12ecd166a59072fc2840"
+    },
+    {
+      "check": "Read-only preservation: judge/assignment.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "01538fcd0f51ce8b41a2a46fabd9ad916112ef1b9764c4b69998f375608179ee"
+    },
+    {
+      "check": "Read-only preservation: judge/inputs/setup.md",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "98e72a73620adeb28d3403ea6d9465be2bfa890c535ebc82d3ce256e92313247"
+    },
+    {
+      "check": "Read-only preservation: parent-oracle-checks.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "d46468f52966a073b62b406b4fdc07d383b29377b73bbe1055db0e3c293bbf3e"
+    },
+    {
+      "check": "Read-only preservation: parent-numeric-checks.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "e84c035f502632c3eef1e1199af9580bf456e19181ec9ffa643d7c58f47c389e"
+    },
+    {
+      "check": "Read-only preservation: parent-prompt-projection.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "3b08ec5e641b16403cf8ac98620b4ea26d5ba460d0704b766ce5fc987839f7f1"
+    },
+    {
+      "check": "Read-only preservation: parent/producer-return.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "8aad02d09d959210aa1e600c09ccfa31b3956a2b0921ad13d8be3daa19d82596"
+    },
+    {
+      "check": "Read-only preservation: parent/producer-intake.json",
+      "result": "PASS",
+      "scope": "EXACT_BYTE_PRESERVATION",
+      "detail": "7667f58d3a1d862acabb3e51923784587e65b7c7491b221f3b429efe66489daf"
+    }
+  ],
+  "inputs": [
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/owner.md",
+      "bytes": 1509,
+      "sha256": "dabe7c2fd83b1ac992773b94770219bfe95172fd92c1eaa669c2e304d966475b"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/blueprint.md",
+      "bytes": 937,
+      "sha256": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/reference.md",
+      "bytes": 641,
+      "sha256": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/task-map.json",
+      "bytes": 26029,
+      "sha256": "b6e1bf630bacc4fedb845eb71cf7b7357bcdf571506eefd5250e8d8e57cccf02"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/intent.json",
+      "bytes": 18521,
+      "sha256": "e5d7527198a6934fb83aa6af7b7c66e131a43d9abd50f861d822f0267d551785"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/plan.json",
+      "bytes": 15859,
+      "sha256": "97754d39edb5275634271d786d30e332394dea89c3bd6951e5934d9fbf4132e0"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/issued-binding.json",
+      "bytes": 435,
+      "sha256": "07fcf6f968cc1ff51ff39d0baefec09291055ea6b4d54c6ddd695a13887709d1"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/identity.json",
+      "bytes": 1384,
+      "sha256": "c4c9962c83093d46298335fb85c699649f585f624c1e601462dba986b01d3440"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/packaging-refinement.json",
+      "bytes": 1728,
+      "sha256": "977cfbc330d0dd84de2df9a837878f99819277cb18e4ea3f4774d28e9f09efbd"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/source-snapshot.json",
+      "bytes": 759,
+      "sha256": "b672c21387bdaa2ec945b1dbbc13f835c957f5477c58b4f6fec07e38703be114"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/arithmetic-evidence.json",
+      "bytes": 1540,
+      "sha256": "844612151dbaaaf4086feea6641201f4cdd2c58e7f0462d7d69b6ee17bb63ba2"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-brief.md",
+      "bytes": 7671,
+      "sha256": "76cb1b57ddd037c6bf3cef88c1352e3716f40c4e63f2f7f094b98d67e81d0b4a"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-operational-view.md",
+      "bytes": 4244,
+      "sha256": "2fbf71ef49d5406dbf9c6c6c6a51004ebbfbc0f707fcc3a5f7ad0d34dade8047"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md",
+      "bytes": 2496,
+      "sha256": "aac728d0d679dada9f7ee8031afdf923e7030a33782c67cdf852aa0bb07b97db"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/native-report.md",
+      "bytes": 7504,
+      "sha256": "401cb8b57c86f54ac543a03d98b7498f809cf3da3006b315d79a37a7aadd2bcb"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/judge/assessment.md",
+      "bytes": 6082,
+      "sha256": "77742638f652bf9690a980a099b00ef8d25f81a1109afb491bcf5c2b41d58729"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/judge/calculations.json",
+      "bytes": 11961,
+      "sha256": "73dd51177770da1e368f126ded88fa0c8e19237776ce12ecd166a59072fc2840"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/judge/assignment.md",
+      "bytes": 2523,
+      "sha256": "01538fcd0f51ce8b41a2a46fabd9ad916112ef1b9764c4b69998f375608179ee"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/judge/inputs/setup.md",
+      "bytes": 1004,
+      "sha256": "98e72a73620adeb28d3403ea6d9465be2bfa890c535ebc82d3ce256e92313247"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/parent-oracle-checks.json",
+      "bytes": 4287,
+      "sha256": "d46468f52966a073b62b406b4fdc07d383b29377b73bbe1055db0e3c293bbf3e"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/parent-numeric-checks.json",
+      "bytes": 1001,
+      "sha256": "e84c035f502632c3eef1e1199af9580bf456e19181ec9ffa643d7c58f47c389e"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/parent-prompt-projection.json",
+      "bytes": 500,
+      "sha256": "3b08ec5e641b16403cf8ac98620b4ea26d5ba460d0704b766ce5fc987839f7f1"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/parent/producer-return.json",
+      "bytes": 9656,
+      "sha256": "8aad02d09d959210aa1e600c09ccfa31b3956a2b0921ad13d8be3daa19d82596"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/parent/producer-intake.json",
+      "bytes": 10564,
+      "sha256": "7667f58d3a1d862acabb3e51923784587e65b7c7491b221f3b429efe66489daf"
+    }
+  ],
+  "all_checks_pass": true,
+  "structural_suites_repeated": false,
+  "projection_limit": "Assessor problem/manifest bytes were not read in this continuation; parent/assessor reported digest agreement is distinguished above."
+}

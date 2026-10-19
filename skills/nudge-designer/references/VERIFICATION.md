@@ -9,6 +9,7 @@
 - [Role-adapter extension checkpoint](#role-adapter-extension-checkpoint)
 - [Prompt and Applying guidance extension](#prompt-and-applying-guidance-extension)
 - [Adaptive support amendment](#adaptive-support-amendment)
+- [Task-local context amendment](#task-local-context-amendment)
 
 ## Scope and provenance
 
@@ -251,3 +252,53 @@ The existing 84 compatibility checks passed locally on Python 3.12. Skill Creato
 validation, syntax/JSON/metadata, local-link, reference-value, archive-identity and
 diff checks are performed before publication; the delivery PR records exact-head
 hosted Python 3.10/3.12 results and remote readback before the authorized merge.
+
+## Task-local context amendment
+
+The Owner's 19 October request adopts qualified fresh-NLM lessons and asks about
+small fresh-worker nudges. This amendment changes guidance, prompts and fixtures
+only; runtime/schema/profile contracts remain unchanged. The focused local suite
+passed **84 tests** on Python 3.12. Tool compatibility is separate from the
+semantic application evidence and does not establish lower-model capability.
+
+The [actual isolated role cycle](../examples/isolated-forward/ASSESSMENT.md) retains
+Oracle preparation, a parent-assisted 1,065 → 484 word view, brief-only production,
+prompt-only separate assessment and continued-Oracle evidence reconciliation.
+Original inputs/native results stayed exact. The assessor's UNKNOWN full-artifact
+coverage was preserved and bridged explicitly rather than relabeled independent
+review. This is a synthetic default-runtime observation, not low-thinking-model
+qualification, guaranteed blinding, automatic compression or a causal effect.
+
+Four new paired references (G11–G14) and a pre-send self-check address provenance,
+exposure, small task context, multipart verdicts and identity/transport. The reported
+NLM case retains absent-original-artifact limits. Runtime, schemas and APIs were not
+changed; the separate Task Decomposer change is not a dependency of this skill.
+
+## Oracle execution amendment
+
+The Owner asked to complete the operating support before the live pilot. Added
+Oracle execution guidance, an Owner/Oracle entry, optional native episode aid,
+source-bound LFEA entry and G15's raw/golden case. Existing coordinator/pre-send/
+integration guidance allocates the actual measurement, channel, return inspection,
+adaptive direction and integrated verification. Runtime, profiles, both schemas
+and API contracts are unchanged. Oracle is not a new role/audience enum.
+
+The existing 84 tests passed locally on Python 3.12 in 23.629 seconds after the
+first attempt omitted the existing optional `jsonschema` dependency path. That
+failed environment attempt remains an observed startup restriction, not a pass.
+Metadata/link/JSON/Python and scoped whitespace checks are recorded before
+publication; exact-head hosted results belong to the delivery PR.
+
+A [fresh actual application](../examples/oracle-execution/ASSESSMENT.md) reproduced
+a synthetic state defect despite four passing native checks, then issued a
+442-word GUIDED repair to a fresh worker and reconciled the returned source.
+Four native tests, ten worker tests, ten Oracle witnesses and 7,024 bounded
+schedules passed after repair; four extra parent check groups also passed.
+Raw inputs/native reports are preserved. Assistance, finite-model assumptions,
+unknown configuration and non-independent aspects remain explicit. Separate
+document/selected-contract review found no material issue.
+
+This demonstrates a local agent-led continuation using the operating support,
+not a selected low-thinking benchmark, autonomous dispatcher, causal ROI claim,
+real LFEA repair or whole application acceptance. The prepared LFEA entry is the
+next live pilot; its runtime/source/authority must be established during use.

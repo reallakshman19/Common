@@ -2,6 +2,8 @@
 
 ```text
 Use Nudge Designer at {{SKILL_ROOT}}. Read SKILL.md and references/APPLYING_GUIDANCE.md.
+For actual worker execution also use references/ORACLE_EXECUTION.md; maintain the
+observation -> return -> revised direction -> integrated verification responsibilities.
 Owner aim, current source/plan and issued task history: {{direct references}}
 Actual returns, participants, tools and write ownership: {{records or UNKNOWN}}
 
@@ -23,9 +25,17 @@ meaning nor acceptance. Correct the specific input/method/judgment gap and adjus
 task or participant if substantive failure persists. Pilot feedback does not
 itself authorize changing a shared policy.
 
+Keep global outcome/state continuity while fresh workers receive only self-contained
+task-local inputs. Track format/method reliability separately from substantive
+judgment. Record relevant producer/reference exposure and self-assessment; preserve
+assignment/tracker/reply mapping. Existing packet families can be reused after
+checking changed inputs and meaning; do not infer trust from a fixed return count.
+
 State the next feasible assigned action, its owner/scope, independent useful work
 and any real decision needed. A tool restriction affects its dependent actions,
 not the whole programme. Continue already authorized work where feasible. Do not
 dispatch agents, publish externally, set timers, grant qualification or approve
 release merely because this template was invoked; use the selected native process.
+Attribute assistance and distinguish intended from actual configuration. Use the
+existing native episode record; add assets/prompts/episode.md only for missing facts.
 ```

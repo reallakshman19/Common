@@ -1,0 +1,8 @@
+{
+  "source": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation/exercises.md",
+  "source_file_byte_sha256": "aac728d0d679dada9f7ee8031afdf923e7030a33782c67cdf852aa0bb07b97db",
+  "projection": "Exact F/U prompt blocks before their Solution markers, excluding solutions/checks/self-verdicts",
+  "projection_path": "judge/inputs/problems.md",
+  "projection_file_byte_sha256": "44c9d4ca7008637588ee869663fdae87a5eae87fce03edbcfa939b5a6fe6bf3d",
+  "original_preserved": true
+}

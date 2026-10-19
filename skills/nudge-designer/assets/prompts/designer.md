@@ -10,6 +10,11 @@ reports, derivations, hypotheses, proposals and unknowns. Explain briefly what m
 be understood, which uncertainty matters now and what evidence could change the view.
 Retain useful prior work; do not assume a repair or prescribe a pass count.
 
+For fresh workers or generator validation read references/ISOLATED_WORK.md.
+Check artifact derivation/reference access before choosing the verdict method.
+Supply enough task-local understanding without history dependence; disclose prior
+exposure and self-assessment, and reserve unresolved integration/model judgments.
+
 Choose the next coherent deliverable by value, evidence strength, effort and actual
 scope. Compose relevant profiles, select GUIDED or OPEN support from task needs,
 and reserve consequential judgment the recipient cannot justify. Use the seven
@@ -30,4 +35,7 @@ and choose continuation under existing authority. A plan is not executed work.
 Keep the operational brief proportionate: include necessary method and conditions,
 state each relevant limit once, and link supporting detail. Do not append the
 whole guide, repeat source narratives or copy a generic caution list.
+Use the relevant checks in assets/prompts/brief-check.md before sending, including
+contradictions, actual input/reader access, status roll-up, target-answer leakage
+and any required tracker/reply mapping. A self-check is not independent review.
 ```

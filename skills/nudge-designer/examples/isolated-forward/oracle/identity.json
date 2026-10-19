@@ -1,0 +1,30 @@
+{
+  "state": "PREPARED_NOT_DISPATCHED",
+  "canonical_assignment_id": "A-GENERATE",
+  "assignment_revision": 1,
+  "canonical_map_id": "MAP-BP1-PILOT",
+  "map_revision": 1,
+  "task_id": "T-GENERATE",
+  "map_canonical_sha256": "b3e8bd62c71a32e760b6da7687cac1dda707f7001617fcd086468a5f18f98fe2",
+  "tracker_alias": "MOVE-31",
+  "reply_first_line": "ACK MOVE-31",
+  "binding": {
+    "intent_id": "INTENT-BP1-PILOT",
+    "intent_revision": 1,
+    "intent_sha256": "aa9025cb19ac3fe4927cbb525a31f15be8d2533bfa9a051a6e4ac662c306d0c5",
+    "plan_id": "PLAN-BP1-PILOT",
+    "plan_revision": 1,
+    "plan_sha256": "a756175be35b6bb9988b227514870c6f0dd560096690c7f90efca8eb3dc3c491",
+    "nudge_id": "A-GENERATE",
+    "nudge_sha256": "1fcf797407dd8a116b2eeaa978ae30d94c141d034c5ab1c7277f0c86fce13b03",
+    "participant_id": "P-PRODUCER"
+  },
+  "worker_brief_locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-brief.md",
+  "worker_brief_file_sha256": "76cb1b57ddd037c6bf3cef88c1352e3716f40c4e63f2f7f094b98d67e81d0b4a",
+  "allowed_inputs": [
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-brief.md",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/blueprint.md"
+  ],
+  "actual_send_history": [],
+  "limits": "No tracker mutation, channel delivery, actual worker or qualification is established."
+}

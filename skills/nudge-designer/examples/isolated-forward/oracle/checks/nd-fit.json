@@ -1,0 +1,23 @@
+{
+  "name": "nd-fit",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nudge_designer.py",
+    "fit",
+    "--intent",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/intent.json",
+    "--plan",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/plan.json",
+    "--nudge",
+    "A-GENERATE"
+  ],
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/workspace/scratch/52eed2252c51/tmp/br20-deps"
+  },
+  "exit_code": 0,
+  "stdout": "{\n  \"status\": \"NOT_ESTABLISHED\",\n  \"affected_nudge\": \"A-GENERATE\",\n  \"participant_id\": \"P-PRODUCER\",\n  \"role_mismatch\": false,\n  \"requirements\": [\n    {\n      \"group\": \"capabilities\",\n      \"id\": \"signed_force_and_units\",\n      \"importance\": \"ESSENTIAL\",\n      \"status\": \"UNKNOWN\",\n      \"basis\": \"UNKNOWN\"\n    },\n    {\n      \"group\": \"tools\",\n      \"id\": \"local_files\",\n      \"importance\": \"ESSENTIAL\",\n      \"status\": \"AVAILABLE\",\n      \"basis\": \"REPORTED\"\n    },\n    {\n      \"group\": \"tools\",\n      \"id\": \"python\",\n      \"importance\": \"HELPFUL\",\n      \"status\": \"AVAILABLE\",\n      \"basis\": \"REPORTED\"\n    }\n  ],\n  \"qualification_verified\": false,\n  \"execution_authorized\": false,\n  \"scope\": \"THIS_ASSIGNMENT_ONLY\",\n  \"workflow_locked\": false\n}\n",
+  "stderr": "",
+  "scope": "Actual local structural/rendering/fit check, not semantic acceptance or execution"
+}
