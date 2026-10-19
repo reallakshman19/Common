@@ -36,6 +36,14 @@ hooks, force a handover, count tool calls as turns or change coordinator mode.
 
 ## Owner and agent workflow
 
+For takeover, use [independent reconstruction](references/INDEPENDENT_RECONSTRUCTION.md),
+never a Q1–Q5 questionnaire, pass mark or scored agent admission. The executing
+agent derives its own account from original sources; no examiner/Oracle is needed.
+If BuddyRunner, two-pass or three-pass is selected, use only its native stages.
+After it is completed, additional reconstruction is **NOT_APPLICABLE**: reuse the
+outputs and continue authorized work, with targeted updates for new facts.
+Do not turn the task self-check below into a qualification exam.
+
 1. Owner supplies the source prompt/issue, actual label, approved plan,
    scope, protected files and task child issue. Agent checks the assignment
    against source words; it does not presume admission from a fixture.

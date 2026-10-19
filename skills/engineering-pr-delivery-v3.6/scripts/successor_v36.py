@@ -14,11 +14,10 @@ import re
 from decompose_v36 import GithubClient, PARENT_REF, load_plan
 from lifecycle_v36 import ContractError, load_label, require_explicit_lab
 from snapshot_v36 import snapshot
+from reconstruction_v36 import CONTINUATION_GUIDANCE
 
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 PHASES = frozenset({"1a", "1b", "2", "Y"})
-
-
 
 # ECO-06 extends the EXISTING cold successor read path, without another agent
 # stage or separate publisher. Treat fetched text as *reported sources*, not
@@ -462,7 +461,7 @@ def render_markdown(packet: dict) -> str:
              f"Task aim: {label['task_aim']}",
              f"Done when: {label['done_when']}",
              "Owner constraints:"] + [f"- {s}" for s in label["owner_constraints"]]
-    lines += ["Outcomes:"] + [f"- {k}: {v}" for k, v in label["outcomes"].items()]
+    lines += [CONTINUATION_GUIDANCE, "Outcomes:"] + [f"- {k}: {v}" for k, v in label["outcomes"].items()]
     data = packet["snapshot"]
     lines += [f"Evidence: E{data['current_evidence']}/{data['total']}; stale={data['stale_evidence']}; accepted={data['accepted_complete']}",
               "Task | Outcome | Child | Source evidence | Status | Accepted",
@@ -517,7 +516,7 @@ def buddy_prompt(phase: str, *, handover_id: str, parent: str, assessed_sha: str
               f"Assessed exact head: {assessed_sha}\n"
               "Work only from the approved Owner label, current issue plan, child "
               "evidence and current GitHub source/CI. Never rely on prior chats. "
-              "Preserve exact label words and distinguish current/stale evidence from acceptance.\n")
+              "Preserve exact label words and distinguish current/stale evidence from acceptance.\n" + CONTINUATION_GUIDANCE)
     if phase == "1a":
         return common + ("Outgoing G1: provide ONE successor-ready source-first investigation "
                          "prompt with explicit inputs/risks; do not implement. End 1a "

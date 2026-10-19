@@ -1,0 +1,67 @@
+{
+  "recorded_at_utc": "2026-10-19T13:52:00.697775+00:00",
+  "cwd": "/workspace/scratch/52eed2252c51/reconstruction-forward-20261019",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "before_sha256": {
+    "cases.json": "21b68f578ddfbad29bea11e075d34fdcfda1fb3ce50c4a57931a908b0cf685f6",
+    "owner.md": "e9488cac4fba94278a9935097a888efa0ea3a572c1abfc51c52f3781e02dafb0",
+    "source.py": "e40ad9b8317d0e67521cc57b9162c38df215e1e748b2fda37172549c5b508425",
+    "observed.py": "9b0889fab8e5229c30d6a2aec9ff15ce14d0f8679ea22a491bd6f599b9a2ccf6",
+    "observed.txt": "f82384741320ee9d1c5049a540b91010996c35be87bdf0e8a62d4d5f3b633692"
+  },
+  "after_sha256": {
+    "cases.json": "21b68f578ddfbad29bea11e075d34fdcfda1fb3ce50c4a57931a908b0cf685f6",
+    "owner.md": "e9488cac4fba94278a9935097a888efa0ea3a572c1abfc51c52f3781e02dafb0",
+    "source.py": "e40ad9b8317d0e67521cc57b9162c38df215e1e748b2fda37172549c5b508425",
+    "observed.py": "9b0889fab8e5229c30d6a2aec9ff15ce14d0f8679ea22a491bd6f599b9a2ccf6",
+    "observed.txt": "f82384741320ee9d1c5049a540b91010996c35be87bdf0e8a62d4d5f3b633692"
+  },
+  "inputs_unchanged": true,
+  "source_matches_all_records": true,
+  "source_physical_lines": 11,
+  "runs": [
+    {
+      "name": "supplied_replay",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "observed.py"
+      ],
+      "stdin": null,
+      "exit_code": 0,
+      "stdout": "{'displayed_quantity': 3, 'model_quantity': 2, 'subtotal': 14}\n",
+      "stderr": ""
+    },
+    {
+      "name": "owner_outcome_regression",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-"
+      ],
+      "stdin": "from pathlib import Path\nimport unittest\nnamespace = {}\nexec(compile(Path(\"source.py\").read_bytes(), \"source.py\", \"exec\"), namespace)\nOrder = namespace[\"Order\"]\nclass OwnerOutcome(unittest.TestCase):\n    def setUp(self):\n        self.order = Order()\n        self.order.apply(3)\n    def test_displayed_quantity(self):\n        self.assertEqual(self.order.displayed_quantity, 3)\n    def test_model_quantity(self):\n        self.assertEqual(self.order.quantity, 3)\n    def test_subtotal_consumer(self):\n        # Owner givens independently imply 3 * 7 = 21.\n        self.assertEqual(self.order.subtotal(), 21)\n    def test_preserved_unit_price(self):\n        self.assertEqual(self.order.unit_price, 7)\nunittest.main(verbosity=2)\n",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "test_displayed_quantity (__main__.OwnerOutcome.test_displayed_quantity) ... ok\ntest_model_quantity (__main__.OwnerOutcome.test_model_quantity) ... FAIL\ntest_preserved_unit_price (__main__.OwnerOutcome.test_preserved_unit_price) ... ok\ntest_subtotal_consumer (__main__.OwnerOutcome.test_subtotal_consumer) ... FAIL\n\n======================================================================\nFAIL: test_model_quantity (__main__.OwnerOutcome.test_model_quantity)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<stdin>\", line 13, in test_model_quantity\nAssertionError: 2 != 3\n\n======================================================================\nFAIL: test_subtotal_consumer (__main__.OwnerOutcome.test_subtotal_consumer)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<stdin>\", line 16, in test_subtotal_consumer\nAssertionError: 14 != 21\n\n----------------------------------------------------------------------\nRan 4 tests in 0.010s\n\nFAILED (failures=2)\n"
+    }
+  ],
+  "summary": {
+    "replay_exit": 0,
+    "focused_checks_passed": 2,
+    "focused_checks_run": 4,
+    "focused_checks_failed": [
+      "test_model_quantity",
+      "test_subtotal_consumer"
+    ],
+    "after_repair": "NOT_RUN: read-only assignment; no repair applied",
+    "full_product_suite": "NOT_RUN: no product suite supplied"
+  },
+  "limitations": [
+    "Synthetic local record only; no live product or UI route.",
+    "Owner and native-flow claims are supplied local records, not provider-authenticated history.",
+    "No Git commit, label, plan, real child issue, PR, CI or acceptance supplied.",
+    "Current evaluator saw all four case summaries and expected subtotal before running checks; this is not blind product review.",
+    "Byte-compiled current source for focused checks; replay used supplied observed.py. Python -B avoided writing bytecode."
+  ]
+}
