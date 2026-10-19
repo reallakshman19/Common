@@ -1,0 +1,14 @@
+{
+  "checked_utc": "2026-10-19T07:18:28.757607+00:00",
+  "checks": [
+    "All archived task-local inputs match the corresponding raw files.",
+    "Parent recomputation confirms delivery crossing contradicts the Owner rule.",
+    "Direct receipt counts, execution result and input hashes agree with preserved artifacts.",
+    "Custody receipt matches original bytes and the retained altered copy is rejected.",
+    "Parent exact arithmetic corroborates lesson displacement and distance; source unchanged."
+  ],
+  "limits": [
+    "Synthetic local applications only; no LFEA/Writer2 acceptance.",
+    "No model/effort qualification, authenticated distinct principal or causal ROI established."
+  ]
+}

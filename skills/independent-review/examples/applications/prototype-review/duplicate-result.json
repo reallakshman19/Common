@@ -1,0 +1,21 @@
+{
+  "schema_check": {
+    "status": "CHECKED",
+    "issues": []
+  },
+  "direct_compare": {
+    "observations": [
+      {
+        "id": "SUBJECT",
+        "status": "MATCH"
+      }
+    ],
+    "issues": [],
+    "limit": "Caller-supplied observations only; assess changed claims and integration manually."
+  },
+  "cli": {
+    "exit_code": 0,
+    "stdout": "{\n  \"observations\": [\n    {\n      \"id\": \"SUBJECT\",\n      \"status\": \"MATCH\"\n    }\n  ],\n  \"issues\": [],\n  \"limit\": \"Caller-supplied observations only; assess changed claims and integration manually.\"\n}\n",
+    "stderr": ""
+  }
+}

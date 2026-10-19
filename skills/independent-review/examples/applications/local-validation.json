@@ -1,0 +1,42 @@
+{
+  "checked_utc": "2026-10-19T07:20:25.933269+00:00",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "/workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "test_all_cli_commands_work_without_other_skills_or_optional_packages (test_local_helpers.LocalChecks.test_all_cli_commands_work_without_other_skills_or_optional_packages) ... ok\ntest_input_error_is_technical_and_does_not_claim_project_failure (test_local_helpers.LocalChecks.test_input_error_is_technical_and_does_not_claim_project_failure) ... ok\ntest_json_duplicate_keys_and_nonfinite_values_are_rejected (test_local_helpers.LocalChecks.test_json_duplicate_keys_and_nonfinite_values_are_rejected) ... ok\ntest_no_locator_fetch_or_embedded_command_execution (test_local_helpers.LocalChecks.test_no_locator_fetch_or_embedded_command_execution) ... ok\ntest_original_bytes_mismatch_and_missing_are_independent (test_local_helpers.LocalChecks.test_original_bytes_mismatch_and_missing_are_independent) ... ok\ntest_path_escape_and_symlink_are_not_followed_outside_root (test_local_helpers.LocalChecks.test_path_escape_and_symlink_are_not_followed_outside_root) ... ok\ntest_real_cli_byte_check_reads_all_fixture_and_report_files (test_local_helpers.LocalChecks.test_real_cli_byte_check_reads_all_fixture_and_report_files) ... ok\ntest_reported_inconsistency_is_advisory_not_an_admission_exit_code (test_local_helpers.LocalChecks.test_reported_inconsistency_is_advisory_not_an_admission_exit_code) ... ok\ntest_symlink_loop_preserves_known_mismatch_and_later_checks (test_local_helpers.LocalChecks.test_symlink_loop_preserves_known_mismatch_and_later_checks) ... ok\ntest_canonical_binding_is_not_file_byte_hash (test_records.RecordChecks.test_canonical_binding_is_not_file_byte_hash) ... ok\ntest_case_binding_changes_with_actual_meaning (test_records.RecordChecks.test_case_binding_changes_with_actual_meaning) ... ok\ntest_distinct_identity_does_not_remove_shared_oracle_limit (test_records.RecordChecks.test_distinct_identity_does_not_remove_shared_oracle_limit) ... ok\ntest_duplicate_identity_is_diagnosed (test_records.RecordChecks.test_duplicate_identity_is_diagnosed) ... ok\ntest_duplicate_issued_or_observed_identity_cannot_be_a_match (test_records.RecordChecks.test_duplicate_issued_or_observed_identity_cannot_be_a_match) ... ok\ntest_evidence_for_wrong_candidate_does_not_cover_claim (test_records.RecordChecks.test_evidence_for_wrong_candidate_does_not_cover_claim) ... ok\ntest_known_failure_and_unknown_both_survive_rendering (test_records.RecordChecks.test_known_failure_and_unknown_both_survive_rendering) ... ok\ntest_missing_claim_is_visible (test_records.RecordChecks.test_missing_claim_is_visible) ... ok\ntest_narrow_pass_does_not_accept_unrun_parent_claim (test_records.RecordChecks.test_narrow_pass_does_not_accept_unrun_parent_claim) ... ok\ntest_no_source_lineage_is_visible (test_records.RecordChecks.test_no_source_lineage_is_visible) ... ok\ntest_partial_identity_observation_is_not_a_match (test_records.RecordChecks.test_partial_identity_observation_is_not_a_match) ... ok\ntest_reported_assertion_is_not_first_hand_evidence (test_records.RecordChecks.test_reported_assertion_is_not_first_hand_evidence) ... ok\ntest_same_author_cannot_be_relabelled_separate (test_records.RecordChecks.test_same_author_cannot_be_relabelled_separate) ... ok\ntest_schemas_are_self_contained_and_check_examples (test_records.RecordChecks.test_schemas_are_self_contained_and_check_examples) ... ok\ntest_sound_bounded_self_review_with_no_findings (test_records.RecordChecks.test_sound_bounded_self_review_with_no_findings) ... ok\ntest_structure_diagnostic_does_not_crash_on_bad_record (test_records.RecordChecks.test_structure_diagnostic_does_not_crash_on_bad_record) ... ok\ntest_supplied_freshness_does_not_rewrite_historical_result (test_records.RecordChecks.test_supplied_freshness_does_not_rewrite_historical_result) ... ok\ntest_unknown_reference_is_not_silently_dropped (test_records.RecordChecks.test_unknown_reference_is_not_silently_dropped) ... ok\ntest_unknown_revision_is_not_a_freshness_match (test_records.RecordChecks.test_unknown_revision_is_not_a_freshness_match) ... ok\ntest_wrong_reviewed_candidate_or_base_is_visible (test_records.RecordChecks.test_wrong_reviewed_candidate_or_base_is_visible) ... ok\n\n----------------------------------------------------------------------\nRan 29 tests in 0.460s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "/workspace/scratch/52eed2252c51/tmp/br20-skill-tools/quick_validate.py",
+        "/workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review"
+      ],
+      "cwd": "/workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review",
+      "exit": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    }
+  ],
+  "functional_sha256": {
+    "scripts/review.py": "d9bb71768a41c92a92cf66a57fc80e7ad9703df1c5801c1234c75404b357496e",
+    "scripts/review_records.py": "e798793664730465db0c9c5f721a817eaa44c9b9bc582f038ef5f27e5f28764f",
+    "schemas/review-case.schema.json": "dda1c8eca9250bee957e9c8cfd5fe0f047e4710a0393e28fbdf6947451b757a3",
+    "schemas/review-result.schema.json": "d1c3e6037363380e5d5590fc809b0c2fb508d8e1610530b0423db5de753ea759",
+    "tests/test_records.py": "8d20769619a3c33141853f4167784d800a02ea9de3eecf8ca0b265da2d925ce1",
+    "tests/test_local_helpers.py": "b2cbe2b2379bbf33ade64b290ab54ab0856f234c836d27ea8f526d864889571e"
+  },
+  "local_navigation": "No missing selected relative targets.",
+  "scope": "Local prototype checks only. No CI, participant qualification or real product acceptance."
+}

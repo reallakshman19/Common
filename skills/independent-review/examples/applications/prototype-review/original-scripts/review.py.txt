@@ -1,0 +1,83 @@
+"""Read-only conveniences for independent-review records; Python 3.11+."""
+
+import argparse
+import json
+import sys
+
+from review_records import check_files, compare_candidates, digest, inspect_records, read_json
+
+
+def render(case, result=None):
+    """Render issued meaning and declared results without synthesizing a verdict."""
+    lines = [f"# Review {case['id']}", '', f"Purpose: {case['owner_intent']['text']}",
+             f"Task: {case['task']['id']} — {case['task']['outcome']}", '', 'Candidates:']
+    for item in case['candidates']:
+        lines.append(f"- {item['id']}: {item['locator']} @ {item['revision']}")
+        for key in ('base_revision', 'sha256', 'local_path'):
+            if key in item:
+                lines.append(f"  {key}: {item[key]}")
+    lines += ['', 'Owner intent sources: ' + ', '.join(case['owner_intent']['source_refs']), '', 'Sources:']
+    for item in case['sources']:
+        lines.append(f"- {item['id']} ({item['role']}): {item['locator']}")
+        for key in ('revision', 'sha256', 'local_path', 'provenance'):
+            if key in item:
+                lines.append(f"  {key}: {item[key]}")
+    lines += ['', 'Claims and contrary conditions:']
+    for claim in case['claims']:
+        lines += [f"- {claim['id']}: {claim['statement']} (required: {claim['required']})", f"  Contrast: {claim['contrast']}",
+                  f"  Sources: {', '.join(claim['source_refs'])}; candidates: {', '.join(claim['candidate_refs'])}"]
+    for key in ('understanding', 'method_guidance', 'arrangement', 'boundaries', 'return_to', 'bindings'):
+        if key in case:
+            lines += ['', f'{key}:', json.dumps(case[key], ensure_ascii=False, indent=2)]
+    lines += ['', f'Canonical case binding: {digest(case)}',
+              'Use actual evidence; disclose independence and uncovered scope. No release authority is conferred.']
+    if result is not None:
+        # Keep every declared field visible, including limits and original report pointer.
+        lines += ['', '## Declared return (not accepted by rendering)', '',
+                  json.dumps(result, ensure_ascii=False, indent=2)]
+    return '\n'.join(lines) + '\n'
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('command', choices=('bind', 'validate', 'render', 'check-evidence', 'compare'))
+    parser.add_argument('case', help='Explicit Review Case JSON path')
+    parser.add_argument('--result', help='Optional Review Result JSON path')
+    parser.add_argument('--root', help='Explicit root for local byte checks')
+    parser.add_argument('--observations', help='JSON array of caller-supplied current candidate identities')
+    args = parser.parse_args()
+    try:
+        case = read_json(args.case)
+        result = read_json(args.result) if args.result else None
+        if args.command == 'bind':
+            output = {'case_id': case['id'], 'case_digest': digest(case),
+                      'limit': 'Canonical JSON binding, not a file-byte hash or permission.'}
+        elif args.command == 'validate':
+            output = inspect_records(case, result)
+        elif args.command == 'render':
+            print(render(case, result), end='')
+            return 0
+        elif args.command == 'check-evidence':
+            if not args.root:
+                parser.error('check-evidence requires an explicit --root')
+            records = list(case['candidates']) + list(case['sources'])
+            if result is not None:
+                records += result['evidence']
+                if 'native_report' in result:
+                    records.append(result['native_report'])
+            output = {'files': check_files(records, args.root),
+                      'limit': 'Local byte identity only; no URL fetch, reasoning or execution authentication.'}
+        else:
+            if not args.observations:
+                parser.error('compare requires --observations')
+            output = compare_candidates(case, read_json(args.observations))
+        print(json.dumps(output, ensure_ascii=False, indent=2))
+        # Reports are advisory. No project admission or approval outcome is encoded.
+        return 0
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+        print(json.dumps({'input_error': str(error), 'project_decision': 'NONE'}), file=sys.stderr)
+        return 2
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

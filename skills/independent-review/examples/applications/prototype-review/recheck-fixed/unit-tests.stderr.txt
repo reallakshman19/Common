@@ -1,0 +1,34 @@
+test_all_cli_commands_work_without_other_skills_or_optional_packages (test_local_helpers.LocalChecks.test_all_cli_commands_work_without_other_skills_or_optional_packages) ... ok
+test_input_error_is_technical_and_does_not_claim_project_failure (test_local_helpers.LocalChecks.test_input_error_is_technical_and_does_not_claim_project_failure) ... ok
+test_json_duplicate_keys_and_nonfinite_values_are_rejected (test_local_helpers.LocalChecks.test_json_duplicate_keys_and_nonfinite_values_are_rejected) ... ok
+test_no_locator_fetch_or_embedded_command_execution (test_local_helpers.LocalChecks.test_no_locator_fetch_or_embedded_command_execution) ... ok
+test_original_bytes_mismatch_and_missing_are_independent (test_local_helpers.LocalChecks.test_original_bytes_mismatch_and_missing_are_independent) ... ok
+test_path_escape_and_symlink_are_not_followed_outside_root (test_local_helpers.LocalChecks.test_path_escape_and_symlink_are_not_followed_outside_root) ... ok
+test_real_cli_byte_check_reads_all_fixture_and_report_files (test_local_helpers.LocalChecks.test_real_cli_byte_check_reads_all_fixture_and_report_files) ... ok
+test_reported_inconsistency_is_advisory_not_an_admission_exit_code (test_local_helpers.LocalChecks.test_reported_inconsistency_is_advisory_not_an_admission_exit_code) ... ok
+test_symlink_loop_preserves_known_mismatch_and_later_checks (test_local_helpers.LocalChecks.test_symlink_loop_preserves_known_mismatch_and_later_checks) ... ok
+test_canonical_binding_is_not_file_byte_hash (test_records.RecordChecks.test_canonical_binding_is_not_file_byte_hash) ... ok
+test_case_binding_changes_with_actual_meaning (test_records.RecordChecks.test_case_binding_changes_with_actual_meaning) ... ok
+test_distinct_identity_does_not_remove_shared_oracle_limit (test_records.RecordChecks.test_distinct_identity_does_not_remove_shared_oracle_limit) ... ok
+test_duplicate_identity_is_diagnosed (test_records.RecordChecks.test_duplicate_identity_is_diagnosed) ... ok
+test_duplicate_issued_or_observed_identity_cannot_be_a_match (test_records.RecordChecks.test_duplicate_issued_or_observed_identity_cannot_be_a_match) ... ok
+test_evidence_for_wrong_candidate_does_not_cover_claim (test_records.RecordChecks.test_evidence_for_wrong_candidate_does_not_cover_claim) ... ok
+test_known_failure_and_unknown_both_survive_rendering (test_records.RecordChecks.test_known_failure_and_unknown_both_survive_rendering) ... ok
+test_missing_claim_is_visible (test_records.RecordChecks.test_missing_claim_is_visible) ... ok
+test_narrow_pass_does_not_accept_unrun_parent_claim (test_records.RecordChecks.test_narrow_pass_does_not_accept_unrun_parent_claim) ... ok
+test_no_source_lineage_is_visible (test_records.RecordChecks.test_no_source_lineage_is_visible) ... ok
+test_partial_identity_observation_is_not_a_match (test_records.RecordChecks.test_partial_identity_observation_is_not_a_match) ... ok
+test_reported_assertion_is_not_first_hand_evidence (test_records.RecordChecks.test_reported_assertion_is_not_first_hand_evidence) ... ok
+test_same_author_cannot_be_relabelled_separate (test_records.RecordChecks.test_same_author_cannot_be_relabelled_separate) ... ok
+test_schemas_are_self_contained_and_check_examples (test_records.RecordChecks.test_schemas_are_self_contained_and_check_examples) ... ok
+test_sound_bounded_self_review_with_no_findings (test_records.RecordChecks.test_sound_bounded_self_review_with_no_findings) ... ok
+test_structure_diagnostic_does_not_crash_on_bad_record (test_records.RecordChecks.test_structure_diagnostic_does_not_crash_on_bad_record) ... ok
+test_supplied_freshness_does_not_rewrite_historical_result (test_records.RecordChecks.test_supplied_freshness_does_not_rewrite_historical_result) ... ok
+test_unknown_reference_is_not_silently_dropped (test_records.RecordChecks.test_unknown_reference_is_not_silently_dropped) ... ok
+test_unknown_revision_is_not_a_freshness_match (test_records.RecordChecks.test_unknown_revision_is_not_a_freshness_match) ... ok
+test_wrong_reviewed_candidate_or_base_is_visible (test_records.RecordChecks.test_wrong_reviewed_candidate_or_base_is_visible) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.477s
+
+OK

@@ -1,0 +1,110 @@
+{
+  "schema_version": "independent-review.result/v1",
+  "case_id": "JOIN-CASE-1",
+  "case_digest": "dc2155776a7f43fdd038a701f8c37e761286127637c709884412f457ca964e83",
+  "run_id": "JOIN-RUN-ILLUSTRATION",
+  "reviewer": {
+    "id": "fixture-author",
+    "author_relation": "SAME",
+    "basis": "Invented self-review reference; no real identity claim."
+  },
+  "review_type": "SELF_REVIEW",
+  "independence": {
+    "context": {
+      "status": "EXPOSED",
+      "basis": "Fixture author sees all inputs."
+    },
+    "expectation": {
+      "status": "INDEPENDENT",
+      "basis": "Example derivation from the stated string rule, not tests."
+    },
+    "method": {
+      "status": "ALTERNATIVE",
+      "basis": "Symbolic examples of ordered concatenation."
+    },
+    "execution": {
+      "status": "NOT_RUN",
+      "basis": "This reference receipt is illustrative, not an actual execution."
+    },
+    "lineage": {
+      "status": "ASSESSED",
+      "basis": "All material is explicitly synthetic."
+    }
+  },
+  "candidates": [
+    {
+      "id": "SUBJECT",
+      "locator": "synthetic:candidate.py",
+      "revision": "fixture-r1",
+      "sha256": "339e25c898f786375bd77ee5abb859fc1a16bc1381437c960099eac97272e79c",
+      "local_path": "candidate.py"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "DERIVATION",
+      "kind": "DERIVED",
+      "description": "Illustrative join derivation.",
+      "source_refs": [
+        "OWNER"
+      ],
+      "candidate_refs": [
+        "SUBJECT"
+      ],
+      "locator": "synthetic:receipt.txt",
+      "local_path": "receipt.txt",
+      "sha256": "54de4290a64068167e5006d2181b6cef1d122a4f5ff94626ad90632cd519cbb5",
+      "observed": "[\"x\", \"y\"] -> \"x|y\"; [] -> \"\".",
+      "limits": [
+        "Synthetic derivation; no runtime or principal qualification."
+      ]
+    }
+  ],
+  "claim_results": [
+    {
+      "claim_id": "ORDER",
+      "status": "SUPPORTED",
+      "evidence_refs": [
+        "DERIVATION"
+      ],
+      "reason": "The illustrative source derivation meets this rule.",
+      "limitations": [
+        "Reference example only."
+      ]
+    },
+    {
+      "claim_id": "EMPTY",
+      "status": "SUPPORTED",
+      "evidence_refs": [
+        "DERIVATION"
+      ],
+      "reason": "The illustrative source derivation meets this rule.",
+      "limitations": [
+        "Reference example only."
+      ]
+    }
+  ],
+  "findings": [],
+  "coverage": {
+    "assessed": [
+      "Declared synthetic join behavior."
+    ],
+    "not_assessed": [
+      "Any real application or runtime."
+    ]
+  },
+  "verdict": {
+    "value": "PASS",
+    "claim_refs": [
+      "ORDER",
+      "EMPTY"
+    ],
+    "rationale": "The declared synthetic source reasoning supports this bounded scope."
+  },
+  "next_action": "Replace synthetic inputs with actual artifacts for a real review.",
+  "native_report": {
+    "locator": "synthetic:receipt.txt",
+    "local_path": "receipt.txt",
+    "sha256": "54de4290a64068167e5006d2181b6cef1d122a4f5ff94626ad90632cd519cbb5"
+  }
+}

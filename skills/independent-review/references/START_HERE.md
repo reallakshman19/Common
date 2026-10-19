@@ -1,0 +1,198 @@
+# Start here: use one module or combine them
+
+## Contents
+
+- [Start with a short request](#start-with-a-short-request)
+- [Choose only useful modules](#choose-only-useful-modules)
+- [Adapt to available participants](#adapt-to-available-participants)
+- [Carry work end to end](#carry-work-end-to-end)
+- [Preserve the handoff](#preserve-the-handoff)
+- [Use schemas when helpful](#use-schemas-when-helpful)
+- [Follow the worked examples](#follow-the-worked-examples)
+- [Start the real LFEA test](#start-the-real-lfea-test)
+
+Use this as an operating guide, not another skill, runtime controller or required
+sequence. Start from human intent and actual sources. The available agent maintains
+records and selects useful support. Roles, modules, JSON and helper scripts are
+optional; no CI, role quota or new execution/acceptance gate is introduced.
+
+## Start with a short request
+
+Owner, for end-to-end work:
+
+> Use this guide for <goal>, using <original sources/candidate>. Select the modules
+> that help and use the participants/tools available. Carry the authorized work
+> through execution, evidence inspection and integrated verification; keep the
+> records and unresolved outcomes for me.
+
+Owner, for review only:
+
+> Review <exact candidate> against <original purpose/sources> using Independent
+> Reviewer. Show actual evidence, findings, coverage, independence limits and the
+> next useful action. Use the available participants; preserve the original artifact.
+
+Supply natural language and available references. The agent reconstructs missing
+context from accessible authoritative records, distinguishes unknowns and asks only
+about consequential missing meaning/authority when needed. A source link is not a
+claim its contents were read. Keep the Owner's interface short.
+
+When a skill is installed, use its name. Otherwise read its `SKILL.md` at the
+selected source revision and follow the relevant guidance with available tools.
+Record the revision used; merely naming a skill does not install or invoke a host
+capability. A reference to another module does not create a dependency on it.
+
+## Choose only useful modules
+
+| Need | Select | Input → useful output |
+|---|---|---|
+| Understand long/difficult work and choose coherent boundaries | [Task Decomposer](https://github.com/reallakshman19/Common/blob/main/skills/task-decomposer/SKILL.md) | Intent/original sources → task map, dependencies, required understanding and selected task designs |
+| Prepare guidance for a particular participant | [Nudge Designer](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/SKILL.md) | Intent or selected task, actual tools/capability → self-contained operational brief and return contract |
+| Assess an actual artifact or engineering/learning claim | [Independent Reviewer](../SKILL.md) | Candidate/original criteria → evidence-backed findings, coverage and scoped assessment |
+
+Use a module alone when that satisfies the request. Plan-only ends with usable
+task designs; brief-only ends with usable instructions; review-only ends with an
+assessment. For an execution request, creating those artifacts is preparation:
+the available lead still owns actual execution, return inspection and continuation.
+
+Do not load every reference. Read the selected module's core, then only the
+applicable domain/support/adapter guidance. If an optional module is unavailable,
+perform the useful native work and disclose the omitted support. Continue
+unaffected work rather than waiting for an entire toolchain.
+
+## Adapt to available participants
+
+| Available participants | Practical arrangement |
+|---|---|
+| One agent | Hold planning, instruction, execution and reconciliation responsibilities as needed. Label contribution/self-review honestly; do not manufacture another role. |
+| Lead and narrower worker | Lead selects the coherent task and usable method; worker captures bounded evidence; lead interprets it and retains coupled decisions/integration. |
+| Separate reviewer available | Assign a meaningful assessment with original sources and necessary knowledge. Disclose authorship, context/reference exposure and shared assumptions separately. |
+| Several workers/specialists | Split only where a durable output makes the handoff worthwhile. Name the available participant who integrates results and retains unresolved work. |
+
+Oracle, Designer and reviewer are responsibilities, not compulsory people or
+competence certificates. Use DIRECT/OPEN support when the participant can justify
+the method; use GUIDED support when avoidable decisions should be removed. Give
+the WHY and necessary model/state knowledge in either case. A short prompt, model
+label or correct ACK does not establish sound judgment. Keep consequential model,
+architecture and acceptance interpretation with a participant who can justify it;
+if unavailable, retain that limit while gathering useful evidence.
+
+## Carry work end to end
+
+Apply these responsibilities as useful; combine, skip or revisit them according to
+the problem. They are not fixed passes or a requirement to run all three modules.
+
+1. Reconstruct the original outcome and amendments. Establish actual sources,
+   candidate/input identity, environment, available authority and prior useful work.
+2. Select the next uncertainty or deliverable that can change the outcome. Use
+   Task Decomposer if boundaries/dependencies need clarification. Keep coupled
+   state/model decisions coherent and retain integration/deferred outcomes.
+3. Prepare executable work. Use Nudge Designer when participant guidance helps.
+   Establish who designs the observation, executes/sends it, finds the return and
+   interprets it. The available lead retains unallocated responsibilities. Use the
+   actual authorized/manual channel; these modules do not dispatch or watch it.
+4. Execute under existing task authority. Capture the actual inputs, commands or
+   interactions, observations and artifacts. A plausible wrong result should be
+   distinguishable. A missing tool/resource affects its dependent checks; retain
+   attempted action, observed restriction, affected scope and next feasible route.
+5. Inspect the return. Use Independent Reviewer when useful. Check original
+   requirements, actual candidate and witness, not just COMPLETE/PASS/count/hash.
+   Review the test oracle and a relevant contrary condition. Preserve supported
+   claims, known defects, NOT_RUN items and independent-assessment limits together.
+6. Reconcile against the whole outcome. Preserve the original report and record
+   the consumer's response separately. Correct affected inputs/methods/work, issue
+   a visible revision where meaning changed, and verify the actual integrated
+   behavior. Continue authorized work; reserve only genuinely unresolved decisions.
+
+Select evidence for the project: original interaction/state traces for UI, source
+rules and real consumers for logic, accurate material and learner evidence for
+claimed learning outcomes, or original givens/units/model assumptions and suitable
+comparisons for calculations/FEA. A shared operating loop does not supply domain
+qualification. Follow already applicable project criteria and authority.
+
+## Preserve the handoff
+
+Carry this minimum meaning in the existing native record. Add only missing fields;
+this is a prose aid, not a new shared schema or mandatory return envelope.
+
+```text
+Purpose: <Owner outcome, original source and applicable amendment>
+Task/subject: <coherent deliverable or claim, task identity, exact candidate/input>
+Understanding: <WHY, necessary model/state context, established decisions>
+Inputs: <accessible originals/revisions; byte hashes where consequential>
+Boundaries: <allowed work, preserved behavior, reserved judgments>
+Method/result: <usable method, observable success/contrary case, actual evidence>
+Continuation: <uncertainty, remaining parent work, return location and next action>
+Optional bindings: <selected module/version, map/task, assignment/tracker/run IDs>
+```
+
+Keep task, candidate and review-run identities distinct. Link details rather than
+passing the entire chat. Preserve issued snapshots and native returns. A new
+candidate does not erase old evidence; assess affected claims and integration
+before reuse. A changed observation alone need not invent a new task-map revision.
+Use [adapter mappings](ADAPTERS.md) for identity/transport details and
+[reconciliation guidance](RECONCILIATION.md) for findings and drift.
+
+## Use schemas when helpful
+
+| Module | Optional structured contract |
+|---|---|
+| Task Decomposer | [Task Map](https://github.com/reallakshman19/Common/blob/main/skills/task-decomposer/schemas/task-map.schema.json), `task-decomposer.map/v1` |
+| Nudge Designer | [Intent](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/schemas/intent.schema.json) and [Plan](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/schemas/plan.schema.json); select its documented v1/v1.1 contract |
+| Independent Reviewer | [Review Case](../schemas/review-case.schema.json) and [Review Result](../schemas/review-result.schema.json) |
+
+A Task Map is source input to Nudge Designer, not native Nudge Plan JSON. The
+consuming agent creates that module's objects from the selected task meaning when
+structured support is useful. Bind a review result to its actual review case and
+candidate; keep any selected project review profile/native report alongside it.
+No automatic converter or single universal end-to-end object exists here.
+
+For a Markdown-only use, keep the same meaning without filling JSON. If an optional
+validator is unavailable, record its NOT_RUN status and perform available checks.
+Structural validity, byte identity and schema intake do not establish technical
+correctness, distinct-principal independence or integrated Owner acceptance.
+
+## Follow the worked examples
+
+Standalone examples:
+
+- Task Decomposer: ask it to plan a long UI investigation from the original goal,
+  retaining uncertain future work. It returns source-grounded designs; it does not
+  claim the UI was repaired. Use its [entry prompts](https://github.com/reallakshman19/Common/blob/main/skills/task-decomposer/assets/entry-prompts.md).
+- Nudge Designer: give it a custody task, manifest and actual worker tools. Request
+  a GUIDED brief for byte hashing and an altered-copy contrast. It returns usable
+  instructions; sending/execution remains with the authorized lead/host. Use its
+  [assignment template](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/assets/prompts/assignment.md).
+- Independent Reviewer: review the short learning page against its stated aim.
+  The [actual standalone application](../examples/applications/lesson/out/review.md)
+  preserves recalculation, an empty finding set and learner/independence limits.
+
+Illustrative composed example — review an estimator against its original rule:
+
+| Handoff | Meaning and artifact |
+|---|---|
+| Owner → available lead | Review the supplied estimator against the item-only discount rule; preserve source bytes and make no product edit. |
+| Task Decomposer → brief preparation, if selected | KEEP one coherent review boundary; retain source authority, threshold/rounding knowledge, candidate identity and the no-edit boundary. Do not create a separate agent/task for every line. |
+| Nudge Designer → evidence execution, if selected | Issue a bounded comparison using actual files, original rule, boundary cases, required evidence and native return. A narrower worker receives a usable method; it does not choose the business rule. |
+| Worker → assessment | Return actual inputs/outputs, source identity, runtime receipts, unchanged-byte checks and limits. Original tests passing does not settle rule coverage. |
+| Independent Reviewer → reconciliation, if selected | Establish that delivery can wrongly trigger the discount, with a concrete witness. The [actual standalone review](../examples/applications/direct/out/review.md) shows this evidence; it was not generated through a three-module run. |
+| Available lead → Owner | Preserve the failed bounded claim and valid evidence; the requested review is complete, while any repair needs the applicable task authority and a changed-candidate check. No release claim follows. |
+
+This table is an illustration of composition, not evidence that all three modules
+were executed together. It contains a worked answer: withhold it when assessing
+fresh discovery on this same fixture. The [application archive](../examples/applications/assessment.md)
+and the Nudge Designer [Oracle episode](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/examples/oracle-execution/ASSESSMENT.md)
+record the separate actual applications, assistance and limits. Do not combine
+their PASS labels into an unperformed integrated pilot.
+
+## Start the real LFEA test
+
+Use [the LFEA entry prompt](../assets/lfea-pilot.md), choosing direct review or
+optional composition according to the actual need. Refresh AA3 original intent,
+amendments, candidate/deployment, trace access and existing authority. Preserve the
+whole findings → locate → supported correction → fresh checks → Output aim.
+
+Begin with a discriminating observation rather than a speculative repair. Preserve
+actual failed-click coordinates and preparation differences; do not substitute a
+force-click, guessed center or easier segment. Retain useful source review if the
+runtime route is unavailable. Measure actual outcomes and assistance; prototype
+checks do not establish LFEA acceptance, low-thinking qualification or causal ROI.

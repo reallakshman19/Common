@@ -1,0 +1,9 @@
+[
+  {
+    "id": "SUBJECT",
+    "locator": "synthetic:candidate.py",
+    "revision": "fixture-r2",
+    "sha256": "339e25c898f786375bd77ee5abb859fc1a16bc1381437c960099eac97272e79c",
+    "local_path": "candidate.py"
+  }
+]

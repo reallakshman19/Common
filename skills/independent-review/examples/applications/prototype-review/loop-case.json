@@ -1,0 +1,78 @@
+{
+  "schema_version": "independent-review.case/v1",
+  "id": "JOIN-CASE-1",
+  "task": {
+    "id": "JOIN-REVIEW",
+    "outcome": "Assess the small join operation only."
+  },
+  "owner_intent": {
+    "text": "Preserve row order and the empty-list result.",
+    "source_refs": [
+      "OWNER"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "SUBJECT",
+      "locator": "synthetic:candidate.py",
+      "revision": "fixture-r1",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "local_path": "good.txt"
+    }
+  ],
+  "sources": [
+    {
+      "id": "OWNER",
+      "locator": "synthetic:requirement.txt",
+      "role": "AUTHORITY",
+      "sha256": "68ef8077191f0384f77fe04a73632fad20c6f43b14208a634f56410b6036c211",
+      "local_path": "loop",
+      "provenance": "Invented input for module reference use."
+    }
+  ],
+  "claims": [
+    {
+      "id": "ORDER",
+      "statement": "Rows join in original order.",
+      "source_refs": [
+        "OWNER"
+      ],
+      "candidate_refs": [
+        "SUBJECT"
+      ],
+      "contrast": "Reversing rows gives a different output.",
+      "required": true
+    },
+    {
+      "id": "EMPTY",
+      "statement": "Empty input returns an empty string.",
+      "source_refs": [
+        "OWNER"
+      ],
+      "candidate_refs": [
+        "SUBJECT"
+      ],
+      "contrast": "Returning a separator or null is wrong.",
+      "required": true
+    }
+  ],
+  "boundaries": {
+    "allowed_actions": [
+      "Read local fixtures and run disposable checks."
+    ],
+    "preserve": [
+      "Original reference bytes."
+    ],
+    "reserved_decisions": [
+      "Any real product release."
+    ]
+  },
+  "arrangement": {
+    "participants": [
+      "fixture-author"
+    ],
+    "support": "DIRECT",
+    "project_type": "synthetic logic"
+  },
+  "return_to": "Local example only; no publication is authorized by the case."
+}

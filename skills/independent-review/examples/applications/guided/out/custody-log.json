@@ -1,0 +1,151 @@
+{
+  "started_utc": "2026-10-19T07:12:25.297229+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "script": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/verify_custody.py",
+  "manifest": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/custody.json",
+  "originals": [
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md",
+      "bytes": 589,
+      "expected_sha256": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32",
+      "actual_sha256": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32",
+      "match": true,
+      "sha256sum_agrees": true,
+      "sha256sum_check_exit": 0,
+      "wc_agrees": true,
+      "id": "owner.md",
+      "after_bytes": 589,
+      "after_sha256": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32",
+      "preserved_at_recheck": true
+    },
+    {
+      "path": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/lesson.md",
+      "bytes": 1225,
+      "expected_sha256": "8e9748eca50afce7c28013528c17fc79ad706a0fa1ea76f29cf817ebeecbf6ac",
+      "actual_sha256": "8e9748eca50afce7c28013528c17fc79ad706a0fa1ea76f29cf817ebeecbf6ac",
+      "match": true,
+      "sha256sum_agrees": true,
+      "sha256sum_check_exit": 0,
+      "wc_agrees": true,
+      "id": "lesson.md",
+      "after_bytes": 1225,
+      "after_sha256": "8e9748eca50afce7c28013528c17fc79ad706a0fa1ea76f29cf817ebeecbf6ac",
+      "preserved_at_recheck": true
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "sha256sum",
+        "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md"
+      ],
+      "stdin": null,
+      "returncode": 0,
+      "stdout": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32  /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "--check"
+      ],
+      "stdin": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32  /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md\n",
+      "returncode": 0,
+      "stdout": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md: OK\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "wc",
+        "-c",
+        "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md"
+      ],
+      "stdin": null,
+      "returncode": 0,
+      "stdout": "589 /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/lesson.md"
+      ],
+      "stdin": null,
+      "returncode": 0,
+      "stdout": "8e9748eca50afce7c28013528c17fc79ad706a0fa1ea76f29cf817ebeecbf6ac  /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/lesson.md\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "--check"
+      ],
+      "stdin": "8e9748eca50afce7c28013528c17fc79ad706a0fa1ea76f29cf817ebeecbf6ac  /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/lesson.md\n",
+      "returncode": 0,
+      "stdout": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/lesson.md: OK\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "wc",
+        "-c",
+        "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/lesson.md"
+      ],
+      "stdin": null,
+      "returncode": 0,
+      "stdout": "1225 /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/lesson.md\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/owner.altered.md"
+      ],
+      "stdin": null,
+      "returncode": 0,
+      "stdout": "dfc103826bf552142bbe6eb0fb8e607a77606eef05e5e377fb30edf3320e159e  /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/owner.altered.md\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "--check"
+      ],
+      "stdin": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32  /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/owner.altered.md\n",
+      "returncode": 1,
+      "stdout": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/owner.altered.md: FAILED\n",
+      "stderr": "sha256sum: WARNING: 1 computed checksum did NOT match\n"
+    },
+    {
+      "argv": [
+        "wc",
+        "-c",
+        "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/owner.altered.md"
+      ],
+      "stdin": null,
+      "returncode": 0,
+      "stdout": "628 /workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/owner.altered.md\n",
+      "stderr": ""
+    }
+  ],
+  "access_failures": [],
+  "manifest_bytes": 407,
+  "manifest_sha256": "1cf6e3ed1ca14923d1f3e6a382f312c67c07da518aba54efbab800cb9d7c19f5",
+  "manifest_purpose": "Check exact original bytes only; do not infer semantic validity.",
+  "negative_control": {
+    "path": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/out/owner.altered.md",
+    "bytes": 628,
+    "expected_sha256": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32",
+    "actual_sha256": "dfc103826bf552142bbe6eb0fb8e607a77606eef05e5e377fb30edf3320e159e",
+    "match": false,
+    "sha256sum_agrees": true,
+    "sha256sum_check_exit": 1,
+    "wc_agrees": true,
+    "source_path": "/workspace/scratch/52eed2252c51/tmp/ir-forward/guided/inputs/owner.md",
+    "alteration": "Append 39 bytes: LF + [DISPOSABLE CUSTODY NEGATIVE CONTROL] + LF",
+    "appended_bytes": 39,
+    "rejected": true
+  },
+  "finished_utc": "2026-10-19T07:12:25.325764+00:00",
+  "overall_pass": true
+}

@@ -1,0 +1,219 @@
+"""Optional offline record checks. No dispatch, permission or acceptance decisions."""
+
+import hashlib
+import json
+import math
+from pathlib import Path
+
+
+def _unique_object(pairs):
+    value = {}
+    for key, item in pairs:
+        if key in value:
+            raise ValueError(f'duplicate JSON key: {key}')
+        value[key] = item
+    return value
+
+
+def _nonfinite(value):
+    raise ValueError(f'non-finite JSON number: {value}')
+
+
+def _finite_float(value):
+    number = float(value)
+    if not math.isfinite(number):
+        return _nonfinite(value)
+    return number
+
+
+def read_json(path):
+    return json.loads(Path(path).read_text(encoding='utf-8'),
+                      object_pairs_hook=_unique_object, parse_constant=_nonfinite,
+                      parse_float=_finite_float)
+
+
+def digest(record):
+    """Local canonical JSON recipe; distinct from a file-byte SHA-256."""
+    data = json.dumps(record, ensure_ascii=False, sort_keys=True,
+                      separators=(',', ':'), allow_nan=False).encode('utf-8')
+    return hashlib.sha256(data).hexdigest()
+
+
+def issue(code, message, scope='', kind='CONTRADICTION'):
+    return {'code': code, 'scope': scope, 'kind': kind, 'message': message}
+
+
+def schema_check(record):
+    version = record.get('schema_version') if isinstance(record, dict) else None
+    names = {'independent-review.case/v1': 'review-case',
+             'independent-review.result/v1': 'review-result'}
+    if version not in names:
+        return {'status': 'CHECKED', 'issues': [issue('VERSION', 'Unrecognized record version.')]}
+    try:
+        from jsonschema import Draft202012Validator
+    except ImportError:
+        return {'status': 'NOT_RUN', 'issues': [issue(
+            'SCHEMA_NOT_RUN', 'Optional jsonschema package unavailable; no full structural validation.', kind='LIMIT')]}
+    schema = read_json(Path(__file__).resolve().parents[1] / 'schemas' / (names[version] + '.schema.json'))
+    errors = sorted(Draft202012Validator(schema).iter_errors(record), key=lambda e: str(list(e.path)))
+    return {'status': 'CHECKED', 'issues': [issue('SCHEMA', e.message, '/'.join(map(str, e.path))) for e in errors]}
+
+
+def _index(rows, field, label, issues):
+    indexed = {}
+    for row in rows:
+        key = row[field]
+        if key in indexed:
+            issues.append(issue('DUPLICATE_ID', f'Duplicate {label} identity: {key}', key))
+        indexed[key] = row
+    return indexed
+
+
+def _refs(refs, known, label, scope, issues):
+    for ref in refs:
+        if ref not in known:
+            issues.append(issue('UNKNOWN_REFERENCE', f'Unknown {label} reference: {ref}', scope))
+
+
+def candidate_identity(candidate):
+    return {key: candidate[key] for key in ('locator', 'revision', 'base_revision', 'sha256') if key in candidate}
+
+
+def inspect_records(case, result=None):
+    """Inspect declarations, not technical validity or authenticated identity."""
+    issues = []
+    structures = [schema_check(case)] + ([schema_check(result)] if result is not None else [])
+    for label, structure in zip(('case', 'result'), structures):
+        issues.extend(dict(item, scope=label + ('/' + item['scope'] if item['scope'] else ''))
+                      for item in structure['issues'])
+    if any(item['code'] in ('SCHEMA', 'VERSION') for item in issues):
+        return {'issues': issues, 'consistency': 'NOT_RUN', 'scope': 'Record structure only; no project decision.'}
+    try:
+        candidates = _index(case['candidates'], 'id', 'candidate', issues)
+        sources = _index(case['sources'], 'id', 'source', issues)
+        claims = _index(case['claims'], 'id', 'claim', issues)
+        _refs(case['owner_intent']['source_refs'], sources, 'source', 'owner_intent', issues)
+        for claim_id, claim in claims.items():
+            _refs(claim['source_refs'], sources, 'source', claim_id, issues)
+            _refs(claim['candidate_refs'], candidates, 'candidate', claim_id, issues)
+        for item in list(candidates.values()) + list(sources.values()):
+            if item.get('revision', 'UNKNOWN') == 'UNKNOWN' and not item.get('sha256'):
+                issues.append(issue('UNPINNED', 'Exact revision/bytes not established.', item['id'], 'LIMIT'))
+        if result is not None:
+            _inspect_result(case, result, candidates, sources, claims, issues)
+    except (KeyError, TypeError, AttributeError) as error:
+        issues.append(issue('INCOMPLETE_STRUCTURE', f'Cannot inspect supplied record structure: {error}', kind='MISSING'))
+        return {'issues': issues, 'consistency': 'NOT_RUN', 'scope': 'Record declarations only; no project decision.'}
+    return {'issues': issues, 'consistency': 'CHECKED', 'scope': 'Record declarations only; no project decision.'}
+
+
+def _inspect_result(case, result, candidates, sources, claims, issues):
+    if result['case_id'] != case['id'] or result['case_digest'] != digest(case):
+        issues.append(issue('CASE_BINDING', 'Result does not bind to these exact case contents.'))
+    reviewed = _index(result['candidates'], 'id', 'reviewed candidate', issues)
+    for candidate_id in candidates.keys() | reviewed.keys():
+        if (candidate_id not in candidates or candidate_id not in reviewed or
+                candidate_identity(candidates[candidate_id]) != candidate_identity(reviewed[candidate_id])):
+            issues.append(issue('CANDIDATE_BINDING', 'Issued and reviewed candidate identities differ.', candidate_id))
+    evidence = _index(result['evidence'], 'id', 'evidence', issues)
+    answers = _index(result['claim_results'], 'claim_id', 'claim result', issues)
+    _index(result['findings'], 'id', 'finding', issues)
+    for evidence_id, item in evidence.items():
+        _refs(item['source_refs'], sources, 'source', evidence_id, issues)
+        _refs(item['candidate_refs'], reviewed, 'candidate', evidence_id, issues)
+        if item['kind'] not in ('NOT_RUN', 'REPORTED') and not any(item.get(k) for k in ('locator', 'local_path', 'observed')):
+            issues.append(issue('NO_WITNESS', 'No observation or retrievable witness declared.', evidence_id, 'MISSING'))
+    for claim_id, answer in answers.items():
+        _refs([claim_id], claims, 'claim', claim_id, issues)
+        _refs(answer['evidence_refs'], evidence, 'evidence', claim_id, issues)
+        if answer['status'] in ('SUPPORTED', 'CONTRADICTED'):
+            usable = [evidence[ref] for ref in answer['evidence_refs'] if ref in evidence and
+                      evidence[ref]['kind'] not in ('NOT_RUN', 'REPORTED')]
+            if not usable:
+                issues.append(issue('UNSUPPORTED_CONCLUSION', 'Conclusion has no first-hand/inspected/derived evidence reference.', claim_id, 'MISSING'))
+            if claim_id in claims:
+                mentioned = {ref for item in usable for ref in item['candidate_refs']}
+                if not set(claims[claim_id]['candidate_refs']).issubset(mentioned):
+                    issues.append(issue('CANDIDATE_COVERAGE', 'Evidence does not declare every candidate for this claim.', claim_id, 'MISSING'))
+                source_lineage = {ref for item in usable for ref in item['source_refs']}
+                if not set(claims[claim_id]['source_refs']) & source_lineage:
+                    issues.append(issue('SOURCE_LINEAGE', 'No cited evidence declares a source for this claim.', claim_id, 'MISSING'))
+    for claim_id, claim in claims.items():
+        if claim['required'] and claim_id not in answers:
+            issues.append(issue('MISSING_CLAIM', 'Required case claim has no declared result.', claim_id, 'MISSING'))
+    for finding in result['findings']:
+        _refs(finding['claim_refs'], claims, 'claim', finding['id'], issues)
+        _refs(finding['evidence_refs'], evidence, 'evidence', finding['id'], issues)
+    verdict = result['verdict']
+    _refs(verdict['claim_refs'], claims, 'claim', 'verdict', issues)
+    if verdict['value'] == 'PASS':
+        for claim_id in verdict['claim_refs']:
+            if answers.get(claim_id, {}).get('status') != 'SUPPORTED':
+                issues.append(issue('PASS_SCOPE', 'PASS scope contains a claim not declared SUPPORTED.', claim_id))
+        for finding in result['findings']:
+            if finding['disposition'] == 'OPEN' and set(finding['claim_refs']) & set(verdict['claim_refs']):
+                issues.append(issue('OPEN_FINDING', 'PASS scope has an open finding; reconcile meaning explicitly.', finding['id']))
+    relation, review_type = result['reviewer']['author_relation'], result['review_type']
+    if (relation == 'SAME' and review_type != 'SELF_REVIEW') or (review_type == 'SEPARATE_REVIEW' and relation != 'DISTINCT'):
+        issues.append(issue('INDEPENDENCE_DECLARATION', 'Review type conflicts with declared author relation.'))
+    if result['independence']['expectation']['status'] == 'SHARED':
+        issues.append(issue('SHARED_EXPECTATION', 'Assess the shared oracle/premise; agreement alone is insufficient.', kind='LIMIT'))
+    if result['reviewer']['author_relation'] == 'UNKNOWN':
+        issues.append(issue('UNKNOWN_PRINCIPAL', 'Authorship/principal separation is not established.', kind='LIMIT'))
+
+
+def check_files(records, root):
+    """Hash explicitly named local files under root. Never fetch URL locators."""
+    root = Path(root).resolve(strict=True)
+    observations = []
+    for record in records:
+        if 'local_path' not in record:
+            observations.append({'id': record.get('id', 'native_report'), 'status': 'NOT_CHECKED',
+                                 'reason': 'No explicit local_path; locator not fetched.'})
+            continue
+        observation = {'id': record.get('id', 'native_report'), 'path': record['local_path']}
+        try:
+            supplied = Path(record['local_path'])
+            if supplied.is_absolute():
+                raise ValueError('local_path must be relative to the explicit root')
+            path = (root / supplied).resolve(strict=True)
+            if not path.is_relative_to(root):
+                raise ValueError('local_path escapes root, including through a symlink')
+            if not path.is_file():
+                raise ValueError('local_path is not a regular file')
+            # Incremental reads avoid retaining large fixture bytes in memory.
+            with path.open('rb') as stream:
+                observed = hashlib.file_digest(stream, 'sha256').hexdigest()
+            observation.update(sha256=observed, bytes=path.stat().st_size,
+                               status=('MATCH' if observed == record['sha256'] else 'MISMATCH')
+                               if 'sha256' in record else 'HASHED_NO_EXPECTATION')
+        except (OSError, ValueError, RuntimeError) as error:
+            observation.update(status='UNAVAILABLE', reason=str(error))
+        observations.append(observation)
+    return observations
+
+
+def compare_candidates(case, observations):
+    """Compare caller-supplied identities. Does not establish their freshness."""
+    issues = []
+    current = _index(observations, 'id', 'observation', issues)
+    result = []
+    issued = _index(case['candidates'], 'id', 'issued candidate', issues)
+    ambiguous = {item['scope'] for item in issues if item['code'] == 'DUPLICATE_ID'}
+    for candidate_id in sorted(issued.keys() | current.keys()):
+        before, after = issued.get(candidate_id), current.get(candidate_id)
+        status = 'NOT_OBSERVED'
+        if candidate_id in ambiguous:
+            status = 'AMBIGUOUS_IDENTITY'
+        elif before is None:
+            status = 'NOT_IN_CASE'
+        elif after is not None:
+            keys = candidate_identity(before)
+            if (any(key not in after for key in keys) or
+                    any(value == 'UNKNOWN' or after.get(key) == 'UNKNOWN' for key, value in keys.items())):
+                status = 'INCOMPLETE_OBSERVATION'
+            else:
+                status = 'MATCH' if all(after[key] == value for key, value in keys.items()) else 'CHANGED'
+        result.append({'id': candidate_id, 'status': status})
+    return {'observations': result, 'issues': issues,
+            'limit': 'Caller-supplied observations only; assess changed claims and integration manually.'}

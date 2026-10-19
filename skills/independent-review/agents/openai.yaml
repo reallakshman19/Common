@@ -1,0 +1,4 @@
+interface:
+  display_name: "Independent Reviewer"
+  short_description: "Review exact candidates with traceable evidence"
+  default_prompt: "Use $independent-review to assess this candidate against its original requirements, verify evidence, and report a bounded verdict with independence and coverage limits."

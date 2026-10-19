@@ -1,0 +1,28 @@
+{
+  "schema_check": {
+    "status": "CHECKED",
+    "issues": []
+  },
+  "direct_compare": {
+    "observations": [
+      {
+        "id": "SUBJECT",
+        "status": "AMBIGUOUS_IDENTITY"
+      }
+    ],
+    "issues": [
+      {
+        "code": "DUPLICATE_ID",
+        "scope": "SUBJECT",
+        "kind": "CONTRADICTION",
+        "message": "Duplicate issued candidate identity: SUBJECT"
+      }
+    ],
+    "limit": "Caller-supplied observations only; assess changed claims and integration manually."
+  },
+  "cli": {
+    "exit_code": 0,
+    "stdout": "{\n  \"observations\": [\n    {\n      \"id\": \"SUBJECT\",\n      \"status\": \"AMBIGUOUS_IDENTITY\"\n    }\n  ],\n  \"issues\": [\n    {\n      \"code\": \"DUPLICATE_ID\",\n      \"scope\": \"SUBJECT\",\n      \"kind\": \"CONTRADICTION\",\n      \"message\": \"Duplicate issued candidate identity: SUBJECT\"\n    }\n  ],\n  \"limit\": \"Caller-supplied observations only; assess changed claims and integration manually.\"\n}\n",
+    "stderr": ""
+  }
+}
