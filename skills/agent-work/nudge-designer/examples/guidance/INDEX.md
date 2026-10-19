@@ -40,3 +40,5 @@ authority boundary. A copied old answer that no longer fits must fail review.
 The [existing actual role cycle](../adapter-cycle/ASSESSMENT.md) supplies executed
 local evidence and immutable history. These new cases complement that record;
 they do not relabel it or replace native reporting with another governance format.
+
+- [G14 Option demand and cues](G14-option-demand/raw.md): a unit-retrieval item, a cued causal item and a cue-free off-demand justification; [reference distinctions](G14-option-demand/golden.md) are withheld during fresh discovery.

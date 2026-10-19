@@ -32,3 +32,10 @@ the concrete result, remaining parent outcomes and next action. Do not claim an
 unrun live pilot, a low-thinking model effect, independent review or automated
 coordination from structural checks or a synthetic rehearsal.
 ```
+
+For an Owner-selected standalone ChatGPT-agent activity rule, keep the executing
+agent's persistent episode log and BuddyRunner recommendation visible. The agent
+runs its recorder; Oracle checks actual returned observations, never invented
+host measurements. Work/other surfaces are exempt; UNKNOWN applicability stays explicit. Follow the Oracle
+reference's >5 GitHub-access turns OR >35 active-minute rule; do not reset per task
+or treat the recommendation as an automatic handover or new role requirement.

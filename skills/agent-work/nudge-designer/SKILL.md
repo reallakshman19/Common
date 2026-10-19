@@ -70,6 +70,11 @@ integrated verification. Record assistance and actual host configuration; a defa
 rehearsal does not qualify a low-thinking configuration. The [LFEA pilot entry](assets/prompts/lfea-pilot.md)
 prepares that real-source application without claiming its live repair has run.
 
+For selected-response learning items, use [verb/option and generator guidance](references/SELECTED_RESPONSE.md)
+and profile `selected-response` where useful. Carry the tile verb into the brief;
+the generator runs option-length/shared-word checks before return and records
+flag dispositions. A script cannot approve demand fit or subject correctness.
+
 Use the [Owner entry prompts](assets/prompts/owner.md) for a short request. Select
 one role prompt: [Designer](assets/prompts/designer.md), [worker](assets/prompts/worker.md),
 [specialist](assets/prompts/specialist.md), [reviewer](assets/prompts/reviewer.md),

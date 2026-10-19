@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "Common-assessment-lessons/skills/agent-work/nudge-designer/scripts/nd_item_cues.py",
+    "--items",
+    "tmp/item-generator-forward-v1/items.json"
+  ],
+  "exit_code": 0,
+  "items_sha256": "3dcb40bcecf95f25ac54a14df4762888b5aea6b8f54968dabb86ec368d9e7d2b",
+  "helper_sha256_before": "aa8a11b8e2dc3ff8f3f5c8acf816818e038ee6eb6cc459102d65358b0cce2b1d",
+  "helper_sha256_after": "aa8a11b8e2dc3ff8f3f5c8acf816818e038ee6eb6cc459102d65358b0cce2b1d",
+  "helper_unchanged_during_run": true,
+  "nd_io_sha256": "b0c650ae84be2a01bbd32f56257ffcec403cefe78f34d03e521d718415e5212b",
+  "stdout_file": "generator-cues.json",
+  "stdout_sha256": "3bc6c35d5873e1abddd5154b7e39d617c3d100f7cc8921bfab8ed95741449b18",
+  "stderr_file": "generator-cues.stderr.txt",
+  "revision_history": "Initial helper run exited 0 and its output is preserved as generator-cues-first-run.json. Helper output differed from the implementation read earlier; this final evidence run captures helper hashes before and after execution. Item content was not revised."
+}

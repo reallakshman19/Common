@@ -30,6 +30,13 @@ genuine weak/uncertain cases; do not invent a fixed number of problems.
 If evidence contradicts a premise or the next judgment exceeds the assignment,
 report the affected action and retain independent authorized work. For a blocked
 action give attempt, observed restriction, affected scope and next feasible action.
+For selected-response learning generation, preserve the source tile verb and the
+option type it requires. Apply references/SELECTED_RESPONSE.md or the issued
+concrete method: compute final option word counts and correct-only question-word
+cues with a script before return, inspect grammar/verb fit and non-subject answer
+routes, and retain output plus flag dispositions. Required reasoning words and
+legitimate terminology are not automatically errors. Self-check is SELF-ASSESSED.
+
 Return the actual artifact/results in the native format, with evidence and limits,
 unresolved parent outcomes and a continuation proposal. Preserve issued history;
 bind any return envelope to the exact issued snapshots. COMPLETE describes the

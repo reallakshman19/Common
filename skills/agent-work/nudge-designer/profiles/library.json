@@ -56,6 +56,36 @@
       "evidence_methods": ["runtime_probe", "regression_test", "artifact_readback", "source_trace", "end_to_end_use"],
       "review_questions": ["Does the same meaningful check expose the old failure and establish the new behavior?", "Was affected integrated behavior checked?"],
       "pitfalls": ["Do not weaken the oracle to pass.", "Use the separately selected coding protocol and actual authority.", "Prepared instructions and published plans are not executed continuation."]
+    },
+    {
+      "id": "selected-response",
+      "revision": "1",
+      "label": "Verb-aligned options and cue screening",
+      "knowledge": [
+        "Original tile verb, required learner demand, option type and answer basis; source exposure and reference derivation"
+      ],
+      "reasoning_moves": [
+        "reconstruct",
+        "construct",
+        "compare",
+        "challenge",
+        "verify"
+      ],
+      "evidence_methods": [
+        "option_cue_screen",
+        "subject_review",
+        "counterexample"
+      ],
+      "review_questions": [
+        "Does the option type demand the specified verb?",
+        "Could the key be selected without the target subject knowledge?",
+        "What plausible wrong result could survive this check?"
+      ],
+      "pitfalls": [
+        "Do not ban causal words needed for explain/justify options.",
+        "A mechanical cue flag needs inspection; zero flags does not approve the item.",
+        "A non-fresh judge cannot undo exposure by citing files only."
+      ]
     }
   ]
 }

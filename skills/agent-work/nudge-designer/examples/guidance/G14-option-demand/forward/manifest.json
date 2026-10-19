@@ -1,0 +1,50 @@
+{
+  "generator/assessment.json": {
+    "bytes": 5703,
+    "sha256": "0d41b7ef05aa2d3d11fd053be1cdb8d61d62b412fdb3607bfa3e33e3001e1bf5"
+  },
+  "generator/execution.json": {
+    "bytes": 1125,
+    "sha256": "682e66c77e7d787acbbd3bce6b845ec4b503f11a33feb7baedb74681ae53f8ee"
+  },
+  "generator/generator-cues-first-run.json": {
+    "bytes": 1558,
+    "sha256": "3bc6c35d5873e1abddd5154b7e39d617c3d100f7cc8921bfab8ed95741449b18"
+  },
+  "generator/generator-cues.json": {
+    "bytes": 1558,
+    "sha256": "3bc6c35d5873e1abddd5154b7e39d617c3d100f7cc8921bfab8ed95741449b18"
+  },
+  "generator/generator-cues.stderr.txt": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "generator/report.md": {
+    "bytes": 1607,
+    "sha256": "90507379242e5a7b02874ae1244fc012e996743f07949f0963edcfca9782b8c7"
+  },
+  "items.json": {
+    "bytes": 1762,
+    "sha256": "3dcb40bcecf95f25ac54a14df4762888b5aea6b8f54968dabb86ec368d9e7d2b"
+  },
+  "owner.md": {
+    "bytes": 743,
+    "sha256": "0a01ad076da86fdbe112c26d2605a4b6f59943bc47357d76e614956cf5899260"
+  },
+  "reviewer/check-results.json": {
+    "bytes": 4510,
+    "sha256": "bec5111cd89dcc164b51460aa892f1ca515a8a284da64520b26efbd6b66b268d"
+  },
+  "reviewer/check_items.py": {
+    "bytes": 5308,
+    "sha256": "39c646d9e98829c030d744e83beedaef514145a4d6d7c10d41a836b90d441212"
+  },
+  "reviewer/execution.log": {
+    "bytes": 976,
+    "sha256": "4eaf8176a66e59ebc26e1c4830a16ef7f954a05a8568a561cf46e95925e4ef37"
+  },
+  "reviewer/review.md": {
+    "bytes": 9324,
+    "sha256": "ca289b50fb0949071ab9ef09efca748f35d34f6d1660d003ff633ef0aadb8453"
+  }
+}

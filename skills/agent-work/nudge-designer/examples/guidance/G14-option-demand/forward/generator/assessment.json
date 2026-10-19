@@ -1,0 +1,87 @@
+{
+  "status": "COMPLETE_BOUNDED_GENERATION_AND_SELF_CHECK_ONLY",
+  "judgment_basis": "SELF-ASSESSED by the item producer; no independent approval",
+  "supplied_scope": "Grade 11; EXPLAIN constant-net-force motion for constant mass; JUSTIFY a claimed acceleration using F=ma under stated conditions; RETRIEVE SI force unit.",
+  "selected_guidance": [
+    "Nudge Designer references/SELECTED_RESPONSE.md",
+    "profiles/library.json: education and selected-response"
+  ],
+  "host_configuration": {
+    "model": "UNKNOWN",
+    "reasoning_setting": "UNKNOWN",
+    "basis": "No task-specific runtime configuration observed or changed."
+  },
+  "standard_assumptions": [
+    "Classical introductory Newtonian translational motion in an inertial frame.",
+    "F_net is the resultant of all forces; no additional frictionless-surface assumption is made.",
+    "Masses are positive and constant as stated."
+  ],
+  "added_conditions": {
+    "X1": [
+      "Cart context; initial velocity right; nonzero constant net force right. Equal speed increments refer to intervals while those stated conditions hold."
+    ],
+    "X2": [
+      "Cart context; mass 3 kg; instantaneous motion left; net force 12 N right; claimed acceleration 4 m/s² right. No future constancy of net force is needed."
+    ],
+    "X3": [
+      "No conditions beyond standard SI terminology."
+    ]
+  },
+  "script_result": {
+    "exit_code": 0,
+    "flags": {
+      "X1": [],
+      "X2": [],
+      "X3": []
+    },
+    "flag_dispositions": [],
+    "flag_disposition_basis": "The final script reported no flags. Manual checks below still assess risks that can survive a no-flag report.",
+    "word_count_rule": "whitespace-separated tokens, including standalone symbols",
+    "shared_word_rule": "all casefolded Unicode words; a separate non-stopword subset helps inspection; no stemming or semantic inference",
+    "word_limit": "None supplied; --max-words was not used."
+  },
+  "manual_checks": [
+    {
+      "id": "X1",
+      "key": "B",
+      "status": "SELF-ASSESSED",
+      "verb_fit": "All choices are causal explanations. The key links constant force to constant acceleration and then equal speed increases; selecting a bare acceleration label would be off-demand.",
+      "subject_basis": "F_net/m is constant and rightward. With initial velocity right, speed increases by the same amount in each equal time interval. A invokes the force-maintains-velocity misconception; C incorrectly makes acceleration grow under fixed F_net and m.",
+      "grammar_and_cues": "All choices begin Its speed and contain because; all are 12 tokens. Constant appears in both A and B, so it does not uniquely identify the key.",
+      "remaining_limit": "The option can be selected by recognizing a learned causal statement; this is not evidence that a learner can independently construct an explanation."
+    },
+    {
+      "id": "X2",
+      "key": "C",
+      "status": "SELF-ASSESSED",
+      "verb_fit": "Each option presents an argument with F_net = ma, substitution and a direction relation. The learner selects the argument that supports both the claimed magnitude and direction. A final number alone would not preserve JUSTIFY.",
+      "subject_basis": "Taking right as positive: F_net=+12 N and m=3 kg give a=+4 m/s². Acceleration points along net force, even while the cart moves left. A incorrectly aligns acceleration with velocity; B incorrectly opposes net force.",
+      "grammar_and_cues": "All choices share the same calculation and sentence pattern. The key ties the longest distractor at 16 tokens (A has 15). No option states right, so matching the direction word in the claim cannot alone reveal the key.",
+      "remaining_limit": "The numerical relation is common to all options, so the discriminating step is whether the force-direction relation makes the complete justification valid; this item does not separately measure arithmetic execution."
+    },
+    {
+      "id": "X3",
+      "key": "A",
+      "status": "SELF-ASSESSED",
+      "verb_fit": "The learner recognizes the SI force unit directly; no causal explanation is required.",
+      "subject_basis": "Force is measured in newtons (N); joule and watt name energy and power units respectively.",
+      "grammar_and_cues": "Each option is a unit name plus symbol, two tokens. No correct-only stem overlap or reasoning marker appears.",
+      "remaining_limit": "Recognition of a unit does not establish understanding or use of F=ma."
+    }
+  ],
+  "exposure": {
+    "read": "Assigned target statement, applicable Common AGENTS overlay, Nudge Designer SKILL.md, BLUEPRINT.md, APPLYING_GUIDANCE.md, PROFILES.md, SELECTED_RESPONSE.md, worker prompt, education and selected-response profiles, helper implementation.",
+    "not_read": "Golden/reference example contents and other agents work. A file-name inventory included example paths but their contents were not opened.",
+    "provenance_limit": "No access-enforced isolation claim; this records this producer's observed source exposure."
+  },
+  "revision_history": "One item-content revision was authored. Initial and final actual helper outputs are preserved. A helper-revision ambiguity after the first code read prompted a final execution with before/after helper hashes; it was unchanged during that run.",
+  "not_executed": [
+    "No learner trial or learner response.",
+    "No independent subject or demand approval.",
+    "No publication, GitHub change, skill modification or sub-agent work."
+  ],
+  "unresolved_scope": [
+    "Actual learner understanding/transfer is UNKNOWN.",
+    "Integrated Owner acceptance remains with the parent/Owner; complete refers only to the bounded generation and recorded self-check."
+  ]
+}

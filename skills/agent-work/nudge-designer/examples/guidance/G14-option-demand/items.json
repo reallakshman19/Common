@@ -1,0 +1,5 @@
+{"items":[
+  {"id":"SYN-UNIT","verb":"retrieve","question":"Which unit represents force?","options":[{"id":"A","text":"N"},{"id":"B","text":"J"},{"id":"C","text":"Pa"}],"answer":"A"},
+  {"id":"SYN-CAUSE","verb":"explain","question":"Why does a body slow on a rough surface?","options":[{"id":"A","text":"The rough surface opposes its motion"},{"id":"B","text":"The body becomes entirely weightless"},{"id":"C","text":"The applied forces increase speed"}],"answer":"A"},
+  {"id":"SYN-ARGUMENT","verb":"justify","question":"Justify a body's deceleration under a force opposed to its velocity.","options":[{"id":"A","text":"Its speed decreases"},{"id":"B","text":"Its temperature increases"},{"id":"C","text":"Its shape changes"}],"answer":"A"}
+]}

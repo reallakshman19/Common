@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "X1",
+      "verb": "EXPLAIN",
+      "question": "A cart of constant mass moves right. A constant nonzero net force acts right. Which explanation describes what happens next?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Its speed stays exactly constant because the force maintains its existing motion."
+        },
+        {
+          "id": "B",
+          "text": "Its speed rises equally each second because the force produces constant acceleration."
+        },
+        {
+          "id": "C",
+          "text": "Its speed rises more each second because the force produces increasing acceleration."
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "X2",
+      "verb": "JUSTIFY",
+      "question": "A 3 kg cart moves left. Its mass is constant and its net force is 12 N right. Which argument justifies an acceleration of 4 m/s² right?",
+      "options": [
+        {
+          "id": "A",
+          "text": "F_net = ma gives a = 12/3 = 4 m/s²; acceleration points along the velocity."
+        },
+        {
+          "id": "B",
+          "text": "F_net = ma gives a = 12/3 = 4 m/s²; acceleration points opposite the net force."
+        },
+        {
+          "id": "C",
+          "text": "F_net = ma gives a = 12/3 = 4 m/s²; acceleration points along the net force."
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "X3",
+      "verb": "RETRIEVE",
+      "question": "What is the SI unit of force?",
+      "options": [
+        {
+          "id": "A",
+          "text": "newton (N)"
+        },
+        {
+          "id": "B",
+          "text": "joule (J)"
+        },
+        {
+          "id": "C",
+          "text": "watt (W)"
+        }
+      ],
+      "answer": "A"
+    }
+  ]
+}
