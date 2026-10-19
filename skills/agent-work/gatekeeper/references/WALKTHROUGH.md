@@ -139,7 +139,7 @@ Use Nudge Designer, or a plain brief.
     and its own results written down before reading the producer's reply.
 
   Keep its report unedited.
-- **If blocked:** see "verification without a subagent" in SKILL.md.
+- **If blocked:** use the next of the [verification routes](../SKILL.md#verification-routes).
 - **Seen on 19 October:** the result is [below](#wo-001-verification-result).
 
 ### 8. Coordinator note
@@ -257,7 +257,7 @@ separation comes from fresh context or from the Owner.
 | 6. Check bytes (GK9) | Re-hashes the master, targets and items before claiming anything. | If hashing is unavailable, it compares size and modified time, and says the check is weaker. |
 | 7. Claim (GK6) | Gives the label, its qualifiers, the sha, x of 28 and the not-tested list, in one message. | If N is unknown, it writes "N unknown" and continues. |
 | 8. Release (GK7) | Shows the DRAFT preview, and releases on the Owner's words or a recorded grant, diffing so only the label changes. | If the Owner is away, it leaves the offline handover and the work stays DRAFT. |
-| Throughout (GK8) | Lists every fallback and skipped step in the same reply. Retries a failed tool by a second route. | Under pressure: checkpoint, then narrow visibly, then accept SELF-ASSESSED. |
+| Throughout (GK8) | Lists every fallback and skipped step in the same reply. Retries a failed tool by a second route. | Under pressure: checkpoint, then narrow visibly, then step down the verification routes (as far as SELF-ASSESSED, which keeps the work order open). |
 
 How standalone differs from coordinator mode:
 - GK3 reduces to "don't retouch reviewed content silently".
@@ -274,11 +274,11 @@ untested.
 This is a desk sketch of the same request in the other setups. It was not
 executed. Only the steps that change are shown.
 
-| Step | Critical: Owner, Oracle, coding Agent | Noncritical with an Oracle and a TeamCoordinator |
+| Step | Critical: Owner, Oracle, Agent | Noncritical with an Oracle and a TeamCoordinator |
 |---|---|---|
 | Brief (step 3) | The Owner issues it, or approves the Oracle's draft. If the Oracle drafted it, any later review by the Oracle is labelled (coordinator review). | The OwnerTeammember issues it. The TeamCoordinator routes it and records the packet id. |
 | Seal (step 2) | The Oracle seals before reading the return. | The OwnerTeammember seals. The Oracle may seal its own targets too. |
-| Produce (step 4) | The coding Agent. The Oracle writes nothing into the product. | The coding Agent. Neither the OwnerTeammember nor the TeamCoordinator assembles. |
+| Produce (step 4) | The Agent. The Oracle writes nothing into the product. | The Agent. Neither the OwnerTeammember nor the TeamCoordinator assembles. |
 | Verify (step 7) | The Oracle gives VERIFIED. If it is unavailable: a separate session or an Owner spot-check, with the label qualified; else DRAFT · CHECKED (SELF-ASSESSED). | The Oracle gives VERIFIED. If it is unavailable: OwnerTeammember coordinator review, or a fresh subagent. |
 | Release (step 10) | Only the Owner's own words. No standing grant applies. | The OwnerTeammember may merge VERIFIED work under the Owner's recorded grant; for coordinator review, only if the grant says so. Anything below VERIFIED needs the Owner. |
 

@@ -126,13 +126,13 @@ if unavailable, retain that limit while gathering useful evidence.
 
 A coordinator that issues work does not also produce, repair or assemble that
 deliverable; inserting items into a page counts as producing it. Send a repair back
-as a new brief. A typo-level fix that changes no meaning, key or number may be made
-by the coordinator if it is labelled COORDINATOR-EDITED and shown to the verifier.
+as a new brief. Gatekeeper's GK3 sets the one exception, a labelled typo-level fix.
 The coordinator's own checks are notes, unless the role setup names it the
-reviewer of record, in which case its result is labelled (coordinator review). Labels
+reviewer of record; then its review counts as (coordinator review) only on
+Gatekeeper's conditions. Labels
 move on evidence the coordinator cannot rewrite, or on a disclosed fallback. A
 check limits a label, never the work. See Gatekeeper's
-[role setups](gatekeeper/SKILL.md#role-setups) and its
+[role setups](gatekeeper/SKILL.md#who-does-what) and its
 [rules against using checks as excuses](gatekeeper/SKILL.md#no-check-is-a-reason-to-stop-work).
 
 ## Carry work end to end
