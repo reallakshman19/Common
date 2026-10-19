@@ -1,0 +1,16 @@
+UTC 2026-10-19T23:06:59.625538+00:00
+...........................................................................................................................................................usage: python -m unittest [-h] --label LABEL --plan PLAN [--lab LAB] [--pr PR]
+                          [--scoreboard SCOREBOARD] [--apply]
+                          [--confirm-scope CONFIRM_SCOPE]
+python -m unittest: error: ECO-05 live demonstration: NOT_RUN (no exact-scope write consent)
+...............usage: python -m unittest [-h] --label LABEL --plan PLAN [--lab LAB] [--pr PR]
+                          [--scoreboard SCOREBOARD] [--apply]
+                          [--confirm-scope CONFIRM_SCOPE]
+python -m unittest: error: ECO-05 live demonstration: NOT_RUN (no exact-scope write consent)
+.....................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 383 tests in 27.430s
+
+OK
+
+exit=0

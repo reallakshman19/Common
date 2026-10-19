@@ -19,7 +19,7 @@ The coding agent must not self-review, self-approve, close or merge.
 
 ## Native core obligations
 
-For takeover, use [independent reconstruction](references/INDEPENDENT_RECONSTRUCTION.md),
+For cold/missing context, use [independent reconstruction](references/INDEPENDENT_RECONSTRUCTION.md),
 never a Q1–Q5 questionnaire, pass mark or scored agent admission. The incoming
 agent derives the project model from original sources and the available lead
 reconciles its continuation. No compulsory examiner is added. This v3.6 rule
@@ -28,6 +28,12 @@ custody, independent product review and Owner acceptance remain separately bound
 If BuddyRunner, two-pass or three-pass is selected, use only its native stages.
 After completion, additional reconstruction is **NOT_APPLICABLE**: reuse the
 outputs and continue authorized work, with targeted updates for new facts.
+
+For a usable Oracle OnBoard Prompt, check essential originals/current candidate
+and execute the bounded task within existing custody/dispatch authority. No extra
+Oracle role or separate reconstruction report is needed. Correct a stale explanation
+from evidence and return actual results, changed understanding, remaining parent
+work and the next justified action to the available lead. Native evidence remains.
 
 Use the selected label, matching approved plan and real task/child issues.
 The existing O1–O5 lifecycle, dry-run defaults, explicit --apply/

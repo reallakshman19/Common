@@ -81,6 +81,14 @@ These are application responsibilities, not mandatory phases, gates or a runtime
 controller. Both skills still work alone. No native converter, shared import,
 automatic reconciliation or permission service is implemented by this recipe.
 
+For a next instruction from established context, optionally use Nudge Designer's
+[Oracle OnBoard Prompt](../../nudge-designer/references/ORACLE_ONBOARD.md). Carry the
+selected task's original meaning, revisable explanation, current sources and
+remaining parent outcome. The receiver checks essentials and acts within authority,
+returning evidence and changed understanding; do not require another reconstruction
+or repeat a completed BuddyRunner/two-pass/three-pass. This optional prompt support
+adds no Task Map field, runtime dependency, dispatch power or required Oracle role.
+
 ## Distinguish focused context from blind evidence
 
 For ordinary execution, give the worker all load-bearing inputs and decisions.

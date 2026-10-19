@@ -1,0 +1,11 @@
+UTC 2026-10-19T23:06:21.438618+00:00
+Expected original candidate to fail the Owner contract.
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/onboard-forward-20261020/verify_return.py", line 33, in <module>
+    check(Path(sys.argv[1]))
+  File "/workspace/scratch/52eed2252c51/onboard-forward-20261020/verify_return.py", line 17, in check
+    assert got == {'zero': 0.0, 'positive': 4.25}, got
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'positive': 4.25}
+
+exit=1

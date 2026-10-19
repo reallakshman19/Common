@@ -1,0 +1,42 @@
+{
+  "v36-tests.txt": {
+    "bytes": 1113,
+    "sha256": "0c1ec5c962fc71013e94a09cb94dde18e25a8ab4a03c2c3e8b28b24b382bae2d"
+  },
+  "verify_return.py": {
+    "bytes": 1417,
+    "sha256": "7dce6c0e52db261af97875ab8d55e05916793d692f04bd27403f32a4f4bc5e67"
+  },
+  "parent-baseline.txt": {
+    "bytes": 512,
+    "sha256": "656ada5499b4a750ccf6336083f0dc9cd245b8f789ad6ac9340c1d498d236137"
+  },
+  "issued.md": {
+    "bytes": 8604,
+    "sha256": "4f226a4f798468a5f3fb30980ae109a99bfe89331f07546e94e49bb99336ccb4"
+  },
+  "parent-checks.txt": {
+    "bytes": 3074,
+    "sha256": "d0c3cd658ddc476ab1d38ef883de903ac80060c53b8fb819cf110f87f7ea678f"
+  },
+  "input/OWNER.md": {
+    "bytes": 1308,
+    "sha256": "dc42488aa420006c253f0437ba89039a1b8930c202871727cb6cc0ba6164c7e5"
+  },
+  "input/drafts.py": {
+    "bytes": 282,
+    "sha256": "3242f3fd9ba204045000a732f04f7a7adc4ca9ca2fcb30f450275b630c43df2a"
+  },
+  "out/result.md": {
+    "bytes": 9913,
+    "sha256": "87faa4deef81df09557b561331c1ed0852de67ed0307fc80a046ccb9429b1e2a"
+  },
+  "out/test_drafts.py": {
+    "bytes": 2763,
+    "sha256": "f6b6b48d1fe58e6d667d5a4a3f6fa20ef4b0a33e581a87fdfceeae92dc009ee0"
+  },
+  "out/drafts.py": {
+    "bytes": 294,
+    "sha256": "388a475fd473f8031df16f1a9d9eb8dc651d6717b3ed7fb581d3ff808bd64484"
+  }
+}

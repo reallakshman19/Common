@@ -1,0 +1,45 @@
+UTC 2026-10-19T23:09:08.761680+00:00
+
+Original B2 + exact returned tests
+test_explicit_zero_and_nonzero_survive_round_trip (test_drafts.DraftPersistenceTests.test_explicit_zero_and_nonzero_survive_round_trip) ... FAIL
+test_loaded_dictionary_is_a_copy (test_drafts.DraftPersistenceTests.test_loaded_dictionary_is_a_copy) ... ok
+test_none_and_absence_do_not_become_zero_drafts (test_drafts.DraftPersistenceTests.test_none_and_absence_do_not_become_zero_drafts) ... ok
+test_none_only_and_empty_saves_replace_with_empty_drafts (test_drafts.DraftPersistenceTests.test_none_only_and_empty_saves_replace_with_empty_drafts) ... ok
+test_save_replaces_previous_drafts (test_drafts.DraftPersistenceTests.test_save_replaces_previous_drafts) ... ok
+test_saving_one_model_does_not_disturb_another (test_drafts.DraftPersistenceTests.test_saving_one_model_does_not_disturb_another) ... ok
+test_unknown_model_loads_empty_without_creating_entry (test_drafts.DraftPersistenceTests.test_unknown_model_loads_empty_without_creating_entry) ... ok
+
+======================================================================
+FAIL: test_explicit_zero_and_nonzero_survive_round_trip (test_drafts.DraftPersistenceTests.test_explicit_zero_and_nonzero_survive_round_trip)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/onboard-forward-20261020/tmp678n5ld7/test_drafts.py", line 16, in test_explicit_zero_and_nonzero_survive_round_trip
+    self.assertEqual(loaded, edits)
+AssertionError: {'normal': 12.5} != {'zero': 0, 'float_zero': 0.0, 'normal': 12.5}
+- {'normal': 12.5}
++ {'float_zero': 0.0, 'normal': 12.5, 'zero': 0}
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.002s
+
+FAILED (failures=1)
+exit=1
+
+Repaired candidate + exact returned tests
+test_explicit_zero_and_nonzero_survive_round_trip (test_drafts.DraftPersistenceTests.test_explicit_zero_and_nonzero_survive_round_trip) ... ok
+test_loaded_dictionary_is_a_copy (test_drafts.DraftPersistenceTests.test_loaded_dictionary_is_a_copy) ... ok
+test_none_and_absence_do_not_become_zero_drafts (test_drafts.DraftPersistenceTests.test_none_and_absence_do_not_become_zero_drafts) ... ok
+test_none_only_and_empty_saves_replace_with_empty_drafts (test_drafts.DraftPersistenceTests.test_none_only_and_empty_saves_replace_with_empty_drafts) ... ok
+test_save_replaces_previous_drafts (test_drafts.DraftPersistenceTests.test_save_replaces_previous_drafts) ... ok
+test_saving_one_model_does_not_disturb_another (test_drafts.DraftPersistenceTests.test_saving_one_model_does_not_disturb_another) ... ok
+test_unknown_model_loads_empty_without_creating_entry (test_drafts.DraftPersistenceTests.test_unknown_model_loads_empty_without_creating_entry) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+OK
+exit=0
+
+Parent-defined contract checker
+PASS: zero/nonzero, None/absence, model and acceptance isolation, input/copy isolation, unknown model and replacement semantics
+exit=0

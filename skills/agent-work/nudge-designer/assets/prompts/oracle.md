@@ -33,6 +33,12 @@ unrun live pilot, a low-thinking model effect, independent review or automated
 coordination from structural checks or a synthetic rehearsal.
 ```
 
+For an established-context instruction to the next agent, use the
+[Oracle OnBoard Prompt](oracle-onboard.md) and its
+[applying guide](../../references/ORACLE_ONBOARD.md). Preserve the working explanation
+as revisable, actual source/candidate, remaining parent outcome and existing authority.
+This prompt type does not require another role or an extra reconstruction pass.
+
 For an Owner-selected standalone ChatGPT-agent activity rule, keep the executing
 agent's persistent episode log and BuddyRunner recommendation visible. The agent
 runs its recorder; Oracle checks actual returned observations, never invented

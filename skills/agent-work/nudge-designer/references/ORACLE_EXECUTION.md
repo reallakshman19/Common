@@ -56,6 +56,14 @@ positive/negative evidence and a return condition. Keep coupled UI/model/state
 decisions together until a durable output supports a useful handoff. Use a fresh
 worker to reduce remembered-history dependence, not to remove necessary knowledge.
 
+When source-based context and next direction are already usable, issue an
+[Oracle OnBoard Prompt](ORACLE_ONBOARD.md) using its
+[template](../assets/prompts/oracle-onboard.md). It transfers the working explanation
+and one next task, with room for source-backed correction and a return describing
+changed understanding, actual results and unfinished parent work. Reuse completed
+context-flow outputs; do not add an understanding essay or reconstruction stage.
+An Owner/available lead can prepare it without staffing another role.
+
 Read the actual recipient view using [the pre-send check](../assets/prompts/brief-check.md).
 Remove repeated boilerplate, not load-bearing conditions. Walk its input/tool
 instructions. Keep a reusable family and verify changed parameters rather than

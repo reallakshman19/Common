@@ -36,6 +36,23 @@ class ReconstructionTests(unittest.TestCase):
         self.assertEqual(rendered.count('PASS 2 —'), 1)
         self.assertNotIn('PASS 3 —', rendered)
 
+    def test_onboard_continuation_is_emitted_in_both_modes(self):
+        for mode in ('standalone', 'coordinator'):
+            with self.subTest(mode=mode):
+                label = copy.deepcopy(LABEL)
+                label['mode'] = mode
+                result = successor.build_packet(label, PLAN, Provider(), [4])
+                rendered = successor.render_markdown(result)
+                self.assertIn('usable Oracle OnBoard Prompt', rendered)
+                self.assertIn('No separate reconstruction', rendered)
+                self.assertIn('Treat its explanation as\nrevisable', rendered)
+                self.assertIn('remaining parent work', rendered)
+                self.assertIn('existing authority', rendered)
+                self.assert_policy(rendered)
+                self.assertIn(label['label']['main_aim'], rendered)
+                self.assertIn(HEAD, rendered)
+                self.assertEqual(result['snapshot']['accepted_complete'], 0)
+
     def test_three_pass_keeps_its_three_native_passes(self):
         rendered = three.generate_three_pass(packet(), 'V36-1-WP1')
         self.assert_policy(rendered)
