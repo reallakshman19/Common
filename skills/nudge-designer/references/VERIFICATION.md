@@ -273,3 +273,32 @@ Four new paired references (G11–G14) and a pre-send self-check address provena
 exposure, small task context, multipart verdicts and identity/transport. The reported
 NLM case retains absent-original-artifact limits. Runtime, schemas and APIs were not
 changed; the separate Task Decomposer change is not a dependency of this skill.
+
+## Oracle execution amendment
+
+The Owner asked to complete the operating support before the live pilot. Added
+Oracle execution guidance, an Owner/Oracle entry, optional native episode aid,
+source-bound LFEA entry and G15's raw/golden case. Existing coordinator/pre-send/
+integration guidance allocates the actual measurement, channel, return inspection,
+adaptive direction and integrated verification. Runtime, profiles, both schemas
+and API contracts are unchanged. Oracle is not a new role/audience enum.
+
+The existing 84 tests passed locally on Python 3.12 in 23.629 seconds after the
+first attempt omitted the existing optional `jsonschema` dependency path. That
+failed environment attempt remains an observed startup restriction, not a pass.
+Metadata/link/JSON/Python and scoped whitespace checks are recorded before
+publication; exact-head hosted results belong to the delivery PR.
+
+A [fresh actual application](../examples/oracle-execution/ASSESSMENT.md) reproduced
+a synthetic state defect despite four passing native checks, then issued a
+442-word GUIDED repair to a fresh worker and reconciled the returned source.
+Four native tests, ten worker tests, ten Oracle witnesses and 7,024 bounded
+schedules passed after repair; four extra parent check groups also passed.
+Raw inputs/native reports are preserved. Assistance, finite-model assumptions,
+unknown configuration and non-independent aspects remain explicit. Separate
+document/selected-contract review found no material issue.
+
+This demonstrates a local agent-led continuation using the operating support,
+not a selected low-thinking benchmark, autonomous dispatcher, causal ROI claim,
+real LFEA repair or whole application acceptance. The prepared LFEA entry is the
+next live pilot; its runtime/source/authority must be established during use.

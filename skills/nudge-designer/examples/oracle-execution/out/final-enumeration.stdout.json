@@ -1,0 +1,10 @@
+{
+  "source": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/session.py",
+  "source_sha256": "1e00c29dd0262723ae3ec6d749a89c8c07d12ce4882e6b77414c53592de12f8d",
+  "method": "All generated length-five schedules; each prefix checked after every action against prewritten public-state ownership model.",
+  "scope": "3 begin variants (A/q0, A/q1, B/q0), cancel anywhere, at most one finish/fail delivery per issued handle; no real concurrency or malformed tickets.",
+  "schedules": 7024,
+  "passed": 7024,
+  "event_comparisons": 35120,
+  "first_failure": null
+}

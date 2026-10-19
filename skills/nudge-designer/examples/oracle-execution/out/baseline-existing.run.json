@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "raw/test_existing.py",
+    "-v"
+  ],
+  "exit_code": 0
+}

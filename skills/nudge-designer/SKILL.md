@@ -59,6 +59,13 @@ actual representative result where useful; a model label or ACK cannot establish
 fit. Keep consequential synthesis with an appropriate participant. Adapt from
 evidence instead of prescribing a fixed number of checks or passes.
 
+For execution through workers, use [Oracle execution](references/ORACLE_EXECUTION.md)
+and the [Oracle entry](assets/prompts/oracle.md). Assign responsibility for the
+measurement method, actual delivery/return inspection, adaptive direction and
+integrated verification. Record assistance and actual host configuration; a default
+rehearsal does not qualify a low-thinking configuration. The [LFEA pilot entry](assets/prompts/lfea-pilot.md)
+prepares that real-source application without claiming its live repair has run.
+
 Use the [Owner entry prompts](assets/prompts/owner.md) for a short request. Select
 one role prompt: [Designer](assets/prompts/designer.md), [worker](assets/prompts/worker.md),
 [specialist](assets/prompts/specialist.md), [reviewer](assets/prompts/reviewer.md),
@@ -273,3 +280,8 @@ The [task-local role cycle](examples/isolated-forward/ASSESSMENT.md) preserves a
 Oracle, brief-only producer, prompt-only assessor and continued reconciliation,
 including packaging feedback and evidence limits. It does not qualify a low-thinking
 model or prove access-enforced blinding. Withhold its outputs in fresh exercises.
+
+The [Oracle execution application](examples/oracle-execution/ASSESSMENT.md) retains
+an actual local defect reproduction, fresh guided repair, return inspection and
+integrated verification. It records assistance/configuration limits and is separate
+from the prepared live LFEA entry. Withhold its worked outputs from fresh exercises.

@@ -1,0 +1,180 @@
+{
+  "source": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/raw/session.py",
+  "source_sha256": "316b565738204bab3c81b6e2143d7bedaa3d8b13bcacf9960dde07c7deb03512",
+  "method": "All generated length-five schedules; each prefix checked after every action against prewritten public-state ownership model.",
+  "scope": "3 begin variants (A/q0, A/q1, B/q0), cancel anywhere, at most one finish/fail delivery per issued handle; no real concurrency or malformed tickets.",
+  "schedules": 7024,
+  "passed": 4480,
+  "event_comparisons": 35120,
+  "first_failure": {
+    "operations": [
+      [
+        "begin",
+        "0",
+        "A",
+        "q0"
+      ],
+      [
+        "begin",
+        "1",
+        "A",
+        "q0"
+      ],
+      [
+        "begin",
+        "2",
+        "A",
+        "q0"
+      ],
+      [
+        "begin",
+        "3",
+        "A",
+        "q0"
+      ],
+      [
+        "finish",
+        "0",
+        [
+          "z",
+          "a"
+        ]
+      ]
+    ],
+    "result": {
+      "pass": false,
+      "events": [
+        {
+          "operation": [
+            "begin",
+            "0",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "1",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "2",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "begin",
+            "3",
+            "A",
+            "q0"
+          ],
+          "accepted": null,
+          "expected_accepted": null,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": true
+        },
+        {
+          "operation": [
+            "finish",
+            "0",
+            [
+              "z",
+              "a"
+            ]
+          ],
+          "accepted": true,
+          "expected_accepted": false,
+          "observed": {
+            "scope": "A",
+            "query": "q0",
+            "busy": false,
+            "rows": [
+              "z",
+              "a"
+            ],
+            "error": null
+          },
+          "expected": {
+            "scope": "A",
+            "query": "q0",
+            "busy": true,
+            "rows": [],
+            "error": null
+          },
+          "pass": false
+        }
+      ]
+    }
+  }
+}

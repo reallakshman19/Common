@@ -1,0 +1,21 @@
+{
+  "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/SKILL.md": "055e2453536e5773c7966dc6efdd3af4acd1a78bf330deb5337af43d0ea5212a",
+  "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/ORACLE_USE.md": "75f028f503d90ceec977cd1843a3e9bd7a32e364e31315809f3ea661f905897c",
+  "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/CONTRACT.md": "63b2b7eaea3a311cd7feaac180379590ad91f6ba776a0ce8f810d2d34df020bd",
+  "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/APPLYING_GUIDANCE.md": "cc533c112b379de0e5178a2043bd2a3793223a1ae0b222a3d41a86f2bf0763eb",
+  "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/references/INTEGRATION.md": "b50165b5e96bcdfc3c793a0bd45028790433c65a7970af1140bc8978e898f1f7",
+  "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/schemas/task-map.schema.json": "b59470f6ffb6de22895c544ba2c6c4d4515b6c9a695a3f9d7c35a3262ea3c56c",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/SKILL.md": "1a837582a0fc7615078eeb1cc51c8f2ab862b06479f8cba538b47e21d860696f",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/ORACLE_EXECUTION.md": "544b08569831fa0c69b553f100197a2025b8f1361f78f89f0befaaad65a97e27",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/BLUEPRINT.md": "5908bbadb05aa5cd1768051d83ff733081cd4df595aae5112431a1b454b85b68",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/PROFILES.md": "0e7b3248f49fe035432c2eabaeff1335c797f2d756ef5c21135a460a3b5cc4dd",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/IMPLEMENTATION_PLAN.md": "2a0aa26a11e15eee4fbbb632414fbcab4555bee355aff2a06746172d15bbec14",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/ISOLATED_WORK.md": "9713a268e8b50638ba5e5fea6421efdfe077f1bd0c9f185fc9f9846394041e27",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/ADAPTIVE_SUPPORT.md": "6a2b7d8cefc18241a5fcb527a4e706c5fa8ebd9f506e84ed2ab548b051c79faf",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/references/APPLYING_GUIDANCE.md": "51bdc16e9d5a352a60476a2dc3ff1ff21492c1ed83075b82d14aec923952b120",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/oracle.md": "90b120b1b93da05574b94cc85a8391088c82f765f1e968b32ef0b610919fa998",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/assets/prompts/brief-check.md": "678fcf2eb555277791a53b41cab680df3157ed1881400360078a07a8f35a774e",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/schemas/intent.schema.json": "b6277589b1a00cb607e1af4d37988ce4d07aa69abc679e592dfaf7be11f332eb",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/schemas/plan.schema.json": "aff80a9b37e214f8c42e418f4d1a51f6dccb4ab854eb7a921d98a90da3d4fd38",
+  "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/profiles/library.json": "bd6e1ec832f160ec5d0affce1f7595b4ebfa1345b6a5e2c083b808fc39268808"
+}

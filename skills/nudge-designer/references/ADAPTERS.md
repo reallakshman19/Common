@@ -39,6 +39,11 @@ problem needs sound synthesis. Neither can be established from a model name or
 a self-declared high effort setting. Ask for a meaningful prediction/contrast at
 fragile boundaries; use actual evidence rather than an acknowledgment as support.
 
+For actual execution use [Oracle execution](ORACLE_EXECUTION.md). Oracle combines
+appropriate existing Designer/coordinator responsibilities; it is not an eighth
+`audience` value or a new participant role enum. Its entry prompt assigns operating
+duties, while these APIs continue to prepare documents and inspect declared records.
+
 ## Choose support from the work
 
 The Owner can say: “Use Nudge Designer on this problem. Keep the original goal,

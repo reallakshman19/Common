@@ -23,6 +23,7 @@ the same conditions. Use existing schema examples when authoring machine objects
 | G12 fresh task-local work | [raw.md](G12-fresh-task-context/raw.md) | [golden.md](G12-fresh-task-context/golden.md) | Oracle/worker; T05, T06, T07, T22, T23 |
 | G13 parts and transport | [raw.md](G13-parts-and-transport/raw.md) | [golden.md](G13-parts-and-transport/golden.md) | Designer/worker/receiver; T12, T16, T18, T20, T21 |
 | G14 reported NLM pilot | [raw.md](G14-nlm-reported/raw.md) | [golden.md](G14-nlm-reported/golden.md) | Designer/coordinator; T19, T20, T21, T23; original artifacts absent |
+| G15 Oracle execution | [raw.md](G15-oracle-execution/raw.md) | [golden.md](G15-oracle-execution/golden.md) | Oracle/coordinator; inadequate method, actual continuation, assistance and integrated outcome |
 
 Trap IDs are defined in [Applying guidance](../../references/APPLYING_GUIDANCE.md).
 Give a fresh agent only a raw case, the needed role prompt/guide and tools/scope.

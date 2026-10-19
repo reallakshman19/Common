@@ -30,6 +30,10 @@ This is an authoring aid, not a gate, fixed reviewer count or extra reporting fo
 8. Read the compact operational view. State material conditions once, keep WHY and
    decisive evidence, and link detailed source context. A filled template is not
    evidence the task is understood or executable.
+9. For an execution request, allocate measurement design, actual sending/return
+   inspection, adaptive direction and integrated verification. Check the channel
+   is usable and someone owns continuation; a prepared packet is not a live loop.
+   Record actual configuration/assistance instead of attributing all work to Oracle.
 
 A second reader is useful for novel or consequential judgment briefs when its
 expected benefit warrants it or the project requires it. After material corrections,

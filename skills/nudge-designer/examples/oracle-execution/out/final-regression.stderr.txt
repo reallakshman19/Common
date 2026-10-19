@@ -1,0 +1,15 @@
+test_cancel_begin_then_old_fail (__main__.RegressionChecks.test_cancel_begin_then_old_fail) ... ok
+test_cancel_begin_then_old_finish (__main__.RegressionChecks.test_cancel_begin_then_old_finish) ... ok
+test_cancel_then_late_fail (__main__.RegressionChecks.test_cancel_then_late_fail) ... ok
+test_cancel_then_late_finish (__main__.RegressionChecks.test_cancel_then_late_finish) ... ok
+test_return_to_scope_stale_fail (__main__.RegressionChecks.test_return_to_scope_stale_fail) ... ok
+test_return_to_scope_stale_finish (__main__.RegressionChecks.test_return_to_scope_stale_finish) ... ok
+test_same_scope_stale_fail (__main__.RegressionChecks.test_same_scope_stale_fail) ... ok
+test_same_scope_stale_finish (__main__.RegressionChecks.test_same_scope_stale_finish) ... ok
+test_valid_error_after_reuse_and_recovery (__main__.RegressionChecks.test_valid_error_after_reuse_and_recovery) ... ok
+test_valid_success_after_reuse_preserves_rank_and_copies (__main__.RegressionChecks.test_valid_success_after_reuse_preserves_rank_and_copies) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.002s
+
+OK

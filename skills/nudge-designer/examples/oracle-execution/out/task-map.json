@@ -1,0 +1,276 @@
+{
+  "schema": "task-decomposer.map/v1",
+  "id": "search-session-map",
+  "revision": 1,
+  "scale": "SINGLE_PROBLEM",
+  "request": "# Owner request\n\nFix this small local search-session component. Users sometimes see an older search\nreplace newer results, including after returning to a previous project filter.\nCancellation must leave the view idle and empty even if the cancelled operation\nfinishes later. Preserve normal successful results, genuine current errors and\nreuse after cancellation. Rows are already ranked; preserve their supplied order.\n\nThe source is work/session.py. The original source and existing native checks are\nin raw/. Keep raw/ byte-identical and change only work/ and out/. Add focused checks\nwhere useful. Use the provided Python runtime; no network, browser or live repo\nactions are needed or authorized. Deliver a working component and concise evidence\nof what actually happened, what changed direction and what remains unestablished.\n",
+  "purpose": "Repair local search-session callback authority and cancellation while preserving ranked rows, current responses and reusable state.",
+  "performer_context": {
+    "description": "Oracle with a fresh task-local worker through the available collaboration tool; actual model and reasoning setting UNKNOWN.",
+    "basis": "OBSERVED",
+    "limitations": [
+      "Freshness is prompt/context isolation, not access enforcement.",
+      "No low-thinking model or independence qualification."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-OWNER",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/raw/owner.md",
+      "revision": "sha256:215813d15d8ea3d9404a8ba9e25c8006025139da3978618b8cf94c40dbdbdf59",
+      "kind": "OWNER",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-SOURCE",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/raw/session.py",
+      "revision": "sha256:316b565738204bab3c81b6e2143d7bedaa3d8b13bcacf9960dde07c7deb03512",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-TESTS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/raw/test_existing.py",
+      "revision": "sha256:20b52ced9a30e0367994675446e056e7efd51ee31dc5c94cd79d0be43360dcca",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-ACCESS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/raw/access.md",
+      "revision": "sha256:20ac0efe244cf52ceaa0ab62b32f21d95ffc859d30345762933059d4443fd39f",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-BASE",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/out/baseline-probe.stdout.txt",
+      "revision": "sha256:13c7ecd692d0a0909c1a33e066c257b59ec98b21270c253e37963f081f5ff11e",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN"
+    },
+    {
+      "id": "S-EXISTING",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/out/baseline-existing.stderr.txt",
+      "revision": "sha256:6023d9f7a5805a0c1abd576e1130784d180c38cae9c8f41bb03254237ab09ffc",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN"
+    }
+  ],
+  "items": [
+    {
+      "id": "R-LATEST",
+      "kind": "REQUIREMENT",
+      "statement": "Only the latest noncancelled search operation may update the view, including repeated queries in one project and return to a previous project filter.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "R-CANCEL",
+      "kind": "REQUIREMENT",
+      "statement": "Cancellation leaves the view idle with empty rows and no error even when the cancelled operation later finishes or fails.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "R-PRESERVE",
+      "kind": "REQUIREMENT",
+      "statement": "Preserve normal successful results, genuine current errors, reuse after cancellation and detached snapshots.",
+      "source_refs": [
+        "S-OWNER",
+        "S-TESTS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "R-ORDER",
+      "kind": "CONSTRAINT",
+      "statement": "Rows are already ranked; preserve their supplied order.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-RAW",
+      "kind": "CONSTRAINT",
+      "statement": "raw/ and raw-manifest.json remain byte-identical.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-LOCAL",
+      "kind": "CONSTRAINT",
+      "statement": "Change only this episode work/ and out/; use the provided Python runtime; no network, browser, live repository, app service or external message actions.",
+      "source_refs": [
+        "S-OWNER",
+        "S-ACCESS"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-GUARD",
+      "kind": "FACT",
+      "statement": "Original begin issues increasing sequence values, but finish/fail compare only scope and cancel does not revoke tickets.",
+      "source_refs": [
+        "S-SOURCE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-BASE",
+      "kind": "FACT",
+      "statement": "Original candidate matches raw source; original native checks pass 4/4, while Oracle event-order witnesses fail 10/10.",
+      "source_refs": [
+        "S-BASE",
+        "S-EXISTING"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-CONFIG",
+      "kind": "UNKNOWN",
+      "statement": "Actual Oracle and worker model/reasoning configuration, token cost and comparable causal/ROI effect are UNKNOWN.",
+      "source_refs": [],
+      "blocks": []
+    }
+  ],
+  "scope": {
+    "permitted": [
+      "Read selected methods and episode raw inputs.",
+      "Repair work/session.py; add focused local checks and out/ evidence.",
+      "Use one fresh worker for coherent repair under Oracle retained judgment."
+    ],
+    "forbidden": [
+      "Write outside episode work/ or out/.",
+      "Modify raw inputs or raw-manifest.json.",
+      "Read worked answers, unrelated folders or other agent outputs.",
+      "Use network, live repositories, browser, apps or external messages."
+    ],
+    "source_refs": [
+      "S-OWNER",
+      "S-ACCESS"
+    ]
+  },
+  "preserve_refs": [
+    "R-ORDER",
+    "C-RAW",
+    "C-LOCAL"
+  ],
+  "tasks": [
+    {
+      "id": "T-SESSION",
+      "parent_id": null,
+      "kind": "WORK",
+      "detail": "BOUNDED",
+      "purpose": "Repair local search-session callback authority and cancellation while preserving ranked rows, current responses and reusable state.",
+      "deliverable": "Repaired work/session.py with focused executable event-order regression checks and a native report.",
+      "item_refs": [
+        "R-LATEST",
+        "R-CANCEL",
+        "R-PRESERVE",
+        "R-ORDER",
+        "C-RAW",
+        "C-LOCAL",
+        "F-GUARD",
+        "F-BASE"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "A project filter is not an operation identity: A\u2192A and A\u2192B\u2192A can have obsolete callbacks with the current scope.",
+        "Oracle established the public-state model before delegating: the latest begin owns the view, while cancel revokes that ownership; stale success/error callbacks return False without any snapshot change.",
+        "Sequence already exists in issued tickets; maintain a lifetime identity across begin and cancel, preserve source API and copy/order behavior.",
+        "Worker implements one coherent state repair and regression artifact; Oracle retains interpretation, scope choices, source/probe inspection and integrated acceptance."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Single-threaded public callback schedules only; real UI and production integration are not represented.",
+        "Malformed/forged tickets, cross-session tickets, reentrant callbacks and duplicate terminal delivery semantics are outside this local repair.",
+        "Oracle retains integrated judgment; worker self-checks are SELF-ASSESSED."
+      ],
+      "acceptance": {
+        "observable": "Native checks and original Oracle schedules pass on the actual candidate; current result/error is accepted and old/cancelled callbacks are rejected with full state unchanged.",
+        "contrast": "The same fixed Oracle schedules fail on the original source, including A\u2192A, A\u2192B\u2192A and cancellation before late success/error.",
+        "integration": "Oracle inspects actual returned source/tests and reruns the source-derived event schedules plus preserved native checks; no live UI claim."
+      },
+      "boundary": {
+        "choice": "KEEP",
+        "reason": "Callback identity and cancellation share one state invariant. One repair deliverable avoids splitting coupled finish/fail/cancel semantics; Oracle keeps diagnosis and integrated verification.",
+        "cut": null
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "item_ref": "R-LATEST",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-SESSION"
+      ],
+      "source_refs": [],
+      "reason": "Retained in coherent repair and Oracle integration checks."
+    },
+    {
+      "item_ref": "R-CANCEL",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-SESSION"
+      ],
+      "source_refs": [],
+      "reason": "Retained in coherent repair and Oracle integration checks."
+    },
+    {
+      "item_ref": "R-PRESERVE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-SESSION"
+      ],
+      "source_refs": [],
+      "reason": "Retained in coherent repair and Oracle integration checks."
+    },
+    {
+      "item_ref": "R-ORDER",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-SESSION"
+      ],
+      "source_refs": [],
+      "reason": "Retained in coherent repair and Oracle integration checks."
+    },
+    {
+      "item_ref": "C-RAW",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-SESSION"
+      ],
+      "source_refs": [],
+      "reason": "Retained in coherent repair and Oracle integration checks."
+    },
+    {
+      "item_ref": "C-LOCAL",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-SESSION"
+      ],
+      "source_refs": [],
+      "reason": "Retained in coherent repair and Oracle integration checks."
+    },
+    {
+      "item_ref": "U-CONFIG",
+      "disposition": "UNRESOLVED",
+      "task_refs": [],
+      "source_refs": [],
+      "reason": "Configuration does not block authorized local repair."
+    }
+  ],
+  "focus": [
+    "T-SESSION"
+  ],
+  "focus_reason": "The baseline is discriminating; delegate bounded implementation while retaining the model and full outcome with Oracle."
+}

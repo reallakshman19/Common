@@ -1,0 +1,50 @@
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "name": "final-existing",
+      "cmd": "python -B raw/test_existing.py -v > out/final-existing.stdout.txt 2> out/final-existing.stderr.txt",
+      "chunk_id": "975b0f",
+      "wall_time_seconds": 0.271518851,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "name": "final-regression",
+      "cmd": "python -B work/test_regression.py -v > out/final-regression.stdout.txt 2> out/final-regression.stderr.txt",
+      "chunk_id": "1dbbf0",
+      "wall_time_seconds": 0.275535935,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "name": "final-probe",
+      "cmd": "python -B work/oracle_probe.py > out/final-probe.stdout.json 2> out/final-probe.stderr.txt",
+      "chunk_id": "941437",
+      "wall_time_seconds": 0.158741859,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "name": "final-enumeration",
+      "cmd": "python -B work/oracle_sequence_check.py > out/final-enumeration.stdout.json 2> out/final-enumeration.stderr.txt",
+      "chunk_id": "07bdaa",
+      "wall_time_seconds": 0.599749082,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  }
+]

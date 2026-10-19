@@ -1,0 +1,191 @@
+test_cancel_begin_then_old_fail (__main__.RegressionChecks.test_cancel_begin_then_old_fail) ... 
+  test_cancel_begin_then_old_fail (__main__.RegressionChecks.test_cancel_begin_then_old_fail) (current_callback='finish') ... FAIL
+  test_cancel_begin_then_old_fail (__main__.RegressionChecks.test_cancel_begin_then_old_fail) (current_callback='fail') ... FAIL
+test_cancel_begin_then_old_finish (__main__.RegressionChecks.test_cancel_begin_then_old_finish) ... 
+  test_cancel_begin_then_old_finish (__main__.RegressionChecks.test_cancel_begin_then_old_finish) (current_callback='finish') ... FAIL
+  test_cancel_begin_then_old_finish (__main__.RegressionChecks.test_cancel_begin_then_old_finish) (current_callback='fail') ... FAIL
+test_cancel_then_late_fail (__main__.RegressionChecks.test_cancel_then_late_fail) ... FAIL
+test_cancel_then_late_finish (__main__.RegressionChecks.test_cancel_then_late_finish) ... FAIL
+test_return_to_scope_stale_fail (__main__.RegressionChecks.test_return_to_scope_stale_fail) ... 
+  test_return_to_scope_stale_fail (__main__.RegressionChecks.test_return_to_scope_stale_fail) (current_callback='finish') ... FAIL
+  test_return_to_scope_stale_fail (__main__.RegressionChecks.test_return_to_scope_stale_fail) (current_callback='fail') ... FAIL
+test_return_to_scope_stale_finish (__main__.RegressionChecks.test_return_to_scope_stale_finish) ... 
+  test_return_to_scope_stale_finish (__main__.RegressionChecks.test_return_to_scope_stale_finish) (current_callback='finish') ... FAIL
+  test_return_to_scope_stale_finish (__main__.RegressionChecks.test_return_to_scope_stale_finish) (current_callback='fail') ... FAIL
+test_same_scope_stale_fail (__main__.RegressionChecks.test_same_scope_stale_fail) ... 
+  test_same_scope_stale_fail (__main__.RegressionChecks.test_same_scope_stale_fail) (current_callback='finish') ... FAIL
+  test_same_scope_stale_fail (__main__.RegressionChecks.test_same_scope_stale_fail) (current_callback='fail') ... FAIL
+test_same_scope_stale_finish (__main__.RegressionChecks.test_same_scope_stale_finish) ... 
+  test_same_scope_stale_finish (__main__.RegressionChecks.test_same_scope_stale_finish) (current_callback='finish') ... FAIL
+  test_same_scope_stale_finish (__main__.RegressionChecks.test_same_scope_stale_finish) (current_callback='fail') ... FAIL
+test_valid_error_after_reuse_and_recovery (__main__.RegressionChecks.test_valid_error_after_reuse_and_recovery) ... FAIL
+test_valid_success_after_reuse_preserves_rank_and_copies (__main__.RegressionChecks.test_valid_success_after_reuse_preserves_rank_and_copies) ... FAIL
+
+======================================================================
+FAIL: test_cancel_begin_then_old_fail (__main__.RegressionChecks.test_cancel_begin_then_old_fail) (current_callback='finish')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 96, in check_cancel_and_begin
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_cancel_begin_then_old_fail (__main__.RegressionChecks.test_cancel_begin_then_old_fail) (current_callback='fail')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 96, in check_cancel_and_begin
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_cancel_begin_then_old_finish (__main__.RegressionChecks.test_cancel_begin_then_old_finish) (current_callback='finish')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 96, in check_cancel_and_begin
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_cancel_begin_then_old_finish (__main__.RegressionChecks.test_cancel_begin_then_old_finish) (current_callback='fail')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 96, in check_cancel_and_begin
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_cancel_then_late_fail (__main__.RegressionChecks.test_cancel_then_late_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 85, in test_cancel_then_late_fail
+    self.check_cancelled_callback("fail")
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 78, in check_cancelled_callback
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_cancel_then_late_finish (__main__.RegressionChecks.test_cancel_then_late_finish)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 82, in test_cancel_then_late_finish
+    self.check_cancelled_callback("finish")
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 78, in check_cancelled_callback
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_return_to_scope_stale_fail (__main__.RegressionChecks.test_return_to_scope_stale_fail) (current_callback='finish')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_return_to_scope_stale_fail (__main__.RegressionChecks.test_return_to_scope_stale_fail) (current_callback='fail')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_return_to_scope_stale_finish (__main__.RegressionChecks.test_return_to_scope_stale_finish) (current_callback='finish')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_return_to_scope_stale_finish (__main__.RegressionChecks.test_return_to_scope_stale_finish) (current_callback='fail')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_same_scope_stale_fail (__main__.RegressionChecks.test_same_scope_stale_fail) (current_callback='finish')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_same_scope_stale_fail (__main__.RegressionChecks.test_same_scope_stale_fail) (current_callback='fail')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_same_scope_stale_finish (__main__.RegressionChecks.test_same_scope_stale_finish) (current_callback='finish')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_same_scope_stale_finish (__main__.RegressionChecks.test_same_scope_stale_finish) (current_callback='fail')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 47, in check_supersession
+    self.assert_ignored(session, ticket, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_valid_error_after_reuse_and_recovery (__main__.RegressionChecks.test_valid_error_after_reuse_and_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 143, in test_valid_error_after_reuse_and_recovery
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+======================================================================
+FAIL: test_valid_success_after_reuse_preserves_rank_and_copies (__main__.RegressionChecks.test_valid_success_after_reuse_preserves_rank_and_copies)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 129, in test_valid_success_after_reuse_preserves_rank_and_copies
+    self.assert_ignored(session, cancelled, callback)
+  File "/workspace/scratch/52eed2252c51/tmp/oracle-execution-application/work/test_regression.py", line 32, in assert_ignored
+    self.assertIs(self.deliver(session, ticket, callback, "obsolete"), False)
+AssertionError: True is not False
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.031s
+
+FAILED (failures=16)
