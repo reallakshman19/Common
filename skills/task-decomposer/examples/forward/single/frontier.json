@@ -1,0 +1,15 @@
+{
+  "scope": "DECLARED_DESIGN_CONTEXT_ONLY",
+  "candidates": [
+    {
+      "task": "T-INVESTIGATE",
+      "state": "DESIGN_CANDIDATE",
+      "blocking_unknowns": [],
+      "prerequisites": [],
+      "focus": true
+    }
+  ],
+  "deferred": [],
+  "focus_reason": "A single BOUNDED investigation preserves the exact same-revision/different-source counterexample and the Owner publication invariant. No separate task or global stop is justified by missing production/configuration evidence; those limits remain explicit. This is a proposed design candidate, not an execution or acceptance decision.",
+  "authority_effects": []
+}

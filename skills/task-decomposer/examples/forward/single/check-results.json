@@ -1,0 +1,103 @@
+{
+  "scope": "Actual local map/packet checks only; no product acceptance or performer qualification",
+  "python_version": "3.12.14",
+  "jsonschema_version": "4.26.0",
+  "PYTHONPATH": "/workspace/scratch/52eed2252c51/tmp/br20-deps",
+  "commands": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+        "validate",
+        "--map",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-map.json",
+        "--out",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/validation.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+        "frontier",
+        "--map",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-map.json",
+        "--out",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/frontier.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "PASS"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+        "render",
+        "--map",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-map.json",
+        "--task",
+        "T-INVESTIGATE",
+        "--out",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-design.md"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "PASS"
+    }
+  ],
+  "additional_checks": [
+    {
+      "name": "canonical_map_binding_matches_validation_and_rendered_packet",
+      "result": "PASS",
+      "sha256": "199638e23fdad84eacd8e0eaa80dd315d4fb8bbb3636fd29681b7560833c72c3"
+    },
+    {
+      "name": "frontier_is_one_unblocked_design_candidate_without_authority_effects",
+      "result": "PASS"
+    },
+    {
+      "name": "original_request_and_all_source_file_sha256_pins_unchanged",
+      "result": "PASS"
+    },
+    {
+      "name": "one_bounded_task_with_KEEP_boundary",
+      "result": "PASS"
+    }
+  ],
+  "manual_source_and_boundary_review": {
+    "result": "PASS_AS_PLANNING_REVIEW_ONLY",
+    "basis": "Read the supplied owner request, guard and synthetic event record, and inspected the one task design against them. The map preserves current-source/current-revision identity, the original same-revision wrong-source order, local-only scope, recipient uncertainty, an explicit KEEP rationale, positive/stale-revision contrasts and the unverified integrated product outcome. No implementation remedy is selected.",
+    "limit": "This is an agent judgment against the supplied sources, not a semantic validation result from the CLI."
+  },
+  "not_run": [
+    {
+      "check": "production/browser/JavaScript application execution",
+      "reason": "Not represented by supplied sources and outside assigned local planning scope."
+    },
+    {
+      "check": "product repair and end-to-end acceptance",
+      "reason": "Not assigned; no product implementation or ordinary application path was available."
+    },
+    {
+      "check": "skill package tests, examples or verification materials",
+      "reason": "Explicitly excluded from this fresh application."
+    },
+    {
+      "check": "impact comparison",
+      "reason": "No earlier map revision was supplied or issued; this is revision 1."
+    }
+  ],
+  "runtime_model": "UNKNOWN",
+  "reasoning_effort": "UNKNOWN",
+  "formal_qualification": "UNKNOWN"
+}

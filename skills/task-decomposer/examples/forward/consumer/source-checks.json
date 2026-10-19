@@ -1,0 +1,401 @@
+{
+  "kind": "Actual local sender checks for a prepared downstream assignment",
+  "runtime": {
+    "python": "3.12.14",
+    "python_invocation": "python -B",
+    "model": "UNKNOWN",
+    "reasoning_effort": "UNKNOWN",
+    "formal_qualification": "UNKNOWN"
+  },
+  "allowed_input_sha256": {
+    "task-design.md": "f629ad828838d3e2690246ab1aaecb8c858b520bec487ec22358d0de1a5cfd68",
+    "task-map.json": "e3b93c74e9fa779644b8b076381c047f835b6f7b9781c49705eff98aa703d5d9",
+    "owner.md": "f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+    "guard.js": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+    "events.json": "9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+    "analysis-checks.json": "51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+    "consumer/owner.md": "68151e7db68db56488e369e7778f892d750dd081649e5f280b5141d9f041d10c"
+  },
+  "representation": "Original bytes preserved; strict UTF-8 decoding succeeded. Decodability is not encoding provenance or authority authentication.",
+  "canonical_map_sha256": "199638e23fdad84eacd8e0eaa80dd315d4fb8bbb3636fd29681b7560833c72c3",
+  "checks": [
+    {
+      "name": "issued_map_identity_and_canonical_binding",
+      "result": "PASS",
+      "witness": {
+        "map_id": "MAP-SINGLE-SOURCE-IDENTITY",
+        "revision": 1,
+        "task_id": "T-INVESTIGATE",
+        "canonical_sha256": "199638e23fdad84eacd8e0eaa80dd315d4fb8bbb3636fd29681b7560833c72c3",
+        "declared_canonical_sha256": "199638e23fdad84eacd8e0eaa80dd315d4fb8bbb3636fd29681b7560833c72c3"
+      }
+    },
+    {
+      "name": "upstream_source_pins_match_actual_bytes",
+      "result": "PASS",
+      "witness": [
+        {
+          "source_id": "S-OWNER",
+          "file": "owner.md",
+          "actual_sha256": "f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+          "declared_revision": "sha256:f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+          "locator_matches_exact_allowed_file": true,
+          "sha256_matches": true
+        },
+        {
+          "source_id": "S-GUARD",
+          "file": "guard.js",
+          "actual_sha256": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+          "declared_revision": "sha256:0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+          "locator_matches_exact_allowed_file": true,
+          "sha256_matches": true
+        },
+        {
+          "source_id": "S-EVENTS",
+          "file": "events.json",
+          "actual_sha256": "9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+          "declared_revision": "sha256:9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+          "locator_matches_exact_allowed_file": true,
+          "sha256_matches": true
+        },
+        {
+          "source_id": "S-ANALYSIS",
+          "file": "analysis-checks.json",
+          "actual_sha256": "51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+          "declared_revision": "sha256:51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+          "locator_matches_exact_allowed_file": true,
+          "sha256_matches": true
+        }
+      ]
+    },
+    {
+      "name": "upstream_receipt_raw_input_hashes_match",
+      "result": "PASS",
+      "witness": {
+        "owner.md": {
+          "actual": "f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+          "receipt": "f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3"
+        },
+        "guard.js": {
+          "actual": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+          "receipt": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe"
+        },
+        "events.json": {
+          "actual": "9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+          "receipt": "9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524"
+        }
+      }
+    },
+    {
+      "name": "unchanged_literal_guard_recognized",
+      "result": "PASS",
+      "witness": {
+        "guard_expression": "selected.revision === completed.revision",
+        "interpretation": "Python equality only for the finite integer revisions below; no JS execution"
+      }
+    },
+    {
+      "name": "exact_original_event_order_and_synthetic_limit",
+      "result": "PASS",
+      "witness": {
+        "events": [
+          {
+            "step": 1,
+            "action": "select",
+            "source": "ALPHA",
+            "revision": 11
+          },
+          {
+            "step": 2,
+            "action": "start",
+            "source": "ALPHA",
+            "revision": 11
+          },
+          {
+            "step": 3,
+            "action": "select",
+            "source": "BETA",
+            "revision": 11
+          },
+          {
+            "step": 4,
+            "action": "complete",
+            "source": "ALPHA",
+            "revision": 11
+          },
+          {
+            "step": 5,
+            "action": "display",
+            "source": "ALPHA",
+            "revision": 11
+          }
+        ],
+        "kind": "synthetic supplied event record",
+        "limits": "No production application or browser execution is represented."
+      }
+    },
+    {
+      "name": "independently_derived_finite_state_and_contrasts",
+      "result": "PASS",
+      "witness": {
+        "state_trace": [
+          {
+            "step": 1,
+            "action": "select",
+            "selected": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "started": null,
+            "completed": null,
+            "displayed": null
+          },
+          {
+            "step": 2,
+            "action": "start",
+            "selected": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "started": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "completed": null,
+            "displayed": null
+          },
+          {
+            "step": 3,
+            "action": "select",
+            "selected": {
+              "source": "BETA",
+              "revision": 11
+            },
+            "started": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "completed": null,
+            "displayed": null
+          },
+          {
+            "step": 4,
+            "action": "complete",
+            "selected": {
+              "source": "BETA",
+              "revision": 11
+            },
+            "started": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "completed": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "displayed": null
+          },
+          {
+            "step": 5,
+            "action": "display",
+            "selected": {
+              "source": "BETA",
+              "revision": 11
+            },
+            "started": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "completed": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "displayed": {
+              "source": "ALPHA",
+              "revision": 11
+            }
+          }
+        ],
+        "analytic_contrasts": [
+          {
+            "id": "original_same_revision_wrong_source",
+            "selected": {
+              "source": "BETA",
+              "revision": 11
+            },
+            "completed": {
+              "source": "ALPHA",
+              "revision": 11
+            },
+            "revision_only_guard_model": true,
+            "owner_source_and_revision_invariant": false,
+            "basis": "Reconstructed original supplied sequence"
+          },
+          {
+            "id": "current_source_and_revision",
+            "selected": {
+              "source": "BETA",
+              "revision": 11
+            },
+            "completed": {
+              "source": "BETA",
+              "revision": 11
+            },
+            "revision_only_guard_model": true,
+            "owner_source_and_revision_invariant": true,
+            "basis": "Constructed positive contrast"
+          },
+          {
+            "id": "current_source_stale_revision",
+            "selected": {
+              "source": "BETA",
+              "revision": 11
+            },
+            "completed": {
+              "source": "BETA",
+              "revision": 10
+            },
+            "revision_only_guard_model": false,
+            "owner_source_and_revision_invariant": false,
+            "basis": "Constructed stale-revision contrast"
+          }
+        ]
+      }
+    },
+    {
+      "name": "derived_claims_agree_with_supplied_receipt",
+      "result": "PASS",
+      "witness": "Compared freshly reconstructed pairs and both predicates, not copied PASS labels or expected totals."
+    }
+  ],
+  "state_trace": [
+    {
+      "step": 1,
+      "action": "select",
+      "selected": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "started": null,
+      "completed": null,
+      "displayed": null
+    },
+    {
+      "step": 2,
+      "action": "start",
+      "selected": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "started": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "completed": null,
+      "displayed": null
+    },
+    {
+      "step": 3,
+      "action": "select",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "started": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "completed": null,
+      "displayed": null
+    },
+    {
+      "step": 4,
+      "action": "complete",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "started": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "displayed": null
+    },
+    {
+      "step": 5,
+      "action": "display",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "started": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "displayed": {
+        "source": "ALPHA",
+        "revision": 11
+      }
+    }
+  ],
+  "analytic_contrasts": [
+    {
+      "id": "original_same_revision_wrong_source",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "ALPHA",
+        "revision": 11
+      },
+      "revision_only_guard_model": true,
+      "owner_source_and_revision_invariant": false,
+      "basis": "Reconstructed original supplied sequence"
+    },
+    {
+      "id": "current_source_and_revision",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "revision_only_guard_model": true,
+      "owner_source_and_revision_invariant": true,
+      "basis": "Constructed positive contrast"
+    },
+    {
+      "id": "current_source_stale_revision",
+      "selected": {
+        "source": "BETA",
+        "revision": 11
+      },
+      "completed": {
+        "source": "BETA",
+        "revision": 10
+      },
+      "revision_only_guard_model": false,
+      "owner_source_and_revision_invariant": false,
+      "basis": "Constructed stale-revision contrast"
+    }
+  ],
+  "result": "PASS",
+  "limits": [
+    "Only the explicitly issued files and this local assignment were read for task evidence.",
+    "This is a separate sender derivation by the same Designer, not independent-agent review or capability qualification.",
+    "Supplied synthetic records and Python finite integer comparisons do not establish JavaScript, browser or production behavior.",
+    "No product edit, repair execution, architecture selection, agent dispatch, external write or product acceptance occurred.",
+    "Current-selection capture, publication path, authoritative source representation and all-ordering correctness remain unverified."
+  ]
+}

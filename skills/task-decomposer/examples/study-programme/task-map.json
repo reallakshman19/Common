@@ -1,0 +1,229 @@
+{
+  "schema": "task-decomposer.map/v1",
+  "id": "STUDY-PROGRAMME",
+  "revision": 1,
+  "scale": "PROGRAMME",
+  "request": "Design coherent study material and retain separate learning evidence.",
+  "purpose": "Design coherent study material and retain separate learning evidence.",
+  "performer_context": {
+    "description": "Future performers and tool access are not yet established.",
+    "basis": "UNKNOWN",
+    "limitations": [
+      "No model, effort or formal qualification observed."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-CASE",
+      "locator": "raw.md",
+      "revision": "synthetic-case-1",
+      "kind": "SYNTHETIC",
+      "assessment": "SUPPLIED"
+    }
+  ],
+  "items": [
+    {
+      "id": "R-STUDY",
+      "kind": "REQUIREMENT",
+      "statement": "Prepare coherent study material aligned with the supplied course; actual learner understanding must be assessed separately.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-SCOPE",
+      "kind": "CONSTRAINT",
+      "statement": "Plan locally and preserve original model conditions; do not claim learner evidence.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-LEVEL",
+      "kind": "UNKNOWN",
+      "statement": "Learner prerequisites and curriculum boundaries are not established.",
+      "source_refs": [],
+      "blocks": [
+        "T-DRAFT"
+      ]
+    }
+  ],
+  "scope": {
+    "permitted": [
+      "Local source analysis, task design and new planning artifacts."
+    ],
+    "forbidden": [
+      "Product edits, external dispatch and release."
+    ],
+    "source_refs": [
+      "S-CASE"
+    ]
+  },
+  "preserve_refs": [
+    "C-SCOPE"
+  ],
+  "tasks": [
+    {
+      "id": "T-STUDY",
+      "parent_id": null,
+      "kind": "WORK",
+      "detail": "EXPANDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "Aligned content plus separate learner transfer evidence.",
+      "item_refs": [
+        "R-STUDY"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "SPLIT",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": {
+          "output": "A grounded curriculum/prerequisite basis.",
+          "oracle": "Original course requirements and actual supplied learner evidence can be inspected before content production.",
+          "consumer": "Content drafting consumes that basis.",
+          "benefit": "Prevent a polished draft from silently choosing an unsuitable learning target.",
+          "cost": "A grounding-to-drafting handoff and later actual learner assessment."
+        }
+      }
+    },
+    {
+      "id": "T-GROUND",
+      "parent_id": "T-STUDY",
+      "kind": "DISCOVERY",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "A source-linked curriculum/prerequisite question set and feasible content audit.",
+      "item_refs": [
+        "R-STUDY",
+        "U-LEVEL"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "DISCOVER_FIRST",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-DRAFT",
+      "parent_id": "T-STUDY",
+      "kind": "WORK",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "Content conditional on the established curriculum and prerequisite basis.",
+      "item_refs": [
+        "R-STUDY",
+        "U-LEVEL"
+      ],
+      "depends_on": [
+        "T-GROUND"
+      ],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "KEEP",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-TRANSFER",
+      "parent_id": "T-STUDY",
+      "kind": "REVIEW",
+      "detail": "DEFERRED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "Actual learner transfer assessment retained for later availability.",
+      "item_refs": [
+        "R-STUDY"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "DEFER",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "item_ref": "R-STUDY",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-STUDY"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "C-SCOPE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-STUDY"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "U-LEVEL",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-GROUND",
+        "T-DRAFT"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    }
+  ],
+  "focus": [
+    "T-GROUND"
+  ],
+  "focus_reason": "Choose work that establishes useful evidence while retaining unresolved parent outcomes."
+}

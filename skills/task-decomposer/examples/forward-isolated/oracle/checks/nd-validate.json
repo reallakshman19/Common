@@ -1,0 +1,21 @@
+{
+  "name": "nd-validate",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/52eed2252c51/Common-nd-isolated-nudges/skills/nudge-designer/scripts/nudge_designer.py",
+    "validate",
+    "--intent",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/intent.json",
+    "--plan",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/plan.json"
+  ],
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/workspace/scratch/52eed2252c51/tmp/br20-deps"
+  },
+  "exit_code": 0,
+  "stdout": "{\n  \"status\": \"STRUCTURALLY_VALID\",\n  \"semantic_quality\": \"NOT_MACHINE_VERIFIED\",\n  \"coverage_basis\": \"DECLARED_ITEMS_ONLY\",\n  \"sources_authenticated\": false,\n  \"authority_verified\": false,\n  \"execution_performed\": false,\n  \"intent_sha256\": \"aa9025cb19ac3fe4927cbb525a31f15be8d2533bfa9a051a6e4ac662c306d0c5\",\n  \"nudges\": 1,\n  \"declared_coverage_targets\": 21\n}\n",
+  "stderr": "",
+  "scope": "Actual local structural/rendering/fit check, not semantic acceptance or execution"
+}

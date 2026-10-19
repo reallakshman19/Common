@@ -1,0 +1,19 @@
+{
+  "name": "td-validate",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+    "validate",
+    "--map",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/task-map.json"
+  ],
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/workspace/scratch/52eed2252c51/tmp/br20-deps"
+  },
+  "exit_code": 0,
+  "stdout": "{\n  \"valid\": true,\n  \"scope\": \"DECLARED_STRUCTURE_ONLY\",\n  \"map_sha256\": \"b3e8bd62c71a32e760b6da7687cac1dda707f7001617fcd086468a5f18f98fe2\"\n}\n",
+  "stderr": "",
+  "scope": "Actual local structural/rendering/fit check, not semantic acceptance or execution"
+}

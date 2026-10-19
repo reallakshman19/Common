@@ -1,0 +1,143 @@
+{
+  "schema": "task-decomposer.map/v1",
+  "id": "SINGLE-LOGIC",
+  "revision": 1,
+  "scale": "SINGLE_PROBLEM",
+  "request": "Explain a wrong-source display without inventing a patch.",
+  "purpose": "Explain a wrong-source display without inventing a patch.",
+  "performer_context": {
+    "description": "Future performers and tool access are not yet established.",
+    "basis": "UNKNOWN",
+    "limitations": [
+      "No model, effort or formal qualification observed."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-CASE",
+      "locator": "raw.md",
+      "revision": "synthetic-case-1",
+      "kind": "SYNTHETIC",
+      "assessment": "SUPPLIED"
+    }
+  ],
+  "items": [
+    {
+      "id": "R-IDENTITY",
+      "kind": "REQUIREMENT",
+      "statement": "A displayed result must belong to the currently selected source and revision.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "F-TRACE",
+      "kind": "FACT",
+      "statement": "Source A revision 7 completes after source B revision 7 was selected; the display shows A.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-SCOPE",
+      "kind": "CONSTRAINT",
+      "statement": "Investigate locally; do not edit product source or redesign ownership without authority.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-MODEL",
+      "kind": "UNKNOWN",
+      "statement": "The appropriate state ownership repair has not been selected.",
+      "source_refs": [],
+      "blocks": []
+    }
+  ],
+  "scope": {
+    "permitted": [
+      "Local source analysis, task design and new planning artifacts."
+    ],
+    "forbidden": [
+      "Product edits, external dispatch and release."
+    ],
+    "source_refs": [
+      "S-CASE"
+    ]
+  },
+  "preserve_refs": [
+    "C-SCOPE"
+  ],
+  "tasks": [
+    {
+      "id": "T-TRACE",
+      "parent_id": null,
+      "kind": "DISCOVERY",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "A source-linked invariant and event-order witness for the supplied stale display.",
+      "item_refs": [
+        "R-IDENTITY",
+        "F-TRACE",
+        "U-MODEL"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Equal revision numbers do not establish equal source identity.",
+        "Separate identifying a violated invariant from authorizing an architectural repair."
+      ],
+      "decision_refs": [
+        "U-MODEL"
+      ],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "Trace each selection/completion and identify whether the displayed result matches the active source and revision.",
+        "contrast": "A result for source A revision 7 cannot become current solely because source B also has revision 7.",
+        "integration": "No repair or general event-order correctness is accepted from this trace."
+      },
+      "boundary": {
+        "choice": "DISCOVER_FIRST",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "item_ref": "R-IDENTITY",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-TRACE"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "C-SCOPE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-TRACE"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "U-MODEL",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-TRACE"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    }
+  ],
+  "focus": [
+    "T-TRACE"
+  ],
+  "focus_reason": "Choose work that establishes useful evidence while retaining unresolved parent outcomes."
+}

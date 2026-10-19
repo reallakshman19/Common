@@ -1,0 +1,15 @@
+# Oracle preparation result
+
+The next useful work is one GUIDED generation bundle from BP-1, followed by separate artifact assessment and Oracle reconciliation. Keep the two profiles together. Correct arithmetic from reference-derived old material remains useful; it cannot establish independently generated examples or independent acceptance.
+
+Use the compact [generation-operational-view.md](worker/generation-operational-view.md) with the exact BP-1 file only. It is a packaging refinement after parent feedback, preserving the first prepared view and all planning bindings. Its file-byte SHA-256 is `2fbf71ef49d5406dbf9c6c6c6a51004ebbfbc0f707fcc3a5f7ad0d34dade8047`. The original [generation-brief.md](worker/generation-brief.md) remains unchanged with SHA-256 `76cb1b57ddd037c6bf3cef88c1352e3716f40c4e63f2f7f094b98d67e81d0b4a`. Neither packet has been dispatched by this Oracle.
+
+Canonical identity is MAP-BP1-PILOT revision 1 / T-GENERATE, carried by A-GENERATE revision 1. The supplied tracker alias is MOVE-31 and the reply correlation is ACK MOVE-31. The exact binding and both view hashes are in [identity.json](identity.json) and [packaging-refinement.json](packaging-refinement.json); an ACK/hash does not prove execution.
+
+The [task-map.json](task-map.json) and [selected-design.md](selected-design.md) retain generation, assessment and integration. [intent.json](intent.json), [plan.json](plan.json), [issued-binding.json](issued-binding.json) and the Oracle-only [native-generation-design.md](native-generation-design.md) preserve the native downstream design. They are excluded from the proposed producer's allowed inputs.
+
+Oracle recomputed the supplied old instances as +20 N, +5 m/s² and 1.6 m using exact rational relations; see [arithmetic-evidence.json](arithmetic-evidence.json). The reference reports OLD-F copied/renamed and OLD-U wording-adapted, with the old producer's judgment SELF-ASSESSED. Their original files/logs were not read.
+
+Actual Task Decomposer validation/frontier/render and Nudge Designer validation/fit/bind/render completed successfully with the supplied jsonschema dependency path. These are declared structural/identity checks; native fit is NOT_ESTABLISHED, with qualification and execution authorization false. The default interpreter's initial dependency failure is recorded separately. [semantic-review.md](semantic-review.md) is Oracle self-inspection, not machine semantic approval or independent acceptance. [provenance.json](provenance.json), [source-snapshot.json](source-snapshot.json) and checks/ record actual inputs, tools and source/brief integrity.
+
+No worker was dispatched, no new exercise/assessment result was read, and no product/publication/learner action was performed in this application. Worker/reviewer model, effort, substantive fit and prior exposure remain unestablished. The proposed reference boundary is instruction-only on a shared filesystem; training-data independence, OS-enforced isolation, broad blueprint reliability and learner understanding are not established. The retained [assessment-plan.md](assessment-plan.md) describes the next evidence needed, without issuing that task.

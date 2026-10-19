@@ -1,0 +1,20 @@
+{
+  "representation": "SHA-256 of original file bytes; not authentication",
+  "files": {
+    "owner.md": {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/owner.md",
+      "sha256": "dabe7c2fd83b1ac992773b94770219bfe95172fd92c1eaa669c2e304d966475b",
+      "bytes": 1509
+    },
+    "blueprint.md": {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/blueprint.md",
+      "sha256": "6b904a1405b98399d78dc6d8c87e4caf243cfc99a2cf53c550628953cc8c3546",
+      "bytes": 937
+    },
+    "reference.md": {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/reference.md",
+      "sha256": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c",
+      "bytes": 641
+    }
+  }
+}

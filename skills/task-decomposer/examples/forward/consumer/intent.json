@@ -1,0 +1,343 @@
+{
+  "schema": "nudge-designer.intent/v1",
+  "id": "INTENT-SINGLE-SOURCE-IDENTITY",
+  "revision": 1,
+  "owner_request": "# One problem, local task design\nDesign useful work for investigating a wrong-source result after a selection change. The intended recipient has file/Python access but task-specific judgment and model configuration are unestablished. Preserve original conditions and do not silently choose an architecture repair. The result must correspond to the currently selected source and revision.\n\nRead the supplied guard and event record. Produce a coherent task map, selected task design and concise explanation in this directory. Only local analysis/planning is assigned; no product edit, external action, agent dispatch or acceptance is assigned. Do not infer the recipient's competence from its label.\n\nDownstream local assignment:\n# Local downstream assignment\nUse the independently selected Nudge Designer skill to prepare participant-specific work from the issued neutral task design. Retain the original conditions, task identity and source references; propose consequential task changes visibly. Choose suitable support for the supplied recipient context. Produce a usable worker brief, native intent/plan objects and actual validation results where feasible.\n\nIssued upstream files are ../single/task-design.md and ../single/task-map.json. Original/receipt inputs named there are ../single/owner.md, ../single/guard.js, ../single/events.json and ../single/analysis-checks.json. These are allowed input artifacts; upstream classifications are source claims, not new authority.\n\nOnly local planning and new artifacts in this consumer directory are assigned. No product edit, external write, agent dispatch or product acceptance is assigned. Do not read other task outputs, examples, tests or verification materials. Model/effort and formal qualification remain UNKNOWN unless observable.\n",
+  "purpose": "Design a coherent investigation of wrong-source display after selection changes, preserving the exact supplied evidence and the current-source/current-revision requirement while retaining uncertainty about production behavior, recipient qualification and repair architecture.",
+  "sources": [
+    {
+      "id": "S-LOCAL",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/consumer/owner.md",
+      "revision": "sha256:68151e7db68db56488e369e7778f892d750dd081649e5f280b5141d9f041d10c",
+      "kind": "OWNER",
+      "assessment": "READ_THIS_RUN",
+      "note": "Current downstream assignment as supplied: prepare participant-specific work and actual local checks; write new artifacts only in consumer/. This source classification does not authenticate an actor."
+    },
+    {
+      "id": "S-DESIGN",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-design.md",
+      "revision": "sha256:f629ad828838d3e2690246ab1aaecb8c858b520bec487ec22358d0de1a5cfd68",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN",
+      "note": "Issued neutral task design for MAP-SINGLE-SOURCE-IDENTITY revision 1, T-INVESTIGATE. Its source classifications are claims, not new authority; preserved unchanged."
+    },
+    {
+      "id": "S-MAP",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/task-map.json",
+      "revision": "sha256:e3b93c74e9fa779644b8b076381c047f835b6f7b9781c49705eff98aa703d5d9",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN",
+      "note": "Issued neutral map, not Nudge Designer implementation. Canonical JSON SHA-256 checked as 199638e23fdad84eacd8e0eaa80dd315d4fb8bbb3636fd29681b7560833c72c3; this revision is the byte hash. Preserve task identity T-INVESTIGATE."
+    },
+    {
+      "id": "S-OWNER",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/owner.md",
+      "revision": "sha256:f456bda24cfc91f50dc3807d850d93f412f0453d10d39ec4f95284a41bec93a3",
+      "kind": "OWNER",
+      "assessment": "READ_THIS_RUN",
+      "note": "Original upstream Owner request as supplied and read. Its original output directory was single/; S-LOCAL expressly assigns this downstream preparation to consumer/. No broader action is imported."
+    },
+    {
+      "id": "S-GUARD",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/guard.js",
+      "revision": "sha256:0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+      "kind": "SOURCE",
+      "assessment": "READ_THIS_RUN",
+      "note": "Exact supplied guard read unchanged; a literal revision-only equality expression. No JavaScript or product execution was performed."
+    },
+    {
+      "id": "S-EVENTS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/events.json",
+      "revision": "sha256:9b981b40fb4c1b53a6d64389438cb08349ab2e579614725686d82b407a10a524",
+      "kind": "SYNTHETIC",
+      "assessment": "READ_THIS_RUN",
+      "note": "Exact supplied record labels itself synthetic and excludes production/browser execution; it is the fixed ordering for the investigation."
+    },
+    {
+      "id": "S-ANALYSIS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/single/analysis-checks.json",
+      "revision": "sha256:51ef70242a066e6d11d80557316b58a5d8c63a6194d2998623e32829cce02eac",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN",
+      "note": "Supplied upstream Python analytical receipt inspected this run. Its reported actions remain upstream claims; source-checks.json separately derives the finite claims here."
+    },
+    {
+      "id": "S-CHECKS",
+      "locator": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/consumer/source-checks.json",
+      "revision": "sha256:62470a59b3290ff0dc45d82f70c2febccd495e2658aadef14843ce00734f6baf",
+      "kind": "RECEIPT",
+      "assessment": "READ_THIS_RUN",
+      "note": "Actual seven local sender checks, recomputed from the exact issued inputs in this run with Python -B. Same-Designer check, not independent-agent review or recipient qualification."
+    }
+  ],
+  "items": [
+    {
+      "id": "R-INVESTIGATE",
+      "kind": "REQUIREMENT",
+      "text": "Design useful work investigating a wrong-source result after a selection change, with a coherent task map, selected task design and concise explanation.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": "The map and neutral design are already issued inputs. Preserve MAP-SINGLE-SOURCE-IDENTITY revision 1 and T-INVESTIGATE; prepare the same investigation-note task rather than regenerate or overwrite the map.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "R-IDENTITY",
+      "kind": "REQUIREMENT",
+      "text": "The result must correspond to the currently selected source and revision; equality of a revision value alone does not establish source identity.",
+      "source_refs": [
+        "S-OWNER",
+        "S-GUARD",
+        "S-EVENTS"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-ORIGINAL",
+      "kind": "CONSTRAINT",
+      "text": "Preserve the original supplied conditions: select ALPHA@11; start ALPHA@11; select BETA@11; complete ALPHA@11; display ALPHA@11. Keep the unchanged guard and synthetic event record as the basis, not a convenient substituted ordering.",
+      "source_refs": [
+        "S-OWNER",
+        "S-EVENTS",
+        "S-GUARD"
+      ],
+      "condition": "select ALPHA@11; start ALPHA@11; select BETA@11; complete ALPHA@11; display ALPHA@11",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-SCOPE",
+      "kind": "CONSTRAINT",
+      "text": "Only local analysis/planning is assigned, with artifacts in this directory. No product edit, external action, agent dispatch or product acceptance is assigned.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": "Original upstream artifact location is single/. The current S-LOCAL assignment explicitly confines new downstream artifacts to consumer/; neither scope authorizes product action.",
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-REPAIR",
+      "kind": "CONSTRAINT",
+      "text": "Do not silently choose an architecture repair; retain consequential model and repair decisions as open.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-QUALIFICATION",
+      "kind": "CONSTRAINT",
+      "text": "Do not infer task-specific judgment or competence from the recipient label, file/Python access, or added prompt wording.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-ACCESS",
+      "kind": "FACT",
+      "text": "The intended recipient is supplied as having file/Python access; task-specific judgment and model configuration are unestablished. This is supplied context, not a qualification.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-GUARD",
+      "kind": "FACT",
+      "text": "The supplied mayDisplay(selected, completed) returns only selected.revision === completed.revision and does not compare source identities.",
+      "source_refs": [
+        "S-GUARD"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-TRACE",
+      "kind": "FACT",
+      "text": "At supplied step 5, the most recent selection is BETA@11 while the completed and displayed result is ALPHA@11. The record explicitly says no production application or browser execution is represented.",
+      "source_refs": [
+        "S-EVENTS"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-COUNTEREXAMPLE",
+      "kind": "FACT",
+      "text": "A local Python analytical replay, restricted to the supplied integer inputs and literal guard expression, returns true for revision-only admission while the Owner source-and-revision invariant is false. Constructed matching-identity and stale-revision contrasts return (true,true) and (false,false). This is not JavaScript or production execution.",
+      "source_refs": [
+        "S-ANALYSIS",
+        "S-GUARD",
+        "S-EVENTS",
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "U-RUNTIME",
+      "kind": "UNKNOWN",
+      "text": "The intended recipient runtime model, reasoning effort, task-specific competence and formal qualification are UNKNOWN. No qualification can be established from the supplied access or labels.",
+      "source_refs": [
+        "S-OWNER"
+      ],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": []
+    },
+    {
+      "id": "U-PRODUCTION",
+      "kind": "UNKNOWN",
+      "text": "The supplied inputs do not establish production caller behavior, authoritative source identity, how current selection is read at publication, or whether the synthetic ordering represents a real incident. This limits production causal and acceptance claims, not this local investigation design.",
+      "source_refs": [
+        "S-EVENTS",
+        "S-GUARD"
+      ],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": []
+    },
+    {
+      "id": "U-REPAIR",
+      "kind": "UNKNOWN",
+      "text": "The suitable architecture or implementation remedy and its all-ordering correctness are unestablished. Identity checks, request generations, cancellation, state capture, and publication revalidation would require an authorized production investigation before choosing among them; none is selected here.",
+      "source_refs": [
+        "S-OWNER",
+        "S-GUARD",
+        "S-EVENTS"
+      ],
+      "condition": null,
+      "state": "UNRESOLVED",
+      "outcome_refs": []
+    },
+    {
+      "id": "C-DOWNSTREAM",
+      "kind": "CONSTRAINT",
+      "text": "Retain the original conditions, T-INVESTIGATE identity and source references. Current work is local preparation and new artifacts in consumer/ only; preserve issued inputs. No product edit, external write, agent dispatch or product acceptance is assigned. Propose consequential task changes visibly.",
+      "source_refs": [
+        "S-LOCAL",
+        "S-DESIGN",
+        "S-MAP"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": []
+    },
+    {
+      "id": "F-SENDER-CHECK",
+      "kind": "FACT",
+      "text": "This Designer independently reconstructed the supplied states and finite integer predicates: all seven sender checks pass, including source pins, exact ordering and contrasts. This separately derived check agrees with the supplied receipt but does not establish production behavior or recipient fit.",
+      "source_refs": [
+        "S-CHECKS"
+      ],
+      "condition": null,
+      "state": "CURRENT",
+      "outcome_refs": [
+        "O-INVESTIGATION"
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "O-PUBLICATION",
+      "parent_id": null,
+      "text": "The displayed result corresponds to the currently selected source and revision.",
+      "done_when": "Evidence through the ordinary authorized application publication path establishes current source and revision. This parent outcome is unverified and outside current local preparation scope.",
+      "item_refs": [
+        "R-IDENTITY",
+        "U-PRODUCTION",
+        "U-REPAIR"
+      ]
+    },
+    {
+      "id": "O-INVESTIGATION",
+      "parent_id": "O-PUBLICATION",
+      "text": "Retain one coherent source-grounded T-INVESTIGATE note, with the original ordering, identity invariant, contrasts and limits.",
+      "done_when": "The note traces the fixed raw sequence, compares the literal guard with the Owner identity condition, links witnesses to claims, and states what remains unverified.",
+      "item_refs": [
+        "R-INVESTIGATE",
+        "R-IDENTITY",
+        "C-ORIGINAL",
+        "C-DOWNSTREAM",
+        "U-RUNTIME"
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "topic": "Evidence and authority have separate roles",
+      "reason": "The original Owner condition controls the identity oracle; the issued design and supplied receipt retain useful claims without granting product or execution authority.",
+      "outcome_refs": [
+        "O-INVESTIGATION"
+      ],
+      "source_refs": [
+        "S-OWNER",
+        "S-LOCAL",
+        "S-MAP",
+        "S-ANALYSIS"
+      ]
+    },
+    {
+      "topic": "Task identity and completion remain bounded",
+      "reason": "The same T-INVESTIGATE task is being adapted for a recipient. A completed local note would leave the parent publication outcome unverified.",
+      "outcome_refs": [
+        "O-INVESTIGATION"
+      ],
+      "source_refs": [
+        "S-DESIGN",
+        "S-MAP",
+        "S-LOCAL"
+      ]
+    }
+  ],
+  "worker": {
+    "model": null,
+    "reasoning_effort": null,
+    "configuration_basis": "UNKNOWN: no observable intended-recipient runtime model, effort or formal qualification was supplied. No override was requested or performed.",
+    "tools": [
+      "File access: supplied, not independently observed for the future recipient.",
+      "Python access: supplied, not independently observed for the future recipient."
+    ],
+    "reserved_decisions": [
+      "Production caller/state ownership, authoritative source representation, selection capture and publication timing remain unresolved.",
+      "No architecture or implementation remedy is selected, including identity guard, request generation, cancellation or publication revalidation.",
+      "Recipient task-specific qualification, actual runtime model and reasoning effort remain UNKNOWN; source access, a guided prompt and known target contrasts cannot establish them.",
+      "Only an actually authorized later investigation may assess ordinary application behavior and any product acceptance."
+    ]
+  },
+  "scope": {
+    "permitted": [
+      "Read only the issued task-design.md and task-map.json, their named owner.md, guard.js, events.json and analysis-checks.json, and this consumer/owner.md.",
+      "Prepare participant-specific local planning artifacts in consumer/ and run finite local source checks and Nudge Designer structural validation there."
+    ],
+    "forbidden": [
+      "Edit or replace the issued upstream inputs, product, shared skill or policy.",
+      "Read other task outputs, examples, tests or verification materials.",
+      "Write outside consumer/, dispatch an agent, perform an external action, choose a product repair or claim product acceptance."
+    ],
+    "basis_refs": [
+      "S-LOCAL",
+      "S-OWNER"
+    ],
+    "note": "The upstream original output location is preserved as historical scope. The explicit downstream location is consumer/. This plan prepares T-INVESTIGATE instructions; it neither dispatches that task nor extends authority."
+  },
+  "protocols": {
+    "thinking": "Nudge Designer; core + logic profiles, selected for source identity and event-order reasoning",
+    "delivery": null,
+    "note": "Independently selected for local planning only. No upstream Task Decomposer implementation, handover, coding, UI or external delivery protocol is imported."
+  }
+}

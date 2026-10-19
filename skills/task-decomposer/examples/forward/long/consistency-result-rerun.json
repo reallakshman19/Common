@@ -1,0 +1,109 @@
+{
+  "scope": "LOCAL_DECLARED_STRUCTURE_AND_ARTIFACT_INTEGRITY_ONLY",
+  "map_id": "M-LONG-DESKTOP",
+  "revision": 1,
+  "canonical_map_sha256": "b424b2df8cbbcd3635a69ff481ea007e59533b87abf8fdaffb99d2efc2edd591",
+  "skill_script_sha256_before": "82d0ef256d95f35380834c0d70c265d6a4d84e0cb23073c79a71349da119d3c8",
+  "skill_script_sha256_after": "82d0ef256d95f35380834c0d70c265d6a4d84e0cb23073c79a71349da119d3c8",
+  "schema_sha256_before": "b59470f6ffb6de22895c544ba2c6c4d4515b6c9a695a3f9d7c35a3262ea3c56c",
+  "schema_sha256_after": "b59470f6ffb6de22895c544ba2c6c4d4515b6c9a695a3f9d7c35a3262ea3c56c",
+  "native_runs": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+        "validate",
+        "--map",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/task-map.json",
+        "--out",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/validate-result-rerun.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "output": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/validate-result-rerun.json"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+        "frontier",
+        "--map",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/task-map.json",
+        "--out",
+        "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/frontier-result-rerun.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "output": "/workspace/scratch/52eed2252c51/tmp/task-decomposer-forward/long/frontier-result-rerun.json"
+    }
+  ],
+  "validation_receipt_matches_map": true,
+  "frontier_receipt_matches_map": true,
+  "source_revision_checks": [
+    {
+      "source": "S-OWNER",
+      "matches_pinned_revision": true
+    },
+    {
+      "source": "S-ATTEMPTS",
+      "matches_pinned_revision": true
+    },
+    {
+      "source": "S-KEYBOARD",
+      "matches_pinned_revision": true
+    },
+    {
+      "source": "S-SCOPE",
+      "matches_pinned_revision": true
+    },
+    {
+      "source": "S-INVENTORY",
+      "matches_pinned_revision": true
+    }
+  ],
+  "render_binding_checks": [
+    {
+      "task": "T-ORDINARY-JOURNEY",
+      "file": "ordinary-journey-task-design.md",
+      "equals_render_of_issued_map": true
+    },
+    {
+      "task": "T-KEYBOARD",
+      "file": "keyboard-task-design.md",
+      "equals_render_of_issued_map": true
+    }
+  ],
+  "actual_declared_blocking_unknowns_by_task": {
+    "T-WORKFLOW": [],
+    "T-ORDINARY-JOURNEY": [
+      "U-CURRENT-MATERIALS",
+      "U-ORIGINAL-CONDITIONS"
+    ],
+    "T-WORKFLOW-RESOLUTION": [
+      "U-CURRENT-MATERIALS",
+      "U-ORDINARY-BEHAVIOR",
+      "U-ORIGINAL-CONDITIONS"
+    ],
+    "T-END-TO-END": [
+      "U-CURRENT-MATERIALS",
+      "U-ORDINARY-BEHAVIOR",
+      "U-ORIGINAL-CONDITIONS"
+    ],
+    "T-KEYBOARD": [],
+    "T-BATCH": [
+      "U-BATCH"
+    ]
+  },
+  "earlier_consistency_receipt": "consistency-result.json preserved: frontier mismatch due to shared checker gaining an unallocated field between native initial run and recheck; no map change.",
+  "authority_effects": [],
+  "limits": [
+    "The first-run checker hash was not captured. Its printed source and native frontier receipt predate the observed unallocated-field addition.",
+    "Checks are structural and content-binding checks only; no product/browser/repair/export/Owner acceptance or participant qualification was assessed.",
+    "The synthetic source claims remain supplied reports."
+  ],
+  "checker_stable_during_rerun": true
+}

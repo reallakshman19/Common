@@ -1,0 +1,324 @@
+{
+  "schema": "task-decomposer.map/v1",
+  "id": "UI-PROGRAMME",
+  "revision": 1,
+  "scale": "PROGRAMME",
+  "request": "Make the original ordinary UI journey usable; retain independent route documentation.",
+  "purpose": "Make the original ordinary UI journey usable; retain independent route documentation.",
+  "performer_context": {
+    "description": "Future performers and tool access are not yet established.",
+    "basis": "UNKNOWN",
+    "limitations": [
+      "No model, effort or formal qualification observed."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S-CASE",
+      "locator": "raw.md",
+      "revision": "synthetic-case-1",
+      "kind": "SYNTHETIC",
+      "assessment": "SUPPLIED"
+    }
+  ],
+  "items": [
+    {
+      "id": "R-JOURNEY",
+      "kind": "REQUIREMENT",
+      "statement": "Restore the ordinary UI journey using the original files and entrypoint.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "R-INVENTORY",
+      "kind": "REQUIREMENT",
+      "statement": "Retain an independent source-linked route inventory.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "C-SCOPE",
+      "kind": "CONSTRAINT",
+      "statement": "Only local analysis and task design are assigned; no product edits or dispatch.",
+      "source_refs": [
+        "S-CASE"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "U-CAUSE",
+      "kind": "UNKNOWN",
+      "statement": "The cause of the navigation failure is unestablished.",
+      "source_refs": [],
+      "blocks": [
+        "T-REPAIR"
+      ]
+    },
+    {
+      "id": "U-LATER",
+      "kind": "UNKNOWN",
+      "statement": "A later export enhancement is unspecified.",
+      "source_refs": [],
+      "blocks": []
+    }
+  ],
+  "scope": {
+    "permitted": [
+      "Local source analysis, task design and new planning artifacts."
+    ],
+    "forbidden": [
+      "Product edits, external dispatch and release."
+    ],
+    "source_refs": [
+      "S-CASE"
+    ]
+  },
+  "preserve_refs": [
+    "C-SCOPE"
+  ],
+  "tasks": [
+    {
+      "id": "T-OUTCOME",
+      "parent_id": null,
+      "kind": "WORK",
+      "detail": "EXPANDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "A usable ordinary journey with integrated evidence.",
+      "item_refs": [
+        "R-JOURNEY"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "SPLIT",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": {
+          "output": "Durable original-journey trace and separate route inventory.",
+          "oracle": "Trace identity/actions can be checked before any repair exists.",
+          "consumer": "A repair uses the observed cause instead of redefining its reproduction.",
+          "benefit": "Reduce causal uncertainty while preserving independently useful inventory work.",
+          "cost": "An explicit trace-to-repair handoff and later integrated replay."
+        }
+      }
+    },
+    {
+      "id": "T-DISCOVER",
+      "parent_id": "T-OUTCOME",
+      "kind": "DISCOVERY",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "A reproducible entry/action/state trace distinguishing candidate causes.",
+      "item_refs": [
+        "R-JOURNEY",
+        "U-CAUSE"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "DISCOVER_FIRST",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-REPAIR",
+      "parent_id": "T-OUTCOME",
+      "kind": "WORK",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "A conditional targeted repair after cause and implementation scope are established.",
+      "item_refs": [
+        "R-JOURNEY",
+        "U-CAUSE"
+      ],
+      "depends_on": [
+        "T-DISCOVER"
+      ],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "KEEP",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-INTEGRATE",
+      "parent_id": "T-OUTCOME",
+      "kind": "INTEGRATION",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "Replay the original ordinary journey and contrary state/path.",
+      "item_refs": [
+        "R-JOURNEY"
+      ],
+      "depends_on": [
+        "T-REPAIR"
+      ],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "KEEP",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-INVENTORY",
+      "parent_id": "T-OUTCOME",
+      "kind": "WORK",
+      "detail": "BOUNDED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "A route inventory from the supplied current source.",
+      "item_refs": [
+        "R-INVENTORY"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "KEEP",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    },
+    {
+      "id": "T-LATER",
+      "parent_id": "T-OUTCOME",
+      "kind": "WORK",
+      "detail": "DEFERRED",
+      "purpose": "Contribute source-linked evidence to the declared Owner outcome.",
+      "deliverable": "Later export capability retained for future definition.",
+      "item_refs": [
+        "U-LATER"
+      ],
+      "depends_on": [],
+      "understanding": [
+        "Retain original conditions, source identity and the limits of the evidence."
+      ],
+      "decision_refs": [],
+      "limits": [
+        "Work only within the supplied local planning scope; reserve consequential unresolved judgments."
+      ],
+      "acceptance": {
+        "observable": "A source-linked result covering the stated deliverable.",
+        "contrast": "Identify a plausible contrary case that would change the conclusion.",
+        "integration": "This bounded result does not establish the complete parent outcome."
+      },
+      "boundary": {
+        "choice": "DEFER",
+        "reason": "One coherent deliverable under the stated conditions.",
+        "cut": null
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "item_ref": "R-JOURNEY",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-OUTCOME"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "R-INVENTORY",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-INVENTORY"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "C-SCOPE",
+      "disposition": "PLANNED",
+      "task_refs": [
+        "T-OUTCOME"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "U-CAUSE",
+      "disposition": "UNRESOLVED",
+      "task_refs": [
+        "T-DISCOVER",
+        "T-REPAIR"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    },
+    {
+      "item_ref": "U-LATER",
+      "disposition": "DEFERRED",
+      "task_refs": [
+        "T-LATER"
+      ],
+      "source_refs": [],
+      "reason": "Retained explicitly under the synthetic supplied conditions."
+    }
+  ],
+  "focus": [
+    "T-DISCOVER",
+    "T-INVENTORY"
+  ],
+  "focus_reason": "Choose work that establishes useful evidence while retaining unresolved parent outcomes."
+}

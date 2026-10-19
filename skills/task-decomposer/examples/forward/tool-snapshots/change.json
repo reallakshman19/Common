@@ -1,0 +1,8 @@
+{
+  "before_file_byte_sha256": "e55b611b9a42b904ad53a3c6d5082a285fc1662a919ec011e0d4d28213bc2413",
+  "after_file_byte_sha256": "82d0ef256d95f35380834c0d70c265d6a4d84e0cb23073c79a71349da119d3c8",
+  "parent_change": "Added descriptive unallocated obligations to frontier; candidate classification, map validation and rendered packet unchanged.",
+  "limits": "These source snapshots are archival. Their relative schema path is not a runnable copied package.",
+  "before_snapshot_provenance": "Parent reconstructed this source from the final file by reversing its single frontier-output edit. The pilot did not capture the first-run checker hash; this is not an authenticated pre-run snapshot.",
+  "after_snapshot_provenance": "Copied from the final source; its SHA-256 matches the long application final rerun receipt."
+}

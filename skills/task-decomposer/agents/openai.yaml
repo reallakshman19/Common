@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task Decomposer"
+  short_description: "Design coherent work for complex tasks"
+  default_prompt: "Use $task-decomposer to reconstruct my goal and design useful, bounded work from the available sources."

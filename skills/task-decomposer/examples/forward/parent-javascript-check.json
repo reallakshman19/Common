@@ -1,0 +1,26 @@
+{
+  "scope": "Actual JavaScript execution of the synthetic supplied helper, not browser or product execution",
+  "node": "v24.19.0",
+  "source_file_byte_sha256": "0d6f29c53ee46a03dff8e0a9d9d248f324c9097397ab1560238042f163d150fe",
+  "results": [
+    {
+      "id": "original",
+      "guard": true,
+      "ownerCondition": false
+    },
+    {
+      "id": "current-match",
+      "guard": true,
+      "ownerCondition": true
+    },
+    {
+      "id": "stale-revision",
+      "guard": false,
+      "ownerCondition": false
+    }
+  ],
+  "limits": [
+    "Finite controls share the supplied identity model.",
+    "No caller timing, production causal attribution, repair or acceptance established."
+  ]
+}

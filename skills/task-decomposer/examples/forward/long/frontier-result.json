@@ -1,0 +1,29 @@
+{
+  "scope": "DECLARED_DESIGN_CONTEXT_ONLY",
+  "candidates": [
+    {
+      "task": "T-ORDINARY-JOURNEY",
+      "state": "DISCOVER_OR_DECIDE",
+      "blocking_unknowns": [
+        "U-CURRENT-MATERIALS",
+        "U-ORIGINAL-CONDITIONS"
+      ],
+      "prerequisites": [],
+      "focus": true
+    },
+    {
+      "task": "T-KEYBOARD",
+      "state": "DESIGN_CANDIDATE",
+      "blocking_unknowns": [],
+      "prerequisites": [],
+      "focus": true
+    }
+  ],
+  "deferred": [
+    "T-WORKFLOW-RESOLUTION",
+    "T-END-TO-END",
+    "T-BATCH"
+  ],
+  "focus_reason": "T-ORDINARY-JOURNEY is the useful next product design: a source-bound ordinary-path investigation before any repair, with missing inputs explicitly scoped. It is a proposal outside current execution authority. T-KEYBOARD is independent local source work and its inventory is supplied now. Repair, whole-journey acceptance and unspecified batch implementation remain deferred; no global stop is inferred.",
+  "authority_effects": []
+}

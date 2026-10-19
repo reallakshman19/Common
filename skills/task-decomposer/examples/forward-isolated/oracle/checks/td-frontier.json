@@ -1,0 +1,19 @@
+{
+  "name": "td-frontier",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/52eed2252c51/Common-task-decomposer/skills/task-decomposer/scripts/task_decomposer.py",
+    "frontier",
+    "--map",
+    "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/task-map.json"
+  ],
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/workspace/scratch/52eed2252c51/tmp/br20-deps"
+  },
+  "exit_code": 0,
+  "stdout": "{\n  \"scope\": \"DECLARED_DESIGN_CONTEXT_ONLY\",\n  \"candidates\": [\n    {\n      \"task\": \"T-GENERATE\",\n      \"state\": \"DESIGN_CANDIDATE\",\n      \"blocking_unknowns\": [],\n      \"prerequisites\": [],\n      \"focus\": true\n    },\n    {\n      \"task\": \"T-ASSESS\",\n      \"state\": \"DISCOVER_OR_DECIDE\",\n      \"blocking_unknowns\": [\n        \"U-ACCESS\",\n        \"U-ARTIFACT\"\n      ],\n      \"prerequisites\": [\n        \"T-GENERATE\"\n      ],\n      \"focus\": false\n    },\n    {\n      \"task\": \"T-RECONCILE\",\n      \"state\": \"DISCOVER_OR_DECIDE\",\n      \"blocking_unknowns\": [\n        \"U-ACCESS\",\n        \"U-ARTIFACT\",\n        \"U-ASSESSMENT\"\n      ],\n      \"prerequisites\": [\n        \"T-ASSESS\"\n      ],\n      \"focus\": false\n    }\n  ],\n  \"deferred\": [],\n  \"unallocated\": [\n    {\n      \"item\": \"U-LEARNER\",\n      \"disposition\": \"DEFERRED\",\n      \"statement\": \"Actual learner understanding is unobserved and outside this synthetic authoring pilot.\"\n    }\n  ],\n  \"focus_reason\": \"The stipulated model and unit relation are already sufficient for one useful GUIDED generation bundle. New artifact/provenance and assessment unknowns restrict their downstream claims, not preparation. Existing arithmetic is retained; repeating old verdicts cannot answer the missing generation question.\",\n  \"authority_effects\": []\n}\n",
+  "stderr": "",
+  "scope": "Actual local structural/rendering/fit check, not semantic acceptance or execution"
+}
