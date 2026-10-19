@@ -4,6 +4,7 @@
 
 - [Start with a short request](#start-with-a-short-request)
 - [Choose only useful modules](#choose-only-useful-modules)
+- [Find task-specific support](#find-task-specific-support)
 - [Adapt to available participants](#adapt-to-available-participants)
 - [Carry work end to end](#carry-work-end-to-end)
 - [Preserve the handoff](#preserve-the-handoff)
@@ -15,6 +16,8 @@ Use this as an operating guide, not another skill, runtime controller or require
 sequence. Start from human intent and actual sources. The available agent maintains
 records and selects useful support. Roles, modules, JSON and helper scripts are
 optional; no CI, role quota or new execution/acceptance gate is introduced.
+When selecting a separate delivery protocol, follow its scoped requirements; see
+the task-specific support below. This guide does not silently select one for you.
 
 ## Start with a short request
 
@@ -67,6 +70,35 @@ Do not load every reference. Read the selected module's core, then only the
 applicable domain/support/adapter guidance. If an optional module is unavailable,
 perform the useful native work and disclose the omitted support. Continue
 unaffected work rather than waiting for an entire toolchain.
+
+## Find task-specific support
+
+Choose the relevant row after selecting the task and available participants. Read
+the linked guidance when applicable, rather than loading every module/reference.
+
+| Situation | Use | Applying guidance |
+|---|---|---|
+| Coding with separately selected v3.6 standalone delivery | [Standalone mode](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) and [pre-DONE self-check](../engineering-pr-delivery-v3.6/references/STANDALONE_COMPLETION.md) | Before calling the task done, complete the native SELF-CHECK v1 with source/candidate bindings, common checklist, frozen task criteria, actual witnesses and pending work. Keep coordinator mode separate. |
+| ChatGPT agent using that standalone protocol | [Activity and BuddyRunner policy](../engineering-pr-delivery-v3.6/references/CHATGPT_AGENT_ACTIVITY.md) | Recording is mandatory for this surface. Suggest the selected BuddyRunner once when distinct GitHub-access turns >5 OR recorded active-turn elapsed time >35 minutes. ChatGPT Work and other hosts are exempt. |
+| Learning-item task design | [Task Decomposer guidance](task-decomposer/references/APPLYING_GUIDANCE.md) | Preserve the source-defined verb, response type and an off-demand contrast: explain needs causal reasons, justify needs an argument, and retrieval may recognise a unit/sign. |
+| Selected-response item generation | [Generator guidance](nudge-designer/references/SELECTED_RESPONSE.md) | Select the optional `selected-response` profile when useful. Before handing over, script option lengths and correct-only shared question words; inspect flags, grammar and verb fit, retain actual results and label producer judgments SELF-ASSESSED. |
+| Selected-response item review | [Reviewer guidance](independent-review/references/SELECTED_RESPONSE_REVIEW.md) | Inspect length, reasoning-word, grammar, verb and word-overlap cues before subject judgment. Ask whether the key is selectable without the intended knowledge; disclose exposure and state what plausible wrong result could survive each verdict. |
+
+The executing ChatGPT agent runs its own activity record; no extra worker is
+needed. An available Oracle/lead preserves the duty in assignments and checks
+returned summaries. Without one, the executing agent owns both responsibilities.
+Keep each agent/project episode across nudges; calls are not turns, and closed
+active intervals exclude idle/user-wait gaps. Retain unavailable observations and
+UNKNOWN applicability explicitly. A known lower bound crossing either threshold
+still requires a suggestion. Follow the [Oracle responsibility guidance](task-decomposer/references/ORACLE_USE.md#owner-selected-chatgpt-agent-activity-duty)
+for optional composition. The recorder is agent-invoked, not installed host telemetry;
+the recommendation does not force handover or stop useful work.
+
+For learning material, reasoning words can be essential to the required explanation
+or argument; inspect asymmetric cues rather than banning those words. A no-flag
+script result does not approve the subject model, demand or learner transfer.
+An exposed reviewer remains exposed even when using only exact supplied files.
+Keep those limits visible without adding a compulsory role or review pass.
 
 ## Adapt to available participants
 
@@ -174,6 +206,11 @@ Standalone examples:
 - Independent Reviewer: review the short learning page against its stated aim.
   The [actual standalone application](independent-review/examples/applications/lesson/out/review.md)
   preserves recalculation, an empty finding set and learner/independence limits.
+- Selected-response generation/review: [G14 raw case](nudge-designer/examples/guidance/G14-option-demand/raw.md)
+  illustrates verb/cue distinctions; its [fresh application receipt](nudge-designer/examples/guidance/G14-option-demand/forward/RECEIPT.md)
+  retains actual generation, script checks and a separate review with exposure
+  limits. Withhold completed returns/goldens during another discovery test; this
+  application does not establish learner performance, a qualified P2 or an LFEA fix.
 
 Illustrative composed example — review an estimator against its original rule:
 
