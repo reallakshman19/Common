@@ -243,6 +243,27 @@ examples in [adapters](references/ADAPTERS.md). The
 [fresh NLM lessons](references/PILOT_LESSONS.md) distinguish adopted guidance,
 qualified proposals, research and unverified pilot reports. No app is changed.
 
+When a coordinator issues the work, it can apply these practices. Each one names
+its fallback, and none stops work:
+- **Producing:** the coordinator does not produce, repair or assemble the
+  deliverable; a repair is a new brief. Fallback: a typo-level fix that changes no
+  meaning, key or number, labelled COORDINATOR-EDITED and shown to the verifier.
+- **Packet ids:** take them from the channel, as a comment id or an id issued by an
+  app. Fallback: the work-order id plus the first 8 hex characters of the brief's
+  sha, marked LOCAL-ID. Never an id that imitates an app's format.
+- **Coverage:** take the denominator from the blueprint and state x of N. Report an
+  Owner-set scope against that N, and give any other narrowing as a visible
+  proposal.
+- **Withheld references:** for a reference-withheld producer, withhold the answers,
+  not the quality bar. Give it the baseline's format, depth and section structure.
+- **Checks:** ask the producer to ship its validators together with seeded-defect
+  cases.
+- **Sealing:** seal acceptance targets before the return is read. Fallback: seal
+  in the Owner's chat. If the seal is late, qualify the label.
+
+The optional [Gatekeeper](../gatekeeper/SKILL.md) module covers labels, sealing,
+fresh verification and release.
+
 Where Python support is unavailable, use the prose contract and preserve explicit
 NOT_RUN structural checks. Follow required project validation rather than
 claiming a manual plan satisfies an unavailable delivery qualification.

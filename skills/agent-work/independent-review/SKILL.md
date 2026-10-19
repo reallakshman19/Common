@@ -53,6 +53,12 @@ them when useful. They are not compulsory passes or a lifecycle controller.
    Inspect the test oracle, not only its green result. Use
    [applying guidance](references/APPLYING_GUIDANCE.md) for domain and capability
    choices. Add discovered risks even if absent from the initial claim list.
+   Before relying on a validator's PASS, show that it fails on a seeded defect,
+   such as a dropped sentence, a truncated stem or a lowered count. Check content
+   fidelity, not only structure. Count a crash or missing input as NOT_RUN. Where
+   an existing product sets the quality bar, run the same counting method on it and
+   on the candidate, compare section by section, and take coverage N from the
+   blueprint.
 5. **Inspect actual evidence.** Connect each conclusion to source, candidate,
    observation/derivation and a retrievable witness. Distinguish executed checks,
    inspected existing receipts, simulations and NOT_RUN. A command string alone
@@ -63,6 +69,8 @@ them when useful. They are not compulsory passes or a lifecycle controller.
    Review completion, coverage, independence and Owner acceptance are distinct.
    For each verdict give a concrete plausible wrong result that could survive
    that check, or explain an exhaustive checked scope; use it to bound the claim.
+   Bind a claim about displayed content to the displayed bytes. A display that
+   truncates or reformats content is a new candidate.
 7. **Reconcile and continue.** Have the available lead/Owner/reviewer compare the
    return with the original outcome and current candidate. Preserve the reviewer's
    actual verdict and record any disagreement separately. Revisit only affected

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gatekeeper"
+  short_description: "Label deliverables by the evidence they actually have"
+  default_prompt: "Use $gatekeeper to decide which label this deliverable's evidence supports (DRAFT, CHECKED, VERIFIED or RELEASED), using anchored evidence where available and the stated fallback where not."

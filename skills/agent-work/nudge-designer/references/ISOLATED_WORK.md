@@ -22,7 +22,7 @@ Choose among these arrangements; none is a universal phase or default agent coun
 |---|---|---|
 | Fresh task-local worker | A bounded count, observation, comparison or implementation has explicit inputs and a usable oracle | Context isolation does not establish skill or evaluator independence |
 | Continuing worker | The next coherent task needs the same live state or costly tacit model | Refresh changed inputs/decisions; do not carry stale assumptions forward |
-| Reference-withheld producer | The claim concerns novel generation or transfer without a particular reference | Specify which reference is withheld and what the producer legitimately receives |
+| Reference-withheld producer | The claim concerns novel generation or transfer without a particular reference | Specify which reference is withheld and what the producer legitimately receives. Withhold answers, not the quality bar: the producer still gets the baseline's format, depth and section structure |
 | Separate assessment | A consequential judgment benefits from someone who did not produce the artifact or see its verdict | Record shared inputs/model assumptions and remaining correlation |
 
 Keep tightly coupled UI/state/model work together until a durable intermediate
@@ -74,6 +74,15 @@ Trace upstream derivation too: a fresh producer cannot make a reference-derived
 blueprint, dataset or oracle unseen. State which relationship the independence
 claim concerns. Shared authorship/model assumptions can remain even when the
 specific reference items were excluded from the producer's issued inputs.
+
+Keep the existing product (the baseline) separate from the content source. A
+producer given only the content source can match its facts and still fall far
+short of the product's depth. Name both inputs in the brief. Judge the result
+against the baseline section by section, using the same counting method on both
+files. The coordinator who issued the work does not repair the artifact under
+test. A repair goes back as a new brief. Only a typo-level fix that changes no
+meaning, key or number may instead be labelled COORDINATOR-EDITED and shown to the
+assessor.
 
 ## Make graded judgments and corrections usable
 

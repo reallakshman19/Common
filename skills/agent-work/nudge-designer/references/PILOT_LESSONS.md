@@ -52,3 +52,33 @@ that protocol; their particular lengths/formats are not general requirements.
 Use these as reasons to pilot task-local contexts and explicit handoffs, with
 observed quality/cost and exposure limits. No universal chunk size, guaranteed
 blinding, automatic model selection or fixed pass/reviewer count follows.
+
+## Later on 19 October: second pilot and the Core build
+
+These are OTM's reports of the second pilot (rounds G6 to G9 on
+[#300](https://github.com/reallakshman19/Grade9v3.5/issues/300)). The method was:
+a blind writer Agent, then a fresh reviewer, then sealed targets, then a
+coordinator spot-check. On that method, 13 items were judged fit, covering 13 of
+the 28 cells in the item grid. REPRESENT and all D4 cells were not attempted.
+Read this as "13 valid items", not as a complete Core 2.
+
+Three transport and method points were routed to the Owner on #439:
+- Agents can take tasks from GitHub comments addressed `TO: <id>` and reply with
+  `ACK <packet id>`, with no browser after setup.
+- Reusing a reviewer across rounds wears away its independence; G9 used a new one.
+- A Markdown conversion needs a round-trip check: every source sentence must be
+  present in the output.
+
+The same day, the coordinator built Core 1A, 1B and 2 pages itself from the content
+source alone. The result was under 10% of the existing master, and it passed only
+the coordinator's own checks. The lessons and their fixes are in the
+[Gatekeeper](../../gatekeeper/SKILL.md) module:
+- locate the baseline before building;
+- seal targets before results;
+- the coordinator doesn't produce;
+- validators must be shown to fail;
+- verify freshly on exact bytes;
+- labels tied to bytes and to x of N;
+- release on the Owner's words.
+
+Each of those checks has a fallback.

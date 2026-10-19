@@ -24,6 +24,12 @@ Check sender/input identity and interpretation before attributing a failure.
 State the observable outcome and the conceptual model, decisions and evidence it
 requires. A useful first task may reconstruct source meaning, distinguish competing
 explanations or settle a model question. Do not prescribe an unestablished repair.
+For a product, first locate three inputs: the blueprint's definition of each
+artifact type and its coverage set, the existing best version and the content
+source. Never infer an artifact type from its name. Take the coverage denominator
+from the blueprint. An Owner-set scope is the scope, but report it against the
+blueprint's N. Any other narrowing is a visible proposal, not a silent selection. If an input can't be found, ask one specific question and
+keep independent preparation going.
 Read [Applying guidance](references/APPLYING_GUIDANCE.md) for decision questions,
 domain variations and pitfalls; select relevant guidance rather than fixed passes.
 

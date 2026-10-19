@@ -31,6 +31,23 @@ judgment. Record relevant producer/reference exposure and self-assessment; prese
 assignment/tracker/reply mapping. Existing packet families can be reused after
 checking changed inputs and meaning; do not infer trust from a fixed return count.
 
+Do not produce, repair or assemble the deliverable you issued; send a new brief.
+You may make a typo-level fix that changes no meaning, key or number, if it is
+labelled COORDINATOR-EDITED and shown to the verifier. Before building a product,
+locate the blueprint, the existing best version and the content source. If one is
+missing, ask and continue the work that doesn't depend on it. Seal targets before
+reading the return; if you can't, seal in the Owner's chat or qualify the label.
+Take packet ids from the channel; if none is issued, use a disclosed LOCAL-ID.
+Report coverage as x of N, with N from the blueprint. Your own checks are notes,
+unless the role setup names you the reviewer of record; then label the result
+(coordinator review). Label by evidence (DRAFT, CHECKED, VERIFIED, RELEASED),
+qualify the label when you use a fallback, and post a claim block when it changes.
+Say in the same message when you skip a step. A check never excuses an incomplete
+return: BLOCKED needs the attempt, the error or symptom, a second route, the
+fallback tried and the work done meanwhile. Under budget
+pressure, first checkpoint and defer, then narrow the scope visibly, and never cut
+quality silently. Gatekeeper lists each check's fallback.
+
 State the next feasible assigned action, its owner/scope, independent useful work
 and any real decision needed. A tool restriction affects its dependent actions,
 not the whole programme. Continue already authorized work where feasible. Do not
