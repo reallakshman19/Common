@@ -1,5 +1,9 @@
 # Verification checkpoint — 18 October 2026
 
+> Current location: `skills/agent-work/nudge-designer/`. Run current checks with
+> `python -B -m unittest discover -s skills/agent-work/nudge-designer/tests -v`.
+> The dated paths, commands and outcomes below remain historical records.
+
 ## Contents
 
 - [Scope and provenance](#scope-and-provenance)

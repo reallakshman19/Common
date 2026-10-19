@@ -11,7 +11,7 @@ instructions and suggest revision impact; they do not infer purpose or approve
 execution. Select reasoning moves by the uncertainty, without a fixed pass count.
 
 For standalone and optional composed use, see the shared
-[Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/independent-review/references/START_HERE.md).
+[Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md).
 It adds no dependency on the other modules.
 
 ## Start from the real assignment

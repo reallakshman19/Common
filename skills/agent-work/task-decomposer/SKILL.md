@@ -10,7 +10,7 @@ purpose before choosing task boundaries. Produce usable task designs without
 requiring another skill, issue tracker or delivery protocol.
 
 For standalone and optional composed use, see the shared
-[Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/independent-review/references/START_HERE.md).
+[Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md).
 It adds no dependency on the other modules.
 
 ## Reconstruct before dividing
