@@ -1,0 +1,11 @@
+{
+  "direct_check": {
+    "exception_type": "RuntimeError",
+    "exception": "Symlink loop from '/workspace/scratch/52eed2252c51/tmp/ir-prototype-review/loop-files/loop'"
+  },
+  "cli": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1240, in resolve\n    s = self._flavour.realpath(self, strict=strict)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen posixpath>\", line 424, in realpath\n  File \"<frozen posixpath>\", line 491, in _joinrealpath\n  File \"<frozen posixpath>\", line 486, in _joinrealpath\nOSError: [Errno 40] Too many levels of symbolic links: '/workspace/scratch/52eed2252c51/tmp/ir-prototype-review/loop-files/loop'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/scripts/review.py\", line 83, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/scripts/review.py\", line 68, in main\n    output = {'files': check_files(records, args.root),\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/scripts/review_records.py\", line 179, in check_files\n    path = (root / supplied).resolve(strict=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1242, in resolve\n    check_eloop(e)\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1237, in check_eloop\n    raise RuntimeError(\"Symlink loop from %r\" % e.filename)\nRuntimeError: Symlink loop from '/workspace/scratch/52eed2252c51/tmp/ir-prototype-review/loop-files/loop'\n"
+  }
+}

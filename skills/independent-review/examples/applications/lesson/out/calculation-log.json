@@ -1,0 +1,182 @@
+{
+  "executed_utc": "2026-10-19T07:15:01.806609+00:00",
+  "source_path": "/workspace/scratch/52eed2252c51/tmp/ir-forward/lesson/inputs/lesson.md",
+  "source_sha256": "8e9748eca50afce7c28013528c17fc79ad706a0fa1ea76f29cf817ebeecbf6ac",
+  "method": "Exact rational integration of linear velocity, split at an internal zero; triangular velocity-time areas cross-check the supplied case.",
+  "assumptions": [
+    "One spatial dimension",
+    "Right is positive",
+    "Acceleration stays constant over each stated interval",
+    "Duration begins at t=0"
+  ],
+  "main_case": {
+    "initial_velocity_m_per_s": {
+      "fraction": "3",
+      "decimal": 3.0
+    },
+    "acceleration_m_per_s_squared": {
+      "fraction": "-2",
+      "decimal": -2.0
+    },
+    "duration_s": {
+      "fraction": "4",
+      "decimal": 4.0
+    },
+    "final_velocity_m_per_s": {
+      "fraction": "-5",
+      "decimal": -5.0
+    },
+    "change_in_velocity_m_per_s": {
+      "fraction": "-8",
+      "decimal": -8.0
+    },
+    "zero_velocity_time_s": {
+      "fraction": "3/2",
+      "decimal": 1.5
+    },
+    "reversal_inside_interval": true,
+    "signed_interval_displacements_m": [
+      {
+        "fraction": "9/4",
+        "decimal": 2.25
+      },
+      {
+        "fraction": "-25/4",
+        "decimal": -6.25
+      }
+    ],
+    "signed_displacement_m": {
+      "fraction": "-4",
+      "decimal": -4.0
+    },
+    "distance_m": {
+      "fraction": "17/2",
+      "decimal": 8.5
+    }
+  },
+  "geometric_cross_check": {
+    "rightward_triangle_m": {
+      "fraction": "9/4",
+      "decimal": 2.25
+    },
+    "leftward_triangle_magnitude_m": {
+      "fraction": "25/4",
+      "decimal": 6.25
+    },
+    "signed_displacement_m": {
+      "fraction": "-4",
+      "decimal": -4.0
+    },
+    "distance_m": {
+      "fraction": "17/2",
+      "decimal": 8.5
+    }
+  },
+  "conceptual_snapshots": [
+    {
+      "t_s": "1/2",
+      "velocity_m_per_s": "2",
+      "acceleration_m_per_s_squared": "-2",
+      "interpretation": "Moving right and slowing: velocity and acceleration have opposite signs."
+    },
+    {
+      "t_s": "3/2",
+      "velocity_m_per_s": "0",
+      "acceleration_m_per_s_squared": "-2",
+      "interpretation": "Instantaneously at rest at the turn; acceleration remains nonzero."
+    },
+    {
+      "t_s": "2",
+      "velocity_m_per_s": "-1",
+      "acceleration_m_per_s_squared": "-2",
+      "interpretation": "Moving left and speeding up: velocity and acceleration have the same sign."
+    }
+  ],
+  "zero_acceleration_case": {
+    "initial_velocity_m_per_s": {
+      "fraction": "3",
+      "decimal": 3.0
+    },
+    "acceleration_m_per_s_squared": {
+      "fraction": "0",
+      "decimal": 0.0
+    },
+    "duration_s": {
+      "fraction": "4",
+      "decimal": 4.0
+    },
+    "final_velocity_m_per_s": {
+      "fraction": "3",
+      "decimal": 3.0
+    },
+    "change_in_velocity_m_per_s": {
+      "fraction": "0",
+      "decimal": 0.0
+    },
+    "zero_velocity_time_s": null,
+    "reversal_inside_interval": false,
+    "signed_interval_displacements_m": [
+      {
+        "fraction": "12",
+        "decimal": 12.0
+      }
+    ],
+    "signed_displacement_m": {
+      "fraction": "12",
+      "decimal": 12.0
+    },
+    "distance_m": {
+      "fraction": "12",
+      "decimal": 12.0
+    }
+  },
+  "reviewer_created_contrary_case": {
+    "initial_velocity_m_per_s": {
+      "fraction": "-4",
+      "decimal": -4.0
+    },
+    "acceleration_m_per_s_squared": {
+      "fraction": "1",
+      "decimal": 1.0
+    },
+    "duration_s": {
+      "fraction": "6",
+      "decimal": 6.0
+    },
+    "final_velocity_m_per_s": {
+      "fraction": "2",
+      "decimal": 2.0
+    },
+    "change_in_velocity_m_per_s": {
+      "fraction": "6",
+      "decimal": 6.0
+    },
+    "zero_velocity_time_s": {
+      "fraction": "4",
+      "decimal": 4.0
+    },
+    "reversal_inside_interval": true,
+    "signed_interval_displacements_m": [
+      {
+        "fraction": "-8",
+        "decimal": -8.0
+      },
+      {
+        "fraction": "2",
+        "decimal": 2.0
+      }
+    ],
+    "signed_displacement_m": {
+      "fraction": "-6",
+      "decimal": -6.0
+    },
+    "distance_m": {
+      "fraction": "10",
+      "decimal": 10.0
+    }
+  },
+  "contrary_interpretation": "At t=1 s, v=-3 m/s while a=+1 m/s^2: the cart still moves left while its signed velocity increases. Reversal occurs at t=4 s.",
+  "unit_check_by_inspection": "a*t has units m/s; v0*t and a*t^2 each have units m; velocity-time areas have units m.",
+  "assertions": "All 17 arithmetic and interval assertions passed.",
+  "limits": "The original candidate answers were visible before this derivation. No learners, generator, UI, external benchmarks, experiments, or classroom results were tested."
+}

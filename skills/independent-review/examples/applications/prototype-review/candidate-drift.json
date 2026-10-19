@@ -1,0 +1,10 @@
+{
+  "tests/test_local_helpers.py": {
+    "before": "3bfc4049b2fdfd8f9ed429abfac87a5132424f6461c4b2c18472e4cdc1399758",
+    "after": "41ae31ef282ef499367193964299703be143cd114c714729e1767c5d467b0103"
+  },
+  "references/CONTRACTS.md": {
+    "before": "c07186b50cf2edfdd9a91034cff3e1d918b14d3fc07fc520cac05c5b39414f3b",
+    "after": "23b654c9439c4378860d7d4c62238501736e8f7fc810da06ff87986acce53334"
+  }
+}

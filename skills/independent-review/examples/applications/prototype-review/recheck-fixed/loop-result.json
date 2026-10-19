@@ -1,0 +1,31 @@
+{
+  "direct_check": {
+    "observations": [
+      {
+        "id": "KNOWN_BAD",
+        "path": "good.txt",
+        "sha256": "106675dc1490d5cdd6d1f0410731316ce93fc964c6cf6726e2b0d53e19688feb",
+        "bytes": 5,
+        "status": "MISMATCH"
+      },
+      {
+        "id": "LOOP",
+        "path": "loop",
+        "status": "UNAVAILABLE",
+        "reason": "Symlink loop from '/workspace/scratch/52eed2252c51/tmp/ir-prototype-review/recheck-fixed/loop-files/loop'"
+      },
+      {
+        "id": "LATER_GOOD",
+        "path": "good.txt",
+        "sha256": "106675dc1490d5cdd6d1f0410731316ce93fc964c6cf6726e2b0d53e19688feb",
+        "bytes": 5,
+        "status": "MATCH"
+      }
+    ]
+  },
+  "cli": {
+    "exit_code": 0,
+    "stdout": "{\n  \"files\": [\n    {\n      \"id\": \"SUBJECT\",\n      \"path\": \"good.txt\",\n      \"sha256\": \"106675dc1490d5cdd6d1f0410731316ce93fc964c6cf6726e2b0d53e19688feb\",\n      \"bytes\": 5,\n      \"status\": \"MISMATCH\"\n    },\n    {\n      \"id\": \"OWNER\",\n      \"path\": \"loop\",\n      \"status\": \"UNAVAILABLE\",\n      \"reason\": \"Symlink loop from '/workspace/scratch/52eed2252c51/tmp/ir-prototype-review/recheck-fixed/loop-files/loop'\"\n    }\n  ],\n  \"limit\": \"Local byte identity only; no URL fetch, reasoning or execution authentication.\"\n}\n",
+    "stderr": ""
+  }
+}

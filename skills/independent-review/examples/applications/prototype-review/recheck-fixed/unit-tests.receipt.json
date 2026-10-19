@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review",
+  "exit_code": 0,
+  "manifest": {
+    "scripts/review_records.py": "e798793664730465db0c9c5f721a817eaa44c9b9bc582f038ef5f27e5f28764f",
+    "scripts/review.py": "d9bb71768a41c92a92cf66a57fc80e7ad9703df1c5801c1234c75404b357496e",
+    "references/CONTRACTS.md": "705065c97335b62eefda5c58edfe2f9565b816247e87de8fc82770f54eb85d53",
+    "tests/test_records.py": "8d20769619a3c33141853f4167784d800a02ea9de3eecf8ca0b265da2d925ce1",
+    "tests/test_local_helpers.py": "b2cbe2b2379bbf33ade64b290ab54ab0856f234c836d27ea8f526d864889571e"
+  }
+}

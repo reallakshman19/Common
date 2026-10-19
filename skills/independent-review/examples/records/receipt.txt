@@ -1,0 +1,2 @@
+SYNTHETIC REFERENCE ONLY: source derivation gives ["x", "y"] -> "x|y", [] -> "".
+No hosted run or actual independent principal is claimed by this fixture.

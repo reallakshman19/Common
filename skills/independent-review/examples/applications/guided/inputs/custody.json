@@ -1,0 +1,15 @@
+{
+  "purpose": "Check exact original bytes only; do not infer semantic validity.",
+  "files": [
+    {
+      "id": "owner.md",
+      "local_path": "owner.md",
+      "sha256": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32"
+    },
+    {
+      "id": "lesson.md",
+      "local_path": "lesson.md",
+      "sha256": "8e9748eca50afce7c28013528c17fc79ad706a0fa1ea76f29cf817ebeecbf6ac"
+    }
+  ]
+}

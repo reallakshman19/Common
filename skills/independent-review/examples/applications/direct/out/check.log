@@ -1,0 +1,51 @@
+READ-ONLY ESTIMATOR REVIEW
+Python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+Platform: Linux-6.18.55-x86_64-with-glibc2.39
+Candidate: /workspace/scratch/52eed2252c51/tmp/ir-forward/direct/inputs/rate.py
+Input SHA-256 before: {"owner.md": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32", "rate.py": "d8124e99da3e6bdc1db4fdf9b0b4c4f545704c4b6381a878d140b1be45627829", "test_rate.py": "680a2296cc580466419170ffce870ef2a960c03aa94ade4cf2e0f8c71f6dcc01"}
+
+EXISTING TESTS: ['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python', '-B', '-m', 'unittest', '-v', 'test_rate'] cwd= /workspace/scratch/52eed2252c51/tmp/ir-forward/direct/inputs
+test_invalid (test_rate.ExistingChecks.test_invalid) ... ok
+test_large (test_rate.ExistingChecks.test_large) ... ok
+test_small (test_rate.ExistingChecks.test_small) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+Existing tests exit: 0
+
+CHECK SUMMARY: {"boundary_sweep": {"failed": 273, "passed": 744}, "concrete": {"failed": 4, "passed": 12}, "invalid_input": {"failed": 0, "passed": 24}, "large_integer": {"failed": 0, "passed": 1}}
+Concrete observations:
+{"actual": 0, "actual_type": "int", "delivery": 0, "expected": 0, "group": "concrete", "label": "zero", "passed": true, "subtotal": 0}
+{"actual": 10000, "actual_type": "int", "delivery": 10000, "expected": 10000, "group": "concrete", "label": "delivery_only", "passed": true, "subtotal": 0}
+{"actual": 10009, "actual_type": "int", "delivery": 10000, "expected": 10009, "group": "concrete", "label": "zero_floor_discount", "passed": true, "subtotal": 9}
+{"actual": 9999, "actual_type": "int", "delivery": 9990, "expected": 10000, "group": "concrete", "label": "first_nonzero_wrong_discount", "passed": false, "subtotal": 10}
+{"actual": 9999, "actual_type": "int", "delivery": 0, "expected": 9999, "group": "concrete", "label": "below_threshold_no_delivery", "passed": true, "subtotal": 9999}
+{"actual": 9001, "actual_type": "int", "delivery": 1, "expected": 10000, "group": "concrete", "label": "delivery_one_crosses_threshold", "passed": false, "subtotal": 9999}
+{"actual": 9999, "actual_type": "int", "delivery": 999, "expected": 9999, "group": "concrete", "label": "delivery_just_below_crossing", "passed": true, "subtotal": 9000}
+{"actual": 9100, "actual_type": "int", "delivery": 1000, "expected": 10000, "group": "concrete", "label": "delivery_hits_threshold", "passed": false, "subtotal": 9000}
+{"actual": 9600, "actual_type": "int", "delivery": 6000, "expected": 10000, "group": "concrete", "label": "small_items_large_delivery", "passed": false, "subtotal": 4000}
+{"actual": 9000, "actual_type": "int", "delivery": 0, "expected": 9000, "group": "concrete", "label": "exact_item_threshold", "passed": true, "subtotal": 10000}
+{"actual": 9500, "actual_type": "int", "delivery": 500, "expected": 9500, "group": "concrete", "label": "threshold_with_delivery", "passed": true, "subtotal": 10000}
+{"actual": 9501, "actual_type": "int", "delivery": 500, "expected": 9501, "group": "concrete", "label": "fractional_discount_down_1", "passed": true, "subtotal": 10001}
+{"actual": 9009, "actual_type": "int", "delivery": 0, "expected": 9009, "group": "concrete", "label": "fractional_discount_down_9", "passed": true, "subtotal": 10009}
+{"actual": 9009, "actual_type": "int", "delivery": 0, "expected": 9009, "group": "concrete", "label": "discount_cent_step", "passed": true, "subtotal": 10010}
+{"actual": 9019, "actual_type": "int", "delivery": 1, "expected": 9019, "group": "concrete", "label": "fractional_discount_down_19", "passed": true, "subtotal": 10019}
+{"actual": 18500, "actual_type": "int", "delivery": 500, "expected": 18500, "group": "concrete", "label": "large_author_case", "passed": true, "subtotal": 20000}
+{"actual": 9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000046, "actual_type": "int", "delivery": 37, "expected": 9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000046, "group": "large_integer", "label": "arbitrary_precision", "passed": true, "subtotal": 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009}
+First 10 boundary sweep failures:
+{"actual": 9999, "actual_type": "int", "delivery": 9990, "expected": 10000, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 10}
+{"actual": 10000, "actual_type": "int", "delivery": 9991, "expected": 10001, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 10}
+{"actual": 10009, "actual_type": "int", "delivery": 10000, "expected": 10010, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 10}
+{"actual": 10010, "actual_type": "int", "delivery": 10001, "expected": 10011, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 10}
+{"actual": 9999, "actual_type": "int", "delivery": 9989, "expected": 10000, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 11}
+{"actual": 10000, "actual_type": "int", "delivery": 9990, "expected": 10001, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 11}
+{"actual": 10010, "actual_type": "int", "delivery": 10000, "expected": 10011, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 11}
+{"actual": 10011, "actual_type": "int", "delivery": 10001, "expected": 10012, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 11}
+{"actual": 9999, "actual_type": "int", "delivery": 9988, "expected": 10000, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 12}
+{"actual": 10000, "actual_type": "int", "delivery": 9989, "expected": 10001, "group": "boundary_sweep", "label": "owner_formula", "passed": false, "subtotal": 12}
+Input SHA-256 after: {"owner.md": "52af62ddd92b4d0a061a2724b624921f3d00f2aa4dd42f7907f243737d20fd32", "rate.py": "d8124e99da3e6bdc1db4fdf9b0b4c4f545704c4b6381a878d140b1be45627829", "test_rate.py": "680a2296cc580466419170ffce870ef2a960c03aa94ade4cf2e0f8c71f6dcc01"}
+Inputs unchanged: True
+Detailed evidence: /workspace/scratch/52eed2252c51/tmp/ir-forward/direct/out/check_evidence.json
+Review checks: FAIL

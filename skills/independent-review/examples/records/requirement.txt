@@ -1,0 +1,1 @@
+Join string rows with | in their original order. An empty list returns an empty string.
