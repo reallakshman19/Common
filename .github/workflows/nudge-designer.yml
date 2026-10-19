@@ -3,12 +3,12 @@ name: Nudge Designer
 on:
   pull_request:
     paths:
-      - 'skills/nudge-designer/**'
+      - 'skills/agent-work/nudge-designer/**'
       - '.github/workflows/nudge-designer.yml'
   push:
     branches: [main]
     paths:
-      - 'skills/nudge-designer/**'
+      - 'skills/agent-work/nudge-designer/**'
       - '.github/workflows/nudge-designer.yml'
   workflow_dispatch:
 
@@ -34,4 +34,4 @@ jobs:
       - name: Run declared-contract, rendering, revision and CLI checks
         env:
           PYTHONDONTWRITEBYTECODE: '1'
-        run: python -B -m unittest discover -s skills/nudge-designer/tests -v
+        run: python -B -m unittest discover -s skills/agent-work/nudge-designer/tests -v

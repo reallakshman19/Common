@@ -43,11 +43,20 @@ capability. A reference to another module does not create a dependency on it.
 
 ## Choose only useful modules
 
+This parent is a collection of independent packages. Select the nested folder
+containing the module's own `SKILL.md` when reading, copying or registering a
+module with an available host. Keep the names `task-decomposer`, `nudge-designer`
+and `independent-review`. There is no parent skill to install and no assumption
+that a host scans nested folders automatically. The three source roots are
+`skills/agent-work/task-decomposer/`, `skills/agent-work/nudge-designer/` and
+`skills/agent-work/independent-review/`. Copy only the selected package when
+using it alone; the shared guide is optional and introduces no runtime import.
+
 | Need | Select | Input → useful output |
 |---|---|---|
-| Understand long/difficult work and choose coherent boundaries | [Task Decomposer](https://github.com/reallakshman19/Common/blob/main/skills/task-decomposer/SKILL.md) | Intent/original sources → task map, dependencies, required understanding and selected task designs |
-| Prepare guidance for a particular participant | [Nudge Designer](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/SKILL.md) | Intent or selected task, actual tools/capability → self-contained operational brief and return contract |
-| Assess an actual artifact or engineering/learning claim | [Independent Reviewer](../SKILL.md) | Candidate/original criteria → evidence-backed findings, coverage and scoped assessment |
+| Understand long/difficult work and choose coherent boundaries | [Task Decomposer](task-decomposer/SKILL.md) | Intent/original sources → task map, dependencies, required understanding and selected task designs |
+| Prepare guidance for a particular participant | [Nudge Designer](nudge-designer/SKILL.md) | Intent or selected task, actual tools/capability → self-contained operational brief and return contract |
+| Assess an actual artifact or engineering/learning claim | [Independent Reviewer](independent-review/SKILL.md) | Candidate/original criteria → evidence-backed findings, coverage and scoped assessment |
 
 Use a module alone when that satisfies the request. Plan-only ends with usable
 task designs; brief-only ends with usable instructions; review-only ends with an
@@ -129,16 +138,16 @@ Keep task, candidate and review-run identities distinct. Link details rather tha
 passing the entire chat. Preserve issued snapshots and native returns. A new
 candidate does not erase old evidence; assess affected claims and integration
 before reuse. A changed observation alone need not invent a new task-map revision.
-Use [adapter mappings](ADAPTERS.md) for identity/transport details and
-[reconciliation guidance](RECONCILIATION.md) for findings and drift.
+Use [adapter mappings](independent-review/references/ADAPTERS.md) for identity/transport details and
+[reconciliation guidance](independent-review/references/RECONCILIATION.md) for findings and drift.
 
 ## Use schemas when helpful
 
 | Module | Optional structured contract |
 |---|---|
-| Task Decomposer | [Task Map](https://github.com/reallakshman19/Common/blob/main/skills/task-decomposer/schemas/task-map.schema.json), `task-decomposer.map/v1` |
-| Nudge Designer | [Intent](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/schemas/intent.schema.json) and [Plan](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/schemas/plan.schema.json); select its documented v1/v1.1 contract |
-| Independent Reviewer | [Review Case](../schemas/review-case.schema.json) and [Review Result](../schemas/review-result.schema.json) |
+| Task Decomposer | [Task Map](task-decomposer/schemas/task-map.schema.json), `task-decomposer.map/v1` |
+| Nudge Designer | [Intent](nudge-designer/schemas/intent.schema.json) and [Plan](nudge-designer/schemas/plan.schema.json); select its documented v1/v1.1 contract |
+| Independent Reviewer | [Review Case](independent-review/schemas/review-case.schema.json) and [Review Result](independent-review/schemas/review-result.schema.json) |
 
 A Task Map is source input to Nudge Designer, not native Nudge Plan JSON. The
 consuming agent creates that module's objects from the selected task meaning when
@@ -157,13 +166,13 @@ Standalone examples:
 
 - Task Decomposer: ask it to plan a long UI investigation from the original goal,
   retaining uncertain future work. It returns source-grounded designs; it does not
-  claim the UI was repaired. Use its [entry prompts](https://github.com/reallakshman19/Common/blob/main/skills/task-decomposer/assets/entry-prompts.md).
+  claim the UI was repaired. Use its [entry prompts](task-decomposer/assets/entry-prompts.md).
 - Nudge Designer: give it a custody task, manifest and actual worker tools. Request
   a GUIDED brief for byte hashing and an altered-copy contrast. It returns usable
   instructions; sending/execution remains with the authorized lead/host. Use its
-  [assignment template](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/assets/prompts/assignment.md).
+  [assignment template](nudge-designer/assets/prompts/assignment.md).
 - Independent Reviewer: review the short learning page against its stated aim.
-  The [actual standalone application](../examples/applications/lesson/out/review.md)
+  The [actual standalone application](independent-review/examples/applications/lesson/out/review.md)
   preserves recalculation, an empty finding set and learner/independence limits.
 
 Illustrative composed example — review an estimator against its original rule:
@@ -174,19 +183,19 @@ Illustrative composed example — review an estimator against its original rule:
 | Task Decomposer → brief preparation, if selected | KEEP one coherent review boundary; retain source authority, threshold/rounding knowledge, candidate identity and the no-edit boundary. Do not create a separate agent/task for every line. |
 | Nudge Designer → evidence execution, if selected | Issue a bounded comparison using actual files, original rule, boundary cases, required evidence and native return. A narrower worker receives a usable method; it does not choose the business rule. |
 | Worker → assessment | Return actual inputs/outputs, source identity, runtime receipts, unchanged-byte checks and limits. Original tests passing does not settle rule coverage. |
-| Independent Reviewer → reconciliation, if selected | Establish that delivery can wrongly trigger the discount, with a concrete witness. The [actual standalone review](../examples/applications/direct/out/review.md) shows this evidence; it was not generated through a three-module run. |
+| Independent Reviewer → reconciliation, if selected | Establish that delivery can wrongly trigger the discount, with a concrete witness. The [actual standalone review](independent-review/examples/applications/direct/out/review.md) shows this evidence; it was not generated through a three-module run. |
 | Available lead → Owner | Preserve the failed bounded claim and valid evidence; the requested review is complete, while any repair needs the applicable task authority and a changed-candidate check. No release claim follows. |
 
 This table is an illustration of composition, not evidence that all three modules
 were executed together. It contains a worked answer: withhold it when assessing
-fresh discovery on this same fixture. The [application archive](../examples/applications/assessment.md)
-and the Nudge Designer [Oracle episode](https://github.com/reallakshman19/Common/blob/main/skills/nudge-designer/examples/oracle-execution/ASSESSMENT.md)
+fresh discovery on this same fixture. The [application archive](independent-review/examples/applications/assessment.md)
+and the Nudge Designer [Oracle episode](nudge-designer/examples/oracle-execution/ASSESSMENT.md)
 record the separate actual applications, assistance and limits. Do not combine
 their PASS labels into an unperformed integrated pilot.
 
 ## Start the real LFEA test
 
-Use [the LFEA entry prompt](../assets/lfea-pilot.md), choosing direct review or
+Use [the LFEA entry prompt](independent-review/assets/lfea-pilot.md), choosing direct review or
 optional composition according to the actual need. Refresh AA3 original intent,
 amendments, candidate/deployment, trace access and existing authority. Preserve the
 whole findings → locate → supported correction → fresh checks → Output aim.

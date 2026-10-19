@@ -9,7 +9,7 @@ Prototype v1.0. Review directly from the Owner's request, original sources and t
 actual candidate. Use ordinary prose or the project's native reporting format.
 Treat structured records, scripts and other skills as optional conveniences.
 
-For standalone or end-to-end use, begin with [Start here](references/START_HERE.md).
+For standalone or end-to-end use, begin with [Start here](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md).
 It includes short prompts, available-participant arrangements, handoff/schema
 guidance and worked examples without requiring the other modules.
 

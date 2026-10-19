@@ -75,7 +75,7 @@ Suggested folder contents:
 - `examples/<case>/` with raw case, intent, plan and human assessment
 - `tests/` plus a narrowly scoped CI workflow
 
-Allowed engineering scope: the new `skills/nudge-designer/` package and one
+Allowed engineering scope: the new `skills/agent-work/nudge-designer/` package and one
 focused CI workflow. Preserve existing skills, historical evidence, product
 repositories, NextNudge source/data, protected authorities and source fixtures.
 

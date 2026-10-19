@@ -5,7 +5,7 @@ available participants and existing records. These are file/reference mappings,
 not Python imports, automatic dispatch or required services. No sibling skill
 installation is needed. Never silently replace the authoritative task definition.
 
-Use [Start here](START_HERE.md) for standalone and composed operating examples;
+Use [Start here](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md) for standalone and composed operating examples;
 return here for the selected interface's detailed mapping.
 
 | Adapter | Bring in | Return/preserve |
