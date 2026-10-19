@@ -9,6 +9,10 @@ Prototype v1.0. Review directly from the Owner's request, original sources and t
 actual candidate. Use ordinary prose or the project's native reporting format.
 Treat structured records, scripts and other skills as optional conveniences.
 
+For standalone or end-to-end use, begin with [Start here](references/START_HERE.md).
+It includes short prompts, available-participant arrangements, handoff/schema
+guidance and worked examples without requiring the other modules.
+
 Start with: **"Review <candidate> against <purpose/sources>. Use the participants
 and tools available. Show evidence, limitations and the next useful action."**
 

@@ -5,6 +5,9 @@ available participants and existing records. These are file/reference mappings,
 not Python imports, automatic dispatch or required services. No sibling skill
 installation is needed. Never silently replace the authoritative task definition.
 
+Use [Start here](START_HERE.md) for standalone and composed operating examples;
+return here for the selected interface's detailed mapping.
+
 | Adapter | Bring in | Return/preserve |
 |---|---|---|
 | Task Decomposer | Selected map/task identity, revision/digest, original sources, required understanding, dependencies, protected constraints and acceptance contrast | Review Case binding and evidence for that boundary; propose visible meaning changes to the available lead. Keep parent integration/deferred work. |

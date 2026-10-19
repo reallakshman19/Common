@@ -1,0 +1,37 @@
+{
+  "scope": "Copied task-local raw inputs and native returns; manifest excludes itself.",
+  "files": [
+    {
+      "path": "ASSESSMENT.md",
+      "sha256": "ba6b76a6f0a5b832788cf788a207762844df86ad6756d79cc22215fca9f455c4"
+    },
+    {
+      "path": "inputs/candidate.py",
+      "sha256": "683784aca35613d3984f106ecc97de7b40c8628fc599e576fc7bcb559bf788c3"
+    },
+    {
+      "path": "inputs/owner.txt",
+      "sha256": "2e9f908d4403505168fb9bfad3e92ab7835af3d8d71b8eddc7b6fdd03231df00"
+    },
+    {
+      "path": "issued.txt",
+      "sha256": "493489cc09ec952b38fefc3e53613cb8272dd63cc9a1b7ffcb4f44bbad5b275f"
+    },
+    {
+      "path": "out/check_remove_first.py",
+      "sha256": "fec6985c0bb3b8788869228fab3a79e2256fa41e6498fdb44b68e63fd49729f5"
+    },
+    {
+      "path": "out/execution.log",
+      "sha256": "1b34c130f952dfcde8f89e1ac2378098179b669f610697dd5b388538eb3693b8"
+    },
+    {
+      "path": "out/provenance.log",
+      "sha256": "8a28abbe1b4d916bf5ff3425a5531fc662185488ec1f0a029ccab394dc91b8c5"
+    },
+    {
+      "path": "out/report.md",
+      "sha256": "d3aba9158142f9cd91175abecc6791188ab7bb79aba3500e4fcd624e5bdcbfc1"
+    }
+  ]
+}

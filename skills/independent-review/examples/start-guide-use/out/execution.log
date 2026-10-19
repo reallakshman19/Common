@@ -1,0 +1,35 @@
+Run: remove-first-review-01; UTC start: 2026-10-19T07:47:46.290435+00:00
+Environment: CPython 3.12.14
+BEFORE owner.txt: 271 bytes; SHA256 2e9f908d4403505168fb9bfad3e92ab7835af3d8d71b8eddc7b6fdd03231df00
+BEFORE candidate.py: 139 bytes; SHA256 683784aca35613d3984f106ecc97de7b40c8628fc599e576fc7bcb559bf788c3
+
+MANUAL ORACLE: explicit expected lists derived from owner.txt
+PASS empty, absent: input=[], item=7; expected=[]; actual=[]; input_unchanged=True
+PASS nonempty, absent: input=[3, 1, 2], item=9; expected=[3, 1, 2]; actual=[3, 1, 2]; input_unchanged=True
+PASS singleton match: input=[7], item=7; expected=[]; actual=[]; input_unchanged=True
+PASS first-position match: input=[7, 1, 2], item=7; expected=[1, 2]; actual=[1, 2]; input_unchanged=True
+PASS middle-position match: input=[1, 7, 2], item=7; expected=[1, 2]; actual=[1, 2]; input_unchanged=True
+PASS last-position match: input=[1, 2, 7], item=7; expected=[1, 2]; actual=[1, 2]; input_unchanged=True
+PASS separated duplicates: input=[7, 1, 7, 2, 7], item=7; expected=[1, 7, 2, 7]; actual=[1, 7, 2, 7]; input_unchanged=True
+PASS adjacent duplicates: input=[1, 7, 7, 2], item=7; expected=[1, 7, 2]; actual=[1, 7, 2]; input_unchanged=True
+PASS all values match: input=[7, 7, 7], item=7; expected=[7, 7]; actual=[7, 7]; input_unchanged=True
+PASS falsy requested value: input=[0, 1, 0, 2], item=0; expected=[1, 0, 2]; actual=[1, 0, 2]; input_unchanged=True
+PASS None requested value: input=[None, 'x', None], item=None; expected=['x', None]; actual=['x', None]; input_unchanged=True
+PASS equal numeric values: input=[True, 2, 1, 3], item=1; expected=[2, 1, 3]; actual=[2, 1, 3]; input_unchanged=True
+PASS equal, distinct objects: input=[Token(7, 'first'), Token(8, 'middle'), Token(7, 'later')]; actual=[Token(8, 'middle'), Token(7, 'later')]; required survivor identities=[middle, later]; original identities preserved=True
+PASS nested-list equality: expected=[[2], [1]]; actual=[[2], [1]]; original=[[1], [2], [1]]; survivor identities correct=True
+EXHAUSTIVE: 4372 cases checked; candidate failures=0
+
+CONTRARY IMPLEMENTATIONS: validation of the manual oracle
+REJECTED remove every occurrence: 6/12 manual cases reject; witness: separated duplicates: input=[7, 1, 7, 2, 7], item=7; expected=[1, 7, 2, 7]; actual=[1, 2]; input_unchanged=True
+REJECTED remove last occurrence: 4/12 manual cases reject; witness: separated duplicates: input=[7, 1, 7, 2, 7], item=7; expected=[1, 7, 2, 7]; actual=[7, 1, 7, 2]; input_unchanged=True
+REJECTED mutate the input: 10/12 manual cases reject; witness: singleton match: input=[7], item=7; expected=[]; actual=[]; input_unchanged=False
+REJECTED reverse surviving order: 9/12 manual cases reject; witness: nonempty, absent: input=[3, 1, 2], item=9; expected=[3, 1, 2]; actual=[2, 1, 3]; input_unchanged=True
+REJECTED raise if absent: 2/12 manual cases reject; witness: empty, absent: input=[], item=7; expected=[]; actual=ValueError: list.remove(x): x not in list; input_unchanged=True
+REJECTED never remove: 10/12 manual cases reject; witness: singleton match: input=[7], item=7; expected=[]; actual=[7]; input_unchanged=True
+
+INPUT CUSTODY
+AFTER owner.txt: SHA256 2e9f908d4403505168fb9bfad3e92ab7835af3d8d71b8eddc7b6fdd03231df00; byte_identical=True
+AFTER candidate.py: SHA256 683784aca35613d3984f106ecc97de7b40c8628fc599e576fc7bcb559bf788c3; byte_identical=True
+RESULT: PASS; failures=[]
+UTC finish: 2026-10-19T07:47:46.299244+00:00

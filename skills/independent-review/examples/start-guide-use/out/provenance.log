@@ -1,0 +1,27 @@
+Local source and evidence identity
+
+SHA256 2e9f908d4403505168fb9bfad3e92ab7835af3d8d71b8eddc7b6fdd03231df00  /workspace/scratch/52eed2252c51/tmp/module-guide-application/inputs/owner.txt  (271 bytes)
+SHA256 683784aca35613d3984f106ecc97de7b40c8628fc599e576fc7bcb559bf788c3  /workspace/scratch/52eed2252c51/tmp/module-guide-application/inputs/candidate.py  (139 bytes)
+SHA256 4b785fd7c47ccd533da32499c953200b050ede9f4c83ae12c1eef7d00baff551  /workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/SKILL.md  (6997 bytes)
+SHA256 5754622a5b8b753f31523e00c6ad7c376ff9d0dde6d48e610481371bac727e35  /workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/references/START_HERE.md  (13631 bytes)
+SHA256 758dd9af18fa6c89e259d2f7734599d9100c287bf48c76b07a1d91975efafef1  /workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/references/INDEPENDENCE.md  (2898 bytes)
+SHA256 0953e2477afb78bcbd0e1ad7f6c44a0490df51887d2d45aa66c7d3be7c357014  /workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/references/APPLYING_GUIDANCE.md  (5444 bytes)
+SHA256 df296e787878e254e98186f054e20345acb2c6d511706dc5a52300d981c43bca  /workspace/scratch/52eed2252c51/Common-independent-review/skills/independent-review/references/RECONCILIATION.md  (2819 bytes)
+SHA256 fec6985c0bb3b8788869228fab3a79e2256fa41e6498fdb44b68e63fd49729f5  /workspace/scratch/52eed2252c51/tmp/module-guide-application/out/check_remove_first.py  (8157 bytes)
+SHA256 1b34c130f952dfcde8f89e1ac2378098179b669f610697dd5b388538eb3693b8  /workspace/scratch/52eed2252c51/tmp/module-guide-application/out/execution.log  (3430 bytes)
+
+$ git -C /workspace/scratch/52eed2252c51/Common-independent-review rev-parse HEAD
+exit_code=0
+62fd69a307c8c4f70aa27b831f57a9a7096013ed
+
+
+$ git -C /workspace/scratch/52eed2252c51/Common-independent-review status --short -- skills/independent-review/SKILL.md skills/independent-review/references/START_HERE.md skills/independent-review/references/INDEPENDENCE.md skills/independent-review/references/APPLYING_GUIDANCE.md skills/independent-review/references/RECONCILIATION.md
+exit_code=0
+ M skills/independent-review/SKILL.md
+?? skills/independent-review/references/START_HERE.md
+
+
+Candidate check command executed:
+python3 /workspace/scratch/52eed2252c51/tmp/module-guide-application/out/check_remove_first.py > /workspace/scratch/52eed2252c51/tmp/module-guide-application/out/execution.log 2>&1
+Observed command exit_code=0 (exec tool receipt; execution.log contains the actual run output).
+No module or input edits performed. The selected working-tree guide is untracked and SKILL.md is modified at the recorded HEAD; hashes above bind the actual local sources.

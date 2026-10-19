@@ -1,0 +1,1 @@
+Review the supplied Python function against this rule: preserve order and remove only the first occurrence of a requested value. If absent, return an equal list. Do not mutate the input list. Perform useful work with the available single agent; do not edit product code.

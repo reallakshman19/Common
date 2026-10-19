@@ -31,3 +31,7 @@ See [actual prototype applications](applications/assessment.md) for issued raw
 tasks, untouched native returns, execution witnesses, parent verification and the
 limits of the observed results. These are local synthetic applications, not the
 planned real LFEA pilot.
+
+The [start-guide application](start-guide-use/ASSESSMENT.md) preserves a fresh
+single-agent use of the consolidated entry: selected review support, omitted
+unnecessary modules, actual execution and native reconciliation without JSON.
