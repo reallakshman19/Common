@@ -16,6 +16,10 @@ Use this as an operating guide, not another skill, runtime controller or require
 sequence. Start from human intent and actual sources. The available agent maintains
 records and selects useful support. Roles, modules, JSON and helper scripts are
 optional; no CI, role quota or new execution/acceptance gate is introduced.
+The optional Gatekeeper module adds label rules (DRAFT, CHECKED, VERIFIED,
+RELEASED) for work that will be shown or released. They are label rules, not
+execution gates: work continues, and only the label shown is limited. Each check
+has a fallback, and a missing anchor narrows or qualifies the label.
 When selecting a separate delivery protocol, follow its scoped requirements; see
 the task-specific support below. This guide does not silently select one for you.
 
@@ -48,11 +52,11 @@ capability. A reference to another module does not create a dependency on it.
 
 This parent is a collection of independent packages. Select the nested folder
 containing the module's own `SKILL.md` when reading, copying or registering a
-module with an available host. Keep the names `task-decomposer`, `nudge-designer`
-and `independent-review`. There is no parent skill to install and no assumption
-that a host scans nested folders automatically. The three source roots are
-`skills/agent-work/task-decomposer/`, `skills/agent-work/nudge-designer/` and
-`skills/agent-work/independent-review/`. Copy only the selected package when
+module with an available host. Keep the names `task-decomposer`, `nudge-designer`,
+`independent-review` and `gatekeeper`. There is no parent skill to install and no
+assumption that a host scans nested folders automatically. The four source roots are
+`skills/agent-work/task-decomposer/`, `skills/agent-work/nudge-designer/`,
+`skills/agent-work/independent-review/` and `skills/agent-work/gatekeeper/`. Copy only the selected package when
 using it alone; the shared guide is optional and introduces no runtime import.
 
 | Need | Select | Input → useful output |
@@ -60,6 +64,7 @@ using it alone; the shared guide is optional and introduces no runtime import.
 | Understand long/difficult work and choose coherent boundaries | [Task Decomposer](task-decomposer/SKILL.md) | Intent/original sources → task map, dependencies, required understanding and selected task designs |
 | Prepare guidance for a particular participant | [Nudge Designer](nudge-designer/SKILL.md) | Intent or selected task, actual tools/capability → self-contained operational brief and return contract |
 | Assess an actual artifact or engineering/learning claim | [Independent Reviewer](independent-review/SKILL.md) | Candidate/original criteria → evidence-backed findings, coverage and scoped assessment |
+| Decide what a deliverable may be labelled, shown or released as | [Gatekeeper](gatekeeper/SKILL.md) | Deliverable, baseline, sealed targets and available evidence → a label (DRAFT/CHECKED/VERIFIED/RELEASED) with sha, x of N, untested scope and deviations |
 
 Use a module alone when that satisfies the request. Plan-only ends with usable
 task designs; brief-only ends with usable instructions; review-only ends with an
@@ -84,6 +89,7 @@ the linked guidance when applicable, rather than loading every module/reference.
 | Learning-item task design | [Task Decomposer guidance](task-decomposer/references/APPLYING_GUIDANCE.md) | Preserve the source-defined verb, response type and an off-demand contrast: explain needs causal reasons, justify needs an argument, and retrieval may recognise a unit/sign. |
 | Selected-response item generation | [Generator guidance](nudge-designer/references/SELECTED_RESPONSE.md) | Select the optional `selected-response` profile when useful. Before handing over, script option lengths and correct-only shared question words; inspect flags, grammar and verb fit, retain actual results and label producer judgments SELF-ASSESSED. |
 | Selected-response item review | [Reviewer guidance](independent-review/references/SELECTED_RESPONSE_REVIEW.md) | Inspect length, reasoning-word, grammar, verb and word-overlap cues before subject judgment. Ask whether the key is selectable without the intended knowledge; disclose exposure and state what plausible wrong result could survive each verdict. |
+| Producing, showing or releasing a learner product, page or item bank | [Gatekeeper checks](gatekeeper/SKILL.md#checks) | Before building, locate the blueprint, the existing best version and the content source. Seal baseline-relative targets before the candidate is first measured. Pair each label-raising check with a seeded defect, and verify freshly on the exact bytes. Label by evidence, state x of N from the blueprint, and release only on the Owner's words or a recorded grant. Each check has a fallback. Its walkthrough contains worked answers; withhold it from fresh exercises. |
 
 The executing ChatGPT agent runs its own activity record; no extra worker is
 needed. An available Oracle/lead preserves the duty in assignments and checks
@@ -118,13 +124,25 @@ label or correct ACK does not establish sound judgment. Keep consequential model
 architecture and acceptance interpretation with a participant who can justify it;
 if unavailable, retain that limit while gathering useful evidence.
 
+A coordinator that issues work does not also produce, repair or assemble that
+deliverable; inserting items into a page counts as producing it. Send a repair back
+as a new brief. A typo-level fix that changes no meaning, key or number may be made
+by the coordinator if it is labelled COORDINATOR-EDITED and shown to the verifier.
+The coordinator's own checks are notes. Labels move on evidence the coordinator
+cannot rewrite, or on a disclosed fallback (see Gatekeeper).
+
 ## Carry work end to end
 
 Apply these responsibilities as useful; combine, skip or revisit them according to
-the problem. They are not fixed passes or a requirement to run all three modules.
+the problem. They are not fixed passes or a requirement to run every module.
 
 1. Reconstruct the original outcome and amendments. Establish actual sources,
    candidate/input identity, environment, available authority and prior useful work.
+   For a product, locate the blueprint's definitions and coverage set, the existing
+   best version (the quality bar) and the content source before building anything.
+   If one is missing, ask one specific question per missing input and continue
+   with the work that doesn't depend on the answer. If no earlier product exists,
+   build against the blueprint and label the result NO-BASELINE.
 2. Select the next uncertainty or deliverable that can change the outcome. Use
    Task Decomposer if boundaries/dependencies need clarification. Keep coupled
    state/model decisions coherent and retain integration/deferred outcomes.
@@ -140,10 +158,17 @@ the problem. They are not fixed passes or a requirement to run all three modules
    requirements, actual candidate and witness, not just COMPLETE/PASS/count/hash.
    Review the test oracle and a relevant contrary condition. Preserve supported
    claims, known defects, NOT_RUN items and independent-assessment limits together.
+   Where the result will be judged, seal the targets before the candidate is first
+   measured (in coordinator mode, before the return is read). Use an external
+   timestamp such as a comment id, or else the Owner's chat. Show that each check
+   whose PASS raises a label fails on a seeded defect.
 6. Reconcile against the whole outcome. Preserve the original report and record
    the consumer's response separately. Correct affected inputs/methods/work, issue
    a visible revision where meaning changed, and verify the actual integrated
    behavior. Continue authorized work; reserve only genuinely unresolved decisions.
+   Show or release work only under the label its evidence supports, with its sha,
+   x of N and untested scope. Say in the same message when a step was skipped or
+   a fallback was used.
 
 Select evidence for the project: original interaction/state traces for UI, source
 rules and real consumers for logic, accurate material and learner evidence for
