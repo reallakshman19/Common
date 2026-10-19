@@ -1,8 +1,6 @@
 """Standalone completion witnesses and negative cases; no network/provider writes."""
-from copy import deepcopy
 import hashlib
 import importlib
-import json
 from pathlib import Path
 import subprocess
 import sys
@@ -86,52 +84,54 @@ class StandaloneDoneTests(unittest.TestCase):
 
     def test_native_v1_with_real_witnesses_and_no_ci(self):
         result = self.assess()
-        self.assertTrue(result['done_supported'], result)
+        self.assertTrue(result['declaration_consistent'], result)
         self.assertFalse(result['owner_accepted'])
         self.assertEqual(result['witnesses_checked'], 9)
         self.assertEqual(result['mode'], 'standalone')
+        self.assertEqual(result['issue_ref'], 'sample/project#2')
+        self.assertEqual(result['plan'], self.plan['plan_version'])
 
     def test_missing_common_group_fails(self):
         body = '\n'.join(x for x in self.body.splitlines() if not x.startswith('Done-when: SC_FLOW '))
-        self.assertFalse(self.assess(body=body)['done_supported'])
+        self.assertFalse(self.assess(body=body)['declaration_consistent'])
 
     def test_missing_or_extra_frozen_criterion_fails(self):
         missing = '\n'.join(x for x in self.body.splitlines() if not x.startswith('Done-when: AC1 '))
-        self.assertFalse(self.assess(body=missing)['done_supported'])
+        self.assertFalse(self.assess(body=missing)['declaration_consistent'])
         extra = self.body + next(x for x in self.body.splitlines() if x.startswith('Done-when: AC1 ')).replace('AC1 ', 'AC2 ') + '\n'
-        self.assertFalse(self.assess(body=extra)['done_supported'])
+        self.assertFalse(self.assess(body=extra)['declaration_consistent'])
 
     def test_duplicate_row_and_missing_proof_fail(self):
         row = next(x for x in self.body.splitlines() if x.startswith('Done-when: AC1 '))
-        self.assertFalse(self.assess(body=self.body + row + '\n')['done_supported'])
-        self.assertFalse(self.assess(body=self.body.replace('proof: result.txt', 'proof: missing.txt'))['done_supported'])
+        self.assertFalse(self.assess(body=self.body + row + '\n')['declaration_consistent'])
+        self.assertFalse(self.assess(body=self.body.replace('proof: result.txt', 'proof: missing.txt'))['declaration_consistent'])
 
     def test_tampered_witness_fails(self):
         (self.repo / 'result.txt').write_bytes(b'Changed evidence\n')
-        self.assertFalse(self.assess()['done_supported'])
+        self.assertFalse(self.assess()['declaration_consistent'])
 
     def test_stale_candidate_or_dirty_tracked_tree_fails(self):
-        self.assertFalse(self.assess(candidate='sample/project@' + 'f' * 40)['done_supported'])
+        self.assertFalse(self.assess(candidate='sample/project@' + 'f' * 40)['declaration_consistent'])
         (self.repo / 'result.txt').write_bytes(b'Working tree differs\n')
         self.assertIn('tracked worktree differs from candidate', self.assess()['gaps'])
 
     def test_criteria_drift_and_wrong_basis_fail(self):
-        self.assertFalse(self.assess(criteria_text=self.criteria.replace('Produce a result', 'Skip the result'))['done_supported'])
-        self.assertFalse(self.assess(body=self.body.replace('plan V36-1-PLAN-01', 'plan V36-1-PLAN-02'))['done_supported'])
+        self.assertFalse(self.assess(criteria_text=self.criteria.replace('Produce a result', 'Skip the result'))['declaration_consistent'])
+        self.assertFalse(self.assess(body=self.body.replace('plan V36-1-PLAN-01', 'plan V36-1-PLAN-02'))['declaration_consistent'])
 
     def test_pending_obligation_prevents_done(self):
         pending = 'Pending: task failure · owner agent · next fix failure · unblocks task · prevents task DONE yes'
-        self.assertFalse(self.assess(body=self.body.replace('Pending: none', pending))['done_supported'])
+        self.assertFalse(self.assess(body=self.body.replace('Pending: none', pending))['declaration_consistent'])
 
     def test_unrelated_pending_does_not_block_bounded_done(self):
         pending = 'Pending: separate future task · owner Owner · next decide priority · unblocks future work · prevents task DONE no'
-        self.assertTrue(self.assess(body=self.body.replace('Pending: none', pending))['done_supported'])
+        self.assertTrue(self.assess(body=self.body.replace('Pending: none', pending))['declaration_consistent'])
 
     def test_unknown_not_run_and_na_never_silently_qualify(self):
         for state in ('UNKNOWN', 'NOT_RUN', 'NOT_MET', 'NOT_APPLICABLE'):
             with self.subTest(state=state):
                 body = self.body.replace('AC1 → MET', 'AC1 → ' + state)
-                self.assertFalse(self.assess(body=body)['done_supported'])
+                self.assertFalse(self.assess(body=body)['declaration_consistent'])
 
     def test_coordinator_rejected_before_git_or_file_reads(self):
         for label in ({k: v for k, v in self.label.items() if k != 'mode'},
@@ -141,9 +141,9 @@ class StandaloneDoneTests(unittest.TestCase):
                     self.assess(label=label)
 
     def test_foreign_identity_and_parent_as_child_fail(self):
-        self.assertFalse(self.assess(issue_ref='other/project#2')['done_supported'])
-        self.assertFalse(self.assess(issue_ref='sample/project#1')['done_supported'])
-        self.assertFalse(self.assess(task_id='V36-1-WP2')['done_supported'])
+        self.assertFalse(self.assess(issue_ref='other/project#2')['declaration_consistent'])
+        self.assertFalse(self.assess(issue_ref='sample/project#1')['declaration_consistent'])
+        self.assertFalse(self.assess(task_id='V36-1-WP2')['declaration_consistent'])
 
     def test_no_fake_acceptance_from_checklist(self):
         result = self.assess()
@@ -152,14 +152,14 @@ class StandaloneDoneTests(unittest.TestCase):
         self.assertFalse(result['independent_review_established'])
 
     def test_path_escape_and_symlink_escape_fail(self):
-        self.assertFalse(self.assess(body=self.body.replace('proof: result.txt', 'proof: ../result.txt'))['done_supported'])
+        self.assertFalse(self.assess(body=self.body.replace('proof: result.txt', 'proof: ../result.txt'))['declaration_consistent'])
         with tempfile.TemporaryDirectory() as outside:
             p = Path(outside) / 'outside.txt'; p.write_bytes((self.repo / 'result.txt').read_bytes())
             try:
                 (self.repo / 'escape.txt').symlink_to(p)
             except OSError:
                 self.skipTest('Symlink creation unavailable')
-            self.assertFalse(self.assess(body=self.body.replace('proof: result.txt', 'proof: escape.txt'))['done_supported'])
+            self.assertFalse(self.assess(body=self.body.replace('proof: result.txt', 'proof: escape.txt'))['declaration_consistent'])
 
 
 if __name__ == '__main__':

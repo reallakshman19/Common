@@ -1,0 +1,22 @@
+SELF-CHECK v1 · V36-1-WP1 · sample/project#2
+Basis: plan V36-1-PLAN-01; label PILOT@1.0.0:abc1234; criteria sha256 6ad8be1d80a955c5f73c8e71b1799eda8bda25c798b2007deb94cc736ff6d576; candidate sample/project@b349457b307e86b3fe37a3531baabf594794b057; source #1 body
+Done-when: SC_INTENT → NOT_MET ; reason: help omits required missing-file error and nonzero exit ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: SC_INPUTS → MET ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: SC_SCOPE → MET ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: SC_FLOW → NOT_MET ; reason: help reader receives no missing-file failure guidance ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: SC_TESTS → MET ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: SC_CODE → MET ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: SC_PENDING → NOT_MET ; reason: AC2 remains necessary within this same task ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: SC_FRESHNESS → MET ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: AC1 → MET ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Done-when: AC2 → NOT_MET ; reason: entire help has no missing-file error or nonzero exit documentation ; proof: out/verification-readonly.txt ; sha256: 956ceef314bddc28d42c81f8f9ce04f574f4fce180859e5104e908c456bbd051
+Scope: approved bounded help documentation from owner.txt and frozen AC1/AC2; candidate adds help.txt and original owner.txt; result.txt unchanged; assessment writes only out/ reports; whitespace wording preserved; no product fix
+A13: documentation and read-only assessment; no authored source/test files or functions changed; git HEAD^ to HEAD physical counts help.txt 0 to 2 and owner.txt 0 to 1; coding ratchet and function-span split have no applicable changed target
+A13 review: source/output and diff assessment; no code cohesion or reuse deviation to review; optional standalone independent review not required or claimed; no test-first runtime implementation claim
+Tests: local Python and Git inspection at b349457b307e86b3fe37a3531baabf594794b057; 7 of 8 source/output checks pass and AC2 fails; original proposal helper exits 0 for structure and local bytes only; no CI or runtime CLI execution; full document inspected against owner.txt
+Issue reconciliation: local plan and frozen criteria give AC1 MET and AC2 NOT_MET; child sample/project#2 supplied by manifest; live issue checklist and remote head not inspected; inherited result.txt and generic author witness do not establish AC2; Owner acceptance separate
+Pending: AC2 in V36-1-WP1 · owner UNKNOWN · next authorized task performer adds explicit missing-file error and nonzero exit to help.txt preserving AC1 then reassesses at new candidate · unblocks both frozen criteria supported by current help · prevents task DONE yes
+Pending: Native A14 publication for V36-1-WP1 · owner UNKNOWN · next authorized publisher posts source-bound companion on actual child and reads back before any new public claim · unblocks qualified native report under actual publication scope · prevents task DONE yes; this assessment is read-only and does not grant publication authority
+Proposed claim: PARTIAL · reason: one of two frozen criteria is met; AC2 remains within this task; no Owner acceptance granted
+Native report: NOT_POSTED read-only pre-DONE assessment; publication prohibited for this assessment; no PR or canonical test count invented
+

@@ -16,6 +16,11 @@ the full A01–A14 core/coordinator-only/simplified classification.
 Standalone label/target CLIs reject CoordinatorLandingpage for **reads and
 writes before provider I/O**; coordinator behavior remains unchanged.
 The Owner always retains acceptance; the agent never self-approves.
+**When standalone is explicitly selected**, use the
+[standalone completion checklist](references/STANDALONE_COMPLETION.md) before DONE.
+It retains native A14 v1, adds source/criterion/witness traceability and an optional
+local helper, and requires no team roles, other skill or CI. Its instructions
+apply only to standalone; coordinator mode and shared runtime remain unchanged.
 C1–C18 mechanical checking and the separate scored SELF-CHECK v2 view
 are described in [SCORED_SELF_CHECK.md](SCORED_SELF_CHECK.md). The freeze,
 score and mismatch check do not substitute for native evidence, LOG,

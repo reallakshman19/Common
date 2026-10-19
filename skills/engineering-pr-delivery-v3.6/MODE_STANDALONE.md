@@ -32,7 +32,12 @@ Tab later, but it is **not** an implemented dependency in WP1.
    the full suite counts before committing the implementation.
 3. Agent runs the complete applicable suite after the fix (or reports
    NOT_RUN), checks A13 against exact base/head and preserves evidence.
-4. For every completed task, publish the unchanged native eight-line
+4. Before claiming DONE, apply the [standalone completion checklist](references/STANDALONE_COMPLETION.md)
+   against every frozen criterion and the actual result. Publish native
+   **SELF-CHECK v1** first; v2 scoring is optional supporting context. Use the
+   standalone-only read-only helper if useful. Local checks are valid without CI;
+   record that limit and do not invent a CI or reviewer dependency.
+   For every completed task, publish the unchanged native eight-line
    record **on the real child issue**, with a separate A14 self-check and
    the terminal LOG line. Do not create a team evidence mirror.
 5. Owner reviews the source-bound evidence, limitations and actual
@@ -69,8 +74,14 @@ mirror live in [MODE_COORDINATOR.md](MODE_COORDINATOR.md). The exact native
 A01–A14 wording remains in [CODING_PRACTICES_ADDENDUM.md](CODING_PRACTICES_ADDENDUM.md);
 this table classifies it without weakening any protected part.
 
-**Start here:** the [standalone quickstart](QUICKSTART_STANDALONE.md)
-walks the Owner through a throwaway label, frozen criteria, native child
-receipt, scored companion, A13 checker, recompute and final Owner decision.
+**Standalone-only invocation:** “Use engineering-pr-delivery-v3.6 in standalone
+mode only; apply its standalone completion checklist before calling this task DONE.”
+Keep this module in its current folder. No other skill or team role is required.
+The extension uses native A14; it does not alter coordinator mode or shared tools.
+
+**Start here:** the [standalone completion guide](references/STANDALONE_COMPLETION.md)
+provides the pre-DONE method and template. The [standalone quickstart](QUICKSTART_STANDALONE.md)
+also walks the Owner through a throwaway label, frozen criteria, native child
+receipt, optional scored companion and Python CI checker, and final Owner decision.
 C1–C18 checking and SELF-CHECK v2 are already available in native v3.6.
 Keep A13/A14, original v1 companions, canonical evidence and LOG unchanged.
