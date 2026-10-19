@@ -25,3 +25,16 @@ parent-authored compact reference. Consumer fit remains NOT_ESTABLISHED.
 
 These checks establish bounded observations, not semantic completeness, source
 authenticity, low-thinking model qualification or integrated domain acceptance.
+
+## Task-local context amendment
+
+The Owner's 19 October request adopts qualified fresh-NLM lessons and asks about
+small fresh-worker nudges. This amendment changes guidance, prompts and fixtures
+only; runtime/schema/profile contracts remain unchanged. The focused local suite
+passed **29 tests** on Python 3.12. Tool compatibility is separate from the
+semantic application evidence and does not establish lower-model capability.
+
+The [fresh Oracle application](../examples/forward-isolated/ASSESSMENT.md)
+retains source inputs, native planning/bindings, parent assistance and the visible
+1,065 → 484 word packaging revision. It is preparation evidence, with unknown
+configuration/qualification and instruction-level exposure limits.

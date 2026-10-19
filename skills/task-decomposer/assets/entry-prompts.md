@@ -28,3 +28,10 @@ Optional downstream request:
 
 These prompts request substantive outputs; they do not invoke tools, elevate
 reasoning settings, dispatch participants or change governance by themselves.
+
+Owner — fresh task-local workers:
+
+> Use Task Decomposer for [goal/sources]. Select coherent work that a fresh worker
+> can perform from a self-contained brief; minimize dependence on prior chat while
+> preserving necessary understanding. Keep coupled decisions and integration with
+> Oracle, and prepare selected designs for Nudge Designer if useful.

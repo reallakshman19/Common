@@ -48,6 +48,11 @@ record into the assignment. Preserve important conditions verbatim where needed;
 brevity must not remove consequential uncertainty. No universal word cap applies.
 Schema validity cannot establish that a brief is usable by its intended recipient.
 
+For independent fresh-worker boundaries and optional Oracle composition, use
+[Oracle application guidance](ORACLE_USE.md). Keep state-coupled investigation
+coherent until a stable artifact makes handoff useful. Earlier exposure remains
+exposure; a short fresh prompt is not proof of blind or independent judgment.
+
 | Pitfall | Correction |
 |---|---|
 | Split by file/function/LOC/time alone | Examine semantic boundary and acceptance; checkpoint independently |

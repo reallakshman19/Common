@@ -19,3 +19,12 @@ for actual forward applications and executed tool checks.
 The [forward archive and assessment](forward/ASSESSMENT.md) retain fresh raw-task
 applications separately from these worked goldens, with native outputs, original
 receipts, observed limitations and parent checks.
+
+The [fresh-worker boundary case](isolated-tasks/raw.md) and its
+[golden distinctions](isolated-tasks/golden.md) cover meaningful cuts, required
+knowledge carryover and artifact/reference provenance. This paired prose case adds
+no formal map or execution claim.
+
+The [fresh Oracle preparation](forward-isolated/ASSESSMENT.md) applies the new
+task-local guidance with original sources and preserves its parent-assisted
+packaging revision separately from the earlier forward archive.

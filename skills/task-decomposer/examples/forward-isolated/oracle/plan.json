@@ -1,0 +1,367 @@
+{
+  "schema": "nudge-designer.plan/v1.1",
+  "id": "PLAN-BP1-PILOT",
+  "revision": 1,
+  "intent_id": "INTENT-BP1-PILOT",
+  "intent_revision": 1,
+  "intent_sha256": "aa9025cb19ac3fe4927cbb525a31f15be8d2533bfa9a051a6e4ac662c306d0c5",
+  "profile_ids": [
+    "core",
+    "education",
+    "quantitative"
+  ],
+  "profiles_sha256": "cd052394a9f517110097c40070ed103ddbbe3b1f65133d1d4fb93c556b216196",
+  "strategy": "Retain the valid old arithmetic evidence. Prepare one GUIDED two-profile candidate generation task under a reference-withheld input view; leave empirical provenance, separate content assessment and integration to the mapped downstream work. Native Oracle records preserve all source distinctions; compile a compact worker brief containing only allowed inputs.",
+  "nudges": [
+    {
+      "id": "A-GENERATE",
+      "parent_id": null,
+      "type": "next_step",
+      "outcome_refs": [
+        "O-GENERATE"
+      ],
+      "item_refs": [
+        "R-GENERATE",
+        "R-F",
+        "R-U",
+        "U-WORKER",
+        "P-MAP-BINDING",
+        "C-INVENT",
+        "C-LOCAL",
+        "C-PREPARE",
+        "C-EXPOSURE",
+        "C-IDENTITY",
+        "C-CLAIMS"
+      ],
+      "source_refs": [
+        "S-BP",
+        "S-OWNER",
+        "S-MAP"
+      ],
+      "profile_ids": [
+        "core",
+        "education",
+        "quantitative"
+      ],
+      "purpose": "Create new candidate exercises from allowed BP-1 inputs for the generation pilot.",
+      "deliverable": "One generation bundle: exercises.md with F and U prompts/solutions plus native-report.md identifying source use, actual checks, exposure and SELF-ASSESSED judgments.",
+      "understanding": [
+        "F uses signed force addition in one declared frame and a=F_net/m for m>0, so acceleration carries the net-force sign.",
+        "U represents the same positive physical length in a larger unit; divide the numerical millimetre value by 1000 using 1000 mm = 1 m.",
+        "The worker must invent its own settings/values without benchmark/old-output access; formulas supplied by BP-1 are legitimate inputs."
+      ],
+      "reasoning_moves": [
+        "construct",
+        "derive",
+        "compare",
+        "verify"
+      ],
+      "evidence_methods": [
+        "source_trace",
+        "hand_derivation",
+        "unit_check",
+        "artifact_readback",
+        "counterexample"
+      ],
+      "depends_on": [],
+      "branches": [],
+      "boundaries": {
+        "preserve_refs": [
+          "C-INVENT",
+          "C-LOCAL",
+          "C-PREPARE",
+          "C-EXPOSURE",
+          "C-IDENTITY",
+          "C-CLAIMS"
+        ],
+        "do_not": [
+          "Do not read benchmark/assessor references, prior examples/logs, Oracle map/native objects/assessment notes or other task outputs as producer inputs.",
+          "Do not alter source inputs, use external sources or produce product/learner acceptance claims.",
+          "Do not change assigned task/revision or substitute ACK A-GENERATE for ACK MOVE-31."
+        ]
+      },
+      "success": {
+        "observable": "Exactly two self-contained exercises have every required learner decision and justified, unit-consistent solutions. A source/exposure and actual-tool report accompanies returned bytes.",
+        "negative_case": "A force question that gives acceleration without asking/deriving signed net force, or a conversion that gives only a number without explaining 1000, fails the respective required part; correct arithmetic alone is insufficient."
+      },
+      "uncertainty": {
+        "missing": [
+          "Actual future worker task fit, model/effort, file/Python access and prior reference exposure are UNKNOWN.",
+          "Separate assessment and artifact provenance evidence have not yet been produced."
+        ],
+        "return_with": "If BP-1 is missing, unreadable or has a different byte hash, report the attempted access and observed discrepancy; do not silently use another revision. If relevant prior worked/reference exposure exists, disclose it and limit the clean-context claim. Preserve unaffected profile work as PARTIAL when useful; do not seek withheld answers.",
+        "independent_work": [
+          "If Python is unavailable, derive by hand and mark only the Python check NOT_RUN.",
+          "A missing/failed part does not erase known correct work; return the other profile and exact gap when feasible."
+        ]
+      },
+      "report": {
+        "required": [
+          "Write exercises.md and native-report.md under /workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/generation only. Keep the actual native report unchanged on return.",
+          "First channel line: ACK MOVE-31. Report canonical A-GENERATE revision 1, MAP-BP1-PILOT revision 1 / T-GENERATE, exact issued binding from the brief and output file-byte SHA-256 values. ACK is correlation, not completion.",
+          "Report COMPLETE/PARTIAL/BLOCKED/NOT_RUN for the bounded bundle, actual inputs/revisions/access, prior relevant exposure, output derivation and actual tool attempts/check results with reproducible relations.",
+          "Label own content judgments SELF-ASSESSED. Provide MET/NOT_MET/UNKNOWN evidence for F.model, F.net, F.acceleration, U.premise, U.conversion and U.explanation. Missing required work is NOT_MET; UNKNOWN means the evidence cannot decide it.",
+          "Roll up all MET as FULFILLED; any UNKNOWN as UNKNOWN while retaining known misses; otherwise a mix of MET and NOT_MET as PARTIAL, and no MET as NOT_FULFILLED. State content and provenance separately.",
+          "Return only local artifacts and the brief channel receipt; do not publish, dispatch, accept the pilot or claim learner understanding."
+        ],
+        "next_action": "Return the pinned generation bundle to Oracle. Proposed next task is T-ASSESS by an appropriate separately selected assessor; no assessment nudge or dispatch is issued here."
+      },
+      "assignment": {
+        "role": "WORKER",
+        "participant_id": "P-PRODUCER",
+        "capabilities": [
+          {
+            "id": "signed_force_and_units",
+            "importance": "ESSENTIAL"
+          }
+        ],
+        "tools": [
+          {
+            "id": "local_files",
+            "importance": "ESSENTIAL"
+          },
+          {
+            "id": "python",
+            "importance": "HELPFUL"
+          }
+        ],
+        "support": "GUIDED",
+        "method": "Read only the issued brief and exact BP-1 file; verify the BP-1 byte SHA-256. Record any relevant prior exposure before authoring. Invent one clear setting and value set per profile without benchmark access. For F, stipulate positive mass, two opposing horizontal forces, the positive axis and no other horizontal forces; ask both net force and signed acceleration; assign force signs, add them, then divide by positive mass using F_net=m*a and state units. For U, choose a positive millimetre length under a physically ordinary premise; ask conversion and why 1000; derive L_m=L_mm/1000 from 1000 mm=1 m. Write both self-contained prompts and solutions. Independently recalculate your own values by hand or Python; for F reverse the coordinate convention and check the signs reverse with magnitudes unchanged, and for U check converting back returns the same length. These are self-checks, not additional exercises. Read back both files; report actual tools/results and part-level evidence as SELF-ASSESSED. Do not infer independent validity or learning.",
+        "worked_example": null,
+        "reserved_decisions": [
+          "Whether a returned artifact actually supports a reference-withheld generation claim, and what prior exposure permits.",
+          "Separate content validity/assessment acceptance and broader BP-1, physical-model or learner-understanding conclusions.",
+          "Any change to BP-1, task scope, issued identities or reporting/dispatch authority."
+        ],
+        "review_of": []
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "target_id": "R-PILOT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "R-GENERATE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "R-F",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "R-U",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "C-INVENT",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "C-LOCAL",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "C-PREPARE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "C-EXPOSURE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "C-IDENTITY",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "C-CLAIMS",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Preserved by the proposed issued generation task and its inherited purpose; planning is not execution."
+    },
+    {
+      "target_id": "R-KEEP",
+      "disposition": "EVIDENCE_REPORTED",
+      "nudge_ids": [],
+      "evidence_refs": [
+        "S-REF",
+        "S-ARITH"
+      ],
+      "rationale": "Preserved old arithmetic evidence is limited to supplied numerical instances; no fresh generation or assessment is inferred."
+    },
+    {
+      "target_id": "U-ARTIFACT",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Retained downstream uncertainty; generation preparation does not resolve it."
+    },
+    {
+      "target_id": "U-ASSESSMENT",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Retained downstream uncertainty; generation preparation does not resolve it."
+    },
+    {
+      "target_id": "U-WORKER",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "GUIDED support is proposed while fit/configuration/exposure remain unestablished."
+    },
+    {
+      "target_id": "U-ACCESS",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Retained downstream uncertainty; generation preparation does not resolve it."
+    },
+    {
+      "target_id": "U-GENERALIZATION",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Retained downstream uncertainty; generation preparation does not resolve it."
+    },
+    {
+      "target_id": "U-LEARNER",
+      "disposition": "DEFERRED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Actual learner evidence is outside this synthetic pilot; do not introduce a learner acceptance task."
+    },
+    {
+      "target_id": "O-PILOT",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Only the useful next generation assignment is elaborated; separate assessment/integration stay explicit in the neutral map and Oracle assessment plan."
+    },
+    {
+      "target_id": "O-GENERATE",
+      "disposition": "PLANNED",
+      "nudge_ids": [
+        "A-GENERATE"
+      ],
+      "evidence_refs": [],
+      "rationale": "Only the useful next generation assignment is elaborated; separate assessment/integration stay explicit in the neutral map and Oracle assessment plan."
+    },
+    {
+      "target_id": "O-ASSESS",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Only the useful next generation assignment is elaborated; separate assessment/integration stay explicit in the neutral map and Oracle assessment plan."
+    },
+    {
+      "target_id": "O-RECONCILE",
+      "disposition": "UNRESOLVED",
+      "nudge_ids": [],
+      "evidence_refs": [],
+      "rationale": "Only the useful next generation assignment is elaborated; separate assessment/integration stay explicit in the neutral map and Oracle assessment plan."
+    }
+  ],
+  "handover": {
+    "remaining": [
+      "Actual new generation bundle, input/exposure report and source/byte custody.",
+      "Separate assessment and Oracle reconciliation under T-ASSESS / T-RECONCILE.",
+      "Unestablished worker/reviewer fit, model/effort and prior exposure.",
+      "Actual learner understanding, training-data independence, OS-enforced isolation and broad blueprint reliability are not established."
+    ],
+    "next_action": "Provide only worker/generation-brief.md plus exact BP-1 to a genuinely fresh participant when separately dispatched. This application prepares the packet and does not send it.",
+    "changed_understanding": "The supplied old artifacts are reported COPIED/ADAPTED and their producer verdict is SELF-ASSESSED. Direct recomputation preserves arithmetic correctness while removing any unsupported independent-generation/assessment inference."
+  },
+  "participants": [
+    {
+      "id": "P-PRODUCER",
+      "label": "Proposed fresh task-local generation worker; not instantiated",
+      "roles": [
+        "WORKER"
+      ],
+      "capabilities": [
+        {
+          "id": "signed_force_and_units",
+          "status": "UNKNOWN",
+          "basis": "UNKNOWN",
+          "evidence_refs": [],
+          "note": "Required model/units reasoning has not been observed for any selected worker."
+        }
+      ],
+      "tools": [
+        {
+          "id": "local_files",
+          "status": "AVAILABLE",
+          "basis": "REPORTED",
+          "evidence_refs": [
+            "S-OWNER"
+          ],
+          "note": "Owner supplies intended tool access; no actual future worker access verified."
+        },
+        {
+          "id": "python",
+          "status": "AVAILABLE",
+          "basis": "REPORTED",
+          "evidence_refs": [
+            "S-OWNER"
+          ],
+          "note": "Owner supplies intended Python tool; actual future worker execution unobserved."
+        }
+      ],
+      "model": null,
+      "reasoning_effort": null,
+      "configuration_basis": "UNKNOWN model/effort; tools supplied by Owner. Role/brief does not qualify the worker or enforce isolation."
+    }
+  ]
+}

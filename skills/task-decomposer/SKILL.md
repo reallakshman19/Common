@@ -42,6 +42,11 @@ wording does not qualify a performer. Leave participant-specific support, worked
 methods and issued nudges to a separately selected consumer. Keep the task design
 self-contained so it can also be used directly by a human or agent.
 
+Read [Oracle application guidance](references/ORACLE_USE.md) for fresh task-local
+workers and optional composition with Nudge Designer. Minimize remembered history
+while retaining necessary understanding. Distinguish context isolation from blind
+evaluation; trace artifact/reference exposure and keep self-assessment explicit.
+
 ## Choose meaningful boundaries
 
 Choose KEEP, SPLIT, MERGE, DISCOVER_FIRST or DEFER and give a concise reason.

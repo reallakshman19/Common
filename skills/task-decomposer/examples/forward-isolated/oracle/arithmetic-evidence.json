@@ -1,0 +1,38 @@
+{
+  "id": "E-OLD-ARITHMETIC",
+  "scope": "Oracle recomputation of quantities stated in reference.md, not inspection of OLD-F/OLD-U originals",
+  "basis": {
+    "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/reference.md",
+    "sha256": "832097008b1ffa45fdbf9bd85f96af03f35eb270fdce8b6acad316fd752f350c",
+    "bytes": 641
+  },
+  "method": "Exact rational arithmetic, independently formulated from the supplied givens with stated right-positive frame and 1000 mm = 1 m.",
+  "results": [
+    {
+      "item": "Reported R-F / OLD-F numerical instance",
+      "signed_force_terms_N": [
+        30,
+        -10
+      ],
+      "mass_kg": 4,
+      "formula": "F_net = 30 - 10; a = F_net / 4",
+      "net_force_N": "20",
+      "acceleration_m_per_s2": "5",
+      "unit_relation": "N/kg = m/s^2",
+      "status": "MATCHES_STATED_ARITHMETIC"
+    },
+    {
+      "item": "Reported R-U / OLD-U numerical instance",
+      "length_mm": 1600,
+      "formula": "metres = millimetres / 1000",
+      "metres_exact": "8/5",
+      "metres_decimal": "1.6",
+      "status": "MATCHES_STATED_ARITHMETIC"
+    }
+  ],
+  "limits": [
+    "The reference reports the old derivation logs and old self-verdict; their original files were not supplied/read.",
+    "The calculations do not establish independent generation, review independence, blueprint generalization, physical qualification or learner understanding.",
+    "This is Oracle arithmetic checking by the same planner who read the reference; no separate participant performed review."
+  ]
+}

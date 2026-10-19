@@ -1,0 +1,136 @@
+{
+  "representation": "SHA-256 of exact file bytes; content identity only",
+  "files": [
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/task-map.json",
+      "bytes": 26029,
+      "sha256": "b6e1bf630bacc4fedb845eb71cf7b7357bcdf571506eefd5250e8d8e57cccf02"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/selected-design.md",
+      "bytes": 11950,
+      "sha256": "ce22c1512af8e852578aa1c0775ad254a4a56c07a17f620e14e3b3011ea5dd18"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/intent.json",
+      "bytes": 18521,
+      "sha256": "e5d7527198a6934fb83aa6af7b7c66e131a43d9abd50f861d822f0267d551785"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/plan.json",
+      "bytes": 15859,
+      "sha256": "97754d39edb5275634271d786d30e332394dea89c3bd6951e5934d9fbf4132e0"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/issued-binding.json",
+      "bytes": 435,
+      "sha256": "07fcf6f968cc1ff51ff39d0baefec09291055ea6b4d54c6ddd695a13887709d1"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/identity.json",
+      "bytes": 1384,
+      "sha256": "c4c9962c83093d46298335fb85c699649f585f624c1e601462dba986b01d3440"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/packaging-refinement.json",
+      "bytes": 1728,
+      "sha256": "977cfbc330d0dd84de2df9a837878f99819277cb18e4ea3f4774d28e9f09efbd"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/native-generation-design.md",
+      "bytes": 15533,
+      "sha256": "d34eae9b03892f5d5ea502f6ab830a81dd2a19067e36b8a16ea666fdb79b07d1"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-brief.md",
+      "bytes": 7671,
+      "sha256": "76cb1b57ddd037c6bf3cef88c1352e3716f40c4e63f2f7f094b98d67e81d0b4a"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/worker/generation-operational-view.md",
+      "bytes": 4244,
+      "sha256": "2fbf71ef49d5406dbf9c6c6c6a51004ebbfbc0f707fcc3a5f7ad0d34dade8047"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/arithmetic-evidence.json",
+      "bytes": 1540,
+      "sha256": "844612151dbaaaf4086feea6641201f4cdd2c58e7f0462d7d69b6ee17bb63ba2"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/source-snapshot.json",
+      "bytes": 759,
+      "sha256": "b672c21387bdaa2ec945b1dbbc13f835c957f5477c58b4f6fec07e38703be114"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/provenance.json",
+      "bytes": 17166,
+      "sha256": "30e1e31dcad30566bf0afe9644de51e31c9a48ce1cabfd6a83ab46d5bffb8cda"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/semantic-review.md",
+      "bytes": 2433,
+      "sha256": "df414f179b20c6e89e0a47320712a870258ee20e327aabb194579fc71d8ab672"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/assessment-plan.md",
+      "bytes": 2990,
+      "sha256": "69885a086cd0ca4e669802f88cadb8814473918cbd706b95a182189c040d66d2"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/reconciliation.md",
+      "bytes": 3167,
+      "sha256": "88778fcfab9f32a025b5e4b63b862688ebb861a92775ddb7731fbae33023d7ab"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/prepare_artifacts.py",
+      "bytes": 31998,
+      "sha256": "690b5c533c506c6f261bbdb70c7d7dac55ae8e2c07780340fd2c39529c45d048"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/td-validate.json",
+      "bytes": 801,
+      "sha256": "1d90c15eb42188d8878a99b6587cdaa56ce4844f3709d3e9f5d7d42df4a07f17"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/td-frontier.json",
+      "bytes": 2059,
+      "sha256": "cca489b12f72cb0d4ec585b9a15e30175279277aded48e97960622f0197e7118"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/td-selected-design.json",
+      "bytes": 786,
+      "sha256": "a8e47eccfde0fbc9a855befc9bac4a8523cb3639a16eda7c6db535c2057facec"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/nd-validate.json",
+      "bytes": 1140,
+      "sha256": "2c47f6f6abbec6da260c2b316a34e5905399bc9158e15837f262de1175dc6987"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/nd-fit.json",
+      "bytes": 1632,
+      "sha256": "b8f296f6c393f15627fdfc107324cc21f8365872da1b1838b3b99213da0e6a2e"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/nd-bind.json",
+      "bytes": 874,
+      "sha256": "db5888d45dc19dd42042974b4537ceb5a5d1b6c6af8848325b9dead22f11f649"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/nd-native-render.json",
+      "bytes": 893,
+      "sha256": "6cda12da6bd449672671f3163c4a89a4105da44fb4a2357fce44603d0a86426d"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/dependency-probe.json",
+      "bytes": 1228,
+      "sha256": "1257850502ecc06cf319e6f6ed7f6573bad92c57fa90899807ce5f9ff42499af"
+    },
+    {
+      "locator": "/workspace/scratch/52eed2252c51/tmp/isolated-nudge-forward/oracle/checks/final-integrity.json",
+      "bytes": 1997,
+      "sha256": "11daff1d5586adade786ca026e9fd0f5f890d3c50c8eb0f691a044cea3724fba"
+    }
+  ],
+  "excluded": "Downstream generation/assessment outputs not enumerated or read; manifest excludes itself."
+}
