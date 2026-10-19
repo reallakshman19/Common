@@ -1,0 +1,34 @@
+{
+  "assessment.md": {
+    "bytes": 4083,
+    "sha256": "efd2ca5b9e7c670ea0cd86bf558c165d4b50b123074eb0cfda0a68891a5f1a5d"
+  },
+  "case-a.jsonl": {
+    "bytes": 991,
+    "sha256": "40803db6b599e7c8c2314cdb05f378c70ffb60f95bd1ced8daefbed08778660c"
+  },
+  "case-b.jsonl": {
+    "bytes": 846,
+    "sha256": "8b8a4044188718b4f51d8308b2e0e0bc719a41596ddf14033ca7836be715a666"
+  },
+  "case-c.jsonl": {
+    "bytes": 875,
+    "sha256": "d92e19d38009cfe61ea62b3abd0049dc43aea112c941d378f265f1e4868e7d16"
+  },
+  "case-d.jsonl": {
+    "bytes": 240,
+    "sha256": "a6d9e8d23087ed79d0ccc8ef85b5ad98f19d6e98be6de9c2aa9cd9acf2ed0895"
+  },
+  "case-e.jsonl": {
+    "bytes": 402,
+    "sha256": "2b418f9c6421457d14579702c897c9bc949707d3f4a74167907fee54e5ade305"
+  },
+  "issued-policy.md": {
+    "bytes": 7678,
+    "sha256": "a12c9b7f56cdd253761d3ccc790f3eba45626c012d77d29a34e7306f975f3a87"
+  },
+  "parent-recheck.json": {
+    "bytes": 3690,
+    "sha256": "324d0a88c432c417ec8236b9bcd001d95cc27d25f47033b75a8d2f74e6c4556f"
+  }
+}

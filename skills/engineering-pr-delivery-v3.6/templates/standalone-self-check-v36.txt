@@ -1,0 +1,19 @@
+SELF-CHECK v1 · TASK_ID · owner/repo#CHILD
+Basis: plan PLAN_VERSION; label WORK@VERSION:LABEL_SHA; criteria sha256 CONFIRMED_FULL_64_HEX; candidate owner/repo@FULL_40_HEX; source EXACT_CRITERIA_SOURCE
+Done-when: SC_INTENT → UNKNOWN ; reason: original intent assessment pending ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: SC_INPUTS → UNKNOWN ; reason: source custody assessment pending ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: SC_SCOPE → UNKNOWN ; reason: actual scope assessment pending ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: SC_FLOW → UNKNOWN ; reason: real consumer assessment pending ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: SC_TESTS → NOT_RUN ; reason: applicable checks not run yet ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: SC_CODE → UNKNOWN ; reason: stage and A13 assessment pending ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: SC_PENDING → UNKNOWN ; reason: issue reconciliation pending ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: SC_FRESHNESS → UNKNOWN ; reason: current candidate comparison pending ; proof: NONE ; sha256: NOT_AVAILABLE
+Done-when: AC1 → UNKNOWN ; reason: replace with every exact frozen criterion ID ; proof: NONE ; sha256: NOT_AVAILABLE
+Scope: approved SOURCE_REF; actual PATHS_OR_OUTPUT; preserved BEHAVIOR; extra findings LINKS_OR_NONE
+A13: stage applicability BASIS; changed file counts SOURCE; unresolved deviations LIMITS
+A13 review: SELF_ASSESSED_OR_ACTUAL_REVIEW_REF; cohesion and reuse FINDINGS; limitations LIMITS
+Tests: COMMAND_ENVIRONMENT_AND_SHA; expected and observed RESULTS; negative case REF; failures skips NOT_RUN REASONS; CI ACTUAL_OR_NO_CI
+Issue reconciliation: CRITERION_AND_CHECKLIST_REFS; actual RESULT; wider Owner outcome REMAINING_SCOPE
+Pending: ITEM · owner ACTOR_OR_UNKNOWN · next ACTION · unblocks CONDITION · prevents task DONE yes
+Proposed claim: PARTIAL · reason: replace placeholders using actual evidence before proposing DONE
+Native report: NOT_POSTED completion not yet established

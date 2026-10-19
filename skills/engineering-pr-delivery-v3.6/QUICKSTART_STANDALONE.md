@@ -2,8 +2,10 @@
 
 Use a **throwaway Git repository**, not a live project. Work with one
 coding agent; there is **no TeamCoordinator**, shared registry, chat-send
-route or CoordinatorLandingpage access. The Owner approves every scope,
-review and merge. The agent never approves its own work.
+route or CoordinatorLandingpage access. The Owner approves scope, acceptance and merge. The agent never approves its
+own work. Reuse existing clear Owner authorization. Apply the
+[standalone completion checklist](references/STANDALONE_COMPLETION.md) before DONE;
+its native v1 companion is the completion record. CI and v2 scoring are optional.
 
 **Windows shells:** Commands work in **Git Bash** and **PowerShell 5.1**.
 Open either shell and change directory to this skill folder:
@@ -110,8 +112,14 @@ Do not use #430's checked sample as your project's frozen criteria.
 ## 3. Child task evidence and SELF-CHECK v2
 
 Agent creates tests first, records the RED commit and baseline/head
-full-suite results, and links the real child issue and PR. Publish a
-**separate SELF-CHECK v2 companion first on that real child issue**.
+full-suite results, and links the real child issue and PR. Publish the native
+**SELF-CHECK v1 first on that real child issue**, using the
+[standalone template](templates/standalone-self-check-v36.txt) and checklist.
+Keep v1 linked from the native receipt. Its source-bound common rows and each
+frozen criterion must support the actual bounded task before DONE.
+
+If a score is useful, prepare a **separate optional SELF-CHECK v2 view**.
+It cannot replace the v1 companion consumed by the native reader.
 The required header is
 `SELF-CHECK v2 · <TASK> · owner/repo#N` followed **immediately** by
 `Basis: CRITERIA v1 · source #N <text> · candidate owner/repo@<sha40>`.
@@ -138,7 +146,13 @@ Keep `Proof:` as the real PR/commit link, and append the mandatory
 terminal LOG in its own location. **No command above posts anything.**
 There is no `--apply`, authorization or GitHub write in this page.
 
-## 4. Run the A13 checkpoint gate
+## 4. Run the A13 checkpoint gate (optional Python CI profile)
+
+Use this legacy checker only for a project with its supported, existing Python
+unittest CI profile. It requires that workflow at base and head. For a local-only
+project or another runner, record the applicable A13 measurements and actual test
+proof in native v1 instead; the standalone completion helper accepts no-CI work.
+Do not install CI or change coordinator tooling to make a standalone task pass.
 
 Freeze `policy.json` in the **base Git commit** of your throwaway
 repo: its allowed `paths`, `ci_workflow`, `ci_pattern`,
@@ -161,7 +175,11 @@ pin `core.autocrlf=false` and write explicit LF bytes; the test also
 covers CRLF working-tree content. A GREEN script does not replace
 the actual full test suite or independent source review.
 
-## 5. Recompute the score
+## 5. Recompute the score (optional v2 view)
+
+This is supplementary to the v1 completion record. The unchanged legacy scorer
+has a claim-vocabulary mismatch for rubrics with no JUDGMENT row; use the native
+v1/checklist route in that case, without adding a fake human criterion.
 
 Save the verified `before.json` and `after.json` with
 `run`, `passed`, exact `sha`. **`before.json` is the baseline suite before the change,

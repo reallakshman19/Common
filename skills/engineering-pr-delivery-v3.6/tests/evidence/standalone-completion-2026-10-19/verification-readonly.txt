@@ -1,0 +1,77 @@
+READ-ONLY PRE-DONE WITNESS
+Task: V36-1-WP1
+Mode: standalone
+Candidate: sample/project@b349457b307e86b3fe37a3531baabf594794b057
+Plan: V36-1-PLAN-01
+Child: sample/project#2 (supplied manifest; not provider-attested)
+Assessment date: 2026-10-19
+
+AUTHORITY AND SOURCE
+owner.txt is the supplied original task. It explicitly requires both whitespace separation and a missing-file error with nonzero exit; acceptance is help text, Owner merge is separate.
+criteria.txt is frozen CRITERIA v1 PILOT with AC1 and AC2, no JUDGMENT criterion. Its byte hash matches the retained confirmed digest in source-manifest.json. No criteria were changed or reconfirmed.
+relay/AIM/PILOT.yaml selects mode standalone, work PILOT, version 1.0.0, label_sha abc1234, repository sample/project, outcome O1.
+plan.yaml binds those label fields and parent sample/project#1, and uniquely selects task V36-1-WP1. The manifest supplies child sample/project#2.
+These are the task's supplied local sources, not independently authenticated GitHub/Owner identities. No network or provider operation occurred.
+
+ACTUAL OUTPUT
+help.txt has exactly these two lines:
+Word count usage: python wordcount.py FILE
+Whitespace separates words, including tabs and newlines.
+
+AC1 expected: help states whitespace, including tabs and newlines, separates words.
+Observed: help.txt line 2 states exactly that. MET.
+AC2 expected: help explicitly documents a missing-file error and a nonzero exit.
+Observed: neither appears anywhere in the complete two-line artifact. NOT_MET.
+Reversal condition: a new assessed candidate whose help explicitly includes both error and nonzero exit, while retaining AC1, could satisfy AC2. A self-check edit, helper success, runtime assertion or future task cannot substitute for the missing help content.
+
+CHECKS AND RESULTS
+Local Python standard library inspection and Git read commands were run from the task repository. There is no code test suite or CI for this documentation assessment; no CLI runtime behavior was executed or inferred.
+The Python predicates are transparent literal screening, followed by human inspection of the complete document against the supplied source. Equivalent future wording requires semantic reinspection rather than reliance on literal terms.
+Actual check output:
+PASS | candidate HEAD binding | b349457b307e86b3fe37a3531baabf594794b057
+PASS | tracked tree clean | git diff --name-only HEAD
+PASS | retained criteria digest | 6ad8be1d80a955c5f73c8e71b1799eda8bda25c798b2007deb94cc736ff6d576
+PASS | help bytes equal candidate blob | git show b349457b307e86b3fe37a3531baabf594794b057:help.txt
+PASS | owner bytes equal candidate blob | git show b349457b307e86b3fe37a3531baabf594794b057:owner.txt
+PASS | CLI usage present | help.txt:1
+PASS | AC1 whitespace including tabs and newlines | help.txt:2
+FAIL | AC2 missing-file error plus nonzero exit | help.txt entire two-line document
+FILE | owner.txt | sha256 fea6ebcff0087c4211796c4957dca5f5edec5162553ef32c109e35085f59efb3 | physical lines 1
+FILE | help.txt | sha256 53dc8f9283bbf8b7a6c2807303421f05af5e19333703b2a7ce0526718d8fc6cd | physical lines 2
+FILE | criteria.txt | sha256 6ad8be1d80a955c5f73c8e71b1799eda8bda25c798b2007deb94cc736ff6d576 | physical lines 4
+FILE | relay/AIM/PILOT.yaml | sha256 c1e70b42f59d32ea89202640f9041a65fdd770e089ae201c88b5cb0bb04491bf | physical lines 24
+FILE | plan.yaml | sha256 a45a18f98c31d7e63f1dc9f2858bc7d1f920c3ffbfcd7829318cb410dee5fd22 | physical lines 13
+FILE | source-manifest.json | sha256 fe3d5954448371c71f1994778b19afa5f13c2fe993a05f8feef130eced90be35 | physical lines 8
+FILE | verification.txt | sha256 096547430837f63dc9e970f60b1f963494fc0d94227e80b3452a5f6c57aca2ba | physical lines 1
+FILE | proposed-selfcheck.txt | sha256 66e962d883aa1f101e77174457f4981dbcdb799bab170f9e0a47fd6e30ee778c | physical lines 20
+FILE | result.txt | sha256 595fd01f5734b650997ef9970a0454f823d6b2755ee907bbee025ad3e65a3cda | physical lines 1
+NEGATIVE ORACLE | Current usage-plus-whitespace help lacks AC2 and must be rejected as complete; independent full-document inspection confirms the literal check result. Alternate equivalent wording would require human reinspection, not this literal predicate.
+
+Local inspection checks: 7 passed / 8 run, including 1 expected task-requirement failure (AC2). These are documentation/source inspections, not native code test counts.
+
+STRUCTURAL HELPER
+Command:
+PYTHONDONTWRITEBYTECODE=1 python protocol/scripts/standalone_done_v36.py --label relay/AIM/PILOT.yaml --plan plan.yaml --task-id V36-1-WP1 --issue-ref sample/project#2 --candidate sample/project@b349457b307e86b3fe37a3531baabf594794b057 --criteria criteria.txt --criteria-sha256 6ad8be1d80a955c5f73c8e71b1799eda8bda25c798b2007deb94cc736ff6d576 --self-check proposed-selfcheck.txt --repo /workspace/scratch/52eed2252c51/tmp/standalone-forward-v1 --evidence-root /workspace/scratch/52eed2252c51/tmp/standalone-forward-v1
+Exit: 0
+Output:
+{"candidate": "sample/project@b349457b307e86b3fe37a3531baabf594794b057", "criteria_sha256": "6ad8be1d80a955c5f73c8e71b1799eda8bda25c798b2007deb94cc736ff6d576", "done_supported": true, "gaps": [], "independent_review_established": false, "limits": ["Owner confirmation and semantic sufficiency of criteria/evidence need source review.", "Local HEAD is checked; remote PR freshness, publication and actual child binding are not attested.", "Tests, UI behavior, engineering correctness and reviewer independence are not inferred from hashes.", "No Owner acceptance, merge, dispatch or release authority is granted."], "mode": "standalone", "owner_accepted": false, "self_check_sha256": "66e962d883aa1f101e77174457f4981dbcdb799bab170f9e0a47fd6e30ee778c", "task_id": "V36-1-WP1", "verification": "STRUCTURE_AND_LOCAL_BYTES_ONLY", "witnesses_checked": 10}
+
+Interpretation: the author's all-MET proposal passes the optional helper's structure-and-local-bytes checks, but not the task's semantic requirements. The helper explicitly does not interpret prose. verification.txt says only that help exists and has usage; its hash is genuine but its contents do not prove AC2. The inherited result.txt predates the help candidate and describes output 2, with no reproducible documentation check; it is not evidence that AC2 is documented.
+
+COMMON CHECKLIST ASSESSMENT
+SC_INTENT NOT_MET: expected both original requirements in help; observed AC1 only. Witness: owner.txt, criteria.txt, full help above. Reversal: revised help at a newly assessed candidate meeting AC2.
+SC_INPUTS MET: expected supplied original source, selected standalone label/plan, unchanged frozen criteria and manifest candidate; observed matching bindings and byte digest. Limits: label/plan/criteria/manifest are supplied untracked files, not live provider attestations. Reversal: changed bytes, retained digest mismatch or evidence that these are not the selected sources.
+SC_SCOPE MET: expected bounded help documentation, preserved whitespace explanation and no unauthorized work by this assessment. Candidate diff HEAD^ to HEAD adds help.txt (0 to 2 physical lines) and owner.txt (0 to 1); result.txt is unchanged from the prior commit. No authored source/test file, protected protocol file, runtime implementation or dependency changed. This assessment only creates out/ reports. Reversal: a contrary diff or additional authored implementation change.
+SC_FLOW NOT_MET: expected source requirements -> help.txt -> help reader for both normal and failure behavior; observed reader receives usage and whitespace, but no missing-file failure guidance. No CLI or UI route is in task acceptance. Reversal: complete revised help inspected at the current candidate.
+SC_TESTS MET: expected source/output inspection capable of rejecting plausible usage-only documentation; observed local checks and complete-document reading reject AC2 omission even though the generic author witness and helper pass. No CI; no runtime/full-code-suite requirement was invented. Reversal: evidence that checks used different bytes or the document actually conveys both missing-file error and nonzero exit.
+SC_CODE MET: expected explicit stage applicability; observed documentation-only task and read-only assessment, with no source/test files or functions changed. A13 300-line ratchet, function spans, test-first implementation and split/reuse review have no new coding target here. Documentation counts are recorded above; no generated/vendor exclusions are used. No separate independent review is required by MODE_STANDALONE.md step 5. Reversal: discovery of source/test changes in this task.
+SC_PENDING NOT_MET: expected no unresolved necessary obligation before DONE; observed AC2 is still absent and the author proposal incorrectly reports Pending none. Reversal: AC2 completed and reassessed; an authorized native publication can then qualify a future public claim.
+SC_FRESHNESS MET: expected assessed local candidate equals current HEAD, tracked tree clean, artifact equals committed bytes, unchanged retained criteria digest; all observed. Scope is local only. No remote PR head, CI, publication, live child checklist, independent reviewer status or Owner acceptance is attested. Reversal: local/source change or actual remote mismatch if a later publication relies on it.
+
+A14 AND REMAINING ACTION
+Status: PARTIAL, 1 of 2 frozen acceptance criteria met, 0 of 1 tasks DONE.
+AC2 remains part of this same task. No criterion was waived, moved, or narrowed. Preserve the existing AC1 sentence and add explicit missing-file error and nonzero-exit documentation to help.txt through the authorized task performer. Named performer ownership is not supplied: UNKNOWN.
+Then re-inspect both criteria at the new candidate, rerun applicable documentation checks, and bind a fresh A14 companion and witnesses to that candidate.
+The assessment is not publication. No GitHub evidence, PR, issue update, product fix, role, task dispatch, acceptance, merge or release was created. Actual live issue checklist/publication and remote head are NOT_VERIFIED. Owner acceptance remains separate.
+If an authorized task completion is later published, native A14 requires publishing the companion first on the actual child and linking it inline from the unchanged native user-benefit field; qualifying proof remains the real PR URL. No PR or native test count is manufactured here.
+
