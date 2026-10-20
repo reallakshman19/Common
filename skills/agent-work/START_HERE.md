@@ -198,6 +198,10 @@ qualification. Follow already applicable project criteria and authority.
 
 ## Preserve the handoff
 
+**Optional local-agent transfer aid:** [local-handover v2](local-handover/README.md) provides concise instructions and source-bound handoff/self-check forms for fast local agents across software, UI, research, documents and calculations. It is not a fifth required skill, separate qualification exam, provider action, acceptance gate or replacement for a selected project's native evidence and authority.
+
+
+
 Carry this minimum meaning in the existing native record. Add only missing fields;
 this is a prose aid, not a new shared schema or mandatory return envelope.
 
