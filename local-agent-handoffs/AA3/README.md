@@ -6,6 +6,12 @@
 
 This is an **index on Common/main**. It is not AA3 production code, an issue completion report, a test receipt or acceptance. AA3's protected original fixture, engineering solver, task criteria and native evidence stay under their actual source and authorizations.
 
+## Current verified transfer (2026-10-20)
+
+The source-bound [AA3 #56 local-agent prompt](ISSUE_56_NEXT_AGENT.md) gives the complete continuation sequence. The actual incremental repair ZIP is already on [Google Drive](https://drive.google.com/file/d/14wZrQ7nNP5CsTq2Xlkf8omijkGzF_DGF/view?usp=drivesdk) in [AA3 / Issue 56 / Repair Deltas](https://drive.google.com/drive/folders/11yGq0WXIX1XZAFWlePW1MPO3XtIuViwW). Its 32,053 remotely downloaded bytes matched SHA-256 `8d96cf3023b0e7c78cdb4ce106a50896c4af26a7422f43c7f44afe8596930c74`. The next agent must rehash its **own download**; a matching transfer hash does not establish actual product behavior. This delta depends on the previous full handoff candidate (not yet claimed in this Drive folder), so do not apply it directly to PR #48.
+
+The one-file Common DRAFT artifact PR is still a separate optional/public-safe GitHub transfer obligation; **no such PR is claimed here**. Do not delay real tests when authorized candidate bytes are already accessible through Drive.
+
 ## Transfer an AA3 #56 candidate
 
 The local agent builds a non-sensitive ZIP using the [local handover protocol](../../skills/agent-work/local-handover/README.md) and reviews its contents before exposing them to the **public** Common repository.

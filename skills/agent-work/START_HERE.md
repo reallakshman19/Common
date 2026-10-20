@@ -99,6 +99,7 @@ the linked guidance when applicable, rather than loading every module/reference.
 
 | Situation | Use | Applying guidance |
 |---|---|---|
+| Moving work between fast/local agents, including agent ↔ ChatGPT | [Local-agent operating protocol](local-handover/AGENT_PROTOCOL.md) and [handover forms](local-handover/README.md) | Re-read originals and bytes, report actual execution and missing tests, self-check all criteria; use original task-issue comments and a verified file link (Drive or public-safe Common one-file DRAFT PR) without promoting transfer to acceptance. |
 | Taking over work under separately selected v3.6, in either mode | [Continuation/reconstruction applicability](../engineering-pr-delivery-v3.6/references/INDEPENDENT_RECONSTRUCTION.md) | Use a usable Oracle OnBoard Prompt directly; independently reconstruct only cold/missing context. No Q1–Q5 exam or agent pass mark. A selected BuddyRunner/two-pass/three-pass uses only its native stages; after completion, additional reconstruction is NOT_APPLICABLE. Reuse outputs and continue authorized work. |
 | Coding with separately selected v3.6 standalone delivery | [Standalone mode](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) and [pre-DONE self-check](../engineering-pr-delivery-v3.6/references/STANDALONE_COMPLETION.md) | Before calling the task done, complete the native SELF-CHECK v1 with source/candidate bindings, common checklist, frozen task criteria, actual witnesses and pending work. Keep coordinator mode separate. |
 | ChatGPT agent using that standalone protocol | [Activity and BuddyRunner policy](../engineering-pr-delivery-v3.6/references/CHATGPT_AGENT_ACTIVITY.md) | Recording is mandatory for this surface. Suggest the selected BuddyRunner once when distinct GitHub-access turns >5 OR recorded active-turn elapsed time >35 minutes. ChatGPT Work and other hosts are exempt. |
@@ -198,9 +199,12 @@ qualification. Follow already applicable project criteria and authority.
 
 ## Preserve the handoff
 
-**Optional local-agent transfer aid:** [local-handover v2](local-handover/README.md) provides concise instructions and source-bound handoff/self-check forms for fast local agents across software, UI, research, documents and calculations. It is not a fifth required skill, separate qualification exam, provider action, acceptance gate or replacement for a selected project's native evidence and authority.
-
-
+**Optional local-agent work:** [agent operating protocol](local-handover/AGENT_PROTOCOL.md)
+and [handover forms](local-handover/README.md) guide source-first work,
+source-bound self-checks and [GitHub comment handover](local-handover/COMMENT_RELAY.md)
+without Owner copy/paste. A verified Google Drive ZIP or public-safe, single-file
+Common DRAFT PR transports bytes only; it never verifies the product or grants
+acceptance. No fifth required skill/role, exam, gate or native-protocol waiver.
 
 Carry this minimum meaning in the existing native record. Add only missing fields;
 this is a prose aid, not a new shared schema or mandatory return envelope.

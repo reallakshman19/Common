@@ -1,5 +1,7 @@
 # Copy this message to a new local agent
 
+**Read the [local-agent operating protocol](../AGENT_PROTOCOL.md) first.** If the outgoing packet is already on Google Drive, download the real file, independently hash its bytes and continue authorized work; don't require the Owner to copy/paste or block genuine tests on a duplicate GitHub upload. A public-safe one-file Common DRAFT PR is a separate transfer record, not engineering acceptance.
+
 **GitHub-native transfer:** Given only the task issue or comment URL, use GitHub to read the outgoing agent's [delimited handover block](COMMENT_BLOCK.md) directly. Independently inspect original sources, candidate and reported tests. Post your own INCOMING_RESULT block on the same issue, including original criteria/failures/next action; read the posted comment back. For ZIP, check the linked dedicated **one-file DRAFT PR** in the Owner-selected public [Common project-wise folder](../../../../local-agent-handoffs/README.md) (only if the bytes are permitted to be public), its exact head/diff and actual file digest (see [relay](../COMMENT_RELAY.md)). If access is unavailable, state NOT_RUN/BLOCKED instead of inventing a post or PR.
 
 Continue **<project/task>** under the Owner's original source, effective amendments and actually selected project rules. Read the attached protocol `PROTOCOL.md`, the completed outgoing handoff, and actual candidate files. You are **not** being tested or admitted by an exam; you are expected to make bounded useful progress.

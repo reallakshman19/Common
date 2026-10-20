@@ -25,6 +25,10 @@ A project README on `Common/main` is a **pointer/index**, not a statement of suc
 
 **Do not commit ZIPs directly to `Common/main` by default.** This folder and project indexes may be committed to main; the binary transfer goes to an isolated draft PR. The Owner alone decides artifact PR disposition and any eventual merge or retention. An open draft PR link is retrievable while GitHub retains the ref; it is **not a guaranteed permanent archival URL** if the branch/PR is deleted or inaccessible.
 
+## Already available Google Drive file
+
+An agent may continue authorized work from an actual **Owner-linked Google Drive file**, after downloading and independently hashing its bytes. Drive access and transfer integrity are not product acceptance; do not create a fake GitHub artifact PR or delay tests merely to duplicate an already verified transfer. For a *separately selected* GitHub artifact PR, use the one-file OPEN/DRAFT route above only with content safe for public Common. [Local-agent operating instructions](../skills/agent-work/local-handover/AGENT_PROTOCOL.md) distinguish these routes. Preserve Drive sharing boundaries and do not widen permissions by default.
+
 ## Transfer vs acceptance
 
 ZIP CRC, manifest hashes, GitHub delivery and a one-file PR do **not** prove engineering correctness. Independently inspect the candidate against the original project source and run the real consumer/negative tests. Keep predecessor reports distinct from actual executed evidence.
