@@ -35,6 +35,13 @@ This is a **human form**, not an exam or Owner approval. Fill it even for PARTIA
 |---|---|---|---|---|---|
 | | | | | | |
 
+## GitHub comment / single-file artifact transfer (when selected)
+- Existing task issue and outgoing comment permalink I directly read, or NOT_RUN reason:
+- My posted comment URL plus actual readback status, or NOT_RUN reason:
+- If a ZIP/file was transferred: artifact-only **DRAFT PR** URL, exact head SHA, one PR diff path, source file size/SHA-256, remote download/hash check and any limits. Otherwise NONE:
+- Public/private, repository policy or permission restrictions and smallest unblock:
+- These communication receipts are **not** proof of product correctness or Owner acceptance.
+
 ## Declaration
 - My contribution: `AUTHOR / EXECUTOR / REVIEWER / SOURCE-EXPOSED / OTHER` and independence limit:
 - This is my own self-check, **not** independent technical approval or Owner acceptance.

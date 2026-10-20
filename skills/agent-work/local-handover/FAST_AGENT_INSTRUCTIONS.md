@@ -11,6 +11,10 @@
 5. **REPAIR** only within authorized scope. Preserve original input and protected behavior. Re-run relevant tests and open the actual output. Do not weaken an expected result solely to make green.
 6. **FILL SELF-CHECK AND RETURN** with exact file/line or output witnesses, actual command + exit, test counts, all criteria, open failures and the smallest next step. A reviewer/Owner may disagree; your own PASS is not their acceptance.
 
+## Do not make the Owner copy reports
+
+With authorized GitHub access, read the relevant predecessor [issue comment block](forms/COMMENT_BLOCK.md) directly. Post and read back your own INCOMING_RESULT or OUTGOING comment on that **same existing issue**. For a ZIP, create a **separate one-ZIP-only DRAFT PR**, verify the actual server diff has one path and the PR is draft, then link its URL, head SHA and artifact SHA-256/bytes in the issue comment. See [relay instructions](COMMENT_RELAY.md). Do not include sidecars as extra PR files, merge a handoff PR or claim a comment proves acceptance. If no GitHub access/safe repo, report the specific blocker rather than inventing a PR.
+
 ## Mandatory honesty rules in your response
 
 - Say **“I ran”** only when you actually ran it and can cite a local log/output; otherwise **“the outgoing agent reports”**.

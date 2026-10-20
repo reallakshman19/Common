@@ -1,5 +1,7 @@
 # Copy this message to a new local agent
 
+**GitHub-native transfer:** Given only the task issue or comment URL, use GitHub to read the outgoing agent's [delimited handover block](COMMENT_BLOCK.md) directly. Independently inspect original sources, candidate and reported tests. Post your own INCOMING_RESULT block on the same issue, including original criteria/failures/next action; read the posted comment back. For ZIP, check the linked dedicated **one-file DRAFT PR**, its exact head/diff and actual file digest (see [relay](../COMMENT_RELAY.md)). If access is unavailable, state NOT_RUN/BLOCKED instead of inventing a post or PR.
+
 Continue **<project/task>** under the Owner's original source, effective amendments and actually selected project rules. Read the attached protocol `PROTOCOL.md`, the completed outgoing handoff, and actual candidate files. You are **not** being tested or admitted by an exam; you are expected to make bounded useful progress.
 
 **Do not blindly repeat the predecessor's PASS, hashes, review findings or DONE.** Treat them as `REPORTED_BY_PREDECESSOR` until you inspect the actual bytes and independently rerun the relevant check. An attached manifest supports transfer integrity only; it is not Owner approval. Keep every original acceptance criterion in scope, and preserve earlier failures and reviews for the exact candidate they assessed.

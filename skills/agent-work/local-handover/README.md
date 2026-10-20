@@ -2,7 +2,7 @@
 
 Use this reference when an Owner moves work between local agents, especially fast or low-reasoning ones. Do not treat previous agents' PASS/completion claims as independent facts. Preserve the original Owner outcome and actual evidence.
 
-**Start:** [fast-agent instructions](FAST_AGENT_INSTRUCTIONS.md), [incoming-agent prompt](forms/INCOMING_AGENT_PROMPT.md), [outgoing handoff](forms/OUTGOING_HANDOFF.md), [self-check form](forms/SELF_CHECK.md). See the [protocol](PROTOCOL.md), [scenario playbooks](SCENARIO_PLAYBOOKS.md), [Owner quick review](OWNER_QUICK_REVIEW.md).
+**Start:** [fast-agent instructions](FAST_AGENT_INSTRUCTIONS.md), [incoming-agent prompt](forms/INCOMING_AGENT_PROMPT.md), [outgoing handoff](forms/OUTGOING_HANDOFF.md), [self-check form](forms/SELF_CHECK.md). See the [protocol](PROTOCOL.md), [GitHub comment-block relay](COMMENT_RELAY.md), [handover comment template](forms/COMMENT_BLOCK.md), [single-file DRAFT artifact PR checklist](forms/ARTIFACT_PR_CHECKLIST.md), [scenario playbooks](SCENARIO_PLAYBOOKS.md), [Owner quick review](OWNER_QUICK_REVIEW.md).
 
 **Evidence and authority:** Original Owner source > applicable native project requirements > real inputs/candidate > executed observation > prior-agent report. Label FACT / REPORTED / UNKNOWN and PASS / FAIL / NOT_RUN / BLOCKED accurately. Bind source revisions, exact candidate bytes, actual commands/logs, and contrary cases. A manifest match proves its file copies, not correctness. A reviewed patch is not a real product Run/Output/CSV.
 

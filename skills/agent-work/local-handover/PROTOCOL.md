@@ -4,6 +4,12 @@
 
 **Precedence:** Original Owner instructions and effective amendments → actual project plan, acceptance conditions, permissions and native workflow → actual sources/fixtures → candidate bytes → observed execution → earlier agent statements. If two sources conflict, preserve both and disclose the discrepancy; do not silently choose an easier target. A handoff or verifier does not make a claim true, permit a merge, or release work. For a project governed by `engineering-pr-delivery-v3.6.1`, use its actual selected standalone/coordinator mode; do not infer standalone from this document.
 
+## GitHub-native comment handoff (no Owner copy/paste)
+
+Where agents have actual authorized GitHub access, use the [comment-block relay](COMMENT_RELAY.md): each local agent posts a source-bound block on the **existing task issue** and reads it back; the successor fetches the posted block directly and returns a separate evidence-bound comment. The Owner shares only the task issue/comment URL. The relay is not an automatic chat integration or a new permission/acceptance gate.
+
+For ZIP or other single-file artifact transfers, create a **dedicated DRAFT PR with exactly one file changed** in the approved artifact repository, separate from product implementation PRs. Independently verify its server-side draft status, changed path, PR head, archive bytes and SHA-256; link that PR in the task issue comment. See [comment template](forms/COMMENT_BLOCK.md) and [artifact PR checklist](forms/ARTIFACT_PR_CHECKLIST.md). When GitHub access or a privacy-safe repository is missing, say NOT_RUN/BLOCKED and use only a permitted fallback; never fabricate a transfer.
+
 ## 1. Seven things that must survive any handoff
 
 1. **Purpose:** exact Owner outcome/WHY, authentic original source and applicable amendments, including replaced requirements.

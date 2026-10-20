@@ -11,4 +11,6 @@
 7. **Is a failure still open?** If an agent claims the issue is fixed, find the new-candidate witness for that exact old defect. Old reviews do not self-update.
 8. **What decision is actually requested?** More authorized work, missing input, Owner acceptance, merge or deployment are different actions.
 
+**Link-based review:** Ask for the **existing task issue/comment permalink**, not another pasted chat. If the handover claims to ship a ZIP, check the **separate DRAFT artifact PR**, confirm the server diff is **exactly one file**, inspect its SHA-256/size and whether it is the exact file the tests cite. A produced manifest or un-read-back comment alone isn't independent evidence. See [GitHub relay](COMMENT_RELAY.md).
+
 If an answer is absent, request **one precise piece of evidence or the real artifact**; do not demand an elaborate reconstruction exam. A local agent can continue other authorized tasks while the specific claim stays NOT_RUN/UNKNOWN.
