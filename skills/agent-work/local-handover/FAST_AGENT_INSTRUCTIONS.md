@@ -13,7 +13,7 @@
 
 ## Do not make the Owner copy reports
 
-With authorized GitHub access, read the relevant predecessor [issue comment block](forms/COMMENT_BLOCK.md) directly. Post and read back your own INCOMING_RESULT or OUTGOING comment on that **same existing issue**. For a ZIP, create a **separate one-ZIP-only DRAFT PR**, verify the actual server diff has one path and the PR is draft, then link its URL, head SHA and artifact SHA-256/bytes in the issue comment. See [relay instructions](COMMENT_RELAY.md). Do not include sidecars as extra PR files, merge a handoff PR or claim a comment proves acceptance. If no GitHub access/safe repo, report the specific blocker rather than inventing a PR.
+With authorized GitHub access, read the relevant predecessor [issue comment block](forms/COMMENT_BLOCK.md) directly. Post and read back your own INCOMING_RESULT or OUTGOING comment on that **same existing issue**. For a ZIP, use the Owner-selected public [Common project-wise folder](../../../local-agent-handoffs/README.md), e.g. `local-agent-handoffs/AA3/issue-56/<candidate-id>.zip`, and create a **separate one-ZIP-only DRAFT PR**, verify the actual server diff has one path and the PR is draft, then link its URL, head SHA and artifact SHA-256/bytes in the issue comment. See [relay instructions](COMMENT_RELAY.md). Do not include sidecars as extra PR files, merge a handoff PR or claim a comment proves acceptance. If no GitHub access or the bytes are unsafe for public Common, report the specific blocker rather than inventing a PR.
 
 ## Mandatory honesty rules in your response
 

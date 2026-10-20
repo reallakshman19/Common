@@ -15,8 +15,10 @@ Use the **existing task issue**. Fill this human-readable Markdown, including bo
 - Failed-Or-Not-Run: all known failed/skipped/blocked tests, pre-existing vs introduced vs unattributed
 - Open-Criteria: every unmet original acceptance ID and specific missing evidence
 - Next: actor, authority, smallest task, dependency and expected return location
-- Artifact-PR: NONE | NOT_CREATED(reason) | https://github.com/OWNER/REPO/pull/NUMBER
-- Artifact-Path: NONE | exactly one repository-relative ZIP/file path
+- Artifact-Repository: NONE | reallakshman19/Common | other explicitly authorized repository
+- Artifact-Visibility: NONE | PUBLIC_SAFE_CONFIRMED | BLOCKED_PRIVATE(reason)
+- Artifact-PR: NONE | NOT_CREATED(reason) | https://github.com/reallakshman19/Common/pull/NUMBER
+- Artifact-Path: NONE | local-agent-handoffs/<project-slug>/issue-<number>/<candidate-id>.zip (one changed PR path)
 - Artifact-Head: NONE | 40-character commit SHA
 - Artifact-SHA256: NONE | 64-character SHA-256 of actual file bytes
 - Artifact-Bytes: NONE | actual positive integer
@@ -29,6 +31,6 @@ Write a local UTF-8 `handoff-comment.md` and use `gh api -X POST repos/OWNER/REP
 
 For `INCOMING_RESULT`, read actual original source and candidate independently; set `Supersedes` to the received comment permalink, post a **new** comment and read it back. Keep the native project SELF-CHECK and LOG separate.
 
-For ZIP, fill all artifact fields from the real [dedicated one-file draft PR](ARTIFACT_PR_CHECKLIST.md). If no artifact, all artifact fields are `NONE`. A claim that a PR is draft or has one file requires direct GitHub verification, not only the outgoing agent's text.
+For ZIP, use the Owner-selected public [Common project-wise artifact folder](../../../../local-agent-handoffs/README.md) when safe and fill all artifact fields from the real [dedicated one-file draft PR](ARTIFACT_PR_CHECKLIST.md). If no artifact, all artifact fields are `NONE`. A claim that a PR is draft or has one file requires direct GitHub verification, not only the outgoing agent's text.
 
 **Never post** secrets, confidential files, customer data or private chats on public GitHub. Comments and archive PRs don't grant technical approval, implementation permission or Owner acceptance.
