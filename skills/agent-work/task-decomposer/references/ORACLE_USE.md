@@ -30,6 +30,12 @@ result, what state must stay consistent, and what would invalidate the artifact?
 Use existing `understanding`, `decision_refs`, task boundaries, acceptance and
 source/coverage records. No participant-exposure JSON schema is added.
 
+For Owner-authorized Oracle/reviewer contributions before coding handoff, use the
+optional [contribution recipe](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/CONTRIBUTION_HANDOFF.md).
+Preserve the High/Medium ROI rationale, bounded result, source-backed decisions,
+checks and exact continuation in existing records. A map or Oracle role grants no
+edit authority; contributor judgments on affected claims remain SELF-ASSESSED.
+
 ## Compose the two independently selected skills
 
 1. Reconstruct the original purpose, source conditions, useful work and unknowns.

@@ -18,6 +18,13 @@ reviewer can rerun author tests usefully without establishing an independent ora
 A same-principal fresh attempt remains self-review. A reviewer who repairs a
 candidate must disclose contribution to the changed scope.
 
+Declare affected contributor scope before an authorized edit, including expected
+answers, test design and shared specification/model premises. Do not independently
+approve that contribution. Unchanged filenames do not prove unaffected claims:
+justify review reuse through dependencies and integration on the new candidate.
+Preserve earlier verdicts on their original subject. An Oracle/reviewer switching
+to bounded implementation does not gain authority from the switch or erase exposure.
+
 Earlier conversation, inspected files and shared memory count as exposure.
 "Do this before reading that" cannot undo prior access. For reference-withheld
 generation or transfer, name the withheld reference, issued input set, known prior

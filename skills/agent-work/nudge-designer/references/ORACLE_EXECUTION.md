@@ -35,6 +35,14 @@ application result without qualifying an intended low-thinking configuration.
 These are adaptive responsibilities, not fixed phases, a required team size,
 automatic model upgrade or prescribed number of successful returns.
 
+When the Owner wants Oracle to contribute before a coding successor starts, use
+the optional [contribution and handoff recipe](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/CONTRIBUTION_HANDOFF.md).
+Carry context-heavy High/Medium ROI work to a bounded checkable result, then leave
+the exact next unit and decision basis in native records. Keep selected coordinator
+separation intact; Oracle is not automatically a producer. Disclose affected
+contributor scope and self-review. Do not independently approve your own changes
+or claim measured ROI from one successful intervention.
+
 ## Prepare executable work
 
 Choose the next uncertainty whose resolution can change direction. Write the

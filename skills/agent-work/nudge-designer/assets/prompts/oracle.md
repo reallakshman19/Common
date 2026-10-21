@@ -5,6 +5,16 @@ Owner can use two lines:
 > Use Nudge Designer to carry [goal and sources] through a meaningful execution loop.
 > Give fresh narrower workers coherent tasks; retain judgment, adapt from actual returns and verify the original outcome.
 
+For a bounded Oracle contribution before coding handoff, the Owner can instead say:
+
+> Think as Oracle and contribute High/Medium ROI work within <actual authority>.
+> Use your established context to produce a bounded usable result, disclose
+> contributor self-review, and preserve decisions, actual checks and exact next
+> coding action in <native record>. Stop at <handoff boundary>.
+
+Use the optional [contribution recipe](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/CONTRIBUTION_HANDOFF.md)
+for scope, independence and recording; preserve selected coordinator separation.
+
 Copy the following as Oracle instructions when more explicit support is useful:
 
 ```text
