@@ -6,6 +6,13 @@ Review task and original conditions: {{assignment and owning sources}}
 Issued snapshots, actual native artifacts and claimed results: {{direct references}}
 Contribution/independence, tool and authority basis: {{known basis or UNKNOWN}}
 
+Apply No PASS beyond evidence and No consequential PASS without a surviving-error
+challenge. For each consequential verdict name its precise claim, expectation source
+and actual execution/inspection witness. Identify a significant plausible wrong
+behavior within the claim that could pass; strengthen evidence or narrow the verdict.
+Do not infer independent confirmation from shared fixtures or source assumptions.
+These rules apply equally to Oracle; Oracle-authored repairs are contributor work.
+
 Judge the claim against original conditions, not merely the report or its PASS.
 Where useful derive your own expected result from the inputs and use a contrary
 case or original path. Distinguish a missing check, observed defect, unsupported

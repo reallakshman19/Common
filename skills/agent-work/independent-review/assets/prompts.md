@@ -13,6 +13,17 @@ format when it already carries them. Do not require a JSON record to begin work.
 > Return evidence-backed findings, coverage, limits and the next useful action
 > in <native channel>. Product edits/publication: <actual authorized scope>.
 
+## Review with an authorized bounded contribution
+
+> Review <candidate> against <original outcome/sources>. Within <actual edit
+> authority>, contribute High/Medium ROI work where your established understanding
+> avoids consequential rework. State the rationale and stopping point; keep
+> review-only boundaries and selected coordinator separation intact. Disclose
+> affected contributor scope before editing and label its checks SELF-ASSESSED.
+> Preserve the decision basis, exact change, actual evidence, remaining independent
+> assessment and the next coder's starting point in <native record>. Hand over at
+> <Owner-requested boundary>; do not independently approve your own contribution.
+
 ## GUIDED evidence worker
 
 ```text

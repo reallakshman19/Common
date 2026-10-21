@@ -70,6 +70,20 @@ integrated verification. Record assistance and actual host configuration; a defa
 rehearsal does not qualify a low-thinking configuration. The [LFEA pilot entry](assets/prompts/lfea-pilot.md)
 prepares that real-source application without claiming its live repair has run.
 
+When authorized to contribute before handing work to a coder, use the optional
+[contribution and handoff recipe](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/CONTRIBUTION_HANDOFF.md).
+Select bounded High/Medium ROI work from actual context advantage; persist useful
+decisions, checks and the exact continuation. Disclose contributor self-review on
+affected claims and preserve any selected coordinator/producer separation. This
+does not grant edit authority or require another module.
+
+Apply No PASS beyond evidence and No consequential PASS without a surviving-error
+challenge to agents and Oracle. Name the bounded claim, expectation source and
+actual witness; strengthen evidence or narrow the verdict when significant wrong
+behavior within that claim could pass. Choose the next task from evidence rather
+than agent number; preserve contributor scope, required independent review and
+authorized Owner acceptance.
+
 For selected-response learning items, use [verb/option and generator guidance](references/SELECTED_RESPONSE.md)
 and profile `selected-response` where useful. Carry the tile verb into the brief;
 the generator runs option-length/shared-word checks before return and records

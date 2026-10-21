@@ -24,6 +24,21 @@ For PowerShell on Windows, measure a downloaded file with `(Get-Item .\handoff.z
 
 ## Fill the return; avoid fake PASS
 
+Apply **No PASS beyond evidence** and **No consequential PASS without a
+surviving-error challenge** to local agents and any Oracle. Name the precise claim,
+expectation source/review status, candidate/input hashes and actual executed
+witness. Identify significant plausible wrong behavior within the claim that could
+still pass; strengthen the evidence or narrow the verdict. A genuine alternative
+and differing predicted outcomes matter more than filling five evidence fields.
+Keep FAIL, NOT_RUN, UNKNOWN and claim-level HOLD distinct; continue unrelated work.
+
+Choose the next task from actual evidence: settled implementation, an established
+repair, or suitably independent falsification of disputed correctness. A fixed
+agent count is not required. Transfer original requirements, facts, artifacts,
+revisions and conditional explanations without making a speculative diagnosis a
+required fix. Oracle-authored patches remain contributor artifacts; preserve any
+required independent review and authorized Owner acceptance separately.
+
 | Situation | Accurate statement |
 |---|---|
 | Predecessor says test passed; you did not run it | `REPORTED_BY_PREDECESSOR` + witness link and dependency |

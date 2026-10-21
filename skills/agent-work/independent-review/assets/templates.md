@@ -24,11 +24,14 @@ Run / case / actual candidate: <distinct identities>
 Reviewer/contributions: <author relation and basis; earlier contributions>
 Independence/exposure: <specific earlier candidate/key/reference/verdict access; context, expectation derivation, method, execution, lineage>
 Claim results: <supported / contradicted / inconclusive / not run, with witnesses>
+Claim bounds/expectations: <exact supported scope; expectation source and review status>
+Execution witness: <candidate/input hashes, actual commands/interactions, output/exit>
 Surviving wrong result per verdict: <concrete residual risk and contrast, or justified exhaustive scope>
 Findings: <source/candidate locator, observed vs expected, consequence, reproduction>
 Coverage: <assessed and excluded scope, unknowns and missing checks>
 Verdict: <PASS / NEEDS_WORK / FAIL / INCONCLUSIVE within an explicit scope>
 Next: <useful action and responsible available participant; existing authority>
+Next-task basis: <settled implementation/repair or independent falsification; actual evidence>
 ```
 
 An overall verdict does not erase per-claim results. Use FAIL for a demonstrated

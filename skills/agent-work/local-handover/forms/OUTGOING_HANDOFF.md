@@ -7,6 +7,13 @@ Authentic input/fixture, golden, baseline and access limits:
 Causal source → owner/decision → consumer/output:  
 Allowed modifications and protected behavior:  
 Earlier agents' claims / exposure:  
+Bounded claim and expectation source/review status:
+
+Hypothesis, genuine alternative and differing predictions:
+
+Surviving-error challenge, stronger evidence or narrowed verdict:
+
+Candidate/input/fixture hashes and unresolved contradictions:
 
 ## Actual tests and observations
 | ID | Exact command or interaction, environment | Exit/status | Artifact/log witness | Negative/limit |
@@ -25,6 +32,9 @@ Unattributable failures:
 Skipped checks, exact observed restriction:  
 What changed in understanding:  
 Next useful action, owner/authority and dependency:  
+Next-task choice/basis (implementation / established repair / independent falsification):
+
+Contributor scope, including Oracle patches, and required independent review:
 Packet files, exact SHA-256 and permitted return location:  
 Owner acceptance/merge/deploy status:  
 

@@ -1,6 +1,6 @@
 ---
 name: independent-review
-description: Review an exact artifact, implementation, calculation or learning resource against original intent and actual evidence. Use for source-grounded assessment, adversarial checks, review evidence collection, self-review with disclosed limits, or a distinct review. Adapt to available participants and project type; use optional Task Decomposer, Nudge Designer and project-policy adapters without requiring them.
+description: Review an exact artifact, implementation, calculation or learning resource against original intent and actual evidence. Use for source-grounded assessment, adversarial checks, review evidence collection, self-review with disclosed limits, a distinct review, or an authorized bounded contribution followed by handoff. Preserve scope-specific independence; use optional project and participant adapters without requiring them.
 ---
 
 # Independent Reviewer
@@ -31,6 +31,13 @@ wait for a missing role, module, schema, calibration count or CI. Continue feasi
 work and state precisely which claim the available evidence cannot establish.
 
 ## Apply the review method
+
+Apply two central rules: **No PASS beyond evidence**—name the bounded claim,
+expectation source and actual execution/inspection witness; **No consequential PASS
+without a surviving-error challenge**—identify significant wrong behavior the test
+could miss, then strengthen the evidence or narrow the verdict. A source inspection
+cannot establish unexecuted runtime behavior. These rules also apply to Oracle;
+shared assumptions or fixture lineage can limit apparent independent confirmation.
 
 Use these responsibilities in the order the problem needs, combining or revisiting
 them when useful. They are not compulsory passes or a lifecycle controller.
@@ -80,6 +87,16 @@ them when useful. They are not compulsory passes or a lifecycle controller.
 Review findings do not grant product-edit, publication, merge or release authority.
 Use authority already given by the Owner/project. If an authorized repair is made,
 record the new candidate and the reviewer's contribution; reassess affected work.
+
+For an authorized contribution before another coder continues, use the optional
+[contribution and handoff recipe](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/CONTRIBUTION_HANDOFF.md).
+Choose work where current understanding can remove consequential rework; record
+the bounded outcome, decision basis, exact candidate/checks and next action in the
+native report. Disclose the contributor scope before editing. Do not independently
+approve your affected candidate contribution; label its assessment SELF-ASSESSED
+and preserve existing independent-review requirements. Writing independent review
+checks alone does not make you the candidate's author. A review-only
+assignment still ends with assessment rather than an unauthorized repair.
 
 ## Match support to the task
 

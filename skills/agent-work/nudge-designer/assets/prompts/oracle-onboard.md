@@ -24,6 +24,8 @@ Why this task matters: {{connection to outcome; what remains after this task}}
 One bounded task
 Deliverable: {{one checkable result}}
 Working explanation: {{FACT/CLAIM/HYPOTHESIS + evidence + plausible alternative}}
+Task choice/basis: {{implementation, established repair or independent falsification;
+actual evidence supporting this role, required independence and unresolved criterion}}
 Method: {{concrete GUIDED operations, or OPEN investigation with decision contrast}}
 
 Authoritative inputs
@@ -37,6 +39,9 @@ Preserve/reserve: {{invariants, coupled decisions, acceptance/release authority}
 
 Success criteria
 {{observable result; meaningful contrary case; statuses/roll-up and UNKNOWN}}
+Bounded PASS claim and expectation source/review status: {{exact scope and basis}}
+Surviving-error challenge: {{significant plausible wrong behavior within that claim;
+discriminating fixture and differing predictions before execution, or justified exhaustive scope}}
 
 Uncertainty handling
 Known access/tools: {{observed availability or UNKNOWN; report actual errors}}
@@ -49,6 +54,13 @@ Evidence and continuation
 Return via {{native format/channel/binding; exact ACK only if used by that system}}.
 Include actual action/result and witnesses or NOT_RUN; what changed in understanding;
 task status; remaining parent outcome; next justified action and its authority.
+Apply No PASS beyond evidence and No consequential PASS without a surviving-error
+challenge. Include candidate/input hashes, actual commands/interactions, outputs
+and exit status. State whether evidence was strengthened or the verdict narrowed;
+keep independently reviewed expectations separate from author assertions.
+Retain contradictions as FAIL, NOT_RUN or UNKNOWN as appropriate; a claim-level
+HOLD withholds the affected verdict, not unrelated authorized work. Disclose any
+Oracle/receiver contribution; its self-check is not independent approval.
 For a blocked action include attempt, restriction, affected scope and feasible route.
 After this result: {{conditional next action within standing authority, or proposed
 action for the appropriate actor; no implied expansion of scope}}

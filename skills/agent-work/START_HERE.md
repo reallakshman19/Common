@@ -4,6 +4,7 @@
 
 - [Start with a short request](#start-with-a-short-request)
 - [Choose only useful modules](#choose-only-useful-modules)
+- [Contribute before handing over](#contribute-before-handing-over)
 - [Use an Oracle OnBoard Prompt](#use-an-oracle-onboard-prompt)
 - [Find task-specific support](#find-task-specific-support)
 - [Adapt to available participants](#adapt-to-available-participants)
@@ -76,6 +77,32 @@ Do not load every reference. Read the selected module's core, then only the
 applicable domain/support/adapter guidance. If an optional module is unavailable,
 perform the useful native work and disclose the omitted support. Continue
 unaffected work rather than waiting for an entire toolchain.
+
+## Contribute before handing over
+
+Apply **No PASS beyond evidence** and **No consequential PASS without a
+surviving-error challenge** to both agents and Oracle. Bind verdicts to exact
+claims, expectation sources and actual checks; strengthen inadequate evidence or
+narrow the verdict. See [the two rules](CONTRIBUTION_HANDOFF.md#bound-every-pass).
+
+Choose the next bounded task from the evidence: implementation when the contract
+and important failure modes are established; suitably independent falsification
+when correctness remains disputed or consequential errors can evade existing
+checks. Oracle then challenges integration; separately required independent review
+and authorized Owner acceptance remain distinct. This is an adaptive arrangement,
+not a compulsory three-agent sequence. Oracle-authored patches are contributor work.
+
+When the Owner wants an Oracle or reviewer to contribute before a coder continues,
+use [contribution and handoff guidance](CONTRIBUTION_HANDOFF.md). Select High/Medium
+ROI work from actual context advantage and project benefit, implement a bounded
+usable result within existing authority, and preserve decisions, checks and exact
+continuation in native records. Treat ROI as a prospective judgment unless measured.
+
+Review-only work remains review-only. A contributor's checks of affected claims
+are SELF-ASSESSED; another role label or chat cannot make them independent. Keep
+selected coordinator separation and independently required review intact. Stop at
+an Owner-requested handoff boundary; a checkpoint alone does not end an execution
+assignment. This recipe adds no controller, required role or approval gate.
 
 ## Use an Oracle OnBoard Prompt
 
