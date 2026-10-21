@@ -6,12 +6,14 @@ import argparse
 import json
 
 
-def route(intent: str, workflow: str, monitor: str = "OFF") -> dict:
-    """Return a routing decision, never an execution receipt."""
-    if intent not in ("progress", "start", "unclear"):
-        raise ValueError("intent must be progress/start/unclear")
+def route(intent: str, workflow: str, monitor: str = "OFF", consumer: str = "standalone") -> dict:
+    """Return routing advice only; an Oracle role never grants execution authority."""
+    if intent not in ("progress", "start", "unclear", "mcda", "combined"):
+        raise ValueError("intent must be progress/start/unclear/mcda/combined")
     if monitor not in ("OFF", "ON"):
         raise ValueError("monitor must be OFF or ON")
+    if consumer not in ("standalone", "oracle"):
+        raise ValueError("consumer must be standalone/oracle")
     if not isinstance(workflow, str):
         raise ValueError("workflow must be text")
     name = workflow.strip()
@@ -27,6 +29,25 @@ def route(intent: str, workflow: str, monitor: str = "OFF") -> dict:
     }
     if intent == "unclear":
         return {**result, "route": "CLARIFY_INTENT", "next_action": "ASK_SHOW_PROGRESS_OR_START"}
+    if intent in ("mcda", "combined"):
+        # MCDA is independently available without GitHub, a workflow ID or a monitor.
+        if intent == "mcda" and monitor == "OFF":
+            return {**result, "route": "ORACLE_MCDA_ADVISORY" if consumer == "oracle" else "SOFTWARE_MCDA",
+                    "monitor": "OFF", "render_order": ["MCDA"], "state": "ADVISORY_ONLY",
+                    "next_action": "EVALUATE_SUPPLIED_OPTIONS_WITHOUT_LIVE_PROGRESS"}
+        if not name:
+            return {**result, "route": "MCDA_PROGRESS_TARGET_REQUIRED", "monitor": monitor,
+                    "mcda_allowed": True, "state": "MONITORING_UNAVAILABLE_CONFIGURATION_REQUIRED",
+                    "next_action": "CONTINUE_MCDA_OFF_AND_REQUEST_WORKFLOW_SELECTOR"}
+        return {
+            **result,
+            "route": "ORACLE_MCDA_PROGRESS" if consumer == "oracle" else "MCDA_PROGRESS",
+            "monitor": monitor,
+            "state": "READ_ONLY_OBSERVATION_REQUESTED" if monitor == "ON" else "NOT_LIVE",
+            "render_order": ["WORKFLOW_PROGRESS", "MCDA"],
+            "next_action": "VERIFY_MAPPING_THEN_READ_ONCE_AND_KEEP_MCDA_ADVISORY" if monitor == "ON"
+            else "RENDER_SUPPLIED_EVIDENCE_AND_KEEP_MCDA_ADVISORY",
+        }
     if not name:
         return {**result, "route": "REQUIRE_TARGET", "next_action": "ASK_WORKFLOW_AND_ISSUE"}
     if intent == "progress":
@@ -54,11 +75,12 @@ def route(intent: str, workflow: str, monitor: str = "OFF") -> dict:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--intent", choices=("progress", "start", "unclear"), required=True)
+    parser.add_argument("--intent", choices=("progress", "start", "unclear", "mcda", "combined"), required=True)
     parser.add_argument("--workflow", default="")
     parser.add_argument("--monitor", choices=("OFF", "ON"), default="OFF")
+    parser.add_argument("--consumer", choices=("standalone", "oracle"), default="standalone")
     args = parser.parse_args(argv)
-    print(json.dumps(route(args.intent, args.workflow, args.monitor), sort_keys=True))
+    print(json.dumps(route(args.intent, args.workflow, args.monitor, args.consumer), sort_keys=True))
     return 0
 
 

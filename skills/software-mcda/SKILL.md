@@ -11,6 +11,17 @@ An independent, read-only decision-support skill. It requires neither the Workfl
 
 When this skill is called, expose **Workflow monitoring: OFF (default) / ON (one-time read-only GitHub check)**. If unspecified, run MCDA in OFF mode immediately; do not require GitHub, a monitor config, or a confirmation prompt to calculate scores. Honor an explicit ON selection and request only the missing named workflow/configuration if it is required; never invent a mapping. ON uses the standalone `skills/workflow-intelligence/scripts/invoke.py --monitor on` runner, with an explicitly selected workflow ID and reviewed source config. ON never changes scheduled monitoring, adds an approval, or sends a notification. The monitored stage observation remains SUBMITTED/UNVERIFIED or UNKNOWN and does not affect MCDA ratings. See the Workflow Intelligence skill's invocation-toggle reference.
 
+## Optional Oracle + compact workflow presentation
+
+When an Owner asks for both an Oracle decision and progress, follow the
+[Universal Workflow Progress bridge](../universal-workflow-progress/references/oracle-mcda-bridge.md).
+Render the source-grounded progress strip first, then keep weighted alternatives,
+hard requirements and sensitivity in a separate **MCDA — ADVISORY** section.
+Workflow states, issue comments and source digests never become scoring inputs
+or approval. Monitoring OFF remains the default and an unavailable ON mapping
+must not prevent independent MCDA scoring. This link creates no import,
+background observer, Oracle invocation or cross-chat auto-installation.
+
 ## Workflow
 
 1. Define the decision, time horizon, equivalent scope, competing engineering alternatives and mandatory requirements. Do not mistake a workflow stage (e.g. BuddyRunner 1a/1b/2) for an MCDA option.

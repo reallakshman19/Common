@@ -1,6 +1,6 @@
 ---
 name: universal-workflow-progress
-version: 1.0.0
+version: 1.1.0
 description: >-
   Read-only graphical progress for any user-selected workflow. Dynamically discover
   its actual stages and dependency structure from the current governing contract,
@@ -46,6 +46,18 @@ python skills/universal-workflow-progress/scripts/route_invocation.py --intent p
 ```
 
 This helper **does not start an agent, fetch source, activate monitoring, install a ChatGPT skill or mutate a workflow**. Its JSON declares a route/next action, `source_checked=false` and `agent_invoked=false`. An invoking agent must perform any authorized subsequent action in the correct runtime; the routed decision is not a completion receipt. Do not modify the existing scheduled monitor/email bridge, opt-in diagnostic job or workflow configuration just to route a chat request.
+
+## Oracle and Software MCDA composition (optional)
+
+When an Oracle conversation needs progress or architecture comparison, use the
+[Oracle / MCDA bridge](references/oracle-mcda-bridge.md) for intent routing.
+Universal Workflow Progress remains a read-only observer; [Software MCDA](../software-mcda/SKILL.md)
+remains independent advisory decision support. They never mark the other's
+evidence VERIFIED, alter ratings, grant permission or dispatch workers.
+The pure `route_invocation.py --consumer oracle --intent mcda|combined`
+returns routing advice only, with `source_checked=false`; an Oracle chat must
+explicitly load the skill before it can follow this convention. Repository
+changes cannot silently install a new skill in pre-existing conversations.
 
 ## Operating contract
 
@@ -123,12 +135,17 @@ projector remains the sole source of its percentages.
 ## Graphical output rules
 
 Use graphical layout primitives supported by the current ChatGPT response UI
-(e.g. horizontal segmented row, boxes, icons, short captions). For 2–6 stages,
-show one compact row; for more stages or parallel work, collapse to parent
-segments with optional grouped sub-stages. Make branching/parallel dependencies
-visible rather than inventing a sequential path. Include accessible status
-words alongside colors/icons. Recommended symbols: ✓ VERIFIED, ◐ IN_PROGRESS,
-↑ SUBMITTED, ! BLOCKED, ↻ STALE, ? UNKNOWN, ○ NOT_STARTED, – N/A.
+(e.g. horizontal segmented row, boxes, icons, short captions). For 2–6 stages, prefer a **compact, horizontally ordered strip** over a
+grid of identical large cards. For more stages, collapse to parent milestones.
+Show independent producer/reviewer work in one **parallel lanes** panel below
+the strip, then one **CURRENT BLOCKER / NEXT OBSERVABLE** with responsible actor.
+On narrow layouts, use a vertical equivalent rather than unreadable overflow.
+Make fork/join dependencies visible; never project child SUBMITTED/VERIFIED
+onto parent completion. Distinguish awaiting authorization from awaiting an
+actual run, and indicate uncertainty when the actor or source cannot be verified.
+Include accessible status words alongside colors/icons. Recommended symbols:
+✓ VERIFIED, ◐ IN_PROGRESS, ↑ SUBMITTED, ! BLOCKED, ↻ STALE,
+? UNKNOWN, ○ NOT_STARTED, – N/A.
 
 A strip must show:
 - Workflow title and *observed-as-of* timestamp or `NOT LIVE`.
@@ -188,7 +205,11 @@ plainly when asked for self-refreshing graphics.
 
 ## Response format
 
-Prefer one concise graphical strip, then one compact paragraph containing
-`Verified evidence`, `Gap/blocker`, `Next observable`, and `Observed as of`.
-Show protocol-native stage IDs and cite exact sources. Never fill a progress
-strip from illustrative data without marking it `EXAMPLE / NOT LIVE`.
+Use **WORKFLOW PROGRESS — <selected workflow>** and explicit
+`LIVE SOURCE SNAPSHOT / observed-as-of` (only for a completed source read),
+`NOT LIVE`, or `OBSERVATION UNAVAILABLE`. Render **compact milestone strip →
+parallel workstreams (when present) → CURRENT BLOCKER → NEXT OBSERVABLE
+(responsible actor)**, then exact source/HEAD links and scope limits. For
+combined Oracle/MCDA answers, put this progress display first, followed by
+a distinctly marked **MCDA — ADVISORY** section. An illustrative view must
+say `EXAMPLE / NOT LIVE`; never invent milestones or completion percentages.

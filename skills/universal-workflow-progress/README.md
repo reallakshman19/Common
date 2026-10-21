@@ -18,6 +18,19 @@
 4. Enable Actions and run `workflow_dispatch` once. First run establishes a baseline and should not email. Subsequent runs compare with the prior successful snapshot artifact and email only changes. Inspect the workflow run logs and artifacts. GitHub schedule is best-effort, not a guaranteed exact 15-minute SLA.
 5. Use `WORK_TRIGGER.md` to configure a new-mail event-triggered Work task and enable ChatGPT notifications.
 
+## Oracle + MCDA presentation (v1.1)
+
+See the [Oracle / MCDA / progress bridge](references/oracle-mcda-bridge.md):
+one compact contract-derived strip, independent lanes and a named blocker/next
+observable, followed (only when requested) by separate advisory MCDA.
+Neither the bridge nor the pure router installs a ChatGPT feature, launches
+an Oracle or activates the existing disabled scheduled monitor.
+
+```sh
+python skills/universal-workflow-progress/scripts/route_invocation.py --consumer oracle --intent combined --workflow selected-id --monitor OFF
+python skills/universal-workflow-progress/scripts/route_invocation.py --consumer oracle --intent mcda
+```
+
 ## Invoking in a ChatGPT conversation
 
 **Progress request:** "show/check status" invokes read-only observation; select Monitoring ON only for a verified, one-time live source read, otherwise disclose `NOT LIVE`. **Start request:** "start/kick off" must be routed to the named *governing* execution skill, not the monitor. For BuddyRunner v1.7, that means preparing a real Stage 1a packet and returning its `PROMPT_PREPARED` receipt; this is not G2 dispatch. The [skill's invocation-routing contract](SKILL.md#intent-sensitive-invocation-routing-before-rendering-progress) is accompanied by a pure diagnostic:

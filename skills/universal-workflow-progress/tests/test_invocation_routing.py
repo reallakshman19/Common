@@ -71,6 +71,53 @@ class InvocationRoutingTests(unittest.TestCase):
         for key in ("workflow_executed", "repository_mutated", "agent_invoked"):
             self.assertIs(out[key], False)
 
+    def test_oracle_mcda_default_without_workflow_is_independent(self):
+        out = route_module.route("mcda", "", consumer="oracle")
+        self.assertEqual(out["route"], "ORACLE_MCDA_ADVISORY")
+        self.assertEqual(out["render_order"], ["MCDA"])
+        self.assertEqual(out["monitor"], "OFF")
+        self.assertFalse(out["source_checked"])
+        self.assertFalse(out["approval_granted"])
+
+    def test_oracle_combined_off_progress_first_but_not_live(self):
+        out = route_module.route("combined", "ciifr", consumer="oracle")
+        self.assertEqual(out["route"], "ORACLE_MCDA_PROGRESS")
+        self.assertEqual(out["render_order"], ["WORKFLOW_PROGRESS", "MCDA"])
+        self.assertEqual(out["state"], "NOT_LIVE")
+        self.assertFalse(out["repository_mutated"])
+
+    def test_oracle_combined_on_requests_not_fabricates_read(self):
+        out = route_module.route("combined", "ciifr", monitor="ON", consumer="oracle")
+        self.assertEqual(out["state"], "READ_ONLY_OBSERVATION_REQUESTED")
+        self.assertEqual(out["next_action"], "VERIFY_MAPPING_THEN_READ_ONCE_AND_KEEP_MCDA_ADVISORY")
+        self.assertFalse(out["source_checked"])
+        self.assertFalse(out["workflow_executed"])
+
+    def test_missing_mapping_does_not_block_mcda(self):
+        out = route_module.route("mcda", "", monitor="ON", consumer="oracle")
+        self.assertEqual(out["route"], "MCDA_PROGRESS_TARGET_REQUIRED")
+        self.assertTrue(out["mcda_allowed"])
+        self.assertFalse(out["source_checked"])
+
+    def test_oracle_start_does_not_become_observation(self):
+        out = route_module.route("start", "ciifr", monitor="ON", consumer="oracle")
+        self.assertEqual(out["route"], "GOVERNING_EXECUTOR_REQUIRED")
+        self.assertFalse(out["agent_invoked"])
+        self.assertFalse(out["approval_granted"])
+
+    def test_invalid_consumer_is_refused(self):
+        with self.assertRaises(ValueError):
+            route_module.route("combined", "ciifr", consumer="ownerbot")
+
+    def test_cli_oracle_combined_off_prints_no_execution_receipt(self):
+        proc = subprocess.run(
+            [sys.executable, str(SCRIPT), "--intent", "combined", "--workflow", "ciifr",
+             "--consumer", "oracle"], capture_output=True, text=True, check=True)
+        result = json.loads(proc.stdout)
+        self.assertEqual(result["render_order"][0], "WORKFLOW_PROGRESS")
+        self.assertEqual(result["route"], "ORACLE_MCDA_PROGRESS")
+        self.assertFalse(result["workflow_executed"])
+
 
 if __name__ == "__main__":
     unittest.main()
