@@ -105,6 +105,23 @@ returning evidence and changed understanding; do not require another reconstruct
 or repeat a completed BuddyRunner/two-pass/three-pass. This optional prompt support
 adds no Task Map field, runtime dependency, dispatch power or required Oracle role.
 
+## Optional Oracle progress + MCDA reporting
+
+For progress questions, select the read-only [Universal Workflow Progress skill](../../../universal-workflow-progress/SKILL.md)
+and its [Oracle / MCDA bridge](../../../universal-workflow-progress/references/oracle-mcda-bridge.md).
+Render the contract's compact milestone strip first, followed by parallel
+workstreams and one blocker/next observable. A prompt prepared is not dispatched;
+a contributor's test PASS is not independent review, and a bounded subsystem
+PASS is not Owner acceptance. Retain exact-head, custody and reviewer lineage.
+
+For competing engineering approaches, optionally use [Software MCDA](../../../software-mcda/SKILL.md)
+as an independent advisory calculation. Default monitoring OFF. Keep alternatives,
+hard gates, ratings and sensitivity distinct from workflow stages. If a monitored
+workflow lacks reviewed source mapping, continue MCDA with a visible observation
+gap. Neither skill overrides the Owner's decisions or this Oracle's evidentiary
+challenge and integration obligations. This is composition guidance, not an
+automatic runtime hook into other Oracle conversations.
+
 ## Distinguish focused context from blind evidence
 
 For ordinary execution, give the worker all load-bearing inputs and decisions.
