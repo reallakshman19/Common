@@ -77,6 +77,13 @@ decisions, checks and the exact continuation. Disclose contributor self-review o
 affected claims and preserve any selected coordinator/producer separation. This
 does not grant edit authority or require another module.
 
+Apply No PASS beyond evidence and No consequential PASS without a surviving-error
+challenge to agents and Oracle. Name the bounded claim, expectation source and
+actual witness; strengthen evidence or narrow the verdict when significant wrong
+behavior within that claim could pass. Choose the next task from evidence rather
+than agent number; preserve contributor scope, required independent review and
+authorized Owner acceptance.
+
 For selected-response learning items, use [verb/option and generator guidance](references/SELECTED_RESPONSE.md)
 and profile `selected-response` where useful. Carry the tile verb into the brief;
 the generator runs option-length/shared-word checks before return and records

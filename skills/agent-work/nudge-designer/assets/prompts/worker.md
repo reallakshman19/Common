@@ -7,6 +7,15 @@ brief should not require loading the whole process library or choosing its roles
 Issued assignment/packet and input snapshots: {{direct references}}
 Known runtime/tool/scope conditions: {{actual conditions, otherwise UNKNOWN}}
 
+Apply No PASS beyond evidence: name the exact claim, expectation source/review
+status, candidate/input hashes and actual commands/interactions, outputs and exit.
+Apply No consequential PASS without a surviving-error challenge: identify a
+significant plausible wrong behavior within the claim that could still pass,
+then strengthen the evidence or narrow the verdict. State the hypothesis, genuine
+alternative and differing predictions before execution; an existing adequate
+fixture can be reused. Preserve FAIL, NOT_RUN and UNKNOWN honestly. Do not infer
+independent review from agreement on shared fixtures or assumptions.
+
 Execute the one bounded deliverable, preserving its purpose, original conditions
 and reserved decisions. Read the exact inputs before using the supplied method.
 For GUIDED support follow the concrete method; for OPEN support choose a justified

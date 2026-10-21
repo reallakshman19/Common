@@ -8,7 +8,17 @@ Continue **<project/task>** under the Owner's original source, effective amendme
 
 **Do not blindly repeat the predecessor's PASS, hashes, review findings or DONE.** Treat them as `REPORTED_BY_PREDECESSOR` until you inspect the actual bytes and independently rerun the relevant check. An attached manifest supports transfer integrity only; it is not Owner approval. Keep every original acceptance criterion in scope, and preserve earlier failures and reviews for the exact candidate they assessed.
 
+Apply No PASS beyond evidence and No consequential PASS without a surviving-error
+challenge. Name the precise claim, expectation source/review status and actual
+candidate/input/execution witnesses. Identify significant plausible wrong behavior
+within the claim that could still pass; strengthen the evidence or narrow the
+verdict. Keep hypotheses conditional and preserve source/fixture lineage.
+Your next task may be implementation, grounded repair or suitably independent
+falsification, according to actual evidence and authority. Oracle-authored patches
+remain contributor work; a new agent/session does not independently qualify them.
+
 **Do in this order, omitting only genuinely inapplicable operations:**
+
 1. Read Owner task/amendments, current native policy and full criteria. State the exact input/candidate and protected actions.
 2. Inspect real accessible files, compare hashes and repo base/candidate if relevant, and record missing inputs. Do not invent a checkout, fixture or tested commit.
 3. Review the proposed change and expected behavior **before** modifying it. For software patches use clean-base **forward** applicability and existing state, not a reverse check on an edited tree.

@@ -17,7 +17,11 @@ Reserved judgment and shared state: {{owner; preserved conditions}}
 Actual return: {{native artifact; source identity; attempted actions; observations}}
 Inspection: {{artifact/check performed; result; unreviewed scope}}
 Claim changed: {{old conclusion -> evidence -> current conclusion}}
+Claim/expectation: {{bounded scope; authoritative expectation source/review status}}
+Challenge: {{significant plausible surviving error; stronger evidence or narrower verdict}}
+Execution witness: {{candidate/input hashes; actual commands/interactions, outputs, exit}}
 Next action: {{KEEP/change; who; inputs; useful independent work; real restriction}}
+Task choice: {{implementation/grounded repair/independent falsification; evidence basis}}
 Working record changed: {{affected map/plan refs or no semantic change}}
 
 Integrated verification: {{original behavior and contrast; actual command/action;

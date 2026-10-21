@@ -2,6 +2,8 @@
 
 ## Contents
 
+- [Bound every PASS](#bound-every-pass)
+- [Choose the next task from evidence](#choose-the-next-task-from-evidence)
 - [Choose useful work](#choose-useful-work)
 - [Keep authority and independence explicit](#keep-authority-and-independence-explicit)
 - [Make one coherent contribution](#make-one-coherent-contribution)
@@ -16,6 +18,73 @@ work can end with a complete assessment; it carries no implicit repair assignmen
 Apply the recipe inside existing project authority and native records. It adds no
 skill dependency, runtime controller, mandatory team, score or approval ceremony.
 An Oracle title establishes neither technical competence nor permission to write.
+
+## Bound every PASS
+
+Apply these two rules to implementing agents, reviewers and Oracle alike:
+
+**Rule 1 — No PASS beyond evidence.** Bind every PASS to a precisely bounded claim,
+an identified expectation source and actual execution evidence on the named
+candidate/input. Record commands or interactions, outputs, exit status and input
+hashes where consequential. Source/artifact inspection supports only the inspected
+claim; it cannot establish unexecuted runtime behavior. Keep independently reviewed
+expectations distinguishable from author-generated assertions.
+
+**Rule 2 — No consequential PASS without a surviving-error challenge.** Ask what
+significant wrong behavior could still pass the proposed test. Identify a materially
+plausible error within the claimed scope, then strengthen the evidence or narrow
+the verdict. Do not use an artificial objection merely to fill a field. Where the
+checked scope is exhaustive, justify that scope rather than inventing an error.
+An error outside the bounded claim does not invalidate supported evidence; it must
+not disappear when the result is used to support a broader requirement.
+
+Use the five-step evidence discipline: state the hypothesis and source requirement;
+construct a genuine competing interpretation; construct or reuse a fixture on
+which their predicted outcomes differ; record predictions before actual execution;
+retain unresolved contradictions with precise witnesses and a next action. Preserve
+FAIL for demonstrated defects, NOT_RUN for unavailable execution and UNKNOWN for
+unsettled interpretation. A claim-level HOLD withholds that verdict; it does not
+alter project control records or stop unrelated authorized work. Keep the record
+concise; no private reasoning transcript or duplicate fixture is required.
+
+Oracle challenges the **test design** (could the wrong behavior pass?), the **source
+model** (is the expectation grounded independently of candidate assumptions?) and
+the **handoff** (are facts, conditional explanations and unknowns still distinct?).
+Inspect shared fixture/reference lineage: agreement between agents or methods
+sharing a disputed premise is not independent confirmation.
+
+For example, a clock changing on screen supports a ticking-display claim. It does
+not establish that agent activity is fresh. A suitable freshness contrast holds
+the agent observation fixed while advancing the clock and refreshing capture;
+the claimed freshness must still follow the governing observation rule. A valid
+file or successful parser similarly does not establish preserved field meaning.
+
+## Choose the next task from evidence
+
+Use an adaptive sequence, without imposing a fixed agent count or extra ceremony:
+
+Bounded execution → Oracle claim-and-test challenge → next justified task → Oracle
+integration challenge → separately required independent review → authorized Owner
+acceptance (or the Owner's explicitly scoped acceptance delegate).
+
+| Evidence after the challenge | Next useful assignment |
+|---|---|
+| The contract is established and important failure modes are adequately tested for the intended decision. | Implement the next bounded feature. |
+| The correctness criterion remains disputed, or a consequential error could survive the evidence required for that decision. | Assign suitably independent falsification, preserving actual authorship, exposure and expectation lineage. |
+| A defect is demonstrated and the criterion and remedy are established. | Assign the bounded repair and affected checks; do not repeat an already decisive investigation merely to occupy an agent stage. |
+| Oracle patches code or changes a candidate's expected behavior. | Treat the patch/premise as contributor work; obtain independently required assessment of affected claims, not an Oracle self-approval. |
+
+Choose the assignment from actual evidence and risk; do not automatically turn the
+next agent into either another implementer or another reviewer. Preserve original
+requirements, artifacts/revisions, decisions, unresolved alternatives and why they
+matter. A speculative diagnosis may travel as a hypothesis or conditional next
+test, never as an established instruction to implement its guessed repair.
+Integration must be checked against the whole outcome. Technical review, merge,
+release and authorized acceptance remain distinct.
+
+Premature convergence and claim inflation are separate failures: challenge the
+chosen explanation and also prevent narrow evidence from being promoted into a
+broader PASS, even when the implementation happens to be correct.
 
 ## Choose useful work
 
@@ -112,9 +181,12 @@ ROI judgment: <High/Medium/Defer; impact, context advantage, bounded cost/risk>
 Decision: <chosen approach, decisive evidence, rejected alternative and falsifier>
 Change/result: <exact commit/artifact, affected paths/claims; implemented/partial>
 Validation: <candidate, actual command/witness, expected/actual, PASS/FAIL/NOT_RUN>
+Claim/expectation: <precise PASS scope, requirement/source and expectation provenance>
+Challenge: <plausible surviving error, discriminating fixture/predictions and disposition>
 Independence: <authorship, expectation derivation, exposure; self-assessed scope>
 Remaining: <known defects, missing checks, deferred parent outcomes and dependencies>
 Handoff: <starting path, next actor/responsibility and exact next action, stop point>
+Next-task basis: <implementation/falsification/integration; evidence and unresolved alternatives>
 ```
 
 Do not fabricate an identity, source URL or future containing-commit SHA. When a

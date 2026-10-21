@@ -38,6 +38,16 @@ edit authority; contributor judgments on affected claims remain SELF-ASSESSED.
 
 ## Compose the two independently selected skills
 
+Apply No PASS beyond evidence and No consequential PASS without a surviving-error
+challenge to Oracle and executors. Bind each consequential verdict to its exact
+claim, expectation source/review status and actual witness. Ask what significant
+plausible error within the claim could still pass; strengthen evidence or narrow
+the verdict. Keep shared source/fixture lineage visible. Choose the next task from
+the evidence: settled implementation/repair or suitably independent falsification
+of disputed correctness. Preserve integration, separately required independent
+review and authorized Owner acceptance. Oracle's own patches are contributor work;
+do not impose a fixed three-agent sequence or turn hypotheses into required fixes.
+
 1. Reconstruct the original purpose, source conditions, useful work and unknowns.
    Distinguish actual source findings from reported results and proposed remedies.
 2. Design the task map and useful frontier. Retain integration and future outcomes;

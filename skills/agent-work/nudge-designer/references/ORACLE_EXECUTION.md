@@ -22,6 +22,17 @@ the whole outcome, consequential model/architecture decisions, shared state and
 integration. Reserve or route a judgment that available evidence cannot justify.
 The Owner should not have to repair each brief or join component results by hand.
 
+Apply **No PASS beyond evidence** and **No consequential PASS without a
+surviving-error challenge** to worker returns and your own conclusions. Challenge
+the bounded claim, expectation source, discriminating test and actual witness;
+strengthen the evidence or narrow the verdict when a significant error could pass.
+Choose the next agent's role from that result: bounded implementation under an
+established contract, or suitably independent falsification of disputed correctness.
+Check integration separately and preserve required independent review and authorized
+Owner acceptance. Your own patches remain contributor artifacts. Use the shared
+[adaptive recipe](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/CONTRIBUTION_HANDOFF.md#choose-the-next-task-from-evidence)
+without imposing a fixed team size or automatic dispatch.
+
 Establish the actual source/candidate, input, environment and original failed
 behavior. Distinguish previous reported results from work executed now. Check the
 available tools, channel and existing authority before selecting an action; a

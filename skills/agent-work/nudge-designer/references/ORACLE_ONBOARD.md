@@ -46,6 +46,22 @@ the Owner retell the project or require a worker to infer critical context.
 | Evidence and continuation | Native return location/binding, real observations, changed understanding, remaining parent work and the next useful action. State any standing authority for continuation; otherwise return a recommendation. |
 
 Check the actual recipient view with the [brief check](../assets/prompts/brief-check.md).
+
+Carry the two evidence rules: **No PASS beyond evidence** and **No consequential
+PASS without a surviving-error challenge**. Name each consequential claim's scope,
+expectation source/review status, plausible wrong behavior that could survive the
+current test, and the stronger contrast or narrower verdict. Give the hypothesis,
+genuine alternative and differing predictions before execution. A ticking-display
+check cannot establish activity freshness; a valid file cannot establish preserved
+field meaning. Do not turn these questions into form-filling or invented objections.
+
+Choose the receiver's task from the actual evidence: implement a settled contract,
+repair an established defect, or conduct suitably independent falsification when
+correctness remains disputed. Preserve integration, separately required independent
+review and authorized Owner acceptance. A fixed second/third agent role is not
+required. If Oracle contributed code or changed a candidate's expected behavior,
+carry that contributor scope and outstanding independent-review requirement.
+
 Copy identifiers from authoritative records, not memory. If a tracker issues the
 identity, preserve its native mapping and issued snapshot; do not create competing
 ACK/task IDs. A source pointer must be readable through the available tools.
@@ -80,6 +96,8 @@ Keep the native reporting format. The following are contents, not a second
 mandatory envelope:
 
 - Actual task/candidate/input basis, action and decisive result, with witnesses.
+- Exact claim and expectation source, input hashes, predictions and actual output;
+  surviving-error challenge and whether evidence was strengthened or verdict narrowed.
 - What changed in understanding: confirmed explanation, correction, drift, new
   issue or useful improvement; distinguish FACT / CLAIM / HYPOTHESIS / UNKNOWN.
 - The task's completion status and the wider Owner outcome still unfinished.
@@ -100,6 +118,7 @@ issue is recorded and prioritized, not automatically patched or made a global st
 | “Oracle says the root cause is X” | Treat it as the declared explanation; verify the load-bearing premise against actual source/behavior and revise it if contradicted. |
 | “The prompt is titled OnBoard, so all context is settled” | Use its actual inputs and meaning. Retrieve/check a missing material fact without an exam or full-process reset. |
 | “Local task PASS means the project is done” | Preserve missing consumers, full input census, integration, real-user acceptance and release authority separately. |
+| “The five evidence fields are filled, so the test is adequate” | Ask which significant plausible error within the claim could still pass; strengthen the evidence or narrow that verdict. |
 | “Update the assertion until tests pass” | Justify changed expectations from original requirements. A regression exposing a real failure stays meaningful. |
 | “Fresh worker means blind/independent review” | Disclose supplied conclusions and prior exposure. An instruction handover is context transfer, not proof of blind discovery or a distinct reviewer. |
 | “Another prompt will fix missing access” | Report the actual restriction and feasible execution route; retain useful source work without claiming runtime PASS. |

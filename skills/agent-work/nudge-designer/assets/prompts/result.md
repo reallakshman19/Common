@@ -10,12 +10,18 @@ Bounded deliverable status: {{COMPLETE/PARTIAL/BLOCKED/NOT_RUN with exact scope}
 
 Actual result/artifact: {{direct reference; supplied/derived/executed distinction}}
 Decisive checks: {{actual action; expected versus observed; meaningful contrary case}}
+Claim/expectation: {{precise verdict scope; source and expectation review status}}
+Surviving-error challenge: {{significant plausible error within scope; stronger
+test or narrower verdict; justified exhaustive scope if applicable}}
+Execution witness: {{candidate/input hashes; commands/interactions; output and exit}}
 Execution/source/review limits: {{what was not run, unobserved or unauthenticated}}
 
 Changed understanding: {{supported finding and original condition/source}}
 Disposition: {{drift/improvement/new issue/assumption conflict, if justified}}
 Remaining Owner outcomes: {{unresolved evidence/acceptance; do not infer completion}}
 Next feasible action: {{scope/owner when known; actual authority or specific decision}}
+Next-task basis: {{settled implementation/repair or independent falsification;
+evidence and unresolved alternatives; required review of contributor artifacts}}
 ```
 
 For a blocked continuation, include **attempted action → observed restriction →

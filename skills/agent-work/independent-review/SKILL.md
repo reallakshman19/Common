@@ -32,6 +32,13 @@ work and state precisely which claim the available evidence cannot establish.
 
 ## Apply the review method
 
+Apply two central rules: **No PASS beyond evidence**—name the bounded claim,
+expectation source and actual execution/inspection witness; **No consequential PASS
+without a surviving-error challenge**—identify significant wrong behavior the test
+could miss, then strengthen the evidence or narrow the verdict. A source inspection
+cannot establish unexecuted runtime behavior. These rules also apply to Oracle;
+shared assumptions or fixture lineage can limit apparent independent confirmation.
+
 Use these responsibilities in the order the problem needs, combining or revisiting
 them when useful. They are not compulsory passes or a lifecycle controller.
 

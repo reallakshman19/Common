@@ -26,6 +26,14 @@ This is a **human form**, not an exam or Owner approval. Fill it even for PARTIA
 | 12 | Are unresolved defects, uncertain facts, other actors and next action plainly listed? | | |
 
 ## One row per original criterion (N rows; don't drop unsatisfied rows)
+
+For every consequential verdict, record its precise claim, expectation source and
+review status, candidate/input hashes and actual execution witness. Ask which
+significant plausible wrong behavior within that claim could still pass; strengthen
+the evidence or narrow the verdict. This applies to Oracle as well as producer.
+Keep author assertions separate from independently reviewed expectations; a new
+session sharing the same disputed premise does not supply independent confirmation.
+
 | Original ID | MET / NOT_MET / NOT_RUN / UNKNOWN / justified N/A | Actual evidence (source/candidate/log) | Plausible wrong result and how checked | Smallest next action |
 |---|---|---|---|---|
 | | | | | |

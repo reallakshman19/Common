@@ -35,6 +35,14 @@ This is an authoring aid, not a gate, fixed reviewer count or extra reporting fo
    is usable and someone owns continuation; a prepared packet is not a live loop.
    Record actual configuration/assistance instead of attributing all work to Oracle.
 
+Before relying on a consequential PASS, challenge both its scope and test adequacy:
+is the expectation grounded in the original requirement, and could a significant
+plausible error within that claim still pass? Strengthen the evidence or narrow
+the verdict. A filled hypothesis/alternative/test template does not answer this.
+Preserve shared premise/fixture lineage and choose the receiver's role from the
+actual evidence, not a fixed agent number. Oracle's own contribution is not an
+independently reviewed result.
+
 A second reader is useful for novel or consequential judgment briefs when its
 expected benefit warrants it or the project requires it. After material corrections,
 recheck affected interactions; earlier review does not automatically cover the fix.

@@ -26,6 +26,8 @@ Boundaries
 Success criteria
 {{Observable result; meaningful negative/contrast case; evidence that changes the view}}
 {{Part-level criteria, roll-up/UNKNOWN and edge cases if judging several parts}}
+{{Bounded claim; expectation source/review status; significant surviving-error
+challenge and discriminating fixture/predictions, or justified exhaustive scope}}
 
 Uncertainty handling
 {{Missing fact or restriction; exactly which action it blocks; when/what to return}}
@@ -35,6 +37,8 @@ Evidence and continuation
 {{Actual results/artifacts in the native reporting format, attempts and execution limits}}
 {{Unresolved parent outcomes; next feasible action or proposal; issued binding if used}}
 {{Material claim witnesses, coverage and selected sender checks where relevant}}
+{{Candidate/input hashes; actual commands/interactions, outputs and exit status;
+evidence strengthened or verdict narrowed; unresolved contradictions}}
 {{SELF-ASSESSED when judging own output; assignment/tracker/reply mapping if used}}
 ```
 
