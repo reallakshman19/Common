@@ -1,0 +1,41 @@
+name: Progress Page
+
+on:
+  pull_request:
+    paths:
+      - 'skills/agent-work/progress-page/**'
+      - '.github/workflows/progress-page.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'skills/agent-work/progress-page/**'
+      - '.github/workflows/progress-page.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tools-and-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{ matrix.python-version }}'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run the seeded-defect tests (checker, editing tool, triggers parity, local build)
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python -B -m unittest discover -s skills/agent-work/progress-page/tests -v
+      - name: Check the viewer modules parse
+        run: |
+          for f in skills/agent-work/progress-page/viewer/*.js; do node --input-type=module --check < "$f"; done

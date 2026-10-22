@@ -1,0 +1,13 @@
+{
+  "schema": 3,
+  "nudges": {
+    "N1": {
+      "card": "a1",
+      "text": "Check the edge cases",
+      "by": "Owner",
+      "at": "2026-10-22T09:14:40Z",
+      "src": "OWNER_PRIVATE_REF:r-001",
+      "status": "open"
+    }
+  }
+}

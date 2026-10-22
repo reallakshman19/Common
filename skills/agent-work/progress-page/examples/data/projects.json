@@ -1,0 +1,28 @@
+{
+  "schema": 3,
+  "site": {},
+  "projects": [
+    {
+      "key": "demo",
+      "label": "Demo",
+      "order": 1,
+      "mode": "standalone",
+      "replyTo": {
+        "kind": "none"
+      }
+    },
+    {
+      "key": "other",
+      "label": "Other project",
+      "order": 2,
+      "mode": "otm",
+      "replyTo": {
+        "kind": "github-issue",
+        "repo": "acme/demo",
+        "template": "owner-reply.yml",
+        "target": "Oracle",
+        "site": "https://acme.github.io/demo/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "a1": {
+    "order": 1,
+    "group": "main",
+    "milestone": "M2",
+    "label": "Coder",
+    "who": {
+      "chat": "c1",
+      "role": "coder"
+    },
+    "state": "SUBMITTED",
+    "now": "Waiting for the review",
+    "next": {
+      "actor": "Oracle",
+      "text": "Review the PR"
+    },
+    "refs": [
+      {
+        "k": "issue",
+        "l": "Issue 1",
+        "u": "https://github.com/acme/demo/issues/1"
+      },
+      {
+        "k": "pr",
+        "l": "PR 2",
+        "u": "https://github.com/acme/demo/pull/2",
+        "s": "draft"
+      }
+    ],
+    "updatedAt": "2026-10-22T09:14:40Z",
+    "src": "https://github.com/acme/demo/issues/1#issuecomment-100"
+  },
+  "b1": {
+    "order": 2,
+    "group": "g2",
+    "milestone": "M3",
+    "label": "Reviewer",
+    "who": {
+      "chat": "c2",
+      "role": "reviewer"
+    },
+    "state": "NOT_STARTED",
+    "now": "Not started yet",
+    "next": {
+      "actor": "-",
+      "text": ""
+    },
+    "edges": [
+      {
+        "to": "a1",
+        "k": "to"
+      }
+    ]
+  },
+  "x1": {
+    "order": 3,
+    "group": "main",
+    "milestone": "M1",
+    "label": "Spare",
+    "who": {
+      "chat": "c1"
+    },
+    "state": "IN_PROGRESS",
+    "now": "A card the tests may close",
+    "next": {
+      "actor": "-",
+      "text": ""
+    },
+    "updatedAt": "2026-10-22T09:14:40Z",
+    "src": "https://github.com/acme/demo/issues/1#issuecomment-100"
+  }
+}
