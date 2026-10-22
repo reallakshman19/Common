@@ -14,7 +14,7 @@ and the project's Oracle in standalone mode.
 | `replyTo.repo` | the repository that runs the OTM loop | the project's own repository |
 | Trigger labels | "OTM owes", "Nudges for OTM" | "Oracle owes", "Nudges for Oracle" |
 
-Agents never write the page. They leave evidence on GitHub (a comment, a commit, a pull request). The coordinator reads it and records it.
+Agents never write the agent blocks, decisions or revisions. They leave evidence on GitHub (a comment, a commit, a pull request). The coordinator reads it and records it. Grounding fixtures are the exception: anybody may add one with `fixture add`, under their own name as `--actor`.
 
 ## The recording loop (both modes)
 

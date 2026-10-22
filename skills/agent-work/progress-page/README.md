@@ -19,7 +19,8 @@ The same files, the same checker and the same page serve both modes. Only a few 
 | `projects.json` → `mode` | `otm` | `standalone` |
 | `index.json` → `rules.coordinator` | `OTM` | the Oracle's name, for example `Oracle` |
 
-Agents never write the page. A coordinator (OTM or the Oracle) writes it from evidence the agents leave on GitHub.
+Agents never write the agent blocks, decisions or revisions: a coordinator (OTM or the Oracle) writes those from evidence the agents leave on GitHub.
+**Grounding fixtures are the exception: anybody may add one** (an Oracle, an agent, the coordinator), with `fixture add` and their own name as `--actor`, so the Timeline shows who added it.
 More in [references/MODES.md](references/MODES.md).
 
 ## Start in five minutes (a new page)
