@@ -50,6 +50,15 @@ selected source revision and follow the relevant guidance with available tools.
 Record the revision used; merely naming a skill does not install or invoke a host
 capability. A reference to another module does not create a dependency on it.
 
+## Aim first, and keep the modules in sight
+
+Lesson 1 (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645): twenty agents and thousands of lines produced no learner output because no aim was written down and the process was built for a corporate product. So:
+
+- **No work without a written aim.** The project's aim is the Owner's words, on its Progress page tab (`project aim`). If it is missing, ask the Owner before planning.
+- **Match the quality bar to the use.** A personal-use product skips rights, publication, custody and whole-bank gates ([Gatekeeper](gatekeeper/SKILL.md), personal-use profile).
+- **The learner is the measure:** one topic end to end and in front of the learner before the next; small pieces, merged often.
+- **Keep the modules visible** where people already look: every task packet carries an `Aim:` line and a `Modules:` line naming the module each step uses; every Oracle prompt carries the table below; each Progress page tab links the modules under its aim.
+
 ## Choose only useful modules
 
 This parent is a collection of independent packages. Select the nested folder
@@ -127,14 +136,14 @@ the linked guidance when applicable, rather than loading every module/reference.
 
 | Situation | Use | Applying guidance |
 |---|---|---|
-| Moving work between fast/local agents, including agent ↔ ChatGPT | [Local-agent operating protocol](local-handover/AGENT_PROTOCOL.md) and [handover forms](local-handover/README.md) | Re-read originals and bytes, report actual execution and missing tests, self-check all criteria; use original task-issue comments and a verified file link (Drive or public-safe Common one-file DRAFT PR) without promoting transfer to acceptance. |
+| Moving work between fast/local agents, including agent ↔ ChatGPT | [Local-agent operating protocol](local-handover/AGENT_PROTOCOL.md) and [handover forms](local-handover/README.md) | Re-read originals and bytes, report actual execution and missing tests, self-check all criteria; use original task-issue comments and a verified file: in the Owner's Drive or OneDrive handoff folder, named in public text by subfolder, file name, size and SHA-256 only (never the link), or a public-safe Common one-file DRAFT PR, without promoting transfer to acceptance. |
 | Taking over work under separately selected v3.6, in either mode | [Continuation/reconstruction applicability](../engineering-pr-delivery-v3.6/references/INDEPENDENT_RECONSTRUCTION.md) | Use a usable Oracle OnBoard Prompt directly; independently reconstruct only cold/missing context. No Q1–Q5 exam or agent pass mark. A selected BuddyRunner/two-pass/three-pass uses only its native stages; after completion, additional reconstruction is NOT_APPLICABLE. Reuse outputs and continue authorized work. |
 | Coding with separately selected v3.6 standalone delivery | [Standalone mode](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) and [pre-DONE self-check](../engineering-pr-delivery-v3.6/references/STANDALONE_COMPLETION.md) | Before calling the task done, complete the native SELF-CHECK v1 with source/candidate bindings, common checklist, frozen task criteria, actual witnesses and pending work. Keep coordinator mode separate. |
 | ChatGPT agent using that standalone protocol | [Activity and BuddyRunner policy](../engineering-pr-delivery-v3.6/references/CHATGPT_AGENT_ACTIVITY.md) | Recording is mandatory for this surface. Suggest the selected BuddyRunner once when distinct GitHub-access turns >5 OR recorded active-turn elapsed time >35 minutes. ChatGPT Work and other hosts are exempt. |
 | Learning-item task design | [Task Decomposer guidance](task-decomposer/references/APPLYING_GUIDANCE.md) | Preserve the source-defined verb, response type and an off-demand contrast: explain needs causal reasons, justify needs an argument, and retrieval may recognise a unit/sign. |
 | Selected-response item generation | [Generator guidance](nudge-designer/references/SELECTED_RESPONSE.md) | Select the optional `selected-response` profile when useful. Before handing over, script option lengths and correct-only shared question words; inspect flags, grammar and verb fit, retain actual results and label producer judgments SELF-ASSESSED. |
 | Selected-response item review | [Reviewer guidance](independent-review/references/SELECTED_RESPONSE_REVIEW.md) | Inspect length, reasoning-word, grammar, verb and word-overlap cues before subject judgment. Ask whether the key is selectable without the intended knowledge; disclose exposure and state what plausible wrong result could survive each verdict. |
-| Producing, showing or releasing a learner product, page or item bank | [Gatekeeper checks](gatekeeper/SKILL.md#checks) | Before building, locate the blueprint, the existing best version and the content source. Seal baseline-relative targets before the candidate is first measured. Pair each label-raising check with a seeded defect, and verify freshly on the exact bytes. Label by evidence, state x of N from the blueprint, and release only on the Owner's words or a recorded grant. Each check has a fallback. Its walkthrough contains worked answers; withhold it from fresh exercises. |
+| Producing, showing or releasing a learner product, page or item bank | [Gatekeeper checks](gatekeeper/SKILL.md#checks) | Before building, locate the blueprint, the existing best version and the content source. Seal baseline-relative targets before the candidate is first measured. Pair each label-raising check with a seeded defect, and verify freshly on the exact bytes. Label by evidence, state x of N from the blueprint, and release only on the Owner's words or a recorded grant. For a personal-use product, the Owner's recorded personal-use words are that release: see Gatekeeper's personal-use profile. Each check has a fallback. Its walkthrough contains worked answers; withhold it from fresh exercises. |
 
 The executing ChatGPT agent runs its own activity record; no extra worker is
 needed. An available Oracle/lead preserves the duty in assignments and checks

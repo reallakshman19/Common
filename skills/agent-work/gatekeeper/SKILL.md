@@ -29,7 +29,7 @@ Three principles:
    [verification route](#verification-routes) used, normally the reviewer of
    record in [who does what](#who-does-what), or the small-tier project review
    ([fit the checks](#fit-the-checks-to-the-work)). Anyone else's checks are notes.
-3. **The Owner releases and overrides.** Work is released by the Owner's words,
+3. **The Owner releases and overrides.** Work is released by the Owner's words (for a personal-use product, see the [personal-use profile](#personal-use-profile)),
    or, in a noncritical project, by a recorded Owner grant covering that class of
    work. Only the Owner overrides a check.
 
@@ -41,6 +41,15 @@ Both have fallbacks. The module is optional, depends on no other module and gran
 no authority. It does not dispatch, approve, merge or publish anything. For
 composed use, see the shared
 [Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md).
+
+## Personal-use profile
+
+When the Owner records that a product is for personal use, not published (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645):
+
+- Publication to others, rights questions, the sha lists of GK9, and finishing the whole bank before any item reaches the learner do not apply. Record the Owner's words with the label.
+- **An item that is DRAFT · CHECKED and passed a spot-check by a reviewer who is not its author** ([Independent Review, spot-check mode](../independent-review/SKILL.md#spot-check-mode-personal-use-products)): key confirmed, no answer giveaway (position, length, wording, early reveal), hint ladder tried, may go to the learner. It is then labelled **RELEASED (personal use) · CHECKED · SPOT-CHECKED x of N**. The Owner's recorded personal-use words release it (principle 3, GK7): they are the Owner's own words naming this class of items, not a grant, so they hold in a critical project too. VERIFIED is not required for this product only. CHECKED keeps its meaning in [Labels](#labels); the spot-check is the [Independent Review](../independent-review/SKILL.md) evidence beside it, not a verification route.
+- Labels stay honest: CHECKED names the sample (x of N) and what was not checked; VERIFIED still needs its full evidence.
+- A fault the learner meets is fixed and recorded; it is not a reason to hold every other item.
 
 ## Labels
 
@@ -111,7 +120,7 @@ says which. State every fallback you use in the same message. Record a deviation
 | GK4. Prove each check can fail | Pair any check whose PASS raises a label with a seeded defect that must fail. Whoever runs the check runs its defect. Briefs ask producers to ship their defect cases with their validators. Fit the defect to the work: a dropped sentence or truncated stem for copied content; a wrong key, duplicate id or length-skewed option for new items; a missing section or lowered count for pages. A crash, timeout or missing input is NOT_RUN, never PASS. | Use a known-bad historical case. If none exists, report UNPROVEN-CHECK: useful evidence, but it raises no label. If a validator crashes, retry after one fix or switch method, on the baseline and the candidate alike. If it still fails, that part is NOT_RUN and the label names it. |
 | GK5. Verify the exact bytes | The reviewer of record checks the sha-bound bytes against the sealed targets and the baseline. It counts both files with the same method, runs its own seeded defects, names a plausible wrong result its check could miss, and keeps its verdict unedited (A2). If it can't reach a file, give it a copy with the sha. A small repair may go back to the same reviewer for the changed parts only, disclosed. Use a new reviewer for a substantial repair or a disputed verdict. | [Verification routes](#verification-routes) |
 | GK6. Tie claims to bytes and N | Every claim names the sha of the bytes shown, the coverage x of N, and what was not tested. N is the blueprint's coverage set for the deliverable's scope; for nested sets, name which one. For an extension, give the new part and the whole. An Owner-set scope is the scope, but report it against the blueprint's N. A display that truncates or reformats content is a new artifact with its own check. Fix a misleading label; don't add a caveat beside it. | Without hashing, use the size plus the first and last line. If N can't be found, write "N unknown" and continue; RELEASED with N unknown needs the Owner to see that phrase. |
-| GK7. Release on the Owner's words | Release means removing DRAFT, publishing to learners or merging into a product path. It needs A1 naming the bytes, by sha or by the preview that showed them. In a critical project only the Owner's own words release; there are no standing release grants. A grant covers VERIFIED (coordinator review) work only if it says so. Releasing below VERIFIED is an [Owner override](#owner-override). Show any release code in the preview, outside the product bytes. At release, diff the released bytes against the verified bytes: only the label may differ. | If the Owner can't be reached, see [offline Owner](#source-defects-and-an-offline-owner). |
+| GK7. Release on the Owner's words | Release means removing DRAFT, publishing to learners or merging into a product path. It needs A1 naming the bytes, by sha or by the preview that showed them. In a critical project only the Owner's own words release; there are no standing release grants. A grant covers VERIFIED (coordinator review) work only if it says so. Releasing below VERIFIED is an [Owner override](#owner-override), except under the [personal-use profile](#personal-use-profile), where the Owner's recorded personal-use words are the release (A1 names the class of items; the spot-check record names each item's bytes). Show any release code in the preview, outside the product bytes. At release, diff the released bytes against the verified bytes: only the label may differ. | If the Owner can't be reached, see [offline Owner](#source-defects-and-an-offline-owner). |
 | GK8. Say when a step is skipped | When a step is blocked or costly, or budget or context is short, say so in the same message with a deviation record: what was skipped, why, the effect on the label, and the fix. Retry a failed tool at least once by another route before calling it unavailable. Never trade quality silently. Under pressure: (1) checkpoint and defer to a successor (Nudge Designer [successor prompt](../nudge-designer/assets/prompts/successor.md)); (2) narrow the scope visibly; (3) step down the [verification routes](#verification-routes), as far as SELF-ASSESSED. SELF-ASSESSED, NOT_RUN and UNPROVEN-CHECK parts keep the work order open ([rule 3](#no-check-is-a-reason-to-stop-work)). Never drop the label, the scope or the deviation record. | If the Owner can't answer, take the feasible path, record the deviation, qualify the label and continue. |
 | GK9. Notice changes to sealed bytes | Keep a sha list of the sealed inputs: registry entry, baseline, targets and reviewed items. Recompute it before verifying and before release. | Without hashing, compare size and modified time, and say the check is weaker. An unexplained change is a deviation: re-verify the affected claims and continue other work. |
 
@@ -251,7 +260,7 @@ the latest block from the participant who keeps the records. None of them is evi
 
 ## Owner override
 
-Only the Owner overrides a check, and no grant delegates that power. Everyone else
+Only the Owner overrides a check, and no grant delegates that power. The [personal-use profile](#personal-use-profile) is not an override: the Owner's recorded words set that product's release rule. Everyone else
 takes the check's fallback and accepts the weaker label. An override, and a
 release, is one line in the Owner's own words, as the host records them (A1):
 

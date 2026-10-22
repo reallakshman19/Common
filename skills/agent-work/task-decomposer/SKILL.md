@@ -33,6 +33,8 @@ keep independent preparation going.
 Read [Applying guidance](references/APPLYING_GUIDANCE.md) for decision questions,
 domain variations and pitfalls; select relevant guidance rather than fixed passes.
 
+**Aim first** (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645). Start from the project's written aim on its Progress page tab; if there is none, ask the Owner before dividing. Prefer one topic end to end (for a learning product: in front of the learner) before breadth, and tasks small enough for one pull request each. Where a learner exists, acceptance evidence includes the learner using the result.
+
 ## Separate horizon from reasoning difficulty
 
 For a programme, map coherent outcomes and dependencies. Detail the useful
