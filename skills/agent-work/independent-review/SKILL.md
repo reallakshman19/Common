@@ -98,6 +98,10 @@ and preserve existing independent-review requirements. Writing independent revie
 checks alone does not make you the candidate's author. A review-only
 assignment still ends with assessment rather than an unauthorized repair.
 
+## Spot-check mode (personal-use products)
+
+For a personal-use product (see Gatekeeper's personal-use profile), review a sample instead of the whole set: at least 5 items or 10%, chosen across tiles or topics. For each: solve it without the key first, then compare; look for answer giveaways; walk the hint ladder; check the reasoning route and teacher's answer. Report x of N, the items chosen and why, every fault, and what was not checked. Never extend a sample PASS to the unchecked items.
+
 ## Match support to the task
 
 Use **DIRECT** support when the participant can select and justify a method. Use

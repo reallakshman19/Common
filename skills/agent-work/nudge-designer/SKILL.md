@@ -41,6 +41,8 @@ need reasoning context, a worked method where useful, a falsifier, reserved
 decisions and a clear return condition. A long response, filled schema or
 self-description as a high-thinking agent proves none of these.
 
+**Every packet carries two lines** (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645): `Aim:` (the project's aim, quoted from its Progress page tab) and `Modules:` (the Common agent-work modules the task uses, with the step each serves). A packet whose project has no written aim goes back to the Owner first.
+
 ## Apply the guidance and choose a prompt
 
 Read [Applying guidance](references/APPLYING_GUIDANCE.md) when choosing support,

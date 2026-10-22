@@ -50,6 +50,15 @@ selected source revision and follow the relevant guidance with available tools.
 Record the revision used; merely naming a skill does not install or invoke a host
 capability. A reference to another module does not create a dependency on it.
 
+## Aim first, and keep the modules in sight
+
+Lesson 1 (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645): twenty agents and thousands of lines produced no learner output because no aim was written down and the process was built for a corporate product. So:
+
+- **No work without a written aim.** The project's aim is the Owner's words, on its Progress page tab (`project aim`). If it is missing, ask the Owner before planning.
+- **Match the quality bar to the use.** A personal-use product skips rights, publication, custody and whole-bank gates ([Gatekeeper](gatekeeper/SKILL.md), personal-use profile).
+- **The learner is the measure:** one topic end to end and in front of the learner before the next; small pieces, merged often.
+- **Keep the modules visible** where people already look: every task packet carries an `Aim:` line and a `Modules:` line naming the module each step uses; every Oracle prompt carries the table below; each Progress page tab links the modules under its aim.
+
 ## Choose only useful modules
 
 This parent is a collection of independent packages. Select the nested folder

@@ -42,6 +42,15 @@ no authority. It does not dispatch, approve, merge or publish anything. For
 composed use, see the shared
 [Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md).
 
+## Personal-use profile
+
+When the Owner records that a product is for personal use, not published (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645):
+
+- Rights, publication, custody (file-record) and whole-bank gates do not apply. Record the Owner's words with the label.
+- **CHECKED is enough to give an item to the learner**: a reviewer who is not its author confirmed the key, found no answer giveaway (position, length, wording, early reveal) and tried the hint ladder.
+- Labels stay honest: CHECKED names the sample (x of N) and what was not checked; VERIFIED still needs its full evidence.
+- A fault the learner meets is fixed and recorded; it is not a reason to hold every other item.
+
 ## Labels
 
 | Label | Supported by |

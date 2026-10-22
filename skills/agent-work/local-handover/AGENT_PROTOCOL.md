@@ -24,6 +24,8 @@ This is an **optional field instruction** for fast/low-reasoning local agents ta
 
 For PowerShell on Windows, measure a downloaded file with `(Get-Item .\handoff.zip).Length` and `(Get-FileHash -Algorithm SHA256 .\handoff.zip).Hash.ToLower()`. On POSIX use `wc -c < handoff.zip` and `sha256sum handoff.zip`. Run `python -c "import zipfile; z=zipfile.ZipFile('handoff.zip'); print('BAD:', z.testzip()); print(len(z.namelist()), 'entries')"` for CRC/entry count. A passing CRC does not audit ZIP path safety or patch meaning; inspect paths and contents independently.
 
+**Drive or OneDrive, recorded as fixtures** (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645). Private files go through the Owner's handoff folder in Google Drive or OneDrive, in the project's subfolder. Record each file as a grounding fixture on the Progress page (list `inputs`): subfolder, file name, size and full SHA-256; never the link (the page checker refuses Drive, OneDrive and SharePoint links).
+
 ## Fill the return; avoid fake PASS
 
 Apply **No PASS beyond evidence** and **No consequential PASS without a
