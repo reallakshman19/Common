@@ -100,7 +100,7 @@ assignment still ends with assessment rather than an unauthorized repair.
 
 ## Spot-check mode (personal-use products)
 
-For a personal-use product (see Gatekeeper's personal-use profile), review a sample instead of the whole set: at least 5 items or 10%, chosen across tiles or topics. For each: solve it without the key first, then compare; look for answer giveaways; walk the hint ladder; check the reasoning route and teacher's answer. Report x of N, the items chosen and why, every fault, and what was not checked. Never extend a sample PASS to the unchecked items.
+For a personal-use product (see Gatekeeper's personal-use profile), review a sample instead of the whole set: 10% of the items or 5, whichever is more (all of them when there are 5 or fewer), chosen across tiles or topics. The reviewer is never the author of the items checked; the one-agent arrangement above does not apply to a spot-check. For each: solve it without the key first, then compare; look for answer giveaways; walk the hint ladder; check the reasoning route and teacher's answer. Report x of N, the items chosen and why, every fault, and what was not checked. Never extend a sample PASS to the unchecked items.
 
 ## Match support to the task
 
