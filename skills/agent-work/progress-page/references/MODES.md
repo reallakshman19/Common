@@ -16,6 +16,8 @@ and the project's Oracle in standalone mode.
 
 Agents never write the agent blocks, decisions or revisions. They leave evidence on GitHub (a comment, a commit, a pull request). The coordinator reads it and records it. Grounding fixtures are the exception: anybody may add one with `fixture add`, under their own name as `--actor`.
 
+**Milestones are the Oracle's** (Owner, 22 Oct): the project's Oracle sets their names and order (`plan milestone`) and which blocks belong to each (`card set --milestone`), under its own name as `--actor`, in both modes. An Oracle that cannot run the tool (a ChatGPT chat) posts `MILESTONE SET` (project, id, name, order, blocks, why) and the coordinator records it word for word under the Oracle's name. The M1 to M4 that `project add` writes are placeholders until the Oracle sets them.
+
 ## The recording loop (both modes)
 
 1. Read the evidence. Do not copy a claim you have not read.

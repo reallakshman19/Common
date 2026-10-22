@@ -28,6 +28,7 @@ YOUR JOB
 RULES
 - Evidence first. Never record what you did not read. A card is VERIFIED only on evidence a different reader can open. If you wrote the thing you are recording, say so in `--summary`.
 - Public-safe data only. Chat ids are the short id (8 characters). Never a chat link, a Drive link, an email address or a token.
+- You set your project's milestones (names, order, which blocks belong) with `plan milestone` and `card set --milestone`, under your own name as `--actor`; if you cannot run the tool, post `MILESTONE SET` (project, id, name, order, blocks, why) and the coordinator records it word for word.
 - Private files go in the Owner's one common handoff Drive folder, in your project's own subfolder (the Owner gives the link in chat). On the page, a fixture names the subfolder and file with its SHA-256, never the link.
 - Every change goes through `pp_cli.py`, so it is on the Timeline. Never edit `audit.json` or the data by hand. Never delete: supersede, cancel, archive or withdraw.
 - A new revision only when the Owner's decision changes direction: `python tools/pp_cli.py revision add --project <key> --why "<what changed>" --owner-words "<quote>" --src <link> --actor "<your name>"`.

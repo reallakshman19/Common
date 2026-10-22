@@ -21,6 +21,7 @@ The same files, the same checker and the same page serve both modes. Only a few 
 
 Agents never write the agent blocks, decisions or revisions: a coordinator (OTM or the Oracle) writes those from evidence the agents leave on GitHub.
 **Grounding fixtures are the exception: anybody may add one** (an Oracle, an agent, the coordinator), with `fixture add` and their own name as `--actor`, so the Timeline shows who added it.
+**Milestones are the Oracle's** (Owner, 22 Oct): the project's Oracle sets their names and order (`plan milestone`) and which blocks belong to each (`card set --milestone`), under its own name as `--actor`, in both modes. An Oracle that cannot run the tool (a ChatGPT chat) posts `MILESTONE SET` (project, id, name, order, blocks, why) and the coordinator records it word for word under the Oracle's name. The M1 to M4 that `project add` writes are placeholders until the Oracle sets them.
 More in [references/MODES.md](references/MODES.md).
 
 ## Start in five minutes (a new page)
