@@ -22,7 +22,7 @@ For a read-only strip inside a chat, see `universal-workflow-progress`.
 1. **Record from evidence.** Read the comment, commit or pull request, then record it with its link and its time. Never record a claim you did not read.
 2. **Use the tool.** `scripts/pp_cli.py` writes the data, the Timeline entry and runs the checker. Never edit `audit.json` or the data by hand. If a check fails, nothing stays written.
 3. **Nothing is deleted.** Supersede, cancel, archive or withdraw. The history stays on the page and in git.
-4. **Public-safe only.** Short chat ids, never chat links; no Drive links, emails or tokens. Chat links stay in a private file or the Owner's browser.
+4. **Public-safe only.** Short chat ids, never chat links; no Drive, OneDrive or SharePoint links, emails or tokens. Chat links stay in a private file or the Owner's browser.
 5. **VERIFIED needs evidence a different reader can open.** A coordinator that wrote the record is reviewing itself; say so. Use [Independent Reviewer](../independent-review/SKILL.md) and the [Gatekeeper](../gatekeeper/SKILL.md) labels for deliverables.
 6. **A revision only for an Owner decision that changes direction**, with the Owner's words and a link. Everyday movement goes to the Timeline.
 7. **The coordinator reads Nudge + lines, not the agent.** It folds them into its own next message, then records `nudge done` with the link of what it sent.

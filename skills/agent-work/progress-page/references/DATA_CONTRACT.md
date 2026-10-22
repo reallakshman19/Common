@@ -44,6 +44,7 @@ Top level: `schema` (int, yes, must be 3); `project` (object, yes); `rules` (obj
 | `project.updatedAt` | time | yes | not more than 60 s older than the newest Timeline entry |
 | `project.updatedBy` | text | yes | max 60 |
 | `project.staleAfterMin` | int | yes | at least 1 |
+| `project.aim`, `project.aimSrc` | text, https link | yes for an active project | the Owner's aim (at most 400 characters) and its GitHub source; set with `project add --aim` or `project aim` |
 | `rules.coordinator` | text | no | max 40; default `OTM` |
 | `rules.quietAfterMin`, `idleAfterMin`, `owesAfterMin`, `waitingAfterMin` | int | no | at least 1 |
 | `rules.nudgeAfterMin` | int | no | not checked; the page reads it (default 15) |
@@ -183,9 +184,9 @@ Flags that differ: `action answer` takes `--ref` (the Owner's words) in place of
 
 ## Privacy
 
-- The checker reads the text of every `*.json` file under the data folder and refuses: a Google Drive or Docs link; an email address; a token (`ghp_`, `github_pat_`, `sk-` followed by 20 or more characters);
+- The checker reads the text of every `*.json` file under the data folder and refuses: a Google Drive or Docs link; a OneDrive or SharePoint link (also when hidden by JSON escapes, %-encoding or invisible characters); an email address; a token (`ghp_`, `github_pat_`, `sk-` followed by 20 or more characters);
   a chat link (`chatgpt.com/c/`, `chat.openai.com`, `antigravity.google.com`, `claude.ai/chat/`, `claude.ai/code/`).
-- `--private` (`pp_check.py data --private`, `pp_cli.py check --private`) lifts only the chat-link rule, for a private local folder. It never lifts the other three.
+- `--private` (`pp_check.py data --private`, `pp_cli.py check --private`) lifts only the chat-link rule, for a private local folder. It never lifts the other rules.
 - Chats appear as `id8`, the short id. Chat links belong outside `data/`: in the Owner's browser ("My links") or in a private local build.
 - A source field accepts only `https://github.com/...` or `OWNER_PRIVATE_REF:<id>` (capitals, an id, no spaces). Any other address is refused there.
   `OWNER_PRIVATE_REF:<id>` is for evidence only the Owner can open, such as a private message. The whole value is published: use a short label, never the private link.

@@ -4,7 +4,9 @@
     "key": "other",
     "title": "Other project",
     "subtitle": "",
-    "updatedAt": "2026-10-22T09:14:39Z",
+    "aim": "Run another project",
+    "aimSrc": "https://github.com/acme/demo/issues/1#issuecomment-100",
+    "updatedAt": "2026-10-22T12:35:13Z",
     "updatedBy": "Oracle O2",
     "staleAfterMin": 120
   },
@@ -47,7 +49,7 @@
   "revisions": [
     {
       "id": "R1",
-      "at": "2026-10-22T09:14:39Z",
+      "at": "2026-10-22T12:35:13Z",
       "by": "Oracle O2",
       "why": "recorded in a test",
       "ownerWords": "Another project",
