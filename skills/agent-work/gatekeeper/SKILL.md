@@ -29,7 +29,7 @@ Three principles:
    [verification route](#verification-routes) used, normally the reviewer of
    record in [who does what](#who-does-what), or the small-tier project review
    ([fit the checks](#fit-the-checks-to-the-work)). Anyone else's checks are notes.
-3. **The Owner releases and overrides.** Work is released by the Owner's words,
+3. **The Owner releases and overrides.** Work is released by the Owner's words (for a personal-use product, see the [personal-use profile](#personal-use-profile)),
    or, in a noncritical project, by a recorded Owner grant covering that class of
    work. Only the Owner overrides a check.
 
@@ -46,8 +46,8 @@ composed use, see the shared
 
 When the Owner records that a product is for personal use, not published (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645):
 
-- Rights and publication checks, the file-record (custody) steps of GK9, and finishing the whole bank before any item reaches the learner do not apply. Record the Owner's words with the label.
-- **An item may go to the learner at DRAFT · CHECKED plus a passed spot-check by a reviewer who is not its author** ([Independent Review, spot-check mode](../independent-review/SKILL.md#spot-check-mode-personal-use-products)): key confirmed, no answer giveaway (position, length, wording, early reveal), hint ladder tried. The Owner's recorded personal-use words are the standing release for this product: they replace GK7's VERIFIED-or-override rule here only. CHECKED keeps its meaning in [Labels](#labels).
+- Publication to others, rights questions, the sha lists of GK9, and finishing the whole bank before any item reaches the learner do not apply. Record the Owner's words with the label.
+- **An item may go to the learner at DRAFT · CHECKED plus a passed spot-check by a reviewer who is not its author** ([Independent Review, spot-check mode](../independent-review/SKILL.md#spot-check-mode-personal-use-products)): key confirmed, no answer giveaway (position, length, wording, early reveal), hint ladder tried. Such an item is labelled **RELEASED (personal use) · CHECKED · SPOT-CHECKED x of N**. The Owner's recorded personal-use words release it (principle 3, GK7): they are the Owner's own words naming this class of items, not a grant, so they hold in a critical project too. VERIFIED is not required for this product only. CHECKED keeps its meaning in [Labels](#labels); the spot-check is the [Independent Review](../independent-review/SKILL.md) evidence beside it, not a verification route.
 - Labels stay honest: CHECKED names the sample (x of N) and what was not checked; VERIFIED still needs its full evidence.
 - A fault the learner meets is fixed and recorded; it is not a reason to hold every other item.
 

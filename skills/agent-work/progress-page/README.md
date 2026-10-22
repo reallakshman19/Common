@@ -38,6 +38,7 @@ More in [references/MODES.md](references/MODES.md).
    ```
    python tools/pp_cli.py project add --key demo --title "Demo project" --mode standalone --coordinator "Oracle" \
      --reply-repo <owner>/<name> --reply-site https://<owner>.github.io/<name>/ \
+     --aim "<the Owner's aim for the project, at most 400 characters>" \
      --actor "Oracle O2" --src https://github.com/<owner>/<name>/issues/1#issuecomment-<id> \
      --owner-words "<the Owner's words that start it>" --why "<why it starts>"
    ```
