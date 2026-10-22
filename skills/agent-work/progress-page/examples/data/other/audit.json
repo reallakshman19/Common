@@ -1,14 +1,14 @@
 {
   "schema": "progress-ledger/v3",
   "project": "other",
-  "baseline_at": "2026-10-22T09:14:39Z",
+  "baseline_at": "2026-10-22T12:35:13Z",
   "scope": "Ledger of published Progress maintenance from this declared baseline; not a reconstruction of historic agent execution.",
   "events": [
     {
       "seq": 1,
       "id": "OTHER-R-0001",
       "previous_id": null,
-      "at": "2026-10-22T09:14:39Z",
+      "at": "2026-10-22T12:35:13Z",
       "kind": "REVISION",
       "actor": "Oracle O2",
       "summary": "recorded in a test",

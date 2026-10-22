@@ -84,8 +84,8 @@ Every write command records one Timeline entry (who, what, why, source) and runs
 
 ## The rules that matter
 
-- **Public-safe data only.** Chat ids are the short id (8 characters), never a chat link. No Drive links, no email addresses, no tokens. The checker refuses them.
-- **Private files** (ZIPs, banks, originals, source fixtures, candidates) live in the Owner's one common handoff Drive folder, one subfolder per project key. A grounding fixture names the subfolder and file (with its SHA-256), never the link: see [local-handover](../local-handover/AGENT_PROTOCOL.md).
+- **Public-safe data only.** Chat ids are the short id (8 characters), never a chat link. No Drive, OneDrive or SharePoint links, no email addresses, no tokens. The checker refuses them.
+- **Private files** (ZIPs, banks, originals, source fixtures, candidates) live in the Owner's one common handoff folder (Google Drive, or OneDrive as the alternative), one subfolder per project key. A grounding fixture names the subfolder and file (with its SHA-256), never the link: see [local-handover](../local-handover/AGENT_PROTOCOL.md).
   Chat links live only in a private file (`links.private.json`), a private local build, or the Owner's browser.
 - **Every update is on the Timeline.** Use the tool, never edit `audit.json` or the data files by hand. The Timeline only grows.
 - **Nothing is deleted.** Supersede, cancel or archive instead. Superseded and cancelled cards stay on the page, greyed, with the reason.
