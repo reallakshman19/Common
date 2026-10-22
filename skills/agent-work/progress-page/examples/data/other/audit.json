@@ -1,0 +1,21 @@
+{
+  "schema": "progress-ledger/v3",
+  "project": "other",
+  "baseline_at": "2026-10-22T09:14:39Z",
+  "scope": "Ledger of published Progress maintenance from this declared baseline; not a reconstruction of historic agent execution.",
+  "events": [
+    {
+      "seq": 1,
+      "id": "OTHER-R-0001",
+      "previous_id": null,
+      "at": "2026-10-22T09:14:39Z",
+      "kind": "REVISION",
+      "actor": "Oracle O2",
+      "summary": "recorded in a test",
+      "source": "https://github.com/acme/demo/issues/1#issuecomment-100",
+      "revision": "R1",
+      "scope": "project",
+      "rev": "R1"
+    }
+  ]
+}

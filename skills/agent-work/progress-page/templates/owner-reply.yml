@@ -1,0 +1,52 @@
+name: Owner Reply
+description: One-click reply from the Progress page ("Send to ..." on a decision, or "Send" in Nudge +). Project, target, type and your text come filled in. Tick the confirmation and submit.
+title: "[Owner input] "
+labels: ["owner-input"]
+body:
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: Filled in by the Progress page. Change it only if this reply belongs to another project.
+    validations:
+      required: true
+
+  - type: input
+    id: target
+    attributes:
+      label: Target
+      description: Filled in by the Progress page. The coordinator (OwnerTeammember or the project's Oracle) reads it.
+    validations:
+      required: true
+
+  - type: input
+    id: type
+    attributes:
+      label: Input type
+      description: DECISION answers a decision card. NUDGE adds a line to an agent block's Nudge + list. NUDGE-WITHDRAW deletes an open line.
+    validations:
+      required: true
+
+  - type: textarea
+    id: text
+    attributes:
+      label: Your instruction or message
+      description: |
+        Filled in from the card option or the Nudge + line. Edit it only if you mean something different.
+        The coordinator compares a DECISION reply with the reply offered on the open card; a reply that differs is shown back to you before anything happens.
+    validations:
+      required: true
+
+  - type: input
+    id: evidence_link
+    attributes:
+      label: Evidence link (optional)
+      description: Link to the card this reply answers (filled in by the Progress page).
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I am the Owner. This input is mine and is time-stamped by GitHub.
+          required: true

@@ -1,0 +1,30 @@
+{
+  "d1": {
+    "order": 1,
+    "status": "open",
+    "title": "Pick one",
+    "lead": "Which option?",
+    "options": [
+      {
+        "key": "A",
+        "label": "Option A (suggested)",
+        "suggested": true,
+        "body": "Do A",
+        "reply": "Reply A"
+      },
+      {
+        "key": "B",
+        "label": "Option B",
+        "suggested": false,
+        "body": "Do B",
+        "reply": "Reply B"
+      }
+    ],
+    "links": [
+      {
+        "l": "Spec",
+        "u": "https://github.com/acme/demo/blob/main/SPEC.md"
+      }
+    ]
+  }
+}

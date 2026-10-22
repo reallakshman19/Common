@@ -1,0 +1,4 @@
+interface:
+  display_name: "Progress Page"
+  short_description: "Record project progress with sources on the Progress page"
+  default_prompt: "Use $progress-page to record this project's progress from linked evidence with scripts/pp_cli.py, keep the Timeline complete, run the checker, and act on the triggers."

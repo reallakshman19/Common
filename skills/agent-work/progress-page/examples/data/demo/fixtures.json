@@ -1,0 +1,19 @@
+{
+  "repository": [
+    {
+      "t": "Main repository",
+      "u": "https://github.com/acme/demo",
+      "s": "ok",
+      "n": "default branch main"
+    }
+  ],
+  "issues": [],
+  "pullRequests": [],
+  "roadmap": [],
+  "highRoi": [],
+  "future": [],
+  "intent": [],
+  "inputs": [],
+  "knownIssues": [],
+  "pending": []
+}

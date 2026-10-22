@@ -67,6 +67,7 @@ using it alone; the shared guide is optional and introduces no runtime import.
 | Prepare guidance for a particular participant | [Nudge Designer](nudge-designer/SKILL.md) | Intent or selected task, actual tools/capability → self-contained operational brief and return contract |
 | Assess an actual artifact or engineering/learning claim | [Independent Reviewer](independent-review/SKILL.md) | Candidate/original criteria → evidence-backed findings, coverage and scoped assessment |
 | Decide what a deliverable may be labelled, shown or released as | [Gatekeeper](gatekeeper/SKILL.md) | Deliverable, baseline, sealed targets and available evidence → a label (DRAFT/CHECKED/VERIFIED/RELEASED) with sha, x of N, untested scope and deviations |
+| Keep a traceable, visible record of project progress, Owner decisions and nudges | [Progress Page](progress-page/README.md) | Agent evidence on GitHub → a static page backed by JSON, with a Timeline, a checker, an editing tool and triggers. A runnable toolset: copy the whole folder, read its README, use its tools |
 
 Use a module alone when that satisfies the request. Plan-only ends with usable
 task designs; brief-only ends with usable instructions; review-only ends with an

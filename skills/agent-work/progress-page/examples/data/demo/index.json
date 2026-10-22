@@ -1,0 +1,79 @@
+{
+  "schema": 3,
+  "project": {
+    "key": "demo",
+    "title": "Demo project",
+    "subtitle": "A small project for tests",
+    "updatedAt": "2026-10-22T09:14:40Z",
+    "updatedBy": "Owner",
+    "staleAfterMin": 120
+  },
+  "rules": {
+    "coordinator": "Oracle",
+    "quietAfterMin": 30,
+    "idleAfterMin": 15,
+    "owesAfterMin": 15,
+    "waitingAfterMin": 15
+  },
+  "chats": {
+    "c1": {
+      "label": "Agent one",
+      "id8": "aaaa1111",
+      "engine": "ChatGPT"
+    },
+    "c2": {
+      "label": "Agent two",
+      "id8": "bbbb2222",
+      "engine": "Antigravity"
+    }
+  },
+  "milestones": {
+    "M1": {
+      "order": 1,
+      "name": "Plan",
+      "full": "Plan and approvals"
+    },
+    "M2": {
+      "order": 2,
+      "name": "Build",
+      "full": "Work in progress"
+    },
+    "M3": {
+      "order": 3,
+      "name": "Review",
+      "full": "Review and decisions"
+    },
+    "M4": {
+      "order": 4,
+      "name": "Accept",
+      "full": "Owner acceptance"
+    },
+    "M5": {
+      "name": "Ship",
+      "full": "Ship it",
+      "order": 5
+    }
+  },
+  "groups": {
+    "main": {
+      "order": 1,
+      "title": "Work"
+    },
+    "g2": {
+      "title": "Second group",
+      "sub": "Follow-up work",
+      "order": 2
+    }
+  },
+  "revisions": [
+    {
+      "id": "R1",
+      "at": "2026-10-22T09:14:39Z",
+      "by": "Oracle O2",
+      "why": "recorded in a test",
+      "ownerWords": "Start the demo project",
+      "src": "https://github.com/acme/demo/issues/1#issuecomment-100",
+      "status": "current"
+    }
+  ]
+}

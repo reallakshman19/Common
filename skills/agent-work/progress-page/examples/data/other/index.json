@@ -1,0 +1,58 @@
+{
+  "schema": 3,
+  "project": {
+    "key": "other",
+    "title": "Other project",
+    "subtitle": "",
+    "updatedAt": "2026-10-22T09:14:39Z",
+    "updatedBy": "Oracle O2",
+    "staleAfterMin": 120
+  },
+  "rules": {
+    "coordinator": "OTM",
+    "quietAfterMin": 30,
+    "idleAfterMin": 15,
+    "owesAfterMin": 15,
+    "waitingAfterMin": 15
+  },
+  "chats": {},
+  "milestones": {
+    "M1": {
+      "order": 1,
+      "name": "Plan",
+      "full": "Plan and approvals"
+    },
+    "M2": {
+      "order": 2,
+      "name": "Build",
+      "full": "Work in progress"
+    },
+    "M3": {
+      "order": 3,
+      "name": "Review",
+      "full": "Review and decisions"
+    },
+    "M4": {
+      "order": 4,
+      "name": "Accept",
+      "full": "Owner acceptance"
+    }
+  },
+  "groups": {
+    "main": {
+      "order": 1,
+      "title": "Work"
+    }
+  },
+  "revisions": [
+    {
+      "id": "R1",
+      "at": "2026-10-22T09:14:39Z",
+      "by": "Oracle O2",
+      "why": "recorded in a test",
+      "ownerWords": "Another project",
+      "src": "https://github.com/acme/demo/issues/1#issuecomment-100",
+      "status": "current"
+    }
+  ]
+}
