@@ -134,6 +134,11 @@ bytes. They do not certify reasoning, identity, independence or acceptance.
 
 ## Reference cases and prototype use
 
+Under [Prototype-first](../prototype-first/SKILL.md) a review is selected by the slice
+card: it runs for `check: independent` cards, before the real-world use the card names,
+and at hardening. Scope it to the card's `done_when` and `keeps` on the exact candidate.
+A prototype the user is still trying needs no independent review.
+
 Read [golden cases](examples/INDEX.md) for sound work, wrong shared oracles, stale
 candidates, partial evidence, self-review and narrow evidence collection. Keep
 golden outcomes away from a participant whose independent discovery is being

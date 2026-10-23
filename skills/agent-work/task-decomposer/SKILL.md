@@ -9,6 +9,9 @@ Decide what meaningful work exists and how it fits together. Preserve the Owner'
 purpose before choosing task boundaries. Produce usable task designs without
 requiring another skill, issue tracker or delivery protocol.
 
+For project delivery, express the next steps as slice cards: each ends in something the
+user runs on the real inputs ([Prototype-first](../prototype-first/SKILL.md), default since 23 Oct 2026).
+
 For standalone and optional composed use, see the shared
 [Start here guide](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md).
 It adds no dependency on the other modules.

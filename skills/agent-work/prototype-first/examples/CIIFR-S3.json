@@ -1,0 +1,35 @@
+{
+  "slice": "CIIFR-S3",
+  "wbs": "1.3",
+  "state": "written",
+  "user_can": "I transfer node names from the source CII to the matching nodes of the target CII, node by node within matched lines",
+  "user": "Owner",
+  "real_inputs": [
+    {
+      "name": "GLRD-SYS-20-10.CII",
+      "where": "the Owner's private copy, attached in the builder chat; never published"
+    },
+    {
+      "name": "GLRD-SYS-20-10-T.CII",
+      "where": "the Owner's private copy of the revised target model, attached in the builder chat; never published"
+    }
+  ],
+  "done_when": "Names move only between nodes the mapping pairs inside matched lines; unmatched or ambiguous nodes are listed for the Owner and never named silently; S1 and S2 behave as before",
+  "keeps": [
+    "CIIFR-S1 unedited round trip byte for byte",
+    "CIIFR-S1 editor tests",
+    "CIIFR-S2 line mapping and T1/P1 transfer"
+  ],
+  "timebox_h": 8,
+  "check": "independent",
+  "why_check": "node names in the target model are used in the real analysis and its reports",
+  "next_risks": [
+    "how nodes pair inside a line (order, geometry, element lengths) is not yet decided"
+  ],
+  "builds_on": [
+    {
+      "slice": "CIIFR-S2",
+      "what": "the exported source-to-target line mapping"
+    }
+  ]
+}

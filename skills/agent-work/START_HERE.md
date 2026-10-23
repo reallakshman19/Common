@@ -57,6 +57,12 @@ Lesson 1 (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 63395
 - **No work without a written aim.** The project's aim is the Owner's words, on its Progress page tab (`project aim`). If it is missing, ask the Owner before planning.
 - **Match the quality bar to the use.** A personal-use product skips rights, publication, custody and whole-bank gates ([Gatekeeper](gatekeeper/SKILL.md), personal-use profile).
 - **The learner is the measure:** one topic end to end and in front of the learner before the next; small pieces, merged often.
+Lesson 2 (Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6354803323, 6354995849; #156): one builder chat, steered by the Owner on the Owner's real file, gave the Owner a tool to run locally in about seven hours, where the multi-agent route was estimated at 40+ hours and five agents. So, by default ([Prototype-first](prototype-first/SKILL.md)):
+
+- **Build first, on the real inputs.** Every step ends in something the user runs with one command or one URL; the Oracle writes each step as a slice card.
+- **The user tries it, then the next card.** Evidence follows a working prototype; an independent check runs where a mistake would reach the real world, before that use.
+- **The benchmark is R0** (CIIFR-S1): compare each project's time to first runnable and its cost with it.
+
 - **Keep the modules visible** where people already look: every task packet carries an `Aim:` line and a `Modules:` line naming the module each step uses; every Oracle prompt carries the table below; each Progress page tab links the modules under its aim.
 
 ## Choose only useful modules
@@ -77,6 +83,7 @@ using it alone; the shared guide is optional and introduces no runtime import.
 | Assess an actual artifact or engineering/learning claim | [Independent Reviewer](independent-review/SKILL.md) | Candidate/original criteria → evidence-backed findings, coverage and scoped assessment |
 | Decide what a deliverable may be labelled, shown or released as | [Gatekeeper](gatekeeper/SKILL.md) | Deliverable, baseline, sealed targets and available evidence → a label (DRAFT/CHECKED/VERIFIED/RELEASED) with sha, x of N, untested scope and deviations |
 | Keep a traceable, visible record of project progress, Owner decisions and nudges | [Progress Page](progress-page/README.md) | Agent evidence on GitHub → a static page backed by JSON, with a Timeline, a checker, an editing tool and triggers. A runnable toolset: copy the whole folder, read its README, use its tools |
+| Deliver a step as something the user runs, and size the checking to the risk | [Prototype-first](prototype-first/SKILL.md) | Aim, real inputs and what the user can do today → a slice card per step, a capability probe and builder brief, a short prototype return, and a checker for cards |
 
 Use a module alone when that satisfies the request. Plan-only ends with usable
 task designs; brief-only ends with usable instructions; review-only ends with an

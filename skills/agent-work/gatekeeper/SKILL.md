@@ -79,6 +79,10 @@ provided a diff shows nothing else changed.
 
 ## Who does what
 
+Under [Prototype-first](../prototype-first/SKILL.md) a runnable prototype the user tries
+is DRAFT; CHECKED starts at hardening and VERIFIED needs the card's independent check.
+The checks below apply to what is shown or released, not to building the prototype.
+
 The Owner says whether a project is critical or noncritical, and a recorded Owner
 grant also sets the class for the work it covers. Until then the class is unset:
 use the critical release rule, and let all other work proceed. The standalone

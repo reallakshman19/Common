@@ -127,3 +127,11 @@ Use [G16 raw cases](../examples/guidance/G16-oracle-onboard/raw.md) for applicat
 and [reference distinctions](../examples/guidance/G16-oracle-onboard/golden.md)
 afterward. Withhold the golden answers during fresh discovery. These are synthetic
 references, not evidence of an LFEA repair or qualification of a low-thinking model.
+
+## Promoting an agent to Oracle (prototype-first)
+
+(Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6355155436, 6355213295.) An agent that has shown understanding beyond its own task may be promoted to
+Oracle by the Owner or the coordinator. Onboard it with the
+[promoted Oracle prompt](../assets/prompts/oracle-onboard.md#promoted-oracle):
+the frozen baseline, the next two prototypes and how they connect. It is Oracle only from
+then on. See [Prototype-first](../../prototype-first/SKILL.md#after-a-prototype-is-finalized-navigate).

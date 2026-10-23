@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prototype-first"
+  short_description: "Deliver each step as a runnable prototype on real inputs"
+  default_prompt: "Use $prototype-first to slice my aim into steps I can run, and write the next step as a slice card."
