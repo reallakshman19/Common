@@ -22,7 +22,8 @@ Owner outcome and relevant amendments: {{original words + direct references}}
 Why this task matters: {{connection to outcome; what remains after this task}}
 
 One bounded task
-Deliverable: {{one checkable result}}
+Slice card: {{slice id, WBS, what the user will run and how, real inputs, timebox, check level}}
+Deliverable: {{one checkable result; by default something the user runs on the real inputs}}
 Working explanation: {{FACT/CLAIM/HYPOTHESIS + evidence + plausible alternative}}
 Task choice/basis: {{implementation, established repair or independent falsification;
 actual evidence supporting this role, required independence and unresolved criterion}}

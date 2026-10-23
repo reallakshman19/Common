@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/reallakshman19/Common/skills/agent-work/prototype-first/schemas/slice-card.v1.json",
+  "title": "Slice card v1",
+  "description": "One WBS step delivered prototype-first. State-dependent rules (runnable needs demo, tried needs after_use, and so on) and the no-private-link rule are enforced by scripts/slice_check.py.",
+  "type": "object",
+  "required": ["slice", "wbs", "state", "user_can", "user", "real_inputs", "done_when", "keeps", "timebox_h", "check"],
+  "properties": {
+    "slice": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,40}$"},
+    "wbs": {"type": "string", "pattern": "^[1-9][0-9]{0,2}(\\.[1-9][0-9]{0,2}){0,3}$"},
+    "state": {"enum": ["written", "building", "runnable", "tried", "accepted", "hardened", "verified"]},
+    "user_can": {"type": "string", "minLength": 10, "maxLength": 300},
+    "user": {"type": "string", "minLength": 1},
+    "real_inputs": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "required": ["name", "where"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "where": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "runnable": {"type": "string"},
+    "demo": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 3, "maxItems": 6},
+    "done_when": {"type": "string", "minLength": 1},
+    "keeps": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "timebox_h": {"type": "number", "exclusiveMinimum": 0, "maximum": 40},
+    "check": {"enum": ["none", "self", "independent"]},
+    "why_check": {"type": "string"},
+    "next_risks": {"type": "array", "items": {"type": "string"}},
+    "probe": {
+      "type": "object",
+      "required": ["code", "downloads", "read_attachments", "browser", "repo_push"],
+      "additionalProperties": {"enum": ["yes", "no", "unknown"]}
+    },
+    "after_use": {
+      "type": "object",
+      "required": ["tried_at", "by", "verdict", "can_do_today"],
+      "properties": {
+        "tried_at": {"type": "string"},
+        "by": {"type": "string"},
+        "verdict": {"enum": ["works", "gaps", "fails"]},
+        "gaps": {"type": "array", "items": {"type": "string"}},
+        "can_do_today": {"type": "string", "minLength": 1},
+        "evidence": {"type": "string", "pattern": "^https://"},
+        "accept_src": {"type": "string", "pattern": "^https://"}
+      }
+    },
+    "hardening": {
+      "type": "object",
+      "required": ["repo", "head", "evidence"],
+      "properties": {
+        "repo": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+        "head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "evidence": {"type": "string", "pattern": "^https://"}
+      }
+    },
+    "check_verdict": {"type": "string", "pattern": "^https://"},
+    "owner_steering": {
+      "type": "array",
+      "items": {"type": "object", "required": ["at", "what"], "properties": {"at": {"type": "string"}, "what": {"type": "string"}, "src": {"type": "string"}}}
+    },
+    "supersedes": {"type": "string"}
+  }
+}

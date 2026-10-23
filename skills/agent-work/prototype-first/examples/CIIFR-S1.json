@@ -1,0 +1,41 @@
+{
+  "slice": "CIIFR-S1",
+  "wbs": "1.1",
+  "state": "tried",
+  "user_can": "I open my real CII model as RichInputXML in a local editor, change one column on one line with find and replace, preview, undo, and generate the CII again",
+  "user": "Owner",
+  "real_inputs": [
+    {"name": "GLRD-SYS-20-10.CII", "where": "the Owner's private copy, attached in the builder chat; never published"}
+  ],
+  "runnable": "start-editor.bat (or python branch_editor_server.py --port 8766), then open http://127.0.0.1:8766/",
+  "demo": [
+    "Pick one line branch in the dropdown",
+    "Choose the column T1 (TEMP_EXP_C1)",
+    "Find 120.000, replace with 81.000, preview the matches",
+    "Apply to the selected line and generate the CII",
+    "Undo and generate again: the bytes equal the original"
+  ],
+  "done_when": "The unedited round trip reproduces the original CII byte for byte; an edit on one line changes only that line's element rows; undo restores the original bytes",
+  "keeps": [],
+  "timebox_h": 8,
+  "check": "self",
+  "next_risks": [
+    "hot allowables (Sh) are stored values and do not follow a temperature edit",
+    "the unassigned line group mixes elements of different lines",
+    "numeric match tolerance and fixed field width are not stated",
+    "no edited CII has been opened in CAESAR II"
+  ],
+  "probe": {"code": "yes", "downloads": "yes", "read_attachments": "yes", "browser": "unknown", "repo_push": "unknown"},
+  "after_use": {
+    "tried_at": "2026-10-23T04:56+04:00",
+    "by": "Owner",
+    "verdict": "works",
+    "gaps": [],
+    "can_do_today": "The Owner runs a line-scoped CII branch editor locally on the real model and generates an edited CII",
+    "evidence": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/156#issuecomment-6354748854"
+  },
+  "owner_steering": [
+    {"at": "2026-10-22", "what": "use the pinned writer only to decode the serialization; build an own RichInputXML writer"},
+    {"at": "2026-10-23", "what": "add a branch-level find and replace editor with a column table", "src": "https://github.com/reallakshman19/CoordinatorLandingpage/issues/1#issuecomment-6354803323"}
+  ]
+}

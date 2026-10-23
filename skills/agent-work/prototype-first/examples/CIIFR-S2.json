@@ -1,0 +1,17 @@
+{
+  "slice": "CIIFR-S2",
+  "wbs": "1.2",
+  "state": "written",
+  "user_can": "I open an edited CII in CAESAR II and see the new value on exactly the edited elements, with hot allowables that match the new temperature",
+  "user": "Owner",
+  "real_inputs": [
+    {"name": "GLRD-SYS-20-10.CII", "where": "the Owner's private handoff folder, subfolder ciifr"},
+    {"name": "CAESAR II", "where": "installed on the Owner's computer"}
+  ],
+  "done_when": "In CAESAR II the edited elements show T1 = 81 and every other element is unchanged; Sh of the edited elements matches 81 degrees C, or the editor warns before generating; a P1 edit on another line behaves the same",
+  "keeps": ["CIIFR-S1 unedited round trip byte for byte", "CIIFR-S1 editor tests"],
+  "timebox_h": 6,
+  "check": "independent",
+  "why_check": "an edited CII will feed a real stress analysis",
+  "next_risks": ["the unassigned line group", "numeric match tolerance and fixed field width"]
+}

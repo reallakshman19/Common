@@ -2,6 +2,7 @@
 
 ## Contents
 
+- [Default: prototype-first slices](#default-prototype-first-slices)
 - [Choose a context boundary](#choose-a-useful-context-boundary)
 - [Compose independent skills](#compose-the-two-independently-selected-skills)
 - [Focused context and blind evidence](#distinguish-focused-context-from-blind-evidence)
@@ -11,6 +12,19 @@ Accept the Owner's human-language goal and available sources. Oracle maintains t
 map and reconciles results; the Owner need not operate schemas. An Oracle label
 or medium/high model label does not establish the consequential judgment needed.
 Reserve or route a judgment Oracle cannot justify with sources and evidence.
+
+## Default: prototype-first slices
+
+(Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6354803323, 6354995849; #156.) For project work the Oracle's map is a sequence of slice cards
+([Prototype-first](../../prototype-first/SKILL.md)). Each step ends in something the
+user runs on the real inputs within a timebox; infrastructure the user cannot see is
+the hardening of a visible step, not a step of its own. Before a builder starts, its
+capability probe shapes the card. The Owner may steer the builder directly; record
+that steering afterwards as a visible card or WBS change. After the user tries a step,
+write the next card from their reaction. Set each card's check by consequence: the
+evidence and surviving-error challenge below apply in full from hardening on and to
+every independent check, not to a prototype the user has yet to try. Do not demand
+proof before something exists to prove.
 
 ## Choose a useful context boundary
 
