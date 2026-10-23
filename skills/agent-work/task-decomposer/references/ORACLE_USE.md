@@ -26,6 +26,17 @@ evidence and surviving-error challenge below apply in full from hardening on and
 every independent check, not to a prototype the user has yet to try. Do not demand
 proof before something exists to prove.
 
+Who is Oracle, and how it moves on (Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6355155436, 6355213295; [After a prototype is finalized](../../prototype-first/SKILL.md#after-a-prototype-is-finalized-navigate)):
+an agent becomes Oracle when the Owner or the coordinator promotes it for understanding it
+has shown beyond its own task, with links to the turns that showed it. From then on it is
+Oracle only: it writes cards and briefs and reviews returns against them, never builds,
+and someone else checks the work it built. When the user finalizes a prototype, it becomes
+the frozen baseline: later prototypes add beside it and keep its demo and tests. The Oracle
+holds the next two cards and how they connect (`builds_on`, `prepares_for`), so each
+builder produces what the step after it needs, and briefs a fresh builder per prototype.
+When its context runs short, the next agent that has shown the same understanding is
+promoted; that succession carries the project's meaning without a long handover.
+
 ## Choose a useful context boundary
 
 Prefer fresh task-local workers for a coherent deliverable with explicit inputs,

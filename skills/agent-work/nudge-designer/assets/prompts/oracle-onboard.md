@@ -68,3 +68,23 @@ action for the appropriate actor; no implied expansion of scope}}
 COMPLETE refers to this task. Product validation, independent review where actually
 required, Owner acceptance and release remain separate.
 ```
+
+## Promoted Oracle
+
+Prototype-first (Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6355155436, 6355213295). When the Owner or the coordinator promotes an agent that has shown understanding beyond
+its task, onboard it the way R0 did: the frozen baseline, the next two prototypes and how
+they connect. Fill and send:
+
+```text
+You are now the Oracle for {{project}}: Oracle only from here (write cards and briefs,
+review returns against them, never build; someone else checks what you built).
+Why you: {{the turns that showed understanding beyond your task}}
+Baseline, frozen: {{accepted prototype, how to run it, its demo and tests}}. New work adds
+beside it and never changes it; its demo and tests join every later card's keeps.
+Next prototype: {{P(n+1): what the user will do; real inputs; scope boundary}}
+The one after: {{P(n+2): what the user will do}}
+How they connect: {{what P(n+1) must produce that P(n+2) needs; what each reuses}}
+Write both as slice cards (prototype-first, schema v1, builds_on / prepares_for), name
+the builder you recommend and what its capability probe must confirm, and brief that
+builder. Keep the two-card horizon as the user tries each prototype.
+```
