@@ -19,8 +19,8 @@ SLICE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,40}")
 SHA40 = re.compile(r"[0-9a-f]{40}")
 REPO = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+")
 # Chat and storage links are private: a card names files, never links to them.
-PRIVATE = re.compile(r"chatgpt\.com/(c|g|share)/|chat\.openai\.com|drive\.google\.com|docs\.google\.com"
-                     r"|onedrive\.live\.com|1drv\.ms|sharepoint\.com", re.I)
+PRIVATE = re.compile(r"chatgpt\.com|chat\.openai\.com|claude\.ai|(drive|docs|drive\.usercontent)\.google\.com"
+                     r"|onedrive\.live\.com|1drv\.ms|sharepoint\.com|dropbox\.com", re.I)
 
 
 def reached(state, other):
@@ -44,7 +44,8 @@ def text(v):
 
 
 def https(v):
-    return isinstance(v, str) and v.startswith("https://") and not any(c.isspace() for c in v)
+    """A link field: public GitHub only, so no private host can pass."""
+    return isinstance(v, str) and v.startswith("https://github.com/") and not any(c.isspace() for c in v)
 
 
 def check(card):
@@ -86,7 +87,7 @@ def check(card):
         for i, item in enumerate(inputs):
             if not (isinstance(item, dict) and text(item.get("name")) and text(item.get("where"))):
                 e.append(f"real_inputs[{i}]: needs name and where")
-            elif re.search(r"https?://", item["where"]):
+            elif re.search(r"https?://", item["where"], re.I):
                 e.append(f"real_inputs[{i}].where: a folder or 'attached in chat', not a link")
 
     for key in ("builds_on", "prepares_for"):
@@ -127,14 +128,17 @@ def check(card):
             if use.get("verdict") == "gaps" and not (isinstance(use.get("gaps"), list) and use["gaps"]):
                 e.append("after_use.gaps: list the gaps when the verdict is gaps")
             if "evidence" in use and not https(use["evidence"]):
-                e.append("after_use.evidence: a public https link")
+                e.append("after_use.evidence: a public GitHub link")
             if reached(state, "accepted") and not https(use.get("accept_src")):
                 e.append("after_use.accept_src: link to the Owner's acceptance, required from state accepted")
     if reached(state, "hardened"):
         h = card.get("hardening")
         if not (isinstance(h, dict) and isinstance(h.get("repo"), str) and REPO.fullmatch(h["repo"])
                 and isinstance(h.get("head"), str) and SHA40.fullmatch(h["head"]) and https(h.get("evidence"))):
-            e.append("hardening: repo owner/name, 40-character head and https evidence, required from state hardened")
+            e.append("hardening: repo owner/name, 40-character head and GitHub evidence, required from state hardened")
+    for i, st in enumerate(card.get("owner_steering") or []):
+        if isinstance(st, dict) and "src" in st and not https(st["src"]):
+            e.append(f"owner_steering[{i}].src: a public GitHub link")
     if state == "verified":
         if check_level != "independent":
             e.append("state verified: only a card with check independent can be verified")
@@ -150,7 +154,7 @@ def main(argv):
     failed = False
     for name in argv:
         try:
-            card = json.loads(Path(name).read_text(encoding="utf-8"))
+            card = json.loads(Path(name).read_text(encoding="utf-8-sig"))
         except (OSError, ValueError) as exc:
             print(f"{name}: cannot read: {exc}")
             failed = True
@@ -162,6 +166,8 @@ def main(argv):
                 print(f"{name}: {err}")
         else:
             print(f"OK {name}")
+            if (card.get("check") == "independent" and card.get("state") in ("accepted", "hardened")):
+                print(f"NOTE {name}: check independent; trial use only until verified")
     return 1 if failed else 0
 
 

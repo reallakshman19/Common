@@ -148,6 +148,29 @@ class SeededDefects(unittest.TestCase):
         c["state"] = "done"
         self.assertCaught(c, "state")
 
+    def test_private_hosts_in_free_text(self):
+        for url in ("https://claude.ai/chat/0000", "https://chatgpt.com/codex/tasks/x",
+                    "https://drive.usercontent.google.com/x", "HTTPS://CHATGPT.COM/C/0"):
+            c = copy.deepcopy(self.s2)
+            c["next_risks"].append(url)
+            self.assertCaught(c, "private link")
+
+    def test_link_fields_are_github_only(self):
+        c = copy.deepcopy(self.r0)
+        c["after_use"]["accept_src"] = "https://example.org/accept"
+        self.assertCaught(c, "accept_src")
+        c = copy.deepcopy(self.r0)
+        c["after_use"]["evidence"] = "https://example.org/e"
+        self.assertCaught(c, "after_use.evidence")
+        c = copy.deepcopy(self.s2)
+        c["owner_steering"][0]["src"] = "https://example.org/s"
+        self.assertCaught(c, "owner_steering[0].src")
+
+    def test_uppercase_link_as_input_location(self):
+        c = copy.deepcopy(self.s2)
+        c["real_inputs"][0]["where"] = "HTTPS://example.org/folder"
+        self.assertCaught(c, "not a link")
+
 
 class CommandLine(unittest.TestCase):
     def run_cli(self, card):
@@ -165,6 +188,20 @@ class CommandLine(unittest.TestCase):
         res = self.run_cli(bad)
         self.assertEqual(res.returncode, 1)
         self.assertIn("real_inputs", res.stdout)
+
+    def test_bom_card_reads(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "card.json"
+            p.write_bytes(b"\xef\xbb\xbf" + json.dumps(example("CIIFR-S1.json")).encode("utf-8"))
+            res = subprocess.run([sys.executable, str(SCRIPT), str(p)], capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+
+    def test_independent_accepted_gets_trial_note(self):
+        c = example("CIIFR-S1.json")
+        c["check"], c["why_check"] = "independent", "feeds a real analysis"
+        res = self.run_cli(c)
+        self.assertEqual(res.returncode, 0, res.stdout)
+        self.assertIn("trial use only until verified", res.stdout)
 
 
 if __name__ == "__main__":

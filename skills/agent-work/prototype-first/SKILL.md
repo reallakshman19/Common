@@ -21,6 +21,8 @@ user can do, per unit of cost.
    step cannot show something runnable within its timebox, the Oracle re-slices it.
 3. **The user tries it.** A step is not progress until the user (the Owner, or the
    learner for a learner product) has run it. Their reaction drives the next card.
+   The Owner may try a DRAFT; a learner gets an item only after a non-author
+   spot-check ([Gatekeeper personal-use profile](../gatekeeper/SKILL.md#personal-use-profile)).
 4. **Prove in proportion.** Evidence is written after a working prototype, not
    demanded before one. An independent check runs where a mistake would reach the
    real world (see [check levels](#check-level-by-consequence)), before that use.
@@ -83,7 +85,7 @@ written -> building -> runnable -> tried -> accepted -> hardened -> verified
 | building | a builder with a `probe` | NOT_DEMONSTRATED | — |
 | runnable | `runnable` and `demo` that work for the builder | CANDIDATE | DRAFT |
 | tried | `after_use` from the user's own run | CANDIDATE | DRAFT |
-| accepted | the Owner's words (`after_use.accept_src`) | AVAILABLE for that use | personal-use release where that profile applies |
+| accepted | the Owner's words (`after_use.accept_src`) | AVAILABLE for that use; with `check: independent`, trial use only until verified | personal-use release only after that profile's spot-check |
 | hardened | code, tests and launcher in the repository at an exact head | BENCHMARK_SUPPORTED | CHECKED |
 | verified | an independent PASS at that head (`check: independent` only) | INDEPENDENTLY_VERIFIED | VERIFIED |
 

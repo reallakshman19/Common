@@ -81,6 +81,7 @@ provided a diff shows nothing else changed.
 
 Under [Prototype-first](../prototype-first/SKILL.md) a runnable prototype the user tries
 is DRAFT; CHECKED starts at hardening and VERIFIED needs the card's independent check.
+A DRAFT goes to the Owner only; an item reaches a learner after the personal-use spot-check.
 The checks below apply to what is shown or released, not to building the prototype.
 
 The Owner says whether a project is critical or noncritical, and a recorded Owner
