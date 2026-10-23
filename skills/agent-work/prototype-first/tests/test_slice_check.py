@@ -27,8 +27,16 @@ class Examples(unittest.TestCase):
     def test_benchmark_r0_passes(self):
         self.assertEqual(S.check(example("CIIFR-S1.json")), [])
 
-    def test_next_card_passes(self):
-        self.assertEqual(S.check(example("CIIFR-S2.json")), [])
+    def test_next_cards_pass(self):
+        for name in ("CIIFR-S2.json", "CIIFR-S3.json"):
+            self.assertEqual(S.check(example(name)), [], name)
+
+    def test_horizon_is_connected(self):
+        s1, s2, s3 = (example(f"CIIFR-S{i}.json") for i in (1, 2, 3))
+        self.assertEqual(s1["state"], "accepted")
+        self.assertIn("CIIFR-S2", [x["slice"] for x in s1["prepares_for"]])
+        self.assertIn("CIIFR-S3", [x["slice"] for x in s2["prepares_for"]])
+        self.assertIn("CIIFR-S2", [x["slice"] for x in s3["builds_on"]])
 
     def test_schema_is_valid_json_and_names_every_required_field(self):
         schema = json.loads((ROOT / "schemas/slice-card.v1.json").read_text(encoding="utf-8"))
@@ -112,6 +120,7 @@ class SeededDefects(unittest.TestCase):
     def test_accepted_without_owner_link(self):
         c = copy.deepcopy(self.r0)
         c["state"] = "accepted"
+        del c["after_use"]["accept_src"]
         self.assertCaught(c, "accept_src")
 
     def test_hardened_without_exact_head(self):
@@ -128,6 +137,11 @@ class SeededDefects(unittest.TestCase):
         c["hardening"] = {"repo": "o/r", "head": "a" * 40, "evidence": "https://github.com/o/r/pull/1"}
         c["check_verdict"] = "https://github.com/o/r/pull/1#issuecomment-2"
         self.assertCaught(c, "state verified")
+
+    def test_connection_needs_what(self):
+        c = copy.deepcopy(self.s2)
+        c["prepares_for"] = [{"slice": "CIIFR-S3"}]
+        self.assertCaught(c, "prepares_for[0]")
 
     def test_unknown_state(self):
         c = copy.deepcopy(self.s2)

@@ -2,16 +2,49 @@
   "slice": "CIIFR-S2",
   "wbs": "1.2",
   "state": "written",
-  "user_can": "I open an edited CII in CAESAR II and see the new value on exactly the edited elements, with hot allowables that match the new temperature",
+  "user_can": "I load a source CII and a revised target CII, see which lines match by line number, and transfer Temperature 1 and Pressure 1 line by line, while the working single-model editor stays as it is",
   "user": "Owner",
   "real_inputs": [
-    {"name": "GLRD-SYS-20-10.CII", "where": "the Owner's private handoff folder, subfolder ciifr"},
-    {"name": "CAESAR II", "where": "installed on the Owner's computer"}
+    {
+      "name": "GLRD-SYS-20-10.CII",
+      "where": "the Owner's private copy, attached in the builder chat; never published"
+    },
+    {
+      "name": "GLRD-SYS-20-10-T.CII",
+      "where": "the Owner's private copy of the revised target model, attached in the builder chat; never published"
+    }
   ],
-  "done_when": "In CAESAR II the edited elements show T1 = 81 and every other element is unchanged; Sh of the edited elements matches 81 degrees C, or the editor warns before generating; a P1 edit on another line behaves the same",
-  "keeps": ["CIIFR-S1 unedited round trip byte for byte", "CIIFR-S1 editor tests"],
-  "timebox_h": 6,
+  "done_when": "Lines match through the XML of both files by line number, not by a node offset (node 1200 in the source is node 11200 in the target); the target CII changes only T1 and P1 of matched lines' elements; unmatched, duplicated and mixed-value lines are shown and never transferred silently; the S1 editor is unchanged",
+  "keeps": [
+    "CIIFR-S1 unedited round trip byte for byte",
+    "CIIFR-S1 editor tests"
+  ],
+  "timebox_h": 8,
   "check": "independent",
-  "why_check": "an edited CII will feed a real stress analysis",
-  "next_risks": ["the unassigned line group", "numeric match tolerance and fixed field width"]
+  "why_check": "a transferred target CII will feed a real stress analysis; the check includes opening the target in CAESAR II with its allowables",
+  "next_risks": [
+    "both files must use the same units",
+    "target lines may differ in material and hot allowables (Sh)",
+    "a line carrying more than one T1 or P1",
+    "the unassigned line group"
+  ],
+  "builds_on": [
+    {
+      "slice": "CIIFR-S1",
+      "what": "RichInputXML conversion and writer; line groups"
+    }
+  ],
+  "prepares_for": [
+    {
+      "slice": "CIIFR-S3",
+      "what": "an exportable source-to-target line mapping that S3 extends to nodes"
+    }
+  ],
+  "owner_steering": [
+    {
+      "at": "2026-10-23",
+      "what": "Prototype-2: find and replace in transfer mode, mapping by line number; T1 and P1 at branch level; node names wait for Prototype-3",
+      "src": "https://github.com/reallakshman19/CoordinatorLandingpage/issues/1#issuecomment-6355155436"
+    }
+  ]
 }

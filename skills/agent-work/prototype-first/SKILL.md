@@ -39,8 +39,10 @@ One builder chat (id8 6ada4669), the Owner's real CII model attached in chat, th
 Owner correcting meaning as it built (blind round trip versus reconstruction, missing
 blocks, which field a value belongs to), a pivot away from a dead-end writer, and a
 deliverable with a launcher, a demo and tests. Evidence: XML_Compare_Utilities PR
-#156 comment 6354748854. Its next step, with an independent check before real use:
-[examples/CIIFR-S2.json](examples/CIIFR-S2.json).
+#156 comment 6354748854. The Owner then finalized it ("works!"), made that builder the
+Oracle, and set the next two prototypes and how they connect: see
+[After a prototype is finalized](#after-a-prototype-is-finalized-navigate).
+Cards: [S2, transfer by line](examples/CIIFR-S2.json) and [S3, node names](examples/CIIFR-S3.json).
 
 ## The slice card
 
@@ -61,6 +63,7 @@ checker: `python scripts/slice_check.py CARD.json` (standard library only).
 | `probe` | the builder's capability probe (from `building` on) |
 | `after_use` | when and by whom it was tried, verdict, gaps, the can-do line, evidence |
 | `hardening`, `check_verdict` | repository and exact head with evidence; the independent PASS |
+| `builds_on`, `prepares_for` | what this step reuses from earlier steps, and what it must produce for a later one |
 | `owner_steering` | links to the Owner's direct corrections, recorded after the fact |
 
 Private data never enters a card: no chat, Drive or OneDrive links; files are named
@@ -93,6 +96,37 @@ written -> building -> runnable -> tried -> accepted -> hardened -> verified
 | Owner / user | talks to the builder while it builds; tries each runnable; accepts | — |
 | Coordinator (OTM) | provisions chats, inputs and launch details; records `after_use` from a read of the chat; keeps cards moving; routes independent checks | relays every message; gatekeeps a prototype |
 | Independent checker | checks `done_when` and `keeps` at the exact candidate | reviews its own or its briefer's work |
+
+## After a prototype is finalized: navigate
+
+(Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6355155436 and 6355213295.)
+
+1. **Finalize.** The user says it works on the real input: the card becomes `accepted`
+   and the prototype is the baseline. Later prototypes add a mode or feature beside it
+   and never change it ("without tampering this working model"); its demo and tests
+   join every later card's `keeps`.
+2. **Promote by demonstrated understanding.** An agent that has shown understanding
+   beyond its task may be made the Oracle by the Owner or the coordinator. Signs: it
+   corrected meaning the user had not spelled out, named the invariants worth
+   protecting, proposed sound safeguards and delivered on the real inputs. From then on
+   it is Oracle only: it writes cards and briefs and reviews returns against them, and
+   never builds; someone else checks the work it built. Record the promotion with links
+   to the turns that showed the understanding.
+3. **Look two prototypes ahead.** The Oracle (or the Owner) writes the next two cards and
+   how they connect: what each reuses (`builds_on`) and what the next must produce for
+   the one after (`prepares_for`). In R0, P2 maps lines between a source and a revised
+   target model by line number, not node offset, and transfers T1 and P1 per line; P3
+   extends that mapping to node names at node level, so P2 keeps its mapping exportable.
+4. **A fresh builder per prototype.** The Oracle briefs a new builder with the card, the
+   baseline and the connection; the capability probe comes first. The coordinator opens
+   the chat and makes the real inputs reachable.
+5. **Repeat.** The user tries the new prototype; the Oracle turns the reaction into the
+   next card and keeps the two-card horizon. When the Oracle's context runs short, promote
+   the next agent that has shown the same understanding: succession by merit carries the
+   project's meaning without a long handover.
+
+The coordinator records each step on the Progress page: the accepted baseline, the
+promotion, the two-card horizon and the builder's chat.
 
 ## Onboarding a builder
 

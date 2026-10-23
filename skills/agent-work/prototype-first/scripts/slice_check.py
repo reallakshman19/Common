@@ -89,6 +89,17 @@ def check(card):
             elif re.search(r"https?://", item["where"]):
                 e.append(f"real_inputs[{i}].where: a folder or 'attached in chat', not a link")
 
+    for key in ("builds_on", "prepares_for"):
+        links = card.get(key)
+        if links is None:
+            continue
+        if not isinstance(links, list):
+            e.append(f"{key}: a list of slice and what")
+            continue
+        for i, link in enumerate(links):
+            if not (isinstance(link, dict) and text(link.get("slice")) and text(link.get("what"))):
+                e.append(f"{key}[{i}]: needs slice and what")
+
     if reached(state, "building"):
         probe = card.get("probe")
         if not isinstance(probe, dict):
