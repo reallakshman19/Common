@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "command_id": "command-4",
+  "project_id": "example-project",
+  "actor": "oracle-2",
+  "requested_at": "2026-10-23T08:00:00+04:00",
+  "operation": "publish",
+  "expected_revision": 3,
+  "expected_oracle_epoch": 2,
+  "next_state_sha256": "14745d9727146a12d1454c249b2b46398d103da3044f733d7aa74b4c0016b5d7",
+  "authority": {
+    "locator": "OWNER_PRIVATE_REF:publish",
+    "version": "illustrative-v1",
+    "captured_at": "2026-10-23T08:00:00+04:00"
+  }
+}

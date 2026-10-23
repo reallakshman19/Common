@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 2,
+  "updated_at": "2026-10-23T08:00:00+04:00",
+  "project": {
+    "id": "example-project",
+    "domain": "software",
+    "aim": "Convert a real input file into a usable report.",
+    "aim_revision": 1,
+    "aim_source": {
+      "locator": "OWNER_PRIVATE_REF:aim",
+      "version": "illustrative-v1",
+      "captured_at": "2026-10-23T08:00:00+04:00"
+    }
+  },
+  "control": {
+    "oracle_session_id": "oracle-1",
+    "epoch": 1
+  },
+  "sessions": [
+    {
+      "id": "owner-1",
+      "agent_id": "owner-1",
+      "generation": 1,
+      "surface": "ILLUSTRATIVE ONLY: no live chat",
+      "roles": [
+        "owner",
+        "user"
+      ],
+      "lifecycle": "active",
+      "probes": []
+    },
+    {
+      "id": "oracle-1",
+      "agent_id": "oracle-1",
+      "generation": 1,
+      "surface": "ILLUSTRATIVE ONLY: no live chat",
+      "roles": [
+        "oracle"
+      ],
+      "lifecycle": "active",
+      "probes": []
+    },
+    {
+      "id": "builder-1",
+      "agent_id": "builder-1",
+      "generation": 1,
+      "surface": "ILLUSTRATIVE ONLY: no live chat",
+      "roles": [
+        "executor"
+      ],
+      "lifecycle": "active",
+      "probes": [
+        {
+          "capability": "read_inputs",
+          "result": "yes",
+          "at": "2026-10-23T08:00:00+04:00",
+          "basis": "observed",
+          "witness": {
+            "locator": "OWNER_PRIVATE_REF:illustrative-probe",
+            "version": "illustrative-v1",
+            "captured_at": "2026-10-23T08:00:00+04:00"
+          }
+        },
+        {
+          "capability": "return_artifact",
+          "result": "yes",
+          "at": "2026-10-23T08:00:00+04:00",
+          "basis": "observed",
+          "witness": {
+            "locator": "OWNER_PRIVATE_REF:illustrative-probe",
+            "version": "illustrative-v1",
+            "captured_at": "2026-10-23T08:00:00+04:00"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reviewer-1",
+      "agent_id": "reviewer-1",
+      "generation": 1,
+      "surface": "ILLUSTRATIVE ONLY: no live chat",
+      "roles": [
+        "reviewer",
+        "runner"
+      ],
+      "lifecycle": "active",
+      "probes": []
+    },
+    {
+      "id": "builder-2",
+      "agent_id": "builder-1",
+      "generation": 2,
+      "surface": "ILLUSTRATIVE ONLY: no live chat",
+      "roles": [
+        "executor"
+      ],
+      "lifecycle": "active",
+      "probes": [
+        {
+          "capability": "read_inputs",
+          "result": "yes",
+          "at": "2026-10-23T08:00:00+04:00",
+          "basis": "observed",
+          "witness": {
+            "locator": "OWNER_PRIVATE_REF:illustrative-probe",
+            "version": "illustrative-v1",
+            "captured_at": "2026-10-23T08:00:00+04:00"
+          }
+        },
+        {
+          "capability": "return_artifact",
+          "result": "yes",
+          "at": "2026-10-23T08:00:00+04:00",
+          "basis": "observed",
+          "witness": {
+            "locator": "OWNER_PRIVATE_REF:illustrative-probe",
+            "version": "illustrative-v1",
+            "captured_at": "2026-10-23T08:00:00+04:00"
+          }
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-1",
+      "revision": 1,
+      "kind": "delivery",
+      "outcome": "User can convert one supplied file and inspect the report.",
+      "inputs": [
+        {
+          "locator": "OWNER_PRIVATE_REF:real-input",
+          "version": "illustrative-v1",
+          "captured_at": "2026-10-23T08:00:00+04:00"
+        }
+      ],
+      "invariants": [
+        "Source input remains unchanged."
+      ],
+      "dependencies": [],
+      "decision_ids": [],
+      "criteria": [
+        {
+          "id": "C1",
+          "statement": "Report preserves the input quantities.",
+          "requires_separate_review": true
+        }
+      ],
+      "state": "in_progress",
+      "candidate_artifact_id": null,
+      "completion_policy": {
+        "require_user_use": true,
+        "require_acceptance": true
+      },
+      "acceptance_decision_id": null,
+      "checkpoint": {
+        "at": "2026-10-23T08:00:00+04:00",
+        "by": "oracle-1",
+        "summary": "Illustrative state, not a live execution receipt.",
+        "unresolved": [
+          "Actual runtime and user observations must replace these illustrative witnesses."
+        ],
+        "next_action": "Run the real artifact and retain the actual result.",
+        "references": [
+          {
+            "locator": "OWNER_PRIVATE_REF:example-request",
+            "version": "illustrative-v1",
+            "captured_at": "2026-10-23T08:00:00+04:00"
+          }
+        ]
+      }
+    }
+  ],
+  "assignments": [
+    {
+      "id": "build-1",
+      "task_id": "task-1",
+      "task_revision": 1,
+      "session_id": "builder-1",
+      "role": "executor",
+      "generation": 1,
+      "issued_by": "oracle-1",
+      "issued_epoch": 1,
+      "issued_at": "2026-10-23T08:00:00+04:00",
+      "authority": {
+        "locator": "OWNER_PRIVATE_REF:bounded-build",
+        "version": "illustrative-v1",
+        "captured_at": "2026-10-23T08:00:00+04:00"
+      },
+      "status": "superseded",
+      "delivery": "confirmed",
+      "write_resources": [
+        "output:converter"
+      ],
+      "required_capabilities": [
+        "read_inputs",
+        "return_artifact"
+      ],
+      "replaces_assignment_id": null,
+      "handover_id": null
+    },
+    {
+      "id": "build-2",
+      "task_id": "task-1",
+      "task_revision": 1,
+      "session_id": "builder-2",
+      "role": "executor",
+      "generation": 2,
+      "issued_by": "oracle-1",
+      "issued_epoch": 1,
+      "issued_at": "2026-10-23T08:00:00+04:00",
+      "authority": {
+        "locator": "OWNER_PRIVATE_REF:bounded-build",
+        "version": "illustrative-v1",
+        "captured_at": "2026-10-23T08:00:00+04:00"
+      },
+      "status": "active",
+      "delivery": "confirmed",
+      "write_resources": [
+        "output:converter"
+      ],
+      "required_capabilities": [
+        "read_inputs",
+        "return_artifact"
+      ],
+      "replaces_assignment_id": "build-1",
+      "handover_id": "handover-worker-1"
+    }
+  ],
+  "artifacts": [],
+  "evidence": [],
+  "assessments": [],
+  "decisions": [],
+  "handovers": [
+    {
+      "id": "handover-worker-1",
+      "kind": "worker",
+      "status": "activated",
+      "from_session": "builder-1",
+      "to_session": "builder-2",
+      "task_id": "task-1",
+      "old_assignment_id": "build-1",
+      "new_assignment_id": "build-2",
+      "from_epoch": null,
+      "to_epoch": null,
+      "adopted_assignment_ids": [],
+      "prepared_at": "2026-10-23T08:00:00+04:00",
+      "cutover_at": "2026-10-23T08:00:00+04:00",
+      "authority": {
+        "locator": "OWNER_PRIVATE_REF:continuation",
+        "version": "illustrative-v1",
+        "captured_at": "2026-10-23T08:00:00+04:00"
+      },
+      "checkpoint": {
+        "at": "2026-10-23T08:00:00+04:00",
+        "by": "oracle-1",
+        "summary": "Illustrative state, not a live execution receipt.",
+        "unresolved": [
+          "Actual runtime and user observations must replace these illustrative witnesses."
+        ],
+        "next_action": "Run the real artifact and retain the actual result.",
+        "references": [
+          {
+            "locator": "OWNER_PRIVATE_REF:example-request",
+            "version": "illustrative-v1",
+            "captured_at": "2026-10-23T08:00:00+04:00"
+          }
+        ]
+      }
+    }
+  ],
+  "history": [
+    {
+      "id": "event-1",
+      "seq": 1,
+      "previous_id": null,
+      "command_id": "command-1",
+      "at": "2026-10-23T08:00:00+04:00",
+      "actor": "oracle-1",
+      "summary": "ILLUSTRATIVE snapshot publication."
+    },
+    {
+      "id": "event-2",
+      "seq": 2,
+      "previous_id": "event-1",
+      "command_id": "command-2",
+      "at": "2026-10-23T08:00:00+04:00",
+      "actor": "oracle-1",
+      "summary": "ILLUSTRATIVE snapshot publication."
+    }
+  ]
+}

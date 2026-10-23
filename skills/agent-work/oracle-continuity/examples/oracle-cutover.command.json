@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "command_id": "command-3",
+  "project_id": "example-project",
+  "actor": "oracle-1",
+  "requested_at": "2026-10-23T08:00:00+04:00",
+  "operation": "activate_handover",
+  "expected_revision": 2,
+  "expected_oracle_epoch": 1,
+  "next_state_sha256": "1d47bacafa0187cafc7307c6396b97f50f5e207215fc6624bf5a679e2b260bc1",
+  "authority": {
+    "locator": "OWNER_PRIVATE_REF:publish",
+    "version": "illustrative-v1",
+    "captured_at": "2026-10-23T08:00:00+04:00"
+  }
+}

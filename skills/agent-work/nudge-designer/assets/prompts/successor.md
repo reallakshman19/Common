@@ -6,6 +6,14 @@ Recovery/onboarding request and selected protocol: {{actual request/selector or 
 Durable project sources and last report: {{direct references}}
 Known current task and authority: {{actual basis or UNKNOWN}}
 
+Preserve the native task/slice identity. Carry the actual source assignment and
+successor session/generation, baseline, decisions/alternatives and pending returns.
+Reconcile old execution and actual write ownership before activating the successor;
+prepare or use isolated output while that remains uncertain. At Oracle succession
+carry the next two connected deliveries and explicitly adopt ongoing assignments.
+Use the optional Oracle Continuity Protocol at {{SKILL_ROOT}}/../oracle-continuity/PROTOCOL.md
+without replacing the selected protocol, native reports or existing authority.
+
 Use a usable supplied OnBoard Prompt and completed context-flow outputs directly;
 check essential originals/current state and reconstruct only missing or materially
 stale context from original purpose, amendments, issued records and native evidence.

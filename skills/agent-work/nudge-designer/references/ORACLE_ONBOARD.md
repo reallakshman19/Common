@@ -29,6 +29,14 @@ or review guidance. It neither selects those modules nor grants their authority.
 Where an actual coordinator arrangement exists, preserve its dispatch/custody
 division; the title Oracle does not confer permission to send or approve work.
 
+For session replacement or Oracle succession, apply the shared
+[Oracle continuity contract](../../oracle-continuity/PROTOCOL.md). Preserve native
+task identity, create a distinct successor assignment and carry the current baseline,
+decision context, pending returns and exact continuation. Reconcile actual old
+execution before ownership cutover; use isolated output if necessary. An Oracle
+successor explicitly adopts ongoing assignments and the next two connected deliveries.
+The optional schemas neither dispatch work nor change this prompt's native format.
+
 ## Prepare the instruction
 
 Reuse the [seven-element assignment](../assets/prompts/assignment.md). Condense

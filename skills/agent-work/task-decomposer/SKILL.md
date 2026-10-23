@@ -65,6 +65,11 @@ For execution requests, retain ownership of the observation method, actual retur
 inspection, adaptive next action and integrated verification. Record assistance
 and actual configuration; structural checks cannot qualify a low-thinking worker.
 
+For Oracle work across temporary sessions, use [Oracle continuity](../oracle-continuity/PROTOCOL.md)
+for durable task/assignment identity, checkpoints, ownership cutover and evidence lineage.
+Keep native task maps and reports; the structured state and command schemas are optional.
+An ordinary single-session task needs no extra ledger or approval ceremony.
+
 ## Choose meaningful boundaries
 
 Choose KEEP, SPLIT, MERGE, DISCOVER_FIRST or DEFER and give a concise reason.

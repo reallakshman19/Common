@@ -13,6 +13,16 @@ Real inputs and where they live: {{names and folders; never links}}
 What the user can do today: {{current can-do lines, or "nothing yet"}}
 Earlier benchmarks: {{keeps}}
 
+Continuity when workers or the Oracle change:
+- Preserve the slice/WBS identity; bind a fresh session to a new assignment generation.
+- Carry the baseline, decisions/alternatives, pending returns and exact next action.
+- Confirm accessible real inputs and actual delivery; reconcile old execution before
+  activating a successor on the same write surface. Isolate outputs while uncertain.
+- Carry authorship and evidence scope forward. At Oracle cutover explicitly adopt
+  ongoing assignments and preserve the next two connected cards.
+Use the optional Oracle Continuity Protocol at {{SKILL_ROOT}}/oracle-continuity/PROTOCOL.md;
+native slice cards/reports remain the operating format unless JSON is selected.
+
 1. Slice the aim into thin steps. Each step ends in something the user runs on the
    real inputs, within a timebox of at most 40 builder hours (aim for hours, not days).
    Order steps by what the user most needs to do first; infrastructure the user cannot

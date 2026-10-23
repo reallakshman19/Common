@@ -130,6 +130,14 @@ written -> building -> runnable -> tried -> accepted -> hardened -> verified
 The coordinator records each step on the Progress page: the accepted baseline, the
 promotion, the two-card horizon and the builder's chat.
 
+For temporary builders and Oracle succession, use [Oracle continuity](../oracle-continuity/PROTOCOL.md).
+Keep the slice/WBS identity when the session changes; record a new assignment
+generation and the actual ownership cutover. Carry the frozen baseline, pending
+returns, decisions and next two connected cards. A prepared prompt is not delivered
+work; retain author/reviewer lineage and exact-candidate evidence. Keep repairs in
+the current coherent assignment when useful. The structured records are optional
+and add no universal checkpoint approval or automatic chat creation.
+
 ## Onboarding a builder
 
 1. Send the [capability probe](assets/capability-probe.md) first; record the answer as `probe`.

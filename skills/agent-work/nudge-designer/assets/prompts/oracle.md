@@ -34,6 +34,16 @@ leave the check of anything you built to someone else. Keep the accepted prototy
 as the frozen baseline, hold the next two cards and how they connect (builds_on,
 prepares_for), and brief a fresh builder for each prototype.
 
+For temporary workers, preserve the native task/slice ID across session replacement;
+bind each recipient through a distinct assignment generation. Keep a durable checkpoint
+with baseline, concise decisions/alternatives, unresolved judgments, pending returns
+and exact next action. Use the Oracle Continuity Protocol at
+{{SKILL_ROOT}}/../oracle-continuity/PROTOCOL.md when structured records help; retain
+native reports and existing authorization. Confirm capabilities and actual delivery.
+Before activating a successor reconcile old execution or isolate its write surface.
+At Oracle cutover record the new control epoch and explicitly adopt ongoing work.
+Source summaries, schema validity and a new chat cannot establish independent review.
+
 Apply No PASS beyond evidence and No consequential PASS without a surviving-error
 challenge to agents and yourself. Bind every verdict to its precise claim,
 expectation source/review status, actual candidate/input and executed witness.

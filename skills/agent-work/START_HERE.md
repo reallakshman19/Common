@@ -95,6 +95,14 @@ applicable domain/support/adapter guidance. If an optional module is unavailable
 perform the useful native work and disclose the omitted support. Continue
 unaffected work rather than waiting for an entire toolchain.
 
+For Oracle work across temporary sessions, use the optional
+[Oracle continuity protocol](oracle-continuity/PROTOCOL.md). It separates durable
+tasks, temporary assignments/sessions, exact-version evidence and ownership cutover.
+Its [reference package](oracle-continuity/README.md) contains schemas, a read-only
+validator and synthetic worker/Oracle transitions. Keep native maps and reports;
+use structured records where they help. Actual dispatch, identity, write exclusion
+and atomic publication require the selected transport and execution adapter.
+
 ## Contribute before handing over
 
 Apply **No PASS beyond evidence** and **No consequential PASS without a
