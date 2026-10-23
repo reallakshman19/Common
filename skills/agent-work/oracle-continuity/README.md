@@ -45,6 +45,10 @@ opts in to local artifact-byte checks and rejects paths resolving outside that r
 Without it, digests are checked for form and binding, not against file bytes.
 Private/remote locators are never automatically fetched.
 
+Keep locally prepared state files as proposals until the actual canonical publisher
+commits them and supplies its receipt. A valid proposed history event or assignment
+does not prove publication or transfer ownership. See PROTOCOL section 8.
+
 Exit 0 means the supplied records satisfy the implemented contract. Exit 1 reports
 contract violations; exit 2 reports input/usage errors. Supplying `--command` requires
 `--previous`. JSON duplicate keys and non-finite numbers are rejected.

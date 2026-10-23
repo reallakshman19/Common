@@ -195,6 +195,13 @@ instruction after retirement.
 `oracle-command.schema.json` binds a proposed state file's exact bytes to a command
 ID, project ID, enrolled actor, expected previous revision and Oracle epoch.
 
+Keep proposed files separate from the canonical published record. Validation does
+not activate their assignments or turn their proposed history entries into actual
+publication receipts. The same state shape is used for preparation and publication;
+its trusted storage reference and committed receipt establish which it is, rather
+than a self-declared draft/live flag. Do not point Progress or dispatch tooling at
+an uncommitted proposal. Preparation timestamps are not evidence of actual delivery.
+
 The actual publisher must execute the following as one controlled operation:
 
 1. Authenticate the actor and resolve authority outside the supplied JSON.
