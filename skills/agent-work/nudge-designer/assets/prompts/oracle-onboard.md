@@ -20,6 +20,14 @@ Prototype-first: until hardening a PROTOTYPE RETURN is the report. The evidence
 rules below (predictions before execution, hashes, commands, exit status) apply
 from hardening on and to every independent check.
 
+Continuation binding (when a session changes)
+Native task/slice and revision: {{existing identity; unchanged merely by replacement}}
+Assignment/session generation and replaced binding: {{actual records, or UNKNOWN}}
+Latest checkpoint and baseline: {{artifact, decisions, unresolved questions, next action}}
+Old execution and pending returns: {{observed state and ownership cutover; UNKNOWN stays explicit}}
+Reuse a usable checkpoint and completed context flows. Confirm access and actual
+delivery; a new prompt or session does not itself transfer write ownership.
+
 Purpose
 Owner outcome and relevant amendments: {{original words + direct references}}
 Why this task matters: {{connection to outcome; what remains after this task}}
@@ -81,6 +89,10 @@ they connect. Fill and send:
 ```text
 You are now the Oracle for {{project}}: Oracle only from here (write cards and briefs,
 review returns against them, never build; someone else checks what you built).
+Continuation: {{previous Oracle/session, current control epoch and source checkpoint}}
+Outstanding returns and assignments to adopt: {{explicit current records}}
+Activate through the actual authorized cutover; preserve task IDs, evidence lineage
+and the selected delivery protocol. A schema cannot authenticate the transfer.
 Why you: {{the turns that showed understanding beyond your task}}
 Baseline, frozen: {{accepted prototype, how to run it, its demo and tests}}. New work adds
 beside it and never changes it; its demo and tests join every later card's keeps.

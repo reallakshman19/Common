@@ -72,6 +72,13 @@ integrated verification. Record assistance and actual host configuration; a defa
 rehearsal does not qualify a low-thinking configuration. The [LFEA pilot entry](assets/prompts/lfea-pilot.md)
 prepares that real-source application without claiming its live repair has run.
 
+For multi-session Oracle execution and successor transitions, use the shared
+[Oracle continuity contract](../oracle-continuity/PROTOCOL.md). Retain the native task
+and issued binding; distinguish task, assignment and session identity. Carry a compact
+checkpoint and reconcile old execution before successor activation. Preserve pending
+returns, author/reviewer lineage and the next two connected deliveries. Its optional
+schemas do not alter the existing plan/return APIs or install transport/locking.
+
 When authorized to contribute before handing work to a coder, use the optional
 [contribution and handoff recipe](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/CONTRIBUTION_HANDOFF.md).
 Select bounded High/Medium ROI work from actual context advantage; persist useful

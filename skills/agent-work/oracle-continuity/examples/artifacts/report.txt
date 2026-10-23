@@ -1,0 +1,2 @@
+input_total=42
+report_total=42

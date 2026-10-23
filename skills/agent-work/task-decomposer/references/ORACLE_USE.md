@@ -3,6 +3,7 @@
 ## Contents
 
 - [Default: prototype-first slices](#default-prototype-first-slices)
+- [Preserve Oracle continuity](#preserve-oracle-continuity-across-sessions)
 - [Choose a context boundary](#choose-a-useful-context-boundary)
 - [Compose independent skills](#compose-the-two-independently-selected-skills)
 - [Focused context and blind evidence](#distinguish-focused-context-from-blind-evidence)
@@ -36,6 +37,38 @@ holds the next two cards and how they connect (`builds_on`, `prepares_for`), so 
 builder produces what the step after it needs, and briefs a fresh builder per prototype.
 When its context runs short, the next agent that has shown the same understanding is
 promoted; that succession carries the project's meaning without a long handover.
+
+## Preserve Oracle continuity across sessions
+
+Use the shared [Oracle Continuity Protocol](../../oracle-continuity/PROTOCOL.md)
+when several temporary workers or an Oracle successor need a durable continuation.
+It supplies optional schemas and a read-only validator; it does not dispatch, lock,
+authenticate or replace the selected delivery protocol. Keep native map/slice/report
+identities and record their mapping once rather than maintaining competing truths.
+
+- Maintain the aim, working baseline, concise decisions and alternatives, current
+  assignments, outstanding returns, unresolved judgments and exact next action.
+  Checkpoint at meaningful artifact/decision boundaries; do not wait for an
+  unavailable context-percentage meter.
+- Give medium-reasoning workers the WHY, accessible inputs, preserved behavior and
+  a GUIDED method for settled work or an OPEN discriminating investigation. Retain
+  difficult unallocated model/measurement decisions with a capable participant.
+- Preserve task identity when an executor changes. Create a new assignment/session
+  generation, reconcile old execution and publish the actual ownership cutover.
+  A prepared successor is provisional. Isolate outputs if the predecessor may still
+  write; a status field alone cannot stop it. Reconcile late returns explicitly.
+- At Oracle succession carry the baseline, decision context and next two connected
+  deliveries. Record the new control epoch and explicitly adopt ongoing assignments;
+  their work and applicable evidence can continue. Promotion itself grants no new
+  scope, merge authority or independent approval of earlier contributor work.
+- Bind assessments to the actual task revision and artifact. Preserve author and
+  ancestor lineage, observed/reported distinctions, failures and review limitations.
+  Separate runtime checks, actual use and acceptance. A new chat cannot erase exposure.
+
+Use one compact continuation record in the existing channel. When JSON is selected,
+validate it against the previous canonical snapshot and optional command envelope.
+Structural success checks declared records; actual delivery, authority, write
+exclusion and substantive correctness still need their own evidence and adapter.
 
 ## Choose a useful context boundary
 

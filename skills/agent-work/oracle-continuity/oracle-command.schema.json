@@ -1,0 +1,119 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "command_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,95}$"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,95}$"
+    },
+    "actor": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,95}$"
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "operation": {
+      "enum": [
+        "publish",
+        "activate_handover"
+      ]
+    },
+    "expected_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "expected_oracle_epoch": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "next_state_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000,
+          "pattern": "\\S"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "captured_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "locator",
+        "version",
+        "captured_at"
+      ],
+      "anyOf": [
+        {
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000,
+              "pattern": "\\S"
+            }
+          }
+        },
+        {
+          "properties": {
+            "captured_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "command_id",
+    "project_id",
+    "actor",
+    "requested_at",
+    "operation",
+    "expected_revision",
+    "expected_oracle_epoch",
+    "next_state_sha256",
+    "authority"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oracle-continuity:command:1.0.0",
+  "title": "Oracle state-publication preconditions"
+}
