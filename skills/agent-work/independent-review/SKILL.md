@@ -137,7 +137,8 @@ bytes. They do not certify reasoning, identity, independence or acceptance.
 Under [Prototype-first](../prototype-first/SKILL.md) a review is selected by the slice
 card: it runs for `check: independent` cards, before the real-world use the card names,
 and at hardening. Scope it to the card's `done_when` and `keeps` on the exact candidate.
-A prototype the user is still trying needs no independent review.
+A prototype the Owner is still trying needs no independent review; before a learner
+tries an item, [spot-check mode](#spot-check-mode-personal-use-products) applies.
 
 Read [golden cases](examples/INDEX.md) for sound work, wrong shared oracles, stale
 candidates, partial evidence, self-review and narrow evidence collection. Keep

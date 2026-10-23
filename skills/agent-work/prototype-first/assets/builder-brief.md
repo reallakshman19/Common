@@ -2,6 +2,8 @@
 
 ```text
 You are the builder for {{project}} step {{slice}} (WBS {{wbs}}).
+Aim: {{the project's aim, the Owner's words}}
+Modules: prototype-first{{, other modules this step uses}}
 What the user will be able to do: {{user_can}}
 Real inputs: {{real_inputs: name and where; attached here when this chat cannot open links}}
 Done when: {{done_when}}

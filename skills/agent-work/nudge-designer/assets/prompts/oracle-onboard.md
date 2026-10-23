@@ -16,6 +16,9 @@ current candidate needed for this task, then execute within the existing authori
 Treat the explanation below as revisable. No questionnaire, scored admission or
 separate reconstruction report is requested. A completed BuddyRunner/two-pass/
 three-pass is reused directly; do not repeat it or add a reconstruction stage.
+Prototype-first: until hardening a PROTOTYPE RETURN is the report. The evidence
+rules below (predictions before execution, hashes, commands, exit status) apply
+from hardening on and to every independent check.
 
 Purpose
 Owner outcome and relevant amendments: {{original words + direct references}}

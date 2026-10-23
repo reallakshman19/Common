@@ -47,7 +47,9 @@ the Owner retell the project or require a worker to infer critical context.
 
 Check the actual recipient view with the [brief check](../assets/prompts/brief-check.md).
 
-Carry the two evidence rules: **No PASS beyond evidence** and **No consequential
+From hardening on, and for every independent check ([Prototype-first](../../prototype-first/SKILL.md);
+before that a [prototype return](../../prototype-first/assets/prototype-return.md) is the report),
+carry the two evidence rules: **No PASS beyond evidence** and **No consequential
 PASS without a surviving-error challenge**. Name each consequential claim's scope,
 expectation source/review status, plausible wrong behavior that could survive the
 current test, and the stronger contrast or narrower verdict. Give the hypothesis,
@@ -92,7 +94,8 @@ evidence. Use the selected protocol's existing completion checks where applicabl
 
 ## Return evidence and direction
 
-Keep the native reporting format. The following are contents, not a second
+Keep the native reporting format. Before hardening a prototype return is the report;
+the contents below apply from hardening on and to independent checks. They are contents, not a second
 mandatory envelope:
 
 - Actual task/candidate/input basis, action and decisive result, with witnesses.

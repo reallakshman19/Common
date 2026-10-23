@@ -57,13 +57,13 @@ Lesson 1 (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 63395
 - **No work without a written aim.** The project's aim is the Owner's words, on its Progress page tab (`project aim`). If it is missing, ask the Owner before planning.
 - **Match the quality bar to the use.** A personal-use product skips rights, publication, custody and whole-bank gates ([Gatekeeper](gatekeeper/SKILL.md), personal-use profile).
 - **The learner is the measure:** one topic end to end and in front of the learner before the next; small pieces, merged often.
+- **Keep the modules visible** where people already look: every task packet carries an `Aim:` line and a `Modules:` line naming the module each step uses; every Oracle prompt carries the table below; each Progress page tab links the modules under its aim.
+
 Lesson 2 (Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6354803323, 6354995849; #156): one builder chat, steered by the Owner on the Owner's real file, gave the Owner a tool to run locally in about seven hours, where the multi-agent route was estimated at 40+ hours and five agents. So, by default ([Prototype-first](prototype-first/SKILL.md)):
 
 - **Build first, on the real inputs.** Every step ends in something the user runs with one command or one URL; the Oracle writes each step as a slice card.
 - **The user tries it, then the next card.** Evidence follows a working prototype; an independent check runs where a mistake would reach the real world, before that use.
 - **The benchmark is R0** (CIIFR-S1): compare each project's time to first runnable and its cost with it.
-
-- **Keep the modules visible** where people already look: every task packet carries an `Aim:` line and a `Modules:` line naming the module each step uses; every Oracle prompt carries the table below; each Progress page tab links the modules under its aim.
 
 ## Choose only useful modules
 
