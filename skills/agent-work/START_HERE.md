@@ -103,6 +103,13 @@ validator and synthetic worker/Oracle transitions. Keep native maps and reports;
 use structured records where they help. Actual dispatch, identity, write exclusion
 and atomic publication require the selected transport and execution adapter.
 
+For an Owner manually routing files and instructions among several chat windows,
+use optional [Oracle Chat Routing — standalone](oracle-chat-routing/STANDALONE.md).
+It renders role + Owner-supplied conversation display ID, the one next destination,
+exact artifact and return receipt, and keeps reported attachment distinct from
+verified bytes. It needs no runtime, schema, new role or other module; a chat ID
+does not authenticate an agent, establish independence or grant authority.
+
 ## Contribute before handing over
 
 Apply **No PASS beyond evidence** and **No consequential PASS without a
