@@ -2,11 +2,14 @@
 
 **Proposal** · v0.1 · 2026-10-24 · **Mode: STANDALONE / NOT OTM**
 
-This is a **plan for a new optional skill**, not an installed, activated,
-or tested skill. Do not create `SKILL.md` until its contract and negative
-tests have been reviewed. Planning this skill does not activate a
-project's `CURRENT.json`, create a receipt issue, publish Progress Page
-data, contact another chat, or grant access to Google Drive.
+This started as a **plan for a new optional skill**. At the Owner's subsequent
+request to fully inspect the existing agent-work instructions, the draft PR
+now also contains a **documentation-first `SKILL.md`** and focused references
+that integrate the existing Oracle changeover/succession contract. That text
+is an **uninstalled, unproven skill proposal**, not a live dispatcher.
+Neither a plan nor a `SKILL.md` activates the project's `CURRENT.json`,
+creates a receipt issue, publishes Progress Page data, contacts another chat,
+or grants Google Drive access.
 
 ## 1. Owner's desired experience
 
@@ -87,30 +90,38 @@ Use existing repository protections and review policies. Workers may
 do useful independently safe work when a separate dependency is blocked;
 do not add a universal gate.
 
-## 4. Proposed skill file tree
+## 4. Skill file tree and source-audit integration
 
 ```text
 skills/agent-work/oracle-standalone/
-  PLAN.md                 # this proposal (first contribution)
-  SKILL.md                # future host-facing concise instructions
+  PLAN.md                  # Owner's plan, limits and phased pilot
+  SKILL.md                 # proposed uninstalled host-facing skill instructions
   references/
-    FRESH_CYCLE.md        # read order, roles, check before execution
-    BOARD_AND_STATUS.md   # Owner routing board + freshness/status projection
-    RECEIPT_AND_CAS.md   # issue transport, idempotency, stale return reconciliation
-    PRIVATE_ARTIFACTS.md # Drive custody and public-safe reference strategy
-    PROGRESS_ADAPTER.md  # official CLI commands, audit and publication readback
-  examples/
-    SYNTHETIC_CYCLES.md  # fictional plan→coder→IR→Owner paths and errors
-  tests/
-    test_cycle_contract.py  # optional read-only fixture/transition validator
+    SOURCE_INTEGRATION.md  # file-by-file inherited requirements + conditional scope
+    CHANGEOVER.md          # worker replacement, Oracle succession, activity suggestion
+    BOARD_AND_STATUS.md    # exact-head/source-bound routing board
+    PROGRESS_ADAPTER.md    # native standalone CLI/project data PR constraints
 ```
 
-Start with `SKILL.md`, `BOARD_AND_STATUS.md` and
-`RECEIPT_AND_CAS.md` as the smallest coherent usable slice.
-Create helper code only if a manual pilot finds a repeatable failure
-that code can actually prevent. Do not duplicate the complete
-`oracle-cycles/PROTOCOL.md` in the skill; **link to its pinned
-effective revision** and read the live project state for work.
+The first S1 documentation slice uses existing
+[Oracle Cycle](../../../oracle-cycles/PROTOCOL.md) for issue receipt format,
+stale/idempotent returns and versioning; it **does not clone those rules**
+into another schema or runtime. Extra helpers, synthetic fixtures or
+transport adapters are separate work **only if actually needed by a
+real pilot**.
+
+**Exact reference audit:** the Owner-specified
+`f2fe525264b486c397d1f2b3dbcb013d9c83ae0a` includes
+707 total files (~3.39 MB), of which 263 are Markdown
+(~1.12 MB). The integration reviewed the *normative instructional
+entrypoints/procedural references* across Start Here, Contribution Handoff,
+Task Decomposer, Nudge Designer, Oracle Continuity, Local Handover,
+Independent Reviewer, Prototype-first, Gatekeeper, Progress Page
+and Oracle Chat Routing. Its [source integration map](references/SOURCE_INTEGRATION.md)
+names the inherited rules, reference locations and conditional module
+selection. Example corpora and test assets are not treated as independent
+new authority; this is **not** a claim to have semantically inspected every
+one of the 707 repository artifacts.
 
 ## 5. Board contract: derived, not independently edited
 
@@ -227,7 +238,7 @@ CLI execution environment is available, write
 | Slice | Deliverable | Required demonstration |
 |---|---|---|
 | **S0 — Plan** | Owner-reviewed plan, source boundaries, scope | Correct link to Canonical Cycle protocol; no changed live state |
-| **S1 — Minimal skill** | Short `SKILL.md`, board/status and receipt references | One read-only `Cycle now` displays accurate NOT ACTIVE P2.5-B board |
+| **S1 — Source-integrated skill draft** | `SKILL.md`, inherited-rule map, changeover, board/status and Progress CLI guidance (authored in PR) | Static source/link audit and one actual read-only `Cycle now` proving NOT ACTIVE P2.5-B; live host trial still NOT_RUN |
 | **S2 — Writer receipts** | GitHub issue transport + small synthetic receipts | One assigned participant posts; readback permalink, duplicates idempotent, conflicting stale not adopted |
 | **S3 — Oracle state advance** | Reconciliation guide + one actual authorized state PR | `CURRENT.json` revision advances only after merged commit verified |
 | **S4 — Progress projection** | Actual `pp_cli.py` projection + tests | Public-safe standalone card update, audit event, base checks and published readback |
@@ -294,5 +305,9 @@ pilot is needed before claiming a complete Owner→Coder→IR→Progress
 closed loop. A copied document or passing static check is not
 runtime deployment, cross-chat access, or Owner acceptance.
 
-No `SKILL.md` is published in this planning PR. The implementation
-will be a separate, reviewable PR after this design is approved.
+`SKILL.md` and the reference docs **are present in this draft PR**
+so they can be reviewed against the Owner's pinned existing instructions.
+They are **not installed into any host**, not verified as an autonomous
+runtime, and not evidence that GitHub Issue receipts, cutovers or Progress
+Page writes have been executed. Activation, host execution and cross-chat
+tests remain separately authorized implementation/pilot work.
