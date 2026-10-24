@@ -110,6 +110,14 @@ exact artifact and return receipt, and keeps reported attachment distinct from
 verified bytes. It needs no runtime, schema, new role or other module; a chat ID
 does not authenticate an agent, establish independence or grant authority.
 
+When the Owner **explicitly selects a GitHub transaction-based relay** rather than
+copy-pasting full handoffs, use [Oracle Cycle — standalone](../../oracle-cycles/PROTOCOL.md)
+and its [project workspace example](../../oracle-cycles/p25b/README.md). The one-line
+`Cycle now` trigger reads the current task and posts safe GitHub receipts;
+private bytes use authorized Drive. This is optional and separate from the
+existing manual routing and `relay/**` V3.1 execution ledger. No automatic
+cross-chat dispatch or Progress Page publication is implied.
+
 ## Contribute before handing over
 
 Apply **No PASS beyond evidence** and **No consequential PASS without a
