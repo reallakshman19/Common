@@ -32,7 +32,12 @@ user can do, per unit of cost.
    updated after use.
 
 The Owner may steer the builder directly in its chat. The Oracle records the change
-afterwards as a visible card or WBS change; there is no relay and no silent drift.
+afterwards as a visible card or WBS change; there is no **conversational** relay
+and no silent drift. **Artifact transport is separate:** for Oracle↔Builder inputs
+and returns, use the Owner-selected [Common artifact relay](../ARTIFACT_RELAY.md).
+An upload, `/mnt/data` path or `sandbox:` link is not a durable cross-chat
+handoff; public-safe payloads use the isolated Common relay path, and protected
+bytes stay in authorized private custody with a sanitized relay receipt.
 
 ## Benchmark R0: CIIFR-S1
 
