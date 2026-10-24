@@ -33,9 +33,11 @@ as a ceremonial exam. Read only the task's relevant original sources.
 When a worker may change, the Oracle may be succeeded, or writes overlap,
 **read [CHANGEOVER.md](references/CHANGEOVER.md)** and
 [Oracle Continuity](../oracle-continuity/PROTOCOL.md) before suggesting
-or executing cutover. If the Owner selected a separate engineering
-delivery protocol, follow its native records and execution boundaries.
-Do not create competing state for convenience.
+or executing cutover. For an **Owner-requested Oracle handover**, additionally
+apply [the outcome-first handover protocol](references/ORACLE_HANDOVER_PROTOCOL.md)
+and, when relevant, its [CIIFR R3 worked example](examples/CIIFR_R3_HANDOVER.md).
+If the Owner selected a separate engineering delivery protocol, follow its
+native records and execution boundaries. Do not create competing state for convenience.
 
 For substantive claim review read
 [Contribution and handoff](../CONTRIBUTION_HANDOFF.md),
@@ -151,6 +153,22 @@ handover. Follow [CHANGEOVER.md](references/CHANGEOVER.md):
   work and overlapping writes, prepare the successor separately, publish
   an explicit assignment-generation/Oracle-epoch cutover, and adopt
   continuing work. A late predecessor return needs separate adoption.
+
+### Owner-requested Oracle handover
+
+Give a new Oracle a **read-only** source-grounded briefing first: original
+Owner outcome, current **usable prototype** with exact tested scope,
+the **next two connected deliveries**, all relevant landing and
+fixtures links, artifact/access/approval gaps, and **five concrete next
+actions** with a single immediate actor. Use
+[ORACLE_HANDOVER_PROTOCOL.md](references/ORACLE_HANDOVER_PROTOCOL.md)
+instead of a generic summary. Read the real Progress project in
+`data/projects.json` and `data/<key>/fixtures.json`; never invent
+a new project tab when an engineering Cycle uses a different slug.
+An onboarding write-up does not transfer any ZIP or grant the successor
+an Oracle epoch. Actual cutover follows the existing Continuity and
+Changeover rules, including adopting active worker assignments and
+isolating competing write access.
 
 ## 6. Progress Page projection, not a second truth
 
