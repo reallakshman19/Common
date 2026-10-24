@@ -78,10 +78,10 @@
       "limits": "Not native Windows served-browser acceptance"
     },
     {
-      "id": "glrd-transfer",
+      "id": "one-branch-transfer",
       "status": "PASS_REPORTED_INDEPENDENT",
       "scope": "Previously independently tested one 32-element mapping",
-      "evidence_ref": "OWNER_PRIVATE_REF:ir-p25b-glrd-32-transfer",
+      "evidence_ref": "OWNER_PRIVATE_REF:ir-p25b-tested-branch-transfer",
       "limits": "Not approval of 30 physical line mappings"
     },
     {
