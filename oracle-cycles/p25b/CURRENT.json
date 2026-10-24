@@ -3,7 +3,7 @@
   "project": "p25b",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 2,
+  "revision": 3,
   "last_accepted_receipt_ids": [
     "p25b-codeonly-v011-coder-20261024-29d6219842e4"
   ],
@@ -12,10 +12,11 @@
   "privacy": "PUBLIC_SAFE_METADATA_ONLY",
   "roles": {
     "oracle": {
-      "label": "Oracle",
-      "chat_id8": "6ada4669",
-      "provenance": "OWNER_REPORTED",
-      "responsibility": "Meaning, authoritative next assignment and Progress projection"
+      "label": "CIIFR R3 Oracle (successor)",
+      "chat_id8": "01a16c60",
+      "provenance": "OWNER_APPOINTED_IN_SUCCESSOR_SESSION; SHORT_ID_FROM_CODEX_THREAD_ID_ENV",
+      "responsibility": "Owner intent, Cycle reconciliation, checkpoint briefs, evidence integration and CIIFR R3 Progress projection",
+      "session_id": "ciifr-oracle-01a16c60"
     },
     "coder": {
       "label": "P2.5-B coder",
@@ -138,8 +139,8 @@
     "publication_status": "PUBLISHED_REPOSITORY_R3_VERIFIED",
     "published_revision": "R3",
     "published_evidence_url": "https://github.com/reallakshman19/progress-page/blob/main/data/ciifr/index.json",
-    "sync_status": "R3_CURRENT_BUT_CHECKPOINT_CARD_UPDATE_PENDING",
-    "reason": "Existing CIIFR R3 is actually published in progress-page/main. Previous Cycle project_key=p25b / NOT_CREATED was stale; no separate p25b tab. New checkpoint assignment has not been projected via official pp_cli.py; do not claim fully synchronized viewer."
+    "sync_status": "R3_PUBLISHED__SUCCESSOR_AND_CHECKPOINT_PROJECTION_PENDING",
+    "reason": "Existing ciifr R3 remains the sole Progress project. Oracle binding and checkpoint projection need a separate official pp_cli.py data-only PR after canonical state publication; no page synchronization claimed."
   },
   "activation_basis": "OWNER_PRIVATE_REF:owner-pilot-start-20261024",
   "activation_scope": "Manual GitHub issue receipt pilot for existing code-only return; no engineering transfer authorization, release, or automatic dispatch.",
@@ -175,11 +176,69 @@
     "chat_id8": null,
     "after": "P25B-V011-STABLE-CODING-CHECKPOINT evidence reconciled and Owner-authorized new coder assignment",
     "requirements": "Separate bounded successor task and generation; actual access to candidate/source/IR evidence; isolate outgoing coder write scope; preserve exact candidate, passes/fails/NOT_RUN, baseline and next task.",
-    "oracle_control_transfer": "SEPARATE_NOT_ACTIVATED"
+    "oracle_control_transfer": "Separate coding-agent handoff; Oracle successor binding is defined in control and oracle_succession, effective only when this revision is canonical."
   },
   "parallel_work": {
     "custody": "IN_PROGRESS_OR_BLOCKED_BY_ACCESS; exact unchanged v0.1.1 ZIPs privately retrieved/hash checked later by authorized recipient; do not publish child links.",
     "windows": "OWNER_MAY_TEST_EXISTING_REVIEWED_RUNNABLE_WHEN_SAFE_AND_AUTHORIZED; real native observations NOT_RUN; no automatic approval from checkpoint.",
     "independent_review": "Code-only recipient SHA/CRC/member/24-protected scope audit after valid private file availability; cannot be inferred from coder local receipt."
+  },
+  "control": {
+    "oracle_session_id": "ciifr-oracle-01a16c60",
+    "epoch": 1
+  },
+  "control_record_ref": "ORACLE-CONTROL-CUTOVER-20261024.md",
+  "oracle_succession": {
+    "status_when_canonical": "CONTROL_BINDING_PUBLISHED__ENFORCEMENT_UNVERIFIED",
+    "authority_ref": "OWNER_PRIVATE_REF:ciifr-owner-successor-proceed-20261024",
+    "predecessor_chat_id8": "6ada4669",
+    "successor_chat_id8": "01a16c60",
+    "predecessor_control_epoch": "NOT_RECORDED_IN_CURRENT",
+    "epoch_basis": "First explicit control epoch. Do not invent a historical numeric epoch; predecessor binding is preserved by canonical revision/source and cutover record.",
+    "canonical_preimage": {
+      "repository": "reallakshman19/Common",
+      "branch": "main",
+      "observed_head": "37435267c861d54998fee589e6dc91385bf59bfa",
+      "observed_revision": 1
+    },
+    "required_predecessor": {
+      "pull_request": "https://github.com/reallakshman19/Common/pull/467",
+      "head": "4d489022a519a078753f479e1e0204574ce4e22c",
+      "revision": 2
+    },
+    "adopted_assignments": [
+      {
+        "id": "P25B-CODEONLY-RETURN-01",
+        "generation": 1,
+        "disposition": "Preserve reconciled PARTIAL return and outstanding custody limits; do not restart or duplicate receipt."
+      },
+      {
+        "id": "P25B-STABLE-CHECKPOINT-02",
+        "generation": 1,
+        "disposition": "Adopt unchanged coder checkpoint, recipient 6adb2ff1; evidence-first, no speculative coding."
+      }
+    ],
+    "adopted_responsibilities": [
+      {
+        "role": "reviewer",
+        "chat_id8": "6adb484a",
+        "status": "Retained; no active reviewer assignment is currently published; exact-byte audit awaits accessible artifacts."
+      },
+      {
+        "role": "owner",
+        "status": "Retains engineering authorization, actual Windows test, acceptance and merge authority."
+      }
+    ],
+    "write_isolation": {
+      "successor_branch": "cutover/ciifr-r3-oracle-01a16c60-20261024",
+      "predecessor_branches": "UNCHANGED; NO SUCCESSOR WRITES",
+      "canonical_publisher": "Owner-reviewed GitHub PR merge with fresh preimage check; no direct main push",
+      "predecessor_stop_or_access_revocation": "NOT_OBSERVED",
+      "epoch_enforcement": "NO_AUTHENTICATED_RUNTIME_GATE_OBSERVED",
+      "safe_exclusive_control_claim": "NOT_ESTABLISHED"
+    },
+    "stale_control_policy": "Once canonical, superseded Oracle 6ada4669 control directives are historical. Do not apply them automatically. Authenticate current Owner authority and compare current oracle_session_id/epoch/revision before any dependent write. Late results require an explicit exact-version adoption decision.",
+    "return_route": "https://github.com/reallakshman19/Common/issues/465",
+    "limitations": "A draft does not transfer control; merging changes the administrative binding only. This JSON does not revoke permissions, stop another chat, authenticate a sender or establish custody/product acceptance."
   }
 }
