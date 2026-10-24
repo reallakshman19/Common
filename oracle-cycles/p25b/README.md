@@ -1,47 +1,62 @@
-# Oracle Cycle / P2.5-B — Standalone workspace
+# Oracle Cycle / P2.5-B — standalone workspace
 
-**Status:** proposed pilot; **not activated**. Do not use this draft
-as a live task assignment before the Owner has reviewed and merged
-the protocol, created a real receipt issue and activated `CURRENT.json`.
+**Canonical activation and assignment:** [CURRENT.json](CURRENT.json) on **`main`**.
 
-- [Plan first](PLAN.md)
+- [Historical plan and pilot boundaries](PLAN.md)
 - [Read current structured state](CURRENT.json)
 - [Shared Cycle now protocol](../PROTOCOL.md)
+- [Append-only receipt issue #465](https://github.com/reallakshman19/Common/issues/465)
 
-## Incoming coder, IR or new agent
+## First rule — read canonical state, not this README's age
 
-One-line bootstrap:
+A protocol merge or issue creation alone does not authorize work.
+Before each operation, fetch `CURRENT.json` from actual
+`Common/main`, inspect its revision, `activation`, assigned
+role/chat suffix, scope and `receipt_issue_url`, and follow
+[the protocol](../PROTOCOL.md). A branch/draft PR may contain
+a proposed ACTIVE revision that is not yet published.
+
+**If canonical `activation != ACTIVE` or issue binding is absent:**
+return **NOT ACTIVE** and do not claim that any assignment
+was dispatched. If an active assignment exists but the
+recipient role doesn't match, return **NO ACTION**.
+
+## One-line Owner command for coder / IR / new agent
 
 ```text
 Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/p25b
 ```
 
-Open the actual `CURRENT.json` from the canonical branch on every invocation,
-identify your registered role/chat display ID and assigned revision, then
-follow [the shared protocol](../PROTOCOL.md). The short chat IDs are routing
-labels reported by the Owner, not proof of identity or permission.
+A participant already registered with verified project/role
+context can subsequently receive just `Cycle now`.
+A prompt only reaches the chat where it is typed. It never
+broadcasts or runs in the background. Eight-character
+conversation labels are not authenticated identities.
 
-If `activation` is not `ACTIVE`, there is no issue inbox or binding:
-return **NOT ACTIVE**, do not modify private engineering artifacts, and
-request activation from Oracle. You may inspect draft documents but
-must not post a work-completed receipt against them.
+## What an assigned agent returns
 
-If activated and assigned, inspect the relevant original artifact/version
-from an authorized repository/private Drive location; validate bytes
-before making changes; return a safe GitHub issue receipt after actual
-execution. A private file reference may require additional authorized
-access. NEVER post customer CII/XML, approval keys, private Drive child
-links or full conversation URLs to this public repo.
+Use the designated real private handoff location for any
+restricted ZIP and compute size/hash on actual downloaded
+bytes. A reported hash is not a verified readback.
 
-## Owner and Oracle
+Post one public-safe `ORACLE-CYCLE-RECEIPT v1` comment
+to the issue URL named in canonical `CURRENT.json`.
+Bind it to exact `assignment_id`, `observed_revision`,
+candidate and test limits; fetch the permalink afterward.
+Do not put protected engineering files, customer identifiers,
+private child Drive URLs, full chat URLs or approval keys
+in public GitHub issues or PRs.
 
-Oracle shows the routing board in chat after any meaningful change:
-**role + id8 + status + ONE next action**. Oracle reads issue receipts,
-distinguishes reports from observed tests and proposes a new state
-revision in GitHub. Progress Page is a sanitized projection, updated
-through its official CLI and reviewed publication process. The Owner
-may issue the short Cycle now command to individual chats; it does not
-wake all chats simultaneously.
+An issue comment is a proposed receipt only. Oracle
+reconciles it into a reviewed next revision; Progress
+updates through its official standalone CLI and Owner merge.
 
-This entrypoint is outside `Common/relay/**` so the existing V3.1
-execution/custody ledger remains untouched.
+## Oracle / Owner
+
+Oracle displays a compact role+ID routing board and one
+next action, distinguishes self-tests from independent
+review and preserves genuine Windows Owner acceptance.
+The first live pilot tests one unchanged code-only
+handoff—not additional P2.1 engineering development
+or P3. The separate active V3.1 `Common/relay/**`
+execution ledger is untouched.
