@@ -30,12 +30,19 @@ issue comments, not arbitrary edits to current state. Oracle selects and
 proposes the next revision, and separately updates Progress via its
 native CLI when actually executable.
 
-### Status of this first contribution
+### Activation and current status
 
-The first P2.5-B workspace is a **PROPOSAL ONLY** in a draft PR.
-No receipt issue has been activated, no Google Drive permissions have
-been changed, and no Progress Page data has been updated. Until
-activation, a participant who reads it must reply **NOT ACTIVE**
-rather than undertaking a fresh task on its authority.
+**Always read [the P2.5-B project's current state](p25b/CURRENT.json)
+from the canonical `main` branch.** The protocol/skill existing
+in `Common/main` does not itself activate an assignment. An issue
+inbox may exist before activation, and a draft PR can propose
+`activation: ACTIVE` without publishing it.
 
-See [P2.5-B PLAN.md](p25b/PLAN.md) for the handoff layout and tests.
+If actual canonical state is NOT ACTIVE or has no configured
+receipt issue URL, agents must return **NOT ACTIVE**.
+Only an activated, role-bound assignment may proceed.
+No change to Google Drive permissions or Progress Page
+publication follows from activating the Cycle protocol.
+
+See [P2.5-B PLAN.md](p25b/PLAN.md) for the initial
+handoff design and safety tests.
