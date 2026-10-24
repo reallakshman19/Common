@@ -1,0 +1,27 @@
+schema: ciifr-r4-relay-handoff-index/v1
+id: CIIFR-R4-S1-BUILDER-TO-ORACLE-PENDING
+status: NOT_SUBMITTED_TEMPLATE
+kind: PROPOSED_ARTIFACT_RETURN_INDEX_NOT_NATIVE_V3_1_TX
+mode: standalone
+relation:
+  responds_to: CIIFR-R4-S1-ORACLE-TO-BUILDER-001
+  task: https://github.com/reallakshman19/XML_Compare_Utilities/issues/159
+  source_manifest: relay/CIIFR_R4_HANDOFFS/S1-ORACLE-TO-BUILDER.yaml
+from:
+  role: CIIFR_R4_S1_BUILDER
+  chat_id8: UNKNOWN
+to:
+  role: CIIFR_R4_ORACLE
+  chat_id8: UNKNOWN
+return_contract:
+  exact_code_head: PENDING
+  draft_pr: https://github.com/reallakshman19/XML_Compare_Utilities/pull/163
+  changed_file_inventory: PENDING
+  test_evidence_issue_comment: PENDING
+  actual_artifacts: []
+  receiver_custody_check: NOT_RUN
+  negative_falsification_evidence: NOT_RUN
+  independent_review: NOT_RUN
+  owner_acceptance: NOT_RUN
+  privacy: PUBLIC_METADATA_ONLY
+  warning: "Template only. The builder must publish real return artifact locators and hashes before the Oracle can claim receipt, verification or progress."
