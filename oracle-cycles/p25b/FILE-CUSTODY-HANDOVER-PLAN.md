@@ -131,7 +131,8 @@ For each transferred F01–F08 file, require: (1) actual existence and authorize
 | Role | Owner-reported chat label | Responsibility |
 |---|---|---|
 | Incumbent Oracle | `6ada4669` | Approve/prepare safe custody index; reconcile immutable source and missing assets; maintain one current assignment |
-| Current coder | `6adb2ff1` | Finish the approved P2.5-B checkpoint in §0A; preserve reviewed v0.1.1; provide exact candidate/source/evidence for the subsequent coding handoff and unchanged existing packages for custody |\n| Future ChatGPT coder | **NOT YET APPOINTED** | Onboard after the checkpoint with verified file access and a bounded task; write only after authorized assignment and outgoing-writer exclusion |
+| Current coder | `6adb2ff1` | Finish the approved P2.5-B checkpoint in §0A; preserve reviewed v0.1.1; provide exact candidate/source/evidence for the subsequent coding handoff and unchanged existing packages for custody |
+| Future ChatGPT coder | **NOT YET APPOINTED** | Onboard after the checkpoint with verified file access and a bounded task; write only after authorized assignment and outgoing-writer exclusion |
 | Independent reviewer | `6adb484a` | Transfer its independent report/evidence bundle and perform separate recipient-side hash/scope check |
 | New Oracle | **UNASSIGNED** | Read-only audit and onboarding first; no new canonical write authority |
 | Owner | Final authority | Approves permissions, selects successor, completes native Windows acceptance |
