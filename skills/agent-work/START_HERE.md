@@ -84,6 +84,7 @@ using it alone; the shared guide is optional and introduces no runtime import.
 | Decide what a deliverable may be labelled, shown or released as | [Gatekeeper](gatekeeper/SKILL.md) | Deliverable, baseline, sealed targets and available evidence → a label (DRAFT/CHECKED/VERIFIED/RELEASED) with sha, x of N, untested scope and deviations |
 | Keep a traceable, visible record of project progress, Owner decisions and nudges | [Progress Page](progress-page/README.md) | Agent evidence on GitHub → a static page backed by JSON, with a Timeline, a checker, an editing tool and triggers. A runnable toolset: copy the whole folder, read its README, use its tools |
 | Deliver a step as something the user runs, and size the checking to the risk | [Prototype-first](prototype-first/SKILL.md) | Aim, real inputs and what the user can do today → a slice card per step, a capability probe and builder brief, a short prototype return, and a checker for cards |
+| Run a source-grounded Oracle in **standalone** mode with compact ID routing, `Cycle now` GitHub handoffs and succession safety | [Oracle Standalone — proposed skill](oracle-standalone/SKILL.md) | Owner aim + canonical project state + real receipts → one current board, next authorized action, changeover advice and scoped Progress projection; no OTM, automatic dispatch or publication |
 
 Use a module alone when that satisfies the request. Plan-only ends with usable
 task designs; brief-only ends with usable instructions; review-only ends with an
@@ -117,6 +118,15 @@ and its [project workspace example](../../oracle-cycles/p25b/README.md). The one
 private bytes use authorized Drive. This is optional and separate from the
 existing manual routing and `relay/**` V3.1 execution ledger. No automatic
 cross-chat dispatch or Progress Page publication is implied.
+
+For an Oracle coordinating that selected route, the optional
+[Oracle Standalone skill](oracle-standalone/SKILL.md) wraps the existing
+[Oracle continuity](oracle-continuity/PROTOCOL.md) rules, the
+[Oracle OnBoard](nudge-designer/references/ORACLE_ONBOARD.md) prompt,
+[changeover/succession guidance](oracle-standalone/references/CHANGEOVER.md)
+and the [standalone Progress Page publication mode](progress-page/references/MODES.md).
+A new skill file does **not** install itself in other chats or activate
+a Cycle project; use its project URL bootstrap and activation checks.
 
 ## Contribute before handing over
 
