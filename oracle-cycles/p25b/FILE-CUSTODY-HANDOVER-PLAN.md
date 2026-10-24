@@ -15,6 +15,25 @@
 - Current gates: protected P2.1 baseline remains frozen; repaired runnable preview independently reported PASS **only in injected-browser scope**; code-only recipient verification **BLOCKED**; native Windows **NOT_RUN**; Owner acceptance not granted; P3 deferred.
 - **Known process bug to reconcile later:** Current Cycle `progress_projection.project_key` still says `p25b` / `NOT_CREATED`, although CIIFR R3 is now actually published. The succeeding Oracle must prepare an explicit, scoped correction **to `ciifr`** when reconciling canonical state. Do not fork the Progress project.
 
+## 0A. Owner amendment — finish the current coding checkpoint before coder succession
+
+**Owner direction, 24 October 2026:** continue the existing coder to a stable P2.5-B set point, then onboard a ChatGPT coding agent. The Owner approved recording this direction. This changes the execution order; it does not activate a new coding assignment or an Oracle control transfer.
+
+The existing coder `6adb2ff1` retains the current approved P2.5-B work until this checkpoint is recorded:
+
+- Discover → Accept → Preview → Apply → Export CII is ready for a genuine Windows trial with the real local backend and authorized private files. Readiness is distinct from an executed Windows PASS or Owner acceptance.
+- Observed defects within the approved P2.5-B scope are resolved and checked, or explicitly recorded with their consequences. Preserve accurate before/after preview, stale-state invalidation, applicable engineering authorization and the authorized Apply/Export change boundary.
+- Frozen P2.1 remains byte-identical. Preserve the independently reviewed v0.1.1 runnable and existing code-only archive unchanged. Any justified further repair produces a separately identified candidate with its own hashes, lineage and affected checks; it cannot inherit the old candidate's overall review verdict.
+- One exact current candidate, source changes, run instructions, actual checks and negative cases, known limitations, missing assets and one bounded next task are available for a practical handoff.
+
+If the current candidate already satisfies this set point, record that result and proceed to the handoff; do not invent additional coding. QA-01 remains separately documented and low severity; P3 stays deferred. A remaining real Windows observation can identify an in-scope repair, but this amendment supplies no new engineering or feature authority.
+
+Private custody preparation and the independent code-only distribution audit may proceed alongside safe current work. The Owner may test the unchanged, already reviewed runnable on Windows independently of the code-only audit. Missing shared custody blocks the affected transfer or recipient claim, not unrelated work using an already authorized accessible candidate.
+
+**Coding-agent succession follows the checkpoint.** Prepare the ChatGPT coder's source-grounded brief and actual file access; carry the exact candidate and protected baseline, source/patch lineage, passed/failed/NOT_RUN checks, known issues, allowed scope and exact next action. Before releasing it to write, confirm the outgoing coder's write scope is stopped or isolated and publish the authorized new assignment/generation in the selected records. No new agent is launched by this plan.
+
+**Oracle succession is separate.** The incumbent Oracle's control binding remains unchanged until an expressly authorized, recorded cutover with ongoing assignments adopted and actual write exclusion. Onboarding a coding agent does not appoint a successor Oracle.
+
 ## 1. What "all files" means, and what is missing
 
 "All" means **every byte-relevant asset required to reproduce, run, audit and responsibly continue the project**, plus the exact original/previous versions needed to explain lineage. It does **not** mean copying unrelated work or merely collecting every file in a chat. Every asset needs a custody entry even when the bytes are missing.
@@ -93,7 +112,7 @@ For each transferred F01–F08 file, require: (1) actual existence and authorize
 
 ## 4. Handover phases — one useful action at a time
 
-**H0 — Freeze custody index / access, no code changes.** Incumbent Oracle exports the private partial inventory and marks all reported-only assets missing. Verify Drive sharing and recipient permissions; choose the one restricted project folder. Record the accepted Owner scope. Avoid duplicate copies when an exact digest already exists in the private store.
+**H0 — Prepare custody index / access alongside the current coding checkpoint.** Incumbent Oracle exports the private partial inventory and marks all reported-only assets missing. Verify Drive sharing and recipient permissions; choose the one restricted project folder. Record the accepted Owner scope. Avoid duplicate copies when an exact digest already exists in the private store.
 
 **H1 — Transfer existing Owner/Oracle originals.** Owner-authorized custodian makes F01/F02/F03 and useful historical F04/F07/F08 files available unchanged in the private tree; keep all original customer file names and mapping/approval evidence **inside Drive only**. Verify that receiving Oracle/IR can actually download them. Existing local intermediate ZIPs are historical, not substitutions for v0.1.1.
 
@@ -103,7 +122,7 @@ For each transferred F01–F08 file, require: (1) actual existence and authorize
 
 **H4 — Oracle reconciliation and Progress projection.** Read canonical `main`, pending [PR #467](https://github.com/reallakshman19/Common/pull/467), issue comments and private recipient receipts. Merge/advance one authorized state revision only after comparing current HEAD. Fix `progress_projection.project_key` to the **existing `ciifr` R3** using the same scoped canonical-state review (not a second `p25b` tab). Use the actual Progress Page `pp_cli.py` with audit and data-only PR for any new public status; no direct manual JSON writes. Do not mark the native Windows gate PASS.
 
-**H5 — Prepare new Oracle / controlled cutover.** New Oracle first performs a **read-only source and custody audit**, using [successor checkpoint](CIIFR-R3-ORACLE-SUCCESSOR.md), [Oracle Standalone skill](../../skills/agent-work/oracle-standalone/SKILL.md), and actual private manifest. It returns a bounded understanding, actual accessible files, discrepancies and the **two connected next deliveries** (artifact review, native Windows Owner acceptance). After Owner selects and authorizes the successor, explicitly record new Oracle epoch/generation, adopt active coder/IR assignments, resolve concurrent write scope and only then retire old control. A mere new chat or a correct reconstruction is **not** cutover.
+**H5 — Prepare new Oracle / controlled cutover, separately from the coding-agent handoff.** New Oracle first performs a **read-only source and custody audit**, using [successor checkpoint](CIIFR-R3-ORACLE-SUCCESSOR.md), [Oracle Standalone skill](../../skills/agent-work/oracle-standalone/SKILL.md), and actual private manifest. It returns a bounded understanding, actual accessible files, discrepancies and the **two connected next deliveries** (artifact review, native Windows Owner acceptance). After Owner selects and authorizes the successor, explicitly record new Oracle epoch/generation, adopt active coder/IR assignments, resolve concurrent write scope and only then retire old control. A mere new chat or a correct reconstruction is **not** cutover.
 
 **H6 — Final usable product acceptance.** Owner performs unmocked local Windows Discover → Accept → Preview → Apply → Export CII using authorized files; capture real before/after, stale-state behavior and exact byte-level CII change audit under F09, then explicit approval/refusal. This final evidence may follow a completed handover; it **cannot** be claimed in advance. The code-only distribution and Windows usability may be pursued independently where safe.
 
@@ -112,12 +131,13 @@ For each transferred F01–F08 file, require: (1) actual existence and authorize
 | Role | Owner-reported chat label | Responsibility |
 |---|---|---|
 | Incumbent Oracle | `6ada4669` | Approve/prepare safe custody index; reconcile immutable source and missing assets; maintain one current assignment |
-| Coder | `6adb2ff1` | Transfer **exact existing** repaired runnable/code-only bytes and any owned original B/historical test artifacts; no rebuild |
+| Current coder | `6adb2ff1` | Finish the approved P2.5-B checkpoint in §0A; preserve reviewed v0.1.1; provide exact candidate/source/evidence for the subsequent coding handoff and unchanged existing packages for custody |
+| Future ChatGPT coder | **NOT YET APPOINTED** | Onboard after the checkpoint with verified file access and a bounded task; write only after authorized assignment and outgoing-writer exclusion |
 | Independent reviewer | `6adb484a` | Transfer its independent report/evidence bundle and perform separate recipient-side hash/scope check |
 | New Oracle | **UNASSIGNED** | Read-only audit and onboarding first; no new canonical write authority |
 | Owner | Final authority | Approves permissions, selects successor, completes native Windows acceptance |
 
-After the plan is reviewed, the **first single action** is **secure custody setup and exact F05/F06 transfer**, not another UI coding cycle. If the coder lacks Drive access, raise a specific one-time private relay request instead of making the Owner reconstruct all handoffs.
+**Immediate execution frontier:** the existing coder continues approved P2.5-B work to the stable checkpoint in §0A, then the ChatGPT coding-agent handoff is prepared and authorized. The Oracle identifies whether the checkpoint is already met or the exact observed in-scope defect that remains; do not dispatch speculative coding. Secure custody setup and exact F05/F06 transfer proceed where safe in parallel. If the coder lacks Drive access, use a specific one-time authorized private relay of the existing bytes. Full file-custody completion and Oracle succession are not prerequisites for unaffected work on an already authorized accessible candidate.
 
 ## 6. Explicit contrary checks
 
