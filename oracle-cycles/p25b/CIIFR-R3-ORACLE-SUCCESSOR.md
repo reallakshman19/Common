@@ -6,6 +6,8 @@
 **Cycle workstream:** `p25b` under [Common Oracle Cycle](https://github.com/reallakshman19/Common/tree/main/oracle-cycles/p25b).
 These are two views of **the same CII Find & Replace VNext product**, not two new products or separate acceptance authorities. CIIFR R3 is a **revision inside the existing tab**, not a new project key. The Cycle `CURRENT.json` remains the authoritative assignment pointer; the Progress Page is its public-safe status projection and Owner intent record.
 
+**Companion for the actual file collection:** [CIIFR R3 complete private file custody plan](FILE-CUSTODY-HANDOVER-PLAN.md). Its inventory is private and its missing-asset statuses must be verified; this checkpoint alone does not transfer a single byte.
+
 ## 1. The Owner's latest direction
 
 Source: `OWNER_PRIVATE_REF:ciifr-r3-owner-20261024`. Owner requested:
