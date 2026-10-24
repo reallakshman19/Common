@@ -67,3 +67,13 @@ NEXT_ACTION:
 - **A06:** authentic Microsoft Word-exported PDF/render: NOT_VERIFIED; none in the evidence package. **A07:** runnable P1 candidate: NOT_BUILT.
 - **Durable handoff gap:** no designated, verified private cross-agent destination found; an authorized Owner transfer plus independent Builder readback is required. A private chat download is a staging link, not durable cross-agent custody.
 - **Oracle review:** PR #473 review ID `5639107895`. Generic rule PR #474 accepts this existing task-scoped `relay/` register path; do not create a competing second SCTL-P1 ledger.
+
+## Builder-side private intake and delivery observation — 2026-10-24
+
+**Evidence:** [BUILDER_P1_DELIVERY.md](BUILDER_P1_DELIVERY.md) (same draft branch).
+
+- **A03/A04/A05: BUILDER_BYTES_VERIFIED**, updated from the earlier `BUILDER_NOT_RECEIVED` historical state. Archive and both input-entry raw SHA-256 digests were independently measured after actual Builder attachment. Source originals were not overwritten.
+- **A06: SOURCE_PREVIEW_RENDERED / WORD_FIDELITY_NOT_VERIFIED**. Source Table #2 (Notes) is located on LibreOffice-rendered PDF preview page 2 of 13. No authenticated Word-export PDF.
+- **A07: RUNNABLE_CANDIDATE / OWNER_NOT_TRIED**. Private ZIP `SCTL_P1_Missing_Source_Lens_R5_Private_Prototype.zip`, **1,888,155 bytes**, SHA-256 `8b5e5c8f3184f6a68dab4888ee38165473345cb37daa9a34d122532c6b1d1805`. Private Builder chat download exists; `SESSION_ONLY`, not durable cross-agent byte custody.
+- Builder ran 6/6 unit tests and Chromium injected-HTML DOM interaction checks; browser normal file URL blocked by administrator. No Owner acceptance or independent page-parity PASS.
+- This is the **same task-specific register**, not a second ledger. The former Oracle and Builder receipt statements are preserved as valid observations at their respective times.
