@@ -56,3 +56,14 @@ TESTED: PASS | FAIL | NOT_RUN
 OWNER_TRIED: YES | NO | UNKNOWN
 NEXT_ACTION:
 ```
+
+## Oracle-side custody observation — 2026-10-24
+
+**Observer:** SCTL standalone Oracle (separate conversation). **Scope:** available original bytes only; NOT a Builder intake receipt, product result or Owner acceptance.
+
+- Oracle retrieved the original R5 evidence ZIP in its session and verified its ZIP CRC and **16/16 internal manifest SHA-256 entries**, including original `R5.docx` and `R5_after.html`.
+- Archive and input-entry exact sizes/SHA-256 were recorded in a **private Oracle-side input receipt**. The bytes, private receipt and session-scoped `/mnt/data` / `sandbox:` link are intentionally **not published** here.
+- Artifact statuses **A03/A04/A05: ORACLE_BYTES_VERIFIED / BUILDER_NOT_RECEIVED**. The original Builder return remains an accurate statement about the Builder's own conversation at its time.
+- **A06:** authentic Microsoft Word-exported PDF/render: NOT_VERIFIED; none in the evidence package. **A07:** runnable P1 candidate: NOT_BUILT.
+- **Durable handoff gap:** no designated, verified private cross-agent destination found; an authorized Owner transfer plus independent Builder readback is required. A private chat download is a staging link, not durable cross-agent custody.
+- **Oracle review:** PR #473 review ID `5639107895`. Generic rule PR #474 accepts this existing task-scoped `relay/` register path; do not create a competing second SCTL-P1 ledger.
