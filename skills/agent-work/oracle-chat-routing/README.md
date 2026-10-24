@@ -39,3 +39,9 @@ handoff or change in the actual task state, not after every message.
 The [Oracle Continuity Protocol](../oracle-continuity/PROTOCOL.md) remains an
 optional separate structured-state contract; its schemas are not required for
 this standalone mode.
+
+When the Owner instead wants workers to fetch assignments and post receipts
+through GitHub with a one-line `Cycle now` trigger, select the separate
+[Oracle Cycle standalone transaction protocol](../../../oracle-cycles/PROTOCOL.md).
+Do not infer that manual Chat Routing, GitHub Issue receipts and a structured
+continuity executor are automatically enabled by mentioning one another.
