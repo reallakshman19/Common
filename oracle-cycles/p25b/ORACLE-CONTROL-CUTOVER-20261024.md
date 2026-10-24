@@ -17,8 +17,8 @@ Coder-reported code-only SHA-256: `29d6219842e4b1dec24f7b0f702b67744c7327cbcaaa8
 
 ## C. Source/preimage and proposed binding
 - Actual Common/main observed: `37435267c861d54998fee589e6dc91385bf59bfa`, Cycle revision 1.
-- Required predecessor: [PR467](https://github.com/reallakshman19/Common/pull/467), exact head `4d489022a519a078753f479e1e0204574ce4e22c`, proposed revision 2. It reconciles the existing PARTIAL receipt, retains its limits, adds the stable-coder checkpoint and fixes Progress project mapping to `ciifr`.
-- This isolated branch is based on that exact head and proposes revision 3. The predecessor branch is untouched. If main or PR467 changes, compare actual CURRENT and reconcile before Owner merge; do not infer a clean state from a green check.
+- Incorporated unmerged proposal: [PR467](https://github.com/reallakshman19/Common/pull/467), exact head `4d489022a519a078753f479e1e0204574ce4e22c`, proposed revision 2. It reconciles the existing PARTIAL receipt, retains its limits, adds the stable-coder checkpoint and fixes Progress project mapping to `ciifr`.
+- This isolated branch carries the useful changes from that exact proposal and targets main directly as revision 2, advancing the actual published revision 1 once. PR467 is an alternative unmerged state proposal, not a prior merge dependency. The predecessor branch is untouched. If main or PR467 changes, compare actual CURRENT and reconcile before Owner merge; do not merge both proposals without reconciliation.
 - Previous Oracle: `6ada4669`. Successor Oracle: `01a16c60`; native control session ID `ciifr-oracle-01a16c60`. The short label was derived from this session's actual CODEX_THREAD_ID, not a copied chat title. Public records carry only the short display label.
 - Canonical CURRENT has no recorded numeric Oracle epoch. This proposal establishes the first explicit epoch, **1**, rather than inventing a historical epoch or claiming an unobserved increment.
 
@@ -28,7 +28,7 @@ The added CURRENT `control` object uses the unchanged `oracle_session_id` / `epo
 | Work | Binding retained | Disposition |
 |---|---|---|
 | P25B-CODEONLY-RETURN-01 | coder `6adb2ff1`, generation 1 | Preserve the reconciled PARTIAL receipt and unresolved custody; no duplicate receipt or rebuilt ZIP |
-| P25B-STABLE-CHECKPOINT-02 | coder `6adb2ff1`, generation 1 | Adopt the exact evidence-first checkpoint prepared by PR467; no speculative coding |
+| P25B-STABLE-CHECKPOINT-02 | coder `6adb2ff1`, generation 1 | Carry forward and activate the Owner-approved checkpoint prepared by unmerged PR467; no speculative coding or claim it was already published |
 | Independent package verification | reviewer `6adb484a` | Retain responsibility; no active reviewer assignment or download is fabricated |
 | Windows test / engineering approval / acceptance | Owner | Preserve independent scopes and explicit Owner decision |
 
@@ -41,7 +41,7 @@ Successor writes are isolated to `cutover/ciifr-r3-oracle-01a16c60-20261024` and
 
 **Before publishing the cutover**, the Owner must arrange cessation or actual exclusion of predecessor writes to the shared Cycle/Progress control scope. The predecessor's cessation/access revocation has not been observed here. This is a write-custody requirement, not a request for predecessor approval. The successor can continue permitted analysis and isolated proposals while it is unresolved.
 
-Publication route: Owner-reviewed GitHub PR merge, fresh expected revision/preimage comparison, then GET-readback of actual main. PR467 must be adopted before this revision-3 delta; retarget/rebase safely after its merge and recheck the full current diff. No direct main push or automatic merge is authorized.
+Publication route: Owner-reviewed GitHub PR merge, fresh expected revision/preimage comparison, then GET-readback of actual main. This revision-2 proposal incorporates PR467's receipt/checkpoint work and supersedes its state-publication route for this handoff. Recheck the full diff against actual main; PR467 remains preserved as provenance. No direct main push or automatic merge is authorized.
 
 Once this binding is canonical, prior Oracle control directives remain historical. A publisher/reviewer must resolve actual Owner authority and compare current session/epoch/revision before applying a directive. Old-epoch or old-binding directives and late returns require explicit source-bound reconciliation/adoption. There is no authenticated automated epoch gate observed, and no claim that this JSON revokes access or stops another chat. Report **CUTOVER_ENFORCEMENT_UNKNOWN** until actual exclusion is verified; do not label exclusive control safe from merge alone.
 
@@ -64,7 +64,7 @@ Successor exposure: read Owner-relayed IR conclusions and public coder receipt; 
 ## G. Five next actions
 | Order | Actor / action | Done when | Stop condition |
 |---|---|---|---|
-| 1 | Owner reviews PR467 and this cutover; resolves predecessor shared-write scope | Required state is actually merged/read back and write exclusion is evidenced | Preimage drift or unresolved overlapping canonical writes |
+| 1 | Owner reviews this consolidated cutover and the incorporated PR467 provenance; resolves predecessor shared-write scope | Required state is actually merged/read back and write exclusion is evidenced | Preimage drift or unresolved overlapping canonical writes |
 | 2 | Successor Oracle refreshes main/inbox, confirms binding and adopts the listed work | Actual revision/role/receipt observations and one next actor | Wrong binding, stale/future or conflicting receipt |
 | 3 | Existing coder `6adb2ff1` receives the full Cycle now URL after the checkpoint assignment is canonical | ALREADY_MET evidence or exact NOT_YET_DEMONSTRATED blocker, unique scoped receipt | Unknown candidate, protected-byte change or unauthorized repair |
 | 4 | Authorized custodian / reviewer closes actual file-access and exact-byte gaps; Owner may run safe native trial in parallel | Recipient hashes/scope evidence and separately recorded actual Windows results | Unknown sharing, byte mismatch or absent engineering authorization |
