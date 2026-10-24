@@ -88,6 +88,8 @@ Rules for rendering:
 
 ## 3. Handoff transaction: one artifact, one destination, one receipt
 
+**Owner-selected Common artifact transport (24 October 2026):** Record Oracle↔agent artifact transfers through [`ARTIFACT_RELAY.md`](../ARTIFACT_RELAY.md) and the separate `Common/relay/AGENT_WORK/` namespace. A previously pasted or attached file, including `/mnt/data` or `sandbox:`, is not durable delivery to another chat. Publish public-safe bytes to an authorized GitHub relay artifact path; keep protected bytes in authorized private custody and publish only a sanitized relay record. The recipient must retrieve/verify actual bytes. Do not treat the separate active V3.1 recorder as an arbitrary file-upload folder, and do not turn this artifact handoff rule into a conversational relay.
+
 Use the minimum information required for the task. For each handoff distinguish
 six separate observations; none automatically implies the next:
 

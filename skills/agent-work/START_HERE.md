@@ -50,6 +50,8 @@ selected source revision and follow the relevant guidance with available tools.
 Record the revision used; merely naming a skill does not install or invoke a host
 capability. A reference to another module does not create a dependency on it.
 
+**Owner-selected artifact relay (24 October 2026):** For Oracle↔agent handoffs that include a file/workpack/output, follow [Common artifact relay](ARTIFACT_RELAY.md) even if the file was initially supplied through an upload, `/mnt/data`, or a `sandbox:` link. Such a link is staging, not verified cross-chat delivery. Use the separate public-safe `relay/AGENT_WORK/` namespace or an authorized private byte store with a sanitized relay record; do not touch the active V3.1 `relay/` execution ledger. Preserve the selected protocol's custody rules and Owner acceptance boundary.
+
 ## Aim first, and keep the modules in sight
 
 Lesson 1 (Owner, 22 Oct 2026, Lesson 1: CoordinatorLandingpage #1 comments 6339599529, 6339795835, 6339862645): twenty agents and thousands of lines produced no learner output because no aim was written down and the process was built for a corporate product. So:

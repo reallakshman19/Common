@@ -81,6 +81,8 @@ On an Owner's request for status, routing, intent update or `Cycle now`:
 No task or status write occurs merely because someone requests a read-only
 progress report. Never infer access to other live chat tabs.
 
+**Artifact transfer rule (Owner, 24 October 2026):** Every Oracle↔agent transfer of a material input, output, prototype, ZIP or review evidence is recorded through [Common artifact relay](../ARTIFACT_RELAY.md), **even when first shared by attachment, `/mnt/data` or `sandbox:` link**. The relay record is public-safe; authorized public bytes may live in `relay/AGENT_WORK/`, while protected bytes stay in the Owner's private handoff storage and the relay contains only a sanitized locator/status. Track actual recipient retrieval and SHA-256 verification separately. Neither a local link nor a draft PR is a completed transfer; do not change the active V3.1 relay recorder to accomplish an agent-work handoff.
+
 ## 3. Worker / Independent Reviewer: one-line Cycle
 
 **Cold/new chat:**
