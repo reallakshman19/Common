@@ -1,0 +1,68 @@
+schema: ciifr-r4-relay-handoff-index/v1
+id: CIIFR-R4-S1-ORACLE-TO-BUILDER-001
+status: DECLARED_NOT_RECEIVED
+kind: PROPOSED_ARTIFACT_HANDOFF_INDEX_NOT_NATIVE_V3_1_TX
+mode: standalone
+basis:
+  protocol: Common@37435267c861d54998fee589e6dc91385bf59bfa
+  relay_reference: https://github.com/reallakshman19/Common/tree/37435267c861d54998fee589e6dc91385bf59bfa/relay
+  owner_charter: https://github.com/reallakshman19/XML_Compare_Utilities/issues/158
+  task: https://github.com/reallakshman19/XML_Compare_Utilities/issues/159
+  draft_pr: https://github.com/reallakshman19/XML_Compare_Utilities/pull/163
+  exact_source_commit: 4f31afebcc8afadc1024ef8e7545e5551229ff09
+from:
+  role: CIIFR_R4_ORACLE
+  chat_id8: UNKNOWN
+to:
+  role: CIIFR_R4_S1_BUILDER
+  chat_id8: UNKNOWN
+contract:
+  aim: "Unedited CII -> XMLv2 -> CII yields identical bytes and SHA-256; add read-only line/element/node views."
+  privacy: PUBLIC_METADATA_ONLY_AND_PRIVATE_REAL_MODEL_OFF_GITHUB
+  protect:
+    - "P2/P2.1 frozen serializer and protected files"
+    - "Unchanged CII source lexical bytes and original auxiliary pointers"
+  prohibit:
+    - "Publish private real CII or model content"
+    - "Claim receiver verified bytes from filename, hash expectation or sandbox link"
+    - "Merge, release, authorize engineering edits or change Common relay/STATE.yaml"
+artifacts:
+  - id: WORKPACK_ZIP
+    filename: CIIFR_R4_STANDALONE_WORKPACK.zip
+    declared_bytes: 34352
+    declared_sha256: d85d7ede9abc4381fe636a85b22c9ba9449a860fa8fd0420d267eb1fde13c9cb
+    declared_members: 18
+    custody: ORACLE_LOCAL_CHAT_ARTIFACT
+    transport: CHAT_ATTACHMENT_OR_SANDBOX_LINK_IF_RECEIVER_ACTUALLY_ACCESSIBLE
+    durable_binary_url: NONE
+    receiver_bytes_verified: false
+    note: "An /mnt/data link is a transport hint, not a cross-chat shared volume; no GitHub byte-for-byte copy of this ZIP is claimed."
+  - id: PUBLIC_CODE_SOURCE_SNAPSHOT
+    kind: EXACT_GITHUB_TREE
+    url: https://github.com/reallakshman19/XML_Compare_Utilities/tree/4f31afebcc8afadc1024ef8e7545e5551229ff09/prototypes/ciifr-r4
+    head_sha: 4f31afebcc8afadc1024ef8e7545e5551229ff09
+    notes: "Public code, synthetic fixture generator and tests; this source tree is NOT byte-identical to WORKPACK_ZIP."
+    recipient_source_readback: NOT_RUN
+  - id: ENGINEERING_MODEL
+    kind: PRIVATE_OWNER_INPUT
+    availability: OUT_OF_BAND_WITH_EXPLICIT_AUTHORIZATION
+    public_artifact: false
+return:
+  channel: https://github.com/reallakshman19/XML_Compare_Utilities/issues/159
+  mandatory:
+    - "handoff ID and received physical artifact route"
+    - "ZIP measured bytes and SHA-256, or explicit NOT_RECEIVED"
+    - "exact public code source head checked"
+    - "GitHub/Python/ZIP/browser capability probe RAN or NOT_RUN"
+    - "actual tests, negative tests, source custody, resulting draft head"
+    - "no private model bytes or identifiers in public receipt"
+  next_state_only_on_receipt: RECEIVED_CONFIRMED
+  after_independent_hash_check: BYTES_VERIFIED
+state:
+  oracle_reported_local_sha: true
+  recipient_ack: NOT_RECEIVED
+  recipient_hash: NOT_RUN
+  implementation: NOT_RUN
+  independent_review: NOT_RUN
+  owner_acceptance: NOT_RUN
+  progress_page: NOT_SYNCED
