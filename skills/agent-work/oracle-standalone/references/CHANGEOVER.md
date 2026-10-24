@@ -11,6 +11,10 @@
 
 This is a decision guide for a GitHub Cycle operator, not a second
 continuity schema, permission service, or new compulsory agent position.
+For the Owner-facing **prototype/outcome briefing, landing and fixture links,
+five-next-actions plan, file custody and read-only successor checkpoint**,
+use [Oracle Handover Protocol](ORACLE_HANDOVER_PROTOCOL.md). That packet
+precedes but never substitutes for the control cutover described below.
 
 ## 1. Distinguish recommendation, preparation, and activation
 
