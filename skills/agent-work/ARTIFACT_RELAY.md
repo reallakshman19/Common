@@ -16,6 +16,14 @@ Use a task-scoped durable location under `relay/`: for example [`relay/SCTL-P1-2
 
 This repository is publicly visible. **GitHub is not a substitute for private storage.** A pointer to protected storage does not itself confer access.
 
+### Owner-designated private handoff root — 25 October 2026
+
+For the Owner who explicitly supplies a Google Drive **Handoffs** folder in a private task conversation, the Oracle/OTM may refer to it in *public-safe metadata* as `OWNER_PRIVATE_REF:HANDOFFS_PRIMARY`. **This is an opaque label, not a public folder locator or access grant.** The actual Drive URL/ID, child-file URLs, account identifiers and any restricted source names remain in the Owner-authorized private communication or custody record; never put them in Common, Progress Page fixtures, GitHub comments or a draft PR.
+
+**Observed at designation:** the connected Drive account could list the named root and its existing project folders; the provider reported `shared=true`, but did **not** expose sufficient permissions to establish restricted visibility or any new agent/reviewer's access. Record **`ROOT_LOCATED / SHARING_NOT_VERIFIED / RECIPIENT_ACCESS_NOT_RUN`**, not `PRIVATE_ACCESS_VERIFIED`. The custodian must confirm effective sharing permissions for each intended actor before protected bytes are transferred. Do not change Drive ACLs, create public sharing links, move existing files, or imply a receipt merely because the root can be listed.
+
+For a real project transfer, retain the existing project subfolder or authorized task-scoped location within this root. Privately provide the **exact file** to the assigned recipient under its authorized identity and access route; perform the receiver download, file-size/SHA-256 and content check. Use the same exact artifact for a subsequent independent review, but separately record that reviewer's actual permitted retrieval and identity. A Common relay receipt names the **task and opaque locator/status only**; it cannot serve as a private file browser. This designation does not force other projects to use this Owner's Drive or replace stronger native custody protocols.
+
 ## 2. Minimal transaction record
 
 Create one public-safe record for each distinct transfer of exact bytes. Use the existing handoff/receipt identifier when the project has one; do not invent competing task or agent identities. The record may be Markdown or project-native structured data; these fields are the minimum human-readable contract:
@@ -36,6 +44,8 @@ Source: <native task/receipt link if available; Owner private reference if neede
 ```
 
 Keep **(a)** a producer's claim about bytes, **(b)** a stable relay record, **(c)** a recipient's actual retrieval, **(d)** byte verification, **(e)** technical review and **(f)** Owner acceptance separate. A PR number or hash alone does not establish any later state.
+
+**Agent → Oracle → independent reviewer:** An existing immutable candidate may be reused without uploading a second copy. The Oracle's inspection and the reviewer's inspection require **their own** observed access/bytes and exact-candidate identity; append the reviewer's receiver observation to the existing task relay/native review return (or issue a transfer receipt only when the project contract needs a distinct transfer). Verify reviewer authorship/principal and exposure separately under [Independent Reviewer](independent-review/SKILL.md); a successful Drive download or a new chat is **not** independent approval. The review verdict returns through the native issue/PR, and the Oracle/OTM projects **reconciled** public-safe evidence into Progress Page using its existing CLI, never by copying protected artifacts into `data/`.
 
 ## 3. Actual handoff flow
 

@@ -50,6 +50,18 @@ them when useful. They are not compulsory passes or a lifecycle controller.
    this review attempt separately. Inspect the real artifact and inputs. Record
    byte hashes where identity matters; a filename, copied hash or PR summary is
    insufficient. Name unavailable resources and continue unaffected checks.
+   For material Oracle/agent workpacks, use the project's existing native handoff
+   and [Common artifact relay](../ARTIFACT_RELAY.md) to recover the **exact**
+   versioned candidate. If the Owner nominated private Drive custody, obtain the
+   child artifact through the Owner-approved private route, not a public page
+   fixture or a guessed URL. Confirm the reviewer's **own actual** access,
+   download, file size/hash and relevant ZIP members; the author/Oracle's
+   earlier `BYTES_VERIFIED` does not establish reviewer receipt. A private root
+   that can be listed by one connector does not prove the reviewer has access or
+   that its sharing is restricted. If not retrievable, record `NOT_RECEIVED` /
+   `NOT_RUN` for dependent technical checks; avoid passing source fidelity
+   using only a producer's summary. Never publish restricted URLs, input bytes
+   or private source names in public review comments.
 3. **Disclose independence.** State authorship, inherited context, reference access,
    expected-behavior derivation, execution and upstream shared assumptions. Use
    [independence guidance](references/INDEPENDENCE.md). Fresh context alone proves

@@ -7,6 +7,8 @@ the page, a checker, an editing tool, a trigger tool, a local-file builder, temp
 
 **Use these tools. Do not rewrite them.** If one is missing something, say so in the pull request that adds it.
 
+**First-time writer capability:** The Oracle/OTM or its delegated page writer verifies a checkout of the *actual page repository* and executes `python tools/pp_cli.py --help` plus `python tools/pp_cli.py check` there. In this Common module source the script path is `scripts/pp_cli.py`, not `tools/pp_cli.py`; a repository web view cannot execute either command. Mark `PAGE: PENDING / NOT_RUN` if code execution, page repository access or publication readback is unavailable. A builder/reviewer ordinarily leaves native issue/PR/relay evidence for the coordinator and does not run page-writer scripts.
+
 ## Who uses it, in which mode
 
 The same files, the same checker and the same page serve both modes. Only a few fields differ.
@@ -85,7 +87,7 @@ Every write command records one Timeline entry (who, what, why, source) and runs
 ## The rules that matter
 
 - **Public-safe data only.** Chat ids are the short id (8 characters), never a chat link. No Drive, OneDrive or SharePoint links, no email addresses, no tokens. The checker refuses them.
-- **Private files** (ZIPs, banks, originals, source fixtures, candidates) live in the Owner's one common handoff folder (Google Drive, or OneDrive as the alternative), one subfolder per project key. A grounding fixture names the subfolder and file (with its SHA-256), never the link: see [local-handover](../local-handover/AGENT_PROTOCOL.md).
+- **Private files** (ZIPs, originals, source fixtures and candidate workpacks) remain in the Owner-approved private store; when the Owner designates the Handoffs Drive root, reference it publicly **only as** `OWNER_PRIVATE_REF:HANDOFFS_PRIMARY`, without its URL/ID, child-file links, or sensitive project/filename/hash details. A recipient must verify their **own** private access and downloaded bytes before `BYTES_VERIFIED` can be recorded. The Oracle's successful folder listing is not reviewer delivery or permission verification. Follow [Common artifact relay](../ARTIFACT_RELAY.md) and selected native [local-handover](../local-handover/AGENT_PROTOCOL.md); public fixtures record only sanctioned opaque reference, task/WBS, handoff state and safe native evidence links.
   Chat links live only in a private file (`links.private.json`), a private local build, or the Owner's browser.
 - **Every update is on the Timeline.** Use the tool, never edit `audit.json` or the data files by hand. The Timeline only grows.
 - **Nothing is deleted.** Supersede, cancel or archive instead. Superseded and cancelled cards stay on the page, greyed, with the reason.
