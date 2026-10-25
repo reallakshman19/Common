@@ -1,10 +1,22 @@
 # Oracle continuity packet — 3DC-XML-CII (PUBLIC-SAFE, PREPARED)
 
-**Prepared:** 2026-10-25 UTC  
+**Prepared:** 2026-10-25 UTC; **revised** after Owner found missing concept/complex-architecture transfer  
 **Stage:** PACKET_PREPARED / HANDOVER_PROPOSED; **NOT** CUTOVER_PUBLISHED.  
 **Next recipient:** UNKNOWN, not assigned; successor access/byte verification: NOT_RUN.  
 **Current role:** Incumbent Oracle, with a disclosed code contribution to PR #336.  
 **Coordination mode:** NOT ESTABLISHED for this project from the inspected authoritative sources; do not infer OTM, Standalone Oracle, v3.6 or GitHub Cycle activation from a role label or this document.
+
+## READ FIRST — conceptual and complex-logic transfer (Owner minimum)
+
+The earlier A–G continuity status was **not sufficient**. Before reading the next-action table, study these actual companion artifacts prepared from the pinned Owner AIM, code, original architecture contracts and PRs:
+
+1. **[Project concept note](CONCEPT_NOTE.md):** Owner's O1/O2/O3 words and problem; intended user experience, original-versus-physical identity, source/engineering/release distinction; what has actually been observed; scope and alternative approaches.
+2. **[Architecture and complex engineering logic](ARCHITECTURE_COMPLEX_LOGIC.md):** systems/trust diagram; LFJ large-JSON byte/occurrence path; InputBasis and seven FactRecords; Worker lease and CAS/frozen Final; guarded Python native output; independent CII RIGID pointer/unit/mass byte parser; why `FINAL_INTENT_NOT_OBSERVED` can coexist with a failed Run; PR #336 diagnostic; PR #335 emitted ≤6 mm topology and upstream rounding/prepass trap.
+3. **[Architectural decisions, alternative explanations and falsification](ARCHITECTURE_DECISIONS_AND_CHALLENGES.md):** risk-by-risk reasoning, rejected shortcuts, discriminating cases, release decision tree, ownership and dependency map.
+
+**Successor conceptual readback (read-only, not an exam):** Explain (a) how one original JSON occurrence becomes a source-bound engineering physical fact without aliasing `NodeNumber=-1`, (b) why 100 Final masses and a clicked Run still must not enable CII download, and (c) why an emitted 6 mm straight edge deletion cannot be qualified by XML-short counts, a CII syntax pass or a no-op test. Then identify the one actual current diagnostic or owner-authorization gap. **Report UNKNOWN** where original artifacts or current runtime are inaccessible. These references convey technical meaning, not automatic adopted engineering requirements or control rights.
+
+**Concept provenance:** [Owner AIM v2.2.0](https://github.com/reallakshman19/Common/blob/d381021e755d63c48759983e29bfedc1c7edbb88/relay/AIM/3DC-XML-CII.yaml), exact 3D main `40f11e3f6051086b1bcfcb64f2dd07b12fcb232c`, PR #335 `73da06327a9befd05cb66fe96a1dee63e6a8249e`. This incumbent Oracle contributed PR #336 and prepared these explanations: **SELF_ASSESSED, not independent engineering sign-off**.
 
 ## A. Owner outcome and authoritative boundary
 
