@@ -67,6 +67,40 @@ handover, a universal stop or a measure of model competence.
 Reference: `task-decomposer/references/ORACLE_USE.md` §Owner-selected
 ChatGPT-agent activity duty and `nudge-designer/references/ORACLE_EXECUTION.md`.
 
+## 2a. Measurable handover triggers — optional evidence-based pilot
+
+These are **proposed operating thresholds for an Owner-approved pilot**, not already-adopted universal rules, timers, automatic replacement, extra approval gates or new tracking records. The governing Owner/OTM and existing native authority still decide. Record the observed issue/PR/receipt links **in the existing task/control record**; do not create a replacement database.
+
+**Agent / builder / reviewer:**
+
+| Level | Observable trigger | Action |
+| --- | --- | --- |
+| P0 | One explicit Owner replacement instruction | Prepare bounded successor; preserve existing authority until actual cutover |
+| P0 | One verified serious write/authority/confidentiality violation | Stop affected operations and escalate; determine authorized isolation/replacement |
+| P1 | Two consecutive **eligible** task cycles with no new useful validated progress, despite an actionable corrected instruction | Recommend replacement or assistance after checking access/scope/sender causes |
+| P1 | Two material repeats of the same source-demonstrated task misunderstanding **after one targeted correction** | Recommend replacement rather than another full onboarding |
+| P1 | Two verified failures of essential capability with required access, or one conclusive incompatibility | Route to capable successor/assistance |
+| P1 | One confirmed author/reviewer-principal conflict on required independent scope | Assign an eligible reviewer for that scope, not automatically replace every agent |
+| P2 | One completed, checkpointed coherent deliverable | Optional low-disruption planned handover, only if valuable |
+
+**Project Oracle / coordinator:**
+
+| Level | Observable trigger | Action |
+| --- | --- | --- |
+| P0 | One explicit Owner/governing-OTM replacement instruction | Prepare knowledge-first Oracle handover |
+| P0 | One verified serious competing-control or authority incident | Stop affected conflicting control, escalate and establish actual isolation |
+| P1 | Two **preventable** wrong dispatches among the last three eligible dispatches **after correction** | Recommend Oracle succession with original dispatch and correction links |
+| P1 | Two consecutive **eligible** agent returns not reconciled despite one corrective intervention | Recommend succession if discrepancy is the Oracle's, not unavailable inputs or approval |
+| P1 | Two source-demonstrated consequential architecture/Owner-intent misunderstandings after targeted correction | Prepare concept/complex-logic knowledge handover |
+| P1 | Two verified failures of an essential control-source operation with no authorized workaround, or one conclusive inability | Recommend a capable successor or operator assistance |
+| P2 | Two consecutive routine cycles unnecessarily rebuilding unchanged grounding, after guidance | Correct workflow first; handover only if it persists |
+
+**Measurement rules:** An *eligible cycle* has a correctly authorized task, accessible required inputs, no unresolved external/Owner HOLD preventing the action, and a real chance to produce evidence. Useful progress includes a new tested candidate, meaningful falsification, valid root-cause discriminator, or source-backed disposition; a repeated status/ACK alone does not count. Count only observed incidents after a recorded correction where required. Do not punish an agent/Oracle for unavailable Owner files, a broken provider, an unchanged engineering HOLD or legitimate deep work. If no reliable observation exists, record `UNKNOWN`, not a fabricated count.
+
+The separate **Owner-selected ChatGPT-agent activity duty** above stays exactly that: >5 distinct GitHub-access turns or >35 recorded active-turn minutes triggers a **BuddyRunner suggestion only**, never an Oracle handover rule, compulsory retirement or automatic transition. For an Oracle, long conversation/turn burden matters only if source/model control is actually degrading or the Owner requests a handover.
+
+**Evaluation:** first correct the observed problem once, then compare a continuation versus successor for the next bounded deliverable. A trigger proposes `RECOMMEND_CHANGEOVER`; only selected native authorization, a versioned checkpoint, actual write isolation and readback can establish `CUTOVER_ACTIVATED` or `ORACLE_CONTROL_TRANSFERRED`. Preserve agent task IDs/reviews and Oracle concept/architecture knowledge. See [Oracle knowledge handover](ORACLE_HANDOVER_PROTOCOL.md).
+
 ## 3. Worker replacement: prepare and cut over safely
 
 1. **Checkpoint:** retain original Owner aim/amendments, stable task ID,

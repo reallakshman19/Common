@@ -6,7 +6,7 @@ actual `tools/pp_cli.py` with its test-backed data contract.
 
 **Oracle** coordinates and owns the published claims in standalone;
 the selected writer agent may prepare `data/` under Oracle's
-authority, but **the Owner merges**. This is not OTM mode.
+authority. **Merge authority is exclusively defined in** [Progress Page modes](../../progress-page/references/MODES.md): Owner merge by default, with the scoped `reallakshman19/progress-page` standing authorization and required gates. This is not OTM mode.
 A draft PR is a proposed publication, not a live change.
 
 ## Source-of-truth division
@@ -50,8 +50,8 @@ checkout, not direct GitHub writes to JSON.
    history is available, `check --base origin/main`.
    Verify all changes are `data/` only for that project
    and preserve existing audit history.
-5. Open a **DRAFT** standalone data-only PR; the Owner
-   reviews/merges. Read back the merged commit and actual
+5. Open a **DRAFT** standalone data-only PR; follow the exact
+   [mode/merge authority and gates](../../progress-page/references/MODES.md), including the applicable repository-specific standing grant. Read back the merged commit and actual
    project data. Only after publication evidence may
    Oracle report `PAGE: SYNCED`.
 6. On missing actual CLI execution, branch write access,

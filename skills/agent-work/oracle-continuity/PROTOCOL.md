@@ -205,11 +205,28 @@ Useful work can be salvaged without silently restoring old authority.
 
 ## 7. Oracle succession
 
+**When to prepare a handover:** apply observed project continuity, repeated corrected failure, demonstrated missing capability or explicit Owner/governing OTM preference. The [measurable agent/Oracle trigger pilot](../oracle-standalone/references/CHANGEOVER.md#2a-measurable-handover-triggers--optional-evidence-based-pilot) is **proposed guidance**, not a compulsory numerical takeover rule or authority grant. Normal Oracle refresh is changed-evidence-only; neither long chats nor task completion alone requires succession. Follow the actual native coordination mode and existing cutover authority.
+
 Choose a successor on observed understanding: source-grounded decisions, useful
 results, detected contradictions and preserved invariants. Supply the current
 baseline, decisions/alternatives, open uncertainties, pending returns and the next
 two proposed deliveries with their connection. A capability probe and a real next
 action give more useful evidence than ceremonial acceptance of a title.
+
+### Knowledge transfer — Owner-selected golden fixture
+
+**Golden content reference:** [3DC-XML-CII Oracle continuity package, immutable commit `bf02e54e`](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload). The Owner selected this project-specific package as the **minimum-quality example** for Oracle handover knowledge, not as a universal XML/CII method, validated engineering result, or published control-epoch change. Its four linked documents are a project concept note, complex architecture/logic, architecture decisions/challenges, and an outcome/evidence/assignment handover.
+
+Before describing a handover packet as complete, the incumbent must make the following **four knowledge classes** retrievable and understandable from actual cited source material:
+
+1. **Concept:** original Owner aim/amendments, why the product exists, user journey, expected outcome and prohibited scope.
+2. **Architecture and difficult logic:** current component/data/control flow, critical state/identity boundaries, non-obvious algorithms and invariants, with explanations or concrete examples of *why* they exist.
+3. **Decisions and challenges:** consequential design choices, considered/rejected alternatives and their rationale, surviving wrong cases and a discriminating check.
+4. **Execution frontier:** exact working candidate and verified versus reported results, fixture custody/access, active assignments/returns, HOLDs, two connected next deliveries and **one immediate authorized action**.
+
+A status-only A–G checklist, a set of unread links, or an agent roster does **not** establish these knowledge classes. Reuse existing Project Home or project-native architecture/decision records wherever sufficient; **four distinct new files are not mandated**. If content is genuinely absent or inaccessible, label the specific knowledge gap and keep its assurance unknown rather than inventing an explanation or claiming full transfer.
+
+The successor checks the relevant original sources and demonstrates usable understanding by explaining an important design invariant, a rejected alternative or surviving wrong case, and the next evidence-bearing operation. This is targeted source reconciliation, **not a scored onboarding exam**, engineering review, file-byte receipt, independent PASS, or grant of Oracle control. Follow the selected native authorization and epoch/cutover rules below.
 
 **Read-only successor mentoring and source challenge:** The outgoing Oracle or
 coordinator brings a source-linked concept, architecture decisions, real current

@@ -10,6 +10,8 @@ aim, changes and decisions with Oracle; Oracle carries the useful work through
 bounded assignments, source/evidence reconciliation and Owner-facing progress.
 For a worker or reviewer, `Cycle now` is a **read-current-state, act-if-assigned,
 return-evidence** instruction, not a request to become Oracle.
+**Pre-resolved dispatch:** The selected Oracle/OTM or direct Owner supplies the recipient with ONE actual issue or active Cycle locator and the already-decided coordination mode, native delivery protocol (v3.6 only where selected), task/candidate, original/relay inputs, limits/HOLDs, return destination and immediate next actor. A builder does **not** select another mode, onboarding route, reporting system or approval procedure. Verify authority and real source access; escalate changed or contradictory conditions. [Single-task routing](../ENTRY_PROCESS_MAPS.md#one-shared-spine) · [role lifecycle](../ROLE_LIFECYCLE.md).
+
 **Established recipient:** use [lightweight `Cycle now` continuation](../../../oracle-cycles/PROTOCOL.md#lightweight-continuation--already-bound-participants): refresh assignment and changed evidence, not full onboarding. Do not rerun returned work while Oracle reconciliation is pending; repair an unposted routing receipt by v1 rules without replaying tests. Current authority, source identity and access checks still apply.
 
 **Precedence:** actual Owner outcome/amendments and authority → selected native
@@ -169,7 +171,7 @@ safe work.
 
 Do **not** treat a new chat label, role title, prepared onboard prompt,
 context uncertainty, or a recorded activity threshold as a completed
-handover. Follow [CHANGEOVER.md](references/CHANGEOVER.md):
+handover. Follow the **optional measurable trigger pilot** and existing actual cutover rules in [CHANGEOVER.md](references/CHANGEOVER.md):
 
 - Suggest worker continuation or replacement only when evidence/context,
   missing capability, concurrency, cost or Owner preference supports it.
@@ -190,11 +192,13 @@ handover. Follow [CHANGEOVER.md](references/CHANGEOVER.md):
 
 ### Owner-requested Oracle handover
 
-Give a new Oracle a **read-only** source-grounded briefing first: original
-Owner outcome, current **usable prototype** with exact tested scope,
-the **next two connected deliveries**, all relevant landing and
-fixtures links, artifact/access/approval gaps, and **five concrete next
-actions** with a single immediate actor. Use
+Give a new Oracle a **read-only, knowledge-first** source-grounded briefing first: original
+Owner outcome and **project concept**, current **system architecture and difficult logic**
+(with invariants, ownership, decision rationale, rejected alternatives and surviving wrong cases),
+the **usable prototype** with exact tested scope, the **next two connected deliveries**,
+all relevant landing and fixtures links, artifact/access/approval gaps, and **five concrete
+next actions** with a single immediate actor. The immutable [3DC-XML-CII golden fixture](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload)
+illustrates minimum content, not the current acceptance/authority of other projects. Use
 [ORACLE_HANDOVER_PROTOCOL.md](references/ORACLE_HANDOVER_PROTOCOL.md)
 instead of a generic summary. Read the real Progress project in
 `data/projects.json` and `data/<key>/fixtures.json`; never invent
@@ -209,7 +213,7 @@ isolating competing write access.
 Use the source-bound [Progress adapter](references/PROGRESS_ADAPTER.md)
 and the **actual** Progress Page CLI:
 `python tools/pp_cli.py`. In standalone mode Oracle (or a
-named writer agent) prepares a **data-only draft PR** for Owner merge;
+named writer agent) prepares a **data-only draft PR**; merging follows the [canonical Progress Page mode/merge rules](../progress-page/references/MODES.md), including its scoped standing exception;
 record source, actor and reason through CLI so its existing audit
 Timeline updates. The `p25b` project or another project's source records
 must not be overwritten because chat roles happen to look similar.
