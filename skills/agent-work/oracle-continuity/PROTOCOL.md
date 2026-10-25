@@ -219,8 +219,8 @@ in conversation to reconcile: (1) the actual Owner/user outcome, (2) one
 **original-to-effective engineering meaning** path and rejected shortcut/wrong
 case against real source/specification, and (3) the immediate useful task,
 following dependent task, existing worker owners and late-return risk. In a CII
-example, ELEMENTS/RIGID/NODENAME counts, node/pointer census and 13 green
-synthetic parser tests **do not verify** field-specific inheritance, sentinel
+example, ELEMENTS/RIGID/NODENAME counts, node/pointer census and 13 green synthetic
+parser tests **do not verify** field-specific inheritance, sentinel
 semantics, auxiliary ownership or downstream effective properties. Mark those
 unknown until independently grounded in original CII, existing parser and
 appropriate vendor layout; if uncertain, the first successor task is bounded
