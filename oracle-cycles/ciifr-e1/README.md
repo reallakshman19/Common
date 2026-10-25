@@ -1,24 +1,18 @@
-# CIIFR E1 — proposed Oracle Cycle transport (INACTIVE)
+# CIIFR E1 — archival Cycle preparation (INACTIVE)
 
-**Canonical truth:** read `CURRENT.json` on **Common/main** every invocation. **At this checkpoint, no E1 Cycle is published there.** [Draft PR #496](https://github.com/reallakshman19/Common/pull/496) now proposes `PREPARED_NOT_ACTIVE`, revision 0; it is a source-linked future transport, **not an executable `Cycle now` assignment**.
+**No E1 actor is currently assigned an executable `Cycle now` task.** This folder is proposed in [Common draft PR #496](https://github.com/reallakshman19/Common/pull/496), `revision=0`, `activation=PREPARED_NOT_ACTIVE`, unmerged. **Read canonical `CURRENT.json` on Common/main every invocation**; an unmerged proposal, GitHub issue or existing worker return is not activation.
 
-## Native engineering state (source of truth)
+## Verified native work completed before Cycle activation
 
-- E1 coder `6adddf80` **already returned R2** on existing [XCU #173 comment 6400645653](https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400645653), repaired [draft PR #168 at `2aeaf737`](https://github.com/reallakshman19/XML_Compare_Utilities/commit/2aeaf7372de66eda3bc082b8d81bf8db43c34f4b). [Oracle delivery reconciliation](https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400698988) verified exactly 3 files and exact-head hosted CI; 32/32 author-reported native regressions. F1 empty RESTRANT and F2 REDUCERS have visible corrections **AWAITING INDEPENDENT REPLAY**; F3 v14 CONTROL strictness remains `VERSION_BRACKETED_CONTROL_SHAPE_UNRESOLVED`.
-- The **next actor is the existing independent E1 reviewer #170**, not the coder. [Exact R2-head read-only challenge](https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400708556) is prepared. The reviewer's ChatGPT short ID is **UNBOUND**, so no executable Cycle assignment or accepted routing receipt exists for the reviewer.
-- [Common #495](https://github.com/reallakshman19/Common/issues/495) is the separate eventual `ORACLE-CYCLE-RECEIPT v1` inbox, currently **no completed Cycle transport**. Do not demand a retroactive Cycle receipt or rerun native R2 solely because this inbox exists.
+- **Coder R2 returned:** [XCU #173 comment 6400645653](https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400645653), [Oracle delivery reconciliation](https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400698988). Exact [draft PR #168 head `2aeaf7372de66eda3bc082b8d81bf8db43c34f4b`](https://github.com/reallakshman19/XML_Compare_Utilities/commit/2aeaf7372de66eda3bc082b8d81bf8db43c34f4b); 3 authorized files, exact-head hosted CI success, native 32/32 builder self-reported.
+- **Independent R2 specialist returned:** [XCU #170 comment 6401186110](https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401186110), [Oracle scoped acceptance](https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401405888). F1 rejecting empty/missing/whitespace positive-count sections **PASS**. F2 v14 REDUCERS two physical lines + logical bounds **PASS**, **not** 10 numeric-slot content validation. All 15 auxiliary pointer-range guards including BEND, EXPJT, IZUP/EQUIP and retained RIGID/NODENAME sharing/zero **PASS** on invented V8 source cases.
+- **Overall E1 engineering qualification remains PARTIAL/HOLD:** F3 v14 CONTROL row width and extra numeric fields version-specific importer admissibility **UNRESOLVED**; full RESTRANT, REDUCERS token syntax, effective property semantics, original protected CII and actual CAESAR native importer NOT_PROVEN/NOT_RUN. Reviewer not blinded, ChatGPT ID/GitHub non-author principal unbound.
+- PR #168 remains DRAFT/UNMERGED; no Writer/TARGET1/E2/E3/merge/release authority is conferred.
 
-## How the next `Cycle now` will work
+## No stale Cycle handoff
 
-1. Owner/Oracle binds the **actual original E1 reviewer chat label and role**, confirms current native #170/head and review access. This is a routing label, not proof of GitHub-principal independence.
-2. Oracle prepares a **fresh reviewer assignment/generation** and obtains the required authorized merge to Common/main. Only after main readback confirms `mode=standalone`, `activation=ACTIVE`, matching reviewer role, exact ID, candidate and receipt inbox can the Owner send the reviewer the cold-chat URL form:
-   `Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr-e1`
-3. Reviewer reads fresh CURRENT and native #170, executes only unfinished authorized read-only R2 review, posts actual engineering evidence on #170 and a short, idempotent Cycle receipt on #495. If review already returned, **do not rerun**; only repair a missing envelope from an activated assignment under the protocol.
+[Common #495](https://github.com/reallakshman19/Common/issues/495) is an unused intended receipt inbox. Both native R2 returns happened **before** this project had a canonical ACTIVE `CURRENT.json`. **Do not demand retroactive `ORACLE-CYCLE-RECEIPT` or rerun the completed coder/reviewer task.**
 
-**Until activation, use native #170 task routing rather than `Cycle now`.** This proposed transport does not bind a reviewer or publish code, and it cannot override XCU `AGENTS.md`, independent-review, Writer/TARGET1, native CAESAR, merge or release HOLDs.
+**Next evidence dependency (no actor dispatched):** direct authoritative CAESAR II v14 CONTROL row/trailing-field format, **or** authorized native v14 importer valid/extra-slot discriminating tests with actual hash/custody. Until evidence exists: `F3_SOURCE_BLOCKED`, no speculative strict-width parser edit or generic re-review. A genuinely new bounded assignment requires separate Owner/Oracle decision, known recipient, correct source and authorized ACTIVE revision publication/readback before any `Cycle now`.
 
-## Workstream isolation
-
-- [ACTIVE G1 Geometry Cycle](../ciifr/README.md) is a different project and **must not route E1**.
-- [CIIFR Element field-authority proposal](https://github.com/reallakshman19/Common/pull/494) is a different inactive project (#178).
-- [Common Oracle Cycle protocol](../PROTOCOL.md) and [agent-work START_HERE](../../skills/agent-work/START_HERE.md) govern routing. The older [Common E1 relay draft #479](https://github.com/reallakshman19/Common/pull/479) remains a draft artifact route, not required for this public-source review.
+Separate workstreams: [active G1 Geometry Cycle](../ciifr/README.md) is NOT this E1 task; [CIIFR ELEMENT field authority](https://github.com/reallakshman19/Common/pull/494) remains separate. Follow [agent-work](../../skills/agent-work/START_HERE.md) and [Cycle protocol](../PROTOCOL.md).
