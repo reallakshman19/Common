@@ -71,31 +71,38 @@
   "gates": [
     {
       "id": "archive-source-recovery",
-      "status": "OWNER_REPORTED_PASS",
+      "status": "NOT_RUN",
       "scope": "Owner reports exact XCU archive extracted (9,208 entries), safe paths, critical blobs at 80e693bd... and original S1/T SHA match",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "Fresh builder native recovery receipt supplied in chat but not independently read back from GitHub; not engineering takeover PASS"
+      "limits": "Fresh builder native recovery receipt supplied in chat but not independently read back from GitHub; not engineering takeover PASS",
+      "reported_status": "OWNER_REPORTED_PASS",
+      "oracle_verification": "NOT_RUN"
     },
     {
       "id": "method-c-original-falsifiers",
-      "status": "OWNER_REPORTED_PASS",
+      "status": "NOT_RUN",
       "scope": "Owner reports native anchor 3910->875 translation-only, 41/57 within 100mm XYZ, 4060 TARGET 900->905 segment-only, 4970 -300.57mm Z and corruption ORIGINAL_SHA256_MISMATCH",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "No separate Oracle exact-command output review; nearest candidates are not certified physical matches"
+      "limits": "No separate Oracle exact-command output review; nearest candidates are not certified physical matches",
+      "reported_status": "OWNER_REPORTED_PASS",
+      "oracle_verification": "NOT_RUN"
     },
     {
       "id": "native-regression-baseline",
-      "status": "OWNER_REPORTED_PASS",
+      "status": "NOT_RUN",
       "scope": "Owner reports Node v22.16.0 and Chromium available, initial native regression 44/44 passed",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "Pre-G1 regression only; G1 integrated Node/Chromium exact-head acceptance NOT_RUN"
+      "limits": "Pre-G1 regression only; G1 integrated Node/Chromium exact-head acceptance NOT_RUN",
+      "reported_status": "OWNER_REPORTED_PASS",
+      "oracle_verification": "NOT_RUN"
     },
     {
       "id": "appendix-a-qualification",
-      "status": "NOT_RUN_COMPLETE",
+      "status": "BLOCKED",
       "scope": "Native source-specific A1-A5 gate score, worklog and authorization not yet returned",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "Production file edits must not begin until native guard satisfied; A1-A3 may reuse unchanged prior work"
+      "limits": "Production file edits must not begin until native guard satisfied; A1-A3 may reuse unchanged prior work",
+      "reported_status": "PARTIAL_SOURCE_INSPECTION"
     },
     {
       "id": "g1-native-integrated-ui",
