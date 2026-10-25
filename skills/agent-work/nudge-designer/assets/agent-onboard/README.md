@@ -23,6 +23,8 @@ For a **reviewer**, keep task-neutral original requirements and expected behavio
 
 **File delivery priority for every material artifact:** Option **1** immutable **public-safe Common relay**; Option **2** authorized **Google Drive Handoffs** for protected files or when 1 is unusable. One of 1 or 2 is required to call a cross-agent transfer complete, with an existing task-scoped sanitized Common receipt. A `sandbox:` or `/mnt/data` link is `LOCAL_ONLY / NOT_TRANSFERRED`, not delivery. Recipient confirms actual bytes/digest independently where identity matters. Follow [Artifact Relay](../../../ARTIFACT_RELAY.md).
 
+**PR title and Chat ID:** Use [native title/traffic hygiene](../../references/TITLE_AND_TRAFFIC_HYGIENE.md). For a human-owned PR under permissive native naming, prefer `[<TASK-ID>][<ROLE>:<verified CHAT-ID8>] <specific result>`; if the native owner/projects enforce a title pattern or generator, keep it and put Chat ID in the issue/PR body. For v3.5 DELP-managed **issue** titles, no human edits of traffic light, P/E/D, or status; the projector owns them. Never guess an ID8, treat it as authenticated identity, or fake PR green.
+
 **Execution authority comes only from the actual native assignment/Owner**, not this template or the four knowledge documents. A reviewer cannot edit the producer PR merely because the packet contains write instructions; a successor builder cannot overlap the predecessor's write surface without native isolation and new assignment binding. Not every project uses a `CURRENT.json` Cycle, Progress Page or v3.6. Nothing here activates them.
 
 ## Usage
