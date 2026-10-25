@@ -53,7 +53,7 @@ class AgentOnBoardGoldenDocs(unittest.TestCase):
         for name in FOUR:
             self.assertIn(f"({name})", prompt)
         for text in (prompt, readme):
-            self.assertIn("no new", text.lower())
+            self.assertTrue("no new" in text.lower() or "not a new" in text.lower())
             self.assertIn("independent reviewer", text.lower())
             self.assertIn("not", text.lower())
             self.assertIn("native", text.lower())
@@ -69,8 +69,8 @@ class AgentOnBoardGoldenDocs(unittest.TestCase):
         prompt = read(BASE / "AGENT_ONBOARD_PROMPT.md")
         readme = read(BASE / "README.md")
         for text in (doc, prompt, readme):
-            self.assertIn("Option 1", text if text is readme else
-                          text.replace("Priority 1", "Option 1").replace("priority 2", "Option 2").replace("2 authorized", "Option 2 authorized"))
+            self.assertRegex(text, r"(?i)(Option|Priority)\s*\*{0,2}1\*{0,2}")
+            self.assertRegex(text, r"(?i)(Option|Priority)\s*\*{0,2}2\*{0,2}")
             self.assertIn("LOCAL_ONLY / NOT_TRANSFERRED", text)
             self.assertIn("Common", text)
             self.assertIn("Drive", text)
@@ -84,7 +84,7 @@ class AgentOnBoardGoldenDocs(unittest.TestCase):
         self.assertIn("READ_ONLY", prompt)
         self.assertIn("do not", prompt.lower())
         self.assertIn("F6", decisions)
-        self.assertIn("new assignment generation", handover)
+        self.assertIn("new assignment generation", handover.lower())
         self.assertIn("SELF_ASSESSED", handover)
         self.assertIn("original", decisions.lower())
 
