@@ -14,7 +14,7 @@ The same files, the same checker and the same page serve both modes. Only a few 
 | | OTM mode (OwnerTeammember coordinates) | Standalone mode (an Oracle coordinates) |
 |---|---|---|
 | Who writes the data | OTM | the project's Oracle (or its writer agent) |
-| How it reaches the page | data-only commit to `main` | branch `pp/<project>-<you>` and a DRAFT pull request; the Owner merges |
+| How it reaches the page | data-only commit to `main` | branch `pp/<project>-<you>` and a DRAFT PR; Owner merges by default (see progress-page-repo standing go-ahead exception) |
 | Where the Owner's replies go | OTM | the Oracle |
 | `projects.json` → `mode` | `otm` | `standalone` |
 | `index.json` → `rules.coordinator` | `OTM` | the Oracle's name, for example `Oracle` |
@@ -143,6 +143,8 @@ To make chat ids clickable on the public page in one browser: `python tools/pp_l
 | `revision add` refuses | commit `data/` first so the old revision keeps a commit to open from |
 | `--base` complains "no entry" | the data changed without the tool. Redo the change with `pp_cli.py` |
 | A chat link was committed | the checker refuses it before a commit; if one got in, remove it in a new commit and tell the Owner (the old commit still holds it). Do not edit the Timeline: add a correcting entry |
+
+**Specific Owner-approved merge exception (25 October 2026):** For PRs **into `reallakshman19/progress-page` only**, an Owner go-ahead to proceed with the scoped draft covers its merge after verifying the exact head, applicable required checks, compatibility and GitHub protection rules; **do not ask for a second Owner approval**. Mark ready and merge when safe; report the actual merge SHA. Keep the PR unmerged on failed tests, missing source, scope drift, unreviewed mandatory gates or conflicts. This exception does not affect Common/other projects, Owner product acceptance or private custody; see [MODES.md](references/MODES.md). No autonomous future merge is implied.
 
 ## Related modules
 
