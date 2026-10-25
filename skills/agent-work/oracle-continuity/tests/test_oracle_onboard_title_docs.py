@@ -29,13 +29,15 @@ class OracleOnboardTitleDocs(unittest.TestCase):
                 self.assertIn("{{", text)
                 self.assertGreater(len(text), 1400)
         prompt = read(ORACLE / "ORACLE_ONBOARD_PROMPT.md")
-        self.assertIn("NEW_ORACLE", prompt)
-        self.assertIn("PROMOTED_ORACLE", prompt)
+        self.assertIn("SENDER: OWNER → ORACLE", prompt)
+        self.assertIn("OWNER_APPOINTED_ACTIVE_ORACLE", prompt)
         self.assertIn("CANDIDATE_SUCCESSOR_READ_ONLY", prompt)
         self.assertIn("KNOWLEDGE_READ_ONLY / NO_CONTROL_CUTOVER", prompt)
-        self.assertIn("ONE", prompt)
-        for name in FOUR:
-            self.assertIn(f"({name})", prompt)
+        self.assertIn("all WBS", prompt)
+        self.assertIn("ONE immediate project priority", prompt)
+        self.assertIn("no new file per WBS", prompt.lower())
+        # Four source knowledge classes exist, but are not another intake ritual.
+        self.assertIn("project knowledge examples", prompt)
 
     def test_v35_projector_is_sole_owner_of_generated_issue_title(self):
         hygiene = read(NATIVE)
