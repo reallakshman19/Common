@@ -37,7 +37,7 @@ For a read-only strip inside a chat, see `universal-workflow-progress`.
 | Writer agent (standalone, named by the Oracle) | makes the pull request under delegated authority; may perform repo-specific approved merge when permitted | assumes product acceptance or cross-repo merge authority |
 | Agent | leaves evidence on GitHub | writes the page |
 
-**Scoped Owner merge rule:** For **`reallakshman19/progress-page` alone**, an Owner go-ahead for a draft PR also permits the authorized operator to mark ready and **merge the same scoped PR** after required exact-head checks, current-base compatibility and GitHub protections; no **second** Owner merge approval is required. Block on failed gates, conflicting HOLDs or material scope drift. Other repos keep their own merge/acceptance authority. See [MODES.md](references/MODES.md#owner-standing-go-ahead--reallakshman19progress-page-only-25-october-2026) and the target repository README. GitHub merge does not imply product acceptance or independent review.
+**Scoped Owner merge rule:** For **`reallakshman19/progress-page` alone**, an Owner go-ahead for a draft PR also permits the authorized operator to mark ready and **merge the same scoped PR** after required exact-head checks, current-base compatibility and GitHub protections; no **second** Owner merge approval is required. Block on failed gates, conflicting HOLDs or material scope drift. Other repos keep their own merge/acceptance authority. See [MODES.md](references/MODES.md) and the target repository README. GitHub merge does not imply product acceptance or independent review.
 
 Modes and the Nudge + wiring: [references/MODES.md](references/MODES.md). Fields and rules: [references/DATA_CONTRACT.md](references/DATA_CONTRACT.md).
 
