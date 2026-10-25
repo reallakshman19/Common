@@ -1,0 +1,153 @@
+{
+  "schema": "oracle-cycle-current/v1",
+  "project": "ciifr-e1",
+  "mode": "standalone",
+  "activation": "PREPARED_NOT_ACTIVE",
+  "revision": 0,
+  "last_accepted_receipt_ids": [],
+  "aim": "CIIFR E1 read-only v14 CII ELEMENTS field/auxiliary-pointer catalogue: source-accountable logical indexed record guards, without mutating customer CII, producing TARGET1, or claiming effective engineering field meanings. Resolve independently falsified structural catalogue defects while retaining previously passed pointer-range behavior.",
+  "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/167",
+  "privacy": "PUBLIC_SAFE_METADATA_ONLY",
+  "roles": {
+    "oracle": {
+      "label": "CIIFR E1 Oracle",
+      "chat_id8": null,
+      "provenance": "OWNER_CHAT_LABEL_NOT_CONFIRMED",
+      "responsibility": "Own E1 WBS meaning, challenge R2 native return, reconcile one dedicated Cycle inbox and propose next revision; no code self-acceptance"
+    },
+    "coder": {
+      "label": "E1 pointer catalogue R2 repair builder",
+      "chat_id8": "6adddf80",
+      "provenance": "OWNER_CONFIRMED_CHAT_LABEL_NATIVE_TASK_173; NOT_AUTHENTICATED_AS_GITHUB_PRINCIPAL",
+      "responsibility": "Completed R2 exact-head builder return, native evidence reconciled; no further source edits or repeated execution authorized"
+    },
+    "reviewer": {
+      "label": "Independent E1 field-map reviewer",
+      "chat_id8": null,
+      "provenance": "ORIGINAL_REVIEWER_ON_XCU_170_SHORT_CHAT_ID_UNBOUND",
+      "responsibility": "Completed READ-ONLY R2 contrary-case review on XCU #170 6401186110; F1/F2/all-15 bounded PASS, F3 source HOLD. No further R2 reviewer assignment."
+    },
+    "owner": {
+      "label": "Owner",
+      "chat_id8": null,
+      "provenance": "OWNER_DIRECTIVE_USE_CYCLE_NOW_20261025",
+      "responsibility": "Paste Cycle trigger manually after activation; Owner-only release/merge/engineering acceptance"
+    }
+  },
+  "source_boundary": {
+    "xcu_repo": "reallakshman19/XML_Compare_Utilities",
+    "native_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173",
+    "wbs": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/167",
+    "reviewer_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170",
+    "current_candidate": "XCU draft PR #168 head 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b, bounded F1/F2/all15 independent replay PASS, F3 v14 CONTROL unresolved, merge HOLD",
+    "pr_url": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/168",
+    "oracle_r2_go": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400196426",
+    "original_independent_fail": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400040909",
+    "public_input": "https://github.com/reallakshman19/XML_Compare_Utilities/tree/2aeaf7372de66eda3bc082b8d81bf8db43c34f4b",
+    "supplemental_relay": "https://github.com/reallakshman19/Common/pull/479 (DRAFT/PROPOSED, not primary work artifact)",
+    "original_custody": "No private original needed for invented-source structural R2; original protected CII and native CAESAR import NOT_RUN",
+    "native_qualification": "XCU AGENTS.md Appendix A, local pre-edit backups and .agent-worklogs ledger; existing #90/#91 are old preimages; .backups/log.json tracked locally and never staged",
+    "protected_invariants": [
+      "Original SOURCE/TARGET0 immutable; no customer original public upload",
+      "Preserve exact physical byte spans and logical pointer counts",
+      "Retain independent BEND/EXPJT/IZUP/EQUIPMNT bounded PASS and RIGID/NODENAME sharing/zero semantics",
+      "Restrict R2 to reader, synthetic tests and PR168_workreport on same draft PR",
+      "No Writer, TARGET1, E2/E3, private-file/CAESAR import, release, merge, deployment",
+      "Separate active ciifr G1 Geometry Cycle rev4 and proposed ciifr-element #178 are not modified"
+    ],
+    "reviewer_r2_order": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400708556",
+    "reviewer_r2_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401186110",
+    "oracle_r2_acceptance": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401405888"
+  },
+  "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/495",
+  "assignments": [
+    {
+      "id": "CIIFR-E1-PTR-GUARD-R2",
+      "generation": 1,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adddf80",
+      "dispatch": "RETURNED_NATIVE_ORACLE_RECONCILED_NO_CYCLE_RECEIPT_EXPECTED",
+      "scope": "Continue existing, Oracle-authorized R2 minimum source repair on XCU #173: F1 reject declared positive-count RESTRANT section with header but empty body; F2 change v14 REDUCERS logical record cardinality to 2 physical lines and test valid/truncated; F3 source-qualify CONTROL fixed row widths or explicitly hold that format claim. Preserve all 15 index guards and old 30 native regressions. Same draft PR #168 and approved three files only.",
+      "candidate": "XCU PR #168 DRAFT repaired R2 head 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b (delivery verified 2026-10-25)",
+      "input_artifact_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/commit/01d94e1f19e39c1fb5863f539e56c2f06d5405d2",
+      "accepted_input_status": "PUBLIC_GITHUB_SOURCE_COMMIT_KNOWN; RECIPIENT_RECHECK_LIVE_NATIVE_CHECKOUT_REQUIRED",
+      "required_return": "ALREADY RETURNED via native XCU #173 6400645653; do not rerun or retroactively require Cycle receipt for an unactivated Cycle",
+      "next_after": "oracle",
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173",
+      "native_return_status": "R2_NATIVE_RETURN_VERIFIED_AND_R2_INDEPENDENT_REVIEW_RECONCILED",
+      "cycle_receipt_url": null,
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400645653",
+      "oracle_reconciliation_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400698988",
+      "independent_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401186110",
+      "independent_oracle_decision_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401405888"
+    }
+  ],
+  "next": {
+    "recipient_role": "owner",
+    "recipient_chat_id8": null,
+    "status": "NO_ACTIVE_ASSIGNMENT_F3_SOURCE_EVIDENCE_DEPENDENCY",
+    "instruction": "Both R2 coder and reviewer native returns reconciled. Do not activate completed R2 Cycle or request retroactive receipts. F3 requires direct v14 CONTROL format/extra-field admissibility specification OR authorized native v14 importer positive/negative contrast before any subsequent source-guard proposal. Otherwise preserve F3_SOURCE_BLOCKED and engineering/release HOLD, and choose other authorized WBS work.",
+    "owner_trigger": "NONE; no executable Cycle now until genuinely new actor/action and authorized canonical ACTIVE revision",
+    "native_evidence": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401405888"
+  },
+  "gates": [
+    {
+      "id": "r1-range-correction",
+      "status": "PASS_BOUNDED_INDEPENDENT_R2",
+      "scope": "R2 reviewer independently replayed all 15 pointer ordinal overflow probes and retained RIGID/NODENAME/zero/owner cases",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401186110",
+      "limits": "Not complete E1 catalogue acceptance"
+    },
+    {
+      "id": "r1-empty-restrant",
+      "status": "PASS_BOUNDED_INDEPENDENT_R2",
+      "scope": "R1 failure repaired in R2: absent, empty, whitespace-only positive-count auxiliary section rejects; nonempty RESTRANT shape unvalidated",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401186110"
+    },
+    {
+      "id": "r1-reducers-cardinality",
+      "status": "PASS_BOUNDED_INDEPENDENT_R2",
+      "scope": "v14 REDUCERS count=1 requires exactly 2 physical nonblank lines and logical pointer in range; two malformed nonblank rows can still pass cardinality-only",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401186110"
+    },
+    {
+      "id": "control-v14-row-admissibility",
+      "status": "BLOCKED",
+      "scope": "F3 native v14 CONTROL row width/trailing-field admissibility unproven; observed parser accepts surplus numeric slots; requires direct v14 spec or controlled native importer contrast",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401405888",
+      "limits": "v12/v15 version-bracketed description is not a direct v14 import/format verdict"
+    },
+    {
+      "id": "r2-builder-return",
+      "status": "PASS_DELIVERY_ONLY",
+      "scope": "R2 coder published exact-head fast-forward, three blobs verified, native 32/32 author-reported and hosted CI SUCCESS; F1/F2 engineering claim not yet independent",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400645653"
+    },
+    {
+      "id": "r2-independent-review",
+      "status": "PASS_BOUNDED_F1_F2_ALL15_F3_HOLD",
+      "scope": "Separate read-only V8 contrary-fixture reviewer returned PARTIAL: F1/F2 all15 PASS, F3 source unresolved, not blinded nor authenticated separate reviewer principal",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6401186110"
+    },
+    {
+      "id": "native-cii-caesar-import",
+      "status": "NOT_RUN",
+      "scope": "Private original customer CII and native CAESAR import not supplied/qualified"
+    },
+    {
+      "id": "owner-engineering-release",
+      "status": "HOLD",
+      "scope": "E1 source semantics, Writer/TARGET1, E2/E3, merge, release and deployment not authorized"
+    }
+  ],
+  "progress_projection": {
+    "repository": "reallakshman19/progress-page",
+    "project_key": "ciifr",
+    "publication_status": "DRAFT_PR18_EXISTING_PROJECTION_NOT_CYCLE_ACTIVE",
+    "published_revision": null,
+    "evidence": "https://github.com/reallakshman19/progress-page/pull/18",
+    "reason": "R2 independent review PARTIAL reconciled: F1/F2/all15 bounded PASS, F3 CONTROL source HOLD, no new actor assignment. Existing Progress Page PR18 updated by authorized native CLI in separate draft; not live merge."
+  },
+  "activation_basis": "OWNER_SELECTED_CYCLE_NOW_BUT_E1_R2_CODER_AND_REVIEWER_RETURNED_BEFORE_CANONICAL_ACTIVATION; NO_ACTIVE_ASSIGNMENT",
+  "activation_scope": "PREPARED_NOT_ACTIVE archival evidence for completed E1 R2 coder and reviewer native tasks. No current executable assignment; no retroactive Cycle receipt. Future F3 source-only task requires distinct authorized assignment + actual v14 source."
+}
