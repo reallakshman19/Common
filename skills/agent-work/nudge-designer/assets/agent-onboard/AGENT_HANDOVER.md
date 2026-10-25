@@ -1,6 +1,6 @@
 # {{PROJECT}} — Agent OnBoard executable task and artifact handover
 
-**WBS-LEVEL REFERENCE / not a dispatch by itself.** The Oracle fills the actual **ONE WBS task** from its native issue, project Home, original inputs and predecessor evidence. These optional [concept](CONCEPT_NOTE.md), [complex architecture](ARCHITECTURE_COMPLEX_LOGIC.md) and [decisions/falsifiers](ARCHITECTURE_DECISIONS_AND_CHALLENGES.md) scaffolds may help the **Oracle explain this WBS's relevant source meaning**, but they are NOT four additional documents a coder must author, read in full or seek approval for. The complete first-contact instruction is [Oracle → Agent, one WBS prompt](AGENT_ONBOARD_PROMPT.md). Preserve the existing task ID, source/current head, assignment generation and original native return.
+**WBS-LEVEL TEMPLATE / REFERENCE; not a dispatch by itself.** The Oracle fills the actual **ONE WBS task** from its native issue, project Home, original inputs and predecessor evidence. These optional [concept](CONCEPT_NOTE.md), [complex architecture](ARCHITECTURE_COMPLEX_LOGIC.md) and [decisions/falsifiers](ARCHITECTURE_DECISIONS_AND_CHALLENGES.md) scaffolds may help the **Oracle explain this WBS's relevant source meaning**, but they are NOT four additional documents a coder must author, read in full or seek approval for. The complete first-contact instruction is [Oracle → Agent, one WBS prompt](AGENT_ONBOARD_PROMPT.md). Preserve the existing task ID, source/current head, assignment generation and original native return.
 
 ## A. Actual actor, task, role and accepted mode
 
