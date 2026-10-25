@@ -4,7 +4,9 @@
 **Status at preparation:** `PUBLIC_SAFE_PAYLOAD_STAGED_ON_DRAFT_BRANCH / NOT_CANONICAL_MAIN / RECIPIENT_NOT_CONFIRMED / ORACLE_NOT_CUTOVER`  
 **Source/producer:** incumbent CIIFR E1 coordinating Oracle, **SELF_ASSESSED narrative**; no independent validation of these prose claims beyond opening the referenced GitHub native source/issue metadata. No active successor Oracle ID, chat message delivery, control epoch or SOURCE/TARGET copy transfer.
 
-**Draft publication locator:** [Common PR #506](https://github.com/reallakshman19/Common/pull/506), DRAFT/UNMERGED at preparation. The PR's exact head is mutable; inspect fresh HEAD and frozen Git blob IDs.\n\n**Exact proposed GitHub relay path:** `Common/relay/AGENT_WORK/ciifr/E1-ORACLE-CONTINUITY-20261025/` on branch `oracle/ciifr-e1-continuity-knowledge-20261025`; intended draft PR tracked in repository PR description. After any merge the recipient should use the exact merged commit, not assume this draft's content is canonical. This receipt is public-safe and does not include protected engineering model bytes.
+**Draft publication locator:** [Common PR #506](https://github.com/reallakshman19/Common/pull/506), DRAFT/UNMERGED at preparation. The PR's exact head is mutable; inspect fresh HEAD and frozen Git blob IDs.
+
+**Exact proposed GitHub relay path:** `Common/relay/AGENT_WORK/ciifr/E1-ORACLE-CONTINUITY-20261025/` on branch `oracle/ciifr-e1-continuity-knowledge-20261025`; intended draft PR tracked in repository PR description. After any merge the recipient should use the exact merged commit, not assume this draft's content is canonical. This receipt is public-safe and does not include protected engineering model bytes.
 
 ## Manifest — Git blob integrity locators, *not* recipient SHA-256 measurements
 
