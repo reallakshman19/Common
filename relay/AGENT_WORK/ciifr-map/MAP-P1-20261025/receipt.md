@@ -3,17 +3,23 @@ Handoff: CIIFR-MAP / MAP-P1 / 20261025
 From → To: Owner-appointed CIIFR-MAP Oracle → task-local MAP-P1 builder (runtime binding pending; Chat ID8 UNKNOWN)
 Native authority: [parent/WBS #179](https://github.com/reallakshman19/XML_Compare_Utilities/issues/179) and [MAP-P1 #180](https://github.com/reallakshman19/XML_Compare_Utilities/issues/180).
 Mode: standalone native task routing; no new Cycle, DELP or v3.6 selection.
-Purpose: capability/source probe, then ownership-safe XML-backed correspondence preview under the reconciled slice. No field/CII writer.
+Purpose R2 (Owner narrowed before builder start): compare TWO EXISTING XML geometries with Method C and the existing manual-anchor logic, produce overlay SVG and node evidence. No CII→XML construction or field/CII writer. Native #180 body is the current contract.
 
 ## Public immutable input route (Option 1)
 These existing public GitHub commit artifacts are the authorized payload equivalent; they are not copied into this receipt and are not private customer transfers.
 
-- **R4 dependency:** XCU commit `9da244e7670a21d963def16543679a6d983d5ba7`, [prototypes/ciifr-r4](https://github.com/reallakshman19/XML_Compare_Utilities/tree/9da244e7670a21d963def16543679a6d983d5ba7/prototypes/ciifr-r4). Source-slot snapshot and frozen XML-only roundtrip.
+- **R4 XML format reference / optional fixture producer only:** XCU commit `9da244e7670a21d963def16543679a6d983d5ba7`, [prototypes/ciifr-r4](https://github.com/reallakshman19/XML_Compare_Utilities/tree/9da244e7670a21d963def16543679a6d983d5ba7/prototypes/ciifr-r4). Source-slot snapshot and frozen XML-only roundtrip.
 - **Original public input source:** XCU main checkpoint `c823f0c0edbeb315c07fa2911390dc781968146f`, [Benchmark](https://github.com/reallakshman19/XML_Compare_Utilities/tree/c823f0c0edbeb315c07fa2911390dc781968146f/Benchmark). Retrieve required exact files through a native checkout; do not infer private custody.
 - **S1.CII:** Oracle measured 108,330 bytes; SHA-256 `9a9cb14db4c13f5aac41cc74a60e7e528722eb5003d09f07192762ab6bfb1a2b`.
 - **T.CII:** Oracle measured 2,866,002 bytes; SHA-256 `abfa3ffc9281fe75d4170b2d885d554cb1f120dadedae7c7ab609548b63cc060`.
 - **S2/S3:** available in same immutable public Benchmark; receiving builder must measure exact bytes/hash before any claim.
 - Frozen R4 engine expected SHA-256 `b2bb8ed87440e46f72833424cacd82e6605c47f372f146deec749ad2bb0ee264`, profile expected `8d2c2123bce98a387d00a3aeca69c8e5dea6b3831e29f65e7760f6a5694204b2` (published R4 receipts; receiver must independently remeasure).
+
+## Current XML geometry implementation sources
+- XCU main c823f0c0edbeb315c07fa2911390dc781968146f: tabs/cii-workspace/cii-workspace-method-c-{registration,candidates,svg,rigid-fit,original-geometry}.js. Reuse numerical/overlay functions; new XML graph adapter only, no converter or shared module edits.
+- Existing manual-anchor correspondence is separately implemented in cii-workspace-propagation.js, cii-workspace-topology.js and cii-workspace-multi-base-correspondence.js. Single reviewed seeds propagate through supported adjacent element assignments and stop at ambiguous frontiers. This is distinct from manual anchor input to Method C's pose fitter. Trace its applicability to XMLv1 before deciding the interface; do not silently collapse the two logics.
+- F05 XML profile reference at PR157 a67487023bcafc13d68b62dbfc9bb74c61b3c64c; R4 XML profile reference at PR163 9da244e7670a21d963def16543679a6d983d5ba7. No Owner XML pair attached.
+- New comparison files only under prototypes/ciifr-map/ on current main, plus recovery report. Previous R4-stacked ownership inspector plan is superseded, no builder started R1.
 
 ## Oracle observations before builder dispatch
 Native Python 3.12.14 at exact R4 commit:
