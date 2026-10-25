@@ -50,8 +50,15 @@ class AgentOnBoardGoldenDocs(unittest.TestCase):
         prompt = read(BASE / "AGENT_ONBOARD_PROMPT.md")
         readme = read(BASE / "README.md")
         handover = read(BASE / "AGENT_HANDOVER.md")
-        for name in FOUR:
-            self.assertIn(f"({name})", prompt)
+        # A WBS agent receives scoped continuity, not all four project packets.
+        self.assertIn("ONE WBS TASK", prompt)
+        self.assertIn("SENDER: PROJECT ORACLE", prompt)
+        self.assertIn("Stable task ID", prompt)
+        self.assertIn("predecessor", prompt.lower())
+        self.assertIn("downstream consumer", prompt.lower())
+        self.assertIn("AWAIT_ORACLE_RECONCILIATION", prompt)
+        self.assertNotIn("([CONCEPT_NOTE.md])", prompt)
+        self.assertIn("one", readme.lower())
         for text in (prompt, readme):
             self.assertTrue("no new" in text.lower() or "not a new" in text.lower())
             self.assertIn("independent reviewer", text.lower())
