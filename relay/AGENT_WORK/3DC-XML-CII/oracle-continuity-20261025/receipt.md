@@ -6,7 +6,7 @@
 - **Candidate:** Common `main` baseline `d381021e755d63c48759983e29bfedc1c7edbb88`; 3D_Converters observed `main` `40f11e3f6051086b1bcfcb64f2dd07b12fcb232c`; PR #335 observed Draft `73da06327a9befd05cb66fe96a1dee63e6a8249e`
 - **Storage:** `COMMON_RELAY_PAYLOAD` proposed; NOT in `main` until a separate authorized merge.
 - **Locator:** `relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload/ORACLE_HANDOVER.md` on proposed branch `handover/3dc-xml-cii-oracle-continuity-20261025`
-- **Payload:** public-safe Markdown; immutable Git blob to be verified by recipient at actual version; SHA-256, byte count and recipient's own hash **NOT_YET_VERIFIED**
+- **Payload:** public-safe Markdown; Git blob `1ec1d23ae5a8fd01071dbf6956dca95bfa0be7d6`; producer-measured UTF-8 bytes **13361**; SHA-256 **`cc2830c64272134d5126493fda591364c669e5ce98e8ebe55ead9bfdf6de15cf`**. Recipient's independent download/hash check **NOT_RUN**.
 - **Delivery:** `PROPOSED_DRAFT_PR` only; no successor has been sent an authenticated handover.
 - **Receipt:** `PLANNED`; receiver observation `NOT_RUN`.
 - **Protected files:** `LOCAL_ONLY / NOT_TRANSFERRED`; no private files or URLs in Common.
