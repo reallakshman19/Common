@@ -32,6 +32,13 @@ For a mature working explanation use the optional
 [Oracle OnBoard Prompt](../nudge-designer/references/ORACLE_ONBOARD.md):
 a fresh recipient checks essentials; never re-run a solved reconstruction
 as a ceremonial exam. Read only the task's relevant original sources.
+For a **new agent**, first apply [Initial Mentoring](../initial-mentoring/SKILL.md)
+inside the *same* source walkthrough and task brief: align the Owner's real
+product outcome, one difficult source-to-result rule/wrong case, and the next
+observable deliverable. **The Oracle—not the new agent or Owner—must first
+ground the difficult engineering premise** in an accessible original item,
+the actual existing parser/converter and field-specific specification.
+For a returning `Cycle now` agent, refresh changed evidence only.
 
 When a worker may change, the Oracle may be succeeded, or writes overlap,
 **read [CHANGEOVER.md](references/CHANGEOVER.md)** and
@@ -83,6 +90,30 @@ On an Owner's request for status, routing, intent update or `Cycle now`:
 
 No task or status write occurs merely because someone requests a read-only
 progress report. Never infer access to other live chat tabs.
+
+**Domain-grounding before framework/design claims (CIIFR lesson):**
+Reading `START_HERE` and describing role/relay/CI rules establishes
+**process adoption only**, not understanding of the product. When the Owner
+asks for architecture, code modules, fixtures or benchmarks, first check the
+**actual existing project Home/source and one representative original record**;
+trace it through the current parser/output and authoritative field/units
+specification. Keep structural census (for example, CII ELEMENTS/NODENAME/RIGID
+counts or pointer `0`) separate from verified *effective engineering semantics*
+(such as per-field inheritance, sentinel/default values, auxiliary ownership
+and downstream propagation). If a load-bearing interpretation is not
+verified, do a **bounded read-only source/format grounding slice** or
+explicitly mark that part **PROPOSED/UNKNOWN**; do not build or recommend
+writer/transfer rules as if verified. This is source work, not a request for
+ceremonial Owner permission. Synthetic regressions and a fast benchmark
+qualify only their observed synthetic scope; the Oracle's own contribution
+stays `SELF_ASSESSED` where independent judgment is required.
+
+Before promising another participant a framework/ZIP, inspect an authorized
+**recipient-accessible relay/custody route**. Locally verified ZIP members,
+digests and timing records are not cross-chat delivery or a semantic PASS;
+mark a blocked Common publication as `BLOCKED / NOT_TRANSFERRED`, keep the
+artifact and publish a sanitized receipt where authorized. Follow
+[Artifact Relay](../ARTIFACT_RELAY.md), not a guessed `sandbox:` handoff.
 
 **Artifact transfer rule (Owner, 24 October 2026):** Every Oracle↔agent transfer of a material input, output, prototype, ZIP or review evidence is recorded through [Common artifact relay](../ARTIFACT_RELAY.md), **even when first shared by attachment, `/mnt/data` or `sandbox:` link**. The relay record is public-safe; authorized public bytes may live in `relay/AGENT_WORK/`, while protected bytes stay in the Owner's private handoff storage and the relay contains only a sanitized locator/status. Track actual recipient retrieval and SHA-256 verification separately. Neither a local link nor a draft PR is a completed transfer; do not change the active V3.1 relay recorder to accomplish an agent-work handoff.
 

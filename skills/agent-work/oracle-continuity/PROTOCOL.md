@@ -47,6 +47,15 @@ not allocated to a capable participant. Medium-reasoning executors receive eithe
 concrete guided method or an investigation with competing explanations and a useful
 discriminating observation. Role/model labels do not establish competence.
 
+**Initial understanding is mentor-supported, not exam-scored.** When a new agent
+or successor Oracle is first assigned, the responsible Oracle/coordinator uses
+[Initial Mentoring](../initial-mentoring/SKILL.md) within existing onboarding:
+roughly three adaptive source-grounded questions about **Owner outcome**,
+**difficult architecture and a plausible wrong case**, and **one connected next
+observable result**. A new worker does not inherit an explanation as technical
+truth merely because an Oracle supplied it. Existing returned agents use only
+current-state deltas and do not repeat these questions.
+
 The coordinator owns actual routing and receipts. The executor owns its bounded
 artifact. The reviewer inspects the relevant claims without being an author of the
 artifact or its declared ancestors. A runner supplies execution where needed. The
@@ -105,11 +114,24 @@ referenced; the core does not require copying them into the public record.
    Add browser/runtime/repository requirements only when needed. An active assignment
    requires observed positive evidence for its declared capabilities, including input
    access and artifact return. Capability observations are dated, not permanent.
-4. Write a compact brief from the task record: aim, why this task, actual inputs,
+4. **Before writing a consequential engineering brief or qualifying a new framework**,
+   the Oracle opens one relevant original input/record, its existing implementation
+   path and the authoritative format/domain rules; traces one important relationship
+   end-to-end; and distinguishes **inventoried structure** from verified **effective
+   meaning**, including applicable units, source identity, field-specific defaults,
+   inheritance, auxiliary pointers or other project-specific dependencies.
+   Identify one error a superficial parse or happy-path test could miss and how an
+   original-grounded counterexample would expose it. When material field meaning
+   is unverified or protected inputs are unavailable, label the affected premise
+   `UNKNOWN / NOT_RUN` and choose a **bounded read-only grounding action** before
+   asserting writer or engineering correctness. Do not turn this into a scored
+   onboarding quiz, compulsory new issue or an Owner decision if the necessary
+   source is already accessible.
+5. Write a compact brief from the task record: aim, why this task, actual inputs,
    decisions/constraints, result, checks, reserved judgments and next action.
-5. Deliver through the actual supported route. Keep `prepared`, `sent`, `confirmed`
+6. Deliver through the actual supported route. Keep `prepared`, `sent`, `confirmed`
    and `uncertain` distinct. Only confirmed delivery supports `active` or `returned`.
-6. Inspect a real result early. Update the checkpoint at meaningful artifact,
+7. Inspect a real result early. Update the checkpoint at meaningful artifact,
    decision or evidence boundaries. Resume from the latest trusted checkpoint after
    unexpected session loss; do not wait for a hidden context percentage.
 
@@ -135,7 +157,16 @@ model judgment remains the Oracle's responsibility to resolve or route.
 
 A supported assessment requires observed positive evidence for the exact task
 revision, criterion and artifact. A reported PASS, missing witness or NOT_RUN does
-not qualify. Separate-review criteria reject declared authors and ancestor authors;
+not qualify. **A synthetic-fixture PASS, source-file count, hash check or local
+ZIP-integrity test is evidence only for its measured scope**: it does not establish
+original-model semantic transfer, meaningful benchmark performance on the Owner
+input, a recipient-accessible Common relay, or engineering release. Record
+benchmark method, actual sample size, environment, warm-up and measured source
+separately; three timed samples cannot justify a reliable empirical p95 claim.
+For material Oracle-authored artifacts retain `SELF_ASSESSED` and
+`NOT_TRANSFERRED` where independently checked engineering meaning or actual
+receiver retrieval is missing. Separately reconcile the original model/field
+source and access path before downstream use. Separate-review criteria reject declared authors and ancestor authors;
 the record must disclose source/fixture exposure. Different sessions establish only
 declared session separation, not authenticated principal independence or blindness.
 
@@ -196,6 +227,22 @@ Before describing a handover packet as complete, the incumbent must make the fol
 A status-only A–G checklist, a set of unread links, or an agent roster does **not** establish these knowledge classes. Reuse existing Project Home or project-native architecture/decision records wherever sufficient; **four distinct new files are not mandated**. If content is genuinely absent or inaccessible, label the specific knowledge gap and keep its assurance unknown rather than inventing an explanation or claiming full transfer.
 
 The successor checks the relevant original sources and demonstrates usable understanding by explaining an important design invariant, a rejected alternative or surviving wrong case, and the next evidence-bearing operation. This is targeted source reconciliation, **not a scored onboarding exam**, engineering review, file-byte receipt, independent PASS, or grant of Oracle control. Follow the selected native authorization and epoch/cutover rules below.
+
+**Read-only successor mentoring and source challenge:** The outgoing Oracle or
+coordinator brings a source-linked concept, architecture decisions, real current
+candidate, fixtures/custody, active assignments/returns and next two connected
+deliveries. The new Oracle uses [Initial Mentoring](../initial-mentoring/SKILL.md)
+in conversation to reconcile: (1) the actual Owner/user outcome, (2) one
+**original-to-effective engineering meaning** path and rejected shortcut/wrong
+case against real source/specification, and (3) the immediate useful task,
+following dependent task, existing worker owners and late-return risk. In a CII
+example, ELEMENTS/RIGID/NODENAME counts, node/pointer census and 13 green synthetic
+parser tests **do not verify** field-specific inheritance, sentinel
+semantics, auxiliary ownership or downstream effective properties. Mark those
+unknown until independently grounded in original CII, existing parser and
+appropriate vendor layout; if uncertain, the first successor task is bounded
+**read-only source reconciliation**, not fresh writer/transfer modules. This
+conversation provides understanding, **never automatic control or approval**.
 
 Prepare a handover with the old/new Oracle sessions, epoch n to n+1 and a checkpoint.
 At cutover, retire the prior Oracle instance, activate the new control binding and

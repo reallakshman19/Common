@@ -9,17 +9,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[3]
 
-V3_SKILL_PATTERN = "skills/" + "engineering-pr-delivery-v3/*"
-
-
+# V2.5/V3 CI workflows were retired. Assert the currently maintained V3.1
+# workflow rather than requiring removed historic jobs to be recreated.
 WORKFLOWS = {
-    "engineering-pr-delivery-v2.5.yml": (
-        "skills/engineering-pr-delivery-v2.5/*",
-        "skills/three-pass-prompt-generator/*",
-    ),
-    "engineering-pr-delivery-v3.yml": (
-        V3_SKILL_PATTERN,
-    ),
     "engineering-pr-delivery-v3.1.yml": (
         "skills/engineering-pr-delivery-v3.1/*",
         "skills/two-pass-prompt-generator/*",
@@ -48,7 +40,14 @@ class RequiredCheckTerminalityTests(unittest.TestCase):
                 )
                 self.assertIn("Relay scope not applicable", text)
                 self.assertIn("steps.relevance.outputs.relevant != 'true'", text)
+                # Scope only files changed by the PR, excluding unrelated
+                # commits that landed on the base after the branch forked.
+                self.assertIn('git merge-base "$BASE_SHA" "$HEAD_SHA"', text)
                 self.assertIn(
+                    'git diff --name-only --no-renames "$merge_base" "$HEAD_SHA"',
+                    text,
+                )
+                self.assertNotIn(
                     'git diff --name-only --no-renames "$BASE_SHA" "$HEAD_SHA"',
                     text,
                 )

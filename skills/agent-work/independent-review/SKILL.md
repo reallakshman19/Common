@@ -50,6 +50,23 @@ them when useful. They are not compulsory passes or a lifecycle controller.
    this review attempt separately. Inspect the real artifact and inputs. Record
    byte hashes where identity matters; a filename, copied hash or PR summary is
    insufficient. Name unavailable resources and continue unaffected checks.
+   For material Oracle/agent workpacks, use the project's existing native handoff
+   and [Common artifact relay](../ARTIFACT_RELAY.md) to recover the **exact**
+   versioned candidate. **Option 1 FIRST:** retrieve permitted public-safe bytes
+   from immutable Common relay/authorized GitHub source. **Option 2 NEXT:** for
+   protected bytes or unusable Option 1, use the Owner-designated Google Drive
+   Handoffs under the recipient's authorized access. **One of 1 or 2 is
+   mandatory before claiming a completed artifact handoff.** A `sandbox:`
+   link is only `LOCAL_ONLY / NOT_TRANSFERRED` fallback, not reviewer receipt.
+   Do not use a public page fixture or guessed private child URL to obtain the
+   protected artifact. Confirm the reviewer's **own actual** access,
+   download, file size/hash and relevant ZIP members; the author/Oracle's
+   earlier `BYTES_VERIFIED` does not establish reviewer receipt. A private root
+   that can be listed by one connector does not prove the reviewer has access or
+   that its sharing is restricted. If not retrievable, record `NOT_RECEIVED` /
+   `NOT_RUN` for dependent technical checks; avoid passing source fidelity
+   using only a producer's summary. Never publish restricted URLs, input bytes
+   or private source names in public review comments.
 3. **Disclose independence.** State authorship, inherited context, reference access,
    expected-behavior derivation, execution and upstream shared assumptions. Use
    [independence guidance](references/INDEPENDENCE.md). Fresh context alone proves
