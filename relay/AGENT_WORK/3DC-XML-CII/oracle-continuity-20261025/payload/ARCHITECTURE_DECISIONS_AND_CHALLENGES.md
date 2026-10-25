@@ -43,7 +43,7 @@ Does fresh current Worker receipt match original index/selection/masters?
 1. **Observed native Run failure → deployed safe diagnostic** (Owner trial/revision witness). This closes *observability*, not product output.
 2. **Diagnostic → tightly scoped converter repair** (separate builder, protected real fixture custody or explicit NOT_RUN). This closes the specific engine/packing fault without changing accepted Final, worker lease or release guards.
 3. **Repair → independent actual-CII mass/lineage + Owner use** (separate reviewer under native authority). This closes only the tested output/Download path; preserve importer/solver/material/restraint limits.
-4. **Parallel:** independent CAESAR II contracted-model challenge for draft PR #335. Its result is **not** a shortcut to 1–3 and cannot be imported from an EF-05 no-op.
+4. **Parallel:** independent CAESAR II contracted-model challenge for draft PR #335. Its result is **not** a shortcut to 1–3 and cannot be imported from a historical no-op.
 
 ## Architectural change discipline
 
