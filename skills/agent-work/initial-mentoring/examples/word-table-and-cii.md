@@ -32,7 +32,7 @@ A converter that allows **user-selected header rows and dynamic record-row mergi
 
 ### Why the first Oracle step matters
 
-In the supplied conversation, the Oracle initially discussed coordination before it could explain the actual CII engineering record. The Owner challenged it to inspect the CII and the Hexagon CAESAR II v14 **Basic Element Data** documentation. The key distinction is **stored element fields vs effective engineering properties**, where verified field-specific defaults/inheritance/auxiliary references and units may affect following elements even without changing their raw bytes. The historical Oracle reported that CII identity had been checked, but the **actual field-by-field layout, inheritance encodings, auxiliary relationships and RichInputXML schema had not yet been fully reconciled**. The lesson is to ground the Oracle, not to force a fast confident explanation.
+In the supplied conversation, the Oracle initially discussed coordination before it could explain the actual CII engineering record. The Owner challenged it to inspect the CII and the Hexagon CAESAR II v14 **Basic Element Data** documentation. The key distinction is **stored versus effective engineering properties**, where verified field-specific defaults/inheritance/auxiliary references and units may affect following elements even without changing their raw bytes. The historical Oracle reported that CII identity had been checked, but the **actual field-by-field layout, inheritance encodings, auxiliary relationships and RichInputXML schema had not yet been fully reconciled**. The lesson is to ground the Oracle, not to force a fast confident explanation.
 
 **Q1 / why:** "Is the goal to copy CII values into XML tags, or to transfer the same effective piping model?"
 
