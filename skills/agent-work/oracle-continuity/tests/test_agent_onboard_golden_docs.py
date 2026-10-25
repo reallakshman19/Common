@@ -89,7 +89,7 @@ class AgentOnBoardGoldenDocs(unittest.TestCase):
         self.assertIn("original", decisions.lower())
 
     def test_local_links_exist_and_no_private_child_location(self):
-        paths = [BASE / p for p in (*FOUR, "README.md", "AGENT_ONBOARD_PROMPT.md"),
+        paths = [BASE / p for p in (*FOUR, "README.md", "AGENT_ONBOARD_PROMPT.md")] + [
                  AGENT_WORK / "nudge-designer/references/ORACLE_ONBOARD.md",
                  AGENT_WORK / "nudge-designer/assets/prompts/oracle-onboard.md",
                  AGENT_WORK / "START_HERE.md"]
