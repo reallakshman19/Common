@@ -1,5 +1,9 @@
 # Agent-work operating guide: modules and detailed reference
 
+**Documentation navigation:** [START HERE — role/mode entry](START_HERE.md) · [Entry process maps A–E](ENTRY_PROCESS_MAPS.md) · [Project Home and fixture custody](PROJECT_HOME_GUIDE.md) · [Extended operating reference](OPERATING_GUIDE.md). Read only the branch relevant to your current task; these are not four compulsory stages.
+
+**Artifact transactions:** For current Oracle↔agent inputs and returned files, use [Common artifact relay](ARTIFACT_RELAY.md) (public-safe Common `relay/` path preferred; private Google Drive custody only for restricted bytes/fallback). The [Project Home guide](PROJECT_HOME_GUIDE.md#fixture-maintenance-and-oracleagent-artifact-exchange) describes how the page records the exact source for new agents. This extended guide preserves historical methodology; for current execution enter through START HERE and the five maps.
+
 ## Contents
 
 - [Start with a short request](#start-with-a-short-request)
