@@ -20,7 +20,7 @@ Sources in precedence: latest Owner instruction → original project AIM/native 
 
 ## B. Verified source/candidate: what really exists
 
-**Last retrieved Common/main:** `c3d10bc7c95bef857f5aa12e2a4270777dcb8709` (merged [PR #492 CIIFR prompt](https://github.com/reallakshman19/Common/pull/492), 25 October 2026). This is a **frozen source snapshot** of where preparation began; reread current main before any successor work.
+**Current Common/main readback at final branch reconciliation:** `6f7619ac9160cfadb6c5e6d564afec67b1ca5a51` (25 October 2026). Initial source inspection began at `c3d10bc7c95bef857f5aa12e2a4270777dcb8709` (merged [PR #492 CIIFR prompt](https://github.com/reallakshman19/Common/pull/492)); `main` then advanced one commit to `6f7619ac` publishing **separate, project-native CIIFR four-document continuity materials**. The current Common handover branch explicitly incorporated that newer commit without editing those seven CIIFR files. The older SHA remains a **pinned reference for original Common protocol source inspection**, not a claim that it is live main. **Successor must always reread actual main** and its own project's canonical task/receipts.
 
 | Module/candidate | Verified published fact | Limitation |
 |---|---|---|
