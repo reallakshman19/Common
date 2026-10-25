@@ -1,5 +1,7 @@
 # START HERE — one entry, choose your role and mode
 
+**Documentation navigation:** [START HERE — role/mode entry](START_HERE.md) · [Entry process maps A–E](ENTRY_PROCESS_MAPS.md) · [Project Home and fixture custody](PROJECT_HOME_GUIDE.md) · [Extended operating reference](OPERATING_GUIDE.md). Read only the branch relevant to your current task; these are not four compulsory stages.
+
 **Everyone starts here.** Find the current Owner aim and exact project source; choose the **coordination mode**, then **your role**, then **one next task**. Open only the linked instructions needed. This page is a directory, not a new skill, dispatcher, admission test, authority grant or approval gate.
 
 ## 1. Ground the project (before selecting a module)
@@ -41,6 +43,8 @@ For each role's **task, authority boundary, exact return, full file-cycle steps 
 ## 4. Do one bounded, evidence-carrying cycle
 
 **Aim + originals → task / role / assignment → source/access checks → runnable slice → [artifact relay](ARTIFACT_RELAY.md) → independent challenge as required → reconciliation → Owner trial/decision → [Progress Page](progress-page/README.md) → successor.**
+
+**Artifact exchange and new-agent inputs:** Oracle maintains a task-scoped [Common artifact relay](ARTIFACT_RELAY.md) record under [Common relay/](../../relay/) (**preferred**). The Progress Page Grounding Fixtures/Home lists the exact public-safe relay locator, status and WBS association; the agent reads that record and verifies actual bytes before relying on the input. Use authorized private Google Drive only for protected bytes or when GitHub payload transport is unavailable, with a sanitized Common relay receipt wherever possible. A sent link, a draft PR, a producer SHA claim, and receiver byte verification are different states. Agent outputs/review evidence return through the same relay contract; issue evidence and optional Cycle receipts remain separate.
 
 The seven onboarding checks are: **Owner intent, canonical sources, role and task, real access, protected boundaries, runnable result (or NOT_RUN/BLOCKED), evidence return and one next action**. Progress Page readiness is an *observation* for the same assigned recipient and milestone, not permission to work or a PASS. A private chat upload or `sandbox:` link is not verified cross-chat file delivery.
 
