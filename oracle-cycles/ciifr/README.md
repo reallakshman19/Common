@@ -7,7 +7,7 @@ This is a **manual transport for only the existing XCU G1 builder** (Owner-confi
 - [Geometry concept, WBS and original falsifiers — XCU #166](https://github.com/reallakshman19/XML_Compare_Utilities/issues/166)
 - [Transport issue — Common #482](https://github.com/reallakshman19/Common/issues/482) for a **short** `ORACLE-CYCLE-RECEIPT v1`, referencing actual native #169 evidence
 - [Shared Cycle protocol](../PROTOCOL.md) (lightweight continuation; do not rerun completed source checks)
-- [Source artifact relay receipt](../../relay/AGENT_WORK/ciifr/CIIFR-GEO-C-G1-SOURCE-20261025/receipt.md) (custody not engineering approval)
+- [Owner-reported source recovery and relay coordination](https://github.com/reallakshman19/Common/issues/482) (custody metadata only; Common relay publication is tracked separately)
 
 ## Owner → existing G1 builder
 
