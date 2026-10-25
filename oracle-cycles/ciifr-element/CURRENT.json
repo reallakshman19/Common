@@ -1,0 +1,104 @@
+{
+  "schema": "oracle-cycle-current/v1",
+  "project": "ciifr-element",
+  "mode": "standalone",
+  "activation": "PREPARED_NOT_ACTIVE",
+  "revision": 0,
+  "last_accepted_receipt_ids": [],
+  "aim": "Source-qualified ELEMENTS process and RIGID field semantics for future read-only SOURCE→TARGET Element Property Transfer Preview. Preserve the existing VNext Geometry Tab 3; do not infer Writer or engineering transfer authority from field offsets.",
+  "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178",
+  "privacy": "PUBLIC_SAFE_METADATA_ONLY",
+  "roles": {
+    "oracle": {
+      "label": "CIIFR Element Oracle (coordination)",
+      "chat_id8": null,
+      "provenance": "OWNER_ROLE_DECLARED_CHAT_ID_NOT_BOUND",
+      "responsibility": "Reconcile preliminary specialist report, original input custody and independent field semantics; propose but do not self-authorize activation or engineering PASS"
+    },
+    "coder": {
+      "label": "Field-semantics specialist — READ_ONLY",
+      "chat_id8": null,
+      "provenance": "RECIPIENT_NOT_CONFIRMED",
+      "responsibility": "Original source trace, typed pointer ownership, units/case/zero semantic contrast, native return on XCU #178; no Writer"
+    },
+    "reviewer": {
+      "label": "Independent semantic reviewer (unassigned)",
+      "chat_id8": null,
+      "provenance": "NOT_ASSIGNED",
+      "responsibility": "If required, independently challenge exact original-source meaning after trace return"
+    },
+    "owner": {
+      "label": "Owner",
+      "chat_id8": null,
+      "provenance": "OWNER_SELF",
+      "responsibility": "Confirm actual specialist chat binding and protected-original handoff, final acceptance/merge authority"
+    }
+  },
+  "source_boundary": {
+    "native_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178",
+    "parent_objective": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/139",
+    "native_policy": "https://github.com/reallakshman19/XML_Compare_Utilities/blob/main/AGENTS.md",
+    "pinned_agent_work": "https://github.com/reallakshman19/Common/blob/020a5aaf67f891dcb11d82af9526573fc4775174/skills/agent-work/START_HERE.md",
+    "current_baseline": "XCU main c823f0c0edbeb315c07fa2911390dc781968146f at preparation",
+    "related_draft_candidates": "XCU #176 e973af8b249d4770ae766c8554ac71aba2de119c (NodeName); #174 9936d4078fb7f837ffe6f46805241efdb7bbc0e8 (Geometry). Refresh before use.",
+    "research_artifact_rel": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/receipt.md",
+    "original_custody": "OWNER_PRIVATE_REF:CIIFR_ELEMENT_ORIGINAL; specialist original-byte access NOT_VERIFIED",
+    "engineering_HOLDs": [
+      "TAKEOVER_AUTHORITY=READ_ONLY",
+      "WRITER_HOLD",
+      "ORIGINAL_EFFECTIVE_SEMANTICS_NOT_ESTABLISHED",
+      "PRODUCTION_TAB3_IS_GEOMETRY",
+      "NO_MERGE_DEPLOY",
+      "NO_CII_MODIFICATION"
+    ],
+    "preliminary_return": "Owner-pasted READ-ONLY FIELD AUTHORITY REPORT / PARTIAL; no native task receipt; not a Cycle receipt."
+  },
+  "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/493",
+  "assignments": [
+    {
+      "id": "CIIFR-ELEMENT-FIELD-AUTHORITY-1",
+      "generation": 0,
+      "recipient_role": "coder",
+      "recipient_chat_id8": null,
+      "dispatch": "PREPARED_NOT_DISPATCHED",
+      "scope": "Read-only original-byte→field→effective-property trace for TEMPERATURE_1, PRESSURE_1, FLUID_DENSITY, RIGID.WEIGHT, RIGID.TYPE. One independent positive plus discriminating contrary case and field verdicts on #178; no writer or app edits.",
+      "candidate": "RESEARCH_READONLY_FRAMEWORK_NOT_PRODUCT_CANDIDATE",
+      "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/receipt.md",
+      "protected_input_status": "OWNER_ORIGINAL_ACCESS_NOT_VERIFIED_FOR_RECIPIENT",
+      "required_return": "Native XCU #178 field source map with original source evidence, predictions/observations, hashes, units/cases/pointer type, STOP/HOLDs; separate Common #493 Cycle routing envelope only after activation",
+      "next_after": "oracle"
+    }
+  ],
+  "gates": [
+    {
+      "id": "research-zip-custody",
+      "status": "PARTIAL",
+      "basis": "Archives stored in designated Drive; Oracle retrieved/compared earlier; specialist reports 51/51 manifests and 13/13 synthetic tests; recipient native issue receipt missing."
+    },
+    {
+      "id": "original-protected-access",
+      "status": "BLOCKED",
+      "basis": "Original protected model not present in synthetic ZIPs; no verified specialist original-byte receipt."
+    },
+    {
+      "id": "five-field-semantic-qualification",
+      "status": "PARTIAL",
+      "basis": "Owner-pasted preliminary report: physical locations reported, TEMPERATURE_1 and RIGID.TYPE HOLD, others PARTIAL; no original effective-property witness."
+    },
+    {
+      "id": "writer-and-release",
+      "status": "HOLD",
+      "basis": "Not in scope; no TARGET1 or production edits."
+    }
+  ],
+  "next": {
+    "recipient_role": "owner",
+    "recipient_chat_id8": null,
+    "status": "AWAIT_ACTUAL_RECIPIENT_AND_ORIGINAL_CUSTODY",
+    "instruction": "Confirm existing field specialist's actual short chat ID and authorized original-source receipt; Oracle then proposes a new ACTIVE revision with recipient binding through an authorized PR/merge. Until then do NOT paste an executable Cycle now."
+  },
+  "progress_projection": {
+    "status": "PROGRESS_UPDATE_PENDING",
+    "project_key": "UNRESOLVED_FROM_ACTUAL_PAGE"
+  }
+}
