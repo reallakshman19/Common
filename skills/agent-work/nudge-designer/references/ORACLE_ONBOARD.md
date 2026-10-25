@@ -18,6 +18,8 @@ It is a Markdown template; existing render/adapt APIs and schemas are unchanged.
 
 The new agent's **first executable task, exact permitted files, original data route, return issue and one plausible wrong case must be pre-resolved** by the actual Oracle/OTM/Owner. The Oracle tackles accessible source gaps itself rather than returning routine homework to Owner. For any cross-agent artifact, [Common public-safe Option 1 then restricted Drive Option 2](../../ARTIFACT_RELAY.md) remain mandatory to claim completed delivery; a sandbox link is local only. A new chat is not a new assignment generation or write permission by itself.
 
+**Oracle OnBoard (actual project Oracle role):** For a newly assigned/promoted Oracle or read-only successor, use the [four reusable source-grounded Oracle OnBoard knowledge templates](../assets/oracle-onboard/README.md) and [copy-ready Oracle role prompt](../assets/oracle-onboard/ORACLE_ONBOARD_PROMPT.md). Link established, already-source-grounded Project Home / current native decisions instead of manufacturing documents. New role and actual Owner/OTM selection come from the project's native authority; a candidate successor remains read-only. Preserve issue/PR title owner and actual Chat ID routing under [native title/traffic hygiene](TITLE_AND_TRAFFIC_HYGIENE.md): human-owned PR title hygiene and manual coordination-issue lights are allowed only where native rules permit, while v3.5 DELP issue titles are generated and never manually edited. The light cannot turn NOT_RUN into PASS. This adds neither a mode nor a new gate.
+
 ## Contents
 
 - [Choose the useful route](#choose-the-useful-route)
