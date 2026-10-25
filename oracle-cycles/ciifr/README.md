@@ -1,24 +1,20 @@
-# CIIFR Geometry G1 — active standalone Oracle Cycle
+# CIIFR Geometry — canonical Cycle and Oracle continuity
 
-**Source of truth:** [CURRENT.json](CURRENT.json) on **Common/main**.
-This is a **manual transport for only the existing XCU G1 builder** (Owner-confirmed chat `6addafaa`), not a fresh engineering assignment or a general CIIFR/R4/P2.5-B authorization.
+**Read [CURRENT.json](CURRENT.json) on `Common/main` first.** Only it establishes the currently active assignments/revision; the older G1 example `Cycle now` instructions are historical and **must not be replayed** after their returns were reconciled.
 
-- [Native task and bounded engineering rules — XCU #169](https://github.com/reallakshman19/XML_Compare_Utilities/issues/169)
-- [Geometry concept, WBS and original falsifiers — XCU #166](https://github.com/reallakshman19/XML_Compare_Utilities/issues/166)
-- [Transport issue — Common #482](https://github.com/reallakshman19/Common/issues/482) for a **short** `ORACLE-CYCLE-RECEIPT v1`, referencing actual native #169 evidence
-- [Shared Cycle protocol](../PROTOCOL.md) (lightweight continuation; do not rerun completed source checks)
-- [Owner-reported source recovery and relay coordination](https://github.com/reallakshman19/Common/issues/482) (custody metadata only; Common relay publication is tracked separately)
+## Which handoff?
 
-## Owner → existing G1 builder
+- **Existing assigned worker/reviewer:** Use the [Cycle protocol](../PROTOCOL.md) and `Cycle now` only when the *live* `CURRENT.json` binds your chat and a new runnable assignment. Returned assignments imply **no repeated execution**.
+- **New candidate successor Oracle — READ ONLY:** Copy the complete [CIIFR ORACLE SUCCESSOR PROMPT](ORACLE_SUCCESSOR_PROMPT.md) into the *new candidate Oracle chat*. It is grounded in the immutable **four-document 3DC Oracle golden fixture**, the pinned Common `020a5aaf` `START_HERE`, and the project's current original-source/architecture/decision/evidence records. It does **not** give Oracle control or activate a new Cycle role.
+- **Knowledge checkpoint:** [CIIFR concept, architecture, wrong cases and execution frontier](ORACLE_CONTINUITY_20261025.md) is the incumbent's **source-backed interpretation**, not an independent engineering PASS or activated succession.
 
-```text
-Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr
-```
+## Governing source links
 
-The plain `Cycle now` shorthand is permitted **after this project locator and role have been verified in the same chat**. A message in this chat cannot remotely activate another conversation. A state proposed on a PR is not active until it actually merges into canonical `main`.
+- [G1/Geometry Owner aim and WBS — XCU #166](https://github.com/reallakshman19/XML_Compare_Utilities/issues/166)
+- [G1 native task, author reports and repair returns — XCU #169](https://github.com/reallakshman19/XML_Compare_Utilities/issues/169)
+- [G1 independent falsification — XCU #175](https://github.com/reallakshman19/XML_Compare_Utilities/issues/175)
+- [G2 topology/Boolean prepared work order — XCU #177](https://github.com/reallakshman19/XML_Compare_Utilities/issues/177)
+- [Common short Cycle receipt inbox — #482](https://github.com/reallakshman19/Common/issues/482)
+- [Common START_HERE at Owner-selected commit `020a5aaf`](https://github.com/reallakshman19/Common/blob/020a5aaf67f891dcb11d82af9526573fc4775174/skills/agent-work/START_HERE.md)
 
-On receiving the trigger, G1 reads current revision/assignment and native evidence, then continues the same task using the **recovered source**, finishing native Appendix A qualification and backed-up integration. Existing 44/44 and Method C results are Owner-reported, not automatic independent acceptance. No Geometry Writer/Apply/Target1, new G2/G3, merge, release or Owner acceptance is conferred by this Cycle.
-
-If the latest native return is complete and no new authorized action exists, return `AWAIT_ORACLE_RECONCILIATION`; do not repeat the build or manufacture another finished-task receipt. The separate Cycle receipt is a routing envelope, not a duplicate test report.
-
-**Progress Page** remains a separate authorized read-only projection; historical G0/G1 cards are not the live assignment source.
+**Authority remains explicit:** Progress Page is a separate authorized, source-backed projection. `CURRENT.json` is transport/assignment state, not XCU code/writer authority. Independent original-input tests, Owner trial, protected G1 merge and G2 implementation are governed by native issues and actual proof. A prepared continuity prompt does not initiate an Oracle epoch change.
