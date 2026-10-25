@@ -20,7 +20,7 @@ class OnBoardResponsibilityBoundary(unittest.TestCase):
             with self.subTest(needle=v):
                 self.assertIn(v.lower(), s.lower())
         self.assertIn("Oracle → Agent WBS-level OnBoard", s)
-        self.assertNotIn("four-file admission gate", s.lower())
+        self.assertIn("not a compulsory four-file admission gate", s.lower())
 
     def test_oracle_agent_one_wbs_continuity(self):
         s = AGENT.read_text(encoding="utf8")
