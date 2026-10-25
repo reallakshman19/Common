@@ -5,6 +5,8 @@ Owner can use two lines:
 > Prepare an Oracle OnBoard Prompt for [next task], using [original sources/current context].
 > Preserve the whole outcome and give the receiver a usable direction, room to correct it from evidence, and an evidence-based next action.
 
+For a **cold assigned builder, specialist or independent reviewer** requiring source-grounded concept/architecture/decisions, the complete reusable [Agent OnBoard prompt](../agent-onboard/AGENT_ONBOARD_PROMPT.md) and [four-document knowledge packet](../agent-onboard/README.md) provide golden-depth examples. Reuse existing project equivalents; no new gate, task or approval is introduced. A warm returning recipient stays on the shorter delta-only route below.
+
 Use the [guide](../../references/ORACLE_ONBOARD.md). Fill the load-bearing fields;
 link detail, remove unused alternatives, and preserve the native assignment/tracker
 identity and return format. No schema, extra role or operating mode is required.
@@ -79,6 +81,8 @@ action for the appropriate actor; no implied expansion of scope}}
 COMPLETE refers to this task. Product validation, independent review where actually
 required, Owner acceptance and release remain separate.
 ```
+
+**For an appointed project Oracle or candidate successor**, use the separate [Oracle OnBoard role template](../oracle-onboard/ORACLE_ONBOARD_PROMPT.md) and its [source-grounded four-part knowledge guide](../oracle-onboard/README.md). Keep this existing task-recipient brief for builders/specialists; a title or fresh chat does not activate Oracle control. [Native Chat-ID and traffic-light hygiene](../../references/TITLE_AND_TRAFFIC_HYGIENE.md) applies only under the actual title-owning process.
 
 ## Promoted Oracle
 
