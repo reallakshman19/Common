@@ -1,6 +1,6 @@
 # {{PROJECT}} — Oracle OnBoard source/current-execution frontier
 
-**TEMPLATE; not activated control binding.** Owner `{{authoritative AIM and amendment ref}}`; project `{{native issue/Progress Page key or UNKNOWN}}`; canonical main `{{SHA}}`; source checkpoint `{{date}}`; current active Oracle `{{actual binding or UNKNOWN}}`.
+**PROJECT-WIDE REFERENCE for the ONE [Owner → Oracle continuity prompt](ORACLE_ONBOARD_PROMPT.md); not activated control binding.** This source frontier spans **ALL WBS workstreams**, their cross-WBS dependencies, actors/late returns, Owner decisions, current product behavior and the Oracle's one project priority. It is NOT the one-task agent handover, and filling this file is not a separate approval gate. Owner `{{authoritative AIM and amendment ref}}`; project `{{native issue/Progress Page key or UNKNOWN}}`; canonical main `{{SHA}}`; source checkpoint `{{date}}`; current active Oracle `{{actual binding or UNKNOWN}}`.
 
 ## 1. Which state is actually current?
 - **Selected coordination mode:** `{{OTM / standalone / direct Owner and source}}`; selected engineering protocol `{{v3.5 if explicitly selected and Simplified ON only by direct Owner, or other}}`.
