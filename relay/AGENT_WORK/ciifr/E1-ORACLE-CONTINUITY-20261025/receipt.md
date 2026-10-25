@@ -16,8 +16,8 @@
 | `payload/CONCEPT_NOTE.md` | `08cf7ca01619df1d8f795c0a022726b9264ea9cb` |
 | `payload/ARCHITECTURE_COMPLEX_LOGIC.md` | `9d602294749778b433f0ff05054d3d35bf65c5d0` |
 | `payload/ARCHITECTURE_DECISIONS_AND_CHALLENGES.md` | `3f335a58b6766482795be30a628e28299a869a67` |
-| `payload/ORACLE_HANDOVER.md` | `a3ba192becfec8b45854fa0daeb4cd0fdaef8f58` |
-| `ORACLE_SUCCESSOR_PROMPT.md` | `2982c99b0a0a3e0f7622b9df9b8e1e7a3f4f0c7c` |
+| `payload/ORACLE_HANDOVER.md` | `690280fca362cf0a4edc9114f39573d71f3d9277` |
+| `ORACLE_SUCCESSOR_PROMPT.md` | `ed3785420b0aa5ff3fd851fb280b89bac5d54211` |
 
 These are repository-content **Git SHA-1 object IDs**, not SHA-256 of this packet, not actual private-file digests, and not evidence of new recipient download. Final PR/commit and exact files must be checked after publication; the receipt does not claim `BYTE_MATCHED_BY_RECIPIENT`.
 
@@ -30,6 +30,14 @@ These are repository-content **Git SHA-1 object IDs**, not SHA-256 of this packe
 - Code and tests, not customer original: [PR #168](https://github.com/reallakshman19/XML_Compare_Utilities/pull/168). Historical original SHA256 and counts appear in the native source note, but **no private bytes or byte receipt** enter this relay.
 - Separate WBS: Geometry WBS 3.x [#166](https://github.com/reallakshman19/XML_Compare_Utilities/issues/166) ACTIVE Cycle `ciifr`; Element semantics #178 and MAP #179 have different ownership; do not dispatch the E1 coder or reviewer anew.
 
+## Candidate readback and cross-WBS precedence addendum (25 Oct 2026)
+
+The Owner relayed a **candidate Oracle source walk-through**, chat UUID `01a1746f-74ee-74d1-aad3-9c5ff090df59`, short `01a1746f`. Candidate self-reported verifying PR #506 draft and E1 PR #168 exact heads, reading the reader, preserving R2 F1/F2/all-15 bounded scope and **`F3_SOURCE_BLOCKED`** after unsuccessful direct v14 CONTROL lookup; original v14/private CII and importer remain NOT_RUN. **GitHub return is expressly `NOT_POSTED`**. This is **conversation-provided attributed readback**, not independently witnessed cross-chat source/payload-byte access or formally authorized Oracle cutover. A returning candidate needs delta-only continuation rather than repetition.
+
+**Important disjoint Geometry correction:** [newer Owner #166/6400403221](https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6400403221) and [G2 #177](https://github.com/reallakshman19/XML_Compare_Utilities/issues/177) permit read-only G2 source work and separately qualified **nonoverlapping isolated G2 draft implementation now**. Existing [Common ACTIVE G1 Geometry rev4](https://github.com/reallakshman19/Common/blob/main/oracle-cycles/ciifr/CURRENT.json) still contains a stale blanket G2 code HOLD. **This relay updates handover wording, not the ACTIVE Cycle state**, and cannot grant unassigned G2 actor authority. G1 shared UI integration, Writer/TARGET1, qualified physical identity, Owner merge and release remain protected. The Geometry Oracle owns any later reviewed rev5 state reconciliation; E1 Oracle/read-only candidate must not mutate it.
+
+**Manifest revision:** handover and successor-prompt Git blob IDs below were updated to reflect this source/Cycle discrepancy and candidate readback; these are public-safe Git-object identifiers, not recipient SHA256 measurements.
+
 ## Actual handoff statuses
 
 | Checkpoint | Truth |
@@ -38,7 +46,7 @@ These are repository-content **Git SHA-1 object IDs**, not SHA-256 of this packe
 | Draft PR opened/read back | **YES — Common draft PR #506**, exact files must be rechecked at publication |
 | Packet published to `Common/main` | **NO** |
 | Protected original CII transferred | **NO; not required for source-only handover** |
-| New successor read/verified this packet | **NO / UNBOUND** |
+| Candidate successor readback | **OWNER-RELAYED READ_ONLY chat report** by `01a1746f-74ee-74d1-aad3-9c5ff090df59` (`01a1746f`); `NOT_POSTED` on native GitHub. Source walkthrough self-reported; **no independent payload-byte receipt or authenticated control binding**. |
 | New Oracle appointed or actual control epoch published | **NO** |
 | New E1 `Cycle now` activated | **NO**, Common PR #496 PREPARED_NOT_ACTIVE |
 | Merge, Writer, E2/E3, TARGET1, engineering release | **HOLD** |
