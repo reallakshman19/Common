@@ -1,5 +1,7 @@
 # Five entry process maps — Oracle-owned execution and continuity
 
+**Documentation navigation:** [START HERE — role/mode entry](START_HERE.md) · [Entry process maps A–E](ENTRY_PROCESS_MAPS.md) · [Project Home and fixture custody](PROJECT_HOME_GUIDE.md) · [Extended operating reference](OPERATING_GUIDE.md). Read only the branch relevant to your current task; these are not four compulsory stages.
+
 **Operating design:** Common [START HERE](START_HERE.md) is the entry router; the Oracle owns the project working model and prepares Nudge Designer briefs (in OTM mode, within OTM dispatch/control; in standalone, under Owner selection). The agent reads its assigned **issue → WBS → project** sources, then executes its selected engineering protocol. The Progress Page Home displays the project concept, architecture explanations, source fixtures and roadmap; WBS cards show delivery and evidence. The Page is a projection, never a new control authority.
 
 ## One shared spine
@@ -12,6 +14,20 @@ Owner intent and issue-based project grounding → Oracle project Home (concept 
 - **Grounding and evidence:** v3.6 applies when selected for this engineering work with approved AIM label, plan, actual child issue and write authority. Its `coordinator/standalone` delivery mode remains separate from Progress Page's `otm/standalone` mode. There is no extra v3.6 permission check invented by the process map.
 - **Continuity:** Oracle may recommend agent change from observable GitHub-access turns, task/WBS divergence, material stagnation, capability or Owner preference. The >5 distinct GitHub turns / >35 active minutes rule is only a BuddyRunner *suggestion* when its documented ChatGPT agent scope applies, never forced handoff.
 - **Review and acceptance:** Oracle challenges actual evidence; a self-authored contribution remains SELF_ASSESSED. OTM/Owner grant and selected native epoch/custody restrictions remain operative; no UI, prompt or role label silently authorizes a PR merge or releases private data.
+
+## Common artifact and fixture transaction — used within A–E (not a sixth stage)
+
+**Preferred Oracle↔agent transaction:** [Common artifact relay](ARTIFACT_RELAY.md) under [`Common/relay/`](../../relay/) (usually [`relay/AGENT_WORK/<project>/<handoff-id>/`](../../relay/AGENT_WORK/README.md), or an existing task-specific register). **Google Drive is fallback/private custody only**, never a parallel primary public task tracker. Public-safe authorized actual bytes can be committed under a task-specific `payload/`; protected/private bytes **must not enter public Common** and instead stay in approved private storage, with a **sanitized Common relay `receipt.md`** pointing to their custody status. If even the sanitized record cannot be posted, report `BLOCKED`/`FALLBACK_NOT_POSTED` and do not claim relay delivery. Do not touch governed V3.1 `relay/STATE.yaml`, `EVENTS.jsonl` or `TRANSACTIONS/` for this purpose.
+
+**Transaction flow (no added approval process):** Oracle identifies exact WBS original fixture/input and desired receiver → records task-scoped relay locator, source/size/SHA where public-safe and expected return → producer commits permitted bytes or registers restricted custody → publish/read back exact commit or permitted source (DRAFT = proposed) → **Oracle/OTM projects input locator + custody/delivery state into existing Progress Page fixtures** → receiving agent reads WBS fixture and actual relay receipt, retrieves and measures bytes/digest → executes under selected native protocol → agent relays exact output through the same route with its own receipt → Oracle reads/checks the actual return, updates fixture/WBS source links and selects next work. A receipt is not automatically an engineering PASS or Owner acceptance.
+
+- **A Oracle setup:** include original fixture custody and the authoritative relay register(s) in Home/grounding fixtures; mark missing/old/stale links explicitly.
+- **B onboarding:** Oracle's prompt carries exact **input relay record, identity/hash if publishable, delivery state and expected output relay return**, not just a chat attachment. `PREPARED`/`RELAY_REGISTERED`/`RECEIVED_CONFIRMED`/`BYTES_VERIFIED` stay distinct.
+- **C agent first execution:** after issue → WBS → Home, open its **recorded Common relay input** and check actual downloaded bytes and required negative/golden fixtures before tests. A mismatch or unavailable protected Drive access returns BLOCKED/NOT_RUN under v3.6; do not invent finished-task evidence.
+- **D worker continuity:** successor inherits exact task ID but **rechecks original input and latest output relay artifacts**. The previous worker's measured hash, permission or `sandbox:` URL does not establish successor access.
+- **E Oracle continuity:** successor reconstructs original inputs, latest working candidate and open output transactions from relay+native issues; carry pending handoffs/returns across control epochs, without falsely marking published or verified.
+
+**Progress Page viewer vs storage:** Page has **source-linked, public-safe references**, not copies of fixture files, private Google Drive child URLs, or automatic uploader/synchronizer. Oracle owns the fixture content and evidence reconciliation; **OTM writes the page in OTM mode**, Oracle or designated writer in standalone via the native mode route. Use existing `fixtures.repository`/`fixtures.inputs` and WBS association plus audited `fixture add`; avoid creating a duplicate relay/task schema. See [Project Home fixture handling](PROJECT_HOME_GUIDE.md#fixture-maintenance-and-oracleagent-artifact-exchange).
 
 ## A. Oracle onboarding — initial project setup
 
@@ -41,12 +57,12 @@ flowchart TD
 flowchart TD
   B0["Oracle already knows Owner aim, sources, concept note and roadmap"] --> B1["Oracle selects current WBS and its one deliverable"]
   B1 --> B2["Oracle as Nudge Designer chooses worker/reviewer and GUIDED or OPEN support"]
-  B2 --> B3["Oracle writes role-specific prompt: WHY, exact WBS issue, source fixture, method, checks, return"]
+  B2 --> B3["Oracle writes task prompt with Common relay input locator, source identity and output return"]
   B3 --> B4["Oracle PREPARES assignment and route under current project authority"]
   B4 --> B5{"Standalone project with ACTIVE Oracle Cycle?"}
   B5 -->|Yes| B6["Oracle PUBLISHES assignment to canonical CURRENT.json; sends Cycle now URL"]
   B5 -->|No| B7["Oracle SENDS by selected manual / OTM-native route"]
-  B6 --> B8["Recipient reads current task and CONFIRMS delivery / actual access"]
+  B6 --> B8["Recipient opens relay, retrieves required input and confirms actual access"]
   B7 --> B8
   B8 --> B9{"Delivery confirmed?"}
   B9 -->|No / uncertain| BX["Record prepared / sent / uncertain; do not describe execution as active"]
@@ -77,7 +93,7 @@ flowchart TD
   C0 --> C1["Open CURRENT.json if Cycle; resolve exact assignment and issue"]
   C1 --> C2["Issue → WBS: task scope, Owner amendments, criterion and existing evidence"]
   C2 --> C3["WBS → Project Home: Owner intent, concept note, architecture, full roadmap"]
-  C3 --> C4["Read ground fixtures, original files, negative cases and protected invariants"]
+  C3 --> C4["Open WBS-linked Common relay input; check actual original bytes, negative fixtures and invariants"]
   C4 --> C5["Load v3.6 approved AIM label, plan, child issue and selected delivery mode"]
   C5 --> C6["Use A01-A14, A13 coding standards; dry-run and actual allowed scope"]
   C6 --> CG{"Missing required source/access or engineering HOLD?"}
@@ -114,7 +130,7 @@ flowchart TD
   D1 --> D2{"Continue current agent or hand over?"}
   D2 -->|Continue| D3["Oracle updates bounded next instruction; no new agent"]
   D2 -->|Handover| D4["Oracle checkpoints same WBS/task, exact head, files, decisions and pending work"]
-  D4 --> D5["Oracle writes new-agent OnBoard prompt using Nudge Designer"]
+  D4 --> D5["Oracle binds current source/output relay receipts in successor OnBoard prompt"]
   D5 --> D6["Oracle creates successor assignment generation; checks real file access"]
   D6 --> D7["Oracle reconciles predecessor in-flight writes and isolates actual scopes"]
   D7 --> D8["Under existing native authority, Oracle publishes successor cutover"]
@@ -140,7 +156,7 @@ flowchart TD
   E1 --> E2["Request Owner approval (standalone) or OTM/Owner approval (OTM project)"]
   E2 --> E3["Outgoing Oracle builds continuity checkpoint and current-worker inventory"]
   E3 --> E4["Oracle Continuity protocol first; Nudge Designer adapts successor Oracle prompt"]
-  E4 --> E5["New Oracle reads issue, WBS, Home, exact current prototype and fixtures"]
+  E4 --> E5["New Oracle checks issue, WBS, Home, prototype and Common relay custody/returns"]
   E5 --> E6["Three live alignment questions: Owner intent, architecture choices, next 3 tasks"]
   E6 --> E7["Outgoing Oracle discusses discrepancies, aligns roadmap and records unknowns"]
   E7 --> E8["Check access, old epoch actions, in-flight worker assignments and actual custody"]
