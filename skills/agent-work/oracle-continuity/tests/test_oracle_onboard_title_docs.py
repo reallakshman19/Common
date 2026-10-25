@@ -45,7 +45,7 @@ class OracleOnboardTitleDocs(unittest.TestCase):
         self.assertIn("CHECKPOINT_FACTS_V1", hygiene)
         self.assertIn("DEL P", hygiene.replace("DELP", "DEL P"))
         self.assertIn("never manually authored", hygiene)
-        self.assertIn("only the DELP runner", v35)
+        self.assertIn("It MUST NOT author, edit or paste a percentage, a title", v35)
         self.assertIn("NEVER hand-edit", oracle)
         self.assertIn("Do not manually alter v3.5", agent)
         self.assertIn("CHAT-ID8", hygiene)
@@ -60,7 +60,7 @@ class OracleOnboardTitleDocs(unittest.TestCase):
                 read(AGENT / "nudge-designer/assets/agent-onboard/README.md"))
         self.assertIn("[<TASK-ID>][<ROLE>:<CHAT-ID8>]", docs[0])
         self.assertIn("If the title has a strict", docs[0])
-        self.assertIn("No new", read(ORACLE / "README.md"))
+        self.assertIn("no new", read(ORACLE / "README.md").lower())
         self.assertIn("return", read(ORACLE / "ORACLE_HANDOVER.md").lower())
         for text in docs:
             self.assertIn("DELP", text)
