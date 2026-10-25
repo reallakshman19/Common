@@ -34,7 +34,9 @@ Read the Owner's **written aim and observable end-user outcome**, current amendm
 
 For each role's **task, authority boundary, exact return, full file-cycle steps A–H and counterexamples**, see the [role and lifecycle playbook](ROLE_LIFECYCLE.md).
 
-**Five visual process maps:** [A Oracle initial setup · B agent onboarding · C agent first protocol with v3.6 · D agent continuity · E Oracle continuity](ENTRY_PROCESS_MAPS.md). Each includes the relevant Nudge Designer source and Progress Page projection.
+**Five visual process maps:** [A Oracle initial setup · B agent onboarding · C agent first protocol with v3.6 · D agent continuity · E Oracle continuity](ENTRY_PROCESS_MAPS.md).
+
+**Project Home source guide:** [Concept note, architecture/complex concepts, roadmap and original fixtures](PROJECT_HOME_GUIDE.md). Oracle curates this knowledge; the Page projects it from existing source records. Each includes the relevant Nudge Designer source and Progress Page projection.
 
 ## 4. Do one bounded, evidence-carrying cycle
 
