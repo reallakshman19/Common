@@ -51,6 +51,18 @@ In the supplied conversation, the Oracle initially discussed coordination before
 
 **Mentor's recovery if confused:** acknowledge exactly what documentation was read and what file semantics remain unknown; trace an original record before delegating engineering changes. A prepared plan, reviewer label or merged config PR is not evidence that the CII↔XML workflow was qualified.
 
+## CIIFR failure pattern — knowing process is not engineering grounding
+
+The Owner's supplied CIIFR exchange records an Oracle first acknowledging the Common protocol, then creating an ambitious **26-file local framework** (five JavaScript modules, synthetic fixtures, tests and a benchmark). It reported **13/13 native tests** and a read-only original CII inventory (353 ELEMENTS, 258 NODENAME, 38 RIGID records and two node-565 appearances with pointer `0`). Those are useful *structural/algorithmic observations*, not a qualification of the effective ELEMENTS process fields, RIGID type/weight meanings, field-specific sentinel rules, downstream propagation or authorized writer behavior. The local ZIP's manifest was checked, but **Common/GitHub relay publication was BLOCKED**; a local ZIP is not a handover another agent can retrieve.
+
+The improved Oracle sequence is **not** "run a three-question test, then build the same framework":
+
+1. Trace one real ELEMENTS record and referenced auxiliary record through the existing parser plus authoritative v14 field documentation. Distinguish observed bytes/pointers from assumptions about *effective* engineering behavior.
+2. State one plausible misleading-success case (for example, unchanged later element bytes with changed inherited effective properties). Name the exact source/field rule needed to distinguish it. Until verified, keep related modules **EXPLORATORY/READ_ONLY** and conclusions `UNKNOWN` rather than asserting a qualified engineering architecture.
+3. Select the smallest next useful deliverable and the **actual** artifact recipient/relay route. Distinguish synthetic 353/1,000/3,000-element timing from a *single* Owner original-file timing; record warm-up, sample size, platform and statistic, never call the slowest of three samples a credible empirical p95. If relay is blocked, return `NOT_TRANSFERRED`, preserve reusable work and identify the smallest permitted transport remedy—do not repack the entire framework as a new "completed handover."
+
+This is a **historical adverse example** from the user's pasted chat, not a replay of the real source or proof of the current CIIFR implementation. When a new Oracle arrives, the current revision, actual project Home, active writer/assignment and private input custody must be rechecked before dispatch or cutover.
+
 ## If the incoming participant is the Oracle
 
 Use **the same three themes**, but require the person to **inherit the work context**, not just one file:
