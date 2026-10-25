@@ -27,6 +27,19 @@ The ID is Owner-reported display routing, not an authenticated
 session or actual full URL. State which observation is
 Owner-reported versus byte-checked versus independently reviewed.
 
+## One Owner action — transport and delivery strip
+
+This is a **presentation derived from the current Oracle assignment/inbox**, not a new tracker or an automatic dispatch. Display it **alongside** [Universal Workflow Progress](../../../../universal-workflow-progress/SKILL.md) when that read-only skill is selected; **Progress Page** is a distinct project viewer/projection. Do not recompute its milestones, percentages or stage completion.
+
+**ORACLE → next role/chat ID8 → exact native evidence.** Show only **one NOW actor** and **one PASTE instruction** selected by the Oracle from the real transport:
+
+- **ACTIVE standalone Cycle, first-time/cold chat:** `Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/<project>`.
+- **ACTIVE standalone Cycle, verified previously bound chat:** `Cycle now`. The recipient performs [lightweight continuation](../../../../oracle-cycles/PROTOCOL.md#lightweight-continuation--already-bound-participants), not full onboarding by default.
+- **Other native/OTM/inactive Cycle:** one task URL, bounded deliverable, governing native protocol, invariant, evidence return and material stop condition; **never** show an inactive/draft Cycle as executable.
+- **Already SENT/OWNER-REPORTED SENT or RECEIVED:** show **No additional paste required** and the specific expected return; do not repeatedly ask the Owner to send a known instruction. `OWNER-REPORTED` is not `RECEIVED`; the Owner-reported short ID8 does not authenticate a chat.
+
+`RETURN` points to **one native result/evidence permalink**, plus the [Common relay](../../ARTIFACT_RELAY.md) receipt when input/output artifacts move. `STOP IF` states one or two decisive source, authorization, access or engineering-HOLD blockers. Use delivery status `PREPARED`, `SENT/OWNER-REPORTED`, `RECEIVED`, or `RETURNED` **as observed**; do not infer byte verification or independent PASS from the status.
+
 ## Minimal default view
 
 ```text
@@ -38,9 +51,10 @@ Coder    · chat <id8> · owns artifact       · <status>
 Reviewer · chat <id8> · tests exact claim   · <status>
 Owner                 · actual acceptance  · <status>
 
-NOW → <one role/id8, or precise activation blocker>
-PASTE → <Cycle now or one-line URL form, or NONE>
-RETURN → <one receipt/artifact/decision proving next state>
+NOW → <one role/id8, exact task ID and bounded deliverable, or activation blocker>
+DELIVERY → <PREPARED | SENT/OWNER-REPORTED | RECEIVED | RETURNED; observation source>
+PASTE → <one selected Cycle now or native-task instruction | No additional paste required>
+RETURN → <native evidence permalink; plus Common relay receipt if files move>
 STOP IF → <material mismatch or permission gap>
 PAGE → SYNCED at <commit/revision> | PENDING | OUT_OF_SYNC | NOT_CREATED
 ```
