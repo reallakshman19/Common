@@ -44,6 +44,27 @@ class HandoffIntegrationDocs(unittest.TestCase):
         self.assertIn("shared=true", relay)
         self.assertIn("do not change Drive ACLs".lower(), relay.lower())
 
+    def test_owner_order_is_mandatory_and_sandbox_is_not_delivery(self):
+        relay = read("ARTIFACT_RELAY.md")
+        guide = read("progress-page/README.md")
+        onboarding = read("progress-page/assets/ORACLE_ONBOARD_PROMPT.md")
+        reviewer = read("independent-review/SKILL.md")
+        self.assertIn("**1 — FIRST**", relay)
+        self.assertIn("**2 — NEXT**", relay)
+        self.assertIn("**Mandatory:** Every material artifact", relay)
+        self.assertIn("**FALLBACK — NOT DELIVERED**", relay)
+        self.assertIn("Option 1 FIRST", reviewer)
+        self.assertIn("Option 2 NEXT", reviewer)
+        self.assertIn("**Option 1 FIRST**", guide)
+        self.assertIn("**Option 2 NEXT**", guide)
+        self.assertIn("**1 — Common public-safe relay", onboarding)
+        self.assertIn("**2 — Owner-designated Google Drive", onboarding)
+        for text in (relay, guide, onboarding, reviewer):
+            with self.subTest(origin=text[:42]):
+                self.assertIn("LOCAL_ONLY / NOT_TRANSFERRED", text)
+        self.assertIn("for either", relay.lower())
+        self.assertIn("Owner-designated Google Drive", relay)
+
     def test_receiver_and_reviewer_each_prove_bytes(self):
         relay = read("ARTIFACT_RELAY.md")
         reviewer = read("independent-review/SKILL.md")
