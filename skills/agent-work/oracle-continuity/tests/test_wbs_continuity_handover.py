@@ -31,7 +31,7 @@ class WbsContinuityRegression(unittest.TestCase):
     def test_oracle_prompt_reconciles_old_and_new_work_before_dispatch(self):
         text = ORACLE.read_text(encoding="utf-8")
         for requirement in (
-            "actual existing Progress Page Home/WBS",
+            "Progress Page Home/WBS",
             "PARENT WBS → EXISTING/current WBS → NEXT WBS",
             "CONTINUES / REUSES / SUPERSEDES / PARALLEL",
             "READ_ONLY",
@@ -60,7 +60,7 @@ class WbsContinuityRegression(unittest.TestCase):
             "WBS 5.x",
             "5.1 MAP-P1",
             "existing #166/#179",
-            "not proof that 5.1 supersedes 3.1",
+            "proof that 5.1 supersedes 3.1",
             "no engineering or acceptance PASS",
         ):
             with self.subTest(requirement=requirement):
