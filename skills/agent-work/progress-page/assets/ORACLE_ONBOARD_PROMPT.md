@@ -1,6 +1,6 @@
 # Progress page: onboarding prompt for an Oracle or a writer agent
 
-Status: DRAFT written by OTM. Polish before first use. Fill every `<...>`, then paste everything between the lines.
+Status: reusable **project-specific prompt template**; not proof that any live Oracle received it, installed tools or published a page. Fill every `<...>` from the actual project before dispatch; keep the Owner's private Drive locator out of public task issues.
 
 ---
 
@@ -8,7 +8,9 @@ You now keep the Progress page of the project `<project key>` up to date, in `<s
 
 READ FIRST (five minutes): https://github.com/reallakshman19/Common/blob/main/skills/agent-work/progress-page/README.md (the module README). Use its tools. Do not rewrite them.
 
-WHERE: repository `<owner/name>` (public), page `<page url>`, data in `data/<project key>/`. The tools are in `tools/`. Run them from the repository root with plain `python`.
+WHERE: repository `<owner/name>` (public), page `<page url>`, data in `data/<project key>/`. **For an already bootstrapped Progress Page checkout**, the scripts are in `tools/`; run from that repository root with plain `python`. **In the Common skill source** the original scripts are under `skills/agent-work/progress-page/scripts/`; they do not edit a different deployed page repository automatically.
+
+TOOL PREFLIGHT (first assigned page-writer operation, not every `Cycle now`): confirm the **actual target repo checkout and project key**, then execute `python tools/pp_cli.py --help` and `python tools/pp_cli.py check` (or `python scripts/pp_cli.py` in the skill checkout for **read-only skill validation**). Report `RAN` with exit/output or `NOT_RUN / PAGE: PENDING` and the precise missing access/tool if unavailable. A GitHub page read or copied command **does not** mean the CLI ran.
 Coordinator name on this project (who "owes" replies): `<OTM or the Oracle's name>`.
 
 YOUR JOB
@@ -22,13 +24,12 @@ YOUR JOB
    - quiet agents: ping them; waiting agents: chase the owner of the next step; stale tab: refresh the page.
 3. Owner replies arrive as GitHub issues labelled `owner-input`. `python tools/pp_cli.py inputs --actor "<your name>"` lists the ones not recorded yet and prints the command for each. By `type`: `DECISION` becomes `action answer`; `NUDGE` becomes `nudge add`; `NUDGE-WITHDRAW` becomes `nudge withdraw`.
    Show the Owner any reply that matches no open card before you act on it.
-4. Commit `data/` only. Standalone mode: work on branch `pp/<key>-<you>`, open a DRAFT pull request, and the Owner merges it.
-   OTM mode: a data-only commit to `main` is allowed.
+4. Commit `data/` only. Standalone mode: work on branch `pp/<key>-<you>` and open a DRAFT PR; **merge per current [Progress Page mode rules](../references/MODES.md)** (Owner default, with the explicit `reallakshman19/progress-page` scoped standing go-ahead only after all actual gates). OTM mode: a data-only commit to `main` is allowed. Do not treat this prompt as merge permission for Common or any other repository.
 
 RULES
 - Evidence first. Never record what you did not read. A card is VERIFIED only on evidence a different reader can open. If you wrote the thing you are recording, say so in `--summary`.
 - Public-safe data only. Chat ids are the short id (8 characters). Never a chat link, a Drive link, an email address or a token.
-- Private files go in the Owner's one common handoff Drive folder, in your project's own subfolder (the Owner gives the link in chat). On the page, a fixture names the subfolder and file with its SHA-256, never the link.
+- **Mandatory artifact-transfer order:** **1 — Common public-safe relay payload/authorized immutable GitHub source FIRST**; **2 — Owner-designated Google Drive Handoffs NEXT**, for protected files or where Option 1 cannot be used. Every material cross-agent/Oracle/reviewer artifact must reach **1 or 2 before claiming durable delivery**. A `sandbox:`/`/mnt/data` link is a temporary `LOCAL_ONLY / NOT_TRANSFERRED` fallback only. The Owner authorizes sharing the Handoffs **root link directly in the intended recipient's task conversation**; do not post protected child-file links or bytes publicly. **Progress Page `data/` requires** `OWNER_PRIVATE_REF:HANDOFFS_PRIMARY` rather than the Drive URL. For both options, maintain a source-bound Common relay receipt and separately establish actual recipient access, identity/bytes, technical review and Owner acceptance per [artifact relay](../../ARTIFACT_RELAY.md). Do not infer any recipient's permissions from the Oracle's earlier folder listing.
 - Every change goes through `pp_cli.py`, so it is on the Timeline. Never edit `audit.json` or the data by hand. Never delete: supersede, cancel, archive or withdraw.
 - A new revision only when the Owner's decision changes direction: `python tools/pp_cli.py revision add --project <key> --why "<what changed>" --owner-words "<quote>" --src <link> --actor "<your name>"`.
 - A Nudge + line is an instruction for you, not text to forward. You stay responsible for what you send.

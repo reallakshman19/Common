@@ -7,6 +7,8 @@ the page, a checker, an editing tool, a trigger tool, a local-file builder, temp
 
 **Use these tools. Do not rewrite them.** If one is missing something, say so in the pull request that adds it.
 
+**First-time writer capability:** The Oracle/OTM or its delegated page writer verifies a checkout of the *actual page repository* and executes `python tools/pp_cli.py --help` plus `python tools/pp_cli.py check` there. In this Common module source the script path is `scripts/pp_cli.py`, not `tools/pp_cli.py`; a repository web view cannot execute either command. Mark `PAGE: PENDING / NOT_RUN` if code execution, page repository access or publication readback is unavailable. A builder/reviewer ordinarily leaves native issue/PR/relay evidence for the coordinator and does not run page-writer scripts.
+
 ## Who uses it, in which mode
 
 The same files, the same checker and the same page serve both modes. Only a few fields differ.
@@ -85,7 +87,7 @@ Every write command records one Timeline entry (who, what, why, source) and runs
 ## The rules that matter
 
 - **Public-safe data only.** Chat ids are the short id (8 characters), never a chat link. No Drive, OneDrive or SharePoint links, no email addresses, no tokens. The checker refuses them.
-- **Private files** (ZIPs, banks, originals, source fixtures, candidates) live in the Owner's one common handoff folder (Google Drive, or OneDrive as the alternative), one subfolder per project key. A grounding fixture names the subfolder and file (with its SHA-256), never the link: see [local-handover](../local-handover/AGENT_PROTOCOL.md).
+- **Artifact transfer priority (Owner, 25 October 2026):** **Option 1 FIRST** — public-safe, immutable artifact under a task-scoped [Common artifact relay](../ARTIFACT_RELAY.md) payload/authorized GitHub commit; **Option 2 NEXT** — the Owner-designated Google Drive Handoffs root, required for protected files or when public-safe Option 1 cannot be used. **Every completed agent↔Oracle↔reviewer artifact transfer must succeed by 1 or 2.** A `sandbox:`/`/mnt/data` link is a temporary `LOCAL_ONLY / NOT_TRANSFERRED` fallback **not** completed delivery. Public Progress Page fixtures continue to use only the safe `OWNER_PRIVATE_REF:HANDOFFS_PRIMARY` metadata label, not Drive URLs or sensitive child details. The Owner may share the root link directly with assigned recipients; receipt, access, independently measured bytes and review remain separate. Keep an exact task-scoped Common receipt for either transport and follow the selected [local-handover](../local-handover/AGENT_PROTOCOL.md) custody rules.
   Chat links live only in a private file (`links.private.json`), a private local build, or the Owner's browser.
 - **Every update is on the Timeline.** Use the tool, never edit `audit.json` or the data files by hand. The Timeline only grows.
 - **Nothing is deleted.** Supersede, cancel or archive instead. Superseded and cancelled cards stay on the page, greyed, with the reason.
