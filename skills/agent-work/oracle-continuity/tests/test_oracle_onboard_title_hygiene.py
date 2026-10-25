@@ -42,7 +42,7 @@ class OracleAndAgentOnboardHygiene(unittest.TestCase):
     def test_chat_id_is_locator_not_authentication(self):
         doc = read(HYG).lower()
         for word in ("chat-id8", "not authenticated", "principal", "unknown",
-                     "independent", "replacement", "assignment"):
+                     "independent", "replacing", "assignment"):
             self.assertIn(word, doc)
         self.assertIn("chat", read(ORACLE / "ORACLE_HANDOVER.md").lower())
         self.assertIn("chat", read(AGENT_PACKET / "AGENT_HANDOVER.md").lower())
@@ -84,7 +84,7 @@ class OracleAndAgentOnboardHygiene(unittest.TestCase):
         onboard = read(AGENT / "nudge-designer/references/ORACLE_ONBOARD.md")
         for word in ("oracle-onboard/README.md", "agent-onboard/README.md"):
             self.assertIn(word, start + onboard)
-        self.assertIn("not a new", read(ORACLE / "README.md").lower())
+        self.assertIn("not extra", read(ORACLE / "README.md").lower())
         self.assertIn("existing", onboard.lower())
 
 
