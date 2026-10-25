@@ -62,7 +62,7 @@ class HandoffIntegrationDocs(unittest.TestCase):
         for text in (relay, guide, onboarding, reviewer):
             with self.subTest(origin=text[:42]):
                 self.assertIn("LOCAL_ONLY / NOT_TRANSFERRED", text)
-        self.assertIn("for either", relay.lower())
+        self.assertIn("for **either** option", relay)
         self.assertIn("Owner-designated Google Drive", relay)
 
     def test_receiver_and_reviewer_each_prove_bytes(self):
