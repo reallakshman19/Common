@@ -35,16 +35,18 @@ A selected worker/reviewer continues to use `Cycle now`; a successor Oracle must
 
 ## 3. Required handover packet — seven compact sections
 
-The incumbent Oracle prepares a **public-safe landing packet** that links to sources rather than restating private customer data. Include:
+**Knowledge-first minimum:** This A–G landing packet must transfer the four knowledge classes in [Oracle Continuity §7](../../oracle-continuity/PROTOCOL.md#knowledge-transfer--owner-selected-golden-fixture), **not only control/status information**. The Owner-selected [3DC-XML-CII golden fixture at immutable commit `bf02e54e`](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload) illustrates this through [CONCEPT_NOTE.md](https://github.com/reallakshman19/Common/blob/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload/CONCEPT_NOTE.md), [ARCHITECTURE_COMPLEX_LOGIC.md](https://github.com/reallakshman19/Common/blob/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload/ARCHITECTURE_COMPLEX_LOGIC.md), [ARCHITECTURE_DECISIONS_AND_CHALLENGES.md](https://github.com/reallakshman19/Common/blob/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload/ARCHITECTURE_DECISIONS_AND_CHALLENGES.md), and [ORACLE_HANDOVER.md](https://github.com/reallakshman19/Common/blob/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload/ORACLE_HANDOVER.md). These are **content exemplars**, not a required file naming/folder scheme, a live engineering acceptance, a verified private-byte transfer, or an activated succession.
+
+The incumbent Oracle prepares a **public-safe landing packet** with actual explanatory substance, linking existing concept/architecture/decision sources rather than restating private customer data. Include:
 
 | Section | Required content | Evidence boundary |
 |---|---|---|
-| **A. Owner outcome** | Owner's words and effective amendments, actual **end-user acceptance criterion**, prohibited/deferred scope | Distinguish words, paraphrase and proposed inference |
-| **B. Prototype now** | What actually runs, exact build/candidate identity and lineage, features exercised, test environment, preserved frozen baseline, evidenced failures | `WORKS_IN_MOCK` is not `WORKS_ON_OWNER_WINDOWS`; separate self/IR tests |
+| **A. Owner outcome** | Owner's words and effective amendments, project concept/why, user journey, actual **end-user acceptance criterion**, prohibited/deferred scope | Distinguish words, paraphrase and proposed inference |
+| **B. Prototype now** | What actually runs, exact build/candidate identity and lineage, **architecture/data flow, difficult logic, key invariants and source-backed explanations**, features exercised, test environment, preserved frozen baseline, evidenced failures | `WORKS_IN_MOCK` is not `WORKS_ON_OWNER_WINDOWS`; separate self/IR tests |
 | **C. Next planned** | **Two connected delivery outcomes** and dependencies, avoiding feature wishlists; QA/presentation work only if justified by an observed blocker | Name a tested release/acceptance threshold, not generic "finish" |
 | **D. Agent/work frontier** | Current Oracle, coder, IR and Owner routing labels, canonical revision, exact active assignments, return issue/PRs, accepted and pending receipts | Short chat IDs are display locators, not identity or access |
 | **E. Files/fixtures** | Public landing page URL, **exact fixtures collection URL**, project repo, original source/mapping approvals, baseline, runnable, code-only, independent reports and screenshot evidence; **private manifest location by opaque ref** | Mark bytes `MISSING`, `UPLOADED`, `DOWNLOADED`, `BYTE_MATCHED`, `INDEPENDENTLY_REVIEWED` separately |
-| **F. Open risk/authority** | Stale approvals, ambiguous mapping, unauthorized target changes, private-content leaks, failed/pending tests, successor author exposure, Owner approval boundaries | No positive claim beyond its exact candidate and observation |
+| **F. Open risk/authority** | **Major design decisions, rejected alternatives, surviving wrong cases**, stale approvals, ambiguous mapping, unauthorized target changes, private-content leaks, failed/pending tests, successor author exposure, Owner approval boundaries | No positive claim beyond its exact candidate and observation |
 | **G. Next five actions** | Five prioritized *concrete* actions with actor, input source, completion proof and stop condition; **one immediate NOW** | Do not require Owner to transport detailed prompts unnecessarily |
 
 **Canonical source of state:** Read `oracle-cycles/<project>/CURRENT.json` from the actual permitted canonical branch/commit. GitHub issue comments are transport receipts; Progress Page is a public-safe presentation. Preserve old revisions/history, not a copied parallel "current" JSON.
@@ -90,8 +92,8 @@ Use `REPORTED`, `EXECUTED_HERE`, `INDEPENDENTLY_REVIEWED`, `NOT_RUN`, and `UNKNO
 | Stage | May do | May not assert |
 |---|---|---|
 | `HANDOVER_PROPOSED` | Owner requests preparation, incumbent identifies sources/risks | New Oracle appointed |
-| `PACKET_PREPARED` | Build linked packet, custody manifest and five actions | All files received |
-| `SUCCESSOR_READ_ONLY` | New chat opens originals, reproduces current status/limits, challenges a plausible wrong case | Old Oracle retired, successor can write |
+| `PACKET_PREPARED` | Build the source-backed concept, complex-architecture/logic and decision/challenge transfer **plus** linked A–G packet, custody manifest and five actions; name knowledge gaps | All files received |
+| `SUCCESSOR_READ_ONLY` | Successor opens originals, reconciles concept/architecture and consequential decisions with live sources, verifies actual access, reproduces current status/limits and challenges a plausible wrong case | Old Oracle retired, successor can write |
 | `OWNER_APPROVED_CUTOVER` | Owner selects successor, role, actual write policy and time/conditions | Automatic write isolation or release authority |
 | `CUTOVER_PUBLISHED` | Compare-and-swap authorized state/epoch change; explicitly adopt ongoing coder/IR assignments and preserve task IDs | Chat suffix or readback alone authenticated the actor |
 | `CUSTODY_AND_CONTROL_RECONCILED` | Read actual next-state and artifact receipts, verify write isolation, late returns and Page projection | Owner engineering approval or Windows acceptance |
