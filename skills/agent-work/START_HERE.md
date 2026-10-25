@@ -10,6 +10,8 @@ Read the Owner's **written aim and observable end-user outcome**, current amendm
 
 **Precedence:** actual Owner decisions and native engineering/custody authority → original inputs and exact current candidate → applicable Common instructions → historical agent accounts. Role labels, chat IDs, readiness stages and template completions do **not** grant permission to edit, dispatch, review, merge or release.
 
+**Initial mentoring (new participant or incoming Oracle only):** Use [Initial Mentoring](initial-mentoring/SKILL.md) *inside* the first source walkthrough to align roughly three conversational themes: the actual user outcome, a consequential architecture/source rule and wrong case, and the next evidence-producing result. **The Oracle must first examine a representative original source item and the actual implementation/specification where engineering meaning depends on field semantics.** Reading this router or passing a process checklist does not prove the Oracle understands the CII element/pointer contract, Word table mapping or another domain model. If the load-bearing field meaning is unverified, say so and take a bounded read-only source-trace step before asserting an engineering fix or qualified code module. No test, grade, extra approval or repeat for established `Cycle now` participants.
+
 ## 2. Select coordination mode (do not blend)
 
 | Mode | Coordinator and first read |
