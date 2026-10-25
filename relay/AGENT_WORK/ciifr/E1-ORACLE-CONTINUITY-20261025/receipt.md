@@ -4,7 +4,7 @@
 **Status at preparation:** `PUBLIC_SAFE_PAYLOAD_STAGED_ON_DRAFT_BRANCH / NOT_CANONICAL_MAIN / RECIPIENT_NOT_CONFIRMED / ORACLE_NOT_CUTOVER`  
 **Source/producer:** incumbent CIIFR E1 coordinating Oracle, **SELF_ASSESSED narrative**; no independent validation of these prose claims beyond opening the referenced GitHub native source/issue metadata. No active successor Oracle ID, chat message delivery, control epoch or SOURCE/TARGET copy transfer.
 
-**Exact proposed GitHub relay path:** `Common/relay/AGENT_WORK/ciifr/E1-ORACLE-CONTINUITY-20261025/` on branch `oracle/ciifr-e1-continuity-knowledge-20261025`; intended draft PR tracked in repository PR description. After any merge the recipient should use the exact merged commit, not assume this draft's content is canonical. This receipt is public-safe and does not include protected engineering model bytes.
+**Draft publication locator:** [Common PR #506](https://github.com/reallakshman19/Common/pull/506), DRAFT/UNMERGED at preparation. The PR's exact head is mutable; inspect fresh HEAD and frozen Git blob IDs.\n\n**Exact proposed GitHub relay path:** `Common/relay/AGENT_WORK/ciifr/E1-ORACLE-CONTINUITY-20261025/` on branch `oracle/ciifr-e1-continuity-knowledge-20261025`; intended draft PR tracked in repository PR description. After any merge the recipient should use the exact merged commit, not assume this draft's content is canonical. This receipt is public-safe and does not include protected engineering model bytes.
 
 ## Manifest — Git blob integrity locators, *not* recipient SHA-256 measurements
 
@@ -33,7 +33,7 @@ These are repository-content **Git SHA-1 object IDs**, not SHA-256 of this packe
 | Checkpoint | Truth |
 |---|---|
 | Source documents authored and exact Git blob identifiers read | **YES, DRAFT GitHub BRANCH** |
-| Draft PR opened/read back | **NOT_YET at receipt writing; verify later** |
+| Draft PR opened/read back | **YES — Common draft PR #506**, exact files must be rechecked at publication |
 | Packet published to `Common/main` | **NO** |
 | Protected original CII transferred | **NO; not required for source-only handover** |
 | New successor read/verified this packet | **NO / UNBOUND** |
