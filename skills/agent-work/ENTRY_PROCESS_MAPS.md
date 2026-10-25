@@ -23,8 +23,9 @@ flowchart TD
   A3 --> A4["Oracle builds project concept note: why, scope, current capability and rationale"]
   A4 --> A5["Oracle records architecture and complex concepts with examples, decisions and source links"]
   A5 --> A6["Oracle defines roadmap: WBS, dependencies, next three tasks and accepted / held work"]
-  A6 --> A7["Oracle publishes source-backed project Home through Progress Page CLI"]
-  A7 --> A8["Oracle chooses one current WBS and the next useful agent/actor"]
+  A6 --> A7["Oracle records source-backed project Home through the Progress Page CLI"]
+  A7 --> AV["Oracle opens actual project view: concept, architecture, fixtures, roadmap and current task discoverable or marked missing"]
+  AV --> A8["Oracle chooses one current WBS and the next useful agent/actor"]
   A8 --> A9["Oracle continues task design and evidence reconciliation"]
 ```
 
@@ -32,7 +33,7 @@ flowchart TD
 
 **Nudge Designer = Oracle's design tool**, not a separate participant. Use [Oracle execution](nudge-designer/references/ORACLE_EXECUTION.md), [conceptual blueprint](nudge-designer/references/BLUEPRINT.md) and the selected [profiles](nudge-designer/references/PROFILES.md) to author and revise this model. In OTM projects, Oracle sends its task/control recommendations through the actual OTM route; in standalone it coordinates directly as selected.
 
-**Progress Page:** Oracle owns Home content and source quality; the actual **page writer** is OTM in OTM mode and Oracle in standalone. The project view should prominently show concept note, architecture/complex concepts and full roadmap, with grounded original fixtures—not only sources, blockers and a next-action sentence.
+**Progress Page:** Oracle owns Home content and source quality; the actual **page writer** is OTM in OTM mode and Oracle in standalone. **At A7, verify both the documentation and actual project display:** concept note, architecture/complex concepts, original fixture links, roadmap and current task must be discoverable **or explicitly recorded as missing**. A source link in a protocol is not proof the viewer rendered it. **Implementation boundary:** the original viewer displays the Owner aim and grounding fixtures/roadmap in separate areas; a consolidated Project Home is proposed in [Progress Page draft PR #16](https://github.com/reallakshman19/progress-page/pull/16), not assumed live until merged/deployed and checked. Never treat a proposed source document or a draft UI as verified content.
 
 ## B. Oracle onboards a builder / reviewer / specialist agent
 
@@ -41,18 +42,26 @@ flowchart TD
   B0["Oracle already knows Owner aim, sources, concept note and roadmap"] --> B1["Oracle selects current WBS and its one deliverable"]
   B1 --> B2["Oracle as Nudge Designer chooses worker/reviewer and GUIDED or OPEN support"]
   B2 --> B3["Oracle writes role-specific prompt: WHY, exact WBS issue, source fixture, method, checks, return"]
-  B3 --> B4["Oracle creates / routes assignment under existing project operating authority"]
+  B3 --> B4["Oracle PREPARES assignment and route under current project authority"]
   B4 --> B5{"Standalone project with ACTIVE Oracle Cycle?"}
-  B5 -->|Yes| B6["Oracle publishes next assignment in CURRENT.json and gives Cycle now URL"]
-  B5 -->|No| B7["Oracle uses selected manual / OTM-native task transport"]
-  B6 --> B8["Agent receives one task and confirms relevant source/capability"]
+  B5 -->|Yes| B6["Oracle PUBLISHES assignment to canonical CURRENT.json; sends Cycle now URL"]
+  B5 -->|No| B7["Oracle SENDS by selected manual / OTM-native route"]
+  B6 --> B8["Recipient reads current task and CONFIRMS delivery / actual access"]
   B7 --> B8
-  B8 --> B9["Agent proceeds to initial protocol C; reports blockers as real evidence"]
-  B4 -.-> BP["Oracle / OTM updates Progress Page WBS actor and task"]
-  B9 -.-> BP
+  B8 --> B9{"Delivery confirmed?"}
+  B9 -->|No / uncertain| BX["Record prepared / sent / uncertain; do not describe execution as active"]
+  B9 -->|Yes| B10{"v3.6 selected for this task?"}
+  B10 -->|Yes| B11["Continue at map C: v3.6 initial execution"]
+  B10 -->|No| B12["Continue under the selected native task / delivery protocol"]
+  B4 -.-> BP["Oracle / OTM records task and actual delivery state on Progress Page"]
+  BX -.-> BP
+  B11 -.-> BP
+  B12 -.-> BP
 ```
 
-Oracle must **not re-read its own complete project grounding at each assignment**. It uses the current grounded Home/roadmap and selected WBS issue to prepare the briefing. A material Owner amendment, changed source or stale evidence warrants targeted re-grounding, not a ritual repeat.
+Oracle must **not re-read its own complete project grounding at each assignment**. It uses the current grounded Home/roadmap and selected WBS issue to prepare the briefing. A material Owner amendment, changed source or stale evidence warrants targeted re-grounding, not a ritual repeat. **Prepared** means the prompt/task is drafted, **published/sent** means it reached the canonical selected transport, and **confirmed** means the recipient actually obtained the relevant assignment/sources. They must not be conflated: an unconfirmed send is not active execution. This is transport evidence, **not an added admission, approval or readiness gate**.
+
+**B9 routing:** Map C is specifically for v3.6-governed engineering tasks. An agent whose task uses another selected native protocol follows that protocol directly; neither the Oracle Cycle nor onboarding automatically selects v3.6.
 
 **Nudge Designer is performed by the Oracle**: [Oracle OnBoard](nudge-designer/assets/prompts/oracle-onboard.md), [worker](nudge-designer/assets/prompts/worker.md), [reviewer](nudge-designer/assets/prompts/reviewer.md), and [adaptive support](nudge-designer/references/ADAPTIVE_SUPPORT.md) supply reusable prompt formats, not a second approval actor. Every prompt keeps an `Aim:` and `Modules:` line, scope, source references and return contract.
 
@@ -71,11 +80,17 @@ flowchart TD
   C3 --> C4["Read ground fixtures, original files, negative cases and protected invariants"]
   C4 --> C5["Load v3.6 approved AIM label, plan, child issue and selected delivery mode"]
   C5 --> C6["Use A01-A14, A13 coding standards; dry-run and actual allowed scope"]
-  C6 --> C7["Build assigned slice and test positive / negative / regression on exact head"]
-  C7 --> C8["A14 SELF-CHECK v1 on own child before the completion claim"]
-  C8 --> C9["Publish canonical 8-line TASK_EVIDENCE on own child for finished task"]
+  C6 --> CG{"Missing required source/access or engineering HOLD?"}
+  CG -->|No| C7["Build assigned slice and test positive / negative / regression on exact head"]
+  CG -->|Yes| CF["A14 if making task claim; report BLOCKED / NOT_RUN and evidence gaps"]
+  C7 --> CE{"Finished task with valid exact-head evidence?"}
+  CE -->|No| CF
+  CE -->|Yes| C8["A14 SELF-CHECK v1 on own child before completion claim"]
+  C8 --> C9["Canonical 8-line TASK_EVIDENCE on own child for finished task"]
   C9 --> C10["Terminal LOG and linked PR/head; reconcile pending items"]
-  C10 --> C11["If standalone Cycle: post ORACLE-CYCLE-RECEIPT and read back permalink"]
+  CF --> CX["No fabricated finished-task receipt or proof; terminal LOG / native status"]
+  CX --> C11["If standalone Cycle: separate ORACLE-CYCLE-RECEIPT and readback"]
+  C10 --> C11
   C11 --> C12["Oracle reviews issue evidence, challenges return and selects next task"]
   C12 -.-> CP["Oracle updates Progress Page: WBS evidence, blocker, next actor; project Home if changed"]
 ```
@@ -84,7 +99,7 @@ flowchart TD
 
 **Always v3.6 in this mapped engineering execution:** [SKILL](../engineering-pr-delivery-v3.6/SKILL.md), appropriate [coordinator](../engineering-pr-delivery-v3.6/MODE_COORDINATOR.md) / [standalone](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) delivery instructions and [A01–A14 addendum](../engineering-pr-delivery-v3.6/CODING_PRACTICES_ADDENDUM.md). The approved AIM label/plan, actual own-child issue, scope/permissions and dry-run are still native prerequisites; this process does not need a duplicate `Can execute?` decision box.
 
-**Exact v3.6 evidence:** A14 SELF-CHECK v1 is published first on the own-child issue. For a task with valid finished-task proof, publish the unmodified eight-line `TASK_EVIDENCE v3.6`; its `For the user:` line carries the self-check permalink and `Proof:` remains a qualifying PR/commit URL. The response ends with one native terminal LOG. If work is blocked/partial or tests not run, report honestly rather than inventing a finished-task receipt. **Cycle receipt and TASK_EVIDENCE are distinct**; Oracle reconciles both.
+**Exact v3.6 evidence:** A14 SELF-CHECK v1 is published first on the own-child issue before a task claim when applicable. For a task with valid finished-task proof, publish the unmodified eight-line `TASK_EVIDENCE v3.6`; its `For the user:` line carries the self-check permalink and `Proof:` remains a qualifying PR/commit URL. **If access/source checks fail, an engineering HOLD applies, or tests do not support completion**, return the actual attempted action and `BLOCKED` / `PARTIAL` / `NOT_RUN` as appropriate, with A14 companion where applicable; **do not manufacture finished-task evidence, tests, PR identity or E-credit**. The response still ends with one native terminal LOG. **Cycle receipt and TASK_EVIDENCE are distinct**; Oracle reconciles both.
 
 **Nudge Designer:** Oracle authored the task and source-specific method; the agent is not asked to act as a second Nudge Designer. Use the relevant [coding/logic profile](nudge-designer/references/PROFILES.md) only to interpret the bounded task. Oracle later revises the prompt when actual evidence contradicts it.
 
@@ -153,7 +168,7 @@ The outgoing Oracle compares the answers with actual issue/WBS/Home/fixtures and
 
 **Home content and publication guide:** [PROJECT_HOME_GUIDE.md](PROJECT_HOME_GUIDE.md) describes the concept note, architecture explanations, fixtures and roadmap source contract and the existing page record route.
 
-**Home:** Oracle keeps all source-grounded **Owner intent, effective amendments, project concept note, architecture and complex concept explanations, original source/fixture inventory and custody, roadmap/WBS relationships, current accepted/runnable product, major decisions, unresolved contradictions and next three tasks**. Use the page's existing project + grounding-fixture records, not a second task database. The Progress Page viewer may show "not recorded" for a missing conceptual source; Oracle must repair its public-safe source record. Exact sensitive details stay in private custody.
+**Home:** Oracle keeps all source-grounded **Owner intent, effective amendments, project concept note, architecture and complex concept explanations, original source/fixture inventory and custody, roadmap/WBS relationships, current accepted/runnable product, major decisions, unresolved contradictions and next three tasks**. Use the page's existing project + grounding-fixture records, not a second task database. The original live viewer can expose these in separate areas; the **consolidated Home view is a proposal in Progress Page draft PR #16**, subject to merge/deployment and real project readback. Where a source concept is absent, explicitly mark it **not recorded**; do not fabricate content or treat a draft UI as rendered. Exact sensitive details stay in private custody.
 
 **Issue → WBS → Project:** an agent follows the **issue** (actual assignment/acceptance and Owner amendments) → **WBS** (its milestone/dependencies and evidence) → **project Home** (concept, architecture, fixtures and roadmap). Oracle moves in reverse when planning: **Home → roadmap/WBS → task issue**. This avoids making agents read an entire project at every assignment.
 
