@@ -70,7 +70,7 @@ class CommonOracleGoldenHandoverTests(unittest.TestCase):
                      "T1–T5", "SELF_ASSESSED", "NOW", "two connected",
                      "NOT_CUTOVER"):
             self.assertIn(term.lower(), handover.lower())
-        self.assertIn("G2", handover)  # CIIFR explicitly *not* this project
+        self.assertIn("CIIFR", handover)  # CIIFR explicitly *not* this project
 
     def test_cold_prompt_routes_to_this_packet_not_ciifr_as_controller(self):
         prompt = read(LANDING / "ORACLE_SUCCESSOR_PROMPT.md")
@@ -111,7 +111,7 @@ class CommonOracleGoldenHandoverTests(unittest.TestCase):
         architecture = read(PAYLOAD / "ARCHITECTURE_COMPLEX_LOGIC.md")
         handover = read(PAYLOAD / "ORACLE_HANDOVER.md")
         self.assertIn("not a transaction server", architecture.lower())
-        self.assertIn("not** assigned", handover.lower() if "not** assigned" in handover.lower() else "not** assigned")
+        self.assertIn("NOT_ASSIGNED", handover)
         self.assertIn("NOT_ESTABLISHED", handover)
         self.assertIn("c3d10bc7", handover)
 
