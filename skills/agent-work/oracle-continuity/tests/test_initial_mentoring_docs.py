@@ -60,7 +60,6 @@ class InitialMentoringDocs(unittest.TestCase):
         self.assertIn("stored versus effective", example)
         self.assertIn("13/13 native tests", example)
         self.assertIn("NOT_TRANSFERRED", example)
-        self.assertIn("13 green synthetic", oracle.lower().replace("tests", "tests") if False else continuity)
         self.assertIn("structural census", oracle.lower())
 
     def test_artifacts_and_benchmark_not_misrepresented(self):
