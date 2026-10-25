@@ -1,6 +1,6 @@
 # Oracle OnBoard — project-first four-document template
 
-**For an Owner-selected new/promoted Oracle or a candidate successor.** A project's real [Owner AIM/Project Home](../../../PROJECT_HOME_GUIDE.md), original engineering evidence, canonical native task and activated Cycle (if any) **remain the source**; these templates are prompts for content, not extra required copies or approval gates.
+**For an Owner-selected new/promoted Oracle or a candidate successor.** This is **not a new protocol, gate, role or separate approval process**.  A project's real [Owner AIM/Project Home](../../../PROJECT_HOME_GUIDE.md), original engineering evidence, canonical native task and activated Cycle (if any) **remain the source**; these templates are prompts for content, not extra required copies or approval gates.
 
 The four [immutable 3DC handover documents at bf02e54e](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload) supply a **quality benchmark**, not engineering facts for another project. Common's [complete, published self-example](https://github.com/reallakshman19/Common/tree/main/relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025) demonstrates the same causal depth for Oracle continuity itself. **For CIIFR or another project, write their own four source-grounded knowledge classes** or reference equivalent native records:
 
