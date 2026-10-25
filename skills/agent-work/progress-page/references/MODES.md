@@ -9,10 +9,12 @@ and the project's Oracle in standalone mode.
 | `projects.json` → `mode` | `otm` | `standalone` |
 | `index.json` → `rules.coordinator` | `OTM` | the Oracle's name (matched without regard to case) |
 | Who writes the data | OTM | the Oracle, or a writer agent the Oracle names |
-| How a change reaches `main` | data-only commit | DRAFT pull request from `pp/<project>-<you>`; the Owner merges |
+| How a change reaches `main` | data-only commit | DRAFT pull request from `pp/<project>-<you>`; Owner merge is default except the explicit progress-page repository authorization below |
 | `replyTo.target` | `OwnerTeammember` | the Oracle's name |
 | `replyTo.repo` | the repository that runs the OTM loop | the project's own repository |
 | Trigger labels | "OTM owes", "Nudges for OTM" | "Oracle owes", "Nudges for Oracle" |
+
+**Owner standing go-ahead — `reallakshman19/progress-page` only (25 October 2026):** When the Owner has given go-ahead to proceed with a draft PR in the **`reallakshman19/progress-page` repository**, that go-ahead **also authorizes merging that scoped PR without requesting a second Owner approval**. The authorized contributor/operator must finish the agreed scope, inspect the actual PR diff/head, check current-base mergeability, exact-head required CI/tests and applicable GitHub branch protections, then mark Ready and **merge**. If a required gate fails, source/authority/scope materially changes, or the PR cannot be merged safely, leave it open, state the exact blocker, and repair/review under existing rules; **no waiver, no admin bypass, no fabricated independent PASS**. This authorization is repo-specific: it does not transfer Owner acceptance of product behavior, enable external deployment, approve Common/other repositories, or override native engineering/reviewer/secret-custody rules. A draft go-ahead is not automatic background execution; the merge is an actual, reported GitHub operation. Document the observed merged SHA/readback.
 
 Agents never write the page. They leave evidence on GitHub (a comment, a commit, a pull request). The coordinator reads it and records it.
 
