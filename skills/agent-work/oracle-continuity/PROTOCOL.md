@@ -174,6 +174,8 @@ Useful work can be salvaged without silently restoring old authority.
 
 ## 7. Oracle succession
 
+**When to prepare a handover:** apply observed project continuity, repeated corrected failure, demonstrated missing capability or explicit Owner/governing OTM preference. The [measurable agent/Oracle trigger pilot](../oracle-standalone/references/CHANGEOVER.md#2a-measurable-handover-triggers--optional-evidence-based-pilot) is **proposed guidance**, not a compulsory numerical takeover rule or authority grant. Normal Oracle refresh is changed-evidence-only; neither long chats nor task completion alone requires succession. Follow the actual native coordination mode and existing cutover authority.
+
 Choose a successor on observed understanding: source-grounded decisions, useful
 results, detected contradictions and preserved invariants. Supply the current
 baseline, decisions/alternatives, open uncertainties, pending returns and the next
