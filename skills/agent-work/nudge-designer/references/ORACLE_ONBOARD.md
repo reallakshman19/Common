@@ -14,6 +14,10 @@ active assignments and next two connected deliveries, remaining read-only until
 the actual native succession is authorized.
 It is a Markdown template; existing render/adapt APIs and schemas are unchanged.
 
+**Golden-depth Agent OnBoard (new builder/specialist/reviewer):** When the recipient lacks a real project concept, difficult source-model explanation or a reliable execution/custody frontier, use the [four reusable source-grounded Agent OnBoard knowledge templates](../assets/agent-onboard/README.md) and its [copy-ready Agent OnBoard prompt](../assets/agent-onboard/AGENT_ONBOARD_PROMPT.md). The original four [3DC golden documents](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload) define **depth, not transferred engineering facts**. Fill from actual Owner/native sources, or **link existing substantive Project Home/ADRs/issue sources** rather than manufacturing four files. This is still the same native seven-element assignment, not a required extra briefing, exam, dispatch gate or parallel reviewer process. Existing grounded agents receive only the changed context; no redundant onboarding.
+
+The new agent's **first executable task, exact permitted files, original data route, return issue and one plausible wrong case must be pre-resolved** by the actual Oracle/OTM/Owner. The Oracle tackles accessible source gaps itself rather than returning routine homework to Owner. For any cross-agent artifact, [Common public-safe Option 1 then restricted Drive Option 2](../../../ARTIFACT_RELAY.md) remain mandatory to claim completed delivery; a sandbox link is local only. A new chat is not a new assignment generation or write permission by itself.
+
 ## Contents
 
 - [Choose the useful route](#choose-the-useful-route)
