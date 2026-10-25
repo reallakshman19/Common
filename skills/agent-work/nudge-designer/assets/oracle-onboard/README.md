@@ -1,4 +1,9 @@
-# Oracle OnBoard — project-first four-document template
+# Oracle OnBoard — OWNER → ORACLE: one project-wide continuity prompt
+
+**START HERE: [ONE OWNER-ISSUED PROJECT PROMPT](ORACLE_ONBOARD_PROMPT.md).** The Oracle carries **THE ENTIRE PROJECT**, its Owner WHY, architecture/decisions, all WBS actors/dependencies, current evidence, source custody and the next three connected outcomes. The Owner sends **one prompt**, not four forms. The four source-knowledge files below are **optional examples/references for an Oracle to assemble/locate project knowledge**, not four compulsory attachments, agent assignments or a second onboarding gate. The Oracle obtains missing accessible facts itself.
+
+**Different unit:** [Agent OnBoard](../agent-onboard/AGENT_ONBOARD_PROMPT.md) is **Oracle → Agent, ONE WBS task only**. The Oracle translates relevant project context into the specific WBS briefing with predecessor return/head, permitted files, a falsifier and native return. Do not paste the project-wide Oracle prompt into coder chats. Owner-selected Oracle continuity control/cutover is separate from knowledge preparation.
+
 
 **For an Owner-selected new/promoted Oracle or a candidate successor.** This is **not a new protocol, gate, role or separate approval process**.  A project's real [Owner AIM/Project Home](../../../PROJECT_HOME_GUIDE.md), original engineering evidence, canonical native task and activated Cycle (if any) **remain the source**; these templates are prompts for content, not extra required copies or approval gates.
 

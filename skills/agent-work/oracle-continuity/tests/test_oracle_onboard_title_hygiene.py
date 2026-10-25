@@ -32,8 +32,10 @@ class OracleAndAgentOnboardHygiene(unittest.TestCase):
                 self.assertIn("source", text.lower())
                 self.assertGreater(len(text), 1700)
         prompt = read(ORACLE / "ORACLE_ONBOARD_PROMPT.md")
-        for name in FOUR:
-            self.assertIn(name, prompt)
+        self.assertIn("UNIT OF CONTINUITY: THE WHOLE PROJECT", prompt)
+        self.assertIn("SENDER: OWNER → ORACLE", prompt)
+        self.assertIn("all WBS", prompt)
+        self.assertIn("ONE immediate project priority", prompt)
         self.assertIn("READ_ONLY", prompt)
         self.assertIn("NOW", prompt)
         self.assertIn("chat", prompt.lower())

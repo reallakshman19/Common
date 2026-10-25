@@ -1,4 +1,7 @@
-# Agent OnBoard — golden-depth source packet (reusable template)
+# Agent OnBoard — ORACLE → AGENT: one WBS-level continuity prompt
+
+**START HERE: [ONE ORACLE-ISSUED WBS PROMPT](AGENT_ONBOARD_PROMPT.md).** The recipient inherits exactly **one WBS task**: parent Owner outcome, upstream/downstream dependency, source contract, current task/assignment generation, predecessor evidence, exact PR head, authorized files, source custody, test/negative case, and one native return. This is not a project-wide Oracle succession prompt. The Oracle already read [project continuity](../oracle-onboard/ORACLE_ONBOARD_PROMPT.md) and distills only **relevant** context here. The four documents below are **optional reference/scaffold material for missing source explanations**, not tasks to copy, fill, re-author or formally approve before the agent acts. An established agent gets changed-context delta only.
+
 
 **For a genuinely new or replacement assigned builder, specialist or independent reviewer.** This is an extension of the existing [Oracle OnBoard guidance](../../references/ORACLE_ONBOARD.md) and [seven-element assignment](../prompts/assignment.md), **not a new protocol, form, reviewer role, test, dispatch system or admission gate**. An existing grounded agent uses a **delta-only continuation** and must not rerun onboarding.
 
