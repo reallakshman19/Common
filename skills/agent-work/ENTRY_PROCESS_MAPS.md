@@ -151,6 +151,8 @@ The outgoing Oracle compares the answers with actual issue/WBS/Home/fixtures and
 
 ## Progress Page: project Home plus WBS/issue evidence
 
+**Home content and publication guide:** [PROJECT_HOME_GUIDE.md](PROJECT_HOME_GUIDE.md) describes the concept note, architecture explanations, fixtures and roadmap source contract and the existing page record route.
+
 **Home:** Oracle keeps all source-grounded **Owner intent, effective amendments, project concept note, architecture and complex concept explanations, original source/fixture inventory and custody, roadmap/WBS relationships, current accepted/runnable product, major decisions, unresolved contradictions and next three tasks**. Use the page's existing project + grounding-fixture records, not a second task database. The Progress Page viewer may show "not recorded" for a missing conceptual source; Oracle must repair its public-safe source record. Exact sensitive details stay in private custody.
 
 **Issue → WBS → Project:** an agent follows the **issue** (actual assignment/acceptance and Owner amendments) → **WBS** (its milestone/dependencies and evidence) → **project Home** (concept, architecture, fixtures and roadmap). Oracle moves in reverse when planning: **Home → roadmap/WBS → task issue**. This avoids making agents read an entire project at every assignment.
