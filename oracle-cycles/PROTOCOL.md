@@ -45,10 +45,12 @@ On every invocation, the **recipient**:
    receipts needed to avoid duplicating completed work.
 3. **If not assigned:** reply briefly “NO ACTION — next is <role>”,
    with current state revision. Do not invent a new task or modify files.
-4. **If assigned:** verify actual access/authority and candidate hash,
-   perform the bounded work, retain self-test/negative-test evidence,
-   then post a redacted `ORACLE-CYCLE-RECEIPT v1` to the
-   `receipt_issue_url` configured in `CURRENT.json`.
+4. **If assigned and a new bounded action is authorized:** verify actual
+   access/authority and candidate identity, perform only that action,
+   retain native self-test/negative-test evidence, then post a redacted
+   `ORACLE-CYCLE-RECEIPT v1` to the configured `receipt_issue_url`.
+   For work already returned, or a missing receipt, follow the
+   **lightweight continuation** exception below instead of re-execution.
 5. Fetch the actual comment URL/readback and return that permalink,
    artifact identity, executed checks, limitations, and next suggested
    action. If GitHub is inaccessible, follow §4 and explicitly label
