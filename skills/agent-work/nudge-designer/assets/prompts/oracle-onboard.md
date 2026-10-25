@@ -82,6 +82,8 @@ COMPLETE refers to this task. Product validation, independent review where actua
 required, Owner acceptance and release remain separate.
 ```
 
+**For an appointed project Oracle or candidate successor**, use the separate [Oracle OnBoard role template](../oracle-onboard/ORACLE_ONBOARD_PROMPT.md) and its [source-grounded four-part knowledge guide](../oracle-onboard/README.md). Keep this existing task-recipient brief for builders/specialists; a title or fresh chat does not activate Oracle control. [Native Chat-ID and traffic-light hygiene](../../references/TITLE_AND_TRAFFIC_HYGIENE.md) applies only under the actual title-owning process.
+
 ## Promoted Oracle
 
 Prototype-first (Owner, 23 Oct 2026: CoordinatorLandingpage #1 comments 6355155436, 6355213295). When the Owner or the coordinator promotes an agent that has shown understanding beyond
