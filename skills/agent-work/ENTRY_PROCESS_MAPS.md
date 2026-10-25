@@ -91,7 +91,9 @@ This process map is specifically for **engineering work selected under v3.6**. I
 flowchart TD
   C0["Agent starts: Cycle now URL if active standalone Cycle, otherwise received native task"]
   C0 --> C1["Open fresh CURRENT.json only if Cycle; verify ACTIVE, correct role/revision and bounded assignment"]
-  C1 --> CR{"Already returned with no new authorized action?"}
+  C1 --> CV{"Cycle ACTIVE if selected, correct role/revision, authorized task and return?"}
+  CV -->|No| CH["NO ACTION / NOT ACTIVE or BLOCKED; do not invent a task"]
+  CV -->|Yes| CR{"Already returned with no new authorized action?"}
   CR -->|Yes| CW["AWAIT_ORACLE_RECONCILIATION; repair missing receipt only; do not rerun engineering"]
   CR -->|No| CC{"Established participant with unchanged grounding?"}
   CC -->|Yes| CD["Refresh changed issue/evidence/candidate and relevant Home only; preserve current byte checks"]
@@ -161,10 +163,10 @@ flowchart TD
 flowchart TD
   E0["Owner request, Oracle return, changed evidence or observed continuity risk"]
   E0 --> E1["Open current canonical assignment and relevant native receipts; inspect exact candidates"]
-  E1 --> E2{"Can incumbent Oracle continue safely and productively?"}
-  E2 -->|Yes| E3["Refresh changed issue/WBS/Home facts only; reconcile pending evidence"]
+  E1 --> E2{"Explicit replacement order or evidenced risk warrants succession?"}
+  E2 -->|No| E3["Refresh changed issue/WBS/Home facts only; reconcile pending evidence"]
   E3 --> E4["CONTINUE: preserve concept, architecture, approvals and active agents; issue ONE next authorized action"]
-  E2 -->|No or explicit replacement| E5["Incumbent checkpoints FOUR knowledge classes: concept; complex architecture; decisions/wrong cases; exact execution frontier"]
+  E2 -->|Yes| E5["Incumbent checkpoints FOUR knowledge classes: concept; complex architecture; decisions/wrong cases; exact execution frontier"]
   E5 --> E6["Link immutable 3DC golden example + actual project-native sources and custody; name UNKNOWNs"]
   E6 --> E7["Successor READ-ONLY: recover Owner aim, explain difficult logic, inspect one surviving wrong case, inventory active workers"]
   E7 --> E8{"Material knowledge/access gaps?"}
