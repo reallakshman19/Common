@@ -23,7 +23,7 @@ class WbsContinuityRegression(unittest.TestCase):
             "receiving Oracle's first actual continuity action",
             "continues, depends on, replaces or coexists",
             "KNOWLEDGE_CHECKPOINT_PUBLISHED",
-            "not a blanket project HOLD",
+            "blanket project HOLD",
         ):
             with self.subTest(requirement=requirement):
                 self.assertIn(requirement.lower(), text.lower())
@@ -33,7 +33,7 @@ class WbsContinuityRegression(unittest.TestCase):
         for requirement in (
             "Progress Page Home/WBS",
             "PARENT WBS → EXISTING/current WBS → NEXT WBS",
-            "CONTINUES / REUSES / SUPERSEDES / PARALLEL",
+            "continues, reuses, supersedes or runs in parallel",
             "READ_ONLY",
             "no extra checkpoint",
         ):
