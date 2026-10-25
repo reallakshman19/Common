@@ -10,6 +10,8 @@ aim, changes and decisions with Oracle; Oracle carries the useful work through
 bounded assignments, source/evidence reconciliation and Owner-facing progress.
 For a worker or reviewer, `Cycle now` is a **read-current-state, act-if-assigned,
 return-evidence** instruction, not a request to become Oracle.
+**Pre-resolved dispatch:** The selected Oracle/OTM or direct Owner supplies the recipient with ONE actual issue or active Cycle locator and the already-decided coordination mode, native delivery protocol (v3.6 only where selected), task/candidate, original/relay inputs, limits/HOLDs, return destination and immediate next actor. A builder does **not** select another mode, onboarding route, reporting system or approval procedure. Verify authority and real source access; escalate changed or contradictory conditions. [Single-task routing](../ENTRY_PROCESS_MAPS.md#one-shared-spine) · [role lifecycle](../ROLE_LIFECYCLE.md).
+
 **Established recipient:** use [lightweight `Cycle now` continuation](../../../oracle-cycles/PROTOCOL.md#lightweight-continuation--already-bound-participants): refresh assignment and changed evidence, not full onboarding. Do not rerun returned work while Oracle reconciliation is pending; repair an unposted routing receipt by v1 rules without replaying tests. Current authority, source identity and access checks still apply.
 
 **Precedence:** actual Owner outcome/amendments and authority → selected native
@@ -30,6 +32,13 @@ For a mature working explanation use the optional
 [Oracle OnBoard Prompt](../nudge-designer/references/ORACLE_ONBOARD.md):
 a fresh recipient checks essentials; never re-run a solved reconstruction
 as a ceremonial exam. Read only the task's relevant original sources.
+For a **new agent**, first apply [Initial Mentoring](../initial-mentoring/SKILL.md)
+inside the *same* source walkthrough and task brief: align the Owner's real
+product outcome, one difficult source-to-result rule/wrong case, and the next
+observable deliverable. **The Oracle—not the new agent or Owner—must first
+ground the difficult engineering premise** in an accessible original item,
+the actual existing parser/converter and field-specific specification.
+For a returning `Cycle now` agent, refresh changed evidence only.
 
 When a worker may change, the Oracle may be succeeded, or writes overlap,
 **read [CHANGEOVER.md](references/CHANGEOVER.md)** and
@@ -81,6 +90,30 @@ On an Owner's request for status, routing, intent update or `Cycle now`:
 
 No task or status write occurs merely because someone requests a read-only
 progress report. Never infer access to other live chat tabs.
+
+**Domain-grounding before framework/design claims (CIIFR lesson):**
+Reading `START_HERE` and describing role/relay/CI rules establishes
+**process adoption only**, not understanding of the product. When the Owner
+asks for architecture, code modules, fixtures or benchmarks, first check the
+**actual existing project Home/source and one representative original record**;
+trace it through the current parser/output and authoritative field/units
+specification. Keep structural census (for example, CII ELEMENTS/NODENAME/RIGID
+counts or pointer `0`) separate from verified *effective engineering semantics*
+(such as per-field inheritance, sentinel/default values, auxiliary ownership
+and downstream propagation). If a load-bearing interpretation is not
+verified, do a **bounded read-only source/format grounding slice** or
+explicitly mark that part **PROPOSED/UNKNOWN**; do not build or recommend
+writer/transfer rules as if verified. This is source work, not a request for
+ceremonial Owner permission. Synthetic regressions and a fast benchmark
+qualify only their observed synthetic scope; the Oracle's own contribution
+stays `SELF_ASSESSED` where independent judgment is required.
+
+Before promising another participant a framework/ZIP, inspect an authorized
+**recipient-accessible relay/custody route**. Locally verified ZIP members,
+digests and timing records are not cross-chat delivery or a semantic PASS;
+mark a blocked Common publication as `BLOCKED / NOT_TRANSFERRED`, keep the
+artifact and publish a sanitized receipt where authorized. Follow
+[Artifact Relay](../ARTIFACT_RELAY.md), not a guessed `sandbox:` handoff.
 
 **Artifact transfer rule (Owner, 24 October 2026):** Every Oracle↔agent transfer of a material input, output, prototype, ZIP or review evidence is recorded through [Common artifact relay](../ARTIFACT_RELAY.md), **even when first shared by attachment, `/mnt/data` or `sandbox:` link**. The relay record is public-safe; authorized public bytes may live in `relay/AGENT_WORK/`, while protected bytes stay in the Owner's private handoff storage and the relay contains only a sanitized locator/status. Track actual recipient retrieval and SHA-256 verification separately. Neither a local link nor a draft PR is a completed transfer; do not change the active V3.1 relay recorder to accomplish an agent-work handoff.
 
@@ -138,7 +171,7 @@ safe work.
 
 Do **not** treat a new chat label, role title, prepared onboard prompt,
 context uncertainty, or a recorded activity threshold as a completed
-handover. Follow [CHANGEOVER.md](references/CHANGEOVER.md):
+handover. Follow the **optional measurable trigger pilot** and existing actual cutover rules in [CHANGEOVER.md](references/CHANGEOVER.md):
 
 - Suggest worker continuation or replacement only when evidence/context,
   missing capability, concurrency, cost or Owner preference supports it.
@@ -159,11 +192,13 @@ handover. Follow [CHANGEOVER.md](references/CHANGEOVER.md):
 
 ### Owner-requested Oracle handover
 
-Give a new Oracle a **read-only** source-grounded briefing first: original
-Owner outcome, current **usable prototype** with exact tested scope,
-the **next two connected deliveries**, all relevant landing and
-fixtures links, artifact/access/approval gaps, and **five concrete next
-actions** with a single immediate actor. Use
+Give a new Oracle a **read-only, knowledge-first** source-grounded briefing first: original
+Owner outcome and **project concept**, current **system architecture and difficult logic**
+(with invariants, ownership, decision rationale, rejected alternatives and surviving wrong cases),
+the **usable prototype** with exact tested scope, the **next two connected deliveries**,
+all relevant landing and fixtures links, artifact/access/approval gaps, and **five concrete
+next actions** with a single immediate actor. The immutable [3DC-XML-CII golden fixture](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload)
+illustrates minimum content, not the current acceptance/authority of other projects. Use
 [ORACLE_HANDOVER_PROTOCOL.md](references/ORACLE_HANDOVER_PROTOCOL.md)
 instead of a generic summary. Read the real Progress project in
 `data/projects.json` and `data/<key>/fixtures.json`; never invent
@@ -178,7 +213,7 @@ isolating competing write access.
 Use the source-bound [Progress adapter](references/PROGRESS_ADAPTER.md)
 and the **actual** Progress Page CLI:
 `python tools/pp_cli.py`. In standalone mode Oracle (or a
-named writer agent) prepares a **data-only draft PR** for Owner merge;
+named writer agent) prepares a **data-only draft PR**; merging follows the [canonical Progress Page mode/merge rules](../progress-page/references/MODES.md), including its scoped standing exception;
 record source, actor and reason through CLI so its existing audit
 Timeline updates. The `p25b` project or another project's source records
 must not be overwritten because chat roles happen to look similar.

@@ -6,13 +6,13 @@
 
 ## One shared spine
 
-Owner intent and issue-based project grounding → Oracle project Home (concept note, architecture/complex concepts, original fixtures and roadmap) → Oracle-assigned WBS slice → agent `Cycle now` bootstrap in an **activated standalone Cycle** or actual OTM/native dispatch → v3.6 coding and own-child evidence → Oracle challenge and Progress Page update → agent / Oracle continuity when warranted → Owner acceptance.
+**Owner aim → Oracle/OTM (or direct Owner) pre-resolved assignment → Agent executes selected native protocol → Native task evidence (+ Cycle envelope/relay only where applicable) → Oracle/OTM reconciliation → Continue current actor OR authorized agent/Oracle succession → ONE next task.** Engineering review, protected custody, Owner acceptance and merge/release controls apply at their actual boundaries. This spine is not a demand that every participant perform every map or stage.
 
 - **Cycle now:** the [GitHub Oracle Cycle protocol](../../oracle-cycles/PROTOCOL.md) is the one-line **standalone** execution transport *when that project has activated an Oracle Cycle*: `Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/<project>` for a cold chat; `Cycle now` for a chat with a verified locator and role. The receiver must read actual `CURRENT.json` on canonical `main`, confirm `mode=standalone`, `activation=ACTIVE`, its role, generation and assigned task, and return a public-safe `ORACLE-CYCLE-RECEIPT v1` to its designated GitHub issue, with readback. No assignment → `NO ACTION`; inactive → `NOT ACTIVE`. Do not confuse a cycle receipt with v3.6's separate native `TASK_EVIDENCE`.
-- **Progress Page ownership:** OTM updates the page in OTM projects; **the project Oracle updates it in standalone** using the existing page CLI/Timeline and Owner-reviewed DRAFT PR. Agents post evidence to native issues/PRs, not to page JSON. Oracle ensures Home is up to date as Owner intent, architecture or roadmap changes.
+- **Progress Page ownership:** OTM updates the page in OTM projects; **the project Oracle updates it in standalone** using the existing page CLI/Timeline and data-only DRAFT PR, subject to the [canonical mode/merge grant](progress-page/references/MODES.md). Agents post evidence to native issues/PRs, not to page JSON. Oracle ensures Home is up to date as Owner intent, architecture or roadmap changes.
 - **Concept note, architecture and complex concepts:** publish Oracle-authored **source-bound explanations or public-safe links** in the existing grounding fixtures. Keep Owner-approved concepts distinct from hypotheses and recorded alternatives. Protected file bytes remain in authorized custody; Home links/notes do not expose them.
 - **Grounding and evidence:** v3.6 applies when selected for this engineering work with approved AIM label, plan, actual child issue and write authority. Its `coordinator/standalone` delivery mode remains separate from Progress Page's `otm/standalone` mode. There is no extra v3.6 permission check invented by the process map.
-- **Continuity:** Oracle may recommend agent change from observable GitHub-access turns, task/WBS divergence, material stagnation, capability or Owner preference. The >5 distinct GitHub turns / >35 active minutes rule is only a BuddyRunner *suggestion* when its documented ChatGPT agent scope applies, never forced handoff.
+- **Continuity:** Oracle may recommend agent change from observable GitHub-access turns, task/WBS divergence, material stagnation, capability or Owner preference, with [optional measurable pilot thresholds](oracle-standalone/references/CHANGEOVER.md#2a-measurable-handover-triggers--optional-evidence-based-pilot). The >5 distinct GitHub turns / >35 active minutes rule is only a BuddyRunner *suggestion* when its documented ChatGPT agent scope applies, never forced handoff.
 - **Review and acceptance:** Oracle challenges actual evidence; a self-authored contribution remains SELF_ASSESSED. OTM/Owner grant and selected native epoch/custody restrictions remain operative; no UI, prompt or role label silently authorizes a PR merge or releases private data.
 
 ## Common artifact and fixture transaction — used within A–E (not a sixth stage)
@@ -57,7 +57,7 @@ flowchart TD
 flowchart TD
   B0["Oracle already knows Owner aim, sources, concept note and roadmap"] --> B1["Oracle selects current WBS and its one deliverable"]
   B1 --> B2["Oracle as Nudge Designer chooses worker/reviewer and GUIDED or OPEN support"]
-  B2 --> B3["Oracle writes task prompt with Common relay input locator, source identity and output return"]
+  B2 --> B3["Oracle resolves task issue, recipient, both applicable modes, exact head, relay inputs/HOLDs, native return and ONE next actor"]
   B3 --> B4["Oracle PREPARES assignment and route under current project authority"]
   B4 --> B5{"Standalone project with ACTIVE Oracle Cycle?"}
   B5 -->|Yes| B6["Oracle PUBLISHES assignment to canonical CURRENT.json; sends Cycle now URL"]
@@ -77,7 +77,7 @@ flowchart TD
 
 Oracle must **not re-read its own complete project grounding at each assignment**. It uses the current grounded Home/roadmap and selected WBS issue to prepare the briefing. A material Owner amendment, changed source or stale evidence warrants targeted re-grounding, not a ritual repeat. **Prepared** means the prompt/task is drafted, **published/sent** means it reached the canonical selected transport, and **confirmed** means the recipient actually obtained the relevant assignment/sources. They must not be conflated: an unconfirmed send is not active execution. This is transport evidence, **not an added admission, approval or readiness gate**.
 
-**B9 routing:** Map C is specifically for v3.6-governed engineering tasks. An agent whose task uses another selected native protocol follows that protocol directly; neither the Oracle Cycle nor onboarding automatically selects v3.6.
+**Dispatch routing:** Oracle/OTM (or direct Owner) selects the coordination mode, native protocol, return path and required evidence **before** delivery. Recipients verify actual authority and access but do not independently redesign the dispatch. **B9 routing:** Map C is specifically for v3.6-governed engineering tasks. An agent whose task uses another selected native protocol follows that protocol directly; neither the Oracle Cycle nor onboarding automatically selects v3.6.
 
 **Nudge Designer is performed by the Oracle**: [Oracle OnBoard](nudge-designer/assets/prompts/oracle-onboard.md), [worker](nudge-designer/assets/prompts/worker.md), [reviewer](nudge-designer/assets/prompts/reviewer.md), and [adaptive support](nudge-designer/references/ADAPTIVE_SUPPORT.md) supply reusable prompt formats, not a second approval actor. Every prompt keeps an `Aim:` and `Modules:` line, scope, source references and return contract.
 
@@ -90,8 +90,15 @@ This process map is specifically for **engineering work selected under v3.6**. I
 ```mermaid
 flowchart TD
   C0["Agent starts: Cycle now URL if active standalone Cycle, otherwise received native task"]
-  C0 --> C1["Open CURRENT.json if Cycle; resolve exact assignment and issue"]
-  C1 --> C2["Issue → WBS: task scope, Owner amendments, criterion and existing evidence"]
+  C0 --> C1["Open fresh CURRENT.json only if Cycle; verify ACTIVE, correct role/revision and bounded assignment"]
+  C1 --> CV{"Cycle ACTIVE if selected, correct role/revision, authorized task and return?"}
+  CV -->|No| CH["NO ACTION / NOT ACTIVE or BLOCKED; do not invent a task"]
+  CV -->|Yes| CR{"Already returned with no new authorized action?"}
+  CR -->|Yes| CW["AWAIT_ORACLE_RECONCILIATION; repair missing receipt only; do not rerun engineering"]
+  CR -->|No| CC{"Established participant with unchanged grounding?"}
+  CC -->|Yes| CD["Refresh changed issue/evidence/candidate and relevant Home only; preserve current byte checks"]
+  CC -->|No| C2["Issue → WBS: task scope, Owner amendments, criterion and existing evidence"]
+  CD --> C4
   C2 --> C3["WBS → Project Home: Owner intent, concept note, architecture, full roadmap"]
   C3 --> C4["Open WBS-linked Common relay input; check actual original bytes, negative fixtures and invariants"]
   C4 --> C5["Load v3.6 approved AIM label, plan, child issue and selected delivery mode"]
@@ -111,7 +118,7 @@ flowchart TD
   C12 -.-> CP["Oracle updates Progress Page: WBS evidence, blocker, next actor; project Home if changed"]
 ```
 
-**Issue first, then WBS, then project**: the agent starts from the actual assigned issue (including Owner amendments and source evidence), identifies its WBS position and dependencies, then opens the larger project Home and only the relevant ground fixtures and concept/architecture materials. A concept note is grounding, not a substitute for native criteria.
+**New agent:** Issue first, then WBS, then project: the agent starts from the actual assigned issue (including Owner amendments and source evidence), identifies its WBS position and dependencies, then opens the larger project Home and only the relevant ground fixtures and concept/architecture materials. A concept note is grounding, not a substitute for native criteria.
 
 **Always v3.6 in this mapped engineering execution:** [SKILL](../engineering-pr-delivery-v3.6/SKILL.md), appropriate [coordinator](../engineering-pr-delivery-v3.6/MODE_COORDINATOR.md) / [standalone](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) delivery instructions and [A01–A14 addendum](../engineering-pr-delivery-v3.6/CODING_PRACTICES_ADDENDUM.md). The approved AIM label/plan, actual own-child issue, scope/permissions and dry-run are still native prerequisites; this process does not need a duplicate `Can execute?` decision box.
 
@@ -119,66 +126,69 @@ flowchart TD
 
 **Nudge Designer:** Oracle authored the task and source-specific method; the agent is not asked to act as a second Nudge Designer. Use the relevant [coding/logic profile](nudge-designer/references/PROFILES.md) only to interpret the bounded task. Oracle later revises the prompt when actual evidence contradicts it.
 
-**Progress Page:** Oracle (or OTM in OTM projects) reads the native issue/PR/test evidence, publishes WBS truth and updates Home only if the actual project concept, architecture or roadmap changed. The agent does not edit page JSON or set engineering VERIFIED from its own DONE.
+**Progress Page:** Oracle (or OTM in OTM projects) reads the native issue/PR/test evidence, publishes WBS truth and updates Home only if the actual project concept, architecture or roadmap changed. The agent does not edit page JSON or set engineering VERIFIED from its own DONE. **Established agent:** valid unchanged understanding is reused; an already-returned task without a new authorized step is not repeated. The Cycle receipt links native evidence and does not duplicate it.
 
-## D. Oracle-driven agent continuity — GitHub turns + WBS judgment
+## D. Oracle-driven agent continuity — measurable warnings, native cutover
 
 ```mermaid
 flowchart TD
-  D0["Oracle observes agent GitHub-access turns, receipts, WBS evidence and divergence"]
-  D0 --> D1["Oracle judges useful progress, task alignment, capability, turn cost and Owner wishes"]
-  D1 --> D2{"Continue current agent or hand over?"}
-  D2 -->|Continue| D3["Oracle updates bounded next instruction; no new agent"]
-  D2 -->|Handover| D4["Oracle checkpoints same WBS/task, exact head, files, decisions and pending work"]
-  D4 --> D5["Oracle binds current source/output relay receipts in successor OnBoard prompt"]
-  D5 --> D6["Oracle creates successor assignment generation; checks real file access"]
-  D6 --> D7["Oracle reconciles predecessor in-flight writes and isolates actual scopes"]
-  D7 --> D8["Under existing native authority, Oracle publishes successor cutover"]
-  D8 --> D9["Oracle gives active standalone Cycle now URL or OTM-native next instruction"]
-  D9 --> D10["New agent opens issue → WBS → Home and continues unchanged task"]
-  D10 --> D11["Oracle challenges return, handles late evidence and updates next WBS actor"]
-  D3 -.-> DP["Oracle / OTM updates Progress Page actor, WBS and actual next action"]
+  D0["Oracle inspects exact current assignment, native return, real progress and source/access"]
+  D0 --> D1{"Explicit replacement or verified critical incident?"}
+  D1 -->|No| D2{"Pilot P1: repeated eligible failures after correction?"}
+  D2 -->|No| D3["CONTINUE current agent: delta-only instruction, no re-onboarding"]
+  D2 -->|Yes| D4["RECOMMEND replacement/assistance; confirm fault is not external HOLD"]
+  D1 -->|Yes| D4
+  D4 --> D5{"Native Owner/OTM/Oracle authority and safe transition?"}
+  D5 -->|No| DX["HOLD affected change; retain safe existing assignment"]
+  D5 -->|Yes| D6["Checkpoint same task ID, original source, exact candidate, reasoning, wrong cases and pending receipts"]
+  D6 --> D7["Prepare successor assignment generation; verify original/relay bytes"]
+  D7 --> D8["Check old in-flight writes and isolate actual write surface"]
+  D8 --> D9{"No uncontrolled overlapping writes?"}
+  D9 -->|No| DX
+  D9 -->|Yes| D10["Publish authorized native successor binding; read back actual current state"]
+  D10 --> D11["Successor continues SAME task; reconcile late returns only by explicit adoption"]
+  D3 -.-> DP["Oracle/OTM reconciles existing WBS actor, evidence and ONE next action"]
   D11 -.-> DP
 ```
 
-**Trigger judgment belongs to Oracle:** derive from *observed* GitHub-access turns and actual WBS progression or divergence, source-model/context degradation, repeated blocker after corrected instruction, demonstrated unavailable capability, Owner preference and handoff cost. A long conversation or task completion by itself does not compel replacement. Where selected and applicable to an actual ChatGPT agent, **>5 distinct GitHub-access turns or >35 recorded active-turn minutes** triggers a **BuddyRunner suggestion**, not a forced transfer; do not invent hidden usage telemetry.
+**Agent handover pilot measurements:** two consecutive **eligible** no-progress cycles after a corrected instruction; two repeated source-demonstrated misunderstandings after correction; two failed essential-capability attempts (or one conclusive incompatibility); one verified critical authority incident or explicit Owner replacement. These are proposed warning/disposition thresholds in [CHANGEOVER](oracle-standalone/references/CHANGEOVER.md#2a-measurable-handover-triggers--optional-evidence-based-pilot), **not** automatic replacement. A missing protected input or standing engineering HOLD is not agent failure. The separate Owner-selected **>5 distinct GitHub-access turns OR >35 recorded active-turn minutes** rule suggests BuddyRunner only in its scoped runtime, not forced handover; never infer hidden time.
 
-**All downstream handoff work is led by Oracle**: checkpoint, new assignment generation and `replaces_assignment_id`, [Nudge Designer successor prompt](nudge-designer/assets/prompts/oracle-onboard.md) + [successor template](nudge-designer/assets/prompts/successor.md), source/byte access probe, predecessor in-flight comparison, real branch/output isolation, native cutover and treatment of late returns. For an OTM-governed project Oracle submits/coordinates these through the actual TeamCoordinator/OTM authority rather than claiming it can unilaterally supersede that control. An unchecked declaration in `CURRENT.json` is not real write revocation.
+**All downstream handoff work is led by Oracle under actual Owner/OTM/native authority**: same task ID, new assignment generation and `replaces_assignment_id`, source/byte probe, predecessor in-flight comparison, write-scope isolation, actual cutover and late-return disposition. In OTM mode Oracle coordinates through governing OTM rather than unilaterally superseding control. A changed `CURRENT.json` label alone does not revoke real write permission. Completed task awaiting reconciliation is **not** replayed.
 
-**Progress Page:** Oracle makes the grounded WBS/actor/progress update in standalone; OTM writes it in OTM projects. The same WBS/task survives, new-agent readiness observations are recipient-specific, and historical evidence stays scoped to its old head.
+**Progress Page:** Oracle makes source-grounded WBS/actor evidence updates in standalone; OTM writes in OTM projects. Valid earlier technical evidence survives within its exact candidate/scope; the Page is not task or merge authority.
 
-## E. Oracle continuity — turn/divergence triggers and three-question alignment
+## E. Oracle continuity — routine refresh OR knowledge-first succession
 
 ```mermaid
 flowchart TD
-  E0["Observe Oracle GitHub connector turns, task divergence and project continuity"]
-  E0 --> E1["Review whole-project Owner intent, concept/architecture and roadmap integrity"]
-  E1 --> E2["Request Owner approval (standalone) or OTM/Owner approval (OTM project)"]
-  E2 --> E3["Outgoing Oracle builds continuity checkpoint and current-worker inventory"]
-  E3 --> E4["Oracle Continuity protocol first; Nudge Designer adapts successor Oracle prompt"]
-  E4 --> E5["New Oracle checks issue, WBS, Home, prototype and Common relay custody/returns"]
-  E5 --> E6["Three live alignment questions: Owner intent, architecture choices, next 3 tasks"]
-  E6 --> E7["Outgoing Oracle discusses discrepancies, aligns roadmap and records unknowns"]
-  E7 --> E8["Check access, old epoch actions, in-flight worker assignments and actual custody"]
-  E8 --> E9["Approved native control-epoch cutover; adopt ongoing worker assignments"]
-  E9 --> E10["Successor resumes one next task; Oracle / OTM updates Progress Page"]
-  E3 -.-> EP["Progress Page: prepared, pending or blocked continuity checkpoint"]
-  E10 -.-> EP
+  E0["Owner request, Oracle return, changed evidence or observed continuity risk"]
+  E0 --> E1["Open current canonical assignment and relevant native receipts; inspect exact candidates"]
+  E1 --> E2{"Explicit replacement order or evidenced risk warrants succession?"}
+  E2 -->|No| E3["Refresh changed issue/WBS/Home facts only; reconcile pending evidence"]
+  E3 --> E4["CONTINUE: preserve concept, architecture, approvals and active agents; issue ONE next authorized action"]
+  E2 -->|Yes| E5["Incumbent checkpoints FOUR knowledge classes: concept; complex architecture; decisions/wrong cases; exact execution frontier"]
+  E5 --> E6["Link immutable 3DC golden example + actual project-native sources and custody; name UNKNOWNs"]
+  E6 --> E7["Successor READ-ONLY: recover Owner aim, explain difficult logic, inspect one surviving wrong case, inventory active workers"]
+  E7 --> E8{"Material knowledge/access gaps?"}
+  E8 -->|Yes| EX["Repair targeted missing source/knowledge; no premature activation"]
+  EX --> E7
+  E8 -->|No| E9{"Owner/OTM authorizes native Oracle control cutover?"}
+  E9 -->|No| EH["PREPARED/READ-ONLY: old Oracle remains authoritative"]
+  E9 -->|Yes| E10["Reconcile old in-flight commands/receipts and actual exclusive write isolation"]
+  E10 --> E11{"Safe enforced or isolated control?"}
+  E11 -->|No| EH
+  E11 -->|Yes| E12["Publish precondition-checked new Oracle epoch; read back new control binding"]
+  E12 --> E13["ADOPT existing builder and IR assignments with SAME IDs; reconcile late returns"]
+  E13 --> E14["Successor resumes ONE next task; Oracle/OTM projects source-backed progress"]
 ```
 
-**Handoff triggers:** the Oracle's observed GitHub-access turn burden together with **divergence from the Owner intent, current task or roadmap**, reduced source-model integrity, inability to reconcile WBS/evidence, unavailable Oracle or explicit Owner direction. The trigger is a **recommendation for Owner or governing OTM approval**, not automatic changeover or a universally defined turn count. The separate ChatGPT agent activity rule can suggest BuddyRunner, but it does **not** itself retire an Oracle.
+**Oracle handover pilot measurements:** one explicit Owner/governing-OTM request or verified critical authority incident; otherwise propose handover after **two preventable wrong dispatches among the last three eligible dispatches after correction**, **two consecutive eligible returns left unreconciled despite correction**, or **two consequential source-demonstrated project-model misunderstandings after targeted correction**. Distinguish unavailable source, absent approval or justified technical HOLD from Oracle fault. These are **proposed measurable warnings**, not activated policy or an automatic epoch change; see [CHANGEOVER pilot](oracle-standalone/references/CHANGEOVER.md#2a-measurable-handover-triggers--optional-evidence-based-pilot).
 
-**Protocol sequence:** [Oracle Continuity](oracle-continuity/PROTOCOL.md) and [outcome-first handover](oracle-standalone/references/ORACLE_HANDOVER_PROTOCOL.md) are the primary sources. Oracle uses Nudge Designer **after** identifying the actual control epoch, project checkpoint and pending assignments, to prepare a concise [promoted/successor Oracle prompt](nudge-designer/assets/prompts/oracle-onboard.md#promoted-oracle). Only the actual Owner/OTM and native publisher activate the new epoch; open worker assignments are expressly adopted, not abandoned.
+**Knowledge-first contract:** Carry the Owner outcome, conceptual model, **architecture/difficult logic with its WHY**, rejected alternatives and actual discriminating wrong cases, original/fixture provenance, exact candidate, valid evidence, open limitations, next two connected deliverables and all in-flight agents. [Golden 3DC example at immutable commit](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload) shows **minimum content quality**, not four required new documents or live technical PASS. The canonical [Oracle Continuity](oracle-continuity/PROTOCOL.md) and [handover contract](oracle-standalone/references/ORACLE_HANDOVER_PROTOCOL.md) retain actual authority/custody boundaries.
 
-**Three conversational questions (not a scored exam or statistics):**
+**Source-focused alignment, not an exam:** Successor identifies (1) Owner intent/current usable outcome and protected boundaries, (2) key architecture decisions, alternatives and a plausible surviving wrong case, and (3) next three connected tasks with **ONE NOW actor**. Repair only consequential knowledge gaps. The successor checks real originals and exact private bytes when required. Five planning actions are not five parallel dispatches.
 
-1. **Owner intent and user outcome:** "What exactly is the Owner trying to achieve, what demonstrably works now, and which acceptance limits must not be crossed?"
-2. **Complex architecture/concept:** "Which current source-model or architectural decisions are essential, where are they recorded, and which important alternative or unresolved contradiction could change the plan?"
-3. **Roadmap and immediate continuation:** "What are the **next three sensible tasks**, in which dependency order, which participant acts on the first, and what concrete user-visible result or evidence should follow?"
-
-The outgoing Oracle compares the answers with actual issue/WBS/Home/fixtures and **helps align any misunderstanding**. These are a useful guided alignment conversation, not the v3.6 prohibited Q1–Q5 takeover exam, a score, a proof of actor identity, or an extra engineering PASS. When a source is missing, record UNKNOWN; alignment cannot replace real access or native transfer authority.
-
-**Progress Page:** retain the whole Home and historical WBS; record approved Oracle identity, current coordinator, outcome-first checkpoint, next three tasks, known open agent assignments, hold/activation state and timeline. In OTM mode the project page writer remains OTM unless a real mode transfer is separately authorized. A page update never revokes a predecessor's write access by itself.
+**Control:** Read-only preparation does not retire the incumbent. Only actual Owner/OTM/native publisher approval, precondition-checked new control epoch, and real write-surface isolation activate succession. Explicitly adopt ongoing agent/reviewer assignments rather than resetting them; preserve previous exact-scope evidence and any engineering HOLD. In OTM mode the page writer remains OTM absent separately authorized mode transfer. Progress Page and chat labels cannot revoke writes.
 
 ## Progress Page: project Home plus WBS/issue evidence
 

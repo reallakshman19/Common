@@ -5,6 +5,13 @@ on:
     paths:
       - 'skills/agent-work/oracle-continuity/**'
       - 'skills/agent-work/START_HERE.md'
+      - 'skills/agent-work/ENTRY_PROCESS_MAPS.md'
+      - 'skills/agent-work/ROLE_LIFECYCLE.md'
+      - 'skills/agent-work/oracle-standalone/SKILL.md'
+      - 'skills/agent-work/oracle-standalone/references/CHANGEOVER.md'
+      - 'skills/agent-work/oracle-standalone/references/PROGRESS_ADAPTER.md'
+      - 'skills/agent-work/oracle-standalone/references/ORACLE_HANDOVER_PROTOCOL.md'
+      - 'skills/agent-work/progress-page/references/MODES.md'
       - 'skills/agent-work/task-decomposer/SKILL.md'
       - 'skills/agent-work/task-decomposer/references/ORACLE_USE.md'
       - 'skills/agent-work/prototype-first/SKILL.md'
@@ -18,6 +25,14 @@ on:
     branches: [main]
     paths:
       - 'skills/agent-work/oracle-continuity/**'
+      - 'skills/agent-work/START_HERE.md'
+      - 'skills/agent-work/ENTRY_PROCESS_MAPS.md'
+      - 'skills/agent-work/ROLE_LIFECYCLE.md'
+      - 'skills/agent-work/oracle-standalone/SKILL.md'
+      - 'skills/agent-work/oracle-standalone/references/CHANGEOVER.md'
+      - 'skills/agent-work/oracle-standalone/references/PROGRESS_ADAPTER.md'
+      - 'skills/agent-work/oracle-standalone/references/ORACLE_HANDOVER_PROTOCOL.md'
+      - 'skills/agent-work/progress-page/references/MODES.md'
       - '.github/workflows/oracle-continuity.yml'
   workflow_dispatch:
 

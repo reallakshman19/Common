@@ -1,26 +1,28 @@
-# START HERE — one entry, choose your role and mode
+# START HERE — discover once, execute the assigned route
 
 **Documentation navigation:** [START HERE — role/mode entry](START_HERE.md) · [Entry process maps A–E](ENTRY_PROCESS_MAPS.md) · [Project Home and fixture custody](PROJECT_HOME_GUIDE.md) · [Extended operating reference](OPERATING_GUIDE.md). Read only the branch relevant to your current task; these are not four compulsory stages.
 
-**Everyone starts here.** Find the current Owner aim and exact project source; choose the **coordination mode**, then **your role**, then **one next task**. Open only the linked instructions needed. This page is a directory, not a new skill, dispatcher, admission test, authority grant or approval gate.
+**Cold/unassigned participants** use this directory to discover the project and applicable instructions. **Assigned participants start at their actual task issue or activated Cycle locator**, not a fresh mode-selection exercise; **established participants** use [delta-only continuation](../../oracle-cycles/PROTOCOL.md#lightweight-continuation--already-bound-participants) when the selected standalone Cycle applies. The Oracle/OTM or direct Owner resolves routing and mode before dispatch. No task URL, role or document creates write authority.
 
-## 1. Ground the project (before selecting a module)
+## 1. Ground once; thereafter inspect only changed or consequential facts
 
-Read the Owner's **written aim and observable end-user outcome**, current amendments, source issue/Progress Page, current candidate/baseline, original inputs/fixture custody, selected delivery protocol and active HOLDs. If no aim is recorded, obtain it before planning. A URL does not prove the page or file bytes were read.
+For an initial participant, read the Owner's **written aim and observable end-user outcome**, current amendments, assigned issue/WBS and relevant Home/concept/complex architecture, current candidate/baseline, original inputs/fixture custody, **already selected** delivery protocol and active HOLDs. For a returning participant, reuse unchanged verified grounding and reopen only changes, contradictions, and required current original-byte/access checks. If no aim is recorded, obtain it before planning. A URL does not prove the page or file bytes were read.
 
 **Precedence:** actual Owner decisions and native engineering/custody authority → original inputs and exact current candidate → applicable Common instructions → historical agent accounts. Role labels, chat IDs, readiness stages and template completions do **not** grant permission to edit, dispatch, review, merge or release.
 
-## 2. Select coordination mode (do not blend)
+**Initial mentoring (new participant or incoming Oracle only):** Use [Initial Mentoring](initial-mentoring/SKILL.md) *inside* the first source walkthrough to align roughly three conversational themes: the actual user outcome, a consequential architecture/source rule and wrong case, and the next evidence-producing result. **The Oracle must first examine a representative original source item and the actual implementation/specification where engineering meaning depends on field semantics.** Reading this router or passing a process checklist does not prove the Oracle understands the CII element/pointer contract, Word table mapping or another domain model. If the load-bearing field meaning is unverified, say so and take a bounded read-only source-trace step before asserting an engineering fix or qualified code module. No test, grade, extra approval or repeat for established `Cycle now` participants.
+
+## 2. Verify the coordinator-selected mode (do not choose another)
 
 | Mode | Coordinator and first read |
 | --- | --- |
 | **OTM** | OwnerTeammember owns selected team coordination and page updates. Project Oracle works within actual OTM delegation. [OTM/standalone page rules](progress-page/references/MODES.md); [Oracle execution](nudge-designer/references/ORACLE_EXECUTION.md). |
-| **Standalone Oracle (no OTM)** | Owner chooses the Oracle to coordinate; reviewed Progress Page updates use drafts, Owner merges. [Oracle Standalone](oracle-standalone/SKILL.md); [page rules](progress-page/references/MODES.md). |
+| **Standalone Oracle (no OTM)** | Owner chooses the Oracle to coordinate; reviewed Progress Page updates use drafts and the [canonical page authority rule](progress-page/references/MODES.md), including its scoped merge authorization. [Oracle Standalone](oracle-standalone/SKILL.md). |
 | **Direct Owner + builder** | No separate Oracle required: [Prototype-first](prototype-first/SKILL.md) and selected native task/delivery rules. Mark self-checks honestly. |
 
 **Separate selections:** Progress Page `otm/standalone` is not engineering v3.6 `coordinator/standalone`. Use [v3.6 coordinator](../engineering-pr-delivery-v3.6/MODE_COORDINATOR.md) or [v3.6 standalone](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) only if *that* engineering protocol was selected. [Manual Oracle Chat Routing](oracle-chat-routing/STANDALONE.md) and [GitHub Oracle Cycle](../../oracle-cycles/PROTOCOL.md) are optional *different* transfer conventions; neither activates itself.
 
-## 3. Pick your role — one door
+## 3. Follow the assigned role — one door
 
 | Your current responsibility | Read this first |
 | --- | --- |
@@ -40,17 +42,21 @@ For each role's **task, authority boundary, exact return, full file-cycle steps 
 
 **Project Home source guide:** [Concept note, architecture/complex concepts, roadmap and original fixtures](PROJECT_HOME_GUIDE.md). Oracle curates this knowledge; the Page projects it from existing source records. Each includes the relevant Nudge Designer source and Progress Page projection.
 
-## 4. Do one bounded, evidence-carrying cycle
+## 4. Execute one pre-resolved assignment
 
-**Aim + originals → task / role / assignment → source/access checks → runnable slice → [artifact relay](ARTIFACT_RELAY.md) → independent challenge as required → reconciliation → Owner trial/decision → [Progress Page](progress-page/README.md) → successor.**
+**Owner aim → Oracle/OTM (or direct Owner) assignment → Agent execution → Native evidence return → Oracle/OTM reconciliation → Oracle continuation or controlled succession → ONE next task.** Owner trial, independent review and protected release/merge gates remain applicable where required. The [full maps](ENTRY_PROCESS_MAPS.md) distinguish initial execution, agent continuity and Oracle continuity.
+
+**Minimum executable assignment supplied by coordinator/Owner:** recipient and role; exact task issue or active Cycle locator; selected coordination and native engineering protocol (v3.6 only if selected); original input/relay locator and exact candidate; boundaries/HOLDs and relevant concept/architecture; expected native evidence and return destination; one next action/actor. The agent **verifies** authority and facts, but does not independently choose another mode, reporting path or approval procedure. An unassigned/inactive/wrong-role Cycle means `NO ACTION` / `NOT ACTIVE`; an already-returned task with no new grant means `AWAIT_ORACLE_RECONCILIATION`, **not rerun**.
 
 **Artifact exchange and new-agent inputs:** Oracle maintains a task-scoped [Common artifact relay](ARTIFACT_RELAY.md) record under [Common relay/](../../relay/) (**preferred**). The Progress Page Grounding Fixtures/Home lists the exact public-safe relay locator, status and WBS association; the agent reads that record and verifies actual bytes before relying on the input. Use authorized private Google Drive only for protected bytes or when GitHub payload transport is unavailable, with a sanitized Common relay receipt wherever possible. A sent link, a draft PR, a producer SHA claim, and receiver byte verification are different states. Agent outputs/review evidence return through the same relay contract; issue evidence and optional Cycle receipts remain separate.
 
-The seven onboarding checks are: **Owner intent, canonical sources, role and task, real access, protected boundaries, runnable result (or NOT_RUN/BLOCKED), evidence return and one next action**. Progress Page readiness is an *observation* for the same assigned recipient and milestone, not permission to work or a PASS. A private chat upload or `sandbox:` link is not verified cross-chat file delivery.
+**For a new recipient only**, the seven onboarding checks are: **Owner intent, canonical sources, role and task, real access, protected boundaries, runnable result (or NOT_RUN/BLOCKED), evidence return and one next action**. Progress Page readiness is an *observation* for the same assigned recipient and milestone, not permission to work or a PASS. A private chat upload or `sandbox:` link is not verified cross-chat file delivery.
 
 Use [examples, goldens, fixtures and templates by role](REFERENCE_INDEX.md): synthetic golden outcomes are **not** current production acceptance; a reviewer exposed to expected answers must disclose it.
 
-## 5. Resume from GitHub, not from a chat summary
+## 5. Resume from current GitHub evidence, not the chat summary
+
+**Oracle succession** preserves project concept, complex logic, decisions, alternatives and in-flight worker assignments through [knowledge-first handover](oracle-standalone/references/ORACLE_HANDOVER_PROTOCOL.md), using the [pinned 3DC golden exemplar](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload). Handover triggers and optional measurable pilot thresholds are [here](oracle-standalone/references/CHANGEOVER.md#2a-measurable-handover-triggers--optional-evidence-based-pilot). A prepared packet is **not** an authorized control cutover.
 
 The next participant must be able to locate: **Owner aim, exact candidate/head, original input/fixture custody, latest runnable observation, unresolved surviving wrong case, active assignment/authority, and ONE executable next action**. Unknown access and unactivated succession remain UNKNOWN/HELD. [Full role/file-cycle playbook](ROLE_LIFECYCLE.md) · [Original extended operating guide](OPERATING_GUIDE.md).
 

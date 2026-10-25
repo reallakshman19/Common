@@ -4,6 +4,14 @@ Use this optional instruction handover when a source-based working explanation
 and useful next direction already exist. The available lead or Owner can prepare
 it; an outgoing agent and a separately staffed Oracle are not required. It is a
 prompt type, not another operating mode, admission test or review qualification.
+For a **genuinely new recipient**, the responsible Oracle may use
+[Initial Mentoring](../../initial-mentoring/SKILL.md) *within this same brief or first
+source walkthrough*: roughly three conversational, source-grounded prompts about the
+Owner concept, complex architecture/surviving wrong case, and the meaningful next
+result. **This is coaching, not a questionnaire, score or extra admission step.**
+Returning agents do not repeat it; an incoming Oracle uses the same themes with
+active assignments and next two connected deliveries, remaining read-only until
+the actual native succession is authorized.
 It is a Markdown template; existing render/adapt APIs and schemas are unchanged.
 
 ## Contents
@@ -22,6 +30,7 @@ It is a Markdown template; existing render/adapt APIs and schemas are unchanged.
 | Relevant BuddyRunner, two-pass or three-pass completed | Reuse its outputs directly. An OnBoard Prompt may package the next instruction; it must not repeat the completed flow or add reconstruction. Product FAIL does not mean that the context flow is incomplete. |
 | A selected context flow is still in progress | Follow its native stages. This prompt does not bypass or add stages. |
 | Cold recovery with no usable context | Recover the missing meaning from original sources using the selected protocol's method. Once usable, continue; do not impose a questionnaire or a second reconstruction ceremony. |
+| Newly assigned participant lacks a shared concept/architecture model | Oracle first grounds itself in accessible originals; mentor using about three adaptive conversational questions [Initial Mentoring](../../initial-mentoring/SKILL.md), then issue/continue the **same** bounded task. No exam or additional gate. |
 | Same grounded task continues | Keep working. A new commit, reply or task boundary alone does not require another onboarding. |
 
 Use this guide alone or alongside separately selected Task Decomposer, delivery

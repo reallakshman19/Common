@@ -71,7 +71,7 @@ Every step above writes one Timeline entry, so "who asked, who did it, when, on 
 - One writer per project at a time. The open DRAFT pull request `pp/<project>-<name>` is the claim; another agent waits for its merge or its closing. (A convention, not enforced by the checker.)
 - The project repository holds `.github/ISSUE_TEMPLATE/owner-reply.yml` (copy it from `templates/`) and `replyTo` points at it, so the Oracle receives the replies.
 - The CI workflow runs `pp_check.py data --base origin/<base>` on every pull request. A change without a Timeline entry cannot merge.
-- A writer agent works under the Oracle's authority. The Oracle reviews the pull request; the Owner merges it.
+- A writer agent works under the Oracle's authority. The Oracle reviews the exact pull request and its evidence. **Owner merge is the default**, except that the **explicit, scoped standing go-ahead for `reallakshman19/progress-page` in this document** permits the authorized operator to mark Ready and merge after the listed actual required gates; no second Owner approval for that unchanged scope. It is not a grant to merge Common, product PRs or other repositories.
 
 ## Moving a project between modes
 

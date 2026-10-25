@@ -8,13 +8,31 @@ This is an **artifact transport and custody rule**, not a requirement to relay t
 
 ## 1. Durable route and privacy boundary
 
+**Owner priority decision — 25 October 2026 (applies to every Oracle↔agent↔reviewer artifact handoff):**
+
+| Priority | Route | Scope | Completed transfer |
+| --- | --- | --- | --- |
+| **1 — FIRST** | **Common GitHub public-safe artifact relay**: immutable permitted bytes under task-scoped `Common/relay/` payload (or an expressly authorized immutable GitHub commit/release) | Public-safe artifacts only; **never** protected originals, private ZIPs, CII/XML or secrets | Possible only when the actual recipient retrieves the exact committed artifact and verifies its identity |
+| **2 — NEXT** | **Owner-designated Google Drive Handoffs** | Files that cannot be safely published via Option 1, or a public-safe artifact whose Option 1 delivery is not usable | Possible only after intended recipient verifies authorized access, actual file bytes and identity |
+| **FALLBACK — NOT DELIVERED** | **`sandbox:`, `/mnt/data`, in-chat attachment / `LOCAL_ONLY`** | Local presentation or temporary staging when neither 1 nor 2 is available | **Not a completed cross-agent transfer**; preserve source and report `LOCAL_ONLY / NOT_TRANSFERRED` or `BLOCKED` |
+
+**Mandatory:** Every material artifact exchanged between agent, Oracle and independent reviewer must successfully use **Option 1 or Option 2** to count as a durable transfer. Try **1 first if public-safe**; otherwise select **2** without leaking protected bytes. Sandbox links can remain in the current conversation as a fallback/staging convenience, but can **never** replace 1 or 2 or be marked `RECEIVED_CONFIRMED`/`BYTES_VERIFIED` for another agent on that basis. Keep the existing task-scoped public-safe Common relay **receipt** for **either** option, even when its actual bytes live in Google Drive. Do not quietly treat OneDrive or another service as a third qualifying route without a new explicit Owner authorization.
+
 Use a task-scoped durable location under `relay/`: for example [`relay/SCTL-P1-20261024/ARTIFACT_REGISTER.md`](../../relay/SCTL-P1-20261024/ARTIFACT_REGISTER.md) in draft PR #473. The optional [`relay/AGENT_WORK/`](../../relay/AGENT_WORK/README.md) directory is also available for new handoffs. Do not move or duplicate an existing task-specific register solely to match a directory convention. **Do not** write to the governed V3.1 engineering recorder files `relay/STATE.yaml`, `relay/EVENTS.jsonl`, `relay/TRANSACTIONS/`, `relay/LEASES/`, or `relay/GENERATED/` merely to transmit a file. Those belong to a distinct active protocol. If a project has its own required GitHub Cycle / task / issue receipt, link to that native record from the artifact handoff rather than maintaining a second competing assignment state.
 
 - **Public-safe file:** put the actual immutable artifact bytes in an authorized task-scoped `relay/<project-handoff>/payload/` or `relay/AGENT_WORK/<project>/<handoff-id>/payload/` path (or use a stable, expressly permitted GitHub release/commit artifact); identify the Git commit and payload path in the handoff record. Verify GitHub accepts the size and content. A draft PR is a *proposed* relay, not an already delivered handoff.
 - **Protected or confidential file:** **never publish its bytes** or private download URL to the public Common repository. Put the bytes in the Owner's authorized private handoff storage, and record only a **sanitized custody reference** at `relay/AGENT_WORK/<project>/<handoff-id>/receipt.md`. If even its name, digest or location is sensitive, keep that field in the protected receipt and publish a non-sensitive locator/status only. The recipient must actually have authorized access and independently retrieve the bytes.
-- **Local/upload/sandbox/temporary link:** treat as `LOCAL_ONLY` until it is placed in one of the authorized durable routes. Never record `/mnt/data` or a `sandbox:` URL as a durable cross-chat transport. Do not fabricate upload success when the originating runtime cannot publish or the recipient cannot retrieve it.
+- **Local/upload/sandbox/temporary link (fallback only):** use to present a local working file when both qualifying options cannot be completed, label `LOCAL_ONLY / NOT_TRANSFERRED`, and preserve an actionable next route. A local link does **not** fulfill the mandatory Option 1/2 transfer or permit the next actor to claim receipt. Do not fabricate upload success when the producer cannot publish or the receiver cannot retrieve the bytes.
 
 This repository is publicly visible. **GitHub is not a substitute for private storage.** A pointer to protected storage does not itself confer access.
+
+### Owner-designated private handoff root — 25 October 2026
+
+**Owner decision (25 October 2026):** The Owner authorized sharing the designated **Handoffs** Drive root link with assigned agents, Oracles and independent reviewers in their authorized task conversations. The coordinator may supply this root link directly to the intended recipient; it is a locator, **not a permission grant, restricted-sharing attestation or byte receipt**. Keep individual protected child-file links, protected contents and credentials outside public GitHub and the Progress Page. In public page data and safe relay metadata, retain the stable opaque label `OWNER_PRIVATE_REF:HANDOFFS_PRIMARY`, because the current Progress Page data checker does not accept Drive URLs. Each intended recipient must separately confirm access and independently retrieve and verify the exact permitted file.
+
+**Observed at designation:** the connected Drive account could list the named root and its existing project folders; the provider reported `shared=true`, but did **not** expose sufficient permissions to establish restricted visibility or any new agent/reviewer's access. Record **`ROOT_LOCATED / SHARING_NOT_VERIFIED / RECIPIENT_ACCESS_NOT_RUN`**, not `PRIVATE_ACCESS_VERIFIED`. The custodian must confirm effective sharing permissions for each intended actor before protected bytes are transferred. Do not change Drive ACLs, create public sharing links, move existing files, or imply a receipt merely because the root can be listed.
+
+For a real project transfer, retain the existing project subfolder or authorized task-scoped location within this root. Privately provide the **exact file** to the assigned recipient under its authorized identity and access route; perform the receiver download, file-size/SHA-256 and content check. Use the same exact artifact for a subsequent independent review, but separately record that reviewer's actual permitted retrieval and identity. A Common relay receipt names the **task and opaque locator/status only**; it cannot serve as a private file browser. This designation does not force other projects to use this Owner's Drive or replace stronger native custody protocols.
 
 ## 2. Minimal transaction record
 
@@ -37,15 +55,17 @@ Source: <native task/receipt link if available; Owner private reference if neede
 
 Keep **(a)** a producer's claim about bytes, **(b)** a stable relay record, **(c)** a recipient's actual retrieval, **(d)** byte verification, **(e)** technical review and **(f)** Owner acceptance separate. A PR number or hash alone does not establish any later state.
 
+**Agent → Oracle → independent reviewer:** An existing immutable candidate may be reused without uploading a second copy. The Oracle's inspection and the reviewer's inspection require **their own** observed access/bytes and exact-candidate identity; append the reviewer's receiver observation to the existing task relay/native review return (or issue a transfer receipt only when the project contract needs a distinct transfer). Verify reviewer authorship/principal and exposure separately under [Independent Reviewer](independent-review/SKILL.md); a successful Drive download or a new chat is **not** independent approval. The review verdict returns through the native issue/PR, and the Oracle/OTM projects **reconciled** public-safe evidence into Progress Page using its existing CLI, never by copying protected artifacts into `data/`.
+
 ## 3. Actual handoff flow
 
 1. **Oracle prepares:** declare exact inputs, recipient, task, expected output, confidentiality and permitted transport. For a previously provided link/attachment, recover the **actual bytes** or explicitly report that they are unavailable.
-2. **Producer stages:** put public-safe bytes in `relay/AGENT_WORK` via authorized GitHub work, or protected bytes in the authorized private destination. Record an immutable version/size/SHA-256 where appropriate; do not publish protected identifiers.
+2. **Producer stages:** **Option 1 first** for public-safe files: commit an immutable authorized `relay/AGENT_WORK` payload (or expressly permitted GitHub equivalent). **Option 2 next**: use the Owner-designated Google Drive Handoffs for protected files, or when public-safe Option 1 is not usable. Record version/size/SHA-256 where appropriate without exposing protected identifiers. A transfer cannot be complete unless **1 or 2** succeeds.
 3. **Publish/read back:** verify the relay path and Git commit or the sanitized record actually exist. An open draft PR means `PROPOSED`, not published `main`. Do not claim completed delivery solely from the staging link.
 4. **Receiver retrieves:** recipient reads the durable relay record, obtains its permitted artifact, measures actual bytes/hash and checks ZIP contents when relevant. A wrong/missing artifact is `BLOCKED`, never silently replaced.
 5. **Agent returns:** put new output artifacts through the same route, with a new exact version/receipt; Oracle inspects the real result and its negative tests. No automatic adoption, acceptance, release or merger follows.
 
-**Fallback:** If the tool session cannot upload/retrieve the exact file, mark `LOCAL_ONLY` or `BLOCKED`, name the authorized custodian and the missing operation, and continue unaffected planning/tests. Do not claim Common relay delivery.
+**Fallback (not a third delivery option):** If neither Common public-safe Option 1 nor Owner Google Drive Option 2 can actually deliver the exact artifact, a `sandbox:`/`/mnt/data` link may be shown for local use, but mark `LOCAL_ONLY / NOT_TRANSFERRED` or `BLOCKED`, name the custodian and missing operation, and continue unaffected planning/tests. Do not mark delivery complete, receiver bytes verified or independent review performed.
 
 ## 4. Required negative cases
 
