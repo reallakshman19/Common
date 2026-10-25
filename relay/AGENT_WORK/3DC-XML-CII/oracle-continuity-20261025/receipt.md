@@ -22,7 +22,7 @@ These producer measurements identify **the public-safe GitHub source files at th
 | [ORACLE_HANDOVER.md](payload/ORACLE_HANDOVER.md) | `fe6ed7fbd39f1909020e803fac34127f3765ebf9` | 15729 | `7fab325affb0c2b996a60b6143d2c2e184f6cb0e1335fac6dc36151f1deece4a` |
 | [CONCEPT_NOTE.md](payload/CONCEPT_NOTE.md) | `6a572cf1bac01b908b881554312ac5854c37b2ce` | 13432 | `bf232933bc059db2cd6ca83f16aa47cb6e126fe1dfe7d91c5acf4ecb37aa1339` |
 | [ARCHITECTURE_COMPLEX_LOGIC.md](payload/ARCHITECTURE_COMPLEX_LOGIC.md) | `736fa30c1ccbce6a316fdb072ebf438671ee9ae6` | 23222 | `ba2422e428ca2a3c8ddb4e9604883be3d1f27fd11682e25ea60b8a34e593bc79` |
-| [ARCHITECTURE_DECISIONS_AND_CHALLENGES.md](payload/ARCHITECTURE_DECISIONS_AND_CHALLENGES.md) | `b076b6e0522eae48b41e34ecc22b8b0fec6ad47b` | 11157 | `12680d2442c9d340a3a9b1b62184e49be155363262660cce6176eee6f80d248f` |
+| [ARCHITECTURE_DECISIONS_AND_CHALLENGES.md](payload/ARCHITECTURE_DECISIONS_AND_CHALLENGES.md) | `2fd17274abcb729b84af0c4c467a5329b9695958` | 11161 | `73fadfe86ad4af577bc716d34cf65a76904c54ea7059fe155d3815dcd87d2e58` |
 
 **All four files: proposed in Draft PR #481, not published on Common `main`; no recipient byte verification, adoption, concept/architecture independent review, engineering signoff or Owner acceptance.** The Owner's reference handover sets a **minimum conceptual transfer**: concept note and difficult architecture decisions must travel with current-state A–G rather than only a status table. Source-backed self-assessment is explicitly disclosed.
 
