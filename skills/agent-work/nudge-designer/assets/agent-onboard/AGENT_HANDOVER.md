@@ -12,6 +12,8 @@ Read [concept](CONCEPT_NOTE.md), [complex architecture](ARCHITECTURE_COMPLEX_LOG
 - **Candidate/baseline/allowed paths:** `{{repository, exact head, branch, frozen files, edit ownership, no-writer-conflict witness}}`.
 - **Replacement:** `{{original same task ID, NEW assignment generation, predecessor writes/returns and actual isolation; or NOT_APPLICABLE}}`. Do not replay returned generations or claim old writers stopped merely due to new chat.
 
+**PR title on the permitted native surface:** `[<TASK-ID>][<ROLE>:<confirmed CHAT-ID8>] <deliverable>` when the PR title is human-owned and the native convention permits it. Otherwise record chat identity in the task/PR body. No manually set `🟢`, generated v3.5 issue title, DELP P/E/D or stale head acceptance; see [title hygiene](../../references/TITLE_AND_TRAFFIC_HYGIENE.md).
+
 ## B. One useful user-facing deliverable and native action
 
 **Owner outcome still unfinished:** `{{source URL + user's words}}`.
