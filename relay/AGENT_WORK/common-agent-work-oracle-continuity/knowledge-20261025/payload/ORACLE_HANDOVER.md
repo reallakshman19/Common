@@ -92,4 +92,4 @@ These limitations can coexist with valuable progress; none is reason to block au
 
 **One-line cold-start transport (read-only):** `Oracle handover (read-only): https://github.com/reallakshman19/Common/tree/main/relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025`. This URL is a **discovery locator** and is only a verified `main` destination after actual merge/readback.
 
-**Status at preparation:** knowledge documents authored in draft source branch; *not* independently tested live, *not* a candidate appointment, *not* control cutover.
+**Status at preparation: `KNOWLEDGE_PACKET_PREPARED / NOT_CUTOVER`.** Knowledge documents authored in a source branch; *not* independently tested live, *not* a candidate appointment, *not* control cutover. A merged/read-back publication changes only knowledge availability.
