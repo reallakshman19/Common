@@ -32,10 +32,12 @@ For a read-only strip inside a chat, see `universal-workflow-progress`.
 
 | Role | Does | Never |
 |---|---|---|
-| Owner | decides, answers decision cards, adds Nudge + lines, merges (standalone) | is asked to edit JSON |
+| Owner | decides, answers decision cards, adds Nudge + lines, controls standalone merges by default; see repo-specific go-ahead below | is asked to edit JSON |
 | Coordinator (OTM or the project's Oracle) | records evidence, answers triggers, sends the nudges, keeps the Timeline complete | invents evidence, forwards a nudge blindly |
-| Writer agent (standalone, named by the Oracle) | makes the pull request under the Oracle's authority | merges, accepts |
+| Writer agent (standalone, named by the Oracle) | makes the pull request under delegated authority; may perform repo-specific approved merge when permitted | assumes product acceptance or cross-repo merge authority |
 | Agent | leaves evidence on GitHub | writes the page |
+
+**Scoped Owner merge rule:** For **`reallakshman19/progress-page` alone**, an Owner go-ahead for a draft PR also permits the authorized operator to mark ready and **merge the same scoped PR** after required exact-head checks, current-base compatibility and GitHub protections; no **second** Owner merge approval is required. Block on failed gates, conflicting HOLDs or material scope drift. Other repos keep their own merge/acceptance authority. See [MODES.md](references/MODES.md) and the target repository README. GitHub merge does not imply product acceptance or independent review.
 
 Modes and the Nudge + wiring: [references/MODES.md](references/MODES.md). Fields and rules: [references/DATA_CONTRACT.md](references/DATA_CONTRACT.md).
 

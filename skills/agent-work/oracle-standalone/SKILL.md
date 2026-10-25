@@ -10,6 +10,7 @@ aim, changes and decisions with Oracle; Oracle carries the useful work through
 bounded assignments, source/evidence reconciliation and Owner-facing progress.
 For a worker or reviewer, `Cycle now` is a **read-current-state, act-if-assigned,
 return-evidence** instruction, not a request to become Oracle.
+**Established recipient:** use [lightweight `Cycle now` continuation](../../../oracle-cycles/PROTOCOL.md#lightweight-continuation--already-bound-participants): refresh assignment and changed evidence, not full onboarding. Do not rerun returned work while Oracle reconciliation is pending; repair an unposted routing receipt by v1 rules without replaying tests. Current authority, source identity and access checks still apply.
 
 **Precedence:** actual Owner outcome/amendments and authority → selected native
 task/delivery/release protocol → exact original inputs/baseline/candidate →

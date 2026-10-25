@@ -45,14 +45,33 @@ On every invocation, the **recipient**:
    receipts needed to avoid duplicating completed work.
 3. **If not assigned:** reply briefly “NO ACTION — next is <role>”,
    with current state revision. Do not invent a new task or modify files.
-4. **If assigned:** verify actual access/authority and candidate hash,
-   perform the bounded work, retain self-test/negative-test evidence,
-   then post a redacted `ORACLE-CYCLE-RECEIPT v1` to the
-   `receipt_issue_url` configured in `CURRENT.json`.
+4. **If assigned and a new bounded action is authorized:** verify actual
+   access/authority and candidate identity, perform only that action,
+   retain native self-test/negative-test evidence, then post a redacted
+   `ORACLE-CYCLE-RECEIPT v1` to the configured `receipt_issue_url`.
+   For work already returned, or a missing receipt, follow the
+   **lightweight continuation** exception below instead of re-execution.
 5. Fetch the actual comment URL/readback and return that permalink,
    artifact identity, executed checks, limitations, and next suggested
    action. If GitHub is inaccessible, follow §4 and explicitly label
    `FALLBACK_NOT_POSTED`.
+
+### Lightweight continuation — already bound participants
+
+A **new recipient** with no verified project locator/role grounds the assigned issue, relevant WBS/Home and actual original inputs. For an **established recipient** whose project locator and role were previously checked, `Cycle now` means **refresh current assignment → compare changed evidence → continue the next authorized bounded action**, not rebuild the complete project model.
+
+Each invocation still reads fresh canonical `CURRENT.json` on `main` and checks `mode=standalone`, `activation=ACTIVE`, revision, assignment ID/generation, intended recipient/role, current candidate, limits and engineering HOLDs. Read the **latest relevant** issue/native evidence and Cycle receipt (including `receipt_id`/accepted IDs) before acting. Compare source/candidate, authority, access, task status and receipt with the last verified working state; reopen **affected** originals/WBS/Home/relay records only where changed, newly consequential or contradicted. Prior understanding can be reused; **previous access is never a substitute for a required current original-file/byte check**.
+
+- **Unassigned/wrong recipient:** `NO ACTION`; **inactive Cycle:** `NOT ACTIVE`. A one-line trigger creates no task or engineering PASS.
+- **Already returned with no new authorized action:** do **not** rerun or post another completed-work receipt, even if the stale assignment still appears active. Report **AWAIT_ORACLE_RECONCILIATION** with the existing native evidence and published receipt permalink; only the Oracle may reconcile/publish a subsequent assignment.
+- **Native return exists but required Cycle receipt is absent/unposted:** inspect the configured receipt inbox and accepted receipt IDs. Repair the *missing routing envelope*, using v1's existing revision/idempotency/readback rules and referencing **the same native evidence**; do not rerun engineering. If publication is inaccessible, report `FALLBACK_NOT_POSTED` and the actual blocker, not a fabricated GitHub receipt.
+- **Changed generation, recipient, authorization, candidate/original bytes, lost access or contradiction:** recheck affected sources/authority/fixture identity and required native qualification; full onboarding only if the prior grounding is no longer applicable. A task can remain `BLOCKED` or `NOT_RUN` despite an unchanged candidate SHA.
+
+The Oracle owns the **Home → WBS → issue** task choice, purpose, source/fixture and Common [artifact relay](../skills/agent-work/ARTIFACT_RELAY.md) locator, one plausible wrong case, limits, native evidence target and next consequential dependency. The recipient follows **assigned issue → relevant WBS → Home as needed**, then reads/checks the actual authorized relay input and uses its **selected native protocol**. The recipient reports contradictions rather than independently replanning the roadmap or becoming a second Nudge Designer. All of these rules apply **only to an activated standalone Cycle**, not OTM/native dispatch by default.
+
+### Cycle receipt is a routing envelope, not duplicate engineering evidence
+
+Keep **every field, action value, revision check, idempotency rule and readback** of `ORACLE-CYCLE-RECEIPT v1` unchanged. Point `public_evidence` to the actual native child issue/`TASK_EVIDENCE`/PR/commit/reviewer result; scope `result`, `limits` and `next` precisely. Do not paste full test logs, A14 SELF-CHECK narratives or implementation descriptions into the Cycle receipt. Actual **input/output bytes and verified custody** belong to the separate [Common artifact relay](../skills/agent-work/ARTIFACT_RELAY.md); project state belongs to canonical `CURRENT.json`; Progress Page is Oracle-reconciled projection. The Oracle reads native evidence before updating an assignment or the Page. A linked claim, digest, received file or readback is **not** technical PASS, independent review or Owner acceptance.
 
 For **Oracle**, Cycle now additionally means read the full issue inbox
 since the last accepted receipt, reconcile new returns with the
@@ -215,6 +234,12 @@ fabricating an automatic send.
 
 ## 7. Required falsification before calling the pilot operational
 
+- An established agent's identical assignment/recipient/generation/candidate continues **without redoing full onboarding**, after relevant current source/authority/access and receipt checks.
+- Work already returned, while `CURRENT.json` remains active with no newly authorized step, yields `AWAIT_ORACLE_RECONCILIATION`, not duplicate execution or a second receipt.
+- A missing/unposted Cycle receipt for actual native work is repaired by the existing v1 idempotent receipt/readback contract, **without** repeating native execution.
+- Candidate/assignment-generation/authority drift or loss of source-file access at the **same SHA** causes targeted requalification, never a stale-access PASS.
+- The routing envelope points to complete native issue/PR evidence (and separate Common relay custody); logs and self-check text are not copied into it.
+- A previously sent instruction displays **No additional paste required**, not another dispatch.
 - “Cycle now” to a cold unregistered chat cannot assume a folder.
 - Wrong role/short ID, inactive project and missing capability return
   **NO ACTION/BLOCKED**, not work.
