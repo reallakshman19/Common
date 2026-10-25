@@ -30,7 +30,7 @@ For an initial participant, read the Owner's **written aim and observable end-us
 | **OTM / coordinator** — assign, route, reconcile and record | [Mode contract](progress-page/references/MODES.md), [handoff rules](CONTRIBUTION_HANDOFF.md) |
 | **Oracle under OTM** — slice, brief, challenge, return to OTM | [Oracle execution](nudge-designer/references/ORACLE_EXECUTION.md), [Task Decomposer](task-decomposer/SKILL.md) |
 | **Standalone Oracle** — coordinate, reconcile, plan succession | [Oracle Standalone](oracle-standalone/SKILL.md) |
-| **Builder / specialist** — execute one bounded slice | [Prototype-first](prototype-first/SKILL.md), [OnBoard prompt](nudge-designer/assets/prompts/oracle-onboard.md) |
+| **Builder / specialist** — execute one bounded slice | [Prototype-first](prototype-first/SKILL.md), [OnBoard prompt](nudge-designer/assets/prompts/oracle-onboard.md); [golden-depth Agent OnBoard](nudge-designer/assets/agent-onboard/README.md) only for a genuinely new recipient needing project source context |
 | **Independent reviewer / falsifier** — check original expectation and a wrong case | [Independent Reviewer](independent-review/SKILL.md), [independence](independent-review/references/INDEPENDENCE.md) |
 | **Oracle / reviewer contributing code** — disclose changed role and affected scope | [Contribution & Handoff](CONTRIBUTION_HANDOFF.md) |
 | **Successor Oracle / replacement** — reconstruct before taking control | [Continuity protocol](oracle-continuity/PROTOCOL.md), [Oracle handover](oracle-standalone/references/ORACLE_HANDOVER_PROTOCOL.md) |
