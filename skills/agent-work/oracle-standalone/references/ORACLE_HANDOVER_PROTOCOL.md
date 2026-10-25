@@ -5,7 +5,7 @@
 
 ## 1. Handover contract
 
-A successful handover means the **new Oracle** can independently locate original Owner intent and governing sources, explain the **current working prototype versus the next planned usable result**, recover every important evidence/fixture link, name **five sensible next actions with one immediate next owner**, and carry current work under a properly authorized cutover.
+A successful **knowledge handover** lets the recipient locate the actual Owner outcome and relevant originals, explain current product reality versus the next **two connected usable outcomes**, recover concept, difficult architecture, source-backed decisions, evidence and artifacts, and take **ONE immediately executable next source/coordination action** without reopening solved issues or asking Owner to repeat the task. An actual **control handover** is a separate, explicitly authorized and versioned Oracle cutover. Up to five supporting actions may be useful, but **five is not a compulsory list or additional approval gate**.
 
 A handover document, a correct verbal reconstruction, a GitHub receipt, or a new chat ID is **not** proof of control transfer or recipient-byte verification. **Progress tracking and succession serve the working product**, not the other way around.
 
@@ -19,6 +19,12 @@ A handover document, a correct verbal reconstruction, a GitHub receipt, or a new
 6. Older agent summaries **only as leads to confirm**, never as replacements for missing source or file bytes.
 
 If a project selected a native delivery, lease, gatekeeper or independent-review process, **preserve that process**; this handover protocol indexes it and does not create a competing task/approval ledger. No universal three-agent requirement, no additional reconstruction exam when context and demonstrated understanding are adequate.
+
+### Common's four-document benchmark and incumbent's duty
+
+The [Owner-selected immutable 3DC golden four](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload) define **depth**, not another project's engineering truth. The [Common Agent-Work four-document example](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ORACLE_HANDOVER.md) provides THIS protocol's [concept](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/CONCEPT_NOTE.md), [architecture](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ARCHITECTURE_COMPLEX_LOGIC.md), [decisions/falsifiers](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ARCHITECTURE_DECISIONS_AND_CHALLENGES.md) and [execution frontier](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ORACLE_HANDOVER.md) plus [copy-ready prompt](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/ORACLE_SUCCESSOR_PROMPT.md). The incumbent must author **equivalent project-specific source substance** for its project, or link existing verified native records that already carry it; copying status labels/these generic documents is not enough.
+
+**Owner instruction: no avoidable blocker or ceremonial gate.** Outgoing Oracle resolves accessible source, conflicting status, current-head, pending receipt and legitimate transfer issues itself before saying “Owner next.” An UNKNOWN must have a named source/actor and an **attemptable next action**; it is not automatically a project-wide HOLD. Protected native authority and real Owner-only acceptance continue to apply to their specific operations. Keep active worker/reviewer assignments and late results alive until a **separate actual control cutover**; a published prompt means knowledge available, not successor assigned or authorized.
 
 ## 2. One-line cold-start command (read-only first)
 
@@ -47,7 +53,7 @@ The incumbent Oracle prepares a **public-safe landing packet** with actual expla
 | **D. Agent/work frontier** | Current Oracle, coder, IR and Owner routing labels, canonical revision, exact active assignments, return issue/PRs, accepted and pending receipts | Short chat IDs are display locators, not identity or access |
 | **E. Files/fixtures** | Public landing page URL, **exact fixtures collection URL**, project repo, original source/mapping approvals, baseline, runnable, code-only, independent reports and screenshot evidence; **private manifest location by opaque ref** | Mark bytes `MISSING`, `UPLOADED`, `DOWNLOADED`, `BYTE_MATCHED`, `INDEPENDENTLY_REVIEWED` separately |
 | **F. Open risk/authority** | **Major design decisions, rejected alternatives, surviving wrong cases**, stale approvals, ambiguous mapping, unauthorized target changes, private-content leaks, failed/pending tests, successor author exposure, Owner approval boundaries | No positive claim beyond its exact candidate and observation |
-| **G. Next five actions** | Five prioritized *concrete* actions with actor, input source, completion proof and stop condition; **one immediate NOW** | Do not require Owner to transport detailed prompts unnecessarily |
+| **G. Execution frontier** | **ONE executable NOW**, actor, exact source and return; two connected outcomes and only as many supporting tasks as materially useful | Do not invent a five-action gate or require Owner to deliver every prompt |
 
 **Canonical source of state:** Read `oracle-cycles/<project>/CURRENT.json` from the actual permitted canonical branch/commit. GitHub issue comments are transport receipts; Progress Page is a public-safe presentation. Preserve old revisions/history, not a copied parallel "current" JSON.
 
@@ -63,9 +69,9 @@ Inventory byte-relevant originals, frozen baselines, runnable and code-only pack
 
 If protected artifacts remain accessible only inside an old coding chat, call the custody state `NOT_TRANSFERRED` and request **one unchanged private relay** by an authorized actor. Do not rebuild a reviewed ZIP merely to satisfy a file transfer.
 
-## 4. Five-action decision rule for the successor
+## 4. One executable next action (five optional planning examples)
 
-Prepare **exactly five plausible actions**; select order by consequence and dependencies rather than fixed bureaucracy. A strong default for an engineering tool with a reviewed prototype is:
+Identify **ONE immediately executable action** and **two connected delivery outcomes**. The following five are *examples* from a complex engineering project, not a compulsory sequence, admission test or Owner gate. Perform attainable Oracle-owned source/receipt/coordination work directly and hold only the affected unsafe claim:
 
 1. **Read-only source reconciliation.** Refresh actual canonical commit/revision, Owner aim, R3/public fixtures, last issue receipts, pending PRs, candidate lineage and missing evidence. Report discrepancy between published state and reports; demonstrate understanding without a ceremonial exam.
 2. **Resolve coordination/authority safely.** Reconcile the existing coder result once with idempotency and stale-state checks; correct public Progress-project mapping; prepare but do not assume the successor control epoch. If the Owner approves actual cutover, separately authorize and compare-and-swap-publish the new Oracle binding, adopt running worker assignments and isolate competing write access.
@@ -73,7 +79,7 @@ Prepare **exactly five plausible actions**; select order by consequence and depe
 4. **Close the independently testable gap.** Give a suitably independent reviewer the *retrievable* candidate, exact bytes, scope, original criteria and a plausible surviving wrong case. Check ZIP/hash/member/unchanged frozen files; preserve historical PASS with its original scope.
 5. **Prove the Owner's usable outcome.** Coordinate actual user-environment operation and output validation, collect Owner approval/refusal and update current state/Progress Page through the selected authorized path; do not release before evidence and Owner authority.
 
-Where an Owner can run a reviewed runnable safely before distribution finishes, **do not unnecessarily serialize** native usability work behind a code-only packaging check. Declare separate acceptance scopes and the true dependencies. The five-action list may be reordered for another project's needs; keep an owner, an evidence source, a measurable completion criterion and one material stop condition for each.
+Where an Owner can run a reviewed runnable safely before distribution finishes, **do not unnecessarily serialize** native usability work behind a code-only packaging check. Declare separate acceptance scopes and the true dependencies. Optional supporting steps may be reordered, omitted or combined for another project's needs; preserve an actor, an evidence source, a measurable completion criterion and an actual stop condition where it matters. **Do not stop independent safe work because a separate Owner trial or independent verdict has not happened yet.**
 
 ### Prototype-to-intent test
 
