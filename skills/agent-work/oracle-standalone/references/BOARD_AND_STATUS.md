@@ -29,7 +29,7 @@ Owner-reported versus byte-checked versus independently reviewed.
 
 ## One Owner action — transport and delivery strip
 
-This is a **presentation derived from the current Oracle assignment/inbox**, not a new tracker or an automatic dispatch. Display it **alongside** [Universal Workflow Progress](../../../../universal-workflow-progress/SKILL.md) when that read-only skill is selected; **Progress Page** is a distinct project viewer/projection. Do not recompute its milestones, percentages or stage completion.
+This is a **presentation derived from the current Oracle assignment/inbox**, not a new tracker or an automatic dispatch. Display it **alongside** [Universal Workflow Progress](../../../universal-workflow-progress/SKILL.md) when that read-only skill is selected; **Progress Page** is a distinct project viewer/projection. Do not recompute its milestones, percentages or stage completion.
 
 **ORACLE → next role/chat ID8 → exact native evidence.** Show only **one NOW actor** and **one PASTE instruction** selected by the Oracle from the real transport:
 
