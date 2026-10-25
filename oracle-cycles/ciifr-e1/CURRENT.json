@@ -1,0 +1,145 @@
+{
+  "schema": "oracle-cycle-current/v1",
+  "project": "ciifr-e1",
+  "mode": "standalone",
+  "activation": "ACTIVE",
+  "revision": 1,
+  "last_accepted_receipt_ids": [],
+  "aim": "CIIFR E1 read-only v14 CII ELEMENTS field/auxiliary-pointer catalogue: source-accountable logical indexed record guards, without mutating customer CII, producing TARGET1, or claiming effective engineering field meanings. Resolve independently falsified structural catalogue defects while retaining previously passed pointer-range behavior.",
+  "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/167",
+  "privacy": "PUBLIC_SAFE_METADATA_ONLY",
+  "roles": {
+    "oracle": {
+      "label": "CIIFR E1 Oracle",
+      "chat_id8": null,
+      "provenance": "OWNER_CHAT_LABEL_NOT_CONFIRMED",
+      "responsibility": "Own E1 WBS meaning, challenge R2 native return, reconcile one dedicated Cycle inbox and propose next revision; no code self-acceptance"
+    },
+    "coder": {
+      "label": "E1 pointer catalogue R2 repair builder",
+      "chat_id8": "6adddf80",
+      "provenance": "OWNER_CONFIRMED_CHAT_LABEL_NATIVE_TASK_173; NOT_AUTHENTICATED_AS_GITHUB_PRINCIPAL",
+      "responsibility": "Same bounded E1 R2 correction on existing XCU PR #168 after native source/backup/test prerequisites; native return to XCU #173"
+    },
+    "reviewer": {
+      "label": "Independent E1 field-map reviewer",
+      "chat_id8": null,
+      "provenance": "ORIGINAL_REVIEWER_ON_XCU_170_SHORT_CHAT_ID_UNBOUND",
+      "responsibility": "Independent exact-new-head falsification of R2 after Oracle assignment; no coding or self-certification"
+    },
+    "owner": {
+      "label": "Owner",
+      "chat_id8": null,
+      "provenance": "OWNER_DIRECTIVE_USE_CYCLE_NOW_20261025",
+      "responsibility": "Paste Cycle trigger manually after activation; Owner-only release/merge/engineering acceptance"
+    }
+  },
+  "source_boundary": {
+    "xcu_repo": "reallakshman19/XML_Compare_Utilities",
+    "native_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173",
+    "wbs": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/167",
+    "reviewer_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170",
+    "current_candidate": "XCU draft PR #168 head 01d94e1f19e39c1fb5863f539e56c2f06d5405d2 at preparation; refresh live head on invocation",
+    "pr_url": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/168",
+    "oracle_r2_go": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400196426",
+    "original_independent_fail": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400040909",
+    "public_input": "https://github.com/reallakshman19/XML_Compare_Utilities/tree/01d94e1f19e39c1fb5863f539e56c2f06d5405d2",
+    "supplemental_relay": "https://github.com/reallakshman19/Common/pull/479 (DRAFT/PROPOSED, not primary work artifact)",
+    "original_custody": "No private original needed for invented-source structural R2; original protected CII and native CAESAR import NOT_RUN",
+    "native_qualification": "XCU AGENTS.md Appendix A, local pre-edit backups and .agent-worklogs ledger; existing #90/#91 are old preimages; .backups/log.json tracked locally and never staged",
+    "protected_invariants": [
+      "Original SOURCE/TARGET0 immutable; no customer original public upload",
+      "Preserve exact physical byte spans and logical pointer counts",
+      "Retain independent BEND/EXPJT/IZUP/EQUIPMNT bounded PASS and RIGID/NODENAME sharing/zero semantics",
+      "Restrict R2 to reader, synthetic tests and PR168_workreport on same draft PR",
+      "No Writer, TARGET1, E2/E3, private-file/CAESAR import, release, merge, deployment",
+      "Separate active ciifr G1 Geometry Cycle rev4 and proposed ciifr-element #178 are not modified"
+    ]
+  },
+  "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/495",
+  "assignments": [
+    {
+      "id": "CIIFR-E1-PTR-GUARD-R2",
+      "generation": 1,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adddf80",
+      "dispatch": "AWAIT_OWNER_TRIGGER_AFTER_CANONICAL_ACTIVATION",
+      "scope": "Continue existing, Oracle-authorized R2 minimum source repair on XCU #173: F1 reject declared positive-count RESTRANT section with header but empty body; F2 change v14 REDUCERS logical record cardinality to 2 physical lines and test valid/truncated; F3 source-qualify CONTROL fixed row widths or explicitly hold that format claim. Preserve all 15 index guards and old 30 native regressions. Same draft PR #168 and approved three files only.",
+      "candidate": "XCU PR #168 DRAFT exact head 01d94e1f19e39c1fb5863f539e56c2f06d5405d2 at this proposal; STOP/requalify if live head or scope changed",
+      "input_artifact_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/commit/01d94e1f19e39c1fb5863f539e56c2f06d5405d2",
+      "accepted_input_status": "PUBLIC_GITHUB_SOURCE_COMMIT_KNOWN; RECIPIENT_RECHECK_LIVE_NATIVE_CHECKOUT_REQUIRED",
+      "required_return": "Existing native [E1-PTR-GUARD-1 R2 · BUILDER RETURN] on XCU #173 with exact new head, tests, source-grounded F1/F2/F3 and backup/ledger constraints; separately a short ORACLE-CYCLE-RECEIPT v1 here on Common #495 pointing to native comment (no duplicate engineering text). If work already returned, do not rerun; send only missing routing envelope per idempotency rules.",
+      "next_after": "oracle",
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173",
+      "native_return_status": "R2_INSTRUCTED_NOT_RETURNED_AS_OF_PREPARATION",
+      "cycle_receipt_url": null
+    }
+  ],
+  "next": {
+    "recipient_role": "coder",
+    "recipient_chat_id8": "6adddf80",
+    "status": "AWAIT_OWNER_TRIGGER_AFTER_CANONICAL_ACTIVATION",
+    "instruction": "After this CURRENT.json is actually merged to Common/main as ACTIVE, send established coder a one-line Cycle now (full locator if not previously verified). Coder checks native #173 for R2 returns first; does not repeat completed work. Returns native evidence #173 and a brief Common #495 Cycle receipt.",
+    "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr-e1"
+  },
+  "gates": [
+    {
+      "id": "r1-range-correction",
+      "status": "PASS_BOUNDED_INDEPENDENT",
+      "scope": "Original NC-A BEND, EXPJT and IZUP/EQUIP logical pointer range and RIGID/NODENAME contrasts",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400040909",
+      "limits": "Not complete E1 catalogue acceptance"
+    },
+    {
+      "id": "r1-empty-restrant",
+      "status": "FAIL",
+      "scope": "Positive CONTROL RESTRANT count1 and ptr4=1 accepted when section header has zero body lines",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400040909"
+    },
+    {
+      "id": "r1-reducers-cardinality",
+      "status": "FAIL",
+      "scope": "v14 REDUCERS 2 physical lines rejected; 1 incomplete accepted",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400040909"
+    },
+    {
+      "id": "control-v14-row-admissibility",
+      "status": "BLOCKED",
+      "scope": "Extra CONTROL numeric fields accepted; strict source-defined v14 admissibility not independently established",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170#issuecomment-6400040909",
+      "limits": "v12/v15 version-bracketed description is not a direct v14 import/format verdict"
+    },
+    {
+      "id": "r2-builder-return",
+      "status": "NOT_RUN",
+      "scope": "Same-coder R2 implementation and exact-head native tests/hosted CI expected",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6400196426"
+    },
+    {
+      "id": "r2-independent-review",
+      "status": "NOT_RUN",
+      "scope": "Existing independent E1 reviewer new-head replay F1/F2/F3 and retained BEND etc; reviewer short ID not bound",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/170"
+    },
+    {
+      "id": "native-cii-caesar-import",
+      "status": "NOT_RUN",
+      "scope": "Private original customer CII and native CAESAR import not supplied/qualified"
+    },
+    {
+      "id": "owner-engineering-release",
+      "status": "HOLD",
+      "scope": "E1 source semantics, Writer/TARGET1, E2/E3, merge, release and deployment not authorized"
+    }
+  ],
+  "progress_projection": {
+    "repository": "reallakshman19/progress-page",
+    "project_key": "ciifr",
+    "publication_status": "DRAFT_PR18_EXISTING_PROJECTION_NOT_CYCLE_ACTIVE",
+    "published_revision": null,
+    "evidence": "https://github.com/reallakshman19/progress-page/pull/18",
+    "reason": "E1 R1 failed independent replay; same-PR R2 instructed; preserve existing audited WBS card and update only after actual receipt/reconciliation"
+  },
+  "activation_basis": "OWNER_SELECTED_CYCLE_NOW_FOR_FUTURE_CIIFR_WORK_20261025; E1 R2 native Oracle GO 6400196426",
+  "activation_scope": "Manual standalone transport ONLY for same E1 #173 R2 task and assigned coder 6adddf80. Main-branch merge required; a draft proposed ACTIVE field is not activation. No engineering rights or separate reviewer identity conferred."
+}
