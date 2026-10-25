@@ -40,7 +40,7 @@ class OnBoardResponsibilityBoundary(unittest.TestCase):
         o = ORACLE.read_text(encoding="utf8").lower()
         m = MAP.read_text(encoding="utf8").lower()
         self.assertIn("not mandatory", a)
-        self.assertIn("not require a new file per wbs", o)
+        self.assertIn("or require a new file per wbs", o)
         self.assertIn("not four duplicate onboarding documents", m)
         self.assertIn("oracle cutover", m)
         self.assertIn("one wbs", m)
