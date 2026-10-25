@@ -3,8 +3,10 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 1,
-  "last_accepted_receipt_ids": [],
+  "revision": 2,
+  "last_accepted_receipt_ids": [
+    "ciifr-g1-6addafaa-pr174-a59f479f-20261025"
+  ],
   "aim": "G1 Geometry review-only workbench in XCU VNext: original CII SOURCE/TARGET0, manual anchor, registered Method C correspondence ledger and linked two side-by-side synchronized SVGs, preserving original physical NODE identity and non-acceptance of proximity.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
   "privacy": "PUBLIC_SAFE_METADATA_ONLY",
@@ -25,7 +27,7 @@
       "label": "Independent G1 Reviewer (not assigned)",
       "chat_id8": null,
       "provenance": "UNASSIGNED",
-      "responsibility": "No review action until G1 exact-head candidate exists and Oracle routes it"
+      "responsibility": "Read-only independent exact-head PR #174 test on an authorized served browser; issue #175 prepared; recipient not selected"
     },
     "owner": {
       "label": "Owner",
@@ -42,7 +44,9 @@
     "frozen_baseline": "Original S1/T CII physical NODE/ELEMENT witnesses and immutable SOURCE/TARGET0; live ref and concurrent PR changes must be rechecked before edits",
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
-    "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes"
+    "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
+    "current_candidate": "XCU PR #174 head a59f479f0dcf8be00a3ca7324da7e4f624a2d6f4; G1 exact head mandatory",
+    "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175"
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
   "assignments": [
@@ -51,80 +55,91 @@
       "generation": 1,
       "recipient_role": "coder",
       "recipient_chat_id8": "6addafaa",
-      "dispatch": "READY_FOR_OWNER_TRIGGER",
+      "dispatch": "RETURNED_RECONCILED",
       "scope": "Continue existing XCU #169 G1; source ZIP reported recovered and tested. Record/finish A1-A5 native Appendix A qualification (reuse unchanged A1-A3), recheck exact source/authority and overlap, create native worklog and backups; ONLY IF qualified and authorized, implement real VNext manual-anchor Method C evidence ledger and two linked physical-mm SVG panes on one draft PR, run Node/served Chromium at exact head. No merge/deploy.",
-      "candidate": "XCU main 80e693bd81f54003a487cb763421f9bfd0d3dfc2 (pre-edit baseline)",
+      "candidate": "XCU draft PR #174 exact head a59f479f0dcf8be00a3ca7324da7e4f624a2d6f4",
       "input_artifact_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/tree/80e693bd81f54003a487cb763421f9bfd0d3dfc2",
       "accepted_input_status": "OWNER_REPORT_ARCHIVE_EXTRACTED_CRITICAL_BLOBS_AND_S1_T_SHA_CHECKED_NOT_ORACLE_REVERIFIED",
       "required_return": "Post concise native A1-A5 qualification and actual test/falsifier evidence plus G1 draft-PR head or precise blocker on XCU #169; separate short ORACLE-CYCLE-RECEIPT v1 here in Common #482 referring to native evidence, read back both permalinks.",
       "next_after": "oracle",
-      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169"
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
+      "native_return_status": "DRAFT_PARTIAL / AUTHOR_SELF_TESTS_PASS / INDEPENDENT_BROWSER_NOT_RUN",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6396767394",
+      "cycle_receipt_url": "https://github.com/reallakshman19/Common/issues/482#issuecomment-6396772657"
     }
   ],
   "next": {
-    "recipient_role": "coder",
-    "recipient_chat_id8": "6addafaa",
-    "status": "READY_FOR_OWNER_TRIGGER",
-    "instruction": "Owner sends Cycle now URL into the existing G1 builder chat; builder reads current main state, confirms role/source/receipt and completes qualification then bounded G1 work. Do not redo prior completed source tracing or duplicate native evidence.",
-    "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr"
+    "recipient_role": "owner",
+    "recipient_chat_id8": null,
+    "status": "AWAIT_INDEPENDENT_REVIEWER_BINDING",
+    "instruction": "Oracle source challenge on PR #174 completed and issue #175 published for B1-B5. Owner designates one genuinely independent reviewer with a working served browser/native original-file access. Do not re-trigger completed G1 assignment or auto-enroll unbound IR via Cycle now.",
+    "owner_trigger": "Native review handoff: https://github.com/reallakshman19/XML_Compare_Utilities/issues/175 (to the actual designated independent reviewer chat)"
   },
   "gates": [
     {
       "id": "archive-source-recovery",
       "status": "NOT_RUN",
-      "scope": "Owner reports exact XCU archive extracted (9,208 entries), safe paths, critical blobs at 80e693bd... and original S1/T SHA match",
-      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "Fresh builder native recovery receipt supplied in chat but not independently read back from GitHub; not engineering takeover PASS",
-      "reported_status": "OWNER_REPORTED_PASS",
+      "scope": "Native archive, S1/T hashes reported checked by G1 builder in returned workreport",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6396767394",
+      "limits": "Author-native self-report; Oracle readback of comment and source metadata only",
+      "reported_status": "BUILDER_NATIVE_PASS",
       "oracle_verification": "NOT_RUN"
     },
     {
       "id": "method-c-original-falsifiers",
       "status": "NOT_RUN",
-      "scope": "Owner reports native anchor 3910->875 translation-only, 41/57 within 100mm XYZ, 4060 TARGET 900->905 segment-only, 4970 -300.57mm Z and corruption ORIGINAL_SHA256_MISMATCH",
-      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "No separate Oracle exact-command output review; nearest candidates are not certified physical matches",
-      "reported_status": "OWNER_REPORTED_PASS",
-      "oracle_verification": "NOT_RUN"
+      "scope": "Builder reported native 3910→875 translation-only; 41/57; 4060 segment-only; 4970 signed Z -300.57mm; corrupt SHA fail",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6396767394",
+      "limits": "Oracle independently inspected implementation and test source; not independently executed original CII on served/browser host",
+      "reported_status": "BUILDER_NATIVE_PASS",
+      "oracle_verification": "STATIC_SOURCE_INSPECTED"
     },
     {
       "id": "native-regression-baseline",
       "status": "NOT_RUN",
-      "scope": "Owner reports Node v22.16.0 and Chromium available, initial native regression 44/44 passed",
-      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "Pre-G1 regression only; G1 integrated Node/Chromium exact-head acceptance NOT_RUN",
-      "reported_status": "OWNER_REPORTED_PASS",
+      "scope": "G1 builder reports 27/27 selected Node PASS at source corresponding to PR #174",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6396767394",
+      "limits": "GitHub PR #174 exact head has 0 check-runs, 0 commit statuses and 0 PR-triggered workflow runs at Oracle readback; not independent rerun",
+      "reported_status": "BUILDER_LOCAL_PASS",
       "oracle_verification": "NOT_RUN"
     },
     {
       "id": "appendix-a-qualification",
       "status": "BLOCKED",
-      "scope": "Native source-specific A1-A5 gate score, worklog and authorization not yet returned",
-      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
-      "limits": "Production file edits must not begin until native guard satisfied; A1-A3 may reuse unchanged prior work",
-      "reported_status": "PARTIAL_SOURCE_INSPECTION"
+      "scope": "Builder workreport shows self-assessed A1-A5 96/100 (all >=17/20) and local backups 90-92 / worklog",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/blob/a59f479f0dcf8be00a3ca7324da7e4f624a2d6f4/agents/PR174_workreport.md",
+      "limits": "Self-assessed, not independent implementation accreditation; no Writer or wider engineering authority",
+      "reported_status": "BUILDER_SELF_ASSESSED_PASS"
     },
     {
       "id": "g1-native-integrated-ui",
-      "status": "NOT_RUN",
-      "scope": "Real Geometry mount/table/two SVGs, non-mutation and Normal/Writer regressions",
-      "evidence_ref": null,
-      "limits": "No G1 PR, browser integration or Owner trial reported"
+      "status": "BLOCKED",
+      "scope": "DRAFT G1 Geometry real UI source present and statically Oracle-inspected; browser navigation blocked before scripts",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/174",
+      "limits": "Two SVG DOMs, real input selection, stale race, Normal→Geometry→Normal, browser and original SHA remain unverified in served app; independent issue #175",
+      "reported_status": "AUTHOR_CODE_SUBMITTED"
     },
     {
       "id": "owner-merge-acceptance",
       "status": "NOT_RUN",
-      "scope": "Owner trial, any independent review/engineering acceptance and merge",
-      "evidence_ref": null,
-      "limits": "No merge or deploy authority in this Cycle"
+      "scope": "No independent G1 exact-head trial, acceptance, merge or deploy",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175",
+      "limits": "Owner must select reviewer and later decide after evidence; G2/G3/Writer remain held"
+    },
+    {
+      "id": "cycle-g1-return",
+      "status": "PASS",
+      "scope": "GitHub presence and envelope schema/idempotency/readback of one G1 work_returned receipt for Cycle rev1, not correctness of engineering claims",
+      "evidence_ref": "https://github.com/reallakshman19/Common/issues/482#issuecomment-6396772657",
+      "limits": "No automatic engineering PASS, independent review or Owner acceptance"
     }
   ],
   "progress_projection": {
     "repository": "reallakshman19/progress-page",
     "project_key": "ciifr",
-    "publication_status": "PENDING_EXISTING_CIIFR_WRITER",
+    "publication_status": "PENDING_AUTHORIZED_CIIFR_WRITER",
     "published_revision": null,
-    "reason": "Common Cycle state may be active after its own canonical merge; Progress Page G1 status requires separate source-backed update via authorized sole CIIFR data writer and pp_cli.py, not Cycle issue writes"
+    "reason": "Cycle rev2 reflects accepted routing receipt / exact PR #174 draft candidate. Progress Page main not yet source-reconciled; separate authorized CLI data-only PR/merge required."
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482",
   "activation_scope": "Manual one-recipient standalone transport for existing XCU #169 Geometry G1 only. No dispatch until Owner pastes trigger; no change to engineering/native or unrelated project authority."
