@@ -3,7 +3,7 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 4,
+  "revision": 5,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025"
@@ -45,14 +45,14 @@
     "frozen_baseline": "Original S1/T CII physical NODE/ELEMENT witnesses and immutable SOURCE/TARGET0; live ref and concurrent PR changes must be rechecked before edits",
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
-    "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
+    "deferred": "G3 F05 XML bridge, Writer/Apply/TARGET1, G1+G2 merged release acceptance and unrelated CIIFR R4/P2.5-B; G2 original-graph/isolated topology work no longer deferred",
     "current_candidate": "XCU PR #174 R1 repaired head 9936d4078fb7f837ffe6f46805241efdb7bbc0e8, based on XCU main c823f0c0edbeb315c07fa2911390dc781968146f; G1 DRAFT, MERGE HOLD",
     "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175",
     "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6397228570",
     "minimal_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6397715134",
     "review_awaited": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6400033775",
     "g2_prepared_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/177",
-    "g2_implementation": "HOLD_UNTIL_G1_ORIGINAL_BROWSER_INDEPENDENT_OWNER_TRIAL_AND_MERGE_DECISION",
+    "g2_implementation": "ORACLE_SOURCE_WORK_GO; QUALIFIED_DISJOINT_G2_DRAFT_ALLOWED; RECEIVER_CHAT_UNASSIGNED; SHARED_G1_UI_INTEGRATION_PENDING_COMPATIBILITY",
     "oracle_continuity": "oracle-cycles/ciifr/ORACLE_CONTINUITY_20261025.md (PREPARED_NOT_CUTOVER)"
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
@@ -94,11 +94,11 @@
     }
   ],
   "next": {
-    "recipient_role": "owner",
+    "recipient_role": "oracle",
     "recipient_chat_id8": null,
-    "status": "AWAIT_REAL_REVIEWER_AND_ORIGINAL_BROWSER",
-    "instruction": "Select a genuine separate reviewer/runner with actual S1/T and working Chromium. Give native XCU #175 exact-head R1 review order at 9936d407...; check original paired S1/T served app, no Writer and Normal, and report independent/author-only tests separately. G2 #177 can be read-only prepared but coding remains held until G1 independent evidence, Owner trial and acceptance/merge decision.",
-    "owner_trigger": "Independent G1 review (READ_ONLY): https://github.com/reallakshman19/XML_Compare_Utilities/issues/175 — exact PR #174 head 9936d4078fb7f837ffe6f46805241efdb7bbc0e8; report B1-B4 evidence on #175; no edit, merge or Writer."
+    "status": "ORACLE_SOURCE_AND_G2_DISJOINT_EXECUTION_NOW",
+    "instruction": "Owner directs no avoidable blockers or ceremonial gates. Oracle takes direct responsibility for G1 exact-head #174 source/original S1+T intake/B1-B4 checks on native/CI runner and reports actual evidence on XCU #175; route narrowly scoped native G1 repair if real fault. In parallel perform G2 pose-free topology adapter/interface and duplicate/collision falsifier source work on XCU #177. An actually authorized G2 writer may build a disjoint, bounded draft without awaiting G1 browser/Owner trial; integration into the served G1 UI follows exact-file and source-compatibility checks. No extra Owner request to execute what Oracle can solve. Record inaccessible original T/browser as exact environment limitation, not blanket G2 HOLD.",
+    "owner_trigger": "NONE_FOR_ORACLE_EXECUTABLE_WORK; Owner only for genuinely unavailable private access/irreconcilable write authority or final product acceptance/release decision."
   },
   "gates": [
     {
@@ -138,10 +138,10 @@
     },
     {
       "id": "g1-native-integrated-ui",
-      "status": "BLOCKED",
-      "scope": "DRAFT G1 Geometry real UI source present and statically Oracle-inspected; browser navigation blocked before scripts",
-      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/174",
-      "limits": "Two SVG DOMs, real input selection, stale race, Normal→Geometry→Normal, browser and original SHA remain unverified in served app; independent issue #175",
+      "status": "NOT_RUN",
+      "scope": "G1 Geometry read-only UI source exists; actual original T served file-picker and Normal→Geometry→Normal end-to-end remain to be executed by Oracle/authorized runner.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175",
+      "limits": "Only original S1 static Normal structural checks now observed; G1 runtime/engineering acceptance unverified, not a reason for isolated G2 project HOLD.",
       "reported_status": "AUTHOR_CODE_SUBMITTED"
     },
     {
@@ -192,23 +192,23 @@
     {
       "id": "g1-r1-exact-head-ci",
       "status": "NOT_RUN",
-      "scope": "No GitHub Actions check runs at PR #174 9936d407, existing geometry workflow watches unrelated Writer2 paths",
+      "scope": "At last readback zero qualifying GitHub workflows for PR #174 exact head; Oracle should run available native tests or route a narrowly authorized targeted CI addition without turning absent CI into an Owner gate.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/174",
-      "limits": "CI absent, not pass; require actual targeted CI or independently executed identical-head original-input checks"
+      "limits": "No exact-head hosted CI PASS. XCU AGENTS prohibits unapproved workflow file edits; Oracle must obtain existing native authority for any such edit."
     },
     {
       "id": "g1-r1-fresh-independent-browser",
-      "status": "BLOCKED",
-      "scope": "R1 head original S1/T served Chromium plus B1-B4 and non-author challenge outstanding",
-      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6400033775",
-      "limits": "Old head review is stale; author synthetic 9/9 PASS is not served-app qualification"
+      "status": "NOT_RUN",
+      "scope": "Oracle owns source/runner-based G1 exact-head original S1/T B1-B4 investigation now; full served original browser still not executed.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175",
+      "limits": "Local browser previously ERR_BLOCKED_BY_ADMINISTRATOR; GitHub connector full T bytes unavailable in this session. Seek working native/CI runner. No original runtime PASS, no non-author independent approval; do not block disjoint G2."
     },
     {
       "id": "g2-topology-boolean",
       "status": "NOT_RUN",
-      "scope": "G2 task issue #177 PREPARED, recipient not selected and no implementation authority",
+      "scope": "Owner permits Oracle-run pose-free graph/signature/interface reconnaissance NOW and G2-only disjoint draft under actual native writer authority; source/model test not yet executed.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/177",
-      "limits": "G1 acceptance/merge and native file claims must be cleared before G2 code begins"
+      "limits": "No verified G2 chat is assigned; no shared-file integration or physical/Writer approval. This is not a G1 dependent project HOLD."
     },
     {
       "id": "oracle-continuity-preparation",
@@ -223,7 +223,7 @@
     "project_key": "ciifr",
     "publication_status": "PENDING_AUTHORIZED_CIIFR_WRITER",
     "published_revision": null,
-    "reason": "G1 R1 author-returned exact PR #174 but true original-browser and independent head review remain held; G2 task #177 prepared only, Oracle succession PREPARED not activated; Progress Page only via its sole authorized CLI writer."
+    "reason": "Owner-directed Oracle execution-first: G1 original T served browser NOT_RUN is a specific evidence gap, not G2 source/isolated draft HOLD. G2 #177 source GO; no invented recipient or Cycle task. Only authorized CLI writer may publish progress-page data."
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482",
   "activation_scope": "Manual one-recipient standalone transport for existing XCU #169 Geometry G1 only. No dispatch until Owner pastes trigger; no change to engineering/native or unrelated project authority."
