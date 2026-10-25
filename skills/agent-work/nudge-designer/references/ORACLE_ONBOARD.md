@@ -1,5 +1,10 @@
 # Oracle OnBoard Prompt
 
+**Owner → Oracle means entire-project continuity in ONE instruction:** [Project-level Oracle OnBoard](../assets/oracle-onboard/ORACLE_ONBOARD_PROMPT.md). Owner supplies the project locator/actual appointment; the Oracle recovers Owner WHY, original architecture and decisions, **all WBS tasks and active actors**, release/evidence/custody limitations, and ONE next cross-WBS priority, preserving any incumbent control boundary. The Owner does not assemble an agent/task packet for every WBS.
+
+**Oracle → Agent means ONE WBS continuation in ONE instruction:** [WBS-level Agent OnBoard](../assets/agent-onboard/AGENT_ONBOARD_PROMPT.md). Oracle pre-resolves task ID, parent WHY, dependency, predecessor return, exact head/allowed files, recipient/generation, wrong case, relay input and native return. A worker does not rebuild the full project model, author four golden documents or become the Oracle. These are **different scopes**, not two interchangeable copies of one prompt.
+
+
 Use this optional instruction handover when a source-based working explanation
 and useful next direction already exist. The available lead or Owner can prepare
 it; an outgoing agent and a separately staffed Oracle are not required. It is a
