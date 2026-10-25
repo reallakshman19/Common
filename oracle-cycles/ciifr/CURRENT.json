@@ -214,7 +214,7 @@
       "id": "oracle-continuity-preparation",
       "status": "NOT_RUN",
       "scope": "Knowledge-first read-only successor checkpoint prepared in this PR, not published until merge; successor not bound, control cutover NOT_RUN",
-      "evidence_ref": "https://github.com/reallakshman19/Common/pull/489",
+      "evidence_ref": "https://github.com/reallakshman19/Common/blob/64958560205b420d5caa857f62e59c6eb89a3803/oracle-cycles/ciifr/ORACLE_CONTINUITY_20261025.md",
       "limits": "No successor identity, epoch increment or new control/acceptance permission"
     }
   ],
