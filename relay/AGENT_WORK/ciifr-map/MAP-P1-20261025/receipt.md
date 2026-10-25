@@ -37,3 +37,13 @@ Limits: field effective semantics, private source, native CAESAR importer and en
 
 ## Return
 Builder publishes exact code and public-safe tests in the native draft stacked PR; outputs from private/runtime input remain local, never committed. One native #180 return links branch/head, commands, original input hashes, frozen dependency parity, probe/implementation limits and actual runnable demo. This same receipt will index the immutable return. A shared local folder or a prepared prompt alone is not a completed durable transfer.
+
+
+## Oracle reconciliation R3 — canonical WBS 3, before product edits
+Owner supplied the earlier Concept Note and required independent reread of canonical CURRENT and XCU #166/#169/#175/#177 and live PR174. The original WBS3/3.x remains authoritative; the premature parallel WBS5 geometry plan is superseded in [#179](https://github.com/reallakshman19/XML_Compare_Utilities/issues/179). [#180](https://github.com/reallakshman19/XML_Compare_Utilities/issues/180) is PREPARED WBS3.1 XML-input/overlay seam only, not a replacement G1/G2 task or independent new workbench.
+
+**Clarification:** Method C provides geometric registration/candidate/overlay logic, manual anchors are G1 inputs, G2 supplies pose-free topology, and F05 XMLv1.1 is G3 provenance. Legacy manual-propagation investigation was explicitly excluded before product implementation. Latest Owner XML-input scope must be reconciled with existing G1, not silently substituted for original-CII byte authority.
+
+**Actual receiver probe returned:** task-local runtime `/root/map_p1_builder` retrieved exact receipt commit31a3c13820746c001f3381918c1c3d7abb40da17, blobd915d63d2783c45e23876f774e007639dfd78b0b, measured5481UTF8bytes/SHA256ea0a9d29839bf48d71b6c24b5fa8dd85f278e6a79d0ff619c7cecacba18f787e and verified Git blob. This is runtime identity, not a fabricated Chat ID8. It returned a READ_ONLY reuse/capability trace; no branch/worktree/product changes or output publication. State: WORK_RETURNED(PROBE_ONLY), implementation NOT_STARTED. It is not canonical coder6addafaa, G2 appointee or independent reviewer.
+
+**Oracle readback/execution evidence:** [#175 comment6401364122](https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6401364122). Original S1/T hashes measured, actual shared VNext parseCii on T returned1614elements/1265NODENAME, and unchanged Method C baseline reproduced documented candidate/segment cases. Full servedG1/Node22/nativeCAESAR/Owner acceptance NOT_RUN. Current-head exactCI absent. No Current.json/epoch/control changes, no Writer/converter/merge.
