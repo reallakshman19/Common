@@ -35,7 +35,7 @@ class OracleOnboardTitleDocs(unittest.TestCase):
         self.assertIn("KNOWLEDGE_READ_ONLY / NO_CONTROL_CUTOVER", prompt)
         self.assertIn("all WBS", prompt)
         self.assertIn("ONE immediate project priority", prompt)
-        self.assertIn("no new file per WBS", prompt.lower())
+        self.assertIn("not require a new file per wbs", prompt.lower())
         # Four source knowledge classes exist, but are not another intake ritual.
         self.assertIn("project knowledge examples", prompt)
 
