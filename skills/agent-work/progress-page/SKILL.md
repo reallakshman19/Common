@@ -5,6 +5,18 @@ description: Run and use the Progress page, a static page plus JSON data in GitH
 
 # Progress page
 
+## Zero-extra-reporting entry (roles)
+
+| Reader | Start here | Native reporting destination |
+|---|---|---|
+| Builder or reviewer | Open the task-specific `#/project/start/REV/wbs%3AN/Mn` Agent Start deep link from the native task. Verify the issue, exact PR head and authority before acting. | Existing native issue/PR/test record only. Never maintain Page JSON. |
+| Coordinator/Oracle | Inspect the same native evidence and use `pp_cli.py reconcile` to detect unrecorded sources, duplicates and candidate drift. | Audited CLI / reviewed data PR; no inferred engineering PASS. |
+| Page writer | Use `pp_batch.py` in dry-run before a reviewed, checked `--apply` (one source can support multiple native changes). | Exact source and append-only Timeline. |
+| Owner | Open Agent Start for orientation or My actions for decisions. | Existing GitHub-signed decision workflow. |
+
+Agent Start is a **read-only projection**, not a new assignment protocol or release gate. If this Page differs from an authoritative native issue or Cycle, stop and reconcile the source. The writer must read the native evidence; a URL alone is not proof of its claim.
+
+
 Prototype v0.1. This is a runnable toolset, not only guidance. Read [README.md](README.md) first (five minutes), then use the tools in `scripts/`.
 For standalone or end-to-end use, begin with [Start here](https://github.com/reallakshman19/Common/blob/main/skills/agent-work/START_HERE.md).
 
