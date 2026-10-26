@@ -117,6 +117,12 @@ Use [Progress standalone publication mode](../../progress-page/references/MODES.
 
 Before issuing a new task, reread `CURRENT.json` and the issue inbox. A duplicate coder receipt is **not** a new transfer, and a merged documentation PR is **not** an active controlled changeover. Where a private Drive upload is blocked, the correct next result is an exact **blocker + authorized relay plan**, not a forged URL.
 
+**Pre-handover substance:** outgoing Oracle first establishes the pending source-qualified framework and, where authorized/high ROI, a coherent tested code or diagnostic contribution; record the exact artifact, authorship and independent limits.
+**If coding is prohibited:** preserve coordinator/producer separation; route a bounded contribution through the actual writer rather than claiming an Oracle-authored implementation.
+**Successor feedback:** test understanding AND challenge outgoing assumptions through original-source questions, a wrong case or one small authorized increment; revise the handover/plan from substantive feedback without imposing an exam.
+**Mandatory closing comparison:** list every active WBS with planned deliverable, actual result, exact evidence/limits, remaining work, actor, dependency and ONE immediately executable next action.
+**Progress Page closeout:** compare published Page to native WBS truth; give corrected merged/read-back revision or exact draft PR plus PAGE: PENDING/OUT_OF_SYNC. Never call a draft update SYNCED.
+
 ## 7. Owner-facing deliverable after a handover review
 
 Keep the answer short and decision-useful:
