@@ -1,4 +1,7 @@
 # CIIFR Element — Oracle Handover / Execution Frontier
+
+> **CURRENT R2 DELTA · 2026-10-26 — this section supersedes older custody/task lines below.** [Native specialist R2](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6402061761) independently retrieved named-reader-restricted private original, ZIP 18,862 bytes / 4-of-4 CRC, original 612,613 bytes and SHA matches private manifest; 353 ELEMENTS' three numeric slots and 38 RIGID records read, 315 pointer-zero / 38 nonzero valid. No original weight-zero case. Actual `#$ UNITS` section has 28 rows, but external Alpha Tolerance/ambient, material and expansion DB, static operating/hydro cases, case FDM and native CAESAR importer remain **NOT_PROVIDED/NOT_RUN**. `R1 BLOCKED_ORIGINAL_ACCESS` is **resolved for this specialist connected session**; **NOW → authorized engineering-model custodian: deliver genuine external configuration through the existing restricted route**, then specialist performs original stored→effective property witness. GitHub chat identity remains unavailable, and this read-only native return is not Cycle activation or independent engineering PASS. [Oracle R2 reconciliation](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6406343093).
+
 **25 October 2026 · READ-ONLY KNOWLEDGE HANDOVER PREPARATION · NOT AN ORACLE CUTOVER**
 
 ## A. Cold-start landing and authority
