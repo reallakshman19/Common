@@ -44,7 +44,7 @@ Version 1.1 reconciles its four findings:
 | F3: current versus intended epochs | Section 13.3 explicitly says the current projection invalidation differs from the proposed numerical/view separation. |
 | F4: epsilon comparator | P07 uses minimum-relative bands, raw scores/regrets and deterministic stagewise lexicographic filtering. SC10 rejects chained pairwise ties. |
 
-The revised specification's independent remote identity receipt is returned through the native PR/issue record after publication. Do not infer a product PASS or new Owner-adopted policy from this documentation review.
+The reviewer independently retrieved version 1.1 at `dfe3cd9c4c8efbc8d70e654b957d178467d86856` and verified all 68,295 bytes, SHA256 and Git blob against its assessed delta. The actual receipt is preserved in `CONCEPT_LOGIC_REVIEW.md`; the final artifact-only followup retains the identical specification blob. Do not infer a product PASS or new Owner-adopted policy from this documentation review.
 
 The highest-priority reconciliation is explicit: individual per-group minima can cycle. The proposed coherent-default min-max-regret policy is additional engineering policy, not already adopted by the Owner. No production change or whole-project stop follows from publishing the concept.
 

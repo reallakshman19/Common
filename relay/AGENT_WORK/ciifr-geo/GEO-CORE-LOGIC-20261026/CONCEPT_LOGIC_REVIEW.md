@@ -68,3 +68,13 @@ The author revised the specification while preserving the original review above.
 - F4 addressed with a minimum-relative epsilon band, raw score/regret retention, explicit near-zero support, stagewise lexicographic filtering and SC10's epsilon-chain challenge.
 
 No remaining material concept-contract finding from F1–F4 survives this inspected delta. This is a scoped document assessment, not adoption of P01–P09 or product acceptance. The mathematical probe was unchanged, so no unrelated product rerun is warranted. Final immutable GitHub receipt is still pending; local hash assessment alone is not claimed as remote handoff completion.
+
+## Final immutable receipt and scoped outcome
+
+After publication, this reviewer independently fetched the complete revised specification and published `CONCEPT_LOGIC_REVIEW.md` through the GitHub connector at immutable Common commit `dfe3cd9c4c8efbc8d70e654b957d178467d86856`.
+
+The retrieved specification was exactly 68,295 bytes, SHA256 `d20c37b566e427ad9847775847ad978907e2ae697eaab5bab7c19156b170dff6`, Git blob `086b52271ffc3d09268afe1f0312093774f33983`. It matched the assessed local v1.1 candidate byte for byte. The retrieved review file matched this review's initial assessment plus local delta assessment byte for byte before this final receipt was appended; its connector blob was `4782fe79e48aedab695f890f9fb35e350fcb9f42`.
+
+**Completed scoped outcome:** independently received the immutable specification, read the complete original and revised delta, reran the finite reference checks with matching results, challenged two seeded wrong rules, and reconciled F1–F4 against the published revision. No remaining material finding from this concept/reference scope. P01–P09 remain proposals, not Owner-adopted policy. No product implementation, browser/GPU, native integrated consolidation, physical qualification, GitHub APPROVE, merge, release or Owner acceptance is established.
+
+An artifact-only followup may append this receipt without modifying the reviewed specification. Any change to specification bytes invalidates this identity binding for the changed clauses and requires reassessment.
