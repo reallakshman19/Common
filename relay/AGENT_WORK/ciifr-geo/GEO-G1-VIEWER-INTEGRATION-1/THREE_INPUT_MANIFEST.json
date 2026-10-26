@@ -1,0 +1,35 @@
+{
+  "schema": "ciifr-geo-official-three-input/v1",
+  "task": "CIIFR-GEO-G1-VIEWER-INTEGRATION-R2",
+  "generation": 2,
+  "filename": "CIIFR_GEO_Three_0_160_0_Input.zip",
+  "bytes": 168381,
+  "sha256": "7799c8bb52760ace39034bef57752f4d17d398203449b41a43d5383c847f720f",
+  "repository": "mrdoob/three.js",
+  "source_commit": "d04539a76736ff500cae883d6a38b3dd8643c548",
+  "version": "0.160.0",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "three.module.min.js",
+      "source_path": "build/three.module.min.js",
+      "bytes": 670681,
+      "git_blob_sha": "9807b610d02fd0a1833fa7ceae44239652c78f3c",
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    {
+      "path": "LICENSE",
+      "source_path": "LICENSE",
+      "bytes": 1081,
+      "git_blob_sha": "d07e209686512b9ac93d7df5481a4a6f622093e7",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    }
+  ],
+  "official_sources": [
+    "https://github.com/mrdoob/three.js/blob/d04539a76736ff500cae883d6a38b3dd8643c548/build/three.module.min.js",
+    "https://github.com/mrdoob/three.js/blob/d04539a76736ff500cae883d6a38b3dd8643c548/LICENSE"
+  ],
+  "producer_verification": "Immutable official blob IDs matched packaged members; SHA256 calculated; ZIP CRC PASS; official package.json version0.160.0/MIT checked.",
+  "recipient_verification": "NOT_RUN",
+  "limits": "Library input only; no browser/WebGL or engineering PASS."
+}

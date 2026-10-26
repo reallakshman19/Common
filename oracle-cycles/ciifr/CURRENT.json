@@ -3,11 +3,12 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 7,
+  "revision": 8,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025",
-    "ciifr-geo-6adedbc6-g1-viewer-onboarding-r5-20261026"
+    "ciifr-geo-6adedbc6-g1-viewer-onboarding-r5-20261026",
+    "ciifr-geo-6adedbc6-g1-viewer-rev7-blocked-20261026"
   ],
   "aim": "CIIFR_GEO read-only two-existing-XML Geometry correspondence: preserve existing Method C/manual NODE anchors, complete ledger and SVG evidence while reusing the repository's 3D Edit viewing layer. This revision dispatches the prepared bounded WBS3.1 continuation with actual native qualification before engineering edits; no engineering acceptance or product release is granted.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
@@ -23,7 +24,7 @@
       "label": "CIIFR_GEO WBS3.1 viewer integration builder",
       "chat_id8": "6adedbc6",
       "provenance": "OWNER_AUTHORIZED_NEW_CHAT_CREATED_AND_MESSAGE_OBSERVED_IN_CHATGPT_CHAT_HIGH_20261026; ID8_OBSERVED_FROM_CHAT_URL_NOT_AUTHENTICATED_IDENTITY",
-      "responsibility": "Receive verified full native workspace, complete actual repository takeover prerequisites, then implement the bounded existing-viewer prototype and all-row selection on a task-owned draft; report precise blockers promptly."
+      "responsibility": "Resume same G1 task using the provided exact-base remote branch and official Three input; actual native source/backup/qualification/testing remain mandatory."
     },
     "reviewer": {
       "label": "Independent G1 Reviewer (not assigned)",
@@ -62,7 +63,8 @@
     "artifact_register": "https://github.com/reallakshman19/Common/blob/8393d1a3a4944c3e626aa394ade3969ef9aac06a/relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-REUSE-1/ARTIFACT_REGISTER.md",
     "scope_reconciliation": "Legacy original-CII G1 gates, independent review and returned assignments remain unchanged and apply to that candidate. New XML viewer source alignment is disjoint from those unverified browser claims. This revision authorizes no G2/G3/G4 implementation, Writer, converter, merge/deploy or Oracle succession. Later native #177 source-preparation decisions do not assign G2 here.",
     "viewer_continuation_brief": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/IMPLEMENTATION_BRIEF.md",
-    "viewer_dispatch": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/DISPATCH.md"
+    "viewer_dispatch": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/DISPATCH.md",
+    "native_publication_route": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/UNBLOCK_R2.md"
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
   "assignments": [
@@ -128,7 +130,7 @@
       "generation": 1,
       "recipient_role": "coder",
       "recipient_chat_id8": "6adedbc6",
-      "dispatch": "READY_NOT_SENT",
+      "dispatch": "BLOCKED_RECONCILED",
       "candidate": "XCU PR183 draft exact head 3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6, tree 00f7825a271c4e68f650eebede40d0d62aea32f6",
       "scope": "Execute the already-requested bounded WBS3.1 viewer continuation. First verify the attached public source snapshot and actual repository qualification READ_ONLY; once prerequisites pass, implement the prepared opt-in existing viewer, all-row picks and stale-binding lifecycle without another routine approval. No expansion beyond prepared brief.",
       "implementation_authority": "BOUNDED_G1_CONDITIONAL_ON_ACTUAL_NATIVE_PREREQUISITES_AND_REPOSITORY_QUALIFICATION",
@@ -139,14 +141,36 @@
       "required_return": "Native #180 actual archive SHA/CRC/HEAD/tree and first executable checkpoint, then scoped draft PR and actual validation or concrete blocker. One final v1 Cycle envelope for observed_revision7 with same task/candidate/recipient; no duplicate onboarding return.",
       "next_after": "oracle",
       "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180",
-      "protected": "No product merge/release, Writer/Apply, G2/G3/G4, shared renderer/matcher rewrite, Page or Oracle cutover."
+      "protected": "No product merge/release, Writer/Apply, G2/G3/G4, shared renderer/matcher rewrite, Page or Oracle cutover.",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6409852667",
+      "cycle_receipt_url": "https://github.com/reallakshman19/Common/issues/482#issuecomment-6409863107",
+      "native_return_status": "RECEIVER_BYTES_CRC_PASS; AUTHOR_NATIVE_18_OF_18_AND_HTTP19_PASS_XMLDOM0_9_8; GIT_AND_THREE_BLOCKED; NO_EDITS",
+      "oracle_disposition": "Explicit remote Git-data route replaces only Oracle's local-Git dispatch condition; official Three input supplied; native qualification and release boundaries unchanged."
+    },
+    {
+      "id": "CIIFR-GEO-G1-VIEWER-INTEGRATION-R2",
+      "generation": 2,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adedbc6",
+      "dispatch": "READY_NOT_SENT",
+      "predecessor": "CIIFR-GEO-G1-VIEWER-INTEGRATION-1 generation1 / rev7",
+      "candidate": "XCU PR183 draft exact head 3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6, tree 00f7825a271c4e68f650eebede40d0d62aea32f6",
+      "scope": "Resume SAME bounded WBS3.1 task using explicitly permitted remote Git-data branch/publication and official Three0.160.0 input. Reuse actual archive receipt and unchanged18/18+HTTP19 baseline. Complete affected native qualification/backup/patch evidence, then implement without another routine approval.",
+      "input_artifact_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/THREE_INPUT_MANIFEST.json",
+      "dispatch_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/UNBLOCK_R2.md",
+      "product_branch": "codex/ciifr-geo-viewer-r8-6adedbc6",
+      "implementation_authority": "BOUNDED_G1_UNCHANGED; REMOTE_GIT_DATA_PUBLICATION_PERMITTED; ACTUAL_QUALIFICATION_BACKUPS_AND_TESTS_REQUIRED",
+      "required_return": "Actual asset/license byte receipt and affected prerequisite resolution on #180, then scoped stacked draft PR/head/tree, exact file preimages and actual native/browser tests with NOT_RUN limits. Final v1 receipt Common#482 for rev8/R2/gen2; concrete new blocker promptly.",
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180",
+      "next_after": "oracle",
+      "protected": "No product merge/release, Writer, G2 or Oracle cutover; never fabricate local checkout/history."
     }
   ],
   "next": {
     "recipient_role": "coder",
     "recipient_chat_id8": "6adedbc6",
     "status": "READY_NOT_SENT",
-    "instruction": "Receive the public current-source snapshot attachment and one URL-form trigger. Follow the new generation1 integration dispatch: byte/native verification first, bounded implementation after real qualification; report concrete failure promptly. Do not repeat the returned onboarding.",
+    "instruction": "Read UNBLOCK_R2, verify Three input and continue same G1 via remote Git-data branch. Reuse completed onboarding and unchanged baseline. Local .git alone is no longer a blocker; report an actual required failed operation promptly.",
     "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr"
   },
   "gates": [
@@ -275,10 +299,10 @@
     },
     {
       "id": "geo-viewer-integration-native-workspace",
-      "status": "NOT_RUN",
-      "scope": "32,126,752-byte public current-source ZIP prepared from exact PR183 commit/tree with Git history and recovery state excluded. Producer CRC checked; recipient receipt, actual native qualification and execution remain NOT_RUN.",
-      "evidence_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/INPUT_MANIFEST.json",
-      "limits": "Full-history upload was rejected by automatic approval review. This replacement has only current public Git tree files, no .git; no native checkout/history verification is claimed. Report actual required missing Git operations precisely; no waiver of repository qualification or WebGL evidence."
+      "status": "BLOCKED",
+      "scope": "Receiver reports archive/critical bytes, Node18/18 and HTTP19 PASS, but stopped for native Git and Three. R2 supplies an explicit route and input; actual recipient resolution still awaits evidence.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6409852667",
+      "limits": "Agent-native author checks used real test-only xmldom0.9.8; not Oracle reruns/browser/GPU/Owner acceptance. No native checkout/history claim."
     }
   ],
   "progress_projection": {
@@ -289,5 +313,5 @@
     "reason": "PROGRESS_UPDATE_PENDING with the existing sole authorized ciifr writer/PR18. Project source now records onboarding return and proposed WBS3.1 bridge; no competing Page write or engineering completion."
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
-  "activation_scope": "Existing Owner-requested Geometry implementation continuation, now dispatched after completed onboarding and explicit idle-state steering. Standing Cycle-information merge authority covers publication of this routing record; it does not waive native prerequisites or grant product merge/release."
+  "activation_scope": "Same Owner-requested bounded G1 continuation. Oracle substitutes a remote Git-data route for its own local-Git condition; actual native source/backup/qualification/testing and product release boundaries remain."
 }
