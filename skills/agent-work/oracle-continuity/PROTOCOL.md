@@ -47,14 +47,13 @@ not allocated to a capable participant. Medium-reasoning executors receive eithe
 concrete guided method or an investigation with competing explanations and a useful
 discriminating observation. Role/model labels do not establish competence.
 
-**Initial understanding is mentor-supported, not exam-scored.** When a new agent
-or successor Oracle is first assigned, the responsible Oracle/coordinator uses
-[Initial Mentoring](../initial-mentoring/SKILL.md) within existing onboarding:
-roughly three adaptive source-grounded questions about **Owner outcome**,
-**difficult architecture and a plausible wrong case**, and **one connected next
-observable result**. A new worker does not inherit an explanation as technical
-truth merely because an Oracle supplied it. Existing returned agents use only
-current-state deltas and do not repeat these questions.
+**Initial understanding is mentor-supported, not exam-scored.** New agents and
+incoming Oracles use [Initial Mentoring](../initial-mentoring/SKILL.md)'s
+[First-source-walkthrough alignment](../initial-mentoring/SKILL.md#1-first-source-walkthrough-alignment)
+within existing onboarding for the Owner outcome, difficult architecture and
+connected next result. Established participants reuse only their own
+demonstrated, still-applicable understanding and refresh affected source deltas.
+Neither another Oracle's explanation nor a document readback establishes it.
 
 The coordinator owns actual routing and receipts. The executor owns its bounded
 artifact. The reviewer inspects the relevant claims without being an author of the
@@ -115,18 +114,10 @@ referenced; the core does not require copying them into the public record.
    requires observed positive evidence for its declared capabilities, including input
    access and artifact return. Capability observations are dated, not permanent.
 4. **Before writing a consequential engineering brief or qualifying a new framework**,
-   the Oracle opens one relevant original input/record, its existing implementation
-   path and the authoritative format/domain rules; traces one important relationship
-   end-to-end; and distinguishes **inventoried structure** from verified **effective
-   meaning**, including applicable units, source identity, field-specific defaults,
-   inheritance, auxiliary pointers or other project-specific dependencies.
-   Identify one error a superficial parse or happy-path test could miss and how an
-   original-grounded counterexample would expose it. When material field meaning
-   is unverified or protected inputs are unavailable, label the affected premise
-   `UNKNOWN / NOT_RUN` and choose a **bounded read-only grounding action** before
-   asserting writer or engineering correctness. Do not turn this into a scored
-   onboarding quiz, compulsory new issue or an Owner decision if the necessary
-   source is already accessible.
+   apply [First-source-walkthrough alignment](../initial-mentoring/SKILL.md#1-first-source-walkthrough-alignment).
+   The Oracle independently grounds the affected engineering premise and execution
+   frontier. Missing sources or unverified meaning limit the dependent claim/action,
+   not unrelated safe exploration; do not replace grounding with an exam or new approval.
 5. Write a compact brief from the task record: aim, why this task, actual inputs,
    decisions/constraints, result, checks, reserved judgments and next action.
 6. Deliver through the actual supported route. Keep `prepared`, `sent`, `confirmed`
@@ -250,15 +241,16 @@ A status-only A–G checklist, a set of unread links, or an agent roster does **
 
 The successor checks the relevant original sources and demonstrates usable understanding by explaining an important design invariant, a rejected alternative or surviving wrong case, and the next evidence-bearing operation. This is targeted source reconciliation, **not a scored onboarding exam**, engineering review, file-byte receipt, independent PASS, or grant of Oracle control. Follow the selected native authorization and epoch/cutover rules below.
 
-**Read-only successor mentoring and source challenge:** The outgoing Oracle or
-coordinator brings a source-linked concept, architecture decisions, real current
-candidate, fixtures/custody, active assignments/returns and next two connected
-deliveries. The new Oracle uses [Initial Mentoring](../initial-mentoring/SKILL.md)
-in conversation to reconcile: (1) the actual Owner/user outcome, (2) one
-**original-to-effective engineering meaning** path and rejected shortcut/wrong
-case against real source/specification, and (3) the immediate useful task,
-following dependent task, existing worker owners and late-return risk. In a CII
-example, ELEMENTS/RIGID/NODENAME counts, node/pointer census and 13 green synthetic
+**Successor mentoring and source challenge:** Apply [First-source-walkthrough alignment](../initial-mentoring/SKILL.md#1-first-source-walkthrough-alignment)
+and its [incoming-Oracle boundary](../initial-mentoring/SKILL.md#3-special-case--incoming-oracle).
+The successor independently grounds the project and challenges stale claims; it
+does not inherit demonstrated understanding from the outgoing session. A candidate
+reports concrete corrections read-only. A directly Owner-appointed active Oracle
+uses its actual coordination scope without predecessor endorsement; shared-write
+replacement still needs the real native cutover and isolation below. Preparation,
+appointment and actual control/custody remain distinct, with no mentoring approval gate.
+
+In a CII example, ELEMENTS/RIGID/NODENAME counts, node/pointer census and 13 green synthetic
 parser tests **do not verify** field-specific inheritance, sentinel
 semantics, auxiliary ownership or downstream effective properties. Mark those
 unknown until independently grounded in original CII, existing parser and

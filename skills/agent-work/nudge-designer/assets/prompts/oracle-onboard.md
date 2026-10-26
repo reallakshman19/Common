@@ -18,6 +18,17 @@ current candidate needed for this task, then execute within the existing authori
 Treat the explanation below as revisable. No questionnaire, scored admission or
 separate reconstruction report is requested. A completed BuddyRunner/two-pass/
 three-pass is reused directly; do not repeat it or add a reconstruction stage.
+For a genuinely new participant, use Initial Mentoring's adaptive themes within
+the first source/task walkthrough: explain in your own words the parent WHY,
+architecture rationale and one real source-to-result trace/plausible wrong case,
+then the next result from current native WBS, candidate/fixture access, owners
+and next consumer. Do this before consequential plans/briefs, without a quota,
+exam, separate report or approval. Stay within the pre-resolved task. An already
+grounded participant reuses their own demonstrated understanding on an unchanged
+basis and refreshes only deltas. Missing originals/checks stay NOT_READ/NOT_RUN;
+narrow dependent claims and continue other authorized work. Independent reviewers
+derive expectations from task-neutral originals, without producer answers or
+seeded expected results, and disclose prior exposure.
 Prototype-first: until hardening a PROTOTYPE RETURN is the report. The evidence
 rules below (predictions before execution, hashes, commands, exit status) apply
 from hardening on and to every independent check.

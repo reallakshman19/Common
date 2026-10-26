@@ -20,9 +20,9 @@ The authorized coordinator/Oracle fills the following **from this recipient's ac
 
 ## One real task; no endless handoff loop
 
-The Oracle/OTM or direct Owner pre-resolves coordination mode, native protocol, recipient/role, task identity, source, permissions, exact return and the first useful action. If work is already assigned and qualified, the recipient **executes**, without creating a separate onboarding ACK, mentoring exam or report. Three source-grounded mentoring themes may happen naturally during the first task. A preparer who does not understand a material source rule **reads the source and corrects the explanation** before inventing a model or demanding an Owner meeting.
+The Oracle/OTM or direct Owner pre-resolves coordination mode, native protocol, recipient/role, task identity, source/candidate/fixture access, permissions, exact return and the first useful action. Apply [Initial Mentoring](../../../initial-mentoring/SKILL.md)'s adaptive themes **within the first source/task walkthrough**: the agent's own explanation of parent WHY, architecture rationale and a real task-relevant source trace/negative observation, and next result with actual upstream/current evidence, owners and downstream consumer. Do this before consequential plans/briefs; combine themes as useful without a question quota, separate ACK, essay, exam, form or approval. The recipient continues the **same assigned task**, without redesigning the project or creating prerequisites/reporting modes. A preparer who does not understand a material source rule **reads the source and corrects the explanation**; unavailable originals/checks stay `NOT_READ`/`NOT_RUN` and narrow only dependent claims.
 
-For a **reviewer**, keep task-neutral original requirements and expected behavior; withhold author answers/private hints when they would compromise independent falsification. A fresh chat ID does not authenticate non-author independence.
+For a **reviewer**, supply task-neutral original requirements, candidate and permitted fixtures; withhold producer answers, diagnoses and seeded expected test results. The reviewer derives expectations from originals and discloses authorship/prior exposure. A fresh chat ID does not authenticate non-author independence.
 
 **File delivery priority for every material artifact:** Option **1** immutable **public-safe Common relay**; Option **2** authorized **Google Drive Handoffs** for protected files or when 1 is unusable. One of 1 or 2 is required to call a cross-agent transfer complete, with an existing task-scoped sanitized Common receipt. A `sandbox:` or `/mnt/data` link is `LOCAL_ONLY / NOT_TRANSFERRED`, not delivery. Recipient confirms actual bytes/digest independently where identity matters. Follow [Artifact Relay](../../../ARTIFACT_RELAY.md).
 
@@ -33,7 +33,7 @@ For a **reviewer**, keep task-neutral original requirements and expected behavio
 ## Usage
 
 - **New recipient:** fill once or link established project equivalents, send the concise [prompt](AGENT_ONBOARD_PROMPT.md) with actual source/issue/reply locations and let the agent do the bounded task.
-- **Existing agent:** send only changed sources, task revision, candidate head and relevant contrary evidence; don't repeat four documents.
+- **Existing grounded agent:** reuse that participant's own demonstrated understanding when its source/candidate basis is unchanged; send only relevant source/task/head/contrary-evidence deltas.
 - **Replacement agent:** retain task ID, mark new assignment generation and old pending returns **from actual native state**; isolate writer access before overlapping work.
 - **Independent reviewer:** use its existing [review protocol](../../../independent-review/SKILL.md), declare author/account/expectation exposure, retrieve exact candidate and run a meaningful opposite case.
 - **If an essential source cannot be accessed:** name the exact missing file/action and continue authorized disjoint work; escalate to Owner only what Oracle cannot resolve or what Owner genuinely reserved.
