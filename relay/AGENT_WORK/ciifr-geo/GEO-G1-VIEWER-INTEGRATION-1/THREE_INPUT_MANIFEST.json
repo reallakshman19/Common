@@ -31,5 +31,6 @@
   ],
   "producer_verification": "Immutable official blob IDs matched packaged members; SHA256 calculated; ZIP CRC PASS; official package.json version0.160.0/MIT checked.",
   "recipient_verification": "NOT_RUN",
-  "limits": "Library input only; no browser/WebGL or engineering PASS."
+  "limits": "Library input only; no browser/WebGL or engineering PASS.",
+  "cycle_revision": 9
 }
