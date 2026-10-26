@@ -1,4 +1,7 @@
 # CIIFR Element — Complex Architecture and Original CII Semantics
+
+> **2026-10-26 R2 supersession:** [Specialist receiver-side R2](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6402061761) now independently confirms the original CII 353 ELEMENTS / 38 RIGID / 315 zero-pointer physical census and field-slot parsing, after restricted byte/manifest verification. The older text below records the earlier stage, not current file access. Effective values, zero-weight native behavior and V14 importer remain `BLOCKED_ENGINEERING_CONFIG / NOT_RUN`; see [Oracle reconciliation](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6406343093).
+
 **Oracle continuity · public-safe knowledge, not implementation authority**
 
 ## Architecture: original-byte identity before property transfer
