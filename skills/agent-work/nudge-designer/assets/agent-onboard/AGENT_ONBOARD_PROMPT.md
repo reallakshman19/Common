@@ -4,6 +4,11 @@
 
 The Oracle already owns the broader project model. It extracts the **relevant** Owner WHY, difficult source semantics, decisions and working history into this ONE executable instruction. Existing WBS issue, parent/roadmap, task PR, native evidence, local handover and relay are reused as the authority; the optional [four knowledge scaffolds](README.md) are for filling a *missing* project/task-specific explanation, not mandatory recipient work.
 
+**Before dispatch:** Oracle states its source-qualified framework and highest-ROI authorized contribution (actual code/fixture/diagnosis, exact candidate and SELF_ASSESSED tests), or explains precisely why contribution was outside its authority.
+**First exchange is feedback, not admission:** a small source/capability probe, question or executable increment lets the agent challenge inherited APIs, wrong cases and the proposed implementation path.
+**Oracle must listen and correct:** reconcile the agent's evidence against originals; amend a wrong interface/brief/foundation before authorizing the remaining bounded implementation, without restarting accepted work.
+**Next action stays concrete:** inherit the working baseline, perform only the remaining WBS delta; no questionnaire score, new approval stage or unsupported PASS.
+
 ## COPY THIS ONE PROMPT — Oracle → Agent
 
 > **[ORACLE → {{ROLE}} AGENT · {{PROJECT}} / WBS {{WBS-ID}} · {{ACTUAL CHAT-ID8 OR UNKNOWN}}]**
