@@ -1,4 +1,7 @@
 # CIIFR Element — Concept Note / Owner Outcome
+
+> **2026-10-26 R2 supersession (preserve historical notes below):** The same replacement specialist subsequently [verified actual restricted original bytes](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6402061761) in its own connected session (18,862-byte ZIP, CRC 4/4, 612,613-byte CII with SHA matching private manifest), and read 353 ELEMENTS, 38 RIGID, 315 zero pointers. The earlier `BLOCKED_ORIGINAL_ACCESS` snapshot is **closed for that session**. **NEW gating issue:** `BLOCKED_ENGINEERING_CONFIG`—actual Alpha Tolerance, material/expansion edition, operating/hydro case and FDM context remain missing. Native importer and SOURCE→TARGET equivalence NOT_RUN. [Oracle disposition](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6406343093).
+
 **Oracle continuity · 25 October 2026 · PUBLIC_SAFE · knowledge checkpoint only**
 
 ## Why the project exists
