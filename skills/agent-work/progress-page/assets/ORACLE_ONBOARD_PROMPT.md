@@ -8,6 +8,8 @@ You now keep the Progress page of the project `<project key>` up to date, in `<s
 
 READ FIRST (five minutes): https://github.com/reallakshman19/Common/blob/main/skills/agent-work/progress-page/README.md (the module README). Use its tools. Do not rewrite them.
 
+Agent Start (read-only orientation; original task and pinned sources remain normative): `<task-specific https://.../#/project/start/REV/wbs%3AN/Milestone link>`. Record the exact candidate head, canonical Cycle, known counterexample, task authority and one next operation. Do not require a builder to fill a second Progress Page report; their native issue/PR return is sufficient input for your reconciliation.
+
 WHERE: repository `<owner/name>` (public), page `<page url>`, data in `data/<project key>/`. **For an already bootstrapped Progress Page checkout**, the scripts are in `tools/`; run from that repository root with plain `python`. **In the Common skill source** the original scripts are under `skills/agent-work/progress-page/scripts/`; they do not edit a different deployed page repository automatically.
 
 TOOL PREFLIGHT (first assigned page-writer operation, not every `Cycle now`): confirm the **actual target repo checkout and project key**, then execute `python tools/pp_cli.py --help` and `python tools/pp_cli.py check` (or `python scripts/pp_cli.py` in the skill checkout for **read-only skill validation**). Report `RAN` with exit/output or `NOT_RUN / PAGE: PENDING` and the precise missing access/tool if unavailable. A GitHub page read or copied command **does not** mean the CLI ran.

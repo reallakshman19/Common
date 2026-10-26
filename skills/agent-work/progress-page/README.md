@@ -5,6 +5,16 @@ the **Owner's decisions** ("My actions"), **grounding fixtures**, a **Timeline**
 The data is plain JSON in a GitHub repository; GitHub history is the trace. This folder holds everything needed to run one:
 the page, a checker, an editing tool, a trigger tool, a local-file builder, templates and tests.
 
+**Quick start: zero additional agent reports.** The builder/reviewer opens the project's native task and its `Agent Start` link (for example `https://reallakshman19.github.io/progress-page/#/ciifr/start/R4/wbs%3A3/M13`), verifies current candidate/authority from original GitHub sources, and leaves evidence only on that native issue/PR. The coordinator, not the builder, reconciles it into the Page. The Page never grants Writer/Owner authority.
+
+**Source reconciliation (read-only):** `python tools/pp_cli.py reconcile --project ciifr --source https://github.com/reallakshman19/XML_Compare_Utilities/pull/185 --expected-head <SHA>`. It reports current GitHub candidate identity, duplicate source receipts, drift and uncertainty; it cannot interpret engineering PASS. From the Common module source tree, use `python scripts/pp_cli.py`.
+
+**Audited batch (coordinator only):** Supply a reviewed JSON manifest with `project`, `actor`, one native GitHub `source`, and `changes` containing native `plan milestone`, `card set`, etc. Preview using `python tools/pp_batch.py update.json --data data` (no changes). After reviewing source and proposed event IDs/files, use `python tools/pp_batch.py update.json --data data --apply --base origin/main` in the page checkout. No automatic promotion of acceptance; normal repository PR and Owner boundaries remain. For Common source the command is `python scripts/pp_batch.py ...`.
+
+**Viewer/tool parity:** The reusable `viewer/` and `scripts/` here are synced from Progress Page merge commit `53d1bcb302b651ab00e390bdeb0e513e3630a68d` (`v=23` viewer). Keep `viewer/VERSION` pinned to the tested source. CI validates the generic bundle/checker and standard-library tests; project-specific source data and Owner controls remain separate.
+
+**Offline source parity guard:** `python -B -m unittest skills/agent-work/progress-page/tests/test_reference_parity.py` verifies exact Git blob SHA-1 for every bundled portable viewer and tool file against `references/UPSTREAM_PARITY.json` without relying on network. A deliberate reusable-core change must first be merged to the reference page and re-synced with a new pinned source commit; never silently claim parity by editing the manifest to fit arbitrary bytes.
+
 **Use these tools. Do not rewrite them.** If one is missing something, say so in the pull request that adds it.
 
 **First-time writer capability:** The Oracle/OTM or its delegated page writer verifies a checkout of the *actual page repository* and executes `python tools/pp_cli.py --help` plus `python tools/pp_cli.py check` there. In this Common module source the script path is `scripts/pp_cli.py`, not `tools/pp_cli.py`; a repository web view cannot execute either command. Mark `PAGE: PENDING / NOT_RUN` if code execution, page repository access or publication readback is unavailable. A builder/reviewer ordinarily leaves native issue/PR/relay evidence for the coordinator and does not run page-writer scripts.

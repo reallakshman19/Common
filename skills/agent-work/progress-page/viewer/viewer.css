@@ -32,6 +32,20 @@ h3{font-size:15px;margin:0}
 .ms-state{font-size:11px;font-weight:700;letter-spacing:.05em}
 .ms-count{font-size:11px;color:var(--mut)}
 .ms-sep{align-self:center;color:var(--mut)}
+.ms[data-ms]{cursor:pointer}
+.wbs-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 4px}
+.wbs-row .h-label{margin:0 6px 0 0}
+.wbs-tab{border:1px solid var(--bd);border-radius:999px;background:var(--card);color:inherit;font:inherit;font-size:13px;padding:4px 12px;cursor:pointer}
+.wbs-tab.on{border-color:var(--acc);outline:2px solid var(--acc);outline-offset:1px}
+.card[hidden],.grp[hidden],.flow .arrow[hidden]{display:none}
+.ms.on,.ms-all.on{outline:2px solid var(--acc);outline-offset:1px}
+.ms-all{align-self:center;border:1px solid var(--bd);border-radius:999px;background:var(--card);color:inherit;font:inherit;font-size:12px;padding:4px 10px;cursor:pointer}
+.ms-id{margin-left:auto;font-size:11px}
+.ms-cap{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.cap-BENCHMARK_SUPPORTED .ms-cap,.cap-CANDIDATE .ms-cap{color:var(--acc)}
+.cap-INDEPENDENTLY_VERIFIED .ms-cap,.cap-AVAILABLE .ms-cap{color:var(--ok)}
+.ms-can{font-size:12px;margin:2px 0}
+.ms-bench{font-size:11px;color:var(--mut)}
 .ms-VERIFIED .ms-ic,.ms-VERIFIED .ms-state{color:var(--ok)}
 .ms-SUBMITTED .ms-ic,.ms-SUBMITTED .ms-state,.ms-IN_PROGRESS .ms-ic,.ms-IN_PROGRESS .ms-state{color:var(--acc)}
 .ms-BLOCKED .ms-ic,.ms-BLOCKED .ms-state{color:var(--er)}
@@ -155,3 +169,145 @@ textarea.brief{width:100%;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;ba
 details.nd{margin-top:6px;font-size:12px}
 @media (max-width:620px){.tl-row{grid-template-columns:40px 1fr}.tl-row .chip{grid-column:2}.tl-m{grid-column:1 / -1}}
 .aim{font-size:15px;margin:4px 0 6px}
+.lpath{font-size:13px;margin:2px 0 4px;color:var(--wn)}
+.lpath code{user-select:all;font-size:12px}
+.repobar{font-size:12px;margin:6px 0;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--card);overflow-wrap:anywhere}
+.rb-warn{color:var(--wn)}
+.repobar code{font-size:12px}
+.btn.tiny{font-size:11px;padding:0 6px;margin-left:2px}
+
+/* Lessons Learned: separate vertical reading layout, never a project milestone UI. */
+.ll-page{max-width:920px;margin:0 auto 45px}
+.ll-page h2{font-size:26px;line-height:1.3;margin:12px 0 8px}
+.ll-page h3{font-size:18px;margin:0 0 12px}
+.ll-page h4{font-size:15px;margin:0 0 8px}
+.ll-page h5{font-size:13px;margin:12px 0 5px}
+.ll-page p{margin:7px 0 12px}
+.ll-lead{font-size:15px;line-height:1.65}
+.ll-meta,.ll-note{font-size:12px;color:var(--mut)}
+.ll-stats,.ll-bottom{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.ll-stats{justify-content:flex-start;margin:16px 0 22px}
+.ll-status{display:inline-block;font-size:11px;background:var(--card);color:var(--mut);border:1px solid var(--bd);padding:3px 9px;border-radius:999px}
+.ll-library{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin:14px 0}
+.ll-card,.ll-record{border:1px solid var(--bd);border-radius:10px;background:var(--card);padding:16px}
+.ll-card{display:flex;flex-direction:column;gap:4px}
+.ll-card .ll-route{margin-top:auto;align-self:flex-start}
+.ll-route{display:inline-block;font-weight:600;text-decoration:none;padding:7px 0}
+.ll-route:hover{text-decoration:underline}
+.ll-heading{padding:16px 0 10px}
+.ll-heading h2{font-size:27px}
+.ll-heading .ll-status{margin:6px 0 12px}
+.ll-section{padding:22px 0;border-top:1px solid var(--bd)}
+.ll-section>.ll-record{margin:10px 0}
+.ll-related{margin-top:12px;padding:10px 14px;border-left:3px solid var(--acc);background:var(--bg)}
+.ll-related p{font-size:13px}
+.ll-source{display:inline-block;font-size:12px;margin-top:5px}
+.ll-correction{border-top:1px solid var(--bd);padding-top:12px}
+.ll-record .ll-status{margin:6px 0}
+.ll-takeaway{padding:16px;border-left:4px solid var(--acc);background:var(--card);border-radius:8px}
+.ll-checklist{list-style:none;padding:0;margin:8px 0}
+.ll-checklist li{padding:8px 0;border-bottom:1px solid var(--bd);display:flex;gap:12px}
+.ll-checkicon{color:var(--mut);font-size:20px;line-height:1}
+.ll-reveal{margin-top:12px;border-top:1px solid var(--bd);padding-top:10px}
+.ll-reveal summary{cursor:pointer;color:var(--acc);font-weight:600}
+.ll-answer{padding:12px 0 0}
+.ll-sourceline{overflow-wrap:anywhere}
+.ll-bottom{border-top:1px solid var(--bd);padding:12px 0 40px}
+@media(max-width:600px){.ll-page h2,.ll-heading h2{font-size:23px}.ll-section{padding:18px 0}.ll-record,.ll-card{padding:13px}}
+
+/* Read-only, source-bound onboarding; no stage grants execution authority. */
+.onb-panel{border:1px solid var(--bd);border-radius:10px;background:var(--card);padding:14px 16px;margin:16px 0 18px}
+.onb-head{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.onb-head h3{font-size:15px;margin:0}
+.onb-phase{font-size:12px;color:var(--mut);font-weight:600}
+.onb-stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;list-style:none;padding:0;margin:10px 0}
+.onb-stage{border:1px solid var(--bd);border-radius:7px;padding:8px;font-size:11px;color:var(--mut);line-height:1.4}
+.onb-stage.current{border-color:var(--acc);color:var(--fg);font-weight:600;background:var(--accbg)}
+.onb-stage.completed{border-color:var(--ok);color:var(--ok)}
+.onb-note,.onb-muted{font-size:12px;color:var(--mut)}
+.onb-note{margin:4px 0 6px}
+.onb-now{display:grid;gap:4px;border-left:3px solid var(--acc);padding:8px 12px;background:var(--bg)}
+.onb-now p{margin:1px 0}
+.onb-reference{font-size:12px;justify-self:start}
+.onb-extra{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.onb-details{border:1px solid var(--bd);border-radius:7px;padding:8px 10px;min-width:0;font-size:12px}
+.onb-details summary{cursor:pointer;font-weight:600;overflow-wrap:anywhere}
+.onb-detail-body{padding-top:8px;overflow-wrap:anywhere}
+.onb-detail-body p{margin:5px 0}
+.onb-guide{padding-left:20px;margin:0 0 10px}
+.onb-guide li{margin:4px 0}
+@media(max-width:620px){.onb-stages{grid-template-columns:repeat(2,minmax(0,1fr))}.onb-extra{grid-template-columns:1fr}}
+/* Project Home: source-backed grounding on the normal project overview, without new data schema. */
+.project-home{margin:1rem 0 1.5rem;padding:1rem;border:1px solid var(--bd);border-radius:12px}
+.project-home h3{margin:0 0 .4rem}
+.project-home .home-aim{line-height:1.45;margin:.7rem 0}
+.home-detail{margin:.45rem 0;border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.home-detail summary{padding:.55rem .75rem;font-weight:600;cursor:pointer;background:var(--card)}
+.home-detail>p{padding:0 .75rem}
+.home-items{padding:.3rem 1rem .55rem 2rem;margin:0}
+.home-items li{line-height:1.45;padding:.12rem 0;overflow-wrap:anywhere}
+
+/* Project Home has its own compact pages, not a 200+ item expanded source wall. */
+.home-subtabs{margin-top:-4px;border-bottom:1px solid var(--bd)}
+.home-subtabs .view{font-size:13px;padding:7px 12px}
+.project-home .home-note,.project-home .home-tip{font-size:12px;line-height:1.5}
+.home-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0 16px}
+.home-tile{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--fg);text-decoration:none;min-width:0}
+.home-tile:hover,.home-tile:focus-visible{border-color:var(--acc);outline:1px solid var(--acc)}
+.home-tile-count{color:var(--acc);font-size:12px;font-weight:600}
+.home-tile-desc{color:var(--mut);font-size:12px;line-height:1.4}
+.home-filter{margin:10px 12px 0;width:calc(100% - 24px);padding:8px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;font-size:13px}
+.home-filter-count{margin:5px 12px!important;padding:0!important;font-size:11px}
+.home-items li[hidden]{display:none}
+
+/* WBS: compact family tabs with only the selected family's child milestones. */
+.wbs-family-nav{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 6px;align-items:center}
+.wbs-family-tab{font:inherit;font-weight:600;font-size:13px;cursor:pointer;border:1px solid var(--bd);border-radius:8px;padding:7px 13px;background:var(--card);color:var(--fg)}
+.wbs-family-tab.on{background:var(--accbg);color:var(--acc);border-color:var(--acc)}
+.wbs-children{display:flex;gap:5px;overflow-x:auto;max-width:100%;padding:6px 1px 9px;margin-bottom:8px;scrollbar-width:thin}
+.wbs-child-tab{flex:0 0 auto;font:inherit;font-size:12px;cursor:pointer;border:1px solid var(--bd);border-radius:6px;padding:5px 10px;background:var(--card);color:var(--fg)}
+.wbs-child-tab.on{background:var(--accbg);color:var(--acc);border-color:var(--acc);font-weight:700}
+.wbs-overview h3{margin:14px 0 8px}
+.wbs-family-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px}
+.wbs-family-card{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;font:inherit;cursor:pointer;padding:13px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--fg)}
+.wbs-family-card strong{font-size:15px}.wbs-family-card span{font-size:12px}
+.wbs-family-card:hover,.wbs-family-card:focus-visible{border-color:var(--acc);outline:1px solid var(--acc)}
+@media(max-width:620px){.wbs-family-tab{padding:7px 10px}.wbs-children{scroll-snap-type:x proximity}.wbs-child-tab{scroll-snap-align:start}}
+
+/* G0 onboarding is one compact WBS step; task and readiness evidence expand together. */
+.onb-accordion{border:1px solid var(--bd);border-radius:10px;background:var(--card);padding:0;overflow:hidden}
+.onb-summary{display:flex;flex-wrap:wrap;align-items:center;gap:8px;cursor:pointer;padding:12px 14px;list-style-position:inside}
+.onb-summary:hover,.onb-summary:focus-visible{background:var(--accbg);outline-offset:-2px}
+.onb-summary .grp-t{flex:1 1 240px}
+.onb-accordion[open]>.onb-summary{border-bottom:1px solid var(--bd)}
+.onb-accordion .onb-panel{border:0;border-radius:0;margin:0;padding:12px 14px 4px;background:transparent}
+.onb-group-content{padding:0 14px 14px}
+.onb-group-content .flow{margin-top:8px}
+.onb-accordion:not([open]) .onb-group-content{display:none}
+
+
+/* Cross-project search: bounded, keyboard accessible, and updated without page rerender. */
+.global-search{margin:10px 0 16px;padding:12px;border:1px solid var(--bd);border-radius:9px;background:var(--card)}
+.global-search-label{display:block;font-size:13px;font-weight:600}
+.global-search-input{display:block;box-sizing:border-box;width:100%;min-height:38px;margin-top:8px;padding:8px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--card);color:var(--fg);font:inherit}
+.global-search-input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.global-search-results{max-height:min(65vh,650px);overflow-y:auto;margin-top:8px}
+.global-search-result{display:flex;flex-direction:column;gap:3px;padding:9px 5px;border-bottom:1px solid var(--bd)}
+.global-search-target{font-size:14px;font-weight:650;overflow-wrap:anywhere}
+.global-search-meta,.global-search-description,.global-search-source{font-size:12px;color:var(--mut);overflow-wrap:anywhere}
+.oracle-continuity .oracle-handover{margin:10px 0}
+.oracle-continuity .onb-detail-body{overflow-wrap:anywhere}
+
+
+/* Lightweight task launchpad: only existing audited sources, no duplicate workflow state. */
+.agent-start{max-width:880px;display:grid;gap:10px;margin:8px 0 24px}
+.agent-start-head,.agent-start-task-title,.agent-start-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.agent-start-head{justify-content:space-between}
+.agent-start-intro,.agent-start-boundary{font-size:13px;color:var(--mut)}
+.agent-start-aim{font-size:14px;margin:4px 0}
+.agent-start-boundary{border-left:3px solid var(--wn);padding:9px 12px;background:var(--card);border-radius:4px}
+.agent-start-task,.agent-start-cap,.agent-start-sources{border:1px solid var(--bd);padding:12px 14px;border-radius:9px;background:var(--card)}
+.agent-start-task p,.agent-start-cap p,.agent-start-sources p{margin:6px 0}
+.agent-start-source{font-size:12px}
+.agent-start-sources details summary{cursor:pointer}
+@media(max-width:620px){.agent-start-task,.agent-start-cap,.agent-start-sources{padding:11px}}
