@@ -3,7 +3,7 @@
   "project": "ciifr-element",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 5,
+  "revision": 6,
   "last_accepted_receipt_ids": [
     "CIIFR-ELEMENT-FIELD-AUTHORITY-1-R1-G1-PR187-3b9056fb-20261026",
     "CIIFR-ELEMENT-E1-PR187-F1F2-R3-G2-C8C2688A-20261026",
@@ -15,15 +15,15 @@
   "roles": {
     "oracle": {
       "label": "CIIFR Element Oracle / WBS4 coordination",
-      "chat_id8": "6ade42a6",
-      "provenance": "OWNER_EXPLICITLY_IDENTIFIED_CHAT_6ade42a6_AS_CIIFR_ELEMENT_20261026; earlier R4 specialist evidence authored by this chat; distinct GitHub principal NOT_AUTHENTICATED",
-      "responsibility": "Own Element aim, task routing and evidence reconciliation; disclose specialist authorship, do not independently approve own R4 evidence or Writer"
+      "chat_id8": "6ade522f",
+      "provenance": "OWNER_CURRENT_MAPPING_20261026 Oracle=6ade522f. Prior 6ade42a6 Oracle label superseded for future routing; earlier R2/R4 source authorship not reassigned.",
+      "responsibility": "Coordinate Element Cycle, evidence and owner routing; prior specialist source authorship belongs to prior chat ID; no code self-review or Writer approval."
     },
     "coder": {
       "label": "CIIFR Element read-only evidence builder",
-      "chat_id8": "6adedbc6",
-      "provenance": "OWNER_EXPLICITLY_DESIGNATED_CHAT_6adedbc6_AS_OUR_BUILDER_20261026; separate active Geometry role is not inherited; chat identity is a routing label, not authenticated GitHub principal",
-      "responsibility": "Continue existing WBS4 field authority after checking current task/relay, run source-backed discriminator and optionally build standalone read-only evidence adapter after real repo Appendix A; no effective value guessing/Writer"
+      "chat_id8": "6ade42a6",
+      "provenance": "OWNER_CURRENT_MAPPING_20261026 Builder=6ade42a6. Old 6adedbc6 builder receipts stay historically unchanged. Owner routing ID not GitHub authentication.",
+      "responsibility": "Execute ONLY active gen3 F3 correction on same draft PR187, with native Appendix A, backup, and review controls; no PR168 edit or product Writer."
     },
     "reviewer": {
       "label": "Owner-identified distinct reviewer — exact-head E1 falsifier",
@@ -35,7 +35,7 @@
       "label": "Owner",
       "chat_id8": null,
       "provenance": "OWNER_SELF",
-      "responsibility": "Owner has selected Element Oracle chat6ade42a6 and Element builder chat6adedbc6; Owner must send Cycle now trigger in intended builder chat; preserve protected-original custody/acceptance and merges"
+      "responsibility": "Current roster Oracle6ade522f, builder6ade42a6, reviewer6adf3dbf. Dispatch to correct builder chat, not old 6adedbc6, after Cycle merged. Historic receipts unchanged."
     }
   },
   "source_boundary": {
@@ -162,7 +162,7 @@
       "id": "CIIFR-ELEMENT-E1-PR187-F3-I13-REPAIR",
       "generation": 3,
       "recipient_role": "coder",
-      "recipient_chat_id8": "6adedbc6",
+      "recipient_chat_id8": "6ade42a6",
       "dispatch": "READY_NOT_SENT",
       "predecessor": "PR187 IR2 reviewer gen1 RETURNED_RECONCILED_FAIL at exact c8c2688a; previous builder gen2 returned at same head; preserve all prior receipts",
       "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6417675982",
@@ -174,7 +174,8 @@
       "implementation_authority": "BOUNDED_EXISTING_DRAFT_PR187_WRITER_ONLY_AFTER_XCU_APP_A_PREIMAGE_BACKUPS_PATCH_LEDGER; NO_PR168_READER_EDIT",
       "protected": "No protected original/model bytes/URLs; no Geometry/NodeName/PR168 catalog edits; no CII writer/Target1, engineering-effective claims, release, PR merges or self approval. Upstream general I13 parser repair remains #173 owner-only.",
       "required_return": "Native #178 new exact PR187 head/tree/changed blobs plus fail-before/pass-after F3 TAB/NBSP selected/unselected and independent branch-label source oracle, actual Node counts and hosted NOT_RUN clarity, workreport; then one Cycle rev5/gen3 receipt Common#493 linked to native return, read back; reviewer6adf3dbf rechecks new head IR3.",
-      "next_after": "reviewer"
+      "next_after": "reviewer",
+      "routing_correction": "Owner corrected recipient before gen3 dispatch at Cycle rev6; generation retained3; past gen1/gen2 recipients/receipts not rewritten."
     }
   ],
   "gates": [
@@ -273,18 +274,24 @@
       "basis": "Reviewer injected wrong reported branch label, all17 producer tests PASS, independent LF/CRLF physical-row oracle FAILS. Coverage gap only, no actual branch mapping defect proven.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6417525759",
       "next": "Add test under task gen3"
+    },
+    {
+      "id": "element-roster-correction-r6",
+      "status": "PASS",
+      "basis": "Owner supplied Oracle6ade522f builder6ade42a6 IR6adf3dbf. Corrected only active unsent gen3 recipient and current roles. Previous receipts retained verbatim.",
+      "evidence_ref": "https://github.com/reallakshman19/Common/issues/493"
     }
   ],
   "next": {
     "recipient_role": "coder",
-    "recipient_chat_id8": "6adedbc6",
+    "recipient_chat_id8": "6ade42a6",
     "status": "READY_NOT_SENT",
-    "instruction": "Owner sends one Element Cycle URL trigger in builder chat6adedbc6 for rev5/gen3 F3 strict I13 ASCII-only padding on SAME PR187, with branch-label oracle test. Read native #178 comment6417675982 and IR2 #188 comment6417525759; no PR168 edits. Return new head, tests and one rev5/gen3 receipt. Reviewer6adf3dbf rechecks new head after.",
+    "instruction": "Owner sends one Element Cycle URL to builder chat6ade42a6. Execute existing gen3 PR187 F3 strict ASCII I13 source-token repair and branch-label oracle on SAME PR187; native #178 comment6417675982 plus R5 workpack. Validate preimage/permissions. Return new head and one rev6/gen3 Common#493 receipt. Next IR3 reviewer6adf3dbf. Prior builder6adedbc6 is NOT current recipient.",
     "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr-element"
   },
   "progress_projection": {
     "status": "PROGRESS_UPDATE_PENDING",
     "project_key": "ciifr",
-    "reason": "IR2 independent technical FAIL F3 on PR187 c8c2688a, new gen3 builder repair prepared; authorized page projection not yet performed."
+    "reason": "Owner corrected active Element roster at rev6 Oracle6ade522f builder6ade42a6 reviewer6adf3dbf. Pending gen3 F3 task was never dispatched and now rebound."
   }
 }
