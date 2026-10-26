@@ -3,7 +3,7 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 14,
+  "revision": 15,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025",
@@ -32,7 +32,7 @@
       "label": "PR185 separate non-author multibase reviewer",
       "chat_id8": null,
       "provenance": "OWNER_EXPLICIT_REVIEW_REQUEST; SEPARATE_NON_AUTHOR_REVIEW_TASK; NO_BROWSER_CHAT_ID; PRINCIPAL_ACCOUNT_INDEPENDENCE_UNKNOWN",
-      "responsibility": "Returned exact-source scoped native PASS plus actual public-sample SVG/DOM popup/selection PASS at72944d6f. GPU rendering/picking, Windows, native-fullscreen success, target-host performance and Owner acceptance remain unverified; account/principal independence UNKNOWN."
+      "responsibility": "Returned exact-source scoped native and actual hosted SVG/DOM PASS through1da8c88c, including independent unchanged-invariant FAIL old/PASS new SVG projection/base badge check. Prior72944 popup/3830/zoom observations retained as unchanged scoped evidence. GPU, Windows, native-fullscreen success, performance and Owner acceptance remain unverified; principal/account independence UNKNOWN."
     },
     "owner": {
       "label": "Owner",
@@ -50,7 +50,7 @@
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
     "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
-    "current_candidate": "XCU open draft PR185 head 72944d6f56d9cdc7226d7a177dcdaa6aab278fe9/tree 47b18769295a44bb0f77e6358ed54bf36ecbfc10, unchanged PR183 base3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6. Owner-directed A/B/Consolidated and viewer repair; scoped native plus SVG/DOM browser PASS. GPU and Owner acceptance pending.",
+    "current_candidate": "XCU open draft PR185 head1da8c88c38ed6202896dfe5ecce2cac51e91ecba/tree08df2c44e667f579381b90fdf59a61cd1fce542e, unchanged PR183 base3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6. A/B/Consolidated and viewer repairs plus independently verified one-line SVG projection/base badge repair. Native and SVG/DOM scoped PASS; GPU/Owner pending.",
     "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
     "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
     "minimal_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6397715134",
@@ -76,12 +76,14 @@
     "navigation_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416464608",
     "temporary_preview": "https://reallakshman19.github.io/CIIFR-GEO-Preview/prototypes/ciifr-map/",
     "temporary_preview_repo": "https://github.com/reallakshman19/CIIFR-GEO-Preview",
-    "preview_commit": "82b037c9d4dcde33cd19d0825075aeed72c18967;50 runtime source blobs verified byte-identical to72944d6f; canonical entry redirects to immutable source-SHA snapshot; hosting wrapper/manifest additional. Pages40391681629 completed successfully.",
+    "preview_commit": "586c00dd6b3f3ac8be4f0e0f85ae4b4e5d515ae5;50 immutable runtime paths match source1da8c88c Git blobs; canonical redirect to source-SHA snapshot; Pages40395569100 SUCCESS.",
     "multibase_specification": "Owner-approved concept at Common41cd3cbe0f112b87f152a0d3b49326aa9d978f45, draft PR536; GEOMETRY_CORRESPONDENCE_CORE_LOGIC.md. Core-1/Core-2 are implementation slices within WBS3.1, not newly adopted WBS numbering.",
     "multibase_return": "relay/AGENT_WORK/ciifr-geo/GEO-MULTIBASE-20261026/README.md",
-    "multibase_manifest": "https://github.com/reallakshman19/XML_Compare_Utilities/blob/72944d6f56d9cdc7226d7a177dcdaa6aab278fe9/agents/PR185_multibase_manifest.json",
+    "multibase_manifest": "https://github.com/reallakshman19/XML_Compare_Utilities/blob/1da8c88c38ed6202896dfe5ecce2cac51e91ecba/agents/PR185_multibase_manifest.json",
     "multibase_review_report": "relay/AGENT_WORK/ciifr-geo/GEO-MULTIBASE-20261026/INDEPENDENT_REVIEW.md",
-    "known_limits": "Public F05/R4 samples are one S1 geometry in two profiles. Full candidate-edit journal and timestamped pin receipts incomplete; target-host large-graphics/search envelope unqualified. Cloud WebGL context unavailable. Actual SVG/DOM facts and contributor C trial do not prove GPU or physical-engineering acceptance."
+    "known_limits": "Public F05/R4 samples are one S1 geometry in two profiles. Full candidate-edit journal and timestamped pin receipts incomplete; target-host large-graphics/search envelope unqualified. Cloud WebGL context unavailable. Actual SVG/DOM facts and contributor C trial do not prove GPU or physical-engineering acceptance.",
+    "multibase_projection_repair": "A final actual SVG ISO/base-switch badge mismatch at72944 was independently reproduced. Four-file delta (one guarded production label line, real-app regressions, report/manifest) at1da8 fixes it; author58/58, independent app9/9 plus own oldFAIL/newPASS and actual hosted ISO/XY/YZ/base-switch consistency verified. No numerical/core/export/shared-viewer/Worker delta.",
+    "previous_multibase_candidate": "72944d6f56d9cdc7226d7a177dcdaa6aab278fe9; scoped popup/3830/zoom SVG review and full native core evidence preserved in the full appended report."
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
   "assignments": [
@@ -285,9 +287,9 @@
       "transport": "OWNER_DIRECT_IMPLEMENTATION_CONTINUATION; root contributor with bounded viewer contributor",
       "dispatch": "RETURNED_RECONCILED",
       "scope": "Independent A/B inputs/anchors/results/proposals and captured view states; checked exact-pair C union, SOURCE conflict choices, whole-group-excluded L1 alternative trials and conditional defaults/manual pins; viewer contrast, paired IDs, popup, readable details and vertical-axis navigation.",
-      "candidate": "XCU PR185 72944d6f56d9cdc7226d7a177dcdaa6aab278fe9/tree 47b18769295a44bb0f77e6358ed54bf36ecbfc10; unchanged PR183 base",
+      "candidate": "XCU draft PR185 1da8c88c38ed6202896dfe5ecce2cac51e91ecba/tree08df2c44e667f579381b90fdf59a61cd1fce542e; unchanged PR183 base",
       "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
-      "native_return_status": "AUTHOR56_NATIVE_HTTP39_ASSETS_PASS; SEPARATE_REVIEW_SCOPED_NATIVE_AND_SVG_DOM_PASS; GPU_NOT_VERIFIED; OWNER_PENDING",
+      "native_return_status": "AUTHOR58_NATIVE_PASS; HTTP39_ASSETS_PRIOR_UNCHANGED; SEPARATE_NATIVE_AND_SVG_DOM_REVIEW_PASS; GPU_NOT_VERIFIED; OWNER_PENDING",
       "evidence_artifacts": "relay/AGENT_WORK/ciifr-geo/GEO-MULTIBASE-20261026/README.md",
       "next_after": "owner",
       "limits": "No product merge/engineering acceptance. Historical incorrect scoring/UI cases preserved. Native and actual SVG/DOM review scopes are distinct."
@@ -299,10 +301,10 @@
       "recipient_chat_id8": null,
       "participant_type": "SEPARATE_NON_AUTHOR_REVIEW_TASK; actual multibase_independent_review return, no new ChatGPT chat binding",
       "dispatch": "REVIEW_RETURNED_RECONCILED",
-      "candidate": "XCU PR185 72944d6f56d9cdc7226d7a177dcdaa6aab278fe9/tree 47b18769295a44bb0f77e6358ed54bf36ecbfc10",
+      "candidate": "XCU draft PR185 1da8c88c38ed6202896dfe5ecce2cac51e91ecba/tree08df2c44e667f579381b90fdf59a61cd1fce542e; unchanged PR183 base",
       "scope": "Independent full-source identities, analytic/wrong-case and native tests; final seven-file delta, focused viewport/camera/selection tests and separate actual hosted SVG/DOM trial. Historical F1-F6 and oversized-popup finding preserved.",
       "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
-      "native_return_status": "SCOPED_NATIVE_PASS + SCOPED_BROWSER_SVG_DOM_PASS / GPU_NOT_VERIFIED / OWNER_ACCEPTANCE_PENDING",
+      "native_return_status": "SCOPED_NATIVE_PASS + SCOPED_BROWSER_SVG_DOM_PASS; FINAL_SVG_BADGE_NATIVE_AND_HOSTED_RECHECK_PASS; GPU_NOT_VERIFIED; OWNER_PENDING",
       "next_after": "owner",
       "limits": "Not blind/separate-account GitHub APPROVE. Final browser checks public S1 A run, contained45%-height popup, expanded label, selected3830 paired SVG identities and retained zoom/reopen; not GPU, Windows, all-row pixel picking or target-host performance."
     }
@@ -311,7 +313,7 @@
     "recipient_role": "owner",
     "recipient_chat_id8": null,
     "status": "AWAIT_MULTIBASE_WEBGL_OWNER_TRIAL",
-    "instruction": "Open the current temporary preview, load own/public XML pair, run distinct A/B anchors, inspect C conflict defaults/manual overrides and one continuous overlay, then test 3D contrast, exact paired labels, X/Y/Z-up orbit about selection, split synchronization and popup/row selection in normal/expanded modes. Return actual browser observations on#186; no new coder dispatch or product merge.",
+    "instruction": "Try the current source1da8 temporary preview A/B→Consolidated choices and continuous overlay, then normal-browser/Windows/WebGL contrast, paired IDs/picks, X/Y/Z-up selected-node orbit, split synchronization and popup/exports. Return observations on#186. The final SVG badge mismatch is repaired/reviewed; no repeat coder dispatch or product merge.",
     "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554"
   },
   "gates": [
@@ -511,6 +513,13 @@
       "scope": "Actual WebGL display/orbit/paired GPU picks, Windows and Owner acceptance still needed at current exact-source snapshot.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
       "limits": "Cloud browser cannot create WebGL context; SVG fallback works. No renderer/security-setting bypass or substitute GPU PASS."
+    },
+    {
+      "id": "geo-pr185-svg-projection-badge-final-delta",
+      "status": "PASS",
+      "scope": "Exact1da8 four-file delta independently verified; one inactive-GPU controls label line. Own correct-invariant FAIL on old72944/PASS on received new app; native app9/9. Actual hosted public A/B runs: ISO/XY/YZ selectors, main heading, SVG aria-label and badge agree through saved-base switches. Author full58/58 separately identified.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
+      "limits": "No new GPU, Windows, native-fullscreen success, target-host performance or Owner acceptance. Previous popup/3830/zoom browser receipt is unchanged historical scope, not falsely repeated."
     }
   ],
   "progress_projection": {
@@ -521,10 +530,10 @@
     "reason": "PROGRESS_UPDATE_PENDING with existing sole ciifr writer. CORE-1/CORE-2 runnable candidate and bounded review now recorded; no claim of Page publication, GPU or Owner acceptance."
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
-  "activation_scope": "Owner-directed WBS3.1 A/B/Consolidated and viewer usability continuation completed and independently scoped native/SVG-DOM reviewed at72944d6f. Authorized temporary preview deployed with50 identical runtime blobs. Actual GPU/Windows/Owner trial remains; no product merge, G2/G3 integration, Writer, release or succession.",
+  "activation_scope": "Owner-directed WBS3.1 A/B/Consolidated and viewer continuation completed through1da8c88c, with native and actual SVG/DOM scoped non-author review. Fifty runtime blobs deployed in immutable preview586c00dd. GPU/Windows/Owner trial remains; no product merge, G2/G3/Writer/release or Oracle cutover.",
   "coordination_observation": {
     "source_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
-    "builder_status": "OWNER_DIRECT_MULTIBASE_AND_VIEWER_RETURNED; separate review reconciled; no idle-agent/off inference or duplicate dispatch.",
+    "builder_status": "OWNER_DIRECT_RETURNED; final SVG badge defect repaired, independently verified and hosted. No new coding assignment pending.",
     "handover_meter": {
       "coverage": "INCOMPLETE_UNKNOWN",
       "observed_completed_work": "Native R2 and R3 returns and exact published candidates are available; complete unique-turn/duration/page history and context-use telemetry are not retained.",

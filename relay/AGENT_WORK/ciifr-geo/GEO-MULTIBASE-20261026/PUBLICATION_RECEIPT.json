@@ -2,15 +2,15 @@
   "schema": "CIIFR.MultibasePublicationReceipt.v1",
   "task": "CIIFR-GEO-MULTIBASE-20261026",
   "sourceRepository": "reallakshman19/XML_Compare_Utilities",
-  "sourceCommit": "72944d6f56d9cdc7226d7a177dcdaa6aab278fe9",
-  "sourceTree": "47b18769295a44bb0f77e6358ed54bf36ecbfc10",
-  "nativeAuthorTests": "56/56 PASS",
+  "sourceCommit": "1da8c88c38ed6202896dfe5ecce2cac51e91ecba",
+  "sourceTree": "08df2c44e667f579381b90fdf59a61cd1fce542e",
+  "nativeAuthorTests": "58/58 full final native suite",
   "nativeModuleHttp": "39 ES modules plus pinned Three/Worker/license PASS",
   "independentScope": "SCOPED_NATIVE_PASS + SCOPED_BROWSER_SVG_DOM_PASS; GPU_NOT_VERIFIED; OWNER_ACCEPTANCE_PENDING",
-  "reviewReportSha256": "384d15cba9f441b7f02a8f32126a2b33657a1edc9aa954d1a16e2d61b9320c6e",
+  "reviewReportSha256": "21d8e13d169cc53c6444a7b2879d04352e7ecd0a8ad313fd95ca76b1d4832370",
   "reviewUrl": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
   "previewRepository": "reallakshman19/CIIFR-GEO-Preview",
-  "previewCommit": "82b037c9d4dcde33cd19d0825075aeed72c18967",
+  "previewCommit": "586c00dd6b3f3ac8be4f0e0f85ae4b4e5d515ae5",
   "previewSourceBlobsVerified": 50,
   "publicPreview": "https://reallakshman19.github.io/CIIFR-GEO-Preview/",
   "uiBoundary": "Existing XML profiles; no CII converter/field transfer/Writer/Apply or product merge",
@@ -39,5 +39,23 @@
     "bytes": 109350,
     "sha256": "0cb0daa7687a1d2a269d627eaab4159c2eafc61217f123864a5d0a40dc3e1f4f",
     "custody": "Observed in this conversation workspace; no cross-chat byte delivery claimed"
+  },
+  "previewPagesRun": "40395569100 SUCCESS",
+  "finalSourceBadgeReview": {
+    "sourceCommit": "1da8c88c38ed6202896dfe5ecce2cac51e91ecba",
+    "independentNative": "unchanged correct-invariant FAIL old/PASS remote new; app9/9",
+    "hosted": "actual public A/B ISO/XY/YZ selectors/headings/SVG/badges agree through saved base switches",
+    "scope": "SCOPED_BROWSER_SVG_DOM_PASS; GPU_WINDOWS_NATIVE_FULLSCREEN_OWNER_PENDING"
+  },
+  "priorPopupBrowserEvidence": {
+    "sourceCommit": "72944d6f56d9cdc7226d7a177dcdaa6aab278fe9",
+    "scope": "850x421 popup within1363x936 surface; actual3830 SVG pair/zoom/reopen; unchanged paths; not repeated at1da8"
+  },
+  "finalAuthorScreenshot": {
+    "name": "ciifr-geo-final-abc-1793046512221.jpg",
+    "bytes": 130630,
+    "sha256": "ac3b12ea0f7d3f96594ed2af932505658da3961017eaafad8e0d64608c9ebd5d",
+    "scope": "Contributor actual final C default5210 choice and ISO labels; no GPU/physical qualification",
+    "custody": "conversation workspace; filename is not cross-chat delivery"
   }
 }
