@@ -1,5 +1,8 @@
 # CIIFR Element — **proposed** standalone Cycle
 
+> **Latest 2026-10-26 R2 source status:** [Replacement specialist original-byte receipt](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6402061761) now reports independently verified protected bytes and physical field decoding. The original-access blocker described in historical documents below is **resolved for that session**; the current engineering blocker is `BLOCKED_ENGINEERING_CONFIG` and native CAESAR II `NOT_RUN`. Follow [Oracle R2 reconciliation](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6406343093); `CURRENT.json` still separately controls Cycle activation.
+
+
 **DO NOT DISPATCH yet.** First read `CURRENT.json` on actual Common/main; if absent or `activation != ACTIVE`, a `Cycle now` trigger is **NOT ACTIVE**. This draft folder is a preparation, not a live assignment. It is separate from the **active Geometry G1** `../ciifr` Cycle.
 
 - Native engineering evidence/task: https://github.com/reallakshman19/XML_Compare_Utilities/issues/178
