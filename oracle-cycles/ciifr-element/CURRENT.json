@@ -3,11 +3,12 @@
   "project": "ciifr-element",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 6,
+  "revision": 7,
   "last_accepted_receipt_ids": [
     "CIIFR-ELEMENT-FIELD-AUTHORITY-1-R1-G1-PR187-3b9056fb-20261026",
     "CIIFR-ELEMENT-E1-PR187-F1F2-R3-G2-C8C2688A-20261026",
-    "CIIFR-ELEMENT-E1-PR187-IR2-R4-G1-C8C2688A-FAIL-20261026"
+    "CIIFR-ELEMENT-E1-PR187-IR2-R4-G1-C8C2688A-FAIL-20261026",
+    "CIIFR-ELEMENT-E1-PR187-F3-R6-G3-F1FFE90D-20261026"
   ],
   "aim": "Source-qualified ELEMENTS process and RIGID field semantics for future read-only SOURCE→TARGET Element Property Transfer Preview. Preserve the existing VNext Geometry Tab 3; do not infer Writer or engineering transfer authority from field offsets.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178",
@@ -163,19 +164,39 @@
       "generation": 3,
       "recipient_role": "coder",
       "recipient_chat_id8": "6ade42a6",
-      "dispatch": "READY_NOT_SENT",
+      "dispatch": "RETURNED_RECONCILED",
       "predecessor": "PR187 IR2 reviewer gen1 RETURNED_RECONCILED_FAIL at exact c8c2688a; previous builder gen2 returned at same head; preserve all prior receipts",
       "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6417675982",
       "review_verdict_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6417525759",
       "oracle_reconciliation_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6417652186",
-      "candidate": "SAME XCU draft PR187 at pre-repair head c8c2688aede49c9c0a9b18a3430942ce08244d20, tree b4606e6f8031e194234d6ff78d5b25f830093580; stacked unchanged PR168 head2aeaf7372de66eda3bc082b8d81bf8db43c34f4b, inherited reader blob32e24c684c687b11e68da6af5dd1abd3bbe6b818",
+      "candidate": "PR187 F3 repaired draft head f1ffe90dee5b559c0781ce44f134e22f1f1da656, tree 3d3f89e84d9d712e33c57d8394722cb74ff4d5bc, direct preimage c8c2688aede49c9c0a9b18a3430942ce08244d20; PR168 unchanged 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b",
       "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/PR187_F3_REPAIR_R5.md",
       "scope": "On SAME PR187 fix only inspector pointer #2 strict physical I13 token validation using original 13-byte ASCII padding vs JS Unicode trim; reject TAB0x09, NBSP0xA0, non-ASCII/control whitespace for selected and unselected shared RIGID owners, preserve F1 source-neutral CLI stderr and F2 decimal/exponent validation. Add raw-offset tests for valid signed/zero pointer vs malformed, LF/CRLF privacy and original bytes invariant. Add physical branch-label source oracle for distinct branch labels with duplicated FROM/TO; verify mutant wrong branch detected. Do NOT invent actual branch-output defect from missing coverage.",
       "implementation_authority": "BOUNDED_EXISTING_DRAFT_PR187_WRITER_ONLY_AFTER_XCU_APP_A_PREIMAGE_BACKUPS_PATCH_LEDGER; NO_PR168_READER_EDIT",
       "protected": "No protected original/model bytes/URLs; no Geometry/NodeName/PR168 catalog edits; no CII writer/Target1, engineering-effective claims, release, PR merges or self approval. Upstream general I13 parser repair remains #173 owner-only.",
       "required_return": "Native #178 new exact PR187 head/tree/changed blobs plus fail-before/pass-after F3 TAB/NBSP selected/unselected and independent branch-label source oracle, actual Node counts and hosted NOT_RUN clarity, workreport; then one Cycle rev5/gen3 receipt Common#493 linked to native return, read back; reviewer6adf3dbf rechecks new head IR3.",
       "next_after": "reviewer",
-      "routing_correction": "Owner corrected recipient before gen3 dispatch at Cycle rev6; generation retained3; past gen1/gen2 recipients/receipts not rewritten."
+      "routing_correction": "Owner corrected recipient before gen3 dispatch at Cycle rev6; generation retained3; past gen1/gen2 recipients/receipts not rewritten.",
+      "observed_return": "PARTIAL_SOURCE_REPAIR_SUBMITTED; published 3-path diff and source Git blob identity verified; author local new7 PASS, old-source new-suite 3 expected FAIL, branch mutant two expected FAIL; exact-head hosted catalog13+NodeName19 PASS; new7 and prior17 hosted NOT_RUN, prior17 on new head NOT_RUN; full native checkout and official backup script NOT_RUN. Independent IR3 NOT_RUN.",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6421669265",
+      "cycle_receipt_url": "https://github.com/reallakshman19/Common/issues/493#issuecomment-6421685403",
+      "validation_authority": "BUILDER_LOCAL_SYNTHETIC_AND_HOSTED_LEGACY_ONLY; reviewer-new-head-NOT_RUN; no native CAESAR, full checkout, or official backup-script authority"
+    },
+    {
+      "id": "CIIFR-ELEMENT-E1-PR187-IR3",
+      "generation": 2,
+      "recipient_role": "reviewer",
+      "recipient_chat_id8": "6adf3dbf",
+      "dispatch": "READY_NOT_SENT",
+      "predecessor": "Builder rev6/gen3 F3 return reconciled; prior IR1/IR2 FAIL applies only to old PR187 heads; do not repeat coder gen3 or retroactively modify receipts.",
+      "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6423070762",
+      "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/PR187_IR3_REVIEW_R7.md",
+      "candidate": "XCU draft PR187 head f1ffe90dee5b559c0781ce44f134e22f1f1da656, tree 3d3f89e84d9d712e33c57d8394722cb74ff4d5bc; preimage c8c2688aede49c9c0a9b18a3430942ce08244d20; stacked PR168 unchanged head2aeaf7372de66eda3bc082b8d81bf8db43c34f4b reader blob32e24c684c687b11e68da6af5dd1abd3bbe6b818",
+      "review_authority": "READ_ONLY independently derive falsifiers; Owner-declared distinct chat6adf3dbf vs builder6ade42a6 and Oracle6ade522f; authenticated distinct GitHub principal NOT_ESTABLISHED",
+      "scope": "Read and hash new-head blobs and actual inherited PR168 reader, independently execute BOTH old17 and new7 Node tests, F1 source-neutral stderr negative, F2 decimal/exponent and F3 TAB/NBSP/control whitespace for selected/unselected shared owners, physical branch-label source span LF/CRLF with repeated endpoints and seeded wrong output, byte immutability/privacy/new plausible surviving wrong result. Separate source behavior from no-native-checkout or backup policy limitations.",
+      "required_return": "New IR3 exact-head READ_ONLY PASS/FAIL/PARTIAL/BLOCKED by claim on XCU#188 with actual Node commands/exit counts/novel contrary tests and identity/source/custody limits; after receiving active rev7/gen2 reviewer trigger post ONE reviewer Cycle v1 receipt at Common#493 with new native permalink and readback.",
+      "protected": "No coding, source edits, self-approval, merge, Writer/TARGET1, protected original disclosure or native CAESAR/effective-engineering acceptance; inherited PR168 all-15-pointer defect separately owned #173.",
+      "next_after": "oracle"
     }
   ],
   "gates": [
@@ -280,18 +301,30 @@
       "status": "PASS",
       "basis": "Owner supplied Oracle6ade522f builder6ade42a6 IR6adf3dbf. Corrected only active unsent gen3 recipient and current roles. Previous receipts retained verbatim.",
       "evidence_ref": "https://github.com/reallakshman19/Common/issues/493"
+    },
+    {
+      "id": "element-e1-pr187-f3-r6-g3-return",
+      "status": "PARTIAL",
+      "basis": "PR187 exact head f1ffe90d verified, direct parent c8c2688a and 3 changed files, inherited reader unchanged. Builder reports 7 synthetic tests local PASS, expected fail-before/mutant negatives, legacy hosted32 PASS. New7/old17 hosted NOT_RUN and old17 on repaired head NOT_RUN. Native checkout/official backup script/CAESAR NOT_RUN; independent new-head review pending.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6421669265"
+    },
+    {
+      "id": "element-e1-pr187-ir3-r7-g2",
+      "status": "NOT_RUN",
+      "basis": "Read-only IR3 work order prepared at exact F3 repaired head; distinct reviewer chat6adf3dbf not yet sent URL trigger. Authentic distinct GitHub principal cannot be inferred from shared login.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6423070762"
     }
   ],
   "next": {
-    "recipient_role": "coder",
-    "recipient_chat_id8": "6ade42a6",
+    "recipient_role": "reviewer",
+    "recipient_chat_id8": "6adf3dbf",
     "status": "READY_NOT_SENT",
-    "instruction": "Owner sends one Element Cycle URL to builder chat6ade42a6. Execute existing gen3 PR187 F3 strict ASCII I13 source-token repair and branch-label oracle on SAME PR187; native #178 comment6417675982 plus R5 workpack. Validate preimage/permissions. Return new head and one rev6/gen3 Common#493 receipt. Next IR3 reviewer6adf3dbf. Prior builder6adedbc6 is NOT current recipient.",
+    "instruction": "Owner sends one Element Cycle now URL to independent reviewer chat6adf3dbf. Read active CURRENT rev7/gen2 and exact-head XCU#188 comment6423070762, run both old17 and new7 on actual PR187 f1ffe90d and independent F1/F2/F3 and branch-source falsifiers. Post fresh native IR3 verdict, then one rev7/gen2 reviewer receipt at Common#493, read back. No builder repeat or engineering/Writer/merge.",
     "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr-element"
   },
   "progress_projection": {
     "status": "PROGRESS_UPDATE_PENDING",
     "project_key": "ciifr",
-    "reason": "Owner corrected active Element roster at rev6 Oracle6ade522f builder6ade42a6 reviewer6adf3dbf. Pending gen3 F3 task was never dispatched and now rebound."
+    "reason": "Builder rev6/gen3 F3 PR187 f1ffe90d returned; IR3 exact-head reviewer gen2 ready not sent; progress page unverified."
   }
 }
