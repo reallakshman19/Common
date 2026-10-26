@@ -35,17 +35,23 @@
 
 ```mermaid
 flowchart TD
-  A0["Owner or OTM appoints Oracle for the project"] --> A1["START HERE: identify OTM or standalone mode and native authority"]
-  A1 --> A2["Oracle reads canonical Owner issue, aim, amendments and accepted product"]
-  A2 --> A3["Oracle examines ground fixtures, full WBS, current baseline and project sources"]
-  A3 --> A4["Oracle builds project concept note: why, scope, current capability and rationale"]
-  A4 --> A5["Oracle records architecture and complex concepts with examples, decisions and source links"]
-  A5 --> A6["Oracle defines roadmap: WBS, dependencies, next three tasks and accepted / held work"]
-  A6 --> A7["Oracle records source-backed project Home through the Progress Page CLI"]
-  A7 --> AV["Oracle opens actual project view: concept, architecture, fixtures, roadmap and current task discoverable or marked missing"]
-  AV --> A8["Oracle chooses one current WBS and the next useful agent/actor"]
-  A8 --> A9["Oracle continues task design and evidence reconciliation"]
+ A0["Owner/OTM appoints project Oracle with actual authority"] --> A1["Read Owner aim, real inputs, working code, native WBS and source evidence"]
+ A1 --> A2["PENDING FRAMEWORK: interfaces, proven reuse, fixtures/semantics, WBS dependencies, acceptance probes"]
+ A2 --> A3["Rank HIGH ROI bounded contributions from verified current code and project context"]
+ A3 --> A4{"Oracle code contribution authorized for this scope?"}
+ A4 -->|Yes| A5["IMPLEMENT one useful slice; tests plus plausible wrong case; no overlap with active writer"]
+ A4 -->|No, or read-only| A6["Leave code-ready seam/task PENDING; record authority or source blocker"]
+ A5 --> A7["Exact PR/head, actual positive-negative regressions; author SELF_ASSESSED"]
+ A7 --> A8["Reconcile WBS planned vs actual and parent release status"]
+ A6 --> A8
+ A8 --> A9["Oracle/OTM updates existing Progress Page and checks publication/readback"]
+ A9 --> A10["Choose ONE next actor/task and downstream WBS"]
+ A10 --> A11{"Owner-requested or justified incoming Oracle?"}
+ A11 -->|No| A12["Continue existing Oracle; onboard bounded worker/IR if useful"]
+ A11 -->|Yes| A13["Prepare source-grounded successor Oracle onboarding; map E controls cutover"]
 ```
+
+**Owner-selected delivery order:** establish a **PENDING framework** (source-qualified architecture/interfaces, reusable code, original fixtures, WBS dependencies, acceptance/wrong-case probes); next contribute **one authorized high-ROI runnable/testable code slice** using the Oracle's accumulated project context and independently verified current sources; reconcile **what was planned vs actually delivered** and update the existing Progress Page through its real writer; only then plan successor Oracle onboarding **if a genuine succession is called for**. PENDING is not implemented or accepted. An Oracle lacking coding authority, a read-only reviewer, or a source-semantics HOLD records a code-ready task instead of making unsafe changes. Oracle-authored implementation is SELF_ASSESSED, not independent PASS. None of these steps creates a new approval gate or forces a successor for routine work.
 
 **Project Home is the project knowledge base, not just a blocker strip.** Oracle maintains **Owner intent and amendments, concept note, purpose, architecture/complex models and their rationale, diagrams or explanatory links, original ground fixtures with exact identity/custody, roadmap/WBS dependency structure, current working prototype, decisions, open contradictions, current actors and next deliverable**. Home displays information supported by the existing project records. Where a concept note is not yet recorded, it says so; the Oracle supplies the missing source-grounded note, rather than the viewer inventing it. The detailed issue and WBS are still canonical for task execution.
 
@@ -163,26 +169,27 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  E0["Owner request, Oracle return, changed evidence or observed continuity risk"]
-  E0 --> E1["Open current canonical assignment and relevant native receipts; inspect exact candidates"]
-  E1 --> E2{"Explicit replacement order or evidenced risk warrants succession?"}
-  E2 -->|No| E3["Refresh changed issue/WBS/Home facts only; reconcile pending evidence"]
-  E3 --> E4["CONTINUE: preserve concept, architecture, approvals and active agents; issue ONE next authorized action"]
-  E2 -->|Yes| E5["Incumbent checkpoints FOUR knowledge classes: concept; complex architecture; decisions/wrong cases; exact execution frontier"]
-  E5 --> E6["Link immutable 3DC golden example + actual project-native sources and custody; name UNKNOWNs"]
-  E6 --> E7["Successor READ-ONLY: recover Owner aim, explain difficult logic, inspect one surviving wrong case, inventory active workers"]
-  E7 --> E8{"Material knowledge/access gaps?"}
-  E8 -->|Yes| EX["Repair targeted missing source/knowledge; no premature activation"]
-  EX --> E7
-  E8 -->|No| E9{"Owner/OTM authorizes native Oracle control cutover?"}
-  E9 -->|No| EH["PREPARED/READ-ONLY: old Oracle remains authoritative"]
-  E9 -->|Yes| E10["Reconcile old in-flight commands/receipts and actual exclusive write isolation"]
-  E10 --> E11{"Safe enforced or isolated control?"}
-  E11 -->|No| EH
-  E11 -->|Yes| E12["Publish precondition-checked new Oracle epoch; read back new control binding"]
-  E12 --> E13["ADOPT existing builder and IR assignments with SAME IDs; reconcile late returns"]
-  E13 --> E14["Successor resumes ONE next task; Oracle/OTM projects source-backed progress"]
+ E0["Current Oracle: Owner request, changed evidence or continuity risk"] --> E1["Inspect canonical issue/WBS, exact PRs, source receipts and current Page"]
+ E1 --> E2["FRAMEWORK: pending interfaces/reuse seams, original semantics and high-ROI candidates"]
+ E2 --> E3{"Authorized bounded Oracle coding contribution useful?"}
+ E3 -->|Yes| E4["CONTRIBUTE one source-qualified slice; keep independent author/IR separation"]
+ E3 -->|No| E5["Keep contribution PENDING and code-ready; record actual limits"]
+ E4 --> E6["Return exact head, witnessed tests, surviving wrong case and SELF_ASSESSED boundary"]
+ E5 --> E7["Reconcile plan vs actual for each existing WBS plus parent release"]
+ E6 --> E7
+ E7 --> E8["Progress Page: publish evidenced correction and check merged/live status; otherwise PAGE PENDING"]
+ E8 --> E9{"Actual Oracle succession needed and selected?"}
+ E9 -->|No| E10["CONTINUE incumbent: preserve workers, dispatch ONE next authorized task"]
+ E9 -->|Yes| E11["CHECKPOINT four knowledge classes, original custody, framework/code and final plan-v-actual"]
+ E11 --> E12["Plan successor Oracle onboarding: real source, hard logic, wrong case, current WBS/actors"]
+ E12 --> E13["Successor READ-ONLY compares native evidence, candidate and Page discrepancy"]
+ E13 --> E14{"Owner/OTM authorizes native cutover and write isolation demonstrated?"}
+ E14 -->|No| EH["HANDOVER PREPARED only; incumbent remains authoritative"]
+ E14 -->|Yes| E15["CAS native epoch/binding, read back; adopt same coder/IR assignments"]
+ E15 --> E16["Reconcile late receipts and continue ONE NOW; project authorized Page correction"]
 ```
+
+**Mandatory final handover closeout:** End the handover with the existing roadmap/WBS **planned deliverable → actual status → exact evidence/head → remaining work**, separately covering component WBS and parent integration/release. Explicitly list (1) pending framework versus shipped Oracle-authored code, (2) planned but not executed tasks, (3) technical HOLD and acceptance limits, (4) ONE next authorized actor/action, and (5) Page project key, update PR/commit, and actual publication/live readback. A DRAFT PR is not a live Page update; an outdated Page does not make demonstrably delivered prototypes NOT_STARTED. The CIIFR Geometry 3.x / Element 4.x / VNext M0–M5 reporting example is a *quality of reconciliation*, not a transfer of CIIFR engineering authority to Common.
 
 **Oracle handover pilot measurements:** one explicit Owner/governing-OTM request or verified critical authority incident; otherwise propose handover after **two preventable wrong dispatches among the last three eligible dispatches after correction**, **two consecutive eligible returns left unreconciled despite correction**, or **two consequential source-demonstrated project-model misunderstandings after targeted correction**. Distinguish unavailable source, absent approval or justified technical HOLD from Oracle fault. These are **proposed measurable warnings**, not activated policy or an automatic epoch change; see [CHANGEOVER pilot](oracle-standalone/references/CHANGEOVER.md#2a-measurable-handover-triggers--optional-evidence-based-pilot).
 
