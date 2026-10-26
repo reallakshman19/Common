@@ -117,15 +117,13 @@ Use [Progress standalone publication mode](../../progress-page/references/MODES.
 
 Before issuing a new task, reread `CURRENT.json` and the issue inbox. A duplicate coder receipt is **not** a new transfer, and a merged documentation PR is **not** an active controlled changeover. Where a private Drive upload is blocked, the correct next result is an exact **blocker + authorized relay plan**, not a forged URL.
 
-**Pre-handover substance:** outgoing Oracle first establishes the pending source-qualified framework and, where authorized/high ROI, a coherent tested code or diagnostic contribution; record the exact artifact, authorship and independent limits.
-**If coding is prohibited:** preserve coordinator/producer separation; route a bounded contribution through the actual writer rather than claiming an Oracle-authored implementation.
-**Successor feedback:** test understanding AND challenge outgoing assumptions through original-source questions, a wrong case or one small authorized increment; revise the handover/plan from substantive feedback without imposing an exam.
-**Mandatory closing comparison:** list every active WBS with planned deliverable, actual result, exact evidence/limits, remaining work, actor, dependency and ONE immediately executable next action.
-**Progress Page closeout:** compare published Page to native WBS truth; give corrected merged/read-back revision or exact draft PR plus PAGE: PENDING/OUT_OF_SYNC. Never call a draft update SYNCED.
-
 ## 7. Owner-facing deliverable after a handover review
 
 Keep the answer short and decision-useful:
+- **Pre-handover contribution:** Record source-qualified framework, actual highest-ROI authorized code/source diagnosis (or authority limit), exact candidate, tests and SELF_ASSESSED/independent boundary.
+- **Successor feedback:** Incoming Oracle may challenge inherited WBS/architecture with source questions, counterexamples or authorized small increment; incumbent/authorized actor responds ACCEPT / CORRECT / INVESTIGATE.
+- **Mandatory plan vs actual:** Close with every active WBS planned output, actual deliverable/candidate, evidence and limits, blockers, actor, dependencies, next planned outcome and ONE NOW.
+- **Progress Page closeout:** State actual native-vs-Page discrepancy, corrected merged/read-back revision or PAGE: PENDING/OUT_OF_SYNC with draft PR and owner; never call a draft SYNCED.
 
 ```text
 ORACLE HANDOVER — <product> / <project key> · <control stage>
