@@ -1,0 +1,31 @@
+{
+  "schema": "ciifr-geo-native-workspace/v1",
+  "task": "CIIFR-GEO-G1-VIEWER-INTEGRATION-1",
+  "recipient_role": "coder",
+  "recipient_chat_id8": "6adedbc6",
+  "filename": "CIIFR_GEO_PR183_Native_Workspace_3a1bec9.zip",
+  "size_bytes": 55065264,
+  "sha256": "21b2f39fd7cacb293e2f19f6c7fa05119e8200785f89af22c5eff96c42e85e93",
+  "repository": "reallakshman19/XML_Compare_Utilities",
+  "commit": "3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6",
+  "tree": "00f7825a271c4e68f650eebede40d0d62aea32f6",
+  "git_history": "FULL_NOT_SHALLOW",
+  "self_contained_objects": true,
+  "producer_checks": [
+    "exact HEAD and tree",
+    "clean tracked checkout",
+    "no object alternates",
+    "ZIP CRC test"
+  ],
+  "transport": "Owner-authorized attachment to existing ChatGPT builder; Common relay supplies authoritative source/byte contract; archive duplicates public Git source",
+  "custody": "PUBLIC_GIT_SOURCE_ONLY_NO_PRIVATE_MODELS_OR_LOCAL_BACKUPS",
+  "delivery_status": "PREPARED_FOR_ATTACHMENT_NOT_RECEIVER_VERIFIED",
+  "receiver_checks": [
+    "SHA-256 and byte count before extraction",
+    "ZIP CRC and full .git history present",
+    "HEAD and tree equal expected",
+    "git status clean before task edits",
+    "actual applicable native baseline and Appendix A before engineering edits"
+  ],
+  "limits": "Producer checks are not receiver verification, native-host execution, WebGL qualification, independent review or Owner acceptance."
+}
