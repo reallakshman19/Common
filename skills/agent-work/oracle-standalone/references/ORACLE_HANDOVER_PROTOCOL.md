@@ -120,6 +120,10 @@ Before issuing a new task, reread `CURRENT.json` and the issue inbox. A duplicat
 ## 7. Owner-facing deliverable after a handover review
 
 Keep the answer short and decision-useful:
+- **Pre-handover contribution:** Record source-qualified framework, actual highest-ROI authorized code/source diagnosis (or authority limit), exact candidate, tests and SELF_ASSESSED/independent boundary.
+- **Successor feedback:** Incoming Oracle may challenge inherited WBS/architecture with source questions, counterexamples or authorized small increment; incumbent/authorized actor responds ACCEPT / CORRECT / INVESTIGATE.
+- **Mandatory plan vs actual:** Close with every active WBS planned output, actual deliverable/candidate, evidence and limits, blockers, actor, dependencies, next planned outcome and ONE NOW.
+- **Progress Page closeout:** State actual native-vs-Page discrepancy, corrected merged/read-back revision or PAGE: PENDING/OUT_OF_SYNC with draft PR and owner; never call a draft SYNCED.
 
 ```text
 ORACLE HANDOVER — <product> / <project key> · <control stage>
