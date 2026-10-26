@@ -16,6 +16,8 @@ description: Run and use the Progress page, a static page plus JSON data in GitH
 
 A project-wide Agent Start is deliberately a **workstream chooser**, not a live sorted task queue. Task-specific deep links remain the preferred zero-friction entry. A narrowed WBS milestone lists the bounded original records without hiding cards. No actor label denotes an accepted assignment until confirmed at the canonical native source.
 
+The reusable page's responsive PC layout is global: Progress/WBS, Project Home, Actions, Fixtures and Timeline share the wide-screen shell, with view tabs before WBS filters and the full Owner brief still available. The UI does not change who owns a task.
+
 Agent Start is a **read-only projection**, not a new assignment protocol or release gate. If this Page differs from an authoritative native issue or Cycle, stop and reconcile the source. The writer must read the native evidence; a URL alone is not proof of its claim.
 
 
