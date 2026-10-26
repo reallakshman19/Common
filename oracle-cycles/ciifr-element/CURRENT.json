@@ -3,9 +3,10 @@
   "project": "ciifr-element",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 3,
+  "revision": 4,
   "last_accepted_receipt_ids": [
-    "CIIFR-ELEMENT-FIELD-AUTHORITY-1-R1-G1-PR187-3b9056fb-20261026"
+    "CIIFR-ELEMENT-FIELD-AUTHORITY-1-R1-G1-PR187-3b9056fb-20261026",
+    "CIIFR-ELEMENT-E1-PR187-F1F2-R3-G2-C8C2688A-20261026"
   ],
   "aim": "Source-qualified ELEMENTS process and RIGID field semantics for future read-only SOURCE→TARGET Element Property Transfer Preview. Preserve the existing VNext Geometry Tab 3; do not infer Writer or engineering transfer authority from field offsets.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178",
@@ -119,18 +120,37 @@
       "generation": 2,
       "recipient_role": "coder",
       "recipient_chat_id8": "6adedbc6",
-      "dispatch": "READY_NOT_SENT",
+      "dispatch": "RETURNED_RECONCILED",
       "predecessor": "CIIFR-ELEMENT-FIELD-AUTHORITY-1 gen1 RETURNED_RECONCILED; PR187 review IR1 gen0 returned FAIL direct native; no reviewer Cycle receipt",
       "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6415590149",
       "review_verdict_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415464730",
       "owner_reconciliation_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415573943",
-      "candidate": "XCU draft PR187 exact pre-repair head 3b9056fb44daa442e96afa70585113578ac9a778 stacked on PR168 exact head 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b",
+      "candidate": "PR187 repaired head c8c2688aede49c9c0a9b18a3430942ce08244d20; parent 3b9056fb44daa442e96afa70585113578ac9a778; stacked PR168 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b",
       "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/PR187_F1F2_REPAIR_R3.md",
       "scope": "Repair only same PR187 F1 private-source CLI stderr leakage on every CLI error path, F2 fail-closed strict I13 RIGID pointer #2 source lexemes at inspector boundary including unselected referenced owner paths; add independent negative subprocess/lexeme/endpoint-oracle regressions on actual parent source, keep source immutable/private/public whitelist and Geometry/NodeName isolated. Preserve upstream inherited source parser ownership via separate PR168 follow-up #173. New head publication, exact hashes, no forced ref, workreport, tests truthful.",
       "implementation_authority": "BOUNDED_EXISTING_DRAFT_PR187_ONLY_AFTER_NATIVE_QUALIFICATION_BACKUPS_AND_NO_INDEX_LEDGER; PR168_READER_OWNER_UNCHANGED",
       "protected": "No PR168 catalog modification, no private original data or URLs, no product writer/Target1, Geometry/NodeName, no merge/release, no native effective CAESAR claims.",
       "required_return": "Native #178 repair return with new PR187 full head/tree/diff and local/hosted positive+negative tests, source-neutral rejection stderr, strict I13 cases, inherited parent defect remains open, one real rev3/gen2 Cycle v1 receipt on Common #493 and readback; then distinct reviewer 6adf3dbf new exact-head re-review.",
-      "next_after": "reviewer"
+      "next_after": "reviewer",
+      "observed_return": "PARTIAL; builder 17/17 local synthetic PASS in Git-blob-identical subtree, fail-before 3 expected failures, wrong-FROM mutant detected; hosted existing 13+19 PASS, new17 NOT_RUN; independent repaired-head review NOT_RUN",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6416435402",
+      "cycle_receipt_url": "https://github.com/reallakshman19/Common/issues/493#issuecomment-6416450368"
+    },
+    {
+      "id": "CIIFR-ELEMENT-E1-PR187-IR2",
+      "generation": 1,
+      "recipient_role": "reviewer",
+      "recipient_chat_id8": "6adf3dbf",
+      "dispatch": "READY_NOT_SENT",
+      "predecessor": "IR1 gen0 native direct FAIL old head3b9056fb; no retroactive reviewer Cycle receipt; builder repair gen2 reconciled rev4",
+      "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6417001263",
+      "candidate": "PR187 draft head c8c2688aede49c9c0a9b18a3430942ce08244d20; tree b4606e6f8031e194234d6ff78d5b25f830093580; stacked PR168 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b; unchanged reader blob32e24c684c687b11e68da6af5dd1abd3bbe6b818",
+      "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/PR187_IR2_REVIEW_R4.md",
+      "review_authority": "READ_ONLY non-author method review; Owner-designated different chat6adf3dbf; distinct authenticated GitHub principal NOT_ESTABLISHED",
+      "scope": "Re-review F1 CLI stderr redaction, F2 RIGID I13 selected/unselected owner containment, FROM endpoint identity negative and public/private source witness, with own contrary tests and actual Node run",
+      "required_return": "New IR2 evidence-backed native verdict on XCU#188, exact repaired head/command/negative, surviving-error risk; then single active Cycle rev4/gen1 receipt Common#493 with new native permalink and readback",
+      "protected": "No code edits, Writer, TARGET1, original-job effective claims, PR168 global parser acceptance or merge",
+      "next_after": "oracle"
     }
   ],
   "gates": [
@@ -203,18 +223,30 @@
       "basis": "Review observed 1.0 and 1E0 pointer #2 tokens parsed as valid RIGID index despite v14 I13. Parent PR168 defect tracked #173; PR187 must contain strict boundary guard and parent owner must separately fix catalog",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6415601518",
       "next": "PR187 containment + separately qualified PR168 reader fix"
+    },
+    {
+      "id": "element-e1-pr187-r3-repair",
+      "status": "PARTIAL",
+      "basis": "Repaired PR187 exact c8c2688a code/blob verified. Builder local17/17 PASS, old code+new suite3 expected failures, wrong FROM seed caught. Hosted legacy32 PASS, new17 NOT_RUN. New-head non-author review pending.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6416435402"
+    },
+    {
+      "id": "element-e1-pr187-ir2",
+      "status": "NOT_RUN",
+      "basis": "Owner-designated reviewer chat6adf3dbf; distinct GitHub principal not established. No new-head executed verdict or receipt; native review task prepared.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6417001263"
     }
   ],
   "next": {
-    "recipient_role": "coder",
-    "recipient_chat_id8": "6adedbc6",
+    "recipient_role": "reviewer",
+    "recipient_chat_id8": "6adf3dbf",
     "status": "READY_NOT_SENT",
-    "instruction": "Owner should paste one Element Cycle URL trigger to builder6adedbc6 for new rev3/gen2 F1/F2 repair. Read native #178 comment6415590149, review #188 comment6415464730, exact pre-repair PR187/PR168 heads; fix CLI stderr source leak and strict I13 RIGID pointer #2 inspector guard including unselected owners. Add independent regressions and evaluate endpoint oracle mutation, preserve PR168 reader. Return one native repair receipt and Cycle v1 on Common493. Re-review at new head by reviewer6adf3dbf. No Builder gen1 repetition, no reviewer re-onboard.",
+    "instruction": "Owner send ONE Element Cycle trigger to reviewer chat6adf3dbf. Reviewer reads CURRENT rev4 and XCU#188 comment6417001263; review actual repaired PR187 c8c2688a with fresh F1/F2/endpoint/privacy falsifiers, run new17 tests on actual inherited PR168 source, post new verdict on #188 and one rev4/gen1 reviewer receipt to Common#493. No builder rerun or retroactive IR1 receipt.",
     "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr-element"
   },
   "progress_projection": {
     "status": "PROGRESS_UPDATE_PENDING",
     "project_key": "ciifr",
-    "reason": "E1 reviewer6adf3dbf technical FAIL and new coder repair rev3/gen2; official progress editor projection not attempted"
+    "reason": "Builder repair rev3/gen2 reconciled at PR187 c8c2688a and reviewer IR2 rev4 prepared; no progress-page author updated"
   }
 }
