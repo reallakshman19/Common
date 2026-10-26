@@ -1,0 +1,33 @@
+{
+  "schema": "ciifr-geo-review-relay/v1",
+  "task": "CIIFR-GEO-IR-PR185-1",
+  "candidate_head": "7f9ea25931777dda85686ad7cc9a1a011132a23c",
+  "candidate_tree": "a6a2ea6820e97fbdedc2e1e96718dc2a26a67e3d",
+  "native_verdict": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6411018989",
+  "verdict": "FAIL_F1; REAL_BROWSER_GPU_BLOCKED",
+  "reviewer": "separate non-author technical reviewer task; principal/account independence UNKNOWN",
+  "files": [
+    {
+      "path": "verdict.md",
+      "bytes": 15928,
+      "sha256": "c20164e15e130a3f2e5acd073281fcebba18c2e66c6935291ef191e68d79774f"
+    },
+    {
+      "path": "repro-stale-enable-realxml.mjs",
+      "bytes": 4477,
+      "sha256": "82cf3ba3449e6e45e139b917893f58925f89344e022f11b590c4c963c434fdd4"
+    },
+    {
+      "path": "repro-normal-output.txt",
+      "bytes": 491,
+      "sha256": "fcb1eab2e8ea5b53c20048dc0d0bce6598811651743b59b7682216275c4bb67f"
+    },
+    {
+      "path": "repro-fifo-output.txt",
+      "bytes": 366,
+      "sha256": "03d03b2a304751fb5816df9de2cf0bd784a08837734f18cd3150a4746ef19d16"
+    }
+  ],
+  "custody": "Public review-only source/report artifacts; original candidate not changed. Common relay copies match reviewer-provided SHA256.",
+  "limits": "The defect-detector script exits0 for reproduced failure. It is not a fixed-candidate PASS or real WebGL test. Repaired head requires independent re-review and Owner acceptance separately."
+}
