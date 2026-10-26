@@ -1,4 +1,4 @@
-# CIIFR_GEO core concept — recovery checkpoint
+# CIIFR_GEO core concept — contribution report
 
 Task: Owner requested a detailed concept and all governing logic after the A/B/C, conflict and iteration discussion. Role: current Oracle contributing a specification/reference probe; separate non-author concept review requested. No product implementation, engineering release or merge authority is claimed.
 
@@ -31,8 +31,12 @@ Exact reference arithmetic ran successfully with the standard-library probe. It 
 
 Read-only native registration checks reproduced six `DUPLICATE_ANCHOR_CUSTODY` and two `DEGENERATE_NONCOLLINEAR_BASIS` results for the eight illustrative assignments. A synthetic two-anchor order test produced candidate-sign residuals [0,+2] versus [-2,0]. All three critical local source blob IDs matched independently fetched GitHub metadata at exact668c22b4.
 
-Full-document concept review and final publication/readback remain next. Browser/GPU, full rigid integrated consolidation, protected original CII and Owner acceptance remain NOT_RUN for this new concept. Earlier PR185 native PASS is not transferred to this new work.
+Initial publication is Common draft PR536 at immutable `31d489f0fe55e564e292958149aad73d5f59a704`. The main specification was read back byte-for-byte. Four applicable hosted workflows succeeded at that initial head; the trusted scoreboard workflow was skipped and is not counted as a pass.
+
+A further separate non-author reviewer independently retrieved the full immutable specification and all relay artifacts. It reproduced the reference results byte-for-byte and independently rejected the two deliberately wrong scalar rules. Its four findings were reconciled in version 1.1: one declared comparable trial universe, truthful partial regret/coverage, explicit current-versus-proposed epoch behaviour, and deterministic epsilon handling. Empty/forced/pinned contexts and discriminating acceptance cases were also specified. The report preserves actual scope, exposure and checks; neither reviewer is represented as a blinded or separate-account approval.
+
+Final v1.1 specification identity: 68,295 UTF-8 bytes, SHA256 `d20c37b566e427ad9847775847ad978907e2ae697eaab5bab7c19156b170dff6`, Git blob `086b52271ffc3d09268afe1f0312093774f33983`. The native return records the final publication head, remote identity check and current hosted-check observations. Browser/GPU, full rigid integrated consolidation, protected original CII and Owner acceptance remain NOT_RUN for this new concept. Earlier PR185 native PASS is not transferred to this new work.
 
 ## Exact next action
 
-Publish a disjoint draft documentation/relay PR, have the separate reviewer retrieve and assess the immutable specification, reconcile findings, and read back final bytes. Do not merge or alter product code as part of this documentation task.
+The detailed concept and reference evidence are available through draft PR536. Reconcile the explicitly proposed policies with the Owner before implementing them as product defaults. The next bounded builder delivery is CORE-1 independent A/B session/proposal state, followed by CORE-2 consolidation using those exact records. This report does not merge or alter product code, adopt new WBS numbers, dispatch an unassigned builder or change Cycle/Progress Page authority.

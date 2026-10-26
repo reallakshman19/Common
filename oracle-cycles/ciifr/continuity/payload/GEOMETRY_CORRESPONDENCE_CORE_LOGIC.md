@@ -1,6 +1,6 @@
 # CIIFR_GEO — Geometry correspondence: core concept and logic
 
-**Document version:** 1.0 candidate, 26 October 2026, Asia/Dubai.  
+**Document version:** 1.1 candidate, 26 October 2026, Asia/Dubai.  
 **Purpose:** preserve the Owner's decisive product concept as a source-grounded, implementable contract.  
 **Standing:** Owner-confirmed requirements plus explicitly marked engineering proposals. This document is not Owner acceptance of its new proposals, a product release, a Writer specification, or a claim that the complete algorithm already exists.  
 **Author:** current CIIFR_GEO Oracle, acting as a specification contributor. Author calculations and reference probes are self-checks. Separate concept review is recorded in the accompanying review artifact; product-independent review remains separate.  
@@ -315,6 +315,20 @@ Displayed signs remain signed. Numeric score construction may use magnitudes; th
 
 If no comparable pose can be evaluated, the trial has a typed `NOT_EVALUATED` result and a reason. Preserve the last valid view as explicitly stale or show original geometry; do not report a zero-score success. Other valid trials remain usable.
 
+### 8.1 Comparable trial universes — proposal P09
+
+Freeze the fit freedoms, solver/version, constraint ordering, orientation premise and admissibility policy **once per search job**. Classify each case explicitly:
+
+| Trial class | Permitted interpretation |
+|---|---|
+| `NATIVE_ADMISSIBLE` | Evaluated through the declared native validator/solver; retain its actual rank, custody and fit limitations |
+| `PREVIEW_NUMERIC` | A separately declared diagnostic fit, such as retained-orientation translation; may expose rejected custody claims numerically |
+| `NOT_EVALUABLE` | Required identity, units, coordinate frame or finite numerical data is unavailable; no numeric success is invented |
+
+A diagnostic adapter is not permission to bypass the native validator and call its output accepted anchors. A full-rigid job must not quietly use full rotation for easy options and retained-orientation translation only for difficult options, then rank the mixed scores as one fair comparison. If a preview is useful, run a separate job with that same declared preview freedom for every compared option. An explicitly designed mixed-rank policy would be another versioned proposal requiring its own validation.
+
+The mathematical minimum is always scoped to a named universe. Keep a **diagnostic minimum** distinct from a **custody-consistent default**. A TARGET-reused trial can remain inspectable, manually selected as a diagnostic and numerically scored; it cannot receive a custody-consistent or transfer-ready label. Manual pins are preserved, and an infeasible pin context produces an honest diagnostic state rather than a silently changed choice. Missing strict trials do not become zero scores or vanish from the coverage receipt.
+
 ## 9. The decisive scoring rule
 
 ### 9.1 Primary scalar
@@ -439,8 +453,14 @@ regret_g(α) = E_g(α) − best_g(α_-g)
 
 Regret is zero when that selected option is a conditional minimum. It is not the group's own anchor residual.
 
+An exact `best_g` requires every admissible alternative in that same-context counterfactual slice to be evaluated, using the same scoring cohort and comparable fit policy. A partial overall search may still complete a particular slice; record completeness per group/context rather than assuming it. If an alternative remains unvisited, the minimum observed so far is an upper bound on the true minimum, and the resulting observed regret is a **lower bound** on the true regret. Label it accordingly. Incomplete regrets cannot certify an exact minimum-worst-regret combination or prove that no simultaneous-minimum assignment exists. A best-found preview remains available with its coverage and uncertainty.
+
+If no alternative is admissible in the fixed context, the minimum and regret are undefined: return `NO_FEASIBLE_CONTEXT` with the excluded trial identities/reasons. Do not store zero, choose an invalid candidate or automatically relax a manual pin. If all groups are manually pinned, there is no automatic-choice optimisation; evaluate and display that complete pinned trial with its actual fit, custody and support status.
+
+If the selected option is the only admissible option, its regret is mathematically zero but it has no admissible challenger. Label it `NO_COMPARABLE_ALTERNATIVE` / feasibility-forced, retain the excluded alternatives and their reasons, and do not describe it as winning a numerical comparison.
+
 1. Honour manual pins as fixed constraints on the joint choice.
-2. If an assignment has zero regret for every unpinned group, select among such assignments deterministically.
+2. If an assignment has zero regret for every unpinned group, select among such assignments deterministically. Numerical implementation uses the explicitly declared near-zero band from P07 and labels tolerance-based equality accordingly.
 3. Otherwise propose a coherent assignment by this lexicographic ordering:
    - Minimum **maximum** regret across unpinned groups.
    - Then minimum sum of their regrets.
@@ -475,6 +495,8 @@ Checking/unchecking an exact duplicate origin changes provenance, not its numeri
 
 Compare unrounded scores. Proposed score tie tolerance is `1e-6 mm`, independently versioned from geometric candidate tolerance and fit-rank tolerance. Display rounding to three decimals never decides a tie.
 
+For a complete comparable option slice, first compute its numerical minimum `b`; define equal minima as `E(o) <= b + epsilon`. Do not use a pairwise “within epsilon” sorting comparator: it is not transitive. Keep raw regrets and scores in the receipt; treat `0 <= regret <= epsilon` as near-zero support under the declared tolerance, not proof of exact mathematical equality. For the P06 lexicographic choice, apply the same minimum-relative band separately to each mm-valued stage, retaining its survivors before the next stage; integer change counts and canonical keys use exact ordering. Freeze the tolerance in the search snapshot. These numerical conventions are proposed policy, not Owner-confirmed mathematics.
+
 For equal supported minima, retain an existing compatible user choice, then the last compatible automatic choice, then use a deterministic stable choice key. Mark equal support; do not imply one is geometrically proven better. When there are no other included pairs, all zero sums have **zero witnesses** and provide no recommendation evidence; a deterministic display default must say so.
 
 A nonzero witness count also does not guarantee discrimination. For example, if the fit policy pins the only other pair exactly, every tested option may obtain zero other-pair error by construction while having a large residual at the tested pair. Display equal/non-discriminating support. Using the tested pair's own residual to break that tie would be a new explicit policy, because the Owner excluded it from the primary score.
@@ -491,6 +513,8 @@ A nonzero witness count also does not guarantee discrimination. For example, if 
 | Numeric mode/tolerance/unit/profile change | New policy snapshot; invalidate dependent fit, candidate or score results explicitly |
 | Manual radio choice | Pin that group, evaluate the compatible joint context, update overlay and other recommendations |
 | Stale Worker completion | Ignore its numerical and UI side effects, including finally/cleanup and export enabling |
+
+This table specifies the intended separation for the new workbench. The current single-session prototype revokes its preview epoch on projection changes; separating numerical evidence validity from view/render requests is implementation work, not a claim that current behaviour already satisfies this contract.
 
 ## 14. Consolidated geometry and viewer
 
@@ -628,6 +652,7 @@ The following matrix is a minimum discriminating specification. Implementers mus
 | DU04 | Unique pair | Included automatically; no checkbox/radio in Consolidated |
 | CU01 | Two SOURCEs share a TARGET | TARGET reuse shown; no silent evidence deletion or transfer-ready claim |
 | CU02 | Custody dependency links groups | Joint dependency retained; score exclusion stays the tested SOURCE group |
+| CU03 | Only one option survives the declared custody/fit policy | Feasibility-forced, not a numerical win; excluded challengers retained |
 | SC01 | Opposite signed residuals | Magnitude score does not cancel them into zero |
 | SC02 | Own anchor improves, other pairs worsen | Recommendation uses other-pair score, not the tested pair's own residual |
 | SC03 | Entire tested group excluded | All its alternatives absent from score; row sorting/filtering has no effect |
@@ -637,17 +662,20 @@ The following matrix is a minimum discriminating specification. Implementers mus
 | SC07 | Rotated source-fixed display | Scoring remains in the fixed declared axes; display-vector rotation cannot change rank |
 | SC08 | Score differs below display precision | Compare unrounded values under explicit tie tolerance |
 | SC09 | No other pairs | Zero witnesses disclosed; deterministic default is not called independent support |
+| SC10 | Scores 0, 0.75 epsilon, 1.5 epsilon | Minimum-relative tie band includes only the first two; no chained pairwise tie |
 | MC01 | Three binary conflict groups | Eight complete assignments; separate per-group scores and context IDs |
 | MC02 | Manual option pinned | Never auto-overwrite it; other recommendations refresh under that context |
 | MC03 | Individual best-response cycle | Terminates with honest conditional/coupled result; no infinite loop or false all-minimum claim |
 | MC04 | Search budget interrupted | Best-so-far/coverage shown; no exact/global-minimum claim |
 | MC05 | Invalid/rank-deficient trial | Typed diagnostic; no zero score and no invented identity transform |
+| MC06 | Visited option scores 5 and 7 mm; an unvisited option later scores 1 mm | The 5 mm option's provisional zero regret was only a lower bound; completed regret is 4 mm; no earlier exact coupled-optimum claim |
 | RG01 | One anchor | Retained orientation visibly unobserved; translation preview works within scope |
 | RG02 | Two anchors with unequal spacing | True residual/mismatch shown; no scale/stretch to force both exact |
 | RG03 | Nearly collinear 3+ constraints | Conditioning/status recorded; no full-rotation claim from pair count alone |
 | RG04 | Reflection would fit better | Proper-rotation policy retained; reflection not silently enabled |
 | RG05 | Reverse incompatible two-anchor input order | The fit order/policy is explicit; UI sorting cannot silently change it or the score |
 | RG06 | Other witness is hard-pinned by the solver | Zero scores are labelled tied/non-discriminating; own residual is not silently used as the primary score |
+| RG07 | Options differ in native fit admissibility | Preserve diagnostics; compare only the declared common fit universe; no hidden per-option fallback |
 | GE01 | Any radio choice/iteration | All original TARGET ELEMENT endpoint relationships and lengths preserved |
 | GE02 | Before/after trial comparison | Table, arrow, transform and export agree on the same trial ID |
 | GE03 | Origin A/B residual versus consolidated residual | Correctly labelled; no historical zero displayed as current overlay error |
@@ -705,7 +733,7 @@ ConflictGroup {
 TrialReceipt {
   trialId, inputSnapshotId, completeChoiceVector,
   manualPins, fitPolicyVersion, transformDirection, scoringFrame,
-  fitStatus, rank, conditioning, R, t, unitScale,
+  trialUniverseId, trialClass, fitFreedoms, fitStatus, rank, conditioning, R, t, unitScale,
   selectedPairKeys, custodyDiagnostics,
   perPairSignedResidualMm, perGroupExcludedPairKeys,
   perGroupCohortHash, perGroupScoreMm, witnessCounts,
@@ -716,7 +744,8 @@ RecommendationReceipt {
   groupKey, contextChoiceVector, candidateTrialIds,
   perOptionOtherPairScoreMm, equalMinima,
   recommendedPairKey, chosenPairKey, manualOverride,
-  coherentPolicyVersion, perGroupRegretMm, coupledStatus,
+  coherentPolicyVersion, perGroupRegretMm, regretBoundKind,
+  counterfactualSliceCoverage, coupledStatus,
   sourceSnapshotId, createdEpoch
 }
 ```
@@ -744,6 +773,7 @@ No export contains private chat URLs, secrets or unapproved customer data. Safe 
 | Simultaneous-minima cycle handling | Necessary mathematical limitation demonstrated; proposed P06 is not yet Owner-adopted |
 | Tie/zero-witness policy | Engineering proposal P07 |
 | Native two-anchor order and residual-sign adapter | Engineering proposal P08 plus source-observed solver behaviour |
+| Comparable fit universes and diagnostic/default distinction | Engineering proposal P09; preserves native validator and truthful partial-search claims |
 | Physical identity, field transfer, CII writing | Not granted by Geometry correspondence; separate future task/authority |
 
 ### 20.2 Current implementation truth

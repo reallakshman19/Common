@@ -11,6 +11,7 @@ Task: `CIIFR-GEO-CORE-LOGIC-20261026`. Owner requested a detailed, decisive conc
 | `PROBE_RESULTS.json` | Actual reference run: screenshot arithmetic, nested-count example, cycle and fallback-policy contrast. |
 | `NEGATIVE_PROBE_RESULTS.json` | Two deliberately wrong variants failed their assertions: signed cancellation and scoring the tested group. Nonzero exits here are expected falsification results. |
 | `ENGINE_SEAM_OBSERVATIONS.json` | Read-only actual native registration observations: six duplicate-TARGET and two degenerate cases; two-anchor order sensitivity. |
+| `CONCEPT_LOGIC_REVIEW.md` | Separate non-author review: independently retrieved immutable source, reference execution, contrary cases, findings and scoped delta assessment. |
 | `INPUT_MANIFEST.json` | Actual file hashes and source identity. Manifest does not hash itself. |
 
 Read the specification in the same immutable Git commit as this register. A mutable branch name alone is not an exact review candidate. The native PR/issue return gives the observed commit and readback; receiver retrieval/assessment is recorded separately from author publication.
@@ -32,7 +33,18 @@ It uses exact fractions and exits nonzero on a failed expectation. A passing run
 
 ## Review and continuation
 
-A separate non-author concept reviewer first challenged the mathematics/native seam and will assess the immutable specification. Review is scoped and exposed to the Owner's conversation and author examples; it is not a blinded or separate-account GitHub approval. The full reviewed-document receipt will be added after actual retrieval.
+A first separate reviewer challenged the mathematics/native seam. A further non-author reviewer independently retrieved the complete specification and all reference artifacts at immutable `31d489f0fe55e564e292958149aad73d5f59a704`, reran the reference output byte-for-byte, and independently falsified signed-cancellation and self-scoring variants. The full scoped report is `CONCEPT_LOGIC_REVIEW.md`. This is an exposed concept assessment, not a blinded or separate-account GitHub approval, product-runtime review or Owner acceptance.
+
+Version 1.1 reconciles its four findings:
+
+| Finding | Reconciliation |
+|---|---|
+| F1: comparable trial universe | P09 freezes fit freedoms/solver/order/admissibility; diagnostic minima are distinct from custody-consistent defaults; empty and feasibility-forced contexts are typed. RG07/CU03 challenge incorrect integration. |
+| F2: incomplete-search regret | Section 12 records per-context slice completeness, lower-bound provisional regret and no exact optimum claim without coverage. MC06 preserves an unvisited winning option. |
+| F3: current versus intended epochs | Section 13.3 explicitly says the current projection invalidation differs from the proposed numerical/view separation. |
+| F4: epsilon comparator | P07 uses minimum-relative bands, raw scores/regrets and deterministic stagewise lexicographic filtering. SC10 rejects chained pairwise ties. |
+
+The revised specification's independent remote identity receipt is returned through the native PR/issue record after publication. Do not infer a product PASS or new Owner-adopted policy from this documentation review.
 
 The highest-priority reconciliation is explicit: individual per-group minima can cycle. The proposed coherent-default min-max-regret policy is additional engineering policy, not already adopted by the Owner. No production change or whole-project stop follows from publishing the concept.
 
