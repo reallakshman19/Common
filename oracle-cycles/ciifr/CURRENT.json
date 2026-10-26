@@ -130,7 +130,7 @@
       "recipient_chat_id8": "6adedbc6",
       "dispatch": "READY_NOT_SENT",
       "candidate": "XCU PR183 draft exact head 3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6, tree 00f7825a271c4e68f650eebede40d0d62aea32f6",
-      "scope": "Execute the already-requested bounded WBS3.1 viewer continuation. First verify the attached full native workspace and actual repository qualification READ_ONLY; once prerequisites pass, implement the prepared opt-in existing viewer, all-row picks and stale-binding lifecycle without another routine approval. No expansion beyond prepared brief.",
+      "scope": "Execute the already-requested bounded WBS3.1 viewer continuation. First verify the attached public source snapshot and actual repository qualification READ_ONLY; once prerequisites pass, implement the prepared opt-in existing viewer, all-row picks and stale-binding lifecycle without another routine approval. No expansion beyond prepared brief.",
       "implementation_authority": "BOUNDED_G1_CONDITIONAL_ON_ACTUAL_NATIVE_PREREQUISITES_AND_REPOSITORY_QUALIFICATION",
       "input_artifact_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/INPUT_MANIFEST.json",
       "dispatch_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/DISPATCH.md",
@@ -146,7 +146,7 @@
     "recipient_role": "coder",
     "recipient_chat_id8": "6adedbc6",
     "status": "READY_NOT_SENT",
-    "instruction": "Receive the full native workspace attachment and one URL-form trigger. Follow the new generation1 integration dispatch: byte/native verification first, bounded implementation after real qualification; report concrete failure promptly. Do not repeat the returned onboarding.",
+    "instruction": "Receive the public current-source snapshot attachment and one URL-form trigger. Follow the new generation1 integration dispatch: byte/native verification first, bounded implementation after real qualification; report concrete failure promptly. Do not repeat the returned onboarding.",
     "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr"
   },
   "gates": [
@@ -276,9 +276,9 @@
     {
       "id": "geo-viewer-integration-native-workspace",
       "status": "NOT_RUN",
-      "scope": "55,065,264-byte exact PR183 full-history native ZIP prepared and producer CRC/HEAD/tree checked; receiver bytes, native qualification and execution await actual delivery/checks",
+      "scope": "32,126,752-byte public current-source ZIP prepared from exact PR183 commit/tree with Git history and recovery state excluded. Producer CRC checked; recipient receipt, actual native qualification and execution remain NOT_RUN.",
       "evidence_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/INPUT_MANIFEST.json",
-      "limits": "Prepared bytes are not sent/received or qualified; WebGL limitations remain until actual capable-host evidence."
+      "limits": "Full-history upload was rejected by automatic approval review. This replacement has only current public Git tree files, no .git; no native checkout/history verification is claimed. Report actual required missing Git operations precisely; no waiver of repository qualification or WebGL evidence."
     }
   ],
   "progress_projection": {
