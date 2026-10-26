@@ -3,7 +3,7 @@
   "project": "ciifr-element",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 2,
+  "revision": 3,
   "last_accepted_receipt_ids": [
     "CIIFR-ELEMENT-FIELD-AUTHORITY-1-R1-G1-PR187-3b9056fb-20261026"
   ],
@@ -24,10 +24,10 @@
       "responsibility": "Continue existing WBS4 field authority after checking current task/relay, run source-backed discriminator and optionally build standalone read-only evidence adapter after real repo Appendix A; no effective value guessing/Writer"
     },
     "reviewer": {
-      "label": "Distinct non-author E1 inspector reviewer (not bound)",
-      "chat_id8": null,
-      "provenance": "OWNER_HAS_NOT_IDENTIFIED_SEPARATE_REVIEW_CHAT_OR_AUTHENTICATED_GITHUB_NONAUTHOR; PRIOR_ISSUE170_REVIEWER_CHAT_UNBOUND",
-      "responsibility": "Once Owner binds a genuine distinct reviewer, independently execute exact-head PR187 new tests against actual inherited PR168 reader, challenge privacy and RIGID/byte witnesses, return verdict on XCU #188; no coding/Writer/merge"
+      "label": "Owner-identified distinct reviewer — exact-head E1 falsifier",
+      "chat_id8": "6adf3dbf",
+      "provenance": "OWNER_IDENTIFIED_REVIEWER_CHAT_6adf3dbf_IN_CONVERSATION_20261026; REVIEWER_SELF_REPORTED_CHAT_ID_UNAVAILABLE; GITHUB_PRINCIPAL_SHARED_REALLAKSHMAN19; METHOD_INDEPENDENCE_OBSERVED_NOT_AUTHENTICATED_GITHUB_NONAUTHOR",
+      "responsibility": "Returned read-only FAIL on PR187 head3b9056fb; no code/edit/merge; fresh new-head recheck after builder repair; do not retroactively create Cycle receipt"
     },
     "owner": {
       "label": "Owner",
@@ -98,8 +98,8 @@
       "id": "CIIFR-ELEMENT-E1-PR187-IR1",
       "generation": 0,
       "recipient_role": "reviewer",
-      "recipient_chat_id8": null,
-      "dispatch": "PREPARED_NOT_SENT_PENDING_DISTINCT_NONAUTHOR_BINDING",
+      "recipient_chat_id8": "6adf3dbf",
+      "dispatch": "RETURNED_DIRECT_NATIVE_FAIL_RECONCILED_NO_CYCLE_RECEIPT",
       "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188",
       "candidate": "XCU draft PR187 exact head 3b9056fb44daa442e96afa70585113578ac9a778; immutable parent PR168 head 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b",
       "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/PR187_IR_INPUT.md",
@@ -107,7 +107,30 @@
       "scope": "Independently run new eleven tests on actual PR187 checkout with inherited exact catalog; new counterexamples for physical occurrence and rigid record ownership, privacy/temporary private report, byte provenance, Windows/path portability and no effective-property promotion; evidence-backed verdict XCU#188; no product edits",
       "required_return": "Independent observed check results PASS/FAIL/NOT_RUN and exact head as public-safe verdict on #188, one dedicated Cycle v1 review_returned receipt to Common #493 after live ACTIVE reviewer binding and actual receipt; non-author identity evidence; no self-review",
       "next_after": "oracle",
-      "protected": "No private original required for synthetic tests; no customer source data/public leakage, Writer/TARGET1, CAESAR engineering acceptance or merge"
+      "protected": "No private original required for synthetic tests; no customer source data/public leakage, Writer/TARGET1, CAESAR engineering acceptance or merge",
+      "observed_reviewer_identity": "OWNER_ROUTING_CHAT_6adf3dbf; github principal not distinct authenticated; reviewer authored no PR changes",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415464730",
+      "oracle_reconciliation_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415573943",
+      "verdict": "FAIL_WITH_F1_PRIVATE_ERROR_LEAK_AND_F2_INHERITED_I13_POINTER_SYNTAX; AUTHOR_11_TESTS_PASS_REVIEWER_SYNTHETIC_FAIL",
+      "scope_limit": "Reviewer personally executed 11/11 on byte-identical four-file subtree (no full Git checkout), independent 14 check groups, Linux, no real original or CAESAR, distinct PR author principal not authenticated; no review Cycle receipt because recipient not bound when original review ran"
+    },
+    {
+      "id": "CIIFR-ELEMENT-E1-PR187-F1F2-REPAIR",
+      "generation": 2,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adedbc6",
+      "dispatch": "READY_NOT_SENT",
+      "predecessor": "CIIFR-ELEMENT-FIELD-AUTHORITY-1 gen1 RETURNED_RECONCILED; PR187 review IR1 gen0 returned FAIL direct native; no reviewer Cycle receipt",
+      "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6415590149",
+      "review_verdict_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415464730",
+      "owner_reconciliation_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415573943",
+      "candidate": "XCU draft PR187 exact pre-repair head 3b9056fb44daa442e96afa70585113578ac9a778 stacked on PR168 exact head 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b",
+      "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/PR187_F1F2_REPAIR_R3.md",
+      "scope": "Repair only same PR187 F1 private-source CLI stderr leakage on every CLI error path, F2 fail-closed strict I13 RIGID pointer #2 source lexemes at inspector boundary including unselected referenced owner paths; add independent negative subprocess/lexeme/endpoint-oracle regressions on actual parent source, keep source immutable/private/public whitelist and Geometry/NodeName isolated. Preserve upstream inherited source parser ownership via separate PR168 follow-up #173. New head publication, exact hashes, no forced ref, workreport, tests truthful.",
+      "implementation_authority": "BOUNDED_EXISTING_DRAFT_PR187_ONLY_AFTER_NATIVE_QUALIFICATION_BACKUPS_AND_NO_INDEX_LEDGER; PR168_READER_OWNER_UNCHANGED",
+      "protected": "No PR168 catalog modification, no private original data or URLs, no product writer/Target1, Geometry/NodeName, no merge/release, no native effective CAESAR claims.",
+      "required_return": "Native #178 repair return with new PR187 full head/tree/diff and local/hosted positive+negative tests, source-neutral rejection stderr, strict I13 cases, inherited parent defect remains open, one real rev3/gen2 Cycle v1 receipt on Common #493 and readback; then distinct reviewer 6adf3dbf new exact-head re-review.",
+      "next_after": "reviewer"
     }
   ],
   "gates": [
@@ -154,10 +177,11 @@
     },
     {
       "id": "element-e1-pr187-independent-review",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "scope": "Non-author, actual PR187 head and inherited catalog reviewer execution",
-      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188",
-      "limits": "Reviewer chat ID and authenticated independent actor not bound; previous #170 reviewer identity remains unbound. No review execution or release approval"
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415464730",
+      "limits": "No full Git checkout, Windows or original native-model test; no prior Cycle receipt; review verdict is technically credible despite GitHub identity limit",
+      "basis": "Owner identified reviewer6adf3dbf. Native review executed 11 new source-identical tests PASS and independent contrary cases with 2 actual technical defects, F1 private stderr leak and F2 inherited I13 acceptance. Distinct authenticated GitHub principal not established. Exact observed head3b9056fb."
     },
     {
       "id": "element-e1-pr187-hosted-new-tests",
@@ -165,18 +189,32 @@
       "scope": "Exact-head GitHub Action 40306587046 success covers catalog and NodeName 13+19 but does NOT run new five-field inspector eleven tests",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/actions/runs/40306587046",
       "limits": "Do not infer hosted 11/11 from workflow green"
+    },
+    {
+      "id": "element-e1-pr187-f1-cli-error-privacy",
+      "status": "FAIL",
+      "basis": "Review observed stderr leaked private basename, pointer lexeme/index/offset on invalid input because CLI interpolates error.message",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/188#issuecomment-6415464730",
+      "next": "Same PR187 bounded repair"
+    },
+    {
+      "id": "element-e1-pr187-f2-i13",
+      "status": "FAIL",
+      "basis": "Review observed 1.0 and 1E0 pointer #2 tokens parsed as valid RIGID index despite v14 I13. Parent PR168 defect tracked #173; PR187 must contain strict boundary guard and parent owner must separately fix catalog",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/173#issuecomment-6415601518",
+      "next": "PR187 containment + separately qualified PR168 reader fix"
     }
   ],
   "next": {
-    "recipient_role": "owner",
-    "recipient_chat_id8": null,
-    "status": "AWAIT_DISTINCT_NONAUTHOR_REVIEWER_BINDING",
-    "instruction": "Owner identify a real reviewer chat different from Element Oracle 6ade42a6, builder 6adedbc6 and PR187 author, or an eligible truly distinct trusted GitHub reviewer. Oracle has prepared the bounded native review XCU#188 at exact head3b9056fb. Once bound, publish new ACTIVE Element Cycle generation with reviewer recipient, then Owner send one URL-form trigger in that distinct reviewer chat. No work to rerun for coder unless independent review finds defect.",
-    "owner_trigger": null
+    "recipient_role": "coder",
+    "recipient_chat_id8": "6adedbc6",
+    "status": "READY_NOT_SENT",
+    "instruction": "Owner should paste one Element Cycle URL trigger to builder6adedbc6 for new rev3/gen2 F1/F2 repair. Read native #178 comment6415590149, review #188 comment6415464730, exact pre-repair PR187/PR168 heads; fix CLI stderr source leak and strict I13 RIGID pointer #2 inspector guard including unselected owners. Add independent regressions and evaluate endpoint oracle mutation, preserve PR168 reader. Return one native repair receipt and Cycle v1 on Common493. Re-review at new head by reviewer6adf3dbf. No Builder gen1 repetition, no reviewer re-onboard.",
+    "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr-element"
   },
   "progress_projection": {
     "status": "PROGRESS_UPDATE_PENDING",
     "project_key": "ciifr",
-    "reason": "PR187 and review issue188 reconciled into Element Cycle r2; no verified page update. No independent review or release claim."
+    "reason": "E1 reviewer6adf3dbf technical FAIL and new coder repair rev3/gen2; official progress editor projection not attempted"
   }
 }
