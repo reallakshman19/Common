@@ -24,12 +24,12 @@ class UpstreamParity(unittest.TestCase):
             for name,blob in expected.items():
                 with self.subTest(folder=folder,name=name):
                     raw=(base/name).read_bytes()
-                    got=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\0"+raw).hexdigest()
+                    got=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
                     self.assertEqual(got,blob,"file differs from the immutable upstream source candidate")
     def test_browser_cache_versions_are_consistent(self):
         m=json.loads(EXPECTED.read_text(encoding="utf-8"))
         for path in list((ROOT/"viewer").glob("*.js"))+[ROOT/"viewer"/"index.html"]:
-            versions=set(re.findall(r"\\?v=([0-9]+)",path.read_text(encoding="utf-8")))
+            versions=set(re.findall(r"\?v=([0-9]+)",path.read_text(encoding="utf-8")))
             self.assertTrue(not versions or versions=={m["viewerVersion"]},str(path)+": "+str(versions))
 
 if __name__=="__main__":unittest.main()
