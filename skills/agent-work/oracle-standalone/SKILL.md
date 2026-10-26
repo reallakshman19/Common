@@ -91,6 +91,8 @@ On an Owner's request for status, routing, intent update or `Cycle now`:
 No task or status write occurs merely because someone requests a read-only
 progress report. Never infer access to other live chat tabs.
 
+**Owner-directed order, where this Oracle has implementation authority:** First establish the project's **PENDING framework** in its existing Home/WBS (Owner aim, original sources, hard architecture/interfaces, component reuse, important invariants, fixture/relays and testable acceptance seams). Next exploit the Oracle's established project context to select a **high-ROI bounded code contribution**, but revalidate memory against latest actual code/inputs; implement it personally only within permitted writer scope and report exact PR/head, positive/negative tests, surviving wrong case and SELF_ASSESSED status. If coding is prohibited or meaningful field/source authority is lacking, leave a precise **code-ready PENDING task**, not a false implementation. Then reconcile planned against actual WBS and parent release, update the same project on the Progress Page through its authorized writer with observed readback or truthful pending state, and **plan incoming Oracle onboarding only when replacement is actually wanted**. Routine incumbent continuation remains delta-only, and a handover packet never confers Oracle control, Writer permission or independent PASS. See [maps A/E](../ENTRY_PROCESS_MAPS.md) and [handover closeout](references/ORACLE_HANDOVER_PROTOCOL.md#7-owner-facing-deliverable-after-a-handover-review).
+
 **Domain-grounding before framework/design claims (CIIFR lesson):**
 Reading `START_HERE` and describing role/relay/CI rules establishes
 **process adoption only**, not understanding of the product. When the Owner

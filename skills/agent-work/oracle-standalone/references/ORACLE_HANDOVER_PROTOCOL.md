@@ -28,6 +28,17 @@ The [Owner-selected immutable 3DC golden four](https://github.com/reallakshman19
 
 **Owner instruction: no avoidable blocker or ceremonial gate.** Outgoing Oracle resolves accessible source, conflicting status, current-head, pending receipt and legitimate transfer issues itself before saying “Owner next.” An UNKNOWN must have a named source/actor and an **attemptable next action**; it is not automatically a project-wide HOLD. Protected native authority and real Owner-only acceptance continue to apply to their specific operations. Keep active worker/reviewer assignments and late results alive until a **separate actual control cutover**; a published prompt means knowledge available, not successor assigned or authorized.
 
+### Before the successor: pending framework → Oracle contribution → reconciled status
+
+When the current Oracle has an **implementation remit**, perform the following in the existing native project records **before preparing a new Oracle**; a read-only handover never authorizes code:
+
+1. **PENDING framework:** Check the current Owner outcome, original input/fixture provenance, existing runnable code and protected engineering constraints. Record the architecture/interfaces, source-qualified reusable components, key invariants, known wrong cases, WBS dependencies, and one high-ROI implementation seam. Mark proposals `PENDING` until built and tested. Reuse existing concept/WBS records, not a mandatory extra schema or file bundle.
+2. **Oracle coding contribution:** Use the Oracle's established project knowledge and prior work to identify likely high-ROI reuse or a useful vertical slice, **then verify each remembered premise against current code, original files and actual authority**. Implement one bounded, authorized slice with precise branch/head, positive and negative checks, regression and observed UI/runtime evidence where required. No overlapping writer, speculative effective engineering semantics, unauthorized Writer, or bypass of existing engineering HOLD. Oracle-authored changes are **contributor work, SELF_ASSESSED** until independently reviewed as required. If unable to code safely, produce a code-ready task with the real blocker and `NOT_IMPLEMENTED`.
+3. **Reality reconciliation:** For the existing WBS root and every active branch, compare **planned deliverable / actual tested state / evidence and head / unfinished acceptance**. Include the parent integration/release plan; do not infer parent PASS from isolated prototype tests. Keep built, source-qualified, NOT_RUN, PENDING, BLOCKED and Owner-accepted states distinct. Attempt source-backed Progress Page correction with the authorized writer; verify merged/live readback and name any lag.
+4. **Only if succession is actually justified or requested**, plan a successor Oracle read-only source walkthrough and transfer the full concept, difficult logic, decisions and wrong cases, original access/custody, the Oracle's exact contributed candidate, all active coder/reviewer WBS assignments, and the concluding plan-vs-actual/Page report. **A handover plan is not a control-epoch change.**
+
+An established Oracle otherwise continues by changed-evidence-only refresh, without re-creating framework documents, re-coding finished slices, or inventing an onboarding gate.
+
 ## 2. One-line cold-start command (read-only first)
 
 For a new successor chat:
@@ -56,6 +67,8 @@ The incumbent Oracle prepares a **public-safe landing packet** with actual expla
 | **E. Files/fixtures** | Public landing page URL, **exact fixtures collection URL**, project repo, original source/mapping approvals, baseline, runnable, code-only, independent reports and screenshot evidence; **private manifest location by opaque ref** | Mark bytes `MISSING`, `UPLOADED`, `DOWNLOADED`, `BYTE_MATCHED`, `INDEPENDENTLY_REVIEWED` separately |
 | **F. Open risk/authority** | **Major design decisions, rejected alternatives, surviving wrong cases**, stale approvals, ambiguous mapping, unauthorized target changes, private-content leaks, failed/pending tests, successor author exposure, Owner approval boundaries | No positive claim beyond its exact candidate and observation |
 | **G. Execution frontier** | **ONE executable NOW**, actor, exact source and return; two connected outcomes and only as many supporting tasks as materially useful | Do not invent a five-action gate or require Owner to deliver every prompt |
+
+**Closing requirement — planned versus actual and Progress Page:** The packet's **last substantive section** compares the exact baseline WBS and parent release milestones: planned deliverable, actual implemented/tested/source-qualified state, evidence and limitations, remaining planned work/stop conditions and next responsible actor. State the incumbent Oracle's own PENDING framework and code contribution explicitly. Report integrated release and Owner acceptance separately. End with the existing Page project key, draft/merged commit, live-view readback and exact discrepancy if stale. Do not claim that a draft PR or successful CLI check updated the live Page. This is a compact table backed by native records, **not a duplicate WBS or additional handover artifact**.
 
 **Canonical source of state:** Read `oracle-cycles/<project>/CURRENT.json` from the actual permitted canonical branch/commit. GitHub issue comments are transport receipts; Progress Page is a public-safe presentation. Preserve old revisions/history, not a copied parallel "current" JSON.
 
@@ -139,7 +152,24 @@ CURRENT → <real canonical state URL>
 PRIVATE BYTES → <RECEIVED / MISSING / UNVERIFIED; no child URL>
 NOW → <one next role and exact one-line instruction, or Owner decision>
 HANDOVER → <PREPARED / READ_ONLY / CUTOVER_APPROVED / PUBLISHED / UNKNOWN>
+
+FINAL STATUS — PLAN VS ACTUAL (as of <date>; roadmap/WBS baseline <URL and SHA>)
+| Existing WBS or parent milestone | Planned deliverable | Actual result / exact evidence | Unfinished / next dependency |
+| <WBS 3.x, 4.x, etc.>         | ...                 | ...                            | ...                          |
+| <M0–M5 / integration>        | ...                 | ...                            | ...                          |
+ORACLE FRAMEWORK → <PENDING architecture/modules/reuse; exact native source>
+ORACLE CODE CONTRIBUTION → <PR + head + tested behaviors / SELF_ASSESSED or NOT_IMPLEMENTED>
+PLANNED BUT UNEXECUTED → <specific intended outcome, why deferred, next actor>
+RELEASE / OWNER ACCEPTANCE → <actual accepted/held scope, missing native/browser tests>
+ONE NEXT AUTHORIZED TASK → <existing ID, actor, inputs, proof and STOP IF>
+
+PROGRESS PAGE → <existing project key + canonical project/fixture links>
+PAGE ACTUAL vs NATIVE → <WBS evidence discrepancies and last read source>
+PAGE UPDATE → <PR/commit and DRAFT / MERGED / LIVE_VERIFIED / BLOCKED>
+PAGE LIVE READBACK → <observed project status or NOT_VERIFIED>
 ```
+
+**CIIFR quality benchmark, not an automatically refreshed factual claim:** A 26 October 2026 source-bound comparison should separate Geometry WBS 3.1 G1 *prototype delivered but genuine browser acceptance pending*, 3.2 G2 *not implemented despite source ambiguity research*, Element WBS 4.1 E1 *field/pointer syntax checks scoped PASS while effective semantics are unresolved*, 4.5 E5 *Writer HOLD*, and parent VNext M4–M5 *integrated acceptance/legacy replacement not established*. If the actual live CIIFR Page still lists G0–G4 as `NOT_STARTED`, report **PAGE STALE**, prepare the correction on the existing project key, and link the PR; only mark `LIVE_VERIFIED` after merging/deployment and observing the corrected view. Revalidate every example value against current native sources when writing a real handover.
 
 Show original sources and meaningful discrepancies. Link to the **current** Progress Page and fixtures on the actual public branch, never claim a draft branch is the live page. For a new unregistered successor, recommend the full `Oracle handover (read-only): <URL>` line; for an already assigned coder or IR, use their `Cycle now` command only when actually authorized.
 
