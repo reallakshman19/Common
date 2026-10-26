@@ -3,7 +3,7 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 12,
+  "revision": 13,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025",
@@ -12,7 +12,7 @@
     "ciifr-geo-6adedbc6-g1-viewer-r2-pr185-20261026",
     "ciifr-geo-6adedbc6-pr185-f1-r3-3787acdf-20261026"
   ],
-  "aim": "CIIFR_GEO read-only two-existing-XML Geometry correspondence: preserve Method C/manual NODE anchors, full ledger and SVG evidence while reusing the 3D Edit viewing layer. This revision reconciles scoped independent native F1 PASS and prepares the remaining actual served-browser/WebGL G1 trial; no engineering acceptance or product release.",
+  "aim": "CIIFR_GEO read-only two-existing-XML correspondence workbench using Method C/manual NODE anchors and shared 3D engine. This revision records Owner-directed navigation, node selection, camera views and fullscreen ledger; actual browser/Owner acceptance remains separate.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
   "privacy": "PUBLIC_SAFE_METADATA_ONLY",
   "roles": {
@@ -20,19 +20,19 @@
       "label": "CIIFR project Oracle",
       "chat_id8": null,
       "provenance": "OWNER_APPOINTED_ORACLE_IN_CURRENT_CONVERSATION; THIS_CHAT_ID_UNKNOWN",
-      "responsibility": "Choose bounded G1 continuation; challenge native evidence and publish next Cycle revision; coordinate Progress Page via authorized writer"
+      "responsibility": "Owner-authorized NAV contributor and coordinator; cannot independently approve own affected changes. Reconcile distinct reviewer verdict and publish bounded temporary preview; no product merge/release."
     },
     "coder": {
       "label": "CIIFR_GEO WBS3.1 viewer integration builder",
       "chat_id8": "6adedbc6",
       "provenance": "OWNER_AUTHORIZED_NEW_CHAT_CREATED_AND_MESSAGE_OBSERVED_IN_CHATGPT_CHAT_HIGH_20261026; ID8_OBSERVED_FROM_CHAT_URL_NOT_AUTHENTICATED_IDENTITY",
-      "responsibility": "R3 repair returned and independently native-reviewed at3787acdf; no further coding assignment unless actual new findings require a bounded repair."
+      "responsibility": "Prior ChatGPT builder returned R3; no duplicate dispatch or new GEO coding assignment. Root implemented Owner's bounded NAV continuation."
     },
     "reviewer": {
       "label": "PR185 separate non-author reviewer / task CIIFR-GEO-IR-PR185-R3",
       "chat_id8": null,
       "provenance": "OWNER_EXPLICIT_REVIEW_REQUEST; SEPARATE_NON_AUTHOR_REVIEW_TASK; NO_BROWSER_CHAT_ID; PRINCIPAL_ACCOUNT_INDEPENDENCE_UNKNOWN",
-      "responsibility": "Returned scoped native F1 PASS at3787acdf. Actual served-browser/GPU qualification and Owner trial remain BLOCKED; browser executor/host not yet verified. Principal/account independence UNKNOWN."
+      "responsibility": "Returned scoped independent native NAV PASS at668c22b4; actual served GPU/browser/Windows/Owner qualification and principal/account limits remain."
     },
     "owner": {
       "label": "Owner",
@@ -50,9 +50,9 @@
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
     "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
-    "current_candidate": "XCU draft PR185 repaired head3787acdf6cd96e51c48f4a2d5de4f358a89cc095/tree0a449e73c50743e003013f570fddc733e84ba2b1, stacked on unchanged PR1833a1bec9. Independent native F1 PASS only; actual served browser/GPU/Owner acceptance BLOCKED.",
+    "current_candidate": "XCU draft PR185 head668c22b49077520e911a3ef64a931c94db3a0a29/treeb9e7f46cb260fc88fc37d832453752bde1e46f79, unchanged PR1833a1bec9 base. Scoped independent native NAV PASS; actual GPU/browser/Owner acceptance remains held.",
     "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
-    "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6412690110",
+    "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416543627",
     "minimal_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6397715134",
     "review_awaited": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6400033775",
     "g2_prepared_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/177",
@@ -71,7 +71,12 @@
     "output_artifact_relay": "https://github.com/reallakshman19/Common/blob/cc315e5884563b4fdc3be84eb5d9bb7b0ff89661/relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/OUTPUT_R2.md",
     "owner_independent_review_requirement": "Explicit Owner instruction: do not skip independent reviewer. Exact-candidate non-author review and required actual browser/Owner gates cannot be replaced by author tests, Oracle self-review or an information merge.",
     "repair_brief": "relay/AGENT_WORK/ciifr-geo/GEO-G1-IR-PR185-1/REPAIR_R3.md",
-    "browser_trial": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6413279309"
+    "browser_trial": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6413279309",
+    "navigation_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6416201337",
+    "navigation_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416464608",
+    "temporary_preview": "https://reallakshman19.github.io/CIIFR-GEO-Preview/",
+    "temporary_preview_repo": "https://github.com/reallakshman19/CIIFR-GEO-Preview",
+    "preview_commit": "2a3298a53186673ec0dff49a5982bb0b983ad076;39 source blobs verified byte-identical to source668c22b4; hosting landing/manifest only additional"
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
   "assignments": [
@@ -233,14 +238,47 @@
       "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6412690110",
       "native_return_status": "SCOPED_NATIVE_F1_PASS; OWN_CORRECTNESS_OLD5_FAIL_NEW6_PASS; NODE27_HTTP_PASS; REAL_BROWSER_GPU_OWNER_BLOCKED",
       "independence_limits": "Same non-author reviewer process, exposed to prior finding and author fix; own execution/additional correctness suite. Shared-account/principal independence UNKNOWN; no formal GitHub APPROVE."
+    },
+    {
+      "id": "CIIFR-GEO-G1-NAV-FULLSCREEN-1",
+      "generation": 4,
+      "recipient_role": "oracle",
+      "recipient_chat_id8": null,
+      "transport": "OWNER_DIRECT_UI_IMPLEMENTATION_CONTINUATION; root contributor",
+      "dispatch": "RETURNED_RECONCILED",
+      "scope": "Owner requested reference Load Calc navigation/camera/node selection, fullscreen popup and row→all-node highlighting. Task-owned UI/bridge only; graph, transforms, shared viewer/Worker and exports preserved.",
+      "candidate": "XCU draft PR185 head668c22b49077520e911a3ef64a931c94db3a0a29/treeb9e7f46cb260fc88fc37d832453752bde1e46f79, unchanged PR1833a1bec9 base. Scoped independent native NAV PASS; actual GPU/browser/Owner acceptance remains held.",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6416201337",
+      "repair_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416464608",
+      "native_return_status": "AUTHOR35_NATIVE_HTTP_PASS; INDEPENDENT_CURRENT_NATIVE_NAV_PASS; ACTUAL_GPU_BROWSER_OWNER_BLOCKED",
+      "next_after": "reviewer"
+    },
+    {
+      "id": "CIIFR-GEO-IR-PR185-NAV-1",
+      "generation": 3,
+      "recipient_role": "reviewer",
+      "recipient_chat_id8": null,
+      "participant_type": "SEPARATE_NON_AUTHOR_REVIEW_TASK",
+      "dispatch": "REVIEW_RETURNED_RECONCILED",
+      "candidate": "XCU draft PR185 head668c22b49077520e911a3ef64a931c94db3a0a29/treeb9e7f46cb260fc88fc37d832453752bde1e46f79, unchanged PR1833a1bec9 base. Scoped independent native NAV PASS; actual GPU/browser/Owner acceptance remains held.",
+      "scope": "Independent READ_ONLY new-head NAV review; preserve9c FAIL N1/N2 and contributor refresh-premise correction; assess picked physical identities, normal/fullscreen linked selection, native fullscreen rejection lifecycle and affected invariants.",
+      "native_old_verdict": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416347415",
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
+      "next_after": "oracle",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416543627",
+      "native_return_status": "SCOPED_NATIVE_NAV_PASS; N1_N1B_N2_N2B_N3_CORRECTED; NO_NEW_BOUNDED_FINDING; GPU_BROWSER_OWNER_BLOCKED",
+      "historical_verdicts": [
+        "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416347415",
+        "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416448740"
+      ]
     }
   ],
   "next": {
     "recipient_role": "owner",
     "recipient_chat_id8": null,
-    "status": "AWAIT_CAPABLE_BROWSER_TRIAL",
-    "instruction": "Use the exact-head archive and Windows launcher/instructions in the native trial card to arrange or perform the remaining actual served SVG/WebGL journey; return public-safe evidence on#186 for assessment. No additional coding nudge or duplicate review of unchanged native repair. Actual capable host/browser executor has not been verified or dispatched.",
-    "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6413279309"
+    "status": "AWAIT_PREVIEW_TRIAL",
+    "instruction": "Try the updated temporary preview: camera/navigation, physical node picking, fullscreen popup and linked row/node highlighting. Return actual browser/GPU observations on#186 for assessment. Root/author cannot grant independent GPU or engineering acceptance; no product merge.",
+    "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416543627"
   },
   "gates": [
     {
@@ -411,17 +449,24 @@
       "scope": "Scoped native F1 PASS on exact PR1853787acdf: independently verified8578 blobs; identical correct-invariant tests fail old/pass new; own source-invalidation/runtime-callback/pagehide challenges6/6; full27/27 native and HTTP checks passed.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6412690110",
       "limits": "Native controlled DOM/factory only. Old-head FAIL preserved. Actual rendered axes/object picks/scale, Worker/GPU lifecycle, fallback/downloads, performance, Windows and Owner trial remain NOT_RUN/BLOCKED. Principal/account independence UNKNOWN."
+    },
+    {
+      "id": "geo-pr185-nav-independent-review",
+      "status": "PASS",
+      "scope": "Scoped independent native NAV PASS at668c22b4: all8581 candidate blobs verified;35/35 native, unchanged contrary SVG/typed identity/fullscreen refusal tests and HTTP31/assets PASS. Historical9c/abd FAILs preserved.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6416543627",
+      "limits": "Root authored change, not independent reviewer. Shared-account principal independence UNKNOWN. No rendered GPU/browser/Owner acceptance or product merge."
     }
   ],
   "progress_projection": {
     "repository": "reallakshman19/progress-page",
     "project_key": "ciifr",
-    "publication_status": "PUBLISHED_R4_NEEDS_REV8_BLOCKER_UPDATE",
+    "publication_status": "PROGRESS_UPDATE_PENDING",
     "published_revision": "R4",
-    "reason": "PROGRESS_UPDATE_PENDING with existing sole ciifr writer. R3 independent native F1 PASS reconciled; actual served browser/GPU/Owner G1 gate remains blocked. No product completion/release."
+    "reason": "PROGRESS_UPDATE_PENDING with existing sole ciifr writer. NAV implementation and exact-head review evidence must be projected without claiming actual browser acceptance; no product release."
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
-  "activation_scope": "R3 F1 independently native-corrected at exact3787acdf; next material gate is actual served-browser/WebGL and Owner trial on a capable host. Trial card prepared, host/executor not verified. No new feature coding, product merge/release, G2, Writer or succession.",
+  "activation_scope": "Owner-directed WBS3.1 navigation/fullscreen/all-node selection implemented and independently native-reviewed at exact668c22b4. Authorized temporary preview updated with39 verified source blobs. Actual GPU/browser/Owner trial remains; no XCU merge, G2, Writer, release or succession.",
   "coordination_observation": {
     "source_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6412585369",
     "builder_status": "R3_RETURNED_NOT_PENDING_CODING; no evidence agent is off",
