@@ -20,6 +20,8 @@ A handover document, a correct verbal reconstruction, a GitHub receipt, or a new
 
 If a project selected a native delivery, lease, gatekeeper or independent-review process, **preserve that process**; this handover protocol indexes it and does not create a competing task/approval ledger. No universal three-agent requirement, no additional reconstruction exam when context and demonstrated understanding are adequate.
 
+Use [First-source-walkthrough alignment](../../initial-mentoring/SKILL.md#1-first-source-walkthrough-alignment) for a new/incoming Oracle and its [appointment/custody distinction](../../initial-mentoring/SKILL.md#3-special-case--incoming-oracle). Own demonstrated, still-applicable understanding supports delta-only continuation; a predecessor's summary or four-file readback does not. A directly Owner-appointed active Oracle can perform its authorized source/coordination work without predecessor endorsement; a read-only candidate cannot mutate current/control, and replacing shared custody still requires real native cutover/isolation.
+
 ### Common's four-document benchmark and incumbent's duty
 
 The [Owner-selected immutable 3DC golden four](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload) define **depth**, not another project's engineering truth. The [Common Agent-Work four-document example](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ORACLE_HANDOVER.md) provides THIS protocol's [concept](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/CONCEPT_NOTE.md), [architecture](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ARCHITECTURE_COMPLEX_LOGIC.md), [decisions/falsifiers](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ARCHITECTURE_DECISIONS_AND_CHALLENGES.md) and [execution frontier](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/payload/ORACLE_HANDOVER.md) plus [copy-ready prompt](../../../../relay/AGENT_WORK/common-agent-work-oracle-continuity/knowledge-20261025/ORACLE_SUCCESSOR_PROMPT.md). The incumbent must author **equivalent project-specific source substance** for its project, or link existing verified native records that already carry it; copying status labels/these generic documents is not enough.
@@ -98,7 +100,7 @@ Use `REPORTED`, `EXECUTED_HERE`, `INDEPENDENTLY_REVIEWED`, `NOT_RUN`, and `UNKNO
 | Stage | May do | May not assert |
 |---|---|---|
 | `HANDOVER_PROPOSED` | Owner requests preparation, incumbent identifies sources/risks | New Oracle appointed |
-| `PACKET_PREPARED` | Build the source-backed concept, complex-architecture/logic and decision/challenge transfer **plus** linked A–G packet, custody manifest and five actions; name knowledge gaps | All files received |
+| `PACKET_PREPARED` | Build the source-backed concept, complex-architecture/logic and decision/challenge transfer **plus** linked A–G packet and custody manifest; name knowledge gaps, ONE executable NOW and two connected outcomes | All files received |
 | `SUCCESSOR_READ_ONLY` | Successor opens originals, reconciles concept/architecture and consequential decisions with live sources, verifies actual access, reproduces current status/limits and challenges a plausible wrong case | Old Oracle retired, successor can write |
 | `OWNER_APPROVED_CUTOVER` | Owner selects successor, role, actual write policy and time/conditions | Automatic write isolation or release authority |
 | `CUTOVER_PUBLISHED` | Compare-and-swap authorized state/epoch change; explicitly adopt ongoing coder/IR assignments and preserve task IDs | Chat suffix or readback alone authenticated the actor |
@@ -127,11 +129,9 @@ NOW PROTOTYPE → <what is actually demonstrated; candidate and test limits>
 NEXT PROTOTYPE → <two connected outcomes and what the Owner can do>
 OWNER INTENT → <one observable outcome and protected constraints>
 
-1 <actor> → <action> · DONE WHEN <evidence>
-2 <actor> → <action> · DONE WHEN <evidence>
-3 <actor> → <action> · DONE WHEN <evidence>
-4 <actor> → <action> · DONE WHEN <evidence>
-5 <actor> → <action> · DONE WHEN <evidence>
+NEXT ACTION → <actor> → <one executable action> · DONE WHEN <evidence>
+CONNECTED OUTCOMES → <next usable outcome> → <following dependent outcome>
+SUPPORTING ACTIONS → <only if materially useful; actor and evidence, no fixed count>
 
 LANDING → <verified existing Progress page URL>
 FIXTURES → <real data/<key>/fixtures.json URL>

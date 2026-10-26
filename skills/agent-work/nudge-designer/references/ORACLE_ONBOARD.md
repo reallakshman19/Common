@@ -9,19 +9,27 @@ Use this optional instruction handover when a source-based working explanation
 and useful next direction already exist. The available lead or Owner can prepare
 it; an outgoing agent and a separately staffed Oracle are not required. It is a
 prompt type, not another operating mode, admission test or review qualification.
-For a **genuinely new recipient**, the responsible Oracle may use
+For a **genuinely new participant or incoming Oracle**, apply
 [Initial Mentoring](../../initial-mentoring/SKILL.md) *within this same brief or first
-source walkthrough*: roughly three conversational, source-grounded prompts about the
-Owner concept, complex architecture/surviving wrong case, and the meaningful next
-result. **This is coaching, not a questionnaire, score or extra admission step.**
-Returning agents do not repeat it; an incoming Oracle uses the same themes with
-active assignments and next two connected deliveries, remaining read-only until
-the actual native succession is authorized.
+source walkthrough*. Before consequential plans or briefs, the participant explains
+in their own words the Owner WHY, architecture rationale and a real source-to-result
+trace with a plausible wrong case, and the meaningful next result from current native
+WBS/candidate/fixture access and actual owners. These are adaptive themes, not three
+required answers, a questionnaire, score or approval step. A worker stays within its
+pre-resolved WBS; an incoming Oracle synthesizes the whole project, active assignments
+and next two connected deliveries: a candidate successor remains read-only pending
+actual authorized cutover, while a directly Owner-appointed active Oracle performs
+authorized planning/coordination without predecessor endorsement; taking over existing
+shared control/write custody still requires actual cutover and writer isolation.
+An already-grounded participant reuses **their own demonstrated understanding** when
+its source/candidate basis is unchanged and refreshes only relevant deltas. Unavailable
+originals/checks stay `NOT_READ`/`NOT_RUN`; narrow only dependent claims and continue
+safe authorized work. The preparer resolves accessible source gaps before briefing.
 It is a Markdown template; existing render/adapt APIs and schemas are unchanged.
 
 **Golden-depth Agent OnBoard (new builder/specialist/reviewer):** When the recipient lacks a real project concept, difficult source-model explanation or a reliable execution/custody frontier, use the [four reusable source-grounded Agent OnBoard knowledge templates](../assets/agent-onboard/README.md) and its [copy-ready Agent OnBoard prompt](../assets/agent-onboard/AGENT_ONBOARD_PROMPT.md). The original four [3DC golden documents](https://github.com/reallakshman19/Common/tree/bf02e54e1b453c3206ae366de7d65f41c94ab0d4/relay/AGENT_WORK/3DC-XML-CII/oracle-continuity-20261025/payload) define **depth, not transferred engineering facts**. Fill from actual Owner/native sources, or **link existing substantive Project Home/ADRs/issue sources** rather than manufacturing four files. This is still the same native seven-element assignment, not a required extra briefing, exam, dispatch gate or parallel reviewer process. Existing grounded agents receive only the changed context; no redundant onboarding.
 
-The new agent's **first executable task, exact permitted files, original data route, return issue and one plausible wrong case must be pre-resolved** by the actual Oracle/OTM/Owner. The Oracle tackles accessible source gaps itself rather than returning routine homework to Owner. For any cross-agent artifact, [Common public-safe Option 1 then restricted Drive Option 2](../../ARTIFACT_RELAY.md) remain mandatory to claim completed delivery; a sandbox link is local only. A new chat is not a new assignment generation or write permission by itself.
+The new agent's **first executable task, exact permitted files, original data/fixture route, candidate, return issue and relevant contrary-case method must be pre-resolved** by the actual Oracle/OTM/Owner. Keep independent-review packets neutral: original requirements and source access, without producer answers, proposed diagnoses or seeded expected results; the reviewer derives expectations and discloses exposure. The Oracle tackles accessible source gaps itself rather than returning routine homework to Owner. For any cross-agent artifact, [Common public-safe Option 1 then restricted Drive Option 2](../../ARTIFACT_RELAY.md) remain mandatory to claim completed delivery; a sandbox link is local only. A new chat is not a new assignment generation or write permission by itself.
 
 **Oracle OnBoard (actual project Oracle role):** For a newly assigned/promoted Oracle or read-only successor, use the [four reusable source-grounded Oracle OnBoard knowledge templates](../assets/oracle-onboard/README.md) and [copy-ready Oracle role prompt](../assets/oracle-onboard/ORACLE_ONBOARD_PROMPT.md). Link established, already-source-grounded Project Home / current native decisions instead of manufacturing documents. New role and actual Owner/OTM selection come from the project's native authority; a candidate successor remains read-only. Preserve issue/PR title owner and actual Chat ID routing under [native title/traffic hygiene](TITLE_AND_TRAFFIC_HYGIENE.md): human-owned PR title hygiene and manual coordination-issue lights are allowed only where native rules permit, while v3.5 DELP issue titles are generated and never manually edited. The light cannot turn NOT_RUN into PASS. This adds neither a mode nor a new gate.
 
@@ -41,7 +49,7 @@ The new agent's **first executable task, exact permitted files, original data ro
 | Relevant BuddyRunner, two-pass or three-pass completed | Reuse its outputs directly. An OnBoard Prompt may package the next instruction; it must not repeat the completed flow or add reconstruction. Product FAIL does not mean that the context flow is incomplete. |
 | A selected context flow is still in progress | Follow its native stages. This prompt does not bypass or add stages. |
 | Cold recovery with no usable context | Recover the missing meaning from original sources using the selected protocol's method. Once usable, continue; do not impose a questionnaire or a second reconstruction ceremony. |
-| Newly assigned participant lacks a shared concept/architecture model | Oracle first grounds itself in accessible originals; mentor using about three adaptive conversational questions [Initial Mentoring](../../initial-mentoring/SKILL.md), then issue/continue the **same** bounded task. No exam or additional gate. |
+| New participant or incoming Oracle | Ground accessible originals and use [Initial Mentoring](../../initial-mentoring/SKILL.md)'s adaptive themes within the first source/task walkthrough; explain the model before consequential plans/briefs and continue the **same** assignment. No exam or additional gate. |
 | Same grounded task continues | Keep working. A new commit, reply or task boundary alone does not require another onboarding. |
 
 Use this guide alone or alongside separately selected Task Decomposer, delivery

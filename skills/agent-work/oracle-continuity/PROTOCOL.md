@@ -47,14 +47,13 @@ not allocated to a capable participant. Medium-reasoning executors receive eithe
 concrete guided method or an investigation with competing explanations and a useful
 discriminating observation. Role/model labels do not establish competence.
 
-**Initial understanding is mentor-supported, not exam-scored.** When a new agent
-or successor Oracle is first assigned, the responsible Oracle/coordinator uses
-[Initial Mentoring](../initial-mentoring/SKILL.md) within existing onboarding:
-roughly three adaptive source-grounded questions about **Owner outcome**,
-**difficult architecture and a plausible wrong case**, and **one connected next
-observable result**. A new worker does not inherit an explanation as technical
-truth merely because an Oracle supplied it. Existing returned agents use only
-current-state deltas and do not repeat these questions.
+**Initial understanding is mentor-supported, not exam-scored.** New agents and
+incoming Oracles use [Initial Mentoring](../initial-mentoring/SKILL.md)'s
+[First-source-walkthrough alignment](../initial-mentoring/SKILL.md#1-first-source-walkthrough-alignment)
+within existing onboarding for the Owner outcome, difficult architecture and
+connected next result. Established participants reuse only their own
+demonstrated, still-applicable understanding and refresh affected source deltas.
+Neither another Oracle's explanation nor a document readback establishes it.
 
 The coordinator owns actual routing and receipts. The executor owns its bounded
 artifact. The reviewer inspects the relevant claims without being an author of the
@@ -115,18 +114,10 @@ referenced; the core does not require copying them into the public record.
    requires observed positive evidence for its declared capabilities, including input
    access and artifact return. Capability observations are dated, not permanent.
 4. **Before writing a consequential engineering brief or qualifying a new framework**,
-   the Oracle opens one relevant original input/record, its existing implementation
-   path and the authoritative format/domain rules; traces one important relationship
-   end-to-end; and distinguishes **inventoried structure** from verified **effective
-   meaning**, including applicable units, source identity, field-specific defaults,
-   inheritance, auxiliary pointers or other project-specific dependencies.
-   Identify one error a superficial parse or happy-path test could miss and how an
-   original-grounded counterexample would expose it. When material field meaning
-   is unverified or protected inputs are unavailable, label the affected premise
-   `UNKNOWN / NOT_RUN` and choose a **bounded read-only grounding action** before
-   asserting writer or engineering correctness. Do not turn this into a scored
-   onboarding quiz, compulsory new issue or an Owner decision if the necessary
-   source is already accessible.
+   apply [First-source-walkthrough alignment](../initial-mentoring/SKILL.md#1-first-source-walkthrough-alignment).
+   The Oracle independently grounds the affected engineering premise and execution
+   frontier. Missing sources or unverified meaning limit the dependent claim/action,
+   not unrelated safe exploration; do not replace grounding with an exam or new approval.
 5. Write a compact brief from the task record: aim, why this task, actual inputs,
    decisions/constraints, result, checks, reserved judgments and next action.
 6. Deliver through the actual supported route. Keep `prepared`, `sent`, `confirmed`
@@ -250,111 +241,14 @@ A status-only A–G checklist, a set of unread links, or an agent roster does **
 
 The successor checks the relevant original sources and demonstrates usable understanding by explaining an important design invariant, a rejected alternative or surviving wrong case, and the next evidence-bearing operation. This is targeted source reconciliation, **not a scored onboarding exam**, engineering review, file-byte receipt, independent PASS, or grant of Oracle control. Follow the selected native authorization and epoch/cutover rules below.
 
-**Read-only successor mentoring and source challenge:** The outgoing Oracle or
-coordinator brings a source-linked concept, architecture decisions, real current
-candidate, fixtures/custody, active assignments/returns and next two connected
-deliveries. The new Oracle uses [Initial Mentoring](../initial-mentoring/SKILL.md)
-in conversation to reconcile: (1) the actual Owner/user outcome, (2) one
-**original-to-effective engineering meaning** path and rejected shortcut/wrong
-case against real source/specification, and (3) the immediate useful task,
-following dependent task, existing worker owners and late-return risk. In a CII
-example, ELEMENTS/RIGID/NODENAME counts, node/pointer census and 13 green synthetic
-parser tests **do not verify** field-specific inheritance, sentinel
-semantics, auxiliary ownership or downstream effective properties. Mark those
-unknown until independently grounded in original CII, existing parser and
-appropriate vendor layout; if uncertain, the first successor task is bounded
-**read-only source reconciliation**, not fresh writer/transfer modules. This
-conversation provides understanding, **never automatic control or approval**.
-
-Prepare a handover with the old/new Oracle sessions, epoch n to n+1 and a checkpoint.
-At cutover, retire the prior Oracle instance, activate the new control binding and
-explicitly list ongoing assignments it adopts. Their execution can continue.
-Record any scope or priority changes separately; succession itself does not rewrite
-the aim, reset reviews, create new release authority or silently cancel all workers.
-
-The validator checks the declared handover/epoch chain. The execution adapter must
-reject stale Oracle control commands; it cannot rely on the old chat obeying a text
-instruction after retirement.
-
-## 8. Publication, concurrency and recovery
-
-`oracle-command.schema.json` binds a proposed state file's exact bytes to a command
-ID, project ID, enrolled actor, expected previous revision and Oracle epoch.
-
-Keep proposed files separate from the canonical published record. Validation does
-not activate their assignments or turn their proposed history entries into actual
-publication receipts. The same state shape is used for preparation and publication;
-its trusted storage reference and committed receipt establish which it is, rather
-than a self-declared draft/live flag. Do not point Progress or dispatch tooling at
-an uncommitted proposal. Preparation timestamps are not evidence of actual delivery.
-
-The actual publisher must execute the following as one controlled operation:
-
-1. Authenticate the actor and resolve authority outside the supplied JSON.
-2. Look up the command ID. For an exact retry, return the original receipt. Reuse
-   with different payload bytes is a conflict. Do not resend external messages.
-3. Read the canonical revision/epoch. Compare with both command preconditions.
-4. Validate the proposed state against that exact previous snapshot and command.
-5. Commit using atomic compare-and-swap against the same previous state. Store the
-   new state and receipt together, then expose the new revision.
-
-For a file/Git adapter, use one actual publisher and an exclusive local lock or
-conditional update against the expected Git object. Atomic rename alone does not
-resolve two readers validating against the same preimage. A database adapter uses
-a transaction and conditional revision/epoch update. The supplied checker performs
-none of these writes or locks.
-
-External side effects need an intent and reconciliation record: save intent before
-sending, inspect the destination afterward, and preserve uncertainty after a crash.
-A timeout or failed readback never means the first send did not happen. No
-exactly-once delivery guarantee is made. If the predecessor is unavailable, recover
-from authoritative records and actual target observations, leaving gaps explicit.
-
-## 9. Version and history rules
-
-- Artifact/evidence/assessment/decision/publication records are append-only across
-  compared snapshots. Corrections use explicit supersession, preserving history.
-- Sessions and assignments retain stable identity fields. Superseded/cancelled
-  assignments and retired sessions cannot revive under the same identity.
-- A task revision change requires an adopted scope decision. Aim revisions preserve
-  their source. Keep previous state snapshots to retain prior task definitions.
-- Unknown schema major versions fail. Additive contract changes require an explicit
-  schema/version migration and tests; a field typo never becomes a silent extension.
-- A single snapshot check cannot prove that history was preserved. Use `--previous`
-  against the actual canonical predecessor; keep the external version history.
-- Publication history is an audit chain, not a full event-sourcing implementation.
-  It neither reconstructs unknown pre-baseline activity nor authenticates timestamps.
-- Timestamps require an offset and a valid calendar value; this reference profile
-  excludes leap seconds. Capability age limits are domain/environment policy.
-
-## 10. Progress projection and adoption
-
-One canonical task record supplies a Progress milestone. Render its outcome,
-candidate/launch reference, assignments, latest applicable verdicts, actual use,
-acceptance, checkpoint and next actor. Keep author-return time, evidence observation
-time and last publication time distinct. Recompute applicable evidence on candidate
-or task revision changes. Do not average these facts into a completion percentage.
-
-Existing fields can remain adapters:
-
-| Existing Progress field | Canonical basis |
-|---|---|
-| aim / aimSrc | project aim / source |
-| wbs or milestone identity | stable task ID mapping, stored once |
-| canDo | task outcome qualified by actual use/evidence |
-| cap / capSrc | conservative projection of applicable assessments, use and acceptance |
-| agent block | one assignment generation with its task and session |
-| next actor / next text | unresolved responsibility plus checkpoint next action |
-| fixtures | task inputs and domain sources |
-| Timeline | publication history linking the original evidence/decisions |
-
-No projection may upgrade a verdict. Public views use an explicit allowlist; private
-inputs, actual chat links, credentials and unrestricted checkpoint text stay private.
-This core intentionally has no automatic public exporter.
-
-Adopt in one current task: create the state, confirm capabilities, attach actual
-receipts, validate changes and exercise a simulated worker/Oracle cutover on a copy.
-Keep the canonical records private until a public projection is deliberately built.
+**Successor mentoring and source challenge:** Apply [First-source-walkthrough alignment](../initial-mentoring/SKILL.md#1-first-source-walkthrough-alignment)
+and its [incoming-Oracle boundary](../initial-mentoring/SKILL.md#3-special-case--incoming-oracle).
+The successor independently grounds the project and challenges stale claims; it
+does not inherit demonstrated understanding from the outgoing session. A candidate
+reports concrete corrections read-only. A directly Owner-appointed active Oracle
+uses its actual coordination scope without predecessor endorsement; shared-write
+replacement still needs the real native cutover and isolation below. Preparation,
+appointment and actual control/custody remain di…1515 tokens truncated…ical records private until a public projection is deliberately built.
 Demonstrate a real successful continuation before enabling unattended publication.
 
 ## Source basis
