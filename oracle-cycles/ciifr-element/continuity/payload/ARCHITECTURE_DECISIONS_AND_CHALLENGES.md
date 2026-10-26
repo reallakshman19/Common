@@ -1,4 +1,7 @@
 # CIIFR Element — Architecture Decisions, Challenges and Falsifiers
+
+> **2026-10-26 R2 supersession:** Specialist [R2 on native #178](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6402061761) replaces the prior protected-original access blocker with `RECIPIENT_PRIVATE_BYTES_VERIFIED / ORIGINAL_PHYSICAL_FIELDS_PASS`; original contains no weight-zero RIGID. The surviving blocker is **actual engineering configuration and native importer**, not archive receipt. Earlier risk-table entries below should be interpreted as *historical pre-R2 state*. See [Oracle adoption](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6406343093).
+
 **Oracle continuity · PUBLIC_SAFE · source-evidence claims, not a release decision**
 
 ## Decisions adopted for research and their rejected shortcuts
