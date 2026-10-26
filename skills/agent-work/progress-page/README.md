@@ -13,6 +13,8 @@ the page, a checker, an editing tool, a trigger tool, a local-file builder, temp
 
 **Viewer/tool parity:** The reusable `viewer/` and `scripts/` here are synced from Progress Page merge commit `53d1bcb302b651ab00e390bdeb0e513e3630a68d` (`v=23` viewer). Keep `viewer/VERSION` pinned to the tested source. CI validates the generic bundle/checker and standard-library tests; project-specific source data and Owner controls remain separate.
 
+**Offline source parity guard:** `python -B -m unittest skills/agent-work/progress-page/tests/test_reference_parity.py` verifies exact Git blob SHA-1 for every bundled portable viewer and tool file against `references/UPSTREAM_PARITY.json` without relying on network. A deliberate reusable-core change must first be merged to the reference page and re-synced with a new pinned source commit; never silently claim parity by editing the manifest to fit arbitrary bytes.
+
 **Use these tools. Do not rewrite them.** If one is missing something, say so in the pull request that adds it.
 
 **First-time writer capability:** The Oracle/OTM or its delegated page writer verifies a checkout of the *actual page repository* and executes `python tools/pp_cli.py --help` plus `python tools/pp_cli.py check` there. In this Common module source the script path is `scripts/pp_cli.py`, not `tools/pp_cli.py`; a repository web view cannot execute either command. Mark `PAGE: PENDING / NOT_RUN` if code execution, page repository access or publication readback is unavailable. A builder/reviewer ordinarily leaves native issue/PR/relay evidence for the coordinator and does not run page-writer scripts.
