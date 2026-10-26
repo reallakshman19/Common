@@ -32,6 +32,7 @@
 **Progress Page viewer vs storage:** Page has **source-linked, public-safe references**, not copies of fixture files, private Google Drive child URLs, or automatic uploader/synchronizer. Oracle owns the fixture content and evidence reconciliation; **OTM writes the page in OTM mode**, Oracle or designated writer in standalone via the native mode route. Use existing `fixtures.repository`/`fixtures.inputs` and WBS association plus audited `fixture add`; avoid creating a duplicate relay/task schema. See [Project Home fixture handling](PROJECT_HOME_GUIDE.md#fixture-maintenance-and-oracleagent-artifact-exchange).
 
 ## A. Oracle onboarding — initial project setup
+**Map A feedback:** Incoming Oracle source-challenges inherited project/WBS decisions → Owner/incumbent verifies ACCEPT / CORRECT / INVESTIGATE → authorized next project action; read-only candidates do not take control.
 
 ```mermaid
 flowchart TD
@@ -54,6 +55,7 @@ flowchart TD
 **Progress Page:** Oracle owns Home content and source quality; the actual **page writer** is OTM in OTM mode and Oracle in standalone. **At A7, verify both the documentation and actual project display:** concept note, architecture/complex concepts, original fixture links, roadmap and current task must be discoverable **or explicitly recorded as missing**. A source link in a protocol is not proof the viewer rendered it. **Implementation boundary:** the original viewer displays the Owner aim and grounding fixtures/roadmap in separate areas; a consolidated Project Home is proposed in [Progress Page draft PR #16](https://github.com/reallakshman19/progress-page/pull/16), not assumed live until merged/deployed and checked. Never treat a proposed source document or a draft UI as verified content.
 
 ## B. Oracle onboards a builder / reviewer / specialist agent
+**Map B feedback:** Agent challenges inherited framework/code via questions, source trace or small authorized increment → Oracle verifies ACCEPT / CORRECT / INVESTIGATE → corrected WBS work, without a new readiness gate.
 
 ```mermaid
 flowchart TD
