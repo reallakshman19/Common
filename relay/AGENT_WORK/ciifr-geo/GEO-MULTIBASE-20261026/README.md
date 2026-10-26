@@ -1,0 +1,11 @@
+# CIIFR_GEO multibase — final native and bounded browser return
+
+Owner asked to implement independent A/B bases, checked-proposal C resolution, legible geometry/physical labels, contained popup/readable details and X/Y/Z camera-up (Z default). Existing draft XCU PR185 is the consumer; no separate unused framework is claimed.
+
+Exact code: `72944d6f56d9cdc7226d7a177dcdaa6aab278fe9`. Run the existing Python launcher or use the Owner-authorized temporary preview. B initially reuses A inputs, and later input changes remain independent. C merges identical pairs once, shows unique/no-control rows and conflict radios, preserves manual pins and scores other pairs on a frozen cohort. Uniform fit universes, rank/custody diagnostics, conditional minmax defaults and partial lower bounds are explicit. Original graphs stay continuous and immutable.
+
+`INDEPENDENT_REVIEW.md` preserves the separate reviewer's F1–F6 before/after, immutable receipts, native tests, wrong-case challenges, final UI delta and actual SVG/popup browser observations. `SOURCE_MANIFEST.json` is the exact XCU manifest. `PUBLICATION_RECEIPT.json` records identities/status. Source and artifact publication are not physical engineering, GPU, Windows, native-fullscreen success or Owner acceptance.
+
+`probes/` preserves reviewer programs unchanged. Their relative candidate layout expects a sibling `geo-multibase-work` checkout and `multibase-ir` probe folder; do not execute them from this relay directory as though the paths were portable. Use the unchanged native product tests for the primary reproducer, or materialize the documented reviewer layout and dependency paths. Expected source is the exact named commit, test-only xmldom0.9.12 through `CIIFR_TEST_RUNTIME`, and the repository's pinned Three r160. Local preimage paths are recovery receipts, not cross-chat delivery.
+
+CORE-1 independent A/B and CORE-2 consolidation are runnable candidates under Geometry WBS3.1, not newly adopted WBS numbering or Owner acceptance. The next user-visible action is the Owner's Windows/WebGL trial of the current temporary preview. Existing topology G2, XMLv1.1 bridge G3 and Writer/release gates remain separately held. No Oracle succession cutover.

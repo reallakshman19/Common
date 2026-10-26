@@ -1,0 +1,43 @@
+{
+  "schema": "CIIFR.MultibasePublicationReceipt.v1",
+  "task": "CIIFR-GEO-MULTIBASE-20261026",
+  "sourceRepository": "reallakshman19/XML_Compare_Utilities",
+  "sourceCommit": "72944d6f56d9cdc7226d7a177dcdaa6aab278fe9",
+  "sourceTree": "47b18769295a44bb0f77e6358ed54bf36ecbfc10",
+  "nativeAuthorTests": "56/56 PASS",
+  "nativeModuleHttp": "39 ES modules plus pinned Three/Worker/license PASS",
+  "independentScope": "SCOPED_NATIVE_PASS + SCOPED_BROWSER_SVG_DOM_PASS; GPU_NOT_VERIFIED; OWNER_ACCEPTANCE_PENDING",
+  "reviewReportSha256": "384d15cba9f441b7f02a8f32126a2b33657a1edc9aa954d1a16e2d61b9320c6e",
+  "reviewUrl": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
+  "previewRepository": "reallakshman19/CIIFR-GEO-Preview",
+  "previewCommit": "82b037c9d4dcde33cd19d0825075aeed72c18967",
+  "previewSourceBlobsVerified": 50,
+  "publicPreview": "https://reallakshman19.github.io/CIIFR-GEO-Preview/",
+  "uiBoundary": "Existing XML profiles; no CII converter/field transfer/Writer/Apply or product merge",
+  "browserObservation": {
+    "scope": "Independent actual cloud browser public S1 SVG/DOM; one original in two profiles, not independent-model qualification",
+    "surface": {
+      "width": 1363,
+      "height": 936
+    },
+    "popup": {
+      "width": 850,
+      "height": 421
+    },
+    "inside": true,
+    "internalHorizontalScroll": true,
+    "expandedFallbackLabel": "Exit expanded view",
+    "pair": "SOURCE3830 / TARGET3830",
+    "zoomPreserved": true,
+    "webgl": "Build/author cloud browser could not create WebGL context",
+    "nativeFullscreenSuccess": "NOT_VERIFIED",
+    "windows": "NOT_RUN",
+    "ownerAcceptance": "PENDING"
+  },
+  "screenshot": {
+    "name": "ciifr-geo-popup-after-72944-1793045028266.jpg",
+    "bytes": 109350,
+    "sha256": "0cb0daa7687a1d2a269d627eaab4159c2eafc61217f123864a5d0a40dc3e1f4f",
+    "custody": "Observed in this conversation workspace; no cross-chat byte delivery claimed"
+  }
+}
