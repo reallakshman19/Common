@@ -1,0 +1,128 @@
+{
+  "scope": "Read-only actual native registration seam, not served browser or product consolidation",
+  "sourceCodeBlobs": {
+    "registration": "4fa5462851ec82c0c87e3339d88e024093b5d10e",
+    "rigidFit": "c7028da785806a4abaec151bda09132a94bc9186",
+    "candidates": "b8095b5a7447124a3755e5b06c7d4cc7e159b4b7"
+  },
+  "inputHashes": {
+    "source": "1154c980d08344b1f803cda3bd9884b169753148b150641a745c9bfcb15de995",
+    "target": "a332dd7b2551faae51de3c016941762c3b795cdf19073b373817354e309526e6"
+  },
+  "cases": [
+    {
+      "targets": [
+        "5210",
+        "5220",
+        "5229"
+      ],
+      "status": "DEGENERATE_NONCOLLINEAR_BASIS",
+      "hasTransform": false
+    },
+    {
+      "targets": [
+        "5210",
+        "5220",
+        "5220"
+      ],
+      "status": "DUPLICATE_ANCHOR_CUSTODY",
+      "hasTransform": false
+    },
+    {
+      "targets": [
+        "5210",
+        "5229",
+        "5229"
+      ],
+      "status": "DUPLICATE_ANCHOR_CUSTODY",
+      "hasTransform": false
+    },
+    {
+      "targets": [
+        "5210",
+        "5229",
+        "5220"
+      ],
+      "status": "DEGENERATE_NONCOLLINEAR_BASIS",
+      "hasTransform": false
+    },
+    {
+      "targets": [
+        "5229",
+        "5220",
+        "5229"
+      ],
+      "status": "DUPLICATE_ANCHOR_CUSTODY",
+      "hasTransform": false
+    },
+    {
+      "targets": [
+        "5229",
+        "5220",
+        "5220"
+      ],
+      "status": "DUPLICATE_ANCHOR_CUSTODY",
+      "hasTransform": false
+    },
+    {
+      "targets": [
+        "5229",
+        "5229",
+        "5229"
+      ],
+      "status": "DUPLICATE_ANCHOR_CUSTODY",
+      "hasTransform": false
+    },
+    {
+      "targets": [
+        "5229",
+        "5229",
+        "5220"
+      ],
+      "status": "DUPLICATE_ANCHOR_CUSTODY",
+      "hasTransform": false
+    }
+  ],
+  "anchorOrder": {
+    "ab": [
+      {
+        "source": "1",
+        "target": "101",
+        "targetMinusRegisteredSource": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "source": "2",
+        "target": "102",
+        "targetMinusRegisteredSource": [
+          2,
+          0,
+          0
+        ]
+      }
+    ],
+    "ba": [
+      {
+        "source": "2",
+        "target": "102",
+        "targetMinusRegisteredSource": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "source": "1",
+        "target": "101",
+        "targetMinusRegisteredSource": [
+          -2,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}

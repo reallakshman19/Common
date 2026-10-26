@@ -1,0 +1,48 @@
+{
+  "task": "CIIFR-GEO-CORE-LOGIC-20261026",
+  "product_basis": "668c22b49077520e911a3ef64a931c94db3a0a29",
+  "artifacts": [
+    {
+      "path": "agents/WIP-CIIFR-GEO-CORE-LOGIC-20261026_workreport.md",
+      "bytes": 3846,
+      "sha256": "0f93a6073623f17969c2376bf7197ac2adb52d9ae64017c8b1cb5a5630d4c353",
+      "git_blob_sha1": "5c763ee7ca1475f32e8d812174f1d4bf4dc27975"
+    },
+    {
+      "path": "oracle-cycles/ciifr/continuity/payload/GEOMETRY_CORRESPONDENCE_CORE_LOGIC.md",
+      "bytes": 63090,
+      "sha256": "e5e86ceb03b60fb5c0d69a1bd3c19c9bc3bad6c76d6a4e84ab78afe0dc8b36a7",
+      "git_blob_sha1": "6226e2f7e616784bb64e96549d94c574af138a89"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/ENGINE_SEAM_OBSERVATIONS.json",
+      "bytes": 2487,
+      "sha256": "b1d892c7e83b1d2094b5b98eac4bd2b300852d327dd2e617a513d1c63de86c8e",
+      "git_blob_sha1": "024e145c94e900b92a0f298aeae113e051e7e98a"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/NEGATIVE_PROBE_RESULTS.json",
+      "bytes": 290,
+      "sha256": "ca70d6be41da05bdd6c378537ccf0f69fe8c055b70331ec79d562d58909952d5",
+      "git_blob_sha1": "80c98ff30355f21ea403c51138f6e79d10b90583"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/PROBE_RESULTS.json",
+      "bytes": 7331,
+      "sha256": "0c69ce9e4891fcc10abe53cfc31f82e509467faec69a0b15e314a5d4fcbcafb7",
+      "git_blob_sha1": "26416dd515ad73576a7fcccf8d200ff8b7b41ef2"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/README.md",
+      "bytes": 3290,
+      "sha256": "46af2b2dae55022c2bd124edf9ee7ebe4b2ad7806f60733fdcb84e83d3670c5a",
+      "git_blob_sha1": "49a707a75a8557745ce879b45e35616bcf069329"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/SCORING_REFERENCE_PROBE.py",
+      "bytes": 5903,
+      "sha256": "4f2481d8714c7b3d47c9ba676e9d5c1872b627e3ac855e4dea1ff1a18116baea",
+      "git_blob_sha1": "28bfa74c30d67fe4656f442d6e8772da63d330f3"
+    }
+  ]
+}

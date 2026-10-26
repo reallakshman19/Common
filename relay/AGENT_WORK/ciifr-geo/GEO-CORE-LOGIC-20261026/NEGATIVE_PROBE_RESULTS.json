@@ -1,0 +1,12 @@
+{
+  "signed-cancellation": {
+    "exit_code": 1,
+    "expectation": "ASSERTION_FAILURE_ON_SEEDED_WRONG_LOGIC",
+    "observed": "AssertionError"
+  },
+  "self-scoring": {
+    "exit_code": 1,
+    "expectation": "ASSERTION_FAILURE_ON_SEEDED_WRONG_LOGIC",
+    "observed": "AssertionError"
+  }
+}
