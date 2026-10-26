@@ -2,24 +2,24 @@
   "schema": "oracle-cycle-current/v1",
   "project": "ciifr-element",
   "mode": "standalone",
-  "activation": "PREPARED_NOT_ACTIVE",
-  "revision": 0,
+  "activation": "ACTIVE",
+  "revision": 1,
   "last_accepted_receipt_ids": [],
   "aim": "Source-qualified ELEMENTS process and RIGID field semantics for future read-only SOURCE→TARGET Element Property Transfer Preview. Preserve the existing VNext Geometry Tab 3; do not infer Writer or engineering transfer authority from field offsets.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178",
   "privacy": "PUBLIC_SAFE_METADATA_ONLY",
   "roles": {
     "oracle": {
-      "label": "CIIFR Element Oracle (coordination)",
-      "chat_id8": null,
-      "provenance": "OWNER_ROLE_DECLARED_CHAT_ID_NOT_BOUND",
-      "responsibility": "Reconcile preliminary specialist report, original input custody and independent field semantics; propose but do not self-authorize activation or engineering PASS"
+      "label": "CIIFR Element Oracle / WBS4 coordination",
+      "chat_id8": "6ade42a6",
+      "provenance": "OWNER_EXPLICITLY_IDENTIFIED_CHAT_6ade42a6_AS_CIIFR_ELEMENT_20261026; earlier R4 specialist evidence authored by this chat; distinct GitHub principal NOT_AUTHENTICATED",
+      "responsibility": "Own Element aim, task routing and evidence reconciliation; disclose specialist authorship, do not independently approve own R4 evidence or Writer"
     },
     "coder": {
-      "label": "Field-semantics specialist — READ_ONLY",
-      "chat_id8": null,
-      "provenance": "RECIPIENT_NOT_CONFIRMED",
-      "responsibility": "Original source trace, typed pointer ownership, units/case/zero semantic contrast, native return on XCU #178; no Writer"
+      "label": "CIIFR Element read-only evidence builder",
+      "chat_id8": "6adedbc6",
+      "provenance": "OWNER_EXPLICITLY_DESIGNATED_CHAT_6adedbc6_AS_OUR_BUILDER_20261026; separate active Geometry role is not inherited; chat identity is a routing label, not authenticated GitHub principal",
+      "responsibility": "Continue existing WBS4 field authority after checking current task/relay, run source-backed discriminator and optionally build standalone read-only evidence adapter after real repo Appendix A; no effective value guessing/Writer"
     },
     "reviewer": {
       "label": "Independent semantic reviewer (unassigned)",
@@ -31,7 +31,7 @@
       "label": "Owner",
       "chat_id8": null,
       "provenance": "OWNER_SELF",
-      "responsibility": "Confirm actual specialist chat binding and protected-original handoff, final acceptance/merge authority"
+      "responsibility": "Owner has selected Element Oracle chat6ade42a6 and Element builder chat6adedbc6; Owner must send Cycle now trigger in intended builder chat; preserve protected-original custody/acceptance and merges"
     }
   },
   "source_boundary": {
@@ -42,7 +42,7 @@
     "current_baseline": "XCU main c823f0c0edbeb315c07fa2911390dc781968146f at preparation",
     "related_draft_candidates": "XCU #176 e973af8b249d4770ae766c8554ac71aba2de119c (NodeName); #174 9936d4078fb7f837ffe6f46805241efdb7bbc0e8 (Geometry). Refresh before use.",
     "research_artifact_rel": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/receipt.md",
-    "original_custody": "OWNER_PRIVATE_REF:CIIFR_ELEMENT_ORIGINAL; specialist original-byte access NOT_VERIFIED",
+    "original_custody": "OWNER_PRIVATE_REF:CIIFR_ELEMENT_ORIGINAL; prior Element specialist receipt reported for R2/R4; new builder 6adedbc6 access NOT_VERIFIED; job-specific active configuration/material/FDM NOT_VERIFIED",
     "engineering_HOLDs": [
       "TAKEOVER_AUTHORITY=READ_ONLY",
       "WRITER_HOLD",
@@ -51,7 +51,8 @@
       "NO_MERGE_DEPLOY",
       "NO_CII_MODIFICATION"
     ],
-    "preliminary_return": "Owner-pasted READ-ONLY FIELD AUTHORITY REPORT / PARTIAL; no native task receipt; not a Cycle receipt."
+    "preliminary_return": "Superseded as sole observation by native XCU #178 R2/R3/R4 source returns; do not inflate physical-layout evidence to effective-semantic approval",
+    "element_workstream_scope": "WBS4 E0/E1 only; XCU PR168 draft 2aeaf737; separate Geometry Cycle ciifr and its coder work excluded"
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/493",
   "assignments": [
@@ -60,45 +61,78 @@
       "generation": 0,
       "recipient_role": "coder",
       "recipient_chat_id8": null,
-      "dispatch": "PREPARED_NOT_DISPATCHED",
+      "dispatch": "HISTORICAL_PREPARED_SUPERSEDED_BY_GEN1",
       "scope": "Read-only original-byte→field→effective-property trace for TEMPERATURE_1, PRESSURE_1, FLUID_DENSITY, RIGID.WEIGHT, RIGID.TYPE. One independent positive plus discriminating contrary case and field verdicts on #178; no writer or app edits.",
       "candidate": "RESEARCH_READONLY_FRAMEWORK_NOT_PRODUCT_CANDIDATE",
       "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/receipt.md",
       "protected_input_status": "OWNER_ORIGINAL_ACCESS_NOT_VERIFIED_FOR_RECIPIENT",
       "required_return": "Native XCU #178 field source map with original source evidence, predictions/observations, hashes, units/cases/pointer type, STOP/HOLDs; separate Common #493 Cycle routing envelope only after activation",
       "next_after": "oracle"
+    },
+    {
+      "id": "CIIFR-ELEMENT-FIELD-AUTHORITY-1",
+      "generation": 1,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adedbc6",
+      "dispatch": "READY_NOT_SENT",
+      "predecessor": "CIIFR-ELEMENT-FIELD-AUTHORITY-1 generation0 (prepared, never dispatched)",
+      "coordination": "STANDALONE_ELEMENT_CYCLE_ONLY_NOT_GEOMETRY",
+      "candidate": "XCU draft PR168 exact head 2aeaf7372de66eda3bc082b8d81bf8db43c34f4b; no Element product branch allocated",
+      "scope": "Read-only WBS4 E0/E1 source/effective-property evidence: reuse R2 original fixed-field receipt, R3 embedded units/material/ambient and R4 contrary candidate config, independently isolate the missing original-job active config+units+material edition+basic-case FDM; prove or label UNKNOWN one field-to-case example and discriminating opposite case. Source-only additive read-only ledger/validator prototype is permitted on an isolated task-owned draft only after actual repository Appendix A, backup/worklog and overlap checks; no semantic assumptions or transfer/writer.",
+      "implementation_authority": "READ_ONLY_TAKEOVER_FIRST; CONDITIONAL_ADDITIVE_PUBLIC_SYNTHETIC_EVIDENCE_TOOL_ONLY_AFTER_APPENDIX_A; ORIGINAL_EFFECTIVE_VALUES_AND_WRITER_HOLD",
+      "input_artifact_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/receipt.md",
+      "dispatch_ref": "relay/AGENT_WORK/ciifr-element/field-authority-20261025/BUILDER_R1_DISPATCH.md",
+      "protected_input_status": "SPECIALIST_6ade42a6_R2_ORIGINAL_AND_R4_CANDIDATE_BYTES_REPORTED_VERIFIED; BUILDER_6adedbc6_ORIGINAL_ACCESS_NOT_VERIFIED; ACTIVE_JOB_NATIVE_CONFIGURATION_AND_FDM_NOT_AVAILABLE",
+      "source_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178",
+      "required_return": "On XCU #178 identify builder chat/task/revision, personally observed public source/PR and permitted protected bytes or NOT_RECEIVED, a source-qualified five-field gap/negative trace, any source-only task branch/head/tests with PASS/FAIL/NOT_RUN and one exact dependency. Post one ORACLE-CYCLE-RECEIPT v1 for revision1/gen1 to Common #493 with native evidence URL and readback.",
+      "next_after": "oracle",
+      "protected": "No original/private bytes or direct protected URLs in public GitHub; no effective-property approval, TARGET1, Writer/Apply, production Tab3, converter/Geometry change, merge/deploy or Oracle succession. No cross-claim of Geometry task permissions."
     }
   ],
   "gates": [
     {
       "id": "research-zip-custody",
       "status": "PARTIAL",
-      "basis": "Archives stored in designated Drive; Oracle retrieved/compared earlier; specialist reports 51/51 manifests and 13/13 synthetic tests; recipient native issue receipt missing."
+      "basis": "Public-safe Common relay research payload exists after PR494 merge; earlier synthetic 51/51 and 13/13 reported. New builder has NOT_RETRIEVED/NOT_HASHED and prior relay wording is stale; receipt remains unverified for builder."
     },
     {
       "id": "original-protected-access",
       "status": "BLOCKED",
-      "basis": "Original protected model not present in synthetic ZIPs; no verified specialist original-byte receipt."
+      "basis": "Existing Element specialist 6ade42a6 reports original R2 byte receipt and R4 attachment byte match; builder 6adedbc6 has no verified original-byte access, selected active native job configuration/cases/material-FDM remain unknown. Block only original-dependent qualification."
     },
     {
       "id": "five-field-semantic-qualification",
       "status": "PARTIAL",
-      "basis": "Owner-pasted preliminary report: physical locations reported, TEMPERATURE_1 and RIGID.TYPE HOLD, others PARTIAL; no original effective-property witness."
+      "basis": "R2 physical field/pointer receipt PASS only for original fixed-layout source; R3 original embedded units/material IDs/ambient source witnessed; R4 candidate units/default differ, no original-job effective config/cases/FDM. Five effective meanings PARTIAL/HOLD. Native CAESAR and SOURCE→TARGET equivalence NOT_RUN."
     },
     {
       "id": "writer-and-release",
       "status": "HOLD",
       "basis": "Not in scope; no TARGET1 or production edits."
+    },
+    {
+      "id": "element-r2-r4-native-source-continuity",
+      "status": "PARTIAL",
+      "basis": "R2 protected-original physical map, R3 embedded units and R4 candidate original-link/contradiction are reported in XCU #178; independent acceptance of effective engineering meaning NOT_ESTABLISHED; prior author 6ade42a6 is now routing Oracle.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6407707652"
+    },
+    {
+      "id": "element-builder-r1-receipt",
+      "status": "NOT_RUN",
+      "basis": "Owner bound builder chat6adedbc6 but has not sent/recipient not verified the new Element Cycle. Public research relay and protected original remain distinct; no receipt on Common #493.",
+      "evidence_ref": "https://github.com/reallakshman19/Common/issues/493"
     }
   ],
   "next": {
-    "recipient_role": "owner",
-    "recipient_chat_id8": null,
-    "status": "AWAIT_ACTUAL_RECIPIENT_AND_ORIGINAL_CUSTODY",
-    "instruction": "Confirm existing field specialist's actual short chat ID and authorized original-source receipt; Oracle then proposes a new ACTIVE revision with recipient binding through an authorized PR/merge. Until then do NOT paste an executable Cycle now."
+    "recipient_role": "coder",
+    "recipient_chat_id8": "6adedbc6",
+    "status": "READY_NOT_SENT",
+    "instruction": "Owner should paste the URL-form Element Cycle trigger in chat6adedbc6. Read actual Element CURRENT and BUILDER_R1_DISPATCH, not the active Geometry Cycle. Start READ_ONLY source/custody check; reuse R2–R4 evidence and avoid repeating synthetic tests. Proceed only with bounded additive read-only public-source evidence tool after native Appendix A; original-job case/units/material/FDM claims remain HOLD without authenticated recipient private source and native provenance. Return concrete blocker on XCU #178 and one Cycle v1 receipt Common #493.",
+    "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr-element"
   },
   "progress_projection": {
     "status": "PROGRESS_UPDATE_PENDING",
-    "project_key": "UNRESOLVED_FROM_ACTUAL_PAGE"
+    "project_key": "ciifr",
+    "reason": "Existing CIIFR R4 Progress Page shows Element source-state; activation of Element-specific builder Cycle1 is new routing evidence and not yet projected by authorized page writer."
   }
 }
