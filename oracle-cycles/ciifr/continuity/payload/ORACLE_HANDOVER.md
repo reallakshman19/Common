@@ -2,6 +2,8 @@
 
 **Revision2 · 26 October 2026 · PUBLIC_SAFE · Oracle-authored / SELF_ASSESSED.** This is current Geometry knowledge and planning, not a successor activation, new engineering approval or release. Earlier handover snapshots remain in Git history; their untested-T, WBS5.x and NOT_STARTED statements are historical where contradicted by the sources below.
 
+**Owner continuation — framework → Oracle code → ChatGPT onboarding plan:** The tested [Oracle contribution PR183](https://github.com/reallakshman19/XML_Compare_Utilities/pull/183) now supplies the immutable shared-viewer scene and pick-identity seam through the current JSON export. Exact candidate `3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6`, tree `00f7825a271c4e68f650eebede40d0d62aea32f6`; actual18/18 native and HTTP19 checks passed, SELF_ASSESSED. Current drawing remains SVG; GPU integration/browser performance are unverified. The [ChatGPT onboarding plan](../../../../relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-REUSE-1/CHATGPT_ONBOARDING.md) and [artifact register](../../../../relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-REUSE-1/ARTIFACT_REGISTER.md) continue this foundation rather than rebuilding it. Future builder UNASSIGNED / NOT_SENT; the premature helper probe was paused without edits.
+
 Read first: [Concept Note R2](CONCEPT_NOTE.md), [roadmap/WBS/implementation plan R2](ROADMAP_AND_IMPLEMENTATION_PLAN.md), [architecture](ARCHITECTURE_COMPLEX_LOGIC.md), [decisions/challenges](ARCHITECTURE_DECISIONS_AND_CHALLENGES.md). The active project locator remains `ciifr`; the Owner's name for this Geometry work is **CIIFR_GEO**. Do not rename the broader CIIFR Element workstream or create a second Progress project.
 
 ## WBS continuity addendum — historical failure and current resolution
@@ -21,6 +23,7 @@ Native sources: [#166](https://github.com/reallakshman19/XML_Compare_Utilities/i
 | XCU main | `c823f0c0edbeb315c07fa2911390dc781968146f` | Refresh before dependent edits |
 | Original-CII G1 PR174 | Draft/open/unmerged; `9936d4078fb7f837ffe6f46805241efdb7bbc0e8` | Separate original-input/dual-SVG reference; true served B1–B4/fresh independent acceptance pending |
 | Two-XML PR181 | Draft/open/unmerged; `683a1ac37b5e4457b3e67753cec1c951ec1a2dc9`; tree `964218af596d52925654b45d9dc1e37f96314bdf` | 21 new task paths, no shared/G1/converter/writer/workflow edits; isolated preview, not integrated VNext |
+| Oracle contributor PR183 | Draft/open/unmerged, stacked on PR181; head `3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6`, tree `00f7825a271c4e68f650eebede40d0d62aea32f6` | Native18/18/HTTP19; scene artifact and pick API delivered, GPU UI/browser unverified; next ChatGPT onboarding prepared |
 | Native prototype return | [#180 comment6401914937](https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6401914937) | Builder/self evidence, not independent acceptance |
 | Oracle reconciliation | [#180 comment6401933227](https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6401933227) | Actual source/tree/fixture/receiver checks; own contribution remains SELF_ASSESSED |
 | Viewer reuse investigation | [#180 comment6406475596](https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6406475596) | Source/scene-contract feasibility; GPU integration and browser FPS NOT_RUN |
@@ -62,14 +65,14 @@ Page writer PR18 is an existing standalone claim. Prepare a native-CLI projectio
 
 ## 6. Next two connected cards
 
-1. **Current3.1/M13 continuation, `CIIFR-GEO-G1-VIEWER-REUSE-1`:** thin read-only graph/ledger→existing3D viewer adapter. Reuse instancing, GPU picker, orthographic/perspective controls, scene worker/chunks/floating origin. Preserve SVG reference/export and hash-scoped picking. Apply complete Method C R*p+t to a display copy once; no original coordinate mutation or translation twice. Local package must include pinned Three.js0.160.0 and worker asset routes. Browser timings are measured on a functioning host, not inferred from code. Separate branch preserves current PR181 source candidate.
+1. **Current3.1/M13 continuation, `CIIFR-GEO-G1-VIEWER-REUSE-1`:** thin read-only graph/ledger→existing3D viewer adapter. Reuse instancing, GPU picker, orthographic/perspective controls, scene worker/chunks/floating origin. Preserve SVG reference/export and hash-scoped picking. Apply complete Method C R*p+t to a display copy once; no original coordinate mutation or translation twice. Local package must include pinned Three.js0.160.0 and worker asset routes. Browser timings are measured on a functioning host, not inferred from code. Delivered PR183 scene/pick seam is the next builder code basis; preserve both PR181 and PR183 tested heads through a separate stacked branch.
 2. **Next functional3.2/M14, `CIIFR-GEO-C-G2-TOPOLOGY-BOOLEAN-1`:** independent pose-free proposals and Manual/Topology/OR/AND with retained anchor conflicts/alternatives and `NOT_EVALUATED` pre-pose residuals. Consumes the same source-qualified graph/ledger and prepares G3 provenance/G4 hardening. Disjoint algorithm/source work can proceed while the viewer trial is pending.
 
 Each card is fully specified in the [implementation plan](ROADMAP_AND_IMPLEMENTATION_PLAN.md): upstream result, downstream consumer, actual inputs, allowed/protected paths, planned run/demo, done-when/keeps, contrary cases, timebox and return. They are written plans, not sent assignments. The next builder receives one paragraph of overall journey plus the specific upstream→current→next-WBS relationship, not an isolated leaf task.
 
 ## 7. One immediate action and remaining uncertainty
 
-**NOW → Oracle, chat ID UNKNOWN:** publish/read back the revised concept/native WBS and controlled Page projection proposal, then qualify one actual builder for card A; preserve the existing test pack for Owner observations and disjoint G2 preparation. This planning request dispatches nobody.
+**NOW → Oracle, chat ID UNKNOWN:** reconcile the published framework/contributor PR183 and present the prepared ChatGPT source/capability probe, then qualify one actual builder for the remaining card A GPU integration; preserve the existing test pack for Owner observations and disjoint G2 preparation. This planning request dispatches nobody.
 
 Remaining proof: real Owner/browser use of current XML preview; actual GPU scene/input/selection/export parity and measured scaling; G2 implementation; original-CII G1 real served journey and separately required independent review; receipt-backed G3; source-backed G4 integration/release. The R4 populated-FORCMNT conversion gap and effective field/property authority are separate workstreams. Avoid pretending a faster renderer resolves them.
 
