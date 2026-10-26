@@ -1,4 +1,7 @@
 # CIIFR Element — Candidate Successor Oracle (copy-ready, READ-ONLY)
+
+> **2026-10-26 CHECKPOINT (do not repeat old access steps):** The replacement specialist already posted [original byte receipt R2](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6402061761). The original-access blocker is closed for that session. Candidate Oracle's ONE next challenge is **missing actual Alpha Tolerance, material/expansion reference, operating/hydro load-case/FDM configuration**, plus native importer validation if accessible. Read [R2 Oracle disposition](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6406343093) before using this prompt. Neither read-only succession nor Cycle activation/Writer changes.
+
 **Prepared handover, not actual successor appointment or control cutover.**
 
 ## Owner paste into *new candidate Oracle chat*
