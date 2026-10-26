@@ -1,4 +1,38 @@
-# CIIFR Geometry — architectural decisions, alternatives and falsification register
+# CIIFR_GEO — decisions, alternatives and surviving challenges
+
+**Revision2 · 26 October2026 · planning/source interpretation, SELF_ASSESSED.** Current rationale is read with [Concept Note R2](CONCEPT_NOTE.md), [implementation plan/WBS](ROADMAP_AND_IMPLEMENTATION_PLAN.md) and [handover](ORACLE_HANDOVER.md). Prior engineering analysis follows as an attributed historical checkpoint, not a live claim that all checks remain unexecuted.
+
+## Current decisions and alternatives
+
+| Decision | Why | Rejected shortcut / remaining challenge |
+|---|---|---|
+| Continue existing WBS3/M12–M16 and use the name CIIFR_GEO | Owner direction and actual existing roadmap | No new WBS5, new project tab or false renumbering; unrelated Element work keeps its own scope |
+| Two existing supported XMLs are the current comparison input | Owner explicitly excluded converter construction from the first work | Keep original-CII G1 reference distinct; XML metadata cannot authenticate original CII |
+| Reuse existing 3D Edit shared viewer for the GPU option | Instancing, picking, cameras, chunks/LOD/index, worker revision guards and floating origin already exist | A new raw OpenGL engine or broad 3D editor port adds avoidable scope; actual browser/GPU performance is still unmeasured |
+| Retain SVG reference and vector evidence export | Existing metric/provenance checks remain useful and export is independent of the interactive backend | Do not use a GPU screenshot as SVG or infer node correspondence from overlapping pixels |
+| Keep Method C/ledger independent of rendering | Renderer swaps must not change candidates, identities, residuals or authority | Display pretransform must include R and t exactly once; known90-degree/translation and same-ID/different-hash cases detect tempting mistakes |
+| Reuse only the viewing surface of the editor | Current work is correspondence review | No inherited edit/drag/solver/Apply/transfer authority, and no reuse of MATCHED/TRANSFER_READY as approval labels |
+| G2 remains next functional WBS3.2 | The Owner needs independent topology versus manual evidence, not only faster drawing | GPU completion/browser availability is not a blanket gate on disjoint G2 source work |
+| Use bounded evidence-qualified prototypes | Native checks and render contracts support useful preparation, not complete browser acceptance | Same-original XML parity, skipped external large fixtures, controlled DOM, source comments and test counts cannot become a real-model GPU/Owner PASS |
+
+## Surviving wrong cases carried into the revised plan
+
+- One manual anchor determines translation under provisional orientation, not an authenticated 3D pose.
+- S4060 inside TARGET900→905 is segment-only; no target node may be invented. S4970 retains its signed Z discrepancy.
+- Degree/incident-length/neighbor-degree suggests three targets for S3910 and319 for S3940/S3970; greedy topology is not identity.
+- Flipping XML deltaY from−1500 to+1500 changes measured XML identity and moves geometry3000mm while an embedded CII SHA remains unchanged. Honor supplied XML values and keep CII claims unverified.
+- Delayed arrayBuffer/hash/worker results after file replacement must not restore old graphs, anchors, pictures or exports.
+- Floating-origin GPU display coordinates cannot replace source/double-precision correspondence calculations.
+- Fast GPU drawing can coexist with slow XML parsing, nearest/segment searches or HTML table rendering. Measure each separately.
+- The optional existing1885_NC large-fixture test was skipped for missing input; instancing source code is not FPS evidence.
+- Viewer dependency/worker paths must work in the local package, including dynamic assets not detected by a static import-only smoke test.
+
+Full proposed cards, checks, permissions and release boundaries are in the R2 implementation plan. No product merge, deployment, new agent assignment or physical NodeMap acceptance is implied.
+
+## Retained prior decision/source analysis (25 October2026)
+
+The following preserves earlier detailed evidence and alternatives. Its delivery/access/status paragraphs are historical where contradicted by the R2 handover.
+
 
 **Knowledge status:** CIIFR Oracle source analysis / **SELF_ASSESSED**, not engineering acceptance. **Snapshot:** XCU `main=c823f0c0edbeb315c07fa2911390dc781968146f`, G1 [draft PR #174 head `9936d4078fb7f837ffe6f46805241efdb7bbc0e8`](https://github.com/reallakshman19/XML_Compare_Utilities/pull/174), Owner execution-first directive in [#166 comment 6400403221](https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6400403221), G2 updated [#177](https://github.com/reallakshman19/XML_Compare_Utilities/issues/177). Historical decisions in issues/comments are not automatically current; a new Owner revision prevails on its declared scope. The **3DC golden fixture supplied document structure, not CIIFR claims**.
 
