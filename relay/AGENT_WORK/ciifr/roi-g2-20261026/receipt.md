@@ -12,8 +12,8 @@
 **Acceptance limits / contrary case:** repeated equal length/degree neighborhoods must yield multiple candidates, not first-match identity. Singleton is still only a candidate; due to degree/rounded-length signature resegmentation can cause false negatives. A prior hash-bound external proposal with changed input hash must reject; segment-only proximity never makes target NODE. Reviewer did not independently derive or run tests and actual field meaning untouched.
 
 **Continuity consumers:**
-- [High-ROI pending work and dependency map](../../../oracle-cycles/ciifr/continuity/payload/PENDING_WORK_AND_HIGH_ROI_20261026.md).
-- [Candidate successor Oracle OnBoard](../../../oracle-cycles/ciifr/continuity/payload/ORACLE_ONBOARD_READ_ONLY_20261026.md).
+- [High-ROI pending work and dependency map](../../../../oracle-cycles/ciifr/continuity/payload/PENDING_WORK_AND_HIGH_ROI_20261026.md).
+- [Candidate successor Oracle OnBoard](../../../../oracle-cycles/ciifr/continuity/payload/ORACLE_ONBOARD_READ_ONLY_20261026.md).
 - [Geometry WBS3.1/3.2 native plan](https://github.com/reallakshman19/XML_Compare_Utilities/issues/166), [G2 native #177](https://github.com/reallakshman19/XML_Compare_Utilities/issues/177).
 - [Element field specialist R4 #178](https://github.com/reallakshman19/XML_Compare_Utilities/issues/178#issuecomment-6407053321) separate; no private config copied.
 
