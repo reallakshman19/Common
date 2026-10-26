@@ -1,0 +1,16 @@
+BEFORE_OLD_COMPLETION {
+  active: true,
+  disposed: [],
+  projection: 'XY',
+  label: 'Use SVG viewer'
+}
+AFTER_OLD_COMPLETION {
+  active: false,
+  disposed: [ 1, 2 ],
+  projection: 'XY',
+  label: 'Use existing 3D viewer'
+}
+DEFECT_REPRODUCED: old app continuation disposed newer viewer #2; current exports remain unchanged
+(node:2) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+

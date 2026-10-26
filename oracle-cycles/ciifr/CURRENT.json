@@ -3,12 +3,13 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 9,
+  "revision": 10,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025",
     "ciifr-geo-6adedbc6-g1-viewer-onboarding-r5-20261026",
-    "ciifr-geo-6adedbc6-g1-viewer-rev7-blocked-20261026"
+    "ciifr-geo-6adedbc6-g1-viewer-rev7-blocked-20261026",
+    "ciifr-geo-6adedbc6-g1-viewer-r2-pr185-20261026"
   ],
   "aim": "CIIFR_GEO read-only two-existing-XML Geometry correspondence: preserve existing Method C/manual NODE anchors, complete ledger and SVG evidence while reusing the repository's 3D Edit viewing layer. This revision dispatches the prepared bounded WBS3.1 continuation with actual native qualification before engineering edits; no engineering acceptance or product release is granted.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
@@ -24,13 +25,13 @@
       "label": "CIIFR_GEO WBS3.1 viewer integration builder",
       "chat_id8": "6adedbc6",
       "provenance": "OWNER_AUTHORIZED_NEW_CHAT_CREATED_AND_MESSAGE_OBSERVED_IN_CHATGPT_CHAT_HIGH_20261026; ID8_OBSERVED_FROM_CHAT_URL_NOT_AUTHENTICATED_IDENTITY",
-      "responsibility": "Resume same G1 task using the provided exact-base remote branch and official Three input; actual native source/backup/qualification/testing remain mandatory."
+      "responsibility": "Repair only independently reproduced F1 on existing PR185, publish exact head and actual regressions, then return to non-author review; no merge or new feature slice."
     },
     "reviewer": {
-      "label": "Independent G1 Reviewer (not assigned)",
+      "label": "PR185 separate non-author reviewer / task CIIFR-GEO-IR-PR185-1",
       "chat_id8": null,
-      "provenance": "UNASSIGNED",
-      "responsibility": "One genuine independent G1 exact R1 head original-file served-browser B1-B4 and regression verifier; issue #175, not assigned/bound"
+      "provenance": "OWNER_EXPLICIT_REVIEW_REQUEST; SEPARATE_NON_AUTHOR_REVIEW_TASK; NO_BROWSER_CHAT_ID; PRINCIPAL_ACCOUNT_INDEPENDENCE_UNKNOWN",
+      "responsibility": "Returned exact-head FAIL/F1 on7f9ea259 with own native falsifier; reserved for independent re-review of the repaired exact head. Real served-browser/GPU gate remains blocked and no principal/account approval is claimed."
     },
     "owner": {
       "label": "Owner",
@@ -48,9 +49,9 @@
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
     "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
-    "current_candidate": "XCU draft PR183 exact head 3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6, tree 00f7825a271c4e68f650eebede40d0d62aea32f6; stacked on unchanged PR181 683a1ac37b5e4457b3e67753cec1c951ec1a2dc9; framework/JSON scene artifact is Oracle-authored SELF_ASSESSED, GPU/browser integration unverified",
-    "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175",
-    "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6397228570",
+    "current_candidate": "XCU draft PR185 exact head 7f9ea25931777dda85686ad7cc9a1a011132a23c, tree a6a2ea6820e97fbdedc2e1e96718dc2a26a67e3d; stacked on PR1833a1bec9 / PR181683a1ac3; author-native tests do not establish browser/independent/Owner acceptance.",
+    "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
+    "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6411018989",
     "minimal_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6397715134",
     "review_awaited": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6400033775",
     "g2_prepared_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/177",
@@ -64,7 +65,11 @@
     "scope_reconciliation": "Legacy original-CII G1 gates, independent review and returned assignments remain unchanged and apply to that candidate. New XML viewer source alignment is disjoint from those unverified browser claims. This revision authorizes no G2/G3/G4 implementation, Writer, converter, merge/deploy or Oracle succession. Later native #177 source-preparation decisions do not assign G2 here.",
     "viewer_continuation_brief": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/IMPLEMENTATION_BRIEF.md",
     "viewer_dispatch": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/DISPATCH.md",
-    "native_publication_route": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/UNBLOCK_R2.md"
+    "native_publication_route": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/UNBLOCK_R2.md",
+    "legacy_original_cii_reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175",
+    "output_artifact_relay": "https://github.com/reallakshman19/Common/blob/cc315e5884563b4fdc3be84eb5d9bb7b0ff89661/relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/OUTPUT_R2.md",
+    "owner_independent_review_requirement": "Explicit Owner instruction: do not skip independent reviewer. Exact-candidate non-author review and required actual browser/Owner gates cannot be replaced by author tests, Oracle self-review or an information merge.",
+    "repair_brief": "relay/AGENT_WORK/ciifr-geo/GEO-G1-IR-PR185-1/REPAIR_R3.md"
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
   "assignments": [
@@ -153,7 +158,7 @@
       "generation": 2,
       "recipient_role": "coder",
       "recipient_chat_id8": "6adedbc6",
-      "dispatch": "READY_NOT_SENT",
+      "dispatch": "RETURNED_RECONCILED",
       "predecessor": "CIIFR-GEO-G1-VIEWER-INTEGRATION-1 generation1 / rev7",
       "candidate": "XCU PR183 draft exact head 3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6, tree 00f7825a271c4e68f650eebede40d0d62aea32f6",
       "scope": "Resume SAME bounded WBS3.1 task using explicitly permitted remote Git-data branch/publication and official Three0.160.0 input. Reuse actual archive receipt and unchanged18/18+HTTP19 baseline. Complete affected native qualification/backup/patch evidence, then implement without another routine approval.",
@@ -164,14 +169,53 @@
       "required_return": "Actual asset/license byte receipt and affected prerequisite resolution on #180, then scoped stacked draft PR/head/tree, exact file preimages and actual native/browser tests with NOT_RUN limits. Final v1 receipt Common#482 for rev8/R2/gen2; concrete new blocker promptly.",
       "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180",
       "next_after": "oracle",
-      "protected": "No product merge/release, Writer, G2 or Oracle cutover; never fabricate local checkout/history."
+      "protected": "No product merge/release, Writer, G2 or Oracle cutover; never fabricate local checkout/history.",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6410647920",
+      "cycle_receipt_url": "https://github.com/reallakshman19/Common/issues/482#issuecomment-6410655926",
+      "native_return_status": "PARTIAL_AUTHOR_IMPLEMENTATION; AUTHOR_NODE21_HTTP30_PASS; REAL_BROWSER_GPU_OWNER_NOT_RUN",
+      "output_candidate": "XCU PR185 exact head 7f9ea25931777dda85686ad7cc9a1a011132a23c, tree a6a2ea6820e97fbdedc2e1e96718dc2a26a67e3d; parent PR1833a1bec9",
+      "review_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186"
+    },
+    {
+      "id": "CIIFR-GEO-IR-PR185-1",
+      "generation": 1,
+      "recipient_role": "reviewer",
+      "recipient_chat_id8": null,
+      "participant_type": "SEPARATE_NON_AUTHOR_REVIEW_TASK",
+      "transport": "DIRECT_READ_ONLY_REVIEW_TASK / native issue186; not a browser-chat Cycle participant",
+      "dispatch": "REVIEW_RETURNED",
+      "candidate": "XCU PR185 exact head 7f9ea25931777dda85686ad7cc9a1a011132a23c, tree a6a2ea6820e97fbdedc2e1e96718dc2a26a67e3d",
+      "scope": "Owner-required non-author exact-head source/inputs/native falsification and feasible actual served-browser assessment. No product edits/repair/merge. Independence dimensions and browser NOT_RUN limits mandatory.",
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
+      "required_return": "Complete scoped native verdict on #186 with actual artifacts/commands/falsifiers, candidate/input identity, findings and limitations; no invented chat ID or separate-account approval.",
+      "next_after": "oracle",
+      "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6411018989",
+      "native_return_status": "FAIL_F1_ASYNC_APP_OWNERSHIP; INDEPENDENT_NATIVE21_HTTP_PASS; REAL_BROWSER_GPU_BLOCKED",
+      "independence_limits": "Separate non-author technical process with own derived falsifier; shared GitHub connector/principal independence UNKNOWN. No separate-account approval."
+    },
+    {
+      "id": "CIIFR-GEO-G1-PR185-F1-REPAIR",
+      "generation": 3,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adedbc6",
+      "dispatch": "READY_NOT_SENT",
+      "candidate": "XCU draft PR185 exact head 7f9ea25931777dda85686ad7cc9a1a011132a23c, tree a6a2ea6820e97fbdedc2e1e96718dc2a26a67e3d",
+      "scope": "Minimal same-PR F1 request-ownership repair in app.js plus actual app-level regression and recovery report. Old async success/error/finally continuations must not dispose or relabel a newer viewer. Preserve real bridge stale rejection, all-row selection, graph/pose/export/asset semantics.",
+      "input_artifact_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-IR-PR185-1/REPAIR_R3.md",
+      "evidence_input": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6411018989",
+      "implementation_authority": "EXISTING_BOUNDED_G1_REPAIR_ONLY; NATIVE_PREIMAGE_BACKUP_LEDGER_AND_TESTS_REQUIRED",
+      "required_return": "Native #180 and #186 exact repaired PR185 head/tree, minimal scope, before-fails/after-passes current-viewer invariant, both completion orders and obsolete failure/finally cases, actual regression results and NOT_RUN. Final v1 receipt Common#482 observed_revision10/gen3. Repaired exact head must return to non-author reviewer before acceptance.",
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180",
+      "next_after": "reviewer",
+      "review_target": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
+      "protected": "No product merge/release, G2, Writer, asset/shared-viewer/MethodC rewrite or Oracle succession."
     }
   ],
   "next": {
     "recipient_role": "coder",
     "recipient_chat_id8": "6adedbc6",
     "status": "READY_NOT_SENT",
-    "instruction": "Read UNBLOCK_R2, verify Three input and continue same G1 via remote Git-data branch. Reuse completed onboarding and unchanged baseline. Local .git alone is no longer a blocker; report an actual required failed operation promptly.",
+    "instruction": "Read complete #186 verdict and Common REPAIR_R3.md/reproducer; repair F1 narrowly on PR185 using established native recovery/Git-data route. Prove correct current-viewer invariant before/after. Do not interpret the defect-detector script's exit0 as PASS. Return repaired exact head for required non-author re-review; no acceptance or merge.",
     "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr"
   },
   "gates": [
@@ -322,6 +366,20 @@
       "scope": "Revision9 resumes SAME G1 generation2 using actual exact-base remote branch, explicit Git-data publication and official Three input after rev8's recorded block. Recipient verification and affected native qualification await execution.",
       "evidence_ref": "relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-INTEGRATION-1/UNBLOCK_R2.md",
       "limits": "Rev7/gen1 blocked history and author-native18/18+HTTP19 limits preserved. No native checkout claim, qualification waiver, product merge/release or WebGL PASS."
+    },
+    {
+      "id": "geo-pr185-owner-required-independent-review",
+      "status": "FAIL",
+      "scope": "Separate non-author exact-head assessment found reproducible F1: obsolete app startup cleanup disposes the current viewer. Actual candidate bytes verified, native21/21 and HTTP checks passed but did not catch this. No repair by reviewer.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6411018989",
+      "limits": "FAIL applies at PR1857f9ea259. Repaired exact head requires independent reassessment; Oracle/author self-check is insufficient. Principal/account independence remains UNKNOWN; no separate-account approval."
+    },
+    {
+      "id": "geo-pr185-actual-served-webgl-owner-trial",
+      "status": "BLOCKED",
+      "scope": "Required actual served SVG/GPU/overlay-split/metric camera/late callback/disposal/fallback/export trial on a capable host and later Owner acceptance.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6411018989",
+      "limits": "Chromium exited SIGTRAP before any page. Actual served SVG/GPU/camera/pixel-pick/lifecycle/fallback/download/Windows/Owner trial NOT_RUN. Native synthetic DOM and HTTP cannot substitute."
     }
   ],
   "progress_projection": {
@@ -329,8 +387,8 @@
     "project_key": "ciifr",
     "publication_status": "PUBLISHED_R4_NEEDS_REV8_BLOCKER_UPDATE",
     "published_revision": "R4",
-    "reason": "Progress Page PR18 merged earlier with R4 Geometry/Element source status. Latest rev7 G1 native blocker is recorded in XCU #180 and Cycle rev8; project Progress projection of this new blocker still pending authorized page update."
+    "reason": "PROGRESS_UPDATE_PENDING with existing sole ciifr writer. PR185 author return and separate review issue186 are new source evidence, not engineering completion or release."
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
-  "activation_scope": "Same Owner-requested bounded G1 continuation. Oracle substitutes a remote Git-data route for its own local-Git condition; actual native source/backup/qualification/testing and product release boundaries remain."
+  "activation_scope": "Owner-required non-author review completed with FAIL/F1; same bounded G1 author repair is the sole next engineering task. Required re-review and real browser/GPU/Owner acceptance remain held; no product merge/release or succession."
 }

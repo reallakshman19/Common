@@ -1,0 +1,10 @@
+(node:2) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+FIFO_COMPLETION {
+  active: false,
+  disposed: [ 1, 2 ],
+  projection: 'XY',
+  label: 'Use existing 3D viewer'
+}
+DEFECT_REPRODUCED: FIFO old/new startup completion also disposes current viewer #2
+
