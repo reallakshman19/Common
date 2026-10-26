@@ -3,26 +3,26 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 4,
+  "revision": 5,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025"
   ],
-  "aim": "G1 Geometry review-only workbench in XCU VNext: original CII SOURCE/TARGET0, manual anchor, registered Method C correspondence ledger and linked two side-by-side synchronized SVGs, preserving original physical NODE identity and non-acceptance of proximity.",
+  "aim": "CIIFR_GEO read-only two-existing-XML Geometry correspondence: preserve existing Method C/manual NODE anchors, complete ledger and SVG evidence while reusing the repository's 3D Edit viewing layer. This revision routes only the new builder's source-alignment feedback and existing onboarding return; no implementation or engineering release is granted.",
   "aim_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
   "privacy": "PUBLIC_SAFE_METADATA_ONLY",
   "roles": {
     "oracle": {
       "label": "CIIFR project Oracle",
       "chat_id8": null,
-      "provenance": "NOT_CONFIRMED_FOR_THIS_CHAT",
+      "provenance": "OWNER_APPOINTED_ORACLE_IN_CURRENT_CONVERSATION; THIS_CHAT_ID_UNKNOWN",
       "responsibility": "Choose bounded G1 continuation; challenge native evidence and publish next Cycle revision; coordinate Progress Page via authorized writer"
     },
     "coder": {
-      "label": "G1 Geometry Builder",
-      "chat_id8": "6addafaa",
-      "provenance": "OWNER_CONFIRMED_20261025_NATIVE_RETURN_6394935584",
-      "responsibility": "Same existing builder, native qualification and one bounded G1 draft PR"
+      "label": "CIIFR_GEO viewer continuation builder — onboarding/source return only",
+      "chat_id8": "6adedbc6",
+      "provenance": "OWNER_AUTHORIZED_NEW_CHAT_CREATED_AND_MESSAGE_OBSERVED_IN_CHATGPT_CHAT_HIGH_20261026; ID8_OBSERVED_FROM_CHAT_URL_NOT_AUTHENTICATED_IDENTITY",
+      "responsibility": "Reuse source walkthrough already underway at PR183; correct material misunderstandings, state actual capability/access and publish the existing native onboarding feedback on XCU #180 plus one Cycle routing envelope; no code edits."
     },
     "reviewer": {
       "label": "Independent G1 Reviewer (not assigned)",
@@ -40,20 +40,26 @@
   "source_boundary": {
     "xcu_repo": "reallakshman19/XML_Compare_Utilities",
     "initial_source_commit": "80e693bd81f54003a487cb763421f9bfd0d3dfc2",
-    "canonical_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
+    "canonical_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180",
     "wbs": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
     "frozen_baseline": "Original S1/T CII physical NODE/ELEMENT witnesses and immutable SOURCE/TARGET0; live ref and concurrent PR changes must be rechecked before edits",
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
     "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
-    "current_candidate": "XCU PR #174 R1 repaired head 9936d4078fb7f837ffe6f46805241efdb7bbc0e8, based on XCU main c823f0c0edbeb315c07fa2911390dc781968146f; G1 DRAFT, MERGE HOLD",
+    "current_candidate": "XCU draft PR183 exact head 3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6, tree 00f7825a271c4e68f650eebede40d0d62aea32f6; stacked on unchanged PR181 683a1ac37b5e4457b3e67753cec1c951ec1a2dc9; framework/JSON scene artifact is Oracle-authored SELF_ASSESSED, GPU/browser integration unverified",
     "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175",
     "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6397228570",
     "minimal_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6397715134",
     "review_awaited": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6400033775",
     "g2_prepared_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/177",
     "g2_implementation": "HOLD_UNTIL_G1_ORIGINAL_BROWSER_INDEPENDENT_OWNER_TRIAL_AND_MERGE_DECISION",
-    "oracle_continuity": "oracle-cycles/ciifr/ORACLE_CONTINUITY_20261025.md (PREPARED_NOT_CUTOVER)"
+    "oracle_continuity": "oracle-cycles/ciifr/ORACLE_CONTINUITY_20261025.md (PREPARED_NOT_CUTOVER)",
+    "legacy_original_cii_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
+    "original_cii_candidate": "XCU PR #174 R1 repaired head 9936d4078fb7f837ffe6f46805241efdb7bbc0e8, based on XCU main c823f0c0edbeb315c07fa2911390dc781968146f; G1 DRAFT, MERGE HOLD",
+    "onboarding_packet": "https://github.com/reallakshman19/Common/blob/8393d1a3a4944c3e626aa394ade3969ef9aac06a/relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-REUSE-1/CHATGPT_ONBOARDING.md",
+    "input_manifest": "https://github.com/reallakshman19/Common/blob/8393d1a3a4944c3e626aa394ade3969ef9aac06a/relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-REUSE-1/INPUT_MANIFEST.json",
+    "artifact_register": "https://github.com/reallakshman19/Common/blob/8393d1a3a4944c3e626aa394ade3969ef9aac06a/relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-REUSE-1/ARTIFACT_REGISTER.md",
+    "scope_reconciliation": "Legacy original-CII G1 gates, independent review and returned assignments remain unchanged and apply to that candidate. New XML viewer source alignment is disjoint from those unverified browser claims. This revision authorizes no G2/G3/G4 implementation, Writer, converter, merge/deploy or Oracle succession. Later native #177 source-preparation decisions do not assign G2 here."
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
   "assignments": [
@@ -91,14 +97,31 @@
       "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6398999288",
       "cycle_receipt_url": "https://github.com/reallakshman19/Common/issues/482#issuecomment-6399004508",
       "observed_revision": 3
+    },
+    {
+      "id": "CIIFR-GEO-G1-VIEWER-REUSE-1",
+      "generation": 1,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adedbc6",
+      "dispatch": "READY_NOT_SENT",
+      "scope": "READ_ONLY onboarding feedback and routing of the already-started source walkthrough. Reuse the framework, actual diff, own accessed XML bytes and existing dialogue. Trace actual node3830 through graph, full-pose display identity and ledger; correct consequential differences and report actual code/browser capability and next WBS3.2 dependency. Do not repeat an onboarding questionnaire, re-download unchanged verified inputs merely for ceremony, rerun inherited tests, or grade understanding. No product/file edits or implementation GO.",
+      "candidate": "XCU PR183 draft exact head 3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6, tree 00f7825a271c4e68f650eebede40d0d62aea32f6",
+      "input_artifact_ref": "https://github.com/reallakshman19/Common/blob/8393d1a3a4944c3e626aa394ade3969ef9aac06a/relay/AGENT_WORK/ciifr-geo/GEO-G1-VIEWER-REUSE-1/ARTIFACT_REGISTER.md",
+      "accepted_input_status": "PRODUCER_INPUT_MANIFEST_AND_PUBLIC_CANDIDATE_AVAILABLE; RECIPIENT_HAS_BEGUN_SOURCE_WALKTHROUGH; ACTUAL_FULL_NATIVE_RETURN_AND_BYTE_EVIDENCE_AWAITED",
+      "onboarding_prompt_status": "SENT_TO_CHAT_THROUGH_OWNER_AUTHORIZED_BROWSER_CHAT_MODE_HIGH; NOT_A_CYCLE_TRIGGER_OR_IMPLEMENTATION_GRANT",
+      "required_return": "When the ongoing walkthrough settles, publish the same source-grounded onboarding feedback on XCU #180, separating own observations/tests from inherited claims, unresolved capability and one next visible result. No duplicate engineering execution. Then one ORACLE-CYCLE-RECEIPT v1 on Common #482 for observed_revision5, role coder/chat6adedbc6, this exact assignment/generation/candidate; public_evidence points to that native comment. Read back both permalinks. Mark PARTIAL/NOT_RUN/BLOCKED precisely rather than minting engineering PASS.",
+      "next_after": "oracle",
+      "target_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180",
+      "implementation_authority": "NOT_GRANTED_THIS_ASSIGNMENT",
+      "next_functional_wbs": "3.2/G2/M14 — native #177 independent pose-free topology and Manual/Topology/OR/AND; UNASSIGNED_BY_THIS_REVISION"
     }
   ],
   "next": {
-    "recipient_role": "owner",
-    "recipient_chat_id8": null,
-    "status": "AWAIT_REAL_REVIEWER_AND_ORIGINAL_BROWSER",
-    "instruction": "Select a genuine separate reviewer/runner with actual S1/T and working Chromium. Give native XCU #175 exact-head R1 review order at 9936d407...; check original paired S1/T served app, no Writer and Normal, and report independent/author-only tests separately. G2 #177 can be read-only prepared but coding remains held until G1 independent evidence, Owner trial and acceptance/merge decision.",
-    "owner_trigger": "Independent G1 review (READ_ONLY): https://github.com/reallakshman19/XML_Compare_Utilities/issues/175 — exact PR #174 head 9936d4078fb7f837ffe6f46805241efdb7bbc0e8; report B1-B4 evidence on #175; no edit, merge or Writer."
+    "recipient_role": "coder",
+    "recipient_chat_id8": "6adedbc6",
+    "status": "READY_NOT_SENT",
+    "instruction": "Use the first URL-form Cycle trigger in the existing Owner-authorized ChatGPT High chat6adedbc6. Read canonical revision5 after actual authorized merge. Continue the already-started source alignment and publish its existing feedback natively; do not re-execute returned original-G1 work or begin implementation. Oracle reconciles the native report before choosing the next meaningful bounded continuation.",
+    "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/ciifr"
   },
   "gates": [
     {
@@ -216,6 +239,13 @@
       "scope": "Knowledge-first read-only successor checkpoint prepared in this PR, not published until merge; successor not bound, control cutover NOT_RUN",
       "evidence_ref": "https://github.com/reallakshman19/Common/blob/64958560205b420d5caa857f62e59c6eb89a3803/oracle-cycles/ciifr/ORACLE_CONTINUITY_20261025.md",
       "limits": "No successor identity, epoch increment or new control/acceptance permission"
+    },
+    {
+      "id": "geo-viewer-new-chat-onboarding-return",
+      "status": "NOT_RUN",
+      "scope": "New ChatGPT High builder6adedbc6 received the initial read-only onboarding message; full native source/capability return and Cycle receipt await publication/reconciliation",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180",
+      "limits": "Browser-observed routing label and initial visible source feedback do not authenticate identity, establish complete byte receipt, native/browser tests, implementation qualification, independent review or acceptance"
     }
   ],
   "progress_projection": {
@@ -223,8 +253,8 @@
     "project_key": "ciifr",
     "publication_status": "PENDING_AUTHORIZED_CIIFR_WRITER",
     "published_revision": null,
-    "reason": "G1 R1 author-returned exact PR #174 but true original-browser and independent head review remain held; G2 task #177 prepared only, Oracle succession PREPARED not activated; Progress Page only via its sole authorized CLI writer."
+    "reason": "Original G1 gates unchanged. New XML viewer builder6adedbc6 is proposed for read-only onboarding/return routing at PR183; canonical change requires authorized merge and readback. Existing Progress Page sole writer/CLI remains responsible; no Page publication claimed."
   },
-  "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482",
-  "activation_scope": "Manual one-recipient standalone transport for existing XCU #169 Geometry G1 only. No dispatch until Owner pastes trigger; no change to engineering/native or unrelated project authority."
+  "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
+  "activation_scope": "Manual one-recipient standalone transport, retaining the original-G1 returned history and adding only read-only WBS3.1 XML viewer onboarding/native-return routing to6adedbc6. This proposal becomes current only after authorized canonical merge/readback. No implementation, engineering approval, Writer, G2 assignment, product merge/deploy or Oracle control cutover."
 }
