@@ -1,0 +1,571 @@
+diff --git a/data/ciifr/audit.json b/data/ciifr/audit.json
+index 1cbc8d7..ed2bf65 100644
+--- a/data/ciifr/audit.json
++++ b/data/ciifr/audit.json
+@@ -5231,6 +5231,212 @@
+       "list": "pending",
+       "op": "add",
+       "rev": "R4"
++    },
++    {
++      "seq": 399,
++      "id": "CIIFR-R-0399",
++      "previous_id": "CIIFR-R-0398",
++      "at": "2026-10-26T02:29:14Z",
++      "kind": "PLAN",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Revise 3 / M12 from current source",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "scope": "milestone:M12",
++      "rev": "R4"
++    },
++    {
++      "seq": 400,
++      "id": "CIIFR-R-0400",
++      "previous_id": "CIIFR-R-0399",
++      "at": "2026-10-26T02:29:14Z",
++      "kind": "PLAN",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Revise 3.1 / M13 from current source",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "scope": "milestone:M13",
++      "rev": "R4"
++    },
++    {
++      "seq": 401,
++      "id": "CIIFR-R-0401",
++      "previous_id": "CIIFR-R-0400",
++      "at": "2026-10-26T02:29:15Z",
++      "kind": "PLAN",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Revise 3.2 / M14 from current source",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "scope": "milestone:M14",
++      "rev": "R4"
++    },
++    {
++      "seq": 402,
++      "id": "CIIFR-R-0402",
++      "previous_id": "CIIFR-R-0401",
++      "at": "2026-10-26T02:29:15Z",
++      "kind": "PLAN",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Revise 3.3 / M15 from current source",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "scope": "milestone:M15",
++      "rev": "R4"
++    },
++    {
++      "seq": 403,
++      "id": "CIIFR-R-0403",
++      "previous_id": "CIIFR-R-0402",
++      "at": "2026-10-26T02:29:16Z",
++      "kind": "PLAN",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Revise 3.4 / M16 from current source",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "scope": "milestone:M16",
++      "rev": "R4"
++    },
++    {
++      "seq": 404,
++      "id": "CIIFR-R-0404",
++      "previous_id": "CIIFR-R-0403",
++      "at": "2026-10-26T02:29:16Z",
++      "kind": "STATE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Reconcile geo-g0 and its next consumer",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "card": "geo-g0",
++      "before": "NOT_STARTED",
++      "after": "SUBMITTED",
++      "rev": "R4"
++    },
++    {
++      "seq": 405,
++      "id": "CIIFR-R-0405",
++      "previous_id": "CIIFR-R-0404",
++      "at": "2026-10-26T02:30:23Z",
++      "kind": "STATE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Reconcile geo-g1 and its next consumer",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "card": "geo-g1",
++      "before": "NOT_STARTED",
++      "after": "SUBMITTED",
++      "rev": "R4"
++    },
++    {
++      "seq": 406,
++      "id": "CIIFR-R-0406",
++      "previous_id": "CIIFR-R-0405",
++      "at": "2026-10-26T02:30:24Z",
++      "kind": "UPDATE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Reconcile geo-g2 and its next consumer",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "card": "geo-g2",
++      "before": "NOT_STARTED",
++      "after": "NOT_STARTED",
++      "rev": "R4"
++    },
++    {
++      "seq": 407,
++      "id": "CIIFR-R-0407",
++      "previous_id": "CIIFR-R-0406",
++      "at": "2026-10-26T02:30:24Z",
++      "kind": "UPDATE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Reconcile geo-g3 and its next consumer",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "card": "geo-g3",
++      "before": "NOT_STARTED",
++      "after": "NOT_STARTED",
++      "rev": "R4"
++    },
++    {
++      "seq": 408,
++      "id": "CIIFR-R-0408",
++      "previous_id": "CIIFR-R-0407",
++      "at": "2026-10-26T02:30:24Z",
++      "kind": "UPDATE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Reconcile geo-g4 and its next consumer",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "card": "geo-g4",
++      "before": "NOT_STARTED",
++      "after": "NOT_STARTED",
++      "rev": "R4"
++    },
++    {
++      "seq": 409,
++      "id": "CIIFR-R-0409",
++      "previous_id": "CIIFR-R-0408",
++      "at": "2026-10-26T02:30:25Z",
++      "kind": "PLAN",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Revise r3-geometry-onboarding display only",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "scope": "group:r3-geometry-onboarding",
++      "rev": "R4"
++    },
++    {
++      "seq": 410,
++      "id": "CIIFR-R-0410",
++      "previous_id": "CIIFR-R-0409",
++      "at": "2026-10-26T02:30:25Z",
++      "kind": "PLAN",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Revise r3-geometry display only",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "scope": "group:r3-geometry",
++      "rev": "R4"
++    },
++    {
++      "seq": 411,
++      "id": "CIIFR-R-0411",
++      "previous_id": "CIIFR-R-0410",
++      "at": "2026-10-26T02:32:52Z",
++      "kind": "FIXTURE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Record CIIFR_GEO Concept Note R2",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "list": "repository",
++      "op": "add",
++      "rev": "R4"
++    },
++    {
++      "seq": 412,
++      "id": "CIIFR-R-0412",
++      "previous_id": "CIIFR-R-0411",
++      "at": "2026-10-26T02:32:52Z",
++      "kind": "FIXTURE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Record CIIFR_GEO revised roadmap and implementation plan",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "list": "repository",
++      "op": "add",
++      "rev": "R4"
++    },
++    {
++      "seq": 413,
++      "id": "CIIFR-R-0413",
++      "previous_id": "CIIFR-R-0412",
++      "at": "2026-10-26T02:32:53Z",
++      "kind": "FIXTURE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Record CIIFR_GEO NEXT WBS3.2 card",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "list": "repository",
++      "op": "add",
++      "rev": "R4"
++    },
++    {
++      "seq": 414,
++      "id": "CIIFR-R-0414",
++      "previous_id": "CIIFR-R-0413",
++      "at": "2026-10-26T02:32:53Z",
++      "kind": "FIXTURE",
++      "actor": "CIIFR_GEO Oracle",
++      "summary": "Record CIIFR_GEO existing 3D Edit viewer reuse source",
++      "source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "list": "repository",
++      "op": "add",
++      "rev": "R4"
+     }
+   ]
+ }
+diff --git a/data/ciifr/cards.json b/data/ciifr/cards.json
+index dab1878..3d12947 100644
+--- a/data/ciifr/cards.json
++++ b/data/ciifr/cards.json
+@@ -626,13 +626,13 @@
+     "order": 20,
+     "group": "r3-geometry-onboarding",
+     "milestone": "M12",
+-    "label": "G0 · Onboarding and ownership",
++    "label": "CIIFR_GEO G0 - source and seam",
+     "who": {},
+-    "state": "NOT_STARTED",
+-    "now": "G0: [Contribution & Handoff](https://github.com/reallakshman19/Common/blob/a9491531fb98f6fd14bc486a4cc78ee4680cb1f5/skills/agent-work/CONTRIBUTION_HANDOFF.md) requires evidence-bounded PASS, surviving-error challenge and SELF_ASSESSED Oracle edits. [Oracle Continuity](https://github.com/reallakshman19/Common/blob/a9491531fb98f6fd14bc486a4cc78ee4680cb1f5/skills/agent-work/oracle-continuity/PROTOCOL.md) preserves task/artifact identity and actual cutover. Read Issue #166 and XCU AGENTS; verify original CII hashes, input access, PR #165 ownership and Appendix A. Engineering takeover READ_ONLY until qualified. No Geometry Writer. Return exact-head demo, checks, NOT_RUN and next actor.",
++    "state": "SUBMITTED",
++    "now": "Original source/candidate/ownership facts reconciled; PR165 overlap blocker is historical. Shared T parser accepted S1/T. Refresh new task-specific qualification; no GPU or Owner acceptance.",
+     "next": {
+       "actor": "Oracle",
+-      "text": "Reconcile PR #165 and identify authorized G1 builder; no Oracle succession activated."
++      "text": "Qualify the actual next builder against the issued card and current source access."
+     },
+     "refs": [
+       {
+@@ -640,22 +640,29 @@
+         "l": "Geometry Option C canonical work order",
+         "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6393745466",
+         "s": "PLANNED"
++      },
++      {
++        "k": "issue",
++        "l": "CIIFR_GEO revised plan",
++        "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++        "s": "R2"
+       }
+     ],
+-    "updatedAt": "2026-10-25T05:27:05Z",
+-    "src": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6393745466"
++    "updatedAt": "2026-10-26T02:29:16Z",
++    "src": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++    "flags": []
+   },
+   "geo-g1": {
+     "order": 21,
+     "group": "r3-geometry",
+     "milestone": "M13",
+-    "label": "G1 · Anchor, ledger and dual SVG",
++    "label": "CIIFR_GEO G1 - XML/GPU preview",
+     "who": {},
+-    "state": "NOT_STARTED",
+-    "now": "Planned: original CII SOURCE/TARGET selection, experimental anchor registration, Method C candidates, linked row↔two physical SVGs at common mm scale, segment-only explicitly not NODE; no Writer/Apply.",
++    "state": "SUBMITTED",
++    "now": "PR181 exact683a1ac returned: native12/12, HTTP18 and actual tree/fixture verification. Browser/Windows/Owner trial NOT_RUN. Viewer-reuse card is written/unassigned; preserve SVG/current test pack.",
+     "next": {
+-      "actor": "Builder after G0",
+-      "text": "Produce Owner-runnable hosted Geometry workbench and exact-head evidence."
++      "actor": "Oracle",
++      "text": "Use R2 viewer-reuse card for one qualified builder; retain Owner trial and WBS3.2 downstream contract."
+     },
+     "refs": [
+       {
+@@ -663,20 +670,29 @@
+         "l": "Geometry Option C canonical work order",
+         "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6393745466",
+         "s": "PLANNED"
++      },
++      {
++        "k": "issue",
++        "l": "CIIFR_GEO revised plan",
++        "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++        "s": "R2"
+       }
+-    ]
++    ],
++    "flags": [],
++    "updatedAt": "2026-10-26T02:30:23Z",
++    "src": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+   },
+   "geo-g2": {
+     "order": 22,
+     "group": "r3-geometry",
+     "milestone": "M14",
+-    "label": "G2 · Smart topology + Boolean",
++    "label": "CIIFR_GEO G2 - NEXT topology/Boolean",
+     "who": {},
+     "state": "NOT_STARTED",
+-    "now": "Planned: independent topology-only candidates without fabricated XYZ residuals; Manual/OR/AND filters retain ambiguous alternatives, target collisions and anchor disagreements.",
++    "now": "Next WBS3.2/M14: pose-free candidate pairs, Manual/Topology/OR/AND and conflicts. Real ambiguity witnesses published; implementation/worker unassigned. Source work is not gated on GPU completion.",
+     "next": {
+-      "actor": "Builder after G1",
+-      "text": "Extend G1 common ledger and demonstrate duplicate-signature/contested-target contrasts."
++      "actor": "Oracle",
++      "text": "Bind a qualified G2 executor under actual disjoint ownership; start pure pair-set result before controlled UI integration."
+     },
+     "refs": [
+       {
+@@ -684,20 +700,29 @@
+         "l": "Geometry Option C canonical work order",
+         "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6393745466",
+         "s": "PLANNED"
++      },
++      {
++        "k": "issue",
++        "l": "CIIFR_GEO revised plan",
++        "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++        "s": "R2"
+       }
+-    ]
++    ],
++    "flags": [],
++    "updatedAt": "2026-10-26T02:30:24Z",
++    "src": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+   },
+   "geo-g3": {
+     "order": 23,
+     "group": "r3-geometry",
+     "milestone": "M15",
+-    "label": "G3 · XMLv1.1 field evidence",
++    "label": "CIIFR_GEO G3 - provenance",
+     "who": {},
+     "state": "NOT_STARTED",
+-    "now": "Planned: locally import F05 XMLv1.1 plus receipt; cross-check actual original byte SHA, schema, ELEMENT ordinals/endpoints and field witness; reject forged/stale pairing.",
++    "now": "Plan receipt-backed original-CII/XML relationships on existing XML witnesses. Measured XML SHA/embedded CII claims do not authenticate original bytes. No converter or identity authority.",
+     "next": {
+-      "actor": "Builder after G2",
+-      "text": "Show valid and invalid XML evidence on linked correspondence."
++      "actor": "Oracle",
++      "text": "Consume graph/pair ledger and prove valid, mismatched and unverified provenance states."
+     },
+     "refs": [
+       {
+@@ -705,20 +730,29 @@
+         "l": "Geometry Option C canonical work order",
+         "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6393745466",
+         "s": "PLANNED"
++      },
++      {
++        "k": "issue",
++        "l": "CIIFR_GEO revised plan",
++        "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++        "s": "R2"
+       }
+-    ]
++    ],
++    "flags": [],
++    "updatedAt": "2026-10-26T02:30:24Z",
++    "src": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+   },
+   "geo-g4": {
+     "order": 24,
+     "group": "r3-geometry",
+     "milestone": "M16",
+-    "label": "G4 · Exports and IR",
++    "label": "CIIFR_GEO G4 - hardening/review",
+     "who": {},
+     "state": "NOT_STARTED",
+-    "now": "Planned: hash-bound evidence JSON/CSV/SVG, stale-epoch and injection rejection, untouched Normal/Line/Config/Writer regressions, original S1/T and independent exact-head challenge.",
++    "now": "Plan full exports, stale worker/file/mode checks, separate CPU/GPU/table scaling, controlled VNext integration, protected regressions and independent exact-head review before consequential release.",
+     "next": {
+-      "actor": "Independent reviewer after builder",
+-      "text": "Return bounded evidence-based verdict; Owner decision remains separate."
++      "actor": "Oracle",
++      "text": "Use actual prototype observations to scope hardening/review; no automatic merge or Writer authority."
+     },
+     "refs": [
+       {
+@@ -726,8 +760,17 @@
+         "l": "Geometry Option C canonical work order",
+         "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6393745466",
+         "s": "PLANNED"
++      },
++      {
++        "k": "issue",
++        "l": "CIIFR_GEO revised plan",
++        "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++        "s": "R2"
+       }
+-    ]
++    ],
++    "flags": [],
++    "updatedAt": "2026-10-26T02:30:24Z",
++    "src": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+   },
+   "oracle-onboarding": {
+     "order": 19,
+diff --git a/data/ciifr/fixtures.json b/data/ciifr/fixtures.json
+index 27dc3dc..153f50a 100644
+--- a/data/ciifr/fixtures.json
++++ b/data/ciifr/fixtures.json
+@@ -117,6 +117,34 @@
+       "s": "ONBOARD_REVISED",
+       "n": "Prepared only",
+       "milestone": "M18"
++    },
++    {
++      "t": "CIIFR_GEO Concept Note R2",
++      "u": "https://github.com/reallakshman19/Common/blob/ca196c6ea5f5599a7c19cff9a828f1cf785a9f9c/oracle-cycles/ciifr/continuity/payload/CONCEPT_NOTE.md",
++      "s": "CONCEPT_NOTE",
++      "n": "Proposed revision; not merged main",
++      "milestone": "M13"
++    },
++    {
++      "t": "CIIFR_GEO revised roadmap and implementation plan",
++      "u": "https://github.com/reallakshman19/Common/blob/ca196c6ea5f5599a7c19cff9a828f1cf785a9f9c/oracle-cycles/ciifr/continuity/payload/ROADMAP_AND_IMPLEMENTATION_PLAN.md",
++      "s": "PLAN_REVISED",
++      "n": "Stable WBS3.x; self-assessed plan",
++      "milestone": "M13"
++    },
++    {
++      "t": "CIIFR_GEO NEXT WBS3.2 card",
++      "u": "https://github.com/reallakshman19/Common/blob/ca196c6ea5f5599a7c19cff9a828f1cf785a9f9c/oracle-cycles/ciifr/continuity/payload/ROADMAP_AND_IMPLEMENTATION_PLAN.md#5-card-b--next-functional-wbs32",
++      "s": "NEXT_WBS",
++      "n": "Written next-WBS card; unassigned",
++      "milestone": "M14"
++    },
++    {
++      "t": "CIIFR_GEO existing 3D Edit viewer reuse source",
++      "u": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6406475596",
++      "s": "SOURCE_REUSE",
++      "n": "Source feasibility; GPU/browser NOT_RUN",
++      "milestone": "M13"
+     }
+   ],
+   "issues": [
+diff --git a/data/ciifr/index.json b/data/ciifr/index.json
+index bc4b3d6..2c28140 100644
+--- a/data/ciifr/index.json
++++ b/data/ciifr/index.json
+@@ -4,8 +4,8 @@
+     "key": "ciifr",
+     "title": "CII Find & Replace VNext",
+     "subtitle": "R3 current: standalone Oracle coordination of P2.5-B handoff, review, Windows acceptance and prepared Oracle succession.",
+-    "updatedAt": "2026-10-25T18:25:18Z",
+-    "updatedBy": "CIIFR Oracle · E1 R2 IR reconciliation",
++    "updatedAt": "2026-10-26T02:32:53Z",
++    "updatedBy": "CIIFR_GEO Oracle",
+     "staleAfterMin": 120,
+     "aim": "Extend CIIFR NodeName VNext into typed ELEMENTS real-value/Line Number edits plus pointer-resolved RIGID Weight/Type. Preserve original bytes, v14 units/sentinels, node/pointer/branch relations, per-span approvals, new-copy export and native import review. Retain R3 Geometry WBS3 review-only, frozen P2/P2.1 and XML custody; defer structural graph/pointer edits and P3.",
+     "aimSrc": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/167#issuecomment-6394203305"
+@@ -177,64 +177,71 @@
+       "canDo": "No accepted production transfer/export in this new prototype. Read-only work can proceed before export qualification."
+     },
+     "M12": {
+-      "name": "Geometry onboarding and seam",
+-      "full": "Re-ground source, file ownership relative to PR #165, original fixtures, builder capability and scoped engineering implementation authority; no shared-file edit before coordination.",
++      "name": "CIIFR_GEO source and ownership",
++      "full": "Original G1 source/ownership groundwork exists; PR165 merged. Refresh each new GPU/G2 writer access and bounded custody without restarting WBS.",
+       "order": 12,
+       "wbs": "3",
+       "bench": "GEO-G0",
+-      "keeps": "Original CII sha and all existing Normal/Line/Config/Writer behaviour",
++      "keeps": "Source hashes; Method C/SVG; all alternatives; no Writer; Normal/Line/Config",
+       "cap": "NOT_DEMONSTRATED",
+-      "canDo": "Not yet runnable: builder/PR seam and fixture access unresolved.",
++      "canDo": "Source/seam checks exist; new GPU/G2 builder qualification and Owner browser trial remain pending.",
+       "repo": "reallakshman19/XML_Compare_Utilities",
+-      "activity": "PLANNED, not implemented or accepted"
++      "activity": "Geometry plan R2; native/browser/release claims separated",
++      "capSrc": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+     },
+     "M13": {
+-      "name": "Geometry table and dual SVG",
+-      "full": "G1: use immutable SOURCE/TARGET CII, manually anchor nodes and display Method C registered candidates with original NODE/ELEMENT witnesses in linked table and two synchronized real-mm-scale SVGs.",
++      "name": "CIIFR_GEO XML comparison and viewer",
++      "full": "Method C/manual XML source candidate PR181 plus original-CII reference PR174. Continue with opt-in shared 3D Edit viewer reuse, SVG reference/export, complete pose and hash-scoped picking.",
+       "order": 13,
+       "wbs": "3.1",
+       "bench": "GEO-G1",
+-      "keeps": "Original CII sha and all existing Normal/Line/Config/Writer behaviour",
+-      "cap": "NOT_DEMONSTRATED",
+-      "canDo": "Not yet demonstrated: real-file Geometry dual-SVG workbench.",
++      "keeps": "Source hashes; Method C/SVG; all alternatives; no Writer; Normal/Line/Config",
++      "cap": "CANDIDATE",
++      "canDo": "Test pack and native-validated XML candidate delivered; browser controls/downloads/Owner use and GPU integration remain unverified.",
+       "repo": "reallakshman19/XML_Compare_Utilities",
+-      "activity": "PLANNED, not implemented or accepted"
++      "activity": "Geometry plan R2; native/browser/release claims separated",
++      "capSrc": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166",
++      "branch": "codex/ciifr-map-xml-overlay-p1-20261025",
++      "commit": "683a1ac37b5e4457b3e67753cec1c951ec1a2dc9"
+     },
+     "M14": {
+-      "name": "Topology and OR/AND review",
+-      "full": "G2: pose-free topology suggestions with NOT_EVALUATED spatial residuals, Manual/OR/AND filters and no hidden duplicated signatures, ambiguous targets or anchor conflicts.",
++      "name": "CIIFR_GEO topology and OR/AND",
++      "full": "NEXT FUNCTIONAL WBS: independent pose-free topology; anchor/coordinate/topology roles, Manual/Topology/OR/AND and retained conflicts. Disjoint source work can proceed while viewer qualification is pending.",
+       "order": 14,
+       "wbs": "3.2",
+       "bench": "GEO-G2",
+-      "keeps": "Original CII sha and all existing Normal/Line/Config/Writer behaviour",
++      "keeps": "Source hashes; Method C/SVG; all alternatives; no Writer; Normal/Line/Config",
+       "cap": "NOT_DEMONSTRATED",
+-      "canDo": "Not yet demonstrated: pose-free topology suggestions and Boolean exceptions.",
++      "canDo": "Concrete next-WBS card and real ambiguity witness exist; topology/Boolean implementation is not delivered.",
+       "repo": "reallakshman19/XML_Compare_Utilities",
+-      "activity": "PLANNED, not implemented or accepted"
++      "activity": "Geometry plan R2; native/browser/release claims separated",
++      "capSrc": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+     },
+     "M15": {
+-      "name": "XMLv1.1 evidence bridge",
+-      "full": "G3: import locally generated XMLv1.1 F05 and a receipt, verify current original CII/XML schema, SHA and endpoint witnesses, show record/field provenance or XML_UNVERIFIED.",
++      "name": "CIIFR_GEO receipt-backed provenance",
++      "full": "Current XML graphs carry field witnesses. Add qualified original-CII/XML/receipt pairing and claimed/mismatched/verified states without converter or matcher construction.",
+       "order": 15,
+       "wbs": "3.3",
+       "bench": "GEO-G3",
+-      "keeps": "Original CII sha and all existing Normal/Line/Config/Writer behaviour",
++      "keeps": "Source hashes; Method C/SVG; all alternatives; no Writer; Normal/Line/Config",
+       "cap": "NOT_DEMONSTRATED",
+-      "canDo": "Not yet demonstrated: XMLv1.1 original-witness evidence inside Geometry.",
++      "canDo": "XML witnesses exist in the candidate; verified original-CII receipt relationships inside Geometry are not demonstrated.",
+       "repo": "reallakshman19/XML_Compare_Utilities",
+-      "activity": "PLANNED, not implemented or accepted"
++      "activity": "Geometry plan R2; native/browser/release claims separated",
++      "capSrc": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+     },
+     "M16": {
+-      "name": "Evidence export and verification",
+-      "full": "G4: immutable hash-bound JSON/CSV/SVG export, stale-epoch invalidation, unaffected Normal/Line/Config/Writer, original benchmark and exact-head independent review.",
++      "name": "CIIFR_GEO scaling, integration and review",
++      "full": "Harden hash-bound evidence, stale epochs, CPU/GPU/table scaling and controlled VNext integration; protect Normal/Writer and obtain exact-head independent assessment and Owner release.",
+       "order": 16,
+       "wbs": "3.4",
+       "bench": "GEO-G4",
+-      "keeps": "Original CII sha and all existing Normal/Line/Config/Writer behaviour",
++      "keeps": "Source hashes; Method C/SVG; all alternatives; no Writer; Normal/Line/Config",
+       "cap": "NOT_DEMONSTRATED",
+-      "canDo": "Not yet demonstrated: independently verified review exports and regression.",
++      "canDo": "Native/HTTP foundations exist; browser, large-scene, integrated independent and Owner acceptance proof remains pending.",
+       "repo": "reallakshman19/XML_Compare_Utilities",
+-      "activity": "PLANNED, not implemented or accepted"
++      "activity": "Geometry plan R2; native/browser/release claims separated",
++      "capSrc": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166"
+     },
+     "M17": {
+       "name": "E0 · Architectural scope / oracle",
+@@ -367,12 +374,14 @@
+       "order": 2
+     },
+     "r3-geometry-onboarding": {
+-      "title": "Geometry: onboarding and integration seam",
+-      "order": 11
++      "title": "CIIFR_GEO source and seam",
++      "order": 11,
++      "sub": "Stable WBS3/M12: source/custody and task-specific qualification."
+     },
+     "r3-geometry": {
+-      "title": "Geometry: correspondence workbench WBS 3.1-3.4",
+-      "order": 12
++      "title": "CIIFR_GEO - Geometry correspondence",
++      "order": 12,
++      "sub": "WBS3.1-3.4/M13-M16: existing XML + Method C, shared GPU viewer/SVG; next topology/Boolean; later provenance/hardening. Other CIIFR work unchanged."
+     },
+     "wbs4-intake": {
+       "title": "WBS4 E0/E1 · CII architecture + physical oracle",
