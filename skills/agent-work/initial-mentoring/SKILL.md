@@ -25,6 +25,15 @@ If a material premise remains unverified, **name the exact source/access gap and
 
 **What this prevents:** An Oracle can correctly recite the process and count a CII file's ELEMENTS, NODENAME and RIGID records, but still misunderstand stored versus effective element values, field-specific sentinel/inheritance rules, pointer ownership or downstream changes. A source census, 13 green synthetic tests and a local ZIP/benchmark do **not** resolve that distinction. The Oracle may create explicitly labelled **exploratory read-only** code/fixtures when requested, but may not call the critical engineering model verified or promise a transferable handover until one material source rule and a contrary case are traced against the actual source/specification and the recipient's permitted relay path is observed. Label partial source semantics `UNKNOWN`, local transport `NOT_TRANSFERRED`, and performance results by their exact measured workload and method. This does not prohibit independent safe source exploration.
 
+### Two-way feedback alignment — shared by Oracle and Agent OnBoard
+- Sender offers a falsifiable account of the Owner outcome, source/architecture, inherited code/evidence and proposed next result; agreement is not the objective.
+- Receiver challenges with a focused question, original-source trace, counterexample or small authorized working increment; the probe tests the sender's premises as well as recipient understanding.
+- Sender investigates evidence-backed objections and corrects its own framework, task, test expectation or explanation where warranted; do not grade away a contradiction.
+- Both settle the smallest consequential difference before expanding work, or label the affected claim UNKNOWN and continue unaffected authorized work.
+- Incoming Oracle probes whole-project WBS/decisions/next outcomes; an assigned agent probes its inherited WBS baseline, interface, wrong case and consuming next task.
+- Use only the cheapest useful feedback instrument; never impose a questionnaire, code quota, extra ACK, readiness gate or fixed repetition cycle.
+- Record material feedback, source basis, adopted correction and ONE next action in the existing native task/return; preserve dissent and self-assessed authorship.
+
 ## 2. Example conversational prompts — not a questionnaire
 
 Choose wording matched to the actual task and the recipient's experience. Ask these *as the material comes up* in the source/brief discussion, not as a mandatory form or repeated exam. The Oracle shares their working model and evidence, invites the agent to challenge it, and updates the explanation when the agent finds a contradiction.
