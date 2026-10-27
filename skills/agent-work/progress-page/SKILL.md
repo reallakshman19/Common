@@ -9,12 +9,14 @@ description: Run and use the Progress page, a static page plus JSON data in GitH
 
 | Reader | Start here | Native reporting destination |
 |---|---|---|
-| Builder or reviewer | Open the task-specific `#/project/start/REV/wbs%3AN/Mn` Agent Start deep link from the native task. Verify the issue, exact PR head and authority before acting. | Existing native issue/PR/test record only. Never maintain Page JSON. |
-| Coordinator/Oracle | Inspect the same native evidence and use `pp_cli.py reconcile` to detect unrecorded sources, duplicates and candidate drift. | Audited CLI / reviewed data PR; no inferred engineering PASS. |
+| Builder or reviewer | Open the task-specific `#/project/start/REV/wbs%3AN/Mn/CARD_ID` Agent Start deep link from the native task. Verify the issue, exact PR head and authority before acting. | Existing native issue/PR/test record only. Never maintain Page JSON. |
+| Coordinator/Oracle | Inspect the native evidence, run `pp_cli.py reconcile` for drift and `pp_cli.py propose --actor NAME --source URL --project KEY [--card ID]` to prepare a **review-required reference-only** manifest. | Verify exact native source/target and dry-run `pp_batch.py`; audited data PR only, no auto-PASS. |
 | Page writer | Use `pp_batch.py` in dry-run before a reviewed, checked `--apply` (one source can support multiple native changes). | Exact source and append-only Timeline. |
 | Owner | Open Agent Start for orientation or My actions for decisions. | Existing GitHub-signed decision workflow. |
 
-A project-wide Agent Start is deliberately a **workstream chooser**, not a live sorted task queue. Task-specific deep links remain the preferred zero-friction entry. A narrowed WBS milestone lists the bounded original records without hiding cards. No actor label denotes an accepted assignment until confirmed at the canonical native source.
+A project-wide Agent Start is deliberately a **workstream chooser**, not a live sorted task queue. Explicit live-card deep links are preferred for assigned tasks; the legacy milestone route still lists all recorded work. Wrong, closed or mismatched task IDs never select a replacement. A narrowed WBS milestone lists the bounded original records without hiding cards. No actor label denotes an accepted assignment until confirmed at the canonical native source.
+
+The reusable page's responsive PC layout is global: Progress/WBS, Project Home, Actions, Fixtures and Timeline share the wide-screen shell, with view tabs before WBS filters and the full Owner brief still available. The UI does not change who owns a task.
 
 Agent Start is a **read-only projection**, not a new assignment protocol or release gate. If this Page differs from an authoritative native issue or Cycle, stop and reconcile the source. The writer must read the native evidence; a URL alone is not proof of its claim.
 
