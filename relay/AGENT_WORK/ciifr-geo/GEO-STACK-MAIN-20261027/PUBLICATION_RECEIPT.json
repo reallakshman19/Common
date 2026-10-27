@@ -1,0 +1,85 @@
+{
+  "schema": "CIIFR.StackMainPublication.v1",
+  "task": "CIIFR-GEO-STACK-MAIN-20261027",
+  "authority": "Owner explicit current-conversation instruction: fix and merge them also (PR183/PR181 prerequisites through main).",
+  "source_before_main": "c823f0c0edbeb315c07fa2911390dc781968146f",
+  "repair_source": "5a098b8805dcf998e9dd42af91a8e48d7edfcfb1",
+  "reviewed_tree": "47fca239283da31f1c53d48ac4a560451b39a463",
+  "merges": [
+    {
+      "pr": 185,
+      "commit": "7ad4caaa706584fc6fa92667e4cfe5f3230295eb",
+      "target": "PR183 framework branch",
+      "tree": "08df2c44e667f579381b90fdf59a61cd1fce542e"
+    },
+    {
+      "pr": 183,
+      "commit": "67aa13d5b6740241b0833cc633ee6fc3dcdc1e63",
+      "target": "PR181 branch",
+      "tree": "47fca239283da31f1c53d48ac4a560451b39a463"
+    },
+    {
+      "pr": 181,
+      "commit": "e3d52e8a5e2855f0e684e9cb1358f4bca5f2b211",
+      "target": "main",
+      "tree": "47fca239283da31f1c53d48ac4a560451b39a463"
+    }
+  ],
+  "merge_verification": "Both latest merge trees equal exact reviewed repair tree; main ref and merged states read back. No deletion/other-tab/workflow/Writer change.",
+  "scope": {
+    "total_paths": 64,
+    "added": 60,
+    "modified": 4,
+    "repair_paths": 8,
+    "new_production_logic": "Sample fetch prefix only, tests/fixtures→samples; exact runtime sample blobs added. Dev fixtures retained."
+  },
+  "contributor_checks": {
+    "native": "58/58 PASS",
+    "method_c": "5 unchanged entrypoints PASS",
+    "http": "39 modules + official Three/Worker/license/denylist PASS",
+    "pages_samples": "same real-workflow-rsync/staged-HTTP test fails old, passes repaired original hashes",
+    "syntax": "app/Python/launcher inspected; Windows interaction NOT_RUN"
+  },
+  "independent": {
+    "verdict": "SCOPED_INTEGRATION_PASS",
+    "source": "5a098b8805dcf998e9dd42af91a8e48d7edfcfb1",
+    "tree": "47fca239283da31f1c53d48ac4a560451b39a463",
+    "report_bytes": 14478,
+    "report_sha256": "db669a644dd38037856a4ee2b4f0240567d6c19f4777882ce20bddfa1d7266b2",
+    "scope": "64 Git blobs; ten unchanged shared-consumer/deployment entrypoints;18 independent Rodrigues cases; wrong-X negative; old404/new200 original-hash challenge",
+    "review_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6433624638",
+    "principal_account_independence": "UNKNOWN; separate non-author exposed agent, no formal GitHub APPROVE"
+  },
+  "premerge_ci": "0 PR check-runs/statuses/workflow runs at inspected heads; not reported as PASS",
+  "production_pages": {
+    "run_id": 40449151134,
+    "source": "e3d52e8a5e2855f0e684e9cb1358f4bca5f2b211",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://reallakshman19.github.io/XML_Compare_Utilities/prototypes/ciifr-map/"
+  },
+  "actual_browser": {
+    "actor": "contributor; not independent reviewer",
+    "url": "https://reallakshman19.github.io/XML_Compare_Utilities/prototypes/ciifr-map/",
+    "public_xml_hashes": [
+      "1154c980d08344b1f803cda3bd9884b169753148b150641a745c9bfcb15de995",
+      "a332dd7b2551faae51de3c016941762c3b795cdf19073b373817354e309526e6"
+    ],
+    "nodes_per_side": 57,
+    "elements_per_side": 56,
+    "a": "3790/3830/3840 self anchors,57 checked proposals",
+    "b": "5210→5229 manual anchor run",
+    "c": "56 unique pairs,1 conflict,2/2 complete; default5210→5210 other-pair0.000mm versus657.411mm for5210→5229 across56 other pairs",
+    "selection": "SOURCE5210/TARGET5210 readable details; ISO badge and expanded popup observed",
+    "screenshot": {
+      "name": "ciifr-geo-main-merged-1793075098718.jpg",
+      "bytes": 130630,
+      "sha256": "ac3b12ea0f7d3f96594ed2af932505658da3961017eaafad8e0d64608c9ebd5d"
+    }
+  },
+  "recovery": "Native PR183 checkout3a1bec9 plus immutable final source overlay; no false native checkout of5a098/main. Operational backup journal excluded from publication. Native backups98–101 and no-index module patch remain local.",
+  "limits": "GPU/Windows/native fullscreen/independent-model physical qualification/large-model performance unverified; full edit-event/pin receipts incomplete. Public samples share one S1 geometry. Original-CII VNext/G2/G3/Writer and Oracle cutover not granted.",
+  "native_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6433747628",
+  "wbs_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/166#issuecomment-6433747995",
+  "next": "Owner normal-browser/WebGL trial of the now-main standalone prototype; no more prerequisite merge or new worker dispatch."
+}
