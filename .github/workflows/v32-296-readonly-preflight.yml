@@ -1,0 +1,169 @@
+name: V3.2 #296 Read-Only Preflight Tests
+
+on:
+  pull_request:
+    paths:
+      - "relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/**"
+      - ".github/workflows/v32-296-readonly-preflight.yml"
+  push:
+    branches:
+      - "prototype/v32-296-readonly-provider-preflight"
+    paths:
+      - "relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/**"
+      - ".github/workflows/v32-296-readonly-preflight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-contract:
+    name: V32 non-admitting tests (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install native C6 module dependencies
+        run: python -m pip install PyYAML==6.0.2 jsonschema
+      - name: Compile code
+        run: python -m compileall -q relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010
+      - name: Execute all non-admission contract tests
+        run: python -m unittest discover -s relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/tests -v
+
+  live-historical-graph-refusal:
+    name: V32 live old-repo graph refused (GET only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read actual provider graph and reject historical ownership
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set +e
+          python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_readonly_cli.py \
+            --repository "$REPOSITORY" \
+            --repository-id 1412133785 \
+            --graph-path .github/v32-evidence-spine/718-proposal-v2.json \
+            --leaf-ref Common#733 \
+            --pr-number 740 > live-refusal.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python - <<'PY'
+          import json
+          with open("live-refusal.json", encoding="utf-8") as stream:
+              row = json.load(stream)
+          assert row["status"] == "HOLD_PROVIDER_READ", row
+          assert "PROVIDER_GRAPH_REPOSITORY_MISMATCH" in row["reasons"], row
+          assert row["accepted_evidence_count"] is None
+          assert row["writer_authorized"] is False
+          assert row["delp_invoked"] is False
+          print("Expected native GET wrong-repository refusal confirmed")
+          PY
+          # The same live historical graph must never reach native C6.
+          set +e
+          python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_c6_readonly_cli.py \
+            --repository "$REPOSITORY" \
+            --repository-id 1412133785 \
+            --graph-path .github/v32-evidence-spine/718-proposal-v2.json \
+            --leaf-ref Common#733 \
+            --pr-number 740 > live-c6-refusal.json
+          c6_status=$?
+          set -e
+          test "$c6_status" -eq 2
+          python - <<'PY'
+          import json
+          with open("live-c6-refusal.json", encoding="utf-8") as stream:
+              row = json.load(stream)
+          assert row["status"] == "HOLD_PREFLIGHT_SOURCE", row
+          assert row["source_status"] == "HOLD_PROVIDER_READ", row
+          assert row["native_c6_invoked"] is False, row
+          assert row["accepted_evidence_count"] is None
+          assert row["writer_authorized"] is False
+          assert row["delp_admitted"] is False
+          print("Real wrong-repository graph prevented native C6 invocation")
+          PY
+
+  live-pr-review-policy-visibility:
+    name: V32 live D4/D5 review and CI visibility (GET only)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Observe this PR without reviewer or CI policy admission
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set +e
+          python relay/RECOVERY/V32_296_READONLY_PREFLIGHT_20261010/v32_review_policy_cli.py \
+            --repository "$REPOSITORY" \
+            --pr-number "$PR_NUMBER" \
+            --expected-head "$EXPECTED_HEAD" > review-policy-visibility.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python - <<'PY'
+          import json
+          with open("review-policy-visibility.json", encoding="utf-8") as stream:
+              row = json.load(stream)
+          assert row["status"] == "HOLD_D4_D5_AUTHORITY_UNKNOWN", row
+          assert row["independent_review_authority"] == "UNKNOWN_NOT_AUTHENTICATED", row
+          assert row["effective_required_check_policy"] == "UNKNOWN_NOT_AUTHENTICATED", row
+          assert row["required_policy_endpoints"]["active_branch_rules"] in (
+              "OBSERVED_EMPTY", "OBSERVED_UNQUALIFIED", "UNKNOWN"
+          ), row
+          # The new branch-applied rules source must be attempted; it can
+          # legitimately return UNKNOWN with a read-only GitHub token.
+          assert row["required_policy_endpoints"]["rulesets"] in (
+              "OBSERVED_EMPTY", "OBSERVED_UNQUALIFIED", "UNKNOWN"
+          ), row
+          assert row["accepted_evidence_count"] is None
+          assert row["writer_authorized"] is False
+          assert row["delp_invoked"] is False
+          print("Real PR D4/D5 visibility read completed; no reviewer/required-CI authority minted")
+          print("submitted review observations:", row["submitted_reviews"])
+          print("observed endpoint visibility:", row["required_policy_endpoints"])
+          PY
+
+  native-v32-delp-contract:
+    name: Native frozen V32 DELP structural regressions (read only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install existing native graph/schema test dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.2 jsonschema
+      - name: Execute actual existing V3.2 DELP graph and facts tests
+        run: |
+          python -m unittest discover \
+            -s skills/engineering-pr-delivery-v3.2/tests \
+            -p 'test_delp_projection_v32.py' -v
+
+  native-v32-c6-contract:
+    name: Native frozen V32 C6 handover regressions (read only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install native handover schema dependency
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.2 jsonschema
+      - name: Execute existing frozen V3.2 C6 and handover tests directly
+        run: |
+          python -m unittest discover \
+            -s skills/engineering-pr-delivery-v3.2/tests \
+            -p 'test_handover_context.py' -v
