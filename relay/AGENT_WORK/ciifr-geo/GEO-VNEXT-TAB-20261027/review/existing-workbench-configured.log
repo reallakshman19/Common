@@ -1,0 +1,80 @@
+✔ real public-original-derived F05/R4 XML reaches unchanged Method C and metric SVG (1976.75963ms)
+✔ source-bound sign falsifier changes XML identity and supplied geometry, never CII claim authority (1287.267171ms)
+✔ unsupported schema/units, malformed XML, DTD, entities, fields and counts fail closed (1348.739861ms)
+✔ reversed XML endpoint occurrence preserves the same signed physical geometry (1101.324648ms)
+✔ file-read reservation immediately removes old graphs/anchors/exports and rejects late stale failure (807.719729ms)
+✔ delayed XML digest completion cannot replace the newer file revision (238.95774ms)
+✔ one/two anchor warnings, duplicate custody and parameter/anchor revocation stay honest (303.014763ms)
+(node:17) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual app F1: new-before-old keeps B active after obsolete A completion (1902.266851ms)
+✔ actual app F1: fifo-same-turn keeps B active after obsolete A completion (789.378109ms)
+✔ actual app F1: obsolete A rejection after B success leaves B and status intact (502.395315ms)
+✔ actual app F1: obsolete A resolve cannot change pending B or finally control (427.495029ms)
+✔ actual app F1: obsolete A reject cannot change pending B or finally control (466.120348ms)
+✔ actual app F1 control: current B failed startup restores SVG and control (446.853989ms)
+✔ actual app: row selects SOURCE and TARGET physical nodes before and after fullscreen (528.245022ms)
+✔ actual app SVG camera badge follows the current evidence projection (400.83993ms)
+✔ actual app SVG camera badge follows each base saved projection (421.939118ms)
+✔ actual camera direction distinguishes preset, custom orbit and evidence-independent projection type (7.80419ms)
+✔ a rejected rigid context never claims an active one-to-one assignment (3.746708ms)
+✔ independently constructed 90-degree rigid transform is recovered without numerical rewrite (8.686526ms)
+✔ contradictory signed cycle and seeds fail closed, seedless components remain relative (2.217775ms)
+✔ collinear and incompatible anchor geometry retains limitations (1.227882ms)
+✔ all alternatives and contested target nodes are retained, even at a manual anchor (2.441065ms)
+✔ element-interior observation never creates a TARGET physical node (3.083421ms)
+✔ actual XML A/B state stays independent; C deduplicates, scores other pairs and preserves physical edges (2600.568643ms)
+✔ native rigid rejection stays explicit; display-only projection does not refit or invalidate numerical evidence (822.293755ms)
+✔ duplicate origins count once; stale asynchronous completion cannot replace changed proposals (645.196813ms)
+✔ different B input revision preserves A; mixed revisions cannot silently consolidate (2122.011746ms)
+✔ row highlights every alternative and reused SOURCE; segment interior stays ELEMENT-only (5.592545ms)
+✔ fullscreen popup keeps the original table, closes/reopens and resets drag offsets on reentry (3.465778ms)
+✔ 936px surface uses45percent default, allows deliberate resize and avoids observer write loops (1.299943ms)
+✔ native fullscreen rejection keeps viewport expansion usable and native Escape restores normal (1.192348ms)
+✔ bridge dispatches all selected instances and exposes camera/navigation commands only for current scene (3.160432ms)
+✔ rejected native fullscreen exit stays expanded, resolves safely, and Escape can recover (2.710819ms)
+✔ cancelled pending native entry and refused auto-exit restore honest fullscreen state (1.040554ms)
+✔ distinct-target best-response cycle terminates with disclosed minmax compromise and per-group conditional alternatives (60.53301ms)
+✔ minimum-worst regret is different from minimum-sum/global-error; pins remain authoritative (24.106237ms)
+✔ incomplete slices expose lower-bound regret and zero witnesses never imply numerical support (2.104423ms)
+✔ actual XML session exports a reusable frozen scene through existing JSON evidence (5958.188456ms)
+✔ full 90deg pose appears once in copied display data and existing runtime accepts it (85.617115ms)
+✔ same hash/member/node IDs on opposite sides stay distinct and wrong/stale picks fail (11.557156ms)
+✔ all target reuse rows survive pick resolution; segment-only stays an ELEMENT link (20.34361ms)
+✔ only registered components are positioned; unregistered scope remains explicit (11.613161ms)
+✔ current scene rejects epoch/projection/pose/parameter changes and malformed inputs (13.425833ms)
+✔ real XML SVG zoom/pan survives row remount; copied state validates independently of geometry (1512.326698ms)
+✔ inspected alternate shows its own residual and identifies the different active TARGET (812.855679ms)
+✔ actual XML SVG TARGET click/keyboard and table expose both SOURCE rows for reused target (5614.747321ms)
+NORMAL_SVG {
+  selectedPhysical: '["TARGET","TARGET:math","bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","NODE","102"]',
+  ariaPressed: 'true'
+}
+FULLSCREEN_SVG { ariaPressed: 'true' }
+GPU_DISPATCH {
+  selectedGpu: [
+    '["TARGET","TARGET:math","bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","NODE","102"]'
+  ]
+}
+(node:110) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unlinked physical TARGET stays highlighted in normal/fullscreen SVG and GPU dispatch (137.214732ms)
+✔ TARGET selection keeps all SOURCE rows, with an explicit ambiguity and witnesses (5.136478ms)
+✔ async viewer callback rejects revoked scene, disposes stale viewer, and preserves model zero translation (4.767641ms)
+✔ pending split and overlay mode switches project immediately without a draw or camera mutation (4.704555ms)
+✔ post-orbit lookAt uses the new camera pose before matrixWorldInverse is drawn (1.418277ms)
+✔ orthographic panes synchronize pending layout and resized viewport while keeping zoom and height (1.379517ms)
+✔ perspective and orthographic annotations honor near/far clip planes including points behind camera (20.741091ms)
+✔ popup clipping uses local coordinates and contains full height/width after viewport shrink (9.311901ms)
+✔ coincident SOURCE/TARGET preserve separate IDs and exact physical display coordinates (3.487587ms)
+✔ actual native navigation orbits around the selected pivot for X/Y/Z; vertical coordinate is invariant (9.885027ms)
+✔ X-up survives native and public navigation validators; unspecified default stays Z (1.277353ms)
+✔ bridge sets real side colours, maps evidence plane with X-up, restores camera and pivots exact primary node (14.558842ms)
+ℹ tests 58
+ℹ suites 0
+ℹ pass 58
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7541.211506

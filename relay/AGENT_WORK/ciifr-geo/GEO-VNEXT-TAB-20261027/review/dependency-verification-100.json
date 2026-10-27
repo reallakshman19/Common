@@ -1,0 +1,98 @@
+[
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+    "expected": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "actual": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/style.css",
+    "expected": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "actual": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+    "expected": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "actual": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-find-replace-ui.js",
+    "expected": "b60dd0188a6c2104b5478b146cc9146e325584ca",
+    "actual": "b60dd0188a6c2104b5478b146cc9146e325584ca",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-find-replace.js",
+    "expected": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "actual": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "match": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-branch-scope.test.mjs",
+    "expected": "c69511a8c5234f46d9d678b88e5de53955b26c79",
+    "actual": "c69511a8c5234f46d9d678b88e5de53955b26c79",
+    "match": true
+  },
+  {
+    "path": "workbench3d/contracts/contracts.js",
+    "expected": "fd06ee02d4187ec355fe22f4b08320ee881d2445",
+    "actual": "fd06ee02d4187ec355fe22f4b08320ee881d2445",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/connector-model.js",
+    "expected": "6b42c66a13fecb58f8e82759ad962f5246c87905",
+    "actual": "6b42c66a13fecb58f8e82759ad962f5246c87905",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/gpu-picker.js",
+    "expected": "e137a813bba005a89d21307f52fb9385e13ee2b0",
+    "actual": "e137a813bba005a89d21307f52fb9385e13ee2b0",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/heatmap.js",
+    "expected": "b226efd2e1f1167b5e6135d03530fe8bf51b7e2a",
+    "actual": "b226efd2e1f1167b5e6135d03530fe8bf51b7e2a",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/scene-derivation-scheduler.js",
+    "expected": "e0a41544ff278848c4e93847a08ec88b0c244dc2",
+    "actual": "e0a41544ff278848c4e93847a08ec88b0c244dc2",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/scene-derivation-worker.js",
+    "expected": "edc7561d1f664850205694a1a3b89da4f67f8aa3",
+    "actual": "edc7561d1f664850205694a1a3b89da4f67f8aa3",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/scene-runtime.js",
+    "expected": "02bc23fc7363493b20ea906d14da4f08a140de3d",
+    "actual": "02bc23fc7363493b20ea906d14da4f08a140de3d",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/workbench-navigation-controls.js",
+    "expected": "666cd48be079d440fa824d0c5997c05f376d1cfb",
+    "actual": "666cd48be079d440fa824d0c5997c05f376d1cfb",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/workbench-navigation-state.js",
+    "expected": "5603d3186a5482cced6fd44e00defe94e14c2fc2",
+    "actual": "5603d3186a5482cced6fd44e00defe94e14c2fc2",
+    "match": true
+  },
+  {
+    "path": "workbench3d/viewer/workbench-viewer.js",
+    "expected": "f8d74b0deff3eda17f8a266ebdb23f7120583c6d",
+    "actual": "f8d74b0deff3eda17f8a266ebdb23f7120583c6d",
+    "match": true
+  }
+]

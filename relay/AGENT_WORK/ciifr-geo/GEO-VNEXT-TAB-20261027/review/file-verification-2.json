@@ -1,0 +1,38 @@
+[
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css",
+    "remote_blob": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "computed_blob": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "bytes": 669,
+    "sha256": "a7846b99f8da5403f327b1f5b403a18ba4439c85b74b5793d659368bf7d6ec29",
+    "local_remote_equal": true,
+    "manifest_match": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-geo-tab.test.mjs",
+    "remote_blob": "71e0530de88bea85ba530bd12f6b67245e181820",
+    "computed_blob": "71e0530de88bea85ba530bd12f6b67245e181820",
+    "bytes": 4895,
+    "sha256": "a8a1ec14c93cc11aeadcd489256e49b471ed3c106abc9a3dc1687fa417f161fb",
+    "local_remote_equal": true,
+    "manifest_match": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-geo-pages-smoke.py",
+    "remote_blob": "27409acef022df9474c1c71c11d3f401e3ac5d0d",
+    "computed_blob": "27409acef022df9474c1c71c11d3f401e3ac5d0d",
+    "bytes": 3369,
+    "sha256": "62131e3dad74edb4dc0bf4c3be33c310706a2d589608358829d2e62866a29df7",
+    "local_remote_equal": true,
+    "manifest_match": true
+  },
+  {
+    "path": "agents/WIP-geo-vnext-tab-20261027_workreport.md",
+    "remote_blob": "539912d064900de787e62479f0f18247bfec2c78",
+    "computed_blob": "539912d064900de787e62479f0f18247bfec2c78",
+    "bytes": 5391,
+    "sha256": "1a0fc048cee965e87d9989c6c59dd26ca00dcd3a178d12baaf3276a3a408b422",
+    "local_remote_equal": true,
+    "manifest_match": true
+  }
+]

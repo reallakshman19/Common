@@ -1,0 +1,25 @@
+{
+  "candidate": "7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a",
+  "tree": "812395ee191b653764a7c8577b1ef5ce9db8a3e2",
+  "prior": "1f4fb608ccdbeb53adae230ac45877d94a16c113",
+  "files": [
+    {
+      "path": "prototypes/ciifr-map/index.html",
+      "bytes": 8122,
+      "sha256": "2d7b8a4f1dcadf575edd62acd2a5c89c77496a4a6ae4bb9266afa32c520d874c",
+      "git_blob": "bf3e1a489b9305ef9707956ce862ddd09a59521b",
+      "local_remote_equal": true
+    },
+    {
+      "path": "agents/PR191_workreport.md",
+      "bytes": 6575,
+      "sha256": "205d151f25dc2f6aecc40b6b8d4d5e7887d085ed49b072f7d22e6b74f07d4015",
+      "git_blob": "7c6f1770516b6b31dc64a46a987fdd16cdc483b5",
+      "local_remote_equal": true
+    }
+  ],
+  "only_two_compare_entries": true,
+  "report_renamed_from": "agents/WIP-geo-vnext-tab-20261027_workreport.md",
+  "banner_single_phrase": true,
+  "publication_contains_original_verbatim": true
+}

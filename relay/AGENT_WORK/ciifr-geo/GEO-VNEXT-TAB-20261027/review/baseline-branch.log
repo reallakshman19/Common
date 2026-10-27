@@ -1,0 +1,46 @@
+✔ exact B2 branch protects all unrelated bytes: v11 LF (40.326924ms)
+✔ exact B2 branch protects all unrelated bytes: v11 CRLF (7.160491ms)
+✔ exact B2 branch protects all unrelated bytes: v14 LF (5.652911ms)
+✔ exact B2 branch protects all unrelated bytes: v14 CRLF (11.294006ms)
+✔ exact B2 selection does not include identical name in unrelated B1 (1.644274ms)
+✖ branch identifier mismatch gives zero replacements, no prefix matching (8.893043ms)
+✔ branch crossing with an unlabeled physical alias is fail-closed (5.673915ms)
+✔ cross-branch warning identifies physical node, all branches and proposed name (1.621081ms)
+✔ inconsistent cross-branch aliases do not qualify for an Option A recommendation (1.510322ms)
+✔ recommended choice is located directly before Remove and is advisory only (26.007579ms)
+✔ SOURCE labels and claim provenance require exact physical alignment (16.401796ms)
+✔ SOURCE-driven branch dropdown and Approve All preserve explicit validation (22.919917ms)
+✔ Approve All cannot bypass cross-branch diagnostic (13.974238ms)
+✔ visible VNext headings, recommendation and review columns have requested order (2.781204ms)
+✔ writer independently rejects forged branch evidence on an otherwise valid claim (3.049362ms)
+✔ invalid branch filter cannot silently fall back to Document (5.713734ms)
+✔ non-branch document mode remains selectable (0.962514ms)
+✔ served and source modules are byte-identical after branch integration (7.320088ms)
+✔ quoted CSV Branch column imports exact branch into Normal rule scope (7.024186ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 18
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 378.385143
+
+✖ failing tests:
+
+test at tests/cii-fnr-vnext-branch-scope.test.mjs:81:1
+✖ branch identifier mismatch gives zero replacements, no prefix matching (8.893043ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/ca71d2f89cf7/ir-vnext-geo-tab/baseline-run/tests/cii-fnr-vnext-branch-scope.test.mjs:85:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

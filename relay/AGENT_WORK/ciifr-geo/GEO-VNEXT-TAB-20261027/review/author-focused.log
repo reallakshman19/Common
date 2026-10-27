@@ -1,0 +1,16 @@
+✔ both module mirrors resolve the existing workbench under any repository prefix (5.041931ms)
+✔ shipped host has a distinct lazy CIIFR_GEO pane and identical module mirrors (37.769107ms)
+✔ actual host app switches isolated panels, loads once and preserves the frame document (177.954367ms)
+✔ V14 offers an explicit opt-in VNext pane; existing V14 scopes remain intact (3.068569ms)
+✔ mode switch lazily loads VNext and preserves separate editing sessions (0.996816ms)
+✔ module-relative route targets the same shipped VNext page from both mirrors (2.260956ms)
+✔ VNext iframe uses scoped layout and hidden panes do not consume viewport (0.390866ms)
+✔ source and GitHub Pages mirrored assets match byte-for-byte (1.320551ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 893.829349

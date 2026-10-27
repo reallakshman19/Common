@@ -1,0 +1,153 @@
+{
+  "schema": "CIIFR_GEO.ArtifactRelayInventory.v1",
+  "task": "GEO-VNEXT-TAB-20261027",
+  "product_source": "7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a",
+  "files": [
+    {
+      "path": "review/REPORT.md",
+      "bytes": 15932,
+      "sha256": "a9d0cfb38ea2087bb07e3eca78669f2ec3655d8917addb75f4c440bde4e6049c"
+    },
+    {
+      "path": "review/reviewer-probe.mjs",
+      "bytes": 4748,
+      "sha256": "09b71aa5d63c5c6f1988c075751199a8e361b176ed0f628a4319d5e96cbbeba7"
+    },
+    {
+      "path": "review/reviewer-pages.py",
+      "bytes": 3676,
+      "sha256": "f28c9a486b714eaffe31f8a2046d1ace5c9e9e53260bff4ae4b4a797e601e966"
+    },
+    {
+      "path": "review/run-baseline.py",
+      "bytes": 1087,
+      "sha256": "446b8cbff5554e5070cca3451dd40551698b49e19f689657326cc8f48e494def"
+    },
+    {
+      "path": "review/verify-received.py",
+      "bytes": 988,
+      "sha256": "e4f746593ffdaf43b9ffd5deda82170ba2ca0d7ea2b6995d3827352edd8255fe"
+    },
+    {
+      "path": "review/SOURCE_MANIFEST.json",
+      "bytes": 3159,
+      "sha256": "2a2885187bdc5612ec05890db3bae770b719470875043304b85a7d1d328e008e"
+    },
+    {
+      "path": "review/reviewer-pages.json",
+      "bytes": 10392,
+      "sha256": "90285080f38c87596d411ca2905b170b8015432a5096fc93231f2bcff4241a86"
+    },
+    {
+      "path": "review/staged-candidate-verification.json",
+      "bytes": 8919,
+      "sha256": "e6582e8ce0ce852d045bc51aaa669c7b123f15011a99f758b99c5abb07b79658"
+    },
+    {
+      "path": "review/file-verification-0.json",
+      "bytes": 1417,
+      "sha256": "77ad7a1f12548abf41386b35de8c61a34308bb1787d81d8c09f60886d1670bfb"
+    },
+    {
+      "path": "review/file-verification-1.json",
+      "bytes": 1449,
+      "sha256": "c25e84c939a694edc56b6dd7d8620bc324585c1abddc7ccb72ef0a72463b9caa"
+    },
+    {
+      "path": "review/file-verification-2.json",
+      "bytes": 1427,
+      "sha256": "46d6d01c2e53e4f6c736e1af0fc17fc10b4caef7e9e68bae75c6e843e45d015b"
+    },
+    {
+      "path": "review/dependency-verification-0.json",
+      "bytes": 20606,
+      "sha256": "69c602ba1c6954daee18899aa6b69dbd28afa6292951429bb7abbc4f994cad7b"
+    },
+    {
+      "path": "review/dependency-verification-100.json",
+      "bytes": 3262,
+      "sha256": "2cb39ad892a152f71e777b94d52a11612504515c8d3c3d7d6773d8be849612bb"
+    },
+    {
+      "path": "review/author-focused.log",
+      "bytes": 852,
+      "sha256": "f27d7d4c270615843a2315e81d4d7b376a27bc4a471e36cb5058241021f2164e"
+    },
+    {
+      "path": "review/baseline-branch.log",
+      "bytes": 2382,
+      "sha256": "5b120b12093e8bc1e776c62f87f4d9c945ba19aec733cb3190216d9778e49214"
+    },
+    {
+      "path": "review/candidate-branch.log",
+      "bytes": 2377,
+      "sha256": "07e0d9569be451e8b7cfcf393509ead2671d9a04ff0d664a6f7449ad34123584"
+    },
+    {
+      "path": "review/browser-attempt.log",
+      "bytes": 202,
+      "sha256": "723e5f890cb2270e447203f6b9f36bec8240b97661d07634c28023ae052ffcf7"
+    },
+    {
+      "path": "review/browser-attempt-fixed-tmp.log",
+      "bytes": 1036,
+      "sha256": "0b6b4765208776ac8f4107f63bd9ce05c9ad4cd018416653389f4ecb4bc6b973"
+    },
+    {
+      "path": "review/browser-attempt-native.log",
+      "bytes": 4192,
+      "sha256": "c404fd98f807cdac4ec3dd76df4862cb888b6f25d3326f8c1f61af453f6f6828"
+    },
+    {
+      "path": "review/existing-pages.log",
+      "bytes": 74,
+      "sha256": "899823ba30a8d6950ac934f426ddc5b06c0a21cd20c1245fad8fc5beb6c61758"
+    },
+    {
+      "path": "review/existing-workbench.log",
+      "bytes": 10161,
+      "sha256": "2f72a2ad5699702fed8736d0f151dbe5eebeab0260fafd32f37300f22c30369c"
+    },
+    {
+      "path": "review/existing-workbench-configured.log",
+      "bytes": 6897,
+      "sha256": "51a927b1fd311b72500234049f170ddafade58e83e5e13064781e4c5a3247b18"
+    },
+    {
+      "path": "review/reviewer-probe.log",
+      "bytes": 993,
+      "sha256": "d268d62a9346aac1746864c49702e6e1d96fb51cb28482600832861398bbb34b"
+    },
+    {
+      "path": "review/reviewer-pages.log",
+      "bytes": 114,
+      "sha256": "fdcadcb56e3b6f764e44c033a77812da02d5ffd657eab1ce8e75b7558eb90d3a"
+    },
+    {
+      "path": "review/ADDENDUM.md",
+      "bytes": 3899,
+      "sha256": "e81e761ef0ce96ccc45343220a32e547cd65acb1bb4bd1d73ecb0357fb676dda"
+    },
+    {
+      "path": "review/addendum-verification.json",
+      "bytes": 901,
+      "sha256": "9331e1bbaa16e5eac617e710f6ce30328ea9c7b3a865c362f35e36fa1722edb2"
+    },
+    {
+      "path": "review/verify-addendum.py",
+      "bytes": 1382,
+      "sha256": "b15e0fa115737c6466dca32db129c34f5b0cd13ec3cd287429da46ef580e0677"
+    },
+    {
+      "path": "review/addendum-live-receipt.json.gz.base64",
+      "bytes": 20281,
+      "sha256": "0bfb9e87e6431fc98e87765fb6a920e4e607edcf724fc9534f9b27cccfa22f86",
+      "originalBytes": 63528,
+      "originalSha256": "cf3c5ff1aab9e72664ea9cde00a9e2d2a39c8d8836487a6a53f5eced06c216d4",
+      "encoding": "gzip + base64 UTF-8"
+    }
+  ],
+  "original_source_manifest": "SOURCE_MANIFEST.json",
+  "final_source_manifest": "FINAL_SOURCE_MANIFEST.json",
+  "source_reconstruction": "Retrieve each immutable original/final XCU file from the source manifests and verify recorded SHA256/Git blobs. Full frozen source is not redundantly stored here."
+}

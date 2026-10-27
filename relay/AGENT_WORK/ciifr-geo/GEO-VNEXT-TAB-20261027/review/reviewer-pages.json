@@ -1,0 +1,253 @@
+{
+  "status": "PASS",
+  "observation": "STAGED_HTTP_NOT_BROWSER",
+  "prefix": "/XML_Compare_Utilities/",
+  "assets": {
+    "prototypes/ciifr-map/vendor/three-0.160.0/three.module.min.js": {
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    "prototypes/ciifr-map/app.js": {
+      "bytes": 13817,
+      "sha256": "66e1dff863a64d6a0926f4b1ee01223fdb794892586c4898032bf693b8f7536a"
+    },
+    "prototypes/ciifr-map/camera-presentation.js": {
+      "bytes": 1183,
+      "sha256": "21ca9524423115e706d90db6ae7e1779adef31df80a437a0fc6aafe07267ab52"
+    },
+    "prototypes/ciifr-map/review-viewport.js": {
+      "bytes": 5708,
+      "sha256": "f7365b2368e8ff164da0497ee7e975e6c49877a7fc0e31ec5396545619289e66"
+    },
+    "prototypes/ciifr-map/geo-viewer-bridge.js": {
+      "bytes": 6147,
+      "sha256": "557c3c8c6b1f30fc6f3c005ab1627e3261bdb16916ad59e2f1728bfa4d117abb"
+    },
+    "prototypes/ciifr-map/viewer-feedback.js": {
+      "bytes": 6620,
+      "sha256": "e4105ec09159915dbe19b48ba5726beaf63afc34679fb11666ca90a625423632"
+    },
+    "workbench3d/viewer/workbench-viewer.js": {
+      "bytes": 71077,
+      "sha256": "9cd9a5bf5b4fca77d8415b7d45931424b521cb88accd535c1815f018580e538f"
+    },
+    "workbench3d/viewer/scene-derivation-worker.js": {
+      "bytes": 708,
+      "sha256": "7e7a265de5d3584e9f9b1d99ad6a89eb6d969687189b94592e5896ee28160c99"
+    },
+    "workbench3d/viewer/scene-runtime.js": {
+      "bytes": 7974,
+      "sha256": "6c6c4f0affca5c20850e182cc3f7e2a60863ec330c169c892966a9aaea1b24f4"
+    },
+    "workbench3d/viewer/scene-derivation-scheduler.js": {
+      "bytes": 1507,
+      "sha256": "41b001b9ab0b25f90eef904a7d8ce0fa42fc061bfef32ccf4f15fbbfe752e7da"
+    },
+    "workbench3d/viewer/workbench-navigation-state.js": {
+      "bytes": 3918,
+      "sha256": "785ebd6754ca2edd143ba04d3e29a129969ff72388881f2088ecf6d3c65d3928"
+    },
+    "workbench3d/viewer/workbench-navigation-controls.js": {
+      "bytes": 9055,
+      "sha256": "9e8f04df854e7fa3fe75c4c00cf4390dcf4c045bd3eb0983b02b6efa2f31526e"
+    },
+    "workbench3d/ui/transfer-overlay-models.js": {
+      "bytes": 5239,
+      "sha256": "d3d7cffc6caab6628fb1ef600d611e4c42a6958f1ad8d258b054a5953d232d35"
+    },
+    "workbench3d/compare/transfer-planner.js": {
+      "bytes": 5542,
+      "sha256": "8e209ed9d219ccd0f214454ca21af986a49412ec3e01ec681aac8ccd756bc9a4"
+    },
+    "workbench3d/contracts/contracts.js": {
+      "bytes": 13693,
+      "sha256": "cfcac35957ac303a9e3384b03055205129e2774342dc9ced20f9a7b4dee546f8"
+    },
+    "workbench3d/viewer/gpu-picker.js": {
+      "bytes": 4151,
+      "sha256": "c2a767ed67146665656033692d81a8687ff4fcdb8b905bce222466faa7bc870e"
+    },
+    "prototypes/ciifr-map/geo-scene-pick.js": {
+      "bytes": 875,
+      "sha256": "62d0761e28cb05a4f5e664f5059f0aa7841370e75a72ec42a8620a616a4b2adb"
+    },
+    "prototypes/ciifr-map/geo-scene.js": {
+      "bytes": 6346,
+      "sha256": "b4248d94e7a4b4fc285e2934827daf93e3219f9f45b86a61a5efe255b238ccae"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-exports.js": {
+      "bytes": 6371,
+      "sha256": "d0cc2abffc8f1e7845d1dcf628dbed9ba262f2ddfc324e3c592d112f5ddfa2d6"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-svg.js": {
+      "bytes": 7545,
+      "sha256": "710ba03d50ef82f3d603abcc78c833147216a1a8a14c4325457e892123879ce7"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-registration.js": {
+      "bytes": 8006,
+      "sha256": "06e799d9781223107d1a4fa095e302b03999adabdec48632c71422f6c8aed17b"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-auto-registration.js": {
+      "bytes": 3750,
+      "sha256": "1811dff47756bb3cbfb0f9565abe2deda91ab50094f3411b1f0fe3e42414bf0e"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-orientation-hypotheses.js": {
+      "bytes": 10215,
+      "sha256": "0f2e927ad42485d5695ec09ef0affeb78d25027c22119f29948d370221905b62"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-signed-paths.js": {
+      "bytes": 3885,
+      "sha256": "7da6d66d39eec3f517fed6a01c5a594271efc0d7134d0b5afd28ebb1f3fe4759"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-proper-frame.js": {
+      "bytes": 3950,
+      "sha256": "74b3b17c049994e8a6f2651739f2ad513322c89fec935bc9bb45479041cdc07c"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-rigid-fit.js": {
+      "bytes": 4655,
+      "sha256": "5a85015a0893fe46fdd54ca9228b03c57a14d3af1bcd63e0550dd2737924d593"
+    },
+    "prototypes/ciifr-map/view.js": {
+      "bytes": 10823,
+      "sha256": "06bc0235f59938709ed01117127f24e8faa70000c18c8db47b4e84bf4919485f"
+    },
+    "prototypes/ciifr-map/multibase-view.js": {
+      "bytes": 5901,
+      "sha256": "50db51fd2aec6c7d148ac9044231ef1157cda6b146ad2e8e7b8f89929b42f340"
+    },
+    "prototypes/ciifr-map/workbench-export.js": {
+      "bytes": 2272,
+      "sha256": "b191e8ae6c35bf2844a44b85fd374ffdf09fce2e2b2a8f9ffa9b93d09a80586d"
+    },
+    "prototypes/ciifr-map/evidence.js": {
+      "bytes": 2691,
+      "sha256": "f9be08a82e5802c488cf20e096cfd168763d3806ec6cf2ef87d68c589f2482b5"
+    },
+    "prototypes/ciifr-map/workbench.js": {
+      "bytes": 10135,
+      "sha256": "21cf0fb353653beadd0ae4f4c86e6870cbc57cdedb9cb78b9ab112ba3639199a"
+    },
+    "prototypes/ciifr-map/resolution-worker.js": {
+      "bytes": 421,
+      "sha256": "e506858d5b81272d2e50f2fa6596bc1805dd4778e3bec4a3be4f9ee710c60107"
+    },
+    "prototypes/ciifr-map/resolution-search.js": {
+      "bytes": 7816,
+      "sha256": "6c34909f2da650e0322299ca618e6fe6cc80f1b4b25e5c2ab7d088a9cb7a2c26"
+    },
+    "prototypes/ciifr-map/resolution-fit.js": {
+      "bytes": 4518,
+      "sha256": "e96f7497fc65829cc00c48bfb967881b7b19a6771b39d3837ee5ce4cb3f0a469"
+    },
+    "prototypes/ciifr-map/proposal-ledger.js": {
+      "bytes": 4978,
+      "sha256": "51bd27d89668d4625b921076ace9bad853c59bdbe3e7dedb4817b3a5694e6a64"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-candidates.js": {
+      "bytes": 10078,
+      "sha256": "75f9ede57c037ba6ecd9b8357269164f505d4a70f9f0f62e3375d9cbd3f7358f"
+    },
+    "prototypes/ciifr-map/xml-intake.js": {
+      "bytes": 1360,
+      "sha256": "085941ff3b3a5b12c7d11a42f9bd1c2dc3035e3ac294d4af7073d0ddef99f762"
+    },
+    "prototypes/ciifr-map/xml-utils.js": {
+      "bytes": 3001,
+      "sha256": "3d5f9af24028fe42c470433e2fdd4390bd154fd53f325ec0d93d8b6e3717421e"
+    },
+    "prototypes/ciifr-map/xml-graph.js": {
+      "bytes": 4078,
+      "sha256": "79c54b4ba4c193789ffb284e3a7bb8a6117f0d2d4fde32dbb3818945be9a3b24"
+    },
+    "prototypes/ciifr-map/xml-profiles.js": {
+      "bytes": 6268,
+      "sha256": "65de36f7b9fe3a0a9f3df22b5084074cb0d70ee83fa4f0549fcb331d25c7aea8"
+    },
+    "tabs/cii-workspace/cii-workspace-method-c-original-geometry.js": {
+      "bytes": 10022,
+      "sha256": "940f78c8e32be0527ce3097ed428e600b26c4218c3158a1f3295c449e2e6a152"
+    },
+    "prototypes/ciifr-map/compare.js": {
+      "bytes": 3587,
+      "sha256": "278100946a8837a8b5c9544926b14116c35b0ca0f0822e83699bbec7e5e117b8"
+    },
+    "prototypes/ciifr-map/multibase.css": {
+      "bytes": 2148,
+      "sha256": "ce79713c7564d995aed61e9a1f3f3afee48fa53e2bf897e203d79b11d1de4e23"
+    },
+    "prototypes/ciifr-map/viewer-feedback.css": {
+      "bytes": 1199,
+      "sha256": "28044335902f0b93a5f78c4e39ca3e0d1c5cc2a54f3020d4c8066fb6cd786f95"
+    },
+    "prototypes/ciifr-map/styles.css": {
+      "bytes": 5006,
+      "sha256": "fab1e275349b630fe65a9f5f68f70d56e4ee2e44d453a82c90f64a13ee65bff3"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/demo-loader.js": {
+      "bytes": 3371,
+      "sha256": "849a83313a95b9c734c7ecb35e4549e01d2954b9dd6dfe6861789103b3469e6f"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js": {
+      "bytes": 28828,
+      "sha256": "6c1bee7ea4ffb7dd2599e682a365d53c873d96f242cc44f2819706d11b64ed2b"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js": {
+      "bytes": 861,
+      "sha256": "7c73c82479b694d72ce85638355dd04e39fccd8f72802f12f8b070593dbdace7"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/nonconflict-review.js": {
+      "bytes": 1607,
+      "sha256": "ece47170cfcccc2be581b039e7b36e6596da777fc6a36dd762b807bf5f07df5e"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/config-policy.js": {
+      "bytes": 2694,
+      "sha256": "c1a0058a29ef291097c0ff7081225ce9961bb3e022f4c077ac312d043cebe2cd"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js": {
+      "bytes": 2280,
+      "sha256": "6c12dbedf2cab436341f3dfab7e9461c9ad88a049350b2dd2d8355cc28ad5b41"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/csv-resolver.js": {
+      "bytes": 10528,
+      "sha256": "806e289af638d3f145eb2850a25f405a2903c67918336b5ea5fb1a660fe1af76"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/normal/plan.js": {
+      "bytes": 7121,
+      "sha256": "b96e13648ef753bd0f261c0d1c0427158dd0525eaee26bf129006f257cd9386f"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js": {
+      "bytes": 600,
+      "sha256": "86d9837a61ed8e4a2e7c8f38e12f3bea1d5613e5eec9e54de0bbbccde1c4ab62"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/physical.js": {
+      "bytes": 4699,
+      "sha256": "e8ede9c820aed1a05ebfb374cf39a21657fa2c355ed9e803b80f89b38365ff34"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js": {
+      "bytes": 1416,
+      "sha256": "feafd2ea549042bdabf19f2ed1f66030a2555d5ab3ce2def8b7cab0394cef856"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/writer.js": {
+      "bytes": 6326,
+      "sha256": "7659416c5dfa50c26aba4fc1cd93ddf9e4642969d75bd1cb752094b70be5e028"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/line-node-admission.js": {
+      "bytes": 10368,
+      "sha256": "6709b9e77ef8fa6a7b59f2dc25399338d666aad08ed9e5dd5cf619c9234bfa20"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css": {
+      "bytes": 669,
+      "sha256": "a7846b99f8da5403f327b1f5b403a18ba4439c85b74b5793d659368bf7d6ec29"
+    },
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/style.css": {
+      "bytes": 3464,
+      "sha256": "6fc4b54d03951cab5efaf3a3aae1fe32bda58490332b703762583bcd45c65edd"
+    }
+  },
+  "samples": {
+    "S1-F05.xml": "1154c980d08344b1f803cda3bd9884b169753148b150641a745c9bfcb15de995",
+    "S1-R4.xml": "a332dd7b2551faae51de3c016941762c3b795cdf19073b373817354e309526e6"
+  },
+  "wrong_docs_route": 404,
+  "workers_and_importmap_vendor_present": true
+}
