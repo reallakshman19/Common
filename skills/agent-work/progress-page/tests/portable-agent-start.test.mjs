@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { agentStartModel, agentStartText, agentStartTaskText, agentStartHref } from '../viewer/agent-start.js';
 import { wbsGroups } from '../viewer/progress.js';
+import { checkpointModel, cycleSource, cycleSummary } from '../viewer/checkpoint.js';
 import { onboardingModel } from '../viewer/onboarding.js';
 import { HOME_VIEWS, CONTINUITY_VIEWS, CONTINUITY_SUBTABS, PRIMARY_TABS, primaryTabActive } from '../viewer/lifecycle.js';
 
@@ -134,4 +135,36 @@ test('portable shell keeps one header and breakpoint discipline without an agent
   assert.match(css,/@media\(min-width:1100px\) and \(max-width:1279px\)/);
   assert.match(css,/\.views\{flex-wrap:nowrap;overflow-x:auto/);
   assert.equal(JSON.stringify(project),initial);
+});
+
+test('portable checkpoint uses existing evidence and never invents native Cycle assignments',()=>{
+  const before=JSON.stringify(project);
+  const m=checkpointModel(project,{pageFetch:{status:'ok',observedAt:'2026-10-27T18:00:00Z'}});
+  assert.equal(m.scope,'Project');
+  assert.equal(m.cycle.status,'UNMAPPED');
+  assert.equal(m.last.state,'BLOCKED');
+  assert.ok(m.aimSource);
+  assert.equal(m.pageFetch.status,'ok');
+  const family=wbsGroups(project.index).find(g=>g.key==='wbs:1');
+  const w=checkpointModel(project,{family});
+  assert.equal(w.purpose,'Original bounded purpose and checked deliverable');
+  assert.equal(w.cycle.status,'OUT_OF_SCOPE');
+  assert.equal(JSON.stringify(project),before);
+});
+test('canonical source mapping fails closed across project, inactive and unrelated WBS',()=>{
+  const b={pageProject:'demo',project:'demo',scope:'wbs:1',
+    url:'https://raw.githubusercontent.com/reallakshman19/Common/main/oracle-cycles/demo/CURRENT.json'};
+  assert.equal(cycleSource(b,'demo'),b.url);
+  assert.equal(cycleSource(b,'other'),null);
+  assert.equal(cycleSource({...b,url:b.url.replace('/main/','/branch/')},'demo'),null);
+  const c={schema:'oracle-cycle-current/v1',project:'demo',mode:'standalone',activation:'ACTIVE',revision:2,
+    progress_projection:{repository:'reallakshman19/progress-page',project_key:'demo',publication_status:'PROGRESS_UPDATE_PENDING'},
+    next:{recipient_role:'owner',status:'AWAIT_OWNER',instruction:'Review native result',evidence_ref:'https://github.com/example/r/issues/1'}};
+  assert.equal(cycleSummary(c,b,'demo').actor,'owner');
+  assert.equal(cycleSummary({...c,project:'wrong'},b,'demo').status,'INVALID');
+  assert.equal(cycleSummary({...c,activation:'DISABLED'},b,'demo').status,'INACTIVE');
+  const one=wbsGroups(project.index).find(g=>g.key==='wbs:1');
+  const two=wbsGroups(project.index).find(g=>g.key==='wbs:2');
+  assert.equal(checkpointModel(project,{family:one,cycle:c,binding:b}).cycle.status,'OBSERVED');
+  assert.equal(checkpointModel(project,{family:two,cycle:c,binding:b}).cycle.status,'OUT_OF_SCOPE');
 });
