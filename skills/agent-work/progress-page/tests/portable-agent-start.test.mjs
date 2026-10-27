@@ -168,3 +168,19 @@ test('canonical source mapping fails closed across project, inactive and unrelat
   assert.equal(checkpointModel(project,{family:one,cycle:c,binding:b}).cycle.status,'OBSERVED');
   assert.equal(checkpointModel(project,{family:two,cycle:c,binding:b}).cycle.status,'OUT_OF_SCOPE');
 });
+
+test('portable Cycle next-status cues never manufacture a new assignment or receipt',()=>{
+  const b={pageProject:'demo',project:'demo',scope:'wbs:1',
+    url:'https://raw.githubusercontent.com/reallakshman19/Common/main/oracle-cycles/demo/CURRENT.json'};
+  const c={schema:'oracle-cycle-current/v1',project:'demo',mode:'standalone',activation:'ACTIVE',revision:2,
+    progress_projection:{repository:'reallakshman19/progress-page',project_key:'demo'},
+    next:{recipient_role:'owner',status:'AWAIT_OWNER'}};
+  assert.equal(cycleSummary(c,b,'demo').nextPhase,'OWNER_DECISION_PENDING');
+  const returned=cycleSummary({...c,active_assignment:{id:'TASK-42',generation:3},
+    next:{recipient_role:'reviewer',status:'AWAIT_ORACLE_RECONCILIATION'}},b,'demo');
+  assert.equal(returned.nextPhase,'AWAIT_ORACLE_RECONCILIATION');
+  assert.match(returned.message,/Do not rerun work/);
+  assert.equal(returned.assignmentId,'TASK-42');
+  assert.equal(returned.generation,'3');
+  assert.equal(JSON.stringify(project),initial);
+});

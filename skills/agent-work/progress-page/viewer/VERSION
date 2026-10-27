@@ -1,1 +1,1 @@
-Synced from github.com/reallakshman19/progress-page commit 6faccfea551e660504e84be02c9aa55ddfe3f0e2 (merged PR #47; portable viewer v=32; read-only source-backed Project/WBS checkpoint, opt-in canonical Cycle mapping, native/Page freshness distinction, existing audit-derived changes)
+Synced from github.com/reallakshman19/progress-page commit 12d5c748400bd74bede55cad66aea0df600e78b2 (PR #48, portable viewer v=33; read-only Cycle continuation and native-source delta watch)
