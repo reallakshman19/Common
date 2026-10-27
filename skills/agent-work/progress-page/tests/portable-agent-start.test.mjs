@@ -119,3 +119,19 @@ test('all projects use recorded workstream purpose; central navigation retains l
   assert.equal(primaryTabActive('progress','progress'),true);
   assert.equal(JSON.stringify(project),initial,'navigation is a read-only view');
 });
+
+test('portable shell keeps one header and breakpoint discipline without an agent workflow change',()=>{
+  const life=readFileSync(new URL('../viewer/lifecycle.js',import.meta.url),'utf8');
+  const app=readFileSync(new URL('../viewer/app.js',import.meta.url),'utf8');
+  const css=readFileSync(new URL('../viewer/viewer.css',import.meta.url),'utf8');
+  const home=readFileSync(new URL('../viewer/actions.js',import.meta.url),'utf8');
+  assert.doesNotMatch(life,/if\s*\(c\.view\s*===\s*'start'\)/);
+  assert.match(life,/const brief = el\('details', 'project-brief'\)/);
+  assert.match(home,/home-owner-aim/);
+  assert.doesNotMatch(app,/route\(\)\.v\s*!==\s*'start'/);
+  assert.doesNotMatch(css,/main:has\(\.agent-start\)/);
+  assert.match(css,/html\{scrollbar-gutter:stable\}/);
+  assert.match(css,/@media\(min-width:1100px\) and \(max-width:1279px\)/);
+  assert.match(css,/\.views\{flex-wrap:nowrap;overflow-x:auto/);
+  assert.equal(JSON.stringify(project),initial);
+});
