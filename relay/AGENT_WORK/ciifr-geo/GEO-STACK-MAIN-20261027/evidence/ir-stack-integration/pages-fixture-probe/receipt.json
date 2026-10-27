@@ -1,0 +1,23 @@
+{
+  "command": [
+    "rsync",
+    "-a",
+    "--exclude=.git/",
+    "--exclude=.github/",
+    "--exclude=.*",
+    "--exclude=tests/",
+    "--exclude=node_modules/",
+    "--exclude=README.md",
+    "--exclude=package.json",
+    "--exclude=package-lock.json",
+    "--exclude=**/__pycache__/",
+    "--exclude=**/*.pyc",
+    "/workspace/scratch/ca71d2f89cf7/ir-stack-integration/pages-fixture-probe/source/",
+    "/workspace/scratch/ca71d2f89cf7/ir-stack-integration/pages-fixture-probe/artifact/"
+  ],
+  "index_in_artifact": true,
+  "sample_runtime_paths": {
+    "S1-F05.xml": false,
+    "S1-R4.xml": false
+  }
+}

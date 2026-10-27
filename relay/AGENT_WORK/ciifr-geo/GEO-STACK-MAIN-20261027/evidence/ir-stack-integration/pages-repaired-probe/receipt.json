@@ -1,0 +1,20 @@
+{
+  "command": [
+    "rsync",
+    "-a",
+    "--exclude=.git/",
+    "--exclude=.github/",
+    "--exclude=.*",
+    "--exclude=tests/",
+    "--exclude=node_modules/",
+    "--exclude=README.md",
+    "--exclude=package.json",
+    "--exclude=package-lock.json",
+    "--exclude=**/__pycache__/",
+    "--exclude=**/*.pyc",
+    "/workspace/scratch/ca71d2f89cf7/ir-stack-integration/pages-repaired-probe/source/",
+    "/workspace/scratch/ca71d2f89cf7/ir-stack-integration/pages-repaired-probe/artifact/"
+  ],
+  "input_basis": "actual candidate app/index and both runtime/development original public sample directories",
+  "workflow_source": "unchanged c823 deploy.yml"
+}

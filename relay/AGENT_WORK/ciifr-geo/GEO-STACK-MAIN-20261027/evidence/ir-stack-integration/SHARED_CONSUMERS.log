@@ -1,0 +1,29 @@
+edit-draft-navigation-core.test.mjs passed
+✔ tests/edit-draft-navigation-core.test.mjs (152.712839ms)
+workbench3d-contracts.test.js passed
+✔ tests/workbench3d-contracts.test.js (200.865415ms)
+workbench3d-settings.test.js passed
+✔ tests/workbench3d-settings.test.js (142.013311ms)
+workbench3d-static-smoke.test.js passed
+  scanned 82 module(s) for static-hosting violations
+✔ tests/workbench3d-static-smoke.test.js (215.855068ms)
+workbench3d-transfer-overlay.test.js passed — pairs=2 globalProps=4
+✔ tests/workbench3d-transfer-overlay.test.js (228.892132ms)
+workbench3d-bend-review-package-verifier.test.js passed
+workbench3d-bend-review-package.test.js passed
+workbench3d-bend-geometry-audit.test.js passed
+  normal-metallic: elements=40 bends=7 resolved=6 blocked=1 chords=72 signature=wb3d-bend-b3db102f
+  asme-b31.4: elements=53 bends=7 resolved=7 blocked=0 chords=58 signature=wb3d-bend-e46d5413
+  gre: elements=100 bends=12 resolved=12 blocked=0 chords=101 signature=wb3d-bend-942c274b
+workbench3d-inputxml-bend-samples.test.js passed
+workbench3d-consumed-bend-ancestry.test.js passed
+workbench3d-visual-markers.test.js passed
+✔ tests/workbench3d-visual-markers.test.js (352.68555ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 388.258881

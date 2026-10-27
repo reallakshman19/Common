@@ -1,0 +1,308 @@
+{
+  "head": "7ad4caaa706584fc6fa92667e4cfe5f3230295eb",
+  "tree": "08df2c44e667f579381b90fdf59a61cd1fce542e",
+  "base": "c823f0c0edbeb315c07fa2911390dc781968146f",
+  "merge_base": "c823f0c0edbeb315c07fa2911390dc781968146f",
+  "files": [
+    {
+      "path": "agents/PR183_workreport.md",
+      "git_blob": "189ba3ad86954d52828a1b799264a450fa5d8829",
+      "status": "added"
+    },
+    {
+      "path": "agents/PR185_multibase_manifest.json",
+      "git_blob": "443b05d3177045256251cb1637d42f682265ccd2",
+      "status": "added"
+    },
+    {
+      "path": "agents/PR185_workreport.md",
+      "git_blob": "28c5079ba4105fe2669d8c077132a24002cb33a4",
+      "status": "added"
+    },
+    {
+      "path": "agents/WIP-CIIFR-MAP-P1_workreport.md",
+      "git_blob": "69dbdde4470a284e6102e71bbf3294c0f4887a88",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/FRAMEWORK.md",
+      "git_blob": "c2d483fd9d045fda65f00a06ff667469e9d2684e",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/README.md",
+      "git_blob": "c24b65851648cda93d8ac05719d9400be2e8365f",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/Start-MAP.cmd",
+      "git_blob": "152065ebbccc5fd194d07c985b910a2ed825f3ab",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/app.js",
+      "git_blob": "8803bbd7c39f5fb8936253fde359ce887e2ca786",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/camera-presentation.js",
+      "git_blob": "773d073e1205910ac718561185a06ab2fb513d77",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/compare.js",
+      "git_blob": "bf170bdd36c239e456c65db202a69809a9928bbc",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/evidence.js",
+      "git_blob": "467f79239b792b027c81dd51501ccfc1f66cd323",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/geo-scene-pick.js",
+      "git_blob": "a60ab3cf7ad1e01c4508c89a23a5e6e340257e59",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/geo-scene.js",
+      "git_blob": "fee91307f91caa0139fb49a44c880d3c76f8f5a0",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/geo-viewer-bridge.js",
+      "git_blob": "a902c5ad993afa39c19540ddd065db8cf9c7d901",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/index.html",
+      "git_blob": "37497b1d5be7c19c727df9948aa510c6a6dc4ea5",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/multibase-view.js",
+      "git_blob": "e97f611fa8aa7b018649610b22795a702b2061ca",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/multibase.css",
+      "git_blob": "250faa450dd8fd8857bb90f4bfed62e6120c9750",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/proposal-ledger.js",
+      "git_blob": "755324efdc22ff9e598773f4c6ac064d73e97070",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/resolution-fit.js",
+      "git_blob": "5a9262e23572d2e950bef07ed4a6aea46c94e17c",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/resolution-search.js",
+      "git_blob": "915f3df9e8040fdcaa37a8952576be042ed928eb",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/resolution-worker.js",
+      "git_blob": "67005e30b3bf80c61bf77bbd6354def7d9b4afdb",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/review-viewport.js",
+      "git_blob": "c411f552f85ff217897ad7a3af81f7cf0d773c0e",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/server.py",
+      "git_blob": "214321389a10d9ae48e3b7f738b475f37a3b9048",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/styles.css",
+      "git_blob": "5dc79f24283fb327a29cd929c6773fb414b19617",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/adapter.test.mjs",
+      "git_blob": "1813eb52d19d1120b1764c344c0109ffb5a8cfd0",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/app-startup-ownership.test.mjs",
+      "git_blob": "3cc0ba494fc7410289745bebdc84779e036fecce",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/camera-presentation.test.mjs",
+      "git_blob": "ac98423bf1784063c7ee720c994dba482e4d02a5",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/fixtures/S1-F05.xml",
+      "git_blob": "914303e2437fffaa5682757ee32b3ae3d8f37df8",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/fixtures/S1-R4.xml",
+      "git_blob": "2da10efac2d2f040000edd988d4a1e0baae5dbe1",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/fixtures/manifest.json",
+      "git_blob": "559ed00b9de48b362f0d7b207df2e3fc3abfc81a",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/geometry.test.mjs",
+      "git_blob": "e7ec40939563501498088e8ef448ab237a8aebe6",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/http_smoke.py",
+      "git_blob": "9441439481ed81fd50473a9b6a9572c293a3c2df",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/multibase-workbench.test.mjs",
+      "git_blob": "960d433de55d1ec3d13409003c795c4d9e401d4e",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/navigation-popup.test.mjs",
+      "git_blob": "bf8237b0c50c96fa0808c4f4b0aa1aa5dc135e94",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/prepare-fixtures.py",
+      "git_blob": "5a7df1cb68e5ea87aefd7bd1b08743a6eaa2732f",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/resolution-policy.test.mjs",
+      "git_blob": "72a467ddfc04358c28288a403df2763c3ea9c89a",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/scene-xml.test.mjs",
+      "git_blob": "e505eca3efa1196e79e95d35e67738bbd0df6103",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/scene.test.mjs",
+      "git_blob": "f44834128ad38eae5b1537e1b9b27e835dc21b7d",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/svg-view-state.test.mjs",
+      "git_blob": "9993b6e5da42e6771d3c214a23abe72bfce5821f",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/ui-selection.test.mjs",
+      "git_blob": "a2514aad7f73c99dee12e642961fd0ebfea5b721",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/unlinked-node-selection.test.mjs",
+      "git_blob": "95da31a60cc6eefb1d9ef0c2d3b5796e19429eec",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/viewer-bridge.test.mjs",
+      "git_blob": "d292004f290b150930bf64e61ef2a05e59a89370",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/viewer-projection.test.mjs",
+      "git_blob": "880e0590ea99ed95ebe2089d4eca09cf7f9003c1",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/viewer-usability.test.mjs",
+      "git_blob": "21f4986bd73d8c77fbaa25fdf14b8f4fca2cd358",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/viewer_http_smoke.py",
+      "git_blob": "585574a5915af231d52223c184c5afcd71ba4877",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/vendor/three-0.160.0/LICENSE",
+      "git_blob": "d07e209686512b9ac93d7df5481a4a6f622093e7",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/vendor/three-0.160.0/three.module.min.js",
+      "git_blob": "9807b610d02fd0a1833fa7ceae44239652c78f3c",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/view.js",
+      "git_blob": "4f7d3043bef446e1f9190979aedd88a7f40c30e7",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/viewer-feedback.css",
+      "git_blob": "c95c581d04306f16bc89ad217de2c450e4a1d1ab",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/viewer-feedback.js",
+      "git_blob": "19ffdb116312d2209cf72adb2c884df8cd77ef44",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/workbench-export.js",
+      "git_blob": "4bcc35bce0c6fae53e57825ddcd062f588bd2b7c",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/workbench.js",
+      "git_blob": "b88d470d6270402fa2f015641029cbb159362f85",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/xml-graph.js",
+      "git_blob": "c1c510001c913bc6fe2de64ac6f20330d3ed78e0",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/xml-intake.js",
+      "git_blob": "00c4379816f49002ddea47fbaa496b8a173154b5",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/xml-profiles.js",
+      "git_blob": "b72a970ef1fad83f78563b15f070135c23be34a1",
+      "status": "added"
+    },
+    {
+      "path": "prototypes/ciifr-map/xml-utils.js",
+      "git_blob": "eb75943f42927825a0fdda14f187524c4e1819a7",
+      "status": "added"
+    },
+    {
+      "path": "workbench3d/contracts/contracts.js",
+      "git_blob": "fd06ee02d4187ec355fe22f4b08320ee881d2445",
+      "status": "modified"
+    },
+    {
+      "path": "workbench3d/viewer/workbench-navigation-controls.js",
+      "git_blob": "666cd48be079d440fa824d0c5997c05f376d1cfb",
+      "status": "modified"
+    },
+    {
+      "path": "workbench3d/viewer/workbench-navigation-state.js",
+      "git_blob": "5603d3186a5482cced6fd44e00defe94e14c2fc2",
+      "status": "modified"
+    },
+    {
+      "path": "workbench3d/viewer/workbench-viewer.js",
+      "git_blob": "f8d74b0deff3eda17f8a266ebdb23f7120583c6d",
+      "status": "modified"
+    }
+  ]
+}

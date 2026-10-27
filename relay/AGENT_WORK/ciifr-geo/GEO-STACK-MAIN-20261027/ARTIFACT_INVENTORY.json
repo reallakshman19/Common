@@ -1,0 +1,104 @@
+[
+  {
+    "original_path": "stack-integration-review.md",
+    "relay_path": "INDEPENDENT_REVIEW.md",
+    "bytes": 14478,
+    "sha256": "db669a644dd38037856a4ee2b4f0240567d6c19f4777882ce20bddfa1d7266b2"
+  },
+  {
+    "original_path": "ir-stack-integration/navigation-rodrigues.mjs",
+    "relay_path": "evidence/ir-stack-integration/navigation-rodrigues.mjs",
+    "bytes": 2846,
+    "sha256": "e9e8ee7bf9fa85e78bae168b5c9649f79ba730d756b72e8d5098f61fa62d1a96"
+  },
+  {
+    "original_path": "ir-stack-integration/pages-sample-invariant.py",
+    "relay_path": "evidence/ir-stack-integration/pages-sample-invariant.py",
+    "bytes": 2449,
+    "sha256": "889701e46d92bef0f9eaeaa48f6c2b6ccf23011e63eb38f1d93c297dceaf1bff"
+  },
+  {
+    "original_path": "ir-stack-integration/RECEIVED_5A098.json",
+    "relay_path": "evidence/ir-stack-integration/RECEIVED_5A098.json",
+    "bytes": 4917,
+    "sha256": "018f1cf3ede0be3834293688683943d42863981eb9fc2719bd2a54c8e5e05efd"
+  },
+  {
+    "original_path": "ir-stack-integration/STACK_SCOPE_5A098.json",
+    "relay_path": "evidence/ir-stack-integration/STACK_SCOPE_5A098.json",
+    "bytes": 10306,
+    "sha256": "8a76cd5b18224f2d547984dbb465a4b512b1bc7ed1d13e4e0b8c437f7b6d95bf"
+  },
+  {
+    "original_path": "ir-stack-integration/RECEIVED_STACK_SCOPE_7AD4.json",
+    "relay_path": "evidence/ir-stack-integration/RECEIVED_STACK_SCOPE_7AD4.json",
+    "bytes": 9729,
+    "sha256": "978f46faf3f5f66d5b14fdffad969e74909fb5f102bb2bda734019ce53978e0b"
+  },
+  {
+    "original_path": "ir-stack-integration/OPEN_PR_OVERLAP_RECEIPT.json",
+    "relay_path": "evidence/ir-stack-integration/OPEN_PR_OVERLAP_RECEIPT.json",
+    "bytes": 60755,
+    "sha256": "dc927d3fcde6be86681c2e0ee1d9fd49cff96e183cdba89eebface0afd723e63"
+  },
+  {
+    "original_path": "ir-stack-integration/SHARED_CONSUMERS.log",
+    "relay_path": "evidence/ir-stack-integration/SHARED_CONSUMERS.log",
+    "bytes": 1318,
+    "sha256": "f6f763a126a999ecb62ac227bb9f3de5f2a3cff6c052179fa26ab2f64a9f9a06"
+  },
+  {
+    "original_path": "ir-stack-integration/SEQUENTIAL_AND_PAGES_GRAPH.log",
+    "relay_path": "evidence/ir-stack-integration/SEQUENTIAL_AND_PAGES_GRAPH.log",
+    "bytes": 592,
+    "sha256": "5d0e2132990e4a2705e276a954e51a868a0f4892960b14f2eb17f7393c0efd0d"
+  },
+  {
+    "original_path": "ir-stack-integration/PAGES_OLD_FAIL.log",
+    "relay_path": "evidence/ir-stack-integration/PAGES_OLD_FAIL.log",
+    "bytes": 1174,
+    "sha256": "725f17f61cfd2513da5f70c57b2a0683821de1e3c539df161b79645ab7fab47f"
+  },
+  {
+    "original_path": "ir-stack-integration/PAGES_REPAIRED_PASS.log",
+    "relay_path": "evidence/ir-stack-integration/PAGES_REPAIRED_PASS.log",
+    "bytes": 807,
+    "sha256": "db7b43ef444158dee7016e6af19dee49559245d9a6d55981906495360d38336f"
+  },
+  {
+    "original_path": "ir-stack-integration/PAGES_FULL_STAGE_PASS.log",
+    "relay_path": "evidence/ir-stack-integration/PAGES_FULL_STAGE_PASS.log",
+    "bytes": 94,
+    "sha256": "f25b3f0af3ae39a1d132ef01e4b3548567e8d1d0e1871d94a1e741241357dfdb"
+  },
+  {
+    "original_path": "ir-stack-integration/NAVIGATION_RODRIGUES_PASS.log",
+    "relay_path": "evidence/ir-stack-integration/NAVIGATION_RODRIGUES_PASS.log",
+    "bytes": 137,
+    "sha256": "6cb18e25038e1dde42fb53fe5d059210b923b8bd5d77550eb185e021dc6e0c65"
+  },
+  {
+    "original_path": "ir-stack-integration/NAVIGATION_BASELINE_YZ_PASS.log",
+    "relay_path": "evidence/ir-stack-integration/NAVIGATION_BASELINE_YZ_PASS.log",
+    "bytes": 136,
+    "sha256": "967794082fefb0728a827d33f47edcf50f533f29584f9a96d2c184799a5effaf"
+  },
+  {
+    "original_path": "ir-stack-integration/NAVIGATION_NEGATIVE_FAIL.log",
+    "relay_path": "evidence/ir-stack-integration/NAVIGATION_NEGATIVE_FAIL.log",
+    "bytes": 410,
+    "sha256": "39b7b898a0d3c05e6d009c885a2ea0928e996edfae3af569680fbda55d3a3241"
+  },
+  {
+    "original_path": "ir-stack-integration/pages-fixture-probe/receipt.json",
+    "relay_path": "evidence/ir-stack-integration/pages-fixture-probe/receipt.json",
+    "bytes": 608,
+    "sha256": "8b99fd2dc93f323a70e46a7de00c2a9dd8d8be89bc1086fa1e9e7152c74c0592"
+  },
+  {
+    "original_path": "ir-stack-integration/pages-repaired-probe/receipt.json",
+    "relay_path": "evidence/ir-stack-integration/pages-repaired-probe/receipt.json",
+    "bytes": 661,
+    "sha256": "9c49097b4bdf231560f28b5bdab846f9d9d1fecac7efab0f81a48b82746a8e0e"
+  }
+]

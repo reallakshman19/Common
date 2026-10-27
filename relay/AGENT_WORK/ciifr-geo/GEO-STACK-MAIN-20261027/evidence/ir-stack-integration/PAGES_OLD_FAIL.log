@@ -1,0 +1,26 @@
+127.0.0.1 - - [27/Oct/2026 08:07:02] code 404, message File not found
+127.0.0.1 - - [27/Oct/2026 08:07:02] "GET /prototypes/ciifr-map/tests/fixtures/S1-F05.xml HTTP/1.1" 404 -
+127.0.0.1 - - [27/Oct/2026 08:07:02] code 404, message File not found
+127.0.0.1 - - [27/Oct/2026 08:07:02] "GET /prototypes/ciifr-map/tests/fixtures/S1-R4.xml HTTP/1.1" 404 -
+{
+  "runtime_prefix": "./tests/fixtures/",
+  "results": [
+    {
+      "file": "S1-F05.xml",
+      "url": "http://127.0.0.1:43651/prototypes/ciifr-map/tests/fixtures/S1-F05.xml",
+      "status": 404
+    },
+    {
+      "file": "S1-R4.xml",
+      "url": "http://127.0.0.1:43651/prototypes/ciifr-map/tests/fixtures/S1-R4.xml",
+      "status": 404
+    }
+  ]
+}
+Traceback (most recent call last):
+  File "/workspace/scratch/ca71d2f89cf7/ir-stack-integration/pages-sample-invariant.py", line 55, in <module>
+    main()
+  File "/workspace/scratch/ca71d2f89cf7/ir-stack-integration/pages-sample-invariant.py", line 47, in main
+    assert result['status'] == 200, 'Runtime sample missing from Pages artifact: ' + result['file']
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Runtime sample missing from Pages artifact: S1-F05.xml
