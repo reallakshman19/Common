@@ -5,6 +5,7 @@ import { runInNewContext } from 'node:vm';
 import { agentStartModel, agentStartText, agentStartTaskText, agentStartHref } from '../viewer/agent-start.js';
 import { wbsGroups } from '../viewer/progress.js';
 import { onboardingModel } from '../viewer/onboarding.js';
+import { HOME_VIEWS, CONTINUITY_VIEWS, CONTINUITY_SUBTABS, PRIMARY_TABS, primaryTabActive } from '../viewer/lifecycle.js';
 
 const gh = 'https://github.com/example/work/issues/';
 const project = {
@@ -14,7 +15,7 @@ const project = {
     chats:{builder:{label:'Builder',id8:'abcd1234'},reviewer:{label:'Reviewer',id8:'dcba4321'}},
     groups:{'demo-onboarding':{title:'Onboarding',order:1}},
     milestones:{
-      M1:{wbs:'1.1',name:'Scoped work',order:1,cap:'NOT_DEMONSTRATED',
+      M1:{wbs:'1.1',name:'Scoped work',full:'Original bounded purpose and checked deliverable',order:1,cap:'NOT_DEMONSTRATED',
         canDo:'Only synthetic checks; Writer remains HOLD.',capSrc:gh+'2'},
       M2:{wbs:'2.1',name:'Other work',order:2}
     }
@@ -99,4 +100,22 @@ test('onboarding stays bound to explicitly chosen card and recipient',()=>{
   assert.equal(onboardingModel(project,{cardId:'first'}).cardId,'first');
   assert.equal(onboardingModel(project,{cardId:'foreign'}),null);
   assert.equal(onboardingModel(project,{cardId:'missing'}),null);
+});
+
+test('all projects use recorded workstream purpose; central navigation retains legacy routes',()=>{
+  const first=agentStartModel(project).choices.find(g=>g.key==='wbs:1');
+  assert.equal(first.title,'Scoped work');
+  assert.equal(first.description,'Original bounded purpose and checked deliverable');
+  assert.deepEqual(PRIMARY_TABS.map(([id])=>id),['home','progress','continuity']);
+  assert.deepEqual(CONTINUITY_SUBTABS.map(([id])=>id),
+    ['continuity','start','oracle-continuity','home-risks','fixtures']);
+  assert.deepEqual(CONTINUITY_VIEWS,CONTINUITY_SUBTABS.map(([id])=>id));
+  assert.ok(HOME_VIEWS.includes('actions') && HOME_VIEWS.includes('timeline'));
+  for(const route of ['start','oracle-continuity','home-risks','fixtures']){
+    assert.equal(primaryTabActive('continuity',route),true,route);
+    assert.equal(primaryTabActive('home',route),false,route);
+  }
+  assert.equal(primaryTabActive('home','home'),true);
+  assert.equal(primaryTabActive('progress','progress'),true);
+  assert.equal(JSON.stringify(project),initial,'navigation is a read-only view');
 });

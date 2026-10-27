@@ -1,8 +1,8 @@
 // Progress view: attention strip, milestone strip, then groups of agent blocks.
-import { el, link, md, age } from './util.js?v=29';
-import { cardTags, fmt, nudgeTag } from './triggers.js?v=29';
-import { nudgeRow } from './nudge.js?v=29';
-import { onboardingModel, renderOnboarding } from './onboarding.js?v=29';
+import { el, link, md, age } from './util.js?v=30';
+import { cardTags, fmt, nudgeTag } from './triggers.js?v=30';
+import { nudgeRow } from './nudge.js?v=30';
+import { onboardingModel, renderOnboarding } from './onboarding.js?v=30';
 
 const RANK = { NOT_STARTED: 0, UNKNOWN: 1, STALE: 1, IN_PROGRESS: 2, SUBMITTED: 3, VERIFIED: 4 };
 const ICON = { VERIFIED: '✓', SUBMITTED: '↑', IN_PROGRESS: '●', BLOCKED: '!', NOT_STARTED: '○', STALE: '?', UNKNOWN: '?', NOT_APPLICABLE: '–' };
@@ -70,7 +70,16 @@ export function wbsGroups(index) {
     groups.get(id).steps.push({ key, wbs:match ? number : null, name:m.name || key, label:'', order:m.order || 0 });
   }
   for (const group of groups.values()) {
-    const major = group.key.slice(4);
+    const major = group.key.startsWith('wbs:') ? group.key.slice(4) : null;
+    // Show the source-recorded parent purpose, never an invented WBS summary.
+    // If there is no parent, list original step names without promoting a child.
+    const parent = major ? group.steps.find(s => s.wbs === major) : null;
+    const anchor = parent || (group.steps.length === 1 ? group.steps[0] : null);
+    const record = anchor ? index.milestones[anchor.key] : null;
+    group.title = anchor ? anchor.name : '';
+    group.description = String(record?.full || '').trim() ||
+      (group.steps.length > 1 ? 'Includes: ' + group.steps.filter(s => s !== anchor).map(s => s.name).join(' · ') :
+        'Detailed description not recorded.');
     const hasZero = group.steps.some(s => s.wbs === major + '.0');
     group.steps.forEach(step => {
       const display = !step.wbs ? step.key : step.wbs === major ? (hasZero ? major + ' · Overview' : major + '.0') : step.wbs;
@@ -116,8 +125,13 @@ function strip(index, cards, ctx, family = null) {
       const mine = cards.filter(c => g.steps.some(s => s.key === c.milestone) && c.state !== 'NOT_APPLICABLE');
       const button = el('button', 'wbs-family-card');
       button.type = 'button';
-      button.append(el('strong', null, g.label), el('span', null, g.steps.length + ' milestones'),
-        el('span', 'muted', mine.length + ' active agent blocks · select to inspect'));
+      button.append(el('strong', null, g.label));
+      if (g.title) button.append(el('span', 'wbs-family-title', g.title));
+      const detail = el('span', 'wbs-family-description', g.description);
+      detail.title = g.description; // Full text remains available on hover and to assistive technology.
+      button.append(detail, el('span', 'wbs-family-meta',
+        g.steps.length + ' milestone' + (g.steps.length === 1 ? '' : 's') +
+        ' · ' + mine.length + ' active agent block' + (mine.length === 1 ? '' : 's') + ' · select to inspect'));
       button.addEventListener('click', () => select(g.key, null));
       row.append(button);
     });
