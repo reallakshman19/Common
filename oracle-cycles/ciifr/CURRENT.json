@@ -3,7 +3,7 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 15,
+  "revision": 16,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025",
@@ -20,7 +20,7 @@
       "label": "CIIFR project Oracle",
       "chat_id8": null,
       "provenance": "OWNER_APPOINTED_ORACLE_IN_CURRENT_CONVERSATION; THIS_CHAT_ID_UNKNOWN",
-      "responsibility": "Owner-authorized multibase/UI contributor and Oracle coordinator; reconcile separate review and exact hosted source, preserve historical failures and acceptance limits. No independent self-approval, product merge or release."
+      "responsibility": "Owner-authorized contributor and Oracle coordinator. Executed explicit PR185 branch merge and verified exact reviewed tree; cannot independently approve own affected changes or infer further product merge/release authority."
     },
     "coder": {
       "label": "CIIFR_GEO WBS3.1 viewer integration builder",
@@ -38,7 +38,7 @@
       "label": "Owner",
       "chat_id8": null,
       "provenance": "OWNER_SELF",
-      "responsibility": "Try the published A/B/C workbench on a normal Windows/WebGL browser, inspect whole-model overlay/paired-node labels/navigation and return observations; later decide protected acceptance/integration/merge."
+      "responsibility": "PR185 merge into its configured framework branch explicitly authorized and completed. Owner normal-browser/Windows/WebGL trial and later protected stack/main acceptance decisions remain."
     }
   },
   "source_boundary": {
@@ -50,7 +50,7 @@
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
     "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
-    "current_candidate": "XCU open draft PR185 head1da8c88c38ed6202896dfe5ecce2cac51e91ecba/tree08df2c44e667f579381b90fdf59a61cd1fce542e, unchanged PR183 base3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6. A/B/Consolidated and viewer repairs plus independently verified one-line SVG projection/base badge repair. Native and SVG/DOM scoped PASS; GPU/Owner pending.",
+    "current_candidate": "XCU PR185 MERGED into PR183 framework branch at7ad4caaa706584fc6fa92667e4cfe5f3230295eb; reviewed source head1da8c88c38ed6202896dfe5ecce2cac51e91ecba and merged tree08df2c44e667f579381b90fdf59a61cd1fce542e are equal. PR183 remains open/draft; no main promotion or GPU/Owner engineering acceptance claimed.",
     "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
     "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
     "minimal_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6397715134",
@@ -83,7 +83,19 @@
     "multibase_review_report": "relay/AGENT_WORK/ciifr-geo/GEO-MULTIBASE-20261026/INDEPENDENT_REVIEW.md",
     "known_limits": "Public F05/R4 samples are one S1 geometry in two profiles. Full candidate-edit journal and timestamped pin receipts incomplete; target-host large-graphics/search envelope unqualified. Cloud WebGL context unavailable. Actual SVG/DOM facts and contributor C trial do not prove GPU or physical-engineering acceptance.",
     "multibase_projection_repair": "A final actual SVG ISO/base-switch badge mismatch at72944 was independently reproduced. Four-file delta (one guarded production label line, real-app regressions, report/manifest) at1da8 fixes it; author58/58, independent app9/9 plus own oldFAIL/newPASS and actual hosted ISO/XY/YZ/base-switch consistency verified. No numerical/core/export/shared-viewer/Worker delta.",
-    "previous_multibase_candidate": "72944d6f56d9cdc7226d7a177dcdaa6aab278fe9; scoped popup/3830/zoom SVG review and full native core evidence preserved in the full appended report."
+    "previous_multibase_candidate": "72944d6f56d9cdc7226d7a177dcdaa6aab278fe9; scoped popup/3830/zoom SVG review and full native core evidence preserved in the full appended report.",
+    "owner_authorized_pr185_merge": {
+      "pull_request": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/185",
+      "merge_commit": "7ad4caaa706584fc6fa92667e4cfe5f3230295eb",
+      "merged_source_head": "1da8c88c38ed6202896dfe5ecce2cac51e91ecba",
+      "tree": "08df2c44e667f579381b90fdf59a61cd1fce542e",
+      "target_branch": "codex/ciifr-geo-framework-oracle-20261026",
+      "target_pr": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/183",
+      "merged_at": "2026-10-27T03:46:54Z",
+      "authority": "Owner explicit current-conversation instruction: merge (27 Oct 2026).",
+      "verification": "GitHub PR merged=true; merge parents exactly previous PR183 base3a1bec9 and reviewed1da8 source; merged tree equals reviewed08df2c44. No other product PR merged.",
+      "limits": "This is a merge into PR183 framework branch. No main promotion, GPU/Windows/native-fullscreen success, physical qualification or broader release is inferred. PR185 has0 check-runs,0 statuses,0 PR workflow runs at pre-merge check; none claimed as CI PASS. Separate native58 and scoped non-author review unchanged."
+    }
   },
   "receipt_issue_url": "https://github.com/reallakshman19/Common/issues/482",
   "assignments": [
@@ -292,7 +304,8 @@
       "native_return_status": "AUTHOR58_NATIVE_PASS; HTTP39_ASSETS_PRIOR_UNCHANGED; SEPARATE_NATIVE_AND_SVG_DOM_REVIEW_PASS; GPU_NOT_VERIFIED; OWNER_PENDING",
       "evidence_artifacts": "relay/AGENT_WORK/ciifr-geo/GEO-MULTIBASE-20261026/README.md",
       "next_after": "owner",
-      "limits": "No product merge/engineering acceptance. Historical incorrect scoring/UI cases preserved. Native and actual SVG/DOM review scopes are distinct."
+      "limits": "No product merge/engineering acceptance. Historical incorrect scoring/UI cases preserved. Native and actual SVG/DOM review scopes are distinct.",
+      "post_return_merge": "7ad4caaa706584fc6fa92667e4cfe5f3230295eb into codex/ciifr-geo-framework-oracle-20261026; original tested source1da8/tree08df unchanged"
     },
     {
       "id": "CIIFR-GEO-MULTIBASE-INDEPENDENT-REVIEW-20261026",
@@ -306,14 +319,15 @@
       "native_return_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
       "native_return_status": "SCOPED_NATIVE_PASS + SCOPED_BROWSER_SVG_DOM_PASS; FINAL_SVG_BADGE_NATIVE_AND_HOSTED_RECHECK_PASS; GPU_NOT_VERIFIED; OWNER_PENDING",
       "next_after": "owner",
-      "limits": "Not blind/separate-account GitHub APPROVE. Final browser checks public S1 A run, contained45%-height popup, expanded label, selected3830 paired SVG identities and retained zoom/reopen; not GPU, Windows, all-row pixel picking or target-host performance."
+      "limits": "Not blind/separate-account GitHub APPROVE. Final browser checks public S1 A run, contained45%-height popup, expanded label, selected3830 paired SVG identities and retained zoom/reopen; not GPU, Windows, all-row pixel picking or target-host performance.",
+      "post_return_merge": "7ad4caaa706584fc6fa92667e4cfe5f3230295eb into codex/ciifr-geo-framework-oracle-20261026; original tested source1da8/tree08df unchanged"
     }
   ],
   "next": {
     "recipient_role": "owner",
     "recipient_chat_id8": null,
     "status": "AWAIT_MULTIBASE_WEBGL_OWNER_TRIAL",
-    "instruction": "Try the current source1da8 temporary preview A/B→Consolidated choices and continuous overlay, then normal-browser/Windows/WebGL contrast, paired IDs/picks, X/Y/Z-up selected-node orbit, split synchronization and popup/exports. Return observations on#186. The final SVG badge mismatch is repaired/reviewed; no repeat coder dispatch or product merge.",
+    "instruction": "PR185 is now merged into PR183 framework branch under explicit Owner instruction. Try the unchanged exact-source1da8 temporary preview A/B→C and normal-browser/Windows/WebGL contrast, paired IDs/picks, X/Y/Z-up pivot orbit, split synchronization, popup and exports; return observations on#186. No new coding dispatch or further stack/main merge is assigned.",
     "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554"
   },
   "gates": [
@@ -520,6 +534,13 @@
       "scope": "Exact1da8 four-file delta independently verified; one inactive-GPU controls label line. Own correct-invariant FAIL on old72944/PASS on received new app; native app9/9. Actual hosted public A/B runs: ISO/XY/YZ selectors, main heading, SVG aria-label and badge agree through saved-base switches. Author full58/58 separately identified.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
       "limits": "No new GPU, Windows, native-fullscreen success, target-host performance or Owner acceptance. Previous popup/3830/zoom browser receipt is unchanged historical scope, not falsely repeated."
+    },
+    {
+      "id": "geo-pr185-owner-authorized-framework-branch-merge",
+      "status": "PASS",
+      "scope": "GitHub merged PR185 at7ad4caaa706584fc6fa92667e4cfe5f3230295eb into configured PR183 framework branch, exact expected reviewed head1da8 and tree08df preserved.",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/185",
+      "limits": "This is a merge into PR183 framework branch. No main promotion, GPU/Windows/native-fullscreen success, physical qualification or broader release is inferred. PR185 has0 check-runs,0 statuses,0 PR workflow runs at pre-merge check; none claimed as CI PASS. Separate native58 and scoped non-author review unchanged."
     }
   ],
   "progress_projection": {
@@ -527,10 +548,10 @@
     "project_key": "ciifr",
     "publication_status": "PROGRESS_UPDATE_PENDING",
     "published_revision": "R4",
-    "reason": "PROGRESS_UPDATE_PENDING with existing sole ciifr writer. CORE-1/CORE-2 runnable candidate and bounded review now recorded; no claim of Page publication, GPU or Owner acceptance."
+    "reason": "PROGRESS_UPDATE_PENDING with existing sole ciifr writer. Owner-authorized PR185 framework-branch merge now recorded; no claim of Page publication, main promotion, GPU or engineering acceptance."
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
-  "activation_scope": "Owner-directed WBS3.1 A/B/Consolidated and viewer continuation completed through1da8c88c, with native and actual SVG/DOM scoped non-author review. Fifty runtime blobs deployed in immutable preview586c00dd. GPU/Windows/Owner trial remains; no product merge, G2/G3/Writer/release or Oracle cutover.",
+  "activation_scope": "Owner-directed WBS3.1 A/B/C/viewer contribution and scoped review through1da8 are complete. Explicit Owner PR185 merge into PR183 framework branch executed and exact tree verified. Preview remains source1da8. GPU/Windows/engineering Owner acceptance, further stack/main integration, G2/G3/Writer/release and Oracle cutover remain separate.",
   "coordination_observation": {
     "source_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
     "builder_status": "OWNER_DIRECT_RETURNED; final SVG badge defect repaired, independently verified and hosted. No new coding assignment pending.",
@@ -539,6 +560,18 @@
       "observed_completed_work": "Native R2 and R3 returns and exact published candidates are available; complete unique-turn/duration/page history and context-use telemetry are not retained.",
       "threshold_crossing": "UNKNOWN; not inferred from elapsed wall time or idle UI",
       "action": "Preserve source manifest, full independent report, reviewer probes and publication receipt in the Common task relay; keep context-meter coverage incomplete/unknown and succession not cut over."
+    },
+    "owner_merge": {
+      "pull_request": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/185",
+      "merge_commit": "7ad4caaa706584fc6fa92667e4cfe5f3230295eb",
+      "merged_source_head": "1da8c88c38ed6202896dfe5ecce2cac51e91ecba",
+      "tree": "08df2c44e667f579381b90fdf59a61cd1fce542e",
+      "target_branch": "codex/ciifr-geo-framework-oracle-20261026",
+      "target_pr": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/183",
+      "merged_at": "2026-10-27T03:46:54Z",
+      "authority": "Owner explicit current-conversation instruction: merge (27 Oct 2026).",
+      "verification": "GitHub PR merged=true; merge parents exactly previous PR183 base3a1bec9 and reviewed1da8 source; merged tree equals reviewed08df2c44. No other product PR merged.",
+      "limits": "This is a merge into PR183 framework branch. No main promotion, GPU/Windows/native-fullscreen success, physical qualification or broader release is inferred. PR185 has0 check-runs,0 statuses,0 PR workflow runs at pre-merge check; none claimed as CI PASS. Separate native58 and scoped non-author review unchanged."
     }
   }
 }
