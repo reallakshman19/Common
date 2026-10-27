@@ -26,7 +26,7 @@ const project = {
       who:{chat:'builder',role:'builder'},now:'Evidence recorded, real trial still HOLD',
       next:{actor:'Oracle',text:'Inspect fixture witness'},src:gh+'11',
       refs:[{u:gh+'12',l:'Contrary observation',k:'issue'}]},
-    second:{milestone:'M1',group:'demo-onboarding',label:'Second task',state:'BLOCKED',
+    second:{milestone:'M1',group:'demo-onboarding',label:'Second task',state:'BLOCKED',updatedAt:'2026-10-27T17:00:00Z',
       who:{chat:'reviewer',role:'reviewer'},now:'Independent second task is BLOCKED',
       next:{actor:'Reviewer',text:'Review failed case'},src:gh+'21'},
     foreign:{milestone:'M2',label:'Unrelated task',state:'IN_PROGRESS',src:gh+'31'},
