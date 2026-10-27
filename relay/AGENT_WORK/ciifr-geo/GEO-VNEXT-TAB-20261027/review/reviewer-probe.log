@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "observation": "LOCAL_EXECUTION_CONTROLLED_DOM_NOT_BROWSER",
+  "observations": [
+    {
+      "check": "module-routes-and-retention",
+      "navigations": 1,
+      "url": "file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/index.html",
+      "transitions": 40
+    },
+    {
+      "check": "seeded-defect",
+      "defect": "wrong-docs-route",
+      "rejected": true,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'https://review.invalid/docs/prototypes/ciifr-map/index.html'\n- 'https://review.invalid/prototypes/ciifr-map/index.html'\n"
+    },
+    {
+      "check": "seeded-defect",
+      "defect": "reload-on-return",
+      "rejected": true,
+      "error": "Expected values to be strictly equal:\n\n20 !== 1\n"
+    },
+    {
+      "check": "actual-app-alternate-transitions",
+      "navigationCount": 1,
+      "unknownTabIgnored": true,
+      "nestedClick": true,
+      "panelsExclusive": true
+    }
+  ]
+}

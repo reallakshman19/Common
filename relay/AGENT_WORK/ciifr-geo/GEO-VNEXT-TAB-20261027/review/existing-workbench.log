@@ -1,0 +1,164 @@
+file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/adapter.test.mjs:10
+if (!process.env.CIIFR_TEST_RUNTIME) throw new Error('Set CIIFR_TEST_RUNTIME to a test-only npm prefix containing @xmldom/xmldom. Product uses browser DOMParser.');
+                                           ^
+
+Error: Set CIIFR_TEST_RUNTIME to a test-only npm prefix containing @xmldom/xmldom. Product uses browser DOMParser.
+    at file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/adapter.test.mjs:10:44
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.22.1
+✖ prototypes/ciifr-map/tests/adapter.test.mjs (451.974002ms)
+file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/app-startup-ownership.test.mjs:17
+if (!process.env.CIIFR_TEST_RUNTIME) throw Error('CIIFR_TEST_RUNTIME is required');
+                                           ^
+
+Error: CIIFR_TEST_RUNTIME is required
+    at file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/app-startup-ownership.test.mjs:17:44
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.22.1
+✖ prototypes/ciifr-map/tests/app-startup-ownership.test.mjs (508.228058ms)
+✔ actual camera direction distinguishes preset, custom orbit and evidence-independent projection type (5.53998ms)
+✔ a rejected rigid context never claims an active one-to-one assignment (1.363902ms)
+✔ independently constructed 90-degree rigid transform is recovered without numerical rewrite (12.017927ms)
+✔ contradictory signed cycle and seeds fail closed, seedless components remain relative (3.303498ms)
+✔ collinear and incompatible anchor geometry retains limitations (5.458226ms)
+✔ all alternatives and contested target nodes are retained, even at a manual anchor (2.571895ms)
+✔ element-interior observation never creates a TARGET physical node (5.447343ms)
+node:internal/modules/cjs/loader:2138
+      throw new ERR_INVALID_ARG_VALUE('filename', filenameOrURL,
+            ^
+
+TypeError [ERR_INVALID_ARG_VALUE]: The argument 'filename' must be a file URL object, file URL string, or absolute path string. Received 'undefined/package.json'
+    at createRequire (node:internal/modules/cjs/loader:2138:13)
+    at file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/multibase-workbench.test.mjs:11:19
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  code: 'ERR_INVALID_ARG_VALUE'
+}
+
+Node.js v24.22.1
+✖ prototypes/ciifr-map/tests/multibase-workbench.test.mjs (1168.821086ms)
+✔ row highlights every alternative and reused SOURCE; segment interior stays ELEMENT-only (6.75545ms)
+✔ fullscreen popup keeps the original table, closes/reopens and resets drag offsets on reentry (5.694675ms)
+✔ 936px surface uses45percent default, allows deliberate resize and avoids observer write loops (1.614977ms)
+✔ native fullscreen rejection keeps viewport expansion usable and native Escape restores normal (1.899009ms)
+✔ bridge dispatches all selected instances and exposes camera/navigation commands only for current scene (4.826331ms)
+✔ rejected native fullscreen exit stays expanded, resolves safely, and Escape can recover (3.012394ms)
+✔ cancelled pending native entry and refused auto-exit restore honest fullscreen state (1.550237ms)
+✔ distinct-target best-response cycle terminates with disclosed minmax compromise and per-group conditional alternatives (27.976823ms)
+✔ minimum-worst regret is different from minimum-sum/global-error; pins remain authoritative (10.168122ms)
+✔ incomplete slices expose lower-bound regret and zero witnesses never imply numerical support (2.189941ms)
+file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/scene-xml.test.mjs:13
+if (!process.env.CIIFR_TEST_RUNTIME) throw new Error('CIIFR_TEST_RUNTIME must contain the real test-only @xmldom/xmldom parser.');
+                                           ^
+
+Error: CIIFR_TEST_RUNTIME must contain the real test-only @xmldom/xmldom parser.
+    at file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/scene-xml.test.mjs:13:44
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.22.1
+✖ prototypes/ciifr-map/tests/scene-xml.test.mjs (502.918977ms)
+✔ full 90deg pose appears once in copied display data and existing runtime accepts it (24.044486ms)
+✔ same hash/member/node IDs on opposite sides stay distinct and wrong/stale picks fail (3.96027ms)
+✔ all target reuse rows survive pick resolution; segment-only stays an ELEMENT link (13.674143ms)
+✔ only registered components are positioned; unregistered scope remains explicit (3.159406ms)
+✔ current scene rejects epoch/projection/pose/parameter changes and malformed inputs (6.558359ms)
+node:internal/modules/cjs/loader:2138
+      throw new ERR_INVALID_ARG_VALUE('filename', filenameOrURL,
+            ^
+
+TypeError [ERR_INVALID_ARG_VALUE]: The argument 'filename' must be a file URL object, file URL string, or absolute path string. Received 'undefined/package.json'
+    at createRequire (node:internal/modules/cjs/loader:2138:13)
+    at file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/svg-view-state.test.mjs:10:21
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  code: 'ERR_INVALID_ARG_VALUE'
+}
+
+Node.js v24.22.1
+✖ prototypes/ciifr-map/tests/svg-view-state.test.mjs (374.321241ms)
+file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/ui-selection.test.mjs:10
+if (!process.env.CIIFR_TEST_RUNTIME) throw new Error('CIIFR_TEST_RUNTIME required');
+                                           ^
+
+Error: CIIFR_TEST_RUNTIME required
+    at file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/ui-selection.test.mjs:10:44
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.22.1
+✖ prototypes/ciifr-map/tests/ui-selection.test.mjs (264.506218ms)
+node:internal/modules/cjs/loader:2138
+      throw new ERR_INVALID_ARG_VALUE('filename', filenameOrURL,
+            ^
+
+TypeError [ERR_INVALID_ARG_VALUE]: The argument 'filename' must be a file URL object, file URL string, or absolute path string. Received 'undefined/package.json'
+    at createRequire (node:internal/modules/cjs/loader:2138:13)
+    at file:///workspace/scratch/ca71d2f89cf7/geo-vnext-tab-20261027/prototypes/ciifr-map/tests/unlinked-node-selection.test.mjs:15:19
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  code: 'ERR_INVALID_ARG_VALUE'
+}
+
+Node.js v24.22.1
+✖ prototypes/ciifr-map/tests/unlinked-node-selection.test.mjs (524.548233ms)
+✔ TARGET selection keeps all SOURCE rows, with an explicit ambiguity and witnesses (2.155841ms)
+✔ async viewer callback rejects revoked scene, disposes stale viewer, and preserves model zero translation (3.609742ms)
+✔ pending split and overlay mode switches project immediately without a draw or camera mutation (6.738024ms)
+✔ post-orbit lookAt uses the new camera pose before matrixWorldInverse is drawn (5.12305ms)
+✔ orthographic panes synchronize pending layout and resized viewport while keeping zoom and height (1.640703ms)
+✔ perspective and orthographic annotations honor near/far clip planes including points behind camera (5.831595ms)
+✔ popup clipping uses local coordinates and contains full height/width after viewport shrink (4.07071ms)
+✔ coincident SOURCE/TARGET preserve separate IDs and exact physical display coordinates (1.532766ms)
+✔ actual native navigation orbits around the selected pivot for X/Y/Z; vertical coordinate is invariant (6.437349ms)
+✔ X-up survives native and public navigation validators; unspecified default stays Z (1.638591ms)
+✔ bridge sets real side colours, maps evidence plane with X-up, restores camera and pivots exact primary node (3.759967ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 33
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1577.1253
+
+✖ failing tests:
+
+test at prototypes/ciifr-map/tests/adapter.test.mjs:1:1
+✖ prototypes/ciifr-map/tests/adapter.test.mjs (451.974002ms)
+  'test failed'
+
+test at prototypes/ciifr-map/tests/app-startup-ownership.test.mjs:1:1
+✖ prototypes/ciifr-map/tests/app-startup-ownership.test.mjs (508.228058ms)
+  'test failed'
+
+test at prototypes/ciifr-map/tests/multibase-workbench.test.mjs:1:1
+✖ prototypes/ciifr-map/tests/multibase-workbench.test.mjs (1168.821086ms)
+  'test failed'
+
+test at prototypes/ciifr-map/tests/scene-xml.test.mjs:1:1
+✖ prototypes/ciifr-map/tests/scene-xml.test.mjs (502.918977ms)
+  'test failed'
+
+test at prototypes/ciifr-map/tests/svg-view-state.test.mjs:1:1
+✖ prototypes/ciifr-map/tests/svg-view-state.test.mjs (374.321241ms)
+  'test failed'
+
+test at prototypes/ciifr-map/tests/ui-selection.test.mjs:1:1
+✖ prototypes/ciifr-map/tests/ui-selection.test.mjs (264.506218ms)
+  'test failed'
+
+test at prototypes/ciifr-map/tests/unlinked-node-selection.test.mjs:1:1
+✖ prototypes/ciifr-map/tests/unlinked-node-selection.test.mjs (524.548233ms)
+  'test failed'

@@ -1,0 +1,90 @@
+{
+  "task": "GEO-VNEXT-TAB-20261027",
+  "repository": "reallakshman19/XML_Compare_Utilities",
+  "pull_request": 191,
+  "source": "7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a",
+  "tree": "812395ee191b653764a7c8577b1ef5ce9db8a3e2",
+  "base": "e3d52e8a5e2855f0e684e9cb1358f4bca5f2b211",
+  "initial_review_source": "1f4fb608ccdbeb53adae230ac45877d94a16c113",
+  "delta": "one visible banner phrase plus renamed/updated PR191 recovery report; no engine or host-code delta",
+  "files": [
+    {
+      "path": "docs/cii-fnr-vnext.html",
+      "bytes": 9729,
+      "sha256": "78ee42070cd8547f689265b1dfa762cbdc0c4c60ad86c42cd3a732d75c6d7990",
+      "gitBlob": "4a5f4a6d3b722ecda855fbbb662396eb896cee7f"
+    },
+    {
+      "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+      "bytes": 28828,
+      "sha256": "6c1bee7ea4ffb7dd2599e682a365d53c873d96f242cc44f2819706d11b64ed2b",
+      "gitBlob": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb"
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+      "bytes": 28828,
+      "sha256": "6c1bee7ea4ffb7dd2599e682a365d53c873d96f242cc44f2819706d11b64ed2b",
+      "gitBlob": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb"
+    },
+    {
+      "path": "tabs/cii-workspace/cii-workspace-find-replace.js",
+      "bytes": 9591,
+      "sha256": "06c88243748b5d77bec3884f934611eaa4ea33a4f6481593daa4a4058ed39ae5",
+      "gitBlob": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9"
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-workspace-find-replace.js",
+      "bytes": 9591,
+      "sha256": "06c88243748b5d77bec3884f934611eaa4ea33a4f6481593daa4a4058ed39ae5",
+      "gitBlob": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9"
+    },
+    {
+      "path": "tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+      "bytes": 861,
+      "sha256": "7c73c82479b694d72ce85638355dd04e39fccd8f72802f12f8b070593dbdace7",
+      "gitBlob": "03ea64cee6acac615b1d751f37ec4465a396eddf"
+    },
+    {
+      "path": "tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css",
+      "bytes": 669,
+      "sha256": "a7846b99f8da5403f327b1f5b403a18ba4439c85b74b5793d659368bf7d6ec29",
+      "gitBlob": "4d2b1223c5b98c356cbd88567a498a42d25d1a23"
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+      "bytes": 861,
+      "sha256": "7c73c82479b694d72ce85638355dd04e39fccd8f72802f12f8b070593dbdace7",
+      "gitBlob": "03ea64cee6acac615b1d751f37ec4465a396eddf"
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css",
+      "bytes": 669,
+      "sha256": "a7846b99f8da5403f327b1f5b403a18ba4439c85b74b5793d659368bf7d6ec29",
+      "gitBlob": "4d2b1223c5b98c356cbd88567a498a42d25d1a23"
+    },
+    {
+      "path": "tests/cii-fnr-vnext-geo-tab.test.mjs",
+      "bytes": 4895,
+      "sha256": "a8a1ec14c93cc11aeadcd489256e49b471ed3c106abc9a3dc1687fa417f161fb",
+      "gitBlob": "71e0530de88bea85ba530bd12f6b67245e181820"
+    },
+    {
+      "path": "tests/cii-fnr-vnext-geo-pages-smoke.py",
+      "bytes": 3369,
+      "sha256": "62131e3dad74edb4dc0bf4c3be33c310706a2d589608358829d2e62866a29df7",
+      "gitBlob": "27409acef022df9474c1c71c11d3f401e3ac5d0d"
+    },
+    {
+      "path": "prototypes/ciifr-map/index.html",
+      "bytes": 8122,
+      "sha256": "2d7b8a4f1dcadf575edd62acd2a5c89c77496a4a6ae4bb9266afa32c520d874c",
+      "gitBlob": "bf3e1a489b9305ef9707956ce862ddd09a59521b"
+    },
+    {
+      "path": "agents/PR191_workreport.md",
+      "bytes": 6575,
+      "sha256": "205d151f25dc2f6aecc40b6b8d4d5e7887d085ed49b072f7d22e6b74f07d4015",
+      "gitBlob": "7c6f1770516b6b31dc64a46a987fdd16cdc483b5"
+    }
+  ]
+}

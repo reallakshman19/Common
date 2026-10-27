@@ -1,0 +1,20 @@
+{
+  "task": "GEO-VNEXT-TAB-20261027",
+  "kind": "source-bound implementation and non-author review return",
+  "product_pr": 191,
+  "product_source": "7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a",
+  "product_tree": "812395ee191b653764a7c8577b1ef5ce9db8a3e2",
+  "main": "e3d52e8a5e2855f0e684e9cb1358f4bca5f2b211",
+  "product_merge": "NOT_PERFORMED",
+  "product_deploy": "NOT_PERFORMED",
+  "native_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662",
+  "review_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6434633458",
+  "cycle_revision": 18,
+  "source_inventories_verified": "13/13 final actual Git blobs match local candidate; reviewer independently retrieved initial12+final2 delta",
+  "review": "no blocking integration defect found in inspected/native/HTTP scope; source1f4 plus7d7 addendum",
+  "browser_gpu_fullscreen": "NOT_RUN",
+  "principal_account_independence": "UNKNOWN",
+  "known_baseline_failure": "preserved branch expectation18/19 on candidate/base projection; no changed expectations",
+  "new_dispatch": "NONE",
+  "next": "Owner supported-browser nested trial and explicit new PR191 merge/acceptance decision"
+}

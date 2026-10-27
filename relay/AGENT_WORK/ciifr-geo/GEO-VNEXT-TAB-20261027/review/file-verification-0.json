@@ -1,0 +1,38 @@
+[
+  {
+    "path": "docs/cii-fnr-vnext.html",
+    "remote_blob": "4a5f4a6d3b722ecda855fbbb662396eb896cee7f",
+    "computed_blob": "4a5f4a6d3b722ecda855fbbb662396eb896cee7f",
+    "bytes": 9729,
+    "sha256": "78ee42070cd8547f689265b1dfa762cbdc0c4c60ad86c42cd3a732d75c6d7990",
+    "local_remote_equal": true,
+    "manifest_match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "remote_blob": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "computed_blob": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "bytes": 28828,
+    "sha256": "6c1bee7ea4ffb7dd2599e682a365d53c873d96f242cc44f2819706d11b64ed2b",
+    "local_remote_equal": true,
+    "manifest_match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "remote_blob": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "computed_blob": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "bytes": 28828,
+    "sha256": "6c1bee7ea4ffb7dd2599e682a365d53c873d96f242cc44f2819706d11b64ed2b",
+    "local_remote_equal": true,
+    "manifest_match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-find-replace.js",
+    "remote_blob": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "computed_blob": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "bytes": 9591,
+    "sha256": "06c88243748b5d77bec3884f934611eaa4ea33a4f6481593daa4a4058ed39ae5",
+    "local_remote_equal": true,
+    "manifest_match": true
+  }
+]

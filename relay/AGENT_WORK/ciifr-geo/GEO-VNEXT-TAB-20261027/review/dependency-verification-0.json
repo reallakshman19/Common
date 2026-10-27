@@ -1,0 +1,602 @@
+[
+  {
+    "path": ".github/workflows/deploy.yml",
+    "expected": "a8b2b3a10c93872d1ea54f6b83d5cd51fb17d964",
+    "actual": "a8b2b3a10c93872d1ea54f6b83d5cd51fb17d964",
+    "match": true
+  },
+  {
+    "path": "AGENTS.md",
+    "expected": "a39570bf6cdd1a66fb3db0aeed09e111734c5bbd",
+    "actual": "a39570bf6cdd1a66fb3db0aeed09e111734c5bbd",
+    "match": true
+  },
+  {
+    "path": "docs/AGENTS.md",
+    "expected": "a39570bf6cdd1a66fb3db0aeed09e111734c5bbd",
+    "actual": "a39570bf6cdd1a66fb3db0aeed09e111734c5bbd",
+    "match": true
+  },
+  {
+    "path": "docs/cii-fnr-vnext.html",
+    "expected": "4a5f4a6d3b722ecda855fbbb662396eb896cee7f",
+    "actual": "4a5f4a6d3b722ecda855fbbb662396eb896cee7f",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/README.md",
+    "expected": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "actual": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/bytes.js",
+    "expected": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "actual": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/cii.js",
+    "expected": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "actual": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/index.js",
+    "expected": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "actual": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/selectors.js",
+    "expected": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "actual": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+    "expected": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "actual": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+    "expected": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "actual": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "expected": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "actual": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/config-policy.js",
+    "expected": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "actual": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/csv-resolver.js",
+    "expected": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "actual": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/demo-loader.js",
+    "expected": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "actual": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css",
+    "expected": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "actual": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+    "expected": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "actual": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/line-node-admission.js",
+    "expected": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "actual": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/nonconflict-review.js",
+    "expected": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "actual": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+    "expected": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "actual": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+    "expected": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "actual": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+    "expected": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "actual": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/style.css",
+    "expected": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "actual": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+    "expected": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "actual": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-workspace-find-replace-ui.js",
+    "expected": "b60dd0188a6c2104b5478b146cc9146e325584ca",
+    "actual": "b60dd0188a6c2104b5478b146cc9146e325584ca",
+    "match": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-workspace-find-replace.js",
+    "expected": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "actual": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "match": true
+  },
+  {
+    "path": "index.html",
+    "expected": "784477098243f4b77b013f87af34693f5d408cfc",
+    "actual": "784477098243f4b77b013f87af34693f5d408cfc",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/FRAMEWORK.md",
+    "expected": "c2d483fd9d045fda65f00a06ff667469e9d2684e",
+    "actual": "c2d483fd9d045fda65f00a06ff667469e9d2684e",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/README.md",
+    "expected": "d75b0af8003107bc0ef825497ffda009e4eb52c1",
+    "actual": "d75b0af8003107bc0ef825497ffda009e4eb52c1",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/Start-MAP.cmd",
+    "expected": "152065ebbccc5fd194d07c985b910a2ed825f3ab",
+    "actual": "152065ebbccc5fd194d07c985b910a2ed825f3ab",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/app.js",
+    "expected": "77a905aba3b20bd09d2f83722cba46fa35238919",
+    "actual": "77a905aba3b20bd09d2f83722cba46fa35238919",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/camera-presentation.js",
+    "expected": "773d073e1205910ac718561185a06ab2fb513d77",
+    "actual": "773d073e1205910ac718561185a06ab2fb513d77",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/compare.js",
+    "expected": "bf170bdd36c239e456c65db202a69809a9928bbc",
+    "actual": "bf170bdd36c239e456c65db202a69809a9928bbc",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/evidence.js",
+    "expected": "467f79239b792b027c81dd51501ccfc1f66cd323",
+    "actual": "467f79239b792b027c81dd51501ccfc1f66cd323",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/geo-scene-pick.js",
+    "expected": "a60ab3cf7ad1e01c4508c89a23a5e6e340257e59",
+    "actual": "a60ab3cf7ad1e01c4508c89a23a5e6e340257e59",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/geo-scene.js",
+    "expected": "fee91307f91caa0139fb49a44c880d3c76f8f5a0",
+    "actual": "fee91307f91caa0139fb49a44c880d3c76f8f5a0",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/geo-viewer-bridge.js",
+    "expected": "a902c5ad993afa39c19540ddd065db8cf9c7d901",
+    "actual": "a902c5ad993afa39c19540ddd065db8cf9c7d901",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/index.html",
+    "expected": "37497b1d5be7c19c727df9948aa510c6a6dc4ea5",
+    "actual": "37497b1d5be7c19c727df9948aa510c6a6dc4ea5",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/multibase-view.js",
+    "expected": "e97f611fa8aa7b018649610b22795a702b2061ca",
+    "actual": "e97f611fa8aa7b018649610b22795a702b2061ca",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/multibase.css",
+    "expected": "250faa450dd8fd8857bb90f4bfed62e6120c9750",
+    "actual": "250faa450dd8fd8857bb90f4bfed62e6120c9750",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/proposal-ledger.js",
+    "expected": "755324efdc22ff9e598773f4c6ac064d73e97070",
+    "actual": "755324efdc22ff9e598773f4c6ac064d73e97070",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/resolution-fit.js",
+    "expected": "5a9262e23572d2e950bef07ed4a6aea46c94e17c",
+    "actual": "5a9262e23572d2e950bef07ed4a6aea46c94e17c",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/resolution-search.js",
+    "expected": "915f3df9e8040fdcaa37a8952576be042ed928eb",
+    "actual": "915f3df9e8040fdcaa37a8952576be042ed928eb",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/resolution-worker.js",
+    "expected": "67005e30b3bf80c61bf77bbd6354def7d9b4afdb",
+    "actual": "67005e30b3bf80c61bf77bbd6354def7d9b4afdb",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/review-viewport.js",
+    "expected": "c411f552f85ff217897ad7a3af81f7cf0d773c0e",
+    "actual": "c411f552f85ff217897ad7a3af81f7cf0d773c0e",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/samples/S1-F05.xml",
+    "expected": "914303e2437fffaa5682757ee32b3ae3d8f37df8",
+    "actual": "914303e2437fffaa5682757ee32b3ae3d8f37df8",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/samples/S1-R4.xml",
+    "expected": "2da10efac2d2f040000edd988d4a1e0baae5dbe1",
+    "actual": "2da10efac2d2f040000edd988d4a1e0baae5dbe1",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/samples/manifest.json",
+    "expected": "559ed00b9de48b362f0d7b207df2e3fc3abfc81a",
+    "actual": "559ed00b9de48b362f0d7b207df2e3fc3abfc81a",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/server.py",
+    "expected": "214321389a10d9ae48e3b7f738b475f37a3b9048",
+    "actual": "214321389a10d9ae48e3b7f738b475f37a3b9048",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/styles.css",
+    "expected": "5dc79f24283fb327a29cd929c6773fb414b19617",
+    "actual": "5dc79f24283fb327a29cd929c6773fb414b19617",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/adapter.test.mjs",
+    "expected": "1813eb52d19d1120b1764c344c0109ffb5a8cfd0",
+    "actual": "1813eb52d19d1120b1764c344c0109ffb5a8cfd0",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/app-startup-ownership.test.mjs",
+    "expected": "3cc0ba494fc7410289745bebdc84779e036fecce",
+    "actual": "3cc0ba494fc7410289745bebdc84779e036fecce",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/camera-presentation.test.mjs",
+    "expected": "ac98423bf1784063c7ee720c994dba482e4d02a5",
+    "actual": "ac98423bf1784063c7ee720c994dba482e4d02a5",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/fixtures/S1-F05.xml",
+    "expected": "914303e2437fffaa5682757ee32b3ae3d8f37df8",
+    "actual": "914303e2437fffaa5682757ee32b3ae3d8f37df8",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/fixtures/S1-R4.xml",
+    "expected": "2da10efac2d2f040000edd988d4a1e0baae5dbe1",
+    "actual": "2da10efac2d2f040000edd988d4a1e0baae5dbe1",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/fixtures/manifest.json",
+    "expected": "559ed00b9de48b362f0d7b207df2e3fc3abfc81a",
+    "actual": "559ed00b9de48b362f0d7b207df2e3fc3abfc81a",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/geometry.test.mjs",
+    "expected": "e7ec40939563501498088e8ef448ab237a8aebe6",
+    "actual": "e7ec40939563501498088e8ef448ab237a8aebe6",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/http_smoke.py",
+    "expected": "9441439481ed81fd50473a9b6a9572c293a3c2df",
+    "actual": "9441439481ed81fd50473a9b6a9572c293a3c2df",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/multibase-workbench.test.mjs",
+    "expected": "960d433de55d1ec3d13409003c795c4d9e401d4e",
+    "actual": "960d433de55d1ec3d13409003c795c4d9e401d4e",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/navigation-popup.test.mjs",
+    "expected": "bf8237b0c50c96fa0808c4f4b0aa1aa5dc135e94",
+    "actual": "bf8237b0c50c96fa0808c4f4b0aa1aa5dc135e94",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/pages_delivery_smoke.py",
+    "expected": "f67f2f0b64fd644cd593b4a3d3c17f8fee4e8be7",
+    "actual": "f67f2f0b64fd644cd593b4a3d3c17f8fee4e8be7",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/prepare-fixtures.py",
+    "expected": "5a7df1cb68e5ea87aefd7bd1b08743a6eaa2732f",
+    "actual": "5a7df1cb68e5ea87aefd7bd1b08743a6eaa2732f",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/resolution-policy.test.mjs",
+    "expected": "72a467ddfc04358c28288a403df2763c3ea9c89a",
+    "actual": "72a467ddfc04358c28288a403df2763c3ea9c89a",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/scene-xml.test.mjs",
+    "expected": "e505eca3efa1196e79e95d35e67738bbd0df6103",
+    "actual": "e505eca3efa1196e79e95d35e67738bbd0df6103",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/scene.test.mjs",
+    "expected": "f44834128ad38eae5b1537e1b9b27e835dc21b7d",
+    "actual": "f44834128ad38eae5b1537e1b9b27e835dc21b7d",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/svg-view-state.test.mjs",
+    "expected": "9993b6e5da42e6771d3c214a23abe72bfce5821f",
+    "actual": "9993b6e5da42e6771d3c214a23abe72bfce5821f",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/ui-selection.test.mjs",
+    "expected": "a2514aad7f73c99dee12e642961fd0ebfea5b721",
+    "actual": "a2514aad7f73c99dee12e642961fd0ebfea5b721",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/unlinked-node-selection.test.mjs",
+    "expected": "95da31a60cc6eefb1d9ef0c2d3b5796e19429eec",
+    "actual": "95da31a60cc6eefb1d9ef0c2d3b5796e19429eec",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/viewer-bridge.test.mjs",
+    "expected": "d292004f290b150930bf64e61ef2a05e59a89370",
+    "actual": "d292004f290b150930bf64e61ef2a05e59a89370",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/viewer-projection.test.mjs",
+    "expected": "880e0590ea99ed95ebe2089d4eca09cf7f9003c1",
+    "actual": "880e0590ea99ed95ebe2089d4eca09cf7f9003c1",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/viewer-usability.test.mjs",
+    "expected": "21f4986bd73d8c77fbaa25fdf14b8f4fca2cd358",
+    "actual": "21f4986bd73d8c77fbaa25fdf14b8f4fca2cd358",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/tests/viewer_http_smoke.py",
+    "expected": "585574a5915af231d52223c184c5afcd71ba4877",
+    "actual": "585574a5915af231d52223c184c5afcd71ba4877",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/vendor/three-0.160.0/LICENSE",
+    "expected": "d07e209686512b9ac93d7df5481a4a6f622093e7",
+    "actual": "d07e209686512b9ac93d7df5481a4a6f622093e7",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/vendor/three-0.160.0/three.module.min.js",
+    "expected": "9807b610d02fd0a1833fa7ceae44239652c78f3c",
+    "actual": "9807b610d02fd0a1833fa7ceae44239652c78f3c",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/view.js",
+    "expected": "4f7d3043bef446e1f9190979aedd88a7f40c30e7",
+    "actual": "4f7d3043bef446e1f9190979aedd88a7f40c30e7",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/viewer-feedback.css",
+    "expected": "c95c581d04306f16bc89ad217de2c450e4a1d1ab",
+    "actual": "c95c581d04306f16bc89ad217de2c450e4a1d1ab",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/viewer-feedback.js",
+    "expected": "19ffdb116312d2209cf72adb2c884df8cd77ef44",
+    "actual": "19ffdb116312d2209cf72adb2c884df8cd77ef44",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/workbench-export.js",
+    "expected": "4bcc35bce0c6fae53e57825ddcd062f588bd2b7c",
+    "actual": "4bcc35bce0c6fae53e57825ddcd062f588bd2b7c",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/workbench.js",
+    "expected": "b88d470d6270402fa2f015641029cbb159362f85",
+    "actual": "b88d470d6270402fa2f015641029cbb159362f85",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/xml-graph.js",
+    "expected": "c1c510001c913bc6fe2de64ac6f20330d3ed78e0",
+    "actual": "c1c510001c913bc6fe2de64ac6f20330d3ed78e0",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/xml-intake.js",
+    "expected": "00c4379816f49002ddea47fbaa496b8a173154b5",
+    "actual": "00c4379816f49002ddea47fbaa496b8a173154b5",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/xml-profiles.js",
+    "expected": "b72a970ef1fad83f78563b15f070135c23be34a1",
+    "actual": "b72a970ef1fad83f78563b15f070135c23be34a1",
+    "match": true
+  },
+  {
+    "path": "prototypes/ciifr-map/xml-utils.js",
+    "expected": "eb75943f42927825a0fdda14f187524c4e1819a7",
+    "actual": "eb75943f42927825a0fdda14f187524c4e1819a7",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/README.md",
+    "expected": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "actual": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/bytes.js",
+    "expected": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "actual": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/cii.js",
+    "expected": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "actual": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/index.js",
+    "expected": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "actual": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/selectors.js",
+    "expected": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "actual": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+    "expected": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "actual": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+    "expected": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "actual": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "expected": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "actual": "7fbd1e80e6f6ab41c6ecade29a09822962b1a1eb",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/config-policy.js",
+    "expected": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "actual": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/csv-resolver.js",
+    "expected": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "actual": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/demo-loader.js",
+    "expected": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "actual": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css",
+    "expected": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "actual": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+    "expected": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "actual": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/line-node-admission.js",
+    "expected": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "actual": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/nonconflict-review.js",
+    "expected": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "actual": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+    "expected": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "actual": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "match": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+    "expected": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "actual": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "match": true
+  }
+]
