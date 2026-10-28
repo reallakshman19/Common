@@ -1,1 +1,1 @@
-Synced from github.com/reallakshman19/progress-page commit 3035ac73340a0e4359eaa69540d7b98f4109ac0f (reference PR #53; portable viewer v=33 unchanged; durable reconciliation health, publication-triggered reference source scanning and removed-link detection; no workflow copied to Common)
+Synced from github.com/reallakshman19/progress-page commit e396c8237bb6b874219615feb9873059808f31a4 (reference PR #55; portable viewer v=33 unchanged; source-bound canonical status guard and ephemeral no-dispatch reconciliation handoff; no reference workflow copied)

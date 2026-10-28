@@ -75,3 +75,6 @@ Modes and the Nudge + wiring: [references/MODES.md](references/MODES.md). Fields
 - Viewing an older revision needs the network (it reads the old commit from GitHub); offline copies show the revision list only.
 - The writer claim in standalone mode (one open data pull request per project) is a convention, not a check.
 - The page is read-only. Owner input arrives as a GitHub issue; the coordinator records it.
+
+
+**Current scoped architecture:** The shared portable Cycle preflight also detects source-bound `UNMERGED` status mirrors contradicting an actually merged native PR, without rewriting historical records. The reference watcher emits a review-only, ephemeral source/custody-role handoff, never an assignment or second ledger. An unbound new agent may review original case evidence but must not assume incumbent Cycle Oracle or Page writer authority. CIIFR-specific correction drafts are Common PR #555 and Progress Page PR #54, independent of this reusable tool sync.
