@@ -1,0 +1,128 @@
+{
+  "task": "CIIFR-NODE-P1-R0-REPAIR-R1",
+  "date": "2026-10-29",
+  "producer": "Owner-directed root builder",
+  "scope": "Coordinator readback, not independent engineering review",
+  "product": {
+    "pr": 232,
+    "head": "7f5dc773ac7bb08544d086be734e4337295088a0",
+    "verifiedFiles": 8
+  },
+  "payloadCommit": "9c4a520c17a410bc91da79c77d1b7bec15a94f27",
+  "payloadPath": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/P1-R0-REPAIR-R1-20261029",
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob": "a589190b75f897d7f75444a443f63ab92f87b054",
+      "content_equal": true
+    },
+    {
+      "path": "payload/required-three.tap",
+      "git_blob": "f97891561a7ccb452446eff211327d00dde24478",
+      "content_equal": true
+    },
+    {
+      "path": "payload/oldhead-vnext-complete.tap",
+      "git_blob": "6699773711bcec78770ff5837e407221a8dca236",
+      "content_equal": true
+    },
+    {
+      "path": "payload/scope-and-mirrors.json",
+      "git_blob": "4ec9b791e1a00862d973d7d440c6aba968a54a0a",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/modules/navigation.md",
+      "git_blob": "4aa49613851bd02e34dcb289e5075a31796f73a6",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/modules/index-evidence.patch",
+      "git_blob": "2686f82acff21b92a0e03169e4693a837e018c5d",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/manifest.md",
+      "git_blob": "8411ce33c8fe9f80f1b5a9c852f8c777faa22adc",
+      "content_equal": true
+    },
+    {
+      "path": "ARTIFACT_MANIFEST.json",
+      "git_blob": "7e1f4879a2ade26dd44a35a8ddf6f5697e7c0ea2",
+      "content_equal": true
+    },
+    {
+      "path": "payload/fail-before.tap",
+      "git_blob": "48dfd079a8bbe5db4350677f0d27d8bdd22182dc",
+      "content_equal": true
+    },
+    {
+      "path": "payload/vnext-all-complete.tap",
+      "git_blob": "361ebc220fc5b3ecab53024bff7c2506286687fa",
+      "content_equal": true
+    },
+    {
+      "path": "payload/geometry-bounded.tap",
+      "git_blob": "6c18d4026dcd730033ca534c0e32f854b41c7d4c",
+      "content_equal": true
+    },
+    {
+      "path": "payload/validation-summary.json",
+      "git_blob": "447ef1f52cfdf654c195b77b48bd4af6e91029c0",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/modules/navigation.patch",
+      "git_blob": "64c41f74433fe174962321defa9794878837a29f",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/modules/regression-report.md",
+      "git_blob": "52e5d7cbbe846ba17f473dcc0af43c9ffd0ef08c",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/changed-files.json",
+      "git_blob": "660343818e6629870dd20f04bfdc5f9defd16c7b",
+      "content_equal": true
+    },
+    {
+      "path": "payload/focused-final.tap",
+      "git_blob": "a627a54de17f237d0833e7e5af7d0a9adfabc408",
+      "content_equal": true
+    },
+    {
+      "path": "payload/base-vnext-complete.tap",
+      "git_blob": "dcbb1abf52e7f94743ec554d332bd76587c4ef4e",
+      "content_equal": true
+    },
+    {
+      "path": "payload/public-fixture-results.json",
+      "git_blob": "8266b46c1e872185afee10cdae4dd714ea664e9e",
+      "content_equal": true
+    },
+    {
+      "path": "payload/product-readback.json",
+      "git_blob": "529e9bd955e32b3f4f615323918751eb2750b08f",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/modules/index-evidence.md",
+      "git_blob": "09806c59c18370ceaef8b082fe0997186b7a7503",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/modules/regression-report.patch",
+      "git_blob": "ec4242be1f6cd2fcb526ed5989641783d2fd8a81",
+      "content_equal": true
+    },
+    {
+      "path": "payload/ledger/new-files.json",
+      "git_blob": "ccd18c079e787fbe222827c647db1f758ed3580d",
+      "content_equal": true
+    }
+  ],
+  "result": "ALL_22_PAYLOAD_CONTENTS_RETRIEVED_AND_EQUAL",
+  "independentReviewerReceipt": "NOT_RUN",
+  "gate": "HOLD"
+}
