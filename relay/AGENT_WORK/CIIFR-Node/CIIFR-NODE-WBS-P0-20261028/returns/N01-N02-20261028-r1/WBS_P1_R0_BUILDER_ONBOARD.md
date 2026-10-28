@@ -29,14 +29,14 @@ Observed base: fd86b21aa9dcbfbbe4f8a1d26133b7e9779448be
 Existing branch: codex/ciifr-property-two-path-r0-20261028  
 Disposition: DRAFT / GATE_R0 FAIL-HOLD.
 
-Read issue231 first, then relevant portions of #227, repository AGENTS.md, the pinned concept and implementation plan, and these actual predecessor records:
+Read issue #231 first, then relevant portions of #227, repository AGENTS.md, the pinned concept and implementation plan, and these actual predecessor records:
 
 - N-01 return: https://github.com/reallakshman19/XML_Compare_Utilities/issues/228#issuecomment-6472916887
 - Unaltered report: https://github.com/reallakshman19/Common/blob/36ecdd335272e3424cea4c5ebe68beb32e47da38/relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/N01_REVIEW.md
 - Evidence/reproducer: https://github.com/reallakshman19/Common/pull/561
 - Original/public-fixture lane: https://github.com/reallakshman19/XML_Compare_Utilities/issues/229
 
-Predecessor executed evidence: required three test files17/17 PASS; full VNext head110/111 versus base94/95 with the same inherited branch-scope failure; bounded Geometry9/9 on both. The earlier Nodal null-panel startup crash is already fixed. Do not rebuild that repair or copy predecessor PASS to your new head.
+Predecessor executed evidence: required three test files: 17/17 PASS; full VNext head: 110/111 versus base: 94/95 with the same inherited branch-scope failure; bounded Geometry: 9/9 on both. The earlier Nodal null-panel startup crash is already fixed. Do not rebuild that repair or copy predecessor PASS to your new head.
 
 The predecessor reviewer was a separate non-contributor agent on a shared host; distinct account/principal independence was not established. Your own implementation checks are SELF_ASSESSED. Changed work needs fresh non-author review.
 
@@ -56,7 +56,7 @@ Use direct Owner/native-task reporting and the repository's selected delivery ru
 
 **F2 — Enforce the inspector's endpoint domain.** Reject negative ELEMENTS FROM and TO before they enter its node inventory. Establish and document any legal zero-sentinel handling. Keep this guard in the new inspector; do not change the protected legacy physical parser.
 
-**F3 — Make pointer qualification truthful.** A BEND pointer999 with CONTROL.BEND=0 is currently accepted because only four auxiliary families are checked. Reject demonstrably impossible typed references where count authority is established, or expose explicit unsupported-family qualification and narrow the validity claim. Do not add full BEND or other auxiliary semantics under this repair.
+**F3 — Make pointer qualification truthful.** A BEND pointer 999 with CONTROL.BEND=0 is currently accepted because only four auxiliary families are checked. Reject demonstrably impossible typed references where count authority is established, or expose explicit unsupported-family qualification and narrow the validity claim. Do not add full BEND or other auxiliary semantics under this repair.
 
 **F4 — Resolve dormant-slot visibility honestly.** A slot with node/type/CNode=0 and nonzero other payload is omitted. Actual V14 legality of dormant fields remains unestablished. Obtain version-specific source evidence, or report explicit unqualified residue. Preserve bytes and distinguish empty, populated, unsupported and unknown. Do not invent a vendor-invalidity rule or silently zero/clear fields.
 
@@ -74,13 +74,13 @@ Use an isolated repair branch from the verified PR226 head. Prepare a draft depe
 
 ## 6. Actual fixture custody
 
-Retrieve your own permitted bytes from Common commit56dbc3a0af137c433ffb5fec48316fa2022d075c:
+Retrieve your own permitted bytes from Common commit 56dbc3a0af137c433ffb5fec48316fa2022d075c:
 
 relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/
 
-Read FIXTURE_CATALOG.json and receipt.md; verify the two payload/SYNTH_V14_*.cii files against measured size8276 bytes each and catalog SHA-256/Git blob identities. Prior receiver proof is not your receipt.
+Read FIXTURE_CATALOG.json and receipt.md; verify the two payload/SYNTH_V14_*.cii files against measured size 8,276 bytes each and catalog SHA-256/Git blob identities. Prior receiver proof is not your receipt.
 
-These author-exposed synthetics establish record presence/ownership. Their force/displacement values beyond the node are zero; they do not qualify nonzero-vector, case or9999.99 semantics.
+These author-exposed synthetics establish record presence/ownership. Their force/displacement values beyond the node are zero; they do not qualify nonzero-vector, case or 9999.99 semantics.
 
 Protected original: NOT_RECEIVED in this handoff. Use only an exact Owner-authorized private file route and separate receipt if supplied. Do not search other conversations, guess protected child URLs or publish original bytes/private identifiers. Missing original/browser checks limit those claims; continue the feasible code repair.
 
@@ -98,10 +98,10 @@ Retain the inherited branch-scope failure separately. Do not delete/skip it, wea
 
 Use an actual supported browser/Windows when available and distinguish it from controlled DOM tests. Record failed attempts and NOT_RUN precisely. R0 inspection does not require a licensed solver; future writers do.
 
-Return to issue231 with task/generation and new SHA, personally verified inputs, changed paths, fail-before/pass-after commands/results and exit codes, F3/F4 source or UNKNOWN disposition, platform/original limits, SELF_ASSESSED status, draft dependent PR, surviving wrong case and one next reviewer action.
+Return to issue #231 with task/generation and new SHA, personally verified inputs, changed paths, fail-before/pass-after commands/results and exit codes, F3/F4 source or UNKNOWN disposition, platform/original limits, SELF_ASSESSED status, draft dependent PR, surviving wrong case and one next reviewer action.
 
 Keep agents/PR<actual-number>_workreport.md recovery-ready. Relay material outputs through task-scoped Common/relay and verify actual published bytes; sandbox-only output is LOCAL_ONLY/NOT_TRANSFERRED. Read back your native return permalink and link it to #227 and review lane #228. Do not edit the Progress Page or claim project-wide acceptance.
 
-**First action now:** open issue231 and verify PR226's live head/claims, establish the exact baseline, and reproduce F1 before the first product edit.
+**First action now:** open issue #231 and verify PR226's live head/claims, establish the exact baseline, and reproduce F1 before the first product edit.
 
 **After return:** AWAIT_ORACLE_RECONCILIATION. The next actor is the non-author exact-head reviewer; builder self-checks do not lift R0, writer, merge or release HOLDs.
