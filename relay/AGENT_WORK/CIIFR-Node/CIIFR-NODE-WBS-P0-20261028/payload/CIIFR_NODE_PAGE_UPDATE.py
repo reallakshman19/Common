@@ -29,24 +29,27 @@ CONCEPT = "https://github.com/reallakshman19/XML_Compare_Utilities/blob/b2b695f6
 IMPLEMENTATION = "https://github.com/reallakshman19/XML_Compare_Utilities/blob/b2b695f66fc8dfc907f2b9a493b39bd4d4109570/docs/ciifr/property-transfer/IMPLEMENTATION_PLAN.md"
 PR_HEAD = "b2b695f66fc8dfc907f2b9a493b39bd4d4109570"
 
+# Page WBS labels are 1..7 because the native Page CLI forbids zero; these
+# map to canonical engineering phases P0..P6 respectively. Child 1.1 is P0.1,
+# 2.1=P1.1, etc. Canonical engineering phase names remain in 'full' text.
 # Human-reviewed native WBS from #227. This table is a page projection, not
 # a second engineering source of truth. P3 is READ_ONLY, P4 writer candidate.
 MILESTONES = [
- ("M1","0","Home, intent and custody","P0.0 · Owner aim, independent modules, concept/architecture, source/version/authority","SOURCE_GROUNDED",WBS),
- ("M2","0.1","Core fixture and original custody","P0.1 · Common public synthetic F00–F07, actual relay bytes plus private V14 receipt","NOT_DEMONSTRATED",N02),
- ("M3","1","Two-path read-only inspector","P1.0 · Independent Property Transfer tab and isolated SOURCE/TARGET intake; no TARGET1","CANDIDATE",PR),
- ("M4","1.1","Native tab regression IR","P1.1 · Reproduce existing Nodal test baseline vs repaired head and all affected tests","NOT_DEMONSTRATED",N01),
- ("M5","1.2","Owner original V14 R0 trial","P1.2 · Private original read-only Node/Element/AUX/MISC inspector, sanitised counts","NOT_DEMONSTRATED",N02),
- ("M6","2","Qualified SOURCE→TARGET correspondence","P2.0 · Numeric-node/element orientation identity, multiple owners, ambiguity HOLD","NOT_DEMONSTRATED",N03),
- ("M7","2.1","TO-only discovery and element selection","P2.1 · Find every element with selected TO node; explicit pick, no arbitrary first","NOT_DEMONSTRATED",N03),
- ("M8","2.2","Auxiliary-occurrence correlation","P2.2 · Element pointer, block, slot, CNode/Tag/GUID and epoch evidence","NOT_DEMONSTRATED",WBS),
- ("M9","3","Restraint semantics, read-only","P3.0 · Restraint type/slot, stiffness/gap/friction, CNode; first future writer priority","NOT_DEMONSTRATED",WBS),
- ("M10","3.1","Process semantics, read-only","P3.1 · T/P/density/units/cases/material dependencies; reuse Element E1 #178","NOT_DEMONSTRATED",WBS),
- ("M11","3.2","Other properties semantic catalogue","P3.2 · Rigid, displ, force, hangers/nozzles, material/geometry/aux positives","NOT_DEMONSTRATED",WBS),
- ("M12","4","Restraint-first existing-slot writer HOLD","P4.0 · Exact approved restraint-field writer; byte oracle + licensed CAESAR import","NOT_DEMONSTRATED",WBS),
- ("M13","4.1","Process field writer HOLD","P4.1 · Only after independent element/case/unit source-semantic authority","NOT_DEMONSTRATED",WBS),
- ("M14","5","Structural CONTROL/MISC transaction HOLD","P5.0 · Counts/pointers, auxiliary record insertion, RRMAT and other MISC ownership","NOT_DEMONSTRATED",WBS),
- ("M15","6","Owner-gated standalone release","P6.0 · Native source/target, Windows, independent review and release decision","NOT_DEMONSTRATED",WBS),
+ ("M1","1","Home, intent and custody","P0.0 · Owner aim, independent modules, concept/architecture, source/version/authority","CANDIDATE",WBS),
+ ("M2","1.1","Core fixture and original custody","P0.1 · Common public synthetic F00–F07, actual relay bytes plus private V14 receipt","NOT_DEMONSTRATED",N02),
+ ("M3","2","Two-path read-only inspector","P1.0 · Independent Property Transfer tab and isolated SOURCE/TARGET intake; no TARGET1","CANDIDATE",PR),
+ ("M4","2.1","Native tab regression IR","P1.1 · Reproduce existing Nodal test baseline vs repaired head and all affected tests","NOT_DEMONSTRATED",N01),
+ ("M5","2.2","Owner original V14 R0 trial","P1.2 · Private original read-only Node/Element/AUX/MISC inspector, sanitised counts","NOT_DEMONSTRATED",N02),
+ ("M6","3","Qualified SOURCE→TARGET correspondence","P2.0 · Numeric-node/element orientation identity, multiple owners, ambiguity HOLD","NOT_DEMONSTRATED",N03),
+ ("M7","3.1","TO-only discovery and element selection","P2.1 · Find every element with selected TO node; explicit pick, no arbitrary first","NOT_DEMONSTRATED",N03),
+ ("M8","3.2","Auxiliary-occurrence correlation","P2.2 · Element pointer, block, slot, CNode/Tag/GUID and epoch evidence","NOT_DEMONSTRATED",WBS),
+ ("M9","4","Restraint semantics, read-only","P3.0 · Restraint type/slot, stiffness/gap/friction, CNode; first future writer priority","NOT_DEMONSTRATED",WBS),
+ ("M10","4.1","Process semantics, read-only","P3.1 · T/P/density/units/cases/material dependencies; reuse Element E1 #178","NOT_DEMONSTRATED",WBS),
+ ("M11","4.2","Other properties semantic catalogue","P3.2 · Rigid, displ, force, hangers/nozzles, material/geometry/aux positives","NOT_DEMONSTRATED",WBS),
+ ("M12","5","Restraint-first existing-slot writer HOLD","P4.0 · Exact approved restraint-field writer; byte oracle + licensed CAESAR import","NOT_DEMONSTRATED",WBS),
+ ("M13","5.1","Process field writer HOLD","P4.1 · Only after independent element/case/unit source-semantic authority","NOT_DEMONSTRATED",WBS),
+ ("M14","6","Structural CONTROL/MISC transaction HOLD","P5.0 · Counts/pointers, auxiliary record insertion, RRMAT and other MISC ownership","NOT_DEMONSTRATED",WBS),
+ ("M15","7","Owner-gated standalone release","P6.0 · Native source/target, Windows, independent review and release decision","NOT_DEMONSTRATED",WBS),
 ]
 FIXTURES = [
  ("repository","CONCEPT_NOTE · full two-path source and risk/ownership contract",CONCEPT,"CONCEPT_NOTE"),
