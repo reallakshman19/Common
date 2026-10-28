@@ -53,7 +53,7 @@ An outgoing Oracle or authorized coordinator supplies available source-linked pr
 
 - **Concept:** Can the new Oracle explain what users are trying to accomplish, not just recite task titles?
 - **Architecture:** Can the new Oracle trace one critical source-to-output relationship, a rejected shortcut and its surviving wrong case, while naming which engineering meaning is unverified?
-- **Continuation:** Can the new Oracle name **which current agent owns what**, the first safe next task, the following dependent result, pending evidence and precise authority boundary? What happens if an old worker returns late?
+- **Continuation:** Can the new Oracle name **which current agent owns what** and **the WBS step each agent's Progress-page block is bound to** (a block outside any WBS step, or a WBS missing from the page, is the first thing to fix), the first safe next task, the following dependent result, pending evidence and precise authority boundary? What happens if an old worker returns late?
 
 **Preparation, appointment and custody are separate.** A candidate successor remains **read-only** and returns proposed corrections without mutating current state/control or dispatching. A direct Owner appointment permits only its actual source/coordination scope; it needs no predecessor endorsement or new mentoring approval. Replacing an incumbent on a shared control/write surface still requires the actual native cutover and old-writer isolation. A new chat, convincing explanation, golden document or `CURRENT.json` pointer does **not** revoke old writers, prove private receiver-byte access or authorize control transfer. Mark absent custody/enforcement `NOT_TRANSFERRED`/`UNKNOWN`; do not claim it.
 
