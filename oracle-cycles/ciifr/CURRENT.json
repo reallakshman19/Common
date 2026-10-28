@@ -3,7 +3,7 @@
   "project": "ciifr",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 18,
+  "revision": 19,
   "last_accepted_receipt_ids": [
     "ciifr-g1-6addafaa-pr174-a59f479f-20261025",
     "ciifr-g1-6addafaa-pr174-r1-9936d407-20261025",
@@ -20,7 +20,7 @@
       "label": "CIIFR project Oracle",
       "chat_id8": null,
       "provenance": "OWNER_APPOINTED_ORACLE_IN_CURRENT_CONVERSATION; THIS_CHAT_ID_UNKNOWN",
-      "responsibility": "Existing Oracle contributed Owner-requested independent VNext tab integration, published PR191 and reconciled separate non-author review. Product main unchanged; new merge/acceptance decision remains Owner-controlled. No self-independent approval or other engineering/cutover authority."
+      "responsibility": "Existing Oracle contributed Owner-requested independent VNext tab integration, published PR191, reconciled separate non-author source/native/HTTP review and observed its actual native main merge a55d7730. Browser/GPU/Owner acceptance still requires separate evidence and approval. No self-independent approval, extra engineering task, Writer/Apply or cutover authority."
     },
     "coder": {
       "label": "CIIFR_GEO WBS3.1 viewer integration builder",
@@ -38,7 +38,7 @@
       "label": "Owner",
       "chat_id8": null,
       "provenance": "OWNER_SELF",
-      "responsibility": "Try final PR191 nested CII Find & Replace > VNext > CIIFR_GEO in a supported browser, then give explicit new merge/acceptance decision. Prior main merge authorization was completed; this new tab is not yet deployed."
+      "responsibility": "Native PR191 is already merged into main. Try the nested CII Find & Replace > VNext > CIIFR_GEO tab on a supported rendered browser/WebGL host, then decide explicit product acceptance and any required qualification. Prior integration source publication does not prove fullscreen/GPU/Windows or physical-model success."
     }
   },
   "source_boundary": {
@@ -50,13 +50,13 @@
     "native_qualification": "XCU AGENTS.md Appendix A; engineering TAKEOVER_AUTHORITY=READ_ONLY until actually satisfied",
     "engineering_approvals": "Cycle activation does not grant or waive source access, native backups/worklogs, qualification, Writer/Apply/TARGET1, merge or deployment",
     "deferred": "G2 topology-only/OR/AND; G3 XMLv1.1 evidence bridge; all unrelated CIIFR R4/P2.5-B and Writer changes",
-    "current_candidate": "Unmerged XCU PR191 source7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a/tree812395ee191b653764a7c8577b1ef5ce9db8a3e2: Owner-directed independent CIIFR_GEO VNext tab. Main remainse3d52e8a/tree47fca. Original-CII PR174 and Writer qualification remain separate.",
+    "current_candidate": "Merged XCU PR191 source 7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a/tree 812395ee191b653764a7c8577b1ef5ce9db8a3e2 into native main via a55d7730152165e83843b24ca3d926b8f0877952 at 2026-10-27T06:22:24Z; source-integrated only. Later native Pages deployment on main succeeded, but actual nested rendered-browser/GPU/fullscreen/Windows/Owner acceptance remains NOT_RUN. Original-CII PR174 and Writer qualification remain separate.",
     "reviewer_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186",
     "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6433624638",
     "minimal_repair": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169#issuecomment-6397715134",
     "review_awaited": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/175#issuecomment-6400033775",
     "g2_prepared_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/177",
-    "g2_implementation": "HOLD_UNTIL_G1_ORIGINAL_BROWSER_INDEPENDENT_OWNER_TRIAL_AND_MERGE_DECISION",
+    "g2_implementation": "HOLD_UNTIL_G1_ORIGINAL_BROWSER_INDEPENDENT_OWNER_TRIAL_AND_ACCEPTANCE_DECISION",
     "oracle_continuity": "oracle-cycles/ciifr/ORACLE_CONTINUITY_20261025.md (PREPARED_NOT_CUTOVER)",
     "legacy_original_cii_task": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/169",
     "original_cii_candidate": "XCU PR #174 R1 repaired head 9936d4078fb7f837ffe6f46805241efdb7bbc0e8, based on XCU main c823f0c0edbeb315c07fa2911390dc781968146f; G1 DRAFT, MERGE HOLD",
@@ -138,7 +138,7 @@
       "tree": "812395ee191b653764a7c8577b1ef5ce9db8a3e2",
       "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6434633458",
       "native_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662",
-      "status": "RETURNED_UNMERGED_BROWSER_TRIAL_AND_OWNER_DECISION_PENDING",
+      "status": "RETURNED_MERGED_MAIN_RENDERED_TRIAL_AND_OWNER_ACCEPTANCE_PENDING",
       "review_scope": "No blocking integration defect within inspected/native/HTTP scope; actual nested browser/GPU/fullscreen/Windows/heavy-model acceptance NOT_RUN. Principal/account independence UNKNOWN."
     }
   },
@@ -386,8 +386,8 @@
   "next": {
     "recipient_role": "owner",
     "recipient_chat_id8": null,
-    "status": "AWAIT_OWNER_VNEXT_TAB_BROWSER_TRIAL_AND_MERGE_DECISION",
-    "instruction": "PR191 is implemented and non-author-reviewed within native/source/HTTP scope. Run supported-browser nested trial if available and decide explicit new product merge. Existing standalone main app remains available; new tab is not deployed. No separate coding dispatch, Writer/G2/G3/original-CII or cutover acceptance.",
+    "status": "AWAIT_OWNER_VNEXT_TAB_BROWSER_TRIAL_AND_ACCEPTANCE_DECISION",
+    "instruction": "PR191 was merged into native main on 2026-10-27 at 06:22:24 UTC (merge a55d7730152165e83843b24ca3d926b8f0877952; reviewed source 7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a). The supported-browser nested CIIFR_GEO VNext trial, GPU/fullscreen/Windows/large-model qualification and explicit Owner product acceptance are still NOT_RUN/NOT_RECORDED. Existing standalone main workbench remains available; this merge does not authorize G2/G3, Writer/Apply, original-CII/cutover or new coder dispatch.",
     "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662",
     "pull_request": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/191",
     "source": "7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a"
@@ -637,7 +637,7 @@
       "status": "NOT_RUN",
       "scope": "Actual new nested CII Find & Replace > VNext > CIIFR_GEO rendered browser/GPU/fullscreen journey on capable Owner host.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662",
-      "limits": "Both contributor and reviewer native Chrome launch failed before usable page; controlled DOM and HTTP do not replace this trial. Product merge decision remains explicitly Owner-controlled."
+      "limits": "Both contributor and reviewer native Chrome launch failed before usable page; controlled DOM, HTTP, native PR merge and later Pages deployment do not replace an actual supported-browser Owner trial. Explicit product acceptance remains Owner-controlled."
     }
   ],
   "progress_projection": {
@@ -645,11 +645,11 @@
     "project_key": "ciifr",
     "publication_status": "PROGRESS_UPDATE_PENDING",
     "published_revision": "R4",
-    "reason": "PROGRESS_UPDATE_PENDING with existing sole ciifr writer. Source-native return now records additional unmerged PR191 independent VNext tab. No Page update, new main deployment, GPU/engineering acceptance or WBS-number invention.",
+    "reason": "PROGRESS_UPDATE_PENDING with designated sole ciifr Page writer; native PR191 merged into main at a55d7730152165e83843b24ca3d926b8f0877952, but WBS 3 still lacks source links to task #180 and PR #191. Published Page revision remains R4. No Page publication, browser/GPU/Owner acceptance, Writer/G2/G3 advancement or new assignment implied.",
     "requested_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662"
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
-  "activation_scope": "Prior prerequisite chain is on maine3d52e8a. Owner subsequently directed independent tab hosting inside VNext; PR191 exact7d7 is returned, unmerged, with separate bounded non-author source/native/HTTP assessment and actual nested browser/Owner decision pending. Information-state publication grants no product merge/engineering/Writer/cutover authority.",
+  "activation_scope": "Prior prerequisite chain is on native main e3d52e8a. Owner-directed PR191 exact source7d7d was separately reviewed in inspected/native/HTTP scope and merged into native main at a55d7730 on 2026-10-27T06:22:24Z. Actual nested rendered browser/WebGL/fullscreen/Windows/Owner acceptance remains NOT_RUN; source integration provides no new engineering/Writer/cutover or worker authority.",
   "coordination_observation": {
     "source_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
     "builder_status": "OWNER_DIRECT_RETURNED; final SVG badge defect repaired, independently verified and hosted. No new coding assignment pending.",
@@ -762,7 +762,7 @@
       "tree": "812395ee191b653764a7c8577b1ef5ce9db8a3e2",
       "base": "e3d52e8a5e2855f0e684e9cb1358f4bca5f2b211",
       "changed_paths": 13,
-      "product_status": "IMPLEMENTED_UNMERGED",
+      "product_status": "MERGED_MAIN_SOURCE_ONLY_OWNER_BROWSER_ACCEPTANCE_NOT_RUN",
       "native_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662",
       "review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6434633458",
       "source_relay": "relay/AGENT_WORK/ciifr-geo/GEO-VNEXT-TAB-20261027",
@@ -774,7 +774,13 @@
       "ci": "0 check-runs/statuses/workflow runs; absent CI not PASS",
       "overlap": "53 prior open inventories checked; known shared HTML/app hunks174/176 and app171, no adoption; heads unchanged",
       "limits": "actual nested rendered browser/GPU/native fullscreen/Windows/heavy-model acceptance NOT_RUN; principal/account independence UNKNOWN. Native Chrome exits before usable page.",
-      "new_cycle_worker_dispatch": "NONE; explicit Owner local non-author review only, no chat-ID/generation/receipt fabricated"
+      "new_cycle_worker_dispatch": "NONE; explicit Owner local non-author review only, no chat-ID/generation/receipt fabricated",
+      "merge_commit": "a55d7730152165e83843b24ca3d926b8f0877952",
+      "merged_at": "2026-10-27T06:22:24Z",
+      "merge_target": "main",
+      "merge_source_head": "7d7d100c51a4ccebc2b9ba877ebb6e337e1a591a",
+      "merged_pr": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/191",
+      "postmerge_limit": "Source merge and successful later main Pages workflow do not prove rendered nested browser/GPU/fullscreen/Windows/large-model trial, independent physical qualification, Owner acceptance or Writer/Apply."
     }
   }
 }
