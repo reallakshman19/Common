@@ -1,0 +1,137 @@
+{
+  "schema": "CIIFR.Node.ReviewReturnReadback.v1",
+  "date": "2026-10-28",
+  "candidate": "b2b695f66fc8dfc907f2b9a493b39bd4d4109570",
+  "payloadCommit": "36ecdd335272e3424cea4c5ebe68beb32e47da38",
+  "receiver": "receiving lead/root; shared principal independence not established",
+  "receipt": "WORK_RETURNED / BYTES_VERIFIED for listed UTF-8 public output files",
+  "publication": "PROPOSED_DRAFT_BRANCH; not Common main or engineering acceptance",
+  "files": [
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/README.md",
+      "bytes": 4396,
+      "gitBlobSha": "2b52cae4bfde02180ff2e8e20d1f3fdec17b8ea3",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/N02_PUBLIC_FIXTURE_RECEIPT.md",
+      "bytes": 3914,
+      "gitBlobSha": "80317c88388c5d939be8df2749eac4b81f0123ad",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n02_fixture_audit.py",
+      "bytes": 5963,
+      "gitBlobSha": "dde43dadc6b20c9cf194d6ed8e56b7a95331ba04",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n02-public-audit-results.json",
+      "bytes": 3800,
+      "gitBlobSha": "d765b5fea10a870e8b166f544348cdd6901d6617",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/N01_REVIEW.md",
+      "bytes": 14729,
+      "gitBlobSha": "1ce1392c5e2399a067862a7de58c4775f4b99e35",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/probe-r0.mjs",
+      "bytes": 7702,
+      "gitBlobSha": "7c8dd9243cc5855597da781eea81e74d3d3748d9",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/base-geometry-bounded.tap",
+      "bytes": 908,
+      "gitBlobSha": "edd820ed9209b260ef905ad2e206c5a0576dcc51",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/base-nodal.tap",
+      "bytes": 226,
+      "gitBlobSha": "27de4a44704a0be3e07848e9273424e5e6b299dd",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/base-vnext-all-complete.tap",
+      "bytes": 9146,
+      "gitBlobSha": "095091e24017dc65787f8e83fdd1c5e170eee33b",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/base-vnext-all.tap",
+      "bytes": 10013,
+      "gitBlobSha": "a3fc8042aaab19be046dbdab05de71fc142def0c",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/geometry-bounded.tap",
+      "bytes": 907,
+      "gitBlobSha": "1031f3fee938c4e7e23074891d8a53af22bfa927",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/geometry.tap",
+      "bytes": 2039,
+      "gitBlobSha": "3487d9e4d8e6a31137929ac3b3ffcaa8e7c5c1c2",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/native-three.tap",
+      "bytes": 1604,
+      "gitBlobSha": "693f88a84db15ae7f8b3204764a8a073eceeba37",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/old-nodal.tap",
+      "bytes": 1194,
+      "gitBlobSha": "b7ea4b1c79a7af9479387d1e6ba29d5ea4f1b465",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/vnext-all-complete.tap",
+      "bytes": 10547,
+      "gitBlobSha": "5061d64a6e83016628bd2992d26b39ae586b51ec",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/vnext-all.tap",
+      "bytes": 11415,
+      "gitBlobSha": "215efe52fc1bc0f249558daa08f8e047841a0ddc",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/probe-r0.log",
+      "bytes": 1762,
+      "gitBlobSha": "aa5a2ae25517d9d629700047cafdbb40a055c9b4",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/candidate-manifest.json",
+      "bytes": 24746,
+      "gitBlobSha": "1665e44cb7d1a1dba4058f0014890d9be9843a25",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/identity.json",
+      "bytes": 428,
+      "gitBlobSha": "5189d6f3f83138f07e534d6c5d577d6e547b191a",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/evidence/environment.txt",
+      "bytes": 163,
+      "gitBlobSha": "2b8c4dd56397bb9cbbe63e6bcb2b639dd12824ed",
+      "exactContentMatch": true
+    },
+    {
+      "path": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/N01-N02-20261028-r1/payload/n01/RETURN_MANIFEST.json",
+      "bytes": 2381,
+      "gitBlobSha": "c40cc9a71bd44df66bdb1e9ed0ffd3ea38f46986",
+      "exactContentMatch": true
+    }
+  ]
+}
