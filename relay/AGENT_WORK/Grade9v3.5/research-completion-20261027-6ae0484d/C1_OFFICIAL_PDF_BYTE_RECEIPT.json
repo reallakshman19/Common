@@ -1,0 +1,49 @@
+{
+  "receiver": "Oracle standalone 6ae0484d",
+  "scope": "Actual HTTP-downloaded PDF bytes in Oracle workspace; public source/hash metadata only",
+  "source_pdf_bytes_obtained_here": true,
+  "documents": [
+    {
+      "file": "nta-2026-04-05-shift2.pdf",
+      "source_url": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260409829414602.pdf",
+      "download": "SUCCESS",
+      "bytes": 2644036,
+      "sha256": "876efb4250b5d8e096f28bb48d9078e39f25f1ad70473701e5c13523716588d4"
+    },
+    {
+      "file": "nta-2026-04-06-shift1.pdf",
+      "source_url": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/202604092007095665.pdf",
+      "download": "SUCCESS",
+      "bytes": 2202415,
+      "sha256": "a95fbbd91673783722fe98e0455860fac1585135d2e84e31f147cbd893226eeb"
+    },
+    {
+      "file": "nta-session2-final-key.pdf",
+      "source_url": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260420409057044.pdf",
+      "download": "SUCCESS",
+      "bytes": 33395,
+      "sha256": "07c89e20741c17f14a000501d6f79055d09834692de0dcb792bf237b77e1c7f9"
+    }
+  ],
+  "visual_inspection": {
+    "method": "PyMuPDF renders inspected with view_image",
+    "pages": {
+      "nta-2026-04-05-shift2.pdf": [
+        11
+      ],
+      "nta-2026-04-06-shift1.pdf": [
+        10
+      ],
+      "nta-session2-final-key.pdf": [
+        6,
+        7
+      ]
+    },
+    "poppler_first_attempt": "NOT_RUN_SUCCESSFULLY: native shared-library dependency unavailable; PyMuPDF fallback succeeded"
+  },
+  "rights": "UNRESOLVED; originals and page images not included in public relay",
+  "original_R1_child_artifacts": "NOT_RECOVERED",
+  "separate_C1_local_ZIP": "NOT_RECEIVED; producer hash remains reported",
+  "candidate_unmodified": "d38d6d21c37e4915316d64ec94d73fc697fa12d4",
+  "limits": "This closes this Oracle receiver byte-custody observation, not another reviewer receipt or academic acceptance."
+}

@@ -1,0 +1,51 @@
+{
+  "candidate_commit": "d38d6d21c37e4915316d64ec94d73fc697fa12d4",
+  "receiver": "Oracle 6ae0484d",
+  "files": [
+    {
+      "path": "payload/WPE_coverage_gaps_and_handoff.md",
+      "bytes": 2960,
+      "sha256": "f096e0e850ac60ef6bac2054a4221da6b7fd796768e1403779ca001833693d98",
+      "git_blob_sha": "695a8b594fd83d1ac31386569b5416b60db4edcc",
+      "git_blob_identity_verified": true
+    },
+    {
+      "path": "payload/WPE_prerequisite_edges.json",
+      "bytes": 1298,
+      "sha256": "84ac0163212224e394a70b23d2749dbbd11ec451d90d6702f8d1f099ae74ba9c",
+      "git_blob_sha": "cf8d30a42857c7bf0ec492a65621999417d91c62",
+      "git_blob_identity_verified": true
+    },
+    {
+      "path": "payload/WPE_question_academic_analysis.json",
+      "bytes": 1171,
+      "sha256": "112f90941fd11640877c713ff2f13088ceca45cf244e2981d1487b7251ce291e",
+      "git_blob_sha": "108cefe69351448d12f5ecb6abede822e6ae42df",
+      "git_blob_identity_verified": true
+    },
+    {
+      "path": "payload/WPE_smart1_and_qrt_candidates.json",
+      "bytes": 1503,
+      "sha256": "4f64a6d5edcb4dd9baef47a53d0b5cfd5647de366f151ee4f9465b051ea3cf7b",
+      "git_blob_sha": "73af90a9b7c2bb1057ca4d0430b222f3ea1ccae0",
+      "git_blob_identity_verified": true
+    },
+    {
+      "path": "payload/WPE_source_and_custody.json",
+      "bytes": 2024,
+      "sha256": "80964058891b154585c148f7250046f4e4153f89c5ba5b35ac8e78e94c11d190",
+      "git_blob_sha": "27b7efac162a9074a5d43d61e4e223a3bdc0d0b6",
+      "git_blob_identity_verified": true
+    },
+    {
+      "path": "receipt.md",
+      "bytes": 640,
+      "sha256": "8a4cd81985812b5105abdf00c276a30d1ead223405bfafde12d9adb2e94395c1",
+      "git_blob_sha": "3eeb9347b42c183cc1422022c3f525cd8407bdb8",
+      "git_blob_identity_verified": true
+    }
+  ],
+  "scope": "GitHub UTF-8 export bytes only; ZIP and original PDF bytes not verified",
+  "native_return": "https://github.com/reallakshman19/Grade9v3.5/issues/311#issuecomment-6441700060",
+  "review_issue": "https://github.com/reallakshman19/Grade9v3.5/issues/313"
+}

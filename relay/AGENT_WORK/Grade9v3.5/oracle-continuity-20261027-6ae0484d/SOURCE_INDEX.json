@@ -1,0 +1,199 @@
+{
+  "document_kind": "Informational continuity source index; not canonical task/control state",
+  "prepared_at": "2026-10-27T13:41:52Z",
+  "prepared_by": "Owner-appointed standalone Oracle 6ae0484d (routing label only)",
+  "purpose": "Owner-requested Oracle continuity planning",
+  "knowledge": "PREPARED_FOR_COMMITTED_RELAY",
+  "independence": "SELF_ASSESSED",
+  "successor": "UNASSIGNED",
+  "recipient_retrieval": "NOT_VERIFIED",
+  "control_transfer": "NOT_EXECUTED",
+  "governance": {
+    "common_pin": "5aeaf6031460c7a3664fe7639c22a99cd3177300",
+    "files": [
+      "skills/agent-work/START_HERE.md",
+      "skills/agent-work/oracle-continuity/PROTOCOL.md",
+      "skills/agent-work/oracle-standalone/references/ORACLE_HANDOVER_PROTOCOL.md",
+      "skills/agent-work/oracle-standalone/references/CHANGEOVER.md"
+    ],
+    "coordinator_protocol": {
+      "version": "3.52.1",
+      "zip_bytes": 738308,
+      "zip_sha256": "7d0c0bd29fe06a0ef7922a17794d14d3b6582aa32058832df15f1884242714d6",
+      "location": "OWNER_PRIVATE_REF:COORDINATOR_PROTOCOL",
+      "state": "READ"
+    },
+    "cycle_at_common_pin": "No Grade9 directory in inspected oracle-cycles/ listing; none activated here",
+    "withdrawn": "Engineering PR Delivery protocol; do not reintroduce from old packet guidance"
+  },
+  "repositories": {
+    "grade9": {
+      "repository": "reallakshman19/Grade9v3.5",
+      "main": "7052691eb97351d1b7e8f22200f733adafb0f13c"
+    },
+    "common": {
+      "repository": "reallakshman19/Common",
+      "main": "5aeaf6031460c7a3664fe7639c22a99cd3177300",
+      "oracle_branch": "docs/g9-r1-r2-completion-6ae0484d-20261027",
+      "oracle_pre_continuity_head": "f3086e0b0b403e09b8b87e74408528040a3e6ab7"
+    },
+    "progress": {
+      "repository": "reallakshman19/progress-page",
+      "main": "073df6f63655e23c06b9bf825600c65fd5c0805d",
+      "project_key": "g9v35",
+      "landing": "https://reallakshman19.github.io/progress-page/",
+      "files": [
+        "data/projects.json",
+        "data/g9v35/index.json",
+        "data/g9v35/cards.json",
+        "data/g9v35/fixtures.json",
+        "data/g9v35/audit.json"
+      ],
+      "repository_read": "READ",
+      "viewer_freshness": "NOT_VERIFIED: web reader could not retrieve live page",
+      "reconciliation": "OUT_OF_SYNC; concrete correction in continuity document; no page write"
+    }
+  },
+  "pull_requests": [
+    {
+      "url": "https://github.com/reallakshman19/Grade9v3.5/pull/307",
+      "head": "2d6be853071daa10d858ac6edf88bac24eaaff81",
+      "state": "open",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "url": "https://github.com/reallakshman19/Grade9v3.5/pull/308",
+      "head": "87b49547c84f1cf2e59f5bf0d675b6de56df2f8a",
+      "state": "open",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "url": "https://github.com/reallakshman19/Grade9v3.5/pull/309",
+      "head": "d87aa9a5ba0c53d4ea9437d75d7b3967af550c86",
+      "state": "open",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "url": "https://github.com/reallakshman19/Grade9v3.5/pull/310",
+      "head": "c44f8e0efdd30f5d8aadf731cb68b1502598ee4c",
+      "state": "open",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "url": "https://github.com/reallakshman19/Common/pull/546",
+      "head": "f3086e0b0b403e09b8b87e74408528040a3e6ab7",
+      "state": "open",
+      "draft": true,
+      "merged": false
+    },
+    {
+      "url": "https://github.com/reallakshman19/Common/pull/547",
+      "head": "d38d6d21c37e4915316d64ec94d73fc697fa12d4",
+      "state": "open",
+      "draft": true,
+      "merged": false
+    }
+  ],
+  "native_tasks": [
+    {
+      "id": "G9-WPE-RESEARCH-01",
+      "continuation": "C1",
+      "url": "https://github.com/reallakshman19/Grade9v3.5/issues/311",
+      "state": "open",
+      "comments": 2,
+      "assignee": null,
+      "chat_id": "UNKNOWN",
+      "result": "RECEIVED_WITH_HOLDS",
+      "return": "https://github.com/reallakshman19/Grade9v3.5/issues/311#issuecomment-6441700060",
+      "oracle_receipt": "https://github.com/reallakshman19/Grade9v3.5/issues/311#issuecomment-6443124409"
+    },
+    {
+      "id": "G9-MATH-CONTRACT-01",
+      "continuation": "C1",
+      "url": "https://github.com/reallakshman19/Grade9v3.5/issues/312",
+      "state": "open",
+      "comments": 0,
+      "assignee": null,
+      "chat_id": "UNKNOWN",
+      "dispatch": "NOT_SENT",
+      "result": "PARTIAL_R2; no C1 return"
+    },
+    {
+      "id": "G9-WPE-C1-IR1",
+      "url": "https://github.com/reallakshman19/Grade9v3.5/issues/313",
+      "state": "open",
+      "comments": 0,
+      "assignee": null,
+      "chat_id": "UNKNOWN",
+      "dispatch": "NOT_SENT",
+      "result": "PREPARED_NOT_DISPATCHED"
+    }
+  ],
+  "historical_native_sources": [
+    "https://github.com/reallakshman19/CoordinatorLandingpage/issues/128#issuecomment-6369877161",
+    "https://github.com/reallakshman19/CoordinatorLandingpage/issues/128#issuecomment-6372561531",
+    "https://github.com/reallakshman19/CoordinatorLandingpage/issues/128#issuecomment-6372574274",
+    "https://github.com/reallakshman19/CoordinatorLandingpage/issues/128#issuecomment-6372752959",
+    "https://github.com/reallakshman19/CoordinatorLandingpage/issues/128#issuecomment-6378741959"
+  ],
+  "predecessor_and_pending_scope": "Historical NLM WBS1,2.1-2.5,3,4 retained; present builder activity/stop state UNKNOWN. Prepared #312/#313 not represented as active assignments.",
+  "source_receipts": {
+    "oracle_receipt_head": "f3086e0b0b403e09b8b87e74408528040a3e6ab7",
+    "path": "relay/AGENT_WORK/Grade9v3.5/research-completion-20261027-6ae0484d/",
+    "files": [
+      "C1_RECEIVER_RECONCILIATION.md",
+      "C1_RECEIVED_MANIFEST.json",
+      "C1_OFFICIAL_PDF_BYTE_RECEIPT.json",
+      "C1_ACADEMIC_REVIEW_BRIEF.md"
+    ],
+    "candidate_head": "d38d6d21c37e4915316d64ec94d73fc697fa12d4",
+    "candidate_path": "relay/AGENT_WORK/Grade9v3.5/G9-WPE-RESEARCH-01-C1-20261027/",
+    "candidate_files_verified": 6,
+    "source_pdfs": "3 actual PDF downloads with measured SHA256; paper pages 11/10 and final key pages 6/7 rendered and visually inspected by incumbent",
+    "source_rights": "UNRESOLVED; original bytes and screenshots excluded from public relay"
+  },
+  "private_reports": [
+    {
+      "file": "WPE-R1.md",
+      "location": "OWNER_PRIVATE_REF:G9_RESEARCH_R1_R2",
+      "bytes": 35427,
+      "sha256": "bb6e29ac77b20e67acf6c87d983364e6e6607186723606d70589eb4ccdaa8cee",
+      "incumbent_receipt": "RECEIVED_AND_MEASURED",
+      "successor_receipt": "NOT_RUN"
+    },
+    {
+      "file": "WPE-R2.md",
+      "location": "OWNER_PRIVATE_REF:G9_RESEARCH_R1_R2",
+      "bytes": 43683,
+      "sha256": "962acfebf4b4a84cbcd22e12f87e638da1b865b64d046560a795f3ddd95f0216",
+      "incumbent_receipt": "RECEIVED_AND_MEASURED",
+      "successor_receipt": "NOT_RUN"
+    }
+  ],
+  "custody_gaps": [
+    "Original R1 children/ZIP NOT_RECOVERED",
+    "Separate C1 ZIP NOT_RECEIVED; reported hash not a receiver measurement",
+    "Original nine Level1 files NOT_INSPECTED",
+    "Old O5 blueprint/content local artifacts not retrieved here",
+    "No actual incoming Oracle selected/retrieval/understanding return"
+  ],
+  "material_decisions": [
+    "WPE-first priority supersedes NLM B2 dependency for current research; retain earlier work/history",
+    "004 source/assumptions and QRT held, neither D4 nor D3 adopted",
+    "003 exact result vs printed/keyed MCQ identity retained separately",
+    "Canonical WPE package CANDIDATE, no promotion",
+    "Reuse existing closed observation/profile/evidence mechanism",
+    "Two delivery outcomes mapped to existing WPE-REUSE packages; no coding dispatch"
+  ],
+  "publication_boundary": "Committed artifact branch and readback can provide retrievable knowledge bytes. Draft PR, document status or new chat does not establish canonical main adoption, recipient verification or Oracle cutover.",
+  "next_now": "Incoming candidate reads native returns/current heads and exact C1 files read-only, reports source delta/correction to incumbent. Incumbent continues #313 reviewer routing within actual available capabilities.",
+  "files": [
+    "ORACLE_CONTINUITY.md",
+    "ORACLE_SUCCESSOR_PROMPT.md",
+    "SOURCE_INDEX.json"
+  ]
+}

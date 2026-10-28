@@ -1,0 +1,47 @@
+{
+  "handoff_id": "G9-L2-R1-R2-COMPLETION-20261027",
+  "revision": 2,
+  "oracle": {
+    "mode": "standalone",
+    "routing_label": "6ae0484d",
+    "identity_basis": "OWNER_SUPPLIED_LABEL"
+  },
+  "status": "PROPOSED_RELAY_RECIPIENTS_UNBOUND",
+  "native_tasks": {
+    "G9-WPE-RESEARCH-01": "https://github.com/reallakshman19/Grade9v3.5/issues/311",
+    "G9-MATH-CONTRACT-01": "https://github.com/reallakshman19/Grade9v3.5/issues/312"
+  },
+  "recipient_ids": {
+    "wpe": null,
+    "mathematics": null
+  },
+  "dispatch": "NOT_SENT",
+  "receiver_retrieval": "NOT_RUN",
+  "academic_acceptance": "NOT_GRANTED",
+  "product_release": "NOT_GRANTED",
+  "inputs": {
+    "research_handover_commit": "d87aa9a5ba0c53d4ea9437d75d7b3967af550c86",
+    "intake_commit": "c44f8e0efdd30f5d8aadf731cb68b1502598ee4c",
+    "canonical_baseline": "7052691eb97351d1b7e8f22200f733adafb0f13c",
+    "private_reports": "OWNER_PRIVATE_REF:G9_RESEARCH_R1_R2",
+    "r1_companion_outputs": "NOT_RECEIVED",
+    "official_pdf_bytes_verification": "NOT_RUN_HERE"
+  },
+  "payloads": [
+    {
+      "path": "payload/ORACLE_COMPLETION_BRIEF.md",
+      "bytes": 22003,
+      "sha256": "f92c0068772f6cf8bc20fde12359c8fcc339d04f1025295d32fe7af3a6554866"
+    },
+    {
+      "path": "payload/WPE_C1_PROMPT.md",
+      "bytes": 5625,
+      "sha256": "30365ec3586e9f6531c435c4bb6fe5fa545584ad3b8c8fcf574fd12d23720ed9"
+    },
+    {
+      "path": "payload/MATH_C1_PROMPT.md",
+      "bytes": 5971,
+      "sha256": "d2ed80919bbcb369ffad0f54f7aae17fcd1ae9e8541221b29c1d4731ce7a93d5"
+    }
+  ]
+}
