@@ -1,0 +1,26 @@
+PASS positive public synthetic
+PASS IZUP=1 positive
+PASS rejected: NUMELT mismatch PROPERTY_NUMELT_MISMATCH
+PASS rejected: negative nozzle PROPERTY_CONTROL_COUNT_INVALID
+PASS rejected: negative hanger PROPERTY_CONTROL_COUNT_INVALID
+PASS rejected: IZUP99 PROPERTY_CONTROL_IZUP_INVALID
+PASS rejected: RRMAT nonnumeric PROPERTY_MISC_RRMAT_NOT_NUMBER
+PASS rejected: RRMAT700 PROPERTY_MISC_RRMAT_ID_OUT_OF_RANGE
+PASS rejected: negative restraint node PROPERTY_RESTRAINT_NODE_INVALID
+PASS rejected: negative CNode PROPERTY_RESTRAINT_NODE_INVALID
+PASS rejected: zero node nonzero type PROPERTY_RESTRAINT_EMPTY_SLOT_INCONSISTENT
+PASS rejected: out of range restraint pointer PROPERTY_POINTER_RANGE_RESTRANT
+PASS rejected: shared restraint pointer PROPERTY_SHARED_POINTER_RESTRANT
+PASS rejected: orphan restraint PROPERTY_ORPHAN_AUX_RESTRANT
+FAIL expected rejection: negative ELEMENTS FROM
+FAIL expected rejection: out of range BEND pointer
+FAIL expected rejection: empty restraint slot with nonzero stiffness
+PASS rejected: lowercase marker PROPERTY_NONCANONICAL_SECTION
+PASS rejected: indented marker PROPERTY_NONCANONICAL_SECTION
+PASS rejected: duplicate marker DUPLICATE_SECTION_CONTROL
+Parser/ownership probes: { passed: 23, failed: 3 }
+NORMAL approval roundtrip via Property: {"before":{"claims":1,"validateDisabled":false},"after":{"claims":0,"validateDisabled":true}}
+PASS controlled DOM: SOURCE/TARGET intake, exact pairs, A/B clear, stale async target rejected
+Limit: Nodal startup/reload writer gates covered by exact existing nodal-ui test; browser/Windows NOT_RUN
+All observations complete; expected-rejection failures are intentionally preserved.
+PASS controlled DOM: approved Nodal state survives Property visit, independent TARGET0 intake and mode switch
