@@ -20,7 +20,7 @@
       "label": "CIIFR project Oracle",
       "chat_id8": null,
       "provenance": "OWNER_APPOINTED_ORACLE_IN_CURRENT_CONVERSATION; THIS_CHAT_ID_UNKNOWN",
-      "responsibility": "Existing Oracle contributed Owner-requested independent VNext tab integration, published PR191 and reconciled separate non-author review. Product main unchanged; new merge/acceptance decision remains Owner-controlled. No self-independent approval or other engineering/cutover authority."
+      "responsibility": "Existing Oracle contributed Owner-requested independent VNext tab integration, published PR191, reconciled separate non-author source/native/HTTP review and observed its actual native main merge a55d7730. Browser/GPU/Owner acceptance still requires separate evidence and approval. No self-independent approval, extra engineering task, Writer/Apply or cutover authority."
     },
     "coder": {
       "label": "CIIFR_GEO WBS3.1 viewer integration builder",
@@ -38,7 +38,7 @@
       "label": "Owner",
       "chat_id8": null,
       "provenance": "OWNER_SELF",
-      "responsibility": "Try final PR191 nested CII Find & Replace > VNext > CIIFR_GEO in a supported browser, then give explicit new merge/acceptance decision. Prior main merge authorization was completed; this new tab is not yet deployed."
+      "responsibility": "Native PR191 is already merged into main. Try the nested CII Find & Replace > VNext > CIIFR_GEO tab on a supported rendered browser/WebGL host, then decide explicit product acceptance and any required qualification. Prior integration source publication does not prove fullscreen/GPU/Windows or physical-model success."
     }
   },
   "source_boundary": {
@@ -138,7 +138,7 @@
       "tree": "812395ee191b653764a7c8577b1ef5ce9db8a3e2",
       "independent_review": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6434633458",
       "native_return": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662",
-      "status": "RETURNED_UNMERGED_BROWSER_TRIAL_AND_OWNER_DECISION_PENDING",
+      "status": "RETURNED_MERGED_MAIN_RENDERED_TRIAL_AND_OWNER_ACCEPTANCE_PENDING",
       "review_scope": "No blocking integration defect within inspected/native/HTTP scope; actual nested browser/GPU/fullscreen/Windows/heavy-model acceptance NOT_RUN. Principal/account independence UNKNOWN."
     }
   },
@@ -637,7 +637,7 @@
       "status": "NOT_RUN",
       "scope": "Actual new nested CII Find & Replace > VNext > CIIFR_GEO rendered browser/GPU/fullscreen journey on capable Owner host.",
       "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662",
-      "limits": "Both contributor and reviewer native Chrome launch failed before usable page; controlled DOM and HTTP do not replace this trial. Product merge decision remains explicitly Owner-controlled."
+      "limits": "Both contributor and reviewer native Chrome launch failed before usable page; controlled DOM, HTTP, native PR merge and later Pages deployment do not replace an actual supported-browser Owner trial. Explicit product acceptance remains Owner-controlled."
     }
   ],
   "progress_projection": {
@@ -649,7 +649,7 @@
     "requested_source": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6434681662"
   },
   "activation_basis": "OWNER_SELECTED_ACTIVATE_CYCLE_NOW_20261025 / https://github.com/reallakshman19/Common/issues/482; OWNER_CURRENT_CONVERSATION_20261026_REQUESTED_NEW_CHATGPT_CHAT_HIGH_AND_SELECTED_CYCLE_NOW_GITHUB_TRANSPORT",
-  "activation_scope": "Prior prerequisite chain is on maine3d52e8a. Owner subsequently directed independent tab hosting inside VNext; PR191 exact7d7 is returned, unmerged, with separate bounded non-author source/native/HTTP assessment and actual nested browser/Owner decision pending. Information-state publication grants no product merge/engineering/Writer/cutover authority.",
+  "activation_scope": "Prior prerequisite chain is on native main e3d52e8a. Owner-directed PR191 exact source7d7d was separately reviewed in inspected/native/HTTP scope and merged into native main at a55d7730 on 2026-10-27T06:22:24Z. Actual nested rendered browser/WebGL/fullscreen/Windows/Owner acceptance remains NOT_RUN; source integration provides no new engineering/Writer/cutover or worker authority.",
   "coordination_observation": {
     "source_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/186#issuecomment-6425272554",
     "builder_status": "OWNER_DIRECT_RETURNED; final SVG badge defect repaired, independently verified and hosted. No new coding assignment pending.",
