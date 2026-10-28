@@ -4,11 +4,11 @@
 **Native assignment:** https://github.com/reallakshman19/XML_Compare_Utilities/issues/231  
 **Parent WBS:** https://github.com/reallakshman19/XML_Compare_Utilities/issues/227  
 **Role:** bounded application-code builder; begin READ_ONLY for source grounding.  
-**Recipient / Chat ID:** UNASSIGNED / UNKNOWN. Record your actual identity; do not invent it.
+**Recipient / Chat ID:** Owner-selected P1 builder, **CHAT_ID8: 6ae20df5**. The Owner supplied the chat locator on 28 October 2026. Record your actual GitHub principal separately; do not infer it from this chat ID.
 
 **Numbering:** This assignment is engineering P1.0, feeding P1.1 review. The published Page labels these WBS2 and 2.1. Page WBS1 is engineering P0; do not change that project numbering.
 
-This is a prepared dispatch prompt. When the Owner sends it to you as the assigned builder, execute this bounded repair without requesting routine reconfirmation. Publication alone does not establish an activated recipient, code lease, independent approval or merge authority.
+**Recipient binding:** confirmed by the Owner. Prompt delivery and agent acknowledgment are not yet observed. When you receive the Owner's assignment, execute this bounded repair without requesting routine reconfirmation. Recording the recipient does not claim that execution has started or grant independent approval, merge or release authority.
 
 ## 1. Owner outcome and your place in it
 
