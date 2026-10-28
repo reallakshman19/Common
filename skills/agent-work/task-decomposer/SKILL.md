@@ -87,6 +87,32 @@ tooling follows their descendants/dependents. An unallocated question or uncover
 future requirement remains visible without blocking independent tasks. Declare
 globally preserved constraints explicitly in `preserve_refs`.
 
+## Repeat a proven unit
+
+Large programmes often consist of one kind of work done many times: a lesson per
+key idea, a page per topic, a converter per format. Decompose the unit once and
+repeat it; do not decompose every repetition afresh (Owner, 28 Oct 2026: "the way
+we broke down large project into reusable").
+
+- **Name the unit and its instances.** State the unit (what one repetition
+  delivers to the user), the instance list with its source denominator (for
+  example the frozen spine or blueprint), and the order with its prerequisite basis.
+- **Design the unit once.** Its internal stages (author, custody check,
+  independent check, repair, accept), each with entry conditions and acceptance
+  evidence that tells success from a plausible wrong result. Record it as one task
+  design; point each instance's basis at it. Lessons from any instance revise the
+  unit design, then flow to later instances.
+- **Prove one instance end to end, in front of the user, before breadth.** Keep the
+  first instance BOUNDED and the rest DEFERRED until it is accepted. Then prove reuse
+  on one more instance with a changed adapter (topic, format) before batching.
+- **Separate per-instance work from once-per-programme work.** Spine freezing,
+  external validation passes and shared tooling are their own tasks with their own
+  evidence; a validation pass whose sources are unknown is DISCOVER_FIRST.
+- **Keep one status grid** (instance × unit stage) on the programme's progress
+  record, so any successor sees where each instance stands.
+- **Cap work in progress.** Do not start more instances than the slowest gate
+  (independent review, user trial) can absorb; queued instance cards wait.
+
 ## Author one neutral map
 
 Use `task-decomposer.map/v1` in [the schema](schemas/task-map.schema.json).
