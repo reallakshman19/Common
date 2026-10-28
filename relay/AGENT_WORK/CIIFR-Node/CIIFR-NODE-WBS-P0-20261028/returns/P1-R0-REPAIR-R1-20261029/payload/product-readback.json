@@ -1,0 +1,51 @@
+{
+  "candidate": "7f5dc773ac7bb08544d086be734e4337295088a0",
+  "codeCommit": "bb479a851bb2c9b92918352be64967ef86c89bf5",
+  "pr": 232,
+  "readback": [
+    {
+      "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+      "git_blob": "fe804874bdf4500761bc582b740ecb555812b121",
+      "content_equal": true
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+      "git_blob": "fe804874bdf4500761bc582b740ecb555812b121",
+      "content_equal": true
+    },
+    {
+      "path": "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+      "git_blob": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+      "content_equal": true
+    },
+    {
+      "path": "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js",
+      "git_blob": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+      "content_equal": true
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+      "git_blob": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+      "content_equal": true
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js",
+      "git_blob": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+      "content_equal": true
+    },
+    {
+      "path": "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+      "git_blob": "a94e57ac92a9c7e42a5aae793449cf67dbb098b9",
+      "content_equal": true
+    },
+    {
+      "path": "agents/PR232_workreport.md",
+      "git_blob": "784e3a1beedb16208f02421ae19bb2a5652cf795",
+      "content_equal": true
+    }
+  ],
+  "basis": "All eight final product files retrieved at exact final head; decoded UTF-8 content matched local tested code/report and Git blobs matched for the seven code/test files.",
+  "author": "Owner-directed root builder; SELF_ASSESSED",
+  "review": "PENDING_NONAUTHOR",
+  "parent": "b2b695f66fc8dfc907f2b9a493b39bd4d4109570"
+}

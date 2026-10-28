@@ -1,0 +1,177 @@
+✖ F1 completed Normal approval, validation and apply survive independent Property activity (66.622555ms)
+✖ F1 actual shared TARGET/SOURCE/CSV changes still revoke preserved Normal state (31.690842ms)
+✖ F1 Property roundtrip cancels pending Normal validation without deleting approval (22.703835ms)
+✔ F1 unchanged Nodal approved output survives Property, while target edits revoke it (45.377445ms)
+✖ F2 positive-node R0 rejects either negative endpoint and holds unqualified zero endpoints (2.096415ms)
+✖ F3 every typed element pointer is bounded against its own CONTROL count (1.566054ms)
+✖ F3 bounded populated BEND remains explicitly unqualified, with unchanged bytes (1.416907ms)
+✖ F4 dormant restraint payload is UNKNOWN evidence, never a logical node or discarded bytes (1.192938ms)
+✖ F4 zero spellings do not fabricate residue; unparsed text is preserved as UNKNOWN (0.983036ms)
+✖ F3/F4 UNKNOWN diagnostics and raw restraint evidence are visible on intake and in either mode (22.69551ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 1
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 331.008098
+
+✖ failing tests:
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:58:1
+✖ F1 completed Normal approval, validation and apply survive independent Property activity (66.622555ms)
+  AssertionError [ERR_ASSERTION]: approved
+  + actual - expected
+  
+    {
+      apply: true,
+  +   claims: 0,
+  +   decisions: [],
+  -   claims: 1,
+  -   decisions: [
+  -     'APPROVED'
+  -   ],
+      export: true,
+      hash: '—',
+  +   validate: true
+  -   validate: false
+    }
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:68:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { claims: 0, decisions: [], validate: true, apply: true, export: true, hash: '—' },
+    expected: { claims: 1, decisions: [ 'APPROVED' ], validate: false, apply: true, export: true, hash: '—' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:77:1
+✖ F1 actual shared TARGET/SOURCE/CSV changes still revoke preserved Normal state (31.690842ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:82:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:90:1
+✖ F1 Property roundtrip cancels pending Normal validation without deleting approval (22.703835ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:102:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:124:1
+✖ F2 positive-node R0 rejects either negative endpoint and holds unqualified zero endpoints (2.096415ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:126:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /PROPERTY_ELEMENT_ENDPOINT_NEGATIVE/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:132:1
+✖ F3 every typed element pointer is bounded against its own CONTROL count (1.566054ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception: BEND
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:140:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /PROPERTY_POINTER_RANGE_BEND/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:143:1
+✖ F3 bounded populated BEND remains explicitly unqualified, with unchanged bytes (1.416907ms)
+  AssertionError [ERR_ASSERTION]: The "string" argument must be of type string. Received type undefined (undefined)
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:147:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /ALL_ELEMENT_POINTERS/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:152:1
+✖ F4 dormant restraint payload is UNKNOWN evidence, never a logical node or discarded bytes (1.192938ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'find')
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:154:50)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:163:1
+✖ F4 zero spellings do not fabricate residue; unparsed text is preserved as UNKNOWN (0.983036ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'length')
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:165:33)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/cii-fnr-vnext-property-transfer-repair.test.mjs:171:1
+✖ F3/F4 UNKNOWN diagnostics and raw restraint evidence are visible on intake and in either mode (22.69551ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /UNKNOWN/. Input:
+  
+  ''
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/p1-repair/source/tests/cii-fnr-vnext-property-transfer-repair.test.mjs:178:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '',
+    expected: /UNKNOWN/,
+    operator: 'match',
+    diff: 'simple'
+  }
