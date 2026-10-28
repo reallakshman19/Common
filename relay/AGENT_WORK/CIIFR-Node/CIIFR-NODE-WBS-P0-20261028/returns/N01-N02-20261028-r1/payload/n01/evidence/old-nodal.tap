@@ -1,0 +1,22 @@
+✖ new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates (20.272767ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 156.030378
+
+✖ failing tests:
+
+test at tests/cii-fnr-vnext-nodal-ui.test.mjs:17:1
+✖ new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates (20.272767ms)
+  TypeError [Error]: Cannot read properties of null (reading 'addEventListener')
+      at mountPropertyTransfer (file:///workspace/scratch/a4187d1acd61/n01-review/old/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js:85:9)
+      at file:///workspace/scratch/a4187d1acd61/n01-review/old/tabs/cii-workspace/cii-fnr-vnext/ui/app.js?nodal-ui-test=1793200013776:26:1
+      at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+      at async node:internal/modules/esm/loader:647:26
+      at async TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/n01-review/old/tests/cii-fnr-vnext-nodal-ui.test.mjs:19:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
