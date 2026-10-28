@@ -1,0 +1,149 @@
+{
+  "schema": "CIIFR.Node.FixtureCatalog.v1",
+  "project": "CIIFR-Node",
+  "handoff": "CIIFR-NODE-WBS-P0-20261028",
+  "sourceOfTruth": {
+    "wbs": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/227",
+    "concept": "https://github.com/reallakshman19/XML_Compare_Utilities/blob/b2b695f66fc8dfc907f2b9a493b39bd4d4109570/docs/ciifr/property-transfer/CONCEPT_NOTE_v1.0.md",
+    "codePR": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/226",
+    "codeHeadAtIntake": "b2b695f66fc8dfc907f2b9a493b39bd4d4109570"
+  },
+  "receiptStatus": "PRODUCER_PUBLISHED_IN_DRAFT_BRANCH;RECEIVER_NOT_RUN;INDEPENDENT_NOT_RUN",
+  "files": [
+    {
+      "path": "payload/SYNTH_V14_SOURCE.cii",
+      "sizeBytes": 8276,
+      "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+      "gitBlobSha": "7d00c13f5c5906a9bb2dba53287f133c8db06358",
+      "dataClass": "PUBLIC_SYNTHETIC"
+    },
+    {
+      "path": "payload/SYNTH_V14_TARGET0.cii",
+      "sizeBytes": 8276,
+      "sha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+      "gitBlobSha": "dddf157895571802973b71904fbad0a679a7e271",
+      "dataClass": "PUBLIC_SYNTHETIC"
+    }
+  ],
+  "independentExpectationsAuthorExposed": true,
+  "families": [
+    {
+      "id": "F00",
+      "name": "Version and CONTROL",
+      "expect": "VERSION=14, CONTROL.NUMELT=2, NUMNOZ=0, NOHGRS=0, IZUP=0, RIGID=1, RESTRANT=1, DISPLMNT=1, FORCMNT=1",
+      "gate": "read-only source index"
+    },
+    {
+      "id": "F01",
+      "name": "Oriented element/process",
+      "source": [
+        {
+          "ordinal": 1,
+          "from": 400,
+          "to": 500,
+          "T1": 200,
+          "P1": 30,
+          "density": 1.01
+        },
+        {
+          "ordinal": 2,
+          "from": 500,
+          "to": 600,
+          "T1": 180,
+          "P1": 20,
+          "density": 1.01
+        }
+      ],
+      "target": [
+        {
+          "ordinal": 1,
+          "from": 840,
+          "to": 850,
+          "T1": 195,
+          "P1": 28,
+          "density": 1.01
+        },
+        {
+          "ordinal": 2,
+          "from": 850,
+          "to": 860,
+          "T1": 175,
+          "P1": 18,
+          "density": 1.01
+        }
+      ],
+      "expect": "Two different values at shared node; no auto mapping/transfer, no pressure fan-out",
+      "gate": "Path A"
+    },
+    {
+      "id": "F02",
+      "name": "Node auxiliary",
+      "sourceNode": 500,
+      "targetNode": 850,
+      "expect": "Each has two element incidents, one RIGID element-owned attachment, one RESTRANT block with occupied slot 1/type 1, one DISPLMNT spec 1, one FORCMNT spec 1; no result reactions",
+      "gate": "Path B"
+    },
+    {
+      "id": "F03",
+      "name": "Structural negatives",
+      "mutations": [
+        "change #$ CONTROL to '  #$ control'",
+        "set CONTROL IZUP=99",
+        "set NUMNOZ or NOHGRS=-1",
+        "duplicate RESTRANT pointer owner to element 2",
+        "truncate MISCEL_1 RRMAT second material ID",
+        "set RRMAT material ID=700",
+        "set restraint node or CNode negative",
+        "set node=0 and type=1"
+      ],
+      "expect": "fail closed, no side effects",
+      "gate": "strict reader"
+    },
+    {
+      "id": "F04",
+      "name": "Mapping adversaries",
+      "mutations": [
+        "reverse 500→400 query",
+        "duplicate FROM/TO with separate ordinal",
+        "two SOURCE edges to one TARGET",
+        "TO-only candidates both match node",
+        "same numeric IDs but different private model identity",
+        "change TARGET hash after plan"
+      ],
+      "expect": "manual choice/HELD, never implicit writer",
+      "gate": "P2 deferred"
+    },
+    {
+      "id": "F05",
+      "name": "Existing tab regression",
+      "source": "tests/cii-fnr-vnext-nodal-ui.test.mjs and tests/cii-fnr-vnext-property-transfer-ui-regression.test.mjs at PR226 head",
+      "expect": "existing NODAL startup/switch state unaffected; no shared writer",
+      "gate": "P1 native independent"
+    },
+    {
+      "id": "F06",
+      "name": "Original protected V14 custody",
+      "dataClass": "OWNER_PRIVATE_NOT_IN_PUBLIC_RELAY",
+      "reportedOnly": true,
+      "expectedAggregates": {
+        "elements": 521,
+        "nodes": 511,
+        "restraintBlocks": 122,
+        "rigidBlocks": 156,
+        "displacementBlocks": 6,
+        "forceBlocks": 0,
+        "nodeNameBlocks": 177,
+        "rrmatRows": 87
+      },
+      "expect": "receiver verifies authorized private original independently; if absent NOT_RUN",
+      "gate": "P1.2"
+    },
+    {
+      "id": "F07",
+      "name": "Native browser and engineering",
+      "expect": "read-only R0 does not require licensed solver; writer stages P4/P5 do require CAESAR II qualified import and byte diff",
+      "gate": "P1 then P4/P5"
+    }
+  ],
+  "caveat": "Synthetic values are invented and not real GLRD data; expected tables are author-exposed design oracles, not independent review. No private CII, customer node identifiers or protected child links."
+}
