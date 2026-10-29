@@ -1,0 +1,35 @@
+{
+  "head": "7f5dc773ac7bb08544d086be734e4337295088a0",
+  "code_commit": "bb479a851bb2c9b92918352be64967ef86c89bf5",
+  "task": "CIIFR-NODE-P1-R0-REPAIR-R1",
+  "scope": "SELF_ASSESSED_BUILDER_CANDIDATE",
+  "required_three": [
+    17,
+    0
+  ],
+  "focused": [
+    11,
+    0
+  ],
+  "vnext": [
+    121,
+    1
+  ],
+  "predecessor_vnext": [
+    110,
+    1
+  ],
+  "base_vnext": [
+    94,
+    1
+  ],
+  "geometry": [
+    9,
+    0
+  ],
+  "inherited_failure": "cii-fnr-vnext-branch-scope.test.mjs:85 actual1 expected0",
+  "browser": "NOT_RUN: Chromium chrome absent",
+  "Windows": "NOT_RUN",
+  "protected_original": "NOT_RECEIVED/NOT_RUN",
+  "gate": "HOLD_PENDING_FRESH_NONAUTHOR_REVIEW"
+}

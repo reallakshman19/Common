@@ -1,0 +1,509 @@
+{
+  "timestamp": "2026-10-29T16:02:36.765Z",
+  "runnerRevision": "R3 exact fields and ownership",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32",
+  "runs": [
+    {
+      "browser": "Microsoft Edge",
+      "productVersion": "Edg/156.0.4314.42",
+      "servedSourceVerification": [
+        {
+          "path": "docs/cii-fnr-vnext.html",
+          "bytes": 15971,
+          "sha256": "36f40cff7d4f984f92521420c30f65d2fefe54bdf1cc1bb4c04fab8f3cddc37a",
+          "gitBlob": "3c0f8dae2ccc68f518f1ad582f1ba831a13a24ac",
+          "treeBlob": "3c0f8dae2ccc68f518f1ad582f1ba831a13a24ac",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+          "bytes": 30460,
+          "sha256": "7c246390253ee6a4a891927f8f27bdb5575a57494244ebd3afcc0085bd614817",
+          "gitBlob": "74891ccd948782b54b8f7781168e996c65d2af9e",
+          "treeBlob": "74891ccd948782b54b8f7781168e996c65d2af9e",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js",
+          "bytes": 8041,
+          "sha256": "96bcfc8cbf7878bcfb2204354bf69bee49466a8cf2268162d6b4fc640713bb32",
+          "gitBlob": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+          "treeBlob": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+          "bytes": 10328,
+          "sha256": "50d4f44f18acacc82e1f89065d9b8c289c4f0876aa9e094f5c5c7b405146605a",
+          "gitBlob": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+          "treeBlob": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/element.js",
+          "bytes": 1274,
+          "sha256": "4c00591cf1efc3c23530fc61ef3e3c80b592bbad765265d7f47ae3da398b6dcb",
+          "gitBlob": "853352955b657853dfa8855eb566c97df67676f0",
+          "treeBlob": "853352955b657853dfa8855eb566c97df67676f0",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/node.js",
+          "bytes": 1069,
+          "sha256": "8cae20c6413311d069aad03560903563e9faad89c68a4ddad254bd72beb3340d",
+          "gitBlob": "35109c593474b191178918d2d6f2a16c6d710571",
+          "treeBlob": "35109c593474b191178918d2d6f2a16c6d710571",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/nodal-panel.js",
+          "bytes": 8353,
+          "sha256": "675f186f12cc96f90dd665ffd60929d9427a30eef673a2e16142490a322f81f6",
+          "gitBlob": "38e28c42105548d8e5352dd43043b008e4252aab",
+          "treeBlob": "38e28c42105548d8e5352dd43043b008e4252aab",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+          "bytes": 6326,
+          "sha256": "7659416c5dfa50c26aba4fc1cd93ddf9e4642969d75bd1cb752094b70be5e028",
+          "gitBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+          "treeBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+          "bytes": 4699,
+          "sha256": "e8ede9c820aed1a05ebfb374cf39a21657fa2c355ed9e803b80f89b38365ff34",
+          "gitBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+          "treeBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+          "bytes": 1416,
+          "sha256": "feafd2ea549042bdabf19f2ed1f66030a2555d5ab3ce2def8b7cab0394cef856",
+          "gitBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+          "treeBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+          "bytes": 2280,
+          "sha256": "6c12dbedf2cab436341f3dfab7e9461c9ad88a049350b2dd2d8355cc28ad5b41",
+          "gitBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+          "treeBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+          "bytes": 861,
+          "sha256": "7c73c82479b694d72ce85638355dd04e39fccd8f72802f12f8b070593dbdace7",
+          "gitBlob": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+          "treeBlob": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+          "bytes": 7121,
+          "sha256": "b96e13648ef753bd0f261c0d1c0427158dd0525eaee26bf129006f257cd9386f",
+          "gitBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+          "treeBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+          "match": true
+        }
+      ],
+      "cases": {
+        "case1_normal_demo": {
+          "status": "PASS",
+          "proposalRows": 2,
+          "claimStatus": "2 proposal(s). Review each claim before Validate.",
+          "validateStatus": "TARGET1 validated in memory. Apply to New Copy is now available.",
+          "applyStatus": "TARGET1 released as an immutable new-copy preview. Export enabled.",
+          "target1Hash": "4bf7f868eda840cb45af6febfc2174a7ddfc2c21fb921be3cf411d3122bd7591",
+          "exportEnabled": true
+        },
+        "case2_property_isolation": {
+          "status": "PASS",
+          "sourceStatus": "SYNTH_V14_SOURCE.cii · V14 · 2 elements · SHA-256 c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+          "targetStatus": "SYNTH_V14_TARGET0.cii · V14 · 2 elements · SHA-256 0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+          "normalStatePreserved": true,
+          "normalDecisionsMatchedCount": 2,
+          "nodalStatePreserved": true
+        },
+        "case3_invalidation_pending_csv": {
+          "status": "PASS",
+          "preAppliedStateVerified": true,
+          "revokedOnRuleEdit": true,
+          "delayPendingPreconditionVerified": true,
+          "revokedWhilePending": true,
+          "clearWhilePendingSafe": true,
+          "eligibilityRestored": true
+        },
+        "case4_process_and_attachments": {
+          "status": "PASS",
+          "forward400_500_distinct": true,
+          "forward400_500_fields": {
+            "t1": 200,
+            "p1": 30,
+            "density": 1.01,
+            "qual": "HOLD",
+            "rawFields": [
+              {
+                "identity": "TEMPERATURE_1_STORED",
+                "lexeme": "200",
+                "byteStart": 466,
+                "byteEnd": 479,
+                "storedNumber": 200
+              },
+              {
+                "identity": "PRESSURE_1_STORED",
+                "lexeme": "30",
+                "byteStart": 591,
+                "byteEnd": 604,
+                "storedNumber": 30
+              },
+              {
+                "identity": "FLUID_DENSITY_STORED",
+                "lexeme": "1.01",
+                "byteStart": 768,
+                "byteEnd": 781,
+                "storedNumber": 1.01
+              }
+            ]
+          },
+          "forward500_600_distinct": true,
+          "forward500_600_fields": {
+            "t1": 180,
+            "p1": 20,
+            "density": 1.01,
+            "qual": "HOLD",
+            "rawFields": [
+              {
+                "identity": "TEMPERATURE_1_STORED",
+                "lexeme": "180",
+                "byteStart": 1696,
+                "byteEnd": 1709,
+                "storedNumber": 180
+              },
+              {
+                "identity": "PRESSURE_1_STORED",
+                "lexeme": "20",
+                "byteStart": 1821,
+                "byteEnd": 1834,
+                "storedNumber": 20
+              },
+              {
+                "identity": "FLUID_DENSITY_STORED",
+                "lexeme": "1.01",
+                "byteStart": 1998,
+                "byteEnd": 2011,
+                "storedNumber": 1.01
+              }
+            ]
+          },
+          "reverseOrientationRejected": true,
+          "node500AttachmentsVerified": true,
+          "node500AttachmentRows": {
+            "restrant": [
+              "RESTRANT",
+              "1",
+              "Pointer 1 · Slot 1",
+              "Type 1 · CNode 0 · semantics partial"
+            ],
+            "displmnt": [
+              "DISPLMNT",
+              "1",
+              "Pointer 1 · Specification 1",
+              "Vectors/cases not yet qualified"
+            ],
+            "forcmnt": [
+              "FORCMNT",
+              "1",
+              "Pointer 1 · Specification 1",
+              "Input loads only; not computed reactions"
+            ],
+            "rigid": [
+              "RIGID",
+              "1",
+              "Pointer 1",
+              "Weight raw 100 · element-owned, semantics partial"
+            ]
+          }
+        },
+        "case5_negative_zero_dormant_challenges": {
+          "status": "PASS",
+          "uiSearchValidation": {
+            "negativeBlocked": true,
+            "zeroBlocked": true
+          },
+          "caiFileIntakeParsing": {
+            "negativeEndpointRejected": true,
+            "zeroEndpointHeld": true,
+            "pointerBeyondControlRejected": true,
+            "dormantResidueReportedUnknown": true
+          },
+          "noApplyOrExportInProperty": true
+        },
+        "case6_integrity_immutability": {
+          "status": "PASS",
+          "pageErrorsCount": 0,
+          "consoleErrorsCount": 0,
+          "fixturesUnchanged": true,
+          "externalRequestsCount": 0
+        }
+      }
+    },
+    {
+      "browser": "Google Chrome",
+      "productVersion": "Chrome/156.0.8078.48",
+      "servedSourceVerification": [
+        {
+          "path": "docs/cii-fnr-vnext.html",
+          "bytes": 15971,
+          "sha256": "36f40cff7d4f984f92521420c30f65d2fefe54bdf1cc1bb4c04fab8f3cddc37a",
+          "gitBlob": "3c0f8dae2ccc68f518f1ad582f1ba831a13a24ac",
+          "treeBlob": "3c0f8dae2ccc68f518f1ad582f1ba831a13a24ac",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+          "bytes": 30460,
+          "sha256": "7c246390253ee6a4a891927f8f27bdb5575a57494244ebd3afcc0085bd614817",
+          "gitBlob": "74891ccd948782b54b8f7781168e996c65d2af9e",
+          "treeBlob": "74891ccd948782b54b8f7781168e996c65d2af9e",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js",
+          "bytes": 8041,
+          "sha256": "96bcfc8cbf7878bcfb2204354bf69bee49466a8cf2268162d6b4fc640713bb32",
+          "gitBlob": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+          "treeBlob": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+          "bytes": 10328,
+          "sha256": "50d4f44f18acacc82e1f89065d9b8c289c4f0876aa9e094f5c5c7b405146605a",
+          "gitBlob": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+          "treeBlob": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/element.js",
+          "bytes": 1274,
+          "sha256": "4c00591cf1efc3c23530fc61ef3e3c80b592bbad765265d7f47ae3da398b6dcb",
+          "gitBlob": "853352955b657853dfa8855eb566c97df67676f0",
+          "treeBlob": "853352955b657853dfa8855eb566c97df67676f0",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/node.js",
+          "bytes": 1069,
+          "sha256": "8cae20c6413311d069aad03560903563e9faad89c68a4ddad254bd72beb3340d",
+          "gitBlob": "35109c593474b191178918d2d6f2a16c6d710571",
+          "treeBlob": "35109c593474b191178918d2d6f2a16c6d710571",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/nodal-panel.js",
+          "bytes": 8353,
+          "sha256": "675f186f12cc96f90dd665ffd60929d9427a30eef673a2e16142490a322f81f6",
+          "gitBlob": "38e28c42105548d8e5352dd43043b008e4252aab",
+          "treeBlob": "38e28c42105548d8e5352dd43043b008e4252aab",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+          "bytes": 6326,
+          "sha256": "7659416c5dfa50c26aba4fc1cd93ddf9e4642969d75bd1cb752094b70be5e028",
+          "gitBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+          "treeBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+          "bytes": 4699,
+          "sha256": "e8ede9c820aed1a05ebfb374cf39a21657fa2c355ed9e803b80f89b38365ff34",
+          "gitBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+          "treeBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+          "bytes": 1416,
+          "sha256": "feafd2ea549042bdabf19f2ed1f66030a2555d5ab3ce2def8b7cab0394cef856",
+          "gitBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+          "treeBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+          "bytes": 2280,
+          "sha256": "6c12dbedf2cab436341f3dfab7e9461c9ad88a049350b2dd2d8355cc28ad5b41",
+          "gitBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+          "treeBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+          "bytes": 861,
+          "sha256": "7c73c82479b694d72ce85638355dd04e39fccd8f72802f12f8b070593dbdace7",
+          "gitBlob": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+          "treeBlob": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+          "match": true
+        },
+        {
+          "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+          "bytes": 7121,
+          "sha256": "b96e13648ef753bd0f261c0d1c0427158dd0525eaee26bf129006f257cd9386f",
+          "gitBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+          "treeBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+          "match": true
+        }
+      ],
+      "cases": {
+        "case1_normal_demo": {
+          "status": "PASS",
+          "proposalRows": 2,
+          "claimStatus": "2 proposal(s). Review each claim before Validate.",
+          "validateStatus": "TARGET1 validated in memory. Apply to New Copy is now available.",
+          "applyStatus": "TARGET1 released as an immutable new-copy preview. Export enabled.",
+          "target1Hash": "4bf7f868eda840cb45af6febfc2174a7ddfc2c21fb921be3cf411d3122bd7591",
+          "exportEnabled": true
+        },
+        "case2_property_isolation": {
+          "status": "PASS",
+          "sourceStatus": "SYNTH_V14_SOURCE.cii · V14 · 2 elements · SHA-256 c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+          "targetStatus": "SYNTH_V14_TARGET0.cii · V14 · 2 elements · SHA-256 0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+          "normalStatePreserved": true,
+          "normalDecisionsMatchedCount": 2,
+          "nodalStatePreserved": true
+        },
+        "case3_invalidation_pending_csv": {
+          "status": "PASS",
+          "preAppliedStateVerified": true,
+          "revokedOnRuleEdit": true,
+          "delayPendingPreconditionVerified": true,
+          "revokedWhilePending": true,
+          "clearWhilePendingSafe": true,
+          "eligibilityRestored": true
+        },
+        "case4_process_and_attachments": {
+          "status": "PASS",
+          "forward400_500_distinct": true,
+          "forward400_500_fields": {
+            "t1": 200,
+            "p1": 30,
+            "density": 1.01,
+            "qual": "HOLD",
+            "rawFields": [
+              {
+                "identity": "TEMPERATURE_1_STORED",
+                "lexeme": "200",
+                "byteStart": 466,
+                "byteEnd": 479,
+                "storedNumber": 200
+              },
+              {
+                "identity": "PRESSURE_1_STORED",
+                "lexeme": "30",
+                "byteStart": 591,
+                "byteEnd": 604,
+                "storedNumber": 30
+              },
+              {
+                "identity": "FLUID_DENSITY_STORED",
+                "lexeme": "1.01",
+                "byteStart": 768,
+                "byteEnd": 781,
+                "storedNumber": 1.01
+              }
+            ]
+          },
+          "forward500_600_distinct": true,
+          "forward500_600_fields": {
+            "t1": 180,
+            "p1": 20,
+            "density": 1.01,
+            "qual": "HOLD",
+            "rawFields": [
+              {
+                "identity": "TEMPERATURE_1_STORED",
+                "lexeme": "180",
+                "byteStart": 1696,
+                "byteEnd": 1709,
+                "storedNumber": 180
+              },
+              {
+                "identity": "PRESSURE_1_STORED",
+                "lexeme": "20",
+                "byteStart": 1821,
+                "byteEnd": 1834,
+                "storedNumber": 20
+              },
+              {
+                "identity": "FLUID_DENSITY_STORED",
+                "lexeme": "1.01",
+                "byteStart": 1998,
+                "byteEnd": 2011,
+                "storedNumber": 1.01
+              }
+            ]
+          },
+          "reverseOrientationRejected": true,
+          "node500AttachmentsVerified": true,
+          "node500AttachmentRows": {
+            "restrant": [
+              "RESTRANT",
+              "1",
+              "Pointer 1 · Slot 1",
+              "Type 1 · CNode 0 · semantics partial"
+            ],
+            "displmnt": [
+              "DISPLMNT",
+              "1",
+              "Pointer 1 · Specification 1",
+              "Vectors/cases not yet qualified"
+            ],
+            "forcmnt": [
+              "FORCMNT",
+              "1",
+              "Pointer 1 · Specification 1",
+              "Input loads only; not computed reactions"
+            ],
+            "rigid": [
+              "RIGID",
+              "1",
+              "Pointer 1",
+              "Weight raw 100 · element-owned, semantics partial"
+            ]
+          }
+        },
+        "case5_negative_zero_dormant_challenges": {
+          "status": "PASS",
+          "uiSearchValidation": {
+            "negativeBlocked": true,
+            "zeroBlocked": true
+          },
+          "caiFileIntakeParsing": {
+            "negativeEndpointRejected": true,
+            "zeroEndpointHeld": true,
+            "pointerBeyondControlRejected": true,
+            "dormantResidueReportedUnknown": true
+          },
+          "noApplyOrExportInProperty": true
+        },
+        "case6_integrity_immutability": {
+          "status": "PASS",
+          "pageErrorsCount": 0,
+          "consoleErrorsCount": 0,
+          "fixturesUnchanged": true,
+          "externalRequestsCount": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import { verifyElementSection, verifyNodeSection } from './qualification-guards.mjs';
+if(!process.argv[2])throw Error('Usage: node receiver-probes-r2-r3.mjs <published R2 runner path>');
+const source=fs.readFileSync(process.argv[2],'utf8');
+assert.equal(crypto.createHash('sha256').update(source).digest('hex'),'e827bcfa865fade5613dac12f49db3ceac5efa26544c96259288dbeb5c251041');
+const oracle=JSON.parse(fs.readFileSync(new URL('./physical-oracle.json',import.meta.url)));
+function extract(start,end){const a=source.indexOf(start),b=source.indexOf(end,a);assert.ok(a>=0&&b>a,'Pinned block absent');return source.slice(a,b);}
+const row=['1','400 → 500','(none)',...oracle.elements[0].fields.map(f=>`${f.identity}: ${f.lexeme} [bytes ${f.byteStart}–${f.byteEnd}]`),'HOLD: effective process semantics / identity not qualified'];
+row[4]=row[4].replace(': 30 ',': 130 ');
+const pressureGuard=extract('  if (fwd400Row[0]', '\n  // Inspect forward element 500->600');
+assert.doesNotThrow(()=>vm.runInNewContext(pressureGuard,{fwd400Row:row}));
+assert.throws(()=>verifyElementSection({title:'SOURCE · FROM 400 → TO 500 · 1 element(s)',tables:[{headers:['Element #','FROM → TO','Branch','T1 stored raw','P1 stored raw','Fluid density stored raw','Qualification'],rows:[row]}]},oracle.elements[0]));
+const pointerGuard=extract('  if (!restrantRow ||', '\n  if (!displmntRow ||');
+const bad=['RESTRANT','1','Pointer 10 · Slot 1','Type 1 · CNode 0 · semantics partial'];
+assert.doesNotThrow(()=>vm.runInNewContext(pointerGuard,{restrantRow:bad}));
+const rows=structuredClone(oracle.node.rows);rows[2]=bad;
+assert.throws(()=>verifyNodeSection({title:'SOURCE · Numeric Node 500',tables:[{headers:['Family','Owning element #','Occurrence','Evidence / HOLD'],rows}]},oracle.node));
+const challengeBlock=extract('  results.cases.case5_negative_zero_dormant_challenges =', '\n  // ==========================================\n  // CASE 6');
+assert.throws(()=>vm.runInNewContext(challengeBlock,{results:{cases:{}},uiSearchNegStatus:'ACCEPTED',uiSearchZeroStatus:'ACCEPTED',fileNegStatus:'ACCEPTED',fileZeroStatus:'ACCEPTED',pointerBeyondControl:'ACCEPTED',dormantStatus:{results:''},ptApplyButton:null,ptExportButton:null}),/Case 5 challenge check failed/);
+const integrityBlock=extract('  results.cases.case6_integrity_immutability =', '\n  await session.screenshot');
+assert.throws(()=>vm.runInNewContext(integrityBlock,{results:{cases:{}},session:{pageErrors:[{}],consoleLogs:[]},consoleErrors:[]}),/uncaught page exceptions detected/);
+assert.throws(()=>vm.runInNewContext(integrityBlock,{results:{cases:{}},session:{pageErrors:[],consoleLogs:[{type:'error'}]},consoleErrors:[{type:'error'}]}),/console errors detected/);
+console.log(JSON.stringify({scope:'Extracted R2 guards and R3 exact guards; no browser or new product test execution',R2:{pressure130StillAccepted:true,pointer10StillAccepted:true,falseChallengesRejected:true,lateExceptionRejected:true,consoleErrorRejected:true},R3:{pressure130Rejected:true,pointer10Rejected:true}},null,2));

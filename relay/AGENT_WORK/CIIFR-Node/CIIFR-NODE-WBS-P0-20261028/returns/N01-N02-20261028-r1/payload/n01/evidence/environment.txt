@@ -1,0 +1,7 @@
+Platform: Linux-6.18.55-x86_64-with-glibc2.39
+Node: v24.22.1
+Windows: NOT_RUN (Linux host)
+chromium: None
+chromium-browser: None
+google-chrome: None
+firefox: None

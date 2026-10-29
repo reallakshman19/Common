@@ -1,0 +1,90 @@
+{
+  "scope": "Actual pinned product panel in native controlled DOM; browser NOT_RUN",
+  "status": "PASS",
+  "observedElements": [
+    {
+      "t1": 200,
+      "p1": 30,
+      "density": 1.01,
+      "qual": "HOLD",
+      "rawFields": [
+        {
+          "identity": "TEMPERATURE_1_STORED",
+          "lexeme": "200",
+          "byteStart": 466,
+          "byteEnd": 479,
+          "storedNumber": 200
+        },
+        {
+          "identity": "PRESSURE_1_STORED",
+          "lexeme": "30",
+          "byteStart": 591,
+          "byteEnd": 604,
+          "storedNumber": 30
+        },
+        {
+          "identity": "FLUID_DENSITY_STORED",
+          "lexeme": "1.01",
+          "byteStart": 768,
+          "byteEnd": 781,
+          "storedNumber": 1.01
+        }
+      ]
+    },
+    {
+      "t1": 180,
+      "p1": 20,
+      "density": 1.01,
+      "qual": "HOLD",
+      "rawFields": [
+        {
+          "identity": "TEMPERATURE_1_STORED",
+          "lexeme": "180",
+          "byteStart": 1696,
+          "byteEnd": 1709,
+          "storedNumber": 180
+        },
+        {
+          "identity": "PRESSURE_1_STORED",
+          "lexeme": "20",
+          "byteStart": 1821,
+          "byteEnd": 1834,
+          "storedNumber": 20
+        },
+        {
+          "identity": "FLUID_DENSITY_STORED",
+          "lexeme": "1.01",
+          "byteStart": 1998,
+          "byteEnd": 2011,
+          "storedNumber": 1.01
+        }
+      ]
+    }
+  ],
+  "attachments": {
+    "restrant": [
+      "RESTRANT",
+      "1",
+      "Pointer 1 · Slot 1",
+      "Type 1 · CNode 0 · semantics partial"
+    ],
+    "displmnt": [
+      "DISPLMNT",
+      "1",
+      "Pointer 1 · Specification 1",
+      "Vectors/cases not yet qualified"
+    ],
+    "forcmnt": [
+      "FORCMNT",
+      "1",
+      "Pointer 1 · Specification 1",
+      "Input loads only; not computed reactions"
+    ],
+    "rigid": [
+      "RIGID",
+      "1",
+      "Pointer 1",
+      "Weight raw 100 · element-owned, semantics partial"
+    ]
+  }
+}

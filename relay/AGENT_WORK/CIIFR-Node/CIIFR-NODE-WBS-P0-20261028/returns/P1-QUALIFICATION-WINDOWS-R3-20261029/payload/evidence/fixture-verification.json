@@ -1,0 +1,20 @@
+{
+  "SYNTH_V14_SOURCE": {
+    "bytes": 8276,
+    "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+    "gitBlob": "7d00c13f5c5906a9bb2dba53287f133c8db06358",
+    "expectedBytes": 8276,
+    "expectedSha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+    "expectedGitBlob": "7d00c13f5c5906a9bb2dba53287f133c8db06358",
+    "match": true
+  },
+  "SYNTH_V14_TARGET0": {
+    "bytes": 8276,
+    "sha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+    "gitBlob": "dddf157895571802973b71904fbad0a679a7e271",
+    "expectedBytes": 8276,
+    "expectedSha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+    "expectedGitBlob": "dddf157895571802973b71904fbad0a679a7e271",
+    "match": true
+  }
+}

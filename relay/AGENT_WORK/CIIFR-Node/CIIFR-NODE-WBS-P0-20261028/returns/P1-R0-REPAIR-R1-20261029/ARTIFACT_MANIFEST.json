@@ -1,0 +1,112 @@
+{
+  "task": "CIIFR-NODE-P1-R0-REPAIR-R1",
+  "candidate": "7f5dc773ac7bb08544d086be734e4337295088a0",
+  "classification": "PUBLIC_SAFE_SELF_ASSESSED_BUILDER_RETURN",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4482,
+      "sha256": "a947a34b54da9a5da62500ed4fb172b0b5135ab1a5ce85767312243f67f0f01d"
+    },
+    {
+      "path": "payload/fail-before.tap",
+      "bytes": 8862,
+      "sha256": "ceb2346f64c8688b7e06f6cd67dffe557e5dea4d2e40e8cfc4b6e20a2c0bbdd2"
+    },
+    {
+      "path": "payload/focused-final.tap",
+      "bytes": 2728,
+      "sha256": "89fddc207deb6b0f89f30234ae2ef094ad5b33aa7c225a34c42b74820216711c"
+    },
+    {
+      "path": "payload/required-three.tap",
+      "bytes": 3701,
+      "sha256": "8ffc4bc7515fb63c373528fa5b00e20dc572b6cb4a987cffd44483c29ba5d907"
+    },
+    {
+      "path": "payload/vnext-all-complete.tap",
+      "bytes": 26426,
+      "sha256": "7bcacbbebebeb7fbce05c916d6b3daebaad2ba348160364216ee4c689ebfdd3b"
+    },
+    {
+      "path": "payload/base-vnext-complete.tap",
+      "bytes": 20462,
+      "sha256": "c1e068b0e0566e06f0a1e5c979a8385a678d8946b828e0d6a419ceade3bbe47e"
+    },
+    {
+      "path": "payload/oldhead-vnext-complete.tap",
+      "bytes": 23814,
+      "sha256": "553d6a63ec02efc6733826261577ae0d9f068f179f409769498d3b841c1a884f"
+    },
+    {
+      "path": "payload/geometry-bounded.tap",
+      "bytes": 1951,
+      "sha256": "c6fe7da5b52c8400a169dff951d31ae0a348e0e1459b20e98b1cbc9c3fcbd55d"
+    },
+    {
+      "path": "payload/public-fixture-results.json",
+      "bytes": 472,
+      "sha256": "e987739653d9559f7a74eb07e9b93f8f06cc80e9b0bbb9140223b9e8f855df43"
+    },
+    {
+      "path": "payload/scope-and-mirrors.json",
+      "bytes": 593,
+      "sha256": "67e7398b4c7b6a649d002a5104f72f24e184b2353ae6332ffa816fd9479a3aa5"
+    },
+    {
+      "path": "payload/validation-summary.json",
+      "bytes": 680,
+      "sha256": "9cc13575c0941a723a725e46bff65771b6359f3a823f9d185f98e6af681a0bf2"
+    },
+    {
+      "path": "payload/product-readback.json",
+      "bytes": 1887,
+      "sha256": "bf5c905f011a563422ab98ba8e07819dab0b04d0049ddde92110213b7154d322"
+    },
+    {
+      "path": "payload/ledger/modules/navigation.md",
+      "bytes": 1907,
+      "sha256": "b574c6cf193a385a71b732435558abcd9603933b26629739d1cf9709daf38d53"
+    },
+    {
+      "path": "payload/ledger/modules/navigation.patch",
+      "bytes": 2062,
+      "sha256": "938b4603882a275d1907cf71af84e1e06bfe16f862f73acb5c88f79726055564"
+    },
+    {
+      "path": "payload/ledger/modules/index-evidence.md",
+      "bytes": 2493,
+      "sha256": "f79d6119381032ded20a2a84b0a326480d2f8e30539e92fb0710cad6530cc20f"
+    },
+    {
+      "path": "payload/ledger/modules/index-evidence.patch",
+      "bytes": 15046,
+      "sha256": "2571cb34b0c3b5eccfa5a37e3121c6538b934605511a3cdce25c289aebe1c204"
+    },
+    {
+      "path": "payload/ledger/modules/regression-report.md",
+      "bytes": 1495,
+      "sha256": "d18b3ef779fe382b7e4f218f9e7801155dff7ce89c9c004662e413f6a47ade6b"
+    },
+    {
+      "path": "payload/ledger/modules/regression-report.patch",
+      "bytes": 21177,
+      "sha256": "6e6b3a59cf79c66a168ee9715ffd0702ac20f87e859947c40f3f1394aca20429"
+    },
+    {
+      "path": "payload/ledger/manifest.md",
+      "bytes": 2372,
+      "sha256": "03fef0f349191c2cca18ab3715f34cdddaba0720dd4a7c6deab705188d4a9bae"
+    },
+    {
+      "path": "payload/ledger/changed-files.json",
+      "bytes": 2718,
+      "sha256": "727b205719340738a52a9459d199d0b07eea1ff35c6445fe465eeddf67cc6f16"
+    },
+    {
+      "path": "payload/ledger/new-files.json",
+      "bytes": 560,
+      "sha256": "293ff8e861777004e0eccc8c87bf6ce39218f050ce3dd120178b73f1a688d24f"
+    }
+  ]
+}

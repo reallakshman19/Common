@@ -1,0 +1,152 @@
+{
+  "task": "CIIFR-NODE-N01-PR226-R0-IR",
+  "reviewed_head": "7f5dc773ac7bb08544d086be734e4337295088a0",
+  "verdict": "F1 pending-selection FAIL; F2/F3/F4 bounded PASS; GATE_R0 HOLD",
+  "files": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 10560,
+      "sha256": "fc6c520ac950736868343048f392c94d6cef74cad6b12a9c5e7428b11b6f36e5"
+    },
+    {
+      "path": "probe.mjs",
+      "bytes": 7149,
+      "sha256": "6ae76b7afccb9d14488a4e040bba113f682517e81bf056cab472be1e1c84e15b"
+    },
+    {
+      "path": "evidence/SYNTH_V14_SOURCE.cii.json",
+      "bytes": 11807,
+      "sha256": "8ebc8360303c6b6ecd71d466d6c369e78b85b825a188629295aacad0ea8829e3"
+    },
+    {
+      "path": "evidence/SYNTH_V14_TARGET0.cii.json",
+      "bytes": 11809,
+      "sha256": "0301e0f27c9255bd399fd198ef4211c0d379ed58b0c468cb18927b8ea7c917f2"
+    },
+    {
+      "path": "evidence/additional-tree.json",
+      "bytes": 3665,
+      "sha256": "0e9f7bc8a86c4dc99398f8812d78a1dc7bf978f4066b2c12aef271a41ed73f42"
+    },
+    {
+      "path": "evidence/agents.json",
+      "bytes": 16674,
+      "sha256": "d58c4acfe3e9dd5560614b8dc978e360eb40c6db1292fe3b9b22941620a567f7"
+    },
+    {
+      "path": "evidence/base-command.json",
+      "bytes": 1163,
+      "sha256": "d303d98f22dbd12a87607b1ced6a6a6246fb6083deda0b7339008077b963aecb"
+    },
+    {
+      "path": "evidence/base-tree.json",
+      "bytes": 111814,
+      "sha256": "4c2faf2aba040971d2dd29a78bb17b3a8d2aa324f407e7e5543699a6f4898aa1"
+    },
+    {
+      "path": "evidence/base-verification.json",
+      "bytes": 13140,
+      "sha256": "18ae07d302d279a5d6cd10aed69fdc2f5047a1f1661966234602a390734dc03e"
+    },
+    {
+      "path": "evidence/base-vnext-all.tap",
+      "bytes": 9125,
+      "sha256": "369111853ea84568514aedec67bbfc5ea440c01e6d12aa10a2179d2821ef5e40"
+    },
+    {
+      "path": "evidence/candidate-tree.json",
+      "bytes": 113495,
+      "sha256": "57c3125d4ddc19bb1c8f7e80ee8f0f42637065be3ed40f25846c3b1bff101d61"
+    },
+    {
+      "path": "evidence/commands.json",
+      "bytes": 4353,
+      "sha256": "74fcdfdc63ffcf4e55d715a784f11e24e7eb5b8813e5d94ff74857798b64bcd8"
+    },
+    {
+      "path": "evidence/geometry.tap",
+      "bytes": 908,
+      "sha256": "1d1d8fe62b2646c39451c3b120619f87f887c624974b891e3ced3106f01e3dd1"
+    },
+    {
+      "path": "evidence/guide.json",
+      "bytes": 5897,
+      "sha256": "843da714ea2fc522c6183d6fd9a4dc0552a31af2fdda0df48c9e62a6e4e437bb"
+    },
+    {
+      "path": "evidence/independence.json",
+      "bytes": 3320,
+      "sha256": "9bb1b1fbd9cfd8079d5a9ecd039458c84121e6a21f2781a0b7134e674a35c91b"
+    },
+    {
+      "path": "evidence/ir.json",
+      "bytes": 8602,
+      "sha256": "b480ab1feabb60d82b26e899c8e3ea5f58feb7c35786cdb5014c9f9e2e9b6431"
+    },
+    {
+      "path": "evidence/issue228-live.json",
+      "bytes": 4378,
+      "sha256": "ae4ec0b2a0dbda0527492fd565741f4f8d80523ef014a0f9aa92037087b21c61"
+    },
+    {
+      "path": "evidence/local-verification.json",
+      "bytes": 23151,
+      "sha256": "4d4ed0275982046bac20cf426e44019e6b6ab5f79b33d36227a7bad1472d5707"
+    },
+    {
+      "path": "evidence/postrun-identity.json",
+      "bytes": 1699,
+      "sha256": "c7c5f2382519b01d3b7eb078430760b7d198681d7cd35cc7e20da33c5add6653"
+    },
+    {
+      "path": "evidence/pr226.json",
+      "bytes": 5685,
+      "sha256": "9ef7ae37d96bb135e2b53a6c298d4aff97b650857e02566e164b8030dd4b1472"
+    },
+    {
+      "path": "evidence/pr232-files.json",
+      "bytes": 567,
+      "sha256": "aa532dae64b25f0d684435a16ed68adf244ff17f156f1bba44ed01ae7bc40203"
+    },
+    {
+      "path": "evidence/pr232.json",
+      "bytes": 3855,
+      "sha256": "6cdd2461b0c66cb838833a0ee99134e1d2a3737c4539ce82c5b97ee97a7aa9bb"
+    },
+    {
+      "path": "evidence/probe-base.log",
+      "bytes": 1063,
+      "sha256": "ee33cd62f682f0d53502a2f4c2c23acf389cbf68e2ae9d9e59f61974bed606ed"
+    },
+    {
+      "path": "evidence/probe-candidate.log",
+      "bytes": 1063,
+      "sha256": "ee33cd62f682f0d53502a2f4c2c23acf389cbf68e2ae9d9e59f61974bed606ed"
+    },
+    {
+      "path": "evidence/repair.tap",
+      "bytes": 1229,
+      "sha256": "0ecf5726a7e2e6e749e6ed2ca2c10639e7b7078c5c3c2339a385cc0faa88fa42"
+    },
+    {
+      "path": "evidence/required-three.tap",
+      "bytes": 1605,
+      "sha256": "52e323d7a96830540cf3480508da6a29c97f7838ff5ebd4cd560d93de1a780eb"
+    },
+    {
+      "path": "evidence/vnext-all.tap",
+      "bytes": 11619,
+      "sha256": "f978c7aa5b5e00ea67b16c525398e39f55b1992eba214d12a4ce9dfdd7b9fed6"
+    },
+    {
+      "path": "fixtures/SYNTH_V14_SOURCE.cii",
+      "bytes": 8276,
+      "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b"
+    },
+    {
+      "path": "fixtures/SYNTH_V14_TARGET0.cii",
+      "bytes": 8276,
+      "sha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661"
+    }
+  ]
+}

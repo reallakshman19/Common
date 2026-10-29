@@ -1,0 +1,10 @@
+PASS literal public-fixture endpoint, incident, restraint, T1/P1/density expectations
+PASS endpoint negative/zero/fraction contrary cases
+PASS all15 pointer families reject below-zero, count+1 and fractional values; explicit physical layout oracle
+PASS all10 non-NODENAME unsupported typed families at upper boundary1 remain UNKNOWN with missing contents
+PASS lexical underflow residue is UNKNOWN; physical span and original-input byte digests preserved
+PASS independent branch oracle {"branch":"/SYNTHETIC\"-BRANCH-001/B","expected":0,"actual":0}
+PASS independent branch oracle {"branch":"/SYNTHETIC\"-BRANCH-001/B2-WRONG","expected":0,"actual":0}
+PASS independent branch oracle {"branch":"/SYNTHETIC\"-BRANCH-001/B1","expected":1,"actual":1}
+OBSERVATION pending owning CSV selection {"exportDisabled":false,"applyDisabled":false,"validateDisabled":false,"claims":1,"downloads":1,"exportContainsOldApprovedReplacement":true,"exportContainsPendingReplacement":false}
+PASS CSV completion revokes output; FAIL selection boundary if immediate revocation is required

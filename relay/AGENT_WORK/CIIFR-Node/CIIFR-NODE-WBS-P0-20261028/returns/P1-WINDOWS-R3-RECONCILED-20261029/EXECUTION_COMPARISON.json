@@ -1,0 +1,68 @@
+{
+  "scope": "Receiver reconciliation of exact committed executor evidence; no receiver Windows/browser execution and no Owner engineering acceptance",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "sourcePhysicalOracle": "Independent raw-byte recheck imports no product reader",
+  "browsers": [
+    {
+      "browser": "Microsoft Edge",
+      "version": "Edg/156.0.4314.42",
+      "cases": 6,
+      "status": "VERIFIED_REPORTED_EXECUTION",
+      "exactPhysicalFields": true,
+      "attachmentOwners": true,
+      "pageErrors": 0,
+      "consoleErrors": 0,
+      "externalPageRequests": 0
+    },
+    {
+      "browser": "Google Chrome",
+      "version": "Chrome/156.0.8078.48",
+      "cases": 6,
+      "status": "VERIFIED_REPORTED_EXECUTION",
+      "exactPhysicalFields": true,
+      "attachmentOwners": true,
+      "pageErrors": 0,
+      "consoleErrors": 0,
+      "externalPageRequests": 0
+    }
+  ],
+  "nativeSummaries": [
+    {
+      "path": "required-three.tap",
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "repair.tap",
+      "tests": 13,
+      "pass": 13,
+      "fail": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "geometry.tap",
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "guard-tests.tap",
+      "tests": 23,
+      "pass": 23,
+      "fail": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "vnext-all-complete.tap",
+      "tests": 124,
+      "pass": 123,
+      "fail": 1,
+      "status": "FAIL"
+    }
+  ],
+  "disposition": "BOUNDED_WINDOWS_PUBLIC_FIXTURE_EVIDENCE_VERIFIED",
+  "original": "NOT_RECEIVED / NOT_RUN"
+}

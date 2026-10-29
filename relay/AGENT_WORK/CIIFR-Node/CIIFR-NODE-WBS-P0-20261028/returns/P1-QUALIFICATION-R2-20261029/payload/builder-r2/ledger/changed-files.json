@@ -1,0 +1,30 @@
+[
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "backup_id": 9,
+    "before_sha256": "881b3dac7884da30502e5dc90400592b4e5a616ab2335f05c90cec5efb83bf72",
+    "after_sha256": "7c246390253ee6a4a891927f8f27bdb5575a57494244ebd3afcc0085bd614817",
+    "git_blob": "74891ccd948782b54b8f7781168e996c65d2af9e"
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "backup_id": 10,
+    "before_sha256": "881b3dac7884da30502e5dc90400592b4e5a616ab2335f05c90cec5efb83bf72",
+    "after_sha256": "7c246390253ee6a4a891927f8f27bdb5575a57494244ebd3afcc0085bd614817",
+    "git_blob": "74891ccd948782b54b8f7781168e996c65d2af9e"
+  },
+  {
+    "path": "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+    "backup_id": 11,
+    "before_sha256": "26455f38c760c7d76ac7552e3a8e05c4847d25b059e2c61be43167a42373b269",
+    "after_sha256": "71d2ddf1b59455e3c204f0faaa0f37bda852ca34d9ac37caea775194616ecd56",
+    "git_blob": "ff96b9e9447875f54a42436dffefded35b626327"
+  },
+  {
+    "path": "agents/PR232_workreport.md",
+    "backup_id": 12,
+    "before_sha256": "1d62cd30d4dbaa399d341b03a2d98f6b9d544e54e9d31b9e484b7dbce40d53f6",
+    "after_sha256": "4227dde7f30c1ef4b9330fd2ae1fa6ee240fba2eb3a53787dc9bcb54bb2c4461",
+    "git_blob": "bc8ea2417c3ca735fbf279dd8fd37bd7c3c8c1f8"
+  }
+]

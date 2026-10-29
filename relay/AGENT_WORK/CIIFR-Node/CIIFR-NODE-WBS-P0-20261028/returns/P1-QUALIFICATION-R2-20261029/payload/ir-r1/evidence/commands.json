@@ -1,0 +1,65 @@
+{
+  "required-three": {
+    "command": [
+      "node",
+      "--test",
+      "tests/cii-fnr-vnext-property-transfer-r0.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-ui-regression.test.mjs",
+      "tests/cii-fnr-vnext-nodal-ui.test.mjs"
+    ],
+    "exit": 0,
+    "tail": "tive node/CNode and inconsistent blank-node slot (4.107373ms)\n\u2714 positive physical RIGID, DISPLMNT and FORCMNT families are indexed without writes (1.342882ms)\n\u2714 new tab and source/served files retain existing VNext tabs (1.213161ms)\n\u2714 Property Transfer mount does not alter Nodal tab state or handlers (36.711252ms)\n\u2714 older focused Nodal DOM without Property panel still starts safely (11.242581ms)\n\u2139 tests 17\n\u2139 suites 0\n\u2139 pass 17\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 176.139398\n"
+  },
+  "repair": {
+    "command": [
+      "node",
+      "--test",
+      "tests/cii-fnr-vnext-property-transfer-repair.test.mjs"
+    ],
+    "exit": 0,
+    "tail": "ounded populated BEND remains explicitly unqualified, with unchanged bytes (1.251498ms)\n\u2714 F4 dormant restraint payload is UNKNOWN evidence, never a logical node or discarded bytes (1.573042ms)\n\u2714 F4 zero spellings do not fabricate residue; unparsed text is preserved as UNKNOWN (2.783659ms)\n\u2714 F3/F4 UNKNOWN diagnostics and raw restraint evidence are visible on intake and in either mode (8.905246ms)\n\u2139 tests 11\n\u2139 suites 0\n\u2139 pass 11\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 347.641883\n"
+  },
+  "vnext-all": {
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+      "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+      "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+      "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+      "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+      "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+      "tests/cii-fnr-vnext-a1.test.mjs",
+      "tests/cii-fnr-vnext-branch-scope.test.mjs",
+      "tests/cii-fnr-vnext-config-policy.test.mjs",
+      "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+      "tests/cii-fnr-vnext-demo.test.mjs",
+      "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+      "tests/cii-fnr-vnext-geo-tab.test.mjs",
+      "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+      "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+      "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+      "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+      "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+      "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+      "tests/cii-fnr-vnext-p2-repair.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-r0.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-ui-regression.test.mjs",
+      "tests/cii-fnr-vnext-r2-regressions.test.mjs"
+    ],
+    "exit": 1,
+    "tail": "SERTION]: Expected values to be strictly equal:\n  \n  1 !== 0\n  \n      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/n01-pr232-review/candidate/tests/cii-fnr-vnext-branch-scope.test.mjs:85:12)\n      at async Test.run (node:internal/test_runner/test:1409:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 1,\n    expected: 0,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+  },
+  "geometry": {
+    "command": [
+      "node",
+      "--test",
+      "tests/cii-workspace-geometry-authority.test.js",
+      "tests/cii-workspace-method-c-original-geometry.test.js"
+    ],
+    "exit": 0,
+    "tail": "\u2714 cycle contradiction is rejected and cannot mint an extra node (1.345095ms)\n\u2714 corrupt original bytes and invalid element count are refused (0.999545ms)\n\u2714 native element CONTROL counts reject missing/extra records (0.764679ms)\n\u2714 NODENAME pointer uses native row-13 first field and fails when out of range (1.407168ms)\n\u2714 native COORDS accepts adjoining signed coordinate as in original S2 (2.058949ms)\n\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 120.097793\n"
+  }
+}

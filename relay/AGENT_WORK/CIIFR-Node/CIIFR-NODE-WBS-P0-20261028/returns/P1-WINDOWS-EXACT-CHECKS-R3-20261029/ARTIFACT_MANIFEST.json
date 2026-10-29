@@ -1,0 +1,116 @@
+{
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "basisReturn": "dffe98513ddb938426e2a0068ee97a411280bf8e",
+  "status": "PREPARED_R3_BROWSER_NOT_RUN",
+  "files": [
+    {
+      "path": "evidence/attribute-scope.json",
+      "bytes": 274,
+      "sha256": "9c787246fdd0ba24b5e2e2659537b3caa703bccff6c8d6fbb951ad087eaaa6ab",
+      "gitBlob": "e4e4258224584b8ee80fa4e0f10fff6e8fc70580"
+    },
+    {
+      "path": "evidence/guard-tests.tap",
+      "bytes": 3152,
+      "sha256": "fc46c372683f5e8dbbac0121b102367825f5da3ab3e8f7348731efdc79b81745",
+      "gitBlob": "1010d125ec4b82aec1bfbfb15873408493515bfa"
+    },
+    {
+      "path": "evidence/panel-integration.json",
+      "bytes": 1991,
+      "sha256": "f0380ff41134aae2492cf9888d0ad6d3e9f8846d5cbc0673550b4c350d0fe1f8",
+      "gitBlob": "a158fb8677291c23ec0ca1312d23b4fbe057e940"
+    },
+    {
+      "path": "evidence/r2-return-readback.json",
+      "bytes": 5089,
+      "sha256": "5ff1cac483445ffb6e0daf0cad1673b59a991989cd644ca06af0f8564ac0684c",
+      "gitBlob": "adc88d4aaf2cf67b9db81da56e7f34dc081a731b"
+    },
+    {
+      "path": "evidence/r2-served-source-readback.json",
+      "bytes": 3734,
+      "sha256": "3850424284afbe250b52fe215bcc8ad499e805e65324667846638dcd5c8d3d8a",
+      "gitBlob": "1196291d0a777036447475440a0199acdbeb0a01"
+    },
+    {
+      "path": "evidence/receiver-probes.json",
+      "bytes": 371,
+      "sha256": "6d385153f941266b24fad428850b32d606146a392ceb52052fae4c81134619f8",
+      "gitBlob": "32cf1d932e4816c589d18bcc9eb1a3fd6084317c"
+    },
+    {
+      "path": "payload/fixtures/.gitattributes",
+      "bytes": 13,
+      "sha256": "74f56d43a317e3d2f7fa470cc1dfea9812a5b045bc20e3e8445088a5d265533e",
+      "gitBlob": "4e9f2b451effc17e6df809e0c281a0002b804aab"
+    },
+    {
+      "path": "payload/fixtures/SYNTH_V14_SOURCE.cii",
+      "bytes": 8276,
+      "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+      "gitBlob": "7d00c13f5c5906a9bb2dba53287f133c8db06358"
+    },
+    {
+      "path": "payload/fixtures/SYNTH_V14_TARGET0.cii",
+      "bytes": 8276,
+      "sha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+      "gitBlob": "dddf157895571802973b71904fbad0a679a7e271"
+    },
+    {
+      "path": "payload/panel-integration.mjs",
+      "bytes": 2852,
+      "sha256": "71b343904e57863b0cc73827ec1ca665f0e51eb9887a07464cb8b98caab5fdc9",
+      "gitBlob": "69200c7bb1024b01e25da9cf265c5e1b66b4cd99"
+    },
+    {
+      "path": "payload/physical-oracle.json",
+      "bytes": 2200,
+      "sha256": "3402d0fcb3ae9996f8d6ab64647e2e9aa74f29c9be9d3d040e8f8cf5b84785ae",
+      "gitBlob": "10cdfdd2053cb2ea4404bb02b685c1dce70128f0"
+    },
+    {
+      "path": "payload/physical_oracle.py",
+      "bytes": 2732,
+      "sha256": "1c9cf951fdbad2600bfc5fc984cbff637470431139c8114befa81ce6a469f5f0",
+      "gitBlob": "67f178ce061db77955a0e0b5f3ef8311095aa1c6"
+    },
+    {
+      "path": "payload/qualification-guards.mjs",
+      "bytes": 2794,
+      "sha256": "19dd251e7c1e334423f24429d67671a4163bf65fd733befd9e3f75217de4dd3d",
+      "gitBlob": "f51a1ed9192bbc15d0a16b480ab4d72d304f6ecd"
+    },
+    {
+      "path": "payload/qualification-guards.test.mjs",
+      "bytes": 3680,
+      "sha256": "c636cc4696a50e6f81a04347000b1d7aa31a60cb14ff5e468fcb8418c5ead181",
+      "gitBlob": "19c5509e74d9788c2ead5beea7cf423f176a5e7e"
+    },
+    {
+      "path": "payload/receiver-probes-r2-r3.mjs",
+      "bytes": 3174,
+      "sha256": "9cb8e58f0bba2c160e9a7b50fc3cdc83607ec2f2268a3d2493e17f7cffef810d",
+      "gitBlob": "239a3410aa9e8d19caf0791bc9136097776f6ed9"
+    },
+    {
+      "path": "payload/run_qualification_browser.mjs",
+      "bytes": 53134,
+      "sha256": "dd7508ef86f1bb3d2eaf4d2853796d5b81e0319748d2fdd228270da3b25252a2",
+      "gitBlob": "fff3987d0647e909e6dd0367be255ebed4b757ef"
+    },
+    {
+      "path": "payload/verify_pack.mjs",
+      "bytes": 1028,
+      "sha256": "8e85c3774a493d799af236500ddd17422e098cdb677f78df69739288385c973a",
+      "gitBlob": "808bf898dbac706da782f60e26dbea60c0d106a5"
+    },
+    {
+      "path": "receipt.md",
+      "bytes": 8059,
+      "sha256": "d75f31b1d24d485545c08dcda75710e24f58e7373d66f2eccd0f828b0bd1ad27",
+      "gitBlob": "e98e209599148a4b56be04cea5edfb25e22eed6d"
+    }
+  ]
+}

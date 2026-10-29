@@ -1,0 +1,14 @@
+{
+  "scope": "Extracted R2 guards and R3 exact guards; no browser or new product test execution",
+  "R2": {
+    "pressure130StillAccepted": true,
+    "pointer10StillAccepted": true,
+    "falseChallengesRejected": true,
+    "lateExceptionRejected": true,
+    "consoleErrorRejected": true
+  },
+  "R3": {
+    "pressure130Rejected": true,
+    "pointer10Rejected": true
+  }
+}
