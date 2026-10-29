@@ -36,6 +36,8 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python -B -m unittest discover -s skills/agent-work/progress-page/tests -v
+      - name: Portable shared Smart Badge integration tests
+        run: node --experimental-default-type=module --test skills/agent-work/progress-page/tests/portable-smart-badges.test.mjs
       - name: Check the viewer modules parse
         run: |
           for f in skills/agent-work/progress-page/viewer/*.js; do node --input-type=module --check < "$f"; done

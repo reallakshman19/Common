@@ -78,3 +78,6 @@ Modes and the Nudge + wiring: [references/MODES.md](references/MODES.md). Fields
 
 
 **Current scoped architecture:** The shared portable Cycle preflight also detects source-bound `UNMERGED` status mirrors contradicting an actually merged native PR, without rewriting historical records. The reference watcher emits a review-only, ephemeral source/custody-role handoff, never an assignment or second ledger. An unbound new agent may review original case evidence but must not assume incumbent Cycle Oracle or Page writer authority. CIIFR-specific correction drafts are Common PR #555 and Progress Page PR #54, independent of this reusable tool sync.
+
+
+**Smart Badge reuse (portable reference pinned):** The latest reference provides stable AIM/ROADMAP/WBS/PLAN/FIXTURE/ORACLE_CONTINUITY identifiers as *read-only* source-grounded pointers for Timeline, the writer brief, Agent Start packets and Oracle continuity. The source derivation does not require an agent check-in; it does not assign roles, resolve private bytes, accept engineering work or write a canonical Page/Cycle record. The actual actor/writer still verifies original sources before publication.
