@@ -1,0 +1,38 @@
+[
+  {
+    "id": 9,
+    "timestamp": "2026-10-29 13:26:31",
+    "file": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "context": "Plan to repair independently observed pending CSV selection revocation under F1",
+    "backupFile": "tabs__cii-workspace__cii-fnr-vnext__ui__app.js_29_10_26_13_26.bak",
+    "bytes": 30191,
+    "sha256": "881b3dac7884da30502e5dc90400592b4e5a616ab2335f05c90cec5efb83bf72"
+  },
+  {
+    "id": 10,
+    "timestamp": "2026-10-29 13:26:31",
+    "file": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "context": "Plan to repair independently observed pending CSV selection revocation under F1",
+    "backupFile": "docs__tabs__cii-workspace__cii-fnr-vnext__ui__app.js_29_10_26_13_26.bak",
+    "bytes": 30191,
+    "sha256": "881b3dac7884da30502e5dc90400592b4e5a616ab2335f05c90cec5efb83bf72"
+  },
+  {
+    "id": 11,
+    "timestamp": "2026-10-29 13:26:31",
+    "file": "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+    "context": "Plan to repair independently observed pending CSV selection revocation under F1",
+    "backupFile": "tests__cii-fnr-vnext-property-transfer-repair.test.mjs_29_10_26_13_26.bak",
+    "bytes": 10331,
+    "sha256": "26455f38c760c7d76ac7552e3a8e05c4847d25b059e2c61be43167a42373b269"
+  },
+  {
+    "id": 12,
+    "timestamp": "2026-10-29 13:26:31",
+    "file": "agents/PR232_workreport.md",
+    "context": "Plan to repair independently observed pending CSV selection revocation under F1",
+    "backupFile": "agents__PR232_workreport.md_29_10_26_13_26.bak",
+    "bytes": 10423,
+    "sha256": "1d62cd30d4dbaa399d341b03a2d98f6b9d544e54e9d31b9e484b7dbce40d53f6"
+  }
+]

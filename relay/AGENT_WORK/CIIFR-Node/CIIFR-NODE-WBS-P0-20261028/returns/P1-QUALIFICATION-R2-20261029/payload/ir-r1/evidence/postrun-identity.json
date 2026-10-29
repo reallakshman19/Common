@@ -1,0 +1,49 @@
+{
+  "captured_utc": "2026-10-29T09:26:43.021192+00:00",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "candidate": "7f5dc773ac7bb08544d086be734e4337295088a0",
+  "parent": "b2b695f66fc8dfc907f2b9a493b39bd4d4109570",
+  "base": "fd86b21aa9dcbfbbe4f8a1d26133b7e9779448be",
+  "fixture_source_commit": "56dbc3a0af137c433ffb5fec48316fa2022d075c",
+  "candidate_postrun_files_checked": 109,
+  "candidate_postrun_mismatches": [],
+  "base_postrun_files_checked": 88,
+  "base_postrun_mismatches": [],
+  "mirrors": [
+    {
+      "module": "app.js",
+      "sha256": "881b3dac7884da30502e5dc90400592b4e5a616ab2335f05c90cec5efb83bf72",
+      "equal": true
+    },
+    {
+      "module": "property-transfer/cii-index.js",
+      "sha256": "50d4f44f18acacc82e1f89065d9b8c289c4f0876aa9e094f5c5c7b405146605a",
+      "equal": true
+    },
+    {
+      "module": "property-transfer/element.js",
+      "sha256": "4c00591cf1efc3c23530fc61ef3e3c80b592bbad765265d7f47ae3da398b6dcb",
+      "equal": true
+    },
+    {
+      "module": "property-transfer/node.js",
+      "sha256": "8cae20c6413311d069aad03560903563e9faad89c68a4ddad254bd72beb3340d",
+      "equal": true
+    },
+    {
+      "module": "property-transfer/panel.js",
+      "sha256": "96bcfc8cbf7878bcfb2204354bf69bee49466a8cf2268162d6b4fc640713bb32",
+      "equal": true
+    },
+    {
+      "module": "property-transfer/style.css",
+      "sha256": "42bd9fda783c576cd0b544ae01bc0e761527474f63ae6639789c29f6b58cf887",
+      "equal": true
+    }
+  ],
+  "csv_handler_sha256": {
+    "candidate": "75c91fc4a726d8605a795ffaae2f384a8c3cfedbe237cd460e060320736f1951",
+    "base": "75c91fc4a726d8605a795ffaae2f384a8c3cfedbe237cd460e060320736f1951"
+  }
+}

@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates
+ok 1 - new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates
+  ---
+  duration_ms: 96.174447
+  type: 'test'
+  ...
+# Subtest: two oriented FROM->TO elements meet at Node 500 without sharing process ownership
+ok 2 - two oriented FROM->TO elements meet at Node 500 without sharing process ownership
+  ---
+  duration_ms: 9.476349
+  type: 'test'
+  ...
+# Subtest: Path A requires exact orientation and never infers SOURCE/TARGET identity
+ok 3 - Path A requires exact orientation and never infers SOURCE/TARGET identity
+  ---
+  duration_ms: 4.626489
+  type: 'test'
+  ...
+# Subtest: Path B resolves exact restraint slot without claiming constrained DOF semantics
+ok 4 - Path B resolves exact restraint slot without claiming constrained DOF semantics
+  ---
+  duration_ms: 1.200613
+  type: 'test'
+  ...
+# Subtest: invalid noncanonical section markers are rejected before property inspection
+ok 5 - invalid noncanonical section markers are rejected before property inspection
+  ---
+  duration_ms: 1.334069
+  type: 'test'
+  ...
+# Subtest: shared RESTRANT auxiliary pointer is held, not silently assigned
+ok 6 - shared RESTRANT auxiliary pointer is held, not silently assigned
+  ---
+  duration_ms: 1.208124
+  type: 'test'
+  ...
+# Subtest: incomplete MISCEL_1/RRMAT custody is rejected
+ok 7 - incomplete MISCEL_1/RRMAT custody is rejected
+  ---
+  duration_ms: 0.787893
+  type: 'test'
+  ...
+# Subtest: unqualified V11 version is rejected rather than interpreted as V14
+ok 8 - unqualified V11 version is rejected rather than interpreted as V14
+  ---
+  duration_ms: 0.773742
+  type: 'test'
+  ...
+# Subtest: inspection does not change TARGET0 and exposes no writer
+ok 9 - inspection does not change TARGET0 and exposes no writer
+  ---
+  duration_ms: 0.80583
+  type: 'test'
+  ...
+# Subtest: CONTROL rejects invalid IZUP, negative nozzle and hanger counts
+ok 10 - CONTROL rejects invalid IZUP, negative nozzle and hanger counts
+  ---
+  duration_ms: 2.531097
+  type: 'test'
+  ...
+# Subtest: CONTROL reports primary counts without claiming nozzle/hanger MISC qualification
+ok 11 - CONTROL reports primary counts without claiming nozzle/hanger MISC qualification
+  ---
+  duration_ms: 2.33067
+  type: 'test'
+  ...
+# Subtest: RRMAT rejects nonnumeric, missing and out-of-range per-element IDs
+ok 12 - RRMAT rejects nonnumeric, missing and out-of-range per-element IDs
+  ---
+  duration_ms: 3.049411
+  type: 'test'
+  ...
+# Subtest: RESTRANT rejects negative node/CNode and inconsistent blank-node slot
+ok 13 - RESTRANT rejects negative node/CNode and inconsistent blank-node slot
+  ---
+  duration_ms: 3.370946
+  type: 'test'
+  ...
+# Subtest: positive physical RIGID, DISPLMNT and FORCMNT families are indexed without writes
+ok 14 - positive physical RIGID, DISPLMNT and FORCMNT families are indexed without writes
+  ---
+  duration_ms: 1.123789
+  type: 'test'
+  ...
+# Subtest: new tab and source/served files retain existing VNext tabs
+ok 15 - new tab and source/served files retain existing VNext tabs
+  ---
+  duration_ms: 0.701175
+  type: 'test'
+  ...
+# Subtest: Property Transfer mount does not alter Nodal tab state or handlers
+ok 16 - Property Transfer mount does not alter Nodal tab state or handlers
+  ---
+  duration_ms: 40.529134
+  type: 'test'
+  ...
+# Subtest: older focused Nodal DOM without Property panel still starts safely
+ok 17 - older focused Nodal DOM without Property panel still starts safely
+  ---
+  duration_ms: 8.261466
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 219.982887

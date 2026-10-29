@@ -1,0 +1,28 @@
+{
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "source": "GitHub fetch_file at exact R2 head",
+  "files": [
+    {
+      "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+      "git_blob": "74891ccd948782b54b8f7781168e996c65d2af9e",
+      "contentEqual": true
+    },
+    {
+      "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+      "git_blob": "74891ccd948782b54b8f7781168e996c65d2af9e",
+      "contentEqual": true
+    },
+    {
+      "path": "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+      "git_blob": "ff96b9e9447875f54a42436dffefded35b626327",
+      "contentEqual": true
+    },
+    {
+      "path": "agents/PR232_workreport.md",
+      "git_blob": "bc8ea2417c3ca735fbf279dd8fd37bd7c3c8c1f8",
+      "contentEqual": true
+    }
+  ],
+  "result": "ALL_FOUR_R2_CHANGES_RETRIEVED_AND_EQUAL",
+  "limits": "Root builder readback; separate non-author exact-tree verification is in R2 report"
+}

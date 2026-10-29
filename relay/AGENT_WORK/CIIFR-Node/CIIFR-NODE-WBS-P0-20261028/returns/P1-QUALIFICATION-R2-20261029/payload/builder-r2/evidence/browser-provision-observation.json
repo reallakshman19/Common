@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-29",
+  "candidate": "7f5dc773ac7bb08544d086be734e4337295088a0",
+  "actor": "root builder; not independent acceptance",
+  "operation": "Real-browser provisioning using installed primary-runtime Playwright1.62.1",
+  "firstAttempt": {
+    "status": "FAIL",
+    "basis": "Native command execution",
+    "error": "ENOENT: mkdtemp /tmp/playwright-download-*; resolved missing temp location by setting writable TMPDIR"
+  },
+  "secondAttempt": {
+    "status": "FAIL",
+    "basis": "Native command execution",
+    "browser": "Chrome Headless Shell151.0.7922.34 / chromium-headless-shell v1234",
+    "error": "Downloaded0MiB; End of central directory record signature not found; browser package empty/truncated; installer exhausted its built-in retries",
+    "exit": 1
+  },
+  "browserExecution": "NOT_RUN",
+  "Windows": "NOT_RUN",
+  "protectedOriginal": "NOT_RECEIVED/NOT_RUN",
+  "next": "Do not repeat this failed download route without a capability change. Use an actually provisioned authorized browser/Windows environment for remaining original/browser qualification.",
+  "limits": "This is a source-bound command observation, not a copied complete raw terminal transcript or browser acceptance."
+}
