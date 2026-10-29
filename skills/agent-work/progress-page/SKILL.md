@@ -5,6 +5,10 @@ description: Run and use the Progress page, a static page plus JSON data in GitH
 
 # Progress page
 
+## Optional Test page and Cycle Timeline (not another agent task)
+
+The [Cycle now via Timeline observation protocol](references/CYCLE_TIMELINE_PROTOCOL.md) describes source-first ACTION/INFO handoffs, source-derived INFO-Auto generated cards, reusable AIM/ROADMAP/WBS/PLAN/FIXTURE/ORACLE_CONTINUITY identifiers and one authorized reconciliation. The per-project [Test page protocol](references/TEST_PAGE_PROTOCOL.md) provides a local Action→Info/Owner-attention demo at `#/PROJECT_KEY/test`, with a read-only audited-Info preview. Neither is a new coordinator mode, mandatory reporting path, assignment, acceptance or Page writer route. Agents begin at the selected native task as below; they do not have to post another status report to populate an Info card.
+
 ## Zero-extra-reporting entry (roles)
 
 | Reader | Start here | Native reporting destination |
