@@ -10,7 +10,7 @@
 - **Cycle Board** is the read-only source-bound *current context, change discovery and continuation view*. It projects claims; it does not grant dispatch, acceptance, merge or Page write authority.
 - **Audit Timeline** means the published append-only `data/<project>/audit.json`. `INFO_AUTO/SOURCE_RECORDED` derives from that audit without posting. Existing optional live `CYCLE_TIMELINE_CARD v2` events are separate reported observations, not a prerequisite to Board usability.
 - **Page writer:** native source review → `pp_cli.py propose` / `pp_batch.py` dry-run → authorized Page update and checked append-only audit. No automatic `--apply`, Cycle state change or instant synchronization. Preserve `#/PROJECT/timeline-live` links if the UI is relabeled **Cycle Board**.
-- The canonical rules in [Oracle Cycle](../../../..//oracle-cycles/PROTOCOL.md), [Page modes](MODES.md), [Page data contract](DATA_CONTRACT.md) and [START_HERE](../../START_HERE.md) supersede a conflicting summary here. Implementation work begins in the reference `progress-page` repository, then syncs reviewed portable code into Common with parity checks.
+- The canonical rules in [Oracle Cycle](../../../../oracle-cycles/PROTOCOL.md), [Page modes](MODES.md), [Page data contract](DATA_CONTRACT.md) and [START_HERE](../../START_HERE.md) supersede a conflicting summary here. Implementation work begins in the reference `progress-page` repository, then syncs reviewed portable code into Common with parity checks.
 
 ## 2. Hard invariants
 
