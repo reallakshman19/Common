@@ -5,6 +5,8 @@ description: Run and use the Progress page, a static page plus JSON data in GitH
 
 # Progress page
 
+**Cycle Board design handoff (optional, not deployed by this documentation):** [source-bound observation/continuation contract](references/CYCLE_BOARD_CONTRACT.md) and [CT-1–CT-4 downstream vertical-slice packets](references/CYCLE_BOARD_VERTICAL_SLICES.md). These are scoped implementation references, not a new Cycle protocol, agent report, WBS or permission to publish; existing task/receipt/Page authority remains unchanged.
+
 ## Zero-extra-reporting entry (roles)
 
 | Reader | Start here | Native reporting destination |
