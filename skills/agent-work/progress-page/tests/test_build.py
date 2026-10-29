@@ -18,7 +18,7 @@ FUNCTIONS = {  # viewer module -> declarations the bundle must still contain
     "onboarding.js": ("renderOnboarding", "onboardingModel"), "search.js": ("buildSearchIndex", "searchProgress"),
     "oracle-continuity.js": ("oracleContinuityModel", "renderOracleContinuity"), "roi.js": ("ciifrRoiModel",),
     "lessons.js": ("renderLessons",), "nudge.js": ("openNudge", "nudgeRow"), "progress.js": ("renderProgress", "milestoneState"),
-    "actions.js": ("renderActions", "renderFixtures", "renderProjectHome", "projectHomeModel"), "timeline.js": ("renderTimeline",), "timeline-live.js": ("timelineCardModel","parseTimelineCardEvent","renderCycleTimeline"), "smart-badges.js": ("smartBadgesForScope","smartBadgeText","renderSmartBadges"), "lifecycle.js": ("tabsRow", "archivedPanel", "projectHead", "revisionRow"),
+    "actions.js": ("renderActions", "renderFixtures", "renderProjectHome", "projectHomeModel"), "timeline.js": ("renderTimeline",), "timeline-live.js": ("timelineCardModel","parseTimelineCardEvent","renderCycleTimeline"), "smart-badges.js": ("smartBadgesForScope","smartBadgeText","renderSmartBadges"), "test-page.js": ("testPageModel","renderTestPage"), "lifecycle.js": ("tabsRow", "archivedPanel", "projectHead", "revisionRow"),
     "briefs.js": ("addProjectDialog", "addRevisionDialog", "projectBrief"), "links.js": ("loadLinks", "takeLinksFromHash", "linksPanel"), "app.js": ("loadAll", "render", "route"),
 }
 

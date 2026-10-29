@@ -195,6 +195,12 @@ changes through their existing reviewed authority. See reference
 [Cycle now via Timeline](https://reallakshman19.github.io/progress-page/#/ciifr/timeline-live)
 and source [PR #63](https://github.com/reallakshman19/progress-page/pull/63).
 
+## New-agent and Owner protocols for Timeline and Test page
+
+- [Cycle now via Timeline — source-first observation](references/CYCLE_TIMELINE_PROTOCOL.md): existing native work record once; ACTION/INFO handoff; INFO-Auto generated evidence; stable Smart Badge reuse; no separate assignment ledger or duplicate reporting.
+- [Test page — optional project-local demonstration](references/TEST_PAGE_PROTOCOL.md): `#/PROJECT_KEY/test` (and `#/learned/test`), local Action/Info/Owner-attention simulation, actual audited-Info preview, zero production writes or claimed acceptance. It is optional, not a mandatory onboarding exercise.
+- [Mode-specific Page authority](references/MODES.md), [Common START_HERE](../START_HERE.md), [canonical Oracle Cycle](../../../oracle-cycles/PROTOCOL.md), [artifact relay](../ARTIFACT_RELAY.md), and [Independent Reviewer](../independent-review/SKILL.md) retain separate real-work authority and evidence requirements.
+
 ## Related modules
 
 [universal-workflow-progress](../../universal-workflow-progress/SKILL.md) (a read-only progress strip inside a chat; not this page), [Gatekeeper](../gatekeeper/SKILL.md) (labels for deliverables),

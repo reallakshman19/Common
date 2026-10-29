@@ -78,3 +78,7 @@ Every step above writes one Timeline entry, so "who asked, who did it, when, on 
 `pp_cli.py project transfer --key <key> --to-coordinator "<name>" [--to-mode standalone|otm] [--reply-target "<name>"] --why ... --actor ... --src ...`
 changes the coordinator (and optionally the mode and the reply target) and records it. The project stays active, with its history.
 To close a project instead: `project archive`, `project supersede --by <other project>`, or `project cancel`. Nothing is deleted; `project restore` brings it back.
+
+## Timeline observation and Test page are not Page writer modes
+
+[Cycle now via Timeline](CYCLE_TIMELINE_PROTOCOL.md) is a read-only operational observation overlay; [Test page](TEST_PAGE_PROTOCOL.md) is an optional local demonstration. Neither changes the OTM/standalone Page writer, canonical Oracle, engineering reviewer, or scoped PR-merge authority defined here. INFO-Auto generated can read existing audited evidence, but a test/demo or agent claim is not a new approved Page-data event. The designated writer must still verify the original native source and use reviewed checked publication; no duplicate agent reports are required.
