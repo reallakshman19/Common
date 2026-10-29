@@ -1,1 +1,2 @@
 coordination/tests/fixtures/v328_source/*.ps1 text eol=lf
+*.cii binary
