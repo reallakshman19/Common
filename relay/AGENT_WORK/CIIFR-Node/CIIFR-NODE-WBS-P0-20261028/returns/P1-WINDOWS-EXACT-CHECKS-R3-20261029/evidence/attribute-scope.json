@@ -1,0 +1,5 @@
+{
+  "restoreRootBlob": "c9dc8a7ec45fdf3573e5b71b83342a2ac21741ef",
+  "currentRootBlob": "a2d3b37256d5e44b2d61117b41cc1a69a09a32e6",
+  "note": "Restore exact pre-R2 root .gitattributes while retaining fixture-local binary rule in both R2 and R3; no fixture normalization."
+}

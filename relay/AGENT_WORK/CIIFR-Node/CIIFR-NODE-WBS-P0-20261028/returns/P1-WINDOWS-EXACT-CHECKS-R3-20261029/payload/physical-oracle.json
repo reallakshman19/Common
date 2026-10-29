@@ -1,0 +1,99 @@
+{
+  "scope": "Pinned public synthetic SOURCE only; physical raw fields and ownership, no effective engineering semantics",
+  "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+  "elements": [
+    {
+      "ordinal": 1,
+      "fromNode": 400,
+      "toNode": 500,
+      "branch": "(none)",
+      "fields": [
+        {
+          "identity": "TEMPERATURE_1_STORED",
+          "lexeme": "200",
+          "byteStart": 466,
+          "byteEnd": 479
+        },
+        {
+          "identity": "PRESSURE_1_STORED",
+          "lexeme": "30",
+          "byteStart": 591,
+          "byteEnd": 604
+        },
+        {
+          "identity": "FLUID_DENSITY_STORED",
+          "lexeme": "1.01",
+          "byteStart": 768,
+          "byteEnd": 781
+        }
+      ]
+    },
+    {
+      "ordinal": 2,
+      "fromNode": 500,
+      "toNode": 600,
+      "branch": "(none)",
+      "fields": [
+        {
+          "identity": "TEMPERATURE_1_STORED",
+          "lexeme": "180",
+          "byteStart": 1696,
+          "byteEnd": 1709
+        },
+        {
+          "identity": "PRESSURE_1_STORED",
+          "lexeme": "20",
+          "byteStart": 1821,
+          "byteEnd": 1834
+        },
+        {
+          "identity": "FLUID_DENSITY_STORED",
+          "lexeme": "1.01",
+          "byteStart": 1998,
+          "byteEnd": 2011
+        }
+      ]
+    }
+  ],
+  "node": {
+    "number": 500,
+    "rows": [
+      [
+        "ELEMENT",
+        "1",
+        "400 → 500",
+        "Incident endpoint; element-owned properties"
+      ],
+      [
+        "ELEMENT",
+        "2",
+        "500 → 600",
+        "Incident endpoint; element-owned properties"
+      ],
+      [
+        "RESTRANT",
+        "1",
+        "Pointer 1 · Slot 1",
+        "Type 1 · CNode 0 · semantics partial"
+      ],
+      [
+        "DISPLMNT",
+        "1",
+        "Pointer 1 · Specification 1",
+        "Vectors/cases not yet qualified"
+      ],
+      [
+        "FORCMNT",
+        "1",
+        "Pointer 1 · Specification 1",
+        "Input loads only; not computed reactions"
+      ],
+      [
+        "RIGID",
+        "1",
+        "Pointer 1",
+        "Weight raw 100 · element-owned, semantics partial"
+      ]
+    ]
+  }
+}
