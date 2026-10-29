@@ -1,0 +1,118 @@
+{
+  "relay_commit": "e46c5687a3854d4319c4fa06e415a7e1a88ff362",
+  "files": [
+    {
+      "path": "payload/browser_qualification_report.json",
+      "bytes": 4571,
+      "sha256": "305b7b2c708a1173500dfbf12781166b1eb2dc258f52e61bad195f45752e7625",
+      "git_blob_match": true,
+      "manifest_match": true
+    },
+    {
+      "path": "payload/evidence/environment.json",
+      "bytes": 626,
+      "sha256": "0611297fb0701f01ca7ec26fef5ef984ed21799377bfe2d84e359aa16636039a",
+      "git_blob_match": true,
+      "manifest_match": true
+    },
+    {
+      "path": "payload/evidence/fixture-verification.json",
+      "bytes": 533,
+      "sha256": "16affc39cba17f36c432672139fefc9a91cd65880e2ce0d19cf6e7b11553bb8c",
+      "git_blob_match": true,
+      "manifest_match": true
+    },
+    {
+      "path": "payload/evidence/geometry.tap",
+      "bytes": 4000,
+      "sha256": "90ee64968510c6ccb8105c2cf0e12b6f0c01172fac5ba96a68c0ecaf466c6f83",
+      "git_blob_match": true,
+      "manifest_match": true,
+      "transport_decoded_bytes": 2002,
+      "transport_decoded_sha256": "6aab704c746106a576d4d9fba449ea13f3054bb6c04eaf42656eebafc03acaa6",
+      "retrieval_note": "Connector transcodes UTF-16LE-with-BOM to UTF-8; inverse encoding exactly matches Git blob and declared SHA-256."
+    },
+    {
+      "path": "payload/evidence/repair.tap",
+      "bytes": 6578,
+      "sha256": "d62c67d85ebffd2dc33c60f736c152cce376b862c5150382e651fe12012e4548",
+      "git_blob_match": true,
+      "manifest_match": true,
+      "transport_decoded_bytes": 3291,
+      "transport_decoded_sha256": "1750c99eba88131b9357186ec46bc32cf983bd2b611d9f86e0ad1553a2bdecdf",
+      "retrieval_note": "Connector transcodes UTF-16LE-with-BOM to UTF-8; inverse encoding exactly matches Git blob and declared SHA-256."
+    },
+    {
+      "path": "payload/evidence/required-three.tap",
+      "bytes": 7554,
+      "sha256": "181b25da5c652d5fed26c2a580abd9717a445be17ddd5e19c23448d2ec6a9a65",
+      "git_blob_match": true,
+      "manifest_match": true,
+      "transport_decoded_bytes": 3779,
+      "transport_decoded_sha256": "675f8dc8c09737afa43f44850ee16b50489e9a7eec056fc3be722d4bf0367c4b",
+      "retrieval_note": "Connector transcodes UTF-16LE-with-BOM to UTF-8; inverse encoding exactly matches Git blob and declared SHA-256."
+    },
+    {
+      "path": "payload/evidence/source-verification.json",
+      "bytes": 2987,
+      "sha256": "a044dd67966720fa605ad6af5f491323f5b8da6366bf9ff06d1fed410eabfdd5",
+      "git_blob_match": true,
+      "manifest_match": true
+    },
+    {
+      "path": "payload/evidence/vnext-all-complete.tap",
+      "bytes": 56542,
+      "sha256": "6b62173c200a36995ef40e584f882f3f61cf40cd2565fd2cec6b473d3343104a",
+      "git_blob_match": true,
+      "manifest_match": true,
+      "transport_decoded_bytes": 28273,
+      "transport_decoded_sha256": "e3579d53903b77ea00df632a656dfd50b56cedb0ab53d1f96e589dd0fff1d804",
+      "retrieval_note": "Connector transcodes UTF-16LE-with-BOM to UTF-8; inverse encoding exactly matches Git blob and declared SHA-256."
+    },
+    {
+      "path": "payload/fixtures/SYNTH_V14_SOURCE.cii",
+      "bytes": 8167,
+      "sha256": "d07bb0857093878f2c1374e19ddec67be6bad156e62c0bcdce4f4f2509e6a86d",
+      "git_blob_match": true,
+      "manifest_match": false
+    },
+    {
+      "path": "payload/fixtures/SYNTH_V14_TARGET0.cii",
+      "bytes": 8167,
+      "sha256": "d56eb9d87a27cf3ab9e4059bd0c87a583f0727975f3fb965761cbe9c07ae10ad",
+      "git_blob_match": true,
+      "manifest_match": false
+    },
+    {
+      "path": "payload/run_qualification_browser.mjs",
+      "bytes": 41668,
+      "sha256": "8934bb53c0e8a4ca09abe598d8f8140cc088e554ece438ea060e10b989cad5db",
+      "git_blob_match": true,
+      "manifest_match": true
+    },
+    {
+      "path": "receipt.md",
+      "bytes": 9140,
+      "sha256": "cccf1f0ced59eb501331b76b8a783e44e8e5514c30d4f3f34b73f43a44116c26",
+      "git_blob_match": true,
+      "manifest_match": true
+    },
+    {
+      "path": "ARTIFACT_MANIFEST.json",
+      "bytes": 2227,
+      "sha256": "e9f1227a8473a0be41012852be0dab5e8a49cfb87f1054e19d8db65be3b20bc6",
+      "git_blob_match": true,
+      "manifest_match": null
+    }
+  ],
+  "all_payload_match": false,
+  "all_git_blobs_match": true,
+  "payload_matching_members": 10,
+  "payload_members": 12,
+  "manifest_public_claim": {
+    "bytes": 2122,
+    "sha256": "66d0efea2df17c6e00b8577317789467645ef20ea8573229b4e7cecf4cb3d1ee",
+    "matches_actual": false
+  },
+  "scope": "Receiver byte verification of e46c5687a; no Windows/browser execution in receiver environment; no product source mutation."
+}
