@@ -26,6 +26,8 @@ Use the [Progress page](progress-page/SKILL.md) module's structure, not only its
 
 **Separate selections:** Progress Page `otm/standalone` is not engineering v3.6 `coordinator/standalone`. Use [v3.6 coordinator](../engineering-pr-delivery-v3.6/MODE_COORDINATOR.md) or [v3.6 standalone](../engineering-pr-delivery-v3.6/MODE_STANDALONE.md) only if *that* engineering protocol was selected. [Manual Oracle Chat Routing](oracle-chat-routing/STANDALONE.md) and [GitHub Oracle Cycle](../../oracle-cycles/PROTOCOL.md) are optional *different* transfer conventions; neither activates itself.
 
+**Optional Cycle Board (source-bound observation, not a mode):** The [read-only Cycle Board contract](progress-page/references/CYCLE_BOARD_CONTRACT.md) reuses already published Page WBS/audit and native source/selected Cycle evidence for changed-only continuation. It creates **no new reporting duty**, selected Cycle, WBS, assignment or Page-writing authority. Only an agent explicitly tasked with *implementing* this feature needs the [CT-1–CT-4 vertical-slice contracts](progress-page/references/CYCLE_BOARD_VERTICAL_SLICES.md); other participants continue at their actual task/Cycle locator.
+
 ## 3. Follow the assigned role — one door
 
 | Your current responsibility | Read this first |
