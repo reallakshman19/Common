@@ -180,6 +180,21 @@ To make chat ids clickable on the public page in one browser: `python tools/pp_l
 
 **Specific Owner-approved merge exception (25 October 2026):** For PRs **into `reallakshman19/progress-page` only**, an Owner go-ahead to proceed with the scoped draft covers its merge after verifying the exact head, applicable required checks, compatibility and GitHub protection rules; **do not ask for a second Owner approval**. Mark ready and merge when safe; report the actual merge SHA. Keep the PR unmerged on failed tests, missing source, scope drift, unreviewed mandatory gates or conflicts. This exception does not affect Common/other projects, Owner product acceptance or private custody; see [MODES.md](references/MODES.md). No autonomous future merge is implied.
 
+## Shared source-backed Smart Badge identifiers (reference PR #63)
+
+The portable `viewer/smart-badges.js` now provides **one** deterministic
+`project/type/key` badge contract to read-only Timeline INFO-Auto generated,
+Page writer grounding brief, exact Agent Start and Oracle continuity. The
+identifiers AIM, ROADMAP (published milestone metadata), WBS, PLAN (audited
+event), FIXTURE (audited list), and ORACLE_CONTINUITY (already-recognized handover)
+carry their original record path and GitHub source or an explicit unknown.
+No agent manually tags routine work, no new report or task ledger is required.
+A badge **never** asserts a verified receipt, new role, independent PASS or
+Owner acceptance. Only designated Cycle/Page custodians may publish canonical
+changes through their existing reviewed authority. See reference
+[Cycle now via Timeline](https://reallakshman19.github.io/progress-page/#/ciifr/timeline-live)
+and source [PR #63](https://github.com/reallakshman19/progress-page/pull/63).
+
 ## Related modules
 
 [universal-workflow-progress](../../universal-workflow-progress/SKILL.md) (a read-only progress strip inside a chat; not this page), [Gatekeeper](../gatekeeper/SKILL.md) (labels for deliverables),
