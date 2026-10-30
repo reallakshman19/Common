@@ -1,0 +1,43 @@
+{
+  "schema": "wpe-public-documentation-manifest/v1",
+  "base": "payload/",
+  "files": {
+    "AGENT_ONBOARDING.md": {
+      "bytes": 5670,
+      "sha256": "0cceb376d8842cc3b5e56ec311e1ee83301598cd8fe0952e6ba17b2c804f7de8"
+    },
+    "ARTIFACT_REGISTER.md": {
+      "bytes": 3302,
+      "sha256": "1e7623f0dc479b3fa61684606fe44dc488fd82500d051f568ff606dbef794e82"
+    },
+    "CONCEPT_ARCHITECTURE.md": {
+      "bytes": 8714,
+      "sha256": "c7c1747f0f1d5b5d4120d7f151c3808a328e63413f6bf48073ed93bb8adf29cc"
+    },
+    "CURRENT.json": {
+      "bytes": 1794,
+      "sha256": "ef31dfa38da53df0540af19ad538a989d202db366f3fd8a9aa64bafcc970f4bb"
+    },
+    "FIXTURES.md": {
+      "bytes": 4016,
+      "sha256": "ea095688f26560abb1814deb49f57386ca9893cab562cab99202691f7919bc06"
+    },
+    "FIXTURE_INVENTORY.csv": {
+      "bytes": 80022,
+      "sha256": "cea945356dbc7174c890f115dd10d2454cb9afd7ddc8e0ad785524252a4b8cea"
+    },
+    "ORACLE_CONTINUITY.md": {
+      "bytes": 4779,
+      "sha256": "e40caa3fe01e6400366565c0b6388a8cb1ef89d12afaa82c9820423364fce02e"
+    },
+    "README.md": {
+      "bytes": 1995,
+      "sha256": "60c2398100113231fe0036ddc1aa2a99a4b6ea84818a82e995da954031a5f738"
+    },
+    "../receipt.md": {
+      "bytes": 1022,
+      "sha256": "8e7c96b25f5decb41ed46cc4f6243d83e1fafac36467a61ab291f77f63e9343b"
+    }
+  },
+  "note": "Exact LF UTF-8 published documentation bytes; receipt is one directory above payload. Excludes this manifest."
+}
