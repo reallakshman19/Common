@@ -1,38 +1,43 @@
 {
-  "AGENT_ONBOARDING.md": {
-    "bytes": 5703,
-    "sha256": "e78680455c59fd119b3abcaa043296df216e18e2e8e2653bcff6497e75e130aa"
+  "schema": "wpe-public-documentation-manifest/v1",
+  "base": "payload/",
+  "files": {
+    "AGENT_ONBOARDING.md": {
+      "bytes": 5670,
+      "sha256": "0cceb376d8842cc3b5e56ec311e1ee83301598cd8fe0952e6ba17b2c804f7de8"
+    },
+    "ARTIFACT_REGISTER.md": {
+      "bytes": 3302,
+      "sha256": "1e7623f0dc479b3fa61684606fe44dc488fd82500d051f568ff606dbef794e82"
+    },
+    "CONCEPT_ARCHITECTURE.md": {
+      "bytes": 8714,
+      "sha256": "c7c1747f0f1d5b5d4120d7f151c3808a328e63413f6bf48073ed93bb8adf29cc"
+    },
+    "CURRENT.json": {
+      "bytes": 1794,
+      "sha256": "ef31dfa38da53df0540af19ad538a989d202db366f3fd8a9aa64bafcc970f4bb"
+    },
+    "FIXTURES.md": {
+      "bytes": 4016,
+      "sha256": "ea095688f26560abb1814deb49f57386ca9893cab562cab99202691f7919bc06"
+    },
+    "FIXTURE_INVENTORY.csv": {
+      "bytes": 80022,
+      "sha256": "cea945356dbc7174c890f115dd10d2454cb9afd7ddc8e0ad785524252a4b8cea"
+    },
+    "ORACLE_CONTINUITY.md": {
+      "bytes": 4779,
+      "sha256": "e40caa3fe01e6400366565c0b6388a8cb1ef89d12afaa82c9820423364fce02e"
+    },
+    "README.md": {
+      "bytes": 1995,
+      "sha256": "60c2398100113231fe0036ddc1aa2a99a4b6ea84818a82e995da954031a5f738"
+    },
+    "../receipt.md": {
+      "bytes": 1022,
+      "sha256": "8e7c96b25f5decb41ed46cc4f6243d83e1fafac36467a61ab291f77f63e9343b"
+    }
   },
-  "ARTIFACT_REGISTER.md": {
-    "bytes": 3318,
-    "sha256": "e5ceda7552ea91986b5bfe9f513b560eb1667902976101bb23b383179b87c60f"
-  },
-  "CONCEPT_ARCHITECTURE.md": {
-    "bytes": 8782,
-    "sha256": "198848e01308684e820c9db61384d5ad5bc72aa974a3d64658b14b77f122cf7a"
-  },
-  "CURRENT.json": {
-    "bytes": 1857,
-    "sha256": "2af86f0c87c2e5bcfa639ff390de182843197c8bbcfc5ec9bb6db2dea0b2a45d"
-  },
-  "FIXTURES.md": {
-    "bytes": 4071,
-    "sha256": "052ae16e9cabc89ba7b42bd48b6a8db5d812d6424fa45855697ac053ce73bde6"
-  },
-  "FIXTURE_INVENTORY.csv": {
-    "bytes": 80279,
-    "sha256": "92a91e1f414c37a96c8d0cb206559434a27d0f47a7fcd3b62de368cf8096046d"
-  },
-  "ORACLE_CONTINUITY.md": {
-    "bytes": 4811,
-    "sha256": "541e08885f99aa0a2fe0fb6cc3ac0c6263601721592e8a30a9d3736bf6394050"
-  },
-  "README.md": {
-    "bytes": 2006,
-    "sha256": "e687954fdfb596f5724807553d33edc696c1d36f2c6d04429d40b161980f6116"
-  },
-  "receipt.md": {
-    "bytes": 1029,
-    "sha256": "6e1e7dd3d2b842d4d9b2a07b64c3d76b1bc6fe540407f4a2d9bbfa165f932367"
-  }
+  "note": "Exact LF UTF-8 published documentation bytes; receipt is one directory above payload. Excludes this manifest."
 }
