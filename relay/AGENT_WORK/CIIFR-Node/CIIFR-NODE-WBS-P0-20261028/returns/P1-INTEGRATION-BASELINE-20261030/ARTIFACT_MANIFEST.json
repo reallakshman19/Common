@@ -1,0 +1,56 @@
+{
+  "task": "CIIFR-Node P1 integration / inherited B1 test oracle",
+  "main": "417bf6a954c5a6de72237537e94b05b285191350",
+  "protectedCandidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "classification": "PUBLIC_SAFE_SYNTHETIC_TEST_AND_SOURCE_EVIDENCE",
+  "files": [
+    {
+      "path": "receipt.md",
+      "bytes": 4939,
+      "sha256": "ba50f3829ac64c592315eedee7650dffb40c68cf70cea980be2d580480903307",
+      "gitBlob": "e8316b2cb76093c42f9e678628acbce622f4218a"
+    },
+    {
+      "path": "payload/main-before.tap",
+      "bytes": 20523,
+      "sha256": "2b07b4b2ca73620bb53c61d42ec6a1a77da55f901458a4458b5e9be0e805d8d4",
+      "gitBlob": "221514827b05405aa9bd3777c73f219a55cb8b75"
+    },
+    {
+      "path": "payload/main-after.tap",
+      "bytes": 20054,
+      "sha256": "6582f8e5a20a8e0cb8eb89ba66571a1d77a71da3840580afffd9e4a0875dfac6",
+      "gitBlob": "fb55ef83f2ad3849d3bcca21dc6cb9b9993befb0"
+    },
+    {
+      "path": "payload/combined-after.tap",
+      "bytes": 26509,
+      "sha256": "825ab8ca4fdd7c10695b0b2927a24a17c94225de707bf7917f7f8d2fb07a59a8",
+      "gitBlob": "faa83b8821a42fd8706ef28db76ffc631858ca50"
+    },
+    {
+      "path": "payload/commands.json",
+      "bytes": 4400,
+      "sha256": "48359e570362f0ae707c8a830e3a0fd014a337b8376cd11b7a6d324d208b63da",
+      "gitBlob": "88b410e5f7a3d0f1726b85748453ecd9621cdf7b"
+    },
+    {
+      "path": "payload/main-source-verification.json",
+      "bytes": 13171,
+      "sha256": "9b8b5672fcd3ac510e0f8e34612f88f7f259d569390fbbcac4c36a468585dea1",
+      "gitBlob": "966878a5057a300f4ab1551c64a5f2607ac04c94"
+    },
+    {
+      "path": "payload/combined-source-verification.json",
+      "bytes": 18483,
+      "sha256": "3027ba1ffa623ca9e63348d1367844dde1defeecd55ce4738c64c2b0141deb9f",
+      "gitBlob": "c2203eaf5e7f7371f693f05073df3c411dfaa681"
+    },
+    {
+      "path": "payload/branch-oracle.patch",
+      "bytes": 1650,
+      "sha256": "0217dd288643acf9c9ad98cefbf4b848db07bb1f78ce0b04db99c0bb9996c8fe",
+      "gitBlob": "aeb70c8e814bf1bc8bf331d4df2248adbd47fb00"
+    }
+  ]
+}
