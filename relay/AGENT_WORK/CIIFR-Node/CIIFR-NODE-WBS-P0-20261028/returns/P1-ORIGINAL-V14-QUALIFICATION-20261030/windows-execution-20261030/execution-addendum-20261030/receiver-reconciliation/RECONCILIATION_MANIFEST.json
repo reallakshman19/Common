@@ -1,0 +1,20 @@
+{
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "receivedAddendumCommit": "0a74d96f21ea7a5f5bbd91250540a959e063359c",
+  "classification": "PUBLIC_SAFE_RECEIVER_RECONCILIATION",
+  "files": [
+    {
+      "path": "receipt.md",
+      "bytes": 3726,
+      "sha256": "861aa1154f14f33c2e67be106e01e3477bf658489b48bd4bb05063a9ba71fd3f",
+      "gitBlob": "676331c04b5a324da82684999114cbd0739223a0"
+    },
+    {
+      "path": "READBACK.json",
+      "bytes": 1649,
+      "sha256": "dc48956f6f3bf05a37f7528ff62e4b69736ee3ed054e513fd2e14a0ea229d582",
+      "gitBlob": "37b0f601b42a84adea2dfbdcac1923fbb1101148"
+    }
+  ]
+}
