@@ -1,0 +1,28 @@
+{
+  "schema": "v36.issue-receipt-stream/v1",
+  "parent": "reallakshman19/Common#400",
+  "allowed_repositories": [
+    "reallakshman19/Common"
+  ],
+  "events": [
+    {
+      "id": "EV-0001",
+      "kind": "OWNER_INPUT",
+      "occurred_at": "2026-10-16T19:26:15Z",
+      "source_ref": "https://github.com/reallakshman19/Common/issues/400#issuecomment-6223067953",
+      "source_class": "OWNER_DIRECT_REPORTED",
+      "actor_login_claim": null,
+      "actor_authentication": "NOT_AUTHENTICATED",
+      "summary": "Owner-supplied formalized statement covers concerns C-01 through C-12, invalid issue lineage, governed versus ad-hoc receipts, agent conversation provenance and ten acceptance criteria; no new approvals are inferred.",
+      "visibility": "PUBLIC_SAFE",
+      "source_sha256_claim": "59c6d6ca34e98ba4e3079d6a2b7d39c0df9cefb1d6460cfb923d885603e2512d",
+      "supersedes": [],
+      "disposition": "N_A",
+      "revisit_trigger": null,
+      "conversation_ref": null,
+      "conversation_access": "NOT_CAPTURED",
+      "lineage": null,
+      "previous_digest": null
+    }
+  ]
+}
