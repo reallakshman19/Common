@@ -1,0 +1,38 @@
+{
+  "AGENT_ONBOARDING.md": {
+    "bytes": 5703,
+    "sha256": "e78680455c59fd119b3abcaa043296df216e18e2e8e2653bcff6497e75e130aa"
+  },
+  "ARTIFACT_REGISTER.md": {
+    "bytes": 3318,
+    "sha256": "e5ceda7552ea91986b5bfe9f513b560eb1667902976101bb23b383179b87c60f"
+  },
+  "CONCEPT_ARCHITECTURE.md": {
+    "bytes": 8782,
+    "sha256": "198848e01308684e820c9db61384d5ad5bc72aa974a3d64658b14b77f122cf7a"
+  },
+  "CURRENT.json": {
+    "bytes": 1857,
+    "sha256": "2af86f0c87c2e5bcfa639ff390de182843197c8bbcfc5ec9bb6db2dea0b2a45d"
+  },
+  "FIXTURES.md": {
+    "bytes": 4071,
+    "sha256": "052ae16e9cabc89ba7b42bd48b6a8db5d812d6424fa45855697ac053ce73bde6"
+  },
+  "FIXTURE_INVENTORY.csv": {
+    "bytes": 80279,
+    "sha256": "92a91e1f414c37a96c8d0cb206559434a27d0f47a7fcd3b62de368cf8096046d"
+  },
+  "ORACLE_CONTINUITY.md": {
+    "bytes": 4811,
+    "sha256": "541e08885f99aa0a2fe0fb6cc3ac0c6263601721592e8a30a9d3736bf6394050"
+  },
+  "README.md": {
+    "bytes": 2006,
+    "sha256": "e687954fdfb596f5724807553d33edc696c1d36f2c6d04429d40b161980f6116"
+  },
+  "receipt.md": {
+    "bytes": 1029,
+    "sha256": "6e1e7dd3d2b842d4d9b2a07b64c3d76b1bc6fe540407f4a2d9bbfa165f932367"
+  }
+}
