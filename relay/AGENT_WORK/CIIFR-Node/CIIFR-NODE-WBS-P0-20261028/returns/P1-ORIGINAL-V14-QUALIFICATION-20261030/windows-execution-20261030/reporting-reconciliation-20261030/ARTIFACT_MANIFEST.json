@@ -1,0 +1,32 @@
+{
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "reviewedReturn": "52067c1b36d54f50c6945c3538dcc83967232fbe",
+  "disposition": "REPORTING_F1_CORRECTED_EXECUTION_F2_F3_PENDING",
+  "files": [
+    {
+      "path": "REPORTING_ERRATUM_F1.md",
+      "bytes": 2743,
+      "sha256": "030080f14b0460ab4145d5797a8477ede8aba617e511ea63f590647b3e7b09ca",
+      "gitBlob": "e625c1d76e7dd12335636a02ee6eed98a9dd5ec5"
+    },
+    {
+      "path": "LOCAL_AGENT_ADDENDUM_REQUEST.md",
+      "bytes": 2981,
+      "sha256": "9252734d351e991f177f878901e1a303498a433d9ca0365369cbff3da087f56b",
+      "gitBlob": "17e8a52bb8909ba0e2b233e21e6b135e3e434c63"
+    },
+    {
+      "path": "READBACK.json",
+      "bytes": 3653,
+      "sha256": "99525fac61ff039d00d6dca89196423252db9c451c595be97cdc7ef3eb6fd9fd",
+      "gitBlob": "2f77f3befcf884c7e5fddc9b84b6ed590831eb4f"
+    },
+    {
+      "path": "SOURCE_COMPARISON.json",
+      "bytes": 3160,
+      "sha256": "a92ac3e68c969091e68d47af4b0b30de05289a35183c49c7a5664ecad45b5794",
+      "gitBlob": "cf46516b94f8e8fc1e07957b7deb6a646e8d12c2"
+    }
+  ]
+}
