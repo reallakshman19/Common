@@ -1,0 +1,65 @@
+{
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "parent": "b2b695f66fc8dfc907f2b9a493b39bd4d4109570",
+  "baseReturn": "52067c1b36d54f50c6945c3538dcc83967232fbe",
+  "erratumReference": "44b7c54b28319aeaa5285106aef5a05ff2581a79",
+  "f1NarrativeStatus": "CORRECTED_BY_ERRATUM",
+  "f2BrowserEvidence": {
+    "run1": {
+      "targetBrowser": "Microsoft Edge",
+      "executableBasename": "msedge.exe",
+      "selectionMechanism": "runner_auto_discovery_default",
+      "cliFlagBrowser": null,
+      "timestamp": "2026-10-30T14:45:50+04:00",
+      "exitCode": 0,
+      "candidateHead": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+      "trackedTreeClean": true,
+      "runnerIdentitySha256": "06bd46ec1e94a0ac27bfa467682a7b912c6140d4631674d024fa350372a96629",
+      "cdpVersionCapturedInOriginalRunner": false,
+      "cdpVersionProbed": {
+        "product": "Edg/156.0.4314.50",
+        "revision": "@af2ba23ae0ecf7084d900446fc59d5119dd5fd5e",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+        "protocolVersion": "1.3",
+        "jsVersion": "15.6.12.7"
+      },
+      "assertionOutcome": "PASS"
+    },
+    "run2": {
+      "targetBrowser": "Google Chrome",
+      "executableBasename": "chrome.exe",
+      "selectionMechanism": "explicit_cli_argument",
+      "cliFlagBrowser": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "timestamp": "2026-10-30T14:46:20+04:00",
+      "exitCode": 0,
+      "candidateHead": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+      "trackedTreeClean": true,
+      "runnerIdentitySha256": "06bd46ec1e94a0ac27bfa467682a7b912c6140d4631674d024fa350372a96629",
+      "cdpVersionCapturedInOriginalRunner": false,
+      "cdpVersionProbed": {
+        "product": "Chrome/156.0.8078.74",
+        "revision": "@d331de35ca8ab1358c7a17e4bd41627d55eaef51",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "protocolVersion": "1.3",
+        "jsVersion": "15.6.75.25"
+      },
+      "assertionOutcome": "PASS"
+    }
+  },
+  "f3ShaAndCustodyEvidence": {
+    "privateExpectedSHAProvided": true,
+    "privateExpectedSHAMatched": true,
+    "evidenceBasis": "Runner pre-flight REQUIRE(hash===expectedSHA,'INTAKE_DIGEST_MISMATCH') evaluated without throw across both runs with validated 64-hex argument",
+    "originalImmutable": true,
+    "originalOutsideServedRepo": true,
+    "privateDirOutsideServedRepo": true,
+    "privateDigestWithheld": true
+  },
+  "gateStatus": {
+    "wbs2_2_browser_qualification": "PASS",
+    "gate_r0": "HOLD",
+    "pr232": "DRAFT",
+    "pr226": "HOLD"
+  }
+}
