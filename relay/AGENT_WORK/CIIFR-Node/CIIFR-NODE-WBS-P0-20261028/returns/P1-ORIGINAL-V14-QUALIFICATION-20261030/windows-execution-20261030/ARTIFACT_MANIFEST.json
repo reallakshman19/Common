@@ -1,0 +1,75 @@
+{
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "parent": "b2b695f66fc8dfc907f2b9a493b39bd4d4109570",
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "classification": "PUBLIC_SAFE_WINDOWS_ORIGINAL_BROWSER_QUALIFICATION_FINAL",
+  "status": "PASS",
+  "files": [
+    {
+      "path": "payload\\evidence\\environment.json",
+      "bytes": 787,
+      "sha256": "c1731bcf07aad26fec4ef0d00bab7daa0bb9408ac757c73601f8bbf2d878879c",
+      "gitBlob": "d4dbb0ed0e12fd6a661961c1e0e3e31e51c81bf3"
+    },
+    {
+      "path": "payload\\evidence\\sanitized-chrome-result.json",
+      "bytes": 783,
+      "sha256": "c39318fe0379c00679b17afa208f5e388df664293341527d9f26eb9a2b144e54",
+      "gitBlob": "c1cba250d66ef2d9c07eaa383234e2c0d2016f4c"
+    },
+    {
+      "path": "payload\\evidence\\sanitized-edge-result.json",
+      "bytes": 783,
+      "sha256": "c39318fe0379c00679b17afa208f5e388df664293341527d9f26eb9a2b144e54",
+      "gitBlob": "c1cba250d66ef2d9c07eaa383234e2c0d2016f4c"
+    },
+    {
+      "path": "payload\\evidence\\source-verification.json",
+      "bytes": 2434,
+      "sha256": "7ce5210508a4622086f3d7cac870166afe630ef28230abeb654a8164cbe22fe8",
+      "gitBlob": "245ad11b06be33a5ea7a57ae9cc245dd51940e01"
+    },
+    {
+      "path": "payload\\runner\\README.md",
+      "bytes": 4567,
+      "sha256": "72786b0fb1ca2ddb2abef3310a744b16068e6e9e3591d5107f66f44d017c1028",
+      "gitBlob": "21f35493368920f80f1eefa435e4af26ddd75d20"
+    },
+    {
+      "path": "payload\\runner\\SELF_ASSESSED_LOCAL_TESTS.md",
+      "bytes": 1166,
+      "sha256": "827f813ceb5a5227e9c83f46aaa21e80e542e3b7f6cb0e5d67ff8a9b5ecabfd6",
+      "gitBlob": "b7a6c1d1288ae493f5e860616f1620516fc6be5b"
+    },
+    {
+      "path": "payload\\runner\\SHA256_MANIFEST.json",
+      "bytes": 889,
+      "sha256": "3e25b78fdd2e043d25a06cccbf1e8ed98b5d244df0048f0cac8ee36a1d9ef0ee",
+      "gitBlob": "6123bb3ec84d3d1e8fe21835ba6afff1c39a5350"
+    },
+    {
+      "path": "payload\\runner\\tools\\physical-oracle.mjs",
+      "bytes": 8255,
+      "sha256": "c4c8a8fa7a1852eec11ebdacb4a89e8897baa49b5784ba6f6bc0cf464d162a2a",
+      "gitBlob": "e2d33d00da044fc1d9f26f592c9d87ed77aac62c"
+    },
+    {
+      "path": "payload\\runner\\tools\\run-windows-original.mjs",
+      "bytes": 12202,
+      "sha256": "06bd46ec1e94a0ac27bfa467682a7b912c6140d4631674d024fa350372a96629",
+      "gitBlob": "0befd37f8983cb251bb9cd777f4a589c12d24182"
+    },
+    {
+      "path": "sanitized-result.json",
+      "bytes": 783,
+      "sha256": "c39318fe0379c00679b17afa208f5e388df664293341527d9f26eb9a2b144e54",
+      "gitBlob": "c1cba250d66ef2d9c07eaa383234e2c0d2016f4c"
+    },
+    {
+      "path": "windows-receipt.md",
+      "bytes": 9121,
+      "sha256": "60622149b00159f6220c479369a63fa8a83a40d5432c734a9bcd388e2761e320",
+      "gitBlob": "c78c3c556529b14244dbc91913990aa7ae715ae2"
+    }
+  ]
+}
