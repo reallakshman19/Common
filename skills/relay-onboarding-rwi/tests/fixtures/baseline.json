@@ -1,0 +1,34 @@
+{
+  "target": {
+    "schema": "onboarding.target/v1",
+    "repository": "acme/app",
+    "issue": 391,
+    "work_id": "ONB-RWI",
+    "mode": "READ_ONLY",
+    "source_heads": {
+      "acme/app": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "acme/shared": "cccccccccccccccccccccccccccccccccccccccc"
+    },
+    "source_health": "COMPLETE",
+    "owner_decision": {
+      "status": "PRESENT",
+      "ref": "https://github.com/acme/app/issues/391"
+    },
+    "observed_at": "2026-10-15T14:00:00Z",
+    "candidate_heads": {
+      "https://github.com/acme/app/pull/20": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "https://github.com/acme/shared/pull/20": "cccccccccccccccccccccccccccccccccccccccc"
+    }
+  },
+  "evidence": [
+    {
+      "schema": "onboarding.evidence/v1",
+      "source_repository": "acme/app",
+      "source_url": "https://github.com/acme/app/pull/20",
+      "assessed_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "kind": "PR",
+      "observation": "REPORTED",
+      "privacy": "PUBLIC"
+    }
+  ]
+}
