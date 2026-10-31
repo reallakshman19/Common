@@ -35,7 +35,7 @@ After coordination, declare exactly one outcome **outside the five lines** (neve
 - `AWAITING_RELAY` — current authorized instruction is ready/posted but actual delivery/ACK is unverified; name the missing route and one accountable relay actor.
 - `BLOCKED` — actual identity, custody, source, authority or engineering restriction prevents this next action; name the blocker/owner. Unrelated authorized work need not stop.
 
-**Owner relay boundary:** If the Oracle has no authenticated way to send to a separate agent conversation, identify one minimal copy-ready Owner relay where actually necessary; the Oracle retains overall coordination. Do not say no Owner action is needed if delivery depends on that action. Never claim background dispatch or monitoring.
+**Owner relay boundary:** If the Oracle has no authenticated way to send to a separate agent conversation, identify one minimum copy-ready Owner relay where actually necessary; the Oracle retains overall coordination. Do not say no Owner action is needed if delivery depends on that action. Never claim background dispatch or monitoring.
 
 **Mode guard:** An established **native-task** continuation does not require an activated `oracle-cycles/<project>/CURRENT.json`. Read the formal Cycle activation, assignment/generation and receipt gates **only if that formal transport was explicitly selected**. Its authority then remains controlling; neither route relaxes engineering HOLDs.
 
