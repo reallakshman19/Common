@@ -1,0 +1,40 @@
+{
+  "schema": "CIIFR.Node.RelayReviewManifest.v1",
+  "date": "2026-10-31",
+  "task": "CIIFR-Node PR238 source-exposed non-author review",
+  "classification": "PUBLIC_SYNTHETIC_ONLY",
+  "verdict": "PARTIAL",
+  "nativeExecution": "NOT_RUN",
+  "publishRepo": "reallakshman19/Common",
+  "publishBranch": "review/ciifr-node-pr238-20261031-gpt6",
+  "startingCommonHead": "999dd8d1516af6a65a840d9f3f489b5f0115d261",
+  "productRepo": "reallakshman19/XML_Compare_Utilities",
+  "productBase": "417bf6a954c5a6de72237537e94b05b285191350",
+  "productHead": "fa6e948eb0f71ba93fe8bab01625e3146d1df3a0",
+  "files": [
+    {
+      "path": "review.md",
+      "gitBlob": "1403bef21e27faac88abc0628a1402ab5ce4b1ce",
+      "utf8Bytes": 8891,
+      "readback": "PASS"
+    },
+    {
+      "path": "physical_fixture_evidence.json",
+      "gitBlob": "315cbe7cab9c92ea0dd267c08e25832974312435",
+      "utf8Bytes": 1941,
+      "readback": "PASS"
+    }
+  ],
+  "fixtureProbe": {
+    "localOnlyScriptSha256": "a665ba80494bbf2a96764f7c3eceac1cc45a6b019299584a639b3a09386e935c",
+    "localOnlyOutputSha256": "6eb7c729b3e3c2c05052fc757f6b6c1deeeee9c1338acfdf90c23dd015b753e7",
+    "syntheticFixtureSha256": "0a43de71b6c37f9251201fe680baaf8994bdea9ba794e49ffb684ccad712254d",
+    "syntheticExpectedOutputSha256": "6bcfe0a0ddbb60df26751965a6d4bfbd56b5db20037c670a016016de9ea1020a"
+  },
+  "limitations": [
+    "No clean native Git worktree due DNS",
+    "No native test execution or production writer execution",
+    "Auth GitHub account equals PR author",
+    "No full CAESAR import qualification, no private original"
+  ]
+}
