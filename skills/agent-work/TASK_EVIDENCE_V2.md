@@ -55,7 +55,7 @@ For an explicitly activated formal GitHub Oracle Cycle, main CURRENT.json, activ
 
 ## Reuse, tests and limits
 
-Use the existing Progress Page Cycle Board and CT-5 context; **no parallel tracker, WBS, task schema, status log or reporting duty**. The implementing draft is [Progress Page PR #102](https://github.com/reallakshman19/progress-page/pull/102), based on the deployed [CT-5 PR #101](https://github.com/reallakshman19/progress-page/pull/101). Format approval is **not** PR merge, deployment, original-source qualification or technical acceptance.
+Use the existing Progress Page Cycle Board and CT-5 context; **no parallel tracker, WBS, task schema, status log or reporting duty**. The existing renderer merged through [Progress Page PR #102](https://github.com/reallakshman19/progress-page/pull/102), reusing [CT-5 PR #101](https://github.com/reallakshman19/progress-page/pull/101). Source code merge is **not** proof of live interaction, agent-message delivery/ACK, original-source qualification or technical acceptance; use native occurrences for freshness.
 
 Negative cases: wrong project/WBS/issue/comment/PR identity, forged acceptance, reported-vs-independent review, missing/stale source, UNKNOWN denominator, unexecuted test, private-chat leak, and any attempt to turn copying a prompt into agent ACK. Keep all source details behind original links.
 
