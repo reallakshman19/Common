@@ -19,7 +19,7 @@ class TE2RoleCycleNow(unittest.TestCase):
         for name in ("1. **TASK:**", "2. **PROGRESS:**", "3. **WORK & PROOF:**",
                      "4. **BLOCKERS & RELAY:**", "5. **NEXT → [ONE ACTOR]:**"):
             self.assertEqual(s.count(name), 1, name)
-        self.assertIn("not a sixth information line", s)
+        self.assertIn("never a sixth information line", s)
 
     def test_acting_oracle_reports_its_own_task_not_two_agent_cards(self):
         for path in ("TASK_EVIDENCE_V2.md", "START_HERE.md",
