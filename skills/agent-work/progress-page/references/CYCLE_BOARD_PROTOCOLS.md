@@ -6,6 +6,8 @@
 **Status:** Operational companion merged through [Common PR #573](https://github.com/reallakshman19/Common/pull/573); this revision clarifies existing-agent continuation and the already-shipped CIIFR UI reuse. Linked live status still requires fresh verification.  
 **Grounding:** [START_HERE pinned at Common main 999dd8d](https://github.com/reallakshman19/Common/blob/999dd8d1516af6a65a840d9f3f489b5f0115d261/skills/agent-work/START_HERE.md) · [START_HERE (current branch)](../../START_HERE.md) · [Cycle Board read-model contract](CYCLE_BOARD_CONTRACT.md) · [CT-1–CT-4 implementation slices](CYCLE_BOARD_VERTICAL_SLICES.md).
 
+**Action to Owner (frozen TE2 companion, not a sixth line):** After the acting-role Task Evidence v2 card, offer at most the necessary, source-linked copy-paste `Cycle now to Agent`, `Cycle now to Oracle`, or exact Owner-only decision/input; when none, say `NONE`. The Board may provide copy controls, but no click is a delivered message, authenticated ACK or new task. An already-returned Agent must not receive a fresh execution request in place of Oracle reconciliation.
+
 The Cycle Board is a **read-only, source-driven operational context and changed-only navigation layer**. It helps the Owner, Oracle, agents, independent reviewers and Page writer resume the *existing* workflow with minimal repeated reconstruction. The native issue, source bytes, Common relay, selected actual Oracle Cycle if any, governing Progress Page WBS and append-only audit retain their own authority.
 
 > **One action, evidence once, reuse everywhere. No new mandatory Board report.**

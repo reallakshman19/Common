@@ -2,6 +2,8 @@
 
 **When Cycle now is triggered:** Use the already-known private conversation route, but follow [TE2-ROLE](../TASK_EVIDENCE_V2.md#te2-role--acting-role-board-hierarchy-and-cycle-completion): the Board may show all role-owned tasks, but the acting Oracle returns **one own coordination card**, linking subordinate original evidence without repeating their cards. Keep PREPARED, posted, delivered, ACK and native returned separate; clicking Resume Agent or copying text is not an authenticated send. No public chat-link registry or second routing ledger.
 
+**Owner transaction handoff:** Use [Action to Owner](../TASK_EVIDENCE_V2.md#action-to-owner--one-copypaste-transaction-outside-five-lines) after the acting Oracle's/Agent's five-line card only for a real required manual relay, Owner decision or source/custody input. Give the **exact existing chat recipient** and one copy-ready message; if the Agent has already returned, default to `Cycle now to Oracle` for reconciliation, not replay. The Board's copy control is NOT_SENT. Do not demand another Owner step when Oracle has an authorized delivery route.
+
 Version 1.0.0 · 23 October 2026 · Optional, manual and host-neutral
 
 **Purpose:** When the Owner uses several agent conversations, show one unambiguous

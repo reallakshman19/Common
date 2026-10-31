@@ -1,5 +1,7 @@
 # Role and mode playbook — full project/file lifecycle
 
+**Owner status on Cycle now:** Where the Owner actually must transfer a message or decide something, put one compact copy-ready [Action to Owner](TASK_EVIDENCE_V2.md#action-to-owner--one-copypaste-transaction-outside-five-lines) section after the acting role's five-line card. A returned Agent requests `Cycle now to Oracle` reconciliation, not an unnecessary rerun; otherwise the Oracle specifies an authorized `Cycle now to Agent` or genuine Owner-only gate. Never treat copying as delivery.
+
 **Owner status on Cycle now:** Apply [TE2-ROLE](TASK_EVIDENCE_V2.md#te2-role--acting-role-board-hierarchy-and-cycle-completion): the Board may show all source-backed role-owned tasks; acting Oracle reports one own coordination card by default, Agent/IR their own card. Distinguish the current relay outcome `CONTINUED / AWAITING_RELAY / BLOCKED` from older accepted evidence and maintain ONE next actor. A completed task or Owner/IR next actor is reconciliation-only; the card never activates work, re-onboards an incumbent or grants acceptance.
 
 This playbook expands [START_HERE.md](START_HERE.md), the short entry point, into a practical role/mode and full file-cycle reference. It is not a new skill, permission, controller or approval process. [Original operating guide](OPERATING_GUIDE.md) preserves the former extended material.

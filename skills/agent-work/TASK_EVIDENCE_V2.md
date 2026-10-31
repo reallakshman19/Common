@@ -43,6 +43,35 @@ After coordination, declare exactly one outcome **outside the five lines** (neve
 
 **Acceptance falsifier:** One existing Oracle responsibility covering two agent tasks → Oracle `Cycle now` response defaults to **one Oracle-owned five-line coordination card**; Board may show the two agent cards; if the current instruction is posted but no actual delivery/ACK or subsequent return exists, outcome is `AWAITING_RELAY`. Two subordinate cards alone fail this rule.
 
+## Action to Owner — one copy/paste transaction (outside five lines)
+
+After the acting participant's five-line Task Evidence v2 card, show a **small `Action to Owner` section** only if the Owner must paste a message, make a decision, supply protected input, or unblock a verified dependency. This is presentation of the same native task/relay and not a sixth information line, new task, report, or automatic dispatch. If no action is required, write **`Action to Owner: NONE — [source-backed reason]`**, without an inert copy block.
+
+**Select exactly one primary transaction type per accountable next actor:**
+
+- **`CYCLE_NOW_TO_AGENT`** — Oracle has an *existing authorized* next instruction for a named established Agent/IR, but actual chat delivery/ACK remains unverified. Provide the exact existing recipient chat label (private URL only in private UI), native task, original instruction permalink, current scope/HOLD, expected return and evidence destination. If two independent recipients genuinely require manual delivery, supply **one separately labeled block per necessary recipient**, each linked to its own original issue. Never infer authorization merely from a Page NEXT label.
+- **`CYCLE_NOW_TO_ORACLE`** — acting Agent/IR has returned native evidence and needs Oracle reconciliation, or Oracle must resolve stale/unknown scope before agent work. Tell the Owner which **existing Oracle chat** receives this message, and include the exact native return/issue so Oracle can continue without onboarding.
+- **`OWNER_DECISION / OWNER_INPUT`** — a genuine Owner-only acceptance, custody/access or direction gate remains. State the *specific decision/input* and native issue; do not bury this behind an executable Agent prompt or invent a permission.
+- **`NONE`** — Oracle can proceed through an actually authorized channel and no Owner dependency exists. State this explicitly; `POSTED` alone is insufficient to claim the work reached the Agent.
+
+**Minimal Owner presentation (only when an action is needed):**
+
+**Action to Owner · [CYCLE_NOW_TO_AGENT / CYCLE_NOW_TO_ORACLE / OWNER_DECISION] · Recipient: [existing chat/role or decision owner] · Status: [AWAITING_RELAY / BLOCKED]**
+
+Copy into the *existing* [Agent / Oracle] conversation (not sent):
+
+```text
+Cycle now — [Project] / [existing role] / [original native issue or task].
+Read [Cycle Board] and [latest native instruction/return permalink].
+[One bounded authorized next action OR request for missing Owner decision; no replay].
+Return [specific evidence/output] to [original native issue / approved Common relay].
+Preserve [READ_ONLY / writer ownership / HOLD / no merge].
+```
+
+**Other issues needing Owner attention:** [one short source-linked item, or NONE]. Avoid duplicating issue histories or printing subordinate Agent cards.
+
+**Hard gates:** The current actor supplies a **real actionable instruction and exact recipient**; do not generate a generic role-swapping prompt when those are UNKNOWN. A previewed/copied block is **NOT_SENT**. Require actual recipient delivery/ACK or source-bound subsequent return before `CONTINUED`. If a current native Agent instruction is stale, completed, unverified or awaiting Oracle review, default to **`CYCLE_NOW_TO_ORACLE` for reconciliation only**, never to an executable Agent dispatch. This applies to direct Agent/IR returns as well as Oracle coordination reports, and to the Board's copy-only CT-5 view.
+
 ## Required when Cycle now is triggered
 
 1. **Read Cycle Board first** as the operational read-view: current AIM, one WBS, INFO-Auto, Smart Badges, task, source revision and delta, prior return, active actor and HOLD. This is not a new coordination mode, assignment or source of authority.
