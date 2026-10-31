@@ -1,6 +1,6 @@
-# Cycle Board — source-bound context and delta contract (draft v0)
+# Cycle Board — source-bound context and delta contract
 
-**Status:** PROPOSED, review-required. **AIM:** reusable information with minimal agent *and total* work. This is an implementation interface for downstream agents, **not** a new coordination mode, required report, governing WBS, Cycle activation, or publication authority. Read with [vertical-slice handoffs](CYCLE_BOARD_VERTICAL_SLICES.md).
+**Status:** Contract merged in [Common PR #567](https://github.com/reallakshman19/Common/pull/567); implementations and human acceptance are independently reviewed. **AIM:** reusable information with minimal agent *and total* work. This remains an implementation interface for downstream agents, **not** a new coordination mode, required report, governing WBS, Cycle activation, or publication authority. Read [Cycle Board Protocols](CYCLE_BOARD_PROTOCOLS.md) for short Owner/Oracle commands and source-bound onboarding; [START_HERE](../../START_HERE.md) remains the role/mode router; see [vertical-slice handoffs](CYCLE_BOARD_VERTICAL_SLICES.md) for implementations.
 
 ## 1. Authority and product boundary
 
