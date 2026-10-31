@@ -75,6 +75,35 @@ class TE2RoleCycleNow(unittest.TestCase):
         self.assertIn("If no action is required", s)
         self.assertIn("do not generate a generic role-swapping prompt", s)
 
+    def test_fast_lane_is_an_explicit_native_execution_envelope(self):
+        s = read("TASK_EVIDENCE_V2.md")
+        for required in ("## Cycle now Fast Lane", "Execution Envelope",
+                         "WITHIN_AUTHORIZED_ENVELOPE", "NEW_AUTHORIZATION_REQUIRED",
+                         "CONTINUE_WHEN", "STOP_WHEN", "pinned",
+                         "source", "recipient", "one meaningful changed-only"):
+            self.assertIn(required, s)
+        self.assertIn("not a new state ledger", read("progress-page/references/CYCLE_BOARD_PROTOCOLS.md"))
+        self.assertIn("Execution Envelope", read("START_HERE.md"))
+
+    def test_fast_lane_same_cycle_oracle_and_scoped_hold(self):
+        s = read("TASK_EVIDENCE_V2.md")
+        for term in ("same invoked turn", "Scoped HOLD", "writer",
+                     "read-only", "critical", "NO_MATERIAL_DELTA",
+                     "Action to Owner: NONE", "not retroactively",
+                     "no new substantive native status comment"):
+            self.assertIn(term.lower(), s.lower())
+        self.assertIn("NEXT → ORACLE: investigate", s)
+        self.assertIn("PREPARED_NOT_SENT",
+                      read("progress-page/references/CYCLE_BOARD_PROTOCOLS.md"))
+
+    def test_fast_lane_does_not_grant_background_work_or_new_cycle(self):
+        s = read("TASK_EVIDENCE_V2.md")
+        for term in ("No background execution", "no new transport",
+                     "same approved assignment", "no approval"):
+            self.assertIn(term.lower(), s.lower())
+        self.assertIn("only when the formal GitHub Oracle Cycle",
+                      read("START_HERE.md"))
+
     def test_legacy_ambiguous_default_is_gone(self):
         for path in ("START_HERE.md", "oracle-standalone/SKILL.md",
                      "progress-page/references/CYCLE_BOARD_PROTOCOLS.md",
