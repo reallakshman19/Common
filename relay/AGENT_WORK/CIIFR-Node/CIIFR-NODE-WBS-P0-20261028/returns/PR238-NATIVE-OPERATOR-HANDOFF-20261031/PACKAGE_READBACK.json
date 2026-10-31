@@ -1,0 +1,43 @@
+{
+  "zip": "CIIFR_PR238_NATIVE_QUALIFICATION_R1.zip",
+  "bytes": 14694,
+  "sha256": "8b46b3af0450c02196d1a870be1e834ee7c92dbe4ccf285d865c6e77a82245bf",
+  "base": "417bf6a954c5a6de72237537e94b05b285191350",
+  "head": "fa6e948eb0f71ba93fe8bab01625e3146d1df3a0",
+  "expectedUniqueTestPaths": [
+    "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+    "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+    "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+    "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+    "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+    "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+    "tests/cii-fnr-vnext-a1.test.mjs",
+    "tests/cii-fnr-vnext-branch-scope.test.mjs",
+    "tests/cii-fnr-vnext-config-policy.test.mjs",
+    "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+    "tests/cii-fnr-vnext-demo.test.mjs",
+    "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+    "tests/cii-fnr-vnext-geo-tab.test.mjs",
+    "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+    "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+    "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+    "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+    "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+    "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+    "tests/cii-fnr-vnext-p2-repair.test.mjs",
+    "tests/cii-fnr-vnext-r2-regressions.test.mjs"
+  ],
+  "criticalModules": [
+    "tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+    "tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+    "tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+    "tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+    "tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+    "tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+    "tabs/cii-workspace/cii-fnr-vnext/ui/app.js"
+  ],
+  "expectedDistinctHashRowsPerCheckout": 35,
+  "receiptVerifierCoverage": "R1 accepts a synthetic receipt omitting one test hash row; receiver must verify exact complete unique inventory independently",
+  "powershellExecutedByReceiver": false,
+  "nativeProductQualification": "NOT_RUN_BY_RECEIVER"
+}

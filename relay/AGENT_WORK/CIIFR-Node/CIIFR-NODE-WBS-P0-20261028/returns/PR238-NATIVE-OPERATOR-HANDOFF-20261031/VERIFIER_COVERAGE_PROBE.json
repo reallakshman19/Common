@@ -1,0 +1,33 @@
+[
+  {
+    "variant": "complete",
+    "classification": "SIMULATED_ONLY_NOT_PRODUCT_OR_REVIEWER_EXECUTION",
+    "exitCode": 0,
+    "verdict": "PASS_PINNED_NATIVE_TESTS",
+    "removedRows": [],
+    "rows": {
+      "base": 35,
+      "head": 35
+    }
+  },
+  {
+    "variant": "missing-one-test",
+    "classification": "SIMULATED_ONLY_NOT_PRODUCT_OR_REVIEWER_EXECUTION",
+    "exitCode": 0,
+    "verdict": "PASS_PINNED_NATIVE_TESTS",
+    "removedRows": [
+      {
+        "label": "base",
+        "path": "tests/cii-fnr-vnext-a1-f01-compact.test.mjs"
+      },
+      {
+        "label": "head",
+        "path": "tests/cii-fnr-vnext-a1-f01-compact.test.mjs"
+      }
+    ],
+    "rows": {
+      "base": 34,
+      "head": 34
+    }
+  }
+]
