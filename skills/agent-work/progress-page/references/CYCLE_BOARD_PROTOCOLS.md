@@ -12,6 +12,12 @@ The Cycle Board is a **read-only, source-driven operational context and changed-
 
 > **One action, evidence once, reuse everywhere. No new mandatory Board report.**
 
+### Fast Lane F1 — don't manufacture a new handoff at every completed substep
+
+`Cycle now` must inspect the original native issue's **Oracle-authorized Execution Envelope** before preparing a new owner relay or agent instruction. `WITHIN_AUTHORIZED_ENVELOPE` means same exact native task, role, pinned SHA/revision and explicit next listed substep, with stop conditions still clear: execute the remaining related read-only work **during the active invocation**, then post one changed-only receipt. If any required identity, source, authority or step is absent or contradicted, classify **`NEW_AUTHORIZATION_REQUIRED`** for that affected scope; do not infer permission from Page NEXT or passing synthetic tests. An envelope is text within the existing issue, not a new state ledger or automatic assignment.
+
+The Oracle should resolve evidence-based decisions within its authority **on the same invoked `Cycle now`**, rather than returning `NEXT → ORACLE: investigate` for an available, authorized check. If the next true gate is independent review, writer custody, protected engineering intent or an Owner-only decision, preserve a **scoped** HOLD and request only that gate. A completed Agent return → Oracle reconciliation, never an automatic new test cycle. Do not re-run accepted evidence or create a new native comment if no consequential delta. Keep the five-line acting-role card and the optional **Action to Owner**; when there is no Owner dependency, write **`Action to Owner: NONE`**. Copy/Open remains PREPARED_NOT_SENT.
+
 ## 1. "Cycle now" is the Owner's short continuation command — use the Cycle Board
 
 The Owner can say **"Cycle now" in an existing Oracle or agent conversation**. Do **not** reflexively respond with fresh onboarding instructions, an invitation for the Owner to create two conversations, or a dry list of source URLs. Continue the *already established* project/task, check what changed, and do the assigned bounded work.
