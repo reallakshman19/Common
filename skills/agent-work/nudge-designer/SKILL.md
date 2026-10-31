@@ -5,6 +5,8 @@ description: Reconstruct source-linked Owner intent and design bounded agent wor
 
 # Nudge Designer
 
+**When invoked by an established participant's Cycle now:** First reuse the Cycle Board and source-bound existing assignment; do not synthesize a fresh onboarding packet. Give the Oracle a frozen [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line Owner view and ONE still-authorized bounded next task. Missing totals remain TOTAL UNKNOWN; no new receipt or approval.
+
 Preserve what the Owner is trying to achieve, then design the next useful work.
 The agent performs the synthesis. The scripts check declared structure, render
 instructions and suggest revision impact; they do not infer purpose or approve

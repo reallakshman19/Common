@@ -1,5 +1,7 @@
 # Agent-work reference index — examples, goldens, fixtures and templates
 
+**Owner-facing continuation reference:** [Task Evidence v2](TASK_EVIDENCE_V2.md) is the frozen five-line output whenever an established Oracle/agent is continued with Cycle now. Native task, relay, independent review and actual canonical Cycle receipts remain authoritative.
+
 **Use with [START_HERE.md](START_HERE.md).** This is a discovery map, not a required checklist or a claim that a project has passed. Read **role + mode → source → raw fixture → expected behavior**, not every file. Keep private production bytes out of public fixtures.
 
 ## Status and safe use

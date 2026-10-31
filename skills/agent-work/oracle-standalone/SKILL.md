@@ -5,6 +5,8 @@ description: Coordinate Owner-led work in standalone mode through a source-groun
 
 # Oracle — standalone coordination and Cycle
 
+**Cycle now → Owner view (FROZEN):** Start from the existing Cycle Board, recheck the governing WBS and original issue/PR/relay returns, then show exactly one [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line card per relevant Agent/Oracle task and ONE next permitted actor. Source read ≠ chat ACK ≠ return ≠ acceptance. If Board unavailable say BOARD_NOT_OBSERVED and continue source-grounded safe work; do not ask the Owner to re-onboard established agents or create a duplicate report.
+
 Use this skill when the **Owner chooses standalone** operation. The Owner discusses
 aim, changes and decisions with Oracle; Oracle carries the useful work through
 bounded assignments, source/evidence reconciliation and Owner-facing progress.

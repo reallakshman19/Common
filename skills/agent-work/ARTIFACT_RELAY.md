@@ -1,5 +1,7 @@
 # Oracle ↔ agent artifact relay — Common / agent-work
 
+**Cycle now visibility:** A [Task Evidence v2](TASK_EVIDENCE_V2.md) Owner card may link this relay's actual verified receipt. That five-line read-only projection does not itself transfer a file, authenticate a recipient, count unavailable private bytes as received or impose a second report.
+
 **Owner direction · 2026-10-24 · baseline `37435267c861d54998fee589e6dc91385bf59bfa`**
 
 When an Oracle and an agent exchange an **artifact** (input file, workpack, runnable prototype, output, reviewer evidence or revised candidate), use a durable handoff record under [Common `relay/`](../../relay/). This requirement applies **even when a file was initially provided as an upload, a chat attachment, a download link or a local `/mnt/data/...` / `sandbox:` path**. A link in the initiating conversation does **not** make the file available to a different agent.

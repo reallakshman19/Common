@@ -1,5 +1,7 @@
 # Cycle Board Protocols — source-bound onboarding, continuation and Page reconciliation
 
+**FROZEN Task Evidence v2:** For every established **Cycle now**, Board → native-source reconciliation → one five-line [Task Evidence v2](../../TASK_EVIDENCE_V2.md) Owner card per relevant existing Agent/Oracle task → ONE next actor. Work performed, native return, Oracle-reported review, independent engineering acceptance and release remain separate. [Draft Page implementation #102](https://github.com/reallakshman19/progress-page/pull/102) is not automatic publication or ACK. Unknown denominators = TOTAL UNKNOWN; Board/browser NOT_OBSERVED must be stated, not hidden.
+
 **Type:** operational companion / index, **not** a new governing protocol, project WBS, Cycle activation or acceptance rule.  
 **Status:** Operational companion merged through [Common PR #573](https://github.com/reallakshman19/Common/pull/573); this revision clarifies existing-agent continuation and the already-shipped CIIFR UI reuse. Linked live status still requires fresh verification.  
 **Grounding:** [START_HERE pinned at Common main 999dd8d](https://github.com/reallakshman19/Common/blob/999dd8d1516af6a65a840d9f3f489b5f0115d261/skills/agent-work/START_HERE.md) · [START_HERE (current branch)](../../START_HERE.md) · [Cycle Board read-model contract](CYCLE_BOARD_CONTRACT.md) · [CT-1–CT-4 implementation slices](CYCLE_BOARD_VERTICAL_SLICES.md).

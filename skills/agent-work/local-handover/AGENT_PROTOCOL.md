@@ -1,5 +1,7 @@
 # Local-agent operating protocol · receive, execute, self-check, hand over
 
+**Cycle now relay visibility:** Keep the one native return and exact byte-identity receipts in their original destinations. The Owner-facing [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line card projects those existing records; it does not replace this protocol, demand a duplicate report, prove recipient file access or authorize the next writer.
+
 This is an **optional field instruction** for fast/low-reasoning local agents taking over work in any project. Use it with the [Common agent-work guide](../START_HERE.md), [handover protocol](PROTOCOL.md), [GitHub comment relay](COMMENT_RELAY.md) and [self-check form](forms/SELF_CHECK.md). It is not a fifth skill, agent admission exam, new lifecycle, standing grant to publish private files, or substitute for a project's actual rules.
 
 ## The job in seven actions

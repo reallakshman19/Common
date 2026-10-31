@@ -1,5 +1,7 @@
 # Cycle Board — source-bound context and delta contract
 
+**FROZEN owner projection — Task Evidence v2:** Reuse the existing source/CT-5 model to show one [five-information-line card](../../TASK_EVIDENCE_V2.md) per relevant Agent/Oracle task whenever Cycle now is invoked; title/last-reconciled metadata are separate. No new reporting schema, WBS, actor assignment, Page write or technical PASS. Source status CURRENT/PARTIAL/UNKNOWN and TOTAL UNKNOWN denominators fail closed. [Page draft PR #102](https://github.com/reallakshman19/progress-page/pull/102) is proposed implementation, not verified deployment.
+
 **Status:** Contract merged in [Common PR #567](https://github.com/reallakshman19/Common/pull/567); implementations and human acceptance are independently reviewed. **AIM:** reusable information with minimal agent *and total* work. This remains an implementation interface for downstream agents, **not** a new coordination mode, required report, governing WBS, Cycle activation, or publication authority. Read [Cycle Board Protocols](CYCLE_BOARD_PROTOCOLS.md) for short Owner/Oracle commands and source-bound onboarding; [START_HERE](../../START_HERE.md) remains the role/mode router; see [vertical-slice handoffs](CYCLE_BOARD_VERTICAL_SLICES.md) for implementations.
 
 ## 1. Authority and product boundary
