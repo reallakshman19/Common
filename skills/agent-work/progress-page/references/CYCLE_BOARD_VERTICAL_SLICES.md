@@ -1,6 +1,6 @@
-# Cycle Board — downstream vertical-slice execution contracts (draft v0)
+# Cycle Board — downstream vertical-slice execution contracts
 
-**Purpose:** hand an independent downstream agent four bounded, reviewable delivery slices. **AIM:** *reuse current Cycle/native/Page evidence with less total work, and deliver a runnable Owner-facing result first*. Companion interface: [source-bound contract](CYCLE_BOARD_CONTRACT.md). This is a delivery plan **within the existing selected project WBS**, not a second governing WBS or a compulsory four-stage journey for every agent.
+**Purpose:** hand an independent downstream agent four bounded, reviewable delivery slices. The **contract was merged in Common PR #567**, but each candidate's merge, tests, original-source review and Owner acceptance require separate verification. **AIM:** *reuse current Cycle/native/Page evidence with less total work, and deliver a runnable Owner-facing result first*. Companion sources: [Cycle Board Protocols](CYCLE_BOARD_PROTOCOLS.md) (operating route), [START_HERE](../../START_HERE.md) (role/mode) and [source-bound contract](CYCLE_BOARD_CONTRACT.md) (interface). This is a delivery plan **within the existing selected project WBS**, not a second governing WBS or a compulsory four-stage journey for every agent.
 
 ## 0. Execution entry and custody
 
