@@ -4,6 +4,13 @@ on:
   pull_request:
     paths:
       - 'skills/agent-work/progress-page/**'
+      - 'skills/agent-work/TASK_EVIDENCE_V2.md'
+      - 'skills/agent-work/START_HERE.md'
+      - 'skills/agent-work/oracle-standalone/**'
+      - 'skills/agent-work/oracle-chat-routing/**'
+      - 'skills/agent-work/ROLE_LIFECYCLE.md'
+      - 'skills/agent-work/ENTRY_PROCESS_MAPS.md'
+      - 'skills/agent-work/tests/**'
       - '.github/workflows/progress-page.yml'
   push:
     branches: [main]
@@ -36,6 +43,8 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python -B -m unittest discover -s skills/agent-work/progress-page/tests -v
+      - name: TE2-ROLE Cycle now falsifiers
+        run: python -B -m unittest discover -s skills/agent-work/tests -p 'test_te2_cycle_now.py' -v
       - name: Portable shared Smart Badge integration tests
         run: node --experimental-default-type=module --test skills/agent-work/progress-page/tests/portable-smart-badges.test.mjs
       - name: Check the viewer modules parse
