@@ -1,6 +1,6 @@
 # Oracle Cycle — GitHub-first standalone relay
 
-Version: 0.1.0 DRAFT · Applies only when explicitly selected · No OTM
+Version: 0.2.0 DRAFT · Applies only when explicitly selected · No OTM
 
 ## Contract in one sentence
 
@@ -13,6 +13,36 @@ The trigger **does not** wake other chats or run in the background. GitHub
 comments do not mutate assignments automatically; a published revised
 `CURRENT.json` does. Without a real GitHub-accessible actor, use the stated
 private Drive fallback and label the missing verification.
+
+## 0. Lean cold start (v0.2.0)
+
+Learned on TopoFix, 31 Oct 2026: cold chats spent their effort reading about
+20,000 words of `skills/agent-work` before starting, and the Owner had to
+paste long briefs by hand. v0.2.0 is additive. Receipt v1 and all rules
+below are unchanged. A project opts in by setting `"protocol_version": "0.2.0"`.
+
+1. **Role in the trigger.** `Cycle now: <project URL> as <role>`. One project
+   may hold several ACTIVE assignments, at most one per role. The recipient
+   picks its own role and ignores the others.
+2. **One brief per assignment.** `brief_url` points to a self-contained file
+   in the project folder: Owner intent, base SHA, task, the never-list, tests
+   and the Owner benchmark. A cold recipient reads `CURRENT.json`, then its
+   brief, then only what the brief links. It does not need the rest of
+   `skills/agent-work`.
+3. **Native issue as inbox.** An assignment's `receipt_issue_url` may be the
+   native task issue, so receipts and the work's discussion sit in one
+   place. The receipt points to the PR. Logs and self-checks belong in the PR.
+4. **First-ACK binding.** For a not-yet-known chat, set the role's
+   `chat_id8: null` and `binding: "FIRST_ACK"`. The first `action: received`
+   receipt for that assignment binds it. A later claimant gets
+   `NO ACTION — already bound`. The Oracle records the bound id8 in the next
+   revision. Binding is routing, not access control (§2).
+5. **Two receipts per assignment by default:** ACK (`received`) and return
+   (`work_returned` or `blocked`). Nothing in between, unless the work is
+   blocked.
+6. **The Oracle checks every return** by re-running its tests and getting an
+   independent review before the Owner sees it. One repair round at most;
+   then the Oracle escalates to the Owner.
 
 ## 1. Discovery and one-line grammar
 
