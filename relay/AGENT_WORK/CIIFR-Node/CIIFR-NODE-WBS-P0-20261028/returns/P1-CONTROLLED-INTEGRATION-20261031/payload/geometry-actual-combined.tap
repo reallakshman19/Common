@@ -1,0 +1,65 @@
+TAP version 13
+# CII Workspace OD-scaled multi-basis geometry authority checks passed.
+# Subtest: tests/cii-workspace-geometry-authority.test.js
+ok 1 - tests/cii-workspace-geometry-authority.test.js
+  ---
+  duration_ms: 133.794648
+  type: 'test'
+  ...
+# Subtest: original bytes reconstruct forward and reverse signed 3D physical centerline
+ok 2 - original bytes reconstruct forward and reverse signed 3D physical centerline
+  ---
+  duration_ms: 10.001747
+  type: 'test'
+  ...
+# Subtest: independent disconnected component remains physically disjoint
+ok 3 - independent disconnected component remains physically disjoint
+  ---
+  duration_ms: 2.845732
+  type: 'test'
+  ...
+# Subtest: wrong original hash and unit interpretation fail closed
+ok 4 - wrong original hash and unit interpretation fail closed
+  ---
+  duration_ms: 1.750313
+  type: 'test'
+  ...
+# Subtest: cycle contradiction is rejected and cannot mint an extra node
+ok 5 - cycle contradiction is rejected and cannot mint an extra node
+  ---
+  duration_ms: 1.461299
+  type: 'test'
+  ...
+# Subtest: corrupt original bytes and invalid element count are refused
+ok 6 - corrupt original bytes and invalid element count are refused
+  ---
+  duration_ms: 1.12993
+  type: 'test'
+  ...
+# Subtest: native element CONTROL counts reject missing/extra records
+ok 7 - native element CONTROL counts reject missing/extra records
+  ---
+  duration_ms: 1.014866
+  type: 'test'
+  ...
+# Subtest: NODENAME pointer uses native row-13 first field and fails when out of range
+ok 8 - NODENAME pointer uses native row-13 first field and fails when out of range
+  ---
+  duration_ms: 2.248923
+  type: 'test'
+  ...
+# Subtest: native COORDS accepts adjoining signed coordinate as in original S2
+ok 9 - native COORDS accepts adjoining signed coordinate as in original S2
+  ---
+  duration_ms: 4.215041
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 175.310042

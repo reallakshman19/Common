@@ -1,0 +1,12 @@
+{
+  "commit": "96d7a92cab7f0fe45a2de8ac05a54f15b3034719",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/cii-workspace-geometry-authority.test.js",
+    "tests/cii-workspace-method-c-original-geometry.test.js"
+  ],
+  "exitCode": 0,
+  "sourceBasis": "verified source subset of actual committed combined head"
+}

@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-31 Asia/Dubai",
+  "node": "v24.22.1",
+  "git": "git version 2.51.1",
+  "platform": "Linux x86_64",
+  "actualImplementationCommit": "96d7a92cab7f0fe45a2de8ac05a54f15b3034719",
+  "executionBasis": "native Node on individually Git-verified actual-commit source subset",
+  "fullNativeGitCheckout": "NOT_RUN",
+  "newWindowsBrowserTrial": "NOT_RUN; prior evidence reused only for identical runtime bytes"
+}
