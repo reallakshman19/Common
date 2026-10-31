@@ -41,6 +41,18 @@ GLRD support (refusing it is correct for now); edits to `xml-profiles.js`, `xml-
 
 Then stop. **Owner benchmark:** uploading F05 shows "Admitted · F05 v1.1 · 56 elements / 57 nodes · absolute"; uploading GLRD or an unknown file shows "Not supported" with the reason, and no topology.
 
+## Every chat reply ends with this card (for the Owner)
+Five lines, your own task only. Use `UNKNOWN` or `NOT_RUN` instead of guessing ([PROTOCOL §0.7](../PROTOCOL.md#0-lean-cold-start-v020)).
+
+```text
+Task Evidence v2 · topofix · coder-b · TOPO-B-B2 · <time>
+1. TASK: <repo> · WBS <id> · issue #<n> · PR #<n> <draft/state> @<head8>
+2. PROGRESS: <done/total deliverables> · acceptance <none|scoped review|Owner>
+3. WORK & PROOF: <what changed> · tests <n/n PASS|FAIL|NOT_RUN> · <permalinks>
+4. BLOCKERS & RELAY: <receipt permalink or NOT_POSTED> · <review state> · <HOLDs>
+5. NEXT → <ONE ACTOR>: <one bounded action> → <expected output> → <where>
+```
+
 ## Cycle receipts (how you report)
 Post both receipts as comments on [issue #239](https://github.com/reallakshman19/XML_Compare_Utilities/issues/239). That issue is this assignment's only inbox.
 

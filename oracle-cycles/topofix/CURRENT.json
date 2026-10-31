@@ -4,35 +4,61 @@
   "project": "topofix",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 1,
-  "last_accepted_receipt_ids": [],
+  "revision": 2,
+  "last_accepted_receipt_ids": [
+    "TOPO-A-P1-ack-202610311415",
+    "TOPO-B-B2-ack-202610311415"
+  ],
   "aim": "Topology gives auditable automatic fixes where safe and clear manual-review directions otherwise; an engineer can find and understand a hidden connection (e.g. a CLOS-declared end) without it being auto-joined; other XML formats are admitted read-only and fail-closed, reusing existing parsers.",
   "aim_source": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/3",
   "privacy": "PUBLIC_SAFE_METADATA_ONLY",
   "roles": {
-    "oracle": {"label": "TopoFix Oracle (Claude Code)", "chat_id8": null, "provenance": "OWNER_APPOINTED_20261031", "responsibility": "Meaning, assignments, checks every return, independent review before Owner"},
-    "coder-a": {"label": "TOPO-A writer (ChatGPT)", "chat_id8": null, "binding": "FIRST_ACK", "responsibility": "TOPO-A P1 review-only Find / Review Connection panel"},
-    "coder-b": {"label": "TOPO-B writer (ChatGPT)", "chat_id8": null, "binding": "FIRST_ACK", "responsibility": "TOPO-B admission verdict in the InputXML Workspace"},
-    "owner": {"label": "Owner", "chat_id8": null, "provenance": "OWNER_SELF", "responsibility": "Acceptance, merges, private-file trials"}
+    "oracle": {
+      "label": "TopoFix Oracle (Claude Code)",
+      "chat_id8": null,
+      "provenance": "OWNER_APPOINTED_20261031",
+      "responsibility": "Meaning, assignments, checks every return, independent review before Owner"
+    },
+    "coder-a": {
+      "label": "TOPO-A writer (ChatGPT)",
+      "chat_id8": "6ae5bfb9",
+      "binding": "BOUND",
+      "responsibility": "TOPO-A P1 review-only Find / Review Connection panel",
+      "provenance": "OWNER_REPORTED_URL_20261031"
+    },
+    "coder-b": {
+      "label": "TOPO-B writer (ChatGPT)",
+      "chat_id8": "6ae5bfc1",
+      "binding": "BOUND",
+      "responsibility": "TOPO-B admission verdict in the InputXML Workspace",
+      "provenance": "OWNER_REPORTED_URL_20261031"
+    },
+    "owner": {
+      "label": "Owner",
+      "chat_id8": null,
+      "provenance": "OWNER_SELF",
+      "responsibility": "Acceptance, merges, private-file trials"
+    }
   },
   "assignments": [
     {
       "id": "TOPO-A-P1",
       "generation": 1,
       "recipient_role": "coder-a",
-      "dispatch": "READY_NOT_SENT",
+      "dispatch": "RETURNED_AWAIT_ORACLE_RECONCILIATION",
       "brief_url": "https://github.com/reallakshman19/Common/blob/main/oracle-cycles/topofix/TOPO-A-P1.md",
       "repository": "reallakshman19/xml229-topology-wp1-preview-20261028",
       "base": "209ec34c (draft PR #13, checkpoint QUALIFIED_SCOPED 92/100)",
       "scope": "Carry-forward fixes + review-only Find / Review Connection panel; new draft PR against feat/topo-a-p0-closure-witness",
       "receipt_issue_url": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/12",
-      "required_return": "Draft PR + head SHA, changed files, test counts, screenshot, deliberate-failure proof"
+      "required_return": "Draft PR + head SHA, changed files, test counts, screenshot, deliberate-failure proof",
+      "returned_candidate": "draft PR #14 @69b4f650 (Oracle re-run 86/86 py, 56/56 node, CI validate pass; independent review running)"
     },
     {
       "id": "TOPO-B-B2",
       "generation": 1,
       "recipient_role": "coder-b",
-      "dispatch": "READY_NOT_SENT",
+      "dispatch": "ACKED_IN_PROGRESS",
       "brief_url": "https://github.com/reallakshman19/Common/blob/main/oracle-cycles/topofix/TOPO-B-B2.md",
       "repository": "reallakshman19/XML_Compare_Utilities",
       "base": "a3ad4dd3 (draft PR #240, checkpoint QUALIFIED_SCOPED 93/100)",
@@ -42,14 +68,55 @@
     }
   ],
   "next": [
-    {"recipient_role": "coder-a", "status": "READY_FOR_OWNER_TRIGGER", "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/topofix as coder-a"},
-    {"recipient_role": "coder-b", "status": "READY_FOR_OWNER_TRIGGER", "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/topofix as coder-b"}
+    {
+      "recipient_role": "oracle",
+      "status": "RECONCILING",
+      "instruction": "Independent review of PR #14; coder-a waits (AWAIT_ORACLE_RECONCILIATION), no new work"
+    },
+    {
+      "recipient_role": "coder-b",
+      "status": "IN_PROGRESS",
+      "owner_trigger": "Cycle now"
+    }
   ],
   "gates": [
-    {"id": "topo-a-p0", "status": "PASS_INDEPENDENT_SCOPED", "scope": "PR #13 @209ec34c closure binding witnesses, 92/100", "evidence_ref": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/12#issuecomment-6542050413", "limits": "Synthetic fixtures only; not engineering acceptance"},
-    {"id": "topo-b-b1", "status": "PASS_INDEPENDENT_SCOPED", "scope": "PR #240 @a3ad4dd3 fail-closed F05/R4 admission, 93/100", "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/239#issuecomment-6542048207", "limits": "Browser DOMParser NOT_RUN; private files NOT_RUN"},
-    {"id": "owner-original-trial", "status": "NOT_RUN", "scope": "Owner runs Node 6880/6450 on the private original on Windows", "evidence_ref": null, "limits": "Owner only"}
+    {
+      "id": "topo-a-p0",
+      "status": "PASS_INDEPENDENT_SCOPED",
+      "scope": "PR #13 @209ec34c closure binding witnesses, 92/100",
+      "evidence_ref": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/12#issuecomment-6542050413",
+      "limits": "Synthetic fixtures only; not engineering acceptance"
+    },
+    {
+      "id": "topo-b-b1",
+      "status": "PASS_INDEPENDENT_SCOPED",
+      "scope": "PR #240 @a3ad4dd3 fail-closed F05/R4 admission, 93/100",
+      "evidence_ref": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/239#issuecomment-6542048207",
+      "limits": "Browser DOMParser NOT_RUN; private files NOT_RUN"
+    },
+    {
+      "id": "owner-original-trial",
+      "status": "NOT_RUN",
+      "scope": "Owner runs Node 6880/6450 on the private original on Windows",
+      "evidence_ref": null,
+      "limits": "Owner only"
+    }
   ],
-  "holds": ["CLOS edits", "240.6 mm join or tolerance change", "Apply for CLOS cases", "GLRD support", "CII Writer/Weight/Final", "engineering acceptance", "merges", "private files on GitHub"],
-  "progress_projection": {"repository": "reallakshman19/progress-page", "project_key": "topofix", "publication_status": "PROGRESS_UPDATE_PENDING", "published_revision": null}
+  "holds": [
+    "CLOS edits",
+    "240.6 mm join or tolerance change",
+    "Apply for CLOS cases",
+    "GLRD support",
+    "CII Writer/Weight/Final",
+    "engineering acceptance",
+    "merges",
+    "private files on GitHub"
+  ],
+  "progress_projection": {
+    "repository": "reallakshman19/progress-page",
+    "project_key": "topofix",
+    "publication_status": "PROGRESS_UPDATE_PENDING",
+    "published_revision": null
+  },
+  "owner_view": "TASK_EVIDENCE_V2 five-line card at the end of every chat reply (PROTOCOL §0.7)"
 }

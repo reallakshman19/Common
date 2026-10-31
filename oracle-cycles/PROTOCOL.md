@@ -43,6 +43,23 @@ below are unchanged. A project opts in by setting `"protocol_version": "0.2.0"`.
 6. **The Oracle checks every return** by re-running its tests and getting an
    independent review before the Owner sees it. One repair round at most;
    then the Oracle escalates to the Owner.
+7. **Every reply in chat ends with a Task Evidence v2 card.** This applies to
+   the agent and Oracle alike, on every `Cycle now`, ACK, progress turn and
+   return. The receipt is for GitHub routing; the card is for the Owner, who
+   reads the chat. Both are always needed. The card is exactly five lines,
+   for the replying role's own task only (the full rules are in
+   [TASK_EVIDENCE_V2](../skills/agent-work/TASK_EVIDENCE_V2.md)):
+
+   ```text
+   Task Evidence v2 · <project> · <role> · <assignment_id> · <time>
+   1. TASK: <repo> · WBS <id> · issue #<n> · PR #<n> <draft/state> @<head8>
+   2. PROGRESS: <done/total deliverables> · acceptance <none|scoped review|Owner>
+   3. WORK & PROOF: <what changed> · tests <n/n PASS|FAIL|NOT_RUN> · <permalinks>
+   4. BLOCKERS & RELAY: <receipt permalink or NOT_POSTED> · <review state> · <HOLDs>
+   5. NEXT → <ONE ACTOR>: <one bounded action> → <expected output> → <where>
+   ```
+   Write `UNKNOWN` or `NOT_RUN` instead of guessing. A brief repeats this
+   requirement so that a cold recipient cannot miss it.
 
 ## 1. Discovery and one-line grammar
 

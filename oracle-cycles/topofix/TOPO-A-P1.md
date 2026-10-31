@@ -42,6 +42,18 @@ Edit CLOS or any XML; change the 25 mm or 6 mm tolerances; join the 240.6 mm gap
 
 Then stop. **Owner benchmark:** you type 6880 and 6450 and see both ends, the CLOS mark, 240.6 mm, "review only, fix upstream", and no way to apply it.
 
+## Every chat reply ends with this card (for the Owner)
+Five lines, your own task only. Use `UNKNOWN` or `NOT_RUN` instead of guessing ([PROTOCOL §0.7](../PROTOCOL.md#0-lean-cold-start-v020)).
+
+```text
+Task Evidence v2 · topofix · coder-a · TOPO-A-P1 · <time>
+1. TASK: <repo> · WBS <id> · issue #<n> · PR #<n> <draft/state> @<head8>
+2. PROGRESS: <done/total deliverables> · acceptance <none|scoped review|Owner>
+3. WORK & PROOF: <what changed> · tests <n/n PASS|FAIL|NOT_RUN> · <permalinks>
+4. BLOCKERS & RELAY: <receipt permalink or NOT_POSTED> · <review state> · <HOLDs>
+5. NEXT → <ONE ACTOR>: <one bounded action> → <expected output> → <where>
+```
+
 ## Cycle receipts (how you report)
 Post both receipts as comments on [issue #12](https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/12). That issue is this assignment's only inbox.
 
