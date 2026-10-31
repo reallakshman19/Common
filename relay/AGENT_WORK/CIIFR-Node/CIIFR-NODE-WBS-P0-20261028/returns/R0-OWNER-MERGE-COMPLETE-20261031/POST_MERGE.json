@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-31 Asia/Dubai",
+  "ownerApproval": "ok in response to final R0-only PR226 merge decision",
+  "approvalComment": 6543340414,
+  "approvedCandidate": "917c21a91a6f5cc02f42d323ebdbe60559e8ae2b",
+  "mergeCommit": "f7ada348f51017f9ca335281c35c4e90fc79b74d",
+  "mainRef": "f7ada348f51017f9ca335281c35c4e90fc79b74d",
+  "leafEntries": 8741,
+  "allLeafIdentitiesEqual": true,
+  "sourceCodeChangesAfterQualification": 0,
+  "testRerunRequiredForIdenticalTree": false,
+  "qualification": {
+    "vnext": "125/125 PASS",
+    "geometry": "9/9 PASS",
+    "testedImplementation": "96d7a92cab7f0fe45a2de8ac05a54f15b3034719",
+    "qualifiedRuntimeFilesPreserved": 367,
+    "vnextMirroredPairs": 26,
+    "executionBasis": "native Node on individually Git-verified exact-commit source subset; no full native Git checkout or new Windows trial"
+  },
+  "deployment": {
+    "workflowRun": 41201103336,
+    "head": "f7ada348f51017f9ca335281c35c4e90fc79b74d",
+    "conclusion": "success",
+    "url": "https://reallakshman19.github.io/XML_Compare_Utilities/",
+    "inspectorPath": "docs/cii-fnr-vnext.html",
+    "publicHTTPReadback": "UNAVAILABLE_VIA_WEB_READER; deployment and main identities verified through GitHub",
+    "newBrowserRenderingTest": "NOT_RUN; qualified application bytes preserved"
+  },
+  "authority": {
+    "r0ReadOnlyMerge": "OWNER_APPROVED_AND_COMPLETED",
+    "p2Correspondence": "NOT_ACTIVATED",
+    "newPropertyWriter": "HOLD",
+    "effectiveSemantics": "UNKNOWN_OR_UNQUALIFIED",
+    "widerEngineeringRelease": "NOT_GRANTED"
+  },
+  "receiver": "root contributor, PR repair author; no new independent engineering acceptance claimed"
+}

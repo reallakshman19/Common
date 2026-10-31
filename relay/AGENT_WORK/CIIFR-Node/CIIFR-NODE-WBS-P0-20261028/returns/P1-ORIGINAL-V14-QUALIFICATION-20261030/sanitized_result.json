@@ -1,0 +1,38 @@
+{
+  "schema": "CIIFR.Node.OriginalV14Qualification.PublicSafe.v1",
+  "task": "CIIFR-NODE-N02-FIXTURE-V14 / WBS 2.2 / P1.2",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "assessment": "SELF_ASSESSED",
+  "receipt": {
+    "actualBytesReceived": true,
+    "privateExpectedIdentity": "MATCHED",
+    "asciiCRLF": true,
+    "version": 14,
+    "inputImmutable": true,
+    "privateDigestWithheld": true
+  },
+  "physical": {
+    "status": "PASS",
+    "elementRecords": 521,
+    "elementCards": 7815,
+    "nodeNameBlocks": 177,
+    "rigidRecords": 156,
+    "restraintBlocks": 122,
+    "restraintPopulatedSlots": 331,
+    "displacementRecords": 6,
+    "forceRecords": 0,
+    "materialRows": 87,
+    "all15PointerFamilyBoundsAndOwnership": "RECONCILED",
+    "elementAndNodeAndAuxByteWitnesses": "ESTABLISHED_PRIVATE"
+  },
+  "application": {
+    "exactHeadRemoteVerified": true,
+    "exactHeadTrackedCheckout": "NOT_RUN",
+    "localServedOriginalBrowser": "NOT_RUN",
+    "fileIntakeDiagnostic": "NOT_OBSERVED",
+    "displayToWitnessComparison": "NOT_RUN",
+    "reason": "GITHUB_DNS_PREVENTS_PINNED_LOCAL_CHECKOUT"
+  },
+  "disposition": "PARTIAL_HOLD",
+  "meaning": "STORED_ONLY;EFFECTIVE_SEMANTICS_UNKNOWN;NO_WRITER_OR_RELEASE"
+}

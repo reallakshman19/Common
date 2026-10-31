@@ -1,0 +1,42 @@
+{
+  "task": "CIIFR-Node PR238 native operator handoff",
+  "candidate": "fa6e948eb0f71ba93fe8bab01625e3146d1df3a0",
+  "base": "417bf6a954c5a6de72237537e94b05b285191350",
+  "date": "2026-10-31 Asia/Dubai",
+  "classification": "PUBLIC_SAFE_RUNNER_AND_RECEIVER_INSPECTION_NOT_EXECUTION",
+  "sourceAttemptCommit": "e3a629eee11a92e50a708999939327f8dbe8d64a",
+  "intendedRecipient": "existing local agent01429edb, proposed; not acknowledged",
+  "nativeGate": "PARTIAL / NOT_RUN",
+  "files": [
+    {
+      "path": "CIIFR_PR238_NATIVE_QUALIFICATION_R1.zip",
+      "bytes": 14694,
+      "sha256": "8b46b3af0450c02196d1a870be1e834ee7c92dbe4ccf285d865c6e77a82245bf",
+      "gitBlob": "ebc21a16509d9d70e370510ef26d58a0d1781f60"
+    },
+    {
+      "path": "RECEIVER_READINESS.md",
+      "bytes": 4240,
+      "sha256": "724de6a09a4bcab604b9b19069f15064bc3662c22cbe3208fb0459b68cd3d39e",
+      "gitBlob": "c3b6fc842a333d865d8a02e87d7ce440d879762f"
+    },
+    {
+      "path": "LOCAL_WINDOWS_CONTINUATION.md",
+      "bytes": 2255,
+      "sha256": "08dc7f80f86011544ff0bb59fab1af1b0f4b0960a2fc27dd1a8bdff15a185b62",
+      "gitBlob": "3c62d245722032fc7b545f52837b237384d5e6e0"
+    },
+    {
+      "path": "PACKAGE_READBACK.json",
+      "bytes": 2103,
+      "sha256": "ebf75056763048f415d89e5987322f24ab18df791042366ac2f62aa3073e729f",
+      "gitBlob": "dc22e59ccf088929c7fa5b4c6acf08e9e4b3a5cd"
+    },
+    {
+      "path": "VERIFIER_COVERAGE_PROBE.json",
+      "bytes": 723,
+      "sha256": "13dd8b083d5a02ba5f7861ed1d79bc3f54c525e58917cf37baf962897942eb3b",
+      "gitBlob": "155a879be2cc11a37ea71c4a7342c81eadad9b06"
+    }
+  ]
+}

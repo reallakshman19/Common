@@ -1,0 +1,20 @@
+{
+  "task": "CIIFR-Node Owner-approved R0 merge closure",
+  "candidate": "917c21a91a6f5cc02f42d323ebdbe60559e8ae2b",
+  "mainMerge": "f7ada348f51017f9ca335281c35c4e90fc79b74d",
+  "classification": "PUBLIC_SAFE_POST_MERGE_RECEIVER_RECORD",
+  "files": [
+    {
+      "path": "receipt.md",
+      "bytes": 2973,
+      "sha256": "2cce376b33945e94668e3dd08b2f0b835ce7cdded0cc2b2b70a1e41e721c753b",
+      "gitBlob": "ac9c8084e307b48fa3cc222c86b0d5424d0232a7"
+    },
+    {
+      "path": "POST_MERGE.json",
+      "bytes": 1649,
+      "sha256": "44d9272a62e5d576a631bb375b5e2b0fd4fc8c0e8a00e2c8ac06c236c58b21ed",
+      "gitBlob": "1c6b92241dd2049383c7f46d6f2a584b163ffa04"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "task": "CIIFR-Node controlled integration",
+  "candidate": "917c21a91a6f5cc02f42d323ebdbe60559e8ae2b",
+  "testedImplementation": "96d7a92cab7f0fe45a2de8ac05a54f15b3034719",
+  "main": "d82ae599913ff7cd39d9e64a0da8d553b7df1535",
+  "classification": "PUBLIC_SAFE_AUTHOR_INTEGRATION_NATIVE_EVIDENCE",
+  "files": [
+    {
+      "path": "receipt.md",
+      "bytes": 4535,
+      "sha256": "c7dd1546cb25f0ab5adf4116a80c7f18579d92fa721ae2c8267ba1fb5c50d70d",
+      "gitBlob": "7464cc92164b7d7982ddae77d89e2ce17b7c221a"
+    },
+    {
+      "path": "payload/FINAL_IDENTITIES.json",
+      "bytes": 7275,
+      "sha256": "c97dd2e6f5c8b51c2ea2f3662b683a570dba93cbc55c0b6d2c071a0b004d6c57",
+      "gitBlob": "634d653e78ce7b0a54cb8481bdd62dbe3e25171d"
+    },
+    {
+      "path": "payload/SOURCE_VERIFICATION.json",
+      "bytes": 27990,
+      "sha256": "24fd012db09c2e7b3e891f33219e6433486c65851f2c02f6b31302214713826c",
+      "gitBlob": "b0c4763e619066ebb7f164e55a5a0c653b9d6575"
+    },
+    {
+      "path": "payload/ENVIRONMENT.json",
+      "bytes": 422,
+      "sha256": "06b0cee2aa058ed71275a3a811c606e909ef726cba642365dc27e317b143d65f",
+      "gitBlob": "98b7ea561ac4c0db629c2ad35326090568927854"
+    },
+    {
+      "path": "payload/vnext-actual-combined.tap",
+      "bytes": 26487,
+      "sha256": "b022f7999461cdaebeb67807377f35c569cfa06a79f1fb8b2d22b93a802d6798",
+      "gitBlob": "4035325e7909ceb0823827afc2e62e5276f706d1"
+    },
+    {
+      "path": "payload/vnext-command.json",
+      "bytes": 1533,
+      "sha256": "b0503569754a063491e8a82ad27b5a9b14532386ae1558d87f75eb6ac9627244",
+      "gitBlob": "2a72d5690e2acb635b3943e85839ecc8298105b7"
+    },
+    {
+      "path": "payload/geometry-actual-combined.tap",
+      "bytes": 1952,
+      "sha256": "ae9cbc94ccffdfa5d0f05bd22c4102acf2ae44d8962f54d0e62ec7bbcdb5b0d8",
+      "gitBlob": "022f65a1746188fbba7b018109667fe6409889ed"
+    },
+    {
+      "path": "payload/geometry-command.json",
+      "bytes": 341,
+      "sha256": "40fbc0f2a653e1d82a91720134b5475f06587b17123fe71b8b1dbee7514dc28a",
+      "gitBlob": "01e47cc191f0b954742f40f0ed182b1cf221d0f4"
+    },
+    {
+      "path": "payload/report-recovery.patch",
+      "bytes": 12610,
+      "sha256": "b46f6d0233ec886fcbfed7c0708930e3c3e5b577450f4bdaefbce6b4de6e47f1",
+      "gitBlob": "61df4cbe054399b7e1025827d5b67c011b9750f9"
+    }
+  ]
+}

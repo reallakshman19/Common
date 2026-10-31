@@ -1,0 +1,28 @@
+{
+  "schema": "CIIFR.Node.P1.2.WindowsGateLocalPackage.v1",
+  "status": "EXECUTION_READY_NOT_RUN_WINDOWS",
+  "subjectPR": "232",
+  "head": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "contents": [
+    {
+      "relative_path": "README.md",
+      "sizeBytes": 4567,
+      "sha256": "72786b0fb1ca2ddb2abef3310a744b16068e6e9e3591d5107f66f44d017c1028"
+    },
+    {
+      "relative_path": "SELF_ASSESSED_LOCAL_TESTS.md",
+      "sizeBytes": 1166,
+      "sha256": "827f813ceb5a5227e9c83f46aaa21e80e542e3b7f6cb0e5d67ff8a9b5ecabfd6"
+    },
+    {
+      "relative_path": "tools/physical-oracle.mjs",
+      "sizeBytes": 8255,
+      "sha256": "c4c8a8fa7a1852eec11ebdacb4a89e8897baa49b5784ba6f6bc0cf464d162a2a"
+    },
+    {
+      "relative_path": "tools/run-windows-original.mjs",
+      "sizeBytes": 12202,
+      "sha256": "06bd46ec1e94a0ac27bfa467682a7b912c6140d4631674d024fa350372a96629"
+    }
+  ]
+}

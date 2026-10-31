@@ -1,0 +1,21 @@
+{
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "referenceRequest": "LOCAL_AGENT_ADDENDUM_REQUEST.md",
+  "classification": "PUBLIC_SAFE_LOCAL_AGENT_EXECUTION_ADDENDUM_F2_F3",
+  "disposition": "PASS",
+  "files": [
+    {
+      "path": "EXECUTION_ADDENDUM_F2_F3.md",
+      "bytes": 9033,
+      "sha256": "007ebc0b3431fadabec72a8c10a7b32a6c42b34688100c30c09161f97145206c",
+      "gitBlob": "08463627846e3dc316ab6873b770160a0950ebcb"
+    },
+    {
+      "path": "sanitized-addendum-f2-f3.json",
+      "bytes": 2780,
+      "sha256": "d4ab4fcb596875503f8788cd2683969d5fa5fce46640cf0c816da43a669e95e2",
+      "gitBlob": "dec144a734465c047aa19b07d988abf4327ab757"
+    }
+  ]
+}

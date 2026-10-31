@@ -1,0 +1,764 @@
+TAP version 13
+# Subtest: F01 status-independent exact/partial overlaps "\\n"
+ok 1 - F01 status-independent exact/partial overlaps "\\n"
+  ---
+  duration_ms: 13.64082
+  type: 'test'
+  ...
+# Subtest: F01 unrelated HOLD/REJECTED must not veto valid named+blank "\\n"
+ok 2 - F01 unrelated HOLD/REJECTED must not veto valid named+blank "\\n"
+  ---
+  duration_ms: 7.628769
+  type: 'test'
+  ...
+# Subtest: F01 status-independent exact/partial overlaps "\\r\\n"
+ok 3 - F01 status-independent exact/partial overlaps "\\r\\n"
+  ---
+  duration_ms: 5.739979
+  type: 'test'
+  ...
+# Subtest: F01 unrelated HOLD/REJECTED must not veto valid named+blank "\\r\\n"
+ok 4 - F01 unrelated HOLD/REJECTED must not veto valid named+blank "\\r\\n"
+  ---
+  duration_ms: 4.089834
+  type: 'test'
+  ...
+# PASS synthetic FORTRAN exponent variants and malformed/unsafe integers: LF and CRLF
+# Subtest: tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs
+ok 2 - tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs
+  ---
+  duration_ms: 110.578354
+  type: 'test'
+  ...
+# Subtest: SIMULATED "\\r\\n": full TARGET node alias closure + line full record
+ok 6 - SIMULATED "\\r\\n": full TARGET node alias closure + line full record
+  ---
+  duration_ms: 30.40497
+  type: 'test'
+  ...
+# Subtest: WRITER API FAIL-CLOSED "\\r\\n": reviewer partial-approval rejected, complete control accepted
+ok 7 - WRITER API FAIL-CLOSED "\\r\\n": reviewer partial-approval rejected, complete control accepted
+  ---
+  duration_ms: 9.251633
+  type: 'test'
+  ...
+# Subtest: SIMULATED "\\n": full TARGET node alias closure + line full record
+ok 8 - SIMULATED "\\n": full TARGET node alias closure + line full record
+  ---
+  duration_ms: 10.508807
+  type: 'test'
+  ...
+# Subtest: WRITER API FAIL-CLOSED "\\n": reviewer partial-approval rejected, complete control accepted
+ok 9 - WRITER API FAIL-CLOSED "\\n": reviewer partial-approval rejected, complete control accepted
+  ---
+  duration_ms: 9.111937
+  type: 'test'
+  ...
+# PASS Normal logical-node alias closure: complete, partial, FROM/TO only, blank, disagreement, singleton, CRLF/LF
+# Subtest: tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs
+ok 4 - tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs
+  ---
+  duration_ms: 131.922282
+  type: 'test'
+  ...
+# Subtest: Policy A named-only closure "\\n" NORMAL
+ok 11 - Policy A named-only closure "\\n" NORMAL
+  ---
+  duration_ms: 27.01408
+  type: 'test'
+  ...
+# Subtest: Policy A named-only closure "\\n" LINE_NODE
+ok 12 - Policy A named-only closure "\\n" LINE_NODE
+  ---
+  duration_ms: 19.907373
+  type: 'test'
+  ...
+# Subtest: Policy A named-only closure "\\r\\n" NORMAL
+ok 13 - Policy A named-only closure "\\r\\n" NORMAL
+  ---
+  duration_ms: 9.327408
+  type: 'test'
+  ...
+# Subtest: Policy A named-only closure "\\r\\n" LINE_NODE
+ok 14 - Policy A named-only closure "\\r\\n" LINE_NODE
+  ---
+  duration_ms: 14.799864
+  type: 'test'
+  ...
+# PASS v14 exponent notation, immutable original, alias closure, LF/CRLF
+# Subtest: tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs
+ok 6 - tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs
+  ---
+  duration_ms: 129.216738
+  type: 'test'
+  ...
+# PASS [SYNTHETIC] byte patch, exact SHA, scoped regex, alias, CRLF/LF, stale, collisions, overflow and capture adversaries
+# Subtest: tests/cii-fnr-vnext-a1.test.mjs
+ok 7 - tests/cii-fnr-vnext-a1.test.mjs
+  ---
+  duration_ms: 122.879135
+  type: 'test'
+  ...
+# Subtest: exact B2 branch protects all unrelated bytes: v11 LF
+ok 17 - exact B2 branch protects all unrelated bytes: v11 LF
+  ---
+  duration_ms: 24.800046
+  type: 'test'
+  ...
+# Subtest: exact B2 branch protects all unrelated bytes: v11 CRLF
+ok 18 - exact B2 branch protects all unrelated bytes: v11 CRLF
+  ---
+  duration_ms: 10.866171
+  type: 'test'
+  ...
+# Subtest: exact B2 branch protects all unrelated bytes: v14 LF
+ok 19 - exact B2 branch protects all unrelated bytes: v14 LF
+  ---
+  duration_ms: 6.93855
+  type: 'test'
+  ...
+# Subtest: exact B2 branch protects all unrelated bytes: v14 CRLF
+ok 20 - exact B2 branch protects all unrelated bytes: v14 CRLF
+  ---
+  duration_ms: 5.075979
+  type: 'test'
+  ...
+# Subtest: exact B2 selection does not include identical name in unrelated B1
+ok 21 - exact B2 selection does not include identical name in unrelated B1
+  ---
+  duration_ms: 2.222214
+  type: 'test'
+  ...
+# Subtest: branch identifier mismatch gives zero replacements, no prefix matching
+ok 22 - branch identifier mismatch gives zero replacements, no prefix matching
+  ---
+  duration_ms: 8.169898
+  type: 'test'
+  ...
+# Subtest: exact B1 selection changes only its owned FROM name
+ok 23 - exact B1 selection changes only its owned FROM name
+  ---
+  duration_ms: 5.717094
+  type: 'test'
+  ...
+# Subtest: branch crossing with an unlabeled physical alias is fail-closed
+ok 24 - branch crossing with an unlabeled physical alias is fail-closed
+  ---
+  duration_ms: 3.699974
+  type: 'test'
+  ...
+# Subtest: cross-branch warning identifies physical node, all branches and proposed name
+ok 25 - cross-branch warning identifies physical node, all branches and proposed name
+  ---
+  duration_ms: 2.410305
+  type: 'test'
+  ...
+# Subtest: inconsistent cross-branch aliases do not qualify for an Option A recommendation
+ok 26 - inconsistent cross-branch aliases do not qualify for an Option A recommendation
+  ---
+  duration_ms: 1.774219
+  type: 'test'
+  ...
+# Subtest: recommended choice is located directly before Remove and is advisory only
+ok 27 - recommended choice is located directly before Remove and is advisory only
+  ---
+  duration_ms: 35.208875
+  type: 'test'
+  ...
+# Subtest: SOURCE labels and claim provenance require exact physical alignment
+ok 28 - SOURCE labels and claim provenance require exact physical alignment
+  ---
+  duration_ms: 15.189162
+  type: 'test'
+  ...
+# Subtest: SOURCE-driven branch dropdown and Approve All preserve explicit validation
+ok 29 - SOURCE-driven branch dropdown and Approve All preserve explicit validation
+  ---
+  duration_ms: 34.48804
+  type: 'test'
+  ...
+# Subtest: Approve All cannot bypass cross-branch diagnostic
+ok 30 - Approve All cannot bypass cross-branch diagnostic
+  ---
+  duration_ms: 17.718414
+  type: 'test'
+  ...
+# Subtest: visible VNext headings, recommendation and review columns have requested order
+ok 31 - visible VNext headings, recommendation and review columns have requested order
+  ---
+  duration_ms: 5.833058
+  type: 'test'
+  ...
+# Subtest: writer independently rejects forged branch evidence on an otherwise valid claim
+ok 32 - writer independently rejects forged branch evidence on an otherwise valid claim
+  ---
+  duration_ms: 4.66116
+  type: 'test'
+  ...
+# Subtest: invalid branch filter cannot silently fall back to Document
+ok 33 - invalid branch filter cannot silently fall back to Document
+  ---
+  duration_ms: 3.962234
+  type: 'test'
+  ...
+# Subtest: non-branch document mode remains selectable
+ok 34 - non-branch document mode remains selectable
+  ---
+  duration_ms: 3.135055
+  type: 'test'
+  ...
+# Subtest: served and source modules are byte-identical after branch integration
+ok 35 - served and source modules are byte-identical after branch integration
+  ---
+  duration_ms: 14.092458
+  type: 'test'
+  ...
+# Subtest: quoted CSV Branch column imports exact branch into Normal rule scope
+ok 36 - quoted CSV Branch column imports exact branch into Normal rule scope
+  ---
+  duration_ms: 16.414247
+  type: 'test'
+  ...
+# Subtest: config isolate real writer: NORMAL / "\\n"
+ok 37 - config isolate real writer: NORMAL / "\\n"
+  ---
+  duration_ms: 21.188989
+  type: 'test'
+  ...
+# Subtest: config isolate real writer: LINE_NODE / "\\n"
+ok 38 - config isolate real writer: LINE_NODE / "\\n"
+  ---
+  duration_ms: 6.309141
+  type: 'test'
+  ...
+# Subtest: config withheld HOLD/REJECTED and invalid diagnostic / "\\n"
+ok 39 - config withheld HOLD/REJECTED and invalid diagnostic / "\\n"
+  ---
+  duration_ms: 4.740374
+  type: 'test'
+  ...
+# Subtest: config isolate real writer: NORMAL / "\\r\\n"
+ok 40 - config isolate real writer: NORMAL / "\\r\\n"
+  ---
+  duration_ms: 3.952077
+  type: 'test'
+  ...
+# Subtest: config isolate real writer: LINE_NODE / "\\r\\n"
+ok 41 - config isolate real writer: LINE_NODE / "\\r\\n"
+  ---
+  duration_ms: 4.877795
+  type: 'test'
+  ...
+# Subtest: config withheld HOLD/REJECTED and invalid diagnostic / "\\r\\n"
+ok 42 - config withheld HOLD/REJECTED and invalid diagnostic / "\\r\\n"
+  ---
+  duration_ms: 3.402816
+  type: 'test'
+  ...
+# Subtest: config rejects unknown controls and retains immutable defaults
+ok 43 - config rejects unknown controls and retains immutable defaults
+  ---
+  duration_ms: 0.497528
+  type: 'test'
+  ...
+# Subtest: CSV resolver retains safe groups, holds competing replacements, preserves inputs
+ok 44 - CSV resolver retains safe groups, holds competing replacements, preserves inputs
+  ---
+  duration_ms: 12.586601
+  type: 'test'
+  ...
+# Subtest: source-corroborated suffix alias may be normalized but unmatched source is held
+ok 45 - source-corroborated suffix alias may be normalized but unmatched source is held
+  ---
+  duration_ms: 6.541964
+  type: 'test'
+  ...
+# Subtest: ambiguous REF/optional .1 normalizations are not guessed
+ok 46 - ambiguous REF/optional .1 normalizations are not guessed
+  ---
+  duration_ms: 3.864173
+  type: 'test'
+  ...
+# Subtest: truncation that makes two new node names equal is held, never accepted
+ok 47 - truncation that makes two new node names equal is held, never accepted
+  ---
+  duration_ms: 4.955688
+  type: 'test'
+  ...
+# Subtest: unsafe regex and invalid truncation fail closed
+ok 48 - unsafe regex and invalid truncation fail closed
+  ---
+  duration_ms: 1.939712
+  type: 'test'
+  ...
+# Subtest: Approve Non-Conflict collects whole X and Z nodes despite Y duplicate claims
+ok 49 - Approve Non-Conflict collects whole X and Z nodes despite Y duplicate claims
+  ---
+  duration_ms: 2.74276
+  type: 'test'
+  ...
+# Subtest: DOM mock includes preview and bulk-approval controls for existing UI tests
+ok 50 - DOM mock includes preview and bulk-approval controls for existing UI tests
+  ---
+  duration_ms: 2.264012
+  type: 'test'
+  ...
+# Subtest: buttons preview, apply accepted CSV, then approve only unrelated proposals
+ok 51 - buttons preview, apply accepted CSV, then approve only unrelated proposals
+  ---
+  duration_ms: 53.894819
+  type: 'test'
+  ...
+# Subtest: synthetic demo parses as v14 CII with two independently owned names
+ok 52 - synthetic demo parses as v14 CII with two independently owned names
+  ---
+  duration_ms: 5.607154
+  type: 'test'
+  ...
+# Subtest: demo CSV produces exactly two reviewable Normal claims
+ok 53 - demo CSV produces exactly two reviewable Normal claims
+  ---
+  duration_ms: 1.854235
+  type: 'test'
+  ...
+# Subtest: source and served demo loader are byte-identical
+ok 54 - source and served demo loader are byte-identical
+  ---
+  duration_ms: 8.131425
+  type: 'test'
+  ...
+# Subtest: demo button goes through existing TARGET then CSV file intake
+ok 55 - demo button goes through existing TARGET then CSV file intake
+  ---
+  duration_ms: 46.245658
+  type: 'test'
+  ...
+# Subtest: F02: delayed Generate -> Config change -> proposals remain 0
+ok 56 - F02: delayed Generate -> Config change -> proposals remain 0
+  ---
+  duration_ms: 57.919469
+  type: 'test'
+  ...
+# Subtest: F02: late rejected digest does not emit stale error diagnostics after config change
+ok 57 - F02: late rejected digest does not emit stale error diagnostics after config change
+  ---
+  duration_ms: 30.045784
+  type: 'test'
+  ...
+# Subtest: F02: delayed target file load A followed by fast target B: target remains B
+ok 58 - F02: delayed target file load A followed by fast target B: target remains B
+  ---
+  duration_ms: 21.351056
+  type: 'test'
+  ...
+# Subtest: both module mirrors resolve the existing workbench under any repository prefix
+ok 59 - both module mirrors resolve the existing workbench under any repository prefix
+  ---
+  duration_ms: 1.283814
+  type: 'test'
+  ...
+# Subtest: shipped host has a distinct lazy CIIFR_GEO pane and identical module mirrors
+ok 60 - shipped host has a distinct lazy CIIFR_GEO pane and identical module mirrors
+  ---
+  duration_ms: 13.347413
+  type: 'test'
+  ...
+# Subtest: actual host app switches isolated panels, loads once and preserves the frame document
+ok 61 - actual host app switches isolated panels, loads once and preserves the frame document
+  ---
+  duration_ms: 60.199138
+  type: 'test'
+  ...
+# Subtest: F3: NUMELT=2 and NUMELT=99 with 1 physical element are HELD and fail closed
+ok 62 - F3: NUMELT=2 and NUMELT=99 with 1 physical element are HELD and fail closed
+  ---
+  duration_ms: 18.609124
+  type: 'test'
+  ...
+# Subtest: F3: invalid NUMELT (0, negative, non-integer) is HELD as invalid
+ok 63 - F3: invalid NUMELT (0, negative, non-integer) is HELD as invalid
+  ---
+  duration_ms: 5.623731
+  type: 'test'
+  ...
+# Subtest: F3: positive control NUMELT=1 with 1 element passes with independent byte verification
+ok 64 - F3: positive control NUMELT=1 with 1 element passes with independent byte verification
+  ---
+  duration_ms: 6.391261
+  type: 'test'
+  ...
+# Subtest: F1: Nodal preview and Apply fail closed on noncanonical section markers
+ok 65 - F1: Nodal preview and Apply fail closed on noncanonical section markers
+  ---
+  duration_ms: 6.525477
+  type: 'test'
+  ...
+# Subtest: F2: absent NODENAME, immediate BEND anchor creates one section and record
+ok 66 - F2: absent NODENAME, immediate BEND anchor creates one section and record
+  ---
+  duration_ms: 19.339084
+  type: 'test'
+  ...
+# Subtest: F2: terminal NODENAME allows in-place renaming with or without ending newline
+ok 67 - F2: terminal NODENAME allows in-place renaming with or without ending newline
+  ---
+  duration_ms: 7.043951
+  type: 'test'
+  ...
+# Subtest: F2: terminal NODENAME creates new pointer when line ending is known
+ok 68 - F2: terminal NODENAME creates new pointer when line ending is known
+  ---
+  duration_ms: 4.673107
+  type: 'test'
+  ...
+# Subtest: F2: insertion without a recognized immediate BEND boundary is held
+ok 69 - F2: insertion without a recognized immediate BEND boundary is held
+  ---
+  duration_ms: 4.740554
+  type: 'test'
+  ...
+# Subtest: F2: terminal NODENAME with no last line ending cannot append a record
+ok 70 - F2: terminal NODENAME with no last line ending cannot append a record
+  ---
+  duration_ms: 2.545211
+  type: 'test'
+  ...
+# Subtest: CSV supports required three columns and empty info with quoted fields
+ok 71 - CSV supports required three columns and empty info with quoted fields
+  ---
+  duration_ms: 3.879038
+  type: 'test'
+  ...
+# Subtest: node 285 renames aliases, node 565 adds two pointer/name records, all other bytes unchanged
+ok 72 - node 285 renames aliases, node 565 adds two pointer/name records, all other bytes unchanged
+  ---
+  duration_ms: 24.007382
+  type: 'test'
+  ...
+# Subtest: information mismatch never selects a different node
+ok 73 - information mismatch never selects a different node
+  ---
+  duration_ms: 7.180889
+  type: 'test'
+  ...
+# Subtest: two renamed nodes on one pointer-zero element share a single appended NODENAME record
+ok 74 - two renamed nodes on one pointer-zero element share a single appended NODENAME record
+  ---
+  duration_ms: 4.771093
+  type: 'test'
+  ...
+# Subtest: duplicates, unknown nodes, invalid-width names and reused existing names held
+ok 75 - duplicates, unknown nodes, invalid-width names and reused existing names held
+  ---
+  duration_ms: 1.804646
+  type: 'test'
+  ...
+# Subtest: assigning identical new name to different nodes holds both
+ok 76 - assigning identical new name to different nodes holds both
+  ---
+  duration_ms: 1.047166
+  type: 'test'
+  ...
+# Subtest: shared physical NODENAME pointer holds writes and stale approvals are rejected
+ok 77 - shared physical NODENAME pointer holds writes and stale approvals are rejected
+  ---
+  duration_ms: 5.823997
+  type: 'test'
+  ...
+# Subtest: writer requires exact TARGET0 SHA and nonempty explicit approvals
+ok 78 - writer requires exact TARGET0 SHA and nonempty explicit approvals
+  ---
+  duration_ms: 2.743746
+  type: 'test'
+  ...
+# Subtest: new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates
+ok 79 - new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates
+  ---
+  duration_ms: 81.772919
+  type: 'test'
+  ...
+# Subtest: F2-N0: physically present zero endpoint cannot receive a name
+ok 80 - F2-N0: physically present zero endpoint cannot receive a name
+  ---
+  duration_ms: 15.38411
+  type: 'test'
+  ...
+# Subtest: F2-N0: valid adjacent node still updates all occurrences
+ok 81 - F2-N0: valid adjacent node still updates all occurrences
+  ---
+  duration_ms: 8.080526
+  type: 'test'
+  ...
+# Subtest: F1: Node and Replace are the only mandatory CSV columns
+ok 82 - F1: Node and Replace are the only mandatory CSV columns
+  ---
+  duration_ms: 3.402144
+  type: 'test'
+  ...
+# Subtest: F1: missing required headers, ambiguous headers and malformed CSV fail closed
+ok 83 - F1: missing required headers, ambiguous headers and malformed CSV fail closed
+  ---
+  duration_ms: 1.035796
+  type: 'test'
+  ...
+# Subtest: F1: optional Find mismatch affects audit only; TARGET1 bytes are identical
+ok 84 - F1: optional Find mismatch affects audit only; TARGET1 bytes are identical
+  ---
+  duration_ms: 30.689264
+  type: 'test'
+  ...
+# Subtest: P2-A malformed evidence / ruleId: admission and writer parity ("\\r\\n")
+ok 85 - P2-A malformed evidence / ruleId: admission and writer parity ("\\r\\n")
+  ---
+  duration_ms: 19.016526
+  type: 'test'
+  ...
+# Subtest: P2-B shared physical pointer: admission and writer parity ("\\r\\n")
+ok 86 - P2-B shared physical pointer: admission and writer parity ("\\r\\n")
+  ---
+  duration_ms: 6.222246
+  type: 'test'
+  ...
+# Subtest: P2-A malformed evidence / ruleId: admission and writer parity ("\\n")
+ok 87 - P2-A malformed evidence / ruleId: admission and writer parity ("\\n")
+  ---
+  duration_ms: 6.246262
+  type: 'test'
+  ...
+# Subtest: P2-B shared physical pointer: admission and writer parity ("\\n")
+ok 88 - P2-B shared physical pointer: admission and writer parity ("\\n")
+  ---
+  duration_ms: 4.280832
+  type: 'test'
+  ...
+# Subtest: two oriented FROM->TO elements meet at Node 500 without sharing process ownership
+ok 89 - two oriented FROM->TO elements meet at Node 500 without sharing process ownership
+  ---
+  duration_ms: 13.466745
+  type: 'test'
+  ...
+# Subtest: Path A requires exact orientation and never infers SOURCE/TARGET identity
+ok 90 - Path A requires exact orientation and never infers SOURCE/TARGET identity
+  ---
+  duration_ms: 7.053868
+  type: 'test'
+  ...
+# Subtest: Path B resolves exact restraint slot without claiming constrained DOF semantics
+ok 91 - Path B resolves exact restraint slot without claiming constrained DOF semantics
+  ---
+  duration_ms: 1.252931
+  type: 'test'
+  ...
+# Subtest: invalid noncanonical section markers are rejected before property inspection
+ok 92 - invalid noncanonical section markers are rejected before property inspection
+  ---
+  duration_ms: 1.649298
+  type: 'test'
+  ...
+# Subtest: shared RESTRANT auxiliary pointer is held, not silently assigned
+ok 93 - shared RESTRANT auxiliary pointer is held, not silently assigned
+  ---
+  duration_ms: 0.985935
+  type: 'test'
+  ...
+# Subtest: incomplete MISCEL_1/RRMAT custody is rejected
+ok 94 - incomplete MISCEL_1/RRMAT custody is rejected
+  ---
+  duration_ms: 0.936967
+  type: 'test'
+  ...
+# Subtest: unqualified V11 version is rejected rather than interpreted as V14
+ok 95 - unqualified V11 version is rejected rather than interpreted as V14
+  ---
+  duration_ms: 0.923735
+  type: 'test'
+  ...
+# Subtest: inspection does not change TARGET0 and exposes no writer
+ok 96 - inspection does not change TARGET0 and exposes no writer
+  ---
+  duration_ms: 1.175126
+  type: 'test'
+  ...
+# Subtest: CONTROL rejects invalid IZUP, negative nozzle and hanger counts
+ok 97 - CONTROL rejects invalid IZUP, negative nozzle and hanger counts
+  ---
+  duration_ms: 4.753174
+  type: 'test'
+  ...
+# Subtest: CONTROL reports primary counts without claiming nozzle/hanger MISC qualification
+ok 98 - CONTROL reports primary counts without claiming nozzle/hanger MISC qualification
+  ---
+  duration_ms: 2.277044
+  type: 'test'
+  ...
+# Subtest: RRMAT rejects nonnumeric, missing and out-of-range per-element IDs
+ok 99 - RRMAT rejects nonnumeric, missing and out-of-range per-element IDs
+  ---
+  duration_ms: 5.697221
+  type: 'test'
+  ...
+# Subtest: RESTRANT rejects negative node/CNode and inconsistent blank-node slot
+ok 100 - RESTRANT rejects negative node/CNode and inconsistent blank-node slot
+  ---
+  duration_ms: 4.555288
+  type: 'test'
+  ...
+# Subtest: positive physical RIGID, DISPLMNT and FORCMNT families are indexed without writes
+ok 101 - positive physical RIGID, DISPLMNT and FORCMNT families are indexed without writes
+  ---
+  duration_ms: 1.540119
+  type: 'test'
+  ...
+# Subtest: new tab and source/served files retain existing VNext tabs
+ok 102 - new tab and source/served files retain existing VNext tabs
+  ---
+  duration_ms: 1.448888
+  type: 'test'
+  ...
+# Subtest: F1 completed Normal approval, validation and apply survive independent Property activity
+ok 103 - F1 completed Normal approval, validation and apply survive independent Property activity
+  ---
+  duration_ms: 130.232752
+  type: 'test'
+  ...
+# Subtest: F1 actual shared TARGET/SOURCE/CSV changes still revoke preserved Normal state
+ok 104 - F1 actual shared TARGET/SOURCE/CSV changes still revoke preserved Normal state
+  ---
+  duration_ms: 121.177637
+  type: 'test'
+  ...
+# Subtest: F1 Property roundtrip cancels pending Normal validation without deleting approval
+ok 105 - F1 Property roundtrip cancels pending Normal validation without deleting approval
+  ---
+  duration_ms: 22.353529
+  type: 'test'
+  ...
+# Subtest: F1 pending owning CSV selection immediately revokes old output and accepts fresh rules after loading
+ok 106 - F1 pending owning CSV selection immediately revokes old output and accepts fresh rules after loading
+  ---
+  duration_ms: 35.128868
+  type: 'test'
+  ...
+# Subtest: F1 clearing owning CSV cancels an older pending read and leaves output revoked
+ok 107 - F1 clearing owning CSV cancels an older pending read and leaves output revoked
+  ---
+  duration_ms: 25.29745
+  type: 'test'
+  ...
+# Subtest: F1 the pre-existing Normal to Config navigation policy still revokes authority
+ok 108 - F1 the pre-existing Normal to Config navigation policy still revokes authority
+  ---
+  duration_ms: 20.643318
+  type: 'test'
+  ...
+# Subtest: F1 unchanged Nodal approved output survives Property, while target edits revoke it
+ok 109 - F1 unchanged Nodal approved output survives Property, while target edits revoke it
+  ---
+  duration_ms: 33.141945
+  type: 'test'
+  ...
+# Subtest: F2 positive-node R0 rejects either negative endpoint and holds unqualified zero endpoints
+ok 110 - F2 positive-node R0 rejects either negative endpoint and holds unqualified zero endpoints
+  ---
+  duration_ms: 5.108198
+  type: 'test'
+  ...
+# Subtest: F3 every typed element pointer is bounded against its own CONTROL count
+ok 111 - F3 every typed element pointer is bounded against its own CONTROL count
+  ---
+  duration_ms: 76.467381
+  type: 'test'
+  ...
+# Subtest: F3 bounded populated BEND remains explicitly unqualified, with unchanged bytes
+ok 112 - F3 bounded populated BEND remains explicitly unqualified, with unchanged bytes
+  ---
+  duration_ms: 5.17198
+  type: 'test'
+  ...
+# Subtest: F4 dormant restraint payload is UNKNOWN evidence, never a logical node or discarded bytes
+ok 113 - F4 dormant restraint payload is UNKNOWN evidence, never a logical node or discarded bytes
+  ---
+  duration_ms: 1.416912
+  type: 'test'
+  ...
+# Subtest: F4 zero spellings do not fabricate residue; unparsed text is preserved as UNKNOWN
+ok 114 - F4 zero spellings do not fabricate residue; unparsed text is preserved as UNKNOWN
+  ---
+  duration_ms: 3.320781
+  type: 'test'
+  ...
+# Subtest: F3/F4 UNKNOWN diagnostics and raw restraint evidence are visible on intake and in either mode
+ok 115 - F3/F4 UNKNOWN diagnostics and raw restraint evidence are visible on intake and in either mode
+  ---
+  duration_ms: 18.181072
+  type: 'test'
+  ...
+# Subtest: Property Transfer mount does not alter Nodal tab state or handlers
+ok 116 - Property Transfer mount does not alter Nodal tab state or handlers
+  ---
+  duration_ms: 50.790851
+  type: 'test'
+  ...
+# Subtest: older focused Nodal DOM without Property panel still starts safely
+ok 117 - older focused Nodal DOM without Property panel still starts safely
+  ---
+  duration_ms: 13.627564
+  type: 'test'
+  ...
+# Subtest: F03: admission default policy and fatal diagnostic enforcement ("\\r\\n")
+ok 118 - F03: admission default policy and fatal diagnostic enforcement ("\\r\\n")
+  ---
+  duration_ms: 19.785948
+  type: 'test'
+  ...
+# Subtest: F03: admission default policy and fatal diagnostic enforcement ("\\n")
+ok 119 - F03: admission default policy and fatal diagnostic enforcement ("\\n")
+  ---
+  duration_ms: 4.647004
+  type: 'test'
+  ...
+# Subtest: F04: stale Validate error does not overwrite newer successful Validate
+ok 120 - F04: stale Validate error does not overwrite newer successful Validate
+  ---
+  duration_ms: 62.495484
+  type: 'test'
+  ...
+# Subtest: F05: delayed CSV import does NOT mutate LINE_NODE tab after tab switch
+ok 121 - F05: delayed CSV import does NOT mutate LINE_NODE tab after tab switch
+  ---
+  duration_ms: 13.274068
+  type: 'test'
+  ...
+# Subtest: F05: delayed CSV import does NOT overwrite intervening rule edit
+ok 122 - F05: delayed CSV import does NOT overwrite intervening rule edit
+  ---
+  duration_ms: 11.577408
+  type: 'test'
+  ...
+# Subtest: F06: pending TARGET file selection immediately revokes export authorization
+ok 123 - F06: pending TARGET file selection immediately revokes export authorization
+  ---
+  duration_ms: 31.591311
+  type: 'test'
+  ...
+# Subtest: F06: failed TARGET selection fails closed without reviving stale export
+ok 124 - F06: failed TARGET selection fails closed without reviving stale export
+  ---
+  duration_ms: 67.609902
+  type: 'test'
+  ...
+# Subtest: F06: pending SOURCE file selection immediately revokes export authorization
+ok 125 - F06: pending SOURCE file selection immediately revokes export authorization
+  ---
+  duration_ms: 42.212618
+  type: 'test'
+  ...
+1..125
+# tests 125
+# suites 0
+# pass 125
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5004.574173

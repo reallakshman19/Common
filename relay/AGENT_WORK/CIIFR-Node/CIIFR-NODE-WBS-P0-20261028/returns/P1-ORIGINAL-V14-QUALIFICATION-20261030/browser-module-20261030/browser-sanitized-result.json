@@ -1,0 +1,50 @@
+{
+  "schema": "CIIFR.Node.P1.2.OriginalModuleBrowser.PublicSafe.v1",
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "subjectPR": 232,
+  "exactHead": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "assessment": "SELF_ASSESSED",
+  "original": {
+    "received": true,
+    "intakeIdentityPrivatelyVerified": true,
+    "postInspectionBytesIdentical": true,
+    "privacy": "PRIVATE_FIELDS_AND_DIGEST_WITHHELD"
+  },
+  "nodeReader": {
+    "actual": true,
+    "recordCounts": {
+      "ELEMENTS": 521,
+      "RESTRANT": 122,
+      "RIGID": 156,
+      "DISPLMNT": 6,
+      "FORCMNT": 0,
+      "NODENAME": 177,
+      "RRMAT_rows": 87
+    },
+    "unknownAuxFamilies": [
+      "BEND",
+      "ALLOWBLS",
+      "SIF&TEES",
+      "NODENAME",
+      "REDUCERS"
+    ]
+  },
+  "browser": {
+    "engine": "Linux Headless Chromium 144",
+    "scope": "isolated DOM host, five blob-verified module bodies, import/export stripping only",
+    "checksPassed": 20,
+    "checksTotal": 20,
+    "originalFileInput": true,
+    "exactLexemesAndByteSpansCompared": true,
+    "typedAttachmentOwnershipCompared": true,
+    "sourceOptional": true,
+    "propertyWriterAbsent": true,
+    "originalImmutable": true,
+    "cryptoShim": "sha256 bridged to Python hashlib; not browser-native subtle",
+    "fullyServedApp": false,
+    "nativeCheckout": false,
+    "navigationBlocked": true
+  },
+  "status": "PARTIAL_HOLD",
+  "nextGate": "Authorized Windows clean PR232 checkout + fully-served original Property Transfer browser trial"
+}

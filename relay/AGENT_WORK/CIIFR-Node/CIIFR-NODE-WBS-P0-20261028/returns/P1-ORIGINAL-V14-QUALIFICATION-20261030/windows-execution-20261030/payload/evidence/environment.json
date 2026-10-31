@@ -1,0 +1,24 @@
+{
+  "platform": "win32",
+  "os": "Windows 10/11 x64",
+  "node": "v22.23.2",
+  "powershell": "5.1.26100.9444",
+  "git": "git version 2.56.0.windows.1",
+  "edge": {
+    "product": "Microsoft Edge",
+    "version": "156.0.4314.50",
+    "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+  },
+  "chrome": {
+    "product": "Google Chrome",
+    "version": "156.0.8078.74",
+    "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+  },
+  "candidateHead": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "parentHead": "b2b695f66fc8dfc907f2b9a493b39bd4d4109570",
+  "runnerPackage": {
+    "filename": "CIIFR_NODE_P12_WINDOWS_ORIGINAL_GATE_RUNNER.zip",
+    "bytes": 12636,
+    "sha256": "68b820b05170bee4fac347f8c9548d3e500f14161fae07de793d0f022be243de"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "task": "CIIFR-NODE-P1.2-ORIGINAL-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "qualification": "SELF_ASSESSED",
+  "original": "PRIVATE_VERIFIED",
+  "counts": {
+    "version": 14,
+    "elementRecords": 521,
+    "elementCards": 7815,
+    "materialRows": 87,
+    "restraintBlocks": 122,
+    "populatedRestraintSlots": 331,
+    "rigidRecords": 156,
+    "displacementBlocks": 6,
+    "forceBlocks": 0,
+    "nodeNameBlocks": 177
+  },
+  "mode": "FULL_PINNED_APP",
+  "platform": "win32",
+  "status": "PASS",
+  "cleanCheckout": true,
+  "blobVerified": 6,
+  "originalBrowserInput": "PASS",
+  "elementWitness": "PASS",
+  "nodeWitnesses": "PASS",
+  "comparedNodeQueries": 4,
+  "reportedUnknownFamilies": 5,
+  "originalImmutable": true,
+  "privateDetails": "WITHHELD"
+}
