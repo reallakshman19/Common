@@ -57,6 +57,24 @@ class TE2RoleCycleNow(unittest.TestCase):
         self.assertIn("No action requested from Owner", chat)
         self.assertIn("only if no Owner-dependent relay", chat)
 
+    def test_action_to_owner_is_outside_five_lines_and_transaction_scoped(self):
+        s = read("TASK_EVIDENCE_V2.md")
+        self.assertIn("## Action to Owner", s)
+        for kind in ("CYCLE_NOW_TO_AGENT", "CYCLE_NOW_TO_ORACLE",
+                     "OWNER_DECISION", "NONE"):
+            self.assertIn(kind, s)
+        self.assertIn("not a sixth information line", s)
+        self.assertIn("NOT_SENT", s)
+        self.assertIn("existing", s)
+        self.assertIn("one bounded", s.lower())
+        self.assertIn("Other issues needing Owner attention", s)
+        for path in ("START_HERE.md", "oracle-standalone/SKILL.md",
+                     "oracle-chat-routing/STANDALONE.md",
+                     "progress-page/references/CYCLE_BOARD_PROTOCOLS.md"):
+            self.assertIn("Action to Owner", read(path), path)
+        self.assertIn("If no action is required", s)
+        self.assertIn("do not generate a generic role-swapping prompt", s)
+
     def test_legacy_ambiguous_default_is_gone(self):
         for path in ("START_HERE.md", "oracle-standalone/SKILL.md",
                      "progress-page/references/CYCLE_BOARD_PROTOCOLS.md",
