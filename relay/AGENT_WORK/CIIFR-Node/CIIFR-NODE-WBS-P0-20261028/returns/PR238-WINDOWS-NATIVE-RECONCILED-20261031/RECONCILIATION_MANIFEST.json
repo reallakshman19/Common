@@ -1,0 +1,27 @@
+{
+  "task": "CIIFR-Node PR238 native return receiver reconciliation",
+  "candidate": "fa6e948eb0f71ba93fe8bab01625e3146d1df3a0",
+  "base": "417bf6a954c5a6de72237537e94b05b285191350",
+  "receivedCommit": "3e71edfacecea114330363da2c0001043d88b20a",
+  "classification": "PUBLIC_SAFE_RECEIVER_RECONCILIATION_NOT_NEW_NATIVE_EXECUTION",
+  "files": [
+    {
+      "path": "RECONCILIATION.md",
+      "bytes": 4911,
+      "sha256": "b222eb54a2f6ec80f0985533523c94e3b33f21d1f2af7bcabeef424747f29975",
+      "gitBlob": "d3be0a7d29831105562e4be08a5d83757d41cfed"
+    },
+    {
+      "path": "READBACK.json",
+      "bytes": 4909,
+      "sha256": "1c1051c69ae02e413771033f7a831bef4c22baf8eee5091069f0edec3728f64a",
+      "gitBlob": "4058930ab700c50d4116c9d135b8d2794f611642"
+    },
+    {
+      "path": "RECEIVER_CHECKS.json",
+      "bytes": 17948,
+      "sha256": "5599ef94d6e1971d9d6a43f3949b877b2f9606fb0c62fcb2f7f1d63c0a886e1c",
+      "gitBlob": "e666632fc15090e7d776d9e4e2a92d76446bb99a"
+    }
+  ]
+}
