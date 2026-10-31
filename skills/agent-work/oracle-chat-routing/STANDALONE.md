@@ -1,5 +1,7 @@
 # Oracle Chat Routing — standalone operating protocol
 
+**When Cycle now is triggered:** Use the already-known private conversation route, but surface each task to the Owner through the existing Board's [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line projection. Keep PREPARED, posted, delivered, ACK and native returned separate; clicking Resume Agent or copying text is not an authenticated send. No public chat-link registry or second routing ledger.
+
 Version 1.0.0 · 23 October 2026 · Optional, manual and host-neutral
 
 **Purpose:** When the Owner uses several agent conversations, show one unambiguous

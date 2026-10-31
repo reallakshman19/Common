@@ -1,5 +1,7 @@
 # Oracle Continuity Protocol
 
+**Cycle now / successor snapshot:** The current project's WBS and actual native returns remain the continuity source; the Oracle presents one source-backed [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line card per active Agent/Oracle task after checking the Cycle Board. Preserve predecessor evidence and actor authority; a handover or replacement never gains ownership from a Card, and UNKNOWN counters cannot be turned into 0% progress.
+
 Version: 1.0.0 · Status: proposed reference contract · 23 October 2026
 
 ## Contents

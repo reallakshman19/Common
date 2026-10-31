@@ -1,5 +1,7 @@
 # Five entry process maps — Oracle-owned execution and continuity
 
+**Cycle now Owner output:** The shared spine is now summarized in one read-only [Task Evidence v2](TASK_EVIDENCE_V2.md) **five-line** card per relevant existing Agent/Oracle task, after Board-first/native-source reconciliation. This is a view of native evidence (not another stage, mandatory agent post or authority); unknown totals remain TOTAL UNKNOWN. Do not confuse the card with a formal Oracle Cycle receipt.
+
 **Documentation navigation:** [START HERE — role/mode entry](START_HERE.md) · [Entry process maps A–E](ENTRY_PROCESS_MAPS.md) · [Project Home and fixture custody](PROJECT_HOME_GUIDE.md) · [Extended operating reference](OPERATING_GUIDE.md). Read only the branch relevant to your current task; these are not four compulsory stages.
 
 **OnBoard direction is not symmetric:** **Owner → Oracle** issues [ONE whole-project continuity prompt](nudge-designer/assets/oracle-onboard/ORACLE_ONBOARD_PROMPT.md): recover the Owner's objective, source architecture/decisions, **all WBS actors/dependencies/evidence** and the next cross-WBS action. **Oracle → Agent** issues [ONE WBS-level continuity prompt](nudge-designer/assets/agent-onboard/AGENT_ONBOARD_PROMPT.md): inherit just the assigned WBS source, predecessor, branch/head, writer/reviewer scope, exact evidence and return. The four golden-quality source classes are **project knowledge**, not four duplicate onboarding documents per agent. Do not conflate project Oracle cutover with replacement on one WBS.
