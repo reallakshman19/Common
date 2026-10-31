@@ -1,6 +1,6 @@
 # Five entry process maps — Oracle-owned execution and continuity
 
-**Cycle now Owner output:** The shared spine is now summarized in one read-only [Task Evidence v2](TASK_EVIDENCE_V2.md) **five-line** card per relevant existing Agent/Oracle task, after Board-first/native-source reconciliation. This is a view of native evidence (not another stage, mandatory agent post or authority); unknown totals remain TOTAL UNKNOWN. Do not confuse the card with a formal Oracle Cycle receipt.
+**Cycle now Owner output:** The shared spine is now summarized in the [TE2-ROLE](TASK_EVIDENCE_V2.md#te2-role--acting-role-board-hierarchy-and-cycle-completion) five-line view: acting Oracle reports its own coordination, Agent/IR their own tasks, while the Board retains all source-backed subordinate cards. After native reconciliation, state the current next-instruction relay outcome `CONTINUED / AWAITING_RELAY / BLOCKED`. This is a view of native evidence (not another stage, mandatory agent post or authority); unknown totals remain TOTAL UNKNOWN. Do not confuse the card with a formal Oracle Cycle receipt.
 
 **Documentation navigation:** [START HERE — role/mode entry](START_HERE.md) · [Entry process maps A–E](ENTRY_PROCESS_MAPS.md) · [Project Home and fixture custody](PROJECT_HOME_GUIDE.md) · [Extended operating reference](OPERATING_GUIDE.md). Read only the branch relevant to your current task; these are not four compulsory stages.
 
