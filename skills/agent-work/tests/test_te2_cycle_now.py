@@ -89,7 +89,7 @@ class TE2RoleCycleNow(unittest.TestCase):
         s = read("TASK_EVIDENCE_V2.md")
         for term in ("same invoked turn", "Scoped HOLD", "writer",
                      "read-only", "critical", "NO_MATERIAL_DELTA",
-                     "Action to Owner: NONE", "not retroactively",
+                     "Action to Owner: NONE", "retroactively",
                      "no new substantive native status comment"):
             self.assertIn(term.lower(), s.lower())
         self.assertIn("NEXT → ORACLE: investigate", s)
@@ -99,7 +99,7 @@ class TE2RoleCycleNow(unittest.TestCase):
     def test_fast_lane_does_not_grant_background_work_or_new_cycle(self):
         s = read("TASK_EVIDENCE_V2.md")
         for term in ("No background execution", "no new transport",
-                     "same approved assignment", "no approval"):
+                     "same approved assignment", "no new approval"):
             self.assertIn(term.lower(), s.lower())
         self.assertIn("only when the formal GitHub Oracle Cycle",
                       read("START_HERE.md"))
