@@ -5,7 +5,7 @@ description: Coordinate Owner-led work in standalone mode through a source-groun
 
 # Oracle — standalone coordination and Cycle
 
-**Cycle now → Owner view (FROZEN):** Start from the existing Cycle Board, recheck the governing WBS and original issue/PR/relay returns, then show exactly one [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line card per relevant Agent/Oracle task and ONE next permitted actor. Source read ≠ chat ACK ≠ return ≠ acceptance. If Board unavailable say BOARD_NOT_OBSERVED and continue source-grounded safe work; do not ask the Owner to re-onboard established agents or create a duplicate report.
+**Cycle now → Owner view (FROZEN):** Start from the existing Cycle Board, recheck the governing WBS and original issue/PR/relay returns, then show **one Oracle-owned coordination** [Task Evidence v2](../TASK_EVIDENCE_V2.md#te2-role--acting-role-board-hierarchy-and-cycle-completion) five-line card by default, linking subordinate native Agent/IR evidence rather than republishing their cards. State `CONTINUED / AWAITING_RELAY / BLOCKED` for the current next instruction and ONE accountable actor; team detail only if requested. Source read ≠ chat ACK ≠ return ≠ acceptance. If Board unavailable say BOARD_NOT_OBSERVED and continue source-grounded safe work; do not ask the Owner to re-onboard established agents or create a duplicate report.
 
 Use this skill when the **Owner chooses standalone** operation. The Owner discusses
 aim, changes and decisions with Oracle; Oracle carries the useful work through
@@ -14,7 +14,7 @@ For a worker or reviewer, `Cycle now` is a **read-current-state, act-if-assigned
 return-evidence** instruction, not a request to become Oracle.
 **Pre-resolved dispatch:** The selected Oracle/OTM or direct Owner supplies the recipient with ONE actual issue or active Cycle locator and the already-decided coordination mode, native delivery protocol (v3.6 only where selected), task/candidate, original/relay inputs, limits/HOLDs, return destination and immediate next actor. A builder does **not** select another mode, onboarding route, reporting system or approval procedure. Verify authority and real source access; escalate changed or contradictory conditions. [Single-task routing](../ENTRY_PROCESS_MAPS.md#one-shared-spine) · [role lifecycle](../ROLE_LIFECYCLE.md).
 
-**Established recipient:** use [lightweight `Cycle now` continuation](../../../oracle-cycles/PROTOCOL.md#lightweight-continuation--already-bound-participants): refresh assignment and changed evidence, not full onboarding. Do not rerun returned work while Oracle reconciliation is pending; repair an unposted routing receipt by v1 rules without replaying tests. Current authority, source identity and access checks still apply.
+**Established recipient:** use changed-only native continuation when no formal Cycle is selected; use [lightweight formal `Cycle now` continuation](../../../oracle-cycles/PROTOCOL.md#lightweight-continuation--already-bound-participants) only where canonical transport was selected: refresh assignment and changed evidence, not full onboarding. Do not rerun returned work while Oracle reconciliation is pending; repair an unposted routing receipt by v1 rules without replaying tests. Current authority, source identity and access checks still apply.
 
 **Precedence:** actual Owner outcome/amendments and authority → selected native
 task/delivery/release protocol → exact original inputs/baseline/candidate →
@@ -67,26 +67,16 @@ On an Owner's request for status, routing, intent update or `Cycle now`:
 1. Preserve the original Owner aim and effective amendments, protected baseline,
    exact current candidate and deferred outcomes. Do not require the Owner
    to write schemas or repeat accepted history.
-2. Fetch the **actual canonical `main` HEAD** and project
-   `oracle-cycles/<project>/CURRENT.json`; read current transport receipt issue
-   comments if configured and accessible. Check `mode=standalone`,
-   schema, activation, revision and issue provenance.
-3. Distinguish the **published** state from returned claims and your proposed
-   correction. A merged *protocol* does not activate a proposed project state.
-   If `activation != ACTIVE` or no receipt issue URL exists, show **NOT ACTIVE**
-   and the one real activation dependency; don't issue an executable
-   worker dispatch.
-4. Present a compact board exactly as
-   [BOARD_AND_STATUS.md](references/BOARD_AND_STATUS.md):
-   role + Owner-reported short chat ID + last scoped result; one
-   **NOW**, **PASTE**, **RETURN**, **STOP IF** and **PAGE**.
-   Do not copy a previous board without rechecking the source.
+2. **Use only the selected transport:** when formal GitHub Oracle Cycle was explicitly selected, fetch canonical `main`, its `oracle-cycles/<project>/CURRENT.json`, and associated receipts and verify assignment/generation/recipient. For ordinary established native-task continuation, inspect its native issue, WBS, latest return and actual authorization; no formal `CURRENT.json` is required or inferred.
+3. Distinguish published state from claims and proposed corrections. A merged *protocol* does not activate a project Cycle. If formal transport was selected and `activation != ACTIVE` or the mandatory receipt issue is missing, show **NOT ACTIVE** and do not issue a formal Cycle dispatch. That condition does **not** block an existing separately authorized native read-only task.
+4. Read the Board as whole-project context, then present **one Oracle-owned five-line coordination card** rather than subordinate agents' cards unless the Owner explicitly requests them. Use the existing [BOARD_AND_STATUS.md](references/BOARD_AND_STATUS.md) private routing details for real handoff only; never add private chat URLs to the public card or repeat stale dashboard content.
 5. Select the next consequential outcome from evidence, not from agent count.
    Favor useful runnable/real-user work where appropriate; keep integration,
    independent checks and Owner acceptance separate. When coding or
    review is needed, issue a bounded task with WHY, exact inputs, preserved
    behavior, expected outputs, plausible wrong case and return channel.
-6. If asked to change project status, propose a versioned state PR with
+6. **Close the current next instruction honestly:** `CONTINUED` needs actual recipient ACK or source-backed subsequent execution/return. Otherwise `AWAITING_RELAY` with one responsible relay actor and, if necessary, the minimum copy-ready Owner action; or `BLOCKED` with identity/custody/authority reason. A GitHub comment proves POSTED, not chat DELIVERED. Keep Oracle coordination responsibility.
+7. If asked to change project status, propose a versioned state PR with
    observed authority and scope; verify actual publication before calling
    it live. Owner acceptance remains explicitly Owner-controlled.
 

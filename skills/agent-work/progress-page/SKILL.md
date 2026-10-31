@@ -5,7 +5,7 @@ description: Run and use the Progress page, a static page plus JSON data in GitH
 
 # Progress page
 
-**Task Evidence v2 (FROZEN Owner format, implementation review pending):** The [five-line read-only contract](../TASK_EVIDENCE_V2.md) belongs inside the existing Cycle Board/CT-5 projection; see [Progress Page draft PR #102](https://github.com/reallakshman19/progress-page/pull/102). On Cycle now the Oracle checks Board + native sources, presents one card per relevant Agent/Oracle task, and uses existing Page proposal/review machinery only for warranted publication. No second WBS, Page data schema, agent report, automatic ACK or acceptance.
+**Task Evidence v2 (FROZEN Owner format; TE2-ROLE hierarchy):** The [five-line read-only contract](../TASK_EVIDENCE_V2.md) belongs inside the existing Cycle Board/CT-5 projection; see the merged [Progress Page PR #102](https://github.com/reallakshman19/progress-page/pull/102). On `Cycle now` the Oracle checks Board + native sources and returns **one own coordination card**, referencing subordinate evidence; the Board still shows each existing role-owned Agent/IR task. An unverified current-instruction delivery is `AWAITING_RELAY`. Use existing Page proposals only for warranted publication. No second WBS, Page data schema, agent report, automatic ACK or acceptance.
 
 **Cycle Board design handoff (optional, not deployed by this documentation):** [source-bound observation/continuation contract](references/CYCLE_BOARD_CONTRACT.md) and [CT-1–CT-4 downstream vertical-slice packets](references/CYCLE_BOARD_VERTICAL_SLICES.md). These are scoped implementation references, not a new Cycle protocol, agent report, WBS or permission to publish; existing task/receipt/Page authority remains unchanged.
 

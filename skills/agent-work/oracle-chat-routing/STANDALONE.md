@@ -1,6 +1,6 @@
 # Oracle Chat Routing — standalone operating protocol
 
-**When Cycle now is triggered:** Use the already-known private conversation route, but surface each task to the Owner through the existing Board's [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line projection. Keep PREPARED, posted, delivered, ACK and native returned separate; clicking Resume Agent or copying text is not an authenticated send. No public chat-link registry or second routing ledger.
+**When Cycle now is triggered:** Use the already-known private conversation route, but follow [TE2-ROLE](../TASK_EVIDENCE_V2.md#te2-role--acting-role-board-hierarchy-and-cycle-completion): the Board may show all role-owned tasks, but the acting Oracle returns **one own coordination card**, linking subordinate original evidence without repeating their cards. Keep PREPARED, posted, delivered, ACK and native returned separate; clicking Resume Agent or copying text is not an authenticated send. No public chat-link registry or second routing ledger.
 
 Version 1.0.0 · 23 October 2026 · Optional, manual and host-neutral
 
@@ -78,15 +78,15 @@ Rules for rendering:
   Never give an ID without a role, or a role without a known/UNKNOWN destination.
 - Distinguish **DONE**, **OWNER_REPORTED**, **RECIPIENT_CONFIRMED**, **VERIFIED**,
   **BLOCKED** and **NOT_RUN** in words. Do not use color as the sole status signal.
-- Include at most **one Owner action now**. When no Owner action is needed, say
-  “No action requested from Owner; awaiting [specific result]” without claiming
-  background monitoring or automatic delivery.
+- Include at most **one Owner action now**. When an authorized instruction cannot reach a separate agent chat through an available authorized tool, report **`AWAITING_RELAY`** and the one minimum copy-ready Owner relay actually needed; the Oracle retains coordination responsibility. Say “No action requested from Owner” only if no Owner-dependent relay exists. Do not claim background monitoring/delivery.
 - If a receipt already establishes the transfer, do not direct the Owner to resend
   the same ZIP. Move to recipient hash verification.
 - Render copyable instructions *only* for the named receiving conversation.
   If the UI cannot show controls, the plain text board and quoted message suffice.
 - Never imply live synchronization with other chats. Update only after an Owner
   report, returned artifact, or actual observed tool result.
+
+**Current-instruction closure:** Keep `PREPARED`, `POSTED`, `DELIVERED`, `ACKNOWLEDGED`, `EVIDENCE_RETURNED`, `ORACLE_RECONCILED` separately grounded for the same current instruction. Older work returned does not imply delivery of newer work. A later source-backed return can prove continuation without a separately observed chat ACK. Declare `CONTINUED`, `AWAITING_RELAY` or `BLOCKED` and the accountable next actor.
 
 ## 3. Handoff transaction: one artifact, one destination, one receipt
 
