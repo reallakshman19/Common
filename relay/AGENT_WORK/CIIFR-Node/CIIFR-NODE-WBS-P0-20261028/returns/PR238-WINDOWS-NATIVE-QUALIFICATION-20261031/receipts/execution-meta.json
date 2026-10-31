@@ -1,0 +1,450 @@
+{
+  "runKind": "LOCAL_NATIVE_PINNED_CLEAN_CLONES",
+  "runTimestamp": "2026-10-31T11:01:05.1983802Z",
+  "node": "v22.23.2",
+  "git": "git version 2.56.0.windows.1",
+  "platform": "Microsoft Windows NT 10.0.26200.0",
+  "host": "REDACTED_LOCAL_WINDOWS_HOST",
+  "runs": {
+    "base-target": {
+      "exit": 1,
+      "arguments": "node --test --test-reporter=tap tests/cii-fnr-vnext-branch-scope.test.mjs",
+      "stdout": "base-target.tap",
+      "stderr": "base-target.stderr"
+    },
+    "head-target": {
+      "exit": 0,
+      "arguments": "node --test --test-reporter=tap tests/cii-fnr-vnext-branch-scope.test.mjs",
+      "stdout": "head-target.tap",
+      "stderr": "head-target.stderr"
+    },
+    "base-full": {
+      "exit": 1,
+      "arguments": "node --test --test-reporter=tap --test-concurrency=1 tests/cii-fnr-vnext-a1-f01-compact.test.mjs tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs tests/cii-fnr-vnext-a1-line-node-admission.test.mjs tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs tests/cii-fnr-vnext-a1.test.mjs tests/cii-fnr-vnext-branch-scope.test.mjs tests/cii-fnr-vnext-config-policy.test.mjs tests/cii-fnr-vnext-csv-resolver.test.mjs tests/cii-fnr-vnext-demo.test.mjs tests/cii-fnr-vnext-f02-lifecycle.test.mjs tests/cii-fnr-vnext-geo-tab.test.mjs tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs tests/cii-fnr-vnext-nodal-sections.test.mjs tests/cii-fnr-vnext-nodal-transfer.test.mjs tests/cii-fnr-vnext-nodal-ui.test.mjs tests/cii-fnr-vnext-nodal-zero-guard.test.mjs tests/cii-fnr-vnext-node-only-csv.test.mjs tests/cii-fnr-vnext-p2-repair.test.mjs tests/cii-fnr-vnext-r2-regressions.test.mjs",
+      "stdout": "base-full.tap",
+      "stderr": "base-full.stderr"
+    },
+    "head-full": {
+      "exit": 0,
+      "arguments": "node --test --test-reporter=tap --test-concurrency=1 tests/cii-fnr-vnext-a1-f01-compact.test.mjs tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs tests/cii-fnr-vnext-a1-line-node-admission.test.mjs tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs tests/cii-fnr-vnext-a1.test.mjs tests/cii-fnr-vnext-branch-scope.test.mjs tests/cii-fnr-vnext-config-policy.test.mjs tests/cii-fnr-vnext-csv-resolver.test.mjs tests/cii-fnr-vnext-demo.test.mjs tests/cii-fnr-vnext-f02-lifecycle.test.mjs tests/cii-fnr-vnext-geo-tab.test.mjs tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs tests/cii-fnr-vnext-nodal-sections.test.mjs tests/cii-fnr-vnext-nodal-transfer.test.mjs tests/cii-fnr-vnext-nodal-ui.test.mjs tests/cii-fnr-vnext-nodal-zero-guard.test.mjs tests/cii-fnr-vnext-node-only-csv.test.mjs tests/cii-fnr-vnext-p2-repair.test.mjs tests/cii-fnr-vnext-r2-regressions.test.mjs",
+      "stdout": "head-full.tap",
+      "stderr": "head-full.stderr"
+    }
+  },
+  "base": {
+    "commit": "417bf6a954c5a6de72237537e94b05b285191350",
+    "headObserved": "417bf6a954c5a6de72237537e94b05b285191350",
+    "testFileCount": 21,
+    "gitStatusBefore": "",
+    "gitStatusAfter": "",
+    "hashes": [
+      {
+        "path": "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+        "headBlob": "af4467e8189823b9da03b07b1d74aa6a31e3da95",
+        "rawBlob": "af4467e8189823b9da03b07b1d74aa6a31e3da95"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+        "headBlob": "6a86157339fc89d0cb153f0bfc601a0dd7fcc598",
+        "rawBlob": "6a86157339fc89d0cb153f0bfc601a0dd7fcc598"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+        "headBlob": "16dabeb03748e7afaa8c59f3792c7d9ffbc6993e",
+        "rawBlob": "16dabeb03748e7afaa8c59f3792c7d9ffbc6993e"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+        "headBlob": "698a1df470dd4f074f34b82da2e6a15604b73c28",
+        "rawBlob": "698a1df470dd4f074f34b82da2e6a15604b73c28"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+        "headBlob": "d86eeec715057fafb41a895f79eb1ea87e8566fc",
+        "rawBlob": "d86eeec715057fafb41a895f79eb1ea87e8566fc"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+        "headBlob": "a549508e74773786d1f95973c221b628e3bc9074",
+        "rawBlob": "a549508e74773786d1f95973c221b628e3bc9074"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1.test.mjs",
+        "headBlob": "61050db6d0b46e18b42f9a148bf237fd48a09559",
+        "rawBlob": "61050db6d0b46e18b42f9a148bf237fd48a09559"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-branch-scope.test.mjs",
+        "headBlob": "c69511a8c5234f46d9d678b88e5de53955b26c79",
+        "rawBlob": "c69511a8c5234f46d9d678b88e5de53955b26c79"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-config-policy.test.mjs",
+        "headBlob": "16281a13d5b37fdafc63d991701cbb188f22a2e8",
+        "rawBlob": "16281a13d5b37fdafc63d991701cbb188f22a2e8"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+        "headBlob": "e4f6182c7b14e84a70ac7ec5ee51c4a56e1571f4",
+        "rawBlob": "e4f6182c7b14e84a70ac7ec5ee51c4a56e1571f4"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-demo.test.mjs",
+        "headBlob": "2296ebec8462d3fbb02908bb29cd55c17095872c",
+        "rawBlob": "2296ebec8462d3fbb02908bb29cd55c17095872c"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+        "headBlob": "f305779ce48f9136a8aa3431056435a7004cc865",
+        "rawBlob": "f305779ce48f9136a8aa3431056435a7004cc865"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-geo-tab.test.mjs",
+        "headBlob": "71e0530de88bea85ba530bd12f6b67245e181820",
+        "rawBlob": "71e0530de88bea85ba530bd12f6b67245e181820"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+        "headBlob": "87875a921dbea08c19ed0dab9f6b9bcfc17784a4",
+        "rawBlob": "87875a921dbea08c19ed0dab9f6b9bcfc17784a4"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+        "headBlob": "46b3963a56b1b9ffc8d3eca3080f634f70f1c991",
+        "rawBlob": "46b3963a56b1b9ffc8d3eca3080f634f70f1c991"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+        "headBlob": "b6087999f0aafc5ff132c450fb6a9d1bd6976c18",
+        "rawBlob": "b6087999f0aafc5ff132c450fb6a9d1bd6976c18"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+        "headBlob": "d3c11273672cb4f40e7afe9371434e779b8acccb",
+        "rawBlob": "d3c11273672cb4f40e7afe9371434e779b8acccb"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+        "headBlob": "e3d4988859a061e42bad95a6339231d3bdcdb04e",
+        "rawBlob": "e3d4988859a061e42bad95a6339231d3bdcdb04e"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+        "headBlob": "a3baf3da741c4a095c1d784d645efffb778e9617",
+        "rawBlob": "a3baf3da741c4a095c1d784d645efffb778e9617"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-p2-repair.test.mjs",
+        "headBlob": "d5decfbc5b969cbacce377d1ecb0d516ab52a824",
+        "rawBlob": "d5decfbc5b969cbacce377d1ecb0d516ab52a824"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-r2-regressions.test.mjs",
+        "headBlob": "2dd75f84af2c6309f52fd77bc11074866df6e6fa",
+        "rawBlob": "2dd75f84af2c6309f52fd77bc11074866df6e6fa"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+        "headBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+        "rawBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+        "headBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+        "rawBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+        "headBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+        "rawBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+        "headBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+        "rawBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+        "headBlob": "02732a205b573fb001977ed16f06fb448d64aec0",
+        "rawBlob": "02732a205b573fb001977ed16f06fb448d64aec0"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+        "headBlob": "02732a205b573fb001977ed16f06fb448d64aec0",
+        "rawBlob": "02732a205b573fb001977ed16f06fb448d64aec0"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+        "headBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+        "rawBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+        "headBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+        "rawBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+        "headBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+        "rawBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+        "headBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+        "rawBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+        "headBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+        "rawBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+        "headBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+        "rawBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+        "headBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b",
+        "rawBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+        "headBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b",
+        "rawBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b"
+      }
+    ]
+  },
+  "baseTestPaths": [
+    "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+    "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+    "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+    "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+    "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+    "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+    "tests/cii-fnr-vnext-a1.test.mjs",
+    "tests/cii-fnr-vnext-branch-scope.test.mjs",
+    "tests/cii-fnr-vnext-config-policy.test.mjs",
+    "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+    "tests/cii-fnr-vnext-demo.test.mjs",
+    "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+    "tests/cii-fnr-vnext-geo-tab.test.mjs",
+    "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+    "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+    "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+    "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+    "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+    "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+    "tests/cii-fnr-vnext-p2-repair.test.mjs",
+    "tests/cii-fnr-vnext-r2-regressions.test.mjs"
+  ],
+  "head": {
+    "commit": "fa6e948eb0f71ba93fe8bab01625e3146d1df3a0",
+    "headObserved": "fa6e948eb0f71ba93fe8bab01625e3146d1df3a0",
+    "testFileCount": 21,
+    "gitStatusBefore": "",
+    "gitStatusAfter": "",
+    "hashes": [
+      {
+        "path": "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+        "headBlob": "af4467e8189823b9da03b07b1d74aa6a31e3da95",
+        "rawBlob": "af4467e8189823b9da03b07b1d74aa6a31e3da95"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+        "headBlob": "6a86157339fc89d0cb153f0bfc601a0dd7fcc598",
+        "rawBlob": "6a86157339fc89d0cb153f0bfc601a0dd7fcc598"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+        "headBlob": "16dabeb03748e7afaa8c59f3792c7d9ffbc6993e",
+        "rawBlob": "16dabeb03748e7afaa8c59f3792c7d9ffbc6993e"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+        "headBlob": "698a1df470dd4f074f34b82da2e6a15604b73c28",
+        "rawBlob": "698a1df470dd4f074f34b82da2e6a15604b73c28"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+        "headBlob": "d86eeec715057fafb41a895f79eb1ea87e8566fc",
+        "rawBlob": "d86eeec715057fafb41a895f79eb1ea87e8566fc"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+        "headBlob": "a549508e74773786d1f95973c221b628e3bc9074",
+        "rawBlob": "a549508e74773786d1f95973c221b628e3bc9074"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-a1.test.mjs",
+        "headBlob": "61050db6d0b46e18b42f9a148bf237fd48a09559",
+        "rawBlob": "61050db6d0b46e18b42f9a148bf237fd48a09559"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-branch-scope.test.mjs",
+        "headBlob": "4d2fa260fbd48487e1ae39871e663e7df782cc49",
+        "rawBlob": "4d2fa260fbd48487e1ae39871e663e7df782cc49"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-config-policy.test.mjs",
+        "headBlob": "16281a13d5b37fdafc63d991701cbb188f22a2e8",
+        "rawBlob": "16281a13d5b37fdafc63d991701cbb188f22a2e8"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+        "headBlob": "e4f6182c7b14e84a70ac7ec5ee51c4a56e1571f4",
+        "rawBlob": "e4f6182c7b14e84a70ac7ec5ee51c4a56e1571f4"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-demo.test.mjs",
+        "headBlob": "2296ebec8462d3fbb02908bb29cd55c17095872c",
+        "rawBlob": "2296ebec8462d3fbb02908bb29cd55c17095872c"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+        "headBlob": "f305779ce48f9136a8aa3431056435a7004cc865",
+        "rawBlob": "f305779ce48f9136a8aa3431056435a7004cc865"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-geo-tab.test.mjs",
+        "headBlob": "71e0530de88bea85ba530bd12f6b67245e181820",
+        "rawBlob": "71e0530de88bea85ba530bd12f6b67245e181820"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+        "headBlob": "87875a921dbea08c19ed0dab9f6b9bcfc17784a4",
+        "rawBlob": "87875a921dbea08c19ed0dab9f6b9bcfc17784a4"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+        "headBlob": "46b3963a56b1b9ffc8d3eca3080f634f70f1c991",
+        "rawBlob": "46b3963a56b1b9ffc8d3eca3080f634f70f1c991"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+        "headBlob": "b6087999f0aafc5ff132c450fb6a9d1bd6976c18",
+        "rawBlob": "b6087999f0aafc5ff132c450fb6a9d1bd6976c18"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+        "headBlob": "d3c11273672cb4f40e7afe9371434e779b8acccb",
+        "rawBlob": "d3c11273672cb4f40e7afe9371434e779b8acccb"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+        "headBlob": "e3d4988859a061e42bad95a6339231d3bdcdb04e",
+        "rawBlob": "e3d4988859a061e42bad95a6339231d3bdcdb04e"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+        "headBlob": "a3baf3da741c4a095c1d784d645efffb778e9617",
+        "rawBlob": "a3baf3da741c4a095c1d784d645efffb778e9617"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-p2-repair.test.mjs",
+        "headBlob": "d5decfbc5b969cbacce377d1ecb0d516ab52a824",
+        "rawBlob": "d5decfbc5b969cbacce377d1ecb0d516ab52a824"
+      },
+      {
+        "path": "tests/cii-fnr-vnext-r2-regressions.test.mjs",
+        "headBlob": "2dd75f84af2c6309f52fd77bc11074866df6e6fa",
+        "rawBlob": "2dd75f84af2c6309f52fd77bc11074866df6e6fa"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+        "headBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+        "rawBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+        "headBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+        "rawBlob": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+        "headBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+        "rawBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+        "headBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+        "rawBlob": "2c12781a5bc633b8a6e557f3362665593e8f2253"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+        "headBlob": "02732a205b573fb001977ed16f06fb448d64aec0",
+        "rawBlob": "02732a205b573fb001977ed16f06fb448d64aec0"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+        "headBlob": "02732a205b573fb001977ed16f06fb448d64aec0",
+        "rawBlob": "02732a205b573fb001977ed16f06fb448d64aec0"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+        "headBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+        "rawBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+        "headBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+        "rawBlob": "1931cfc53246c3e675fab2383557f4726ff5bc48"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+        "headBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+        "rawBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+        "headBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+        "rawBlob": "15e383e8f03ad7028fa7c01063cea19f15d4d298"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+        "headBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+        "rawBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+        "headBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+        "rawBlob": "40b4b2c075407ea43f721d6ad48c98366251a9a7"
+      },
+      {
+        "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+        "headBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b",
+        "rawBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b"
+      },
+      {
+        "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+        "headBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b",
+        "rawBlob": "f5fb8e3ddac4eb7b814be52889203e433c71719b"
+      }
+    ]
+  },
+  "headTestPaths": [
+    "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+    "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+    "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+    "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+    "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+    "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+    "tests/cii-fnr-vnext-a1.test.mjs",
+    "tests/cii-fnr-vnext-branch-scope.test.mjs",
+    "tests/cii-fnr-vnext-config-policy.test.mjs",
+    "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+    "tests/cii-fnr-vnext-demo.test.mjs",
+    "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+    "tests/cii-fnr-vnext-geo-tab.test.mjs",
+    "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+    "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+    "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+    "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+    "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+    "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+    "tests/cii-fnr-vnext-p2-repair.test.mjs",
+    "tests/cii-fnr-vnext-r2-regressions.test.mjs"
+  ],
+  "hostRedacted": true,
+  "derivativeNote": "Derivative artifact: machine hostname sanitized for public repository; raw receipt with actual hostname is retained privately on local Windows qualification workstation."
+}

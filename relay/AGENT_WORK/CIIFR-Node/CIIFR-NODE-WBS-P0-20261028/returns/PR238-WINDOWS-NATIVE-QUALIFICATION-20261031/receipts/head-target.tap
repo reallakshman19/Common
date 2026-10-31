@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: exact B2 branch protects all unrelated bytes: v11 LF
+ok 1 - exact B2 branch protects all unrelated bytes: v11 LF
+  ---
+  duration_ms: 20.4444
+  type: 'test'
+  ...
+# Subtest: exact B2 branch protects all unrelated bytes: v11 CRLF
+ok 2 - exact B2 branch protects all unrelated bytes: v11 CRLF
+  ---
+  duration_ms: 5.3726
+  type: 'test'
+  ...
+# Subtest: exact B2 branch protects all unrelated bytes: v14 LF
+ok 3 - exact B2 branch protects all unrelated bytes: v14 LF
+  ---
+  duration_ms: 4.2698
+  type: 'test'
+  ...
+# Subtest: exact B2 branch protects all unrelated bytes: v14 CRLF
+ok 4 - exact B2 branch protects all unrelated bytes: v14 CRLF
+  ---
+  duration_ms: 3.3833
+  type: 'test'
+  ...
+# Subtest: exact B2 selection does not include identical name in unrelated B1
+ok 5 - exact B2 selection does not include identical name in unrelated B1
+  ---
+  duration_ms: 1.6336
+  type: 'test'
+  ...
+# Subtest: branch identifier mismatch gives zero replacements, no prefix matching
+ok 6 - branch identifier mismatch gives zero replacements, no prefix matching
+  ---
+  duration_ms: 1.7114
+  type: 'test'
+  ...
+# Subtest: exact B1 selection changes only its owned FROM name
+ok 7 - exact B1 selection changes only its owned FROM name
+  ---
+  duration_ms: 2.7906
+  type: 'test'
+  ...
+# Subtest: branch crossing with an unlabeled physical alias is fail-closed
+ok 8 - branch crossing with an unlabeled physical alias is fail-closed
+  ---
+  duration_ms: 1.7064
+  type: 'test'
+  ...
+# Subtest: cross-branch warning identifies physical node, all branches and proposed name
+ok 9 - cross-branch warning identifies physical node, all branches and proposed name
+  ---
+  duration_ms: 1.5065
+  type: 'test'
+  ...
+# Subtest: inconsistent cross-branch aliases do not qualify for an Option A recommendation
+ok 10 - inconsistent cross-branch aliases do not qualify for an Option A recommendation
+  ---
+  duration_ms: 1.5114
+  type: 'test'
+  ...
+# Subtest: recommended choice is located directly before Remove and is advisory only
+ok 11 - recommended choice is located directly before Remove and is advisory only
+  ---
+  duration_ms: 31.3712
+  type: 'test'
+  ...
+# Subtest: SOURCE labels and claim provenance require exact physical alignment
+ok 12 - SOURCE labels and claim provenance require exact physical alignment
+  ---
+  duration_ms: 17.7834
+  type: 'test'
+  ...
+# Subtest: SOURCE-driven branch dropdown and Approve All preserve explicit validation
+ok 13 - SOURCE-driven branch dropdown and Approve All preserve explicit validation
+  ---
+  duration_ms: 24.5643
+  type: 'test'
+  ...
+# Subtest: Approve All cannot bypass cross-branch diagnostic
+ok 14 - Approve All cannot bypass cross-branch diagnostic
+  ---
+  duration_ms: 18.3327
+  type: 'test'
+  ...
+# Subtest: visible VNext headings, recommendation and review columns have requested order
+ok 15 - visible VNext headings, recommendation and review columns have requested order
+  ---
+  duration_ms: 1.8195
+  type: 'test'
+  ...
+# Subtest: writer independently rejects forged branch evidence on an otherwise valid claim
+ok 16 - writer independently rejects forged branch evidence on an otherwise valid claim
+  ---
+  duration_ms: 1.8997
+  type: 'test'
+  ...
+# Subtest: invalid branch filter cannot silently fall back to Document
+ok 17 - invalid branch filter cannot silently fall back to Document
+  ---
+  duration_ms: 2.0124
+  type: 'test'
+  ...
+# Subtest: non-branch document mode remains selectable
+ok 18 - non-branch document mode remains selectable
+  ---
+  duration_ms: 0.8857
+  type: 'test'
+  ...
+# Subtest: served and source modules are byte-identical after branch integration
+ok 19 - served and source modules are byte-identical after branch integration
+  ---
+  duration_ms: 4.819
+  type: 'test'
+  ...
+# Subtest: quoted CSV Branch column imports exact branch into Normal rule scope
+ok 20 - quoted CSV Branch column imports exact branch into Normal rule scope
+  ---
+  duration_ms: 8.8561
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 274.8802

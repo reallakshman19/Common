@@ -1,0 +1,58 @@
+{
+  "verdict": "PASS_PINNED_NATIVE_TESTS",
+  "scope": "Native test qualification only; no CAESAR or Property Transfer acceptance",
+  "reviewerExecution": true,
+  "base": "417bf6a954c5a6de72237537e94b05b285191350",
+  "head": "fa6e948eb0f71ba93fe8bab01625e3146d1df3a0",
+  "node": "v22.23.2",
+  "git": "git version 2.56.0.windows.1",
+  "platform": "Microsoft Windows NT 10.0.26200.0",
+  "checks": {
+    "base-raw-hash-rows": 35,
+    "head-raw-hash-rows": 35,
+    "base-target": {
+      "tests": 19,
+      "pass": 18,
+      "fail": 1,
+      "exit": 1
+    },
+    "head-target": {
+      "tests": 20,
+      "pass": 20,
+      "fail": 0,
+      "exit": 0
+    },
+    "base-full": {
+      "tests": 95,
+      "pass": 94,
+      "fail": 1,
+      "exit": 1
+    },
+    "head-full": {
+      "tests": 96,
+      "pass": 96,
+      "fail": 0,
+      "exit": 0
+    }
+  },
+  "logs": {
+    "base-target.tap": {
+      "bytes": 4706,
+      "sha256": "4186834bae4354d7d8eb8afac3eaa8b26e902212d0540e118d276b9a08c03019"
+    },
+    "head-target.tap": {
+      "bytes": 4069,
+      "sha256": "d241049b2a34978432dfc4eee7dd2aae7c2d8f0716cd1f8ca81aa177b005ec4f"
+    },
+    "base-full.tap": {
+      "bytes": 20471,
+      "sha256": "ce4774f61bdd9d0348ece5e244e329d6aa9bfddf20164867937e765bca6ee0ff"
+    },
+    "head-full.tap": {
+      "bytes": 19835,
+      "sha256": "2a3eb729046ca3487b94c773876b030d56493ac3175fa2e4c691d3da0ff7daaa"
+    }
+  },
+  "problems": [],
+  "note": "A passing artifact still does not establish distinct-human GitHub identity or merge authority."
+}
