@@ -45,7 +45,7 @@ After coordination, declare exactly one outcome **outside the five lines** (neve
 
 ## Action to Owner — one copy/paste transaction (outside five lines)
 
-After the acting participant's five-line Task Evidence v2 card, show a **small `Action to Owner` section** only if the Owner must paste a message, make a decision, supply protected input, or unblock a verified dependency. This is presentation of the same native task/relay and **not** a sixth information line, new task, report, or automatic dispatch. If no action is required, write **`Action to Owner: NONE — [source-backed reason]`**, without an inert copy block.
+After the acting participant's five-line Task Evidence v2 card, show a **small `Action to Owner` section** only if the Owner must paste a message, make a decision, supply protected input, or unblock a verified dependency. This is presentation of the same native task/relay and not a sixth information line, new task, report, or automatic dispatch. If no action is required, write **`Action to Owner: NONE — [source-backed reason]`**, without an inert copy block.
 
 **Select exactly one primary transaction type per accountable next actor:**
 
