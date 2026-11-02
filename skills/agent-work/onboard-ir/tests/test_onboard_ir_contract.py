@@ -70,7 +70,9 @@ class OnboardIrContract(unittest.TestCase):
                 self.assertNotIn(f"/pull/{number}",text)
             self.assertNotIn("all 21 are resolved",text.lower())
         self.assertIn("NOT_RUN",read("templates/STAGE1_COLD_PROMPT.md"))
-        self.assertIn("after",read("templates/STAGE2_SOLUTION_PROMPT.md").lower())
+        stage2 = read("templates/STAGE2_SOLUTION_PROMPT.md").lower()
+        self.assertIn("stage-1 native return",stage2)
+        self.assertIn("now reveal the producer candidate",stage2)
 
     def test_twenty_one_claims_are_template_only(self):
         contents=read("examples/xml229/OWNER_21_CLAIMS_UNEVIDENCED.csv")
