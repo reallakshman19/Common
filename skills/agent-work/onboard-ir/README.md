@@ -22,7 +22,7 @@
 
 ## Golden: OBIR-G01 (XML229 engineering graph)
 
-Start the reviewer with [raw case only](examples/xml229/RAW_CASE.md). The author-side [golden expected distinctions](examples/xml229/GOLDEN_WITHHOLD_UNTIL_AFTER_STAGE2.md) stay withheld until the reviewer has recorded Stage 1 and independently inspected the candidate. [Worked handoff](examples/xml229/WORKED_HANDOFF.md) shows a historically grounded approach, **not** actual V6 source replay or a successful engineering CII.
+Start the reviewer with [raw case only](examples/xml229/RAW_CASE.md) and the [pinned baseline reading map](examples/xml229/BASELINE_READ_MAP.md). The author-side [golden expected distinctions](examples/xml229/GOLDEN_WITHHOLD_UNTIL_AFTER_STAGE2.md) stay withheld until the reviewer has recorded Stage 1 and independently inspected the candidate. [Worked handoff](examples/xml229/WORKED_HANDOFF.md) shows a historically grounded approach, **not** actual V6 source replay or a successful engineering CII.
 
 The public case is synthetic and sanitized. The original 21 production ambiguity claims are **NOT_EVIDENCED / NOT_RUN** without their exact original XML, JSON Trace, configuration, Final and private diagnostic under authorized custody. No "Golden PASS" certifies the real model.
 
