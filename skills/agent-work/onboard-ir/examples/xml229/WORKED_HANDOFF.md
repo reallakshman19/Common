@@ -8,7 +8,7 @@
 - Baseline main reviewed: immutable commit https://github.com/reallakshman19/3D_Converters/commit/5c39dd7bdbb7f2f63a686823b72bdb81909d52af
 - Original design/WBS: https://github.com/reallakshman19/3D_Converters/issues/391
 - Candidate proposed stack: draft PRs #392–#399, stacked, not merged to main at handoff time.
-- Original external evidence: Owner reported **21 mandatory row-level position ambiguities** in a V6 source. Original private XML, JSON, offset/config, and exact Final/output were **not available to this reviewer-handoff author**.
+- Authentic 21-claim original-source replay: **NOT_RUN**. Original external evidence: Owner reported **21 mandatory row-level position ambiguities** in a V6 source. Original private XML, JSON, offset/config, and exact Final/output were **not available to this reviewer-handoff author**.
 - Public synthetic and selected benchmark tests showed partial functions; some actual native CII tests used distinct positive source node IDs rather than the original ambiguous rows. This distinction must be preserved.
 
 ## Sender's first attempt: useful but not an independent verdict
