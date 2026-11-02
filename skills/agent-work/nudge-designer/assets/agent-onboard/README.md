@@ -1,5 +1,7 @@
 # Agent OnBoard — ORACLE → AGENT: one WBS-level continuity prompt
 
+**For a new Independent Reviewer:** [OnBoard IR](../../../onboard-ir/README.md) and its [neutral reviewer-facing Agent bridge](../../../onboard-ir/AGENT_ONBOARD_BRIDGE.md) show how to send one original-source task without seeding the producer's solution as the expected answer. Use the existing independent-review authority and this same one-WBS handoff, not a parallel dispatch or approval.
+
 **START HERE: [ONE ORACLE-ISSUED WBS PROMPT](AGENT_ONBOARD_PROMPT.md).** The recipient inherits exactly **one WBS task**: parent Owner outcome, upstream/downstream dependency, source contract, current task/assignment generation, predecessor evidence, exact PR head, authorized files, source custody, test/negative case, and one native return. This is not a project-wide Oracle succession prompt. The Oracle already read [project continuity](../oracle-onboard/ORACLE_ONBOARD_PROMPT.md) and distills only **relevant** context here. The four documents below are **optional reference/scaffold material for missing source explanations**, not tasks to copy, fill, re-author or formally approve before the agent acts. An established agent gets changed-context delta only.
 
 
