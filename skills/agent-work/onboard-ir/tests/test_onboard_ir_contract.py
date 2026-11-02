@@ -91,7 +91,7 @@ class OnboardIrContract(unittest.TestCase):
         history=read("examples/xml229/WORKED_HANDOFF.md")
         self.assertIn("WITHHOLD",golden)
         self.assertIn("not",golden.lower())
-        self.assertIn("not a real engineering product acceptance",golden)
+        self.assertIn("not a real engineering product acceptance",golden.replace("*",""))
         self.assertIn("NOT_RUN",history)
         self.assertIn("SELF_REVIEW",history)
         self.assertIn("NO PRODUCTION RELEASE",history)
