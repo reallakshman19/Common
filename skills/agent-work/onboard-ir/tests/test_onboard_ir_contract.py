@@ -63,7 +63,8 @@ class OnboardIrContract(unittest.TestCase):
 
     def test_cold_prompt_never_seeds_golden_or_author_pr(self):
         for name in ("templates/STAGE1_COLD_PROMPT.md",
-                     "examples/xml229/RAW_CASE.md"):
+                     "examples/xml229/RAW_CASE.md",
+                     "examples/xml229/BASELINE_READ_MAP.md"):
             text=read(name)
             self.assertNotIn("GOLDEN_WITHHOLD_UNTIL_AFTER_STAGE2.md",text)
             for number in range(392,400):
