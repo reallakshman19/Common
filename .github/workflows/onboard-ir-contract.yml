@@ -1,0 +1,29 @@
+name: OnBoard IR source-first reviewer contract
+on:
+  pull_request:
+    paths:
+      - 'skills/agent-work/onboard-ir/**'
+      - 'skills/agent-work/START_HERE.md'
+      - 'skills/agent-work/REFERENCE_INDEX.md'
+      - 'skills/agent-work/independent-review/SKILL.md'
+      - 'skills/agent-work/oracle-continuity/PROTOCOL.md'
+      - 'skills/agent-work/nudge-designer/assets/agent-onboard/README.md'
+      - '.github/workflows/onboard-ir-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cold-review-source-and-oracle-custody:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Validate skills discovery, source-only exposure, oracle continuity and synthetic fixture
+        run: python -m unittest discover -s skills/agent-work/onboard-ir/tests -p 'test_*.py' -v
