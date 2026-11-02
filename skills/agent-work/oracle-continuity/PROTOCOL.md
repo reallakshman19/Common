@@ -1,5 +1,7 @@
 # Oracle Continuity Protocol
 
+**Review-oracle continuity (optional cold IR):** [OnBoard IR's Oracle bridge](../onboard-ir/ORACLE_CONTINUITY_BRIDGE.md) preserves independently derived expected behavior, exact candidate/source hashes, falsifier, reviewer exposure, current validity and decision owner across an existing WBS/assignment handover. This adds no second Oracle state, WBS, publication receipt, review gate or automatic control transfer. The reviewer report is not an Owner engineering PASS.
+
 **Cycle now / successor snapshot:** The current project's WBS and actual native returns remain the continuity source; the Oracle presents one source-backed [Task Evidence v2](../TASK_EVIDENCE_V2.md) five-line card per active Agent/Oracle task after checking the Cycle Board. Preserve predecessor evidence and actor authority; a handover or replacement never gains ownership from a Card, and UNKNOWN counters cannot be turned into 0% progress.
 
 Version: 1.0.0 · Status: proposed reference contract · 23 October 2026

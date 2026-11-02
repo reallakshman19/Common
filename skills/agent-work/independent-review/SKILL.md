@@ -7,7 +7,7 @@ description: Review an exact artifact, implementation, calculation or learning r
 
 **Review reporting boundary:** During Cycle now the Owner sees [Task Evidence v2](../TASK_EVIDENCE_V2.md), a five-line projection of existing native IR evidence. An Oracle's reported acceptance must not be upgraded to independent engineering PASS, and the reviewer must not rerun completed checks or create an extra Board report.
 
-Prototype v1.0. Review directly from the Owner's request, original sources and the
+**Cold-start reviewer orientation (optional):** [OnBoard IR](../onboard-ir/README.md) packages original-source-first Stage 1 and candidate-challenge Stage 2 with a withheld synthetic golden and Oracle-continuity linkage. It is an onboarding adapter to this SKILL, not a second review approval process; an exposed or same-principal reviewer discloses limitations and can still perform useful SELF_REVIEW.\n\nPrototype v1.0. Review directly from the Owner's request, original sources and the
 actual candidate. Use ordinary prose or the project's native reporting format.
 Treat structured records, scripts and other skills as optional conveniences.
 
