@@ -14,6 +14,7 @@ Version: 1.0.0 · Status: proposed reference contract · 23 October 2026
 - [Core records](#3-core-records)
 - [Initiation](#4-initiation)
 - [Execution and evaluation](#5-execution-and-evaluation)
+- [Convergence discipline](#5a-convergence-discipline-bounded-rounds)
 - [Worker replacement](#6-worker-replacement)
 - [Oracle succession](#7-oracle-succession)
 - [Publication and recovery](#8-publication-concurrency-and-recovery)
@@ -129,6 +130,15 @@ referenced; the core does not require copying them into the public record.
 7. Inspect a real result early. Update the checkpoint at meaningful artifact,
    decision or evidence boundaries. Resume from the latest trusted checkpoint after
    unexpected session loss; do not wait for a hidden context percentage.
+8. **Observe returns, not only deliveries.** A return is the executor's own
+   completion record at the agreed native location (issue comment, chat reply, file
+   drop), found *after* the instruction it answers: an instruction that quotes its
+   own return marker must not be mistaken for the return. Each polling window starts
+   at or before the previous window's start, so a return posted between two polls is
+   never skipped. A transport failure in the executor's reply (for example a chat
+   "delivery timed out") is not a return: check the native work record for what was
+   actually pushed, then send a short *resume from the last observed state* message;
+   do not re-issue the whole instruction, which can duplicate side effects.
 
 No scored onboarding exam or Owner approval at every checkpoint is required. Reuse
 existing authorization and useful completed work. Inspect essentials and act.
@@ -175,6 +185,45 @@ acceptance when required by that task's policy. A technical check or successful
 supported repeat cannot establish independent learning/transfer: that must be a
 separate criterion with suitable observations. Unrelated checks are not imposed on
 every task, and one task's failure does not globally stop other work.
+
+## 5a. Convergence discipline (bounded rounds)
+
+**Concrete regression (TopoFix lanes A/B, 5–6 November 2026):** one step failed three
+consecutive review rounds (fresh-reviewer totals 85, 80, 79) although its core safety
+invariant held from the first round: each new reviewer found further "guard without
+its own test" items, because the acceptance rule "every guard is pinned" had no end.
+A second step needed an Owner-exception closure round for the same reason. Only after
+the third round did it emerge that the first step's feature cannot apply to the
+Owner's real exports (they lack the absolute coordinates it requires). Review agents
+also exhausted the usage budget four times, stopping gates mid-run.
+
+1. **Fixed done-list per assignment.** Before delivery, the assignment states a short
+   finite list of acceptance items (about five), each observable and tied to the
+   task's invariants. The assessment judges the return against that list. A finding
+   outside it becomes a recorded follow-up item for a later assignment, **unless** it
+   is a demonstrated *unsafe acceptance* (the artifact accepts an input it must refuse
+   or emits a wrong result), which always blocks. Distinguish "unsafe accept" from
+   "check without its own test" in every assessment.
+2. **Applicability before repair.** Before a second repair round, confirm on the
+   Owner's real inputs (or by the one data question that decides it) that the step's
+   outcome can occur at all. If it cannot, re-plan the task instead of hardening it.
+3. **Round budget.** A task revision gets a stated number of repair rounds (default
+   two). When it is spent, the Oracle does not open another round on its own; it gives
+   the Owner the evidence and one recommendation among: a bounded *closure round*
+   limited to named items, *accept with listed limits* (moving to the Owner's
+   prototype), or *rethink* (new task revision after an invariant review). Record the
+   choice as an adopted decision with its alternatives.
+4. **Scope rulings are decisions.** When a finding lies outside the task's declared
+   scope or protected boundary (for example a pre-existing defect next to a frozen
+   component), the coordinator may rule it out of scope only as an explicit decision
+   with rationale and a named follow-up; the ruling never upgrades the verdict.
+5. **Staged review cost.** Every round gets an execution runner plus the
+   coordinator's own reproduction of each blocker. Add a new non-author reviewer on
+   the round intended to pass, not on every round. Bound concurrent review agents to
+   what the budget sustains, and resume an interrupted agent from its saved state
+   instead of starting a fresh one. A stopped gate is `NOT_RUN`, never a pass.
+6. **Reproduce before escalating.** The coordinator reproduces each blocking finding
+   (or records that it could not) before reporting it to the Owner or to the executor.
 
 ## 6. Worker replacement
 
@@ -239,7 +288,7 @@ Before describing a handover packet as complete, the incumbent must make the fol
 1. **Concept:** original Owner aim/amendments, why the product exists, user journey, expected outcome and prohibited scope.
 2. **Architecture and difficult logic:** current component/data/control flow, critical state/identity boundaries, non-obvious algorithms and invariants, with explanations or concrete examples of *why* they exist.
 3. **Decisions and challenges:** consequential design choices, considered/rejected alternatives and their rationale, surviving wrong cases and a discriminating check.
-4. **Execution frontier:** exact working candidate and verified versus reported results, fixture custody/access, active assignments/returns, HOLDs, two connected next deliveries and **one immediate authorized action**.
+4. **Execution frontier:** exact working candidate and verified versus reported results, fixture custody/access, active assignments/returns, HOLDs, two connected next deliveries and **one immediate authorized action**. Include a **pending-delivery ledger**: every instruction the Owner already approved but that is not yet confirmed delivered, with its recipient locator (kept private), staged artifact path, size and SHA-256, the exact message text, its precondition and why it is waiting (for example a signed-out transport). Approval is not delivery; the successor sends from this ledger without re-deriving or re-asking.
 
 A status-only A–G checklist, a set of unread links, or an agent roster does **not** establish these knowledge classes. Reuse existing Project Home or project-native architecture/decision records wherever sufficient; **four distinct new files are not mandated**. If content is genuinely absent or inaccessible, label the specific knowledge gap and keep its assurance unknown rather than inventing an explanation or claiming full transfer.
 
