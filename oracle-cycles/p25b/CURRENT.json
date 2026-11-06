@@ -3,17 +3,20 @@
   "project": "p25b",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 1,
-  "last_accepted_receipt_ids": [],
+  "revision": 2,
+  "last_accepted_receipt_ids": [
+    "p25b-codeonly-v011-coder-20261024-29d6219842e4"
+  ],
   "aim": "Coordinate P2.5-B exact-artifact handoffs, independent checks, and Owner Windows acceptance without weakening frozen P2.1.",
   "aim_source": "OWNER_PRIVATE_REF:oracle-cycle-intent-20261024",
   "privacy": "PUBLIC_SAFE_METADATA_ONLY",
   "roles": {
     "oracle": {
-      "label": "Oracle",
-      "chat_id8": "6ada4669",
-      "provenance": "OWNER_REPORTED",
-      "responsibility": "Meaning, authoritative next assignment and Progress projection"
+      "label": "CIIFR R3 Oracle (successor)",
+      "chat_id8": "01a16c60",
+      "provenance": "OWNER_APPOINTED_IN_SUCCESSOR_SESSION; SHORT_ID_FROM_CODEX_THREAD_ID_ENV",
+      "responsibility": "Owner intent, Cycle reconciliation, checkpoint briefs, evidence integration and CIIFR R3 Progress projection",
+      "session_id": "ciifr-oracle-01a16c60"
     },
     "coder": {
       "label": "P2.5-B coder",
@@ -47,21 +50,43 @@
       "generation": 1,
       "recipient_role": "coder",
       "recipient_chat_id8": "6adb2ff1",
-      "dispatch": "READY_NOT_SENT",
-      "scope": "Supply the unchanged v0.1.1 code-only ZIP and exact SHA-256, byte size and inventory; no backend modifications; document QA-01 separately.",
+      "dispatch": "CLOSED_PARTIAL_RETURN_RECORDED",
+      "scope": "Historical task at rev1: supply unchanged code-only archive identity and return. Local SHA/CRC and 12/12 matching reported, but private recipient transfer/IR hash missing. Further custody remains parallel.",
       "candidate": "P2.5-B v0.1.1",
       "private_artifact_ref": "OWNER_PRIVATE_REF:p25b-code-only-expected-hash",
-      "required_return": "Private retrievable artifact and public-safe GitHub receipt of byte identity, tests, limits and code-only contents",
+      "required_return": "Coder local identity receipt has already been posted; DO NOT repost the same receipt or recompute the reviewed binary merely to generate another ZIP.",
       "next_after": "reviewer",
       "accepted_input_status": "CODER_PRIOR_HANDOFF_REPORTED",
-      "target_issue_url": "https://github.com/reallakshman19/Common/issues/465"
+      "target_issue_url": "https://github.com/reallakshman19/Common/issues/465",
+      "public_receipt_url": "https://github.com/reallakshman19/Common/issues/465#issuecomment-6379577797",
+      "receipt_status": "CODER_REPORTED_LOCAL_BYTES_CHECKED",
+      "deliverability": "PRIVATE_SHARED_DOWNLOAD_NOT_CONFIRMED",
+      "status": "RECEIPT_RECONCILED_PARTIAL"
+    },
+    {
+      "id": "P25B-STABLE-CHECKPOINT-02",
+      "generation": 1,
+      "recipient_role": "coder",
+      "recipient_chat_id8": "6adb2ff1",
+      "dispatch": "READY_FOR_OWNER_TRIGGER",
+      "status": "CHECKPOINT_EVIDENCE_NOT_YET_RETURNED",
+      "candidate": "P2.5-B v0.1.1 reviewed runnable; unchanged code-only counterpart",
+      "candidate_provenance": "OWNER_CARRIED_REVIEW_SCOPE_PLUS_CODER_PARTIAL_RECEIPT",
+      "exact_runnable_sha256_expected": "378a60fefeba25d60157fd66a3e3d8b45642778e180e04b39b411df4c346988a",
+      "exact_codeonly_sha256_coder_reported": "29d6219842e4b1dec24f7b0f702b67744c7327cbcaaa80c8a7098ebe3234761d",
+      "depends_on_receipt_id": "p25b-codeonly-v011-coder-20261024-29d6219842e4",
+      "owner_amendment_url": "https://github.com/reallakshman19/Common/pull/471",
+      "scope": "READ-ONLY EVIDENCE-FIRST checkpoint audit on existing v0.1.1: decide whether the approved P2.5-B coding/set-point is ALREADY_MET. Show genuine Windows-trial readiness (install/run steps with real P2.1 local backend), accurate before/after preview, stale state invalidation, current explicit mapping authorization, Apply/Export within approved byte scope, frozen P2.1; inventory exact candidate/source and tests/negative cases/limits. If missing evidence or observed in-scope defect, identify exact blocker and repro; DO NOT start speculative code or rebuild reviewed archives. Any justified repair requires separately authorized, new candidate ID/hash/lineage and affected checks.",
+      "required_return": "Public-safe ORACLE-CYCLE-RECEIPT v1 with unique receipt ID, action work_returned or blocked, candidate SHA expectation/source, checkpoint ALREADY_MET or NOT_YET_DEMONSTRATED, precise inventory of already passed/scoped, installation/run/negative-test evidence or private opaque references, remaining Windows NOT_RUN/QA-01/custody limits, and single next coding-agent handoff recommendation; read back issue comment permalink. If this checkpoint is already established by source-backed exact version/run notes, cite it and create NO new build.",
+      "next_after": "PREPARE_CHATGPT_CODING_AGENT_AFTER_CHECKPOINT"
     }
   ],
   "next": {
     "recipient_role": "coder",
     "recipient_chat_id8": "6adb2ff1",
+    "assignment_id": "P25B-STABLE-CHECKPOINT-02",
     "status": "READY_FOR_OWNER_TRIGGER",
-    "instruction": "Owner triggers the assigned coder with the one-line Cycle now URL form; coder confirms actual artifact access, checks bytes, and posts a public-safe receipt to issue #465.",
+    "instruction": "Existing coder stays through P2.5-B stable checkpoint. READ CURRENT rev2; audit whether reviewed unchanged v0.1.1 already meets approved coding readiness. If met, return ALREADY_MET with actual source/test/run-note evidence, no new code. If not, give exact observed in-scope defect or missing readiness evidence, not speculative repair. Preserve frozen P2.1 and unchanged v0.1.1; recipient-independent package audit and safe Owner Windows test may proceed in parallel. Post new uniquely identified scoped receipt to issue #465; no duplicate of earlier coder PARTIAL receipt.",
     "owner_trigger": "Cycle now: https://github.com/reallakshman19/Common/tree/main/oracle-cycles/p25b"
   },
   "gates": [
@@ -89,9 +114,9 @@
     {
       "id": "code-only-package",
       "status": "BLOCKED",
-      "scope": "New v0.1.1 code-only distribution not independently received/hashed",
-      "evidence_ref": "OWNER_PRIVATE_REF:coder-reported-code-only-sha-v011",
-      "limits": "Coder-reported expected hash is not verification"
+      "scope": "Coder-reported 42,447-byte code-only ZIP SHA-256 and local ZIP integrity / 12-of-12 file match; private retrievable handoff and independent recipient byte check outstanding.",
+      "evidence_ref": "https://github.com/reallakshman19/Common/issues/465#issuecomment-6379577797",
+      "limits": "No confirmed shared Drive copy or independent reviewer downloaded SHA-256; acceptance not granted."
     },
     {
       "id": "windows-native",
@@ -110,11 +135,111 @@
   ],
   "progress_projection": {
     "repository": "reallakshman19/progress-page",
-    "project_key": "p25b",
-    "publication_status": "NOT_CREATED",
-    "published_revision": null,
-    "reason": "Cycle activation proposed in PR; after actual canonical merge, Progress remains pending separate reviewed CLI projection."
+    "project_key": "ciifr",
+    "publication_status": "PUBLISHED_REPOSITORY_R3_VERIFIED",
+    "published_revision": "R3",
+    "published_evidence_url": "https://github.com/reallakshman19/progress-page/blob/main/data/ciifr/index.json",
+    "sync_status": "R3_PUBLISHED__SUCCESSOR_AND_CHECKPOINT_PROJECTION_PENDING",
+    "reason": "Existing ciifr R3 remains the sole Progress project. Oracle binding and checkpoint projection need a separate official pp_cli.py data-only PR after canonical state publication; no page synchronization claimed."
   },
   "activation_basis": "OWNER_PRIVATE_REF:owner-pilot-start-20261024",
-  "activation_scope": "Manual GitHub issue receipt pilot for existing code-only return; no engineering transfer authorization, release, or automatic dispatch."
+  "activation_scope": "Manual GitHub issue receipt pilot for existing code-only return; no engineering transfer authorization, release, or automatic dispatch.",
+  "last_reconciled_receipt": {
+    "receipt_id": "p25b-codeonly-v011-coder-20261024-29d6219842e4",
+    "url": "https://github.com/reallakshman19/Common/issues/465#issuecomment-6379577797",
+    "result": "PARTIAL",
+    "observation": "GitHub comment was read back; code-only SHA-256, ZIP integrity and 12/12 cross-package files are CODER-REPORTED local measurements; not independently rehashed by Oracle/IR.",
+    "accepted_meaning": "Record one coder PARTIAL issue comment as a real return only. Local SHA/CRC/12-of-12 is CODER_REPORTED, not independent distribution verification or Owner acceptance.",
+    "unresolved": "Exact unchanged code-only archive is not confirmed retrievable from private Google Drive."
+  },
+  "active_assignment_id": "P25B-STABLE-CHECKPOINT-02",
+  "checkpoint": {
+    "id": "P25B-V011-STABLE-CODING-CHECKPOINT",
+    "status": "PENDING_CODER_EVIDENCE_OR_ALREADY_MET_PROOF",
+    "owner_direction_source": "OWNER_PRIVATE_REF:coder-through-stable-checkpoint-20261024",
+    "public_plan_amendment": "https://github.com/reallakshman19/Common/pull/471",
+    "base_custody_plan": "https://github.com/reallakshman19/Common/pull/469",
+    "effective_scope": "Same approved P2.5-B, not new feature authority. Coding-readiness set point before replacement coder; native Windows PASS and Owner acceptance are distinct downstream requirements.",
+    "proven_scope": "Owner-carried independent v0.1.1 injected-browser preview repair and protected P2.1 PASS; coder reported unchanged code-only local ZIP verification; no requirement to recode those findings.",
+    "confirm_before_declaring_met": [
+      "Exact reviewed v0.1.1 runnable identity and practical install/run instructions for genuine Windows+real local backend are present",
+      "Existing in-scope preview defects have source-bounded tests or recorded limitations; preview shows actual before/proposed values and invalidates stale state",
+      "Approved mapping/selection remains distinct from geometric discovery; Apply/Export authorized byte boundary survives",
+      "Any remaining in-scope defect is exact, reproducible and linked to candidate; QA-01 remains separate OPEN_LOW",
+      "Source/patch lineage, negative checks and NOT_RUN conditions are sufficiently documented for next coder"
+    ],
+    "stop_if": "Cannot identify current exact candidate/input, missing Owner-approved mapping, changed P2.1 bytes, candidate hash mismatch, or repair demanded without separate authorized candidate."
+  },
+  "planned_coding_agent_onboarding": {
+    "status": "NOT_DISPATCHED",
+    "role": "ChatGPT coding agent",
+    "chat_id8": null,
+    "after": "P25B-V011-STABLE-CODING-CHECKPOINT evidence reconciled and Owner-authorized new coder assignment",
+    "requirements": "Separate bounded successor task and generation; actual access to candidate/source/IR evidence; isolate outgoing coder write scope; preserve exact candidate, passes/fails/NOT_RUN, baseline and next task.",
+    "oracle_control_transfer": "Separate coding-agent handoff; Oracle successor binding is defined in control and oracle_succession, effective only when this revision is canonical."
+  },
+  "parallel_work": {
+    "custody": "IN_PROGRESS_OR_BLOCKED_BY_ACCESS; exact unchanged v0.1.1 ZIPs privately retrieved/hash checked later by authorized recipient; do not publish child links.",
+    "windows": "OWNER_MAY_TEST_EXISTING_REVIEWED_RUNNABLE_WHEN_SAFE_AND_AUTHORIZED; real native observations NOT_RUN; no automatic approval from checkpoint.",
+    "independent_review": "Code-only recipient SHA/CRC/member/24-protected scope audit after valid private file availability; cannot be inferred from coder local receipt."
+  },
+  "control": {
+    "oracle_session_id": "ciifr-oracle-01a16c60",
+    "epoch": 1
+  },
+  "control_record_ref": "ORACLE-CONTROL-CUTOVER-20261024.md",
+  "oracle_succession": {
+    "status_when_canonical": "CONTROL_BINDING_PUBLISHED__ENFORCEMENT_UNVERIFIED",
+    "authority_ref": "OWNER_PRIVATE_REF:ciifr-owner-successor-proceed-20261024",
+    "predecessor_chat_id8": "6ada4669",
+    "successor_chat_id8": "01a16c60",
+    "predecessor_control_epoch": "NOT_RECORDED_IN_CURRENT",
+    "epoch_basis": "First explicit control epoch. Do not invent a historical numeric epoch; predecessor binding is preserved by canonical revision/source and cutover record.",
+    "canonical_preimage": {
+      "repository": "reallakshman19/Common",
+      "branch": "main",
+      "observed_head": "37435267c861d54998fee589e6dc91385bf59bfa",
+      "observed_revision": 1
+    },
+    "adopted_assignments": [
+      {
+        "id": "P25B-CODEONLY-RETURN-01",
+        "generation": 1,
+        "disposition": "Preserve reconciled PARTIAL return and outstanding custody limits; do not restart or duplicate receipt."
+      },
+      {
+        "id": "P25B-STABLE-CHECKPOINT-02",
+        "generation": 1,
+        "disposition": "Carry forward the exact Owner-approved prepared checkpoint from unmerged PR467, activating it with this revision; recipient 6adb2ff1. It was not previously a published active assignment."
+      }
+    ],
+    "adopted_responsibilities": [
+      {
+        "role": "reviewer",
+        "chat_id8": "6adb484a",
+        "status": "Retained; no active reviewer assignment is currently published; exact-byte audit awaits accessible artifacts."
+      },
+      {
+        "role": "owner",
+        "status": "Retains engineering authorization, actual Windows test, acceptance and merge authority."
+      }
+    ],
+    "write_isolation": {
+      "successor_branch": "cutover/ciifr-r3-oracle-01a16c60-20261024",
+      "predecessor_branches": "UNCHANGED; NO SUCCESSOR WRITES",
+      "canonical_publisher": "Owner-reviewed GitHub PR merge with fresh preimage check; no direct main push",
+      "predecessor_stop_or_access_revocation": "NOT_OBSERVED",
+      "epoch_enforcement": "NO_AUTHENTICATED_RUNTIME_GATE_OBSERVED",
+      "safe_exclusive_control_claim": "NOT_ESTABLISHED"
+    },
+    "stale_control_policy": "Once canonical, superseded Oracle 6ada4669 control directives are historical. Do not apply them automatically. Authenticate current Owner authority and compare current oracle_session_id/epoch/revision before any dependent write. Late results require an explicit exact-version adoption decision.",
+    "return_route": "https://github.com/reallakshman19/Common/issues/465",
+    "limitations": "A draft does not transfer control; merging changes the administrative binding only. This JSON does not revoke permissions, stop another chat, authenticate a sender or establish custody/product acceptance.",
+    "incorporated_pending_proposal": {
+      "pull_request": "https://github.com/reallakshman19/Common/pull/467",
+      "head": "4d489022a519a078753f479e1e0204574ce4e22c",
+      "status": "UNMERGED_PROPOSAL_INCORPORATED; NOT A REQUIRED PRIOR PUBLICATION",
+      "provenance": "Checkpoint and receipt reconciliation retained exactly; current canonical assignment remains rev1 until this proposal is merged."
+    }
+  }
 }
