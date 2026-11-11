@@ -1,0 +1,173 @@
+/* M0-U3: double-read current GitHub PR HEADs without rewriting source history.
+ * A mutable destination head is an OBSERVATION, not a migrated review/check.
+ * This module cannot grant Owner, Reviewer, DELP or writer authority.
+ * Caller-provided readers are always graded INJECTED_UNATTESTED.
+ */
+import {validateMigrationManifest} from './validate-migration-manifest-v1.mjs';
+import {auditNativeProvider,nativeGithubGet} from './audit-native-provider-v1.mjs';
+
+const SHA = /^[0-9a-f]{40}$/;
+const clone = v => JSON.parse(JSON.stringify(v));
+const isMap = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+const safeNumber = x => Number.isSafeInteger(x) && x >= 0;
+const refusal = errors => Object.freeze({
+  schema:'common-v35-moving-head-observation-v1',
+  current:false,
+  errors:Object.freeze(errors),
+  source_grade:'INJECTED_UNATTESTED',
+  owner_authenticated:false,reviewer_qualified:false,
+  evidence_accepted:false,writer_authorized:false,
+  programme_acceptance:'NOT_EVALUATED',
+  source_vector:null,
+  manifest_advanced:false,
+});
+
+export async function observeMovingHeads(manifest,read) {
+  const structural = validateMigrationManifest(manifest);
+  if(!structural.valid) return refusal(['BAD_REFERENCE_MANIFEST:'+structural.errors.join(',')]);
+  if(typeof read !== 'function') return refusal(['NO_PROVIDER_READER']);
+  const next = clone(manifest);
+  const errors=[];
+  const d = next.repositories.destination, old = next.repositories.historical;
+  const branches = new Map(next.branches.map(b=>[b.origin_pr,b]));
+  const mapped = next.objects.filter(x=>x.kind==='PR' && x.destination !== null);
+  const early=[];
+  const doRead=async(slug,path)=>{
+    try {
+      const obj=await read(slug,path);
+      if(!isMap(obj))throw Error('not object');
+      return obj;
+    }catch {
+      errors.push('PROVIDER_READ_FAILED:'+slug+'/'+path);
+      return null;
+    }
+  };
+
+  // FIRST independent read of the new default branch. The immutable origin
+  // main SHA remains frozen in manifest; destination main is moving material.
+  const observedMain=await doRead(d.full_name,'git/ref/heads/main');
+  if (!observedMain || observedMain.ref!=='refs/heads/main' ||
+      !SHA.test(String(observedMain.object?.sha||''))) {
+    errors.push('MOVING_MAIN_REF_INVALID');
+  } else {
+    next.repositories.destination.main_sha=observedMain.object.sha;
+  }
+
+  // New default branch may legitimately advance, but may not secretly
+  // rewrite/replace the historical cutover ancestry. A matched SHA across two
+  // GETs by itself is NOT proof of retained baseline history.
+  if (observedMain && next.repositories.destination.main_sha!==next.repositories.historical.main_sha) {
+    const compareMain=await doRead(d.full_name,
+      'compare/'+next.repositories.historical.main_sha+'...'+next.repositories.destination.main_sha);
+    if(!compareMain||compareMain.status!=='ahead'||
+       !safeNumber(compareMain.ahead_by)||compareMain.ahead_by<1||
+       compareMain.behind_by!==0){
+      errors.push('DESTINATION_MAIN_ANCESTRY_INVALID');
+    }
+  }
+
+  // A SOURCE_BRANCH_CONTINUATION keeps the original ref name and ancestry.
+  // A RELATED_NEW_IMPLEMENTATION has its OWN PR branch/ref. Never bind PR #2
+  // head to the preserved #892 source branch, or invent a compare relationship.
+  const safeRef=v=>typeof v==='string'&&
+    /^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(v)&&!v.includes('..')&&!v.includes('//');
+  for(const mapping of mapped){
+    const b=branches.get(mapping.origin.number);
+    if(!b){errors.push('UNMAPPED_DESTINATION_BRANCH:'+mapping.origin.number);continue;}
+    const related=mapping.relation==='RELATED_NEW_IMPLEMENTATION';
+    const pr=await doRead(d.full_name,'pulls/'+mapping.destination.number);
+    const branchName=related?pr?.head?.ref:b.branch;
+    if(!safeRef(branchName)){
+      errors.push('MOVING_PR_BRANCH_UNSAFE:'+mapping.destination.number);
+      continue;
+    }
+    const ref=await doRead(d.full_name,'git/ref/heads/'+branchName);
+    if(!pr||!ref||pr.number!==mapping.destination.number||
+        pr.html_url!=='https://github.com/'+d.full_name+'/pull/'+mapping.destination.number||
+        pr.head?.ref!==branchName || pr.head?.repo?.full_name!==d.full_name||
+        pr.base?.repo?.full_name!==d.full_name||
+        !SHA.test(String(pr.head?.sha||'')) ||
+        ref.ref!=='refs/heads/'+branchName||ref.object?.sha!==pr.head.sha){
+      errors.push('MOVING_PR_OR_BRANCH_MISMATCH:'+mapping.destination.number);
+      continue;
+    }
+    if(related){
+      early.push({old_pr:mapping.origin.number,new_pr:mapping.destination.number,
+        new_head_sha:pr.head.sha,branch:branchName,
+        relation:'RELATED_NEW_IMPLEMENTATION',ahead:null,
+        ancestry:'NOT_CLAIMED'});
+      continue;
+    }
+    // Continuation only: verify exact ancestry with GitHub compare.
+    const cmp=await doRead(d.full_name,
+      'compare/'+b.origin_head_sha+'...'+pr.head.sha);
+    if(!cmp||(cmp.status!=='identical'&&cmp.status!=='ahead')||
+       !safeNumber(cmp.ahead_by)||cmp.behind_by!==0||
+       (cmp.status==='identical'&&(cmp.ahead_by!==0||b.origin_head_sha!==pr.head.sha))||
+       (cmp.status==='ahead'&&(cmp.ahead_by<1||b.origin_head_sha===pr.head.sha))){
+      errors.push('MOVING_SOURCE_ANCESTRY_INVALID:'+mapping.origin.number);
+      continue;
+    }
+    b.destination_head_sha=pr.head.sha;
+    b.ahead_commits=cmp.ahead_by;
+    b.relation=cmp.status==='identical'?'EXACT_HEAD_MATCH':'SOURCE_ADVANCED';
+    early.push({old_pr:mapping.origin.number,new_pr:mapping.destination.number,
+      new_head_sha:pr.head.sha,branch:b.branch,
+      relation:'SOURCE_BRANCH_CONTINUATION',ahead:cmp.ahead_by,
+      ancestry:'GITHUB_COMPARE_AT_OBSERVATION'});
+  }
+  if(errors.length) return refusal(errors);
+  const refreshed=validateMigrationManifest(next);
+  if(!refreshed.valid) return refusal(['REFRESHED_REFERENCE_INVALID:'+refreshed.errors.join(',')]);
+
+  // SECOND fresh fetch: full native old/new source read, old-HEAD constancy,
+  // new issue/PR namespace, new refs and compare ancestry. Never cache the
+  // first read's response; a concurrent push MUST be marked stale.
+  const audited=await auditNativeProvider(next,read);
+  if (!audited.current) return refusal(['REFRESH_REQUIRED',...audited.errors]);
+
+  // RELATED_NEW_IMPLEMENTATION: re-GET native PR and its independent branch
+  // after the full census. The historical branch is checked separately by
+  // auditNativeProvider; it MUST NOT be rewritten to the new PR HEAD.
+  for(const entry of early.filter(x=>x.relation==='RELATED_NEW_IMPLEMENTATION')){
+    const pr=await doRead(d.full_name,'pulls/'+entry.new_pr);
+    const ref=await doRead(d.full_name,'git/ref/heads/'+entry.branch);
+    if(!pr||!ref||pr.number!==entry.new_pr||
+       pr.head?.repo?.full_name!==d.full_name||
+       pr.base?.repo?.full_name!==d.full_name||
+       pr.head?.ref!==entry.branch||
+       pr.head?.sha!==entry.new_head_sha||
+       ref.ref!=='refs/heads/'+entry.branch||
+       ref.object?.sha!==entry.new_head_sha){
+      errors.push('RELATED_PR_HEAD_MOVED:'+entry.new_pr);
+    }
+  }
+  if(errors.length)return refusal(['REFRESH_REQUIRED',...errors]);
+
+  const source_vector=early.map(x=>Object.freeze({...x}));
+  const changed=next.repositories.destination.main_sha!==manifest.repositories.destination.main_sha ||
+    next.branches.some((b,i)=>
+      b.destination_head_sha!==manifest.branches[i].destination_head_sha ||
+      b.ahead_commits!==manifest.branches[i].ahead_commits);
+  return Object.freeze({
+    schema:'common-v35-moving-head-observation-v1',
+    current:true, errors:Object.freeze([]),
+    source_grade:'INJECTED_UNATTESTED',
+    owner_authenticated:false,reviewer_qualified:false,
+    evidence_accepted:false,writer_authorized:false,
+    programme_acceptance:'NOT_EVALUATED',
+    source_vector:Object.freeze(source_vector),
+    destination_main_sha:next.repositories.destination.main_sha,
+    historical_main_sha:next.repositories.historical.main_sha,
+    manifest_advanced:changed,
+  });
+}
+
+// This fixed production-path reader is the only wrapper permitted to grade
+// successful material as a bounded NATIVE GitHub GET. No injectable transport.
+export async function observeLiveMovingHeads(manifest,{token=''}={}) {
+  const r=await observeMovingHeads(manifest,
+    (slug,path)=>nativeGithubGet(slug,path,{token}));
+  return Object.freeze({...r,source_grade:r.current ?
+    'NATIVE_GITHUB_DOUBLE_READ_AT_OBSERVATION' : 'NOT_CURRENT_OR_UNVERIFIED'});
+}
