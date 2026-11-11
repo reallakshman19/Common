@@ -1,0 +1,15 @@
+{
+  "size": 112933,
+  "sha256": "bcb2c2a58cd18658b0617f11cbd718d7711cb76daa2901bcb064d6bfbf9bc483",
+  "memberCount": 37,
+  "originalSourceIncluded": false,
+  "rawXmlFragmentsIncluded": false,
+  "gitBlobSha": "e9f484469e2a431df930d612961bb86e7d0a6d8f",
+  "producerCustodyChecks": {
+    "producerValidMembersAndSource": "PASS",
+    "seededMemberTamper": "REJECTED",
+    "wrongSource": "REJECTED",
+    "reviewerReceipt": "NOT_RUN",
+    "scope": "CUSTODY_CHECK_ONLY"
+  }
+}
