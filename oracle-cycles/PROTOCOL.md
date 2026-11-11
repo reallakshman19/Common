@@ -60,6 +60,12 @@ below are unchanged. A project opts in by setting `"protocol_version": "0.2.0"`.
    ```
    Write `UNKNOWN` or `NOT_RUN` instead of guessing. A brief repeats this
    requirement so that a cold recipient cannot miss it.
+8. **Every question carries its options, each with a reason.** This applies
+   whenever the Oracle or an agent needs a decision from the Owner or the
+   Oracle: one line naming the decision, then two to four options with the
+   suggested one first, each with a one-line reason (gain and cost). Keep it
+   tight. A question without options, or an option without a reason, is
+   incomplete; the recipient may send it back unanswered.
 
 ## 1. Discovery and one-line grammar
 
