@@ -1,0 +1,74 @@
+{
+  "schema": "ciifr-r4-oracle-agent-artifact-relay-v1",
+  "transaction_id": "CIIFR-R4-S1-20261024",
+  "date_utc": "2026-10-24",
+  "project": "ciifr",
+  "roles": {
+    "sender": "S1 builder",
+    "recipient": "standalone Oracle",
+    "owner_acceptance": false,
+    "independent_reviewer": "PENDING"
+  },
+  "pin": {
+    "repository": "reallakshman19/Common",
+    "sha": "37435267c861d54998fee589e6dc91385bf59bfa",
+    "scope": "skills/agent-work; relay"
+  },
+  "authorities": {
+    "charter": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/158",
+    "assignment": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/159",
+    "builder_receipt": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/159#issuecomment-6387012220",
+    "candidate_pr": "https://github.com/reallakshman19/XML_Compare_Utilities/pull/163",
+    "candidate_exact_sha": "4f31afebcc8afadc1024ef8e7545e5551229ff09",
+    "ci": "https://github.com/reallakshman19/XML_Compare_Utilities/actions/runs/40113885630"
+  },
+  "artifacts": [
+    {
+      "direction": "ORACLE_TO_BUILDER",
+      "name": "CIIFR_R4_STANDALONE_WORKPACK.zip",
+      "bytes": 34352,
+      "sha256": "d85d7ede9abc4381fe636a85b22c9ba9449a860fa8fd0420d267eb1fde13c9cb",
+      "custody": "CHAT_ATTACHMENT_VERIFIED_NOT_RELAY_MIRRORED",
+      "source_receipt": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/158#issuecomment-6386689258",
+      "policy": "Original Oracle ZIP exact bytes require independent forwarding; never pretend checksum or link reconstructs the archive."
+    },
+    {
+      "direction": "BUILDER_TO_ORACLE",
+      "name": "CIIFR_R4_S1_HARDENED_OWNER_DEMO.zip",
+      "bytes": 28815,
+      "sha256": "7b4fe07201a7716f07fffdccd5200095c971ebeea440d144993bcafa43d06bf3",
+      "custody": "CHAT_ONLY_NOT_PORTABLE_TO_OTHER_CHATS",
+      "policy": "Receipt only; do not treat sandbox:/mnt/data as a durable Oracle download."
+    },
+    {
+      "direction": "BUILDER_TO_ORACLE",
+      "name": "CIIFR_R4_S1_RELAY_SOURCE.zip",
+      "bytes": 72147,
+      "sha256": "d6cc5d74eb3913184e69a511a47d0cf0be4337d9528aa56f9b921f5df767e039",
+      "git_blob_sha": "3f25279496f3f1225b35ae2e5617491d7d4f7e15",
+      "custody": "GITHUB_COMMON_RELAY_DRAFT_BRANCH",
+      "path": "relay/CIIFR_R4_S1_20261024/CIIFR_R4_S1_RELAY_SOURCE.zip",
+      "download_url": "https://github.com/reallakshman19/Common/blob/ciifr-r4-s1-relay-20261024/relay/CIIFR_R4_S1_20261024/CIIFR_R4_S1_RELAY_SOURCE.zip?raw=1",
+      "identity": "REPACKAGED_FROM_EXACT_PUBLIC_COMMIT_NOT_IDENTICAL_TO_CHAT_ZIP",
+      "source_repository": "reallakshman19/XML_Compare_Utilities",
+      "source_sha": "4f31afebcc8afadc1024ef8e7545e5551229ff09",
+      "members": 14,
+      "has_synthetic_fixture_binary": false,
+      "requires": "Run python fixtures/make_synthetic.py first"
+    }
+  ],
+  "verification": {
+    "original_workpack_handoff_sha_size": "RAN_PASS",
+    "original_oracle_zip_relay_mirror": "NOT_DONE",
+    "chat_owner_demo_zip_crc_sha": "RAN_PASS_IN_BUILDER_CHAT",
+    "relay_zip_sha": "RAN_COMPUTED_AND_GIT_BLOB_IDEMPOTENT_RECHECK",
+    "relay_zip_extraction": "NOT_RUN",
+    "synthetic_pr_tests": "RAN_10_OF_10_PASS",
+    "ci_matrix": "RAN_4_OF_4_PASS",
+    "real_private_cii": "NOT_RUN",
+    "native_caesar": "NOT_RUN",
+    "owner_windows_demo": "NOT_RUN",
+    "independent_review": "NOT_RUN"
+  },
+  "scope": "Standalone builder-to-Oracle artifact index. Does not modify Common relay/STATE.yaml, EVENT log, leases, #438 transactions, XML P2/P2.1, or CIIFR Progress status. Neither merge nor acceptance."
+}
