@@ -1,0 +1,87 @@
+name: v3.6 C1B Owner-input and issue-lineage receipts
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - '.github/workflows/v36-c1b-owner-receipts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  owner-source-and-native-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Native v3.6 test dependencies
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Full native v3.6 regression and new C1B adversarial tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: Original Owner document source bytes are unchanged
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          p=Path("skills/engineering-pr-delivery-v3.6/owner-intent/2026-10-16-common-400-owner-concerns.md")
+          b=p.read_bytes()
+          assert len(b)==16626,(len(b),"OWNER_FILE_BYTE_LENGTH_CHANGED")
+          assert hashlib.sha256(b).hexdigest()=="59c6d6ca34e98ba4e3079d6a2b7d39c0df9cefb1d6460cfb923d885603e2512d","OWNER_FILE_SHA256_CHANGED"
+          text=b.decode("utf-8")
+          assert all("C-"+str(i).zfill(2) in text for i in range(1,13))
+          assert "Issue #123 → ~~Issue #125~~ → Issue #126" in text
+          assert "## 10. Owner-required acceptance demonstration" in text
+          print("C1B_OWNER_SUPPLIED_DOCUMENT_EXACT_BYTES_AND_12_CONCERNS_MATCH")
+          PY
+      - name: CLI owner input source report stays unverified
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/issue_receipt_v36.py --stream skills/engineering-pr-delivery-v3.6/tests/fixtures/c1b-common-400-owner-reported.json > /tmp/c1b.json
+          python3 - <<'PY'
+          import json
+          v=json.load(open("/tmp/c1b.json",encoding="utf-8"))
+          assert v["events"]==1
+          assert v["authenticated_owner_decisions"]==0
+          assert v["verified_provider_events"]==0
+          assert v["may_publish"] is False
+          assert v["may_count_for_o2"] is False
+          print("C1B_STRUCTURE_ONLY_NOT_AN_OWNER_APPROVAL")
+          PY
+      - name: Read-only GitHub provider metadata check of full Owner document issue comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json,os
+          from urllib.request import Request,urlopen
+          u="https://api.github.com/repos/reallakshman19/Common/issues/comments/6223067953"
+          headers={"Accept":"application/vnd.github+json","User-Agent":"v36-c1b-readonly","Authorization":"Bearer "+os.environ["GH_TOKEN"]}
+          with urlopen(Request(u,headers=headers),timeout=25) as r: obj=json.load(r)
+          assert obj["id"]==6223067953
+          assert obj["user"]["login"]=="reallakshman19"
+          assert obj["issue_url"]=="https://api.github.com/repos/reallakshman19/Common/issues/400"
+          assert "59c6d6ca34e98ba4e3079d6a2b7d39c0df9cefb1d6460cfb923d885603e2512d" in obj["body"]
+          assert "## 10. Owner-required acceptance demonstration" in obj["body"]
+          print("C1B_GITHUB_COMMENT_PROVIDER_ACCOUNT_OBSERVED_NOT_OWNER_AUTHENTICATED")
+          PY
+      - name: No runtime imports of legacy Relay or draft modules
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          p=Path("skills/engineering-pr-delivery-v3.6/scripts/issue_receipt_v36.py")
+          modules=set()
+          for node in ast.walk(ast.parse(p.read_text(encoding="utf-8"))):
+              if isinstance(node,ast.Import): modules.update(n.name.split(".")[0] for n in node.names)
+              elif isinstance(node,ast.ImportFrom): modules.add((node.module or "").split(".")[0])
+          allowed={"__future__","argparse","hashlib","json","re","pathlib","urllib"}
+          assert modules<=allowed,sorted(modules-allowed)
+          print("C1B_STDLIB_ONLY_NO_V35_V32_V31_DELP_C1_C2_C3_DRAFT_IMPORTS")
+          PY
