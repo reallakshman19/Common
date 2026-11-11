@@ -1,0 +1,46 @@
+name: ONB-RWI focused contracts (no provider credentials)
+
+on:
+  pull_request:
+    paths:
+      - 'skills/relay-onboarding-rwi/**'
+      - '.github/workflows/onb-rwi-focused.yml'
+  push:
+    branches:
+      - 'feat/onb391-wp2-provider-readonly'
+    paths:
+      - 'skills/relay-onboarding-rwi/**'
+      - '.github/workflows/onb-rwi-focused.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout candidate without secrets
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile bounded source
+        run: |
+          python -m py_compile skills/relay-onboarding-rwi/adapters/github.py
+          python -m py_compile skills/relay-onboarding-rwi/adapters/v36.py
+      - name: Run all committed ONB focused negative tests
+        run: python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_*.py' -v
+      - name: Live public GitHub read-only smoke (advisory; no credentials)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ''
+          GITHUB_TOKEN: ''
+        run: |
+          python skills/relay-onboarding-rwi/adapters/github.py --repo reallakshman19/relay-v36-e2e-lab --issue 1 --pr 4 --expected-main c400b70e4641abf2cda79aa626b77e793f38e107 --expect-pr 4=61a71a038cca56507040bdb365edf76a9c0d2469 > "$RUNNER_TEMP/onb-lab.json"
+          python skills/relay-onboarding-rwi/adapters/github.py --repo reallakshman19/XML_Compare_Utilities --issue 102 --pr 103 --expected-main 040f2f88b54a746808486615230e5a8625d04527 > "$RUNNER_TEMP/onb-xml.json"
+          python -c 'import json,os; base=os.environ["RUNNER_TEMP"]; files=["onb-lab.json","onb-xml.json"]; snapshots=[json.load(open(os.path.join(base,f),encoding="utf-8")) for f in files]; assert all(s["execution_authorized"] is False and s["owner_acceptance_verified"] is False for s in snapshots); print([(s["repository"],s["default_head_sha"],[(p["number"],p["head_sha"],p["checks"]["state"]) for p in s["prs"]]) for s in snapshots])'
