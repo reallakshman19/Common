@@ -98,6 +98,10 @@ jobs:
         if: steps.relevance.outputs.relevant == 'true'
         run: python -m unittest discover -s skills/engineering-pr-delivery-v3.2/tests -p 'test_replay_cases_v32.py' -v
 
+      - name: Run V3.2 native Relay Buddy Markdown transaction regressions
+        if: steps.relevance.outputs.relevant == 'true'
+        run: python -m unittest discover -s skills/engineering-pr-delivery-v3.2/tests -p 'test_relay_tx.py' -v
+
       - name: Run V3.2 handover custody and explicit-reasoning regressions
         if: steps.relevance.outputs.relevant == 'true'
         run: python -m unittest discover -s skills/engineering-pr-delivery-v3.2/tests -p 'test_handover_context.py' -v

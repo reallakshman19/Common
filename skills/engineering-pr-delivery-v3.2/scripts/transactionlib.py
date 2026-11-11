@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import os
+import re
 import shutil
 from fnmatch import fnmatch
 from datetime import datetime, timezone
@@ -17,6 +18,8 @@ from v3lib import load_yaml, repo_path, require_identifier, validate_schema
 
 
 COMMAND_TARGET_PATTERNS = {
+    # Issue-scoped immutable Markdown messages; not lease/scoreboard/plan authority.
+    "PUBLISH_BUDDY_MARKDOWN": ["relay/CONTINUITY/episodes/ISSUE-*/messages/*.md"],
     "ACTIVATE_LEASE": [
         "relay/EVENTS.jsonl",
         "relay/STATE.yaml",
@@ -85,6 +88,168 @@ COMMAND_TARGET_PATTERNS = {
         "relay/LEASES/LEASE-*.yaml",
     ],
 }
+
+
+# One canonical stage allowlist for all native Relay Buddy Markdown writers.
+BUDDY_MESSAGE_STAGES = frozenset({
+    "READINESS", "STAGE1_INTAKE", "DISPATCH_REQUEST", "DISPATCH_OBSERVATION",
+    "STAGE1_BASELINE", "STAGE1_PLAN", "STAGE1_FREEZE_CANDIDATE",
+})
+
+
+def _prior_buddy_message(root: Path, issue: int, current_seq: int, stage: str) -> tuple[bytes, dict[str, Any]] | None:
+    """Read only earlier COMMITTED native Relay message receipts, not loose files."""
+    folder = root / f"relay/CONTINUITY/episodes/ISSUE-{issue}/messages"
+    candidates: list[tuple[int, bytes, dict[str, Any]]] = []
+    for path in folder.glob(f"TX.{issue}.*-{stage}.md"):
+        match = re.fullmatch(rf"TX\.{issue}\.([1-9][0-9]*)-{re.escape(stage)}\.md", path.name)
+        if not match or int(match.group(1)) >= current_seq:
+            continue
+        if path.is_symlink():
+            raise TransactionError("BUDDY_PRIOR_MESSAGE_SYMLINK_FORBIDDEN")
+        seq = int(match.group(1))
+        tx_path = root / f"relay/TRANSACTIONS/TX.{issue}.{seq}/manifest.yaml"
+        if tx_path.is_symlink():
+            raise TransactionError("BUDDY_PRIOR_RECEIPT_SYMLINK_FORBIDDEN")
+        if not tx_path.is_file():
+            raise TransactionError("BUDDY_PRIOR_MESSAGE_UNRECORDED")
+        receipt = load_manifest(tx_path)
+        payload = path.read_bytes()
+        operations = receipt.get("operations") or []
+        if (
+            receipt.get("id") != f"TX.{issue}.{seq}"
+            or receipt.get("status") != "COMMITTED"
+            or receipt.get("command") != "PUBLISH_BUDDY_MARKDOWN"
+            or len(operations) != 1
+            or operations[0].get("path") != path.relative_to(root).as_posix()
+            or operations[0].get("after_digest") != _digest_bytes(payload)
+        ):
+            raise TransactionError("BUDDY_PRIOR_MESSAGE_RECEIPT_MISMATCH")
+        candidates.append((seq, payload, receipt))
+    if not candidates:
+        return None
+    _, payload, receipt = max(candidates, key=lambda item: item[0])
+    return payload, receipt
+
+
+def _require_buddy_sequence(root: Path, issue: int, seq: int, stage: str, actor: str) -> None:
+    """All latest SAME-ISSUE receipts must form one ordered, unbroken Stage1 attempt.
+
+    This proves only local transaction ordering. It does not authenticate actor
+    identity, source-read isolation or the factual accuracy of a run claim.
+    """
+    stages = (
+        "STAGE1_INTAKE", "DISPATCH_REQUEST", "DISPATCH_OBSERVATION",
+        "STAGE1_BASELINE", "STAGE1_PLAN",
+    )
+    target_index = len(stages) if stage == "STAGE1_FREEZE_CANDIDATE" else (
+        stages.index(stage) if stage in stages else -1
+    )
+    if target_index <= 0:
+        return
+    # Missing the immediate prerequisite is a missing-stage defect, not a stale
+    # predecessor-chain defect. Check it first even when earlier stages are absent.
+    required = stages[target_index - 1]
+    if _prior_buddy_message(root, issue, seq, required) is None:
+        raise TransactionError(f"BUDDY_STAGE_ORDER_MISSING_{required}")
+    chain: dict[str, tuple[bytes, dict[str, Any]]] = {}
+    last_seq = 0
+    for predecessor in stages[:target_index]:
+        observation = _prior_buddy_message(root, issue, seq, predecessor)
+        if observation is None:
+            if predecessor == stages[target_index - 1]:
+                raise TransactionError(f"BUDDY_STAGE_ORDER_MISSING_{predecessor}")
+            raise TransactionError("BUDDY_STALE_STAGE_CHAIN")
+        prior_seq = int(observation[1]["id"].split(".")[-1])
+        if prior_seq <= last_seq:
+            raise TransactionError("BUDDY_STALE_STAGE_CHAIN")
+        chain[predecessor] = observation
+        last_seq = prior_seq
+    if target_index >= 3:
+        observed = chain["DISPATCH_OBSERVATION"][0].decode("utf-8")
+        if not observed.startswith("# RUNNER_EXECUTION_OBSERVED\n"):
+            raise TransactionError("BUDDY_DISPATCH_NOT_EXECUTED")
+        if not re.search(r"(?m)^Session ref: \S+", observed) or not re.search(
+            r"(?m)^Read-scope ref: \S+", observed
+        ):
+            raise TransactionError("BUDDY_DISPATCH_REFERENCES_MISSING")
+    if stage == "STAGE1_BASELINE":
+        if actor == chain["DISPATCH_OBSERVATION"][1].get("actor"):
+            raise TransactionError("BUDDY_OPERATOR_AND_RUNNER_NOT_SEPARATE")
+    if stage == "STAGE1_PLAN":
+        if actor != chain["STAGE1_BASELINE"][1].get("actor"):
+            raise TransactionError("BUDDY_STAGE1_AUTHOR_CHANGED")
+    if stage == "STAGE1_FREEZE_CANDIDATE":
+        if chain["STAGE1_BASELINE"][1].get("actor") != chain["STAGE1_PLAN"][1].get("actor"):
+            raise TransactionError("BUDDY_STAGE1_AUTHOR_CHANGED")
+        if actor == chain["STAGE1_PLAN"][1].get("actor"):
+            raise TransactionError("BUDDY_FREEZE_OPERATOR_NOT_SEPARATE")
+
+
+
+
+def _validate_freeze_candidate(root: Path, issue: int, serial: int, content: str) -> None:
+    """Bind ALL five latest Stage1 receipts; never claim independent admission."""
+    if not content.startswith("# STAGE1_FREEZE_CANDIDATE\n"):
+        raise TransactionError("BUDDY_FREEZE_HEADING_REQUIRED")
+    verdicts = re.findall(r"(?m)^Isolation verdict: (.*)$", content)
+    if verdicts != ["NOT_ATTESTED"]:
+        raise TransactionError("BUDDY_FREEZE_CANNOT_SELF_CERTIFY_ISOLATION")
+    phases = (
+        ("STAGE1_INTAKE", "Intake"),
+        ("DISPATCH_REQUEST", "Dispatch request"),
+        ("DISPATCH_OBSERVATION", "Dispatch observation"),
+        ("STAGE1_BASELINE", "Baseline"),
+        ("STAGE1_PLAN", "Plan"),
+    )
+    for stage, label in phases:
+        prior = _prior_buddy_message(root, issue, serial, stage)
+        if prior is None:
+            raise TransactionError(f"BUDDY_FREEZE_MISSING_{stage}")
+        receipt = prior[1]
+        tx_id = receipt["id"]
+        digest = _digest_bytes(prior[0])
+        tx_lines = re.findall(rf"(?m)^{re.escape(label)} tx: (.*)$", content)
+        digest_lines = re.findall(rf"(?m)^{re.escape(label)} digest: (.*)$", content)
+        if tx_lines != [tx_id] or digest_lines != [digest]:
+            raise TransactionError(f"BUDDY_FREEZE_{stage}_REF_MISMATCH")
+
+
+def _validate_buddy_markdown_transaction(
+    root: Path,
+    tx_id: str,
+    actor: str,
+    replacements: dict[str, bytes],
+) -> None:
+    """Prevent direct execute() from bypassing the immutable message boundary."""
+    if len(replacements) != 1:
+        raise TransactionError("BUDDY_SINGLE_MESSAGE_TRANSACTION_REQUIRED")
+    relative, payload = next(iter(replacements.items()))
+    match = re.fullmatch(
+        r"relay/CONTINUITY/episodes/ISSUE-([1-9][0-9]*)/messages/"
+        r"TX\.([1-9][0-9]*)\.([1-9][0-9]*)-([A-Z0-9_]+)\.md",
+        relative,
+    )
+    if not match or int(match.group(1)) != int(match.group(2)):
+        raise TransactionError("BUDDY_MESSAGE_ISSUE_PATH_INVALID")
+    expected_tx = f"TX.{match.group(1)}.{match.group(3)}"
+    if tx_id != expected_tx or match.group(4) not in BUDDY_MESSAGE_STAGES:
+        raise TransactionError("BUDDY_MESSAGE_TX_OR_STAGE_INVALID")
+    if not isinstance(payload, bytes) or not 4 <= len(payload) <= 2_000_000:
+        raise TransactionError("BUDDY_MARKDOWN_BYTES_INVALID")
+    try:
+        content = payload.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise TransactionError("BUDDY_MARKDOWN_UTF8_REQUIRED") from exc
+    if not content.startswith("# ") or "\x00" in content:
+        raise TransactionError("BUDDY_MARKDOWN_HEADING_REQUIRED")
+    target = repo_path(root, relative, "buddy Markdown message")
+    expected = root.resolve() / relative
+    if target != expected or target.exists() or expected.is_symlink():
+        raise TransactionError("BUDDY_MESSAGE_IMMUTABLE_OR_SYMLINKED")
+    _require_buddy_sequence(root, int(match.group(1)), int(match.group(3)), match.group(4), actor)
+    if match.group(4) == "STAGE1_FREEZE_CANDIDATE":
+        _validate_freeze_candidate(root, int(match.group(1)), int(match.group(3)), content)
 
 
 class TransactionError(RuntimeError):
@@ -341,6 +506,8 @@ def _prepare(
         require_identifier(tx_id, "TX-", "transaction id")
     except ValueError as exc:
         raise TransactionError(str(exc)) from exc
+    if command == "PUBLISH_BUDDY_MARKDOWN":
+        _validate_buddy_markdown_transaction(root, tx_id, actor, replacements)
     prune_terminal_payloads(root)
     if incomplete_transactions(root):
         raise TransactionError("another incomplete V3 transaction exists; recover it before starting a new command")
@@ -380,11 +547,14 @@ def _prepare(
     identity_reservations: set[str] = set()
     if parse_canonical_id(tx_id) is not None:
         identity_reservations.add(tx_id)
-    for payload in replacements.values():
-        try:
-            identity_reservations.update(canonical_ids_in_text(payload.decode("utf-8")))
-        except UnicodeDecodeError:
-            continue
+    # Free-form Buddy Markdown can quote historical TX/EP/EVT IDs as evidence.
+    # Those mentions are REFERENCES, not freshly allocated Relay identities.
+    if command != "PUBLISH_BUDDY_MARKDOWN":
+        for payload in replacements.values():
+            try:
+                identity_reservations.update(canonical_ids_in_text(payload.decode("utf-8")))
+            except UnicodeDecodeError:
+                continue
 
     now = _now()
     manifest = {
