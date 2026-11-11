@@ -1,0 +1,61 @@
+{
+  "version": "3.28",
+  "schema": 2,
+  "intervals": [
+    10,
+    15,
+    30
+  ],
+  "fallback_minutes": 45,
+  "report_speed_minutes": 20,
+  "report_economy_minutes": 30,
+  "handover": {
+    "minutes": 35,
+    "pages": 20,
+    "turns": 6
+  },
+  "stall_replies": 3,
+  "speed_evidence": 5,
+  "aim_checkpoints": [
+    5,
+    10,
+    15,
+    19
+  ],
+  "batch_speed": 2,
+  "batch_economy_good_y": 5,
+  "batch_economy_other": 2,
+  "send_gap_seconds": 30,
+  "unusual_gap_seconds": 180,
+  "private_ci_limited": true,
+  "priority": [
+    "LIMIT",
+    "NOACCESS",
+    "UNUSUAL",
+    "DENIED",
+    "ERROR",
+    "IDENTITY_REQUIRED",
+    "NEEDS_AIMS",
+    "REVIEW_TASK_REPORT",
+    "NEEDS_PLAN",
+    "NEEDS_PIN",
+    "HANDOVER_READY",
+    "RECOVER",
+    "SEND_DRAFT",
+    "HANDOVER",
+    "CI_FALLBACK",
+    "RECONCILE",
+    "Y_CHECK",
+    "PING",
+    "NUDGE"
+  ],
+  "messages": {
+    "ping": "Any authorized critical-path work possible now under the current aim? If none, reply HOLD with the exact remaining blocker and your status footer.",
+    "nudge": "Proceed with Tasks {ids} in order as one batch, expected outcomes: {outcomes}. Preserve the current aim and required proof. Stop at a real blocker; publish claimed task IDs with artifact-bound evidence and remaining gaps.",
+    "plan": "Publish your current plan revision with task IDs, expected outcomes and open/done/blocked states. Link each task to the current aim's criterion or necessary dependency. Identify Owner-blocked tasks separately; do not invent substitute work.",
+    "reconcile": "Reconcile the current aim, owning issue, response 2, Y and task evidence. Explain the missing critical-path proof or exact Owner decision. Distinguish necessary support work, unproved claims and drift. Do not invent side work.",
+    "ci": "skip in valid workflow. if credits are done, check locally and proceed.",
+    "handover": "BuddyRunner v1.6 artifact 1a: use {repo} at commit {commit}, skills/buddy-runner-v1-6/SKILL.md and references/CONTRACT.md and 1A_PREPARE.md. Prepare the successor prompt with concrete anchors, both current aim revisions, unfinished proof, recorded drift and pending decisions, then HOLD. Preserve existing publication authority and publish the artifact path with 1a | EXECUTION=HOLD. Do not transfer acceptance or merge authority.",
+    "y": "Use BuddyRunner v1.6 Y at {repo}@{commit} to reconcile the current aims, response-2 baseline and latest validated task evidence. Return CONTINUE / NO_CHANGE, CORRECT, VERIFY_FIRST or BLOCKED_AFFECTED_TASK and close with Y | INTERVENTION=CLOSED | EVIDENCE=<key> | NO_FOLLOWUP_REVIEW. Continue only authorized planned work."
+  }
+}
