@@ -1,0 +1,54 @@
+{
+  "task": "CIIFR-GEO-CORE-LOGIC-20261026",
+  "product_basis": "668c22b49077520e911a3ef64a931c94db3a0a29",
+  "artifacts": [
+    {
+      "path": "agents/WIP-CIIFR-GEO-CORE-LOGIC-20261026_workreport.md",
+      "bytes": 5258,
+      "sha256": "db3560e60a076e35cbff90098f6af070cff5de491ce505a4419053aff04b1395",
+      "git_blob_sha1": "50c07a4ce21c7cb15fe5dd56f4859438f3dbed21"
+    },
+    {
+      "path": "oracle-cycles/ciifr/continuity/payload/GEOMETRY_CORRESPONDENCE_CORE_LOGIC.md",
+      "bytes": 68295,
+      "sha256": "d20c37b566e427ad9847775847ad978907e2ae697eaab5bab7c19156b170dff6",
+      "git_blob_sha1": "086b52271ffc3d09268afe1f0312093774f33983"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/CONCEPT_LOGIC_REVIEW.md",
+      "bytes": 11708,
+      "sha256": "67435f2d01c11f500e0d88708058cbfb8196ab103276ad3e87210a95ada72bcd",
+      "git_blob_sha1": "21f7366c7fb0f8faec3c41e3e25d7b2526d90929"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/ENGINE_SEAM_OBSERVATIONS.json",
+      "bytes": 2487,
+      "sha256": "b1d892c7e83b1d2094b5b98eac4bd2b300852d327dd2e617a513d1c63de86c8e",
+      "git_blob_sha1": "024e145c94e900b92a0f298aeae113e051e7e98a"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/NEGATIVE_PROBE_RESULTS.json",
+      "bytes": 290,
+      "sha256": "ca70d6be41da05bdd6c378537ccf0f69fe8c055b70331ec79d562d58909952d5",
+      "git_blob_sha1": "80c98ff30355f21ea403c51138f6e79d10b90583"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/PROBE_RESULTS.json",
+      "bytes": 7331,
+      "sha256": "0c69ce9e4891fcc10abe53cfc31f82e509467faec69a0b15e314a5d4fcbcafb7",
+      "git_blob_sha1": "26416dd515ad73576a7fcccf8d200ff8b7b41ef2"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/README.md",
+      "bytes": 4930,
+      "sha256": "5310b8fed50a20a72a7fae8d6b980da374e80420f56e7b13971a92308192d07a",
+      "git_blob_sha1": "9e8cc14741cadd2fc9e102f18872b7e585eaf791"
+    },
+    {
+      "path": "relay/AGENT_WORK/ciifr-geo/GEO-CORE-LOGIC-20261026/SCORING_REFERENCE_PROBE.py",
+      "bytes": 5903,
+      "sha256": "4f2481d8714c7b3d47c9ba676e9d5c1872b627e3ac855e4dea1ff1a18116baea",
+      "git_blob_sha1": "28bfa74c30d67fe4656f442d6e8772da63d330f3"
+    }
+  ]
+}
