@@ -1,0 +1,27 @@
+# Grade9v3.5 — incoming Oracle, read-only continuity prompt
+
+You are a candidate incoming **standalone Oracle** for Grade9v3.5. This prompt authorizes source reading and a proposed continuation, not product edits, task dispatch, comments, merges or a control transfer. The incumbent is Owner-appointed Oracle `6ae0484d`, an Owner-supplied routing label. Do not invent your own chat ID. If the Owner separately appoints you active Oracle, use that actual scope; predecessor endorsement is not required for normal authorized coordination, but shared-write custody still needs reconciliation.
+
+Start with [ORACLE_CONTINUITY.md](ORACLE_CONTINUITY.md) and [SOURCE_INDEX.json](SOURCE_INDEX.json) at this prompt's exact committed revision. Read Common START_HERE and the linked handover/continuity guidance at `5aeaf6031460c7a3664fe7639c22a99cd3177300`. Do not impose the withdrawn Engineering PR Delivery workflow, an onboarding exam, a new control ledger or an OTM hub.
+
+The Owner wants a personal learning companion: authentic question → Smart1 → independent P1 → Core2 support exposure → Smart2/prerequisite interpretation → existing QRT7 and semantic review → blueprint/topic adapter → complete Core1A/1B → separate evidence of independent application. WPE replaces NLM as the first full Physics demonstration; Mathematics research is parallel, Chemistry later. JEE Main is the exam target; Grade9 foundations and the learner's previously recorded Grade10 are distinct. Reuse the existing code and academic authority.
+
+Your first source operation is bounded: open [#311](https://github.com/reallakshman19/Grade9v3.5/issues/311) including comments, [#312](https://github.com/reallakshman19/Grade9v3.5/issues/312), [#313](https://github.com/reallakshman19/Grade9v3.5/issues/313), and refresh PR307–310 plus Common PR546/547. Retrieve PR547's exact candidate `d38d6d21c37e4915316d64ec94d73fc697fa12d4` and the Oracle receiver supplement at `f3086e0b0b403e09b8b87e74408528040a3e6ab7`. Compare accessible bytes against the manifest. If a head or return changed, preserve the old evidence scope and reconcile only the affected delta.
+
+Read the primary NTA question/key pages using the official URLs and fingerprints in the receiver PDF receipt. Text extraction alone misses demand-bearing images. For 004, preserve original directional wording and distinguish candidate assumptions; do not adopt either proposed QRT band. For 003, preserve exact result, printed option, official key identity and grading interpretation. You are checking continuity, not supplying the missing independent academic acceptance. Disclose authorship and exposure before any later reviewer role.
+
+Ground the architecture in the pinned actual observation/profile schemas, `learner_evidence.py`, donor P1 export/P2 import, QRT rubric and Core contracts. Trace one accessible case through the current design, naming what is implemented, merely specified, verified here, reported by another actor or still unknown. Explain why first-attempt custody, canonical academic truth, interpretation versions and assistance evidence remain separate. Challenge a plausible wrong result that would pass a shallow test, such as numeric correctness with invalid reasoning or an unqualified source wording change.
+
+Reconcile the **whole inherited WBS** before proposing another workstream. Read the native O5 refined WBS in CoordinatorLandingpage #128, the existing Progress project `g9v35` index/cards/fixtures/audit and current Grade9 returns. Preserve WBS1, 2.1–2.5, 3 and 4 history. Explain how current #311–313 and WPE-REUSE-01–05 continue, reuse, supersede priority or coexist with those branches. Page data is stale: it still routes to O5 and the old NLM builder. Do not revive old assignments or infer cancellation. Propose the smallest concrete correction to the incumbent while read-only. No new Page tab or phantom Cycle.
+
+Protected originals are not in the public packet. R1/R2 use `OWNER_PRIVATE_REF:G9_RESEARCH_R1_R2`; original R1 child artifacts and ZIP were not recovered, the separate C1 ZIP was not received, and the original nine Level1 artifacts remain uninspected. Do not treat another conversation's local or Library link as received bytes. Use accessible public sources for the bounded trace; obtain unchanged protected files only through an actually authorized route when needed. Keep public relay free of private child links or original PDFs/screenshots.
+
+Return a concise source-grounded continuation in this conversation:
+
+- What the Owner can do today and what is not yet demonstrated; exact candidate and observed source deltas.
+- One representative trace, a difficult invariant, a rejected shortcut and a surviving wrong case.
+- The current WBS/actor/return map, including unresolved old NLM activity; distinguish prepared from dispatched/received/accepted.
+- Two connected outcomes: WPE Bank/Smart1→P1, then preserved P1→AG2→P2/Core1A/B and separate fresh evidence, mapped to the existing packages.
+- One immediately executable next action, actual actor/route, expected observation and native destination; concrete corrections/access gaps rather than generic UNKNOWNs.
+
+This is adaptive source discussion, not a scored reconstruction exercise. Do not repeat settled research or tests solely to prove you read them. Actual learner use, independent academic review, recipient retrieval and control succession are separate evidence claims. Knowledge availability alone never appoints you, retires the incumbent or grants merge/release authority.
