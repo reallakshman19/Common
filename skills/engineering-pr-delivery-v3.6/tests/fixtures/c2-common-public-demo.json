@@ -1,0 +1,27 @@
+{
+  "schema": "v36.source-custody/v1",
+  "repository": "reallakshman19/Common",
+  "revision": "0a7c4d45d3fa0787d3e80858a27015b09a85eac2",
+  "artifacts": [
+    {
+      "id": "DEMO_REQUIREMENTS",
+      "role": "DEMONSTRATION_ONLY",
+      "path": "skills/engineering-pr-delivery-v3.6/requirements.txt",
+      "expected_blob_sha1": "903481395b4b90465670fbc150cce9c29d90aad4",
+      "expected_sha256": "c9e3d5b71ce6e54e3c1cd3e97da9a4682811879f2ed85455982ccb9a035fd158",
+      "expected_size_bytes": 17,
+      "oracle_complete": null
+    }
+  ],
+  "issue_records": [
+    {
+      "id": "OWNER_ISSUE_400",
+      "kind": "ISSUE",
+      "issue_number": 400,
+      "comment_id": null,
+      "claimed_actor": "reallakshman19",
+      "expected_body_sha256": null,
+      "expected_updated_at": null
+    }
+  ]
+}
