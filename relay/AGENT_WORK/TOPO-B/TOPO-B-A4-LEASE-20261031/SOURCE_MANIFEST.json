@@ -1,0 +1,67 @@
+{
+  "schema": "TOPO-B-A4-LEASE-RELAY-R1",
+  "transport": "PUBLIC_SAFE_TEXT_LINKED_SOURCE",
+  "main_repository": "reallakshman19/XML_Compare_Utilities",
+  "main_commit": "417bf6a954c5a6de72237537e94b05b285191350",
+  "native_issue": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/239",
+  "owner_conditional_approval_comment": 6541471409,
+  "oracle_gate_comment": 6541589959,
+  "eligibility_conflict_comment": 6541639348,
+  "source_files": [
+    {
+      "path": "prototypes/ciifr-map/xml-intake.js",
+      "git_blob_sha1": "00c4379816f49002ddea47fbaa496b8a173154b5"
+    },
+    {
+      "path": "prototypes/ciifr-map/xml-profiles.js",
+      "git_blob_sha1": "b72a970ef1fad83f78563b15f070135c23be34a1"
+    },
+    {
+      "path": "prototypes/ciifr-map/xml-graph.js",
+      "git_blob_sha1": "c1c510001c913bc6fe2de64ac6f20330d3ed78e0"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/adapter.test.mjs",
+      "git_blob_sha1": "1813eb52d19d1120b1764c344c0109ffb5a8cfd0"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "prototypes/ciifr-map/tests/fixtures/S1-F05.xml",
+      "bytes": 882735,
+      "sha256": "1154c980d08344b1f803cda3bd9884b169753148b150641a745c9bfcb15de995",
+      "profile": "RichInputXML-P1.v1.1"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/fixtures/S1-R4.xml",
+      "bytes": 1426775,
+      "sha256": "a332dd7b2551faae51de3c016941762c3b795cdf19073b373817354e309526e6",
+      "profile": "RichInputXMLv2.1"
+    }
+  ],
+  "verified_prior_evidence": {
+    "v8_valid_pass": 16,
+    "v8_harness_invalid_excluded": 1,
+    "native_node_tests_pass": 7,
+    "public_source_files_verified": 18,
+    "public_fixtures_verified": 2,
+    "original_private_cii_qualified": false,
+    "glrd_profile_qualified": false
+  },
+  "proposed_new_xcu_files": [
+    "prototypes/ciifr-map/xml-format-admission.js",
+    "prototypes/ciifr-map/tests/format-admission.test.mjs"
+  ],
+  "gates": {
+    "independent_reviewer_ack": "NOT_VERIFIED",
+    "a4_independent_verdict": "NOT_RUN",
+    "unpublished_competing_claim_clearance": "UNKNOWN",
+    "exclusive_agent_b_lease": "NOT_ACTIVE",
+    "owner_exact_scope_approval": "CONDITIONAL_APPROVED"
+  },
+  "notes": [
+    "This relay contains only documentation and public source references.",
+    "No independent review verdict is implied by a second tool or chat.",
+    "No implementation or engineering release is authorized."
+  ]
+}
