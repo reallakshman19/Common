@@ -1,0 +1,34 @@
+{
+  "task": "G9-WPE-RESEARCH-01-C1",
+  "scope": "JEE Main Paper 1 Physics only",
+  "source": "RECONSTRUCTED_FROM_R1_MD_PLUS_NTA_RECHECK",
+  "original_child_files_recovered": false,
+  "original_bundle_recovered": false,
+  "official_pdf_bytes_obtained": false,
+  "canonical_promoted": false,
+  "learner_validation": "NOT_RUN",
+  "004": {
+    "source_qid": "691121478",
+    "assumption": "Two-second interval is entirely in steady vertical upward translation; block remains at rest relative to incline; startup acceleration excluded",
+    "friction_N": 5,
+    "lab_vertical_displacement_m": 8,
+    "friction_to_displacement_angle_degrees": 60,
+    "work_friction_J": 20,
+    "normal_work_J": 60,
+    "gravity_work_J": -80,
+    "net_work_J": 0,
+    "physics": "CONDITIONAL_PASS",
+    "review": "SOURCE_EXPOSED_NON_AUTHOR_READBACK_ONLY"
+  },
+  "003": {
+    "source_qid": "6952782163",
+    "delta_K_J": 0.0125,
+    "gravity_work_J": 10,
+    "resistive_work_exact_J": -9.9875,
+    "conventional_rounding_2dp_J": -9.99,
+    "NTA_option_J": -9.98,
+    "source_MCq_preserve": true,
+    "precision_discrepancy": "OPEN",
+    "review": "SOURCE_EXPOSED_NON_AUTHOR_READBACK_ONLY"
+  }
+}

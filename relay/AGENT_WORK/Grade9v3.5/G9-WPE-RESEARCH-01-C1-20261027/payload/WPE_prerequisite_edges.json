@@ -1,0 +1,39 @@
+{
+  "task": "G9-WPE-RESEARCH-01-C1",
+  "scope": "JEE Main Paper 1 Physics only",
+  "source": "RECONSTRUCTED_FROM_R1_MD_PLUS_NTA_RECHECK",
+  "original_child_files_recovered": false,
+  "original_bundle_recovered": false,
+  "official_pdf_bytes_obtained": false,
+  "canonical_promoted": false,
+  "learner_validation": "NOT_RUN",
+  "baseline": "7052691eb97351d1b7e8f22200f733adafb0f13c",
+  "canonical_status": "CANDIDATE",
+  "primary_004": "CAP-WEP-WORK-DIRECTION",
+  "secondary_004": "CAP-WEP-NET-WORK-SIGN",
+  "primary_003": "CAP-WEP-NET-WORK-SIGN",
+  "edges": [
+    {
+      "edge": "WORK-DIRECTION -> NET-WORK-SIGN",
+      "necessity": "yes for current success criterion"
+    },
+    {
+      "edge": "NET-WORK-SIGN -> POTENTIAL-ELIGIBILITY",
+      "necessity": "teaching order; not strictly necessary"
+    },
+    {
+      "edge": "POTENTIAL-ELIGIBILITY -> MECH-ENERGY-CONDITION",
+      "necessity": "conditional when using K+U"
+    },
+    {
+      "edge": "MECH-ENERGY-CONDITION -> GRADE9-QUANT",
+      "necessity": "not required for every elementary work or K computation"
+    }
+  ],
+  "later_grade_bridges": [
+    "inclined plane force components",
+    "static friction equilibrium",
+    "frame/reference for work"
+  ],
+  "new_capability": "CAP-WEP-POTENTIAL-GRADIENT hypothesis only; no admission"
+}

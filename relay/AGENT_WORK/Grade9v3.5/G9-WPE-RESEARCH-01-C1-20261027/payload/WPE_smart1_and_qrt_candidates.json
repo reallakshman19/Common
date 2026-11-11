@@ -1,0 +1,63 @@
+{
+  "task": "G9-WPE-RESEARCH-01-C1",
+  "scope": "JEE Main Paper 1 Physics only",
+  "source": "RECONSTRUCTED_FROM_R1_MD_PLUS_NTA_RECHECK",
+  "original_child_files_recovered": false,
+  "original_bundle_recovered": false,
+  "official_pdf_bytes_obtained": false,
+  "canonical_promoted": false,
+  "learner_validation": "NOT_RUN",
+  "004": {
+    "primary": "MODEL",
+    "author_R1": {
+      "scores": [
+        2,
+        2,
+        2,
+        1,
+        2
+      ],
+      "total": 9,
+      "band": "D4"
+    },
+    "C1_challenge": {
+      "scores": [
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "total": 7,
+      "band": "D3",
+      "reason": "One familiar angle translation, optional net-work checking not mandatory, frame/trap double counting to challenge",
+      "status": "NOT_APPROVED"
+    }
+  },
+  "003": {
+    "primary": "APPLY",
+    "scores": [
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "total": 4,
+    "band": "D2",
+    "grade": "Preserve official MCQ option ID 6952787592 separately from exact -9.9875 J"
+  },
+  "pre_P1_visible": [
+    "source-identifying non-answer metadata",
+    "original question and options"
+  ],
+  "pre_P1_protected": [
+    "correct option",
+    "derived solution",
+    "decisive model/frame",
+    "question crux"
+  ],
+  "Smart1": "question-only pre-P1",
+  "Smart2": "post-P1 hypotheses from immutable evidence; incorrect choice not diagnosis",
+  "academic_authority": "canonical records independently govern concepts and prerequisites"
+}

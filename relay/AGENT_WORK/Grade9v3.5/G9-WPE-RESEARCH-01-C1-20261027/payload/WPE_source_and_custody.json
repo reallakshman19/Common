@@ -1,0 +1,53 @@
+{
+  "task": "G9-WPE-RESEARCH-01-C1",
+  "scope": "JEE Main Paper 1 Physics only",
+  "source": "RECONSTRUCTED_FROM_R1_MD_PLUS_NTA_RECHECK",
+  "original_child_files_recovered": false,
+  "original_bundle_recovered": false,
+  "official_pdf_bytes_obtained": false,
+  "canonical_promoted": false,
+  "learner_validation": "NOT_RUN",
+  "status": "NTA_QID_OPTION_KEY_MATCH_VERIFIED__PDF_BYTE_HASH_UNVERIFIED",
+  "original_r1_report_sha256_oracle_reported": "bb6e29ac77b20e67acf6c87d983364e6e6607186723606d70589eb4ccdaa8cee",
+  "original_bundle_claim_sha256_unmeasured": "7450880a94220748d4a449a58af904e4a57bb3c2a8559e79d0a3f3ab642f65c2",
+  "candidates": [
+    {
+      "id": "WPE-PILOT-004",
+      "paper": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260409829414602.pdf",
+      "page": 11,
+      "key": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260420409057044.pdf",
+      "key_page": 6,
+      "date": "2026-04-05",
+      "shift": "Second",
+      "qid": "691121478",
+      "physics_q": 28,
+      "option_ids_values": {
+        "6911211624": "20 J",
+        "6911211625": "25 J",
+        "6911211626": "30 J",
+        "6911211627": "10 J"
+      },
+      "key_option_id": "6911211624"
+    },
+    {
+      "id": "WPE-PILOT-003",
+      "paper": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/202604092007095665.pdf",
+      "page": 10,
+      "key": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260420409057044.pdf",
+      "key_page": 7,
+      "date": "2026-04-06",
+      "shift": "First",
+      "qid": "6952782163",
+      "physics_q": 28,
+      "option_ids_values": {
+        "6952787589": "-8.75 J",
+        "6952787590": "-8.35 J",
+        "6952787591": "-9.55 J",
+        "6952787592": "-9.98 J"
+      },
+      "key_option_id": "6952787592"
+    }
+  ],
+  "verbatim_paper_question_copied": false,
+  "rights": "External reference custody, redistribution permission not established"
+}
