@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ONB caller-supplied bytes comparison, not Git attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "observed_sha256",
+    "claimed_sha256",
+    "comparison",
+    "source_git_blob_verified",
+    "provider_authenticated",
+    "semantic_owner_acceptance",
+    "execution_authorized"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.supplied-byte-comparison/v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "claimed_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "comparison": {
+      "enum": [
+        "SUPPLIED_BYTES_MATCH",
+        "SUPPLIED_BYTES_MISMATCH",
+        "UNCLAIMED_BYTES"
+      ]
+    },
+    "source_git_blob_verified": {
+      "const": false
+    },
+    "provider_authenticated": {
+      "const": false
+    },
+    "semantic_owner_acceptance": {
+      "const": false
+    },
+    "execution_authorized": {
+      "const": false
+    }
+  }
+}

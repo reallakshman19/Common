@@ -1,0 +1,47 @@
+name: ONB-RWI WP1b original-custody contract tests
+
+on:
+  push:
+    branches:
+      - feat/onb391-wp1b-custody
+    paths:
+      - 'skills/relay-onboarding-rwi/schemas/**'
+      - 'skills/relay-onboarding-rwi/scripts/validate_custody.py'
+      - 'skills/relay-onboarding-rwi/tests/test_custody.py'
+      - '.github/workflows/onb-rwi-wp1b-custody.yml'
+  pull_request:
+    paths:
+      - 'skills/relay-onboarding-rwi/schemas/**'
+      - 'skills/relay-onboarding-rwi/scripts/validate_custody.py'
+      - 'skills/relay-onboarding-rwi/tests/test_custody.py'
+      - '.github/workflows/onb-rwi-wp1b-custody.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  custody:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile and validate all strict custody JSON schemas
+        run: |
+          python -m py_compile skills/relay-onboarding-rwi/scripts/validate_custody.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for file in sorted(Path("skills/relay-onboarding-rwi/schemas").glob("*.schema.json")):
+              data=json.loads(file.read_text())
+              assert data["additionalProperties"] is False
+              assert data["properties"]["schema"]["const"].startswith("onboarding.")
+              print(file.name,data["properties"]["schema"]["const"])
+          PY
+      - name: Fail-closed fixture, decision and provenance tests
+        run: |
+          python -m unittest discover -s skills/relay-onboarding-rwi/tests -p 'test_*.py' -v

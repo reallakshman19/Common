@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ONB-RWI input custody claim (no self-authored byte verification)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "repository",
+    "source_url",
+    "source_revision",
+    "path",
+    "role",
+    "claimed_sha256",
+    "verification",
+    "authority",
+    "visibility"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.custody/v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "source_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "enum": [
+        "ORIGINAL_INPUT",
+        "POSITIVE_ORACLE",
+        "NEGATIVE_FIXTURE",
+        "BENCHMARK",
+        "GENERATED_OUTPUT"
+      ]
+    },
+    "claimed_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "verification": {
+      "enum": [
+        "CLAIMED_ONLY",
+        "UNAVAILABLE"
+      ]
+    },
+    "authority": {
+      "enum": [
+        "OWNER_SOURCE",
+        "ISSUE_DECLARATION",
+        "CANDIDATE",
+        "SYNTHETIC"
+      ]
+    },
+    "visibility": {
+      "enum": [
+        "PUBLIC",
+        "PRIVATE",
+        "RESTRICTED"
+      ]
+    }
+  }
+}

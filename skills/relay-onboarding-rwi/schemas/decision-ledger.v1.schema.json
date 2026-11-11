@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ONB reported decision ledger; not certified Owner approval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "repository",
+    "statement",
+    "actor_role",
+    "disposition",
+    "source_url",
+    "supersedes",
+    "visibility"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.decision/v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_role": {
+      "enum": [
+        "OWNER",
+        "ENGINEER",
+        "UNKNOWN"
+      ]
+    },
+    "disposition": {
+      "enum": [
+        "REPORTED_APPROVED",
+        "PROPOSED",
+        "REJECTED",
+        "UNKNOWN"
+      ]
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "visibility": {
+      "enum": [
+        "PUBLIC",
+        "PRIVATE",
+        "RESTRICTED"
+      ]
+    }
+  }
+}

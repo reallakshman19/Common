@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ONB reproducibility experiment receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "repository",
+    "candidate_sha",
+    "input_ids",
+    "command",
+    "expected",
+    "observed",
+    "status",
+    "oracle_class",
+    "proof_url"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.experiment/v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "candidate_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "input_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "command": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NOT_RUN",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "oracle_class": {
+      "enum": [
+        "OWNER_SOURCE",
+        "INDEPENDENT_GOLDEN",
+        "SYNTHETIC",
+        "IMPLEMENTATION_COUPLED"
+      ]
+    },
+    "proof_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
