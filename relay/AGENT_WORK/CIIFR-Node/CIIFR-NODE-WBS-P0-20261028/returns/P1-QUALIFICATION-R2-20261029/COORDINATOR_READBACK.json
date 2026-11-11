@@ -1,0 +1,339 @@
+{
+  "task": "CIIFR-NODE-N01-PR226-R0-IR",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "payloadCommit": "f5ce7d112cbfa40b4d9a0d1bad13ffe67660dfbe",
+  "payloadPath": "relay/AGENT_WORK/CIIFR-Node/CIIFR-NODE-WBS-P0-20261028/returns/P1-QUALIFICATION-R2-20261029",
+  "verifiedPayloadFiles": 64,
+  "files": [
+    {
+      "path": "payload/ir-r1/REVIEW.md",
+      "git_blob": "576794a32a196b5728dc2698eca273868b618d6a",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/additional-tree.json",
+      "git_blob": "b7548d88052bf4718938c99079ef980315f92e88",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/base-verification.json",
+      "git_blob": "9363b5d6c7a1b6afa533ffa245189c63ff84f294",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/geometry.tap",
+      "git_blob": "e805c4535806e4a5b5316d6f89b2117a44bce519",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/issue228-live.json",
+      "git_blob": "dbc50323d5e54ef8c03e64479de8c2c9ec3b0a24",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/pr232-files.json",
+      "git_blob": "e598c2ab771a020c3465994f07e2f23e9ab1c8ae",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/repair.tap",
+      "git_blob": "521182dd5ddb4fbbd10db0fac0af57e2dba82cd7",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/fixtures/SYNTH_V14_TARGET0.cii",
+      "git_blob": "dddf157895571802973b71904fbad0a679a7e271",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/probe.mjs",
+      "git_blob": "70e3a135ed0d4778f1229bc065b3b0ca9a187b78",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/agents.json",
+      "git_blob": "6aa391824f689c93b677f351fea26ee1043ad794",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/base-vnext-all.tap",
+      "git_blob": "86bab6776020b2e783828ca3008196d32468c5cf",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/guide.json",
+      "git_blob": "812a93717e6a8ffafa90e23204aa76280b305870",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/local-verification.json",
+      "git_blob": "50a3af619a55005a6af90e0ffb1ed187f1491579",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/pr232.json",
+      "git_blob": "979a2897fc6285e15ed7fcfec9990049b3820090",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/required-three.tap",
+      "git_blob": "1f34919489eca51f98991a6729bfa4428db9b3f0",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/RETURN_MANIFEST.json",
+      "git_blob": "c5db098ea26cddfe420f98ac7511771b680d52b8",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/SYNTH_V14_SOURCE.cii.json",
+      "git_blob": "f8e4bcace401bc66391dbf8877e7214481129e16",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/base-command.json",
+      "git_blob": "61b4bcd68648ebfd196e949f73bf989d3969f4be",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/candidate-tree.json",
+      "git_blob": "4fed3fb356efdf86fd8f9e0c1e3c266e9cb9ac59",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/independence.json",
+      "git_blob": "92ddedc34de133ecc2bcfabd1a5328fbea7241a5",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/postrun-identity.json",
+      "git_blob": "89689fe9cf24140598ab068dee1c509fb4f1d147",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/probe-base.log",
+      "git_blob": "7c81bdb67f0a2054672253dc9980c3c8c3f52370",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/vnext-all.tap",
+      "git_blob": "3a3f8a4ace6e3496fa5ffe4075ff158c60126c77",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/SYNTH_V14_TARGET0.cii.json",
+      "git_blob": "80b78c10f76765476ce4445b64489cfe8b661f40",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/base-tree.json",
+      "git_blob": "040c1313de36d8a9a054c3179ff05d83ed345f7b",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/commands.json",
+      "git_blob": "da17b82a9e9103432f1e35d853f0ee45ad3b7ee7",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/ir.json",
+      "git_blob": "b7c8c3958ec43738ae1cb8cea07d468d95f857c1",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/pr226.json",
+      "git_blob": "5de269b33608faee41d18e092851307dd424fcc0",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/evidence/probe-candidate.log",
+      "git_blob": "7c81bdb67f0a2054672253dc9980c3c8c3f52370",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r1/fixtures/SYNTH_V14_SOURCE.cii",
+      "git_blob": "7d00c13f5c5906a9bb2dba53287f133c8db06358",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/R2_ADDENDUM.md",
+      "git_blob": "1fb12489252d27e86529d0156191f6d19d8c1f73",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/candidate-tree.json",
+      "git_blob": "c4b715d6d40462490cf20b03b9ba1dffa5ec6a66",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/geometry.tap",
+      "git_blob": "1eec0f900cfeb6a79ffe575f14064eef51ca3342",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/probe-r2.log",
+      "git_blob": "a0c346ee7c0d724380a998049d5fefe3f47e0b00",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/source-verification.json",
+      "git_blob": "1ba48b0744abe58cb2566195979ec40727eba71a",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/vnext-all.tap",
+      "git_blob": "8bb3db1895a009ea6eff595385f1fadabd56666e",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/RETURN_MANIFEST.json",
+      "git_blob": "5e05c8ca01c3a42d0cfa58af53a36eeaa4c87296",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/probe-r2.mjs",
+      "git_blob": "58dc255ccc79ab6d19f992b519e912dd6441b5b2",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/commands.json",
+      "git_blob": "cf3c58ebde191e4d963421581b08c870da25764e",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/postrun-identity.json",
+      "git_blob": "44224dae17c5c3b8acf8735f73e93ca6b921ba95",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/repair.tap",
+      "git_blob": "94745f20e7694851b5a6606025230b49e9b40207",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/tabs__cii-workspace__cii-fnr-vnext__ui__app.js.json",
+      "git_blob": "755b2dfea8b7acf548169388f6b3c127dba9cd4e",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/fixtures/SYNTH_V14_SOURCE.cii",
+      "git_blob": "7d00c13f5c5906a9bb2dba53287f133c8db06358",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/agents__PR232_workreport.md.json",
+      "git_blob": "bf83fc7ea311d3031dee2ed784cdcfec9825ae3d",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/docs__tabs__cii-workspace__cii-fnr-vnext__ui__app.js.json",
+      "git_blob": "8132029b90859554933ec759d6fad26022cab762",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/pr232-live.json",
+      "git_blob": "0e7135ca054082b208b8e8d5811cdb9e6a66fbba",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/required-three.tap",
+      "git_blob": "86c5bfba66a33e779c5c3f40289acace92de9fd6",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/evidence/tests__cii-fnr-vnext-property-transfer-repair.test.mjs.json",
+      "git_blob": "7e76c4a35642222bfb756919c3afa9e78d2bc0bb",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/ir-r2/fixtures/SYNTH_V14_TARGET0.cii",
+      "git_blob": "dddf157895571802973b71904fbad0a679a7e271",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/evidence/browser-provision-observation.json",
+      "git_blob": "252c7ffea90fce9ef9acd57f3bbf64c2e5ac2387",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/evidence/csv-r2-fail-before.tap",
+      "git_blob": "04a98c13a06e8295f5fa1d72b00b91bd560e0bce",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/evidence/csv-r2-focused.tap",
+      "git_blob": "2c1b5c9d260a4ed5f721796167691070765c656f",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/evidence/csv-r2-geometry.tap",
+      "git_blob": "3fb4949152661fe28a49d1376a322f6d3bbf7bcc",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/evidence/csv-r2-required.tap",
+      "git_blob": "834cdd6cf34de074f9db4b1d23817d2c0730a567",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/evidence/csv-r2-vnext.tap",
+      "git_blob": "e9dc5792c1e5e3a7d5badeea1e1c3028a7ecf451",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/evidence/public-benchmark-intake.json",
+      "git_blob": "927dce9858c44c60c0e74e52a04877c5d9241f50",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/ledger/manifest.md",
+      "git_blob": "668a685d998ed7da10002bacae84ae1378d7cd50",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/ledger/baseline.json",
+      "git_blob": "c9af8c15ae265ed6fd38640d5d94218818f8b34f",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/ledger/backups.json",
+      "git_blob": "e823ff55df4fe6a68a5b58d8c9e0aebd760c5988",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/ledger/changed-files.json",
+      "git_blob": "fab9d9c96ad78b70ccedc82c534f575bd1394a32",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/ledger/modules/csv-selection.md",
+      "git_blob": "0e84a4023a3a6b1d79d05f80da2cba2afda1829f",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/ledger/modules/csv-selection.patch",
+      "git_blob": "05e36a8bf6bb38c5891595a3378d62fd1c42a511",
+      "contentEqual": true
+    },
+    {
+      "path": "receipt.md",
+      "git_blob": "437d73ada6e1eaba49bff1da9d86c90e27821a77",
+      "contentEqual": true
+    },
+    {
+      "path": "payload/builder-r2/product-readback.json",
+      "git_blob": "4d03dcb75088010179895245312f7ad4519762b6",
+      "contentEqual": true
+    }
+  ],
+  "result": "ALL_64_PUBLISHED_CONTENTS_RETRIEVED_AND_EQUAL",
+  "reviewReports": {
+    "R1_sha256": "fc6c520ac950736868343048f392c94d6cef74cad6b12a9c5e7428b11b6f36e5",
+    "R2_sha256": "6472d8ece388497a986d6d3b81d7a0d47dfa4a885825591c6965b6d4a03e6a5f"
+  },
+  "technicalVerdict": "NONAUTHOR_AGENT_BOUNDED_CODE_PASS; GATE_R0_HOLD",
+  "independence": "Same host/account; not blind; distinct human/account independence not established",
+  "browser": "NOT_RUN: provisioning failed",
+  "Windows": "NOT_RUN",
+  "protectedOriginal": "NOT_RECEIVED/NOT_RUN"
+}

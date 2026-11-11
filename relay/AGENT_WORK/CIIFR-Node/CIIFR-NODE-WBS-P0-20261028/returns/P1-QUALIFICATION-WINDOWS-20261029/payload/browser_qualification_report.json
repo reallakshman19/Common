@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-10-29T12:05:12.770Z",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32",
+  "runs": [
+    {
+      "browser": "Microsoft Edge",
+      "productVersion": "Edg/156.0.4314.42",
+      "cases": {
+        "case1_normal_demo": {
+          "status": "PASS",
+          "proposalRows": 2,
+          "claimStatus": "2 proposal(s). Review each claim before Validate.",
+          "validateStatus": "TARGET1 validated in memory. Apply to New Copy is now available.",
+          "applyStatus": "TARGET1 released as an immutable new-copy preview. Export enabled.",
+          "target1Hash": "4bf7f868eda840cb45af6febfc2174a7ddfc2c21fb921be3cf411d3122bd7591",
+          "exportEnabled": true
+        },
+        "case2_property_isolation": {
+          "status": "PASS",
+          "sourceStatus": "SYNTH_V14_SOURCE.cii · V14 · 2 elements · SHA-256 c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+          "targetStatus": "SYNTH_V14_TARGET0.cii · V14 · 2 elements · SHA-256 0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+          "normalStatePreserved": true,
+          "nodalStatePreserved": true
+        },
+        "case3_invalidation_pending_csv": {
+          "status": "PASS",
+          "revokedOnRuleEdit": true,
+          "revokedWhilePending": true,
+          "clearWhilePendingSafe": true,
+          "eligibilityRestored": true
+        },
+        "case4_process_and_attachments": {
+          "status": "PASS",
+          "forward400_500_distinct": true,
+          "forward500_600_distinct": true,
+          "reverseOrientationRejected": true,
+          "node500AttachmentsVerified": true
+        },
+        "case5_negative_zero_dormant_challenges": {
+          "status": "PASS",
+          "uiSearchValidation": {
+            "negativeBlocked": true,
+            "zeroBlocked": true
+          },
+          "caiFileIntakeParsing": {
+            "negativeEndpointRejected": true,
+            "zeroEndpointHeld": true,
+            "pointerBeyondControlRejected": true,
+            "dormantResidueReportedUnknown": true
+          },
+          "noApplyOrExportInProperty": true
+        },
+        "case6_integrity_immutability": {
+          "status": "PASS",
+          "pageErrorsCount": 0,
+          "fixturesUnchanged": true,
+          "externalRequestsCount": 0
+        }
+      }
+    },
+    {
+      "browser": "Google Chrome",
+      "productVersion": "Chrome/156.0.8078.48",
+      "cases": {
+        "case1_normal_demo": {
+          "status": "PASS",
+          "proposalRows": 2,
+          "claimStatus": "2 proposal(s). Review each claim before Validate.",
+          "validateStatus": "TARGET1 validated in memory. Apply to New Copy is now available.",
+          "applyStatus": "TARGET1 released as an immutable new-copy preview. Export enabled.",
+          "target1Hash": "4bf7f868eda840cb45af6febfc2174a7ddfc2c21fb921be3cf411d3122bd7591",
+          "exportEnabled": true
+        },
+        "case2_property_isolation": {
+          "status": "PASS",
+          "sourceStatus": "SYNTH_V14_SOURCE.cii · V14 · 2 elements · SHA-256 c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+          "targetStatus": "SYNTH_V14_TARGET0.cii · V14 · 2 elements · SHA-256 0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+          "normalStatePreserved": true,
+          "nodalStatePreserved": true
+        },
+        "case3_invalidation_pending_csv": {
+          "status": "PASS",
+          "revokedOnRuleEdit": true,
+          "revokedWhilePending": true,
+          "clearWhilePendingSafe": true,
+          "eligibilityRestored": true
+        },
+        "case4_process_and_attachments": {
+          "status": "PASS",
+          "forward400_500_distinct": true,
+          "forward500_600_distinct": true,
+          "reverseOrientationRejected": true,
+          "node500AttachmentsVerified": true
+        },
+        "case5_negative_zero_dormant_challenges": {
+          "status": "PASS",
+          "uiSearchValidation": {
+            "negativeBlocked": true,
+            "zeroBlocked": true
+          },
+          "caiFileIntakeParsing": {
+            "negativeEndpointRejected": true,
+            "zeroEndpointHeld": true,
+            "pointerBeyondControlRejected": true,
+            "dormantResidueReportedUnknown": true
+          },
+          "noApplyOrExportInProperty": true
+        },
+        "case6_integrity_immutability": {
+          "status": "PASS",
+          "pageErrorsCount": 0,
+          "fixturesUnchanged": true,
+          "externalRequestsCount": 0
+        }
+      }
+    }
+  ]
+}

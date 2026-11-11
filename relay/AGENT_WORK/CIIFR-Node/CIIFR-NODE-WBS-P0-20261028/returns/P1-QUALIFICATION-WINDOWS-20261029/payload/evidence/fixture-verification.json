@@ -1,0 +1,16 @@
+{
+  "SYNTH_V14_SOURCE": {
+    "bytes": 8276,
+    "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+    "expectedBytes": 8276,
+    "expectedSha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+    "match": true
+  },
+  "SYNTH_V14_TARGET0": {
+    "bytes": 8276,
+    "sha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+    "expectedBytes": 8276,
+    "expectedSha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+    "match": true
+  }
+}

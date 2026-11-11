@@ -1,0 +1,25 @@
+✔ new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates (79.670528ms)
+✔ two oriented FROM->TO elements meet at Node 500 without sharing process ownership (7.401097ms)
+✔ Path A requires exact orientation and never infers SOURCE/TARGET identity (3.183357ms)
+✔ Path B resolves exact restraint slot without claiming constrained DOF semantics (1.606966ms)
+✔ invalid noncanonical section markers are rejected before property inspection (2.073912ms)
+✔ shared RESTRANT auxiliary pointer is held, not silently assigned (1.31106ms)
+✔ incomplete MISCEL_1/RRMAT custody is rejected (1.084779ms)
+✔ unqualified V11 version is rejected rather than interpreted as V14 (3.217529ms)
+✔ inspection does not change TARGET0 and exposes no writer (1.282127ms)
+✔ CONTROL rejects invalid IZUP, negative nozzle and hanger counts (7.57208ms)
+✔ CONTROL reports primary counts without claiming nozzle/hanger MISC qualification (1.359263ms)
+✔ RRMAT rejects nonnumeric, missing and out-of-range per-element IDs (6.958298ms)
+✔ RESTRANT rejects negative node/CNode and inconsistent blank-node slot (8.252332ms)
+✔ positive physical RIGID, DISPLMNT and FORCMNT families are indexed without writes (2.04561ms)
+✔ new tab and source/served files retain existing VNext tabs (1.585074ms)
+✔ Property Transfer mount does not alter Nodal tab state or handlers (42.445924ms)
+✔ older focused Nodal DOM without Property panel still starts safely (15.745682ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 198.346379

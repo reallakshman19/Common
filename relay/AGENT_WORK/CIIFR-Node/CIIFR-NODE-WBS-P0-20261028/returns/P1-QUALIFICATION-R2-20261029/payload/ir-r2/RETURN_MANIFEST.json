@@ -1,0 +1,98 @@
+{
+  "task": "CIIFR-NODE-N01-PR226-R0-IR",
+  "reviewed_head": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "prior_reviewed_head": "7f5dc773ac7bb08544d086be734e4337295088a0",
+  "verdict": "IR-232-01 resolved; bounded code PASS; whole suite123/1 FAIL; GATE_R0 HOLD",
+  "files": [
+    {
+      "path": "R2_ADDENDUM.md",
+      "bytes": 8071,
+      "sha256": "6472d8ece388497a986d6d3b81d7a0d47dfa4a885825591c6965b6d4a03e6a5f"
+    },
+    {
+      "path": "probe-r2.mjs",
+      "bytes": 9284,
+      "sha256": "79295d02c22035dc9c0c8414869a5139523c80eded403e3808984f0d77bc1b98"
+    },
+    {
+      "path": "evidence/agents__PR232_workreport.md.json",
+      "bytes": 17906,
+      "sha256": "6320d80335b973504b238584e67e980c9d92f8c939c5ec437d7bfbcccdd13dcf"
+    },
+    {
+      "path": "evidence/candidate-tree.json",
+      "bytes": 116898,
+      "sha256": "7840e2567a31b0c1bf8c7dc796db1bf3fdb42bcd0898c3b2d23299834aedcb0d"
+    },
+    {
+      "path": "evidence/commands.json",
+      "bytes": 2160,
+      "sha256": "cc21483e41d4f5b742755b50bec3d8831d49df6e93e530c622a11eb14f639fd8"
+    },
+    {
+      "path": "evidence/docs__tabs__cii-workspace__cii-fnr-vnext__ui__app.js.json",
+      "bytes": 42338,
+      "sha256": "577383c71d0b19ad0f29fd3d78855619c3645118faa5f3d28e68b77f4d18a218"
+    },
+    {
+      "path": "evidence/geometry.tap",
+      "bytes": 907,
+      "sha256": "a04b56a1086300a9858b85120ee1d7b82c11a14230faf84e1b33881b1f820b13"
+    },
+    {
+      "path": "evidence/postrun-identity.json",
+      "bytes": 2308,
+      "sha256": "88b4d0a1f3d5439b0ba261280efb672674e2fe129af5e3d0f6badcb12f6a2d54"
+    },
+    {
+      "path": "evidence/pr232-live.json",
+      "bytes": 3855,
+      "sha256": "a8cd4ab6e7a5650dbaaf63d543549c0a30eb9e53fda4679d966ae5b3a29f9724"
+    },
+    {
+      "path": "evidence/probe-r2.log",
+      "bytes": 1243,
+      "sha256": "63817f931efc8854a116c4ac8d0067cb6c17d4cf0ee7cbaa98d41c9930663c97"
+    },
+    {
+      "path": "evidence/repair.tap",
+      "bytes": 1444,
+      "sha256": "a4faa1472eb3f4d53376de0d54f3f7b00945a7405ce06081d4b7f0a0468e2d5e"
+    },
+    {
+      "path": "evidence/required-three.tap",
+      "bytes": 1605,
+      "sha256": "2efd995c73826c35fb331ff0c7886b42d26f74af96fdd9907619ebf6689bcd64"
+    },
+    {
+      "path": "evidence/source-verification.json",
+      "bytes": 16284,
+      "sha256": "9d66a0f305b680ffa6f0a1d44869abd77ed8439178417cea6d9a3904395a50c5"
+    },
+    {
+      "path": "evidence/tabs__cii-workspace__cii-fnr-vnext__ui__app.js.json",
+      "bytes": 42333,
+      "sha256": "0121a2c07fb4db7f3ddcf3328a73defb95e3c6d3541db69d930564d6a6c62a7c"
+    },
+    {
+      "path": "evidence/tests__cii-fnr-vnext-property-transfer-repair.test.mjs.json",
+      "bytes": 17503,
+      "sha256": "3c7e14aa20b02b577052e2e524e723afb1085e69115affa790eb5bf9e01b0790"
+    },
+    {
+      "path": "evidence/vnext-all.tap",
+      "bytes": 11837,
+      "sha256": "36ec4118d567297047e2e8c8a07fad1e66660decb99b687753326d3fae2476ec"
+    },
+    {
+      "path": "fixtures/SYNTH_V14_SOURCE.cii",
+      "bytes": 8276,
+      "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b"
+    },
+    {
+      "path": "fixtures/SYNTH_V14_TARGET0.cii",
+      "bytes": 8276,
+      "sha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+✔ F1 completed Normal approval, validation and apply survive independent Property activity (85.739545ms)
+✔ F1 actual shared TARGET/SOURCE/CSV changes still revoke preserved Normal state (70.803794ms)
+✔ F1 Property roundtrip cancels pending Normal validation without deleting approval (14.973202ms)
+✔ F1 pending owning CSV selection immediately revokes old output and accepts fresh rules after loading (27.616284ms)
+✔ F1 clearing owning CSV cancels an older pending read and leaves output revoked (17.300844ms)
+✔ F1 the pre-existing Normal to Config navigation policy still revokes authority (14.633356ms)
+✔ F1 unchanged Nodal approved output survives Property, while target edits revoke it (31.781429ms)
+✔ F2 positive-node R0 rejects either negative endpoint and holds unqualified zero endpoints (4.428679ms)
+✔ F3 every typed element pointer is bounded against its own CONTROL count (23.533922ms)
+✔ F3 bounded populated BEND remains explicitly unqualified, with unchanged bytes (1.244307ms)
+✔ F4 dormant restraint payload is UNKNOWN evidence, never a logical node or discarded bytes (0.757699ms)
+✔ F4 zero spellings do not fabricate residue; unparsed text is preserved as UNKNOWN (1.758076ms)
+✔ F3/F4 UNKNOWN diagnostics and raw restraint evidence are visible on intake and in either mode (9.05508ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 408.686478

@@ -1,0 +1,42 @@
+{
+  "executedPackageCommit": "70978e35ca8a0a67678157b4c719bacb4801dce0",
+  "returnedEvidenceCommit": "37b78f87196d0d5288ead489096358a57313d74f",
+  "executableComparison": [
+    {
+      "path": "payload/panel-integration.mjs",
+      "sameAsSupplied": true
+    },
+    {
+      "path": "payload/physical-oracle.json",
+      "sameAsSupplied": true
+    },
+    {
+      "path": "payload/qualification-guards.mjs",
+      "sameAsSupplied": true
+    },
+    {
+      "path": "payload/qualification-guards.test.mjs",
+      "sameAsSupplied": true
+    },
+    {
+      "path": "payload/receiver-probes-r2-r3.mjs",
+      "sameAsSupplied": true
+    },
+    {
+      "path": "payload/run_qualification_browser.mjs",
+      "sameAsSupplied": true
+    }
+  ],
+  "servedSourceComparison": [
+    {
+      "browser": "Microsoft Edge",
+      "modules": 13,
+      "mismatches": []
+    },
+    {
+      "browser": "Google Chrome",
+      "modules": 13,
+      "mismatches": []
+    }
+  ]
+}

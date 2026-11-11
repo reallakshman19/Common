@@ -1,0 +1,15 @@
+{
+  "baseline_files": 108,
+  "changed_existing": [
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+    "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js",
+    "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+    "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js"
+  ],
+  "source_served_pairs": 6,
+  "protected_baseline_files_unchanged": 102,
+  "new_test_lines": 190,
+  "no_property_writer_added": true
+}

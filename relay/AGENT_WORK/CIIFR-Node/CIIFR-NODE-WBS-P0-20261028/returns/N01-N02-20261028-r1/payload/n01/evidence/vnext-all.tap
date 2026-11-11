@@ -1,0 +1,156 @@
+✔ F01 status-independent exact/partial overlaps "\n" (30.521122ms)
+✔ F01 unrelated HOLD/REJECTED must not veto valid named+blank "\n" (13.376674ms)
+✔ F01 status-independent exact/partial overlaps "\r\n" (6.716326ms)
+✔ F01 unrelated HOLD/REJECTED must not veto valid named+blank "\r\n" (3.522299ms)
+PASS synthetic FORTRAN exponent variants and malformed/unsafe integers: LF and CRLF
+✔ tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs (273.836897ms)
+✔ SIMULATED "\r\n": full TARGET node alias closure + line full record (90.798696ms)
+✔ WRITER API FAIL-CLOSED "\r\n": reviewer partial-approval rejected, complete control accepted (23.714818ms)
+✔ SIMULATED "\n": full TARGET node alias closure + line full record (16.886717ms)
+✔ WRITER API FAIL-CLOSED "\n": reviewer partial-approval rejected, complete control accepted (10.46707ms)
+PASS Normal logical-node alias closure: complete, partial, FROM/TO only, blank, disagreement, singleton, CRLF/LF
+✔ tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs (371.602694ms)
+✔ Policy A named-only closure "\n" NORMAL (73.999428ms)
+✔ Policy A named-only closure "\n" LINE_NODE (31.438682ms)
+✔ Policy A named-only closure "\r\n" NORMAL (19.045574ms)
+✔ Policy A named-only closure "\r\n" LINE_NODE (18.444496ms)
+PASS v14 exponent notation, immutable original, alias closure, LF/CRLF
+✔ tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs (302.172974ms)
+PASS [SYNTHETIC] byte patch, exact SHA, scoped regex, alias, CRLF/LF, stale, collisions, overflow and capture adversaries
+✔ tests/cii-fnr-vnext-a1.test.mjs (304.335651ms)
+✔ exact B2 branch protects all unrelated bytes: v11 LF (47.711646ms)
+✔ exact B2 branch protects all unrelated bytes: v11 CRLF (15.39978ms)
+✔ exact B2 branch protects all unrelated bytes: v14 LF (20.492676ms)
+✔ exact B2 branch protects all unrelated bytes: v14 CRLF (9.145971ms)
+✔ exact B2 selection does not include identical name in unrelated B1 (4.902051ms)
+✖ branch identifier mismatch gives zero replacements, no prefix matching (9.464248ms)
+✔ branch crossing with an unlabeled physical alias is fail-closed (10.448352ms)
+✔ cross-branch warning identifies physical node, all branches and proposed name (1.864426ms)
+✔ inconsistent cross-branch aliases do not qualify for an Option A recommendation (1.411259ms)
+✔ recommended choice is located directly before Remove and is advisory only (40.935425ms)
+✔ SOURCE labels and claim provenance require exact physical alignment (24.745816ms)
+✔ SOURCE-driven branch dropdown and Approve All preserve explicit validation (46.015024ms)
+✔ Approve All cannot bypass cross-branch diagnostic (31.13697ms)
+✔ visible VNext headings, recommendation and review columns have requested order (5.200099ms)
+✔ writer independently rejects forged branch evidence on an otherwise valid claim (5.81934ms)
+✔ invalid branch filter cannot silently fall back to Document (4.465475ms)
+✔ non-branch document mode remains selectable (1.628095ms)
+✔ served and source modules are byte-identical after branch integration (9.891808ms)
+✔ quoted CSV Branch column imports exact branch into Normal rule scope (13.217802ms)
+✔ config isolate real writer: NORMAL / "\n" (32.496473ms)
+✔ config isolate real writer: LINE_NODE / "\n" (30.905907ms)
+✔ config withheld HOLD/REJECTED and invalid diagnostic / "\n" (21.699398ms)
+✔ config isolate real writer: NORMAL / "\r\n" (13.655475ms)
+✔ config isolate real writer: LINE_NODE / "\r\n" (14.772872ms)
+✔ config withheld HOLD/REJECTED and invalid diagnostic / "\r\n" (9.73664ms)
+✔ config rejects unknown controls and retains immutable defaults (0.597135ms)
+✔ CSV resolver retains safe groups, holds competing replacements, preserves inputs (48.858364ms)
+✔ source-corroborated suffix alias may be normalized but unmatched source is held (21.348635ms)
+✔ ambiguous REF/optional .1 normalizations are not guessed (6.800347ms)
+✔ truncation that makes two new node names equal is held, never accepted (4.48509ms)
+✔ unsafe regex and invalid truncation fail closed (2.089852ms)
+✔ Approve Non-Conflict collects whole X and Z nodes despite Y duplicate claims (4.237307ms)
+✔ DOM mock includes preview and bulk-approval controls for existing UI tests (2.94676ms)
+✔ buttons preview, apply accepted CSV, then approve only unrelated proposals (127.025514ms)
+✔ synthetic demo parses as v14 CII with two independently owned names (8.027493ms)
+✔ demo CSV produces exactly two reviewable Normal claims (4.317195ms)
+✔ source and served demo loader are byte-identical (16.786051ms)
+✔ demo button goes through existing TARGET then CSV file intake (94.061304ms)
+✔ F02: delayed Generate -> Config change -> proposals remain 0 (92.039027ms)
+✔ F02: late rejected digest does not emit stale error diagnostics after config change (32.905601ms)
+✔ F02: delayed target file load A followed by fast target B: target remains B (25.624774ms)
+✔ both module mirrors resolve the existing workbench under any repository prefix (1.646358ms)
+✖ shipped host has a distinct lazy CIIFR_GEO pane and identical module mirrors (18.646197ms)
+✔ actual host app switches isolated panels, loads once and preserves the frame document (122.61127ms)
+✔ F3: NUMELT=2 and NUMELT=99 with 1 physical element are HELD and fail closed (34.949745ms)
+✔ F3: invalid NUMELT (0, negative, non-integer) is HELD as invalid (13.271146ms)
+✔ F3: positive control NUMELT=1 with 1 element passes with independent byte verification (9.177148ms)
+✔ F1: Nodal preview and Apply fail closed on noncanonical section markers (12.638124ms)
+✔ F2: absent NODENAME, immediate BEND anchor creates one section and record (38.092156ms)
+✔ F2: terminal NODENAME allows in-place renaming with or without ending newline (15.279249ms)
+✔ F2: terminal NODENAME creates new pointer when line ending is known (10.171058ms)
+✔ F2: insertion without a recognized immediate BEND boundary is held (6.981798ms)
+✔ F2: terminal NODENAME with no last line ending cannot append a record (5.835371ms)
+✔ CSV supports required three columns and empty info with quoted fields (5.854459ms)
+✔ node 285 renames aliases, node 565 adds two pointer/name records, all other bytes unchanged (41.076724ms)
+✔ information mismatch never selects a different node (19.164146ms)
+✔ two renamed nodes on one pointer-zero element share a single appended NODENAME record (12.264649ms)
+✔ duplicates, unknown nodes, invalid-width names and reused existing names held (2.87498ms)
+✔ assigning identical new name to different nodes holds both (7.519482ms)
+✔ shared physical NODENAME pointer holds writes and stale approvals are rejected (8.641939ms)
+✔ writer requires exact TARGET0 SHA and nonempty explicit approvals (11.768539ms)
+✔ new tab: exact 3-column CSV, structural preview, explicit approvals, validation/export gates (136.677545ms)
+✔ F2-N0: physically present zero endpoint cannot receive a name (39.174916ms)
+✔ F2-N0: valid adjacent node still updates all occurrences (15.379157ms)
+✔ F1: Node and Replace are the only mandatory CSV columns (2.554279ms)
+✔ F1: missing required headers, ambiguous headers and malformed CSV fail closed (1.240777ms)
+✔ F1: optional Find mismatch affects audit only; TARGET1 bytes are identical (44.765593ms)
+✔ P2-A malformed evidence / ruleId: admission and writer parity ("\r\n") (17.830384ms)
+✔ P2-B shared physical pointer: admission and writer parity ("\r\n") (5.447937ms)
+✔ P2-A malformed evidence / ruleId: admission and writer parity ("\n") (8.601173ms)
+✔ P2-B shared physical pointer: admission and writer parity ("\n") (3.778602ms)
+✔ two oriented FROM->TO elements meet at Node 500 without sharing process ownership (15.134384ms)
+✔ Path A requires exact orientation and never infers SOURCE/TARGET identity (4.188472ms)
+✔ Path B resolves exact restraint slot without claiming constrained DOF semantics (2.245817ms)
+✔ invalid noncanonical section markers are rejected before property inspection (2.477797ms)
+✔ shared RESTRANT auxiliary pointer is held, not silently assigned (3.150605ms)
+✔ incomplete MISCEL_1/RRMAT custody is rejected (1.429033ms)
+✔ unqualified V11 version is rejected rather than interpreted as V14 (1.542396ms)
+✔ inspection does not change TARGET0 and exposes no writer (1.538808ms)
+✔ CONTROL rejects invalid IZUP, negative nozzle and hanger counts (4.648385ms)
+✔ CONTROL reports primary counts without claiming nozzle/hanger MISC qualification (4.010144ms)
+✔ RRMAT rejects nonnumeric, missing and out-of-range per-element IDs (6.097967ms)
+✔ RESTRANT rejects negative node/CNode and inconsistent blank-node slot (6.0083ms)
+✔ positive physical RIGID, DISPLMNT and FORCMNT families are indexed without writes (2.199984ms)
+✔ new tab and source/served files retain existing VNext tabs (0.917627ms)
+✔ Property Transfer mount does not alter Nodal tab state or handlers (59.94493ms)
+✔ older focused Nodal DOM without Property panel still starts safely (7.940808ms)
+✔ F03: admission default policy and fatal diagnostic enforcement ("\r\n") (22.698888ms)
+✔ F03: admission default policy and fatal diagnostic enforcement ("\n") (7.302461ms)
+✔ F04: stale Validate error does not overwrite newer successful Validate (52.168148ms)
+✔ F05: delayed CSV import does NOT mutate LINE_NODE tab after tab switch (15.832836ms)
+✔ F05: delayed CSV import does NOT overwrite intervening rule edit (10.06847ms)
+✔ F06: pending TARGET file selection immediately revokes export authorization (34.734911ms)
+✔ F06: failed TARGET selection fails closed without reviving stale export (47.415535ms)
+✔ F06: pending SOURCE file selection immediately revokes export authorization (33.052832ms)
+ℹ tests 111
+ℹ suites 0
+ℹ pass 109
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1128.253667
+
+✖ failing tests:
+
+test at tests/cii-fnr-vnext-branch-scope.test.mjs:81:1
+✖ branch identifier mismatch gives zero replacements, no prefix matching (9.464248ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/n01-review/candidate/tests/cii-fnr-vnext-branch-scope.test.mjs:85:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/cii-fnr-vnext-geo-tab.test.mjs:23:1
+✖ shipped host has a distinct lazy CIIFR_GEO pane and identical module mirrors (18.646197ms)
+  Error: ENOENT: no such file or directory, open '/workspace/scratch/a4187d1acd61/n01-review/candidate/tabs/cii-workspace/cii-workspace-find-replace.js'
+      at async open (node:internal/fs/promises:1345:25)
+      at async readFile (node:internal/fs/promises:2003:14)
+      at async TestContext.<anonymous> (file:///workspace/scratch/a4187d1acd61/n01-review/candidate/tests/cii-fnr-vnext-geo-tab.test.mjs:33:19)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/scratch/a4187d1acd61/n01-review/candidate/tabs/cii-workspace/cii-workspace-find-replace.js'
+  }

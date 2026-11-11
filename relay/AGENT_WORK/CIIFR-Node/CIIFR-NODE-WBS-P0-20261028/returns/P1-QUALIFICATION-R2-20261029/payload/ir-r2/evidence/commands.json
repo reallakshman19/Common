@@ -1,0 +1,68 @@
+{
+  "required-three": {
+    "command": [
+      "node",
+      "--test",
+      "tests/cii-fnr-vnext-property-transfer-r0.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-ui-regression.test.mjs",
+      "tests/cii-fnr-vnext-nodal-ui.test.mjs"
+    ],
+    "exit": 0
+  },
+  "repair": {
+    "command": [
+      "node",
+      "--test",
+      "tests/cii-fnr-vnext-property-transfer-repair.test.mjs"
+    ],
+    "exit": 0
+  },
+  "vnext-all": {
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+      "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+      "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+      "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+      "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+      "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+      "tests/cii-fnr-vnext-a1.test.mjs",
+      "tests/cii-fnr-vnext-branch-scope.test.mjs",
+      "tests/cii-fnr-vnext-config-policy.test.mjs",
+      "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+      "tests/cii-fnr-vnext-demo.test.mjs",
+      "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+      "tests/cii-fnr-vnext-geo-tab.test.mjs",
+      "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+      "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+      "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+      "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+      "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+      "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+      "tests/cii-fnr-vnext-p2-repair.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-r0.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+      "tests/cii-fnr-vnext-property-transfer-ui-regression.test.mjs",
+      "tests/cii-fnr-vnext-r2-regressions.test.mjs"
+    ],
+    "exit": 1
+  },
+  "geometry": {
+    "command": [
+      "node",
+      "--test",
+      "tests/cii-workspace-geometry-authority.test.js",
+      "tests/cii-workspace-method-c-original-geometry.test.js"
+    ],
+    "exit": 0
+  },
+  "independent-probe": {
+    "command": [
+      "node",
+      "probe-r2.mjs"
+    ],
+    "exit": 0
+  }
+}

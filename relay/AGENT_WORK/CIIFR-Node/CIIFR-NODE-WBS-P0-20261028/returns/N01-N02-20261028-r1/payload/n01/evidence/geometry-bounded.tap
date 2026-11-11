@@ -1,0 +1,18 @@
+CII Workspace OD-scaled multi-basis geometry authority checks passed.
+✔ tests/cii-workspace-geometry-authority.test.js (111.368687ms)
+✔ original bytes reconstruct forward and reverse signed 3D physical centerline (8.328071ms)
+✔ independent disconnected component remains physically disjoint (3.044754ms)
+✔ wrong original hash and unit interpretation fail closed (3.570936ms)
+✔ cycle contradiction is rejected and cannot mint an extra node (1.5975ms)
+✔ corrupt original bytes and invalid element count are refused (1.932641ms)
+✔ native element CONTROL counts reject missing/extra records (0.704847ms)
+✔ NODENAME pointer uses native row-13 first field and fails when out of range (1.625427ms)
+✔ native COORDS accepts adjoining signed coordinate as in original S2 (3.142589ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 160.136824

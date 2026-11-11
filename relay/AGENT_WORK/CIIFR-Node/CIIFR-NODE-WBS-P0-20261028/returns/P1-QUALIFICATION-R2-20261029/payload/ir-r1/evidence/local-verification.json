@@ -1,0 +1,656 @@
+[
+  {
+    "path": "AGENTS.md",
+    "expected": "a39570bf6cdd1a66fb3db0aeed09e111734c5bbd",
+    "actual": "a39570bf6cdd1a66fb3db0aeed09e111734c5bbd",
+    "verified": true
+  },
+  {
+    "path": "Benchmark/S1.CII",
+    "expected": "73c49165b9d33a8c776ef76f480efec3a90e0c93",
+    "actual": "73c49165b9d33a8c776ef76f480efec3a90e0c93",
+    "verified": true
+  },
+  {
+    "path": "Benchmark/S2.CII",
+    "expected": "a04622553720cb41a6fc2a4b85d8290eac7a3b0a",
+    "actual": "a04622553720cb41a6fc2a4b85d8290eac7a3b0a",
+    "verified": true
+  },
+  {
+    "path": "Benchmark/S3.CII",
+    "expected": "a20b1ab87dd4e854cf2f453f8fd206be4b566b42",
+    "actual": "a20b1ab87dd4e854cf2f453f8fd206be4b566b42",
+    "verified": true
+  },
+  {
+    "path": "agents/PR232_workreport.md",
+    "expected": "784e3a1beedb16208f02421ae19bb2a5652cf795",
+    "actual": "784e3a1beedb16208f02421ae19bb2a5652cf795",
+    "verified": true
+  },
+  {
+    "path": "docs/backup.md",
+    "expected": "ec63ec970f2c4d645e3215f298ec2bbe8a7db910",
+    "actual": "ec63ec970f2c4d645e3215f298ec2bbe8a7db910",
+    "verified": true
+  },
+  {
+    "path": "docs/cii-fnr-vnext.html",
+    "expected": "3c0f8dae2ccc68f518f1ad582f1ba831a13a24ac",
+    "actual": "3c0f8dae2ccc68f518f1ad582f1ba831a13a24ac",
+    "verified": true
+  },
+  {
+    "path": "docs/ciifr/property-transfer/CONCEPT_NOTE_v1.0.md",
+    "expected": "e10f40e06e9880b65c3f5c576184266940875c1e",
+    "actual": "e10f40e06e9880b65c3f5c576184266940875c1e",
+    "verified": true
+  },
+  {
+    "path": "docs/ciifr/property-transfer/IMPLEMENTATION_PLAN.md",
+    "expected": "0c59d933f086afbe0f87a67e7ca5970503ccc1d8",
+    "actual": "0c59d933f086afbe0f87a67e7ca5970503ccc1d8",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/README.md",
+    "expected": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "actual": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/bytes.js",
+    "expected": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "actual": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/cii.js",
+    "expected": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "actual": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/index.js",
+    "expected": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "actual": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/line-node/selectors.js",
+    "expected": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "actual": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+    "expected": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "actual": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+    "expected": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "actual": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "expected": "fe804874bdf4500761bc582b740ecb555812b121",
+    "actual": "fe804874bdf4500761bc582b740ecb555812b121",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/config-policy.js",
+    "expected": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "actual": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/csv-resolver.js",
+    "expected": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "actual": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/demo-loader.js",
+    "expected": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "actual": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css",
+    "expected": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "actual": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+    "expected": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "actual": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/line-node-admission.js",
+    "expected": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "actual": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/nodal-panel.js",
+    "expected": "38e28c42105548d8e5352dd43043b008e4252aab",
+    "actual": "38e28c42105548d8e5352dd43043b008e4252aab",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/nodal-transfer.js",
+    "expected": "49e28ef6a67090697039a21eff582fda0d337f57",
+    "actual": "49e28ef6a67090697039a21eff582fda0d337f57",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/nonconflict-review.js",
+    "expected": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "actual": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+    "expected": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "actual": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+    "expected": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "actual": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+    "expected": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+    "actual": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/element.js",
+    "expected": "853352955b657853dfa8855eb566c97df67676f0",
+    "actual": "853352955b657853dfa8855eb566c97df67676f0",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/node.js",
+    "expected": "35109c593474b191178918d2d6f2a16c6d710571",
+    "actual": "35109c593474b191178918d2d6f2a16c6d710571",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js",
+    "expected": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+    "actual": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/style.css",
+    "expected": "d4c4980e1aad04b313bd3734b390ac1af3139ce3",
+    "actual": "d4c4980e1aad04b313bd3734b390ac1af3139ce3",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+    "expected": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "actual": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/style.css",
+    "expected": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "actual": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+    "expected": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "actual": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "verified": true
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-workspace-find-replace.js",
+    "expected": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "actual": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "verified": true
+  },
+  {
+    "path": "package.json",
+    "expected": "35aef8c6dc798bd7538a4392e4479be95ef4535c",
+    "actual": "35aef8c6dc798bd7538a4392e4479be95ef4535c",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/README.md",
+    "expected": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "actual": "61267479b81fd2848f090fc9a42e507a1b350418",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/bytes.js",
+    "expected": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "actual": "2cfdd47dec1a015ccd76fece663b441b9c867528",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/cii.js",
+    "expected": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "actual": "d97c5689295bc862a84db93702f9b98e51133b28",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/index.js",
+    "expected": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "actual": "d35e7c8caa61fbdd70608c80469dd6e46794d533",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/line-node/selectors.js",
+    "expected": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "actual": "0ad74dac9a0f5510d43cf5f0e303c4dfe51af912",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/normal/branch-scope.js",
+    "expected": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "actual": "02732a205b573fb001977ed16f06fb448d64aec0",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/normal/plan.js",
+    "expected": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "actual": "2c12781a5bc633b8a6e557f3362665593e8f2253",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "expected": "fe804874bdf4500761bc582b740ecb555812b121",
+    "actual": "fe804874bdf4500761bc582b740ecb555812b121",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/config-policy.js",
+    "expected": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "actual": "ce158d28b2abb62f208c7ca98ab0bef3db0dafe4",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/csv-resolver.js",
+    "expected": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "actual": "17e139cc77d6be226eb642d6271ea10fe5a00200",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/demo-loader.js",
+    "expected": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "actual": "660e4255a6b7626159cf698eb6259119ff97fa08",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.css",
+    "expected": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "actual": "4d2b1223c5b98c356cbd88567a498a42d25d1a23",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/geo-tab.js",
+    "expected": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "actual": "03ea64cee6acac615b1d751f37ec4465a396eddf",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/line-node-admission.js",
+    "expected": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "actual": "eab1fe668578ebfd6bdccc7ab8170b4f168318e2",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/nodal-panel.js",
+    "expected": "38e28c42105548d8e5352dd43043b008e4252aab",
+    "actual": "38e28c42105548d8e5352dd43043b008e4252aab",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/nodal-transfer.js",
+    "expected": "49e28ef6a67090697039a21eff582fda0d337f57",
+    "actual": "49e28ef6a67090697039a21eff582fda0d337f57",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/nonconflict-review.js",
+    "expected": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "actual": "59d02296756de27c9eab9c21e0f2f58a7e8399d0",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/normal-node-closure.js",
+    "expected": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "actual": "1931cfc53246c3e675fab2383557f4726ff5bc48",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/physical.js",
+    "expected": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "actual": "a0a5d5e1cf6f9c7e7bf4be51073518a2f85f618f",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/cii-index.js",
+    "expected": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+    "actual": "93ec1b4339f0301be4104d96c94e126f8c9fa503",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/element.js",
+    "expected": "853352955b657853dfa8855eb566c97df67676f0",
+    "actual": "853352955b657853dfa8855eb566c97df67676f0",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/node.js",
+    "expected": "35109c593474b191178918d2d6f2a16c6d710571",
+    "actual": "35109c593474b191178918d2d6f2a16c6d710571",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/panel.js",
+    "expected": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+    "actual": "de3f6eb23d067b5d7e0641289059fd31f553f63b",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/property-transfer/style.css",
+    "expected": "d4c4980e1aad04b313bd3734b390ac1af3139ce3",
+    "actual": "d4c4980e1aad04b313bd3734b390ac1af3139ce3",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/source-provenance.js",
+    "expected": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "actual": "40b4b2c075407ea43f721d6ad48c98366251a9a7",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/style.css",
+    "expected": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "actual": "6002792c87e8d5f3e5864b07f41ef811f24cb0c4",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/writer.js",
+    "expected": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "actual": "15e383e8f03ad7028fa7c01063cea19f15d4d298",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-contracts.js",
+    "expected": "6ab30d8dd088225fd89bb729bf9ffdebefe652f6",
+    "actual": "6ab30d8dd088225fd89bb729bf9ffdebefe652f6",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-find-replace.js",
+    "expected": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "actual": "adcb8aecc93aa1cb3614a8e5b3bcc616e81586b9",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-geometry-discrepancy-review.js",
+    "expected": "b3453e6435ec0394e910c7f1fc209e37bbf9b624",
+    "actual": "b3453e6435ec0394e910c7f1fc209e37bbf9b624",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-geometry-discrepancy-ui.js",
+    "expected": "697facbf12e1de32f0dc8221e07065f688b3fed0",
+    "actual": "697facbf12e1de32f0dc8221e07065f688b3fed0",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-geometry.js",
+    "expected": "2358a2167f8b6f3ff26f2418a2eeb239ae361958",
+    "actual": "2358a2167f8b6f3ff26f2418a2eeb239ae361958",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-method-a-weights.js",
+    "expected": "29cb385ad3121b94e8ee523e8f08f0d012e1d293",
+    "actual": "29cb385ad3121b94e8ee523e8f08f0d012e1d293",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-method-c-original-geometry.js",
+    "expected": "5d62916b614c72562a943ca466577f83fa9ce581",
+    "actual": "5d62916b614c72562a943ca466577f83fa9ce581",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-source-set.js",
+    "expected": "02dd71e10cb0351d7cbe56864dee1d13976c8a0e",
+    "actual": "02dd71e10cb0351d7cbe56864dee1d13976c8a0e",
+    "verified": true
+  },
+  {
+    "path": "tabs/cii-workspace/cii-workspace-v11-v14-converter.js",
+    "expected": "a80d9d398d2daf24a1f92c0378e65598c3f2fa6d",
+    "actual": "a80d9d398d2daf24a1f92c0378e65598c3f2fa6d",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1-browser.py",
+    "expected": "831422bea97974fde15c0abf6f8889326b707559",
+    "actual": "831422bea97974fde15c0abf6f8889326b707559",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1-f01-compact.test.mjs",
+    "expected": "af4467e8189823b9da03b07b1d74aa6a31e3da95",
+    "actual": "af4467e8189823b9da03b07b1d74aa6a31e3da95",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1-fortran-exponent-adversaries.test.mjs",
+    "expected": "6a86157339fc89d0cb153f0bfc601a0dd7fcc598",
+    "actual": "6a86157339fc89d0cb153f0bfc601a0dd7fcc598",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1-line-node-admission.test.mjs",
+    "expected": "16dabeb03748e7afaa8c59f3792c7d9ffbc6993e",
+    "actual": "16dabeb03748e7afaa8c59f3792c7d9ffbc6993e",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1-normal-node-closure.test.mjs",
+    "expected": "698a1df470dd4f074f34b82da2e6a15604b73c28",
+    "actual": "698a1df470dd4f074f34b82da2e6a15604b73c28",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1-policy-a-compact.test.mjs",
+    "expected": "d86eeec715057fafb41a895f79eb1ea87e8566fc",
+    "actual": "d86eeec715057fafb41a895f79eb1ea87e8566fc",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1-scientific-numbers.test.mjs",
+    "expected": "a549508e74773786d1f95973c221b628e3bc9074",
+    "actual": "a549508e74773786d1f95973c221b628e3bc9074",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-a1.test.mjs",
+    "expected": "61050db6d0b46e18b42f9a148bf237fd48a09559",
+    "actual": "61050db6d0b46e18b42f9a148bf237fd48a09559",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-branch-scope.test.mjs",
+    "expected": "c69511a8c5234f46d9d678b88e5de53955b26c79",
+    "actual": "c69511a8c5234f46d9d678b88e5de53955b26c79",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-config-policy.test.mjs",
+    "expected": "16281a13d5b37fdafc63d991701cbb188f22a2e8",
+    "actual": "16281a13d5b37fdafc63d991701cbb188f22a2e8",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-csv-resolver.test.mjs",
+    "expected": "e4f6182c7b14e84a70ac7ec5ee51c4a56e1571f4",
+    "actual": "e4f6182c7b14e84a70ac7ec5ee51c4a56e1571f4",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-demo.test.mjs",
+    "expected": "2296ebec8462d3fbb02908bb29cd55c17095872c",
+    "actual": "2296ebec8462d3fbb02908bb29cd55c17095872c",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-f02-lifecycle.test.mjs",
+    "expected": "f305779ce48f9136a8aa3431056435a7004cc865",
+    "actual": "f305779ce48f9136a8aa3431056435a7004cc865",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-geo-pages-smoke.py",
+    "expected": "27409acef022df9474c1c71c11d3f401e3ac5d0d",
+    "actual": "27409acef022df9474c1c71c11d3f401e3ac5d0d",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-geo-tab.test.mjs",
+    "expected": "71e0530de88bea85ba530bd12f6b67245e181820",
+    "actual": "71e0530de88bea85ba530bd12f6b67245e181820",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-nodal-numelt-guard.test.mjs",
+    "expected": "87875a921dbea08c19ed0dab9f6b9bcfc17784a4",
+    "actual": "87875a921dbea08c19ed0dab9f6b9bcfc17784a4",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-nodal-sections.test.mjs",
+    "expected": "46b3963a56b1b9ffc8d3eca3080f634f70f1c991",
+    "actual": "46b3963a56b1b9ffc8d3eca3080f634f70f1c991",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-nodal-transfer.test.mjs",
+    "expected": "b6087999f0aafc5ff132c450fb6a9d1bd6976c18",
+    "actual": "b6087999f0aafc5ff132c450fb6a9d1bd6976c18",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-nodal-ui.test.mjs",
+    "expected": "d3c11273672cb4f40e7afe9371434e779b8acccb",
+    "actual": "d3c11273672cb4f40e7afe9371434e779b8acccb",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-nodal-zero-guard.test.mjs",
+    "expected": "e3d4988859a061e42bad95a6339231d3bdcdb04e",
+    "actual": "e3d4988859a061e42bad95a6339231d3bdcdb04e",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-node-only-csv.test.mjs",
+    "expected": "a3baf3da741c4a095c1d784d645efffb778e9617",
+    "actual": "a3baf3da741c4a095c1d784d645efffb778e9617",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-p2-repair.test.mjs",
+    "expected": "d5decfbc5b969cbacce377d1ecb0d516ab52a824",
+    "actual": "d5decfbc5b969cbacce377d1ecb0d516ab52a824",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-property-transfer-r0.test.mjs",
+    "expected": "e5ab577392df3ec1c7db77730e69398ff4a2d517",
+    "actual": "e5ab577392df3ec1c7db77730e69398ff4a2d517",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+    "expected": "a94e57ac92a9c7e42a5aae793449cf67dbb098b9",
+    "actual": "a94e57ac92a9c7e42a5aae793449cf67dbb098b9",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-property-transfer-ui-regression.test.mjs",
+    "expected": "80b695d1cc69f48232aef8208cb91a72524280dc",
+    "actual": "80b695d1cc69f48232aef8208cb91a72524280dc",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-fnr-vnext-r2-regressions.test.mjs",
+    "expected": "2dd75f84af2c6309f52fd77bc11074866df6e6fa",
+    "actual": "2dd75f84af2c6309f52fd77bc11074866df6e6fa",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-workspace-geometry-authority.test.js",
+    "expected": "597aa0482265b5e38e7b3fa383d863e4d49615a3",
+    "actual": "597aa0482265b5e38e7b3fa383d863e4d49615a3",
+    "verified": true
+  },
+  {
+    "path": "tests/cii-workspace-method-c-original-geometry.test.js",
+    "expected": "42213d6bf217a69c9b9b8c62c6486d72ddf90b1e",
+    "actual": "42213d6bf217a69c9b9b8c62c6486d72ddf90b1e",
+    "verified": true
+  },
+  {
+    "path": "tests/helpers/cii-compare-benchmark-oracle.js",
+    "expected": "99fc3ebaffa0098582be80ed074b862e75dbac1f",
+    "actual": "99fc3ebaffa0098582be80ed074b862e75dbac1f",
+    "verified": true
+  },
+  {
+    "path": "tests/helpers/sequential-1885-nc-evidence-report.js",
+    "expected": "19550648042c3903ecd58a748ca3b2a2e22a7ee6",
+    "actual": "19550648042c3903ecd58a748ca3b2a2e22a7ee6",
+    "verified": true
+  },
+  {
+    "path": "tests/helpers/sequential-engineering-svg-fixture.js",
+    "expected": "687a11527f255133122372730b28e298ccaa78a5",
+    "actual": "687a11527f255133122372730b28e298ccaa78a5",
+    "verified": true
+  },
+  {
+    "path": "tests/helpers/simple-ooxml-xlsx.mjs",
+    "expected": "c98208a55e3a61906ad505e9c744d079dfad9718",
+    "actual": "c98208a55e3a61906ad505e9c744d079dfad9718",
+    "verified": true
+  },
+  {
+    "path": "tests/helpers/support-report-parity-ledger.mjs",
+    "expected": "2fd6165371e92896ab57ea5f4608a08067caa949",
+    "actual": "2fd6165371e92896ab57ea5f4608a08067caa949",
+    "verified": true
+  },
+  {
+    "path": "tests/helpers/vnext-dom-env.mjs",
+    "expected": "d82f4d73d07f8802c8fbd2449018a8a1af19534b",
+    "actual": "d82f4d73d07f8802c8fbd2449018a8a1af19534b",
+    "verified": true
+  },
+  {
+    "path": "utils/backup.cjs",
+    "expected": "7afc1567f770219eebe66fa7c01f43e6acba90ba",
+    "actual": "7afc1567f770219eebe66fa7c01f43e6acba90ba",
+    "verified": true
+  }
+]

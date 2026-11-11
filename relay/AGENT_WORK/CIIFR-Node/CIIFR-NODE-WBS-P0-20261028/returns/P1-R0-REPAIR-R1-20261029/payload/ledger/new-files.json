@@ -1,0 +1,14 @@
+[
+  {
+    "path": "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+    "task_preimage": "ABSENT",
+    "after_sha256": "26455f38c760c7d76ac7552e3a8e05c4847d25b059e2c61be43167a42373b269",
+    "undo": "Delete only exact file after current checksum and no later changes are confirmed"
+  },
+  {
+    "path": "agents/PR232_workreport.md",
+    "task_preimage": "ABSENT",
+    "after_sha256": "1d62cd30d4dbaa399d341b03a2d98f6b9d544e54e9d31b9e484b7dbce40d53f6",
+    "undo": "Delete only exact file after current checksum and no later changes are confirmed"
+  }
+]

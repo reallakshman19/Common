@@ -1,0 +1,32 @@
+{
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "reviewed_return": "e46c5687a3854d4319c4fa06e415a7e1a88ff362",
+  "files": [
+    {
+      "path": "VERIFIED_READBACK.json",
+      "bytes": 4595,
+      "sha256": "f7d57d0dcc620890c2e09547b5ed948529ae7fb28ae5c634ec0fdbb9d303248d"
+    },
+    {
+      "path": "TAP_READBACK.json",
+      "bytes": 1558,
+      "sha256": "c249c1bd5ab62fd824bbe37ee6b1dee031b28530564f872f8001517039b9eece"
+    },
+    {
+      "path": "probe-runner-verdicts.mjs",
+      "bytes": 1945,
+      "sha256": "b15b9e0d6faefb646909ddca037ef3896beb710ba9b2867e93a26c0a49526671"
+    },
+    {
+      "path": "probe-results.json",
+      "bytes": 701,
+      "sha256": "04d8be8ca697f6b9f48c4490159802d5451e99db0af68294f2fa0858551259e7"
+    },
+    {
+      "path": "receipt.md",
+      "bytes": 8362,
+      "sha256": "c36c3585df22e0a38b07c197213584ab30af4a094c644a81031f537e771eb118"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "path": "tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "bytes": 30191,
+    "sha256": "881b3dac7884da30502e5dc90400592b4e5a616ab2335f05c90cec5efb83bf72"
+  },
+  {
+    "path": "docs/tabs/cii-workspace/cii-fnr-vnext/ui/app.js",
+    "bytes": 30191,
+    "sha256": "881b3dac7884da30502e5dc90400592b4e5a616ab2335f05c90cec5efb83bf72"
+  },
+  {
+    "path": "tests/cii-fnr-vnext-property-transfer-repair.test.mjs",
+    "bytes": 10331,
+    "sha256": "26455f38c760c7d76ac7552e3a8e05c4847d25b059e2c61be43167a42373b269"
+  },
+  {
+    "path": "agents/PR232_workreport.md",
+    "bytes": 10423,
+    "sha256": "1d62cd30d4dbaa399d341b03a2d98f6b9d544e54e9d31b9e484b7dbce40d53f6"
+  }
+]

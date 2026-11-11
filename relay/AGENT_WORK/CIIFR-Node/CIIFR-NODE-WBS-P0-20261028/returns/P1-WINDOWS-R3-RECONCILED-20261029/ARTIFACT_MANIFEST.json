@@ -1,0 +1,38 @@
+{
+  "task": "CIIFR-NODE-N02-FIXTURE-V14",
+  "candidate": "d3fbd4041ef4434b4cf5b3c22459f06167be2729",
+  "reviewedReturn": "37b78f87196d0d5288ead489096358a57313d74f",
+  "disposition": "BOUNDED_WINDOWS_PUBLIC_FIXTURE_EVIDENCE_VERIFIED",
+  "files": [
+    {
+      "path": "receipt.md",
+      "bytes": 5424,
+      "sha256": "519d4994fcadb794c3b067c140b389024900b455d70cd71136fc3344defa9a96",
+      "gitBlob": "605aaf80f94d67889d8f5d6eecbaf69047dc5da7"
+    },
+    {
+      "path": "READBACK.json",
+      "bytes": 7041,
+      "sha256": "07e95dc65bf6b54472cf185fa1f8f9fd17f62311b4aa006baad8bcc3597ec9ee",
+      "gitBlob": "5ab99d40deddc6896f2709b8e7b1611094d898e4"
+    },
+    {
+      "path": "LINEAGE.json",
+      "bytes": 951,
+      "sha256": "e42b3454d1aa045b4f2ecb9a7c3e238cd317fa30e0d3aea1eed36dd5199d664a",
+      "gitBlob": "4f3e6e7248e73c6abae180771c491771e7edbdff"
+    },
+    {
+      "path": "EXECUTION_COMPARISON.json",
+      "bytes": 1669,
+      "sha256": "c14300d0186b8d5b9f83d0e7d70c5e57a99b1f21c8427f57f5d0127f32d43a78",
+      "gitBlob": "7f22b8ec7b1b9d21fd8eb75506817d3ce11f8b37"
+    },
+    {
+      "path": "verify_execution.py",
+      "bytes": 4949,
+      "sha256": "2c642745ff943e9e90b3fa7aeb477a95f5d38fec1fb5e01bcbe07e0907ba106f",
+      "gitBlob": "0c58f82be744e59f995c9973991f3cd43cacde05"
+    }
+  ]
+}

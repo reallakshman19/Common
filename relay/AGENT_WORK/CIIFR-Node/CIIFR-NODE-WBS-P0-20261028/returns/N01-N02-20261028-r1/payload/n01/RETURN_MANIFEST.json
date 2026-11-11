@@ -1,0 +1,82 @@
+[
+  {
+    "path": "N01_REVIEW.md",
+    "size": 14729,
+    "sha256": "7aa16a7528952a929173759dad9267b3ec79bd412fea8f96f0775cc2470f28e6"
+  },
+  {
+    "path": "probe-r0.mjs",
+    "size": 7702,
+    "sha256": "c0a30d89e3658b220bc83cb6613daef6481fa84ecd84355dccfa4e5496ba65a1"
+  },
+  {
+    "path": "evidence/base-geometry-bounded.tap",
+    "size": 908,
+    "sha256": "2e099698b7018e0015f80941a9f05c20ad11d70531266d10416b67d462c033ac"
+  },
+  {
+    "path": "evidence/base-nodal.tap",
+    "size": 226,
+    "sha256": "3cfb8c43602cd8b1ab5df85e8714201edd645c87b8d1e985f1751d23323072e6"
+  },
+  {
+    "path": "evidence/base-vnext-all-complete.tap",
+    "size": 9146,
+    "sha256": "17905b6827e87c4dfa5cabeede2fa3b1ab8700be7dc9cd6d82af0ddb7af14aa9"
+  },
+  {
+    "path": "evidence/base-vnext-all.tap",
+    "size": 10013,
+    "sha256": "7b78ca19722a9840b1069942e1834dad14a6d8ec417fc2aea9bf423c7649c725"
+  },
+  {
+    "path": "evidence/geometry-bounded.tap",
+    "size": 907,
+    "sha256": "4dff61e0a9733275ddf90d1426f47f8c5bc0fc11c66f2ffd4adb424ad7998bb3"
+  },
+  {
+    "path": "evidence/geometry.tap",
+    "size": 2039,
+    "sha256": "262a26a3d4f68fcc5c57165c3486fe48ebb25175b84e21da937c6f91d06d0538"
+  },
+  {
+    "path": "evidence/native-three.tap",
+    "size": 1604,
+    "sha256": "a91e00fcf3d9d3037cbd58a3447113ce2a0cf762fa03d67c3b48047f0b35b698"
+  },
+  {
+    "path": "evidence/old-nodal.tap",
+    "size": 1194,
+    "sha256": "ebca9e1dfa719ab1f4f9ded3a273c079207391a6af4e2496100e631469099060"
+  },
+  {
+    "path": "evidence/vnext-all-complete.tap",
+    "size": 10547,
+    "sha256": "fc6444a21853c0ece27b48681cd709825ef63ffaa3ee4a5b7577c9af0c58dcf7"
+  },
+  {
+    "path": "evidence/vnext-all.tap",
+    "size": 11415,
+    "sha256": "cb59028ae28e77a05ec1ec4ddc25d82c0733e5ee1bbad7e36a2e17fed8a1918b"
+  },
+  {
+    "path": "evidence/probe-r0.log",
+    "size": 1762,
+    "sha256": "78d0c4ff64b96954532bf8df6ab27a4107b19992f436b9166e7e02c3ecd74844"
+  },
+  {
+    "path": "evidence/candidate-manifest.json",
+    "size": 24746,
+    "sha256": "5d70f0690801bb604f73d8fe5be20de6e9334b25c24c5f9393f67f091c46c4a2"
+  },
+  {
+    "path": "evidence/identity.json",
+    "size": 428,
+    "sha256": "8b73bce914ecc9d2b968165b458391606e67442b0e8502ff407ecb8ca11982f7"
+  },
+  {
+    "path": "evidence/environment.txt",
+    "size": 163,
+    "sha256": "cf214aa1571b2a3e4577d857f5d30e080f4b4e4bdedf9dcd04c54e28180379dd"
+  }
+]

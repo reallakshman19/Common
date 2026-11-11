@@ -1,0 +1,189 @@
+{
+  "publicFixtureAudit": {
+    "SYNTH_V14_SOURCE.cii": {
+      "bytes": 8276,
+      "sha256": "c8de516c54767c7cf7d5239d404810be891ed3d56ec2111db3dc4c2b07dcdb0b",
+      "elements": [
+        {
+          "ordinal": 1,
+          "from": 400,
+          "to": 500,
+          "T1": 200.0,
+          "P1": 30.0,
+          "density": 1.01,
+          "pointers": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "ordinal": 2,
+          "from": 500,
+          "to": 600,
+          "T1": 180.0,
+          "P1": 20.0,
+          "density": 1.01,
+          "pointers": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "auxiliary": {
+        "RIGID": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "weight": 100.0
+            }
+          ]
+        },
+        "RESTRANT": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "slot": 1,
+              "node": 500
+            }
+          ]
+        },
+        "DISPLMNT": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "slot": 1,
+              "node": 500
+            }
+          ]
+        },
+        "FORCMNT": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "slot": 1,
+              "node": 500
+            }
+          ]
+        }
+      },
+      "materials": [
+        1,
+        1
+      ],
+      "numnoz": 0,
+      "nohgrs": 0,
+      "izup": 0,
+      "trailingMiscRowsUnqualified": 0
+    },
+    "SYNTH_V14_TARGET0.cii": {
+      "bytes": 8276,
+      "sha256": "0bbc3b0a8b7b1e73d655d0a0ffc267e6a698dec5ff66763c468cdc835cc19661",
+      "elements": [
+        {
+          "ordinal": 1,
+          "from": 840,
+          "to": 850,
+          "T1": 195.0,
+          "P1": 28.0,
+          "density": 1.01,
+          "pointers": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "ordinal": 2,
+          "from": 850,
+          "to": 860,
+          "T1": 175.0,
+          "P1": 18.0,
+          "density": 1.01,
+          "pointers": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "auxiliary": {
+        "RIGID": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "weight": 100.0
+            }
+          ]
+        },
+        "RESTRANT": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "slot": 1,
+              "node": 850
+            }
+          ]
+        },
+        "DISPLMNT": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "slot": 1,
+              "node": 850
+            }
+          ]
+        },
+        "FORCMNT": {
+          "blocks": 1,
+          "records": [
+            {
+              "owner": 1,
+              "pointer": 1,
+              "slot": 1,
+              "node": 850
+            }
+          ]
+        }
+      },
+      "materials": [
+        1,
+        1
+      ],
+      "numnoz": 0,
+      "nohgrs": 0,
+      "izup": 0,
+      "trailingMiscRowsUnqualified": 0
+    }
+  },
+  "seededWrongNumeltRejected": true,
+  "originalProtectedFile": "NOT_RECEIVED / NOT_RUN",
+  "oracleExposure": "catalog author-exposed; raw fields independently decoded; no vendor acceptance"
+}

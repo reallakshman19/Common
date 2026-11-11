@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: literal physical fields of element 1 accepted
+ok 1 - literal physical fields of element 1 accepted
+  ---
+  duration_ms: 2.608048
+  type: 'test'
+  ...
+# Subtest: literal physical fields of element 2 accepted
+ok 2 - literal physical fields of element 2 accepted
+  ---
+  duration_ms: 0.202479
+  type: 'test'
+  ...
+# Subtest: pressure 130 cannot satisfy 30
+ok 3 - pressure 130 cannot satisfy 30
+  ---
+  duration_ms: 1.464781
+  type: 'test'
+  ...
+# Subtest: wrong pressure cannot hide in byte span
+ok 4 - wrong pressure cannot hide in byte span
+  ---
+  duration_ms: 0.633215
+  type: 'test'
+  ...
+# Subtest: temperature 1200 cannot satisfy 200
+ok 5 - temperature 1200 cannot satisfy 200
+  ---
+  duration_ms: 0.329095
+  type: 'test'
+  ...
+# Subtest: density 11.01 cannot satisfy 1.01
+ok 6 - density 11.01 cannot satisfy 1.01
+  ---
+  duration_ms: 0.721254
+  type: 'test'
+  ...
+# Subtest: correct values at wrong physical address fail
+ok 7 - correct values at wrong physical address fail
+  ---
+  duration_ms: 0.563912
+  type: 'test'
+  ...
+# Subtest: wrong field identity fails
+ok 8 - wrong field identity fails
+  ---
+  duration_ms: 0.269328
+  type: 'test'
+  ...
+# Subtest: wrong ordinal fails
+ok 9 - wrong ordinal fails
+  ---
+  duration_ms: 0.651281
+  type: 'test'
+  ...
+# Subtest: reversed member fails
+ok 10 - reversed member fails
+  ---
+  duration_ms: 0.418237
+  type: 'test'
+  ...
+# Subtest: unqualified field cannot claim accepted semantics
+ok 11 - unqualified field cannot claim accepted semantics
+  ---
+  duration_ms: 0.444977
+  type: 'test'
+  ...
+# Subtest: extra parallel element cannot pass unique selection
+ok 12 - extra parallel element cannot pass unique selection
+  ---
+  duration_ms: 0.265612
+  type: 'test'
+  ...
+# Subtest: complete node ownership witness accepted
+ok 13 - complete node ownership witness accepted
+  ---
+  duration_ms: 0.506557
+  type: 'test'
+  ...
+# Subtest: wrong owner
+ok 14 - wrong owner
+  ---
+  duration_ms: 0.69823
+  type: 'test'
+  ...
+# Subtest: pointer 10 prefix
+ok 15 - pointer 10 prefix
+  ---
+  duration_ms: 0.321615
+  type: 'test'
+  ...
+# Subtest: wrong slot
+ok 16 - wrong slot
+  ---
+  duration_ms: 0.374743
+  type: 'test'
+  ...
+# Subtest: type 10 prefix
+ok 17 - type 10 prefix
+  ---
+  duration_ms: 0.316267
+  type: 'test'
+  ...
+# Subtest: wrong connection node
+ok 18 - wrong connection node
+  ---
+  duration_ms: 0.532055
+  type: 'test'
+  ...
+# Subtest: wrong displacement specification
+ok 19 - wrong displacement specification
+  ---
+  duration_ms: 0.442683
+  type: 'test'
+  ...
+# Subtest: rigid weight 1000 prefix
+ok 20 - rigid weight 1000 prefix
+  ---
+  duration_ms: 0.386711
+  type: 'test'
+  ...
+# Subtest: missing incident rejected
+ok 21 - missing incident rejected
+  ---
+  duration_ms: 0.343526
+  type: 'test'
+  ...
+# Subtest: duplicate attachment rejected
+ok 22 - duplicate attachment rejected
+  ---
+  duration_ms: 0.357327
+  type: 'test'
+  ...
+# Subtest: reverse orientation has no rows
+ok 23 - reverse orientation has no rows
+  ---
+  duration_ms: 0.283568
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 198.933601

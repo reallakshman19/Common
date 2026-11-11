@@ -1,0 +1,44 @@
+CII Workspace OD-scaled multi-basis geometry authority checks passed.
+✔ tests/cii-workspace-geometry-authority.test.js (246.649212ms)
+node:fs:621
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open '/workspace/scratch/a4187d1acd61/n01-review/candidate/Benchmark/T.CII'
+    at Object.openSync (node:fs:621:18)
+    at readFileSync (node:fs:487:35)
+    at fixture (file:///workspace/scratch/a4187d1acd61/n01-review/candidate/tests/cii-workspace-geometry-discrepancy-review.test.js:11:18)
+    at file:///workspace/scratch/a4187d1acd61/n01-review/candidate/tests/cii-workspace-geometry-discrepancy-review.test.js:16:22
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/workspace/scratch/a4187d1acd61/n01-review/candidate/Benchmark/T.CII'
+}
+
+Node.js v24.22.1
+✖ tests/cii-workspace-geometry-discrepancy-review.test.js (233.567302ms)
+✔ original bytes reconstruct forward and reverse signed 3D physical centerline (23.619421ms)
+✔ independent disconnected component remains physically disjoint (9.014302ms)
+✔ wrong original hash and unit interpretation fail closed (9.216693ms)
+✔ cycle contradiction is rejected and cannot mint an extra node (1.298833ms)
+✔ corrupt original bytes and invalid element count are refused (5.892166ms)
+✔ native element CONTROL counts reject missing/extra records (2.925367ms)
+✔ NODENAME pointer uses native row-13 first field and fails when out of range (2.907666ms)
+✔ native COORDS accepts adjoining signed coordinate as in original S2 (12.187806ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 430.96398
+
+✖ failing tests:
+
+test at tests/cii-workspace-geometry-discrepancy-review.test.js:1:1
+✖ tests/cii-workspace-geometry-discrepancy-review.test.js (233.567302ms)
+  'test failed'

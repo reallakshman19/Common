@@ -1,0 +1,66 @@
+[
+  {
+    "path": "payload/evidence/geometry.tap",
+    "starts_bom": true,
+    "restored_bytes": 4000,
+    "sha256": "90ee64968510c6ccb8105c2cf0e12b6f0c01172fac5ba96a68c0ecaf466c6f83",
+    "git_blob_match": true,
+    "manifest_match": true,
+    "summary": [
+      "# tests 9",
+      "# pass 9",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0"
+    ]
+  },
+  {
+    "path": "payload/evidence/repair.tap",
+    "starts_bom": true,
+    "restored_bytes": 6578,
+    "sha256": "d62c67d85ebffd2dc33c60f736c152cce376b862c5150382e651fe12012e4548",
+    "git_blob_match": true,
+    "manifest_match": true,
+    "summary": [
+      "# tests 13",
+      "# pass 13",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0"
+    ]
+  },
+  {
+    "path": "payload/evidence/required-three.tap",
+    "starts_bom": true,
+    "restored_bytes": 7554,
+    "sha256": "181b25da5c652d5fed26c2a580abd9717a445be17ddd5e19c23448d2ec6a9a65",
+    "git_blob_match": true,
+    "manifest_match": true,
+    "summary": [
+      "# tests 17",
+      "# pass 17",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0"
+    ]
+  },
+  {
+    "path": "payload/evidence/vnext-all-complete.tap",
+    "starts_bom": true,
+    "restored_bytes": 56542,
+    "sha256": "6b62173c200a36995ef40e584f882f3f61cf40cd2565fd2cec6b473d3343104a",
+    "git_blob_match": true,
+    "manifest_match": true,
+    "summary": [
+      "# tests 124",
+      "# pass 123",
+      "# fail 1",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0"
+    ]
+  }
+]
