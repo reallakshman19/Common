@@ -366,3 +366,27 @@ amendments:
     allowed_paths:
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_evidence_identity_red.py
       - skills/engineering-pr-delivery-v3.2/tests/test_continuity_v32_865_custody_red.py
+
+  # Candidate only. This row is deliberately NOT approved; base-pinned Owner
+  # authorization and subsequent governance merge are separate required actions.
+  - id: AMEND-V32-BUDDY-CONTINUITY-017
+    owner_authorized: false
+    owner_basis: >-
+      OWNER DECISION PENDING. Historical Owner request to operate planned Buddy
+      Runner and technical handover via relay Markdown, formerly recorded at
+      reallaksh19/Common issues #889 and #890; resumed in the canonical
+      reallakshman19/Common issue #4. Generic 'proceed next' does not authorize
+      alteration of the frozen V3.2 runtime. Explicit Owner approval of this
+      four-path exception and separate governance merge are still required.
+    summary: >-
+      PROPOSED and DISABLED. Add issue-scoped, immutable, SHA256-readback Markdown
+      message transactions under relay/CONTINUITY/episodes without replacing
+      existing V3.2 handover, accepted facts, lease/custody, DELP progress or
+      executive/reviewer authority. Exact original-source Stage1 intake and
+      bounded positive/negative transaction regressions. No Stage2 promotion,
+      agent-launch credentials or declaration of actual read isolation.
+    allowed_paths:
+      - skills/engineering-pr-delivery-v3.2/schemas/transaction.schema.yaml
+      - skills/engineering-pr-delivery-v3.2/scripts/relay_tx.py
+      - skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
+      - skills/engineering-pr-delivery-v3.2/tests/test_relay_tx.py
