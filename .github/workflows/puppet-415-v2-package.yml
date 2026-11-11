@@ -1,0 +1,46 @@
+name: Puppet 415 corrected v2 package qualification
+on:
+  pull_request:
+    paths:
+      - 'docs/puppetry/issue-415-corrected-v2/**'
+      - '.github/workflows/puppet-415-v2-package.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  editable-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate four distinct scenes and ASCII panels (SOURCE-ONLY)
+        run: python3 docs/puppetry/issue-415-corrected-v2/verify_corrected_v2.py
+      - name: Verify exact four-scene dialogue parity and timed slots
+        run: python3 docs/puppetry/issue-415-corrected-v2/story_parity.py
+      - name: Screen candidate dimensions, holes, joints and safer bow
+        run: python3 docs/puppetry/issue-415-corrected-v2/geometry_gate.py
+      - name: Falsify dimension and timing regressions (synthetic checks)
+        run: python3 -m unittest discover -s docs/puppetry/issue-415-corrected-v2/tests -v
+      - name: Explicitly classify the limited result
+        run: echo 'Source and CANDIDATE_GEOMETRY are screened only; v2 PDFs absent and no physical fabrication approval.' >> "$GITHUB_STEP_SUMMARY"
+  exact-binary-custody:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PDF inspection reader
+        run: python3 -m pip install "PyMuPDF>=1.24,<2"
+      - name: Require actual ZIP bytes committed in this draft PR
+        run: |
+          test -f docs/puppetry/issue-415-corrected-v2/source-package/Narasimha_Puppet_Show_CORRECTED_v2.zip || {
+            echo 'BLOCKED: corrected ZIP not committed to GitHub; manifest is not custody.'
+            exit 1
+          }
+      - name: Check exact ZIP SHA-256 and distinct King/Prahlada/Narasimha/storyboard PDFs
+        run: |
+          python3 docs/puppetry/issue-415-corrected-v2/verify_corrected_v2.py \
+            --zip docs/puppetry/issue-415-corrected-v2/source-package/Narasimha_Puppet_Show_CORRECTED_v2.zip

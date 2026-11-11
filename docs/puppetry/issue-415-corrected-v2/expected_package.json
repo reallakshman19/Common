@@ -1,0 +1,40 @@
+{
+  "package": "Narasimha_Puppet_Show_CORRECTED_v2.zip",
+  "zip_sha256": "f31114ef84bcf5d615cde1f43b1356639f303a6f905761cd190e889c2e3211d1",
+  "expected_members": 47,
+  "expected_pdf_members": 29,
+  "notes": "ZIP was verified in the conversation workspace. THE ORIGINAL ARCHIVE AND PDF BINARIES ARE NOT YET GITHUB-COMMITTED. This is a custody comparison inventory, not a completed upload.",
+  "key_members": [
+    {
+      "path": "QUICK_PRINT/01_KING.pdf",
+      "sha256": "d48db03c9433ab0463ed71ef6dd50928f18b6944814b13c6544984053b5e028f",
+      "pages": 2,
+      "marker": "KING HIRANYAKASHIPU",
+      "provenance": "NEW_CANDIDATE_NOT_RECOVERED_ORIGINAL"
+    },
+    {
+      "path": "QUICK_PRINT/02_PRAHLADA.pdf",
+      "sha256": "8d9e87df05a3b2b9075703c9bc4076a27de708824e1102548c360f4da170c78c",
+      "pages": 2,
+      "marker": "PRAHLADA",
+      "provenance": "NEW_CANDIDATE_NOT_RECOVERED_ORIGINAL"
+    },
+    {
+      "path": "QUICK_PRINT/03_NARASIMHA.pdf",
+      "sha256": "d5b5fc29e7e2d510e9f992d5fcf6aea31f21aff82998b97e051feac7c860095c",
+      "pages": 1,
+      "marker": "CUTTING TEMPLATE - ACTUAL SIZE",
+      "provenance": "EXTRACTED_FROM_SUPPLIED_ORIGINAL_CANDIDATE"
+    },
+    {
+      "path": "QUICK_PRINT/04_STORYBOARD_4_SCENES.pdf",
+      "sha256": "648a89d164be23e7f1cdd2ff94ae6543f9650930a7411d36c485a06b86f18a2f",
+      "pages": 4,
+      "marker": "STORYBOARD - SCENE 1",
+      "provenance": "DISTINCT_FOUR_SCENE_ASCII_STORYBOARD"
+    }
+  ],
+  "pillars_path": "05_STAGE_AND_PILLAR/PILLAR_DOORS_ONLY_Trial_100pct_A4.pdf",
+  "separate_door_templates_only_in_stage_folder": true,
+  "status": "TEXT_INTAKE_COMMITTED__BINARY_TRANSFER_PENDING__PHYSICAL_ACCEPTANCE_NOT_RUN"
+}
