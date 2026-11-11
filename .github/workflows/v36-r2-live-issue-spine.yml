@@ -1,0 +1,98 @@
+name: v3.6 R2 one-issue GitHub live spine
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.6/**'
+      - '.github/workflows/v36-r2-live-issue-spine.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  source-first-live-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing native v3.6 Python requirements
+        run: python3 -m pip install -r skills/engineering-pr-delivery-v3.6/requirements.txt
+      - name: Full native v3.6 suite, R2 adversarial index tests
+        run: python3 -m unittest discover -s skills/engineering-pr-delivery-v3.6/tests -p 'test_*.py' -v
+      - name: One issue URL -> real provider index, comments, pinned C1B/C1/C2 docs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/issue_spine_read_v36.py --issue-url https://github.com/reallakshman19/Common/issues/400 > /tmp/r2-live-audit.json
+          python3 - <<'PY'
+          import json
+          v=json.load(open("/tmp/r2-live-audit.json",encoding="utf-8"))
+          assert v["schema"]=="v36.live-issue-spine-audit/v1"
+          assert v["index_comment_id"]==6223440822
+          assert v["references_total"]==8
+          assert v["references_observed"]==8,(v["missing_or_contradicted"],v["versioned_contracts"])
+          chain=v["event_chronology"]
+          assert v["status"]=="LIVE_INDEX_OBSERVED_CHRONOLOGY_PROVIDER_ONLY"
+          assert chain["status"]=="PROVIDER_OBSERVED_UNEDITED_CONTIGUOUS_NOT_OWNER_APPROVED",chain
+          assert chain["event_count"]==2 and chain["pinned_c1b_prefix_events"]==1
+          assert chain["last_event_id"]=="EV-0002"
+          assert chain["provider_observed_contiguous"] is True
+          assert chain["owner_authenticated"] is False
+          assert chain["provider_append_only_immutability_guaranteed"] is False
+          assert v["source_cut_current"] is True
+          assert v["owner_accepted"] is False and v["semantic_accepted"] is False
+          assert v["complete_golden_accepted"] is False
+          assert v["twelve_section_recovery_complete"] is False
+          assert v["may_publish"] is False and v["may_count_for_o2"] is False
+          assert any("FOREIGN_PARENT_EXAMPLE" in p["status"] for p in v["versioned_contracts"])
+          assert any("NOT_REATTESTED" in p["status"] for p in v["versioned_contracts"])
+          assert any(p.get("source_refs_matched")==1 for p in v["versioned_contracts"])
+          print("R2_REAL_GITHUB_ONE_ISSUE_READ_8_OF_8_WITH_2_LINKED_EVENTS")
+          print("R2_FOREIGN_PARENT_AND_EXTERNAL_MANIFEST_NOT_ACCEPTED")
+          PY
+      - name: Existing v3.6 cold successor one issue URL to twelve cited sections
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 skills/engineering-pr-delivery-v3.6/scripts/successor_v36.py cold --issue-url https://github.com/reallakshman19/Common/issues/400 > /tmp/v36-r3-twelve.md
+          python3 - <<'PY'
+          from pathlib import Path
+          body=Path("/tmp/v36-r3-twelve.md").read_text(encoding="utf-8")
+          assert body.startswith("<!-- v36-native-r3-cold-recovery -->")
+          assert body.count("\nSource references:\n")==12,"R3_SECTION_UNCITED"
+          assert "## 1. Original Owner problem and why" in body
+          assert "## 12. Next reproducible verification and successor handover" in body
+          assert "119/119" in body
+          assert "UNKNOWN" in body and "423" in body
+          assert "EVENT_0002" in body
+          assert "Authority: NOT Owner authenticated" in body
+          assert "STOP: No approval or release inferred" in body
+          print("R3_REAL_EXISTING_COLD_SUCCESSOR_ONE_URL_12_OF_12_CITED")
+          PY
+      - name: Upload generated twelve-section cold handover for independent inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: v36-r3-issue400-twelve-section-handover
+          path: /tmp/v36-r3-twelve.md
+          if-no-files-found: error
+          retention-days: 14
+      - name: Standalone no older Relay or draft imports
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          f=Path("skills/engineering-pr-delivery-v3.6/scripts/issue_spine_read_v36.py")
+          names=set()
+          for n in ast.walk(ast.parse(f.read_text(encoding="utf-8"))):
+              if isinstance(n,ast.Import):names.update(x.name.split(".")[0] for x in n.names)
+              if isinstance(n,ast.ImportFrom):names.add((n.module or "").split(".")[0])
+          assert names<={"__future__","argparse","base64","hashlib","json","os","re","urllib"}
+          print("R2_NO_RUNTIME_IMPORT_OLD_RELAY_OR_UNMERGED_DRAFTS")
+          PY
