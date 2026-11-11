@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "uuid": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "instant": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ$"
+    },
+    "repository": {
+      "type": "object",
+      "properties": {"id": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[1-9][0-9]{0,19}$"}, "name": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"}},
+      "required": ["id", "name"],
+      "additionalProperties": false
+    },
+    "mailbox": {
+      "type": "object",
+      "properties": {"repository": {"$ref": "common.schema.json#/$defs/repository"}, "issue_number": {"type": "integer", "minimum": 1, "maximum": 9007199254740991}, "visibility": {"enum": ["PUBLIC", "PRIVATE"]}},
+      "required": ["repository", "issue_number", "visibility"],
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "properties": {"project_id": {"$ref": "common.schema.json#/$defs/id"}, "work_id": {"$ref": "common.schema.json#/$defs/id"}, "lane_id": {"$ref": "common.schema.json#/$defs/id"}, "assignment_id": {"$ref": "common.schema.json#/$defs/id"}, "run_id": {"$ref": "common.schema.json#/$defs/id"}, "binding_id": {"$ref": "common.schema.json#/$defs/id"}, "coordinator_id": {"$ref": "common.schema.json#/$defs/id"}, "session_id": {"$ref": "common.schema.json#/$defs/id"}, "chat_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 512}, "binding_generation": {"type": "integer", "minimum": 1, "maximum": 9007199254740991}, "expected_label_sha": {"$ref": "common.schema.json#/$defs/sha256"}},
+      "required": ["project_id", "work_id", "lane_id", "assignment_id", "run_id", "binding_id", "coordinator_id", "session_id", "chat_id", "binding_generation", "expected_label_sha"],
+      "additionalProperties": false
+    },
+    "refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 2048},
+      "minItems": 0,
+      "maxItems": 64
+    },
+    "action": {
+      "enum": ["DIRECTIVE", "DECISION_RESOLVE", "RECON_MODE", "PAUSE_WORK", "RESUME_WORK"]
+    }
+  }
+}

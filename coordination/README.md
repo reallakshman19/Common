@@ -2,6 +2,10 @@
 
 Interactive multi-session, multi-tab coordination cockpit and high-performance web dashboard for tracking engineering handovers, decision registers, checkpoints, lineage, and QRT agent monitor boards across `reallakshman19/Common/coordination` and multiple external projects.
 
+Provider-neutral agent exchange: [Common Agent Session Protocol 1.0.0](session-protocol/README.md).
+Start with [the agent entry point](session-protocol/AGENT.md) for manual GitHub request/reply use across
+Claude, ChatGPT/Codex, Antigravity and other existing sessions. This additive package does not activate transport or schedules.
+
 Target repository branch commit: [`9d176f8e74bd71c7aa041aababd90ed31455bd9c`](https://github.com/reallakshman19/Common/tree/9d176f8e74bd71c7aa041aababd90ed31455bd9c/coordination).
 
 ---

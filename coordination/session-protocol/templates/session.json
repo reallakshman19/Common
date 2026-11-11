@@ -1,0 +1,55 @@
+{
+  "protocol_version": "1.0.0",
+  "protocol_ref": "<owner/repo>@<full-candidate-commit>:coordination/session-protocol",
+  "session_id": "<unique-session-id>",
+  "agent_id": "<registered-agent-id>",
+  "revision": 1,
+  "lifecycle": "HOLD",
+  "provider": {
+    "kind": "claude",
+    "instance_id": "<observed-instance-id>",
+    "capabilities": [
+      "MANUAL_READ",
+      "MANUAL_REPLY"
+    ]
+  },
+  "bindings": [
+    {
+      "target": {
+        "project_id": "<project_id>",
+        "work_id": "<work_id>",
+        "lane_id": "<lane_id>",
+        "assignment_id": "<assignment_id>",
+        "run_id": "<run_id>",
+        "binding_id": "<binding_id>",
+        "coordinator_id": "<coordinator_id>",
+        "session_id": "<session_id>",
+        "chat_id": null,
+        "binding_generation": 1,
+        "expected_label_sha": "<expected_label_sha>"
+      },
+      "repository": {
+        "id": "<observed-repository-id>",
+        "name": "<owner/repo>"
+      },
+      "mailbox": {
+        "repository": {
+          "id": "<observed-control-repository-id>",
+          "name": "<owner/private-control-repo>"
+        },
+        "issue_number": 1,
+        "visibility": "PRIVATE"
+      },
+      "mode": "REPORT_ONLY",
+      "allowed_actions": [
+        "DIRECTIVE",
+        "RECON_MODE",
+        "PAUSE_WORK"
+      ],
+      "write_paths": [],
+      "authority_refs": [
+        "<actual-existing-Owner-authority-ref>"
+      ]
+    }
+  ]
+}
