@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ONB-RWI WP3 bounded source-claim reconstruction (not provider certification)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "target",
+    "events",
+    "code_path",
+    "test_results",
+    "first_verification"
+  ],
+  "properties": {
+    "schema": {
+      "const": "onboarding.reconstruction/v1"
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "issue",
+        "source_heads",
+        "candidate_heads",
+        "observed_at"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "issue": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_heads": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          }
+        },
+        "candidate_heads": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^https://github\\.com/"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          }
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "repository",
+          "source_sha",
+          "source_url",
+          "recorded_at",
+          "actor",
+          "summary",
+          "visibility",
+          "supersedes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "kind": {
+            "enum": [
+              "ORIGINAL_PROBLEM",
+              "OWNER_AMENDMENT",
+              "DECISION",
+              "INVESTIGATION",
+              "CODE_CHANGE",
+              "TEST_RESULT",
+              "BENCHMARK",
+              "REJECTED_PATH",
+              "BLOCKER"
+            ]
+          },
+          "repository": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+          },
+          "source_sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "source_url": {
+            "type": "string",
+            "pattern": "^https://github\\.com/"
+          },
+          "recorded_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actor": {
+            "enum": [
+              "REPORTED_OWNER",
+              "ENGINEER",
+              "REVIEWER",
+              "COORDINATOR",
+              "UNKNOWN"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 5000
+          },
+          "visibility": {
+            "enum": [
+              "PUBLIC",
+              "RESTRICTED",
+              "PRIVATE"
+            ]
+          },
+          "supersedes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "code_path": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "repository",
+          "revision",
+          "source_url",
+          "path",
+          "symbol",
+          "role",
+          "line_start",
+          "line_end",
+          "line_sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "repository": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+          },
+          "revision": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "source_url": {
+            "type": "string",
+            "pattern": "^https://github\\.com/"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "symbol": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "enum": [
+              "ENTRYPOINT",
+              "OWNING_LAYER",
+              "DOWNSTREAM_CONSUMER",
+              "TEST_ORACLE"
+            ]
+          },
+          "line_start": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "line_end": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "line_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "test_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "repository",
+          "candidate_sha",
+          "source_url",
+          "command",
+          "status",
+          "oracle",
+          "expected",
+          "observed"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "repository": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+          },
+          "candidate_sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "source_url": {
+            "type": "string",
+            "pattern": "^https://github\\.com/"
+          },
+          "command": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "NOT_RUN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "oracle": {
+            "enum": [
+              "REPORTED_INDEPENDENT",
+              "SYNTHETIC",
+              "IMPLEMENTATION_COUPLED",
+              "UNKNOWN"
+            ]
+          },
+          "expected": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observed": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "first_verification": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2000
+    }
+  }
+}
