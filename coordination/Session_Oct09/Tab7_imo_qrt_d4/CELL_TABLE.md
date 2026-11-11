@@ -1,5 +1,7 @@
 # Tab7 / AGENT-D4 — seven distinct QRT D4 cell technical table
 
+> **Current evidence (14 Oct 2026):** This table is the preserved 12 October worker snapshot. For active exact-head source/ZIP pointers, RETRIEVE/MODEL correction stacks, classification holds and unresolved Owner decisions, read [CURRENT-D4-EVIDENCE.md](CURRENT-D4-EVIDENCE.md) before using any row below. No academic or Owner acceptance is inferred.
+
 Owner governing master: `relay/AIM/IMO-CORE-BLUEPRINTS.yaml` v3.1.0 / label_sha 2ff9246. This is a Tab7 local worker evidence inventory; **not** a replacement for central 28-cell monitor, independent academic decision, Owner golden signoff, code merge or learner release.
 
 | Named cell | Distinct original TEST mathematics | Sole-renderer five-role technical evidence | Scope commit / draft PR | Independent qualified review | Owner accepted |
