@@ -1,0 +1,82 @@
+{
+  "fixture_kind": "SYNTHETIC_NOT_LIVE",
+  "schema_version": "1.0.0",
+  "source": {
+    "project_id": "common",
+    "repo_id": "1412133785",
+    "repo_full_name": "reallakshman19/Common",
+    "kind": "ISSUE_COMMENT",
+    "entity_id": "6158449012",
+    "revision_id": "synthetic-3",
+    "issue_number": 373,
+    "comment_id": "6158449012",
+    "body_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "created_at_utc": "2026-10-14T00:55:35Z",
+    "updated_at_utc": "2026-10-14T00:58:00Z",
+    "url": "https://github.com/reallakshman19/Common/issues/373#issuecomment-6158449012"
+  },
+  "bindings": [
+    {
+      "project_id": "common",
+      "work_id": "common-360-dash-master",
+      "lane_id": "m1",
+      "assignment_id": "dash-master-m1",
+      "run_id": "dash-master-r2-20261014",
+      "provider_kind": "chatgpt"
+    }
+  ],
+  "report": {
+    "task_id": "M1-U01",
+    "reported_status": "ACTIVE",
+    "reported_verdict": "PASS",
+    "candidate_sha": "1111111111111111111111111111111111111111"
+  },
+  "coordinator": {
+    "liveness": "UNKNOWN",
+    "probe_status": "NEVER_PROBED"
+  },
+  "source_state": "REACHABLE",
+  "freshness": "FRESH",
+  "completed_scan": true,
+  "present": true,
+  "observations": [
+    [
+      "2026-10-14T00:55:35Z",
+      "synthetic A"
+    ],
+    [
+      "2026-10-14T00:56:35Z",
+      "synthetic B"
+    ],
+    [
+      "2026-10-14T00:57:35Z",
+      "synthetic A"
+    ],
+    [
+      "2026-10-14T00:57:35Z",
+      "synthetic A"
+    ]
+  ],
+  "second_repo": {
+    "project_id": "aa3",
+    "repo_id": "1363905693",
+    "repo_full_name": "reallakshman19/AA3",
+    "kind": "ISSUE_COMMENT",
+    "entity_id": "6158449012",
+    "revision_id": "synthetic-crossrepo",
+    "issue_number": 1,
+    "comment_id": "6158449012",
+    "url": "https://github.com/reallakshman19/AA3/issues/1#issuecomment-6158449012"
+  },
+  "expected": {
+    "identity_key": "1412133785:ISSUE_COMMENT:6158449012",
+    "second_identity_key": "1363905693:ISSUE_COMMENT:6158449012",
+    "binding_state": "BOUND",
+    "reported_verdict": "PASS",
+    "review_verdict": "UNKNOWN",
+    "coordinator_liveness": "UNKNOWN",
+    "absence": "PRESENT",
+    "versions": 3,
+    "unique_digests": 2
+  }
+}

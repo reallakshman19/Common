@@ -1,0 +1,11 @@
+{
+  "protocol_ref": "reallakshman19/Common@d9180904af5c6a54c4ea42213af68422087e7da7:coordination/session-protocol",
+  "tool_source_sha256": "d0e4340ecfb3b270e1141ca9b66f5ac9beea0e95ccf60399cec9bdd9490bb556",
+  "schema_sha256": {
+    "common.schema.json": "10b20d6ccc4f973cd77593ee875ab1f99e9422e9ae0aab9a54f3b67f4c2667bc",
+    "message.schema.json": "1c39848c86c6e17ccc93e6ffe691e2e69efdfca60f3ce8e12973985f38d7e65c",
+    "session.schema.json": "47f66c525f2068bef1aca184518f32a61252c67810f799274d8c0c38f1853448",
+    "source-observation.schema.json": "e7d1212ff24bfc3d7b76ad72ece8e614e55ca88a7886df7d01dabbb39c0d518e"
+  },
+  "adaptation": "Backend-only validator path/pin checks and safe structural projection; no schema changes, authority or activation"
+}
