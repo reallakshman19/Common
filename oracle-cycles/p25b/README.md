@@ -3,6 +3,8 @@
 **Canonical activation and assignment:** [CURRENT.json](CURRENT.json) on **`main`**.
 
 - [Historical plan and pilot boundaries](PLAN.md)
+- [Complete private file custody and Oracle handover plan](FILE-CUSTODY-HANDOVER-PLAN.md)
+- [Prepared CIIFR R3 successor checkpoint](CIIFR-R3-ORACLE-SUCCESSOR.md)
 - [Read current structured state](CURRENT.json)
 - [Shared Cycle now protocol](../PROTOCOL.md)
 - [Append-only receipt issue #465](https://github.com/reallakshman19/Common/issues/465)
