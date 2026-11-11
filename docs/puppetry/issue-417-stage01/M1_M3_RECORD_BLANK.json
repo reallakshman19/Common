@@ -1,0 +1,81 @@
+{
+  "schema": "puppet-stage01-physical-evidence/v1",
+  "case_issue": "https://github.com/reallakshman19/Common/issues/417",
+  "assessed_commit": "",
+  "assembly_revision": "CANDIDATE_NOT_PHYSICALLY_ASSEMBLED",
+  "observer": "",
+  "test_date": "",
+  "evidence": {
+    "actual_operators": null,
+    "printed_100mm_bar_measured_mm": null,
+    "actual_narasimha_with_control_rods": null,
+    "m1_clearance_by_position": {
+      "approach": {
+        "minimum_clearance_mm": null,
+        "rods_included": null,
+        "notes": ""
+      },
+      "door_plane": {
+        "minimum_clearance_mm": null,
+        "rods_included": null,
+        "notes": ""
+      },
+      "emerged": {
+        "minimum_clearance_mm": null,
+        "rods_included": null,
+        "notes": ""
+      }
+    },
+    "m2_trials": [
+      {
+        "trial": 1,
+        "opened": null,
+        "stayed_open": null,
+        "reveal_clear": null,
+        "no_jam": null,
+        "notes": ""
+      },
+      {
+        "trial": 2,
+        "opened": null,
+        "stayed_open": null,
+        "reveal_clear": null,
+        "no_jam": null,
+        "notes": ""
+      },
+      {
+        "trial": 3,
+        "opened": null,
+        "stayed_open": null,
+        "reveal_clear": null,
+        "no_jam": null,
+        "notes": ""
+      },
+      {
+        "trial": 4,
+        "opened": null,
+        "stayed_open": null,
+        "reveal_clear": null,
+        "no_jam": null,
+        "notes": ""
+      },
+      {
+        "trial": 5,
+        "opened": null,
+        "stayed_open": null,
+        "reveal_clear": null,
+        "no_jam": null,
+        "notes": ""
+      }
+    ],
+    "m3_operator_handoff": {
+      "no_unplanned_hands": null,
+      "all_controls_reachable": null,
+      "hands_by_operator": ""
+    },
+    "frame_stable": null,
+    "no_sharp_edges_or_pinches": null
+  },
+  "evidence_refs": [],
+  "notes": "BLANK TEMPLATE. NOT_RUN; do not write PASS without real observed measurements and independent review."
+}

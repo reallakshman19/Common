@@ -1,0 +1,32 @@
+name: Puppet 415 stage-01 candidate geometry
+on:
+  pull_request:
+    paths:
+      - 'docs/puppetry/issue-417-stage01/**'
+      - '.github/workflows/puppet-415-stage01.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate-screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: PDF vector verification dependencies
+        run: python3 -m pip install "reportlab>=4.0,<5" "PyMuPDF>=1.24,<2"
+      - name: Stage and mock-up falsifier tests (NOT physical acceptance)
+        run: python3 -m unittest discover -s docs/puppetry/issue-417-stage01/tests -v
+      - name: Candidate stage screen (NOT mechanical test)
+        run: python3 docs/puppetry/issue-417-stage01/stage_model.py
+      - name: Rebuild disposable A4 trial PDF
+        run: |
+          python3 docs/puppetry/issue-417-stage01/make_mockup_kit.py             docs/puppetry/issue-417-stage01/mockup_candidate_v1.json             "$RUNNER_TEMP/STAGE01_MOCKUP_TRIAL_100pct_A4.pdf"
+      - name: Save downloadable trial PDF (not product acceptance)
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage01-mockup-trial-a4-not-approved
+          path: ${{ runner.temp }}/STAGE01_MOCKUP_TRIAL_100pct_A4.pdf
+          retention-days: 30
