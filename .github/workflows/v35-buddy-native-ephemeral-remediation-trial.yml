@@ -1,0 +1,221 @@
+name: v35-buddy-native-ephemeral-remediation-trial
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_fixture_migration.py'
+      - 'skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_cross_issue_concurrency.py'
+      - '.github/workflows/v35-buddy-native-ephemeral-remediation-trial.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ephemeral-native-ingress-replay:
+    name: Ephemeral patched native ingress - 16+11 real cases
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: issue16-tests
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: 22c20a6a3aa7a741e7452cf3dddf75299d08b30b
+          path: issue6-diagnostic
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install native dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Print exact source and readback identity
+        run: |
+          set -euo pipefail
+          echo "ISSUE16_EXACT_SHA=$(git -C issue16-tests rev-parse HEAD)"
+          echo "PROTECTED_NATIVE_PREIMAGE=$(git -C native-candidate rev-parse HEAD)"
+          echo "ISSUE6_NEGATIVE_SOURCE=$(git -C issue6-diagnostic rev-parse HEAD)"
+      - name: Stage advisory repair in disposable native candidate only
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Execute actual 16-case wrapper/core chain on dirty native worktree
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_full_buddy_chain.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Execute actual 11-case issue6 ingress/serial suite on dirty native worktree
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          cp issue6-diagnostic/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_ingress_issue6.py \
+             native-candidate/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_ingress_issue6.py
+          python native-candidate/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_ingress_issue6.py -v
+      - name: Record dirty source and remaining governance/concurrency hold
+        if: always()
+        run: |
+          git -C native-candidate rev-parse HEAD
+          git -C native-candidate status --short
+          git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
+          echo 'This trial patched a DISPOSABLE native checkout. Immutable GitHub PR2 remains unchanged.'
+          echo 'The same-issue distinct TX concurrency race remains UNRESOLVED_OWNER_POLICY.'
+          echo 'This is NOT original-B authorship, external read denial, final freeze, Stage2, native grant, or custody.'
+
+  ephemeral-native-legacy-regressions:
+    name: Ephemeral patch versus original native suite - report genuine failures
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: issue16-tests
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install native dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Stage same advisory patch in disposable checkout
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Execute complete native relay transaction test module - no skipped/xfail
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          cd native-candidate
+          python -m unittest discover -s skills/engineering-pr-delivery-v3.2/tests -p 'test_relay_tx.py' -v
+      - name: Report exact native and ephemeral source identities
+        if: always()
+        run: |
+          git -C native-candidate rev-parse HEAD
+          git -C native-candidate status --short
+          git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
+          echo 'An unmodified native fixture may fail strict Stage1 H1; do NOT mislabel as production native qualification.'
+
+  ephemeral-native-migrated-fixtures:
+    name: Ephemeral original native suite with seven contract-correct success fixtures
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: issue16-tests
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Apply advisory source repair in temporary checkout
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py \
+            --native-root native-candidate
+      - name: Correct only seven outdated positive fixture headings in temporary checkout
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_fixture_migration.py \
+            --native-root native-candidate
+      - name: Execute original native 38-case test module with unchanged assertions
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          cd native-candidate
+          python -m unittest discover -s skills/engineering-pr-delivery-v3.2/tests -p 'test_relay_tx.py' -v
+      - name: Print exact original and ephemeral source provenance
+        if: always()
+        run: |
+          git -C native-candidate rev-parse HEAD
+          git -C native-candidate status --short
+          git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py
+          git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/tests/test_relay_tx.py
+          echo 'Legacy test-only heading changes are NOT merged or approved protected source.'
+          echo 'Unmodified original native test job separately records its true failures.'
+          echo 'Concurrency policy and external B/read/freeze/custody remain unproven.'
+
+  ephemeral-native-concurrency-falsifier:
+    name: Same-issue concurrent different-TX race - advisory patched source
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact issue16 source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: issue16-tests
+          persist-credentials: false
+      - name: Checkout immutable protected PR2 native source
+        uses: actions/checkout@v4
+        with:
+          ref: da3680459c5b48f44cda822ccf5009be4b035eef
+          path: native-candidate
+          persist-credentials: false
+      - name: Checkout immutable PR22 deterministic concurrency oracle
+        uses: actions/checkout@v4
+        with:
+          ref: 22c20a6a3aa7a741e7452cf3dddf75299d08b30b
+          path: issue6-diagnostic
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check PyYAML jsonschema
+      - name: Apply same pinned advisory patch to disposable native checkout
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_ephemeral_repair.py \
+            --native-root native-candidate \
+            --expected-native-sha da3680459c5b48f44cda822ccf5009be4b035eef
+      - name: Validate concurrent publication on distinct issues (positive control)
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          python issue16-tests/skills/engineering-pr-delivery-v3.5/tests/probe_issue16_native_cross_issue_concurrency.py \
+            --native-root native-candidate
+      - name: Run PR22 exact 3-case deterministic native concurrency oracle
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          set -euo pipefail
+          cp issue6-diagnostic/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_concurrency_issue6.py \
+             native-candidate/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_concurrency_issue6.py
+          python native-candidate/skills/engineering-pr-delivery-v3.5/tests/test_buddy_native_concurrency_issue6.py -v
+      - name: Report immutable heads, dirty source, and no-authorization boundary
+        if: always()
+        run: |
+          echo "REVIEWER_HEAD=$(git -C issue16-tests rev-parse HEAD)"
+          echo "PROTECTED_PR2_HEAD=$(git -C native-candidate rev-parse HEAD)"
+          echo "PR22_ORACLE_HEAD=$(git -C issue6-diagnostic rev-parse HEAD)"
+          echo "ADVISORY_TRANSACTIONLIB_BLOB=$(git -C native-candidate hash-object skills/engineering-pr-delivery-v3.2/scripts/transactionlib.py)"
+          git -C native-candidate status --short
+          echo 'Expected negative is NOT marked successful: no fail-swallowing.'
+          echo 'Decision needed: Owner/Local same-issue publish arbitration and four-path frozen scope approval.'
+          echo 'No production lock, independent B isolation, Stage2, custody, or writer granted.'

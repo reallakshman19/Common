@@ -1,0 +1,37 @@
+name: v35-buddy-issue16-contract
+
+on:
+  pull_request:
+    paths:
+      - 'skills/engineering-pr-delivery-v3.5/tests/test_issue16_*.py'
+      - 'relay/CONTINUITY/TEMPLATES/TECHNICAL_HANDOVER.md'
+      - 'relay/CONTINUITY/REVIEWER_ONLY/ISSUE16_*.md'
+      - '.github/workflows/v35-buddy-issue16-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  issue16-contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact source head (not synthetic merge commit)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute both issue 16 contract suites
+        run: |
+          set -euo pipefail
+          python -m unittest discover \
+            -s skills/engineering-pr-delivery-v3.5/tests \
+            -p 'test_issue16_*.py' -v
+      - name: Record exact tested Git commit
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          git status --porcelain
