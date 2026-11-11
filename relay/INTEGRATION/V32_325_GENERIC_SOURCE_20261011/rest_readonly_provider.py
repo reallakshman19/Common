@@ -130,3 +130,98 @@ class BoundReadOnlyGitHubProvider:
             "head": {"sha": head_sha, "repo": {"full_name": head_repo}},
             "base": {"ref": base_ref, "repo": {"full_name": base_repo}},
         }
+
+
+class BoundNativeReadOnlyGitHubProvider(BoundReadOnlyGitHubProvider):
+    """Optional native T02 GET methods on the *existing* normalized provider.
+
+    The caller supplies complete, repository-scoped comment observations and
+    compare results through externally authenticated, GET-only callbacks.
+    This class performs no I/O, does not implement pagination or attest that
+    the caller included every page, and never accepts evidence or writes.
+    Unlike the T01-only base class, missing native callbacks are a hard HOLD.
+    """
+
+    _MAX_COMMENTS = 1000
+    _MAX_COMMENT_CHARS = 1_000_000
+    _MAX_TOTAL_COMMENT_CHARS = 5_000_000
+    _REF = re.compile(r"^[A-Za-z0-9_./-]{1,200}$")
+
+    def __init__(
+        self, *, read_comments: Callable[[int], Any],
+        read_compare: Callable[[str, str], Any],
+        allowed_candidate_refs: tuple[str, ...] = (),
+        **three_get_args: Any,
+    ) -> None:
+        super().__init__(**three_get_args)
+        _require(callable(read_comments) and callable(read_compare),
+                 "REST_NATIVE_GET_READER_REQUIRED")
+        _require(isinstance(allowed_candidate_refs, tuple) and
+                 all(self._valid_ref(value) for value in allowed_candidate_refs),
+                 "REST_NATIVE_CANDIDATE_REF_INVALID")
+        self._read_comments = read_comments
+        self._read_compare = read_compare
+        self._allowed_commits = frozenset((self.base_ref, *allowed_candidate_refs))
+
+    @classmethod
+    def _valid_ref(cls, value: Any) -> bool:
+        return (isinstance(value, str) and cls._REF.fullmatch(value) is not None
+                and ".." not in value and not value.startswith(("/", "-"))
+                and not value.endswith("/"))
+
+    def get_commit_sha(self, ref: str) -> str:
+        _require(isinstance(ref, str) and ref in self._allowed_commits,
+                 "REST_NATIVE_COMMIT_REF_UNBOUND")
+        if ref == self.base_ref:
+            return super().get_commit_sha(ref)
+        sha = self._read_commit_sha(ref)
+        _require(isinstance(sha, str) and _SHA.fullmatch(sha) is not None,
+                 "REST_NATIVE_CANDIDATE_SHA_INVALID")
+        return sha
+
+    def list_comments(self, number: int) -> list[dict[str, Any]]:
+        _require(type(number) is int and number > 0,
+                 "REST_NATIVE_COMMENT_SELECTION_INVALID")
+        payload = self._read_comments(number)
+        # Both the native GitHub list and the connected all-pages reader can
+        # supply an array. Pagination completeness is the caller's separate
+        # obligation; this class cannot certify private source currentness.
+        if isinstance(payload, Mapping):
+            payload = payload.get("comments")
+        _require(isinstance(payload, list) and
+                 len(payload) <= self._MAX_COMMENTS,
+                 "REST_NATIVE_COMMENTS_INVALID_OR_UNBOUNDED")
+        output: list[dict[str, Any]] = []
+        previous_id = 0
+        total_chars = 0
+        for comment in payload:
+            _require(isinstance(comment, Mapping) and
+                     type(comment.get("id")) is int and
+                     comment["id"] > previous_id and
+                     isinstance(comment.get("body"), str) and
+                     isinstance(comment.get("user"), Mapping) and
+                     isinstance(comment["user"].get("login"), str) and
+                     bool(comment["user"]["login"]) and
+                     isinstance(comment.get("author_association"), str),
+                     "REST_NATIVE_COMMENT_SOURCE_INVALID")
+            _require(len(comment["body"]) <= self._MAX_COMMENT_CHARS,
+                     "REST_NATIVE_COMMENT_TEXT_UNBOUNDED")
+            total_chars += len(comment["body"])
+            _require(total_chars <= self._MAX_TOTAL_COMMENT_CHARS,
+                     "REST_NATIVE_COMMENT_TOTAL_UNBOUNDED")
+            previous_id = comment["id"]
+            output.append(dict(comment))
+        return output
+
+    def compare(self, base: str, head: str) -> dict[str, int]:
+        _require(base == self.base_ref and self._valid_ref(head) and
+                 head in self._allowed_commits and head != base,
+                 "REST_NATIVE_COMPARE_REF_UNBOUND")
+        result = self._read_compare(base, head)
+        _require(isinstance(result, Mapping) and
+                 all(type(result.get(key)) is int and
+                     0 <= result[key] <= 1_000_000_000
+                     for key in ("ahead_by", "behind_by")),
+                 "REST_NATIVE_COMPARE_RESPONSE_INVALID")
+        return {"ahead_by": result["ahead_by"],
+                "behind_by": result["behind_by"]}
