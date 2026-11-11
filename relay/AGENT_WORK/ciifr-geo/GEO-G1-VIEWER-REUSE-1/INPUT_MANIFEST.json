@@ -1,0 +1,130 @@
+{
+  "schema": "CIIFR.GEO.ContributorInputManifest.v1",
+  "task": "CIIFR-GEO-G1-VIEWER-REUSE-1",
+  "wbs": "3.1/G1/M13",
+  "status": "PREPARED_NOT_SENT",
+  "recipient": "UNASSIGNED",
+  "repository": "reallakshman19/XML_Compare_Utilities",
+  "candidateCommit": "3a1bec9524c8a14e4b0a90a23d628f0b5d47aaf6",
+  "candidateTree": "00f7825a271c4e68f650eebede40d0d62aea32f6",
+  "implementationCommit": "cd9eee33cd4ac80a802e50d1f9cf246d841901d8",
+  "testedImplementationTree": "82851a747983e1953c5d8b050fbda9b5b3fee588",
+  "stackBaseCommit": "683a1ac37b5e4457b3e67753cec1c951ec1a2dc9",
+  "files": [
+    {
+      "path": "prototypes/ciifr-map/FRAMEWORK.md",
+      "bytes": 8784,
+      "sha256": "562e172f66bc60c6a1edbb55c52073475462c71458b77a5f0f893133b3073d62",
+      "gitBlobSha": "c2d483fd9d045fda65f00a06ff667469e9d2684e"
+    },
+    {
+      "path": "prototypes/ciifr-map/geo-scene.js",
+      "bytes": 6346,
+      "sha256": "b4248d94e7a4b4fc285e2934827daf93e3219f9f45b86a61a5efe255b238ccae",
+      "gitBlobSha": "fee91307f91caa0139fb49a44c880d3c76f8f5a0"
+    },
+    {
+      "path": "prototypes/ciifr-map/geo-scene-pick.js",
+      "bytes": 875,
+      "sha256": "62d0761e28cb05a4f5e664f5059f0aa7841370e75a72ec42a8620a616a4b2adb",
+      "gitBlobSha": "a60ab3cf7ad1e01c4508c89a23a5e6e340257e59"
+    },
+    {
+      "path": "prototypes/ciifr-map/compare.js",
+      "bytes": 3587,
+      "sha256": "278100946a8837a8b5c9544926b14116c35b0ca0f0822e83699bbec7e5e117b8",
+      "gitBlobSha": "bf170bdd36c239e456c65db202a69809a9928bbc"
+    },
+    {
+      "path": "prototypes/ciifr-map/evidence.js",
+      "bytes": 2691,
+      "sha256": "f9be08a82e5802c488cf20e096cfd168763d3806ec6cf2ef87d68c589f2482b5",
+      "gitBlobSha": "467f79239b792b027c81dd51501ccfc1f66cd323"
+    },
+    {
+      "path": "prototypes/ciifr-map/README.md",
+      "bytes": 7486,
+      "sha256": "21fd7cd4627016992db715eba4005bf706412d42360cde054642df4d89788aaa",
+      "gitBlobSha": "e1af159eb208a0901ca7cfad0ef1238b529f4ddc"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/scene.test.mjs",
+      "bytes": 8112,
+      "sha256": "e69706c9ec79d07ee993122df6734095a49c6a66a4381e4448868713ec84dddc",
+      "gitBlobSha": "f44834128ad38eae5b1537e1b9b27e835dc21b7d"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/scene-xml.test.mjs",
+      "bytes": 3606,
+      "sha256": "4ec9008ac08650e19e28eba670edd02bd0070aea6d4e70fc724052f3455f639e",
+      "gitBlobSha": "e505eca3efa1196e79e95d35e67738bbd0df6103"
+    },
+    {
+      "path": "agents/PR183_workreport.md",
+      "bytes": 9374,
+      "sha256": "b0d6088efa3306d1261d1fcb5e20e341e2a52506a7c03417fd06b6cd3c6189d8",
+      "gitBlobSha": "189ba3ad86954d52828a1b799264a450fa5d8829"
+    }
+  ],
+  "publicXmlInputs": [
+    {
+      "path": "prototypes/ciifr-map/tests/fixtures/S1-F05.xml",
+      "bytes": 882735,
+      "sha256": "1154c980d08344b1f803cda3bd9884b169753148b150641a745c9bfcb15de995",
+      "gitBlobSha": "914303e2437fffaa5682757ee32b3ae3d8f37df8"
+    },
+    {
+      "path": "prototypes/ciifr-map/tests/fixtures/S1-R4.xml",
+      "bytes": 1426775,
+      "sha256": "a332dd7b2551faae51de3c016941762c3b795cdf19073b373817354e309526e6",
+      "gitBlobSha": "2da10efac2d2f040000edd988d4a1e0baae5dbe1"
+    }
+  ],
+  "unchangedSourceReuse": {
+    "commit": "c823f0c0edbeb315c07fa2911390dc781968146f",
+    "files": [
+      {
+        "path": "workbench3d/contracts/contracts.js",
+        "bytes": 13688,
+        "sha256": "2b6a4b840bd3f94442a4e6135c720fa6b1a6bd1f547a1a19752d431f9f33aaab",
+        "gitBlobSha": "38543853963217a8bd567a26b3db35cdad11c48a"
+      },
+      {
+        "path": "workbench3d/viewer/workbench-viewer.js",
+        "bytes": 69094,
+        "sha256": "4d1357ff535ebf761cee012c7156379c24d9e081b77ca44622b520d10751c874",
+        "gitBlobSha": "5135395ceb1daabb0301d96014a34f5c353d3793"
+      },
+      {
+        "path": "workbench3d/viewer/scene-runtime.js",
+        "bytes": 7974,
+        "sha256": "6c6c4f0affca5c20850e182cc3f7e2a60863ec330c169c892966a9aaea1b24f4",
+        "gitBlobSha": "02bc23fc7363493b20ea906d14da4f08a140de3d"
+      },
+      {
+        "path": "workbench3d/viewer/scene-derivation-scheduler.js",
+        "bytes": 1507,
+        "sha256": "41b001b9ab0b25f90eef904a7d8ce0fa42fc061bfef32ccf4f15fbbfe752e7da",
+        "gitBlobSha": "e0a41544ff278848c4e93847a08ec88b0c244dc2"
+      },
+      {
+        "path": "workbench3d/viewer/scene-derivation-worker.js",
+        "bytes": 708,
+        "sha256": "7e7a265de5d3584e9f9b1d99ad6a89eb6d969687189b94592e5896ee28160c99",
+        "gitBlobSha": "edc7561d1f664850205694a1a3b89da4f67f8aa3"
+      },
+      {
+        "path": "workbench3d/viewer/gpu-picker.js",
+        "bytes": 4151,
+        "sha256": "c2a767ed67146665656033692d81a8687ff4fcdb8b905bce222466faa7bc870e",
+        "gitBlobSha": "e137a813bba005a89d21307f52fb9385e13ee2b0"
+      }
+    ]
+  },
+  "limits": [
+    "Public S1 in two XML profiles; not two independent physical models",
+    "Original-CII embedded claims not reverified",
+    "Oracle-authored/self-assessed; no browser/GPU/Windows or independent engineering acceptance",
+    "Future recipient bytes/capability NOT_RUN; no active assignment or successor cutover"
+  ]
+}

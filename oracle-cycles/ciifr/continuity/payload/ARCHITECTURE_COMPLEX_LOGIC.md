@@ -1,4 +1,24 @@
-# CIIFR Geometry — complex architecture, original-CII reasoning and trust boundaries
+# CIIFR_GEO — current architecture and retained complex logic
+
+**Revision2 · 26 October2026 · Oracle-authored / SELF_ASSESSED.** The current concept and task frontier are [Concept Note R2](CONCEPT_NOTE.md), [revised roadmap/WBS/implementation plan](ROADMAP_AND_IMPLEMENTATION_PLAN.md) and [current handover](ORACLE_HANDOVER.md). The source-level CII/Method C detail below is retained from the prior checkpoint; its old delivery/access/next-action claims are historical wherever superseded by this revision.
+
+## Current input, evidence and rendering architecture
+
+1. **Authoritative inputs:** either actual original-CII graphs (PR174 reference) or measured XML-profile graphs (PR181). Side/hash/endpoint identities, signed vectors, seeds/components and original/XML record witnesses remain distinct. An embedded CII SHA is not proof of original-byte custody.
+2. **Evidence:** existing Method C computes proper rigid pose and coordinate/segment candidates. Next G2 produces independent pose-free topology pairs. Manual anchor, coordinate and topology evidence remain separate roles in one source-bound ledger; none is a Writer plan.
+3. **Display:** a thin CIIFR_GEO adapter derives VisualGeometryModel.v1 for the existing shared Three.js/WebGL workbench viewer. Source/domain graphs are unchanged. SOURCE display points use the complete Method C R*p+t once; the existing translation-only viewer input is zero after this pretransform. Side/hash/node-or-element IDs round-trip through GPU picks and table selection.
+4. **Shared viewer reuse:** instanced geometry, GPU color-ID picker, orthographic/perspective cameras, overlay/split, scene worker/revision scheduler, incremental chunks, floating origin, LOD and spatial index. Pin the current Three.js0.160.0 interface and package local dependency/worker assets. Reuse viewing APIs; leave editor mutation, drag/solver, Apply and transfer inactive.
+5. **Reference/export:** SVG is retained and generated from the same graph/pose/candidate snapshot. XY/XZ/YZ use common-mm orthographic comparison; perspective/oblique inspection is labelled separately. Drawing culling/LOD does not prune the full ledger. JSON/CSV/SVG remain bound to actual source hashes, selected components, pose, anchors, parameters and epoch.
+6. **Invalidation:** file reading, hashing, matching, scene-worker completion, mode changes and exports share source/revision guards. Changing a file clears the old side/anchors/results before asynchronous reads; a renderer may not keep displaying/exporting an old snapshot as current.
+
+Source implementation: [PR181 input/ledger](https://github.com/reallakshman19/XML_Compare_Utilities/tree/683a1ac37b5e4457b3e67753cec1c951ec1a2dc9/prototypes/ciifr-map), [shared viewer](https://github.com/reallakshman19/XML_Compare_Utilities/blob/c823f0c0edbeb315c07fa2911390dc781968146f/workbench3d/viewer/workbench-viewer.js), [runtime](https://github.com/reallakshman19/XML_Compare_Utilities/blob/c823f0c0edbeb315c07fa2911390dc781968146f/workbench3d/viewer/scene-runtime.js), [actual reuse investigation](https://github.com/reallakshman19/XML_Compare_Utilities/issues/180#issuecomment-6406475596). GPU adapter integration is planned, not implemented.
+
+**Important claim update:** original S1/T bytes were retrieved/rehashed and the shared parseCii accepted both in this Oracle runtime. Original served B1–B4 and GPU/browser performance remain NOT_RUN. R4 producer FORCMNT coverage is a separate converter issue. See the current handover for exact candidates, measured input identities and evidence lineage.
+
+## Retained prior source/format explanation (25 October2026)
+
+The following checkpoint preserves original causal/source detail and known wrong cases. It is not the current project-status board; use the R2 documents above for current inputs, graphics and WBS.
+
 
 **Technical continuity / immutable source reference:** XCU [G1 PR #174 R1 head `9936d4078fb7f837ffe6f46805241efdb7bbc0e8`](https://github.com/reallakshman19/XML_Compare_Utilities/pull/174), base `c823f0c0edbeb315c07fa2911390dc781968146f`, and [Method C original engineering documentation](https://github.com/reallakshman19/XML_Compare_Utilities/blob/9936d4078fb7f837ffe6f46805241efdb7bbc0e8/docs/METHOD_C_ENGINEERING.md). **Source-inspected, Oracle interpretation, NOT independently run original-input integration.** This document explains causality and incorrect-but-plausible alternatives; it is not a new approved domain format contract.
 
