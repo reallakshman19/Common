@@ -1,0 +1,43 @@
+plan_version: V36-1-PLAN-02
+parent: reallakshman19/relay-v36-stress-lab#1
+label:
+  work: V36-STRESS
+  version: 1.0.0
+  label_sha: 9f8e7d6
+tasks:
+  - task_id: V36-1-ST01
+    size: S
+    outcome: O1
+    title: stress lab foundation boundary and authorization gates
+    for_user: Dedicated disposable stress repository initialized with strict isolation; unauthorized scopes rejected
+    acceptance: Refusal of unauthorized scopes verified; clean lab state initialized; dry-run matches target plan
+  - task_id: V36-1-ST02
+    size: L
+    outcome: O1
+    title: progressive decomposition scaling up to 300 child issues
+    for_user: Parent issue decomposes cleanly across 20, 125, and 300 tasks with pagination without index truncation
+    acceptance: Zero duplicate tasks across 300 materialized issues; verified REST pagination; intact parent index; stable memory
+  - task_id: V36-1-ST03
+    size: L
+    outcome: O2
+    title: high volume truthful evidence and PR attribution across 600 comments
+    for_user: Evidence processing verifies 300 genuine positive cases while rejecting 300 negative and adversarial fixtures
+    acceptance: 100% genuine positive comments recognized with live PR attribution; 100% invalid/adversarial comments rejected without state corruption
+  - task_id: V36-1-ST04
+    size: M
+    outcome: O3
+    title: concurrent multi worker event storms up to 8 workers
+    for_user: Multi-worker execution converges to settled state without title thrashing or race conditions
+    acceptance: 8 concurrent workers complete; zero race conflicts; replay yields zero mutations
+  - task_id: V36-1-ST05
+    size: M
+    outcome: O3
+    title: simulated fault injection and interrupted recovery
+    for_user: System recovers cleanly from simulated 429 rate limits, 5xx server errors, and dropped connections
+    acceptance: Simulated transient faults fail closed with ContractError and are recorded as FINDING-ST05-RETRY-01; external retry restores accurate state with zero duplicates
+  - task_id: V36-1-ST06
+    size: M
+    outcome: O5
+    title: cold successor independent takeover and endurance verification
+    for_user: Cold agent reconstructs 100% of state from GitHub alone without chat memory or degradation over cycles
+    acceptance: BuddyRunner 1a/1b/2 and prompt generators execute successfully from GitHub facts; endurance stable over 5 cycles
