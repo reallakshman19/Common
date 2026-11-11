@@ -1,0 +1,58 @@
+{
+  "schema": "puppet-originals-sha256/v1",
+  "project_issue": "https://github.com/reallakshman19/Common/issues/415",
+  "source_type": "CONVERSATION_RECOVERED_CANDIDATE",
+  "custody_state": "HASHES_RECORDED_ORIGINAL_BYTES_NOT_COMMITTED",
+  "files": [
+    {
+      "path": "king_puppet_final/make.py",
+      "sha256": "06ca5b41c801afbd2335b82475e64d502c5ac9d06c89b71d6eabcb96f7ea8285",
+      "kind": "generator"
+    },
+    {
+      "path": "king_puppet_final/King_Puppet_Cutting_Template_and_Parent_Appendix.pdf",
+      "sha256": "c43108f2c7250d88483a4fc3974aee2bc23bd659ac47871945da7fed141c3b11",
+      "kind": "pdf"
+    },
+    {
+      "path": "king_puppet_final/renders/page-1.png",
+      "sha256": "790cb9e4ace8eb77e42650de97033d1208df62e791c63307b3bbf83c3405c18b",
+      "kind": "png"
+    },
+    {
+      "path": "king_puppet_final/renders/page-2.png",
+      "sha256": "159ba379092a96df3d36cc4e456ee1390d154564632f528ea31a6bd13a62d0e1",
+      "kind": "png"
+    },
+    {
+      "path": "prahlada_puppet_corrected/build.py",
+      "sha256": "85610f7ff3960bac092e35b3e99eec19f3acf558b90cf7833ebb25263d3f315d",
+      "kind": "generator"
+    },
+    {
+      "path": "prahlada_puppet_corrected/Prahlada_Complete_Puppet_Guide.pdf",
+      "sha256": "6abfb24645dc85b2a32cecca7b56381f55d386dce47786decb7e7bbfb5ac7fe7",
+      "kind": "pdf"
+    },
+    {
+      "path": "prahlada_puppet_corrected/page-1.png",
+      "sha256": "5930d97233eaf8eb795aa93911f8988331f288bb120392dc19331d29730abfdc",
+      "kind": "png"
+    },
+    {
+      "path": "prahlada_puppet_corrected/page-2.png",
+      "sha256": "c99a250444a3a848e89ac4e9b20e8eaf3ca1789b3d17cd1401117f6fd4e9c203",
+      "kind": "png"
+    },
+    {
+      "path": "prahlada_puppet_corrected/page-3.png",
+      "sha256": "bf8bd33ff19072dd8bda2de5559d93f449626d0b52184c2d52c11fa54ee44731",
+      "kind": "png"
+    },
+    {
+      "path": "prahlada_puppet_corrected/page-4.png",
+      "sha256": "9e01d5f32a8c4523c1729013d0dab992fdb39905559df32e83f3e72a1e35e4c5",
+      "kind": "png"
+    }
+  ]
+}
