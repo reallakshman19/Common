@@ -1,6 +1,6 @@
 # Agent A — implement and publish A1
 
-**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_AGENT_A.md](TANDEM_IR_AGENT_A.md) instead; A retains final ownership. Do not apply this template to that mode.
+**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_AGENT_A.md](TANDEM_IR_AGENT_A.md) instead; A normally retains final ownership, with authorized B succession when needed. Do not apply this template to that mode.
 
 Read the single assignment and original requirements/source. PARALLEL is default; you and B have immediate implementation authority in separate candidate trees. You own A1, not B's working tree or the final candidate. Do not wait for B or a new routine authorization.
 

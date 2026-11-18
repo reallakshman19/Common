@@ -1,11 +1,11 @@
 ---
 name: tandem-execution
-description: Two contributing engineering agents, one authorized outcome. PARALLEL defaults to independent isolated implementation and B convergence; SERIAL continues A's candidate with B as final owner; explicit TANDEM_IR uses A implementation, B independent review and corrective contribution, A reconciliation and handover. Select by task objective; exchange native artifacts through the assigned Google Drive folder.
+description: Two contributing engineering agents, one authorized outcome. PARALLEL uses isolated implementation and B convergence; SERIAL continues A's candidate with B as final owner; TANDEM_IR uses A implementation and B's lean reconstruction, aim alignment and independent challenge, with authorized B succession if needed.
 ---
 
 # Tandem Execution — Agent A and Agent B
 
-Use for one bounded engineering outcome assigned to two agents. One existing task; no new role, controller or approval registry. **Read the explicitly assigned mode first.** PARALLEL remains the default for two implementation agents; SERIAL is explicit. For **TANDEM_IR**, A is the primary implementer and final owner; B starts source-grounded challenge work immediately, reviews A's coherent checkpoint, then makes authorized useful corrections or executable evidence contributions and returns them to A. A reviews, reconciles, validates and hands over. Follow [TANDEM_IR.md](TANDEM_IR.md) and its mode-specific templates; the B-final instructions below apply only to PARALLEL/SERIAL. No mode can be inferred from agent names or change an existing grant.
+Use for one bounded engineering outcome assigned to two agents. One existing task; no new role, controller or approval registry. **Read the explicitly assigned mode first.** PARALLEL remains the default for two implementation agents; SERIAL is explicit. For **TANDEM_IR**, A normally implements and hands over; B prepares a lean independent reconstruction, challenges the candidate, and helps align A with the Owner's aim. B performs Oracle responsibilities when assigned or needed within actual authority, and continues as final owner if A cannot finish and takeover is authorized. Follow [TANDEM_IR.md](TANDEM_IR.md); the B-final instructions below otherwise apply only to PARALLEL/SERIAL. No mode or role label changes an existing grant.
 
 ## Execute — PARALLEL / SERIAL only
 

@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | **PARALLEL (default)** | Two capable agents can build from the same source or recoverable checkpoints | A and B independently write isolated candidates immediately | B converges available contributions and fixes remaining work |
 | SERIAL (explicit opt-in) | A's coherent product is a genuinely necessary input to a later refinement | A produces C1; B can prepare tests and isolated repairs without touching A's mutable tree | B continues C1 or reconstructs if missing |
-| **TANDEM_IR (explicit)** | One primary implementation owner with embedded independent challenge and corrective contribution | A implements; B derives expectations and adversarial controls from originals, then reviews a verified checkpoint and improves it | **A** reviews B's contribution, reconciles and hands over C3 |
+| **TANDEM_IR (explicit)** | One primary implementation owner with embedded independent challenge and corrective contribution | A implements; B aligns the Owner's aim, builds a lean reference and reviews a verified checkpoint | **A** normally reconciles and hands over C3; authorized B succeeds A if A cannot finish |
 
 Do not infer SERIAL from A/B names, numbered stages, an absent READY file or the fact that one agent finished earlier. In either pattern, only a real shared-write conflict restricts writes to that particular tree.
 

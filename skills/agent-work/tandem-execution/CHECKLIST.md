@@ -1,6 +1,6 @@
 # Tandem execution checklist — useful work before paperwork
 
-**Scope:** the checklist below tests PARALLEL/SERIAL. For TANDEM_IR use the compact completion checks in [TANDEM_IR.md](TANDEM_IR.md#completion-and-fallback); A is the final owner, B's return to A is intentional, and evidence-only contributions can be valid when no legitimate repair remains.
+**Scope:** the checklist below tests PARALLEL/SERIAL. For TANDEM_IR use the compact completion checks in [TANDEM_IR.md](TANDEM_IR.md#completion-and-fallback); A normally owns the final handover, with authorized B succession if A cannot finish. B's return to A is intentional when A continues, and evidence-only contributions can be valid when no legitimate repair remains.
 
 Use only checks relevant to the current assignment. Do not turn these into a separate gate or new reporting cycle.
 

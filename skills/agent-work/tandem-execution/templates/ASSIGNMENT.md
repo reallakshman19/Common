@@ -1,6 +1,6 @@
 # One assignment — Agent A and Agent B
 
-**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_ASSIGNMENT.md](TANDEM_IR_ASSIGNMENT.md) instead; A retains final ownership. Do not apply this template to that mode.
+**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_ASSIGNMENT.md](TANDEM_IR_ASSIGNMENT.md) instead; A normally retains final ownership, with authorized B succession when needed. Do not apply this template to that mode.
 
 Fill once and share with both. Default mode is PARALLEL unless SERIAL is explicitly selected.
 

@@ -1,6 +1,6 @@
 # Agent B — implement immediately, converge and deliver
 
-**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_AGENT_B.md](TANDEM_IR_AGENT_B.md) instead; A retains final ownership. Do not apply this template to that mode.
+**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_AGENT_B.md](TANDEM_IR_AGENT_B.md) instead; A normally retains final ownership, with authorized B succession when needed. Do not apply this template to that mode.
 
 Read the single assignment and original source. **Start implementing now in your own isolated B1. Do not wait for A-READY, A1, A's final report, or an extra approval.** PARALLEL is default. Preserve existing valid local corrections; they are working implementation, not merely prototype because A is absent. Your primary correction scope and final convergence are both authorized at assignment.
 
