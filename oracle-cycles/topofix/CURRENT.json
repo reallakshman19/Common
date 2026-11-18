@@ -4,10 +4,13 @@
   "project": "topofix",
   "mode": "standalone",
   "activation": "ACTIVE",
-  "revision": 2,
+  "revision": 3,
   "last_accepted_receipt_ids": [
     "TOPO-A-P1-ack-202610311415",
-    "TOPO-B-B2-ack-202610311415"
+    "TOPO-B-B2-ack-202610311415",
+    "TOPO-A-P1-ret-r1",
+    "TOPO-B-B2-ret-r1",
+    "TOPO-B-B2-ret-r2"
   ],
   "aim": "Topology gives auditable automatic fixes where safe and clear manual-review directions otherwise; an engineer can find and understand a hidden connection (e.g. a CLOS-declared end) without it being auto-joined; other XML formats are admitted read-only and fail-closed, reusing existing parsers.",
   "aim_source": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/3",
@@ -45,38 +48,52 @@
       "id": "TOPO-A-P1",
       "generation": 1,
       "recipient_role": "coder-a",
-      "dispatch": "RETURNED_AWAIT_ORACLE_RECONCILIATION",
+      "dispatch": "CLOSED_CHECKPOINT",
       "brief_url": "https://github.com/reallakshman19/Common/blob/main/oracle-cycles/topofix/TOPO-A-P1.md",
       "repository": "reallakshman19/xml229-topology-wp1-preview-20261028",
       "base": "209ec34c (draft PR #13, checkpoint QUALIFIED_SCOPED 92/100)",
       "scope": "Carry-forward fixes + review-only Find / Review Connection panel; new draft PR against feat/topo-a-p0-closure-witness",
       "receipt_issue_url": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/12",
       "required_return": "Draft PR + head SHA, changed files, test counts, screenshot, deliberate-failure proof",
-      "returned_candidate": "draft PR #14 @69b4f650 (Oracle re-run 86/86 py, 56/56 node, CI validate pass; independent review running)"
+      "returned_candidate": "draft PR #14 @a0962e77 · independent re-review QUALIFIED_SCOPED 93/100 · Owner trial on private original NOT_RUN"
     },
     {
       "id": "TOPO-B-B2",
       "generation": 1,
       "recipient_role": "coder-b",
-      "dispatch": "ACKED_IN_PROGRESS",
+      "dispatch": "RETURNED_ROUND2_AWAIT_ORACLE_RECONCILIATION",
       "brief_url": "https://github.com/reallakshman19/Common/blob/main/oracle-cycles/topofix/TOPO-B-B2.md",
       "repository": "reallakshman19/XML_Compare_Utilities",
       "base": "a3ad4dd3 (draft PR #240, checkpoint QUALIFIED_SCOPED 93/100)",
       "scope": "Carry-forward fixes + admission banner on InputXML Workspace upload; new draft PR against feat/topo-b-format-admission",
       "receipt_issue_url": "https://github.com/reallakshman19/XML_Compare_Utilities/issues/239",
-      "required_return": "Draft PR + head SHA, changed files, test counts, two screenshots, deliberate-failure proof"
+      "required_return": "Draft PR + head SHA, changed files, test counts, two screenshots, deliberate-failure proof",
+      "returned_candidate": "draft PR #241 @eb66bd19 (Owner-authorised final round 2; independent re-review running)"
+    },
+    {
+      "id": "TOPO-A-P2",
+      "generation": 1,
+      "recipient_role": "coder-a",
+      "dispatch": "SENT_IN_CHAT_OWNER_AUTHORISED",
+      "authority": "Owner in Oracle chat 31 Oct 2026 15:3x: 'proceed both, now'",
+      "brief_url": "https://github.com/reallakshman19/Common/blob/main/oracle-cycles/topofix/TOPO-A-P2.md",
+      "repository": "reallakshman19/xml229-topology-wp1-preview-20261028",
+      "base": "a0962e77 (draft PR #14, 93/100)",
+      "scope": "Review-only Source Review Queue (spec §3.2/§3.4); new draft PR against feat/topo-a-p1-review-connection-20261031",
+      "receipt_issue_url": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/12",
+      "required_return": "Draft PR + head, changed files, test counts, screenshot, deliberate-failure proof"
     }
   ],
   "next": [
     {
-      "recipient_role": "oracle",
-      "status": "RECONCILING",
-      "instruction": "Independent review of PR #14; coder-a waits (AWAIT_ORACLE_RECONCILIATION), no new work"
+      "recipient_role": "coder-a",
+      "status": "WORKING",
+      "owner_trigger": "Cycle now"
     },
     {
-      "recipient_role": "coder-b",
-      "status": "IN_PROGRESS",
-      "owner_trigger": "Cycle now"
+      "recipient_role": "oracle",
+      "status": "RECONCILING",
+      "instruction": "Independent re-review of PR #241 @eb66bd19"
     }
   ],
   "gates": [
@@ -100,6 +117,13 @@
       "scope": "Owner runs Node 6880/6450 on the private original on Windows",
       "evidence_ref": null,
       "limits": "Owner only"
+    },
+    {
+      "id": "topo-a-p1",
+      "status": "PASS_INDEPENDENT_SCOPED",
+      "scope": "PR #14 @a0962e77 review-only Find / Review Connection panel, 93/100",
+      "evidence_ref": "https://github.com/reallakshman19/xml229-topology-wp1-preview-20261028/issues/12#issuecomment-6542532796",
+      "limits": "Owner private-original trial NOT_RUN"
     }
   ],
   "holds": [
