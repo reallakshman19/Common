@@ -30,7 +30,7 @@ Unique immutable candidate names; use actual file IDs and digests. A/B READY fil
 
 ## B final package
 
-At the agreed convergence boundary, B selects actual A1 (if available) and B1; compare to C0, repair and run combined tests. Upload final cumulative native C0→final delta or complete source; include A1/B1→final reconciliation/delta where available, retained/rejected changes and tests, actual evidence, limitations and lineage. If A is absent, publish B-only result with honest evidence. Never create competing final packages or automatically reopen for late A.
+At the agreed convergence boundary, B selects actual A1 (if available) and B1; compare to C0, repair and run combined tests. Upload final cumulative native C0→final delta or complete source; include A1/B1→final reconciliation/delta where available, retained/rejected changes and tests, actual evidence, limitations and lineage. If no A contribution is retained (absent, unverified, rejected or not reconciled within budget), publish B-only result with honest evidence and actual A disposition. Never create competing final packages or automatically reopen for late A.
 
 Upload final ZIP, verify actual file/digest, then publish B-FINAL.json with final outcome, lineage, base, final candidate and input artifact IDs/digests. A READY marker need not exist for B-only completion. B-READY is useful checkpoint metadata, not a compulsory precursor if B directly delivers final. No approval request or new registry.
 

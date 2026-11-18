@@ -34,6 +34,7 @@ B may integrate incrementally as useful artifacts arrive. B's own code and tests
 | A1 absent / READY absent | Recover usable A bytes if available; otherwise finish from B1 |
 | A1 corrupt or incomplete | Reject unsafe/unverified bytes; recover valid native delta or reconstruct affected fix; continue B1 |
 | A interrupted | Do not wait for A; use verified immutable checkpoint if any; otherwise B-only |
+| Execution budget exhausted before A can be reconciled | Deliver the best tested B candidate with the actual unintegrated A artifact noted; do not force another round |
 | A changes after selected snapshot | Do not mutate or silently substitute selected bytes; consider a later snapshot only before final boundary if useful |
 | B interrupted | Preserve B1 and current integration checkpoint; resume B when available, no automatic handback |
 | Both solve same defect | Select sound implementation; retain useful tests and explicitly account for rejected alternative |
@@ -70,7 +71,7 @@ A real scope/authority boundary, unsafe archive, inaccessible essential input or
 ## 7. Completion has three independent dimensions
 
 - **Outcome:** COMPLETE for the agreed done-list on the final actual candidate; PARTIAL for unresolved required behavior or missing decisive evidence. A fully working B-only outcome can be COMPLETE. A combined implementation can be PARTIAL.
-- **Lineage:** FINAL_COMBINED when A and B's actual candidate contributions were reconciled (state which retained/adapted/rejected; do not claim A authored code B independently reconstructed); FINAL_B_ONLY when A's usable implementation was absent; SERIAL_FINAL for a verified serial continuation. If only an A report was read, record that evidence separately, not an A implementation.
+- **Lineage:** FINAL_COMBINED when actual contributions from both agents are retained in final code or executable evidence (state which retained/adapted/rejected; do not claim A authored code B independently reconstructed); FINAL_B_ONLY when no A contribution was retained, including absent, unverified, rejected or not reconciled before budget exhaustion; SERIAL_FINAL for a verified serial continuation. If only an A report was read, record that evidence separately, not an A implementation.
 - **Delivery:** LOCAL_ONLY / NOT_DELIVERED / UPLOADED / BYTE_VERIFIED as actually observed. Final marker is an index, not an acceptance grant. Do not equate upload with recipient execution.
 
 Use actual commands, source/candidate and input hashes, outputs and PASS/FAIL/NOT_RUN per control. B owns the cumulative final candidate and any feasible in-scope corrections until the selected boundary. The existing product acceptance/merge/release rules still apply, without adding a third participant. Both disclose their own authored changes/tests. No independent-approval claim follows from two authors agreeing.

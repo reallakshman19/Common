@@ -13,7 +13,7 @@ Final candidate: [actual commit/digest, final Drive file ID, SHA-256]
 **Contribution reconciliation:** [contract → retained A / retained B / combined / replacement / rejected / unavailable; why and test]. Include actual meaningful changes/tests; no false credit for an unavailable candidate.
 **Conflicts and preservation:** [original requirement, chosen resolution, combined contrary and positive cases].
 **Outcome:** COMPLETE for proven done-list / PARTIAL for named unresolved cases.
-**Lineage:** FINAL_COMBINED / FINAL_B_ONLY / SERIAL_FINAL. This is not a quality grade.
+**Lineage:** FINAL_COMBINED (both actual contributions retained) / FINAL_B_ONLY (no A contribution retained; explain why) / SERIAL_FINAL (verified continuation). This is not a quality grade.
 **Delivery:** actual uploaded file ID, bytes, checksum verification or NOT_DELIVERED.
 **Limits:** [unexecuted required checks, genuine outstanding decisions or defects]. No automatic reopening for late peer work, no routine handback, no unestablished independent approval or release.
 

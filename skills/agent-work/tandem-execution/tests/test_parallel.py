@@ -96,12 +96,12 @@ class ParallelPolicy(unittest.TestCase):
         self.assertEqual((r["lineage"], r["outcome"]), ("FINAL_B_ONLY", "PARTIAL"))
 
     def test_combined_complete(self):
-        r = self.case(a_bytes_verified=True, a_reconciled=True, b_work_available=True,
+        r = self.case(a_bytes_verified=True, a_reconciled=True, a_retained=True, b_work_available=True,
                       boundary_reached=True, done_list_supported=True)
         self.assertEqual((r["lineage"], r["outcome"]), ("FINAL_COMBINED", "COMPLETE"))
 
     def test_combined_partial(self):
-        r = self.case(a_bytes_verified=True, a_reconciled=True, b_work_available=True,
+        r = self.case(a_bytes_verified=True, a_reconciled=True, a_retained=True, b_work_available=True,
                       boundary_reached=True)
         self.assertEqual((r["lineage"], r["outcome"]), ("FINAL_COMBINED", "PARTIAL"))
 
@@ -122,6 +122,29 @@ class ParallelPolicy(unittest.TestCase):
         r = self.case(mode="SERIAL", a_bytes_verified=True, a_reconciled=True,
                       b_work_available=True, boundary_reached=True, done_list_supported=True)
         self.assertEqual(r["lineage"], "SERIAL_FINAL")
+
+    def test_parallel_never_implies_shared_write(self):
+        self.assertFalse(self.case()["shared_write"])
+
+    def test_serial_requires_actual_custody(self):
+        self.assertFalse(self.case(mode="SERIAL", a_bytes_verified=True)["shared_write"])
+        self.assertTrue(self.case(mode="SERIAL", a_bytes_verified=True,
+                                  serial_custody_verified=True)["shared_write"])
+
+    def test_budget_exhausted_does_not_force_reconciliation(self):
+        r = self.case(a_bytes_verified=True, b_work_available=True,
+                      budget_exhausted=True, done_list_supported=True)
+        self.assertEqual((r["action"], r["lineage"], r["outcome"]),
+                         ("DELIVER_FINAL", "FINAL_B_ONLY", "COMPLETE"))
+
+    def test_rejected_a_patch_is_not_retained_contribution(self):
+        r = self.case(a_bytes_verified=True, a_reconciled=True, b_work_available=True,
+                      boundary_reached=True, done_list_supported=True)
+        self.assertEqual(r["lineage"], "FINAL_B_ONLY")
+
+    def test_unreconciled_a_cannot_be_retained(self):
+        with self.assertRaises(ValueError):
+            self.case(a_bytes_verified=True, a_retained=True)
 
     def test_unknown_mode_rejected(self):
         with self.assertRaises(ValueError):
