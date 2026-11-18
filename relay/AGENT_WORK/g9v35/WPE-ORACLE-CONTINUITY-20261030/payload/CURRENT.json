@@ -1,0 +1,63 @@
+{
+  "schema": "wpe-oracle-checkpoint/v1",
+  "prepared": "2026-10-30",
+  "status": "SELF_ASSESSED_DOCUMENTATION_CANDIDATE",
+  "role": "Oracle (standalone)",
+  "chat_display": "01a188e5",
+  "governing_wbs": "https://reallakshman19.github.io/progress-page/#/g9v35/progress",
+  "base_page_head": "3d0c0f5d073391ca18840eaf47631b265571b75d",
+  "base_page_revision": "R5",
+  "source_authority": "OWNER_PRIVATE_REF:WPE-ORACLE-20261030",
+  "core2": {
+    "target": 21,
+    "matrix_cells": 14,
+    "latest_received": {
+      "conditional": 14,
+      "vacant": 7,
+      "independent_admissions": 0
+    },
+    "frozen_original": {
+      "conditional": 13,
+      "vacant": 8,
+      "independent_admissions": 0
+    },
+    "record_occurrences": 79,
+    "canonical_counting_groups": 78,
+    "remaining_slots": {
+      "RETRIEVE": 3,
+      "EXPLAIN": 3,
+      "JUSTIFY": 1
+    },
+    "independent_review": "NOT_ESTABLISHED",
+    "Owner_approval": "PENDING",
+    "native_learner_Core2": "NOT_BUILT"
+  },
+  "core1a": {
+    "preparation_candidates": 1,
+    "units": 11,
+    "claims": 3,
+    "construction_roles": 3,
+    "native_field_targets": 7,
+    "science": "NOT_QUALIFIED",
+    "reviewed_task_join": "MISSING",
+    "lesson": "NOT_AUTHORED",
+    "Owner_approval": "PENDING"
+  },
+  "core1b": "DEFERRED_PENDING_CORE1A_APPROVAL",
+  "D31": "PAUSED",
+  "golden": {
+    "registered_candidates": 2,
+    "Owner_blessed": 0,
+    "physical_inventory_rows": 256
+  },
+  "agents_launched_here": 0,
+  "cycle": "NOT_ACTIVATED",
+  "meters": {
+    "metric": "reported input plus output",
+    "baseline": "UNKNOWN",
+    "context": "UNKNOWN",
+    "account": "UNKNOWN"
+  },
+  "private_input_delivery_to_future_agent": "NOT_RUN",
+  "next_actor": "Owner reviews candidates and selects next bounded qualification/preparation step"
+}

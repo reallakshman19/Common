@@ -1,0 +1,16 @@
+# Exact artifacts and transport limits
+
+Producer/receiver of this reconciliation: Oracle01a188e5, author/exposed. Destination future Oracle or assigned agent UNKNOWN. Exact local bytes were read/hashed; no new recipient has retrieved private inputs. Storage: LOCAL_ONLY / protected Owner custody; opaque external route OWNER_PRIVATE_REF:HANDOFFS_PRIMARY when actually supplied by custodian. Public packet is metadata only. Neither a Windows path nor this register delivers an archive to another agent.
+
+| Retained local artifact | Bytes | SHA-256 | Scope/status |
+|---|---:|---|---|
+| SMART_LABELLING_QRT_HARDENING_R2_CANDIDATE.zip | 120080 | `96f7f3dea6efb0ec7bff729392ed6b53a08a6496fb53663f002fb9998e9c1286` | Uninstalled R2 candidate; recorded90 regressions, no semantic acceptance |
+| WPE_CORE2_21_REVIEW_CANDIDATE_20261030.zip | 117059668 | `f9f5cf75652f20483d44e837c564fe4635e55aa75dd6007d988c297e82ef82c4` | Frozen private catalogue13/8/0; original routine CLOSED57/60calls54.8min |
+| WPE_CONSTRUCTION_HANDOFF_SKILL_R1_CANDIDATE.zip | 1232093 | `c14de8a538c2276855a5f911dc9685adbebd159f5c631ff870daba87a05ab681` | One preparation dossier; recorded50/50 controls and relocation; CLOSED31/35calls21.1min |
+| WPE_SOURCE_TO_CORE1A_CONCEPT_REPORT_20261030.zip | 333907 | `42eb77a8c1f6dcf56d38df487e6fc7b902b092c61c991ada71ba54485fd8a2e6` | Detailed local report/diagram/fixture catalogue; CLOSED17/25calls12.3min |
+
+Newer received private Owner review package: SHA256 7a5e6f12bd5ea656fea301a00796c20ce9aa5a897acbb1f4e95f57ca2cd59033,128239577bytes. Nested R1 return SHA256 8b3fa63993a8d7a54b8fc6e38dca96227e18e3ae35c3e5b5e9a596cc20b2a99b. Prior report checked nested CRC and18 payload hashes/size bindings plus21-place arithmetic. Read-only audit SHA256 16dd1d5aadc9c2cdf0a0c4e120c1249092136829dc9ac2813c127236a63d20c0,58809bytes;10manifest payloads/CRC matched. The four-input audit checker was NOT_RERUN, academic verdicts NOT_REPERFORMED, appointment UNAPPOINTED.
+
+Authoritative local pins: canonical WPE candidate84fe88387e33a03bf87bf1f537bae8c447f5b86f0d77a854c899ad70f12d8258; learner vocabulary6e6f28bef1182222babf79508288c599585f5f55245abcb934892a1e2b65cfdf; full Physics Blueprint e6030a5933a803ddc39708414e6831c89c9565def78c09c99f58f95052c2b45f; resolvedBlueprint ac32dc937403cac33c76343f2e7e0dabd7c2c4a3188cb3b453ddf2576578ddf9; subtileBlueprint2077ac87345d35ed639c22c4049e2d4840dab604509ca3409c2c1a9621178f86. Source-to-Core1A expected external pin set4592d446024ec963dd9ed33cae85a1f3915fa5f4be9406b2c53337c7aeae91a5. Revised methodology43a2638f7bd2e4e47777c7fa98cbf600986b595549aa683148c1d2a903c8443f; §14 corrected to D3.7→D4.7; D3.5 historical/deferred. These identify retained candidates; no scientific/current adapter authority is inferred.
+
+No authoritative current WPE adapter is selected: received audit reports six candidates/five hashes. Choosing the newest filename would not resolve semantic/custody authority. Exact local source locations, hash receipts, native commands and unresolved-case ledger remain in the private checkpoint bundle. Protected original artifacts must be provided privately and verified by each receiver before execution. Common publication of this packet is not publication of those bytes, and does not certify an independently usable full workpack.
