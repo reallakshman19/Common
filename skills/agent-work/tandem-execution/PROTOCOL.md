@@ -1,6 +1,6 @@
 # Tandem Execution protocol — parallel implementation, forward convergence
 
-**Mode boundary:** the numbered B-final flow below is normative for PARALLEL/SERIAL only. For an explicitly assigned `TANDEM_IR`, [TANDEM_IR.md](TANDEM_IR.md) is the mode-specific contract: A implements, B independently challenges and contributes, A reconciles and delivers. Shared identity, isolation, genuine blocker, evidence and native authority principles still apply; do not apply B-final or no-handback rules to TANDEM_IR. The mode is not a coordination/engineering-release selection.
+**Mode boundary:** the numbered B-final flow below is normative for PARALLEL/SERIAL only. For an explicitly assigned `TANDEM_IR`, [TANDEM_IR.md](TANDEM_IR.md) is the mode-specific contract: A normally implements and delivers; B aligns the aim, reconstructs minimally, challenges and contributes, and succeeds A when authorized if A cannot finish. Shared identity, isolation, genuine blocker, evidence and native authority principles still apply; do not apply the PARALLEL/SERIAL no-handback rules to TANDEM_IR. The mode is not a coordination/engineering-release selection.
 
 ## 1. One assignment; both agents execute
 

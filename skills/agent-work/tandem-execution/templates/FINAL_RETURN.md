@@ -1,6 +1,6 @@
 # Agent B — final implementation return
 
-**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_FINAL_RETURN.md](TANDEM_IR_FINAL_RETURN.md) instead; A retains final ownership. Do not apply this template to that mode.
+**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_FINAL_RETURN.md](TANDEM_IR_FINAL_RETURN.md) instead; A normally retains final ownership, with authorized B succession when needed. Do not apply this template to that mode.
 
 Task / mode / assigned Drive folder: [actual assignment]
 Original source C0: [exact revision and input identity]
