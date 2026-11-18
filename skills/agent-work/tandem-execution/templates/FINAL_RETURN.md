@@ -1,17 +1,20 @@
-# Agent B — final cumulative delivery
+# Agent B — final implementation return
 
-Task and actual Drive folder: [existing task / link]
-Original requirement and C0: [source locator / identity]
-A candidate C1: [Drive file ID, verified SHA, recovered gaps]
-Final candidate C2: [actual code/commit identity, cumulative Drive file link / SHA]
+Task / mode / assigned Drive folder: [actual assignment]
+Original source C0: [exact revision and input identity]
+A1 or C1: [verified Drive file ID, digest, base, actual candidate; or UNAVAILABLE]
+B1: [actual native candidate identity, Drive locator if separately published]
+Final candidate: [actual commit/digest, final Drive file ID, SHA-256]
 
-| Outcome / finding | Before C0 | After A C1 | After B C2 | Actual evidence / command | Result |
+| Observable outcome | C0 | A1/C1 if available | B1 | Final | Actual native evidence | Result |
 | --- | --- | --- | --- | --- | --- | --- |
-| [observable condition] | [wrong/valid] | [observed] | [observed] | [path/input/output] | [PASS/FAIL/NOT_RUN] |
+| [required behavior] | [observed] | [observed/NOT_RUN] | [observed] | [observed] | [command, input, output] | PASS/FAIL/NOT_RUN |
 
-**A contribution:** [actual correction and evidence].
-**B contribution:** [actual surviving error, correction, negative/integration test].
-**Preserved behavior:** [positive control].
-**Remaining limitations:** [actual unresolved defects, unavailable tests, scope].
-**Result:** COMPLETE for the bounded done-list / PARTIAL, with specific reason. Upload and byte verification status separate. No acceptance or release claim unless separately established.
-**Drive:** one final cumulative archive, native source and executable fixtures, SHA-256 index, README. B-FINAL.json points to actual uploaded bytes. No return to A.
+**Contribution reconciliation:** [contract → retained A / retained B / combined / replacement / rejected / unavailable; why and test]. Include actual meaningful changes/tests; no false credit for an unavailable candidate.
+**Conflicts and preservation:** [original requirement, chosen resolution, combined contrary and positive cases].
+**Outcome:** COMPLETE for proven done-list / PARTIAL for named unresolved cases.
+**Lineage:** FINAL_COMBINED (both actual contributions retained) / FINAL_B_ONLY (no A contribution retained; explain why) / SERIAL_FINAL (verified continuation). This is not a quality grade.
+**Delivery:** actual uploaded file ID, bytes, checksum verification or NOT_DELIVERED.
+**Limits:** [unexecuted required checks, genuine outstanding decisions or defects]. No automatic reopening for late peer work, no routine handback, no unestablished independent approval or release.
+
+Upload actual cumulative source/patch, native tests and fixtures, execution logs, lineage and SHA256SUMS.txt; publish B-FINAL.json last. One final candidate.

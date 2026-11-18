@@ -1,19 +1,19 @@
 # One assignment — Agent A and Agent B
 
-Fill once using actual values. Share the same assignment with both agents.
+Fill once and share with both. Default mode is PARALLEL unless SERIAL is explicitly selected.
 
-- Task / existing WBS: [one actual task]
-- Original outcome: [observable result and wrong case]
-- Baseline / source: [exact repo revision or artifact identity]
-- Original inputs and requirements: [permitted locators]
-- Google Drive task folder: [actual URL / ID; accessible to both]
-- Agent A: [assigned session/actor]
-- Agent B: [assigned session/actor]
-- Allowed scope: [files/contracts, local writes, tests, approved dependency setup, safe rebase/integration; specify any permitted repository operations]
-- Protected invariants / forbidden actions: [no data loss, no unrelated edits, no unauthorized merge/deploy/private access]
-- Done-list: [3–6 observable outcomes with positive and contrary cases]
-- Execution budget: [bounded scope/time/resource allowance; A then B; local correction until done or actual limit]
-- Authority: A writes first; B is authorized now for the successor turn once A's recoverable Drive checkpoint is published and A's conflicting writes have ceased. B owns all remaining in-scope corrections. No further routine approval or reverse handoff.
-- Delivery: A uploads native C1 and READY; B uploads cumulative C2 and FINAL in this folder. Existing product acceptance remains unchanged.
+- Task / existing WBS: [one task]
+- Original observable outcome / wrong cases: [requirement]
+- Common C0/source and permitted inputs: [actual revision/digests and locators]
+- Google Drive task folder: [actual URL/ID, accessible to both]
+- Agent A / primary correction area: [assigned agent and contracts]
+- Agent B / primary correction area: [assigned agent and contracts]
+- Mode: PARALLEL (default) / SERIAL (explicit, state genuine dependency)
+- Allowed actions: [isolated local writes, tests, permitted setup, necessary adjacent fixes, safe integration, repository operations if allowed]
+- Protected invariants / forbidden actions: [no data loss, unrelated edits, unauthorized merge/deploy/private data]
+- Done-list: [3–6 observable outcomes, positive and contrary cases]
+- Budget and convergence boundary: [practical execution allowance; final Drive refresh after B's own work and combined test attempt, or other explicit bound]
+- Authority: A and B may implement immediately in isolated candidates A1/B1 under PARALLEL. B is the sole final convergence owner, already authorized to integrate and correct all feasible in-scope defects, including unfinished A scope. A missing READY or A1 never blocks B's own implementation. SERIAL requires exclusive custody only for the shared C1, not for B's isolated preparation/repair.
+- Delivery: A uploads A1 and A-READY; B uploads B1/B-READY where useful, then one final package and B-FINAL through the same Drive folder. If A is absent, B finishes from B1/C0 and records B-only lineage. No routine handback or additional approval.
 
-**Do not add approval gates:** A and B may perform all related routine steps within the granted turn. Recover incomplete material and continue feasible work. No new role, task or reporting queue.
+**Do not wait or restart:** preserve valid existing implementation. Both agents execute immediately; recover missing material and continue. No new WBS, role, reporting queue, or change of existing product acceptance.
