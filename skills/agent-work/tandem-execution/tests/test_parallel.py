@@ -119,7 +119,7 @@ class ParallelPolicy(unittest.TestCase):
         self.assertFalse(r["shared_write"])
 
     def test_serial_lineage_explicit(self):
-        r = self.case(mode="SERIAL", a_bytes_verified=True, a_reconciled=True,
+        r = self.case(mode="SERIAL", a_bytes_verified=True, a_reconciled=True, a_retained=True,
                       b_work_available=True, boundary_reached=True, done_list_supported=True)
         self.assertEqual(r["lineage"], "SERIAL_FINAL")
 
