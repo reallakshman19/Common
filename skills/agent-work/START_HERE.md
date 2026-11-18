@@ -52,6 +52,8 @@ For each role's **task, authority boundary, exact return, full file-cycle steps 
 
 **Project Home source guide:** [Concept note, architecture/complex concepts, roadmap and original fixtures](PROJECT_HOME_GUIDE.md). Oracle curates this knowledge; the Page projects it from existing source records. Each includes the relevant Nudge Designer source and Progress Page projection.
 
+**Two-agent delivery:** When explicitly assigned Agent A and Agent B for one outcome, use [Tandem Execution](tandem-execution/SKILL.md): A fixes and uploads, B receives via Google Drive, fixes forward and delivers the cumulative candidate. One assignment and one forward writer transfer; no routine handback or extra approval stage.
+
 ## 4. Execute one pre-resolved assignment
 
 **Owner aim → Oracle/OTM (or direct Owner) assignment → Agent execution → Native evidence return → Oracle/OTM reconciliation → Oracle continuation or controlled succession → ONE next task.** Owner trial, independent review and protected release/merge gates remain applicable where required. The [full maps](ENTRY_PROCESS_MAPS.md) distinguish initial execution, agent continuity and Oracle continuity.
