@@ -1,5 +1,7 @@
 # Tandem Execution protocol — parallel implementation, forward convergence
 
+**Mode boundary:** the numbered B-final flow below is normative for PARALLEL/SERIAL only. For an explicitly assigned `TANDEM_IR`, [TANDEM_IR.md](TANDEM_IR.md) is the mode-specific contract: A implements, B independently challenges and contributes, A reconciles and delivers. Shared identity, isolation, genuine blocker, evidence and native authority principles still apply; do not apply B-final or no-handback rules to TANDEM_IR. The mode is not a coordination/engineering-release selection.
+
 ## 1. One assignment; both agents execute
 
 The assignment records the original user-visible outcome, real source/input identities, A and B, common C0 or an explicit shared starting candidate, allowed paths/actions, protected invariants, finite done-list, budget, Drive folder and convergence boundary. PARALLEL is default. Both agents are authorized to write **their own isolated candidate** immediately. Explicit SERIAL is available when a first product must genuinely precede refinement. Routine edits, tests, permitted dependency restoration, safe rebase and conflict resolution are in the assigned envelope. No new permission is derived from this document, READY, a chat title or a passing test.

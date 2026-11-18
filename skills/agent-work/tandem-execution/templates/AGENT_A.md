@@ -1,5 +1,7 @@
 # Agent A — implement and publish A1
 
+**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_AGENT_A.md](TANDEM_IR_AGENT_A.md) instead; A retains final ownership. Do not apply this template to that mode.
+
 Read the single assignment and original requirements/source. PARALLEL is default; you and B have immediate implementation authority in separate candidate trees. You own A1, not B's working tree or the final candidate. Do not wait for B or a new routine authorization.
 
 Recover existing valid work. Derive required output, reproduce actual defects, implement the primary assigned corrections and necessary adjacent in-scope changes, execute native positive/negative controls, repair regressions. Do not deliberately leave a known defect for B. Missing report/dependency/fixture is work to recover; continue feasible code and tests. Distinguish inspected from executed behavior.

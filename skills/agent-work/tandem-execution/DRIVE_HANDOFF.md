@@ -2,7 +2,23 @@
 
 All A/B handoffs and final native delivery use Google Drive. The assignment supplies or authorizes one folder and both agents' actual access. Use the intended account; preserve existing sharing, no permission changes without authorization. Repository access can supply source/commits but does not replace Drive exchange. No chat attachment, sandbox URI or GitHub comment is a handoff.
 
-## Folder convention
+## TANDEM_IR route
+
+For explicitly selected TANDEM_IR, the assigned Drive folder is the authorized artifact-byte exchange route, including A's C1 checkpoint(s), B's C2 return(s), and A's C3 final package. Retain the applicable public-safe/sanitized [Common artifact relay receipt](../ARTIFACT_RELAY.md) and existing native task record; the selected Tandem Drive route is the specific transport decision, not permission to publish protected bytes/links or bypass stronger project custody. Use a task/run identity (or existing unique task-scoped folder), immutable versioned file IDs and SHA-256; no second copy of an existing exact artifact is needed. A recipient verifies its own retrieval and bytes; posting a locator/READY does not deliver or activate another agent.
+
+```text
+C1-<revision>-candidate.zip    # A review checkpoint
+A-READY.json                   # actual C1 index
+C2-<revision>-contribution.zip # B's native delta based on exact C1
+B-READY.json                   # actual C2 index, frozen IR findings and role scope linked
+C3-<revision>-final-candidate.zip
+A-FINAL.md
+A-FINAL.json                   # only A (or explicitly authorized successor)
+```
+
+Use the shared package integrity and upload/readback rules below. Every B return identifies the exact reviewed C1, independent findings and native delta/controls; A records retained/rejected/reworked contributions, current A checkpoint, actual C3, final test evidence and independence limits. A-FINAL uses agent A, kind FINAL, mode TANDEM_IR, actual input IDs/digests, outcome COMPLETE/PARTIAL, lineage A_AND_B/A_ONLY, and review status REVIEWED/PARTIAL/NOT_RUN with scope and limits. No B-FINAL in this mode. Final package publication and recipient receipt remain separate. See [mode-specific protocol](TANDEM_IR.md) for timing and fallback. The remaining folder, actor-specific publish and final sections below apply to PARALLEL/SERIAL; shared byte verification remains applicable.
+
+## Folder convention — PARALLEL / SERIAL
 
 ```
 <Task folder>/
