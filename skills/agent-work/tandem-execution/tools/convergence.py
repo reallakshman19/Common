@@ -1,4 +1,7 @@
-"""Offline reference for tandem decisions, not an agent runner or authority mechanism."""
+"""Offline PARALLEL/SERIAL decision reference, not an agent runner or authority mechanism.
+
+TANDEM_IR has a different final owner and follows TANDEM_IR.md, not this B-final helper.
+"""
 from dataclasses import dataclass
 
 

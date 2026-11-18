@@ -1,5 +1,7 @@
 # Tandem methodology — derive, implement, compare, converge
 
+**Mode routing:** the B-convergence methodology below applies to PARALLEL/SERIAL. For TANDEM_IR use [the dedicated route](TANDEM_IR.md), which composes [OnBoard IR](../onboard-ir/SKILL.md), [Independent Review](../independent-review/SKILL.md) and [Contribution & Handoff](../CONTRIBUTION_HANDOFF.md); reuse the source-grounding and evidence calibration principles below, with A performing final semantic reconciliation.
+
 Core question: **What materially wrong result can survive either implementation, and how can the two agents produce one stronger working result without waiting or handing defects backward?**
 
 ## 1. Establish original behavior, not a preferred patch

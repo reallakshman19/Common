@@ -1,5 +1,7 @@
 # Agent B — implement immediately, converge and deliver
 
+**PARALLEL/SERIAL only.** If the actual assignment selects TANDEM_IR, use [TANDEM_IR_AGENT_B.md](TANDEM_IR_AGENT_B.md) instead; A retains final ownership. Do not apply this template to that mode.
+
 Read the single assignment and original source. **Start implementing now in your own isolated B1. Do not wait for A-READY, A1, A's final report, or an extra approval.** PARALLEL is default. Preserve existing valid local corrections; they are working implementation, not merely prototype because A is absent. Your primary correction scope and final convergence are both authorized at assignment.
 
 Reproduce actual failures, implement and test your scope, fix regressions and extend into remaining feasible task defects. Upload B1 and B-READY when useful. Read available A artifacts from the assigned Google Drive folder without making them a dependency of your own work. Recover actual usable code/patch even when formatting or marker is missing; verify bytes and lineage. If A is absent, complete the full feasible outcome from B1/C0. No invented A contribution.

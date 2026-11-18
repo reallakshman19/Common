@@ -52,7 +52,7 @@ For each role's **task, authority boundary, exact return, full file-cycle steps 
 
 **Project Home source guide:** [Concept note, architecture/complex concepts, roadmap and original fixtures](PROJECT_HOME_GUIDE.md). Oracle curates this knowledge; the Page projects it from existing source records. Each includes the relevant Nudge Designer source and Progress Page projection.
 
-**Two-agent delivery:** When assigned A and B for one outcome, use [Tandem Execution](tandem-execution/SKILL.md): PARALLEL by default; both implement immediately in isolated candidates, hand off native work only via Google Drive, B converges and delivers one final candidate. SERIAL is explicit opt-in. Missing A/READY never stops B's isolated implementation; no routine handback or extra approval.
+**Two-agent delivery:** When assigned A and B for one outcome, use [Tandem Execution](tandem-execution/SKILL.md). PARALLEL defaults to isolated implementation and B final convergence; SERIAL explicitly selects B continuation. For Owner-selected [TANDEM_IR](tandem-execution/TANDEM_IR.md), A implements, B independently challenges and contributes, A reciprocally reviews, reconciles and hands over. Both start feasible work immediately; follow the assigned Drive route and actual native authority. No extra WBS or approval, no implied independent final certification.
 
 ## 4. Execute one pre-resolved assignment
 

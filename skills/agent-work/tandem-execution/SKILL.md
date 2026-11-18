@@ -1,13 +1,13 @@
 ---
 name: tandem-execution
-description: Two implementation agents own one outcome. Parallel is the default: both implement immediately in isolated candidates, exchange native artifacts only through Google Drive, and B converges available contributions into one final result without routine handbacks or approval loops. Serial is explicit opt-in.
+description: Two contributing engineering agents, one authorized outcome. PARALLEL defaults to independent isolated implementation and B convergence; SERIAL continues A's candidate with B as final owner; explicit TANDEM_IR uses A implementation, B independent review and corrective contribution, A reconciliation and handover. Select by task objective; exchange native artifacts through the assigned Google Drive folder.
 ---
 
 # Tandem Execution — Agent A and Agent B
 
-Use for one bounded engineering outcome assigned to two execution agents. Both fix, test and deliver; neither is a report-only participant. **PARALLEL is the default.** No mandatory dependency on A's delivery before B can implement. The only final candidate owner is B. One existing task; no new role, controller or approval registry.
+Use for one bounded engineering outcome assigned to two agents. One existing task; no new role, controller or approval registry. **Read the explicitly assigned mode first.** PARALLEL remains the default for two implementation agents; SERIAL is explicit. For **TANDEM_IR**, A is the primary implementer and final owner; B starts source-grounded challenge work immediately, reviews A's coherent checkpoint, then makes authorized useful corrections or executable evidence contributions and returns them to A. A reviews, reconciles, validates and hands over. Follow [TANDEM_IR.md](TANDEM_IR.md) and its mode-specific templates; the B-final instructions below apply only to PARALLEL/SERIAL. No mode can be inferred from agent names or change an existing grant.
 
-## Execute
+## Execute — PARALLEL / SERIAL only
 
 1. **Assign once.** Use the [assignment](templates/ASSIGNMENT.md). Bind the original outcome/source C0, A/B, a common authorized Drive folder, scope, protected invariants, finite done-list and practical convergence boundary. Both agents have implementation authority immediately in PARALLEL. Choose SERIAL explicitly only if B truly must continue a first working candidate. Authority is granted by the actual assignment, not this skill or a marker.
 2. **Implement concurrently (default).** A and B each derive expected behavior, reproduce failures, modify their own isolated working tree/branch, execute native controls and repair regressions. A owns A1; B owns B1. Allocate complementary primary areas without forbidding necessary adjacent corrections. Existing valid local implementation is usable work, not a prototype because the peer is absent. Neither writes the other's workspace or a common mutable branch.

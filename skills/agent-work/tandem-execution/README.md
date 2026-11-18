@@ -1,6 +1,6 @@
-# Tandem Execution — two implementers, one final outcome
+# Tandem Execution — two contributing agents, one final outcome
 
-**Purpose:** use two agents' engineering capacity concurrently without waiting for a predecessor or routing ordinary defects back to their author. The final owner B chooses, integrates, repairs and validates the working product. This is an execution recipe for A and B only; it is not a reviewer onboarding, succession of project control, additional WBS or agent dispatcher.
+**Purpose:** use two agents on one authorized engineering outcome. Select the pattern by the objective: throughput (PARALLEL), dependent continuation (SERIAL), or quality amplification through reciprocal review (TANDEM_IR). The assignment names the final implementation owner. This is not a new WBS, controller, approval or agent dispatcher.
 
 ## Choose execution at assignment
 
@@ -8,10 +8,13 @@
 | --- | --- | --- | --- |
 | **PARALLEL (default)** | Two capable agents can build from the same source or recoverable checkpoints | A and B independently write isolated candidates immediately | B converges available contributions and fixes remaining work |
 | SERIAL (explicit opt-in) | A's coherent product is a genuinely necessary input to a later refinement | A produces C1; B can prepare tests and isolated repairs without touching A's mutable tree | B continues C1 or reconstructs if missing |
+| **TANDEM_IR (explicit)** | One primary implementation owner with embedded independent challenge and corrective contribution | A implements; B derives expectations and adversarial controls from originals, then reviews a verified checkpoint and improves it | **A** reviews B's contribution, reconciles and hands over C3 |
 
 Do not infer SERIAL from A/B names, numbered stages, an absent READY file or the fact that one agent finished earlier. In either pattern, only a real shared-write conflict restricts writes to that particular tree.
 
 ## Minimal route
+
+**TANDEM_IR:** [mode-specific route](TANDEM_IR.md) → [one assignment](templates/TANDEM_IR_ASSIGNMENT.md) → [A](templates/TANDEM_IR_AGENT_A.md) and [B](templates/TANDEM_IR_AGENT_B.md) → A's checkpoint → B's review and native contribution → [A's final return](templates/TANDEM_IR_FINAL_RETURN.md). Reuse existing onboarding and task context; no routine extra approval. The remaining routes below apply to PARALLEL/SERIAL only.
 
 - **New pair:** [one assignment](templates/ASSIGNMENT.md) → [A prompt](templates/AGENT_A.md) and [B prompt](templates/AGENT_B.md) → actual native work in isolated candidates → [Drive exchange](DRIVE_HANDOFF.md) → B's [final return](templates/FINAL_RETURN.md).
 - **Both already investigated:** reuse the evidence. Allocate complementary corrections. Both implement now. No extra audit stage.
@@ -22,13 +25,16 @@ Do not infer SERIAL from A/B names, numbered stages, an absent READY file or the
 
 ## Read map
 
-[Protocol](PROTOCOL.md) — execution states, isolation, convergence boundary, late/absent peer, acceptance and recovery.
+[Tandem IR](TANDEM_IR.md) — mode-specific A → B → A ownership, source-first challenge, contribution, reconciliation and fallback.
+[Protocol](PROTOCOL.md) — shared boundaries and PARALLEL/SERIAL execution states, isolation, convergence and recovery.
 [Methodology](METHODOLOGY.md) — independent derivation, meaningful repair, three-way semantic integration, falsifiers and evidence.
 [Drive contract](DRIVE_HANDOFF.md) — immutable candidate packages, markers, byte verification and fallback.
 [Checklist](CHECKLIST.md) — inspect the actual outcome, not the presence of ceremonial files.
 [NWv7 worked allocation](examples/NWV7.md) — example grounded in the A08/A09 audit pairs.
 
 ## Executable goldens
+
+- **TA-IR-G01 (TANDEM_IR):** [worked case](examples/tandem_ir/WORKED_HANDOFF.md). C0 has two defects; A protects saved state, B discovers and fixes occurrence identity, A detects a new missing-identity defect in B's correction and delivers C3. Native synthetic controls run in `tests/test_tandem_ir.py`.
 
 - **TA-G02 (parallel, default):** [worked case](examples/parallel/WORKED_HANDOFF.md). Both A1 and B1 are produced from C0; each corrects a separate failure in the same native file. B combines them, tests both, and the fallback case shows B proceeding when A1/READY is absent.
 - **TA-G01 (serial, legacy):** [raw case](examples/golden/RAW_CASE.md) · [baseline](examples/golden/baseline.py) · [C1](examples/golden/candidate_a.py) · [C2](examples/golden/candidate_b.py) · [worked handoff](examples/golden/WORKED_HANDOFF.md). Retained as an explicitly selected alternative.
@@ -37,6 +43,6 @@ Run `python -m unittest discover -s tests -v` from this directory. The tests exe
 
 ## Why this revision exists
 
-The previous recipe let B prepare tests but withheld implementation until A-READY. That is serial execution and can leave a capable B idle. A single writer across a whole task is unnecessary when each agent owns its own isolated candidate. Restrict only competing writes to the same candidate; make B's final integration exclusive, not its initial work conditional. An incomplete peer contribution is a lineage limitation, not an engineering blocker.
+For PARALLEL, the previous recipe let B prepare tests but withheld implementation until A-READY. That is serial execution and can leave a capable B idle. A single writer across a whole task is unnecessary when each agent owns its own isolated candidate. Restrict only competing writes to the same candidate; make B's final integration exclusive, not its initial work conditional. An incomplete peer contribution is a lineage limitation, not an engineering blocker.
 
-Drive is the sole handoff channel; authorized repository access remains a source and native development mechanism. An inactive separate conversation still needs invocation; an upload is not dispatch. Existing product approval/release rights remain unchanged. No extra participant or approval step.
+Drive is the sole artifact-byte handoff channel for these explicitly selected patterns; authorized repository access remains a source and native development mechanism. TANDEM_IR also retains the applicable sanitized Common relay receipt; no private bytes or URLs in public records. An inactive separate conversation still needs invocation; an upload is not dispatch. Existing product approval/release rights remain unchanged. No extra participant or approval step.
