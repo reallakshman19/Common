@@ -1,32 +1,42 @@
-# Tandem Execution — one-way, two-agent delivery
+# Tandem Execution — two implementers, one final outcome
 
-**Purpose:** obtain the benefits of two different engineering investigations without multiplying coordination, duplicated patches or report-only returns. The second agent advances the working product, rather than sending findings back to the first.
+**Purpose:** use two agents' engineering capacity concurrently without waiting for a predecessor or routing ordinary defects back to their author. The final owner B chooses, integrates, repairs and validates the working product. This is an execution recipe for A and B only; it is not a reviewer onboarding, succession of project control, additional WBS or agent dispatcher.
 
-This is an execution method for Agent A and Agent B. It uses one actual task and the existing permission/acceptance boundaries. It does not create a new role or a dispatch service.
+## Choose execution at assignment
 
-## Start with the smallest suitable path
+| Pattern | When | Starting work | Final ownership |
+| --- | --- | --- | --- |
+| **PARALLEL (default)** | Two capable agents can build from the same source or recoverable checkpoints | A and B independently write isolated candidates immediately | B converges available contributions and fixes remaining work |
+| SERIAL (explicit opt-in) | A's coherent product is a genuinely necessary input to a later refinement | A produces C1; B can prepare tests and isolated repairs without touching A's mutable tree | B continues C1 or reconstructs if missing |
 
-- **New pair:** use the [single assignment](templates/ASSIGNMENT.md), hand both agents the original outcome and permitted source. A starts first; B may investigate the baseline in a separate read-only scratch space while A builds. A completes and uploads; B begins its write turn from A's Drive checkpoint.
-- **Two agents already investigated:** keep both original discovery records. Give A the useful findings from both, reconcile while implementing; B reads the actual A candidate and fixes the remainder. No extra discovery or review-only round.
-- **A has already built:** B receives the verified Drive package and proceeds directly. Do not send A a request for another status report.
-- **A partially completes or is interrupted:** B can continue from the last usable checkpoint once A's write turn has ended. If no usable candidate exists, B reconstructs from the original baseline and available native deltas. Be precise about what A did not deliver. Do not manufacture a successful A turn.
-- **A fully solves the issue:** B still runs an original-source-derived adverse case and contributes executable coverage or integration proof, not needless production edits.
+Do not infer SERIAL from A/B names, numbered stages, an absent READY file or the fact that one agent finished earlier. In either pattern, only a real shared-write conflict restricts writes to that particular tree.
+
+## Minimal route
+
+- **New pair:** [one assignment](templates/ASSIGNMENT.md) → [A prompt](templates/AGENT_A.md) and [B prompt](templates/AGENT_B.md) → actual native work in isolated candidates → [Drive exchange](DRIVE_HANDOFF.md) → B's [final return](templates/FINAL_RETURN.md).
+- **Both already investigated:** reuse the evidence. Allocate complementary corrections. Both implement now. No extra audit stage.
+- **B already implemented before A delivers:** keep B1, run more useful controls, publish it. It is a working candidate; A is not an implementation prerequisite. Integrate later if A's usable work arrives before the selected final snapshot.
+- **A unavailable:** B completes the bounded task on B1/C0 with an honest B-only lineage. Missing A is not a defect in a complete B product.
+- **Both touched the same file:** resolve the behavior against original intent, not the number of edits or which agent arrived first. B owns the final integration.
+- **Previous v2 serial assignment:** explicit parallel amendment supersedes the sequencing restriction; preserve both agents' existing code. Do not restart. If no amendment has been granted, do not infer new write authority.
 
 ## Read map
 
-[Protocol](PROTOCOL.md) — ownership, allowed transitions, recovery, convergence.
-[Methodology](METHODOLOGY.md) — evidence, actual code execution and cross-checks.
-[Drive handoff](DRIVE_HANDOFF.md) — package contract, actual byte verification and worked recovery.
-[Agent A prompt](templates/AGENT_A.md) · [Agent B prompt](templates/AGENT_B.md) · [Final return](templates/FINAL_RETURN.md).
+[Protocol](PROTOCOL.md) — execution states, isolation, convergence boundary, late/absent peer, acceptance and recovery.
+[Methodology](METHODOLOGY.md) — independent derivation, meaningful repair, three-way semantic integration, falsifiers and evidence.
+[Drive contract](DRIVE_HANDOFF.md) — immutable candidate packages, markers, byte verification and fallback.
+[Checklist](CHECKLIST.md) — inspect the actual outcome, not the presence of ceremonial files.
+[NWv7 worked allocation](examples/NWV7.md) — example grounded in the A08/A09 audit pairs.
 
-## Golden TA-G01
+## Executable goldens
 
-[Raw case](examples/golden/RAW_CASE.md) · [baseline implementation](examples/golden/baseline.py) · [A candidate](examples/golden/candidate_a.py) · [B candidate](examples/golden/candidate_b.py) · [worked handoff](examples/golden/WORKED_HANDOFF.md). Run `python -m unittest discover -s tests -v` from the skill directory. The synthetic case is about distinct occurrence IDs and durable saved-plan preservation. It proves the example's executable behavior, not the real NWv7 product or a real multi-agent transfer.
+- **TA-G02 (parallel, default):** [worked case](examples/parallel/WORKED_HANDOFF.md). Both A1 and B1 are produced from C0; each corrects a separate failure in the same native file. B combines them, tests both, and the fallback case shows B proceeding when A1/READY is absent.
+- **TA-G01 (serial, legacy):** [raw case](examples/golden/RAW_CASE.md) · [baseline](examples/golden/baseline.py) · [C1](examples/golden/candidate_a.py) · [C2](examples/golden/candidate_b.py) · [worked handoff](examples/golden/WORKED_HANDOFF.md). Retained as an explicitly selected alternative.
 
-## Why the method matters
+Run `python -m unittest discover -s tests -v` from this directory. The tests execute synthetic native implementations, offline archive verification and a small policy reference. They do not dispatch agents, authenticate Drive access, enforce writer leases, or certify any real NWv7 repair.
 
-The original execution failure is not insufficient commentary. It is the loss of delivery ownership whenever new defects appear. A report identifying a fix is not that fix. A clean test run on a predecessor's candidate is not current evidence for a changed successor. A shared folder link is not verified file custody. Both agents must create useful engineering value, but the active candidate has one owner at a time. B resolves the discrepancies and publishes the final cumulative result.
+## Why this revision exists
 
-## Boundaries
+The previous recipe let B prepare tests but withheld implementation until A-READY. That is serial execution and can leave a capable B idle. A single writer across a whole task is unnecessary when each agent owns its own isolated candidate. Restrict only competing writes to the same candidate; make B's final integration exclusive, not its initial work conditional. An incomplete peer contribution is a lineage limitation, not an engineering blocker.
 
-Drive is the only handoff and delivery channel. Source code may still originate in an authorized repository; a required native PR/merge operation is distinct from handing work between agents. The assignment grants the two turns once, and no new authorization is needed for the planned conditional succession. Actual invocation of B requires an available agent transport or a resume in B's session; Drive alone does not run an agent. Do not claim dispatch, receipt or independent product approval from an upload. No mandatory third role.
+Drive is the sole handoff channel; authorized repository access remains a source and native development mechanism. An inactive separate conversation still needs invocation; an upload is not dispatch. Existing product approval/release rights remain unchanged. No extra participant or approval step.

@@ -1,50 +1,76 @@
-# Tandem execution protocol — continuous correction, forward-only ownership
+# Tandem Execution protocol — parallel implementation, forward convergence
 
-## 1. Assignment is the permission envelope, not a sequence of approvals
+## 1. One assignment; both agents execute
 
-The user assigns one outcome to A and B at the start. Both receive the same original requirement, baseline source locator, allowed changes, protected behavior, finite done-list, execution budget and exact private or authorized Drive folder. A can write during its turn; B is preauthorized to write after the handoff condition. A and B are names for these two assigned turns, not additional roles. Do not infer merge, deployment, destructive production changes, private data use or ungranted cross-task writes. Routine code fixes, tests, refactoring necessary to fix the contract, dependency restoration from approved sources and scope-preserving conflict resolution are part of the authorized turn. A new task or an actual change of permission is not.
+The assignment records the original user-visible outcome, real source/input identities, A and B, common C0 or an explicit shared starting candidate, allowed paths/actions, protected invariants, finite done-list, budget, Drive folder and convergence boundary. PARALLEL is default. Both agents are authorized to write **their own isolated candidate** immediately. Explicit SERIAL is available when a first product must genuinely precede refinement. Routine edits, tests, permitted dependency restoration, safe rebase and conflict resolution are in the assigned envelope. No new permission is derived from this document, READY, a chat title or a passing test.
 
-One task can start with an immutable baseline, or an already existing working candidate. Preserve baseline and compare actual bytes. Changes to the candidate caused by the current agent are expected progress, not an authorization blocker. If upstream source moved, preserve the pinned candidate and safely rebase/test within the assignment when allowed; stop only a truly conflicting write or prohibited action.
+All handoffs, native packages and final delivery use the one assigned Google Drive folder. Do not use another handoff channel. A Git repository supplies source and may hold native implementation commits when permitted. Do not treat a PR comment as artifact transfer.
 
-## 2. Ownership and flow
+## 2. Separate write ownership from final delivery
 
-| Phase | Agent A | Agent B | Authoritative candidate |
+| State | A | B | Candidate |
 | --- | --- | --- | --- |
-| Start | Own initial correction | May derive independent tests, no shared writes | Baseline C0 |
-| A working | Reproduce, fix, test, close regressions | Prepare contrary cases if active | A scratch candidate |
-| A handoff | Stop writes, upload package, publish READY last | Read/verify same package | C1 from Drive |
-| B working | Finished; no repair handback | Own all feasible in-scope defects, fix and validate | B cumulative candidate |
-| B delivery | No action | Upload complete C2, actual evidence, remaining limits | C2 from Drive |
+| PARALLEL_START | Implement in own workspace | Implement in own workspace | Immutable C0 |
+| A1_WORKING / B1_WORKING | Fix, execute, resolve own failures | Fix, execute, resolve own failures | Two isolated candidates; no shared writes |
+| A1_DELIVERED / B1_DELIVERED | Publish immutable native snapshot | Publish immutable native snapshot | Actual Drive bytes |
+| CONVERGING | No writes to B's candidate | Exclusive owner of integration; continue corrections | B working lineage incorporating available A1 |
+| FINAL | No routine action | Publish one final validated result | C2 or B-only final |
 
-If A finds a known defect, A attempts the fix; never intentionally leave a bug so B has work. If B finds a defect in A's patch, B owns it. If B's change breaks A's earlier control, B restores the invariant. If either discovers unrelated improvements, keep them as notes rather than expanding the done-list. No A→B→A cycle. Neither a failed test nor a disagreement changes the active writer.
+These are observations, not compulsory synchronized barriers. A and B may finish in either order. B need not wait for A to reach a state; B1 can be uploaded before A1. A continues in its own isolated tree until its assigned execution boundary. A may publish a checkpoint and keep working in a different mutable working tree; published snapshots remain immutable. A cannot edit the snapshot consumed by B. Neither may overwrite the other's branch or force-push a shared ref. Only B owns final integrated output.
 
-## 3. Completion and recoverable handoff
+### Scope allocation
 
-A delivers the best coherent candidate at the end of its assigned turn, even if incomplete. Include the native runnable patch or source and dependencies/commands, original inputs, actual test output, negative controls, precise failures, and enough context to resume. A uploads only to the assigned Drive task folder, verifies the package and publishes `A-READY.json` last. A's marker explicitly records it has stopped writing the candidate. The planned successor permission takes effect when B can verify this recoverable checkpoint and no actual conflicting writer remains. No further routine approval, manual receipt ceremony or request for the same evidence. B verifies what is necessary to work; that verification is recorded with B's work, not sent back to A.
+Give each agent a meaningful primary correction area to reduce avoidable duplication; both are responsible for the task outcome. Necessary adjacent edits in an isolated candidate are allowed within assigned scope. Shared-file edits are not a conflict until integration. Do not reserve defects artificially, block a local fix because the peer "owns" a filename, or make both solve the whole problem merely to produce two patches. B can take unfinished A scope without a new routine approval. Across *different tasks*, protect shared upstream contracts and coordinate actual target integration, not individual isolated edits.
 
-If a package is incomplete but the actual source/patch is recoverable from the folder or authorized baseline, B repairs the custody gap, records what is missing and continues. If A is interrupted, a previously complete Drive checkpoint plus verified cessation or isolation of the old writer can be used; B need not obtain an extra report from A. Do not select a late A upload once B has taken the candidate; preserve it as historical if useful. A's shared-branch writes after handoff are forbidden. Do not force-push over a real external concurrent writer. Prefer isolated local candidate trees; native Git commit/PR mechanics do not constitute the handoff.
+## 3. Convergence boundary — no indefinite wait
 
-## 4. B owns convergence
+The assignment sets a practical final snapshot/budget: e.g. after B's own implementation and agreed combined regression attempt, using the latest **verified** A artifact available during the active invocation. It can also name an explicit agreed time or iteration bound if appropriate. Never impose sleep, repeated status pings, indefinite waiting or a new approval to declare that boundary. If A has not delivered at that point, B continues the full feasible outcome from B1/C0. A late package is historical after B-FINAL unless the user explicitly requests a new revision. If the assignment names no boundary, default to B's completion of its authorized implementation and regression run, with one final Drive folder refresh before delivery; do not pretend an inactive peer is running.
 
-B reconstructs the required outcome from original intent and examines A's actual changes, not just the status summary. B identifies the most consequential surviving wrong result, runs the relevant negative case, fixes it if observed, reruns positive controls and checks the combined production entrypoint. Repeat local correction within the assignment's budget. Default: one A implementation turn and one B implementation turn; B may perform as many routine local edits/checks as the agreed budget permits. No per-test permission or arbitrary round counter. A failed check is an input to B, not an exit or a handback. If a final check uncovers a new in-scope failure, B fixes it in the same turn when feasible. Do not return only a list of defects when an authorized correction remains executable.
+B may integrate incrementally as useful artifacts arrive. B's own code and tests must not wait on A's marker, final report or confirmation. If B completes its primary scope early, it takes remaining in-scope work rather than stopping at a prototype. If both have finished, B uses the actual immutable snapshots and makes one final convergence pass (including all necessary local correction iterations). A receives no routine repair request. An early B1 is a working deliverable, not necessarily final.
 
-## 5. No artificial blockers — recovery first
-
-| Situation | Required action |
+| Availability at convergence | Required action |
 | --- | --- |
-| Report missing, file names inconsistent, stale log | Inspect code/fixture, reconstruct the relevant evidence, proceed. |
-| Test dependency unavailable | Try approved setup, use actual module-level execution/alternate harness where valid, continue code/tests; mark unavailable full run NOT_RUN. |
-| A's fix partial, erroneous or contradicts B | Reproduce, correct forward; never return the defect to A. |
-| A already fixed every known issue | Add valuable negative/integration check; no gratuitous production change. |
-| Patch conflict or ordinary baseline drift | Reconcile/rebase if authorized and verify; otherwise preserve separate working patch and continue unrelated work. |
-| A upload incomplete | Recover available native source or apply verified delta from Drive; reconstruct missing logs locally; do not demand a polished report. |
-| Private fixture unavailable | Use authorized representative synthetic controls, label scope; don't pretend actual private replay. |
-| Drive temporarily unavailable | Retry available authorized connection; prepare local native checkpoint and execute feasible local work; mark transfer NOT_DELIVERED until real Drive upload. Do not substitute another handoff channel. |
-| A still writing the same shared candidate | Isolate B in read-only/scratch work; no overlapping shared writes. Resume write turn when cessation/isolation is established. |
-| Missing input prevents one test | Mark that test NOT_RUN; execute all unrelated feasible work. |
-| Real requirement ambiguity | Choose an existing safe behavior when justified; document assumption. Ask only if materially irreversible or incompatible with explicit requirement. |
-| Budget exhausted with material defects | B delivers runnable partial candidate, exact unresolved failing cases, and single next decision. Never label complete. |
+| A1 and B1 both verified | Compare both to C0, choose/combine fixes, test C2 |
+| A1 absent / READY absent | Recover usable A bytes if available; otherwise finish from B1 |
+| A1 corrupt or incomplete | Reject unsafe/unverified bytes; recover valid native delta or reconstruct affected fix; continue B1 |
+| A interrupted | Do not wait for A; use verified immutable checkpoint if any; otherwise B-only |
+| A changes after selected snapshot | Do not mutate or silently substitute selected bytes; consider a later snapshot only before final boundary if useful |
+| B interrupted | Preserve B1 and current integration checkpoint; resume B when available, no automatic handback |
+| Both solve same defect | Select sound implementation; retain useful tests and explicitly account for rejected alternative |
+| Both introduce incompatible fixes | B derives original invariant, tests competing approaches, repairs forward |
+| One candidate has a different base | Establish real ancestry; rebase/port verified changes within scope; test actual final source |
+| A finishes after B final | Preserve late artifact; no automatic reopening, no competing final |
 
-## 6. Done-list and final status
+## 4. Semantic integration
 
-Keep a finite task-specific set: reproduce/fix material defects, preserve valid behavior, run discriminating negative controls, verify actual integrated output where possible, deliver cumulative native code plus reproducible evidence. Completion means the specified observable outcome is supported on C2. A source inspection cannot establish runtime correctness. `COMPLETE` is scoped to proven agreed criteria; `PARTIAL` records useful work with missing or failed criteria; `NOT_DELIVERED` describes real Drive transfer failure, not whether local work happened. Use actual PASS/FAIL/NOT_RUN per check, not a generic gate. A and B disclose authored code/tests; no assertion of independent approval of both contributions. Existing acceptance and release rights do not change, and no additional participant is required by this recipe.
+B compares C0→A1 and C0→B1 as **three distinct objects**. Validate repository/paths/base and exact candidate digest or SHA; for a drifted base establish which upstream changes are already included. Never concatenate patches or cherry-pick conflicting changes by arrival order. For each material first-divergence contract, select A, B, a combination, or a new correction; record why against original requirements and the contrary case. A clean text merge is not proof of semantic compatibility. Inspect real entrypoint, data/identity schemas, configuration defaults, caches, boundary timing, and downstream consumers. Protect previously correct behavior, existing data, and compatibility with other accepted repairs.
+
+Rerun all affected A/B positive and negative controls on the actual final candidate. Add at least one meaningful surviving-error test or integration observation derived from original intent, not just author test counts. Fix any regressions in B's current tree, retest and finish. B can remove an inferior A change; accurately distinguish considered, retained, adapted and rejected contributions. No code quota: a useful executable test can be a retained contribution even if its production patch is not chosen.
+
+## 5. Explicit SERIAL alternative
+
+If assignment explicitly selects SERIAL, A builds C1 and publishes recoverable native bytes. B may derive expectations, write local tests or isolated candidate repairs before C1 is available. To continue the same mutable candidate, A's conflicting writes must have ceased or B must use an isolated immutable snapshot. B incorporates C1 when recoverable, fixes surviving errors and delivers C2. If C1 cannot be recovered, B reconstructs on C0 or its own valid work and records B-only lineage. A READY marker is custody metadata, never a prohibition on independent implementation. Do not apply SERIAL's handoff condition to PARALLEL.
+
+## 6. Recovery first; only real constraints narrow work
+
+| Situation | Execute instead of blocking |
+| --- | --- |
+| Missing peer package, README or marker | Continue own implementation; search actual assigned Drive folder, recover known native files with verifiable source lineage |
+| Missing dependency | Attempt permitted installation/cache/native module alternative; fix and test feasible parts |
+| Missing historical/private input | Use authorized synthetic controls; mark authentic replay NOT_RUN |
+| Ordinary patch conflict | Compare and correct locally; preserve source and tests |
+| Shared branch currently written | Use isolated worktree; never overwrite a real external writer |
+| Drive unavailable | Retry authorized access, finish local code/tests, retain recoverable ZIP; report NOT_DELIVERED rather than switching transport |
+| Uncertain product requirement | Preserve authoritative existing behavior; isolate material decision only; continue unrelated fixes |
+| Test fails | Treat as work; locate first divergence, repair and rerun |
+| Budget exhausted | Publish best executable candidate and exact unresolved case; no manufactured PASS |
+
+A real scope/authority boundary, unsafe archive, inaccessible essential input or protected irreversible operation remains a limit on that action. No missing administrative artifact, absent peer, failure of one test capability or unmerged upstream candidate creates a task-wide stop. Do not ask the user to relay routine feedback. Do not silently change task requirements to attain green tests.
+
+## 7. Completion has three independent dimensions
+
+- **Outcome:** COMPLETE for the agreed done-list on the final actual candidate; PARTIAL for unresolved required behavior or missing decisive evidence. A fully working B-only outcome can be COMPLETE. A combined implementation can be PARTIAL.
+- **Lineage:** FINAL_COMBINED when A and B's actual candidate contributions were reconciled (state which retained/adapted/rejected; do not claim A authored code B independently reconstructed); FINAL_B_ONLY when A's usable implementation was absent; SERIAL_FINAL for a verified serial continuation. If only an A report was read, record that evidence separately, not an A implementation.
+- **Delivery:** LOCAL_ONLY / NOT_DELIVERED / UPLOADED / BYTE_VERIFIED as actually observed. Final marker is an index, not an acceptance grant. Do not equate upload with recipient execution.
+
+Use actual commands, source/candidate and input hashes, outputs and PASS/FAIL/NOT_RUN per control. B owns the cumulative final candidate and any feasible in-scope corrections until the selected boundary. The existing product acceptance/merge/release rules still apply, without adding a third participant. Both disclose their own authored changes/tests. No independent-approval claim follows from two authors agreeing.

@@ -1,53 +1,58 @@
-# Google Drive handoff — one task folder, two native deliveries
+# Google Drive handoff — one task folder, immutable candidates
 
-All handoffs between A and B and final deliverables happen via Google Drive. The user supplies or authorizes one task folder. Verify the correct account and folder; do not change sharing permissions unless explicitly asked. A and B read/write the same task folder using their actual Drive access. A GitHub repository can supply source and hold a commit, but a GitHub comment, sandbox URI or pasted chat log is not an artifact handoff.
+All A/B handoffs and final native delivery use Google Drive. The assignment supplies or authorizes one folder and both agents' actual access. Use the intended account; preserve existing sharing, no permission changes without authorization. Repository access can supply source/commits but does not replace Drive exchange. No chat attachment, sandbox URI or GitHub comment is a handoff.
 
-## Folder convention (no new registry)
+## Folder convention
 
 ```
 <Task folder>/
-  A-<revision>-candidate.zip       # native source/delta, evidence, tests, fixtures
-  A-<revision>-README.md           # optional convenient summary; also in ZIP
-  A-READY.json                    # actual uploaded file ID + digest, published last
-  B-<revision>-candidate.zip       # cumulative code and all material evidence
-  B-<revision>-FINAL.md            # concise outcome with limitations
-  B-FINAL.json                    # actual uploaded file ID + digest, published last
+  original requirements and authorized inputs
+  A1-<revision>-candidate.zip
+  A1-<revision>-README.md
+  A-READY.json
+  B1-<revision>-candidate.zip
+  B1-<revision>-README.md
+  B-READY.json
+  C2-<revision>-final-candidate.zip
+  B-FINAL.md
+  B-FINAL.json
 ```
 
-Use unique immutable candidate names, never overwrite earlier candidate bytes. The two markers are small file indexes, not a new approval ledger. If a retry creates duplicate filenames, use actual file IDs and record which is current. An ambiguous marker is resolved from actual accessible files and the assignment, not by guessing latest modified time. Never put secrets or personal data in a public folder. Use synthetic/anonymized inputs where appropriate.
+Unique immutable candidate names; use actual file IDs and digests. A/B READY files are artifact indexes, not permission gates. Publish one marker after verifying the matching archive. Each agent may publish a recoverable checkpoint; later snapshots get new names and IDs. Never overwrite published bytes. If markers duplicate or are absent, resolve the actual snapshot from known file ID, source identity and verified content; do not guess from filename/modified time. Ambiguous candidates limit only integration of those bytes. B continues its local work.
 
-## A: publish a usable checkpoint
+## A and B publish independently
 
-Bundle native files (full changed paths or complete applyable patch), baseline and candidate ID, original requirements reference, frozen fixtures, runnable test harness, actual logs, dependency/command instructions, known failures and changed paths. Preserve folder paths. Include `SHA256SUMS.txt` for every payload member. If a full checkout is inappropriate, include an exact baseline locator plus reproducible delta and describe what is not included. A source-only report is not a working candidate. Include actual candidate digest or commit, not a predicted future SHA.
+1. Complete feasible implementation and tests in your own workspace. Record real remaining gaps.
+2. Bundle native changed paths or complete applyable patch, exact base/candidate identity, original requirement locator, test harness/fixtures/logs, changed paths, dependency and replay commands, known failures, and SHA256SUMS.txt covering every payload member. Include actual runnable source; a report alone is not an implementation.
+3. Verify archive locally; upload to assigned Drive folder; record returned file ID/URL, bytes and checksum. Verify actual readback when available. If upload fails, retry authorized access, retain recoverable local work and mark NOT_DELIVERED. No fabricated marker.
+4. Publish A-READY or B-READY referencing actual uploaded bytes. In PARALLEL, a marker freezes that snapshot, not all later work in the agent's isolated tree. In explicit SERIAL, record that conflicting writes to the candidate ceased or that B is using an isolated immutable copy. No acknowledgment round.
+5. B reads available A snapshot(s) while continuing B1. Verify exact bytes/internal checksums, safe paths, source lineage and real usability. Recover missing prose/logs locally. If no marker, use known verified native artifact and record discovery; no need to ask A to repeat an upload if actual bytes are recoverable. Missing A archive does not block B's own source fixes.
 
-1. Complete feasible local work. Record any incomplete outcome honestly.
-2. Build the ZIP, verify manifest and archive contents locally. Stop writing the transferred candidate; no further writes in A's turn.
-3. Upload the native ZIP and any separately useful native files to the assigned folder. Check successful returned file ID and metadata; verify bytes by download/hash when available. A sandbox file is only prepared, not uploaded.
-4. Publish `A-READY.json` last with task, baseline, candidate, exact Drive file ID/link, SHA-256, artifact name, A writes stopped, remaining work, and B's preauthorized next action. If upload fails, retry; no fabricated READY.
+## B final package
 
-## B: consume and continue (no acknowledgment round)
+At the agreed convergence boundary, B selects actual A1 (if available) and B1; compare to C0, repair and run combined tests. Upload final cumulative native C0→final delta or complete source; include A1/B1→final reconciliation/delta where available, retained/rejected changes and tests, actual evidence, limitations and lineage. If A is absent, publish B-only result with honest evidence. Never create competing final packages or automatically reopen for late A.
 
-Read the READY marker and actual Drive archive. Verify the download digest and internal payload checksums. Check source lineage and the actual usable files. Recover a missing README/log from source/testing; a missing executable candidate can be reconstructed from verified Drive patch and authorized baseline. Use a fresh scratch directory, reject unsafe archive paths, do not execute untrusted commands blindly. Validate enough to continue. Record what was actually received in B's final evidence; no separate receipt to A is required. A's transfer is complete when B can recover C1 and the planned exclusive write turn applies. B's receipt is not proof of independent correctness. If B cannot access Drive, it can still prepare authorized local tests but must not claim it has received or integrated A's candidate.
+Upload final ZIP, verify actual file/digest, then publish B-FINAL.json with final outcome, lineage, base, final candidate and input artifact IDs/digests. A READY marker need not exist for B-only completion. B-READY is useful checkpoint metadata, not a compulsory precursor if B directly delivers final. No approval request or new registry.
 
-B works on C1, keeps earlier valid fixes, and fixes outstanding defects. Its final package contains cumulative code/delta C0→C2 (or full source) and C1→C2 delta, all relevant executable evidence and final report. Upload and verify it, then publish `B-FINAL.json`. Keep A's evidence immutable. Actual final product acceptance/release is not inferred from a file upload.
-
-## Minimal marker (illustrative, fill with actual data)
+## Minimal marker example (illustrative only)
 
 ```json
 {
-  "task": "existing-task-id",
-  "turn": "A",
-  "baseline": "actual-commit-or-digest",
-  "candidate": "actual-commit-or-digest",
+  "task": "actual-task-id",
+  "mode": "PARALLEL",
+  "agent": "A",
+  "kind": "WORKING_SNAPSHOT",
+  "baseline": "actual-sha-or-digest",
+  "candidate": "actual-sha-or-digest",
   "drive_file_id": "actual-upload-result-id",
   "drive_url": "actual-upload-result-url",
   "sha256": "actual-64-hex-digest",
   "bytes": 12345,
-  "writer_stopped": true,
-  "result": "COMPLETE_OR_PARTIAL",
-  "remaining": ["exact outstanding case or none"],
-  "next": "Agent B continues cumulative correction"
+  "snapshot_immutable": true,
+  "remaining": ["actual unresolved case or none"]
 }
 ```
 
-B's marker replaces `turn` with `B`, includes C1 identity and final result `COMPLETE` or `PARTIAL`, and does not invent a new writer. A READY marker is a factual statement of stopped writes and accessible bytes, not a permission grant; the initial assignment provides that grant. Do not create one with fictitious IDs or hashes. If no automatic cross-chat transport exists, the user resumes B once with the same folder link. No repeated message relays. A Drive file never executes an agent on its own.
+For B-READY use agent B. For B-FINAL use kind FINAL, actual selected input artifacts (A may be absent), `lineage: FINAL_COMBINED | FINAL_B_ONLY | SERIAL_FINAL`, `outcome: COMPLETE | PARTIAL`, and actual remaining cases. Serial snapshots may also retain legacy writer_stopped and turn fields. A marker is a statement about bytes, not proof of correctness, writer cessation, peer execution or authorization. If no marker, verified native source may still be integrated under the assignment. Unsafe or unverifiable bytes are not executed; reconstruct from authorized source.
+
+Use the offline `tools/verify_bundle.py <zip> [--marker <json>]` for byte checks. It cannot authenticate a Drive account or perform upload/dispatch. If Drive is temporarily unavailable, finish feasible local work, retain native package, accurately report delivery gap. Never silently substitute another handoff transport. Drive files do not run inactive conversations; one actual invocation/resume may be required. No routine user relay of technical messages.
